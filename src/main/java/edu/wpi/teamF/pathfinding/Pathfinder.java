@@ -19,34 +19,32 @@ public class Pathfinder {
         while (!priorityQueue.isEmpty()){
             RouteNode currentNode = priorityQueue.poll();
 
-            if(!visited.contains(currentNode)){
+            if(!visited.contains(currentNode)) {
                 visited.add(currentNode);
 
-                if (currentNode.getCurrent().equals(endNode)){
+                if (currentNode.getCurrent().equals(endNode)) {
                     //Has reached the goal node
                     List<GraphNode> path = new ArrayList<GraphNode>();
                     do {
                         path.add(currentNode.getCurrent());
                         currentNode = currentNode.getPrevious();
                     } while (currentNode != null);
+                    System.out.println(path);
                     return path;
-                 }
+                }
 
                 //Make a list of all of the neighbors of this node
                 Set<GraphNode> neighbors = currentNode.getCurrent().getNeighbors();
-                for (GraphNode neighbor : neighbors){
-                    if (!visited.contains(neighbor)){
+                for (GraphNode neighbor : neighbors) {
+                    if (!visited.contains(neighbor)) {
                         double distanceToEnd = scorer.computeCost(neighbor, endNode); //Estimated distance to end
                         double distanceFromStart = currentNode.getRouteScore() + scorer.computeCost(startNode, neighbor); //Actual path distance
                         double estimatedCostOfNeighbor = distanceToEnd + distanceFromStart;
 
-                        RouteNode neighborOnRoute = new RouteNode(neighbor, currentNode.getCurrent(), distanceFromStart, estimatedCostOfNeighbor);
+                        RouteNode neighborOnRoute = new RouteNode(neighbor, currentNode, distanceFromStart, estimatedCostOfNeighbor);
                         priorityQueue.add(neighborOnRoute);
                     }
                 }
-            }
-            else {
-                //It has been visited, we need to check if the current route has a lower cost or not
             }
         }
 
