@@ -8,7 +8,7 @@ plugins {
 }
 sourceCompatibility = '13'
 targetCompatibility = '13'
-mainClassName = 'edu.wpi.teamname.Main'
+mainClassName = 'edu.wpi.teamF.Main'
 
 repositories {
     mavenCentral()

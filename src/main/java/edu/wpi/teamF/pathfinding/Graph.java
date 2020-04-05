@@ -67,14 +67,11 @@ public class Graph {
   }
 
   public GraphNode getNode(String find) {
-    GraphNode returnNode = new GraphNode(0, 0, "blank");
     for (GraphNode i : this.nodes) {
-      if (i.getId() == find) {
-        returnNode = i;
-      } else {
-        returnNode = null;
+      if (i.getId().equals(find)) {
+        return i;
       }
     }
-    return returnNode;
+    return null;
   }
 }
