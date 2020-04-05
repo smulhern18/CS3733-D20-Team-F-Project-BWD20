@@ -14,9 +14,9 @@ public class Main {
     Graph graph = new Graph(new HashSet<GraphNode>());
     Pathfinder pathfinder = new Pathfinder();
     PathVisualizer pathVisualizer = new PathVisualizer();
-    List<GraphNode> path = pathfinder.getPath(graph.getNode("A"), graph.getNode("B"));
+    List<GraphNode> path = pathfinder.getPath(graph.getNode("E"), graph.getNode("E"));
     pathVisualizer.printPath(path);
 
-    //App.launch(App.class, args);
+    // App.launch(App.class, args);
   }
 }
