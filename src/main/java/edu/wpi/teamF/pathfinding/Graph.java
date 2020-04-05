@@ -23,8 +23,8 @@ public class Graph {
     Set<GraphNode> newSet = new HashSet<GraphNode>();
     //newSet.add(nodeA); //doesn't like add for some reason
 
-    public GraphNode getNode(String find, Set<GraphNode> nodes){
-        for(GraphNode i: nodes){
+    public GraphNode getNode(String find){
+        for(GraphNode i: this.nodes){
             if(i.getId() == find){
                 return i;
             }
