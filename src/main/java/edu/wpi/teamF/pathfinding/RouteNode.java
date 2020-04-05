@@ -3,14 +3,14 @@ package edu.wpi.teamF.pathfinding;
 public class RouteNode implements Comparable<RouteNode> {
 
     private  GraphNode current;
-    private  GraphNode previous;
+    private  RouteNode previous;
     private  double routeScore;
     private  double estimatedScore;
 
     public RouteNode (GraphNode current) {
         this(current, null, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
     }
-    public RouteNode(GraphNode current, GraphNode previous, double routeScore, double estimatedScore) {
+    public RouteNode(GraphNode current, RouteNode previous, double routeScore, double estimatedScore) {
 
         this.current = current;
         this.previous = previous;
@@ -27,11 +27,11 @@ public class RouteNode implements Comparable<RouteNode> {
         this.current = current;
     }
 
-    public GraphNode getPrevious() {
+    public RouteNode getPrevious() {
         return previous;
     }
 
-    public void setPrevious(GraphNode previous) {
+    public void setPrevious(RouteNode previous) {
         this.previous = previous;
     }
 
