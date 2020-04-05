@@ -31,7 +31,7 @@ public class Graph {
     nodeB.addNeighbor(nodeA);
     nodeC.addNeighbor(nodeD);
     nodeD.addNeighbor(nodeA);
-    nodeB.addNeighbor(nodeC);
+    nodeD.addNeighbor(nodeC);
     nodeE.addNeighbor(nodeH);
     nodeE.addNeighbor(nodeI);
     nodeF.addNeighbor(nodeJ);

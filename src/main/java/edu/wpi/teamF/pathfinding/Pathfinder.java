@@ -12,7 +12,6 @@ public class Pathfinder {
     // Create the first node and add it to the Priority Queue
     RouteNode start = new RouteNode(startNode, null, 0, scorer.computeCost(startNode, endNode));
     priorityQueue.add(start);
-    visited.add(start.getCurrent());
 
     while (!priorityQueue.isEmpty()) {
       RouteNode currentNode = priorityQueue.poll();
@@ -27,7 +26,6 @@ public class Pathfinder {
             path.add(0, currentNode.getCurrent());
             currentNode = currentNode.getPrevious();
           } while (currentNode != null);
-          System.out.println(path);
           return path;
         }
 
