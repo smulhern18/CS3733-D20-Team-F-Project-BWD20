@@ -68,7 +68,7 @@ public class Graph {
 
   public GraphNode getNode(String find) {
     for (GraphNode i : this.nodes) {
-      if (i.getId() == find) {
+      if (i.getId().equals(find)) {
         return i;
       }
     }
