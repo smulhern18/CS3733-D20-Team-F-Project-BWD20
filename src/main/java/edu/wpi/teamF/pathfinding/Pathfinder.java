@@ -8,19 +8,19 @@ public class Pathfinder {
 
     public List<GraphNode> getPath(GraphNode startNode, GraphNode endNode, Set<GraphNode> graph){
         PriorityQueue<RouteNode> priorityQueue = new PriorityQueue<RouteNode>();
-        HashSet<RouteNode> visited = new HashSet<RouteNode>();
+        HashSet<GraphNode> visited = new HashSet<GraphNode>();
         EuclideanScorer scorer = new EuclideanScorer();
 
         //Create the first node and add it to the Priority Queue
         RouteNode start = new RouteNode(startNode, null, 0, scorer.computeCost(startNode, endNode));
         priorityQueue.add(start);
-        visited.add(start);
+        visited.add(start.getCurrent());
 
         while (!priorityQueue.isEmpty()){
             RouteNode currentNode = priorityQueue.poll();
 
-            if(!visited.contains(currentNode)) {
-                visited.add(currentNode);
+            if(!visited.contains(currentNode.getCurrent())) {
+                visited.add(currentNode.getCurrent());
 
                 if (currentNode.getCurrent().equals(endNode)) {
                     //Has reached the goal node
