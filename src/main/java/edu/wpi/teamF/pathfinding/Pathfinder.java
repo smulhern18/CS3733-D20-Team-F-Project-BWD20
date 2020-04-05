@@ -24,9 +24,9 @@ public class Pathfinder {
 
                 if (currentNode.getCurrent().equals(endNode)) {
                     //Has reached the goal node
-                    List<GraphNode> path = new ArrayList<GraphNode>();
+                    List<GraphNode> path = new LinkedList<>();
                     do {
-                        path.add(currentNode.getCurrent());
+                        path.add(0,currentNode.getCurrent());
                         currentNode = currentNode.getPrevious();
                     } while (currentNode != null);
                     System.out.println(path);
