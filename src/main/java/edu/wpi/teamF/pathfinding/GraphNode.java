@@ -1,5 +1,6 @@
 package edu.wpi.teamF.pathfinding;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class GraphNode {
@@ -9,11 +10,11 @@ public class GraphNode {
     private final String id;
     private final Set<GraphNode> neighbors;
 
-    public GraphNode(int xcoord, int ycoord, String id,Set<GraphNode> neighbors) {
+    public GraphNode(int xcoord, int ycoord, String id) {
         this.xcoord = xcoord;
         this.ycoord = ycoord;
         this.id = id;
-        this.neighbors = neighbors;
+        this.neighbors = new HashSet<>();
     }
 
     public int getXcoord() {
@@ -30,5 +31,23 @@ public class GraphNode {
 
     public Set<GraphNode> getNeighbors() {
         return neighbors;
+    }
+
+    public void addNeighbor(GraphNode neighbor) {
+        neighbors.add(neighbor);
+    }
+
+    /**
+     *  Checks if its a GraphNode object and that the IDs are equal
+     * @param other
+     * @return
+     */
+    public boolean equals(Object other) {
+        boolean isEqual = false;
+        if (other != null && other instanceof GraphNode) {
+            GraphNode otherGraphNode = (GraphNode) other;
+            isEqual = this.id == otherGraphNode.getId();
+        }
+        return isEqual;
     }
 }
