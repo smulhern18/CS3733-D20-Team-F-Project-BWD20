@@ -22,8 +22,8 @@ public class AStarTest {
   public static void setup() {
     nodeFactory = new NodeFactory();
     pathfinder = new PathfindController(nodeFactory);
+    AStarTestData.initializeNodeNeighbors();
   }
-
 
   @Test
   public void testOfEuclideanScorer() {
@@ -51,11 +51,10 @@ public class AStarTest {
 
   @Test
   public void testGetPath() {
-    List<Node> path = pathfinder.getPath();
-    assertEquals(path.get(0).getName(),"E");
-    assertEquals(path.get(0).getName(),"I");
-    assertEquals(path.get(0).getName(),"J");
-    assertEquals(path.get(0).getName(),"F");
-
+    List<Node> path = pathfinder.getPath(AStarTestData.nodeE, AStarTestData.nodeF);
+    assertEquals(path.get(0).getName(), "E");
+    assertEquals(path.get(1).getName(), "I");
+    assertEquals(path.get(2).getName(), "J");
+    assertEquals(path.get(3).getName(), "F");
   }
 }
