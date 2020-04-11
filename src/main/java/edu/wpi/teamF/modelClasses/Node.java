@@ -9,6 +9,8 @@ import java.util.Set;
 
 public class Node {
 
+
+
     public enum NodeType {HALL,ELEV,REST,STAI,DEPT,LABS,INFO,CONF,EXIT,RETL,SERV};
 
     private final short X;
