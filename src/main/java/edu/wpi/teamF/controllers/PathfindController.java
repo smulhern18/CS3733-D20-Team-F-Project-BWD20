@@ -1,4 +1,4 @@
 package edu.wpi.teamF.controllers;
 
-public class PathfindController {
+public class PathfindController extends SceneController {
 }
