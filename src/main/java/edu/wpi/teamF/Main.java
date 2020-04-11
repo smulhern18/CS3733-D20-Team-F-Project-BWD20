@@ -1,22 +1,20 @@
 package edu.wpi.teamF;
 
-import edu.wpi.teamF.pathfinding.Graph;
-import edu.wpi.teamF.pathfinding.GraphNode;
-import edu.wpi.teamF.pathfinding.PathVisualizer;
-import edu.wpi.teamF.pathfinding.Pathfinder;
-import java.util.HashSet;
-import java.util.List;
+import edu.wpi.teamF.factories.DatabaseManager;
 
 public class Main {
 
-  public static void main(String[] args) {
-    System.out.println("Testing Pathfinding");
-    Graph graph = new Graph(new HashSet<GraphNode>());
-    Pathfinder pathfinder = new Pathfinder();
-    PathVisualizer pathVisualizer = new PathVisualizer();
-    List<GraphNode> path = pathfinder.getPath(graph.getNode("E"), graph.getNode("E"));
-    pathVisualizer.printPath(path);
+  static DatabaseManager databaseInitializer = new DatabaseManager();
 
-    // App.launch(App.class, args);
+  public static void main(String[] args) {
+
+    try {
+      Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+    } catch (ClassNotFoundException e) {
+      System.out.println("Driver Not found");
+    }
+    databaseInitializer.initialize();
+
+    App.launch(App.class, args);
   }
 }
