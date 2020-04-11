@@ -25,6 +25,13 @@ public class PathfindController extends SceneController {
     }
 
     public List<Node> getPath(Node startNode, Node endNode) {
+        //Check if the destination is on a different floor
+        if (startNode.getFloor() != endNode.getFloor()){
+            //If it is, navigate to the most practical elevator instead
+            ElevatorSccorer elevScorer = new ElevatorScorer();
+            endNode = elevScorer.elevatorScorer();
+        }
+
         PriorityQueue<RouteNode> priorityQueue = new PriorityQueue<RouteNode>();
         HashSet<Node> visited = new HashSet<Node>();
         EuclideanScorer scorer = new EuclideanScorer();
