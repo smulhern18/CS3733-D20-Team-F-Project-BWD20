@@ -27,6 +27,7 @@ public class AStarTest {
     pathfinder = new PathfindController(nodeFactory);
   }
 
+
   @Test
   public void testOfEuclideanScorer() {
     EuclideanScorer testScorer = new EuclideanScorer();
@@ -45,5 +46,15 @@ public class AStarTest {
 
     Assertions.assertEquals(
         elev3.getName(), tester.elevatorScorer(start, end).getName(), "Elevator 1 is closest");
+  }
+
+  @Test
+  public void testGetPath() {
+    List<Node> path = pathfinder.getPath();
+    assertEquals(path.get(0).getName(),"E");
+    assertEquals(path.get(0).getName(),"I");
+    assertEquals(path.get(0).getName(),"J");
+    assertEquals(path.get(0).getName(),"F");
+
   }
 }
