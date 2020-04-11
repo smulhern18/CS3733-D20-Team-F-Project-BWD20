@@ -1,9 +1,9 @@
 package edu.wpi.teamF.controllers;
 
 import edu.wpi.teamF.factories.NodeFactory;
-import edu.wpi.teamF.pathfinding.EuclideanScorer;
-import edu.wpi.teamF.pathfinding.GraphNode;
-import edu.wpi.teamF.pathfinding.RouteNode;
+import edu.wpi.teamF.modelClasses.EuclideanScorer;
+import edu.wpi.teamF.modelClasses.Node;
+import edu.wpi.teamF.modelClasses.RouteNode;
 
 import java.util.*;
 
@@ -23,9 +23,9 @@ public class PathfindController extends SceneController {
         this.nodeFactory = nodeFactory;
     }
 
-    public List<GraphNode> getPath(GraphNode startNode, GraphNode endNode) {
+    public List<Node> getPath(Node startNode, Node endNode) {
         PriorityQueue<RouteNode> priorityQueue = new PriorityQueue<RouteNode>();
-        HashSet<GraphNode> visited = new HashSet<GraphNode>();
+        HashSet<Node> visited = new HashSet<Node>();
         EuclideanScorer scorer = new EuclideanScorer();
 
         // Create the first node and add it to the Priority Queue
@@ -35,22 +35,22 @@ public class PathfindController extends SceneController {
         while (!priorityQueue.isEmpty()) {
             RouteNode currentNode = priorityQueue.poll();
 
-            if (!visited.contains(currentNode.getCurrent())) {
-                visited.add(currentNode.getCurrent());
+            if (!visited.contains(currentNode.getNode())) {
+                visited.add(currentNode.getNode());
 
-                if (currentNode.getCurrent().equals(endNode)) {
+                if (currentNode.getNode().equals(endNode)) {
                     // Has reached the goal node
-                    List<GraphNode> path = new LinkedList<>();
+                    List<Node> path = new LinkedList<>();
                     do {
-                        path.add(0, currentNode.getCurrent());
+                        path.add(0, currentNode.getNode());
                         currentNode = currentNode.getPrevious();
                     } while (currentNode != null);
                     return path;
                 }
 
                 // Make a list of all of the neighbors of this node
-                Set<GraphNode> neighbors = currentNode.getCurrent().getNeighbors();
-                for (GraphNode neighbor : neighbors) {
+                Set<Node> neighbors = currentNode.getNode().getNeighbors();
+                for (Node neighbor : neighbors) {
                     if (!visited.contains(neighbor)) {
                         double distanceToEnd =
                                 scorer.computeCost(neighbor, endNode); // Estimated distance to end
@@ -69,7 +69,7 @@ public class PathfindController extends SceneController {
 
         // If it exits the while loop without returning a path
         System.out.println("No Route Found");
-        return new ArrayList<GraphNode>();
+        return new ArrayList<Node>();
     }
 
 
