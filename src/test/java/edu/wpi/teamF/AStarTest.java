@@ -18,8 +18,6 @@ public class AStarTest {
   Node testNode1 = new Node((short) 0, (short) 0, "node1", Node.NodeType.HALL, 1);
   Node testNode2 = new Node((short) 0, (short) 5, "node2", Node.NodeType.HALL, 1);
 
-
-
   static NodeFactory nodeFactory;
   static PathfindController pathfinder;
 
@@ -45,6 +43,7 @@ public class AStarTest {
     Node end = new Node((short) 10, (short) 2, "end", Node.NodeType.HALL, 1);
     ElevatorScorer2 tester = new ElevatorScorer2(elevators);
 
-    Assertions.assertEquals(elev1, tester.elevatorScorer(start, end), "Elevator 1 is closest");
+    Assertions.assertEquals(
+        elev3.getName(), tester.elevatorScorer(start, end).getName(), "Elevator 1 is closest");
   }
 }
