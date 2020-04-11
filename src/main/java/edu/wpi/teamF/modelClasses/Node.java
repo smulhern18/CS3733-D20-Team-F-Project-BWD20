@@ -1,6 +1,6 @@
 package edu.wpi.teamF.modelClasses;
 
-import edu.wpi.teamF.pathfinding.GraphNode;
+
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,9 +9,10 @@ public class Node {
     private final int X;
     private final int Y;
     private final String name;
-    private final Set<GraphNode> neighbors = new HashSet<>();
     private final String nodeType;
     private final int floor;
+    private final Set<Node> neighbors = new HashSet<>();;
+
 
 
     public Node(int xCoord, int yCoord, String name, String nodeType, int floor) {
@@ -22,11 +23,11 @@ public class Node {
         this.floor = floor;
     }
 
-    public Set<GraphNode> getNeighbors() {
+    public Set<Node> getNeighbors() {
         return neighbors;
     }
 
-    public void addNeighbor(GraphNode neighbor) {
+    public void addNeighbor(Node neighbor) {
         neighbors.add(neighbor);
     }
 
