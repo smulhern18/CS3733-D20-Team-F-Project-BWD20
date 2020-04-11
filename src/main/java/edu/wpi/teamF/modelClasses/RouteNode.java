@@ -1,5 +1,6 @@
 package edu.wpi.teamF.modelClasses;
 
+
 public class RouteNode implements Comparable<RouteNode> {
     private Node node;
     private RouteNode previous;
@@ -64,3 +65,4 @@ public class RouteNode implements Comparable<RouteNode> {
         }
     }
 }
+

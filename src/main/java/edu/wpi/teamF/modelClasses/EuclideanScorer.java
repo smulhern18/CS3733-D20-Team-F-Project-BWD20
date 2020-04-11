@@ -1,5 +1,6 @@
 package edu.wpi.teamF.modelClasses;
 
+
 import edu.wpi.teamF.modelClasses.Scorer;
 
 public class EuclideanScorer implements Scorer {
@@ -11,3 +12,4 @@ public class EuclideanScorer implements Scorer {
                         + Math.pow(from.getYCoord() - to.getYCoord(), 2));
     }
 }
+
