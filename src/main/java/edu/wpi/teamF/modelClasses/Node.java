@@ -48,6 +48,7 @@ public class Node {
     if (other != null && other instanceof Node) {
       Node otherNode = (Node) other;
       isEqual = this.name == otherNode.getName();
+
     }
     return isEqual;
   }
