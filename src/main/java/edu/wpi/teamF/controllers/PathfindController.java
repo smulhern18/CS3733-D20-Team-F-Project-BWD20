@@ -36,7 +36,7 @@ public class PathfindController extends SceneController {
             List<Node> elevatorList = nodeFactory.getNodes("ELEV");
             //If it is, navigate to the most practical elevator instead
             ElevatorScorer2 elevScorer = new ElevatorScorer2(elevatorList); //Need to find out how we pass it a list of elevators?
-            endNode = elevScorer.elevatorScorer();
+            endNode = elevScorer.elevatorScorer(startNode, endNode);
         }
 
         PriorityQueue<RouteNode> priorityQueue = new PriorityQueue<RouteNode>();
