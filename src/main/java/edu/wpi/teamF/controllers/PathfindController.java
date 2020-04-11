@@ -1,11 +1,15 @@
 package edu.wpi.teamF.controllers;
 
 import edu.wpi.teamF.factories.NodeFactory;
+
 import edu.wpi.teamF.modelClasses.ElevatorScorer;
+
+import edu.wpi.teamF.modelClasses.ElevatorScorer2;
+
 import edu.wpi.teamF.modelClasses.EuclideanScorer;
 import edu.wpi.teamF.modelClasses.Node;
 import edu.wpi.teamF.modelClasses.RouteNode;
-import edu.wpi.teamF.pathfinding.GraphNode;
+
 
 import java.util.*;
 
@@ -29,7 +33,7 @@ public class PathfindController extends SceneController {
         //Check if the destination is on a different floor
         if (startNode.getFloor() != endNode.getFloor()){
             //If it is, navigate to the most practical elevator instead
-            ElevatorSccorer elevScorer = new ElevatorScorer();
+            ElevatorScorer2 elevScorer = new ElevatorScorer2(); //Need to find out how we pass it a list of elevators?
             endNode = elevScorer.elevatorScorer();
         }
 
