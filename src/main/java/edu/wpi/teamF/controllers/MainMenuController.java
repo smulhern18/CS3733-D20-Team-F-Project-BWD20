@@ -1,6 +1,4 @@
 package edu.wpi.teamF.controllers;
 
-public class SceneController {
-
-
+public class MainMenuController {
 }
