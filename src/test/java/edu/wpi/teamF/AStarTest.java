@@ -8,8 +8,10 @@ import edu.wpi.teamF.modelClasses.ElevatorScorer2;
 import edu.wpi.teamF.modelClasses.EuclideanScorer;
 import edu.wpi.teamF.modelClasses.Node;
 import org.junit.jupiter.api.Assertions;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
 
 import java.util.List;
 import java.util.Arrays;
@@ -36,8 +38,11 @@ public class AStarTest {
         Node elev2 = new Node(10,10,"elev2", Node.NodeType.ELEV, 1);
         Node elev3 = new Node(8,3,"elev3", Node.NodeType.ELEV, 1);
         List<Node> elevators = Arrays.asList(elev1, elev2, elev3);
+        Node start = new Node(3,2,"start", Node.NodeType.HALL, 1);
+        Node end = new Node(10,2,"end", Node.NodeType.HALL, 1);
         ElevatorScorer2 tester = new ElevatorScorer2(elevators);
 
 
+        Assertions.assertEquals(elev1, tester.elevatorScorer(start,end), "Elevator 1 is closest");
     }
 }
