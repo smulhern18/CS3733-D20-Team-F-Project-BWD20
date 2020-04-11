@@ -15,11 +15,6 @@ import org.junit.jupiter.api.Test;
 
 public class AStarTest {
 
-  Node testNode1 = new Node((short) 0, (short) 0, "node1", Node.NodeType.HALL, 1);
-  Node testNode2 = new Node((short) 0, (short) 5, "node2", Node.NodeType.HALL, 1);
-
-
-
   static NodeFactory nodeFactory;
   static PathfindController pathfinder;
 
@@ -32,6 +27,10 @@ public class AStarTest {
   @Test
   public void testOfEuclideanScorer() {
     EuclideanScorer testScorer = new EuclideanScorer();
+    Node testNode1 = new Node((short) 0, (short) 0, "node1", Node.NodeType.HALL, 1);
+    Node testNode2 = new Node((short) 0, (short) 5, "node2", Node.NodeType.HALL, 1);
+    Node testNode3 = new Node((short) 25, (short) 11, "node2", Node.NodeType.HALL, 1);
+    assertEquals(5, testScorer.computeCost(testNode1, testNode2), "message");
     assertEquals(5, testScorer.computeCost(testNode1, testNode2), "message");
   }
 
