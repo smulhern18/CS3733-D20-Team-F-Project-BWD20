@@ -5,6 +5,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.management.InstanceNotFoundException;
+import org.apache.derby.iapi.jdbc.BrokeredConnection;
 
 public class CSVManipulator {
 
@@ -38,6 +39,7 @@ public class CSVManipulator {
     String csvString = "";
     String selectStatement = "SELECT * FROM ";
 
+    BrokeredConnection connection = null;
     try (PreparedStatement preparedStatement = connection.prepareStatement(selectStatement)) {
 
       try (ResultSet resultSet = preparedStatement.executeQuery()) {
