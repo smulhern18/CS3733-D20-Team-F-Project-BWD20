@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.chart.*?>
 <?import java.lang.*?>
@@ -9,27 +8,26 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.controllers.DisplayDataController">
    <children>
       <MenuBar layoutY="2.0">
         <menus>
-          <Menu mnemonicParsing="false" text="Main Menu">
+          <Menu mnemonicParsing="false" onAction="#mainMenuButton" text="Main Menu">
             <items>
               <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Display">
+          <Menu mnemonicParsing="false" onAction="#displayButton" text="Display">
             <items>
               <MenuItem mnemonicParsing="false" text="Delete" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Modify">
+          <Menu mnemonicParsing="false" onAction="#modifyButton" text="Modify">
             <items>
               <MenuItem mnemonicParsing="false" text="About" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Pathfinder">
+            <Menu mnemonicParsing="false" onAction="#pathfindButton" text="Pathfinder">
                <items>
                   <MenuItem mnemonicParsing="false" text="About" />
                </items>
