@@ -4,27 +4,22 @@ import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 import javax.management.InstanceNotFoundException;
-
 
 public class CSVManipulator {
 
-
-  /**
-   * reads a csv file and insert the data in the file into the correct places in the database
-   */
+  /** reads a csv file and insert the data in the file into the correct places in the database */
   public void readCSVFile() {
     String row = "";
     ArrayList<String> data = new ArrayList<>();
     try {
-      //goes to get the file
+      // goes to get the file
       BufferedReader csvReader =
           new BufferedReader(new FileReader(getClass().getResource("../csv/Test.csv").getFile()));
       while ((row = csvReader.readLine()) != null) {
         data.addAll(Arrays.asList(row.split(",")));
       }
-      //data now has all the data in a list ready to be used
+      // data now has all the data in a list ready to be used
       //  for(int i =0)
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File Not found!");
@@ -48,7 +43,7 @@ public class CSVManipulator {
       try (ResultSet resultSet = preparedStatement.executeQuery()) {
         // need to loop here to get all entries and call the 2 functions below
         if (resultSet.next()) {
-          //how the stuff should be written
+          // how the stuff should be written
         } else {
           throw new InstanceNotFoundException("Delete did not find a entry to delete");
         }
@@ -57,7 +52,7 @@ public class CSVManipulator {
     } catch (Exception e) {
       System.out.println(e);
     }
-  //writing to the file
+    // writing to the file
     try (FileWriter fw = new FileWriter("testText.txt", true);
         BufferedWriter bw = new BufferedWriter(fw);
         PrintWriter out = new PrintWriter(bw)) {
