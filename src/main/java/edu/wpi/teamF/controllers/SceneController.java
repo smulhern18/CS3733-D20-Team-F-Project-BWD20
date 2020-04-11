@@ -11,8 +11,7 @@ import javafx.stage.Stage;
 public class SceneController {
 
   public void switchScene(ActionEvent actionEvent, String aScene) throws IOException {
-    Parent newFile =
-        FXMLLoader.load(getClass().getResource("/edu/wpi/teamF/views/" + aScene + ".fxml"));
+    Parent newFile = FXMLLoader.load(getClass().getResource("/edu/wpi/teamF/views/" + aScene + ".fxml"));
     Scene newScene = new Scene(newFile);
     Stage appStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
 
