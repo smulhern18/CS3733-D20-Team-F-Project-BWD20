@@ -8,7 +8,7 @@ plugins {
 }
 sourceCompatibility = '13'
 targetCompatibility = '13'
-mainClassName = 'edu.wpi.teamname.Main'
+mainClassName = 'edu.wpi.teamF.Main'
 
 repositories {
     mavenCentral()
@@ -72,8 +72,8 @@ jacocoTestCoverageVerification {
                 minimum = 1.0
             }
             excludes = [
-                    'edu.wpi.teamname.App',
-                    'edu.wpi.teamname.Main',
+                    'edu.wpi.teamF.App',
+                    'edu.wpi.teamF.Main',
             ]
         }
 
@@ -85,8 +85,8 @@ jacocoTestCoverageVerification {
                 minimum = 0.25
             }
             excludes = [
-                    'edu.wpi.teamname.App',
-                    'edu.wpi.teamname.Main',
+                    'edu.wpi.teamF.App',
+                    'edu.wpi.teamF.Main',
             ]
         }
 
@@ -98,8 +98,8 @@ jacocoTestCoverageVerification {
                 minimum = 0.25
             }
             excludes = [
-                    'edu.wpi.teamname.App',
-                    'edu.wpi.teamname.Main',
+                    'edu.wpi.teamF.App',
+                    'edu.wpi.teamF.Main',
             ]
         }
     }
