@@ -4,6 +4,7 @@ import edu.wpi.teamF.factories.NodeFactory;
 import edu.wpi.teamF.modelClasses.EuclideanScorer;
 import edu.wpi.teamF.modelClasses.Node;
 import edu.wpi.teamF.modelClasses.RouteNode;
+import edu.wpi.teamF.pathfinding.GraphNode;
 
 import java.util.*;
 
@@ -72,5 +73,10 @@ public class PathfindController extends SceneController {
         return new ArrayList<Node>();
     }
 
+    public void printPath(List<Node> path) {
+        for (int i = 0; i < path.size(); i++) {
+            System.out.println((i + 1) + ". " + path.get(i).getName());
+        }
+    }
 
 }
