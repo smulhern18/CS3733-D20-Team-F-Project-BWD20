@@ -32,8 +32,10 @@ public class PathfindController extends SceneController {
     public List<Node> getPath(Node startNode, Node endNode) {
         //Check if the destination is on a different floor
         if (startNode.getFloor() != endNode.getFloor()){
+            //create list of elevators to navigate
+            List<Node> elevatorList = nodeFactory.getNodes("ELEV");
             //If it is, navigate to the most practical elevator instead
-            ElevatorScorer2 elevScorer = new ElevatorScorer2(); //Need to find out how we pass it a list of elevators?
+            ElevatorScorer2 elevScorer = new ElevatorScorer2(elevatorList); //Need to find out how we pass it a list of elevators?
             endNode = elevScorer.elevatorScorer();
         }
 
