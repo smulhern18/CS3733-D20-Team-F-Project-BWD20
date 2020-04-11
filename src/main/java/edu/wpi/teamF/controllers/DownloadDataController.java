@@ -1,4 +1,3 @@
 package edu.wpi.teamF.controllers;
 
-public class DownloadDataController extends SceneController {
-}
+public class DownloadDataController extends SceneController {}
