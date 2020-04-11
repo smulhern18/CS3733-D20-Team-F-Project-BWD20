@@ -5,21 +5,27 @@ package edu.wpi.teamF.modelClasses;
 import java.util.HashSet;
 import java.util.Set;
 
+
+
 public class Node {
-    private final int X;
-    private final int Y;
+
+    public enum NodeType {HALL,ELEV,REST,STAI,DEPT,LABS,INFO,CONF,EXIT,RETL,SERV};
+
+    private final short X;
+    private final short Y;
     private final String name;
-    private final String nodeType;
+
+    private NodeType type;
     private final int floor;
     private final Set<Node> neighbors = new HashSet<>();;
 
 
 
-    public Node(int xCoord, int yCoord, String name, String nodeType, int floor) {
+    public Node(short xCoord, short yCoord, String name, NodeType nodeType, int floor) {
         this.X = xCoord;
         this.Y = yCoord;
         this.name = name;
-        this.nodeType = nodeType;
+        this.type = nodeType;
         this.floor = floor;
     }
 
@@ -53,8 +59,8 @@ public class Node {
         return name;
     }
 
-    public String getNodeType() {
-        return nodeType;
+    public NodeType getType() {
+        return type;
     }
 
     public int getFloor() {
