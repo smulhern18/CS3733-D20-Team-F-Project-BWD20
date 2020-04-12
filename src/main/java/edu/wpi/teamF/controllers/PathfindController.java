@@ -6,6 +6,9 @@ import edu.wpi.teamF.modelClasses.ElevatorScorer2;
 import edu.wpi.teamF.modelClasses.EuclideanScorer;
 import edu.wpi.teamF.modelClasses.Node;
 import edu.wpi.teamF.modelClasses.RouteNode;
+import javafx.event.ActionEvent;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 
 
 import java.io.IOException;
@@ -13,6 +16,7 @@ import java.util.*;
 
 public class PathfindController extends SceneController {
 
+    public Canvas canvasMap;
     private NodeFactory nodeFactory;
 
     public PathfindController(NodeFactory nodeFactory){
@@ -150,6 +154,22 @@ public class PathfindController extends SceneController {
         }
     }
 
+    //Canvas Testing
+    public void drawCanvas(ActionEvent actionEvent) {
+        var gc = canvasMap.getGraphicsContext2D();
+        drawLines(gc);
+
+    }
+
+    private void drawLines(GraphicsContext gc) {
+
+        gc.beginPath();
+        gc.moveTo(30.5, 30.5);
+        gc.lineTo(150.5, 30.5);
+        gc.lineTo(150.5, 150.5);
+        gc.lineTo(30.5, 30.5);
+        gc.stroke();
+    }
 
 
 }
