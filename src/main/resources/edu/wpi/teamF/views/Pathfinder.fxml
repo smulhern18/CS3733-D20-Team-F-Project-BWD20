@@ -20,10 +20,27 @@
       </MenuBar>
       <StackPane layoutX="102.0" layoutY="60.0" prefHeight="281.0" prefWidth="396.0">
          <children>
-            <Canvas fx:id="canvasMap" height="256.0" width="382.0" />
             <ImageView fitHeight="265.0" fitWidth="375.0" pickOnBounds="true" preserveRatio="true" />
+            <Canvas fx:id="canvasMap" height="256.0" width="382.0" />
          </children>
       </StackPane>
-      <Button layoutX="387.0" layoutY="2.0" mnemonicParsing="false" onAction="#drawCanvas" text="Draw" />
+      <Button layoutX="542.0" layoutY="2.0" mnemonicParsing="false" onAction="#drawCanvas" text="Draw" />
+      <MenuButton layoutX="379.0" layoutY="2.0" mnemonicParsing="false" text="Pick a Destination">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Psychiatric Impatient Care" />
+          <MenuItem mnemonicParsing="false" text="Psch/Addiction Care" />
+            <MenuItem mnemonicParsing="false" text="Mechanical Space" />
+            <MenuItem mnemonicParsing="false" text="Occupational Therapy" />
+            <MenuItem mnemonicParsing="false" text="Physical Therapy" />
+            <MenuItem mnemonicParsing="false" text="Food Services" />
+            <MenuItem mnemonicParsing="false" text="Otolaryngology" />
+            <MenuItem mnemonicParsing="false" text="Plastic Surgery" />
+            <MenuItem mnemonicParsing="false" text="Central Sterile Supply" />
+            <MenuItem mnemonicParsing="false" text="Laundry" />
+            <MenuItem mnemonicParsing="false" text="Biomedical Engineering" />
+            <MenuItem mnemonicParsing="false" text="Morgue" />
+            <MenuItem mnemonicParsing="false" text="Material Management" />
+        </items>
+      </MenuButton>
    </children>
 </AnchorPane>

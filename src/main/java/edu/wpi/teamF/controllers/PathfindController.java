@@ -156,6 +156,7 @@ public class PathfindController extends SceneController {
 
     //Canvas Testing
     public void drawCanvas(ActionEvent actionEvent) {
+        //Get the graphics values of the canvasMap, then use drawLines method (testing only)
         var gc = canvasMap.getGraphicsContext2D();
         drawLines(gc);
 
@@ -163,6 +164,7 @@ public class PathfindController extends SceneController {
 
     private void drawLines(GraphicsContext gc) {
 
+        //This draws a triangle, for testing
         gc.beginPath();
         gc.moveTo(30.5, 30.5);
         gc.lineTo(150.5, 30.5);
@@ -170,6 +172,7 @@ public class PathfindController extends SceneController {
         gc.lineTo(30.5, 30.5);
         gc.stroke();
     }
+
 
 
 }
