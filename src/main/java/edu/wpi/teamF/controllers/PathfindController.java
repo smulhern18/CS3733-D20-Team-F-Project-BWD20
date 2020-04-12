@@ -8,6 +8,7 @@ import edu.wpi.teamF.modelClasses.Node;
 import edu.wpi.teamF.modelClasses.RouteNode;
 
 
+import java.io.IOException;
 import java.util.*;
 
 public class PathfindController extends SceneController {
@@ -148,5 +149,8 @@ public class PathfindController extends SceneController {
             System.out.println((i + 1) + ". " + path.get(i).getName());
         }
     }
+
+
+
 }
 

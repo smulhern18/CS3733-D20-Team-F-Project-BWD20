@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.wpi.teamF.controllers.PathfindController"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.controllers.PathfindController">
+   <children>
+      <MenuBar layoutY="2.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Main Menu" />
+          <Menu mnemonicParsing="false" text="Display Data" />
+          <Menu mnemonicParsing="false" text="Mofidy Data" />
+            <Menu mnemonicParsing="false" text="Download Data" />
+        </menus>
+      </MenuBar>
+      <StackPane layoutX="200.0" layoutY="100.0" prefHeight="150.0" prefWidth="200.0">
+         <children>
+            <ImageView fitHeight="176.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+            <Canvas height="200.0" width="200.0" />
+         </children>
+      </StackPane>
+   </children>
 </AnchorPane>
