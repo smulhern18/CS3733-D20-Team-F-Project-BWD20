@@ -5,6 +5,7 @@ import java.util.Set;
 
 public class Node {
 
+
     public enum NodeType {
         // Values
         HALL("HALL"), ELEV("ELEV"),REST("REST"),STAI("STAI"),DEPT("DEPT"),LABS("LABS"),INFO("INFO"),CONF("CONF"),EXIT("EXIT"),RETL("RETL"),SERV("SERV");
@@ -63,7 +64,10 @@ public class Node {
         setName(name);
         setType(nodeType);
         setFloor(floor);
+
     }
+
+
 
     /**
      * returns the neighbors set
@@ -259,5 +263,6 @@ public class Node {
         Validators.floorValidation(floor);
         this.floor = floor;
     }
+
 }
 
