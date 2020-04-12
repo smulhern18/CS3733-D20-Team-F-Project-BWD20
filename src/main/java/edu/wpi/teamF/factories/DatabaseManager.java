@@ -19,6 +19,9 @@ public class DatabaseManager {
     static final String NODE_NAME_KEY = "nodeName";
     static final String X_COORDINATE_KEY = "xCoord";
     static final String Y_COORDINATE_KEY = "yCoord";
+    static final String BUILDING_KEY = "building";
+    static final String LONG_NAME_KEY = "longName";
+    static final String SHORT_NAME_KEY = "shortName";
     static final String TYPE_KEY = "type";
     static final String FLOOR_KEY = "floor";
     static final String NODE_1_KEY = "node1";
@@ -34,6 +37,9 @@ public class DatabaseManager {
                         NODE_NAME_KEY + " VARCHAR(32) NOT NULL, " +
                         X_COORDINATE_KEY + " SMALLINT NOT NULL, " +
                         Y_COORDINATE_KEY + " SMALLINT NOT NULL, " +
+                        BUILDING_KEY + " VARCHAR(32) NOT NULL, " +
+                        LONG_NAME_KEY + " VARCHAR(64) NOT NULL, " +
+                        SHORT_NAME_KEY + " VARCHAR(16) NOT NULL, " +
                         TYPE_KEY + " VARCHAR(4) NOT NULL, " +
                         FLOOR_KEY + " SMALLINT NOT NULL," +
                         "PRIMARY KEY (" + NODE_NAME_KEY +"))";
