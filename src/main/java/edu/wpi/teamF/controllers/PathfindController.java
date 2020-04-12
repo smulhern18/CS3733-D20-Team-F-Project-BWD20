@@ -210,10 +210,12 @@ public class PathfindController extends SceneController {
   public void occupationalTherapyButton(ActionEvent actionEvent) {
     setDestination("Occupational Therapy");
   }
+  public void physicalTherapyButton(ActionEvent actionEvent) {
+    setDestination("Physical Therapy");
+  }
   public void foodServicesButton(ActionEvent actionEvent) {
     setDestination("Food Service");
   }
-
   public void otolaryngologyButton(ActionEvent actionEvent) {
     setDestination("Otolaryngology");
   }
@@ -235,7 +237,6 @@ public class PathfindController extends SceneController {
   public void materialManagementButton(ActionEvent actionEvent) {
     setDestination("Material Management");
   }
-
 
 
 
