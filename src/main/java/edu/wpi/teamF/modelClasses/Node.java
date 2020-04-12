@@ -1,13 +1,10 @@
 package edu.wpi.teamF.modelClasses;
 
-
-
 import java.util.HashSet;
 import java.util.Set;
 
-
-
 public class Node {
+
 
     public enum NodeType {
         // Values
@@ -38,6 +35,9 @@ public class Node {
 
     private short xCoord;
     private short yCoord;
+    private String building;
+    private String longName;
+    private String shortName;
     private String name;
     private NodeType type;
     private short floor;
@@ -47,18 +47,27 @@ public class Node {
      * Constructor for Nodes
      * @param xCoord the xCoordinate of the node
      * @param yCoord the yCoordinate of the node
+     * @param building the building of the node
+     * @param longName the long name of the node
+     * @param shortName the short name of the node
      * @param name the name of the node
      * @param nodeType the type of the node
      * @param floor the floor the node is on
      * @throws ValidationException should anything go wrong
      */
-    public Node(short xCoord, short yCoord, String name, NodeType nodeType, short floor) throws ValidationException {
+    public Node(short xCoord, short yCoord, String building, String longName, String shortName, String name, NodeType nodeType, short floor) throws ValidationException {
         setXCoord(xCoord);
         setYCoord(yCoord);
+        setBuilding(building);
+        setLongName(longName);
+        setShortName(shortName);
         setName(name);
         setType(nodeType);
         setFloor(floor);
+
     }
+
+
 
     /**
      * returns the neighbors set
@@ -110,7 +119,10 @@ public class Node {
                       this.getXCoord() == otherNode.getXCoord() &&
                       this.getYCoord() == otherNode.getYCoord() &&
                       this.getFloor() == otherNode.getFloor() &&
-                      this.getType() == otherNode.getType() && neighborsEquals;
+                      this.getType() == otherNode.getType() && neighborsEquals &&
+                      this.getBuilding().equals(otherNode.getBuilding()) &&
+                      this.getLongName().equals(otherNode.getLongName()) &&
+                      this.getShortName().equals(otherNode.getShortName());
 
         }
         return isEqual;
@@ -150,6 +162,54 @@ public class Node {
     public void setYCoord(short yCoord) throws ValidationException {
         Validators.coordValidation(yCoord);
         this.yCoord = yCoord;
+    }
+
+    /**
+     * Returns the building of the node
+     * @return the building
+     */
+    public String getBuilding() {return building; }
+
+    /**
+     * Sets the building
+     * @param building the building to set
+     * @throws ValidationException should the validation fail
+     */
+    public void setBuilding(String building) throws ValidationException{
+        Validators.buildingValidation(building);
+        this.building = building;
+    }
+
+    /**
+     * Returns the longName of the node
+     * @return the longName
+     */
+    public String getLongName() {return longName; }
+
+    /**
+     * Sets the longName
+     * @param longName the longName
+     * @throws ValidationException should the validation fail
+     */
+    public void setLongName(String longName) throws ValidationException{
+        Validators.longNameValidation(longName);
+        this.longName = longName;
+    }
+
+    /**
+     * Returns the shortName of the node
+     * @return the shortName of the node
+     */
+    public String getShortName() {return shortName; }
+
+    /**
+     * Sets the shortName of the node
+     * @param shortName the shortName to set
+     * @throws ValidationException should the validation fail
+     */
+    public void setShortName(String shortName) throws ValidationException{
+        Validators.shortNameValidation(shortName);
+        this.shortName = shortName;
     }
 
     /**
@@ -203,5 +263,6 @@ public class Node {
         Validators.floorValidation(floor);
         this.floor = floor;
     }
+
 }
 

@@ -9,29 +9,25 @@ import edu.wpi.teamF.modelClasses.RouteNode;
 import javafx.event.ActionEvent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-
-
 import java.io.IOException;
 import java.util.*;
 
 public class PathfindController extends SceneController {
 
-    public Canvas canvasMap;
     private NodeFactory nodeFactory;
 
-    public PathfindController(NodeFactory nodeFactory){
+    public PathfindController(NodeFactory nodeFactory) {
         this.nodeFactory = nodeFactory;
     }
 
-
-
     public List<Node> getPath(Node startNode, Node endNode) {
-        //Check if the destination is on a different floor
-        if (startNode.getFloor() != endNode.getFloor()){
-            //create list of elevators to navigate
+        // Check if the destination is on a different floor
+        if (startNode.getFloor() != endNode.getFloor()) {
+            // create list of elevators to navigate
             List<Node> elevatorList = nodeFactory.getNodes("ELEV");
-            //If it is, navigate to the most practical elevator instead
-            ElevatorScorer2 elevScorer = new ElevatorScorer2(elevatorList); //Need to find out how we pass it a list of elevators?
+            // If it is, navigate to the most practical elevator instead
+            ElevatorScorer2 elevScorer =
+                    new ElevatorScorer2(elevatorList); // Need to find out how we pass it a list of elevators?
             endNode = elevScorer.elevatorScorer(startNode, endNode);
         }
 
@@ -78,102 +74,102 @@ public class PathfindController extends SceneController {
             }
         }
 
-        // If it exits the while loop without returning a path
-        System.out.println("No Route Found");
-        return new ArrayList<Node>();
-    }
+
+        //Canvas Testing
+        public void drawCanvas (ActionEvent actionEvent){
+            //Get the graphics values of the canvasMap, then use drawLines method (testing only)
+            var gc = canvasMap.getGraphicsContext2D();
+            drawLines(gc);
 
 
-    public List<Node> getPath2(Node startNode, Node endNode) {
-        //Check if the destination is on a different floor
-
-
-        PriorityQueue<RouteNode> priorityQueue = new PriorityQueue<RouteNode>();
-        HashSet<Node> visited = new HashSet<Node>();
-        EuclideanScorer scorer = new EuclideanScorer();
-        ElevatorScorer elevScorer = new ElevatorScorer(nodeFactory.getNodes("ELEV"));
-
-        // Create the first node and add it to the Priority Queue
-        RouteNode start;
-        if (startNode.getFloor() != endNode.getFloor()){
-            //If it is, navigate to the most practical elevator instead
-            start = new RouteNode(startNode, null, 0, elevScorer.computeCost(startNode, endNode));
-        } else {
-            start = new RouteNode(startNode, null, 0, scorer.computeCost(startNode, endNode));
+            // If it exits the while loop without returning a path
+            System.out.println("No Route Found");
+            return new ArrayList<Node>();
         }
-        priorityQueue.add(start);
 
-        while (!priorityQueue.isEmpty()) {
-            RouteNode currentNode = priorityQueue.poll();
+        public List<Node> getPath2 (Node startNode, Node endNode){
+            // Check if the destination is on a different floor
 
-            if (!visited.contains(currentNode.getNode())) {
-                visited.add(currentNode.getNode());
+            PriorityQueue<RouteNode> priorityQueue = new PriorityQueue<RouteNode>();
+            HashSet<Node> visited = new HashSet<Node>();
+            EuclideanScorer scorer = new EuclideanScorer();
+            ElevatorScorer elevScorer = new ElevatorScorer(nodeFactory.getNodes("ELEV"));
 
-                if (currentNode.getNode().equals(endNode)) {
-                    // Has reached the goal node
-                    List<Node> path = new LinkedList<>();
-                    do {
-                        path.add(0, currentNode.getNode());
-                        currentNode = currentNode.getPrevious();
-                    } while (currentNode != null);
-                    return path;
+            // Create the first node and add it to the Priority Queue
+            RouteNode start;
+            if (startNode.getFloor() != endNode.getFloor()) {
+                // If it is, navigate to the most practical elevator instead
+                start = new RouteNode(startNode, null, 0, elevScorer.computeCost(startNode, endNode));
+            } else {
+                start = new RouteNode(startNode, null, 0, scorer.computeCost(startNode, endNode));
+
+            }
+            priorityQueue.add(start);
+
+            while (!priorityQueue.isEmpty()) {
+                RouteNode currentNode = priorityQueue.poll();
+
+                if (!visited.contains(currentNode.getNode())) {
+                    visited.add(currentNode.getNode());
+
+                    if (currentNode.getNode().equals(endNode)) {
+                        // Has reached the goal node
+                        List<Node> path = new LinkedList<>();
+                        do {
+                            path.add(0, currentNode.getNode());
+                            currentNode = currentNode.getPrevious();
+                        } while (currentNode != null);
+                        return path;
+                    }
+
+
+                    private void drawLines (GraphicsContext gc){
+
+                        //This draws a triangle, for testing
+                        gc.beginPath();
+                        gc.moveTo(30.5, 30.5);
+                        gc.lineTo(150.5, 30.5);
+                        gc.lineTo(150.5, 150.5);
+                        gc.lineTo(30.5, 30.5);
+                        gc.stroke();
+
+                        // Make a list of all of the neighbors of this node
+                        Set<Node> neighbors = currentNode.getNode().getNeighbors();
+                        for (Node neighbor : neighbors) {
+                            if (!visited.contains(neighbor)) {
+                                double distanceToEnd = 0;
+                                if (currentNode.getNode().getFloor() != endNode.getFloor()) {
+                                    // If its not on the same floor, use elevator scorer
+                                    distanceToEnd = elevScorer.computeCost(currentNode.getNode(), endNode);
+                                } else {
+                                    distanceToEnd = scorer.computeCost(startNode, endNode);
+                                }
+                                double distanceFromStart =
+                                        currentNode.getRouteScore()
+                                                + scorer.computeCost(currentNode.getNode(), neighbor); // Actual path distance
+                                double estimatedCostOfNeighbor = distanceToEnd + distanceFromStart;
+
+                                RouteNode neighborOnRoute =
+                                        new RouteNode(neighbor, currentNode, distanceFromStart, estimatedCostOfNeighbor);
+                                priorityQueue.add(neighborOnRoute);
+                            }
+                        }
+                    }
+
                 }
 
-                // Make a list of all of the neighbors of this node
-                Set<Node> neighbors = currentNode.getNode().getNeighbors();
-                for (Node neighbor : neighbors) {
-                    if (!visited.contains(neighbor)) {
-                        double distanceToEnd = 0;
-                        if (currentNode.getNode().getFloor() != endNode.getFloor()){
-                            //If its not on the same floor, use elevator scorer
-                            distanceToEnd = elevScorer.computeCost(currentNode.getNode(), endNode);
-                        } else {
-                            distanceToEnd = scorer.computeCost(startNode, endNode);
-                        }
-                        double distanceFromStart =
-                                currentNode.getRouteScore()
-                                        + scorer.computeCost(currentNode.getNode(), neighbor); // Actual path distance
-                        double estimatedCostOfNeighbor = distanceToEnd + distanceFromStart;
+                // If it exits the while loop without returning a path
+                System.out.println("No Route Found");
+                return new ArrayList<Node>();
+            }
 
-                        RouteNode neighborOnRoute =
-                                new RouteNode(neighbor, currentNode, distanceFromStart, estimatedCostOfNeighbor);
-                        priorityQueue.add(neighborOnRoute);
-                    }
+            public void printPath (List < Node > path) {
+                for (int i = 0; i < path.size(); i++) {
+                    System.out.println((i + 1) + ". " + path.get(i).getName());
                 }
             }
-        }
 
-        // If it exits the while loop without returning a path
-        System.out.println("No Route Found");
-        return new ArrayList<Node>();
-    }
-
-    public void printPath(List<Node> path) {
-        for (int i = 0; i < path.size(); i++) {
-            System.out.println((i + 1) + ". " + path.get(i).getName());
         }
     }
-
-    //Canvas Testing
-    public void drawCanvas(ActionEvent actionEvent) {
-        //Get the graphics values of the canvasMap, then use drawLines method (testing only)
-        var gc = canvasMap.getGraphicsContext2D();
-        drawLines(gc);
-
-    }
-
-    private void drawLines(GraphicsContext gc) {
-
-        //This draws a triangle, for testing
-        gc.beginPath();
-        gc.moveTo(30.5, 30.5);
-        gc.lineTo(150.5, 30.5);
-        gc.lineTo(150.5, 150.5);
-        gc.lineTo(30.5, 30.5);
-        gc.stroke();
-    }
-
-
-
 }
 

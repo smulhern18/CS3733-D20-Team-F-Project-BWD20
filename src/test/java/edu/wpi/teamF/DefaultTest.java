@@ -9,4 +9,5 @@ public class DefaultTest {
 
   @Test
   public void alwaysPass() {}
+
 }
