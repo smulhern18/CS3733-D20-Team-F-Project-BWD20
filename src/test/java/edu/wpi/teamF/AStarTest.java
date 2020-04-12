@@ -1,6 +1,7 @@
 package edu.wpi.teamF;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.wpi.teamF.controllers.PathfindController;
 import edu.wpi.teamF.factories.NodeFactory;
@@ -30,7 +31,7 @@ public class AStarTest {
     EuclideanScorer testScorer = new EuclideanScorer();
     Node testNode1 = new Node((short) 0, (short) 0, "node1", Node.NodeType.HALL, 1);
     Node testNode2 = new Node((short) 0, (short) 5, "node2", Node.NodeType.HALL, 1);
-    Node testNode3 = new Node((short) 4, (short) 3, "node2", Node.NodeType.HALL, 1);
+    Node testNode3 = new Node((short) 4, (short) 3, "node3", Node.NodeType.HALL, 1);
     assertEquals(5, testScorer.computeCost(testNode1, testNode2), "message");
     assertEquals(5, testScorer.computeCost(testNode1, testNode3), "message");
   }
@@ -52,9 +53,9 @@ public class AStarTest {
   @Test
   public void testGetPath() {
     List<Node> path = pathfinder.getPath(AStarTestData.nodeE, AStarTestData.nodeF);
-    assertEquals(path.get(0).getName(), "E");
-    assertEquals(path.get(1).getName(), "I");
-    assertEquals(path.get(2).getName(), "J");
-    assertEquals(path.get(3).getName(), "F");
+    assertTrue(path.get(0).getName().equals("E"));
+    assertTrue(path.get(1).getName().equals("I"));
+    assertTrue(path.get(2).getName().equals("J"));
+    assertTrue(path.get(3).getName().equals("F"));
   }
 }
