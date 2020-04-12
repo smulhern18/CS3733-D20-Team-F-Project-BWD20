@@ -4,8 +4,9 @@ import java.io.IOException;
 
 public class DownloadDataController extends SceneController {
 
-    SceneController sceneController = new SceneController();
+    //Scene Controllers
 
+    SceneController sceneController = new SceneController();
 
     public void displayButton(javafx.event.ActionEvent actionEvent) throws IOException {
         sceneController.switchScene("DisplayData");

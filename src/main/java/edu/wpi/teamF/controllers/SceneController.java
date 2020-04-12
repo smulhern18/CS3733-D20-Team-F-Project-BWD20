@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 
 public class SceneController {
 
+  //Scene switching method
+
   public void switchScene(String aScene) throws IOException {
     Parent newFile =
         FXMLLoader.load(getClass().getResource("/edu/wpi/teamF/views/" + aScene + ".fxml"));

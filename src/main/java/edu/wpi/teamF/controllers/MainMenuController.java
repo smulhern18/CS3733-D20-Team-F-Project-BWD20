@@ -5,9 +5,9 @@ import java.io.IOException;
 
 public class MainMenuController extends SceneController {
 
+  //Scene Controllers For the Main Menu
+
   SceneController sceneController = new SceneController();
-
-
 
   public void displayButton(javafx.event.ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("DisplayData");
