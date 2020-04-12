@@ -6,6 +6,10 @@ import edu.wpi.teamF.modelClasses.ElevatorScorer2;
 import edu.wpi.teamF.modelClasses.EuclideanScorer;
 import edu.wpi.teamF.modelClasses.Node;
 import edu.wpi.teamF.modelClasses.RouteNode;
+import javafx.event.ActionEvent;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import java.io.IOException;
 import java.util.*;
 
 public class PathfindController extends SceneController {
