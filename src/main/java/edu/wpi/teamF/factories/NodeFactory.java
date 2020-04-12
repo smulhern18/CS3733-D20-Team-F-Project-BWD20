@@ -8,5 +8,8 @@ public class NodeFactory {
   public List<Node> getNodes(String elev) {
     return null;
   }
-  public Node read(String name) {return null;}
+
+  public Node read(String name) {
+    return null;
+  }
 }

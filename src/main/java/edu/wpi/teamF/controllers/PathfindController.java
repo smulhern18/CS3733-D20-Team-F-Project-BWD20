@@ -21,10 +21,9 @@ public class PathfindController extends SceneController {
   private NodeFactory nodeFactory;
   private Node startNode;
   private Node destination;
-  private GraphicsContext gc;
 
   public PathfindController() {
-    gc = canvasMap.getGraphicsContext2D();
+
     this.nodeFactory = null;
   }
 
@@ -146,15 +145,17 @@ public class PathfindController extends SceneController {
 
   // Canvas Testing
   public void drawCanvas(ActionEvent actionEvent) {
+    GraphicsContext gc = canvasMap.getGraphicsContext2D();
     if (destination != null) {
       gc.clearRect(0, 0, canvasMap.getWidth(), canvasMap.getHeight());
-      List<Node> path = getPath(startNode,destination);
-      drawPath(path);
+      List<Node> path = getPath(startNode, destination);
+      drawPath(gc, path);
+    } else {
+      gc.strokeText("NO DESTINATION", 100, 100);
     }
   }
 
-
-  private void drawLines() {
+  private void drawLines(GraphicsContext gc) {
     double heightRatio = canvasMap.getHeight() / MAP_HEIGHT;
     double widthRatio = canvasMap.getWidth() / MAP_WIDTH;
     gc.setStroke(Color.RED);
@@ -174,28 +175,29 @@ public class PathfindController extends SceneController {
 
   /**
    * Draw the path on the canvas
+   *
    * @param path
    */
-  private void drawPath(List<Node> path) {
+  private void drawPath(GraphicsContext gc, List<Node> path) {
     double heightRatio = canvasMap.getHeight() / MAP_HEIGHT;
     double widthRatio = canvasMap.getWidth() / MAP_WIDTH;
     gc.setStroke(Color.RED);
     gc.beginPath();
-    gc.moveTo(path.get(0).getXCoord()* widthRatio,path.get(0).getYCoord()* heightRatio);
-    for (int i = 1;i < path.size();i++) {
-      gc.lineTo(path.get(i).getXCoord()* widthRatio,path.get(i).getYCoord()* heightRatio);
+    gc.moveTo(path.get(0).getXCoord() * widthRatio, path.get(0).getYCoord() * heightRatio);
+    for (int i = 1; i < path.size(); i++) {
+      gc.lineTo(path.get(i).getXCoord() * widthRatio, path.get(i).getYCoord() * heightRatio);
     }
     gc.stroke();
   }
 
   /**
    * retrieve the node from database based on destination name
+   *
    * @param destinationName
    */
   public void setDestination(String destinationName) {
     destination = nodeFactory.read(destinationName);
   }
-
 
   public void psychiatricImpatientCareButton(ActionEvent actionEvent) {
     setDestination("Psychiatric Impatient Care");
@@ -204,40 +206,48 @@ public class PathfindController extends SceneController {
   public void addictionCareButton(ActionEvent actionEvent) {
     setDestination("Addiction Care");
   }
+
   public void mechanicalSpaceButton(ActionEvent actionEvent) {
     setDestination("Mechanical Space");
   }
+
   public void occupationalTherapyButton(ActionEvent actionEvent) {
     setDestination("Occupational Therapy");
   }
+
   public void physicalTherapyButton(ActionEvent actionEvent) {
     setDestination("Physical Therapy");
   }
+
   public void foodServicesButton(ActionEvent actionEvent) {
     setDestination("Food Service");
   }
+
   public void otolaryngologyButton(ActionEvent actionEvent) {
     setDestination("Otolaryngology");
   }
+
   public void plasticSurgeryButton(ActionEvent actionEvent) {
     setDestination("P lastic Surgery");
   }
+
   public void centralSterileSupplyButton(ActionEvent actionEvent) {
     setDestination("Central Sterile Supply");
   }
+
   public void laundryButton(ActionEvent actionEvent) {
     setDestination("Laundry");
   }
+
   public void biomedButton(ActionEvent actionEvent) {
     setDestination("Biomedical Engineering");
   }
+
   public void morgueButton(ActionEvent actionEvent) {
     setDestination("Morgue");
   }
+
   public void materialManagementButton(ActionEvent actionEvent) {
     setDestination("Material Management");
   }
-
-
-
 }

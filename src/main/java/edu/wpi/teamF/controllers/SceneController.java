@@ -1,6 +1,5 @@
 package edu.wpi.teamF.controllers;
 
-
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,7 +8,7 @@ import javafx.stage.Stage;
 
 public class SceneController {
 
-  //Scene switching method
+  // Scene switching method
 
   public void switchScene(String aScene) throws IOException {
     Parent newFile =
@@ -20,4 +19,3 @@ public class SceneController {
     appStage.show();
   }
 }
-
