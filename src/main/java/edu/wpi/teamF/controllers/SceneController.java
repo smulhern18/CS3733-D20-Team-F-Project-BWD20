@@ -1,5 +1,6 @@
 package edu.wpi.teamF.controllers;
 
+
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,3 +20,4 @@ public class SceneController {
     appStage.show();
   }
 }
+

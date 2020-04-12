@@ -1,7 +1,10 @@
 package edu.wpi.teamF;
 
+<<<<<<< HEAD
+=======
 import edu.wpi.teamF.factories.DatabaseManager;
 
+>>>>>>> develop
 public class Main {
 
   static DatabaseManager databaseInitializer = new DatabaseManager();

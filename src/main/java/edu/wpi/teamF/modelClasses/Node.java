@@ -1,13 +1,10 @@
 package edu.wpi.teamF.modelClasses;
 
-
-
 import java.util.HashSet;
 import java.util.Set;
 
-
-
 public class Node {
+
 
     public enum NodeType {
         // Values
@@ -58,7 +55,10 @@ public class Node {
         setName(name);
         setType(nodeType);
         setFloor(floor);
+
     }
+
+
 
     /**
      * returns the neighbors set
@@ -203,5 +203,6 @@ public class Node {
         Validators.floorValidation(floor);
         this.floor = floor;
     }
+
 }
 
