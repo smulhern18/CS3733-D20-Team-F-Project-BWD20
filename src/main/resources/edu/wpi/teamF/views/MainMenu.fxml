@@ -7,19 +7,17 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.controllers.MainMenuController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
-          <Menu fx:id="displayButton" mnemonicParsing="false" text="Display" />
-          <Menu fx:id="downloadButton" mnemonicParsing="false" text="Download" />
-          <Menu fx:id="modifyButton" mnemonicParsing="false" text="Modify" />
-            <Menu fx:id="pathfinderButton" mnemonicParsing="false" text="Pathfinder">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-              </items>
-            </Menu>
+          <Menu mnemonicParsing="false" onAction="#displayButton" text="Display" />
+          <Menu mnemonicParsing="false" onAction="#downloadButton" text="Download" />
+          <Menu mnemonicParsing="false" onAction="#modifyButton" text="Modify" />
+            <Menu mnemonicParsing="false" text="Pathfinder">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#pathfinderButton" text="Map" />
+               </items></Menu>
         </menus>
       </MenuBar>
    </top>

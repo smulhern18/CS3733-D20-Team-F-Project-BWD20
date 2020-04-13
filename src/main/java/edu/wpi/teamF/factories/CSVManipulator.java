@@ -1,31 +1,32 @@
 package edu.wpi.teamF.factories;
 
+import edu.wpi.teamF.modelClasses.Node;
+import edu.wpi.teamF.modelClasses.Node.NodeType;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Scanner;
 import javax.management.InstanceNotFoundException;
-
+import org.apache.derby.iapi.jdbc.BrokeredConnection;
 
 public class CSVManipulator {
-
-
-  /**
-   * reads a csv file and insert the data in the file into the correct places in the database
-   */
+    private NodeFactory nodeFactory= new NodeFactory();
+  /** reads a csv file and insert the data in the file into the correct places in the database */
   public void readCSVFile() {
     String row = "";
     ArrayList<String> data = new ArrayList<>();
     try {
-      //goes to get the file
+      // goes to get the file
       BufferedReader csvReader =
           new BufferedReader(new FileReader(getClass().getResource("../csv/Test.csv").getFile()));
       while ((row = csvReader.readLine()) != null) {
         data.addAll(Arrays.asList(row.split(",")));
       }
-      //nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName,teamAssigned
-      //data now has all the data in a list ready to be used
+      for(int i =0;i < data.size(); i =i+9){
+        //ask how to turn string into node type
+        nodeFactory.createNode(new Node(Short.parseShort(data.get(i)),Short.parseShort(data.get(i+1)),data.get(i+2),data.get(i+3),data.get(i+4),data.get(i+5),Node.NodeType.getEnum(data.get(i+6)),Short.parseShort(data.get(i+7)));
+
+      }
 
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File Not found!");
@@ -36,6 +37,8 @@ public class CSVManipulator {
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
+
+
   }
 
   /** Writes to the CSV file so that it can become persistant */
@@ -44,12 +47,13 @@ public class CSVManipulator {
     String csvString = "";
     String selectStatement = "SELECT * FROM ";
 
+    BrokeredConnection connection = null;
     try (PreparedStatement preparedStatement = connection.prepareStatement(selectStatement)) {
 
       try (ResultSet resultSet = preparedStatement.executeQuery()) {
         // need to loop here to get all entries and call the 2 functions below
         if (resultSet.next()) {
-          //how the stuff should be written
+          // how the stuff should be written
         } else {
           throw new InstanceNotFoundException("Delete did not find a entry to delete");
         }
@@ -58,7 +62,7 @@ public class CSVManipulator {
     } catch (Exception e) {
       System.out.println(e);
     }
-  //writing to the file
+    // writing to the file
     try (FileWriter fw = new FileWriter("testText.txt", true);
         BufferedWriter bw = new BufferedWriter(fw);
         PrintWriter out = new PrintWriter(bw)) {
