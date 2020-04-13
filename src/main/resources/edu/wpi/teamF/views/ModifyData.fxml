@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.controllers.ModifyDataController">
    <children>
@@ -10,9 +14,40 @@
       <Button layoutX="153.0" layoutY="14.0" mnemonicParsing="false" onAction="#pathfinderSwitch" text="Pathfinder" />
       <Button layoutX="76.0" layoutY="14.0" mnemonicParsing="false" onAction="#downloadSwitch" text="Download" />
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#displaySwitch" text="Display" />
-      <Button fx:id="addButton" disable="true" layoutX="169.0" layoutY="130.0" mnemonicParsing="false" onAction="#addNode" text="Add" AnchorPane.leftAnchor="169.0" />
-      <Button fx:id="deleteButton" disable="true" layoutX="222.0" layoutY="130.0" mnemonicParsing="false" onAction="#deleteNode" text="Delete" AnchorPane.leftAnchor="222.0" />
-      <Button fx:id="editButton" disable="true" layoutX="282.0" layoutY="130.0" mnemonicParsing="false" onAction="#editNode" text="Edit" AnchorPane.leftAnchor="282.0" />
-      <TextField fx:id="nodeText" layoutX="14.0" layoutY="130.0" onKeyReleased="#validateButton" />
+      <Button fx:id="addButton" layoutX="22.0" layoutY="69.0" mnemonicParsing="false" onAction="#addButtonPress" text="Add" AnchorPane.leftAnchor="22.0" />
+      <Button fx:id="deleteButton" layoutX="76.0" layoutY="69.0" mnemonicParsing="false" onAction="#deleteButtonPress" text="Delete" AnchorPane.leftAnchor="76.0" />
+      <Button fx:id="editButton" layoutX="146.0" layoutY="69.0" mnemonicParsing="false" onAction="#editButtonPress" text="Edit" AnchorPane.leftAnchor="146.0" />
+      <TextField fx:id="nodeText" layoutX="20.0" layoutY="108.0" />
+      <GridPane fx:id="gridPane" alignment="CENTER" layoutX="9.0" layoutY="138.0" prefHeight="221.0" prefWidth="566.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="X-Coordinate" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Label text="Y-Coordinate" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Label text="Building" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <Label text="Long Name" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+            <Label alignment="CENTER" prefHeight="18.0" prefWidth="70.0" text="Short Name" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <TextField GridPane.columnIndex="1" fx:id="xCoordinateText" />
+            <TextField fx:id="yCoordinateText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="builingText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="longNameText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="shortNameText" GridPane.columnIndex="3" />
+            <Label text="Node Type" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label text="Floor Number" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+            <TextField fx:id="nodeTypeText" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <TextField fx:id="floorNumberText" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <Button fx:id="submitButton" layoutX="523.0" layoutY="360.0" mnemonicParsing="false" onAction="#submitData" text="Submit" />
    </children>
 </AnchorPane>
