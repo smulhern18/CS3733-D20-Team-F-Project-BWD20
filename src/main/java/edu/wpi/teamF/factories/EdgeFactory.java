@@ -1,8 +1,3 @@
 package edu.wpi.teamF.factories;
 
-
-
-public class EdgeFactory {
-
-}
-
+public class EdgeFactory {}

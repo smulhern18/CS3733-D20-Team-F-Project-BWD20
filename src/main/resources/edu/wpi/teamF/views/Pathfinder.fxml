@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.canvas.*?>
-<?import javafx.scene.image.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.controllers.PathfindController">
+<AnchorPane prefHeight="636.0" prefWidth="1002.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.controllers.PathfindController">
    <children>
       <MenuBar layoutY="2.0">
         <menus>
@@ -18,28 +21,31 @@
             <Menu mnemonicParsing="false" text="Download Data" />
         </menus>
       </MenuBar>
-      <StackPane layoutX="102.0" layoutY="60.0" prefHeight="281.0" prefWidth="396.0">
+      <StackPane layoutX="61.0" layoutY="61.0" prefHeight="541.0" prefWidth="895.0">
          <children>
-            <ImageView fitHeight="265.0" fitWidth="375.0" pickOnBounds="true" preserveRatio="true" />
-            <Canvas fx:id="canvasMap" height="256.0" width="382.0" />
+            <ImageView fitHeight="524.0" fitWidth="1192.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/Floor2LM.png" />
+               </image></ImageView>
+            <Canvas fx:id="canvasMap" height="526.0" width="876.0" />
          </children>
       </StackPane>
       <Button layoutX="542.0" layoutY="2.0" mnemonicParsing="false" onAction="#drawCanvas" text="Draw" />
       <MenuButton layoutX="379.0" layoutY="2.0" mnemonicParsing="false" text="Pick a Destination">
         <items>
-          <MenuItem mnemonicParsing="false" text="Psychiatric Impatient Care" />
-          <MenuItem mnemonicParsing="false" text="Psch/Addiction Care" />
-            <MenuItem mnemonicParsing="false" text="Mechanical Space" />
-            <MenuItem mnemonicParsing="false" text="Occupational Therapy" />
-            <MenuItem mnemonicParsing="false" text="Physical Therapy" />
-            <MenuItem mnemonicParsing="false" text="Food Services" />
-            <MenuItem mnemonicParsing="false" text="Otolaryngology" />
-            <MenuItem mnemonicParsing="false" text="Plastic Surgery" />
-            <MenuItem mnemonicParsing="false" text="Central Sterile Supply" />
-            <MenuItem mnemonicParsing="false" text="Laundry" />
-            <MenuItem mnemonicParsing="false" text="Biomedical Engineering" />
-            <MenuItem mnemonicParsing="false" text="Morgue" />
-            <MenuItem mnemonicParsing="false" text="Material Management" />
+          <MenuItem mnemonicParsing="false" onAction="#psychiatricImpatientCareButton" text="Psychiatric Impatient Care" />
+          <MenuItem mnemonicParsing="false" onAction="#addictionCareButton" text="Psch/Addiction Care" />
+            <MenuItem mnemonicParsing="false" onAction="#mechanicalSpaceButton" text="Mechanical Space" />
+            <MenuItem mnemonicParsing="false" onAction="#occupationalTherapyButton" text="Occupational Therapy" />
+            <MenuItem mnemonicParsing="false" onAction="#physicalTherapyButton" text="Physical Therapy" />
+            <MenuItem mnemonicParsing="false" onAction="#foodServicesButton" text="Food Services" />
+            <MenuItem mnemonicParsing="false" onAction="#otolaryngologyButton" text="Otolaryngology" />
+            <MenuItem mnemonicParsing="false" onAction="#plasticSurgeryButton" text="Plastic Surgery" />
+            <MenuItem mnemonicParsing="false" onAction="#centralSterileSupplyButton" text="Central Sterile Supply" />
+            <MenuItem mnemonicParsing="false" onAction="#laundryButton" text="Laundry" />
+            <MenuItem mnemonicParsing="false" onAction="#biomedButton" text="Biomedical Engineering" />
+            <MenuItem mnemonicParsing="false" onAction="#morgueButton" text="Morgue" />
+            <MenuItem mnemonicParsing="false" onAction="#materialManagementButton" text="Material Management" />
         </items>
       </MenuButton>
    </children>

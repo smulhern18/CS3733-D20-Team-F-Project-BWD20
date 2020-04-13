@@ -1,12 +1,10 @@
 package edu.wpi.teamF.controllers;
 
-
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class MainMenuController extends SceneController {
 
-  //Scene Controllers For the Main Menu
+  // Scene Controllers For the Main Menu
 
   SceneController sceneController = new SceneController();
 
@@ -26,4 +24,3 @@ public class MainMenuController extends SceneController {
     sceneController.switchScene("Pathfinder");
   }
 }
-
