@@ -23,10 +23,10 @@ public class PathfindController extends SceneController {
   private Node startNode;
   private Node destination;
 
-  public PathfindController() {
-
-    this.nodeFactory = null;
-  }
+  //  public PathfindController() {
+  //
+  //    this.nodeFactory = null;
+  //  }
 
   public PathfindController(NodeFactory nodeFactory) {
     this.nodeFactory = nodeFactory;
