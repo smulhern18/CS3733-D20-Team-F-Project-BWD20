@@ -8,6 +8,8 @@ import javafx.stage.DirectoryChooser;
 
 public class DisplayDataController extends SceneController {
 
+  @
+
   public void displayData(ActionEvent actionEvent) {
     DirectoryChooser directoryChooser = new DirectoryChooser();
     directoryChooser.setInitialDirectory(new File("src"));
