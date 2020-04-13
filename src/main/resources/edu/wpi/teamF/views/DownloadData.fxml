@@ -19,10 +19,9 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Label layoutX="10.0" layoutY="368.0" prefHeight="18.0" prefWidth="124.0" text="Created by Tyler Jones" textAlignment="CENTER" />
-      <Button layoutX="244.0" layoutY="18.0" mnemonicParsing="false" onAction="#modifyValSwitch" text="ModifyValues" />
-      <Button layoutX="163.0" layoutY="18.0" mnemonicParsing="false" onAction="#pathfinderSwitch" text="Pathfinder" />
-      <Button layoutX="86.0" layoutY="18.0" mnemonicParsing="false" onAction="#mainMenuSwitch" text="Main Menu" />
-      <Button layoutX="24.0" layoutY="18.0" mnemonicParsing="false" onAction="#displaySwitch" text="Display" />
+      <Button layoutX="232.0" layoutY="6.0" mnemonicParsing="false" onAction="#modifyValSwitch" text="ModifyValues" />
+      <Button layoutX="154.0" layoutY="6.0" mnemonicParsing="false" onAction="#pathfinderSwitch" text="Pathfinder" />
+      <Button layoutX="72.0" layoutY="6.0" mnemonicParsing="false" onAction="#mainMenuSwitch" text="Main Menu" />
+      <Button layoutX="10.0" layoutY="6.0" mnemonicParsing="false" onAction="#displaySwitch" text="Display" />
    </children>
 </AnchorPane>

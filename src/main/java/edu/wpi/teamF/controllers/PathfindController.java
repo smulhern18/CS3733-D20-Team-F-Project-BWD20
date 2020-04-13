@@ -252,5 +252,22 @@ public class PathfindController extends SceneController {
     setDestination("Material Management");
   }
 
-  public void mainMenuSwitch(ActionEvent actionEvent) throws IOException {}
+  // Swithcer methods
+  SceneController sceneController = new SceneController();
+
+  public void mainMenuSwitch(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("MainMenu");
+  }
+
+  public void modifyValSwitch(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("ModifyData");
+  }
+
+  public void downloadSwitch(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("DownloadData");
+  }
+
+  public void displaySwitch(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("DisplayData");
+  }
 }

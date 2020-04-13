@@ -20,14 +20,20 @@ public class MainMenuController extends SceneController {
 
   public void displaySwitch(ActionEvent actionEvent) throws IOException {
     System.out.println("Test");
-    sceneController.switchScene("Display");
+    sceneController.switchScene("DisplayData");
   }
 
-  public void downloadSwitch(ActionEvent actionEvent) {}
+  public void downloadSwitch(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("DownloadData");
+  }
 
-  public void pathfinderSwitch(ActionEvent actionEvent) {}
+  public void pathfinderSwitch(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("Pathfinder");
+  }
 
-  public void modifyValSwitch(ActionEvent actionEvent) {}
+  public void modifyValSwitch(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("ModifyData");
+  }
 
   public void test(ActionEvent actionEvent) {}
 }

@@ -10,15 +10,13 @@ import javafx.stage.Stage;
 public class SceneController extends App {
 
   // Scene switching method
-  App app = new App();
 
   public void switchScene(String aScene) throws IOException {
-    Stage newstage = app.getPS();
+    Stage newstage = App.getPS();
     Parent root =
         FXMLLoader.load(getClass().getResource("/edu/wpi/teamF/views/" + aScene + ".fxml"));
     Scene scene = new Scene(root);
     newstage.setScene(scene);
-    app.setPS(newstage);
     newstage.show();
   }
 }
