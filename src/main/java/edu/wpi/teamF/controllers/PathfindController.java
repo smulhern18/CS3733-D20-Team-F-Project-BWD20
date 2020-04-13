@@ -6,6 +6,7 @@ import edu.wpi.teamF.modelClasses.ElevatorScorer2;
 import edu.wpi.teamF.modelClasses.EuclideanScorer;
 import edu.wpi.teamF.modelClasses.Node;
 import edu.wpi.teamF.modelClasses.RouteNode;
+import java.io.IOException;
 import java.util.*;
 import javafx.event.ActionEvent;
 import javafx.scene.canvas.Canvas;
@@ -196,7 +197,7 @@ public class PathfindController extends SceneController {
    * @param destinationName
    */
   public void setDestination(String destinationName) {
-    destination = nodeFactory.read(destinationName);
+    // destination = nodeFactory.read(destinationName);
   }
 
   public void psychiatricImpatientCareButton(ActionEvent actionEvent) {
@@ -228,7 +229,7 @@ public class PathfindController extends SceneController {
   }
 
   public void plasticSurgeryButton(ActionEvent actionEvent) {
-    setDestination("P lastic Surgery");
+    setDestination("Plastic Surgery");
   }
 
   public void centralSterileSupplyButton(ActionEvent actionEvent) {
@@ -250,4 +251,6 @@ public class PathfindController extends SceneController {
   public void materialManagementButton(ActionEvent actionEvent) {
     setDestination("Material Management");
   }
+
+  public void mainMenuSwitch(ActionEvent actionEvent) throws IOException {}
 }

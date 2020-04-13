@@ -12,29 +12,17 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.controllers.DownloadDataController">
-    <top>
-        <MenuBar BorderPane.alignment="CENTER">
-            <menus>
-                <Menu mnemonicParsing="false" onAction="#mainMenuButton" text="Main Menu" />
-                <Menu mnemonicParsing="false" onAction="#displayButton" text="Display" />
-                <Menu mnemonicParsing="false" onAction="#modifyButton" text="Modify" />
-                <Menu mnemonicParsing="false" onAction="#pathfinderButton" text="Pathfinder">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Action 1" />
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
-    </top>
-    <bottom>
-        <Label prefHeight="18.0" prefWidth="124.0" text="Created by Tyler Jones" textAlignment="CENTER" BorderPane.alignment="BOTTOM_RIGHT" />
-    </bottom>
-   <center>
-      <Button fx:id="downloadButton" mnemonicParsing="false" prefHeight="62.0" prefWidth="151.0" text="Download" BorderPane.alignment="CENTER">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.controllers.DownloadDataController">
+   <children>
+      <Button fx:id="downloadButton" layoutX="225.0" layoutY="169.0" mnemonicParsing="false" onAction="#downloadData" prefHeight="62.0" prefWidth="151.0" text="Download">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-   </center>
-</BorderPane>
+      <Label layoutX="10.0" layoutY="368.0" prefHeight="18.0" prefWidth="124.0" text="Created by Tyler Jones" textAlignment="CENTER" />
+      <Button layoutX="244.0" layoutY="18.0" mnemonicParsing="false" onAction="#modifyValSwitch" text="ModifyValues" />
+      <Button layoutX="163.0" layoutY="18.0" mnemonicParsing="false" onAction="#pathfinderSwitch" text="Pathfinder" />
+      <Button layoutX="86.0" layoutY="18.0" mnemonicParsing="false" onAction="#mainMenuSwitch" text="Main Menu" />
+      <Button layoutX="24.0" layoutY="18.0" mnemonicParsing="false" onAction="#displaySwitch" text="Display" />
+   </children>
+</AnchorPane>

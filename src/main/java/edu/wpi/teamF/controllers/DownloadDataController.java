@@ -1,26 +1,20 @@
 package edu.wpi.teamF.controllers;
 
-import java.io.IOException;
+import javafx.event.ActionEvent;
 
 public class DownloadDataController extends SceneController {
+  public void mainMenuButton(ActionEvent actionEvent) {}
+
+  public void displayButton(ActionEvent actionEvent) {}
+
+  public void modifyButton(ActionEvent actionEvent) {}
+
+  public void pathfinderButton(ActionEvent actionEvent) {}
+
+  public void downloadData(ActionEvent actionEvent) {
+    System.out.println("Test\n");
+  }
 
   // Scene Controllers
 
-  SceneController sceneController = new SceneController();
-
-  public void displayButton(javafx.event.ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("DisplayData");
-  }
-
-  public void mainMenuButton(javafx.event.ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("MainMenu");
-  }
-
-  public void modifyButton(javafx.event.ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("ModifyValues");
-  }
-
-  public void pathfinderButton(javafx.event.ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("Pathfinder");
-  }
 }
