@@ -24,8 +24,9 @@ public class CSVManipulator {
       while ((row = csvReader.readLine()) != null) {
         data.addAll(Arrays.asList(row.split(",")));
       }
+      //nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName,teamAssigned
       //data now has all the data in a list ready to be used
-      //  for(int i =0)
+
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File Not found!");
     } catch (EOFException e) {
