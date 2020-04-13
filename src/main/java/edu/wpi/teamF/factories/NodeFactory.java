@@ -172,7 +172,4 @@ public class NodeFactory {
     return null;
   }
 
-  public Node read(String name) {
-    return null;
-  }
 }
