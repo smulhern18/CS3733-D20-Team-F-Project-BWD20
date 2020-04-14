@@ -28,7 +28,7 @@
          </children>
       </StackPane>
       <Button layoutX="542.0" layoutY="2.0" mnemonicParsing="false" onAction="#drawCanvas" text="Draw" />
-      <MenuButton layoutX="379.0" layoutY="2.0" mnemonicParsing="false" text="Pick a Destination">
+      <MenuButton fx:id="destinationPicker" layoutX="379.0" layoutY="2.0" mnemonicParsing="false" text="Pick a Destination">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#psychiatricImpatientCareButton" text="Psychiatric Impatient Care" />
           <MenuItem mnemonicParsing="false" onAction="#addictionCareButton" text="Psch/Addiction Care" />
