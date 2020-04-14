@@ -4,8 +4,8 @@ import edu.wpi.teamF.factories.NodeFactory;
 import edu.wpi.teamF.modelClasses.Node;
 import java.awt.*;
 import java.io.IOException;
-
 import edu.wpi.teamF.modelClasses.ValidationException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,23 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 public class ModifyDataController extends SceneController {
-  SceneController sceneController = new SceneController();
-
-  public void mainMenuSwitch(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("MainMenu");
-  }
-
-  public void pathfinderSwitch(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("MainMenu");
-  }
-
-  public void downloadSwitch(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("DownloadData");
-  }
-
-  public void displaySwitch(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("DisplayData");
-  }
 
   @FXML private TextField nodeText;
   @FXML private Button addButton;

@@ -18,9 +18,6 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Button layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#displaySwitch" text="Display" />
-      <Button layoutX="76.0" layoutY="8.0" mnemonicParsing="false" onAction="#downloadSwitch" text="Download" />
-      <Button layoutX="153.0" layoutY="8.0" mnemonicParsing="false" onAction="#pathfinderSwitch" text="Pathfinder" />
-      <Button layoutX="234.0" layoutY="8.0" mnemonicParsing="false" onAction="#modifyValSwitch" text="ModifyValues" />
+      <fx:include source="MenuBar.fxml" />
    </children>
 </AnchorPane>
