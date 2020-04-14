@@ -1,4 +1,4 @@
-package edu.wpi.teamF;
+package edu.wpi.teamF.ModelClasses;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -32,11 +32,11 @@ public class AStarTest {
 
     EuclideanScorer testScorer = new EuclideanScorer();
     Node testNode1 =
-        new Node((short) 0, (short) 0, null, null, null, "node1", Node.NodeType.HALL, (short) 1);
+        new Node(null, (short) 0, (short) 0, null, null, "node1", Node.NodeType.HALL, (short) 1);
     Node testNode2 =
-        new Node((short) 0, (short) 5, null, null, null, "node2", Node.NodeType.HALL, (short) 1);
+        new Node(null, (short) 5, (short) 0, null, null, "node2", Node.NodeType.HALL, (short) 1);
     Node testNode3 =
-        new Node((short) 4, (short) 3, null, null, null, "node3", Node.NodeType.HALL, (short) 1);
+        new Node(null, (short) 3, (short) 4, null, null, "node3", Node.NodeType.HALL, (short) 1);
     assertEquals(5, testScorer.computeCost(testNode1, testNode2), "message");
     assertEquals(5, testScorer.computeCost(testNode1, testNode3), "message");
   }
@@ -44,16 +44,16 @@ public class AStarTest {
   @Test
   public void testElevatorScorer2_1() throws ValidationException {
     Node elev1 =
-        new Node((short) 1, (short) 1, null, null, null, "elev1", Node.NodeType.ELEV, (short) 1);
+        new Node(null, (short) 1, (short) 1, null, null, "elev1", Node.NodeType.ELEV, (short) 1);
     Node elev2 =
-        new Node((short) 10, (short) 10, null, null, null, "elev2", Node.NodeType.ELEV, (short) 1);
+        new Node(null, (short) 10, (short) 10, null, null, "elev2", Node.NodeType.ELEV, (short) 1);
     Node elev3 =
-        new Node((short) 8, (short) 3, null, null, null, "elev3", Node.NodeType.ELEV, (short) 1);
+        new Node(null, (short) 3, (short) 8, null, null, "elev3", Node.NodeType.ELEV, (short) 1);
     List<Node> elevators = Arrays.asList(elev1, elev2, elev3);
     Node start =
-        new Node((short) 3, (short) 2, null, null, null, "start", Node.NodeType.HALL, (short) 1);
+        new Node(null, (short) 2, (short) 3, null, null, "start", Node.NodeType.HALL, (short) 1);
     Node end =
-        new Node((short) 10, (short) 2, null, null, null, "end", Node.NodeType.HALL, (short) 1);
+        new Node(null, (short) 2, (short) 10, null, null, "end", Node.NodeType.HALL, (short) 1);
     ElevatorScorer2 tester = new ElevatorScorer2(elevators);
 
     Assertions.assertEquals(

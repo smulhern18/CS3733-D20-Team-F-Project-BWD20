@@ -59,12 +59,8 @@ public class DatabaseManager {
             + NODE_1_KEY
             + " VARCHAR(32) NOT NULL, "
             + NODE_A_KEY
-            + " VARCHAR(32) NOT NULL,"
-            + "PRIMARY KEY ("
-            + NODE_1_KEY
-            + ", "
-            + NODE_A_KEY
-            + "))";
+            + " VARCHAR(32) NOT NULL"
+            + ")";
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
     preparedStatement.execute();
@@ -85,12 +81,21 @@ public class DatabaseManager {
     } catch (SQLException e) {
       System.out.println("Unable to get connection to database " + e.getMessage());
     }
-
     try {
       createTables();
     } catch (SQLException e) {
       System.out.println("Error when Creating tables: " + e.getMessage());
     }
+  }
+
+  public void reset() throws SQLException {
+    String nodeDropStatement = "DROP TABLE " + NODES_TABLE_NAME;
+    String edgeDropStatement = "DROP TABLE " + EDGES_TABLE_NAME;
+    PreparedStatement preparedStatement = connection.prepareStatement(nodeDropStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(edgeDropStatement);
+    preparedStatement.execute();
+    createTables();
   }
 
   public static Connection getConnection() {
