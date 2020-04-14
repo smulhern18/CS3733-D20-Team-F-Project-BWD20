@@ -2,7 +2,6 @@ package edu.wpi.teamF.controllers;
 
 import edu.wpi.teamF.factories.NodeFactory;
 import edu.wpi.teamF.modelClasses.Node;
-import edu.wpi.teamF.modelClasses.Node.NodeType;
 import java.awt.*;
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -83,11 +82,12 @@ public class ModifyDataController extends SceneController {
     String building = buildingText.getText();
     String longName = longNameText.getText();
     String shortName = shortNameText.getText();
-    NodeType nodeType = NodeType.getEnum(nodeTypeText.getText());
+    Node.NodeType nodeType = Node.NodeType.getEnum(nodeTypeText.getText());
     short floorNumber = Short.parseShort(floorNumberText.getText());
 
     Node node =
         new Node(
+
             name, xCoordinate, yCoordinate, building, longName, shortName, nodeType, floorNumber);
 
     nodeFactory.create(node);
@@ -109,7 +109,9 @@ public class ModifyDataController extends SceneController {
       deleteNode();
     }
     if (modifyType.equals(ModifyType.ADD)) {
+
       addNode();
+
     }
     if (modifyType.equals(ModifyType.EDIT)) {
       editNode();
