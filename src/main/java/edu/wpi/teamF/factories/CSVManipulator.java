@@ -1,5 +1,6 @@
 package edu.wpi.teamF.factories;
 
+import edu.wpi.teamF.modelClasses.Node;
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import javax.management.InstanceNotFoundException;
 import org.apache.derby.iapi.jdbc.BrokeredConnection;
 
 public class CSVManipulator {
-
+  private NodeFactory nodeFactory = new NodeFactory();
   /** reads a csv file and insert the data in the file into the correct places in the database */
   public void readCSVFile() {
     String row = "";
@@ -20,8 +21,20 @@ public class CSVManipulator {
       while ((row = csvReader.readLine()) != null) {
         data.addAll(Arrays.asList(row.split(",")));
       }
-      // data now has all the data in a list ready to be used
-      //  for(int i =0)
+      for (int i = 0; i < data.size(); i = i + 9) {
+        // ask how to turn string into node type
+        nodeFactory.createNode(
+            new Node(
+                Short.parseShort(data.get(i)),
+                Short.parseShort(data.get(i + 1)),
+                data.get(i + 2),
+                data.get(i + 3),
+                data.get(i + 4),
+                data.get(i + 5),
+                Node.NodeType.getEnum(data.get(i + 6)),
+                Short.parseShort(data.get(i + 7))));
+      }
+
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File Not found!");
     } catch (EOFException e) {
