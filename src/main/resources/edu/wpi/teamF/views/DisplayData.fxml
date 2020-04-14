@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<<<<<<< HEAD
 <?import javafx.scene.canvas.*?>
 <?import javafx.scene.chart.*?>
+=======
+>>>>>>> origin
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<<<<<<< HEAD
 <AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.controllers.DisplayDataController">
    <children>
       <Button layoutX="14.0" layoutY="354.0" mnemonicParsing="false" onAction="#displayData" text="Pick A File" />
@@ -17,4 +21,11 @@
       <Button layoutX="100.0" layoutY="6.0" mnemonicParsing="false" onAction="#downloadSwitch" text="Download" />
       <Button layoutX="11.0" layoutY="6.0" mnemonicParsing="false" onAction="#mainMenuSwitch" text="Main Menu" />
    </children>
+=======
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="edu.wpi.teamF.controllers.DisplayDataController"
+            prefHeight="400.0" prefWidth="600.0">
+
+>>>>>>> origin
 </AnchorPane>
