@@ -1,7 +1,6 @@
 package edu.wpi.teamF.factories;
 
 import edu.wpi.teamF.modelClasses.Node;
-import edu.wpi.teamF.modelClasses.Node.NodeType;
 import java.io.*;
 import java.nio.file.Path;
 import java.sql.*;
@@ -10,8 +9,10 @@ import java.util.Arrays;
 import javax.management.InstanceNotFoundException;
 import org.apache.derby.iapi.jdbc.BrokeredConnection;
 
-public class CSVManipulator  {
-    private NodeFactory nodeFactory= new NodeFactory();
+
+public class CSVManipulator {
+  private NodeFactory nodeFactory = new NodeFactory();
+
   /** reads a csv file and insert the data in the file into the correct places in the database */
   public ArrayList<String> readCSVFile(Path path) {
     String row = "";
@@ -23,9 +24,21 @@ public class CSVManipulator  {
       while ((row = csvReader.readLine()) != null) {
         data.addAll(Arrays.asList(row.split(",")));
       }
-      for(int i =0;i < data.size(); i =i+8){
-        //ask how to turn string into node type
-        nodeFactory.createNode(new Node(Short.parseShort(data.get(i)),Short.parseShort(data.get(i+1)),data.get(i+2),data.get(i+3),data.get(i+4),data.get(i+5),Node.NodeType.getEnum(data.get(i+6)),Short.parseShort(data.get(i+7)));
+
+
+
+      for (int i = 0; i < data.size(); i = i + 8) {
+        // ask how to turn string into node type
+        nodeFactory.createNode(
+            new Node(
+                Short.parseShort(data.get(i)),
+                Short.parseShort(data.get(i + 1)),
+                data.get(i + 2),
+                data.get(i + 3),
+                data.get(i + 4),
+                data.get(i + 5),
+                Node.NodeType.getEnum(data.get(i + 6)),
+                Short.parseShort(data.get(i + 7))));
 
       }
 
@@ -38,7 +51,9 @@ public class CSVManipulator  {
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
+
   return data;
+
 
   }
 
