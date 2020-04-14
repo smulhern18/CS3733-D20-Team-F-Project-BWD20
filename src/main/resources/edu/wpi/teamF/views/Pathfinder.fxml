@@ -30,7 +30,7 @@
          </children>
       </StackPane>
       <Button layoutX="912.0" layoutY="11.0" mnemonicParsing="false" onAction="#drawCanvas" text="Draw" />
-      <MenuButton fx:id="destinationPicker" layoutX="761.0" layoutY="11.0" mnemonicParsing="false" text="Pick a Destination">
+      <MenuButton fx:id="destinationPicker" layoutX="688.0" layoutY="11.0" mnemonicParsing="false" text="Pick a Destination">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#psychiatricImpatientCareButton" text="Psychiatric Impatient Care" />
           <MenuItem mnemonicParsing="false" onAction="#addictionCareButton" text="Psch/Addiction Care" />
