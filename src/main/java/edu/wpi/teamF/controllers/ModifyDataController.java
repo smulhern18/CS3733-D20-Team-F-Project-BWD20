@@ -98,14 +98,14 @@ public class ModifyDataController extends SceneController {
 
   public void editNode() throws Exception {
     try {
-      String name = nodeText.getText();
-      short xCoordinate = Short.parseShort(xCoordinateText.getText());
-      short yCoordinate = Short.parseShort(yCoordinateText.getText());
-      String building = buildingText.getText();
-      String longName = longNameText.getText();
-      String shortName = shortNameText.getText();
-      Node.NodeType nodeType = Node.NodeType.getEnum(nodeTypeText.getText());
-      short floorNumber = Short.parseShort(floorNumberText.getText());
+    String name = nodeText.getText();
+    short xCoordinate = Short.parseShort(xCoordinateText.getText());
+    short yCoordinate = Short.parseShort(yCoordinateText.getText());
+    String building = buildingText.getText();
+    String longName = longNameText.getText();
+    String shortName = shortNameText.getText();
+    Node.NodeType nodeType = Node.NodeType.getEnum(nodeTypeText.getText());
+    short floorNumber = Short.parseShort(floorNumberText.getText());
 
       Node node = nodeFactory.read(name);
       node.setXCoord(xCoordinate);

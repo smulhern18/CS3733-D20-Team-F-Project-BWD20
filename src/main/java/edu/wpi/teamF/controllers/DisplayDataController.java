@@ -3,11 +3,9 @@ package edu.wpi.teamF.controllers;
 import edu.wpi.teamF.factories.CSVManipulator;
 import edu.wpi.teamF.factories.NodeFactory;
 import edu.wpi.teamF.modelClasses.Node;
-import java.io.*;
 import java.io.File;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
@@ -24,7 +22,6 @@ public class DisplayDataController extends SceneController {
   public TableColumn<Node, String> type;
   public TableColumn<Node, String> floor;
   public AnchorPane displayPane;
-  public Button mainMenu;
 
   public void displayData(ActionEvent actionEvent) {
     FileChooser fileChooser = new FileChooser();
@@ -40,5 +37,7 @@ public class DisplayDataController extends SceneController {
 
     // populating the table with Node data
     // table.setItems(nodes);
+    populateTable();
   }
+  public void populateTable() {}
 }

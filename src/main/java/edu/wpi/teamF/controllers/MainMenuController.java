@@ -1,3 +1,7 @@
 package edu.wpi.teamF.controllers;
 
-public class MainMenuController extends SceneController {}
+import javafx.scene.image.ImageView;
+
+public class MainMenuController extends SceneController {
+  public ImageView flamingoViewer;
+}

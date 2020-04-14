@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -13,11 +14,16 @@
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.controllers.MainMenuController">
    <children>
-      <Label fx:id="titleLabel" layoutX="91.0" layoutY="101.0" prefHeight="198.0" prefWidth="418.0" text="Welcome to the Amazing Pathfinder!" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="titleLabel" layoutX="91.0" layoutY="14.0" prefHeight="198.0" prefWidth="418.0" text="Welcome to the Amazing Pathfinder!" textAlignment="CENTER" wrapText="true">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
       <fx:include source="MenuBar.fxml" />
+      <ImageView fx:id="flamingoViewer" fitHeight="198.0" fitWidth="209.0" layoutX="201.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/flamingo.gif" />
+         </image></ImageView>
+      <Button layoutX="14.0" layoutY="361.0" mnemonicParsing="false" text="Click to Party" />
    </children>
 </AnchorPane>
