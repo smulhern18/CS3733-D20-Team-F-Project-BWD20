@@ -21,7 +21,7 @@ public class Node {
 
     private String typeString;
     // Constructor
-    private NodeType(String type) {
+    NodeType(String type) {
       this.typeString = type;
     }
 
@@ -50,7 +50,7 @@ public class Node {
   private String name;
   private NodeType type;
   private short floor;
-  private Set<Node> neighbors = new HashSet<>();;
+  private Set<String> neighbors = new HashSet<>();
 
   /**
    * Constructor for Nodes
@@ -66,12 +66,12 @@ public class Node {
    * @throws ValidationException should anything go wrong
    */
   public Node(
+      String name,
       short xCoord,
       short yCoord,
       String building,
       String longName,
       String shortName,
-      String name,
       NodeType nodeType,
       short floor)
       throws ValidationException {
@@ -85,12 +85,27 @@ public class Node {
     setFloor(floor);
   }
 
+  public Node(
+      String name,
+      short xCoord,
+      short yCoord,
+      String building,
+      String longName,
+      String shortName,
+      NodeType nodeType,
+      short floor,
+      Set<String> neighbors)
+      throws ValidationException {
+    this(name, xCoord, yCoord, building, longName, shortName, nodeType, floor);
+    addNeighbor(neighbors);
+  }
+
   /**
    * returns the neighbors set
    *
    * @return the set of neighbor nodes
    */
-  public Set<Node> getNeighbors() {
+  public Set<String> getNeighbors() {
     return neighbors;
   }
 
@@ -99,7 +114,7 @@ public class Node {
    *
    * @param neighbor the neighbor to add
    */
-  public void addNeighbor(Node neighbor) {
+  public void addNeighbor(String neighbor) {
     neighbors.add(neighbor);
   }
 
@@ -108,8 +123,10 @@ public class Node {
    *
    * @param neighbors the neighbors to add
    */
-  public void addNeighbor(Set<Node> neighbors) {
-    this.neighbors.addAll(neighbors);
+  public void addNeighbor(Set<String> neighbors) {
+    for (String nodeName : neighbors) {
+      addNeighbor(nodeName);
+    }
   }
 
   /**
@@ -120,16 +137,12 @@ public class Node {
    */
   public boolean equals(Object other) {
     boolean isEqual = false;
-    if (other != null && other instanceof Node) {
+    if (other instanceof Node) {
       Node otherNode = (Node) other;
       boolean neighborsEquals = true;
       if (otherNode.getNeighbors().size() == neighbors.size()) {
-        for (Node neighborNode : neighbors) {
-          if (!(otherNode.getNeighbors().contains(neighborNode) && neighborsEquals)) {
-            neighborsEquals = false;
-          } else {
-            neighborsEquals = true;
-          }
+        for (String neighborNode : neighbors) {
+          neighborsEquals = otherNode.getNeighbors().contains(neighborNode) && neighborsEquals;
         }
       } else {
         neighborsEquals = false;
@@ -291,7 +304,7 @@ public class Node {
    *
    * @return the floor the node is on
    */
-  public int getFloor() {
+  public short getFloor() {
     return floor;
   }
 
