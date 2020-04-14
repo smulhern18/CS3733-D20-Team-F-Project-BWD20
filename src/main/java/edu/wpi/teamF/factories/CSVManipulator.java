@@ -29,11 +29,10 @@ public class CSVManipulator {
 
       for (int i = 0; i < data.size(); i = i + 8) {
         // ask how to turn string into node type
-        nodeFactory.createNode(
-            new Node(
-                Short.parseShort(data.get(i)),
-                Short.parseShort(data.get(i + 1)),
-                data.get(i + 2),
+        nodeFactory.create(
+            new Node(data.get(i),
+                Short.parseShort(data.get(i+1)),
+                Short.parseShort(data.get(i + 2)),
                 data.get(i + 3),
                 data.get(i + 4),
                 data.get(i + 5),
