@@ -5,8 +5,6 @@ import edu.wpi.teamF.modelClasses.Node;
 import edu.wpi.teamF.modelClasses.Node.NodeType;
 import java.awt.*;
 import java.io.IOException;
-
-import edu.wpi.teamF.modelClasses.ValidationException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -37,7 +35,6 @@ public class ModifyDataController extends SceneController {
   @FXML private Button deleteButton;
   @FXML private Button editButton;
 
-
   @FXML private TextField xCoordinateText;
   @FXML private TextField yCoordinateText;
   @FXML private TextField buildingText;
@@ -49,7 +46,12 @@ public class ModifyDataController extends SceneController {
 
   @FXML private Button submitButton;
 
-  private enum ModifyType{DELETE, ADD, EDIT};
+  private enum ModifyType {
+    DELETE,
+    ADD,
+    EDIT
+  };
+
   private ModifyType modifyType;
 
   private NodeFactory nodeFactory = null;
@@ -58,7 +60,6 @@ public class ModifyDataController extends SceneController {
   private void deleteButtonPress() {
     nodeText.setDisable(false);
     modifyType = ModifyType.DELETE;
-
   }
 
   @FXML
@@ -85,32 +86,32 @@ public class ModifyDataController extends SceneController {
     NodeType nodeType = NodeType.getEnum(nodeTypeText.getText());
     short floorNumber = Short.parseShort(floorNumberText.getText());
 
-    Node node = new Node(xCoordinate, yCoordinate, building, longName, shortName, name, nodeType, floorNumber);
+    Node node =
+        new Node(
+            name, xCoordinate, yCoordinate, building, longName, shortName, nodeType, floorNumber);
 
-    nodeFactory.createNode(node);
+    nodeFactory.create(node);
   }
 
   public void deleteNode() {
     try {
-      Node node = nodeFactory.readNode(nodeText.getText());
-      nodeFactory.deleteNode(node);
+      Node node = nodeFactory.read(nodeText.getText());
+      nodeFactory.delete(node);
     } catch (Exception e) {
       System.out.println("Node not found");
     }
   }
 
-  public void editNode() {
-
-  }
+  public void editNode() {}
 
   public void submitData(ActionEvent actionEvent) throws Exception {
-    if(modifyType.equals(ModifyType.DELETE)){
+    if (modifyType.equals(ModifyType.DELETE)) {
       deleteNode();
     }
-    if(modifyType.equals(ModifyType.ADD)){
+    if (modifyType.equals(ModifyType.ADD)) {
       addNode();
     }
-    if(modifyType.equals(ModifyType.EDIT)){
+    if (modifyType.equals(ModifyType.EDIT)) {
       editNode();
     }
   }

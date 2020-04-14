@@ -3,12 +3,9 @@ package edu.wpi.teamF.controllers;
 import edu.wpi.teamF.App;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -49,18 +46,17 @@ public class DisplayDataController extends SceneController {
 
   private void displayTableView(String filepath) {
 
-    //Need to create a new tableview of type Node
+    // Need to create a new tableview of type Node
     TableView<String> csvData = new TableView<>();
-    //List that the nodes will populate its data with
+    // List that the nodes will populate its data with
     ObservableList<String> dataList = FXCollections.observableArrayList();
-    //populate dataList, need name of nodes to grab data from them
-    
-    //readcvsFile() in cvsmanipulator
-    //display in tableview
-    //CSVManipulator reader = new CSVManipulator(filepath);
+    // populate dataList, need name of nodes to grab data from them
 
+    // readcvsFile() in cvsmanipulator
+    // display in tableview
+    // CSVManipulator reader = new CSVManipulator(filepath);
 
-    //Columns for the tableview, not sure how many we need yet
+    // Columns for the tableview, not sure how many we need yet
 
     TableColumn columna1 = new TableColumn<>("A1");
     columna1.setCellValueFactory(new PropertyValueFactory<>("A1"));
@@ -81,15 +77,17 @@ public class DisplayDataController extends SceneController {
     TableColumn columna9 = new TableColumn<>("A9");
     columna1.setCellValueFactory(new PropertyValueFactory<>("A9"));
 
-
     csvData.setItems(dataList);
-    csvData.getColumns().addAll(columna1, columna2, columna3, columna4, columna5, columna6, columna7, columna8, columna9);
+    csvData
+        .getColumns()
+        .addAll(
+            columna1, columna2, columna3, columna4, columna5, columna6, columna7, columna8,
+            columna9);
 
     VBox vBox = new VBox();
     vBox.setSpacing(10);
     vBox.getChildren().add(csvData);
 
     rootPane.getChildren().add(vBox);
-
   }
 }
