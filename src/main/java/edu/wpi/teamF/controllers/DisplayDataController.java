@@ -7,7 +7,6 @@ import java.io.*;
 import java.io.File;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
@@ -24,7 +23,6 @@ public class DisplayDataController extends SceneController {
   public TableColumn<Node, String> type;
   public TableColumn<Node, String> floor;
   public AnchorPane displayPane;
-  public Button mainMenu;
 
   public void displayData(ActionEvent actionEvent) {
     FileChooser fileChooser = new FileChooser();
