@@ -17,9 +17,6 @@ public class DatabaseManager {
 
   static final String X_COORDINATE_KEY = "xCoord";
   static final String Y_COORDINATE_KEY = "yCoord";
-  static final String BUILDING_KEY = "building";
-  static final String LONG_NAME_KEY = "longName";
-  static final String SHORT_NAME_KEY = "shortName";
   static final String TYPE_KEY = "type";
   static final String FLOOR_KEY = "floor";
   static final String NODE_1_KEY = "node1";
@@ -38,12 +35,6 @@ public class DatabaseManager {
             + " SMALLINT NOT NULL, "
             + Y_COORDINATE_KEY
             + " SMALLINT NOT NULL, "
-            + BUILDING_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + LONG_NAME_KEY
-            + " VARCHAR(64) NOT NULL, "
-            + SHORT_NAME_KEY
-            + " VARCHAR(16) NOT NULL, "
             + TYPE_KEY
             + " VARCHAR(4) NOT NULL, "
             + FLOOR_KEY
@@ -59,8 +50,12 @@ public class DatabaseManager {
             + NODE_1_KEY
             + " VARCHAR(32) NOT NULL, "
             + NODE_A_KEY
-            + " VARCHAR(32) NOT NULL"
-            + ")";
+            + " VARCHAR(32) NOT NULL,"
+            + "PRIMARY KEY ("
+            + NODE_1_KEY
+            + ", "
+            + NODE_A_KEY
+            + "))";
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
     preparedStatement.execute();
@@ -81,21 +76,12 @@ public class DatabaseManager {
     } catch (SQLException e) {
       System.out.println("Unable to get connection to database " + e.getMessage());
     }
+
     try {
       createTables();
     } catch (SQLException e) {
       System.out.println("Error when Creating tables: " + e.getMessage());
     }
-  }
-
-  public void reset() throws SQLException {
-    String nodeDropStatement = "DROP TABLE " + NODES_TABLE_NAME;
-    String edgeDropStatement = "DROP TABLE " + EDGES_TABLE_NAME;
-    PreparedStatement preparedStatement = connection.prepareStatement(nodeDropStatement);
-    preparedStatement.execute();
-    preparedStatement = connection.prepareStatement(edgeDropStatement);
-    preparedStatement.execute();
-    createTables();
   }
 
   public static Connection getConnection() {
