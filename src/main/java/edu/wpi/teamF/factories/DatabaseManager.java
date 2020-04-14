@@ -70,7 +70,7 @@ public class DatabaseManager {
   }
 
   public void initialize() {
-    String dbURL = "jdbc:derby:teamF";
+    String dbURL = "jdbc:derby:teamF;create=true";
     try {
       DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
     } catch (SQLException e) {
