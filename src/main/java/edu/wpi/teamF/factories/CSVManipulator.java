@@ -9,7 +9,6 @@ import java.util.Arrays;
 import javax.management.InstanceNotFoundException;
 import org.apache.derby.iapi.jdbc.BrokeredConnection;
 
-
 public class CSVManipulator {
   private NodeFactory nodeFactory = new NodeFactory();
 
@@ -19,26 +18,23 @@ public class CSVManipulator {
     ArrayList<String> data = new ArrayList<>();
     try {
       // goes to get the file
-      BufferedReader csvReader =
-          new BufferedReader(new FileReader(path.toFile()));
+      BufferedReader csvReader = new BufferedReader(new FileReader(path.toFile()));
       while ((row = csvReader.readLine()) != null) {
         data.addAll(Arrays.asList(row.split(",")));
       }
 
-
-
       for (int i = 0; i < data.size(); i = i + 8) {
         // ask how to turn string into node type
         nodeFactory.create(
-            new Node(data.get(i),
-                Short.parseShort(data.get(i+1)),
+            new Node(
+                data.get(i),
+                Short.parseShort(data.get(i + 1)),
                 Short.parseShort(data.get(i + 2)),
                 data.get(i + 3),
                 data.get(i + 4),
                 data.get(i + 5),
                 Node.NodeType.getEnum(data.get(i + 6)),
                 Short.parseShort(data.get(i + 7))));
-
       }
 
     } catch (FileNotFoundException e) {
@@ -51,8 +47,8 @@ public class CSVManipulator {
       System.out.println(e.getMessage());
     }
 
-
   return data;
+
 
 
   }
