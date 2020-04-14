@@ -1,13 +1,22 @@
 package edu.wpi.teamF.controllers;
 
+import edu.wpi.teamF.App;
+import java.io.File;
 import java.io.IOException;
 import javafx.event.ActionEvent;
+import javafx.stage.DirectoryChooser;
 
 public class DownloadDataController extends SceneController {
   SceneController sceneController = new SceneController();
 
   public void downloadData(ActionEvent actionEvent) {
-    System.out.println("Test\n");
+    DirectoryChooser directoryChooser = new DirectoryChooser();
+    directoryChooser.setTitle("Select Which Directory To Save Your File");
+    File selectedDirectory = directoryChooser.showDialog(App.getPS());
+    String directory = selectedDirectory.getAbsolutePath();
+    System.out.println(directory);
+
+    saveFile();
   }
 
   public void modifyValSwitch(ActionEvent actionEvent) throws IOException {
@@ -26,6 +35,5 @@ public class DownloadDataController extends SceneController {
     sceneController.switchScene("DisplayData");
   }
 
-  // Scene Controllers
-
+  public void saveFile() {}
 }

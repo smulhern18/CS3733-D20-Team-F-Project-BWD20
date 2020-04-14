@@ -87,7 +87,6 @@ public class ModifyDataController extends SceneController {
 
     Node node =
         new Node(
-
             name, xCoordinate, yCoordinate, building, longName, shortName, nodeType, floorNumber);
 
     nodeFactory.create(node);
@@ -111,7 +110,6 @@ public class ModifyDataController extends SceneController {
     if (modifyType.equals(ModifyType.ADD)) {
 
       addNode();
-
     }
     if (modifyType.equals(ModifyType.EDIT)) {
       editNode();

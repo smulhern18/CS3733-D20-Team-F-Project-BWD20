@@ -19,7 +19,6 @@ public class MainMenuController extends SceneController {
   public void pathfinderButton(ActionEvent actionEvent) {}
 
   public void displaySwitch(ActionEvent actionEvent) throws IOException {
-    System.out.println("Test");
     sceneController.switchScene("DisplayData");
   }
 
