@@ -3,13 +3,11 @@ package edu.wpi.teamF.controllers;
 import edu.wpi.teamF.factories.NodeFactory;
 import edu.wpi.teamF.modelClasses.Node;
 import java.awt.*;
-import java.io.IOException;
-import edu.wpi.teamF.modelClasses.ValidationException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 
 public class ModifyDataController extends SceneController {
@@ -29,6 +27,8 @@ public class ModifyDataController extends SceneController {
   @FXML private GridPane gridPane;
 
   @FXML private Button submitButton;
+
+  public void validateSubmitButton(KeyEvent keyEvent) {}
 
   private enum ModifyType {
     DELETE,
@@ -131,5 +131,4 @@ public class ModifyDataController extends SceneController {
       editNode();
     }
   }
-
 }

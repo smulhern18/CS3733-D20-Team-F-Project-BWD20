@@ -38,5 +38,8 @@ public class DisplayDataController extends SceneController {
 
     // populating the table with Node data
     // table.setItems(nodes);
+    populateTable();
   }
+
+  public void populateTable() {}
 }

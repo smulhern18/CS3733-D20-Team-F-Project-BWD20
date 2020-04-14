@@ -48,10 +48,7 @@
          </children>
       </GridPane>
       <Button fx:id="submitButton" layoutX="523.0" layoutY="360.0" mnemonicParsing="false" onAction="#submitData" text="Submit" />
-<<<<<<< HEAD
       <Button fx:id="findLocationButton" layoutX="189.0" layoutY="108.0" mnemonicParsing="false" onAction="#findNode" text="Find Location" />
-=======
       <fx:include source="MenuBar.fxml" />
->>>>>>> 49cc385ee3dea00b4840c927933ecef322cf9d85
    </children>
 </AnchorPane>

@@ -8,8 +8,8 @@ public class MenuBarController {
   public Button mainMenuButton;
   public Button downloadButton;
   public Button pathFinderButton;
-  public Button modifyValuesButton;
   public Button displayButton;
+  public Button modifyDataButton;
   SceneController sceneController = new SceneController();
 
   public void mainMenuSwitch(ActionEvent actionEvent) throws IOException {
@@ -24,13 +24,11 @@ public class MenuBarController {
     sceneController.switchScene("Pathfinder");
   }
 
-  public void modifyValSwitch(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("ModifyData");
-  }
-
   public void displaySwitch(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("DisplayData");
   }
 
-  public void hideMainMenu() {}
+  public void modifyDataSwitch(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("ModifyData");
+  }
 }
