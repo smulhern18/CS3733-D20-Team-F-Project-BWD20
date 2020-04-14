@@ -24,7 +24,6 @@ public class CSVManipulator {
       }
 
       for (int i = 0; i < data.size(); i = i + 8) {
-        // ask how to turn string into node type
         nodeFactory.create(
             new Node(
                 data.get(i),
