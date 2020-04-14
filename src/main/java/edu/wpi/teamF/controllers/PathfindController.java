@@ -25,10 +25,10 @@ public class PathfindController extends SceneController {
   private Node startNode;
   private Node destination;
 
-  public PathfindController() {
-
-    this.nodeFactory = null;
-  }
+  //  public PathfindController() {
+  //
+  //    this.nodeFactory = null;
+  //  }
 
   public PathfindController(NodeFactory nodeFactory) {
     this.nodeFactory = nodeFactory;
@@ -38,7 +38,7 @@ public class PathfindController extends SceneController {
     // Check if the destination is on a different floor
     if (startNode.getFloor() != endNode.getFloor()) {
       // create list of elevators to navigate
-      List<Node> elevatorList = nodeFactory.getNodes("ELEV");
+      List<Node> elevatorList = nodeFactory.getNodesByType(Node.NodeType.ELEV);
       // If it is, navigate to the most practical elevator instead
       ElevatorScorer2 elevScorer =
           new ElevatorScorer2(elevatorList); // Need to find out how we pass it a list of elevators?
@@ -64,7 +64,14 @@ public class PathfindController extends SceneController {
           return path;
         }
         // Make a list of all of the neighbors of this node
-        Set<Node> neighbors = currentNode.getNode().getNeighbors();
+        Set<Node> neighbors = new HashSet<>();
+        for (String neighborNode : currentNode.getNode().getNeighbors()) {
+          try {
+            neighbors.add(nodeFactory.read(neighborNode));
+          } catch (Exception e) {
+            System.out.println(e.getMessage());
+          }
+        }
         for (Node neighbor : neighbors) {
           if (!visited.contains(neighbor)) {
             double distanceToEnd =
@@ -90,7 +97,7 @@ public class PathfindController extends SceneController {
     PriorityQueue<RouteNode> priorityQueue = new PriorityQueue<RouteNode>();
     HashSet<Node> visited = new HashSet<Node>();
     EuclideanScorer scorer = new EuclideanScorer();
-    ElevatorScorer elevScorer = new ElevatorScorer(nodeFactory.getNodes("ELEV"));
+    ElevatorScorer elevScorer = new ElevatorScorer(nodeFactory.getNodesByType(Node.NodeType.ELEV));
     // Create the first node and add it to the Priority Queue
     RouteNode start;
     if (startNode.getFloor() != endNode.getFloor()) {
@@ -114,7 +121,14 @@ public class PathfindController extends SceneController {
           return path;
         }
         // Make a list of all of the neighbors of this node
-        Set<Node> neighbors = currentNode.getNode().getNeighbors();
+        Set<Node> neighbors = new HashSet<>();
+        for (String neighborNode : currentNode.getNode().getNeighbors()) {
+          try {
+            neighbors.add(nodeFactory.read(neighborNode));
+          } catch (Exception e) {
+            System.out.println(e.getMessage());
+          }
+        }
         for (Node neighbor : neighbors) {
           if (!visited.contains(neighbor)) {
             double distanceToEnd = 0;
@@ -199,7 +213,11 @@ public class PathfindController extends SceneController {
    * @param destinationName
    */
   public void setDestination(String destinationName) {
-    // destination = nodeFactory.read(destinationName);
+    try {
+      destination = nodeFactory.read(destinationName);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
   }
 
   public void psychiatricImpatientCareButton(ActionEvent actionEvent) {

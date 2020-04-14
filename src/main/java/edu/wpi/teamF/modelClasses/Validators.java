@@ -16,6 +16,30 @@ public class Validators {
   public static final int SHORT_NAME_MAX_LENGTH = 16;
 
   /**
+   * Validation for Node
+   *
+   * @param t an instance of node or subclass to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static <T extends Node> void nodeValidation(T t, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(t, constraints);
+    Node nodeObject = (Node) t;
+
+    coordValidation(nodeObject.getXCoord());
+    coordValidation(nodeObject.getYCoord());
+    nameValidation(nodeObject.getName());
+    longNameValidation(nodeObject.getShortName());
+    shortNameValidation(nodeObject.getLongName());
+    buildingValidation(nodeObject.getBuilding());
+    for (String nodeName : nodeObject.getNeighbors()) {
+      nameValidation(nodeName);
+    }
+    floorValidation(nodeObject.getFloor());
+  }
+
+  /**
    * Validation for coords
    *
    * @param coord the coord to validate
@@ -32,31 +56,44 @@ public class Validators {
   /**
    * Validation for Buildings
    *
-   * @param building
-   * @param constraints
-   * @throws ValidationException
+   * @param building the building to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the building be invalid
    */
   public static void buildingValidation(String building, int... constraints)
       throws ValidationException {
     nullCheckValidation(building, constraints);
-    if (building.length() >= BUILDING_MAX_LENGTH || building.length() <= BUILDING_MIN_LENGTH) {
+    if (building.length() > BUILDING_MAX_LENGTH || building.length() < BUILDING_MIN_LENGTH) {
       throw new ValidationException("Building string is out of bounds");
     }
   }
 
+  /**
+   * Validation for longNames
+   *
+   * @param longName the long name to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the longName be invalid
+   */
   public static void longNameValidation(String longName, int... constraints)
       throws ValidationException {
     nullCheckValidation(longName, constraints);
-    if (longName.length() >= LONG_NAME_MIN_LENGTH || longName.length() <= LONG_NAME_MAX_LENGTH) {
+    if (longName.length() < LONG_NAME_MIN_LENGTH || longName.length() > LONG_NAME_MAX_LENGTH) {
       throw new ValidationException("Long Name string is out of bounds");
     }
   }
 
-  public static void shortNameValidation(String shortName, int... contraints)
+  /**
+   * Validation for shortNames
+   *
+   * @param shortName the shortName to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the shortName be invalid
+   */
+  public static void shortNameValidation(String shortName, int... constraints)
       throws ValidationException {
-    nullCheckValidation(shortName, contraints);
-    if (shortName.length() >= SHORT_NAME_MIN_LENGTH
-        || shortName.length() <= SHORT_NAME_MAX_LENGTH) {
+    nullCheckValidation(shortName, constraints);
+    if (shortName.length() < SHORT_NAME_MIN_LENGTH || shortName.length() > SHORT_NAME_MAX_LENGTH) {
       throw new ValidationException("Short Name string is out of bounds");
     }
   }
@@ -70,7 +107,7 @@ public class Validators {
    */
   public static void floorValidation(short floor, int... constraints) throws ValidationException {
     nullCheckValidation(floor, constraints);
-    if (!(floor > FLOOR_MIN_VALUE && floor < FLOOR_MAX_VALUE)) {
+    if (!(floor >= FLOOR_MIN_VALUE && floor <= FLOOR_MAX_VALUE)) {
       throw new ValidationException("Floor outside of accepted values");
     }
   }
@@ -85,7 +122,7 @@ public class Validators {
   public static void nameValidation(String string, int... constraints) throws ValidationException {
     nullCheckValidation(string, constraints);
     string = string.trim();
-    if (string.length() >= NAME_MAX_LENGTH || string.length() <= NAME_MIN_LENGTH) {
+    if (string.length() > NAME_MAX_LENGTH || string.length() < NAME_MIN_LENGTH) {
       throw new ValidationException("string is out of bounds");
     }
   }
