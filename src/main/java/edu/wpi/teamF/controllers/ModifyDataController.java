@@ -4,6 +4,8 @@ import edu.wpi.teamF.factories.NodeFactory;
 import edu.wpi.teamF.modelClasses.Node;
 import java.awt.*;
 import java.io.IOException;
+
+import edu.wpi.teamF.modelClasses.ValidationException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -101,18 +103,50 @@ public class ModifyDataController extends SceneController {
     }
   }
 
-  public void editNode() {}
+  public void editNode() throws Exception {
+    String name = nodeText.getText();
+    short xCoordinate = Short.parseShort(xCoordinateText.getText());
+    short yCoordinate = Short.parseShort(yCoordinateText.getText());
+    String building = buildingText.getText();
+    String longName = longNameText.getText();
+    String shortName = shortNameText.getText();
+    Node.NodeType nodeType = Node.NodeType.getEnum(nodeTypeText.getText());
+    short floorNumber = Short.parseShort(floorNumberText.getText());
 
+    Node node = nodeFactory.read(name);
+    node.setXCoord(xCoordinate);
+    node.setYCoord(yCoordinate);
+    node.setBuilding(building);
+    node.setLongName(longName);
+    node.setShortName(shortName);
+    node.setType(nodeType);
+    node.setFloor(floorNumber);
+  }
+
+  @FXML
+  public void findNode(ActionEvent actionEvent) throws Exception {
+    String nodeName = nodeText.getText();
+    Node node = nodeFactory.read(nodeName);
+    xCoordinateText.setText("" + node.getXCoord());
+    yCoordinateText.setText("" + node.getYCoord());
+    buildingText.setText(node.getBuilding());
+    longNameText.setText(node.getLongName());
+    shortNameText.setText(node.getShortName());
+    nodeTypeText.setText("" + node.getType());
+    floorNumberText.setText("" + node.getFloor());
+  }
+
+  @FXML
   public void submitData(ActionEvent actionEvent) throws Exception {
     if (modifyType.equals(ModifyType.DELETE)) {
       deleteNode();
     }
     if (modifyType.equals(ModifyType.ADD)) {
-
       addNode();
     }
     if (modifyType.equals(ModifyType.EDIT)) {
       editNode();
     }
   }
+
 }
