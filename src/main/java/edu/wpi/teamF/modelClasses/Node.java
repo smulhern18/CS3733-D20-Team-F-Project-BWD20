@@ -21,7 +21,7 @@ public class Node {
 
     private String typeString;
     // Constructor
-    private NodeType(String type) {
+    NodeType(String type) {
       this.typeString = type;
     }
 
@@ -44,28 +44,60 @@ public class Node {
 
   private short xCoord;
   private short yCoord;
+  private String building;
+  private String longName;
+  private String shortName;
   private String name;
   private NodeType type;
   private short floor;
-  private Set<Node> neighbors = new HashSet<>();;
+  private Set<String> neighbors = new HashSet<>();
 
   /**
    * Constructor for Nodes
    *
    * @param xCoord the xCoordinate of the node
    * @param yCoord the yCoordinate of the node
+   * @param building the building of the node
+   * @param longName the long name of the node
+   * @param shortName the short name of the node
    * @param name the name of the node
    * @param nodeType the type of the node
    * @param floor the floor the node is on
    * @throws ValidationException should anything go wrong
    */
-  public Node(short xCoord, short yCoord, String name, NodeType nodeType, short floor)
+  public Node(
+      String name,
+      short xCoord,
+      short yCoord,
+      String building,
+      String longName,
+      String shortName,
+      NodeType nodeType,
+      short floor)
       throws ValidationException {
     setXCoord(xCoord);
     setYCoord(yCoord);
+    setBuilding(building);
+    setLongName(longName);
+    setShortName(shortName);
     setName(name);
     setType(nodeType);
     setFloor(floor);
+  }
+
+  public Node(
+      String name,
+      short xCoord,
+      short yCoord,
+      String building,
+      String longName,
+      String shortName,
+      NodeType nodeType,
+      short floor,
+      Set<String> neighbors)
+      throws ValidationException {
+    this(name, xCoord, yCoord, building, longName, shortName, nodeType, floor);
+    addNeighbor(neighbors);
   }
 
   /**
@@ -73,7 +105,7 @@ public class Node {
    *
    * @return the set of neighbor nodes
    */
-  public Set<Node> getNeighbors() {
+  public Set<String> getNeighbors() {
     return neighbors;
   }
 
@@ -82,7 +114,7 @@ public class Node {
    *
    * @param neighbor the neighbor to add
    */
-  public void addNeighbor(Node neighbor) {
+  public void addNeighbor(String neighbor) {
     neighbors.add(neighbor);
   }
 
@@ -91,8 +123,10 @@ public class Node {
    *
    * @param neighbors the neighbors to add
    */
-  public void addNeighbor(Set<Node> neighbors) {
-    this.neighbors.addAll(neighbors);
+  public void addNeighbor(Set<String> neighbors) {
+    for (String nodeName : neighbors) {
+      addNeighbor(nodeName);
+    }
   }
 
   /**
@@ -103,16 +137,12 @@ public class Node {
    */
   public boolean equals(Object other) {
     boolean isEqual = false;
-    if (other != null && other instanceof Node) {
+    if (other instanceof Node) {
       Node otherNode = (Node) other;
       boolean neighborsEquals = true;
       if (otherNode.getNeighbors().size() == neighbors.size()) {
-        for (Node neighborNode : neighbors) {
-          if (!(otherNode.getNeighbors().contains(neighborNode) && neighborsEquals)) {
-            neighborsEquals = false;
-          } else {
-            neighborsEquals = true;
-          }
+        for (String neighborNode : neighbors) {
+          neighborsEquals = otherNode.getNeighbors().contains(neighborNode) && neighborsEquals;
         }
       } else {
         neighborsEquals = false;
@@ -123,7 +153,10 @@ public class Node {
               && this.getYCoord() == otherNode.getYCoord()
               && this.getFloor() == otherNode.getFloor()
               && this.getType() == otherNode.getType()
-              && neighborsEquals;
+              && neighborsEquals
+              && this.getBuilding().equals(otherNode.getBuilding())
+              && this.getLongName().equals(otherNode.getLongName())
+              && this.getShortName().equals(otherNode.getShortName());
     }
     return isEqual;
   }
@@ -169,6 +202,66 @@ public class Node {
   }
 
   /**
+   * Returns the building of the node
+   *
+   * @return the building
+   */
+  public String getBuilding() {
+    return building;
+  }
+
+  /**
+   * Sets the building
+   *
+   * @param building the building to set
+   * @throws ValidationException should the validation fail
+   */
+  public void setBuilding(String building) throws ValidationException {
+    Validators.buildingValidation(building);
+    this.building = building;
+  }
+
+  /**
+   * Returns the longName of the node
+   *
+   * @return the longName
+   */
+  public String getLongName() {
+    return longName;
+  }
+
+  /**
+   * Sets the longName
+   *
+   * @param longName the longName
+   * @throws ValidationException should the validation fail
+   */
+  public void setLongName(String longName) throws ValidationException {
+    Validators.longNameValidation(longName);
+    this.longName = longName;
+  }
+
+  /**
+   * Returns the shortName of the node
+   *
+   * @return the shortName of the node
+   */
+  public String getShortName() {
+    return shortName;
+  }
+
+  /**
+   * Sets the shortName of the node
+   *
+   * @param shortName the shortName to set
+   * @throws ValidationException should the validation fail
+   */
+  public void setShortName(String shortName) throws ValidationException {
+    Validators.shortNameValidation(shortName);
+    this.shortName = shortName;
+  }
+
+  /**
    * Returns the name of the node
    *
    * @return the name
@@ -211,7 +304,7 @@ public class Node {
    *
    * @return the floor the node is on
    */
-  public int getFloor() {
+  public short getFloor() {
     return floor;
   }
 

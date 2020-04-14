@@ -1,26 +1,46 @@
 package edu.wpi.teamF.factories;
 
+import edu.wpi.teamF.modelClasses.Node;
 import java.io.*;
+import java.nio.file.Path;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.management.InstanceNotFoundException;
+import org.apache.derby.iapi.jdbc.BrokeredConnection;
+
 
 public class CSVManipulator {
+  private NodeFactory nodeFactory = new NodeFactory();
 
   /** reads a csv file and insert the data in the file into the correct places in the database */
-  public void readCSVFile() {
+  public ArrayList<String> readCSVFile(Path path) {
     String row = "";
     ArrayList<String> data = new ArrayList<>();
     try {
       // goes to get the file
       BufferedReader csvReader =
-          new BufferedReader(new FileReader(getClass().getResource("../csv/Test.csv").getFile()));
+          new BufferedReader(new FileReader(path.toFile()));
       while ((row = csvReader.readLine()) != null) {
         data.addAll(Arrays.asList(row.split(",")));
       }
-      // data now has all the data in a list ready to be used
-      //  for(int i =0)
+
+
+
+      for (int i = 0; i < data.size(); i = i + 8) {
+        // ask how to turn string into node type
+        nodeFactory.create(
+            new Node(data.get(i),
+                Short.parseShort(data.get(i+1)),
+                Short.parseShort(data.get(i + 2)),
+                data.get(i + 3),
+                data.get(i + 4),
+                data.get(i + 5),
+                Node.NodeType.getEnum(data.get(i + 6)),
+                Short.parseShort(data.get(i + 7))));
+
+      }
+
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File Not found!");
     } catch (EOFException e) {
@@ -30,6 +50,10 @@ public class CSVManipulator {
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
+
+  return data;
+
+
   }
 
   /** Writes to the CSV file so that it can become persistant */
@@ -38,6 +62,7 @@ public class CSVManipulator {
     String csvString = "";
     String selectStatement = "SELECT * FROM ";
 
+    BrokeredConnection connection = null;
     try (PreparedStatement preparedStatement = connection.prepareStatement(selectStatement)) {
 
       try (ResultSet resultSet = preparedStatement.executeQuery()) {
