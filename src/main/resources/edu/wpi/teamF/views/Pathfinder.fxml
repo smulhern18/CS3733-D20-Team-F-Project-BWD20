@@ -24,7 +24,7 @@
          <children>
             <ImageView fitHeight="524.0" fitWidth="1192.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Images/Floor3LM.png" />
+                  <Image url="@../Images/Floor2LM.png" />
                </image></ImageView>
             <Canvas fx:id="canvasMap" height="526.0" width="876.0" />
          </children>
