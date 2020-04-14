@@ -3,7 +3,6 @@ package edu.wpi.teamF.controllers;
 import edu.wpi.teamF.factories.CSVManipulator;
 import edu.wpi.teamF.factories.NodeFactory;
 import edu.wpi.teamF.modelClasses.Node;
-import java.io.*;
 import java.io.File;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -40,6 +39,5 @@ public class DisplayDataController extends SceneController {
     // table.setItems(nodes);
     populateTable();
   }
-
   public void populateTable() {}
 }

@@ -47,8 +47,12 @@
             <TextField fx:id="floorNumberText" GridPane.columnIndex="3" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Button fx:id="submitButton" layoutX="523.0" layoutY="360.0" mnemonicParsing="false" onAction="#submitData" text="Submit" />
-      <Button fx:id="findLocationButton" layoutX="189.0" layoutY="108.0" mnemonicParsing="false" onAction="#findNode" text="Find Location" />
+      <Button fx:id="submitButton" disable="true" layoutX="523.0" layoutY="360.0" mnemonicParsing="false" onAction="#submitData" text="Submit" />
+
+      <Button fx:id="findLocationButton" disable="true" layoutX="328.0" layoutY="108.0" mnemonicParsing="false" onAction="#findNode" text="Find Location" />
+
       <fx:include source="MenuBar.fxml" />
+      <Label fx:id="locationNameLabel" disable="true" layoutX="41.0" layoutY="112.0" text="Location Name" />
+
    </children>
 </AnchorPane>

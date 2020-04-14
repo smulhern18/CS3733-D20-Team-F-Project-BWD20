@@ -84,7 +84,9 @@ public class DatabaseManager {
     try {
       createTables();
     } catch (SQLException e) {
-      System.out.println("Error when Creating tables: " + e.getMessage());
+      if (!e.getMessage().contains("'NODESTABLE' already exists")) {
+        System.out.println(e.getMessage());
+      }
     }
   }
 
