@@ -39,6 +39,6 @@ public class DisplayDataController extends SceneController {
     ObservableList<Node> nodes = nodeFactory.getAllNodes();
 
     // populating the table with Node data
-    table.setItems(nodes);
+    // table.setItems(nodes);
   }
 }
