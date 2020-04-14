@@ -19,9 +19,6 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="232.0" layoutY="6.0" mnemonicParsing="false" onAction="#modifyValSwitch" text="ModifyValues" />
-      <Button layoutX="154.0" layoutY="6.0" mnemonicParsing="false" onAction="#pathfinderSwitch" text="Pathfinder" />
-      <Button layoutX="72.0" layoutY="6.0" mnemonicParsing="false" onAction="#mainMenuSwitch" text="Main Menu" />
-      <Button layoutX="10.0" layoutY="6.0" mnemonicParsing="false" onAction="#displaySwitch" text="Display" />
+      <fx:include source="MenuBar.fxml" />
    </children>
 </AnchorPane>

@@ -1,18 +1,30 @@
 package edu.wpi.teamF.controllers;
 
 import edu.wpi.teamF.factories.CSVManipulator;
+import edu.wpi.teamF.factories.NodeFactory;
+import edu.wpi.teamF.modelClasses.Node;
 import java.io.*;
 import java.io.File;
-import java.io.IOException;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 
 public class DisplayDataController extends SceneController {
 
-  public AnchorPane rootPane;
-  public TableView table;
+  public TableView<Node> table;
+  public TableColumn<Node, String> name;
+  public TableColumn<Node, Short> xCoord;
+  public TableColumn<Node, Short> yCoord;
+  public TableColumn<Node, String> longName;
+  // public TableColumn<Node, String> shortName;
+  public TableColumn<Node, String> type;
+  public TableColumn<Node, String> floor;
+  public AnchorPane displayPane;
+  public Button mainMenu;
 
   public void displayData(ActionEvent actionEvent) {
     FileChooser fileChooser = new FileChooser();
@@ -22,26 +34,11 @@ public class DisplayDataController extends SceneController {
     CSVManipulator csvM = new CSVManipulator();
     csvM.readCSVFile(file.toPath());
 
-    populateTable();
+    // eww
+    NodeFactory nodeFactory = NodeFactory.getFactory();
+    ObservableList<Node> nodes = nodeFactory.getAllNodes();
+
+    // populating the table with Node data
+    table.setItems(nodes);
   }
-
-  SceneController sceneController = new SceneController();
-
-  public void modifyValSwitch(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("ModifyData");
-  }
-
-  public void pathfinderSwitch(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("Pathfinder");
-  }
-
-  public void downloadSwitch(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("DownloadData");
-  }
-
-  public void mainMenuSwitch(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("MainMenu");
-  }
-
-  private void populateTable() {}
 }

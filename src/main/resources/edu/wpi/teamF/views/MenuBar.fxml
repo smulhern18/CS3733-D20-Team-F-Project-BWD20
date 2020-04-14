@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.controllers.MenuBarController">
+   <children>
+      <Button fx:id="mainMenuButton" mnemonicParsing="false" onAction="#mainMenuSwitch" text="Main Menu" />
+      <Button fx:id="downloadButton" mnemonicParsing="false" onAction="#downloadSwitch" text="Download" />
+      <Button fx:id="pathFinderButton" mnemonicParsing="false" onAction="#pathfinderSwitch" text="Pathfinder" />
+      <Button fx:id="modifyValuesButton" mnemonicParsing="false" onAction="#modifyValSwitch" text="ModifyValues" />
+      <Button fx:id="displayButton" mnemonicParsing="false" onAction="#displaySwitch" text="Display" />
+   </children>
+   <padding>
+      <Insets left="5.0" top="10.0" />
+   </padding>
+</HBox>
