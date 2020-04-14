@@ -1,6 +1,6 @@
 package edu.wpi.teamF.factories;
 
-import edu.wpi.teamF.modelClasses.Node;
+import edu.wpi.teamF.ModelClasses.Node;
 import java.io.*;
 import java.nio.file.Path;
 import java.sql.*;

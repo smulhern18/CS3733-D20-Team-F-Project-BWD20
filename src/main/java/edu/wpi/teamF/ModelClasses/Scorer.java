@@ -1,4 +1,4 @@
-package edu.wpi.teamF.modelClasses;
+package edu.wpi.teamF.ModelClasses;
 
 public interface Scorer {
   double computeCost(Node from, Node to);

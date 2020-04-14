@@ -1,7 +1,7 @@
-package edu.wpi.teamF.test;
+package edu.wpi.teamF.Test;
 
-import edu.wpi.teamF.modelClasses.Node;
-import edu.wpi.teamF.modelClasses.ValidationException;
+import edu.wpi.teamF.ModelClasses.Node;
+import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.util.Arrays;
 import java.util.HashSet;
 

@@ -12,7 +12,7 @@
    <children>
       <Button layoutX="14.0" layoutY="354.0" mnemonicParsing="false" onAction="#displayData" text="Pick A File" />
       <Canvas height="292.0" layoutX="114.0" layoutY="54.0" width="372.0" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="114.0" AnchorPane.rightAnchor="114.0" AnchorPane.topAnchor="54.0" />
-      <TableView fx:id="table" layoutX="44.0" layoutY="84.0" prefHeight="200.0" prefWidth="526.0">
+      <TableView fx:id="table" layoutX="75.0" layoutY="100.0" prefHeight="200.0" prefWidth="451.0">
         <columns>
           <TableColumn fx:id="name" prefWidth="75.0" text="Name" />
           <TableColumn prefWidth="75.0" text="xCoord" fx:id="xCoord" />

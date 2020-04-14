@@ -1,4 +1,4 @@
-package edu.wpi.teamF.modelClasses;
+package edu.wpi.teamF.ModelClasses;
 
 import java.util.HashSet;
 import java.util.Set;

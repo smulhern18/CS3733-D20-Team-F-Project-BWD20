@@ -1,10 +1,10 @@
-package edu.wpi.teamF.modelClasses;
+package edu.wpi.teamF.ModelClasses;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import edu.wpi.teamF.factories.DatabaseManager;
 import edu.wpi.teamF.factories.NodeFactory;
-import edu.wpi.teamF.test.TestData;
+import edu.wpi.teamF.Test.TestData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

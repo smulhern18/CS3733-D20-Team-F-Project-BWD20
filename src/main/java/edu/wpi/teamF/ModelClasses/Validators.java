@@ -1,4 +1,4 @@
-package edu.wpi.teamF.modelClasses;
+package edu.wpi.teamF.ModelClasses;
 
 public class Validators {
 

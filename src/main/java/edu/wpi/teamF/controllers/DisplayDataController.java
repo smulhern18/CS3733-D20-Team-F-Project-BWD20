@@ -2,7 +2,7 @@ package edu.wpi.teamF.controllers;
 
 import edu.wpi.teamF.factories.CSVManipulator;
 import edu.wpi.teamF.factories.NodeFactory;
-import edu.wpi.teamF.modelClasses.Node;
+import edu.wpi.teamF.ModelClasses.Node;
 import java.io.File;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

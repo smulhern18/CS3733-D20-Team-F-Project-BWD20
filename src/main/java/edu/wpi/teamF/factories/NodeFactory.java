@@ -1,8 +1,8 @@
 package edu.wpi.teamF.factories;
 
-import edu.wpi.teamF.modelClasses.Node;
-import edu.wpi.teamF.modelClasses.ValidationException;
-import edu.wpi.teamF.modelClasses.Validators;
+import edu.wpi.teamF.ModelClasses.Node;
+import edu.wpi.teamF.ModelClasses.ValidationException;
+import edu.wpi.teamF.ModelClasses.Validators;
 import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
