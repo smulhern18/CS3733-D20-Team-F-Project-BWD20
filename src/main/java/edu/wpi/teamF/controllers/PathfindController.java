@@ -25,14 +25,14 @@ public class PathfindController extends SceneController {
   private Node startNode;
   private Node destination;
 
-  //  public PathfindController() {
-  //
-  //    this.nodeFactory = null;
-  //  }
+  public PathfindController() {
 
-  public PathfindController(NodeFactory nodeFactory) {
-    this.nodeFactory = nodeFactory;
+    this.nodeFactory = NodeFactory.getFactory();
   }
+
+  //  public PathfindController(NodeFactory nodeFactory) {
+  //    this.nodeFactory = nodeFactory;
+  //  }
 
   public List<Node> getPath(Node startNode, Node endNode) {
     // Check if the destination is on a different floor

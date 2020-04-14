@@ -75,22 +75,23 @@ public class ModifyDataController extends SceneController {
     modifyType = ModifyType.EDIT;
   }
 
-  /*public void addNode() throws Exception {
+  public void addNode() throws Exception {
     String name = nodeText.getText();
     short xCoordinate = Short.parseShort(xCoordinateText.getText());
     short yCoordinate = Short.parseShort(yCoordinateText.getText());
     String building = buildingText.getText();
     String longName = longNameText.getText();
     String shortName = shortNameText.getText();
-    NodeType nodeType = NodeType.getEnum(nodeTypeText.getText());
+    Node.NodeType nodeType = Node.NodeType.getEnum(nodeTypeText.getText());
     short floorNumber = Short.parseShort(floorNumberText.getText());
 
     Node node =
         new Node(
-            xCoordinate, yCoordinate, building, longName, shortName, name, nodeType, floorNumber);
+
+            name, xCoordinate, yCoordinate, building, longName, shortName, nodeType, floorNumber);
 
     nodeFactory.create(node);
-  }*/
+  }
 
   public void deleteNode() {
     try {
@@ -108,7 +109,9 @@ public class ModifyDataController extends SceneController {
       deleteNode();
     }
     if (modifyType.equals(ModifyType.ADD)) {
-      // addNode();
+
+      addNode();
+
     }
     if (modifyType.equals(ModifyType.EDIT)) {
       editNode();
