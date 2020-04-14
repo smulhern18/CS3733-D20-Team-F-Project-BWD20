@@ -11,6 +11,7 @@ import java.util.*;
 import javafx.event.ActionEvent;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.MenuButton;
 import javafx.scene.paint.Color;
 
 public class PathfindController extends SceneController {
@@ -19,6 +20,7 @@ public class PathfindController extends SceneController {
   public static int MAP_WIDTH = 2475;
 
   public Canvas canvasMap;
+  public MenuButton destinationPicker;
   private NodeFactory nodeFactory;
   private Node startNode;
   private Node destination;
@@ -202,54 +204,67 @@ public class PathfindController extends SceneController {
 
   public void psychiatricImpatientCareButton(ActionEvent actionEvent) {
     setDestination("Psychiatric Impatient Care");
+    destinationPicker.setText("Psychiatric Impatient Care");
   }
 
   public void addictionCareButton(ActionEvent actionEvent) {
     setDestination("Addiction Care");
+    destinationPicker.setText("Addiction Care");
   }
 
   public void mechanicalSpaceButton(ActionEvent actionEvent) {
     setDestination("Mechanical Space");
+    destinationPicker.setText("Mechanical Space");
   }
 
   public void occupationalTherapyButton(ActionEvent actionEvent) {
     setDestination("Occupational Therapy");
+    destinationPicker.setText("Occupational Therapy");
   }
 
   public void physicalTherapyButton(ActionEvent actionEvent) {
     setDestination("Physical Therapy");
+    destinationPicker.setText("Physical Therapy");
   }
 
   public void foodServicesButton(ActionEvent actionEvent) {
     setDestination("Food Service");
+    destinationPicker.setText("Food Service");
   }
 
   public void otolaryngologyButton(ActionEvent actionEvent) {
     setDestination("Otolaryngology");
+    destinationPicker.setText("Otolarngology");
   }
 
   public void plasticSurgeryButton(ActionEvent actionEvent) {
     setDestination("Plastic Surgery");
+    destinationPicker.setText("Plastic Surgery");
   }
 
   public void centralSterileSupplyButton(ActionEvent actionEvent) {
     setDestination("Central Sterile Supply");
+    destinationPicker.setText("Central Sterile Supply");
   }
 
   public void laundryButton(ActionEvent actionEvent) {
     setDestination("Laundry");
+    destinationPicker.setText("Laundry");
   }
 
   public void biomedButton(ActionEvent actionEvent) {
     setDestination("Biomedical Engineering");
+    destinationPicker.setText("Biomedical Engineering");
   }
 
   public void morgueButton(ActionEvent actionEvent) {
     setDestination("Morgue");
+    destinationPicker.setText("Morgue");
   }
 
   public void materialManagementButton(ActionEvent actionEvent) {
     setDestination("Material Management");
+    destinationPicker.setText("Material Management");
   }
 
   // Swithcer methods

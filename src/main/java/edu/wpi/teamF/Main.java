@@ -13,7 +13,7 @@ public class Main {
     } catch (ClassNotFoundException e) {
       System.out.println("Driver Not found");
     }
-    // databaseInitializer.initialize();
+    databaseInitializer.initialize();
 
     App.launch(App.class, args);
   }
