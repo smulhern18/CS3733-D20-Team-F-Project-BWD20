@@ -30,11 +30,13 @@ public class Validators {
     coordValidation(nodeObject.getXCoord());
     coordValidation(nodeObject.getYCoord());
     nameValidation(nodeObject.getName());
-    longNameValidation(nodeObject.getShortName());
-    shortNameValidation(nodeObject.getLongName());
+    longNameValidation(nodeObject.getLongName());
+    shortNameValidation(nodeObject.getShortName());
     buildingValidation(nodeObject.getBuilding());
-    for (String nodeName : nodeObject.getNeighbors()) {
-      nameValidation(nodeName);
+    if (nodeObject.getNeighbors() != null) {
+      for (String nodeName : nodeObject.getNeighbors()) {
+        nameValidation(nodeName);
+      }
     }
     floorValidation(nodeObject.getFloor());
   }

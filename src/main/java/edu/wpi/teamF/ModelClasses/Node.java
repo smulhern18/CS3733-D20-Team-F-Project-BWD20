@@ -17,7 +17,8 @@ public class Node {
     CONF("CONF"),
     EXIT("EXIT"),
     RETL("RETL"),
-    SERV("SERV");
+    SERV("SERV"),
+    STAF("STAF");
 
     private String typeString;
     // Constructor

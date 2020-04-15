@@ -20,12 +20,17 @@ public class CSVManipulator {
     try {
       // goes to get the file
       BufferedReader csvReader = new BufferedReader(new FileReader(path.toFile()));
+      BufferedWriter csvWriter = new BufferedWriter(new FileWriter(path.toFile(), true));
+      csvWriter.newLine();
+      csvWriter.write("end");
+      csvWriter.close();
       while ((row = csvReader.readLine()) != null) {
         data.addAll(Arrays.asList(row.split(",")));
       }
 
-      for (int i = 9; i < data.size(); i = i + 9) {
-        nodeFactory.create(
+      int i = 9;
+      while (i < data.size() && !data.get(i).equals("end")) {
+        Node node =
             new Node(
                 data.get(i), // name
                 Short.parseShort(data.get(i + 1)), // xcoord
@@ -34,7 +39,10 @@ public class CSVManipulator {
                 data.get(i + 6), // longname
                 data.get(i + 7), // shortname
                 Node.NodeType.getEnum(data.get(i + 5)), // nodetype
-                Short.parseShort(data.get(i + 3)))); // floor
+                Short.parseShort(data.get(i + 3)));
+        System.out.println("Created Node on line " + i / 9 + ", " + node.getName());
+        nodeFactory.create(node); // floor
+        i = i + 9;
       }
 
     } catch (FileNotFoundException e) {
