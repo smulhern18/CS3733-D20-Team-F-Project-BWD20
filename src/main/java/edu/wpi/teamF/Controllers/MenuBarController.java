@@ -1,4 +1,4 @@
-package edu.wpi.teamF.controllers;
+package edu.wpi.teamF.Controllers;
 
 import java.io.IOException;
 import javafx.event.ActionEvent;

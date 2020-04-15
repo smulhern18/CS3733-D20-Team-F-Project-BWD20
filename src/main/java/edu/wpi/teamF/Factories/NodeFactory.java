@@ -1,4 +1,4 @@
-package edu.wpi.teamF.factories;
+package edu.wpi.teamF.Factories;
 
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ValidationException;

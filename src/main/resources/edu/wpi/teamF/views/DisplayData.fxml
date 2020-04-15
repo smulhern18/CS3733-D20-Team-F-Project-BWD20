@@ -11,7 +11,11 @@
 
 
 
+
 <AnchorPane fx:id="displayPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.controllers.DisplayDataController">
+=======
+<AnchorPane fx:id="displayPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.DisplayDataController">
+>>>>>>> refs/remotes/origin/develop
    <children>
       <Button layoutX="14.0" layoutY="354.0" mnemonicParsing="false" onAction="#displayData" text="Pick A File" />
       <Canvas height="292.0" layoutX="114.0" layoutY="54.0" width="372.0" AnchorPane.bottomAnchor="54.0" AnchorPane.leftAnchor="114.0" AnchorPane.rightAnchor="114.0" AnchorPane.topAnchor="54.0" />

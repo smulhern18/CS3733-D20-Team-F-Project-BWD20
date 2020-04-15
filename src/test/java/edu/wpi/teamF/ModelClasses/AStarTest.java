@@ -2,7 +2,7 @@ package edu.wpi.teamF.ModelClasses;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import edu.wpi.teamF.controllers.PathfindController;
+import edu.wpi.teamF.Controllers.PathfindController;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;

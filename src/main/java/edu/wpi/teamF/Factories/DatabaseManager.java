@@ -1,4 +1,4 @@
-package edu.wpi.teamF.factories;
+package edu.wpi.teamF.Factories;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

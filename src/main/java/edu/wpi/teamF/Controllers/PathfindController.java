@@ -1,11 +1,11 @@
-package edu.wpi.teamF.controllers;
+package edu.wpi.teamF.Controllers;
 
+import edu.wpi.teamF.Factories.NodeFactory;
 import edu.wpi.teamF.ModelClasses.ElevatorScorer;
 import edu.wpi.teamF.ModelClasses.ElevatorScorer2;
 import edu.wpi.teamF.ModelClasses.EuclideanScorer;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.RouteNode;
-import edu.wpi.teamF.factories.NodeFactory;
 import java.util.*;
 import javafx.event.ActionEvent;
 import javafx.scene.canvas.Canvas;
