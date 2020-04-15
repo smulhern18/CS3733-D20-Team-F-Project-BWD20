@@ -1,6 +1,6 @@
 package edu.wpi.teamF;
 
-import edu.wpi.teamF.factories.DatabaseManager;
+import edu.wpi.teamF.Factories.DatabaseManager;
 
 public class Main {
 
@@ -13,7 +13,7 @@ public class Main {
     } catch (ClassNotFoundException e) {
       System.out.println("Driver Not found");
     }
-    // databaseInitializer.initialize();
+    databaseInitializer.initialize();
 
     App.launch(App.class, args);
   }

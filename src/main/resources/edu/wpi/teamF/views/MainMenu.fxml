@@ -1,26 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.CubicCurve?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.controllers.MainMenuController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MainMenuController">
    <children>
-      <Label fx:id="titleLabel" layoutX="91.0" layoutY="101.0" prefHeight="198.0" prefWidth="418.0" text="Welcome to the Amazing Pathfinder!" textAlignment="CENTER" wrapText="true">
+      <fx:include source="MenuBar.fxml" />
+      <Text layoutX="346.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome To The Amazing Pathfinder">
          <font>
-            <Font size="36.0" />
+            <Font name="HP Simplified" size="31.0" />
+         </font>
+      </Text>
+      <Label layoutX="491.0" layoutY="640.0" text="Select a Button Above">
+         <font>
+            <Font name="HP Simplified" size="24.0" />
          </font>
       </Label>
-      <Button layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#displaySwitch" text="Display" />
-      <Button layoutX="76.0" layoutY="8.0" mnemonicParsing="false" onAction="#downloadSwitch" text="Download" />
-      <Button layoutX="153.0" layoutY="8.0" mnemonicParsing="false" onAction="#pathfinderSwitch" text="Pathfinder" />
-      <Button layoutX="234.0" layoutY="8.0" mnemonicParsing="false" onAction="#modifyValSwitch" text="ModifyValues" />
+      <Label layoutX="1007.0" layoutY="676.0" text="Created by">
+         <font>
+            <Font name="HP Simplified" size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1039.0" layoutY="643.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../Downloads/drFlamingo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="408.0" fitWidth="405.0" layoutX="352.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../Desktop/hospital.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="399.0" fitWidth="395.0" layoutX="574.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Images/flamingo.gif" />
+      </image>
+      </ImageView>
+      <CubicCurve controlX1="165.20001220703125" controlX2="-133.20001220703125" controlY1="-130.60000610351562" controlY2="127.800048828125" endX="-17.20001220703125" endY="-137.0" fill="#1f93ff00" layoutX="574.0" layoutY="565.0" startX="210.79998779296875" startY="31.0" stroke="BLACK" strokeLineCap="ROUND" strokeWidth="2.0">
+         <effect>
+            <Shadow blurType="GAUSSIAN" height="56.75" radius="23.705" width="40.07" />
+         </effect>
+      </CubicCurve>
    </children>
 </AnchorPane>
