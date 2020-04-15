@@ -22,6 +22,7 @@ public class DatabaseManager {
   static final String SHORT_NAME_KEY = "shortName";
   static final String TYPE_KEY = "type";
   static final String FLOOR_KEY = "floor";
+  static final String EDGEID_KEY = "edgeID";
   static final String NODE_1_KEY = "node1";
   static final String NODE_A_KEY = "nodeA";
 
@@ -56,11 +57,15 @@ public class DatabaseManager {
         "CREATE TABLE "
             + EDGES_TABLE_NAME
             + "( "
+            + EDGEID_KEY
+            + " VARCHAR(32) NOT NULL, "
             + NODE_1_KEY
             + " VARCHAR(32) NOT NULL, "
             + NODE_A_KEY
-            + " VARCHAR(32) NOT NULL"
-            + ")";
+            + " VARCHAR(32) NOT NULL,"
+            + "PRIMARY KEY ("
+            + EDGEID_KEY
+            + "))";
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
     preparedStatement.execute();

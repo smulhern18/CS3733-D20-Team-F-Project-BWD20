@@ -20,16 +20,12 @@ public class CSVManipulator {
     try {
       // goes to get the file
       BufferedReader csvReader = new BufferedReader(new FileReader(path.toFile()));
-      /*BufferedWriter csvWriter = new BufferedWriter(new FileWriter(path.toFile(), true));
-      csvWriter.newLine();
-      csvWriter.write("end");
-      csvWriter.close();*/
       while ((row = csvReader.readLine()) != null) {
         data.addAll(Arrays.asList(row.split(",")));
       }
 
       int i = 9;
-      while (i < (data.size() - 1) && !data.get(i).equals("end")) {
+      while (i < (data.size() - 1)) {
         Node node =
             new Node(
                 data.get(i), // name
@@ -116,10 +112,11 @@ public class CSVManipulator {
         data.addAll(Arrays.asList(row.split(",")));
       }
 
-      for (int i = 0; i < data.size(); i = i + 2) {
-        //  edgeFactory.create(data.get(i), data.get(i + 1), data.get(i + 2));
+      int i = 3;
+      while (i < (data.size() - 1)) {
+        edgeFactory.create(data.get(i), data.get(i + 1), data.get(i + 2));
+        i = i + 3;
       }
-
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File Not found!");
     } catch (EOFException e) {
@@ -130,19 +127,4 @@ public class CSVManipulator {
       System.out.println(e.getMessage());
     }
   }
-
-  /** Writes to the CSV file so that it can become persistant */
-  /*public void writeCSVFileEdge() throws IOException {
-  String csvString = "";
-  // writing to the file
-
-
-  /*for(Node n: Node) {
-
-  try (FileWriter fw = new FileWriter("download.txt", true);
-  for(Node n: Node) {
-
-    csvString = csvString + formatNode(n);
-  }*/
-
 }

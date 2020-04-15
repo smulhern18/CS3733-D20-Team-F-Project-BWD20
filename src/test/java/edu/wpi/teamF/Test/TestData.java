@@ -260,5 +260,9 @@ public class TestData {
     return validNodes;
   }
 
+  public HashSet<String> getValidNeighbors1() {
+    return validNeighbors1;
+  }
+
   public TestData() throws ValidationException {}
 }
