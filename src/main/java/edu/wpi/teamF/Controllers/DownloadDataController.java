@@ -1,9 +1,8 @@
 package edu.wpi.teamF.Controllers;
 
 import edu.wpi.teamF.App;
-import java.io.File;
-
 import edu.wpi.teamF.Factories.CSVManipulator;
+import java.io.File;
 import javafx.event.ActionEvent;
 import javafx.stage.DirectoryChooser;
 
@@ -17,9 +16,6 @@ public class DownloadDataController extends SceneController {
     System.out.println(directory);
 
     CSVManipulator downloader = new CSVManipulator();
-    downloader.writeCSVFile();
-
-
-
+    downloader.writeCSVFileNode(selectedDirectory.toPath());
   }
 }
