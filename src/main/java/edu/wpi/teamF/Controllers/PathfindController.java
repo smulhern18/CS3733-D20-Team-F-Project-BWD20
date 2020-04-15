@@ -24,9 +24,10 @@ public class PathfindController extends SceneController {
   private Node startNode;
   private Node destination;
 
-  public PathfindController() {
+  public PathfindController() throws Exception {
 
     this.nodeFactory = NodeFactory.getFactory();
+    startNode = nodeFactory.read("FHALL01405");
   }
 
   //  public PathfindController(NodeFactory nodeFactory) {

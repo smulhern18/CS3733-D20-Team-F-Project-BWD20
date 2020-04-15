@@ -130,19 +130,4 @@ public class CSVManipulator {
       System.out.println(e.getMessage());
     }
   }
-
-  /** Writes to the CSV file so that it can become persistant */
-  /*public void writeCSVFileEdge() throws IOException {
-  String csvString = "";
-  // writing to the file
-
-
-  /*for(Node n: Node) {
-
-  try (FileWriter fw = new FileWriter("download.txt", true);
-  for(Node n: Node) {
-
-    csvString = csvString + formatNode(n);
-  }*/
-
 }
