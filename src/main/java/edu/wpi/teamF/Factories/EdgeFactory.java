@@ -29,15 +29,18 @@ public class EdgeFactory {
           "INSERT INTO "
               + DatabaseManager.EDGES_TABLE_NAME
               + " ("
+              + DatabaseManager.EDGEID_KEY
+              + ", "
               + DatabaseManager.NODE_A_KEY
               + ", "
               + DatabaseManager.NODE_1_KEY
               + ") "
-              + "VALUES (?, ?)";
+              + "VALUES (?, ?, ?)";
 
       try (PreparedStatement preparedStatement =
           DatabaseManager.getConnection().prepareStatement(insertStatement)) {
         int param = 1;
+        preparedStatement.setString(param++, node.getName() + "_" + neighborNode);
         preparedStatement.setString(param++, node.getName());
         preparedStatement.setString(param++, neighborNode);
 
@@ -60,17 +63,23 @@ public class EdgeFactory {
         "INSERT INTO "
             + DatabaseManager.EDGES_TABLE_NAME
             + " ("
+            + DatabaseManager.EDGEID_KEY
+            + ", "
             + DatabaseManager.NODE_A_KEY
             + ", "
             + DatabaseManager.NODE_1_KEY
             + ") "
-            + "VALUES (?, ?)";
+            + "VALUES (?, ?, ?), (?, ?, ?)";
 
     try (PreparedStatement preparedStatement =
         DatabaseManager.getConnection().prepareStatement(insertStatement)) {
       int param = 1;
+      preparedStatement.setString(param++, node1 + "_" + nodeA);
       preparedStatement.setString(param++, node1);
       preparedStatement.setString(param++, nodeA);
+      preparedStatement.setString(param++, node1 + "_" + nodeA + "2");
+      preparedStatement.setString(param++, nodeA);
+      preparedStatement.setString(param++, node1);
 
       try {
         int numRows = preparedStatement.executeUpdate();
@@ -85,6 +94,41 @@ public class EdgeFactory {
     }
   }
 
+  public void create(String edgeID, String node1, String nodeA) throws Exception {
+    String insertStatement =
+        "INSERT INTO "
+            + DatabaseManager.EDGES_TABLE_NAME
+            + " ("
+            + DatabaseManager.EDGEID_KEY
+            + ", "
+            + DatabaseManager.NODE_A_KEY
+            + ", "
+            + DatabaseManager.NODE_1_KEY
+            + ") "
+            + "VALUES (?, ?, ?), (?, ?, ?)";
+
+    try (PreparedStatement preparedStatement =
+        DatabaseManager.getConnection().prepareStatement(insertStatement)) {
+      int param = 1;
+      preparedStatement.setString(param++, edgeID);
+      preparedStatement.setString(param++, node1);
+      preparedStatement.setString(param++, nodeA);
+      preparedStatement.setString(param++, edgeID + "2");
+      preparedStatement.setString(param++, nodeA);
+      preparedStatement.setString(param++, node1);
+
+      try {
+        int numRows = preparedStatement.executeUpdate();
+        if (numRows < 1) {
+          throw new Exception("Something went wrong with the creation of the edge entry");
+        }
+      } catch (SQLException e) {
+        System.out.println(e.getMessage() + "126");
+      }
+    } catch (SQLException e) {
+      System.out.println(e.getMessage() + "129");
+    }
+  }
   /**
    * Reads a node's neighbors from the database
    *
@@ -139,14 +183,31 @@ public class EdgeFactory {
    */
   public void delete(Node node) {
 
-    String deleteStatement =
+    String deleteStatement1 =
         "DELETE FROM "
             + DatabaseManager.EDGES_TABLE_NAME
             + " WHERE "
             + DatabaseManager.NODE_A_KEY
             + " = ?";
+    String deleteStatement2 =
+        "DELETE FROM "
+            + DatabaseManager.EDGES_TABLE_NAME
+            + " WHERE "
+            + DatabaseManager.NODE_1_KEY
+            + " = ?";
     try (PreparedStatement preparedStatement =
-        DatabaseManager.getConnection().prepareStatement(deleteStatement)) {
+        DatabaseManager.getConnection().prepareStatement(deleteStatement1)) {
+      preparedStatement.setString(1, node.getName());
+
+      int numRows = preparedStatement.executeUpdate();
+      if (numRows > 1) {
+        throw new Exception("Deleted " + numRows + " rows");
+      }
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    try (PreparedStatement preparedStatement =
+        DatabaseManager.getConnection().prepareStatement(deleteStatement2)) {
       preparedStatement.setString(1, node.getName());
 
       int numRows = preparedStatement.executeUpdate();

@@ -14,7 +14,7 @@ public class AStarTest {
   static PathfindController pathfinder;
 
   @BeforeAll
-  public static void setup() {
+  public static void setup() throws Exception {
     pathfinder = new PathfindController();
     AStarTestData.initializeNodeNeighbors();
   }

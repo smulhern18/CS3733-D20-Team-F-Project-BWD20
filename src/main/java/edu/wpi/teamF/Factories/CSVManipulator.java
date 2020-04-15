@@ -20,16 +20,12 @@ public class CSVManipulator {
     try {
       // goes to get the file
       BufferedReader csvReader = new BufferedReader(new FileReader(path.toFile()));
-      /*BufferedWriter csvWriter = new BufferedWriter(new FileWriter(path.toFile(), true));
-      csvWriter.newLine();
-      csvWriter.write("end");
-      csvWriter.close();*/
       while ((row = csvReader.readLine()) != null) {
         data.addAll(Arrays.asList(row.split(",")));
       }
 
-      int i = 9;
-      while (i < (data.size() - 1) && !data.get(i).equals("end")) {
+      int i = 8;
+      while (i < (data.size() - 1)) {
         Node node =
             new Node(
                 data.get(i), // name
@@ -40,9 +36,9 @@ public class CSVManipulator {
                 data.get(i + 7), // shortname
                 Node.NodeType.getEnum(data.get(i + 5)), // nodetype
                 Short.parseShort(data.get(i + 3)));
-        System.out.println("Created Node on line " + i / 9 + ", " + node.getName());
+        System.out.println("Created Node on line " + i / 8 + ", " + node.getName());
         nodeFactory.create(node); // floor
-        i = i + 9;
+        i = i + 8;
       }
 
     } catch (FileNotFoundException e) {
@@ -66,17 +62,20 @@ public class CSVManipulator {
       // csvString = csvString + formatNode(n);
       formatNode(n);
     }
-    try (FileWriter fw = new FileWriter(path.toString());
+    try (FileWriter fw = new FileWriter(path.toString() + "/PrototypeNodes.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
       bw.write("nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName,teamAssigned");
 
       for (Node n : nodes) {
-        bw.newLine();
-        bw.write(formatNode(n));
+        if (n.getName().contains("B")) {
+          bw.newLine();
+          bw.write(formatNode(n));
+        }
       }
       bw.close();
     } catch (IOException e) {
+      System.out.println(e.getMessage() + "" + e.getClass());
       // exception handling left as an exercise for the reader
     }
   }
@@ -116,10 +115,11 @@ public class CSVManipulator {
         data.addAll(Arrays.asList(row.split(",")));
       }
 
-      for (int i = 0; i < data.size(); i = i + 2) {
-        //  edgeFactory.create(data.get(i), data.get(i + 1), data.get(i + 2));
+      int i = 3;
+      while (i < (data.size() - 1)) {
+        edgeFactory.create(data.get(i), data.get(i + 1), data.get(i + 2));
+        i = i + 3;
       }
-
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File Not found!");
     } catch (EOFException e) {

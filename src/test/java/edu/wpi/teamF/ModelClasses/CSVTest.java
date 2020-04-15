@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import edu.wpi.teamF.Factories.CSVManipulator;
 import edu.wpi.teamF.Factories.DatabaseManager;
+import edu.wpi.teamF.Factories.EdgeFactory;
 import edu.wpi.teamF.Factories.NodeFactory;
 import edu.wpi.teamF.Test.TestData;
 import java.io.File;
@@ -12,6 +13,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
@@ -24,10 +27,12 @@ public class CSVTest {
   static DatabaseManager databaseManager = new DatabaseManager();
 
   static CSVManipulator csvManipulator = new CSVManipulator();
-  static NodeFactory nodeFactory = new NodeFactory();
+  static NodeFactory nodeFactory = NodeFactory.getFactory();
   static TestData testData = null;
+  static EdgeFactory edgeFactory = EdgeFactory.getFactory();
 
   Node[] validNodes = null;
+  HashSet<String> validNeighbors1 = null;
 
   @BeforeEach
   public void cleanTests() {
@@ -35,6 +40,7 @@ public class CSVTest {
 
       testData = new TestData();
       validNodes = testData.getValidNodes();
+      validNeighbors1 = testData.getValidNeighbors1();
 
       // testData = new TestData();
 
@@ -61,9 +67,7 @@ public class CSVTest {
   @Test
   public void testReadAndWriteCSVNodes() {
     int i = 0;
-    File file =
-        new File(
-            "/Users/theodorecampbell/IdeaProjects/CS3733-D20-Team-F-Project-BWD20/src/test/java/edu/wpi/teamF/Test/CSVNodeTest.csv");
+    File file = new File("src/test/java/edu/wpi/teamF/Test/CSVNodeTest.csv");
     csvManipulator.readCSVFileNode(file.toPath());
     ObservableList<Node> list = nodeFactory.getAllNodes();
     for (Node n : list) {
@@ -73,9 +77,7 @@ public class CSVTest {
     }
 
     /** Valid data */
-    File wfile =
-        new File(
-            "/Users/theodorecampbell/IdeaProjects/CS3733-D20-Team-F-Project-BWD20/src/test/java/edu/wpi/teamF/Test/CSVNodeTestw.csv");
+    File wfile = new File("src/test/java/edu/wpi/teamF/Test/CSVNodeTestw.csv");
     csvManipulator.writeCSVFileNode(wfile.toPath());
     try {
       byte[] f1 = Files.readAllBytes(wfile.toPath());
@@ -88,10 +90,17 @@ public class CSVTest {
 
   @Test
   public void testReadAndWriteCSVEdges() {
-    NodeFactory nodeFactory = new NodeFactory();
+    Set<String> string;
+    File file =
+        new File(
+            "/Users/theodorecampbell/IdeaProjects/CS3733-D20-Team-F-Project-BWD20/src/test/java/edu/wpi/teamF/Test/CSVEdgeTest.csv");
+    csvManipulator.readCSVFileEdge(file.toPath());
+    try {
+      string = edgeFactory.read("NodeA");
+      Assertions.assertTrue(string.equals(validNeighbors1));
 
-    System.out.println("Wrote to CSV File");
+    } catch (Exception e) {
 
-    System.out.println("Read from CSV File");
+    }
   }
 }

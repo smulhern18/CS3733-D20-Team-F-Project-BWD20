@@ -95,7 +95,7 @@ public class PathfindController extends SceneController {
   public List<Node> getPath2(Node startNode, Node endNode) {
     // Check if the destination is on a different floor
     PriorityQueue<RouteNode> priorityQueue = new PriorityQueue<RouteNode>();
-    HashSet<Node> visited = new HashSet<Node>();
+    HashSet<String> visited = new HashSet<String>();
     EuclideanScorer scorer = new EuclideanScorer();
     ElevatorScorer elevScorer = new ElevatorScorer(nodeFactory.getNodesByType(Node.NodeType.ELEV));
     // Create the first node and add it to the Priority Queue
@@ -109,8 +109,8 @@ public class PathfindController extends SceneController {
     priorityQueue.add(start);
     while (!priorityQueue.isEmpty()) {
       RouteNode currentNode = priorityQueue.poll();
-      if (!visited.contains(currentNode.getNode())) {
-        visited.add(currentNode.getNode());
+      if (!visited.contains(currentNode.getNode().getName())) {
+        visited.add(currentNode.getNode().getName());
         if (currentNode.getNode().equals(endNode)) {
           // Has reached the goal node
           List<Node> path = new LinkedList<>();
@@ -130,7 +130,7 @@ public class PathfindController extends SceneController {
           }
         }
         for (Node neighbor : neighbors) {
-          if (!visited.contains(neighbor)) {
+          if (!visited.contains(neighbor.getName())) {
             double distanceToEnd = 0;
             if (currentNode.getNode().getFloor() != endNode.getFloor()) {
               // If its not on the same floor, use elevator scorer
@@ -163,8 +163,9 @@ public class PathfindController extends SceneController {
   // Canvas Testing
   public void drawCanvas(ActionEvent actionEvent) {
     GraphicsContext gc = canvasMap.getGraphicsContext2D();
+    gc.clearRect(0, 0, canvasMap.getWidth(), canvasMap.getHeight());
     if (destination != null) {
-      gc.clearRect(0, 0, canvasMap.getWidth(), canvasMap.getHeight());
+
       List<Node> path = getPath(startNode, destination);
       if (path.size() > 0) {
         drawPath(gc, path);
@@ -204,6 +205,7 @@ public class PathfindController extends SceneController {
     double heightRatio = canvasMap.getHeight() / MAP_HEIGHT;
     double widthRatio = canvasMap.getWidth() / MAP_WIDTH;
     gc.setStroke(Color.RED);
+    gc.setLineWidth(2);
     gc.beginPath();
     gc.moveTo(path.get(0).getXCoord() * widthRatio, path.get(0).getYCoord() * heightRatio);
     for (int i = 1; i < path.size(); i++) {
@@ -301,7 +303,7 @@ public class PathfindController extends SceneController {
   }
 
   public void entButton(ActionEvent actionEvent) {
-    setDestination("FDEPT01605:");
+    setDestination("FDEPT01605");
     destinationPicker.setText("ENT / Eye Physical / Derm");
   }
 

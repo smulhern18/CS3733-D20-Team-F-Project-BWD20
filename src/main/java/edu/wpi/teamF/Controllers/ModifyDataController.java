@@ -38,7 +38,7 @@ public class ModifyDataController extends SceneController {
 
   private ModifyType modifyType;
 
-  private NodeFactory nodeFactory = null;
+  private NodeFactory nodeFactory = NodeFactory.getFactory();
 
   @FXML
   private void deleteButtonPress() {
@@ -92,7 +92,7 @@ public class ModifyDataController extends SceneController {
       Node node = nodeFactory.read(nodeText.getText());
       nodeFactory.delete(node);
     } catch (Exception e) {
-      System.out.println("Node not found");
+      System.out.println("Node not found" + e.getMessage() + " " + e.getClass());
     }
   }
 
@@ -119,7 +119,7 @@ public class ModifyDataController extends SceneController {
       nodeFactory.update(node);
 
     } catch (Exception e) {
-      System.out.println("invalid information");
+      System.out.println("invalid information" + e.getMessage() + " " + e.getClass());
     }
   }
 
@@ -138,7 +138,7 @@ public class ModifyDataController extends SceneController {
       nodeTypeText.setText("" + node.getType());
       floorNumberText.setText("" + node.getFloor());
     } catch (Exception e) {
-      System.out.println("Error with nodefactory");
+      System.out.println("Error with nodefactory" + e.getClass() + " " + e.getMessage());
     }
   }
 

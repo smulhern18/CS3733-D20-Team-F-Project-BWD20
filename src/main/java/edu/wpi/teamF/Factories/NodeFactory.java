@@ -190,7 +190,7 @@ public class NodeFactory {
         preparedStatement.setString(param++, node.getLongName());
         preparedStatement.setString(param++, node.getShortName());
         preparedStatement.setString(param++, node.getType().getTypeString());
-        preparedStatement.setInt(param++, node.getFloor());
+        preparedStatement.setShort(param++, node.getFloor());
         preparedStatement.setString(param++, node.getName());
         int numRows = preparedStatement.executeUpdate();
         if (numRows != 1) {

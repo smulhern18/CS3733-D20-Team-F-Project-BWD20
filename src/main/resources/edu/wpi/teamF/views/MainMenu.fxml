@@ -11,8 +11,13 @@
 
 <AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MainMenuController">
    <children>
-      <fx:include source="MenuBar.fxml" />
-      <Text layoutX="346.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome To The Amazing Pathfinder">
+      <Text layoutX="346.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome To The Amazing Pathfinder"/>
+      <ImageView fitHeight="377.0" fitWidth="570.0" layoutX="411.0" layoutY="212.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Images/flamingo.gif" />
+      </image>
+      </ImageView>
+      <Text fx:id="titleLabel" layoutX="346.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome To The Amazing Pathfinder!">
          <font>
             <Font name="HP Simplified" size="31.0" />
          </font>
