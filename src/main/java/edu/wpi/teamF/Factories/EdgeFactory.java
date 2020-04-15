@@ -55,6 +55,36 @@ public class EdgeFactory {
     }
   }
 
+  public void create(String node1, String nodeA) throws Exception {
+    String insertStatement =
+            "INSERT INTO "
+                    + DatabaseManager.EDGES_TABLE_NAME
+                    + " ("
+                    + DatabaseManager.NODE_A_KEY
+                    + ", "
+                    + DatabaseManager.NODE_1_KEY
+                    + ") "
+                    + "VALUES (?, ?)";
+
+    try (PreparedStatement preparedStatement =
+                 DatabaseManager.getConnection().prepareStatement(insertStatement)) {
+      int param = 1;
+      preparedStatement.setString(param++, node1);
+      preparedStatement.setString(param++, nodeA);
+
+      try {
+        int numRows = preparedStatement.executeUpdate();
+        if (numRows < 1) {
+          throw new Exception("Something went wrong with the creation of the edge entry");
+        }
+      } catch (SQLException e) {
+        System.out.println(e.getMessage());
+      }
+    } catch (SQLException e) {
+      System.out.println(e.getMessage());
+    }
+  }
+
   /**
    * Reads a node's neighbors from the database
    *

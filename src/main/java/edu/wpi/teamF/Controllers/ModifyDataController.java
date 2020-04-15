@@ -1,7 +1,7 @@
 package edu.wpi.teamF.Controllers;
 
-import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.Factories.NodeFactory;
+import edu.wpi.teamF.ModelClasses.Node;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
