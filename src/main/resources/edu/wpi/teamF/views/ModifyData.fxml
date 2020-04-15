@@ -99,7 +99,7 @@
       </Label>
       <ImageView fitHeight="123.0" fitWidth="149.0" layoutX="1068.0" layoutY="677.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../../Downloads/drFlamingo.png" />
+            <Image url="@../Images/drFlamingo.png" />
          </image>
       </ImageView>
 
