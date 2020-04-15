@@ -42,8 +42,7 @@
             <MenuItem mnemonicParsing="false" onAction="#abu2Button" text="Abulatory Care 2" />
             <MenuItem mnemonicParsing="false" onAction="#abu3Button" text="Abulatory Care 3" />
             <MenuItem mnemonicParsing="false" onAction="#abu4Button" text="Ambulatory Care 4" />
-            <MenuItem mnemonicParsing="false" onAction="#morButton" text="Morgue Ambulatory Clinic" />
-            <MenuItem mnemonicParsing="false" onAction="#ambCliniButton" text="Ambulatory Clinic" />
+            <MenuItem mnemonicParsing="false" onAction="#ambulButton" text="Ambulatory Clinic" />
             <MenuItem mnemonicParsing="false" onAction="#internalButton" text="Internal Medicine Headache" />
             <MenuItem mnemonicParsing="false" onAction="#s5940Button" text="Suite 5940" />
             <MenuItem mnemonicParsing="false" onAction="#s5945Button" text="Suite 5945" />
