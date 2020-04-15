@@ -104,8 +104,7 @@ public class TestData {
         validLongNames[0],
         validShortNames[0],
         validNodeTypes[0],
-        validFloors[0],
-        validNeighbors1),
+        validFloors[0]),
     new Node(
         validNodeNames[1],
         validXCoordinates[1],
@@ -114,8 +113,7 @@ public class TestData {
         validLongNames[1],
         validShortNames[1],
         validNodeTypes[1],
-        validFloors[1],
-        validNeighbors1),
+        validFloors[1]),
     new Node(
         validNodeNames[2],
         validXCoordinates[2],
