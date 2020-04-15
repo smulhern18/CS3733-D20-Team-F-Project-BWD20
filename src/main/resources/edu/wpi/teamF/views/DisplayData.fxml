@@ -22,6 +22,5 @@
         </columns>
       </TableView>
       <fx:include source="MenuBar.fxml" />
-      <Button layoutX="130.0" layoutY="761.0" mnemonicParsing="false" onAction="#getEdges" style="-fx-background-color: #FFD0BE;" text="Pick Edges File" />
    </children>
 </AnchorPane>

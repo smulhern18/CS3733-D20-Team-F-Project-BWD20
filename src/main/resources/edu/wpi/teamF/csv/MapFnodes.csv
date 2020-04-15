@@ -24,7 +24,7 @@ FELEV00X05,1210,410,5,Faulkner,ELEV,Elevator X,ElevX
 FHALL00105,685,1215,5,Faulkner,HALL,ICU Hallway,ICUHall
 FHALL00205,785,1215,5,Faulkner,HALL,Hallway outside HemoDia,HemoHall
 FHALL00305,930,1215,5,Faulkner,HALL,Hallway outside Residents,ResHall
-FHALL00305,1120,1210,5,Faulkner,HALL,Elevator Y Hallway,ElevYHall
+FHALL02105,1120,1210,5,Faulkner,HALL,Elevator Y Hallway,ElevYHall
 FHALL00405,1245,1210,5,Faulkner,HALL,Vacant Hallway,VacHall
 FHALL00505,1250,1120,5,Faulkner,HALL,Elevator Z landing hallway,ElevZHall
 FHALL00605,1250,1065,5,Faulkner,HALL,X-Ray Waiting Hallway,XRayWaitHall
@@ -54,6 +54,3 @@ FSTAI00205,165,1210,5,Faulkner,STAI,Stairwell inside ICU,ICUStair
 FSTAI00305,2310,1235,5,Faulkner,STAI,Stairwell in Oncology Clinic,OncolStair
 FSTAI00405,1235,1070,5,Faulkner,STAI,X-Ray Stairwell,XRayStairs
 FSTAI00505,1280,405,5,Faulkner,STAI,Upper Stair,UPStair
-end,,,,,,,
-end,,,,,,,
-end,,,,,,,
