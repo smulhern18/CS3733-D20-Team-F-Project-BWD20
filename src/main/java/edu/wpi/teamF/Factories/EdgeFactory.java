@@ -102,7 +102,7 @@ public class EdgeFactory {
             + ", "
             + DatabaseManager.NODE_1_KEY
             + ") "
-            + "VALUES (?, ?)";
+            + "VALUES (?, ?, ?)";
 
     try (PreparedStatement preparedStatement =
         DatabaseManager.getConnection().prepareStatement(insertStatement)) {
