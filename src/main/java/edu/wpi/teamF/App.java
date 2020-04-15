@@ -4,6 +4,7 @@ import edu.wpi.teamF.Factories.CSVManipulator;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
+
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;

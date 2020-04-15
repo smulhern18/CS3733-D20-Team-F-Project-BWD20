@@ -1,7 +1,6 @@
 package edu.wpi.teamF.Controllers;
 
 import edu.wpi.teamF.Factories.CSVManipulator;
-import edu.wpi.teamF.Factories.DatabaseManager;
 import edu.wpi.teamF.Factories.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Node;
 import java.io.File;
@@ -49,8 +48,6 @@ public class DisplayDataController extends SceneController {
 
     // populating the table with Node data
     table.setItems(nodes);
-    DatabaseManager manager = new DatabaseManager();
-    manager.reset();
   }
 
   public void getEdges(ActionEvent actionEvent) {

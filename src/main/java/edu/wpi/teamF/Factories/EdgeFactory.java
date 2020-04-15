@@ -69,7 +69,7 @@ public class EdgeFactory {
             + ", "
             + DatabaseManager.NODE_1_KEY
             + ") "
-            + "VALUES (?, ?, ?)";
+            + "VALUES (?, ?, ?), (?, ?, ?)";
 
     try (PreparedStatement preparedStatement =
         DatabaseManager.getConnection().prepareStatement(insertStatement)) {
@@ -77,6 +77,9 @@ public class EdgeFactory {
       preparedStatement.setString(param++, node1 + "_" + nodeA);
       preparedStatement.setString(param++, node1);
       preparedStatement.setString(param++, nodeA);
+      preparedStatement.setString(param++, node1 + "_" + nodeA + "2");
+      preparedStatement.setString(param++, nodeA);
+      preparedStatement.setString(param++, node1);
 
       try {
         int numRows = preparedStatement.executeUpdate();
@@ -102,7 +105,7 @@ public class EdgeFactory {
             + ", "
             + DatabaseManager.NODE_1_KEY
             + ") "
-            + "VALUES (?, ?, ?)";
+            + "VALUES (?, ?, ?), (?, ?, ?)";
 
     try (PreparedStatement preparedStatement =
         DatabaseManager.getConnection().prepareStatement(insertStatement)) {
@@ -110,6 +113,9 @@ public class EdgeFactory {
       preparedStatement.setString(param++, edgeID);
       preparedStatement.setString(param++, node1);
       preparedStatement.setString(param++, nodeA);
+      preparedStatement.setString(param++, edgeID + "2");
+      preparedStatement.setString(param++, nodeA);
+      preparedStatement.setString(param++, node1);
 
       try {
         int numRows = preparedStatement.executeUpdate();

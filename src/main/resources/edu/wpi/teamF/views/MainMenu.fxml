@@ -20,7 +20,7 @@
          <Image url="@../Images/flamingo.gif" />
       </image>
       </ImageView>
-      <Text layoutX="346.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome To The Amazing Pathfinder">
+      <Text fx:id="titleLabel" layoutX="346.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome To The Amazing Pathfinder!">
          <font>
             <Font size="31.0" />
          </font>

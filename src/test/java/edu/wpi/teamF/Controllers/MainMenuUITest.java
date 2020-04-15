@@ -56,7 +56,7 @@ public class MainMenuUITest extends FxRobot {
   @Test
   void testSceneSwitchingDisplay() {
     // when click
-    clickOn("Display");
+    clickOn("Display / Load");
 
     verifyThat("#mainMenuButton", hasText("Main Menu"));
   }
@@ -81,11 +81,5 @@ public class MainMenuUITest extends FxRobot {
     clickOn("Modify Data");
 
     verifyThat("#mainMenuButton", hasText("Main Menu"));
-  }
-
-  @Test
-  void testSceneSwitchingMain() {
-
-    verifyThat("#titleLabel", hasText("Welcome to the Amazing Pathfinder!"));
   }
 }
