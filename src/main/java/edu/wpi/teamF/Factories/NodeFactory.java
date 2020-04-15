@@ -6,9 +6,11 @@ import edu.wpi.teamF.ModelClasses.Validators;
 import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.management.InstanceNotFoundException;
 
@@ -279,7 +281,7 @@ public class NodeFactory {
   }
 
   public ObservableList<Node> getAllNodes() {
-    ObservableList<Node> nodes = null;
+    ObservableList<Node> nodes = FXCollections.observableList(new ArrayList<>());
     String selectStatement = "SELECT * FROM " + DatabaseManager.NODES_TABLE_NAME;
     try (PreparedStatement preparedStatement =
         DatabaseManager.getConnection().prepareStatement(selectStatement)) {

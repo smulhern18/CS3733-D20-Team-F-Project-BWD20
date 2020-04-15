@@ -71,7 +71,7 @@ public class CSVManipulator {
       System.out.println(e);
     }
     // writing to the file
-    try (FileWriter fw = new FileWriter("testText.txt", true);
+    try (FileWriter fw = new FileWriter("download.txt", true);
         BufferedWriter bw = new BufferedWriter(fw);
         PrintWriter out = new PrintWriter(bw)) {
       out.println(csvString);
