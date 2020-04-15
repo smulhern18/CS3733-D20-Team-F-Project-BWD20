@@ -3,10 +3,6 @@ package edu.wpi.teamF.ModelClasses;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import edu.wpi.teamF.controllers.PathfindController;
-import edu.wpi.teamF.modelClasses.ElevatorScorer2;
-import edu.wpi.teamF.modelClasses.EuclideanScorer;
-import edu.wpi.teamF.modelClasses.Node;
-import edu.wpi.teamF.modelClasses.ValidationException;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Assertions;

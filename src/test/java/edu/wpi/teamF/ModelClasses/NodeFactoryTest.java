@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import edu.wpi.teamF.Test.TestData;
 import edu.wpi.teamF.factories.DatabaseManager;
 import edu.wpi.teamF.factories.NodeFactory;
-import edu.wpi.teamF.modelClasses.Node;
-import edu.wpi.teamF.modelClasses.ValidationException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;

@@ -18,6 +18,10 @@ public class App extends Application {
     return PS;
   }
 
+  public static void setPS(Stage stage) {
+    App.PS = stage;
+  }
+
   @Override
   public void init() {}
 

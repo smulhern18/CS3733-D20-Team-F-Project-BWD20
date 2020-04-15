@@ -1,8 +1,5 @@
 package edu.wpi.teamF.ModelClasses;
 
-import edu.wpi.teamF.modelClasses.Node;
-import edu.wpi.teamF.modelClasses.ValidationException;
-
 public class AStarTestData {
   // creation of example graph
   public static Node nodeA = null;

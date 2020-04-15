@@ -1,6 +1,6 @@
 package edu.wpi.teamF.factories;
 
-import edu.wpi.teamF.modelClasses.Node;
+import edu.wpi.teamF.ModelClasses.Node;
 import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

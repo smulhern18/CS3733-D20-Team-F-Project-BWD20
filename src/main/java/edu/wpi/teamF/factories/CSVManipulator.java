@@ -1,14 +1,13 @@
 package edu.wpi.teamF.factories;
 
-import edu.wpi.teamF.modelClasses.Node;
-import edu.wpi.teamF.modelClasses.Node.NodeType;
+
+import edu.wpi.teamF.ModelClasses.Node;
+
 import java.io.*;
 import java.nio.file.Path;
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
-import javax.management.InstanceNotFoundException;
-import org.apache.derby.iapi.jdbc.BrokeredConnection;
+import javafx.collections.ObservableList;
 
 public class CSVManipulator {
   private NodeFactory nodeFactory = new NodeFactory();
@@ -25,7 +24,6 @@ public class CSVManipulator {
       }
 
       for (int i = 0; i < data.size(); i = i + 8) {
-        // ask how to turn string into node type
         nodeFactory.create(
             new Node(
                 data.get(i),
@@ -50,14 +48,14 @@ public class CSVManipulator {
   }
 
   /** Writes to the CSV file so that it can become persistant */
-  public void writeCSVFileNode() {
+  public void writeCSVFileNode(Path path) {
     String csvString = "";
     // writing to the file
-
-    for (Node n: Node) {
+    ObservableList<Node> nodes = nodeFactory.getAllNodes();
+    for (Node n: nodes) {
       csvString = csvString + formatNode(n);
     }
-    try (FileWriter fw = new FileWriter("testText.txt", true);
+    try (FileWriter fw = new FileWriter(path.toString(), true);
         BufferedWriter bw = new BufferedWriter(fw);
         PrintWriter out = new PrintWriter(bw)) {
       out.println(csvString);
@@ -97,7 +95,7 @@ public class CSVManipulator {
       }
 
       for (int i = 0; i < data.size(); i = i + 8) {
-        // ask how to turn string into node type
+
 
       }
 
@@ -116,7 +114,8 @@ public class CSVManipulator {
   public void writeCSVFileEdge() {
     String csvString = "";
     // writing to the file
-    for( n: ) {
+
+    for(Node n: Node) {
       csvString = csvString + formatNode(n);
     }
     try (FileWriter fw = new FileWriter("testText.txt", true);

@@ -1,14 +1,15 @@
 package edu.wpi.teamF.factories;
 
-import edu.wpi.teamF.modelClasses.Node;
-import edu.wpi.teamF.modelClasses.ValidationException;
-import edu.wpi.teamF.modelClasses.Validators;
+import edu.wpi.teamF.ModelClasses.Node;
+import edu.wpi.teamF.ModelClasses.ValidationException;
+import edu.wpi.teamF.ModelClasses.Validators;
 import java.sql.*;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import javafx.collections.ObservableList;
 import javax.management.InstanceNotFoundException;
 
 public class NodeFactory {
@@ -263,7 +264,6 @@ public class NodeFactory {
         node.addNeighbor(neighbors);
         nodes.add(node);
       }
-
     } catch (SQLException e) {
       System.out.println("SQL Exception: " + e.getMessage());
     } catch (ValidationException e) {
@@ -276,5 +276,37 @@ public class NodeFactory {
     } else {
       return null;
     }
+  }
+
+  public ObservableList<Node> getAllNodes() {
+    ObservableList<Node> nodes = null;
+    String selectStatement = "SELECT * FROM " + DatabaseManager.NODES_TABLE_NAME;
+    try (PreparedStatement preparedStatement =
+        DatabaseManager.getConnection().prepareStatement(selectStatement)) {
+      ResultSet resultSet = preparedStatement.executeQuery();
+      while (resultSet.next()) {
+        String nodeName = resultSet.getString(DatabaseManager.NODE_NAME_KEY);
+        short xCoord = resultSet.getShort(DatabaseManager.X_COORDINATE_KEY);
+        short yCoord = resultSet.getShort(DatabaseManager.Y_COORDINATE_KEY);
+        String building = resultSet.getString(DatabaseManager.BUILDING_KEY);
+        String longName = resultSet.getString(DatabaseManager.LONG_NAME_KEY);
+        String shortName = resultSet.getString(DatabaseManager.SHORT_NAME_KEY);
+        Node.NodeType nodeType =
+            Node.NodeType.getEnum(resultSet.getString(DatabaseManager.TYPE_KEY));
+        short floor = resultSet.getShort(DatabaseManager.FLOOR_KEY);
+        Set<String> neighbors = edgeFactory.read(nodeName);
+        Node node =
+            new Node(nodeName, xCoord, yCoord, building, longName, shortName, nodeType, floor);
+        node.addNeighbor(neighbors);
+        nodes.add(node);
+      }
+    } catch (SQLException e) {
+      System.out.println("SQL Exception: " + e.getMessage());
+    } catch (ValidationException e) {
+      System.out.println("Validation Exception: " + e.getMessage());
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    return nodes;
   }
 }

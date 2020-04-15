@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<<<<<<< HEAD
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -20,21 +19,6 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button layoutX="232.0" layoutY="6.0" mnemonicParsing="false" onAction="#modifyValSwitch" text="ModifyValues" />
-      <Button layoutX="154.0" layoutY="6.0" mnemonicParsing="false" onAction="#pathfinderSwitch" text="Pathfinder" />
-      <Button layoutX="72.0" layoutY="6.0" mnemonicParsing="false" onAction="#mainMenuSwitch" text="Main Menu" />
-      <Button layoutX="10.0" layoutY="6.0" mnemonicParsing="false" onAction="#displaySwitch" text="Display" />
+      <fx:include source="MenuBar.fxml" />
    </children>
-=======
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.wpi.teamF.controllers.DownloadDataController"
-            prefHeight="400.0" prefWidth="600.0">
-
->>>>>>> origin
 </AnchorPane>

@@ -1,12 +1,11 @@
 package edu.wpi.teamF.controllers;
 
+import edu.wpi.teamF.ModelClasses.ElevatorScorer;
+import edu.wpi.teamF.ModelClasses.ElevatorScorer2;
+import edu.wpi.teamF.ModelClasses.EuclideanScorer;
+import edu.wpi.teamF.ModelClasses.Node;
+import edu.wpi.teamF.ModelClasses.RouteNode;
 import edu.wpi.teamF.factories.NodeFactory;
-import edu.wpi.teamF.modelClasses.ElevatorScorer;
-import edu.wpi.teamF.modelClasses.ElevatorScorer2;
-import edu.wpi.teamF.modelClasses.EuclideanScorer;
-import edu.wpi.teamF.modelClasses.Node;
-import edu.wpi.teamF.modelClasses.RouteNode;
-import java.io.IOException;
 import java.util.*;
 import javafx.event.ActionEvent;
 import javafx.scene.canvas.Canvas;
@@ -283,24 +282,5 @@ public class PathfindController extends SceneController {
   public void materialManagementButton(ActionEvent actionEvent) {
     setDestination("Material Management");
     destinationPicker.setText("Material Management");
-  }
-
-  // Swithcer methods
-  SceneController sceneController = new SceneController();
-
-  public void mainMenuSwitch(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("MainMenu");
-  }
-
-  public void modifyValSwitch(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("ModifyData");
-  }
-
-  public void downloadSwitch(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("DownloadData");
-  }
-
-  public void displaySwitch(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("DisplayData");
   }
 }
