@@ -301,7 +301,7 @@ public class PathfindController extends SceneController {
   }
 
   public void entButton(ActionEvent actionEvent) {
-    setDestination("FDEPT01605:");
+    setDestination("FDEPT01605");
     destinationPicker.setText("ENT / Eye Physical / Derm");
   }
 
