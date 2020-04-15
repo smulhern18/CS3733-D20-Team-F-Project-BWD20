@@ -68,8 +68,10 @@ public class CSVManipulator {
       bw.write("nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName,teamAssigned");
 
       for (Node n : nodes) {
-        bw.newLine();
-        bw.write(formatNode(n));
+        if (n.getName().contains("B")) {
+          bw.newLine();
+          bw.write(formatNode(n));
+        }
       }
       bw.close();
     } catch (IOException e) {
