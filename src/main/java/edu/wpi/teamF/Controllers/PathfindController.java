@@ -219,68 +219,113 @@ public class PathfindController extends SceneController {
     }
   }
 
-  public void psychiatricImpatientCareButton(ActionEvent actionEvent) {
-    setDestination("Psychiatric Impatient Care");
-    destinationPicker.setText("Psychiatric Impatient Care");
+  public void intensiveCareUnitButton(ActionEvent actionEvent) {
+    setDestination("");
+    destinationPicker.setText("Intensive Care Unit");
   }
 
-  public void addictionCareButton(ActionEvent actionEvent) {
-    setDestination("Addiction Care");
-    destinationPicker.setText("Addiction Care");
+  public void hemoButton(ActionEvent actionEvent) {
+    setDestination("");
+    destinationPicker.setText("Hemo / Dialysis");
   }
 
-  public void mechanicalSpaceButton(ActionEvent actionEvent) {
-    setDestination("Mechanical Space");
-    destinationPicker.setText("Mechanical Space");
+  public void resButton(ActionEvent actionEvent) {
+    setDestination("");
+    destinationPicker.setText("Residents");
   }
 
-  public void occupationalTherapyButton(ActionEvent actionEvent) {
-    setDestination("Occupational Therapy");
-    destinationPicker.setText("Occupational Therapy");
+  public void outButton(ActionEvent actionEvent) {
+    setDestination("");
+    destinationPicker.setText("Outpatient Infusion Center");
   }
 
-  public void physicalTherapyButton(ActionEvent actionEvent) {
-    setDestination("Physical Therapy");
-    destinationPicker.setText("Physical Therapy");
+  public void oncButton(ActionEvent actionEvent) {
+    setDestination("");
+    destinationPicker.setText("Oncology");
   }
 
-  public void foodServicesButton(ActionEvent actionEvent) {
-    setDestination("Food Service");
-    destinationPicker.setText("Food Service");
+  public void xrayButton(ActionEvent actionEvent) {
+    setDestination("");
+    destinationPicker.setText("X-ray");
   }
 
-  public void otolaryngologyButton(ActionEvent actionEvent) {
-    setDestination("Otolaryngology");
-    destinationPicker.setText("Otolarngology");
+  public void abu1Button(ActionEvent actionEvent) {
+    setDestination("");
+    destinationPicker.setText("Abulatory Care Room 1");
   }
 
-  public void plasticSurgeryButton(ActionEvent actionEvent) {
-    setDestination("Plastic Surgery");
-    destinationPicker.setText("Plastic Surgery");
+  public void abu2Button(ActionEvent actionEvent) {
+    setDestination("");
+    destinationPicker.setText("Abulatory Care Room 2");
   }
 
-  public void centralSterileSupplyButton(ActionEvent actionEvent) {
-    setDestination("Central Sterile Supply");
-    destinationPicker.setText("Central Sterile Supply");
+  public void abu3Button(ActionEvent actionEvent) {
+    setDestination("");
+    destinationPicker.setText("Abulatory Care Room 3");
   }
 
-  public void laundryButton(ActionEvent actionEvent) {
-    setDestination("Laundry");
-    destinationPicker.setText("Laundry");
+  public void abu4Button(ActionEvent actionEvent) {
+    setDestination("");
+    destinationPicker.setText("Abulatory Care Room 4");
   }
 
-  public void biomedButton(ActionEvent actionEvent) {
-    setDestination("Biomedical Engineering");
-    destinationPicker.setText("Biomedical Engineering");
-  }
-
-  public void morgueButton(ActionEvent actionEvent) {
-    setDestination("Morgue");
+  public void morButton(ActionEvent actionEvent) {
+    setDestination("");
     destinationPicker.setText("Morgue");
   }
 
-  public void materialManagementButton(ActionEvent actionEvent) {
-    setDestination("Material Management");
-    destinationPicker.setText("Material Management");
+  public void ambCliniButton(ActionEvent actionEvent) {
+    setDestination("");
+    destinationPicker.setText("Ambulatory Clinic");
+  }
+
+  public void internalButton(ActionEvent actionEvent) {
+    setDestination("");
+    destinationPicker.setText("Internal Medicine");
+  }
+
+  public void s5940Button(ActionEvent actionEvent) {
+    setDestination("");
+    destinationPicker.setText("Suite 5940");
+  }
+
+  public void s5945Button(ActionEvent actionEvent) {
+    setDestination("");
+    destinationPicker.setText("Suite 5945");
+  }
+
+  public void s51BUtton(ActionEvent actionEvent) {
+    setDestination("");
+    destinationPicker.setText("Suite 51");
+  }
+
+  public void entButton(ActionEvent actionEvent) {
+    setDestination("");
+    destinationPicker.setText("ENT / Eye Physical / Derm");
+  }
+
+  public void orthoButton(ActionEvent actionEvent) {
+    setDestination("");
+    destinationPicker.setText("Orthopedic");
+  }
+
+  public void s58Button(ActionEvent actionEvent) {
+    setDestination("");
+    destinationPicker.setText("Suite 58");
+  }
+
+  public void surgButton(ActionEvent actionEvent) {
+    setDestination("");
+    destinationPicker.setText("BWH Surgical Specialties");
+  }
+
+  public void endoButton(ActionEvent actionEvent) {
+    setDestination("");
+    destinationPicker.setText("Endocrinology / Diabetes Hem-One");
+  }
+
+  public void pcpButton(ActionEvent actionEvent) {
+    setDestination("");
+    destinationPicker.setText("BWH Primary Care Physicians");
   }
 }

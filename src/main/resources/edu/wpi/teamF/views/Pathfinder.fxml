@@ -24,7 +24,7 @@
          <children>
             <ImageView fitHeight="524.0" fitWidth="1192.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../Images/Floor2LM.png" />
+                  <Image url="@../Images/Floor5LM.png" />
                </image></ImageView>
             <Canvas fx:id="canvasMap" height="526.0" width="876.0" />
          </children>
@@ -32,19 +32,28 @@
       <Button layoutX="989.0" layoutY="105.0" mnemonicParsing="false" onAction="#drawCanvas" text="Draw" />
       <MenuButton fx:id="destinationPicker" layoutX="787.0" layoutY="105.0" mnemonicParsing="false" text="Pick a Destination">
         <items>
-          <MenuItem mnemonicParsing="false" onAction="#psychiatricImpatientCareButton" text="Psychiatric Impatient Care" />
-          <MenuItem mnemonicParsing="false" onAction="#addictionCareButton" text="Psch/Addiction Care" />
-            <MenuItem mnemonicParsing="false" onAction="#mechanicalSpaceButton" text="Mechanical Space" />
-            <MenuItem mnemonicParsing="false" onAction="#occupationalTherapyButton" text="Occupational Therapy" />
-            <MenuItem mnemonicParsing="false" onAction="#physicalTherapyButton" text="Physical Therapy" />
-            <MenuItem mnemonicParsing="false" onAction="#foodServicesButton" text="Food Services" />
-            <MenuItem mnemonicParsing="false" onAction="#otolaryngologyButton" text="Otolaryngology" />
-            <MenuItem mnemonicParsing="false" onAction="#plasticSurgeryButton" text="Plastic Surgery" />
-            <MenuItem mnemonicParsing="false" onAction="#centralSterileSupplyButton" text="Central Sterile Supply" />
-            <MenuItem mnemonicParsing="false" onAction="#laundryButton" text="Laundry" />
-            <MenuItem mnemonicParsing="false" onAction="#biomedButton" text="Biomedical Engineering" />
-            <MenuItem mnemonicParsing="false" onAction="#morgueButton" text="Morgue" />
-            <MenuItem mnemonicParsing="false" onAction="#materialManagementButton" text="Material Management" />
+          <MenuItem mnemonicParsing="false" onAction="#intensiveCareUnitButton" text="Intensive Care Unit" />
+          <MenuItem mnemonicParsing="false" onAction="#hemoButton" text="Hemo Dialysis" />
+            <MenuItem mnemonicParsing="false" onAction="#resButton" text="Residents" />
+            <MenuItem mnemonicParsing="false" onAction="#outButton" text="Occupatient Infusion Center" />
+            <MenuItem mnemonicParsing="false" onAction="#oncButton" text="Oncology Clinic" />
+            <MenuItem mnemonicParsing="false" onAction="#xrayButton" text="X-ray Waiting Room" />
+            <MenuItem mnemonicParsing="false" onAction="#abu1Button" text="Abulatory Care 1" />
+            <MenuItem mnemonicParsing="false" onAction="#abu2Button" text="Abulatory Care 2" />
+            <MenuItem mnemonicParsing="false" onAction="#abu3Button" text="Abulatory Care 3" />
+            <MenuItem mnemonicParsing="false" onAction="#abu4Button" text="Ambulatory Care 4" />
+            <MenuItem mnemonicParsing="false" onAction="#morButton" text="Morgue Ambulatory Clinic" />
+            <MenuItem mnemonicParsing="false" onAction="#ambCliniButton" text="Ambulatory Clinic" />
+            <MenuItem mnemonicParsing="false" onAction="#internalButton" text="Internal Medicine Headache" />
+            <MenuItem mnemonicParsing="false" onAction="#s5940Button" text="Suite 5940" />
+            <MenuItem mnemonicParsing="false" onAction="#s5945Button" text="Suite 5945" />
+            <MenuItem mnemonicParsing="false" onAction="#s51BUtton" text="Suite 51" />
+            <MenuItem mnemonicParsing="false" onAction="#entButton" text="ENT/Eye Physical / Derm" />
+            <MenuItem mnemonicParsing="false" onAction="#orthoButton" text="Orthopedic" />
+            <MenuItem mnemonicParsing="false" onAction="#s58Button" text="Suite 58" />
+            <MenuItem mnemonicParsing="false" onAction="#surgButton" text="BWH Surgical Specialties" />
+            <MenuItem mnemonicParsing="false" onAction="#endoButton" text="Endrocrinology / Diabetes" />
+            <MenuItem mnemonicParsing="false" onAction="#pcpButton" text="BWH Primary Care Physicians" />
         </items>
       </MenuButton>
    </children>
