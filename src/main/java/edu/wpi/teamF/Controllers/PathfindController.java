@@ -166,7 +166,12 @@ public class PathfindController extends SceneController {
     if (destination != null) {
       gc.clearRect(0, 0, canvasMap.getWidth(), canvasMap.getHeight());
       List<Node> path = getPath(startNode, destination);
-      drawPath(gc, path);
+      if (path.size() > 0) {
+        drawPath(gc, path);
+
+      } else {
+        gc.strokeText("NO ROUTE FOUND", 100, 100);
+      }
     } else {
       gc.strokeText("NO DESTINATION", 100, 100);
     }
