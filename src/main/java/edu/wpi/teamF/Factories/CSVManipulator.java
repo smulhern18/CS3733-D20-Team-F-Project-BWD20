@@ -20,16 +20,16 @@ public class CSVManipulator {
     try {
       // goes to get the file
       BufferedReader csvReader = new BufferedReader(new FileReader(path.toFile()));
-      BufferedWriter csvWriter = new BufferedWriter(new FileWriter(path.toFile(), true));
+      /*BufferedWriter csvWriter = new BufferedWriter(new FileWriter(path.toFile(), true));
       csvWriter.newLine();
       csvWriter.write("end");
-      csvWriter.close();
+      csvWriter.close();*/
       while ((row = csvReader.readLine()) != null) {
         data.addAll(Arrays.asList(row.split(",")));
       }
 
       int i = 9;
-      while (i < data.size() && !data.get(i).equals("end")) {
+      while (i < (data.size() - 1) && !data.get(i).equals("end")) {
         Node node =
             new Node(
                 data.get(i), // name
@@ -59,16 +59,23 @@ public class CSVManipulator {
 
   /** Writes to the CSV file so that it can become persistant */
   public void writeCSVFileNode(Path path) {
-    StringBuilder csvString = new StringBuilder();
     // writing to the file
     ObservableList<Node> nodes = nodeFactory.getAllNodes();
     for (Node n : nodes) {
-      csvString.append(formatNode(n));
+
+      // csvString = csvString + formatNode(n);
+      formatNode(n);
     }
-    try (FileWriter fw = new FileWriter(path.toString(), true);
-        BufferedWriter bw = new BufferedWriter(fw);
-        PrintWriter out = new PrintWriter(bw)) {
-      out.println(csvString);
+    try (FileWriter fw = new FileWriter(path.toString());
+        BufferedWriter bw = new BufferedWriter(fw); ) {
+
+      bw.write("nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName,teamAssigned");
+
+      for (Node n : nodes) {
+        bw.newLine();
+        bw.write(formatNode(n));
+      }
+      bw.close();
     } catch (IOException e) {
       // exception handling left as an exercise for the reader
     }
@@ -85,11 +92,12 @@ public class CSVManipulator {
     string = node.getName() + ",";
     string = string + String.valueOf(node.getXCoord()) + ",";
     string = string + String.valueOf(node.getYCoord()) + ",";
+    string = string + String.valueOf(node.getFloor()) + ",";
     string = string + node.getBuilding() + ",";
+    string = string + node.getType().getTypeString() + ",";
     string = string + node.getLongName() + ",";
     string = string + node.getShortName() + ",";
-    string = string + node.getType().getTypeString() + ",";
-    string = string + String.valueOf(node.getFloor()) + ",";
+    string = string + "dataWritten";
 
     return string;
   }
@@ -108,7 +116,9 @@ public class CSVManipulator {
         data.addAll(Arrays.asList(row.split(",")));
       }
 
-      for (int i = 0; i < data.size(); i = i + 8) {}
+      for (int i = 0; i < data.size(); i = i + 2) {
+        //  edgeFactory.create(data.get(i), data.get(i + 1), data.get(i + 2));
+      }
 
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File Not found!");
@@ -123,18 +133,16 @@ public class CSVManipulator {
 
   /** Writes to the CSV file so that it can become persistant */
   /*public void writeCSVFileEdge() throws IOException {
-    String csvString = "";
-    // writing to the file
-    try (FileWriter fw = new FileWriter("download.txt", true);
-    for(Node n: Node) {
-      csvString = csvString + formatNode(n);
-    }
-    try (FileWriter fw = new FileWriter("testText.txt", true);
-        BufferedWriter bw = new BufferedWriter(fw);
-        PrintWriter out = new PrintWriter(bw)) {
-      out.println(csvString);
-    } catch (IOException e) {
-      // exception handling left as an exercise for the reader
-    }
+  String csvString = "";
+  // writing to the file
+
+
+  /*for(Node n: Node) {
+
+  try (FileWriter fw = new FileWriter("download.txt", true);
+  for(Node n: Node) {
+
+    csvString = csvString + formatNode(n);
   }*/
+
 }
