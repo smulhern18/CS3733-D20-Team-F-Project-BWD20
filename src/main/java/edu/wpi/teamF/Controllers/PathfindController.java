@@ -300,7 +300,7 @@ public class PathfindController extends SceneController {
   }
 
   public void orthoButton(ActionEvent actionEvent) {
-    setDestination("");
+    setDestination("FDEPT01705");
     destinationPicker.setText("Orthopedic");
   }
 

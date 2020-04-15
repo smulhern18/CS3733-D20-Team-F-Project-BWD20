@@ -132,12 +132,14 @@ public class NodeFactory {
             Set<String> neighbors = edgeFactory.read(name);
 
             node = new Node(nodeName, xCoord, yCoord, building, longName, shortName, type, floor);
-            node.addNeighbor(neighbors);
+            if (neighbors != null) {
+              node.addNeighbor(neighbors);
+            }
           } else {
             throw new InstanceNotFoundException("read did not find entry to read");
           }
         } catch (Exception e) {
-          throw e;
+          System.out.println(e.getClass());
         }
       }
     } catch (ValidationException e) {
