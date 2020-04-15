@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.controllers.MenuBarController">
+<HBox spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MenuBarController">
    <children>
       <Button fx:id="mainMenuButton" mnemonicParsing="false" onAction="#mainMenuSwitch" text="Main Menu" />
       <Button fx:id="downloadButton" mnemonicParsing="false" onAction="#downloadSwitch" text="Download" />

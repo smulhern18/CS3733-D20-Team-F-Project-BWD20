@@ -1,6 +1,6 @@
 package edu.wpi.teamF;
 
-import edu.wpi.teamF.factories.DatabaseManager;
+import edu.wpi.teamF.Factories.DatabaseManager;
 
 public class Main {
 
