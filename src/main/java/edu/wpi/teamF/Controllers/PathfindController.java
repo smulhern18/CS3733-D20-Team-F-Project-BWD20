@@ -220,87 +220,82 @@ public class PathfindController extends SceneController {
   }
 
   public void intensiveCareUnitButton(ActionEvent actionEvent) {
-    setDestination("");
+    setDestination("FDEPT00105");
     destinationPicker.setText("Intensive Care Unit");
   }
 
   public void hemoButton(ActionEvent actionEvent) {
-    setDestination("");
+    setDestination("FDEPT00205");
     destinationPicker.setText("Hemo / Dialysis");
   }
 
   public void resButton(ActionEvent actionEvent) {
-    setDestination("");
+    setDestination("FDEPT00405");
     destinationPicker.setText("Residents");
   }
 
   public void outButton(ActionEvent actionEvent) {
-    setDestination("");
+    setDestination("FDEPT00305");
     destinationPicker.setText("Outpatient Infusion Center");
   }
 
   public void oncButton(ActionEvent actionEvent) {
-    setDestination("");
+    setDestination("FDEPT00505");
     destinationPicker.setText("Oncology");
   }
 
   public void xrayButton(ActionEvent actionEvent) {
-    setDestination("");
+    setDestination("FDEPT00605");
     destinationPicker.setText("X-ray");
   }
 
   public void abu1Button(ActionEvent actionEvent) {
-    setDestination("");
-    destinationPicker.setText("Abulatory Care Room 1");
+    setDestination("FDEPT00705");
+    destinationPicker.setText("Ambulatory Care Room 1");
   }
 
   public void abu2Button(ActionEvent actionEvent) {
-    setDestination("");
-    destinationPicker.setText("Abulatory Care Room 2");
+    setDestination("FDEPT00905");
+    destinationPicker.setText("Ambulatory Care Room 2");
   }
 
   public void abu3Button(ActionEvent actionEvent) {
-    setDestination("");
-    destinationPicker.setText("Abulatory Care Room 3");
+    setDestination("FDEPT01005");
+    destinationPicker.setText("Ambulatory Care Room 3");
   }
 
   public void abu4Button(ActionEvent actionEvent) {
-    setDestination("");
-    destinationPicker.setText("Abulatory Care Room 4");
+    setDestination("FDEPT01105");
+    destinationPicker.setText("Ambulatory Care Room 4");
   }
 
-  public void morButton(ActionEvent actionEvent) {
-    setDestination("");
-    destinationPicker.setText("Morgue");
-  }
-
-  public void ambCliniButton(ActionEvent actionEvent) {
-    setDestination("");
+  public void ambulButton(ActionEvent actionEvent) {
+    setDestination("FDEPT01305");
     destinationPicker.setText("Ambulatory Clinic");
   }
 
   public void internalButton(ActionEvent actionEvent) {
-    setDestination("");
+    setDestination("FDEPT01405");
     destinationPicker.setText("Internal Medicine");
   }
 
   public void s5940Button(ActionEvent actionEvent) {
-    setDestination("");
+    setDestination("FSERV00305");
     destinationPicker.setText("Suite 5940");
   }
 
   public void s5945Button(ActionEvent actionEvent) {
-    setDestination("");
+    setDestination("FSERV00205");
     destinationPicker.setText("Suite 5945");
   }
 
   public void s51BUtton(ActionEvent actionEvent) {
-    setDestination("");
+    setDestination("FSERV00405");
     destinationPicker.setText("Suite 51");
   }
 
   public void entButton(ActionEvent actionEvent) {
-    setDestination("");
+    setDestination("FDEPT01605:");
     destinationPicker.setText("ENT / Eye Physical / Derm");
   }
 
@@ -310,22 +305,22 @@ public class PathfindController extends SceneController {
   }
 
   public void s58Button(ActionEvent actionEvent) {
-    setDestination("");
+    setDestination("FSERV00505");
     destinationPicker.setText("Suite 58");
   }
 
   public void surgButton(ActionEvent actionEvent) {
-    setDestination("");
+    setDestination("FDEPT01805");
     destinationPicker.setText("BWH Surgical Specialties");
   }
 
   public void endoButton(ActionEvent actionEvent) {
-    setDestination("");
+    setDestination("FDEPT01505");
     destinationPicker.setText("Endocrinology / Diabetes Hem-One");
   }
 
   public void pcpButton(ActionEvent actionEvent) {
-    setDestination("");
+    setDestination("FDEPT00805");
     destinationPicker.setText("BWH Primary Care Physicians");
   }
 }
