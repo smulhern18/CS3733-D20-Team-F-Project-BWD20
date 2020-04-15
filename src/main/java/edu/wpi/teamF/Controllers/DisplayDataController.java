@@ -25,7 +25,7 @@ public class DisplayDataController extends SceneController {
   public TableColumn<Node, String> floor;
   public AnchorPane displayPane;
 
-  public void displayData(ActionEvent actionEvent) throws Exception {
+  public void displayNodes(ActionEvent actionEvent) throws Exception {
     name.setCellValueFactory(new PropertyValueFactory<>("name"));
     xCoord.setCellValueFactory(new PropertyValueFactory<>("xCoord"));
     yCoord.setCellValueFactory(new PropertyValueFactory<>("yCoord"));
@@ -34,7 +34,7 @@ public class DisplayDataController extends SceneController {
     floor.setCellValueFactory(new PropertyValueFactory<>("floor"));
 
     FileChooser fileChooser = new FileChooser();
-    fileChooser.setTitle("Select CSV File");
+    fileChooser.setTitle("Select CSV File Nodes");
     File file = fileChooser.showOpenDialog(table.getScene().getWindow());
 
     CSVManipulator csvM = new CSVManipulator();
@@ -51,5 +51,14 @@ public class DisplayDataController extends SceneController {
     table.setItems(nodes);
     DatabaseManager manager = new DatabaseManager();
     manager.reset();
+  }
+
+  public void getEdges(ActionEvent actionEvent) {
+    FileChooser fileChooser = new FileChooser();
+    fileChooser.setTitle("Select CSV File Edges");
+    File file = fileChooser.showOpenDialog(table.getScene().getWindow());
+
+    CSVManipulator csvM = new CSVManipulator();
+    csvM.readCSVFileEdge(file.toPath());
   }
 }

@@ -59,11 +59,11 @@ public class CSVManipulator {
 
   /** Writes to the CSV file so that it can become persistant */
   public void writeCSVFileNode(Path path) {
-    String csvString = "";
+    StringBuilder csvString = new StringBuilder();
     // writing to the file
     ObservableList<Node> nodes = nodeFactory.getAllNodes();
     for (Node n : nodes) {
-      csvString = csvString + formatNode(n);
+      csvString.append(formatNode(n));
     }
     try (FileWriter fw = new FileWriter(path.toString(), true);
         BufferedWriter bw = new BufferedWriter(fw);

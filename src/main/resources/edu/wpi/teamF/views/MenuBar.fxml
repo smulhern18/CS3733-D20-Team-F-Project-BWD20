@@ -9,13 +9,13 @@
 
 <HBox spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MenuBarController">
    <children>
-      <Button fx:id="mainMenuButton" mnemonicParsing="false" onAction="#mainMenuSwitch" text="Main Menu" />
-      <Button fx:id="downloadButton" mnemonicParsing="false" onAction="#downloadSwitch" text="Download" />
-      <Button fx:id="pathFinderButton" mnemonicParsing="false" onAction="#pathfinderSwitch" text="Pathfinder" />
-      <Button fx:id="modifyDataButton" mnemonicParsing="false" onAction="#modifyDataSwitch" text="Modify Data" />
-      <Button fx:id="displayButton" mnemonicParsing="false" onAction="#displaySwitch" text="Display" />
+      <Button fx:id="mainMenuButton" mnemonicParsing="false" onAction="#mainMenuSwitch" style="-fx-background-color: #88BEC9;" text="Main Menu" />
+      <Button fx:id="displayButton" mnemonicParsing="false" onAction="#displaySwitch" style="-fx-background-color: #88BEC9;" text="Display" />
+      <Button fx:id="modifyDataButton" mnemonicParsing="false" onAction="#modifyDataSwitch" style="-fx-background-color: #88BEC9;" text="Modify Data" />
+      <Button fx:id="pathFinderButton" mnemonicParsing="false" onAction="#pathfinderSwitch" style="-fx-background-color: #88BEC9;" text="Pathfinder" />
+      <Button fx:id="downloadButton" mnemonicParsing="false" onAction="#downloadSwitch" style="-fx-background-color: #88BEC9;" text="Download" />
    </children>
    <padding>
-      <Insets left="5.0" top="10.0" />
+      <Insets left="10.0" top="10.0" />
    </padding>
 </HBox>
