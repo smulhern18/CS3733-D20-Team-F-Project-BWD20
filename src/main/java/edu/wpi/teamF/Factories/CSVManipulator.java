@@ -118,6 +118,7 @@ public class CSVManipulator {
       int i = 3;
       while (i < (data.size() - 1)) {
         edgeFactory.create(data.get(i), data.get(i + 1), data.get(i + 2));
+        edgeFactory.create(data.get(i) + 2, data.get(i + 2), data.get(i + 1));
         i = i + 3;
       }
     } catch (FileNotFoundException e) {

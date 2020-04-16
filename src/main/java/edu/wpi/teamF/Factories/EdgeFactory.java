@@ -123,10 +123,10 @@ public class EdgeFactory {
           throw new Exception("Something went wrong with the creation of the edge entry");
         }
       } catch (SQLException e) {
-        System.out.println(e.getMessage() + "126");
+        System.out.println(e.getMessage());
       }
     } catch (SQLException e) {
-      System.out.println(e.getMessage() + "129");
+      System.out.println(e.getMessage());
     }
   }
   /**

@@ -50,12 +50,12 @@ public class DisplayDataController extends SceneController {
     table.setItems(nodes);
   }
 
-  /*public void getEdges(ActionEvent actionEvent) {
+  public void getEdges(ActionEvent actionEvent) {
     FileChooser fileChooser = new FileChooser();
     fileChooser.setTitle("Select CSV File Edges");
     File file = fileChooser.showOpenDialog(table.getScene().getWindow());
 
     CSVManipulator csvM = new CSVManipulator();
     csvM.readCSVFileEdge(file.toPath());
-  }*/
+  }
 }
