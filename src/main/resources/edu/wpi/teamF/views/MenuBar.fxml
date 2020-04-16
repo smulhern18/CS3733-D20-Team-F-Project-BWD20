@@ -16,7 +16,7 @@
          <font>
             <Font name="HP Simplified" size="14.0" />
          </font></Button>
-      <Button fx:id="displayButton" mnemonicParsing="false" onAction="#displaySwitch" prefHeight="33.0" prefWidth="127.0" style="-fx-background-color: #88BEC9;" text="Display/Load">
+      <Button fx:id="displayButton" mnemonicParsing="false" onAction="#displaySwitch" prefHeight="33.0" prefWidth="139.0" style="-fx-background-color: #88BEC9;" text="Display/Load">
          <font>
             <Font name="HP Simplified" size="14.0" />
          </font></Button>

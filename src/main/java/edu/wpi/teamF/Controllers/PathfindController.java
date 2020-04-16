@@ -183,7 +183,6 @@ public class PathfindController extends SceneController {
     double widthRatio = canvasMap.getWidth() / MAP_WIDTH;
     gc.setStroke(Color.RED);
     gc.beginPath();
-
     gc.moveTo(675 * widthRatio, 1215 * widthRatio);
     gc.lineTo(685 * widthRatio, 1215 * widthRatio);
     gc.lineTo(785 * widthRatio, 1215 * widthRatio);
@@ -206,6 +205,7 @@ public class PathfindController extends SceneController {
     double widthRatio = canvasMap.getWidth() / MAP_WIDTH;
     gc.setStroke(Color.RED);
     gc.beginPath();
+    gc.setLineWidth(2);
     gc.moveTo(path.get(0).getXCoord() * widthRatio, path.get(0).getYCoord() * heightRatio);
     for (int i = 1; i < path.size(); i++) {
       gc.lineTo(path.get(i).getXCoord() * widthRatio, path.get(i).getYCoord() * heightRatio);
