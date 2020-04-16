@@ -25,14 +25,11 @@
         </columns>
       </TableView>
       <fx:include source="MenuBar.fxml" />
-<<<<<<< HEAD
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="986.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true" >
        <image>
            <Image url="@../Images/drFlamingo.png" />
        </image>
       </ImageView>
-=======
->>>>>>> parent of f15bd94... everything works but pathfinder
       <Button layoutX="130.0" layoutY="761.0" mnemonicParsing="false" onAction="#getEdges" style="-fx-background-color: #FFD0BE;" text="Pick Edges File" />
    </children>
 </AnchorPane>
