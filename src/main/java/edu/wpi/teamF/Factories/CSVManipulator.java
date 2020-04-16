@@ -14,12 +14,12 @@ public class CSVManipulator {
    * reads a csv file that contains nodes and inserts the data in the file into the correct place in
    * the database
    */
-  public void readCSVFileNode(Path path) {
+  public void readCSVFileNode(InputStream stream) {
     String row = "";
     ArrayList<String> data = new ArrayList<>();
     try {
       // goes to get the file
-      BufferedReader csvReader = new BufferedReader(new FileReader(path.toFile()));
+      BufferedReader csvReader = new BufferedReader(new InputStreamReader(stream));
       while ((row = csvReader.readLine()) != null) {
         data.addAll(Arrays.asList(row.split(",")));
       }
@@ -105,12 +105,12 @@ public class CSVManipulator {
    * reads a csv file that contains edges and inserts the data in the file into the correct place in
    * the database
    */
-  public void readCSVFileEdge(Path path) {
+  public void readCSVFileEdge(InputStream stream) {
     String row = "";
     ArrayList<String> data = new ArrayList<>();
     try {
       // goes to get the file
-      BufferedReader csvReader = new BufferedReader(new FileReader(path.toFile()));
+      BufferedReader csvReader = new BufferedReader(new InputStreamReader(stream));
       while ((row = csvReader.readLine()) != null) {
         data.addAll(Arrays.asList(row.split(",")));
       }

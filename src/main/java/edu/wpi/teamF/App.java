@@ -2,8 +2,6 @@ package edu.wpi.teamF;
 
 import edu.wpi.teamF.Factories.CSVManipulator;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.nio.file.Paths;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -32,14 +30,14 @@ public class App extends Application {
   public void start(Stage primaryStage) throws IOException {
     try {
       CSVManipulator csvM = new CSVManipulator();
-      //csvM.readCSVFileNode(Paths.get(getClass().getResource("csv/MapFnodes.csv").toURI()));
-      //csvM.readCSVFileEdge(Paths.get(getClass().getResource("csv/MapFedges.csv").toURI()));
+      csvM.readCSVFileNode(getClass().getResourceAsStream("csv/MapFnodes.csv"));
+      csvM.readCSVFileEdge(getClass().getResourceAsStream("csv/MapFedges.csv"));
       Parent root = FXMLLoader.load(getClass().getResource("views/MainMenu.fxml"));
       Scene scene = new Scene(root);
       primaryStage.setScene(scene);
       PS = primaryStage;
       primaryStage.show();
-    } catch (IOException e) {
+    } catch (Exception e) {
       e.printStackTrace();
       Platform.exit();
     }

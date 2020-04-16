@@ -32,7 +32,7 @@ public class DatabaseManager {
     String nodeTableCreationStatement =
         "CREATE TABLE "
             + NODES_TABLE_NAME
-            + "( "
+            + " ( "
             + NODE_NAME_KEY
             + " VARCHAR(32) NOT NULL, "
             + X_COORDINATE_KEY
@@ -48,7 +48,7 @@ public class DatabaseManager {
             + TYPE_KEY
             + " VARCHAR(4) NOT NULL, "
             + FLOOR_KEY
-            + " SMALLINT NOT NULL,"
+            + " SMALLINT NOT NULL, "
             + "PRIMARY KEY ("
             + NODE_NAME_KEY
             + "))";
@@ -56,13 +56,13 @@ public class DatabaseManager {
     String edgeTableCreationStatement =
         "CREATE TABLE "
             + EDGES_TABLE_NAME
-            + "( "
+            + " ( "
             + EDGEID_KEY
             + " VARCHAR(32) NOT NULL, "
             + NODE_1_KEY
             + " VARCHAR(32) NOT NULL, "
             + NODE_A_KEY
-            + " VARCHAR(32) NOT NULL,"
+            + " VARCHAR(32) NOT NULL, "
             + "PRIMARY KEY ("
             + EDGEID_KEY
             + "))";

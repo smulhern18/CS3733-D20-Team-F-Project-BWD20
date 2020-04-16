@@ -4,6 +4,7 @@ import edu.wpi.teamF.Factories.CSVManipulator;
 import edu.wpi.teamF.Factories.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Node;
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,7 +38,7 @@ public class DisplayDataController extends SceneController {
     File file = fileChooser.showOpenDialog(table.getScene().getWindow());
 
     CSVManipulator csvM = new CSVManipulator();
-    csvM.readCSVFileNode(file.toPath());
+    csvM.readCSVFileNode(new FileInputStream(file));
 
     // eww
     NodeFactory nodeFactory = NodeFactory.getFactory();

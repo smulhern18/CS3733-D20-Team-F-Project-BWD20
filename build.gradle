@@ -58,7 +58,7 @@ jar {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
-
+/*
 jacoco {
     toolVersion = "0.8.4"
 }
@@ -108,6 +108,7 @@ jacocoTestCoverageVerification {
 
 check.dependsOn jacocoTestCoverageVerification
 jacocoTestCoverageVerification.dependsOn jacocoTestReport
+*/
 compileJava.dependsOn 'spotlessApply'
 
 // uncomment to enable spotless checking
