@@ -15,7 +15,7 @@
 
 <AnchorPane fx:id="displayPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.DisplayDataController">
    <children>
-      <Button layoutX="32.0" layoutY="744.0" mnemonicParsing="false" onAction="#displayNodes" prefHeight="33.0" prefWidth="110.0" style="-fx-background-color: #FFD0BE;" text="Pick Nodes File">
+      <Button layoutX="32.0" layoutY="744.0" mnemonicParsing="false" onAction="#displayNodes" prefHeight="33.0" prefWidth="132.0" style="-fx-background-color: #FFD0BE;" text="Pick Nodes File">
          <font>
             <Font name="HP Simplified" size="14.0" />
          </font></Button>
