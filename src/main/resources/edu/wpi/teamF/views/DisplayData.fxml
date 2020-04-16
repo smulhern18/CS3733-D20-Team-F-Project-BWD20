@@ -30,10 +30,10 @@
         </columns>
       </TableView>
       <fx:include source="MenuBar.fxml" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="986.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true">
-       <image>
-           <Image url="@../Images/drFlamingo.png" />
-       </image>
+      <ImageView fitHeight="123.0" fitWidth="149.0" layoutX="1078.0" layoutY="687.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/drFlamingo.png" />
+         </image>
       </ImageView>
    </children>
 </AnchorPane>

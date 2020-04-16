@@ -33,11 +33,6 @@
             <Font name="HP Simplified" size="14.0" />
          </font>
       </Label>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="1039.0" layoutY="643.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/drFlamingo.png" />
-         </image>
-      </ImageView>
       <ImageView fitHeight="408.0" fitWidth="405.0" layoutX="398.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/hospital.png" />
@@ -54,5 +49,10 @@
          </effect>
       </CubicCurve>
       <fx:include source="MenuBar.fxml" />
+      <ImageView fitHeight="123.0" fitWidth="149.0" layoutX="1078.0" layoutY="687.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/drFlamingo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
