@@ -56,7 +56,7 @@ public class MainMenuUITest extends FxRobot {
   @Test
   void testSceneSwitchingDisplay() {
     // when click
-    clickOn("Display / Load");
+    clickOn("Display/Load");
 
     verifyThat("#mainMenuButton", hasText("Main Menu"));
   }

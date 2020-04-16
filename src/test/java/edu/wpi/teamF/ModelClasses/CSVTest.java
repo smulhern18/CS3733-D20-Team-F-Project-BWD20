@@ -77,7 +77,7 @@ public class CSVTest {
     }
 
     /** Valid data */
-    File wfile = new File("src/test/java/edu/wpi/teamF/Test/CSVNodeTestw.csv");
+    File wfile = new File("src/test/java/edu/wpi/teamF/Test/");
     csvManipulator.writeCSVFileNode(wfile.toPath());
     try {
       byte[] f1 = Files.readAllBytes(wfile.toPath());
@@ -91,9 +91,7 @@ public class CSVTest {
   @Test
   public void testReadAndWriteCSVEdges() {
     Set<String> string;
-    File file =
-        new File(
-            "/Users/theodorecampbell/IdeaProjects/CS3733-D20-Team-F-Project-BWD20/src/test/java/edu/wpi/teamF/Test/CSVEdgeTest.csv");
+    File file = new File("src/test/java/edu/wpi/teamF/Test/CSVEdgeTest.csv");
     csvManipulator.readCSVFileEdge(file.toPath());
     try {
       string = edgeFactory.read("NodeA");

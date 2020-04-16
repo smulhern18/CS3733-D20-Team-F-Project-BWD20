@@ -265,7 +265,9 @@ public class NodeFactory {
         Set<String> neighbors = edgeFactory.read(nodeName);
         Node node =
             new Node(nodeName, xCoord, yCoord, building, longName, shortName, nodeType, floor);
-        node.addNeighbor(neighbors);
+        if (neighbors != null) {
+          node.addNeighbor(neighbors);
+        }
         nodes.add(node);
       }
     } catch (SQLException e) {

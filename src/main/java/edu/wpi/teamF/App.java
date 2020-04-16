@@ -32,14 +32,14 @@ public class App extends Application {
   public void start(Stage primaryStage) throws IOException {
     try {
       CSVManipulator csvM = new CSVManipulator();
-      csvM.readCSVFileNode(Paths.get(getClass().getResource("csv/MapFnodes.csv").toURI()));
-      csvM.readCSVFileEdge(Paths.get(getClass().getResource("csv/MapFedges.csv").toURI()));
+      //csvM.readCSVFileNode(Paths.get(getClass().getResource("csv/MapFnodes.csv").toURI()));
+      //csvM.readCSVFileEdge(Paths.get(getClass().getResource("csv/MapFedges.csv").toURI()));
       Parent root = FXMLLoader.load(getClass().getResource("views/MainMenu.fxml"));
       Scene scene = new Scene(root);
       primaryStage.setScene(scene);
       PS = primaryStage;
       primaryStage.show();
-    } catch (IOException | URISyntaxException e) {
+    } catch (IOException e) {
       e.printStackTrace();
       Platform.exit();
     }
