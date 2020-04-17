@@ -1,4 +1,4 @@
 package edu.wpi.teamF.ModelClasses;
 
-public class Node {
+public class Path {
 }
