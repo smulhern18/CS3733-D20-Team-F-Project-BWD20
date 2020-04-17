@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.DownloadDataController">
+   <children>
+      <Button fx:id="downloadButton" layoutX="525.0" layoutY="369.0" mnemonicParsing="false" onAction="#downloadData" prefHeight="62.0" prefWidth="151.0" style="-fx-background-color: #FFD0BE;" text="Download">
+         <font>
+            <Font name="HP Simplified" size="24.0" />
+         </font>
+      </Button>
+      <fx:include source="MenuBar.fxml" />
+      <ImageView fitHeight="123.0" fitWidth="149.0" layoutX="1068.0" layoutY="677.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/drFlamingo.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
