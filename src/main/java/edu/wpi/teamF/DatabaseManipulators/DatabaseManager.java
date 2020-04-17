@@ -76,7 +76,7 @@ public class DatabaseManager {
                     + EDGES_TABLE_NAME
                     + " ( "
                     + EDGEID_KEY
-                    + " VARCHAR(32) NOT NULL, "
+                    + " VARCHAR(65) NOT NULL, "
                     + NODE_1_KEY
                     + " VARCHAR(32) NOT NULL, "
                     + NODE_A_KEY
