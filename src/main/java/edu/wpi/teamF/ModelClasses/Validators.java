@@ -37,12 +37,25 @@ public class Validators {
         longNameValidation(nodeObject.getLongName());
         shortNameValidation(nodeObject.getShortName());
         buildingValidation(nodeObject.getBuilding());
-        if (nodeObject.getNeighbors() != null) {
-            for (String nodeName : nodeObject.getNeighbors()) {
-                nameValidation(nodeName);
+        if (nodeObject.getEdges() != null) {
+            for (Edge edgeName : nodeObject.getEdges()) {
+                edgeValidation(edgeName);
             }
         }
         floorValidation(nodeObject.getFloor());
+    }
+    /**
+     * Validation for Edge
+     *
+     * @param t an instance of node or subclass to validate
+     * @param constraints the optional constraints for validation
+     * @throws ValidationException should the validation fail
+     */
+    public static <T extends Edge> void edgeValidation(T t, int... constraints)
+        throws ValidationException {
+        nullCheckValidation(t, constraints);
+        Edge edgeObject = (Edge) t;
+        idValidation(edgeObject.getId());
     }
 
     /**
