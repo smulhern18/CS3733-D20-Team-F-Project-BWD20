@@ -1,6 +1,5 @@
 package edu.wpi.teamF;
 
-import edu.wpi.teamF.Factories.CSVManipulator;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.application.Platform;
