@@ -8,7 +8,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.wpi.teamF.Views.DataManipulator"
+            fx:controller="edu.wpi.teamF.Controllers.DataManipulatorController"
             prefHeight="400.0" prefWidth="600.0">
 
 </AnchorPane>
