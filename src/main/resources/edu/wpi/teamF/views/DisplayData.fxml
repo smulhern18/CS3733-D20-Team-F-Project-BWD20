@@ -1,14 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.image.Image?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.wpi.teamF.controllers.DisplayDataController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane fx:id="displayPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.DisplayDataController">
+   <children>
+      <Button layoutX="32.0" layoutY="744.0" mnemonicParsing="false" onAction="#displayNodes" prefHeight="33.0" prefWidth="132.0" style="-fx-background-color: #FFD0BE;" text="Pick Nodes File">
+         <font>
+            <Font name="HP Simplified" size="14.0" />
+         </font></Button>
+      <TableView fx:id="table" layoutX="378.0" layoutY="208.0" prefHeight="385.0" prefWidth="444.0" style="-fx-background-color: #CDEBE6;">
+        <columns>
+          <TableColumn fx:id="name" prefWidth="75.0" text="Name" />
+          <TableColumn prefWidth="75.0" text="xCoord" fx:id="xCoord" />
+            <TableColumn fx:id="yCoord" prefWidth="75.0" text="yCoord" />
+            <TableColumn fx:id="longName" prefWidth="75.0" text="longName" />
+            <TableColumn fx:id="type" prefWidth="75.0" text="type" />
+            <TableColumn fx:id="floor" prefWidth="75.0" text="floor" />
+        </columns>
+      </TableView>
+      <fx:include source="MenuBar.fxml" />
+      <ImageView fitHeight="123.0" fitWidth="149.0" layoutX="1078.0" layoutY="687.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/drFlamingo.png" />
+         </image>
+      </ImageView>
+   </children>
 </AnchorPane>

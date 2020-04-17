@@ -1,0 +1,56 @@
+nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName
+FDEPT00105,675,1215,5,Faulkner,DEPT,Intensive Care Unit / Critical Care Unit,ICU
+FDEPT00205,815,1215,5,Faulkner,DEPT,Hemo Dialysis,HemoDial
+FDEPT00305,955,1215,5,Faulkner,DEPT,Outpatient Infusion Center,OutInfusion
+FDEPT00405,1015,1215,5,Faulkner,DEPT,Residents,Res
+FDEPT00505,1330,1210,5,Faulkner,DEPT,Oncology Clinic,Oncol
+FDEPT00605,1250,1015,5,Faulkner,DEPT,X-Ray/Nursing Staff Development,XRayNursing
+FDEPT00705,1370,890,5,Faulkner,DEPT,Abulatory Care 1,Abula1
+FDEPT00805,1240,820,5,Faulkner,DEPT,BWH Primary Care Physicians,PriCare
+FDEPT00905,1260,790,5,Faulkner,DEPT,Abulatory Care 2,Abula2
+FDEPT01005,1260,840,5,Faulkner,DEPT,Abulatory Care 3,Abula3
+FDEPT01105,1260,745,5,Faulkner,DEPT,Abulatory Care 4,Abula4
+FDEPT01205,1260,710,5,Faulkner,DEPT,Abulatory Care 5,Abula5
+FDEPT01305,1260,590,5,Faulkner,DEPT,Ambulatory Clinic,AbClinic
+FDEPT01405,1240,640,5,Faulkner,DEPT,Internal Medicine / Headache,Headache
+FDEPT01505,1260,520,5,Faulkner,DEPT,Endocrinology/ Diabetes/ Hem-Onc,Endo
+FDEPT01605,1175,280,5,Faulkner,DEPT,ENT / Eye Physical / Dermatologist,ENT
+FDEPT01705,1270,275,5,Faulkner,DEPT,Othopedic Association,Otho
+FDEPT01905,1260,1060,5,Faulkner,DEPT,X-Ray Waiting Room,XRayWait
+FDEPT01805,1370,345,5,Faulkner,DEPT,BWH Surgical Specialties,Surgical
+FELEV00Y05,1150,1210,5,Faulkner,ELEV,Elevator Y,ElevY
+FELEV00Z05,1310,1150,5,Faulkner,ELEV,Elevator Z,ElevZ
+FELEV00X05,1210,410,5,Faulkner,ELEV,Elevator X,ElevX
+FHALL00105,685,1215,5,Faulkner,HALL,ICU Hallway,ICUHall
+FHALL00205,785,1215,5,Faulkner,HALL,Hallway outside HemoDia,HemoHall
+FHALL00305,930,1215,5,Faulkner,HALL,Hallway outside Residents,ResHall
+FHALL00305,1120,1210,5,Faulkner,HALL,Elevator Y Hallway,ElevYHall
+FHALL00405,1245,1210,5,Faulkner,HALL,Vacant Hallway,VacHall
+FHALL00505,1250,1120,5,Faulkner,HALL,Elevator Z landing hallway,ElevZHall
+FHALL00605,1250,1065,5,Faulkner,HALL,X-Ray Waiting Hallway,XRayWaitHall
+FHALL00705,1250,970,5,Faulkner,HALL,X-Ray Hall,XRayHall
+FHALL00805,1370,975,5,Faulkner,HALL,Shortcut Hall,ShrtHall
+FHALL00905,1250,850,5,Faulkner,HALL,Abulatory Hall 1,AbHall1
+FHALL01005,1250,690,5,Faulkner,HALL,Abulatory Hall 2,AbHall2
+FHALL01105,1250,610,5,Faulkner,HALL,Abulatory Hall 3,AbHall3
+FHALL01205,1250,530,5,Faulkner,HALL,Suite Hall,SuiteHall
+FHALL01305,1250,480,5,Faulkner,HALL,Bottom Intersection of Top Hall,BotInterHall
+FHALL01405,1250,410,5,Faulkner,HALL,Elevator X Landing,ElevXHall
+FHALL01505,1250,310,5,Faulkner,HALL,UpperBathrooms Hallway,UpBathHall
+FHALL01605,1250,280,5,Faulkner,HALL,Upper Curved Intersection Hall,UPCurveHall
+FHALL01705,1145,310,5,Faulkner,HALL,Left Upper Hall,LeftUpHall
+FHALL01805,1355,310,5,Faulkner,HALL,Right Upper Hall,RightUpHall
+FHALL01905,1145,475,5,Faulkner,HALL,Suite 51 Hall,Suite51Hall
+FHALL02005,1355,475,5,Faulkner,HALL,Suite 58 Hall,Suite58Hall
+FREST00105,1250,1175,5,Faulkner,REST,South restrooms,BOTrest
+FREST00205,1250,300,5,Faulkner,REST,Upper Restrooms,UPRest
+FSERV00105,1240,1220,5,Faulkner,SERV,Vacant,Vacant
+FSERV00205,1240,510,5,Faulkner,SERV,Suite 5945,Suite5945
+FSERV00305,1240,555,5,Faulkner,SERV,Suite 5940,Suite5940
+FSERV00405,1130,430,5,Faulkner,SERV,Suite 51,Suite51
+FSERV00505,1370,465,5,Faulkner,SERV,Suite 58,Suite58
+FSTAI00105,675,1220,5,Faulkner,STAI,Stairwell outside HemoDia,HemoStair
+FSTAI00205,165,1210,5,Faulkner,STAI,Stairwell inside ICU,ICUStair
+FSTAI00305,2310,1235,5,Faulkner,STAI,Stairwell in Oncology Clinic,OncolStair
+FSTAI00405,1235,1070,5,Faulkner,STAI,X-Ray Stairwell,XRayStairs
+FSTAI00505,1280,405,5,Faulkner,STAI,Upper Stair,UPStair

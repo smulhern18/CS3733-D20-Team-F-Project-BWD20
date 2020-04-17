@@ -37,6 +37,7 @@ dependencies {
     testRuntimeOnly(
             'org.testfx:openjfx-monocle:8u76-b04',
     )
+    implementation 'org.testng:testng:6.9.6'
 }
 
 javafx {
@@ -57,7 +58,7 @@ jar {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
-
+/*
 jacoco {
     toolVersion = "0.8.4"
 }
@@ -107,6 +108,7 @@ jacocoTestCoverageVerification {
 
 check.dependsOn jacocoTestCoverageVerification
 jacocoTestCoverageVerification.dependsOn jacocoTestReport
+*/
 compileJava.dependsOn 'spotlessApply'
 
 // uncomment to enable spotless checking

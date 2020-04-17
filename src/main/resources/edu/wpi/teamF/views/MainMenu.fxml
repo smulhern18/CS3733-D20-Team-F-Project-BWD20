@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.CubicCurve?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MainMenuController">
+   <children>
+      <Text fx:id="titleLabel" layoutX="342.0" layoutY="127.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome To The Amazing Pathfinder!">
+         <font>
+            <Font name="HP Simplified" size="31.0" />
+         </font>
+      </Text>
+      <Label layoutX="484.0" layoutY="651.0" text="Select a Button Above">
+         <font>
+            <Font name="HP Simplified" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="1007.0" layoutY="676.0" text="Created by">
+         <font>
+            <Font name="HP Simplified" size="14.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="408.0" fitWidth="405.0" layoutX="398.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/hospital.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="399.0" fitWidth="395.0" layoutX="574.0" layoutY="297.0" pickOnBounds="true" preserveRatio="true">
+      <image>
+         <Image url="@../Images/flamingo.gif" />
+      </image>
+      </ImageView>
+      <CubicCurve controlX1="165.20001220703125" controlX2="-133.20001220703125" controlY1="-130.60000610351562" controlY2="127.800048828125" endX="-17.20001220703125" endY="-137.0" fill="#1f93ff00" layoutX="574.0" layoutY="565.0" startX="210.79998779296875" startY="31.0" stroke="BLACK" strokeLineCap="ROUND" strokeWidth="2.0">
+         <effect>
+            <Shadow blurType="GAUSSIAN" height="56.75" radius="23.705" width="40.07" />
+         </effect>
+      </CubicCurve>
+      <fx:include source="MenuBar.fxml" />
+      <ImageView fitHeight="123.0" fitWidth="149.0" layoutX="1078.0" layoutY="687.0" opacity="0.75" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/drFlamingo.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

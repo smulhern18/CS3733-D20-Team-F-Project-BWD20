@@ -1,22 +1,48 @@
 package edu.wpi.teamF;
 
+import edu.wpi.teamF.Factories.CSVManipulator;
+import java.io.IOException;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class App extends Application {
 
-  @Override
-  public void init() {
-    log.info("Starting Up");
+  private static Stage PS;
+
+  protected static Stage getPS() {
+    return PS;
+  }
+
+  public static void setPS(Stage stage) {
+    App.PS = stage;
   }
 
   @Override
-  public void start(Stage primaryStage) {}
+  public void init() {}
 
   @Override
-  public void stop() {
-    log.info("Shutting Down");
+  public void start(Stage primaryStage) throws IOException {
+    try {
+      CSVManipulator csvM = new CSVManipulator();
+      csvM.readCSVFileNode(getClass().getResourceAsStream("csv/MapFnodes.csv"));
+      csvM.readCSVFileEdge(getClass().getResourceAsStream("csv/MapFedges.csv"));
+      Parent root = FXMLLoader.load(getClass().getResource("views/MainMenu.fxml"));
+      Scene scene = new Scene(root);
+      primaryStage.setScene(scene);
+      PS = primaryStage;
+      primaryStage.show();
+    } catch (Exception e) {
+      e.printStackTrace();
+      Platform.exit();
+    }
   }
+
+  @Override
+  public void stop() {}
 }
