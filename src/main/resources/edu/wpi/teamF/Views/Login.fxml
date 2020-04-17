@@ -28,6 +28,6 @@
         <TextField fx:id="usernameInput" layoutX="139.0" layoutY="147.0" AnchorPane.leftAnchor="139.0" AnchorPane.topAnchor="147.0" />
         <Button fx:id="mainMenuButton" layoutX="14.0" layoutY="354.0" mnemonicParsing="false" text="Main Menu" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" />
         <Button fx:id="logInButton" layoutX="532.0" layoutY="354.0" mnemonicParsing="false" text="Login" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="25.0" />
-        <Button fx:id="signUpButton" layoutX="269.0" layoutY="354.0" mnemonicParsing="false" text="Sign Up" AnchorPane.bottomAnchor="25.0" />
+        <Button fx:id="signUpButton" layoutX="269.0" layoutY="354.0" mnemonicParsing="false" text="Register" AnchorPane.bottomAnchor="25.0" />
     </children>
 </AnchorPane>
