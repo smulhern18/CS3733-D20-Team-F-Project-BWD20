@@ -52,6 +52,7 @@ public class Node {
   private NodeType type;
   private short floor;
   private Set<Edge> edges = new HashSet<>();
+  private Set<Node> neighborNodes = new HashSet<>();
 
   /**
    * Constructor for Nodes
@@ -113,6 +114,14 @@ public class Node {
    */
   public void setEdges(Set<Edge> edge) {
     this.edges = edge;
+    for (Edge anEdge : edge){
+      if (anEdge.getNode1().equals(this)){
+        neighborNodes.add(anEdge.getNode2());
+      }
+      else {
+        neighborNodes.add(anEdge.getNode1());
+      }
+    }
   }
 
   /**
@@ -122,6 +131,12 @@ public class Node {
    */
   public void addEdge(Edge edge) {
     this.edges.add(edge);
+    if (edge.getNode1().equals(this)){
+      neighborNodes.add(edge.getNode2());
+    }
+    else {
+      neighborNodes.add(edge.getNode1());
+    }
   }
 
   /**
@@ -306,4 +321,6 @@ public class Node {
     Validators.floorValidation(floor);
     this.floor = floor;
   }
+
+  public Set<Node> getNeighborNodes(){ return neighborNodes; }
 }

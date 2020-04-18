@@ -34,17 +34,11 @@ public class SingleFloorAStar implements PathfindAlgorithm {
                         path.add(0, currentNode.getNode());
                         currentNode = currentNode.getPrevious();
                     } while (currentNode != null);
-                    return path;
+                    Path finalPath = new Path(path);
+                    return finalPath;
                 }
                 // Make a list of all of the neighbors of this node
-                Set<Node> neighbors = new HashSet<>();
-                for (String neighborNode : currentNode.getNode().getNeighbors()) {
-                    try {
-                        neighbors.add(nodeFactory.read(neighborNode));
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
-                    }
-                }
+                Set<Node> neighbors = currentNode.getNode().getNeighborNodes();
                 for (Node neighbor : neighbors) {
                     if (!visited.contains(neighbor)) {
                         double distanceToEnd =
@@ -62,7 +56,7 @@ public class SingleFloorAStar implements PathfindAlgorithm {
         }
         // If it exits the while loop without returning a path
         System.out.println("No Route Found");
-        return new ArrayList<Node>();
+        return new Path();
     }
 
 
