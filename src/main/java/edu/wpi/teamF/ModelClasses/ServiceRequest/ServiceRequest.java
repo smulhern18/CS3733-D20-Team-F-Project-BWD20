@@ -7,10 +7,9 @@ import lombok.Data;
 @Data
 public abstract class ServiceRequest {
 
-    private String id;
-    private Node Location;
-    private String description;
-    private Date dateTimeSubmitted;
-    private int priority;
-
+  private String id;
+  private Node Location;
+  private String description;
+  private Date dateTimeSubmitted;
+  private int priority;
 }

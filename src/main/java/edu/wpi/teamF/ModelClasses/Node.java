@@ -1,9 +1,8 @@
 package edu.wpi.teamF.ModelClasses;
 
-import lombok.Data;
-
 import java.util.HashSet;
 import java.util.Set;
+import lombok.Data;
 
 @Data
 public class Node {
@@ -26,15 +25,15 @@ public class Node {
     // Constructor
     private String typeString;
     // Constructor
-      NodeType (String string) {
-        this.typeString = string;
-      }
+    NodeType(String string) {
+      this.typeString = string;
+    }
 
-      public String getTypeString() {
-        return this.typeString;
-      }
+    public String getTypeString() {
+      return this.typeString;
+    }
 
-      // Get enum type from string
+    // Get enum type from string
     public static NodeType getEnum(String typeString) {
       NodeType value = null;
       for (final NodeType n : values()) {
