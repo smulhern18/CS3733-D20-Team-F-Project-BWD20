@@ -2,13 +2,29 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MenuBarController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MenuBarController">
    <children>
-      <JFXButton buttonType="RAISED" onAction="#login" prefHeight="67.0" prefWidth="155.0" ripplerFill="#c91e1e" text="Login" />
-      <JFXButton buttonType="RAISED" onAction="#pathfinder" prefHeight="68.0" prefWidth="137.0" ripplerFill="#c91e1e" text="Pathfinder" />
-      <JFXButton buttonType="RAISED" onAction="#serviceRequest" prefHeight="67.0" prefWidth="155.0" ripplerFill="#c91e1e" text="Service Request" />
-      <JFXButton buttonType="RAISED" onAction="#admin" prefHeight="67.0" prefWidth="155.0" ripplerFill="#c91e1e" text="Admin" />
-      <JFXButton buttonType="RAISED" onAction="#help" prefHeight="67.0" prefWidth="155.0" ripplerFill="#c91e1e" text="Help" />
+      <JFXButton buttonType="RAISED" onAction="#login" prefHeight="100.0" prefWidth="250.0" ripplerFill="#c91e1e" text="Login">
+         <font>
+            <Font name="Bebas" size="24.0" />
+         </font></JFXButton>
+      <JFXButton buttonType="RAISED" onAction="#pathfinder" prefHeight="100.0" prefWidth="250.0" ripplerFill="#c91e1e" text="Pathfinder">
+         <font>
+            <Font name="Bebas" size="24.0" />
+         </font></JFXButton>
+      <JFXButton buttonType="RAISED" onAction="#serviceRequest" prefHeight="100.0" prefWidth="250.0" ripplerFill="#c91e1e" text="Service Request">
+         <font>
+            <Font name="Bebas" size="24.0" />
+         </font></JFXButton>
+      <JFXButton buttonType="RAISED" onAction="#admin" prefHeight="100.0" prefWidth="250.0" ripplerFill="#c91e1e" text="Admin">
+         <font>
+            <Font name="Bebas" size="24.0" />
+         </font></JFXButton>
+      <JFXButton buttonType="RAISED" onAction="#help" prefHeight="100.0" prefWidth="250.0" ripplerFill="#c91e1e" text="Help">
+         <font>
+            <Font name="Bebas" size="24.0" />
+         </font></JFXButton>
    </children>
 </HBox>
