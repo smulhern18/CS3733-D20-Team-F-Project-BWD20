@@ -51,7 +51,7 @@ public class Node {
   private String id;
   private NodeType type;
   private short floor;
-  private Set<Edge> edges= new HashSet<>();
+  private Set<Edge> edges = new HashSet<>();
 
   /**
    * Constructor for Nodes
@@ -98,17 +98,13 @@ public class Node {
       Set<Edge> edge)
       throws ValidationException {
     this(id, xCoord, yCoord, building, longName, shortName, nodeType, floor);
-   setEdges(edge);
+    setEdges(edge);
   }
 
-  /**
-   *
-   * @return all of the edges related to this node
-   */
-  public Set<Edge> getEdges(){
+  /** @return all of the edges related to this node */
+  public Set<Edge> getEdges() {
     return edges;
   }
-
 
   /**
    * Sets the edges array
@@ -116,7 +112,7 @@ public class Node {
    * @param edge the edge to add
    */
   public void setEdges(Set<Edge> edge) {
-   this.edges = edge;
+    this.edges = edge;
   }
 
   /**
