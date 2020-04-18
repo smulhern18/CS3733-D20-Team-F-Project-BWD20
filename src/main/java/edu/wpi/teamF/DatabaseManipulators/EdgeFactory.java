@@ -176,7 +176,7 @@ public class EdgeFactory {
                 new Edge(
                         resultSet.getString(DatabaseManager.EDGEID_KEY),
                         nodeFactory.read(resultSet.getString(DatabaseManager.NODE_1_KEY)),
-                        nodeFactory.read(resultSet.getString(DatabaseManager.NODE_A_KEY)));
+                        nodeFactory.read(resultSet.getString(DatabaseManager.NODE_A_KEY))));
       }
     } catch (Exception e) {
       System.out.println(
@@ -185,4 +185,3 @@ public class EdgeFactory {
     return edges;
   }
   }
-}
