@@ -1,141 +1,54 @@
 package edu.wpi.teamF.ModelClasses;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import edu.wpi.teamF.Factories.DatabaseManager;
-import edu.wpi.teamF.Factories.NodeFactory;
-import edu.wpi.teamF.Test.TestData;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
+import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
+import edu.wpi.teamF.TestData;
+import javax.management.InstanceNotFoundException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class NodeFactoryTest {
 
-  static DatabaseManager databaseManager = new DatabaseManager();
+  static TestData testData = null;
+  static Node[] validNodes = null;
   NodeFactory nodeFactory = NodeFactory.getFactory();
 
-  static TestData testData = null;
-
-  Node[] validNodes = null;
-
   @BeforeEach
-  public void cleanTests() {
-    try {
-      testData = new TestData();
-      validNodes = testData.getValidNodes();
-    } catch (Exception e) {
-      fail(e.getMessage());
-    }
-  }
-
-  @BeforeAll
-  public static void initializeDatabase() {
-    try {
-      databaseManager.initialize();
-      databaseManager.reset();
-      testData = new TestData();
-    } catch (SQLException e) {
-      // Ignore
-    } catch (ValidationException e) {
-      System.out.println(e.getMessage());
-    } catch (Exception e) {
-      fail(e.getMessage());
-    }
-  }
-
-  @Test
-  public void testCreateAndRead() {
-    try {
-      nodeFactory.create(null);
-    } catch (ValidationException e) {
-      // Ignore, Expected
-    } catch (Exception e) {
-      fail(e.getMessage());
-    }
-
-    for (Node node : validNodes) {
-      try {
-
-        nodeFactory.create(node);
-
-        Node readNode = nodeFactory.read(node.getName());
-
-        Assertions.assertTrue(node.equals(readNode));
-
-        nodeFactory.delete(node);
-
-      } catch (Exception e) {
-        fail(e.getMessage());
-      }
-    }
+  public static void initialize() throws ValidationException {
+    testData = new TestData();
+    validNodes = testData.validNodes;
   }
 
   @Test
   public void testCreateReadUpdateDelete() {
     try {
       nodeFactory.create(null);
+      fail("Creating a null value is unacceptable");
     } catch (ValidationException e) {
-      // Ignore, Expected
-    } catch (Exception e) {
-      fail(e.getMessage());
+      // ignore as expected
     }
-
-    for (Node node : validNodes) {
-      try {
-
-        nodeFactory.create(node);
-
-        Node readNode = nodeFactory.read(node.getName());
-
-        Assertions.assertTrue(node.equals(readNode));
-
-        node.setLongName("The Clinic");
-
-        nodeFactory.update(node);
-
-        readNode = nodeFactory.read(node.getName());
-
-        Assertions.assertTrue(node.equals(readNode));
-
-        nodeFactory.delete(node);
-
-      } catch (Exception e) {
-        fail(e.getCause() + e.getMessage());
-      }
-    }
-  }
-
-  @Test
-  public void testGetNodesByType() {
-    List<Node> validElevatorNodes = new ArrayList<>();
     try {
       for (Node node : validNodes) {
         nodeFactory.create(node);
-        if (node.getType() == Node.NodeType.ELEV) {
-          validElevatorNodes.add(node);
+
+        Node readNode = nodeFactory.read(node.getId());
+
+        assertTrue(readNode.equals(node));
+
+        nodeFactory.delete(node.getId());
+
+        try {
+          readNode = nodeFactory.read(node.getId());
+        } catch (InstanceNotFoundException e) {
+          // ignore
+        } catch (Exception e) {
+          fail(e.getMessage() + ", " + e.getClass());
         }
       }
-
-      List<Node> elevatorNodes = nodeFactory.getNodesByType(Node.NodeType.ELEV);
-
-      assertTrue(elevatorNodes.size() == 3);
-      assertTrue(elevatorNodes.containsAll(validElevatorNodes));
-
-      for (Node node : validElevatorNodes) {
-        nodeFactory.delete(node);
-      }
-
-      elevatorNodes = nodeFactory.getNodesByType(Node.NodeType.ELEV);
-
-      assertNull(elevatorNodes);
-
-      databaseManager.reset();
     } catch (Exception e) {
-      fail(e.getMessage());
+      fail(e.getMessage() + ", " + e.getClass());
     }
   }
 }

@@ -1,6 +1,5 @@
 package edu.wpi.teamF;
 
-import edu.wpi.teamF.Factories.CSVManipulator;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -29,9 +28,6 @@ public class App extends Application {
   @Override
   public void start(Stage primaryStage) throws IOException {
     try {
-      CSVManipulator csvM = new CSVManipulator();
-      csvM.readCSVFileNode(getClass().getResourceAsStream("csv/MapFnodes.csv"));
-      csvM.readCSVFileEdge(getClass().getResourceAsStream("csv/MapFedges.csv"));
       Parent root = FXMLLoader.load(getClass().getResource("views/MainMenu.fxml"));
       Scene scene = new Scene(root);
       primaryStage.setScene(scene);

@@ -4,17 +4,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Arrays;
 import java.util.List;
+
+import edu.wpi.teamF.Controllers.PathfinderController;
+import edu.wpi.teamF.ModelClasses.Scorer.EuclideanScorer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 public class AStarTest {
 
-  static PathfindController pathfinder;
+  static PathfinderController pathfinder;
 
   @BeforeAll
   public static void setup() throws Exception {
-    pathfinder = new PathfindController();
+    pathfinder = new PathfinderController();
     AStarTestData.initializeNodeNeighbors();
   }
 
