@@ -74,7 +74,7 @@ public class AppointmentFactory {
                 resultSet.next();
                 appointment = new Appointment(
                         resultSet.getString(DatabaseManager.APPOINTMENT_ID_KEY),
-                        resultSet.getShort(DatabaseManager.LOCATION_KEY),
+                        resultSet.getString(DatabaseManager.LOCATION_KEY),
                         resultSet.getString(DatabaseManager.ROOM_KEY),
                         resultSet.getString(DatabaseManager.USERID_KEY),
                         resultSet.getString(DatabaseManager.PCP_KEY)

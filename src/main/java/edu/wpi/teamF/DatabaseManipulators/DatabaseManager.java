@@ -134,19 +134,19 @@ public class DatabaseManager {
             + "))";
 
     String appointmentTableCreationStatement =
-            "CREATE TABLE"
+            "CREATE TABLE "
                     + APPOINTMENTS_TABLE_NAME
                     + " ( "
                     + APPOINTMENT_ID_KEY
-                    + "VARCHAR(32) NOT NULL, "
+                    + " VARCHAR(32) NOT NULL, "
                     + LOCATION_KEY
-                    + "VARCHAR(32) NOT NULL, "
+                    + " VARCHAR(32) NOT NULL, "
                     + ROOM_KEY
-                    + "VARCHAR(32) NOT NULL, "
+                    + " VARCHAR(32) NOT NULL, "
                     + USERID_KEY
-                    + "VARCHAR(32) NOT NULL, "
+                    + " VARCHAR(32) NOT NULL, "
                     + PCP_KEY
-                    + "VARCHAR(32) NOT NULL, "
+                    + " VARCHAR(32) NOT NULL, "
                     + "PRIMARY KEY ("
                     + APPOINTMENT_ID_KEY
                     + "))";
