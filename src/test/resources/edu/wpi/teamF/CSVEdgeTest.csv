@@ -1,5 +1,5 @@
 edgeID,startNode,endNode
-NodeA_NodeE,NodeA,NodeE
-NodeA_NodeF,NodeA,NodeF
-NodeA_NodeG,NodeA,NodeG
-NodeA_NodeH,NodeA,NodeH
+nodeA_nodeH,NodeA,nodeH
+nodeB_nodeG,NodeB,NodeG
+nodeC_nodeF,NodeC,NodeF
+nodeD_nodeE,NodeD,NodeE

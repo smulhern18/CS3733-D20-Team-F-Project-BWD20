@@ -35,56 +35,81 @@ public abstract class Account {
     }
   }
 
-  private String firstName;
+  private String FirstName;
   private String lastName;
-  private String address;
-  private String username;
+  private String Address;
+  private String Username;
   private String password;
+  private String email;
   private Type type;
 
-  public String getFirstName() {
-    return firstName;
+public Account(
+      String FirstName,
+      String lastName,
+      String Address,
+      String Username,
+      String password,
+      String email,
+      Type type) throws ValidationException{
+    setFirstName(FirstName);
+    setLastName(lastName);
+    setAddress(Address);
+    setUsername(Username);
+    setPassword(password);
+    setEmail(email);
+    setType(type);
   }
 
+  public String getFirstName() {
+    return FirstName;
+  }
   public void setFirstName(String firstName) throws ValidationException {
     Validators.nameValidation(firstName);
-    this.firstName = firstName;
+    this.FirstName = firstName;
   }
 
   public String getLastName() {
     return lastName;
   }
-
   public void setLastName(String lastName) throws ValidationException {
     Validators.nameValidation(lastName);
+
     this.lastName = lastName;
   }
-
   public String getAddress() {
-    return address;
-  }
 
+    return Address;
+  }
   public void setAddress(String address) throws ValidationException {
     Validators.addressValidation(address);
-    this.address = address;
+    this.Address = address;
   }
 
   public String getUsername() {
-    return username;
+    return Username;
   }
 
   public void setUsername(String username) throws ValidationException {
     Validators.nameValidation(username);
-    this.username = username;
+    this.Username = username;
   }
 
   public String getPassword() {
     return password;
   }
 
-  public void setPassword(String password) throws Exception {
+  public String getEmail() {
+    return email;
+  }
+
+
+  public void setPassword(String password) throws ValidationException {
     Validators.passwordValidation(password);
-    this.password = PasswordHasher.createHash(password);
+    try {
+      this.password = PasswordHasher.createHash(password);
+    }catch (Exception e){
+      System.out.println(e);
+    }
   }
 
   public Type getType() {
@@ -100,11 +125,12 @@ public abstract class Account {
     if (this == o) return true;
     if (!(o instanceof Account)) return false;
     Account account = (Account) o;
-    return Objects.equals(firstName, account.firstName) &&
+    return Objects.equals(FirstName, account.FirstName) &&
             Objects.equals(lastName, account.lastName) &&
-            Objects.equals(address, account.address) &&
-            Objects.equals(username, account.username) &&
+            Objects.equals(Address, account.Address) &&
+            Objects.equals(Username, account.Username) &&
             Objects.equals(password, account.password) &&
             type == account.type;
   }
+
 }
