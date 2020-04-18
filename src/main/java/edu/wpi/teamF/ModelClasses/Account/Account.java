@@ -24,7 +24,7 @@ public abstract class Account {
 
     // Get enum type from string
     public static AccountType getEnum(String typeString) {
-     AccountType value = null;
+      AccountType value = null;
       for (final AccountType n : values()) {
         if (n.getTypeString().equals(typeString)) {
           value = n;
@@ -42,9 +42,14 @@ public abstract class Account {
   private String email;
   private AccountType type;
 
-
-  public Account(String FirstName, String lastName, String Address, String Username,
-      String password, String email, AccountType type) {
+  public Account(
+      String FirstName,
+      String lastName,
+      String Address,
+      String Username,
+      String password,
+      String email,
+      AccountType type) {
     setFirstName(FirstName);
     setLastName(lastName);
     setAddress(Address);
@@ -53,7 +58,6 @@ public abstract class Account {
     setEmail(email);
     setType(type);
   }
-
 
   public String getFirstName() {
     return FirstName;
@@ -102,7 +106,6 @@ public abstract class Account {
   public void setEmail(String email) {
     this.email = email;
   }
-
 
   public AccountType getType() {
     return type;

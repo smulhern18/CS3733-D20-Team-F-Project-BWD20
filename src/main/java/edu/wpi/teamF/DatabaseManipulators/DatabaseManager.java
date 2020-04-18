@@ -45,7 +45,7 @@ public class DatabaseManager {
   static final String EMAIL_KEY = "email";
   static final String USER_TYPE_KEY = "userType";
 
-  //Appointments
+  // Appointments
   static final String APPOINTMENT_ID_KEY = "appointmentId";
   static final String LOCATION_KEY = "location";
   static final String ROOM_KEY = "room";
@@ -132,7 +132,7 @@ public class DatabaseManager {
             + "PRIMARY KEY ("
             + USER_NAME_KEY
             + "))";
-        /*
+    /*
     String appointmentTableCreationStatement =
             "CREATE TABLE"
                     + APPOINTMENTS_TABLE_NAME
