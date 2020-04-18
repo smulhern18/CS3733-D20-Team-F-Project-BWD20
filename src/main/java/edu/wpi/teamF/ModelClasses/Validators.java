@@ -1,5 +1,7 @@
 package edu.wpi.teamF.ModelClasses;
 
+import edu.wpi.teamF.ModelClasses.Account.Account;
+
 public class Validators {
 
   public static final int COORDINATE_MIN_VALUE = 0;
@@ -26,6 +28,18 @@ public class Validators {
   public static final int PCP_MAX_LENGTH = 32;
   public static final int PASSWORD_MIN_LENGTH = 8;
   public static final int PASSWORD_MAX_LENGTH = 32;
+  public static final int ADDRESS_MIN_LENGTH = 1;
+  public static final int ADDRESS_MAX_LENGTH = 64;
+
+  public static <T extends Account> void accountValidation(T t, int... constraints) throws ValidationException{
+    nullCheckValidation(t, constraints);
+    Account accountObject = (Account) t;
+
+    addressValidation(accountObject.getAddress());
+    nameValidation(accountObject.getFirstName());
+    nameValidation(accountObject.getLastName());
+    userIDValidation(accountObject.getUsername());
+  }
 
   public static void addressValidation(String address, int... constraints) throws ValidationException{
     nullCheckValidation(address, constraints);

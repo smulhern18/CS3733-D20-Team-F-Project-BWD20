@@ -49,14 +49,12 @@ public class AppointmentFactory {
         if (numRows < 1) {
           throw new SQLException("Created more than one rows");
         }
-
       } catch (SQLException e) {
         System.out.println(e.getMessage());
       }
     } catch(SQLException e){
         System.out.println(e.getMessage());
       }
-
   }
 
 
@@ -109,8 +107,8 @@ public class AppointmentFactory {
             + DatabaseManager.USERID_KEY
             + " = ?, "
             + DatabaseManager.PCP_KEY
-            + " = ?, "
-            + "WHERE "
+            + " = ? "
+            + "WHERE  "
             + DatabaseManager.APPOINTMENT_ID_KEY
             + " = ?";
     try (PreparedStatement preparedStatement =

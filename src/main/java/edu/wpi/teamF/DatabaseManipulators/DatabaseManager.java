@@ -9,10 +9,9 @@ public class DatabaseManager {
 
   /** Table names */
   static final String NODES_TABLE_NAME = "nodesTable";
-
   static final String EDGES_TABLE_NAME = "edgesTable";
   static final String SERVICEREQUEST_TABLE_NAME = "serviceRequestsTable";
-  static final String USER_TABLE_NAME = "usersTable";
+  static final String ACCOUNT_TABLE_NAME = "accountsTable";
   static final String APPOINTMENTS_TABLE_NAME = "appointmentsTable";
   /** Column Names */
   // node
@@ -111,22 +110,20 @@ public class DatabaseManager {
             + SERVICEID_KEY
             + "))";
 
-    String userTableCreationStatement =
+    String accountTableCreationStatement =
         "CREATE TABLE "
-            + USER_TABLE_NAME
+            + ACCOUNT_TABLE_NAME
             + " ( "
             + USER_NAME_KEY
             + " VARCHAR(32) NOT NULL, "
             + PASSWORD_KEY
-            + " INTEGER NOT NULL, "
+            + " VARCHAR(128) NOT NULL, "
             + FIRST_NAME_KEY
-            + " INTEGER NOT NULL, "
+            + " VARCHAR(32) NOT NULL, "
             + LAST_NAME_KEY
-            + " VARCHAR(64) NOT NULL, "
+            + " VARCHAR(32) NOT NULL, "
             + ADDRESS_KEY
-            + " VARCHAR(16) NOT NULL, "
-            + EMAIL_KEY
-            + " VARCHAR(4) NOT NULL, "
+            + " VARCHAR(64) NOT NULL, "
             + USER_TYPE_KEY
             + " SMALLINT NOT NULL, "
             + "PRIMARY KEY ("
@@ -157,7 +154,7 @@ public class DatabaseManager {
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(serviceTableCreationStatement);
     preparedStatement.execute();
-    preparedStatement = connection.prepareStatement(userTableCreationStatement);
+    preparedStatement = connection.prepareStatement(accountTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(appointmentTableCreationStatement);
     preparedStatement.execute();
@@ -189,7 +186,7 @@ public class DatabaseManager {
     String nodeDropStatement = "DROP TABLE " + NODES_TABLE_NAME;
     String edgeDropStatement = "DROP TABLE " + EDGES_TABLE_NAME;
     String serviceDropStatement = "DROP TABLE " + SERVICEREQUEST_TABLE_NAME;
-    String userDropStatement = "DROP TABLE " + USER_TABLE_NAME;
+    String accountDropStatement = "DROP TABLE " + ACCOUNT_TABLE_NAME;
     String appointmentDropStatement = "DROP TABLE " + APPOINTMENTS_TABLE_NAME;
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeDropStatement);
@@ -198,7 +195,7 @@ public class DatabaseManager {
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(serviceDropStatement);
     preparedStatement.execute();
-    preparedStatement = connection.prepareStatement(userDropStatement);
+    preparedStatement = connection.prepareStatement(accountDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(appointmentDropStatement);
     preparedStatement.execute();
