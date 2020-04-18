@@ -24,6 +24,20 @@ public class Validators {
   public static final int USERID_MAX_LENGTH = 32;
   public static final int PCP_MIN_LENGTH = 1;
   public static final int PCP_MAX_LENGTH = 32;
+  public static final int PASSWORD_MIN_LENGTH = 8;
+  public static final int PASSWORD_MAX_LENGTH = 32;
+
+  public static void addressValidation(String address, int... constraints) throws ValidationException{
+    nullCheckValidation(address, constraints);
+
+  }
+
+  public static void passwordValidation(String password, int... constraints) throws ValidationException{
+    nullCheckValidation(password, constraints);
+    if (password.length() < 8 || password.length() > 32){
+      throw new ValidationException("Invalid password length");
+    }
+  }
 
   /**
    * Validation for Node
