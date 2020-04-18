@@ -1,9 +1,9 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+        import java.sql.Connection;
+        import java.sql.DriverManager;
+        import java.sql.PreparedStatement;
+        import java.sql.SQLException;
 
 public class DatabaseManager {
 
@@ -48,82 +48,82 @@ public class DatabaseManager {
 
   public void createTables() throws SQLException {
     String nodeTableCreationStatement =
-        "CREATE TABLE "
-            + NODES_TABLE_NAME
-            + " ( "
-            + NODEID_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + X_COORDINATE_KEY
-            + " SMALLINT NOT NULL, "
-            + Y_COORDINATE_KEY
-            + " SMALLINT NOT NULL, "
-            + BUILDING_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + LONG_NAME_KEY
-            + " VARCHAR(64) NOT NULL, "
-            + SHORT_NAME_KEY
-            + " VARCHAR(16) NOT NULL, "
-            + TYPE_KEY
-            + " VARCHAR(4) NOT NULL, "
-            + FLOOR_KEY
-            + " SMALLINT NOT NULL, "
-            + "PRIMARY KEY ("
-            + NODEID_KEY
-            + "))";
+            "CREATE TABLE "
+                    + NODES_TABLE_NAME
+                    + " ( "
+                    + NODEID_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + X_COORDINATE_KEY
+                    + " SMALLINT NOT NULL, "
+                    + Y_COORDINATE_KEY
+                    + " SMALLINT NOT NULL, "
+                    + BUILDING_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + LONG_NAME_KEY
+                    + " VARCHAR(64) NOT NULL, "
+                    + SHORT_NAME_KEY
+                    + " VARCHAR(16) NOT NULL, "
+                    + TYPE_KEY
+                    + " VARCHAR(4) NOT NULL, "
+                    + FLOOR_KEY
+                    + " SMALLINT NOT NULL, "
+                    + "PRIMARY KEY ("
+                    + NODEID_KEY
+                    + "))";
 
     String edgeTableCreationStatement =
-        "CREATE TABLE "
-            + EDGES_TABLE_NAME
-            + " ( "
-            + EDGEID_KEY
-            + " VARCHAR(65) NOT NULL, "
-            + NODE_1_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + NODE_A_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + "PRIMARY KEY ("
-            + EDGEID_KEY
-            + "))";
+            "CREATE TABLE "
+                    + EDGES_TABLE_NAME
+                    + " ( "
+                    + EDGEID_KEY
+                    + " VARCHAR(65) NOT NULL, "
+                    + NODE_1_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + NODE_A_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + "PRIMARY KEY ("
+                    + EDGEID_KEY
+                    + "))";
 
     String serviceTableCreationStatement =
-        "CREATE TABLE "
-            + SERVICEREQUEST_TABLE_NAME
-            + " ( "
-            + SERVICEID_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + NODEID_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + TIME_CREATED_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + DESCRIPTION_KEY
-            + " VARCHAR(128) NOT NULL, "
-            + PRIORITY_KEY
-            + " INTEGER NOT NULL, "
-            + "PRIMARY KEY ("
-            + SERVICEID_KEY
-            + "))";
+            "CREATE TABLE "
+                    + SERVICEREQUEST_TABLE_NAME
+                    + " ( "
+                    + SERVICEID_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + NODEID_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + TIME_CREATED_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + DESCRIPTION_KEY
+                    + " VARCHAR(128) NOT NULL, "
+                    + PRIORITY_KEY
+                    + " INTEGER NOT NULL, "
+                    + "PRIMARY KEY ("
+                    + SERVICEID_KEY
+                    + "))";
 
     String userTableCreationStatement =
-        "CREATE TABLE "
-            + USER_TABLE_NAME
-            + " ( "
-            + USER_NAME_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + PASSWORD_KEY
-            + " INTEGER NOT NULL, "
-            + FIRST_NAME_KEY
-            + " INTEGER NOT NULL, "
-            + LAST_NAME_KEY
-            + " VARCHAR(64) NOT NULL, "
-            + ADDRESS_KEY
-            + " VARCHAR(16) NOT NULL, "
-            + EMAIL_KEY
-            + " VARCHAR(4) NOT NULL, "
-            + USER_TYPE_KEY
-            + " SMALLINT NOT NULL, "
-            + "PRIMARY KEY ("
-            + USER_NAME_KEY
-            + "))";
+            "CREATE TABLE "
+                    + USER_TABLE_NAME
+                    + " ( "
+                    + USER_NAME_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + PASSWORD_KEY
+                    + " INTEGER NOT NULL, "
+                    + FIRST_NAME_KEY
+                    + " INTEGER NOT NULL, "
+                    + LAST_NAME_KEY
+                    + " VARCHAR(64) NOT NULL, "
+                    + ADDRESS_KEY
+                    + " VARCHAR(16) NOT NULL, "
+                    + EMAIL_KEY
+                    + " VARCHAR(4) NOT NULL, "
+                    + USER_TYPE_KEY
+                    + " SMALLINT NOT NULL, "
+                    + "PRIMARY KEY ("
+                    + USER_NAME_KEY
+                    + "))";
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
     preparedStatement.execute();
@@ -173,4 +173,9 @@ public class DatabaseManager {
     preparedStatement.execute();
     createTables();
   }
+
+  public static Connection getConnection() {
+    return connection;
+  }
+
 }
