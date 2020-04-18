@@ -132,13 +132,24 @@ public class DatabaseManager {
             + "PRIMARY KEY ("
             + USER_NAME_KEY
             + "))";
-        /*
+
     String appointmentTableCreationStatement =
             "CREATE TABLE"
                     + APPOINTMENTS_TABLE_NAME
                     + " ( "
                     + APPOINTMENT_ID_KEY
-                    +*/
+                    + "VARCHAR(32) NOT NULL, "
+                    + LOCATION_KEY
+                    + "VARCHAR(32) NOT NULL, "
+                    + ROOM_KEY
+                    + "VARCHAR(32) NOT NULL, "
+                    + USERID_KEY
+                    + "VARCHAR(32) NOT NULL, "
+                    + PCP_KEY
+                    + "VARCHAR(32) NOT NULL, "
+                    + "PRIMARY KEY ("
+                    + APPOINTMENT_ID_KEY
+                    + "))";
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
     preparedStatement.execute();
@@ -147,6 +158,8 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(serviceTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(userTableCreationStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(appointmentTableCreationStatement);
     preparedStatement.execute();
     System.out.println("Created Tables Successfully");
   }
@@ -177,6 +190,7 @@ public class DatabaseManager {
     String edgeDropStatement = "DROP TABLE " + EDGES_TABLE_NAME;
     String serviceDropStatement = "DROP TABLE " + SERVICEREQUEST_TABLE_NAME;
     String userDropStatement = "DROP TABLE " + USER_TABLE_NAME;
+    String appointmentDropStatement = "DROP TABLE " + APPOINTMENTS_TABLE_NAME;
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeDropStatement);
     preparedStatement.execute();
@@ -185,6 +199,8 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(serviceDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(userDropStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(appointmentDropStatement);
     preparedStatement.execute();
     createTables();
   }

@@ -18,6 +18,12 @@ public class Validators {
   public static final int ID_MAX_LENGTH = 32;
   public static final int EDGE_ID_MIN_LENGTH = 3;
   public static final int EDGE_ID_MAX_LENGTH = 65;
+  public static final int ROOM_MIN_LENGTH = 1;
+  public static final int ROOM_MAX_LENGTH = 32;
+  public static final int USERID_MIN_LENGTH = 1;
+  public static final int USERID_MAX_LENGTH = 32;
+  public static final int PCP_MIN_LENGTH = 1;
+  public static final int PCP_MAX_LENGTH = 32;
 
   /**
    * Validation for Node
@@ -175,6 +181,68 @@ public class Validators {
       throw new ValidationException("string is out of bounds");
     }
   }
+
+  /**
+   * Validation for Appointment
+   *
+   * @param t an instance of appointment
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static <T extends Appointment> void appointmentValidation(T t, int... constraints)
+          throws ValidationException {
+    nullCheckValidation(t, constraints);
+    Appointment appointmentObject = (Appointment) t;
+    idValidation(appointmentObject.getId());
+    nodeValidation(appointmentObject.getLocation());
+    roomValidation(appointmentObject.getRoom());
+    userIDValidation(appointmentObject.getUserID());
+    PCPValidation(appointmentObject.getPCP());
+  }
+
+
+  /**
+   * Validation for rooms
+   *
+   * @param room the room to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static void roomValidation(String room, int... constraints) throws ValidationException{
+    nullCheckValidation(room, constraints);
+    if (room.length() < ROOM_MIN_LENGTH || room.length() > ROOM_MAX_LENGTH) {
+      throw new ValidationException("Room is outside of accepted values");
+    }
+  }
+
+  /**
+   * Validation for userIDs
+   *
+   * @param userID the userID to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static void userIDValidation(String userID, int... constraints) throws ValidationException{
+    nullCheckValidation(userID, constraints);
+    if (userID.length() < USERID_MIN_LENGTH || userID.length() > USERID_MAX_LENGTH) {
+      throw new ValidationException("UserID is invalid");
+    }
+  }
+
+  /**
+   *  Validation for PCPs
+   *
+   * @param PCP the PCP to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static void PCPValidation(String PCP, int... constraints) throws ValidationException{
+    nullCheckValidation(PCP, constraints);
+    if (PCP.length() < PCP_MIN_LENGTH || PCP.length() > PCP_MAX_LENGTH) {
+      throw new ValidationException("PCP is outside the accepted values");
+    }
+  }
+
 
   /**
    * Validation check for null values

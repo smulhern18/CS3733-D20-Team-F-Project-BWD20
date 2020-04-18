@@ -8,7 +8,7 @@ public class Appointment {
     private String userID;
     private String PCP;
 
-    public Appointment(String id, Node location, String room, String userID, String PCP){
+    public Appointment(String id, Node location, String room, String userID, String PCP) throws ValidationException{
         setId(id);
         setLocation(location);
         setRoom(room);
@@ -17,76 +17,87 @@ public class Appointment {
     }
 
     /**
-     *
-     * @return
+     *  Get the id of the appointment
+     * @return the id
      */
     public String getId(){
         return id;
     }
 
     /**
-     *
-     * @param id
+     * Set the id of the appointment
+     * @param id the id to set
+     * @throws ValidationException should the validators fail
      */
-    public void setId(String id){
+    public void setId(String id) throws ValidationException{
+        Validators.idValidation(id);
         this.id = id;
     }
 
     /**
-     *
-     * @return
+     * Get the location of the appointment
+     * @return the location
      */
     public Node getLocation(){
         return location;
     }
 
     /**
-     *
-     * @param location
+     * Set the location of the appointment
+     * @param location the location to set
+     * @throws ValidationException should the validators fail
      */
-    public void setLocation(Node location){
+    public void setLocation(Node location) throws ValidationException{
+        Validators.nodeValidation(location);
         this.location = location;
     }
     /**
-     *
-     * @return
+     * Get the room of the appointment
+     * @return the room
      */
     public String getRoom(){
         return room;
     }
     /**
-     *
-     * @param room
+     * Set the room of the appointment
+     * @param room the room to set
+     * @throws ValidationException should the validators fail
      */
-    public void setRoom(String room){
+    public void setRoom(String room) throws ValidationException{
+        Validators.roomValidation(room);
         this.room = room;
     }
     /**
-     *
-     * @return
+     * Get the userID of the appointment
+     * @return the userID
      */
     public String getUserID(){
         return userID;
     }
+
     /**
-     *
-     * @param userID
+     * Set the userID of the appointment
+     * @param userID the userID to set
+     * @throws ValidationException should the validators fail
      */
-    public void setUserId(String userID){
+    public void setUserId(String userID) throws ValidationException{
+        Validators.userIDValidation(userID);
         this.userID = userID;
     }
     /**
-     *
-     * @return
+     * Get the PCP of the appointment
+     * @return the PCP
      */
     public String getPCP(){
         return PCP;
     }
     /**
-     *
-     * @param PCP
+     * Set the PCP of the appointment
+     * @param PCP the PCP to set
+     * @throws ValidationException should the validators fail
      */
-    public void setPCP(String PCP){
+    public void setPCP(String PCP) throws ValidationException{
+        Validators.PCPValidation(PCP);
         this.PCP = PCP;
     }
 
