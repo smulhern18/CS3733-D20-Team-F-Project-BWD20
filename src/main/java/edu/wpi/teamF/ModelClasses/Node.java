@@ -1,15 +1,31 @@
 package edu.wpi.teamF.ModelClasses;
 
-import lombok.Data;
+import java.util.HashSet;
+import java.util.Set;
 
-@Data
 public class Node {
 
-    public enum Type {
+  public enum NodeType {
+    // Values
+    HALL("HALL"),
+    ELEV("ELEV"),
+    REST("REST"),
+    STAI("STAI"),
+    DEPT("DEPT"),
+    LABS("LABS"),
+    INFO("INFO"),
+    CONF("CONF"),
+    EXIT("EXIT"),
+    RETL("RETL"),
+    SERV("SERV"),
+    STAF("STAF");
 
+    private String typeString;
+    // Constructor
+    NodeType(String type) {
+      this.typeString = type;
     }
 
-<<<<<<< HEAD
     // Get the string value from enum type
     public final String getTypeString() {
       return typeString;
@@ -51,15 +67,15 @@ public class Node {
    * @throws ValidationException should anything go wrong
    */
   public Node(
-      String id,
-      short xCoord,
-      short yCoord,
-      String building,
-      String longName,
-      String shortName,
-      NodeType nodeType,
-      short floor)
-      throws ValidationException {
+          String id,
+          short xCoord,
+          short yCoord,
+          String building,
+          String longName,
+          String shortName,
+          NodeType nodeType,
+          short floor)
+          throws ValidationException {
     setXCoord(xCoord);
     setYCoord(yCoord);
     setBuilding(building);
@@ -71,16 +87,16 @@ public class Node {
   }
 
   public Node(
-      String id,
-      short xCoord,
-      short yCoord,
-      String building,
-      String longName,
-      String shortName,
-      NodeType nodeType,
-      short floor,
-      Set<Edge> edge)
-      throws ValidationException {
+          String id,
+          short xCoord,
+          short yCoord,
+          String building,
+          String longName,
+          String shortName,
+          NodeType nodeType,
+          short floor,
+          Set<Edge> edge)
+          throws ValidationException {
     this(id, xCoord, yCoord, building, longName, shortName, nodeType, floor);
     setEdges(edge);
   }
@@ -120,15 +136,15 @@ public class Node {
       Node otherNode = (Node) other;
 
       isEqual =
-          this.id.equals(otherNode.getId())
-              && this.getXCoord() == otherNode.getXCoord()
-              && this.getYCoord() == otherNode.getYCoord()
-              && this.getFloor() == otherNode.getFloor()
-              && this.getType() == otherNode.getType()
-              && this.edges.equals((otherNode).edges)
-              && this.getBuilding().equals(otherNode.getBuilding())
-              && this.getLongName().equals(otherNode.getLongName())
-              && this.getShortName().equals(otherNode.getShortName());
+              this.id.equals(otherNode.getId())
+                      && this.getXCoord() == otherNode.getXCoord()
+                      && this.getYCoord() == otherNode.getYCoord()
+                      && this.getFloor() == otherNode.getFloor()
+                      && this.getType() == otherNode.getType()
+                      && this.edges.equals((otherNode).edges)
+                      && this.getBuilding().equals(otherNode.getBuilding())
+                      && this.getLongName().equals(otherNode.getLongName())
+                      && this.getShortName().equals(otherNode.getShortName());
     }
     return isEqual;
   }
@@ -270,21 +286,24 @@ public class Node {
   public void setType(NodeType type) {
     this.type = type;
   }
-=======
-    private String id;
-    private short xCoord;
-    private short yCoord;
-    private String building;
-    private String longName;
-    private String shortName;
-    private Type type;
-    private short floor;
 
+  /**
+   * returns the floor of the node
+   *
+   * @return the floor the node is on
+   */
+  public short getFloor() {
+    return floor;
+  }
 
-    public boolean equals(Object object) {
-        return false;
-    }
->>>>>>> origin/develop
-
-
+  /**
+   * sets the floor the node is on
+   *
+   * @param floor the floor to set
+   * @throws ValidationException should the validation fail
+   */
+  public void setFloor(short floor) throws ValidationException {
+    Validators.floorValidation(floor);
+    this.floor = floor;
+  }
 }
