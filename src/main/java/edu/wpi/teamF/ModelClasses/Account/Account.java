@@ -2,13 +2,9 @@ package edu.wpi.teamF.ModelClasses.Account;
 
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
-<<<<<<< HEAD
 import lombok.Data;
-=======
->>>>>>> 1f3758e2f780dea7fdfb51813cdc000fa09db9f5
 import java.util.Objects;
-import javax.swing.*;
-import lombok.Data;
+
 
 @Data
 public abstract class Account {
@@ -46,26 +42,8 @@ public abstract class Account {
   private String email;
   private Type type;
 
-<<<<<<< Updated upstream
-<<<<<<< HEAD
   public Account(String firstName, String lastName, String address, String username, String password, Type type) throws Exception {
     setFirstName(firstName);
-=======
-  public Account(
-      String FirstName,
-      String lastName,
-      String Address,
-      String Username,
-      String password,
-      String email,
-      Type type)
-      throws ValidationException {
-    setFirstName(FirstName);
->>>>>>> 1f3758e2f780dea7fdfb51813cdc000fa09db9f5
-=======
-  public Account(String firstName, String lastName, String address, String username, String password, Type type) throws Exception {
-    setFirstName(firstName);
->>>>>>> Stashed changes
     setLastName(lastName);
     setAddress(address);
     setUsername(username);
@@ -141,20 +119,11 @@ public abstract class Account {
     if (this == o) return true;
     if (!(o instanceof Account)) return false;
     Account account = (Account) o;
-<<<<<<< HEAD
     return Objects.equals(firstName, account.firstName) &&
             Objects.equals(lastName, account.lastName) &&
             Objects.equals(Address, account.Address) &&
             Objects.equals(Username, account.Username) &&
             Objects.equals(password, account.password) &&
             type == account.type;
-=======
-    return Objects.equals(FirstName, account.FirstName)
-        && Objects.equals(lastName, account.lastName)
-        && Objects.equals(Address, account.Address)
-        && Objects.equals(Username, account.Username)
-        && Objects.equals(password, account.password)
-        && type == account.type;
->>>>>>> 1f3758e2f780dea7fdfb51813cdc000fa09db9f5
   }
 }
