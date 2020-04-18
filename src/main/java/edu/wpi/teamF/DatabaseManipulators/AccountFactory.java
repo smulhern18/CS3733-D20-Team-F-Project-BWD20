@@ -1,7 +1,5 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
-import edu.wpi.teamF.ModelClasses.Account.Account;
-
 public class AccountFactory {
 
   private static final AccountFactory factory = new AccountFactory();
