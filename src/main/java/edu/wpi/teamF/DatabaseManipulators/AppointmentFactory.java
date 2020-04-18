@@ -1,4 +1,4 @@
-package edu.wpi.teamF.Factories;
+package edu.wpi.teamF.DatabaseManipulators;
 
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Appointment;

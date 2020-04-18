@@ -1,8 +1,12 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 public class DatabaseManager {
 
-<<<<<<< HEAD:src/main/java/edu/wpi/teamF/DatabaseManipulators/DatabaseManager.java
   /** Table names */
   static final String NODES_TABLE_NAME = "nodesTable";
 
@@ -133,7 +137,7 @@ public class DatabaseManager {
   }
 
   public void initialize() {
-    String dbURL = "jdbc:derby:teamF;create=true";
+    String dbURL = "jdbc:derby:database;create=true";
     try {
       DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
     } catch (SQLException e) {
@@ -169,7 +173,8 @@ public class DatabaseManager {
     preparedStatement.execute();
     createTables();
   }
-=======
->>>>>>> origin/develop:src/main/java/edu/wpi/teamF/Factories/DatabaseManager.java
 
+  public static Connection getConnection() {
+    return connection;
+  }
 }

@@ -2,20 +2,39 @@ package edu.wpi.teamF.ModelClasses;
 
 import lombok.Data;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Data
 public class Node {
 
-    public enum Type {
+  public enum NodeType {
+    // Values
+    HALL("HALL"),
+    ELEV("ELEV"),
+    REST("REST"),
+    STAI("STAI"),
+    DEPT("DEPT"),
+    LABS("LABS"),
+    INFO("INFO"),
+    CONF("CONF"),
+    EXIT("EXIT"),
+    RETL("RETL"),
+    SERV("SERV"),
+    STAF("STAF");
 
-    }
+    // Constructor
+    private String typeString;
+    // Constructor
+      NodeType (String string) {
+        this.typeString = string;
+      }
 
-<<<<<<< HEAD
-    // Get the string value from enum type
-    public final String getTypeString() {
-      return typeString;
-    }
+      public String getTypeString() {
+        return this.typeString;
+      }
 
-    // Get enum type from string
+      // Get enum type from string
     public static NodeType getEnum(String typeString) {
       NodeType value = null;
       for (final NodeType n : values()) {
@@ -270,21 +289,4 @@ public class Node {
   public void setType(NodeType type) {
     this.type = type;
   }
-=======
-    private String id;
-    private short xCoord;
-    private short yCoord;
-    private String building;
-    private String longName;
-    private String shortName;
-    private Type type;
-    private short floor;
-
-
-    public boolean equals(Object object) {
-        return false;
-    }
->>>>>>> origin/develop
-
-
 }
