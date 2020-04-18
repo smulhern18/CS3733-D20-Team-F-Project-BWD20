@@ -7,6 +7,7 @@ import edu.wpi.teamF.ModelClasses.Account.User;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
 
+import javax.xml.crypto.Data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -146,10 +147,45 @@ public class AccountFactory {
   }
 
   public void delete(String username) {
-    
+    String deleteStatement =
+            "DELETE FROM "
+              + DatabaseManager.ACCOUNT_TABLE_NAME
+              + " WHERE "
+              + DatabaseManager.USER_NAME_KEY
+              + " = ?";
+
+      try (PreparedStatement preparedStatement = DatabaseManager.getConnection().prepareStatement(deleteStatement)){
+          preparedStatement.setString(1, username);
+
+          int numRows = preparedStatement.executeUpdate();
+          if (numRows != 1) {
+            throw new SQLException("Rut Roh Raggy, we deleted " + numRows + " Rows!");
+          }
+      } catch (SQLException e) {
+        System.out.println(e.getMessage() + ", " + e.getClass());
+      }
   }
 
-  public Account getPasswordByUsername(String username) {
-    return null;
+  public String getPasswordByUsername(String username) {
+      String hashword = null;
+      String selectStatement =
+              "SELECT "
+                + DatabaseManager.PASSWORD_KEY
+                + " FROM "
+                + DatabaseManager.ACCOUNT_TABLE_NAME
+                + " WHERE "
+                + DatabaseManager.USER_NAME_KEY
+                + " = ?";
+
+      try (PreparedStatement preparedStatement = DatabaseManager.getConnection().prepareStatement(selectStatement)) {
+        preparedStatement.setString(1, username);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.next();
+        hashword = resultSet.getString(DatabaseManager.USER_NAME_KEY);
+      } catch (SQLException e) {
+        System.out.println(e.getMessage() + ", " + e.getClass());
+      }
+      return hashword;
   }
 }
