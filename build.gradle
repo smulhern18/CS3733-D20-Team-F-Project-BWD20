@@ -18,7 +18,7 @@ repositories {
 
 dependencies {
     implementation(
-            'com.jfoenix:jfoenix:8.0.9',
+            'com.jfoenix:jfoenix:9.0.9',
 
             // You may comment out the database dependency you do not use
             'org.xerial:sqlite-jdbc:3.30.1',
