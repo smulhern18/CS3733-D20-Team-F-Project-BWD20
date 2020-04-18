@@ -14,5 +14,4 @@ public class RouteNode implements Comparable<RouteNode> {
   public int compareTo(RouteNode o) {
     return 0;
   }
-
 }

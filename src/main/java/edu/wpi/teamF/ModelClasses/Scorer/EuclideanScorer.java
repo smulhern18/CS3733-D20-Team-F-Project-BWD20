@@ -7,5 +7,4 @@ public class EuclideanScorer implements Scorer {
   public double computeCost(Node start, Node end) {
     return 0;
   }
-
 }

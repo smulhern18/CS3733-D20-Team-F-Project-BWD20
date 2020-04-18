@@ -3,40 +3,61 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import edu.wpi.teamF.DatabaseManipulators.AccountFactory;
+import edu.wpi.teamF.ModelClasses.Account.Account;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
+import javafx.scene.control.Label;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 
 public class LoginController {
 
-    @FXML
-    private JFXButton loginButton;
+  @FXML private JFXButton loginButton;
 
-    @FXML
-    private JFXTextField usernameInput;
+  @FXML private JFXTextField usernameInput;
 
-    @FXML
-    private JFXPasswordField passwordInput;
+  @FXML private JFXPasswordField passwordInput;
 
-    @FXML
-    private JFXButton RegisterButton;
+  @FXML private JFXButton RegisterButton;
 
-    private AccountFactory accountFactory = AccountFactory.getFactory();
+  @FXML private Label incorrectLabel;
 
-    @FXML
-    void AttemptLogin(ActionEvent event) {
-        String username = usernameInput.getText();
-        String password = passwordInput.getText();
+  private AccountFactory accountFactory = AccountFactory.getFactory();
 
+  @FXML
+  void enableLogin(KeyEvent event) {
+    String username = usernameInput.getText();
+    String password = passwordInput.getText();
+    if (!username.isEmpty() && !password.isEmpty()) {
+      loginButton.setDisable(false);
+    } else {
+      loginButton.setDisable(true);
     }
+  }
 
-    @FXML
-    void switchToMainMenu(ActionEvent event) {
-
+  @FXML
+  void AttemptLogin(ActionEvent event) {
+    String username = usernameInput.getText();
+    String password = passwordInput.getText();
+    Account account = accountFactory.getAccountByUsername(username);
+    if (account != null && account.getPassword().equals(password)) {
+      System.out.println("The account is valid");
+    } else {
+      incorrectLabel.setVisible(true);
+      usernameInput.setUnFocusColor(Color.RED);
+      passwordInput.setUnFocusColor(Color.RED);
+      passwordInput.setText("");
     }
+  }
 
-    @FXML
-    void switchToRegister(ActionEvent event) {
+  @FXML
+  void switchToMainMenu(ActionEvent event) {
 
-    }
+  }
+
+  @FXML
+  void switchToRegister(ActionEvent event) {
+
+  }
 }

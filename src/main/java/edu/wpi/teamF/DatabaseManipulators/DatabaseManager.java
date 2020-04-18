@@ -174,4 +174,7 @@ public class DatabaseManager {
     createTables();
   }
 
+  public static Connection getConnection() {
+    return connection;
+  }
 }

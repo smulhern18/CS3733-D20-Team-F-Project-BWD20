@@ -8,5 +8,4 @@ public class SingleFloorAStar implements PathfindAlgorithm {
   public Path pathfind(Node start, Node end) {
     return null;
   }
-
 }

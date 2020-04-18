@@ -37,5 +37,4 @@ public class Edge {
     Validators.nodeValidation(node2);
     this.Node2 = node2;
   }
-
 }
