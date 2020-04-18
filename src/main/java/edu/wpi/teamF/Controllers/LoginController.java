@@ -19,7 +19,7 @@ public class LoginController {
 
   @FXML private JFXPasswordField passwordInput;
 
-  @FXML private JFXButton RegisterButton;
+  @FXML private JFXButton registerButton;
 
   @FXML private Label incorrectLabel;
 
@@ -37,7 +37,7 @@ public class LoginController {
   }
 
   @FXML
-  void AttemptLogin(ActionEvent event) {
+  void attemptLogin(ActionEvent event) throws InterruptedException {
     String username = usernameInput.getText();
     String password = passwordInput.getText();
     Account account = accountFactory.getAccountByUsername(username);
@@ -52,12 +52,8 @@ public class LoginController {
   }
 
   @FXML
-  void switchToMainMenu(ActionEvent event) {
-
-  }
+  void switchToMainMenu(ActionEvent event) {}
 
   @FXML
-  void switchToRegister(ActionEvent event) {
-
-  }
+  void switchToRegister(ActionEvent event) {}
 }

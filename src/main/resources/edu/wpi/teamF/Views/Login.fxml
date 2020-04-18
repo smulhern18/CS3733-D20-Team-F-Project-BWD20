@@ -42,7 +42,7 @@
                         <Insets bottom="30.0" />
                      </VBox.margin>
                   </JFXPasswordField>
-                  <JFXButton fx:id="loginButton" disable="true" onAction="#AttemptLogin" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #B53389;" text="Login" textFill="WHITE">
+                  <JFXButton fx:id="loginButton" disable="true" onAction="#attemptLogin" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #B53389;" text="Login" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -55,7 +55,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Label>
-                  <JFXButton fx:id="RegisterButton" onAction="#switchToRegister" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #4d4d4d;" text="Register" textFill="WHITE">
+                  <JFXButton fx:id="registerButton" onAction="#switchToRegister" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #4d4d4d;" text="Register" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
