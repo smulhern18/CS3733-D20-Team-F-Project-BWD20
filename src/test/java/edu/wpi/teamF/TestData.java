@@ -1,5 +1,6 @@
 package edu.wpi.teamF;
 
+import edu.wpi.teamF.ModelClasses.Appointment;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ValidationException;
@@ -137,6 +138,17 @@ public class TestData {
     new Edge(validEdgeIDs[1], validNodes[1], validNodes[6]),
     new Edge(validEdgeIDs[2], validNodes[2], validNodes[5]),
     new Edge(validEdgeIDs[3], validNodes[3], validNodes[4])
+  };
+
+  public String[] validRooms = {"White Room", "Red room", "OR", "OP"};
+
+  public String[] validUserIDs = {"12345632", "12300220", "20120323", "dsjfe1232"};
+  public String[] validPCPs = {"John", "Jack", "Jill", "Jimmy"};
+  public Appointment[] validAppointments = {
+    new Appointment(validNodeIDs[0], validNodes[0], validRooms[0], validUserIDs[0], validPCPs[0]),
+    new Appointment(validNodeIDs[1], validNodes[1], validRooms[1], validUserIDs[1], validPCPs[1]),
+    new Appointment(validNodeIDs[2], validNodes[2], validRooms[2], validUserIDs[2], validPCPs[2]),
+    new Appointment(validNodeIDs[3], validNodes[3], validRooms[3], validUserIDs[3], validPCPs[3]),
   };
 
   public TestData() throws ValidationException {}

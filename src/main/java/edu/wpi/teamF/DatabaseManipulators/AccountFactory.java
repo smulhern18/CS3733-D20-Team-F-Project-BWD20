@@ -4,23 +4,21 @@ public class AccountFactory {
 
   private static final AccountFactory factory = new AccountFactory();
 
-   public static AccountFactory getFactory() {
-     return factory;
-   }
+  public static AccountFactory getFactory() {
+    return factory;
+  }
 
-   public void create(Account account) {}
+  public void create(Account account) {}
 
   public Account read(String address) {
-     return null;
-   }
+    return null;
+  }
 
-   public void update(Account account) {}
+  public void update(Account account) {}
 
-   public void delete(String address) {}
+  public void delete(String address) {}
 
-   public Account getAccountByUsername(String username) {
-     return null;
-   }
-
-
+  public Account getAccountByUsername(String username) {
+    return null;
+  }
 }

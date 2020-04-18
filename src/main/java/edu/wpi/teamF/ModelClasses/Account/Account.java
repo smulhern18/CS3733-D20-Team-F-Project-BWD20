@@ -2,10 +2,9 @@ package edu.wpi.teamF.ModelClasses.Account;
 
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
-import lombok.Data;
-
-import javax.swing.*;
 import java.util.Objects;
+import javax.swing.*;
+import lombok.Data;
 
 @Data
 public abstract class Account {
@@ -43,14 +42,15 @@ public abstract class Account {
   private String email;
   private Type type;
 
-public Account(
+  public Account(
       String FirstName,
       String lastName,
       String Address,
       String Username,
       String password,
       String email,
-      Type type) throws ValidationException{
+      Type type)
+      throws ValidationException {
     setFirstName(FirstName);
     setLastName(lastName);
     setAddress(Address);
@@ -63,6 +63,7 @@ public Account(
   public String getFirstName() {
     return FirstName;
   }
+
   public void setFirstName(String firstName) throws ValidationException {
     Validators.nameValidation(firstName);
     this.FirstName = firstName;
@@ -71,15 +72,18 @@ public Account(
   public String getLastName() {
     return lastName;
   }
+
   public void setLastName(String lastName) throws ValidationException {
     Validators.nameValidation(lastName);
 
     this.lastName = lastName;
   }
+
   public String getAddress() {
 
     return Address;
   }
+
   public void setAddress(String address) throws ValidationException {
     Validators.addressValidation(address);
     this.Address = address;
@@ -102,12 +106,11 @@ public Account(
     return email;
   }
 
-
   public void setPassword(String password) throws ValidationException {
     Validators.passwordValidation(password);
     try {
       this.password = PasswordHasher.createHash(password);
-    }catch (Exception e){
+    } catch (Exception e) {
       System.out.println(e);
     }
   }
@@ -125,12 +128,11 @@ public Account(
     if (this == o) return true;
     if (!(o instanceof Account)) return false;
     Account account = (Account) o;
-    return Objects.equals(FirstName, account.FirstName) &&
-            Objects.equals(lastName, account.lastName) &&
-            Objects.equals(Address, account.Address) &&
-            Objects.equals(Username, account.Username) &&
-            Objects.equals(password, account.password) &&
-            type == account.type;
+    return Objects.equals(FirstName, account.FirstName)
+        && Objects.equals(lastName, account.lastName)
+        && Objects.equals(Address, account.Address)
+        && Objects.equals(Username, account.Username)
+        && Objects.equals(password, account.password)
+        && type == account.type;
   }
-
 }

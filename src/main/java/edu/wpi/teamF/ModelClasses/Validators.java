@@ -27,14 +27,15 @@ public class Validators {
   public static final int PASSWORD_MIN_LENGTH = 8;
   public static final int PASSWORD_MAX_LENGTH = 32;
 
-  public static void addressValidation(String address, int... constraints) throws ValidationException{
+  public static void addressValidation(String address, int... constraints)
+      throws ValidationException {
     nullCheckValidation(address, constraints);
-
   }
 
-  public static void passwordValidation(String password, int... constraints) throws ValidationException{
+  public static void passwordValidation(String password, int... constraints)
+      throws ValidationException {
     nullCheckValidation(password, constraints);
-    if (password.length() < 8 || password.length() > 32){
+    if (password.length() < 8 || password.length() > 32) {
       throw new ValidationException("Invalid password length");
     }
   }
@@ -204,7 +205,7 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static <T extends Appointment> void appointmentValidation(T t, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(t, constraints);
     Appointment appointmentObject = (Appointment) t;
     idValidation(appointmentObject.getId());
@@ -214,7 +215,6 @@ public class Validators {
     PCPValidation(appointmentObject.getPCP());
   }
 
-
   /**
    * Validation for rooms
    *
@@ -222,7 +222,7 @@ public class Validators {
    * @param constraints the optional constraints for validation
    * @throws ValidationException should the validation fail
    */
-  public static void roomValidation(String room, int... constraints) throws ValidationException{
+  public static void roomValidation(String room, int... constraints) throws ValidationException {
     nullCheckValidation(room, constraints);
     if (room.length() < ROOM_MIN_LENGTH || room.length() > ROOM_MAX_LENGTH) {
       throw new ValidationException("Room is outside of accepted values");
@@ -236,7 +236,8 @@ public class Validators {
    * @param constraints the optional constraints for validation
    * @throws ValidationException should the validation fail
    */
-  public static void userIDValidation(String userID, int... constraints) throws ValidationException{
+  public static void userIDValidation(String userID, int... constraints)
+      throws ValidationException {
     nullCheckValidation(userID, constraints);
     if (userID.length() < USERID_MIN_LENGTH || userID.length() > USERID_MAX_LENGTH) {
       throw new ValidationException("UserID is invalid");
@@ -244,19 +245,18 @@ public class Validators {
   }
 
   /**
-   *  Validation for PCPs
+   * Validation for PCPs
    *
    * @param PCP the PCP to validate
    * @param constraints the optional constraints for validation
    * @throws ValidationException should the validation fail
    */
-  public static void PCPValidation(String PCP, int... constraints) throws ValidationException{
+  public static void PCPValidation(String PCP, int... constraints) throws ValidationException {
     nullCheckValidation(PCP, constraints);
     if (PCP.length() < PCP_MIN_LENGTH || PCP.length() > PCP_MAX_LENGTH) {
       throw new ValidationException("PCP is outside the accepted values");
     }
   }
-
 
   /**
    * Validation check for null values
