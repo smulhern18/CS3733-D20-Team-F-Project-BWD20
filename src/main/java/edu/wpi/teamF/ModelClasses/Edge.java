@@ -1,17 +1,16 @@
 package edu.wpi.teamF.ModelClasses;
 
+<<<<<<< HEAD
 public class Edge {
- private String Id;
- private Node Node1;
- private Node Node2;
+  private String Id;
+  private Node Node1;
+  private Node Node2;
 
-
- public Edge(String id, Node node1,Node node2) throws ValidationException{
-   setId(id);
-  setNode1(node1);
-   setNode2(node2);
+  public Edge(String id, Node node1, Node node2) throws ValidationException {
+    setId(id);
+    setNode1(node1);
+    setNode2(node2);
   }
-
 
   public String getId() {
     return Id;
@@ -26,8 +25,8 @@ public class Edge {
     return Node1;
   }
 
-  public void setNode1(Node node1) throws ValidationException{
-   Validators.nodeValidation(node1);
+  public void setNode1(Node node1) throws ValidationException {
+    Validators.nodeValidation(node1);
     this.Node1 = node1;
   }
 
@@ -35,8 +34,19 @@ public class Edge {
     return Node2;
   }
 
-  public void setNode2(Node node2)throws ValidationException {
-   Validators.nodeValidation(node2);
+  public void setNode2(Node node2) throws ValidationException {
+    Validators.nodeValidation(node2);
     this.Node2 = node2;
   }
+=======
+import lombok.Data;
+
+@Data
+public class Edge {
+
+    private String id;
+    private Node Node1;
+    private Node Node2;
+
+>>>>>>> origin/develop
 }

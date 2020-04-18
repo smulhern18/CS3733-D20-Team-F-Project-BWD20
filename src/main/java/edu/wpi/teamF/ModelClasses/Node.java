@@ -51,7 +51,7 @@ public class Node {
   private String id;
   private NodeType type;
   private short floor;
-  private Set<Edge> edges= new HashSet<>();
+  private Set<Edge> edges = new HashSet<>();
 
   /**
    * Constructor for Nodes
@@ -67,15 +67,15 @@ public class Node {
    * @throws ValidationException should anything go wrong
    */
   public Node(
-      String id,
-      short xCoord,
-      short yCoord,
-      String building,
-      String longName,
-      String shortName,
-      NodeType nodeType,
-      short floor)
-      throws ValidationException {
+          String id,
+          short xCoord,
+          short yCoord,
+          String building,
+          String longName,
+          String shortName,
+          NodeType nodeType,
+          short floor)
+          throws ValidationException {
     setXCoord(xCoord);
     setYCoord(yCoord);
     setBuilding(building);
@@ -87,28 +87,24 @@ public class Node {
   }
 
   public Node(
-      String id,
-      short xCoord,
-      short yCoord,
-      String building,
-      String longName,
-      String shortName,
-      NodeType nodeType,
-      short floor,
-      Set<Edge> edge)
-      throws ValidationException {
+          String id,
+          short xCoord,
+          short yCoord,
+          String building,
+          String longName,
+          String shortName,
+          NodeType nodeType,
+          short floor,
+          Set<Edge> edge)
+          throws ValidationException {
     this(id, xCoord, yCoord, building, longName, shortName, nodeType, floor);
-   setEdges(edge);
+    setEdges(edge);
   }
 
-  /**
-   *
-   * @return all of the edges related to this node
-   */
-  public Set<Edge> getEdges(){
+  /** @return all of the edges related to this node */
+  public Set<Edge> getEdges() {
     return edges;
   }
-
 
   /**
    * Sets the edges array
@@ -116,7 +112,7 @@ public class Node {
    * @param edge the edge to add
    */
   public void setEdges(Set<Edge> edge) {
-   this.edges = edge;
+    this.edges = edge;
   }
 
   /**
@@ -140,15 +136,15 @@ public class Node {
       Node otherNode = (Node) other;
 
       isEqual =
-          this.id.equals(otherNode.getId())
-              && this.getXCoord() == otherNode.getXCoord()
-              && this.getYCoord() == otherNode.getYCoord()
-              && this.getFloor() == otherNode.getFloor()
-              && this.getType() == otherNode.getType()
-              && this.edges.equals((otherNode).edges)
-              && this.getBuilding().equals(otherNode.getBuilding())
-              && this.getLongName().equals(otherNode.getLongName())
-              && this.getShortName().equals(otherNode.getShortName());
+              this.id.equals(otherNode.getId())
+                      && this.getXCoord() == otherNode.getXCoord()
+                      && this.getYCoord() == otherNode.getYCoord()
+                      && this.getFloor() == otherNode.getFloor()
+                      && this.getType() == otherNode.getType()
+                      && this.edges.equals((otherNode).edges)
+                      && this.getBuilding().equals(otherNode.getBuilding())
+                      && this.getLongName().equals(otherNode.getLongName())
+                      && this.getShortName().equals(otherNode.getShortName());
     }
     return isEqual;
   }
