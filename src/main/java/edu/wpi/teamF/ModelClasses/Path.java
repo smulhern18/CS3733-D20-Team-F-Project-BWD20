@@ -1,6 +1,8 @@
 package edu.wpi.teamF.ModelClasses;
 
 import java.util.List;
+
+import edu.wpi.teamF.ModelClasses.Scorer.EuclideanScorer;
 import lombok.Data;
 
 @Data
@@ -26,8 +28,13 @@ public class Path {
     path.add(node);
   }
 
-  public int getPathLength(){
-    return path.size();
+  public double getPathLength(){ //find the total length travelled
+    double totalLength = 0;
+    EuclideanScorer totalLengthScorer = new EuclideanScorer();
+    for(int i = 0; i < path.size() - 1; i++){
+      totalLength = totalLength + totalLengthScorer.computeCost(path.get(i), path.get(i + 1));
+    }
+    return totalLength;
   }
 
   public Node getFirstNode() {
