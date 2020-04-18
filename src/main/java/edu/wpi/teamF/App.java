@@ -14,7 +14,7 @@ public class App extends Application {
 
   private static Stage PS;
 
-  protected static Stage getPS() {
+  public static Stage getPS() {
     return PS;
   }
 
