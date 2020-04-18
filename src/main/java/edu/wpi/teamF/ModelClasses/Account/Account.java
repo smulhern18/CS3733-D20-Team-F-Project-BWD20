@@ -46,6 +46,7 @@ public abstract class Account {
   private String email;
   private Type type;
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
   public Account(String firstName, String lastName, String address, String username, String password, Type type) throws Exception {
     setFirstName(firstName);
@@ -61,6 +62,10 @@ public abstract class Account {
       throws ValidationException {
     setFirstName(FirstName);
 >>>>>>> 1f3758e2f780dea7fdfb51813cdc000fa09db9f5
+=======
+  public Account(String firstName, String lastName, String address, String username, String password, Type type) throws Exception {
+    setFirstName(firstName);
+>>>>>>> Stashed changes
     setLastName(lastName);
     setAddress(address);
     setUsername(username);

@@ -19,7 +19,11 @@ public class AppointmentFactory {
 
 
   public void create(Appointment appointment) throws ValidationException{
-
+      try {
+          Validators.appointmentValidation(appointment);
+      } catch (ValidationException e){
+          System.out.println(e.getMessage() + ", " + e.getClass());
+      }
     String insertStatement =
         "INSERT INTO "
             + DatabaseManager.APPOINTMENTS_TABLE_NAME
@@ -48,7 +52,7 @@ public class AppointmentFactory {
       try {
         int numRows = prepareStatement.executeUpdate();
         if (numRows < 1) {
-          throw new SQLException("Created more than one rows");
+          throw new SQLException("Created more than one row");
         }
       } catch (SQLException e) {
         System.out.println(e.getMessage());
