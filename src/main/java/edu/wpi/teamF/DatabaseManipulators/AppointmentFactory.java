@@ -19,6 +19,7 @@ public class AppointmentFactory {
 
 
   public void create(Appointment appointment) throws ValidationException{
+
     String insertStatement =
         "INSERT INTO "
             + DatabaseManager.APPOINTMENTS_TABLE_NAME
@@ -39,7 +40,7 @@ public class AppointmentFactory {
         DatabaseManager.getConnection().prepareStatement(insertStatement)) {
       int param = 1;
       prepareStatement.setString(param++, appointment.getId());
-       prepareStatement.setString(param++, appointment.getLocation().getId());
+      prepareStatement.setString(param++, appointment.getLocation().getId());
       prepareStatement.setString(param++, appointment.getRoom());
       prepareStatement.setString(param++, appointment.getUserID());
       prepareStatement.setString(param++, appointment.getPCP());
@@ -56,7 +57,6 @@ public class AppointmentFactory {
         System.out.println(e.getMessage());
       }
   }
-
 
   public Appointment read(String id) {
     Appointment appointment = null;

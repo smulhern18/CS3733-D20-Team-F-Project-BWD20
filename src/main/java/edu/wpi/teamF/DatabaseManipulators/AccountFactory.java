@@ -14,9 +14,9 @@ public class AccountFactory {
 
   private static final AccountFactory factory = new AccountFactory();
 
-   public static AccountFactory getFactory() {
-     return factory;
-   }
+  public static AccountFactory getFactory() {
+    return factory;
+  }
 
   public void create(Account account) {
     try {
@@ -77,24 +77,21 @@ public class AccountFactory {
                       resultSet.getString(DatabaseManager.LAST_NAME_KEY),
                       resultSet.getString(DatabaseManager.ADDRESS_KEY),
                       resultSet.getString(DatabaseManager.USER_NAME_KEY),
-                      resultSet.getString(DatabaseManager.PASSWORD_KEY),
-                      type);
+                      resultSet.getString(DatabaseManager.PASSWORD_KEY));
             case(1):
               account = new Staff(
                       resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
                       resultSet.getString(DatabaseManager.LAST_NAME_KEY),
                       resultSet.getString(DatabaseManager.ADDRESS_KEY),
                       resultSet.getString(DatabaseManager.USER_NAME_KEY),
-                      resultSet.getString(DatabaseManager.PASSWORD_KEY),
-                      type);
+                      resultSet.getString(DatabaseManager.PASSWORD_KEY));
             case(2):
               account = new User(
                       resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
                       resultSet.getString(DatabaseManager.LAST_NAME_KEY),
                       resultSet.getString(DatabaseManager.ADDRESS_KEY),
                       resultSet.getString(DatabaseManager.USER_NAME_KEY),
-                      resultSet.getString(DatabaseManager.PASSWORD_KEY),
-                      type);
+                      resultSet.getString(DatabaseManager.PASSWORD_KEY));
             default:
               throw new ValidationException("Illegal Type of Account: " + type.getTypeOrdinal());
           }

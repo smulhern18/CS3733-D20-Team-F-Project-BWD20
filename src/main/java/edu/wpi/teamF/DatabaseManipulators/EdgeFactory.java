@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import java.util.List;
 
 public class EdgeFactory {
@@ -20,6 +21,7 @@ public class EdgeFactory {
   public static EdgeFactory getFactory() {
     return factory;
   }
+
 
   /**
    * Creates edge entries in database
@@ -96,6 +98,7 @@ public class EdgeFactory {
     }
     return edge;
   }
+
 
   /**
    * Updates edge entries in the database
