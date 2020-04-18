@@ -23,12 +23,13 @@ public class App extends Application {
   }
 
   @Override
-  public void init() {}
+  public void init() {
+  }
 
   @Override
   public void start(Stage primaryStage) throws IOException {
     try {
-      Parent root = FXMLLoader.load(getClass().getResource("views/MainMenu.fxml"));
+      Parent root = FXMLLoader.load(getClass().getResource("views/MenuBar.fxml"));
       Scene scene = new Scene(root);
       primaryStage.setScene(scene);
       PS = primaryStage;
