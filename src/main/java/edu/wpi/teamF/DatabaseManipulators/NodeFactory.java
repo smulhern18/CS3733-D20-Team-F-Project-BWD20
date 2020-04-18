@@ -121,30 +121,30 @@ public class NodeFactory {
    * @param node the node to update
    */
   public void update(Node node) {
-    String updateStatement =
-        "UPDATE "
-            + DatabaseManager.NODES_TABLE_NAME
-            + " SET "
-            + DatabaseManager.NODEID_KEY
-            + " = ?, "
-            + DatabaseManager.X_COORDINATE_KEY
-            + " = ?, "
-            + DatabaseManager.Y_COORDINATE_KEY
-            + " = ?, "
-            + DatabaseManager.BUILDING_KEY
-            + " = ?, "
-            + DatabaseManager.LONG_NAME_KEY
-            + " = ?, "
-            + DatabaseManager.SHORT_NAME_KEY
-            + " = ?, "
-            + DatabaseManager.TYPE_KEY
-            + " = ?, "
-            + DatabaseManager.FLOOR_KEY
-            + " = ? "
-            + "WHERE "
-            + DatabaseManager.NODEID_KEY
-            + " = ?";
-    try (PreparedStatement preparedStatement =
+      String updateStatement =
+              "UPDATE "
+                      + DatabaseManager.NODES_TABLE_NAME
+                      + " SET "
+                      + DatabaseManager.NODEID_KEY
+                      + " = ?, "
+                      + DatabaseManager.X_COORDINATE_KEY
+                      + " = ?, "
+                      + DatabaseManager.Y_COORDINATE_KEY
+                      + " = ?, "
+                      + DatabaseManager.BUILDING_KEY
+                      + " = ?, "
+                      + DatabaseManager.LONG_NAME_KEY
+                      + " = ?, "
+                      + DatabaseManager.SHORT_NAME_KEY
+                      + " = ?, "
+                      + DatabaseManager.TYPE_KEY
+                      + " = ?, "
+                      + DatabaseManager.FLOOR_KEY
+                      + " = ? "
+                      + "WHERE "
+                      + DatabaseManager.NODEID_KEY
+                      + " = ?";
+      try (PreparedStatement preparedStatement =
         DatabaseManager.getConnection().prepareStatement(updateStatement)) {
       int param = 1;
       preparedStatement.setString(param++, node.getId());
