@@ -1,6 +1,10 @@
 package edu.wpi.teamF;
 
 
+import edu.wpi.teamF.ModelClasses.Edge;
+import edu.wpi.teamF.ModelClasses.Node;
+import edu.wpi.teamF.ModelClasses.ValidationException;
+
 public class TestData {
 
     public String[] validEdgeIDs = {
@@ -34,18 +38,17 @@ public class TestData {
             "this string is waaaaaaaaay toooooooo loooooooong to be valid"
     };
 
-    public Integer[] validCoordinates = {
+    public Short[] validCoordinates = {
             10,
             20,
             100,
             2
     };
 
-    public Integer[] invalidCoordinates = {
+    public Short[] invalidCoordinates = {
             0,
             -100,
-            null,
-            100000000
+            null
     };
 
     public String[] validBuildings = {
@@ -87,35 +90,22 @@ public class TestData {
             "this string is waaaaaaaaay toooooooo loooooooong to be valid"
     };
 
-    public Integer[] validFloors = {
+    public Short[] validFloors = {
             1,
             5,
             10,
             3
     };
 
-    public Integer[] invalidFloors = {
+    public Short[] invalidFloors = {
             null,
             -3,
-            1000000
+            0
     };
 
-    public Node.Type[] validNodeTypes = {
-            ELEV,
-            STAI,
-            HALL,
-            DEPT,
-            REST,
-            LABS,
-            INFO,
-            CONF,
-            EXIT,
-            RETL,
-            SERV,
-            STAF
-    };
+    public Node.NodeType[] validNodeTypes = Node.NodeType.values();
 
-    public Node.Type[] invalidNodeTypes = {
+    public Node.NodeType[] invalidNodeTypes = {
             null
     };
 
@@ -127,8 +117,8 @@ public class TestData {
                     validBuildings[0],
                     validLongNames[0],
                     validShortNames[0],
-                    validFloors[0],
-                    validNodeTypes[0]
+                    validNodeTypes[0],
+                    validFloors[0]
             ),
             new Node(
                     validNodeIDs[1],
@@ -137,8 +127,8 @@ public class TestData {
                     validBuildings[1],
                     validLongNames[1],
                     validShortNames[1],
-                    validFloors[1],
-                    validNodeTypes[1]
+                    validNodeTypes[1],
+                    validFloors[1]
             ),
             new Node(
                     validNodeIDs[2],
@@ -147,8 +137,8 @@ public class TestData {
                     validBuildings[2],
                     validLongNames[2],
                     validShortNames[2],
-                    validFloors[2],
-                    validNodeTypes[2]
+                    validNodeTypes[2],
+                    validFloors[2]
             ),
             new Node(
                     validNodeIDs[3],
@@ -157,8 +147,8 @@ public class TestData {
                     validBuildings[3],
                     validLongNames[3],
                     validShortNames[3],
-                    validFloors[3],
-                    validNodeTypes[3]
+                    validNodeTypes[3],
+                    validFloors[3]
             ),
             new Node(
                     validNodeIDs[4],
@@ -167,8 +157,8 @@ public class TestData {
                     validBuildings[0],
                     validLongNames[0],
                     validShortNames[0],
-                    validFloors[0],
-                    validNodeTypes[4]
+                    validNodeTypes[4],
+                    validFloors[0]
             ),
             new Node(
                     validNodeIDs[5],
@@ -177,8 +167,8 @@ public class TestData {
                     validBuildings[1],
                     validLongNames[1],
                     validShortNames[1],
-                    validFloors[1],
-                    validNodeTypes[5]
+                    validNodeTypes[5],
+                    validFloors[1]
             ),
             new Node(
                     validNodeIDs[6],
@@ -187,8 +177,8 @@ public class TestData {
                     validBuildings[2],
                     validLongNames[2],
                     validShortNames[2],
-                    validFloors[2],
-                    validNodeTypes[6]
+                    validNodeTypes[6],
+                    validFloors[2]
             ),
             new Node(
                     validNodeIDs[7],
@@ -197,8 +187,8 @@ public class TestData {
                     validBuildings[3],
                     validLongNames[3],
                     validShortNames[3],
-                    validFloors[3],
-                    validNodeTypes[7]
+                    validNodeTypes[7],
+                    validFloors[3]
             )
     };
 
@@ -226,4 +216,6 @@ public class TestData {
     };
 
 
+    public TestData() throws ValidationException {
+    }
 }

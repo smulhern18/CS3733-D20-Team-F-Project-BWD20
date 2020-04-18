@@ -33,7 +33,7 @@ public class Validators {
 
         coordValidation(nodeObject.getXCoord());
         coordValidation(nodeObject.getYCoord());
-        nameValidation(nodeObject.getName());
+        nameValidation(nodeObject.getId());
         longNameValidation(nodeObject.getLongName());
         shortNameValidation(nodeObject.getShortName());
         buildingValidation(nodeObject.getBuilding());

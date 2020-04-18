@@ -1,6 +1,5 @@
 package edu.wpi.teamF.ModelClasses;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -49,10 +48,10 @@ public class Node {
   private String building;
   private String longName;
   private String shortName;
-  private String name;
+  private String id;
   private NodeType type;
   private short floor;
-  private Set<Edge> edges= new HashSet<Edge>();
+  private Set<Edge> edges= new HashSet<>();
 
   /**
    * Constructor for Nodes
@@ -62,13 +61,13 @@ public class Node {
    * @param building the building of the node
    * @param longName the long name of the node
    * @param shortName the short name of the node
-   * @param name the name of the node
+   * @param id the name of the node
    * @param nodeType the type of the node
    * @param floor the floor the node is on
    * @throws ValidationException should anything go wrong
    */
   public Node(
-      String name,
+      String id,
       short xCoord,
       short yCoord,
       String building,
@@ -82,13 +81,13 @@ public class Node {
     setBuilding(building);
     setLongName(longName);
     setShortName(shortName);
-    setName(name);
+    setId(id);
     setType(nodeType);
     setFloor(floor);
   }
 
   public Node(
-      String name,
+      String id,
       short xCoord,
       short yCoord,
       String building,
@@ -98,7 +97,7 @@ public class Node {
       short floor,
       Set<Edge> edge)
       throws ValidationException {
-    this(name, xCoord, yCoord, building, longName, shortName, nodeType, floor);
+    this(id, xCoord, yCoord, building, longName, shortName, nodeType, floor);
    setEdges(edge);
   }
 
@@ -141,12 +140,12 @@ public class Node {
       Node otherNode = (Node) other;
 
       isEqual =
-          this.name.equals(otherNode.getName())
+          this.id.equals(otherNode.getId())
               && this.getXCoord() == otherNode.getXCoord()
               && this.getYCoord() == otherNode.getYCoord()
               && this.getFloor() == otherNode.getFloor()
               && this.getType() == otherNode.getType()
-              && this.edges.equals(((Node) other).edges)
+              && this.edges.equals((otherNode).edges)
               && this.getBuilding().equals(otherNode.getBuilding())
               && this.getLongName().equals(otherNode.getLongName())
               && this.getShortName().equals(otherNode.getShortName());
@@ -255,23 +254,23 @@ public class Node {
   }
 
   /**
-   * Returns the name of the node
+   * Returns the id of the node
    *
-   * @return the name
+   * @return the id
    */
-  public String getName() {
-    return name;
+  public String getId() {
+    return id;
   }
 
   /**
    * sets the name of the node
    *
-   * @param name the name to set
+   * @param id the id to set
    * @throws ValidationException should the validation fail
    */
-  public void setName(String name) throws ValidationException {
-    Validators.nameValidation(name);
-    this.name = name;
+  public void setId(String id) throws ValidationException {
+    Validators.idValidation(id);
+    this.id = id;
   }
 
   /**
@@ -311,5 +310,4 @@ public class Node {
     Validators.floorValidation(floor);
     this.floor = floor;
   }
-
 }

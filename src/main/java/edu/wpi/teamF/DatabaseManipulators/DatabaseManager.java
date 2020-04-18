@@ -14,7 +14,6 @@ public class DatabaseManager {
   static final String USER_TABLE_NAME = "usersTable";
   /** Column Names */
   //node
-  static final String NODE_NAME_KEY = "nodeId";
   static final String X_COORDINATE_KEY = "xCoord";
   static final String Y_COORDINATE_KEY = "yCoord";
   static final String BUILDING_KEY = "building";
@@ -51,7 +50,7 @@ public class DatabaseManager {
             "CREATE TABLE "
                     + NODES_TABLE_NAME
                     + " ( "
-                    + NODE_NAME_KEY
+                    + NODEID_KEY
                     + " VARCHAR(32) NOT NULL, "
                     + X_COORDINATE_KEY
                     + " SMALLINT NOT NULL, "
@@ -68,7 +67,7 @@ public class DatabaseManager {
                     + FLOOR_KEY
                     + " SMALLINT NOT NULL, "
                     + "PRIMARY KEY ("
-                    + NODE_NAME_KEY
+                    + NODEID_KEY
                     + "))";
 
     String edgeTableCreationStatement =
