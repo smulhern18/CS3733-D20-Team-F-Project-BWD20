@@ -1,4 +1,4 @@
 package edu.wpi.teamF.Controllers;
 
-public class MenuBarController {
+public class RegisterController {
 }
