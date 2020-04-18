@@ -7,4 +7,6 @@ public interface PathfindAlgorithm {
 
     Path pathfind(Node start, Node end);
 
+    Path pathfind(Node start, Node.NodeType nodeType);
+
 }
