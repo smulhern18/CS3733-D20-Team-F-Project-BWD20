@@ -23,8 +23,7 @@ public class App extends Application {
   }
 
   @Override
-  public void init() {
-  }
+  public void init() {}
 
   @Override
   public void start(Stage primaryStage) throws IOException {
