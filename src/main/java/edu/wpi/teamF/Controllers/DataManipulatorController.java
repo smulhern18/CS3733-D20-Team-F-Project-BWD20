@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 
@@ -29,7 +30,7 @@ public class DataManipulatorController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     // ID column
     JFXTreeTableColumn<Node, String> ID = new JFXTreeTableColumn<>("ID");
-    ID.setPrefWidth(150);
+    ID.setPrefWidth(100);
     ID.setCellValueFactory(
         new Callback<TreeTableColumn.CellDataFeatures<Node, String>, ObservableValue<String>>() {
           @Override
@@ -41,7 +42,7 @@ public class DataManipulatorController implements Initializable {
 
     // XCoord Column
     JFXTreeTableColumn<Node, String> xCoord = new JFXTreeTableColumn<>("xCoord");
-    xCoord.setPrefWidth(150);
+    xCoord.setPrefWidth(100);
     xCoord.setCellValueFactory(
         new Callback<TreeTableColumn.CellDataFeatures<Node, String>, ObservableValue<String>>() {
           @Override
@@ -53,7 +54,7 @@ public class DataManipulatorController implements Initializable {
 
     // yCoord Column
     JFXTreeTableColumn<Node, String> yCoord = new JFXTreeTableColumn<>("yCoord");
-    yCoord.setPrefWidth(150);
+    yCoord.setPrefWidth(100);
     yCoord.setCellValueFactory(
         new Callback<TreeTableColumn.CellDataFeatures<Node, String>, ObservableValue<String>>() {
           @Override
@@ -65,7 +66,7 @@ public class DataManipulatorController implements Initializable {
 
     // Building Column
     JFXTreeTableColumn<Node, String> building = new JFXTreeTableColumn<>("Building");
-    building.setPrefWidth(150);
+    building.setPrefWidth(100);
     building.setCellValueFactory(
         new Callback<TreeTableColumn.CellDataFeatures<Node, String>, ObservableValue<String>>() {
           @Override
@@ -77,7 +78,7 @@ public class DataManipulatorController implements Initializable {
 
     // Floor Column
     JFXTreeTableColumn<Node, String> floor = new JFXTreeTableColumn<>("Floor");
-    floor.setPrefWidth(150);
+    floor.setPrefWidth(100);
     floor.setCellValueFactory(
         new Callback<TreeTableColumn.CellDataFeatures<Node, String>, ObservableValue<String>>() {
           @Override
@@ -89,7 +90,7 @@ public class DataManipulatorController implements Initializable {
 
     // Long Name Column
     JFXTreeTableColumn<Node, String> longName = new JFXTreeTableColumn<>("Long Name");
-    longName.setPrefWidth(150);
+    longName.setPrefWidth(100);
     longName.setCellValueFactory(
         new Callback<TreeTableColumn.CellDataFeatures<Node, String>, ObservableValue<String>>() {
           @Override
@@ -101,7 +102,7 @@ public class DataManipulatorController implements Initializable {
 
     // Short Name
     JFXTreeTableColumn<Node, String> shortName = new JFXTreeTableColumn<>("Short Name");
-    shortName.setPrefWidth(150);
+    shortName.setPrefWidth(100);
     shortName.setCellValueFactory(
         new Callback<TreeTableColumn.CellDataFeatures<Node, String>, ObservableValue<String>>() {
           @Override
@@ -113,7 +114,7 @@ public class DataManipulatorController implements Initializable {
 
     // Node Type Column
     JFXTreeTableColumn<Node, String> nodeType = new JFXTreeTableColumn<>("Node Type");
-    nodeType.setPrefWidth(150);
+    nodeType.setPrefWidth(100);
     nodeType.setCellValueFactory(
         new Callback<TreeTableColumn.CellDataFeatures<Node, String>, ObservableValue<String>>() {
           @Override
@@ -125,7 +126,7 @@ public class DataManipulatorController implements Initializable {
 
     // Edges Column
     JFXTreeTableColumn<Node, String> edges = new JFXTreeTableColumn<>("Edges");
-    edges.setPrefWidth(150);
+    edges.setPrefWidth(100);
     edges.setCellValueFactory(
         new Callback<TreeTableColumn.CellDataFeatures<Node, String>, ObservableValue<String>>() {
           @Override
@@ -138,7 +139,8 @@ public class DataManipulatorController implements Initializable {
     ObservableList<Node> nodes = FXCollections.observableArrayList();
 
     // Add Nodes to the table, by creating new Nodes
-    // Test data
+
+    // Test data for now
     nodes.add(new Node("1", "1", "1", "WPI", "1", "Yeet", "Yt", "Sad", "edg1, edge2"));
     nodes.add(new Node("2", "1", "1", "WPI", "1", "Yeet", "Yt", "Sad", "edg1, edge2"));
     nodes.add(new Node("3", "1", "1", "WPI", "1", "Yeet", "Yt", "Sad", "edg1, edge2"));
@@ -148,8 +150,20 @@ public class DataManipulatorController implements Initializable {
         new RecursiveTreeItem<Node>(nodes, RecursiveTreeObject::getChildren);
     treeView
         .getColumns()
-        .setAll(ID, yCoord, xCoord, building, floor, longName, shortName, nodeType, edges);
+        .setAll(ID, xCoord, yCoord, building, floor, longName, shortName, nodeType, edges);
+
+    ID.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    xCoord.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    yCoord.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    building.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    floor.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    longName.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    shortName.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    nodeType.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    edges.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+
     treeView.setRoot(root);
+    treeView.setEditable(true);
     treeView.setShowRoot(false);
 
     filterTextField
