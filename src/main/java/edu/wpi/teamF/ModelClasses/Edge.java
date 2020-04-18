@@ -1,5 +1,6 @@
 package edu.wpi.teamF.ModelClasses;
 
+<<<<<<< HEAD
 public class Edge {
   private String Id;
   private Node Node1;
@@ -37,4 +38,15 @@ public class Edge {
     Validators.nodeValidation(node2);
     this.Node2 = node2;
   }
+=======
+import lombok.Data;
+
+@Data
+public class Edge {
+
+    private String id;
+    private Node Node1;
+    private Node Node2;
+
+>>>>>>> origin/develop
 }

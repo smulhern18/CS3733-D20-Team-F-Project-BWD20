@@ -1,31 +1,15 @@
 package edu.wpi.teamF.ModelClasses;
 
-import java.util.HashSet;
-import java.util.Set;
+import lombok.Data;
 
+@Data
 public class Node {
 
-  public enum NodeType {
-    // Values
-    HALL("HALL"),
-    ELEV("ELEV"),
-    REST("REST"),
-    STAI("STAI"),
-    DEPT("DEPT"),
-    LABS("LABS"),
-    INFO("INFO"),
-    CONF("CONF"),
-    EXIT("EXIT"),
-    RETL("RETL"),
-    SERV("SERV"),
-    STAF("STAF");
+    public enum Type {
 
-    private String typeString;
-    // Constructor
-    NodeType(String type) {
-      this.typeString = type;
     }
 
+<<<<<<< HEAD
     // Get the string value from enum type
     public final String getTypeString() {
       return typeString;
@@ -286,24 +270,21 @@ public class Node {
   public void setType(NodeType type) {
     this.type = type;
   }
+=======
+    private String id;
+    private short xCoord;
+    private short yCoord;
+    private String building;
+    private String longName;
+    private String shortName;
+    private Type type;
+    private short floor;
 
-  /**
-   * returns the floor of the node
-   *
-   * @return the floor the node is on
-   */
-  public short getFloor() {
-    return floor;
-  }
 
-  /**
-   * sets the floor the node is on
-   *
-   * @param floor the floor to set
-   * @throws ValidationException should the validation fail
-   */
-  public void setFloor(short floor) throws ValidationException {
-    Validators.floorValidation(floor);
-    this.floor = floor;
-  }
+    public boolean equals(Object object) {
+        return false;
+    }
+>>>>>>> origin/develop
+
+
 }
