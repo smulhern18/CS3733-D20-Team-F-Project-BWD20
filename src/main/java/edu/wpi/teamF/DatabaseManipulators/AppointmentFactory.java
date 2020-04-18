@@ -11,11 +11,11 @@ import java.sql.SQLException;
 
 public class AppointmentFactory {
 
-    private static final AppointmentFactory factory = new AppointmentFactory();
+  private static final AppointmentFactory factory = new AppointmentFactory();
 
-    public static AppointmentFactory getFactory() {
-        return factory;
-    }
+  public static AppointmentFactory getFactory() {
+    return factory;
+  }
 
     public void create(Appointment appointment) {
         String insertStatement =
@@ -147,5 +147,4 @@ public class AppointmentFactory {
         }
 
     }
-
 }
