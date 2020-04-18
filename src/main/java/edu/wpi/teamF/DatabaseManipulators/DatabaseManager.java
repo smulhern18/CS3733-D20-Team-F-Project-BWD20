@@ -173,5 +173,4 @@ public class DatabaseManager {
     preparedStatement.execute();
     createTables();
   }
-
 }
