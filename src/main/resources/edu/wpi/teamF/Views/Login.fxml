@@ -8,11 +8,11 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #B53389;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #B53389;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.LoginController">
    <children>
       <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
-            <JFXButton layoutX="227.0" layoutY="228.0" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #B53389;" text="Login" textFill="WHITE" AnchorPane.topAnchor="225.0">
+            <JFXButton fx:id="loginButton" layoutX="227.0" layoutY="228.0" onAction="#AttemptLogin" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #B53389;" text="Login" textFill="WHITE" AnchorPane.topAnchor="225.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></JFXButton>
@@ -21,15 +21,15 @@
                   <Font name="System Bold" size="26.0" />
                </font>
             </Label>
-            <JFXTextField focusColor="#b53389" layoutX="227.0" layoutY="110.0" promptText="Username" unFocusColor="#b53389" AnchorPane.topAnchor="100.0" />
-            <JFXPasswordField focusColor="#b53389" layoutX="227.0" layoutY="169.0" promptText="Password" unFocusColor="#b53389" AnchorPane.topAnchor="160.0" />
+            <JFXTextField fx:id="usernameInput" focusColor="#b53389" layoutX="227.0" layoutY="110.0" promptText="Username" unFocusColor="#b53389" AnchorPane.topAnchor="100.0" />
+            <JFXPasswordField fx:id="passwordInput" focusColor="#b53389" layoutX="227.0" layoutY="169.0" promptText="Password" unFocusColor="#b53389" AnchorPane.topAnchor="160.0" />
             <Label layoutX="289.0" layoutY="263.0" text="or" AnchorPane.topAnchor="260.0" />
-            <JFXButton layoutX="227.0" layoutY="290.0" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #4d4d4d;" text="Register" textFill="WHITE" AnchorPane.topAnchor="290.0">
+            <JFXButton fx:id="RegisterButton" layoutX="227.0" layoutY="290.0" onAction="#switchToRegister" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #4d4d4d;" text="Register" textFill="WHITE" AnchorPane.topAnchor="290.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </JFXButton>
-            <JFXButton layoutX="227.0" layoutY="332.0" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #4d4d4d;" text="Main Menu" textFill="WHITE" AnchorPane.topAnchor="330.0">
+            <JFXButton fx:id="RegisterButton" layoutX="227.0" layoutY="332.0" onAction="#switchToMainMenu" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #4d4d4d;" text="Main Menu" textFill="WHITE" AnchorPane.topAnchor="330.0">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

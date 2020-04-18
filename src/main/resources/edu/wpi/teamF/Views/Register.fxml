@@ -40,7 +40,7 @@
                 <Line endX="30.4000244140625" endY="7.62939453125E-6" layoutX="284.0" layoutY="90.0" startX="-20.0" startY="7.62939453125E-6" stroke="#b53389" strokeWidth="2.0" AnchorPane.topAnchor="75.0" />
             <JFXTextField focusColor="#b53389" layoutX="73.0" layoutY="91.0" promptText="First Name" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="90.0" />
             <JFXTextField focusColor="#b53389" layoutX="73.0" layoutY="135.0" promptText="Last Name" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="130.0" />
-            <JFXTextField focusColor="#b53389" layoutX="73.0" layoutY="182.0" promptText="Email Address" AnchorPane.topAnchor="170.0" />
+            <JFXTextField focusColor="#b53389" layoutX="70.0" layoutY="170.0" promptText="Email Address" AnchorPane.topAnchor="170.0" />
             <JFXTextField focusColor="#b53389" layoutX="227.0" layoutY="91.0" promptText="Address" AnchorPane.topAnchor="90.0" />
             <JFXTextField focusColor="#b53389" layoutX="227.0" layoutY="135.0" promptText="State" AnchorPane.topAnchor="130.0" />
             <JFXDatePicker defaultColor="#b53389" layoutX="230.0" layoutY="181.0" prefHeight="28.0" prefWidth="135.0" promptText="Birth Date" style="-fx-background-color: #ffffff;" AnchorPane.topAnchor="170.0" />
@@ -48,7 +48,6 @@
               <items>
                 <MenuItem mnemonicParsing="false" text="Patient" />
                 <MenuItem mnemonicParsing="false" text="Employee" />
-                  <MenuItem mnemonicParsing="false" text="Administrator" />
               </items>
             </MenuButton>
             </children>
