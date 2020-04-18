@@ -15,6 +15,7 @@ public class AppointmentFactory {
     return factory;
   }
 
+
   public void create(Appointment appointment) {
     String insertStatement =
         "INSERT INTO "
@@ -36,7 +37,7 @@ public class AppointmentFactory {
         DatabaseManager.getConnection().prepareStatement(insertStatement)) {
       int param = 1;
       prepareStatement.setString(param++, appointment.getId());
-      // prepareStatement.setString(param++, appointment.getLocation());
+       prepareStatement.setString(param++, appointment.getLocation().getId());
       prepareStatement.setString(param++, appointment.getRoom());
       prepareStatement.setString(param++, appointment.getUserID());
       prepareStatement.setString(param++, appointment.getPCP());
@@ -46,13 +47,16 @@ public class AppointmentFactory {
         if (numRows < 1) {
           throw new SQLException("Created more than one rows");
         }
+
       } catch (SQLException e) {
         System.out.println(e.getMessage());
       }
-    } catch (SQLException e) {
-      System.out.println(e.getMessage());
-    }
+    } catch(SQLException e){
+        System.out.println(e.getMessage());
+      }
+
   }
+
 
   public Appointment read(String id) {
     Appointment appointment = null;

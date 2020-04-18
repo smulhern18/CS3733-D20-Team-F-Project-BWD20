@@ -1,36 +1,37 @@
 package edu.wpi.teamF.ModelClasses.Account;
 
+import edu.wpi.teamF.ModelClasses.ValidationException;
+import edu.wpi.teamF.ModelClasses.Validators;
 import lombok.Data;
+
+import javax.swing.*;
+import java.util.Objects;
 
 @Data
 public abstract class Account {
 
-  public enum AccountType {
-    // Values
-    STAFF("Staff"),
+  public enum Type {
     ADMIN("Admin"),
+    STAFF("Staff"),
     USER("User");
+
     private String typeString;
 
-    // Constructor
-    AccountType(String type) {
-      this.typeString = type;
+    Type(String typeString) {
+      this.typeString = typeString;
     }
 
-    // Get the string value from enum type
-    public final String getTypeString() {
+    public String getTypeString() {
       return typeString;
     }
 
-    // Get enum type from string
-    public static AccountType getEnum(String typeString) {
-      AccountType value = null;
-      for (final AccountType n : values()) {
-        if (n.getTypeString().equals(typeString)) {
-          value = n;
+    public Type getEnum(String type) {
+      for (Type v : values()) {
+        if (v.getTypeString().equals(type)) {
+          return v;
         }
       }
-      return value;
+      return null;
     }
   }
 
@@ -40,16 +41,16 @@ public abstract class Account {
   private String Username;
   private String password;
   private String email;
-  private AccountType type;
+  private Type type;
 
-  public Account(
+public Account(
       String FirstName,
       String lastName,
       String Address,
       String Username,
       String password,
       String email,
-      AccountType type) {
+      Type type) throws ValidationException{
     setFirstName(FirstName);
     setLastName(lastName);
     setAddress(Address);
@@ -62,56 +63,74 @@ public abstract class Account {
   public String getFirstName() {
     return FirstName;
   }
-
-  public void setFirstName(String firstName) {
-    FirstName = firstName;
+  public void setFirstName(String firstName) throws ValidationException {
+    Validators.nameValidation(firstName);
+    this.FirstName = firstName;
   }
 
   public String getLastName() {
     return lastName;
   }
+  public void setLastName(String lastName) throws ValidationException {
+    Validators.nameValidation(lastName);
 
-  public void setLastName(String lastName) {
     this.lastName = lastName;
   }
-
   public String getAddress() {
+
     return Address;
   }
-
-  public void setAddress(String address) {
-    Address = address;
+  public void setAddress(String address) throws ValidationException {
+    Validators.addressValidation(address);
+    this.Address = address;
   }
 
   public String getUsername() {
     return Username;
   }
 
-  public void setUsername(String username) {
-    Username = username;
+  public void setUsername(String username) throws ValidationException {
+    Validators.nameValidation(username);
+    this.Username = username;
   }
 
   public String getPassword() {
     return password;
   }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
-
   public String getEmail() {
     return email;
   }
 
-  public void setEmail(String email) {
-    this.email = email;
+
+  public void setPassword(String password) throws ValidationException {
+    Validators.passwordValidation(password);
+    try {
+      this.password = PasswordHasher.createHash(password);
+    }catch (Exception e){
+      System.out.println(e);
+    }
   }
 
-  public AccountType getType() {
+  public Type getType() {
     return type;
   }
 
-  public void setType(AccountType type) {
+  public void setType(Type type) throws ValidationException {
+    Validators.nullCheckValidation(type);
     this.type = type;
   }
+
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Account)) return false;
+    Account account = (Account) o;
+    return Objects.equals(FirstName, account.FirstName) &&
+            Objects.equals(lastName, account.lastName) &&
+            Objects.equals(Address, account.Address) &&
+            Objects.equals(Username, account.Username) &&
+            Objects.equals(password, account.password) &&
+            type == account.type;
+  }
+
 }

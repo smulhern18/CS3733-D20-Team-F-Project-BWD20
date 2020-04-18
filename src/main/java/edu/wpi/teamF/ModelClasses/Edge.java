@@ -37,4 +37,13 @@ public class Edge {
     Validators.nodeValidation(node2);
     this.Node2 = node2;
   }
+
+  public boolean equals(Object other){
+    boolean isEqual = false;
+    if(other instanceof Edge){
+      Edge otherEdge = (Edge) other;
+      isEqual = this.Id.equals(otherEdge.Id);
+    }
+    return isEqual;
+  }
 }
