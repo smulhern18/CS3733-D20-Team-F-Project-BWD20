@@ -13,6 +13,7 @@ public class DatabaseManager {
   static final String EDGES_TABLE_NAME = "edgesTable";
   static final String SERVICEREQUEST_TABLE_NAME = "serviceRequestsTable";
   static final String USER_TABLE_NAME = "usersTable";
+  static final String APPOINTMENTS_TABLE_NAME = "appointmentsTable";
   /** Column Names */
   // node
   static final String X_COORDINATE_KEY = "xCoord";
@@ -43,6 +44,13 @@ public class DatabaseManager {
   static final String ADDRESS_KEY = "address";
   static final String EMAIL_KEY = "email";
   static final String USER_TYPE_KEY = "userType";
+
+  //Appointments
+  static final String APPOINTMENT_ID_KEY = "appointmentId";
+  static final String LOCATION_KEY = "location";
+  static final String ROOM_KEY = "room";
+  static final String USERID_KEY = "userID";
+  static final String PCP_KEY = "PCP";
 
   static Connection connection = null;
 
@@ -124,6 +132,13 @@ public class DatabaseManager {
             + "PRIMARY KEY ("
             + USER_NAME_KEY
             + "))";
+        /*
+    String appointmentTableCreationStatement =
+            "CREATE TABLE"
+                    + APPOINTMENTS_TABLE_NAME
+                    + " ( "
+                    + APPOINTMENT_ID_KEY
+                    +*/
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
     preparedStatement.execute();
@@ -137,7 +152,7 @@ public class DatabaseManager {
   }
 
   public void initialize() {
-    String dbURL = "jdbc:derby:teamF;create=true";
+    String dbURL = "jdbc:derby:database;create=true";
     try {
       DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
     } catch (SQLException e) {

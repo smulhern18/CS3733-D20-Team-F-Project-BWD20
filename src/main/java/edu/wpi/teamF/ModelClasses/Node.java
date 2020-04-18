@@ -2,7 +2,9 @@ package edu.wpi.teamF.ModelClasses;
 
 import java.util.HashSet;
 import java.util.Set;
+import lombok.Data;
 
+@Data
 public class Node {
 
   public enum NodeType {
@@ -20,15 +22,15 @@ public class Node {
     SERV("SERV"),
     STAF("STAF");
 
+    // Constructor
     private String typeString;
     // Constructor
-    NodeType(String type) {
-      this.typeString = type;
+    NodeType(String string) {
+      this.typeString = string;
     }
 
-    // Get the string value from enum type
-    public final String getTypeString() {
-      return typeString;
+    public String getTypeString() {
+      return this.typeString;
     }
 
     // Get enum type from string
@@ -285,25 +287,5 @@ public class Node {
    */
   public void setType(NodeType type) {
     this.type = type;
-  }
-
-  /**
-   * returns the floor of the node
-   *
-   * @return the floor the node is on
-   */
-  public short getFloor() {
-    return floor;
-  }
-
-  /**
-   * sets the floor the node is on
-   *
-   * @param floor the floor to set
-   * @throws ValidationException should the validation fail
-   */
-  public void setFloor(short floor) throws ValidationException {
-    Validators.floorValidation(floor);
-    this.floor = floor;
   }
 }

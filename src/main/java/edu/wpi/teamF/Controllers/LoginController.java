@@ -1,4 +1,3 @@
 package edu.wpi.teamF.Controllers;
 
-public class LoginController {
-}
+public class LoginController {}
