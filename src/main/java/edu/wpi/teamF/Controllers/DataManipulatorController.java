@@ -124,33 +124,22 @@ public class DataManipulatorController implements Initializable {
           }
         });
 
-    // Edges Column
-    JFXTreeTableColumn<Node, String> edges = new JFXTreeTableColumn<>("Edges");
-    edges.setPrefWidth(100);
-    edges.setCellValueFactory(
-        new Callback<TreeTableColumn.CellDataFeatures<Node, String>, ObservableValue<String>>() {
-          @Override
-          public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<Node, String> param) {
-            return param.getValue().getValue().edges;
-          }
-        });
-
     ObservableList<Node> nodes = FXCollections.observableArrayList();
 
     // Add Nodes to the table, by creating new Nodes
 
     // Test data for now
-    nodes.add(new Node("1", "1", "1", "WPI", "1", "Yeet", "Yt", "Sad", "edg1, edge2"));
-    nodes.add(new Node("2", "1", "1", "WPI", "1", "Yeet", "Yt", "Sad", "edg1, edge2"));
-    nodes.add(new Node("3", "1", "1", "WPI", "1", "Yeet", "Yt", "Sad", "edg1, edge2"));
-    nodes.add(new Node("4", "1", "1", "WPI", "1", "Yeet", "Yt", "Sad", "edg1, edge2"));
+    nodes.add(new Node("1", "1", "1", "WPI", "1", "Yeet", "Yt", "Sad"));
+    nodes.add(new Node("2", "1", "1", "WPI", "1", "Yeet", "Yt", "Sad"));
+    nodes.add(new Node("3", "1", "1", "WPI", "1", "Yeet", "Yt", "Sad"));
+    nodes.add(new Node("4", "1", "1", "WPI", "1", "Yeet", "Yt", "Sad"));
 
     final TreeItem<Node> root =
         new RecursiveTreeItem<Node>(nodes, RecursiveTreeObject::getChildren);
+
     treeView
         .getColumns()
-        .setAll(ID, xCoord, yCoord, building, floor, longName, shortName, nodeType, edges);
+        .setAll(ID, xCoord, yCoord, building, floor, longName, shortName, nodeType);
 
     ID.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     xCoord.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
@@ -160,7 +149,6 @@ public class DataManipulatorController implements Initializable {
     longName.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     shortName.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     nodeType.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-    edges.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
     treeView.setRoot(root);
     treeView.setEditable(true);
@@ -205,7 +193,6 @@ public class DataManipulatorController implements Initializable {
     StringProperty longName;
     StringProperty shortName;
     StringProperty nodeType;
-    StringProperty edges;
 
     public Node(
         String ID,
@@ -215,8 +202,7 @@ public class DataManipulatorController implements Initializable {
         String floor,
         String longName,
         String shortName,
-        String nodeType,
-        String edges) {
+        String nodeType) {
       this.ID = new SimpleStringProperty(ID);
       this.xCoord = new SimpleStringProperty(xCoord);
       this.yCoord = new SimpleStringProperty(yCoord);
@@ -225,7 +211,6 @@ public class DataManipulatorController implements Initializable {
       this.longName = new SimpleStringProperty(longName);
       this.shortName = new SimpleStringProperty(shortName);
       this.nodeType = new SimpleStringProperty(nodeType);
-      this.edges = new SimpleStringProperty(edges);
     }
   }
 }
