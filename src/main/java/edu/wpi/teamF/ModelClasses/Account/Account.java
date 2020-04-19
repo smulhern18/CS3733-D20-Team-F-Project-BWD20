@@ -2,9 +2,8 @@ package edu.wpi.teamF.ModelClasses.Account;
 
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
-import lombok.Data;
 import java.util.Objects;
-
+import lombok.Data;
 
 @Data
 public abstract class Account {
@@ -36,16 +35,22 @@ public abstract class Account {
 
   private String firstName;
   private String lastName;
-  private String Address;
+  private String emailAddress;
   private String Username;
   private String password;
-  private String email;
   private Type type;
 
-  public Account(String firstName, String lastName, String address, String username, String password, Type type) throws Exception {
+  public Account(
+      String firstName,
+      String lastName,
+      String emailAddress,
+      String username,
+      String password,
+      Type type)
+      throws Exception {
     setFirstName(firstName);
     setLastName(lastName);
-    setAddress(address);
+    setEmailAddress(emailAddress);
     setUsername(username);
     setPassword(password);
     setType(type);
@@ -70,14 +75,13 @@ public abstract class Account {
     this.lastName = lastName;
   }
 
-  public String getAddress() {
-
-    return Address;
+  public String getEmailAddress() {
+    return emailAddress;
   }
 
-  public void setAddress(String address) throws ValidationException {
-    Validators.addressValidation(address);
-    this.Address = address;
+  public void setEmailAddress(String emailAddress) throws ValidationException {
+    Validators.emailAddressValidation(emailAddress);
+    this.emailAddress = emailAddress;
   }
 
   public String getUsername() {
@@ -93,16 +97,12 @@ public abstract class Account {
     return password;
   }
 
-  public String getEmail() {
-    return email;
-  }
-
-  public void setPassword(String password) throws ValidationException {
+  public void setPassword(String password) throws Exception {
     Validators.passwordValidation(password);
-    try {
+    if (password.contains("sha1:64000:")) {
+      this.password = password;
+    } else {
       this.password = PasswordHasher.createHash(password);
-    } catch (Exception e) {
-      System.out.println(e);
     }
   }
 
@@ -119,11 +119,15 @@ public abstract class Account {
     if (this == o) return true;
     if (!(o instanceof Account)) return false;
     Account account = (Account) o;
-    return Objects.equals(firstName, account.firstName) &&
-            Objects.equals(lastName, account.lastName) &&
-            Objects.equals(Address, account.Address) &&
-            Objects.equals(Username, account.Username) &&
-            Objects.equals(password, account.password) &&
-            type == account.type;
+    try {
+      return Objects.equals(account.getFirstName(), this.firstName)
+          && Objects.equals(account.getLastName(), this.lastName)
+          && Objects.equals(account.getEmailAddress(), this.emailAddress)
+          && Objects.equals(account.getUsername(), this.Username)
+          && Objects.equals(account.getPassword(), this.password)
+          && account.getType() == this.type;
+    } catch (Exception e) {
+      return false;
+    }
   }
 }

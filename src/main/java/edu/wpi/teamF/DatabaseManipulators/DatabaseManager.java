@@ -9,6 +9,7 @@ public class DatabaseManager {
 
   /** Table names */
   static final String NODES_TABLE_NAME = "nodesTable";
+
   static final String EDGES_TABLE_NAME = "edgesTable";
   static final String SERVICEREQUEST_TABLE_NAME = "serviceRequestsTable";
   static final String ACCOUNT_TABLE_NAME = "accountsTable";
@@ -35,13 +36,12 @@ public class DatabaseManager {
   static final String TIME_CREATED_KEY = "timeCreated";
   static final String PRIORITY_KEY = "priority";
 
-  // User
+  // account
   static final String USER_NAME_KEY = "userName";
   static final String PASSWORD_KEY = "password";
   static final String FIRST_NAME_KEY = "firstName";
   static final String LAST_NAME_KEY = "lastName";
-  static final String ADDRESS_KEY = "address";
-  static final String EMAIL_KEY = "email";
+  static final String EMAIL_ADDRESS_KEY = "email";
   static final String USER_TYPE_KEY = "userType";
 
   // Appointments
@@ -122,7 +122,7 @@ public class DatabaseManager {
             + " VARCHAR(32) NOT NULL, "
             + LAST_NAME_KEY
             + " VARCHAR(32) NOT NULL, "
-            + ADDRESS_KEY
+            + EMAIL_ADDRESS_KEY
             + " VARCHAR(64) NOT NULL, "
             + USER_TYPE_KEY
             + " SMALLINT NOT NULL, "

@@ -26,30 +26,35 @@ public class Validators {
   public static final int USERID_MAX_LENGTH = 32;
   public static final int PCP_MIN_LENGTH = 1;
   public static final int PCP_MAX_LENGTH = 32;
-  public static final int PASSWORD_MIN_LENGTH = 8;
-  public static final int PASSWORD_MAX_LENGTH = 32;
+  public static final int PASSWORD_MIN_LENGTH = 1;
+  public static final int PASSWORD_MAX_LENGTH = 128;
   public static final int ADDRESS_MIN_LENGTH = 1;
   public static final int ADDRESS_MAX_LENGTH = 64;
 
-  public static <T extends Account> void accountValidation(T t, int... constraints) throws ValidationException{
+  public static <T extends Account> void accountValidation(T t, int... constraints)
+      throws ValidationException {
     nullCheckValidation(t, constraints);
     Account accountObject = (Account) t;
 
-    addressValidation(accountObject.getAddress());
+    emailAddressValidation(accountObject.getEmailAddress());
     nameValidation(accountObject.getFirstName());
     nameValidation(accountObject.getLastName());
     userIDValidation(accountObject.getUsername());
   }
 
-  public static void addressValidation(String address, int... constraints)
+  public static void emailAddressValidation(String address, int... constraints)
       throws ValidationException {
     nullCheckValidation(address, constraints);
+    if ((!address.contains("@") || !address.contains("."))
+        && (address.length() > ADDRESS_MIN_LENGTH && address.length() < ADDRESS_MAX_LENGTH)) {
+      throw new ValidationException("Invalid Email Address: " + address);
+    }
   }
 
   public static void passwordValidation(String password, int... constraints)
       throws ValidationException {
     nullCheckValidation(password, constraints);
-    if (password.length() < 8 || password.length() > 32) {
+    if (password.length() < PASSWORD_MIN_LENGTH || password.length() > PASSWORD_MAX_LENGTH) {
       throw new ValidationException("Invalid password length");
     }
   }

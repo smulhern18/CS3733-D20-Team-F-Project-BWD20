@@ -1,9 +1,9 @@
 package edu.wpi.teamF;
 
+import edu.wpi.teamF.ModelClasses.Account.*;
 import edu.wpi.teamF.ModelClasses.Appointment;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
-import edu.wpi.teamF.ModelClasses.ValidationException;
 
 public class TestData {
 
@@ -151,5 +151,42 @@ public class TestData {
     new Appointment(validNodeIDs[3], validNodes[3], validRooms[3], validUserIDs[3], validPCPs[3]),
   };
 
-  public TestData() throws ValidationException {}
+  public String[] validUsernames = {"This one", "TheCuddleMonster", "sjmulhern", "Snuggles"};
+
+  public String[] invalidUsernames = {
+    "", null, "this string is waaaaaaaaay toooooooo loooooooong to be valid"
+  };
+
+  public String[] validPasswords = {
+    "Areally$tr0ngPassw@rd", "aWeakerPassw0rd", "weakPassword", "password"
+  };
+
+  public String[] invalidPasswords = {
+    "weakPWD", "", null, "this string is waaaaaaaaay toooooooo loooooooong to be valid"
+  };
+
+  public String[] validNames = {"Ferdinand", "Nikolas", "Constantine", "Nero"};
+
+  public String[] invalidNames = {
+    "", null, "this string is waaaaaaaaay toooooooo loooooooong to be valid"
+  };
+
+  public String[] validEmails = {
+    "sjmulhern@wpi.edu", "joeBiden@usa.gov", "putin@rus.ru", "wack@giggle.pig"
+  };
+
+  public String[] invalidEmails = {"sjmulhern", "@wpi.edu", "", null};
+
+  public Account.Type[] validAccountTypes = Account.Type.values();
+
+  public Account.Type[] invalidAccountTypes = null;
+
+  public Account[] validAccounts = {
+    new Admin(validNames[0], validNames[0], validEmails[0], validUsernames[0], validPasswords[0]),
+    new Staff(validNames[1], validNames[1], validEmails[1], validUsernames[1], validPasswords[1]),
+    new User(validNames[2], validNames[2], validEmails[2], validUsernames[2], validPasswords[2]),
+    new User(validNames[3], validNames[3], validEmails[3], validUsernames[3], validPasswords[3])
+  };
+
+  public TestData() throws Exception {}
 }
