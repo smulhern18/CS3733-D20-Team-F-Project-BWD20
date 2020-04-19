@@ -3,6 +3,7 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.AccountFactory;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Account.User;
@@ -34,7 +35,7 @@ public class RegisterController {
   @FXML private JFXButton RegisterButton;
 
   AccountFactory accountFactory = AccountFactory.getFactory();
-  SceneController sceneController = new SceneController();
+  SceneController sceneController = App.getSceneController();
 
   @FXML
   void attemptRegister(ActionEvent event) throws IOException {
