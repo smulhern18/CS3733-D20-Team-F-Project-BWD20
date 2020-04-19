@@ -7,6 +7,8 @@ import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.AccountFactory;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import java.io.IOException;
+
+import edu.wpi.teamF.ModelClasses.Account.PasswordHasher;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -43,14 +45,15 @@ public class LoginController {
   }
 
   @FXML
-  void attemptLogin(ActionEvent event) throws InterruptedException, InstanceNotFoundException {
+  void attemptLogin(ActionEvent event) throws Exception {
     String username = usernameInput.getText();
     String password = passwordInput.getText();
-    Account account = accountFactory.read(username);
-    if (account != null && account.getPassword().equals(password)) {
-      System.out.println("The account is valid");
-      // code that logs the user into the application
-    } else {
+    try {
+      if (PasswordHasher.verifyPassword(password, accountFactory.getPasswordByUsername(username))) {
+        System.out.println("The account is valid");
+        // code that logs the user into the application
+      }
+    } catch (Exception e) {
       incorrectLabel.setVisible(true);
       usernameInput.setUnFocusColor(Color.RED);
       passwordInput.setUnFocusColor(Color.RED);

@@ -14,6 +14,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
+import javax.management.InstanceNotFoundException;
+
 public class RegisterController {
 
   @FXML private Label incorrectLabel;
@@ -38,22 +40,17 @@ public class RegisterController {
   SceneController sceneController = App.getSceneController();
 
   @FXML
-  void attemptRegister(ActionEvent event) throws IOException {
+  void attemptRegister(ActionEvent event) throws Exception{
     String firstName = firstNameInput.getText();
     String lastName = lastNameInput.getText();
     String email = emailInput.getText();
     String username = usernameInput.getText();
     String password = passwordInput.getText();
-    Account account = accountFactory.getAccountByUsername(username);
+    Account account = accountFactory.read(username);
 
     if (account == null && password.length() >= 8 && email.contains("@")) { // The account is valid
       System.out.println("The account is valid");
-      Account newAccount = new User();
-      newAccount.setFirstName(firstName);
-      newAccount.setLastName(lastName);
-      newAccount.setEmailAddress(email);
-      newAccount.setUsername(username);
-      newAccount.setPassword(password);
+      Account newAccount = new User(firstName, lastName, email, username,password);
       accountFactory.create(newAccount);
       switchToLogin(event);
     } else if (!email.contains("@")) { // The email is not valid
@@ -64,7 +61,7 @@ public class RegisterController {
       incorrectLabel.setVisible(true);
       incorrectLabel.setText("The username already exists");
       usernameInput.setUnFocusColor(Color.RED);
-    } else { // The password entered contains less than 8 charaters
+    } else { // The password entered contains less than 8 characters
       incorrectLabel.setVisible(true);
       incorrectLabel.setText("The password needs to contain atleast 8 characters");
       passwordInput.setUnFocusColor(Color.RED);
