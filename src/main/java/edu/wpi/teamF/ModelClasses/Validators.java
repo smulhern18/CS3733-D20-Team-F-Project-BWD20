@@ -2,6 +2,8 @@ package edu.wpi.teamF.ModelClasses;
 
 import edu.wpi.teamF.ModelClasses.Account.Account;
 
+import java.util.Date;
+
 public class Validators {
 
   public static final int COORDINATE_MIN_VALUE = 0;
@@ -32,6 +34,8 @@ public class Validators {
   public static final int ADDRESS_MAX_LENGTH = 64;
   public static final int DESCRIPTION_MIN_LENGTH = 1;
   public static final int DESCRIPTION_MAX_LENGTH = 64;
+  public static final int PRIORITY_MIN_LENGTH = 1;
+  public static final int PRIORITY_MAX_LENGTH = 3;
 
   public static <T extends Account> void accountValidation(T t, int... constraints)
       throws ValidationException {
@@ -293,6 +297,35 @@ public class Validators {
         || description.length() > DESCRIPTION_MAX_LENGTH) {
       throw new ValidationException("Description is out of bounds");
     }
+  }
+
+  /**
+   * Validation for dates
+   *
+   * @param date the date to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static void dateValidation(Object date, int... constraints) throws ValidationException{
+    nullCheckValidation(date, constraints);
+    if(!(date instanceof Date)){
+      throw new ValidationException("Provided object is not a date");
+    }
+  }
+
+  /**
+   * Validation for priority
+   *
+   * @param priority the priority to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static void priorityValidation(int priority, int... constraints) throws ValidationException {
+    nullCheckValidation(priority, constraints);
+    if(priority < PRIORITY_MIN_LENGTH || priority > PRIORITY_MAX_LENGTH){
+      throw new ValidationException("Priority is outside accepted values");
+    }
+
   }
 
   /**
