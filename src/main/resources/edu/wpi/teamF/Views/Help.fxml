@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.HelpController">
+
+<AnchorPane fx:id="rootPane" prefHeight="878.0" prefWidth="1309.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.HelpController">
    <children>
-      <fx:include source="MenuBar.fxml" />
+      <Label layoutX="122.0" layoutY="152.0" text="Genarl Questions">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="522.0" layoutY="57.0" text="Help">
+         <font>
+            <Font size="64.0" />
+         </font>
+      </Label>
+      <Line endX="27.1256103515625" endY="-47.99993896484375" layoutX="605.0" layoutY="186.0" startX="-61.8499755859375" startY="-47.99993896484375" stroke="#eb1563" strokeWidth="2.0" />
+      <JFXTreeTableView layoutX="123.0" layoutY="240.0" prefHeight="480.0" prefWidth="1005.0" />
    </children>
 </AnchorPane>
