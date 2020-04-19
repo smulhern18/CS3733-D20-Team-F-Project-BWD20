@@ -51,7 +51,7 @@ public class RegisterController {
       Account newAccount = new User();
       newAccount.setFirstName(firstName);
       newAccount.setLastName(lastName);
-      newAccount.setAddress(email);
+      newAccount.setEmailAddress(email);
       newAccount.setUsername(username);
       newAccount.setPassword(password);
       accountFactory.create(newAccount);
