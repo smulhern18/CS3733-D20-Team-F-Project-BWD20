@@ -8,8 +8,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.HelpController">
->>>>>>> f849e77e915906d317d636aa15339df16195bccb
+<AnchorPane fx:id="rootPane" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.HelpController">
    <children>
       <Label layoutX="122.0" layoutY="152.0" text="General Questions">
          <font>
@@ -22,7 +21,7 @@
          </font>
       </Label>
       <Line endX="27.1256103515625" endY="-47.99993896484375" layoutX="690.0" layoutY="182.0" startX="-61.8499755859375" startY="-47.99993896484375" stroke="#eb1563" strokeWidth="2.0" />
-      <StackPane layoutX="132.0" layoutY="231.0" prefHeight="550.0" prefWidth="1056.0">
+      <StackPane fx:id="stackPane" layoutX="132.0" layoutY="231.0" prefHeight="550.0" prefWidth="1056.0">
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>

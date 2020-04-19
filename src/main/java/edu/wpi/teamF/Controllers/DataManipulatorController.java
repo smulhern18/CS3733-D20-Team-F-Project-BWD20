@@ -315,7 +315,7 @@ public class DataManipulatorController implements Initializable {
     for (UINode nodeUI : UINodes) {
       boolean isSame = nodeUI.equals(new UINode(nodes.read(nodeUI.getID().toString())));
       if (!isSame) {
-        // update that node in the db
+        // update that node in the db to the new values of that nodeUI
 
       }
     }
@@ -325,7 +325,7 @@ public class DataManipulatorController implements Initializable {
     for (UIEdge edgeUI : UIEdges) {
       boolean isSame = edgeUI.equals(new UIEdge(edges.read(edgeUI.getID().toString())));
       if (!isSame) {
-        // update that edge in the db
+        // update that edge in the db to the new values of that nodeUI
 
       }
     }
