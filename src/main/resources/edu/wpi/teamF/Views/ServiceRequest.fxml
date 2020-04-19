@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ServiceRequestController">
    <children>
-      <JFXButton buttonType="RAISED" layoutX="79.0" layoutY="169.0" ripplerFill="#b91010" text="Request Security">
+      <JFXButton buttonType="RAISED" layoutX="79.0" layoutY="169.0" onAction="#reqSecurity" ripplerFill="#b91010" text="Request Security">
          <font>
             <Font size="24.0" />
          </font></JFXButton>
@@ -29,21 +29,21 @@
             <Font size="22.0" />
          </font>
       </JFXButton>
-      <JFXTextField layoutX="623.0" layoutY="303.0" />
+      <JFXTextField layoutX="623.0" layoutY="303.0" style="visibility: false;" />
       <JFXTextField layoutX="623.0" layoutY="379.0" />
       <JFXTextArea layoutX="610.0" layoutY="436.0" prefHeight="168.0" prefWidth="221.0" />
-      <ChoiceBox fx:id="choiceBox" layoutX="1009.0" layoutY="316.0" prefWidth="150.0" />
-      <Text layoutX="880.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Priority:">
+      <ChoiceBox fx:id="choiceBox" layoutX="1009.0" layoutY="316.0" prefWidth="150.0" style="visibility: false;" />
+      <Text layoutX="880.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" style="visibility: false;" text="Priority:">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
-      <Text layoutX="450.0" layoutY="401.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location:">
+      <Text layoutX="450.0" layoutY="401.0" strokeType="OUTSIDE" strokeWidth="0.0" style="visibility: false;" text="Location:">
          <font>
             <Font size="25.0" />
          </font>
       </Text>
-      <Text layoutX="453.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ID:">
+      <Text layoutX="453.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" style="visibility: false;" text="ID:">
          <font>
             <Font size="25.0" />
          </font>
@@ -53,7 +53,7 @@
             <Font size="25.0" />
          </font>
       </Text>
-      <Text layoutX="430.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Security Officers are on the way.">
+      <Text fx:id="confirmationSecurity" layoutX="430.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" style="visibility: false;" text="Security Officers are on the way.">
          <font>
             <Font size="25.0" />
          </font>

@@ -5,10 +5,12 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.text.Text;
 
 public class ServiceRequestController implements Initializable {
 
   public ChoiceBox<String> choiceBox;
+  public Text confirmationSecurity;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -18,4 +20,8 @@ public class ServiceRequestController implements Initializable {
   }
 
   public void submit(ActionEvent actionEvent) {}
+
+  public void reqSecurity(ActionEvent actionEvent) {
+    confirmationSecurity.setVisible(true);
+  }
 }
