@@ -3,7 +3,11 @@ package edu.wpi.teamF.ModelClasses;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class UIEdge extends RecursiveTreeObject<UIEdge> {
 
   public StringProperty ID;

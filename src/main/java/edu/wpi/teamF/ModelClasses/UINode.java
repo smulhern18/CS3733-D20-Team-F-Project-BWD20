@@ -3,7 +3,11 @@ package edu.wpi.teamF.ModelClasses;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
+@Data
 public class UINode extends RecursiveTreeObject<UINode> {
 
   public StringProperty ID;
@@ -18,7 +22,7 @@ public class UINode extends RecursiveTreeObject<UINode> {
   public UINode(Node node) {
     this.ID = new SimpleStringProperty(node.getId());
     this.xCoord = new SimpleStringProperty("" + node.getXCoord());
-    this.yCoord = new SimpleStringProperty("" + node.getXCoord());
+    this.yCoord = new SimpleStringProperty("" + node.getYCoord());
     this.building = new SimpleStringProperty(node.getBuilding());
     this.floor = new SimpleStringProperty("" + node.getFloor());
     this.longName = new SimpleStringProperty(node.getLongName());
