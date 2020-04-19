@@ -17,6 +17,6 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <Button layoutX="1026.0" layoutY="234.0" mnemonicParsing="false" onAction="#draw" text="Draw Line" />
+      <Button layoutX="1026.0" layoutY="234.0" mnemonicParsing="false" onAction="#placeButton" text="Draw Line" />
    </children>
 </AnchorPane>
