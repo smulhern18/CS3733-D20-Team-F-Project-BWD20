@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 import edu.wpi.teamF.DatabaseManipulators.AppointmentFactory;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.TestData;
+import java.sql.SQLException;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,13 +16,18 @@ public class AppointmentFactoryTest {
   static TestData testData = null;
   static Appointment[] validAppointments = null;
   AppointmentFactory appointmentFactory = AppointmentFactory.getFactory();
-  DatabaseManager databaseManager = new DatabaseManager();
+  static DatabaseManager databaseManager = new DatabaseManager();
 
   @BeforeEach
   public void initialize() throws Exception {
     testData = new TestData();
     validAppointments = testData.validAppointments;
     databaseManager.initialize();
+  }
+
+  @AfterAll
+  public static void reset() throws SQLException {
+    databaseManager.reset();
   }
 
   @Test

@@ -4,10 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.TestData;
+import java.sql.SQLException;
 import java.util.List;
 import javax.management.InstanceNotFoundException;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,13 +19,19 @@ public class NodeFactoryTest {
   static TestData testData = null;
   static Node[] validNodes = null;
   NodeFactory nodeFactory = NodeFactory.getFactory();
-  DatabaseManager databaseManager = new DatabaseManager();
+  EdgeFactory edgeFactory = EdgeFactory.getFactory();
+  static DatabaseManager databaseManager = new DatabaseManager();
 
   @BeforeEach
   public void initialize() throws Exception {
     testData = new TestData();
     validNodes = testData.validNodes;
     databaseManager.initialize();
+  }
+
+  @AfterAll
+  public static void reset() throws SQLException {
+    databaseManager.reset();
   }
 
   @Test
@@ -38,7 +47,6 @@ public class NodeFactoryTest {
         nodeFactory.create(node);
 
         Node readNode = nodeFactory.read(node.getId());
-
         assertTrue(readNode.equals(node));
 
         nodeFactory.delete(node.getId());

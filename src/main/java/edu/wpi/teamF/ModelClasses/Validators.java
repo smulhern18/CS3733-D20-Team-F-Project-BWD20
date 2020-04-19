@@ -33,7 +33,6 @@ public class Validators {
   public static final int DESCRIPTION_MIN_LENGTH = 1;
   public static final int DESCRIPTION_MAX_LENGTH = 64;
 
-
   public static <T extends Account> void accountValidation(T t, int... constraints)
       throws ValidationException {
     nullCheckValidation(t, constraints);
@@ -287,9 +286,11 @@ public class Validators {
    * @param constraints the optional constraints for validation
    * @throws ValidationException should the validation fail
    */
-  public static void descriptionValidation(String description, int... constraints) throws ValidationException {
+  public static void descriptionValidation(String description, int... constraints)
+      throws ValidationException {
     nullCheckValidation(description, constraints);
-    if (description.length() <DESCRIPTION_MIN_LENGTH || description.length() > DESCRIPTION_MAX_LENGTH) {
+    if (description.length() < DESCRIPTION_MIN_LENGTH
+        || description.length() > DESCRIPTION_MAX_LENGTH) {
       throw new ValidationException("Description is out of bounds");
     }
   }

@@ -3,7 +3,6 @@ package edu.wpi.teamF.ModelClasses.ServiceRequest;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
-
 import java.util.Date;
 
 public abstract class ServiceRequest {
@@ -15,7 +14,8 @@ public abstract class ServiceRequest {
   private int priority;
 
   public ServiceRequest(
-      String id, Node location, String description, Date dateTimeSubmitted, int priority) throws ValidationException{
+      String id, Node location, String description, Date dateTimeSubmitted, int priority)
+      throws ValidationException {
     setId(id);
     setLocation(location);
     setDescription(description);
@@ -27,7 +27,7 @@ public abstract class ServiceRequest {
     return id;
   }
 
-  public void setId(String id) throws ValidationException{
+  public void setId(String id) throws ValidationException {
     Validators.idValidation(id);
     this.id = id;
   }

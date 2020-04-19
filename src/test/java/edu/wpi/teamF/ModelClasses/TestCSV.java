@@ -14,10 +14,7 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 public class TestCSV {
 
@@ -60,6 +57,11 @@ public class TestCSV {
     } catch (Exception e) {
       fail(e.getMessage());
     }
+  }
+
+  @AfterAll
+  public static void reset() throws SQLException {
+    databaseManager.reset();
   }
 
   @Test

@@ -7,8 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import javax.management.InstanceNotFoundException;
+import java.util.Set;
 
 public class EdgeFactory {
 
@@ -43,8 +44,8 @@ public class EdgeFactory {
         DatabaseManager.getConnection().prepareStatement(insertStatement)) {
       int param = 1;
       prepareStatement.setString(param++, edge.getId());
-      prepareStatement.setString(param++, edge.getNode1().getId());
-      prepareStatement.setString(param++, edge.getNode2().getId());
+      prepareStatement.setString(param++, edge.getNode1());
+      prepareStatement.setString(param++, edge.getNode2());
       try {
         int numRows = prepareStatement.executeUpdate();
         if (numRows < 1) {
@@ -79,15 +80,14 @@ public class EdgeFactory {
 
       try {
         ResultSet resultSet = preparedStatement.executeQuery();
-        resultSet.next();
-        edge =
-            new Edge(
-                resultSet.getString(DatabaseManager.EDGEID_KEY),
-                nodeFactory.read(resultSet.getString(DatabaseManager.NODE_1_KEY)),
-                nodeFactory.read(resultSet.getString(DatabaseManager.NODE_A_KEY)));
+        if (resultSet.next()) {
+          edge =
+              new Edge(
+                  resultSet.getString(DatabaseManager.EDGEID_KEY),
+                  resultSet.getString(DatabaseManager.NODE_1_KEY),
+                  resultSet.getString(DatabaseManager.NODE_A_KEY));
+        }
       } catch (ValidationException e) {
-        throw e;
-      } catch (InstanceNotFoundException e) {
         throw e;
       }
     } catch (IllegalArgumentException e) {
@@ -121,8 +121,8 @@ public class EdgeFactory {
         DatabaseManager.getConnection().prepareStatement(updateStatement)) {
       int param = 1;
       preparedStatement.setString(param++, edge.getId());
-      preparedStatement.setString(param++, edge.getNode1().getId());
-      preparedStatement.setString(param++, edge.getNode2().getId());
+      preparedStatement.setString(param++, edge.getNode1());
+      preparedStatement.setString(param++, edge.getNode2());
       preparedStatement.setString(param++, edge.getId());
       int numRows = preparedStatement.executeUpdate();
       if (numRows != 1) {
@@ -158,6 +158,37 @@ public class EdgeFactory {
     }
   }
 
+  public Set<Edge> getAllEdgesConnectedToNode(String nodeId) {
+    Set<Edge> edges = null;
+    String selectStatement =
+        "SELECT * FROM "
+            + DatabaseManager.EDGES_TABLE_NAME
+            + " WHERE "
+            + DatabaseManager.NODE_1_KEY
+            + " = ? OR "
+            + DatabaseManager.NODE_A_KEY
+            + " = ? ";
+    try (PreparedStatement preparedStatement =
+        DatabaseManager.getConnection().prepareStatement(selectStatement)) {
+      preparedStatement.setString(1, nodeId);
+      preparedStatement.setString(2, nodeId);
+
+      ResultSet resultSet = preparedStatement.executeQuery();
+      edges = new HashSet<>();
+      while (resultSet.next()) {
+        Edge edge =
+            new Edge(
+                resultSet.getString(DatabaseManager.EDGEID_KEY),
+                resultSet.getString(DatabaseManager.NODE_1_KEY),
+                resultSet.getString(DatabaseManager.NODE_A_KEY));
+        edges.add(edge);
+      }
+    } catch (Exception e) {
+      System.out.println(e.getMessage() + ", " + e.getClass());
+    }
+    return edges;
+  }
+
   /**
    * Gets all edges from the database
    *
@@ -175,8 +206,8 @@ public class EdgeFactory {
         edges.add(
             new Edge(
                 resultSet.getString(DatabaseManager.EDGEID_KEY),
-                nodeFactory.read(resultSet.getString(DatabaseManager.NODE_1_KEY)),
-                nodeFactory.read(resultSet.getString(DatabaseManager.NODE_A_KEY))));
+                resultSet.getString(DatabaseManager.NODE_1_KEY),
+                resultSet.getString(DatabaseManager.NODE_A_KEY)));
       }
     } catch (Exception e) {
       System.out.println(

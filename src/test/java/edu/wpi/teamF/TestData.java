@@ -133,11 +133,13 @@ public class TestData {
         validFloors[3])
   };
 
+  public Node[] validNodesWithEdges = validNodes;
+
   public Edge[] validEdges = {
-    new Edge(validEdgeIDs[0], validNodes[0], validNodes[7]),
-    new Edge(validEdgeIDs[1], validNodes[1], validNodes[6]),
-    new Edge(validEdgeIDs[2], validNodes[2], validNodes[5]),
-    new Edge(validEdgeIDs[3], validNodes[3], validNodes[4])
+    new Edge(validEdgeIDs[0], validNodeIDs[0], validNodeIDs[7]),
+    new Edge(validEdgeIDs[1], validNodeIDs[1], validNodeIDs[6]),
+    new Edge(validEdgeIDs[2], validNodeIDs[2], validNodeIDs[5]),
+    new Edge(validEdgeIDs[3], validNodeIDs[3], validNodeIDs[4])
   };
 
   public String[] validRooms = {"White Room", "Red room", "OR", "OP"};
