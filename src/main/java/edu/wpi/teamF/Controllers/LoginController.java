@@ -3,8 +3,9 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.AccountFactory;
-import edu.wpi.teamF.ModelClasses.Account.Account;
+import edu.wpi.teamF.ModelClasses.Account.PasswordHasher;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,7 +27,7 @@ public class LoginController {
 
   private AccountFactory accountFactory = AccountFactory.getFactory();
 
-  SceneController sceneController = new SceneController();
+  SceneController sceneController = App.getSceneController();
 
   @FXML
   void enableLogin(KeyEvent event) {
@@ -40,13 +41,15 @@ public class LoginController {
   }
 
   @FXML
-  void attemptLogin(ActionEvent event) throws InterruptedException {
+  void attemptLogin(ActionEvent event) throws Exception {
     String username = usernameInput.getText();
     String password = passwordInput.getText();
-    Account account = accountFactory.getAccountByUsername(username);
-    if (account != null && account.getPassword().equals(password)) {
-      System.out.println("The account is valid");
-    } else {
+    try {
+      if (PasswordHasher.verifyPassword(password, accountFactory.getPasswordByUsername(username))) {
+        System.out.println("The account is valid");
+        // code that logs the user into the application
+      }
+    } catch (Exception e) {
       incorrectLabel.setVisible(true);
       usernameInput.setUnFocusColor(Color.RED);
       passwordInput.setUnFocusColor(Color.RED);
