@@ -1,6 +1,8 @@
 package edu.wpi.teamF.Controllers;
 
+
 import java.io.IOException;
+
 import javafx.event.ActionEvent;
 
 public class MenuBarController {
@@ -25,4 +27,5 @@ public class MenuBarController {
   public void help(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("Help");
   }
+
 }

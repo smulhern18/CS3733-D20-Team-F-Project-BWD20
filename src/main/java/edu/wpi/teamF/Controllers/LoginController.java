@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
+
 public class LoginController {
 
   @FXML private JFXButton loginButton;
@@ -63,4 +64,5 @@ public class LoginController {
   void switchToRegister(ActionEvent event) throws IOException {
     sceneController.switchScene("Register");
   }
+
 }
