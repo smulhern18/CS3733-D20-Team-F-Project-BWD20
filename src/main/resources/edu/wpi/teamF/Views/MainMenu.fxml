@@ -5,15 +5,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MainMenuController">
+<AnchorPane fx:id="root" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MainMenuController">
    <children>
-      <Label layoutX="365.0" layoutY="365.0" text="Welcome to Brigham and Women's Hospital">
-         <font>
-            <Font name="HP Simplified" size="24.0" />
-         </font>
-      </Label>
       <ImageView fitHeight="223.0" fitWidth="254.0" layoutX="176.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
       </ImageView>
       <fx:include source="MenuBar.fxml" />
+      <Label layoutX="94.0" layoutY="144.0" prefHeight="142.0" prefWidth="434.0" text="BRIGHAM AND WOMEN'S HOSPITAL" wrapText="true">
+         <font>
+            <Font name="Book Antiqua Bold" size="36.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
