@@ -3,6 +3,7 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.AccountFactory;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import java.io.IOException;
@@ -26,7 +27,7 @@ public class LoginController {
 
   private AccountFactory accountFactory = AccountFactory.getFactory();
 
-  SceneController sceneController = new SceneController();
+  SceneController sceneController = App.getSceneController();
 
   @FXML
   void enableLogin(KeyEvent event) {
@@ -46,6 +47,7 @@ public class LoginController {
     Account account = accountFactory.getAccountByUsername(username);
     if (account != null && account.getPassword().equals(password)) {
       System.out.println("The account is valid");
+      // code that logs the user into the application
     } else {
       incorrectLabel.setVisible(true);
       usernameInput.setUnFocusColor(Color.RED);
