@@ -43,11 +43,7 @@ public abstract class Account {
   public Account(
       String firstName,
       String lastName,
-<<<<<<< HEAD
       String emailAddress,
-=======
-      String address,
->>>>>>> 63dd4043257d5b94c561fbdd6d544877440f2c6a
       String username,
       String password,
       Type type)
