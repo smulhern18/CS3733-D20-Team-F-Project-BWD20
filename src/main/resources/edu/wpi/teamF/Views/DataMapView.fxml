@@ -21,7 +21,7 @@
                </image>
             </ImageView>
             <AnchorPane fx:id="mapPane" prefHeight="200.0" prefWidth="200.0" />
-            <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="217.0" prefWidth="558.0" style="-fx-background-color: #FFFFFF;">
+            <GridPane alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="217.0" prefWidth="558.0" style="-fx-background-color: #FFFFFF;">
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -29,31 +29,32 @@
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="X-coordinate" GridPane.rowIndex="2" />
-                  <Label text="Y-Coordinate" GridPane.rowIndex="1" />
-                  <Label text="Short Name" GridPane.columnIndex="2" />
-                  <Label text="Long Name" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Label text="Building" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Label text="Node ID" />
-                  <Label text="Type" GridPane.rowIndex="3" />
-                  <Label text="Floor" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <JFXButton text="Delete" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                  <JFXButton text="Modify" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                  <JFXTextField GridPane.columnIndex="1" />
-                  <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <JFXTextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <JFXTextField GridPane.columnIndex="3" />
-                  <JFXTextField GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <JFXTextField GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                  <JFXTextField GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <Label text="X-coordinate:" GridPane.rowIndex="2" />
+                  <Label text="Y-Coordinate:" GridPane.rowIndex="1" />
+                  <Label text="Short Name:" GridPane.columnIndex="2" />
+                  <Label text="Long Name:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label text="Building:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Label text="Node ID:" />
+                  <Label text="Type:" GridPane.rowIndex="3" />
+                  <Label text="Floor:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <JFXButton fx:id="deleteButton" style="-fx-background-color: #B53389;" text="Delete" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <JFXButton fx:id="modifyButton" style="-fx-background-color: #B53389;" text="Modify" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <JFXTextField fx:id="nodeIDInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" />
+                  <JFXTextField fx:id="yCoorInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <JFXTextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="xCoorInput" />
+                  <JFXTextField fx:id="typeInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <JFXTextField fx:id="shortNameInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="3" />
+                  <JFXTextField fx:id="longNameInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <JFXTextField fx:id="buildingInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <JFXTextField fx:id="floorInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="101.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <JFXButton fx:id="addButton" style="-fx-background-color: #B53389;" text="Add" textFill="WHITE" GridPane.rowIndex="4" />
                </children>
             </GridPane>
          </children>
