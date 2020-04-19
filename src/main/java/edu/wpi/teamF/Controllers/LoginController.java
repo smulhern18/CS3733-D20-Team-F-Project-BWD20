@@ -46,6 +46,7 @@ public class LoginController {
     Account account = accountFactory.getAccountByUsername(username);
     if (account != null && account.getPassword().equals(password)) {
       System.out.println("The account is valid");
+      // code that logs the user into the application
     } else {
       incorrectLabel.setVisible(true);
       usernameInput.setUnFocusColor(Color.RED);
