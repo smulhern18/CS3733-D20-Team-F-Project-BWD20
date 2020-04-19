@@ -13,6 +13,8 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
+import javax.management.InstanceNotFoundException;
+
 public class LoginController {
 
   @FXML private JFXButton loginButton;
@@ -41,10 +43,10 @@ public class LoginController {
   }
 
   @FXML
-  void attemptLogin(ActionEvent event) throws InterruptedException {
+  void attemptLogin(ActionEvent event) throws InterruptedException, InstanceNotFoundException {
     String username = usernameInput.getText();
     String password = passwordInput.getText();
-    Account account = accountFactory.getAccountByUsername(username);
+    Account account = accountFactory.read(username);
     if (account != null && account.getPassword().equals(password)) {
       System.out.println("The account is valid");
       // code that logs the user into the application
