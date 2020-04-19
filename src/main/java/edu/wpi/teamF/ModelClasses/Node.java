@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 import lombok.Data;
 
-@Data
 public class Node {
 
   public enum NodeType {
@@ -69,15 +68,15 @@ public class Node {
    * @throws ValidationException should anything go wrong
    */
   public Node(
-      String id,
-      short xCoord,
-      short yCoord,
-      String building,
-      String longName,
-      String shortName,
-      NodeType nodeType,
-      short floor)
-      throws ValidationException {
+          String id,
+          short xCoord,
+          short yCoord,
+          String building,
+          String longName,
+          String shortName,
+          NodeType nodeType,
+          short floor)
+          throws ValidationException {
     setXCoord(xCoord);
     setYCoord(yCoord);
     setBuilding(building);
@@ -89,16 +88,16 @@ public class Node {
   }
 
   public Node(
-      String id,
-      short xCoord,
-      short yCoord,
-      String building,
-      String longName,
-      String shortName,
-      NodeType nodeType,
-      short floor,
-      Set<Edge> edge)
-      throws ValidationException {
+          String id,
+          short xCoord,
+          short yCoord,
+          String building,
+          String longName,
+          String shortName,
+          NodeType nodeType,
+          short floor,
+          Set<Edge> edge)
+          throws ValidationException {
     this(id, xCoord, yCoord, building, longName, shortName, nodeType, floor);
     setEdges(edge);
   }
@@ -138,15 +137,15 @@ public class Node {
       Node otherNode = (Node) other;
 
       isEqual =
-          this.id.equals(otherNode.getId())
-              && this.getXCoord() == otherNode.getXCoord()
-              && this.getYCoord() == otherNode.getYCoord()
-              && this.getFloor() == otherNode.getFloor()
-              && this.getType() == otherNode.getType()
-              && this.edges.equals((otherNode).edges)
-              && this.getBuilding().equals(otherNode.getBuilding())
-              && this.getLongName().equals(otherNode.getLongName())
-              && this.getShortName().equals(otherNode.getShortName());
+              this.id.equals(otherNode.getId())
+                      && this.getXCoord() == otherNode.getXCoord()
+                      && this.getYCoord() == otherNode.getYCoord()
+                      && this.getFloor() == otherNode.getFloor()
+                      && this.getType() == otherNode.getType()
+                      && this.edges.equals((otherNode).edges)
+                      && this.getBuilding().equals(otherNode.getBuilding())
+                      && this.getLongName().equals(otherNode.getLongName())
+                      && this.getShortName().equals(otherNode.getShortName());
     }
     return isEqual;
   }
@@ -287,5 +286,25 @@ public class Node {
    */
   public void setType(NodeType type) {
     this.type = type;
+  }
+
+  /**
+   * returns the floor of the node
+   *
+   * @return the floor the node is on
+   */
+  public short getFloor() {
+    return floor;
+  }
+
+  /**
+   * sets the floor the node is on
+   *
+   * @param floor the floor to set
+   * @throws ValidationException should the validation fail
+   */
+  public void setFloor(short floor) throws ValidationException {
+    Validators.floorValidation(floor);
+    this.floor = floor;
   }
 }
