@@ -1,16 +1,17 @@
 package edu.wpi.teamF.Controllers;
 
-import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import edu.wpi.teamF.DatabaseManipulators.CSVManipulator;
 import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.UIEdge;
 import edu.wpi.teamF.ModelClasses.UINode;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -19,21 +20,32 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.util.Callback;
+import javax.management.InstanceNotFoundException;
 
 public class DataManipulatorController implements Initializable {
 
-  public JFXTreeTableView<UINode> treeView;
+  public JFXTreeTableView<UINode> treeViewNodes;
   public JFXTextField filterTextFieldNodes;
   public JFXTreeTableView<UIEdge> treeViewEdges;
   public JFXTextField filterTextFieldEdges;
+  public JFXToggleButton switcher;
+  public JFXButton updateNodesButton;
+  public JFXButton updateEdgesButton;
   NodeFactory nodes = NodeFactory.getFactory();
   EdgeFactory edges = EdgeFactory.getFactory();
+  FileChooser nodesChooser = new FileChooser();
+  FileChooser edgesChooser = new FileChooser();
+  CSVManipulator csvM = new CSVManipulator();
+  ObservableList<UINode> UINodes = FXCollections.observableArrayList();
+  ObservableList<UIEdge> UIEdges = FXCollections.observableArrayList();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -58,7 +70,7 @@ public class DataManipulatorController implements Initializable {
 
     // XCoord Column
     JFXTreeTableColumn<UINode, String> xCoord = new JFXTreeTableColumn<>("xCoord");
-    xCoord.setPrefWidth(100);
+    xCoord.setPrefWidth(90);
     xCoord.setCellValueFactory(
         new Callback<TreeTableColumn.CellDataFeatures<UINode, String>, ObservableValue<String>>() {
           @Override
@@ -70,7 +82,7 @@ public class DataManipulatorController implements Initializable {
 
     // yCoord Column
     JFXTreeTableColumn<UINode, String> yCoord = new JFXTreeTableColumn<>("yCoord");
-    yCoord.setPrefWidth(100);
+    yCoord.setPrefWidth(90);
     yCoord.setCellValueFactory(
         new Callback<TreeTableColumn.CellDataFeatures<UINode, String>, ObservableValue<String>>() {
           @Override
@@ -82,7 +94,7 @@ public class DataManipulatorController implements Initializable {
 
     // Building Column
     JFXTreeTableColumn<UINode, String> building = new JFXTreeTableColumn<>("Building");
-    building.setPrefWidth(100);
+    building.setPrefWidth(90);
     building.setCellValueFactory(
         new Callback<TreeTableColumn.CellDataFeatures<UINode, String>, ObservableValue<String>>() {
           @Override
@@ -94,7 +106,7 @@ public class DataManipulatorController implements Initializable {
 
     // Floor Column
     JFXTreeTableColumn<UINode, String> floor = new JFXTreeTableColumn<>("Floor");
-    floor.setPrefWidth(100);
+    floor.setPrefWidth(90);
     floor.setCellValueFactory(
         new Callback<TreeTableColumn.CellDataFeatures<UINode, String>, ObservableValue<String>>() {
           @Override
@@ -106,7 +118,7 @@ public class DataManipulatorController implements Initializable {
 
     // Long Name Column
     JFXTreeTableColumn<UINode, String> longName = new JFXTreeTableColumn<>("Long Name");
-    longName.setPrefWidth(100);
+    longName.setPrefWidth(90);
     longName.setCellValueFactory(
         new Callback<TreeTableColumn.CellDataFeatures<UINode, String>, ObservableValue<String>>() {
           @Override
@@ -118,7 +130,7 @@ public class DataManipulatorController implements Initializable {
 
     // Short Name
     JFXTreeTableColumn<UINode, String> shortName = new JFXTreeTableColumn<>("Short Name");
-    shortName.setPrefWidth(100);
+    shortName.setPrefWidth(90);
     shortName.setCellValueFactory(
         new Callback<TreeTableColumn.CellDataFeatures<UINode, String>, ObservableValue<String>>() {
           @Override
@@ -130,7 +142,7 @@ public class DataManipulatorController implements Initializable {
 
     // UINode Type Column
     JFXTreeTableColumn<UINode, String> UINodeType = new JFXTreeTableColumn<>("Node Type");
-    UINodeType.setPrefWidth(100);
+    UINodeType.setPrefWidth(90);
     UINodeType.setCellValueFactory(
         new Callback<TreeTableColumn.CellDataFeatures<UINode, String>, ObservableValue<String>>() {
           @Override
@@ -139,8 +151,6 @@ public class DataManipulatorController implements Initializable {
             return param.getValue().getValue().nodeType;
           }
         });
-
-    ObservableList<UINode> UINodes = FXCollections.observableArrayList();
 
     // Add UINodes to the table, by creating new UINodes
     List<Node> Nodes = nodes.getAllNodes();
@@ -151,7 +161,7 @@ public class DataManipulatorController implements Initializable {
     final TreeItem<UINode> root =
         new RecursiveTreeItem<UINode>(UINodes, RecursiveTreeObject::getChildren);
 
-    treeView
+    treeViewNodes
         .getColumns()
         .setAll(ID, xCoord, yCoord, building, floor, longName, shortName, UINodeType);
 
@@ -164,9 +174,9 @@ public class DataManipulatorController implements Initializable {
     shortName.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     UINodeType.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
-    treeView.setRoot(root);
-    treeView.setEditable(true);
-    treeView.setShowRoot(false);
+    treeViewNodes.setRoot(root);
+    treeViewNodes.setEditable(true);
+    treeViewNodes.setShowRoot(false);
 
     filterTextFieldNodes
         .textProperty()
@@ -175,7 +185,7 @@ public class DataManipulatorController implements Initializable {
               @Override
               public void changed(
                   ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                treeView.setPredicate(
+                treeViewNodes.setPredicate(
                     new Predicate<TreeItem<UINode>>() {
                       @Override
                       public boolean test(TreeItem<UINode> UINode) {
@@ -195,7 +205,7 @@ public class DataManipulatorController implements Initializable {
      */
 
     JFXTreeTableColumn<UIEdge, String> IDE = new JFXTreeTableColumn<>("ID");
-    IDE.setPrefWidth(100);
+    IDE.setPrefWidth(150);
     IDE.setCellValueFactory(
         new Callback<TreeTableColumn.CellDataFeatures<UIEdge, String>, ObservableValue<String>>() {
           @Override
@@ -206,7 +216,7 @@ public class DataManipulatorController implements Initializable {
         });
 
     JFXTreeTableColumn<UIEdge, String> Node1 = new JFXTreeTableColumn<>("Node 1");
-    Node1.setPrefWidth(100);
+    Node1.setPrefWidth(90);
     Node1.setCellValueFactory(
         new Callback<TreeTableColumn.CellDataFeatures<UIEdge, String>, ObservableValue<String>>() {
           @Override
@@ -217,7 +227,7 @@ public class DataManipulatorController implements Initializable {
         });
 
     JFXTreeTableColumn<UIEdge, String> Node2 = new JFXTreeTableColumn<>("Node 2");
-    Node2.setPrefWidth(100);
+    Node2.setPrefWidth(90);
     Node2.setCellValueFactory(
         new Callback<TreeTableColumn.CellDataFeatures<UIEdge, String>, ObservableValue<String>>() {
           @Override
@@ -226,8 +236,6 @@ public class DataManipulatorController implements Initializable {
             return param.getValue().getValue().node2ID;
           }
         });
-
-    ObservableList<UIEdge> UIEdges = FXCollections.observableArrayList();
 
     List<Edge> Edges = edges.getAllEdges();
     for (Edge edge : Edges) {
@@ -254,11 +262,11 @@ public class DataManipulatorController implements Initializable {
               @Override
               public void changed(
                   ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                treeView.setPredicate(
-                    new Predicate<TreeItem<UINode>>() {
+                treeViewEdges.setPredicate(
+                    new Predicate<TreeItem<UIEdge>>() {
                       @Override
-                      public boolean test(TreeItem<UINode> UINode) {
-                        Boolean flag = UINode.getValue().ID.getValue().contains(newValue);
+                      public boolean test(TreeItem<UIEdge> UIEdge) {
+                        Boolean flag = UIEdge.getValue().ID.getValue().contains(newValue);
                         return flag;
                       }
                     });
@@ -268,5 +276,58 @@ public class DataManipulatorController implements Initializable {
 
   public void clearText(MouseEvent mouseEvent) {
     filterTextFieldNodes.setText("");
+  }
+
+  public void viewerSwitcher(ActionEvent actionEvent) {
+    boolean isSelected = switcher.isSelected();
+    if (isSelected) {
+      filterTextFieldEdges.setVisible(false);
+      filterTextFieldNodes.setVisible(false);
+      updateNodesButton.setVisible(false);
+      updateEdgesButton.setVisible(false);
+      treeViewNodes.setVisible(false);
+      treeViewEdges.setVisible(false);
+
+      // set map stuff visible
+    } else {
+      filterTextFieldEdges.setVisible(true);
+      filterTextFieldNodes.setVisible(true);
+      updateNodesButton.setVisible(true);
+      updateEdgesButton.setVisible(true);
+      treeViewNodes.setVisible(true);
+      treeViewEdges.setVisible(true);
+    }
+  }
+
+  public void uploadNodes(ActionEvent actionEvent) throws FileNotFoundException {
+    nodesChooser.setTitle("Select CSV File Nodes");
+    File file = nodesChooser.showOpenDialog(treeViewNodes.getScene().getWindow());
+    csvM.readCSVFileNode(new FileInputStream(file));
+  }
+
+  public void uploadEdges(ActionEvent actionEvent) throws FileNotFoundException {
+    edgesChooser.setTitle("Select CSV File Nodes");
+    File file = edgesChooser.showOpenDialog(treeViewEdges.getScene().getWindow());
+    csvM.readCSVFileNode(new FileInputStream(file));
+  }
+
+  public void updateNodes(ActionEvent actionEvent) throws InstanceNotFoundException {
+    for (UINode nodeUI : UINodes) {
+      boolean isSame = nodeUI.equals(new UINode(nodes.read(nodeUI.getID().toString())));
+      if (!isSame) {
+        // update that node in the db
+
+      }
+    }
+  }
+
+  public void updateEdges(ActionEvent actionEvent) throws Exception {
+    for (UIEdge edgeUI : UIEdges) {
+      boolean isSame = edgeUI.equals(new UIEdge(edges.read(edgeUI.getID().toString())));
+      if (!isSame) {
+        // update that edge in the db
+
+      }
+    }
   }
 }
