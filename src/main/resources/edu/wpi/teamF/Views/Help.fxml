@@ -35,6 +35,21 @@
                         <Font size="24.0" />
                      </font>
                   </JFXButton>
+                  <JFXButton text="How to find a path?">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton text="How to request a service?">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton text="How to upload nodes?">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </VBox>
          </children>
