@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.management.InstanceNotFoundException;
 
 public class EdgeFactory {
 
@@ -63,7 +64,7 @@ public class EdgeFactory {
    * @param id the id of the edge to read
    * @return the edge read
    */
-  public Edge read(String id) {
+  public Edge read(String id) throws Exception {
     Edge edge = null;
     String selectStatement =
         "SELECT * FROM "
@@ -85,6 +86,8 @@ public class EdgeFactory {
                 nodeFactory.read(resultSet.getString(DatabaseManager.NODE_1_KEY)),
                 nodeFactory.read(resultSet.getString(DatabaseManager.NODE_A_KEY)));
       } catch (ValidationException e) {
+        throw e;
+      } catch (InstanceNotFoundException e) {
         throw e;
       }
     } catch (IllegalArgumentException e) {
@@ -120,6 +123,7 @@ public class EdgeFactory {
       preparedStatement.setString(param++, edge.getId());
       preparedStatement.setString(param++, edge.getNode1().getId());
       preparedStatement.setString(param++, edge.getNode2().getId());
+      preparedStatement.setString(param++, edge.getId());
       int numRows = preparedStatement.executeUpdate();
       if (numRows != 1) {
         throw new Exception("Updated " + numRows + " rows");

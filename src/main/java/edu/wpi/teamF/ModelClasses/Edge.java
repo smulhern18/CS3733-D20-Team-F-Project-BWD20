@@ -27,6 +27,7 @@ public class Edge {
   public void setNode1(Node node1) throws ValidationException {
     Validators.nodeValidation(node1);
     this.Node1 = node1;
+    node1.addEdge(this);
   }
 
   public Node getNode2() {
@@ -36,6 +37,7 @@ public class Edge {
   public void setNode2(Node node2) throws ValidationException {
     Validators.nodeValidation(node2);
     this.Node2 = node2;
+    node2.addEdge(this);
   }
 
   public boolean equals(Object other) {

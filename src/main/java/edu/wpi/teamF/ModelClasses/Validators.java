@@ -30,6 +30,9 @@ public class Validators {
   public static final int PASSWORD_MAX_LENGTH = 128;
   public static final int ADDRESS_MIN_LENGTH = 1;
   public static final int ADDRESS_MAX_LENGTH = 64;
+  public static final int DESCRIPTION_MIN_LENGTH = 1;
+  public static final int DESCRIPTION_MAX_LENGTH = 64;
+
 
   public static <T extends Account> void accountValidation(T t, int... constraints)
       throws ValidationException {
@@ -274,6 +277,20 @@ public class Validators {
     nullCheckValidation(PCP, constraints);
     if (PCP.length() < PCP_MIN_LENGTH || PCP.length() > PCP_MAX_LENGTH) {
       throw new ValidationException("PCP is outside the accepted values");
+    }
+  }
+
+  /**
+   * Validation for descriptions
+   *
+   * @param description the desciption to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static void descriptionValidation(String description, int... constraints) throws ValidationException {
+    nullCheckValidation(description, constraints);
+    if (description.length() <DESCRIPTION_MIN_LENGTH || description.length() > DESCRIPTION_MAX_LENGTH) {
+      throw new ValidationException("Description is out of bounds");
     }
   }
 

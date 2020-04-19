@@ -150,7 +150,7 @@ public class AccountFactory {
       System.out.println(e.getMessage() + ", " + e.getClass());
     }
   }
-
+  
   public void delete(String username) {
     String deleteStatement =
         "DELETE FROM "
