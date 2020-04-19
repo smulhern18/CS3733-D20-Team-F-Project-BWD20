@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -21,42 +22,53 @@
                </image>
             </ImageView>
             <AnchorPane fx:id="mapPane" prefHeight="200.0" prefWidth="200.0" />
-            <GridPane alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="217.0" prefWidth="558.0" style="-fx-background-color: #FFFFFF;">
-              <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #00000050;">
                <children>
-                  <Label text="X-coordinate:" GridPane.rowIndex="2" />
-                  <Label text="Y-Coordinate:" GridPane.rowIndex="1" />
-                  <Label text="Short Name:" GridPane.columnIndex="2" />
-                  <Label text="Long Name:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Label text="Building:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Label text="Node ID:" />
-                  <Label text="Type:" GridPane.rowIndex="3" />
-                  <Label text="Floor:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <JFXButton fx:id="deleteButton" style="-fx-background-color: #B53389;" text="Delete" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <JFXButton fx:id="modifyButton" style="-fx-background-color: #B53389;" text="Modify" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                  <JFXTextField fx:id="nodeIDInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" />
-                  <JFXTextField fx:id="yCoorInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <JFXTextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="xCoorInput" />
-                  <JFXTextField fx:id="typeInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <JFXTextField fx:id="shortNameInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="3" />
-                  <JFXTextField fx:id="longNameInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                  <JFXTextField fx:id="buildingInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                  <JFXTextField fx:id="floorInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="101.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                  <JFXButton fx:id="addButton" style="-fx-background-color: #B53389;" text="Add" textFill="WHITE" GridPane.rowIndex="4" />
+                  <StackPane fx:id="modifyPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="239.0" prefWidth="529.0" style="-fx-background-color: #B53389;">
+                     <children>
+                        <GridPane alignment="CENTER_LEFT" prefHeight="321.0" prefWidth="664.0" style="-fx-background-color: #FFFFFF;">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="X-coordinate:" GridPane.rowIndex="2" />
+                              <Label text="Y-Coordinate:" GridPane.rowIndex="1" />
+                              <Label text="Short Name:" GridPane.columnIndex="2" />
+                              <Label text="Long Name:" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <Label text="Building:" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <Label text="Node ID:" />
+                              <Label text="Type:" GridPane.rowIndex="3" />
+                              <Label text="Floor:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <JFXButton fx:id="deleteButton" style="-fx-background-color: #B53389;" text="Delete" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <JFXButton fx:id="modifyButton" style="-fx-background-color: #B53389;" text="Modify" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                              <JFXTextField fx:id="nodeIDInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" />
+                              <JFXTextField fx:id="yCoorInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <JFXTextField maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="xCoorInput" />
+                              <JFXTextField fx:id="typeInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <JFXTextField fx:id="shortNameInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="3" />
+                              <JFXTextField fx:id="longNameInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <JFXTextField fx:id="buildingInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                              <JFXTextField fx:id="floorInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="101.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                              <JFXButton fx:id="addButton" style="-fx-background-color: #B53389;" text="Add" textFill="WHITE" GridPane.rowIndex="4" />
+                           </children>
+                           <StackPane.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </StackPane.margin>
+                        </GridPane>
+                     </children>
+                  </StackPane>
                </children>
-            </GridPane>
+            </StackPane>
          </children>
       </StackPane>
    </children>

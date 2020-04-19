@@ -1,34 +1,58 @@
 package edu.wpi.teamF.Controllers;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXTextField;
 import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Node;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 
 public class DataMapViewController implements Initializable {
+  @FXML
+  private AnchorPane mapPane;
 
-  private static class NodeEventHandler implements EventHandler<ActionEvent> {
+  @FXML
+  private StackPane modifyPane;
 
-    private Node node;
-    NodeEventHandler (Node node) {
-      this.node = node;
-    }
+  @FXML
+  private JFXButton deleteButton;
 
-    @Override
-    public void handle(ActionEvent event) {
+  @FXML
+  private JFXButton modifyButton;
+
+  @FXML
+  private JFXTextField nodeIDInput;
+
+  @FXML
+  private JFXTextField yCoorInput;
+
+  @FXML
+  private JFXTextField xCoorInput;
+
+  @FXML
+  private JFXTextField typeInput;
+
+  @FXML
+  private JFXTextField shortNameInput;
+
+  @FXML
+  private JFXTextField longNameInput;
+
+  @FXML
+  private JFXTextField buildingInput;
+
+  @FXML
+  private JFXTextField floorInput;
 
 
-    }
-  }
-
-  public AnchorPane mapPane;
   private static final int MAP_HEIGHT = 1485;
   private static final int MAP_WIDTH = 2475;
   private NodeFactory nodeFactory = NodeFactory.getFactory();
@@ -53,11 +77,14 @@ public class DataMapViewController implements Initializable {
     button.setPrefSize(12, 12);
     button.setStyle(
         "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px");
-    int xPos = (int) (node.getXCoord() * widthRatio);
-    int yPos = (int) (node.getYCoord() * heightRatio);
+    int xPos = (int) (200 * widthRatio);
+    int yPos = (int) (200 * heightRatio);
     button.setLayoutX(xPos);
     button.setLayoutY(yPos);
-    button.setOnAction();
+    button.setOnAction(
+        action -> {
+          modifyPane.setVisible(true);
+        });
     mapPane.getChildren().add(button);
   }
 
