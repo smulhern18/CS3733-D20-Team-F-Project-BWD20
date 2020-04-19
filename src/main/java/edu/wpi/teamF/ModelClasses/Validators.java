@@ -31,7 +31,8 @@ public class Validators {
   public static final int ADDRESS_MIN_LENGTH = 1;
   public static final int ADDRESS_MAX_LENGTH = 64;
 
-  public static <T extends Account> void accountValidation(T t, int... constraints) throws ValidationException{
+  public static <T extends Account> void accountValidation(T t, int... constraints)
+      throws ValidationException {
     nullCheckValidation(t, constraints);
     Account accountObject = (Account) t;
 

@@ -2,9 +2,8 @@ package edu.wpi.teamF.ModelClasses.Account;
 
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
-import lombok.Data;
 import java.util.Objects;
-
+import lombok.Data;
 
 @Data
 public abstract class Account {
@@ -42,7 +41,14 @@ public abstract class Account {
   private String email;
   private Type type;
 
-  public Account(String firstName, String lastName, String address, String username, String password, Type type) throws Exception {
+  public Account(
+      String firstName,
+      String lastName,
+      String address,
+      String username,
+      String password,
+      Type type)
+      throws Exception {
     setFirstName(firstName);
     setLastName(lastName);
     setAddress(address);
@@ -119,11 +125,11 @@ public abstract class Account {
     if (this == o) return true;
     if (!(o instanceof Account)) return false;
     Account account = (Account) o;
-    return Objects.equals(firstName, account.firstName) &&
-            Objects.equals(lastName, account.lastName) &&
-            Objects.equals(Address, account.Address) &&
-            Objects.equals(Username, account.Username) &&
-            Objects.equals(password, account.password) &&
-            type == account.type;
+    return Objects.equals(firstName, account.firstName)
+        && Objects.equals(lastName, account.lastName)
+        && Objects.equals(Address, account.Address)
+        && Objects.equals(Username, account.Username)
+        && Objects.equals(password, account.password)
+        && type == account.type;
   }
 }

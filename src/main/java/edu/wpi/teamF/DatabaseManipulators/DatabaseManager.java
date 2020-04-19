@@ -9,6 +9,7 @@ public class DatabaseManager {
 
   /** Table names */
   static final String NODES_TABLE_NAME = "nodesTable";
+
   static final String EDGES_TABLE_NAME = "edgesTable";
   static final String SERVICEREQUEST_TABLE_NAME = "serviceRequestsTable";
   static final String ACCOUNT_TABLE_NAME = "accountsTable";

@@ -11,7 +11,8 @@ public abstract class ServiceRequest {
   private Date dateTimeSubmitted;
   private int priority;
 
-  public ServiceRequest(String id, Node location, String description, Date dateTimeSubmitted, int priority){
+  public ServiceRequest(
+      String id, Node location, String description, Date dateTimeSubmitted, int priority) {
     setId(id);
     setLocation(location);
     setDescription(description);
@@ -19,27 +20,27 @@ public abstract class ServiceRequest {
     setPriority(priority);
   }
 
-  public String getId(){
+  public String getId() {
     return id;
   }
 
-  public void setId(String id){
+  public void setId(String id) {
     this.id = id;
   }
 
-  public Node getLocation(){
+  public Node getLocation() {
     return location;
   }
 
-  public void setLocation(Node location){
+  public void setLocation(Node location) {
     this.location = location;
   }
 
-  public String getDescription(){
+  public String getDescription() {
     return description;
   }
 
-  public void setDescription(String description){
+  public void setDescription(String description) {
     this.description = description;
   }
 
@@ -47,15 +48,15 @@ public abstract class ServiceRequest {
     return dateTimeSubmitted;
   }
 
-  public void setDateTimeSubmitted(Date dateTimeSubmitted){
+  public void setDateTimeSubmitted(Date dateTimeSubmitted) {
     this.dateTimeSubmitted = dateTimeSubmitted;
   }
 
-  public int getPriority(){
+  public int getPriority() {
     return priority;
   }
 
-  public void setPriority(int priority){
+  public void setPriority(int priority) {
     this.priority = priority;
   }
 }
