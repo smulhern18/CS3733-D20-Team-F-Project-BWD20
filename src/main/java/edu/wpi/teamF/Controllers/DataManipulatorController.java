@@ -5,11 +5,16 @@ import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
+import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
+import edu.wpi.teamF.ModelClasses.Edge;
+import edu.wpi.teamF.ModelClasses.Node;
+import edu.wpi.teamF.ModelClasses.UIEdge;
+import edu.wpi.teamF.ModelClasses.UINode;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -23,134 +28,132 @@ import javafx.util.Callback;
 
 public class DataManipulatorController implements Initializable {
 
-  public JFXTreeTableView<Node> treeView;
-  public JFXTextField filterTextField;
+  public JFXTreeTableView<UINode> treeView;
+  public JFXTextField filterTextFieldNodes;
+  public JFXTreeTableView<UIEdge> treeViewEdges;
+  public JFXTextField filterTextFieldEdges;
+  NodeFactory nodes = NodeFactory.getFactory();
+  EdgeFactory edges = EdgeFactory.getFactory();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+
+    /*
+
+    NODES
+
+     */
+
     // ID column
-    JFXTreeTableColumn<Node, String> ID = new JFXTreeTableColumn<>("ID");
+    JFXTreeTableColumn<UINode, String> ID = new JFXTreeTableColumn<>("ID");
     ID.setPrefWidth(100);
     ID.setCellValueFactory(
-        new Callback<TreeTableColumn.CellDataFeatures<Node, String>, ObservableValue<String>>() {
+        new Callback<TreeTableColumn.CellDataFeatures<UINode, String>, ObservableValue<String>>() {
           @Override
           public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<Node, String> param) {
+              TreeTableColumn.CellDataFeatures<UINode, String> param) {
             return param.getValue().getValue().ID;
           }
         });
 
     // XCoord Column
-    JFXTreeTableColumn<Node, String> xCoord = new JFXTreeTableColumn<>("xCoord");
+    JFXTreeTableColumn<UINode, String> xCoord = new JFXTreeTableColumn<>("xCoord");
     xCoord.setPrefWidth(100);
     xCoord.setCellValueFactory(
-        new Callback<TreeTableColumn.CellDataFeatures<Node, String>, ObservableValue<String>>() {
+        new Callback<TreeTableColumn.CellDataFeatures<UINode, String>, ObservableValue<String>>() {
           @Override
           public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<Node, String> param) {
+              TreeTableColumn.CellDataFeatures<UINode, String> param) {
             return param.getValue().getValue().xCoord;
           }
         });
 
     // yCoord Column
-    JFXTreeTableColumn<Node, String> yCoord = new JFXTreeTableColumn<>("yCoord");
+    JFXTreeTableColumn<UINode, String> yCoord = new JFXTreeTableColumn<>("yCoord");
     yCoord.setPrefWidth(100);
     yCoord.setCellValueFactory(
-        new Callback<TreeTableColumn.CellDataFeatures<Node, String>, ObservableValue<String>>() {
+        new Callback<TreeTableColumn.CellDataFeatures<UINode, String>, ObservableValue<String>>() {
           @Override
           public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<Node, String> param) {
+              TreeTableColumn.CellDataFeatures<UINode, String> param) {
             return param.getValue().getValue().yCoord;
           }
         });
 
     // Building Column
-    JFXTreeTableColumn<Node, String> building = new JFXTreeTableColumn<>("Building");
+    JFXTreeTableColumn<UINode, String> building = new JFXTreeTableColumn<>("Building");
     building.setPrefWidth(100);
     building.setCellValueFactory(
-        new Callback<TreeTableColumn.CellDataFeatures<Node, String>, ObservableValue<String>>() {
+        new Callback<TreeTableColumn.CellDataFeatures<UINode, String>, ObservableValue<String>>() {
           @Override
           public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<Node, String> param) {
+              TreeTableColumn.CellDataFeatures<UINode, String> param) {
             return param.getValue().getValue().building;
           }
         });
 
     // Floor Column
-    JFXTreeTableColumn<Node, String> floor = new JFXTreeTableColumn<>("Floor");
+    JFXTreeTableColumn<UINode, String> floor = new JFXTreeTableColumn<>("Floor");
     floor.setPrefWidth(100);
     floor.setCellValueFactory(
-        new Callback<TreeTableColumn.CellDataFeatures<Node, String>, ObservableValue<String>>() {
+        new Callback<TreeTableColumn.CellDataFeatures<UINode, String>, ObservableValue<String>>() {
           @Override
           public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<Node, String> param) {
+              TreeTableColumn.CellDataFeatures<UINode, String> param) {
             return param.getValue().getValue().floor;
           }
         });
 
     // Long Name Column
-    JFXTreeTableColumn<Node, String> longName = new JFXTreeTableColumn<>("Long Name");
+    JFXTreeTableColumn<UINode, String> longName = new JFXTreeTableColumn<>("Long Name");
     longName.setPrefWidth(100);
     longName.setCellValueFactory(
-        new Callback<TreeTableColumn.CellDataFeatures<Node, String>, ObservableValue<String>>() {
+        new Callback<TreeTableColumn.CellDataFeatures<UINode, String>, ObservableValue<String>>() {
           @Override
           public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<Node, String> param) {
+              TreeTableColumn.CellDataFeatures<UINode, String> param) {
             return param.getValue().getValue().longName;
           }
         });
 
     // Short Name
-    JFXTreeTableColumn<Node, String> shortName = new JFXTreeTableColumn<>("Short Name");
+    JFXTreeTableColumn<UINode, String> shortName = new JFXTreeTableColumn<>("Short Name");
     shortName.setPrefWidth(100);
     shortName.setCellValueFactory(
-        new Callback<TreeTableColumn.CellDataFeatures<Node, String>, ObservableValue<String>>() {
+        new Callback<TreeTableColumn.CellDataFeatures<UINode, String>, ObservableValue<String>>() {
           @Override
           public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<Node, String> param) {
+              TreeTableColumn.CellDataFeatures<UINode, String> param) {
             return param.getValue().getValue().shortName;
           }
         });
 
-    // Node Type Column
-    JFXTreeTableColumn<Node, String> nodeType = new JFXTreeTableColumn<>("Node Type");
-    nodeType.setPrefWidth(100);
-    nodeType.setCellValueFactory(
-        new Callback<TreeTableColumn.CellDataFeatures<Node, String>, ObservableValue<String>>() {
+    // UINode Type Column
+    JFXTreeTableColumn<UINode, String> UINodeType = new JFXTreeTableColumn<>("Node Type");
+    UINodeType.setPrefWidth(100);
+    UINodeType.setCellValueFactory(
+        new Callback<TreeTableColumn.CellDataFeatures<UINode, String>, ObservableValue<String>>() {
           @Override
           public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<Node, String> param) {
+              TreeTableColumn.CellDataFeatures<UINode, String> param) {
             return param.getValue().getValue().nodeType;
           }
         });
 
-    // Edges Column
-    JFXTreeTableColumn<Node, String> edges = new JFXTreeTableColumn<>("Edges");
-    edges.setPrefWidth(100);
-    edges.setCellValueFactory(
-        new Callback<TreeTableColumn.CellDataFeatures<Node, String>, ObservableValue<String>>() {
-          @Override
-          public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<Node, String> param) {
-            return param.getValue().getValue().edges;
-          }
-        });
+    ObservableList<UINode> UINodes = FXCollections.observableArrayList();
 
-    ObservableList<Node> nodes = FXCollections.observableArrayList();
+    // Add UINodes to the table, by creating new UINodes
+    List<Node> Nodes = nodes.getAllNodes();
+    for (Node node : Nodes) {
+      UINodes.add(new UINode(node));
+    }
 
-    // Add Nodes to the table, by creating new Nodes
+    final TreeItem<UINode> root =
+        new RecursiveTreeItem<UINode>(UINodes, RecursiveTreeObject::getChildren);
 
-    // Test data for now
-    nodes.add(new Node("1", "1", "1", "WPI", "1", "Yeet", "Yt", "Sad", "edg1, edge2"));
-    nodes.add(new Node("2", "1", "1", "WPI", "1", "Yeet", "Yt", "Sad", "edg1, edge2"));
-    nodes.add(new Node("3", "1", "1", "WPI", "1", "Yeet", "Yt", "Sad", "edg1, edge2"));
-    nodes.add(new Node("4", "1", "1", "WPI", "1", "Yeet", "Yt", "Sad", "edg1, edge2"));
-
-    final TreeItem<Node> root =
-        new RecursiveTreeItem<Node>(nodes, RecursiveTreeObject::getChildren);
     treeView
         .getColumns()
-        .setAll(ID, xCoord, yCoord, building, floor, longName, shortName, nodeType, edges);
+        .setAll(ID, xCoord, yCoord, building, floor, longName, shortName, UINodeType);
 
     ID.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     xCoord.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
@@ -159,14 +162,13 @@ public class DataManipulatorController implements Initializable {
     floor.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     longName.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     shortName.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-    nodeType.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-    edges.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    UINodeType.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
     treeView.setRoot(root);
     treeView.setEditable(true);
     treeView.setShowRoot(false);
 
-    filterTextField
+    filterTextFieldNodes
         .textProperty()
         .addListener(
             new ChangeListener<String>() {
@@ -174,12 +176,89 @@ public class DataManipulatorController implements Initializable {
               public void changed(
                   ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 treeView.setPredicate(
-                    new Predicate<TreeItem<Node>>() {
+                    new Predicate<TreeItem<UINode>>() {
                       @Override
-                      public boolean test(TreeItem<Node> node) {
+                      public boolean test(TreeItem<UINode> UINode) {
                         Boolean flag =
-                            node.getValue().ID.getValue().contains(newValue)
-                                || node.getValue().nodeType.getValue().contains(newValue);
+                            UINode.getValue().ID.getValue().contains(newValue)
+                                || UINode.getValue().nodeType.getValue().contains(newValue);
+                        return flag;
+                      }
+                    });
+              }
+            });
+
+    /*
+
+    EDGES
+
+     */
+
+    JFXTreeTableColumn<UIEdge, String> IDE = new JFXTreeTableColumn<>("ID");
+    IDE.setPrefWidth(100);
+    IDE.setCellValueFactory(
+        new Callback<TreeTableColumn.CellDataFeatures<UIEdge, String>, ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIEdge, String> param) {
+            return param.getValue().getValue().ID;
+          }
+        });
+
+    JFXTreeTableColumn<UIEdge, String> Node1 = new JFXTreeTableColumn<>("Node 1");
+    Node1.setPrefWidth(100);
+    Node1.setCellValueFactory(
+        new Callback<TreeTableColumn.CellDataFeatures<UIEdge, String>, ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIEdge, String> param) {
+            return param.getValue().getValue().node1ID;
+          }
+        });
+
+    JFXTreeTableColumn<UIEdge, String> Node2 = new JFXTreeTableColumn<>("Node 2");
+    Node2.setPrefWidth(100);
+    Node2.setCellValueFactory(
+        new Callback<TreeTableColumn.CellDataFeatures<UIEdge, String>, ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIEdge, String> param) {
+            return param.getValue().getValue().node2ID;
+          }
+        });
+
+    ObservableList<UIEdge> UIEdges = FXCollections.observableArrayList();
+
+    List<Edge> Edges = edges.getAllEdges();
+    for (Edge edge : Edges) {
+      UIEdges.add(new UIEdge(edge));
+    }
+
+    final TreeItem<UIEdge> rootE =
+        new RecursiveTreeItem<UIEdge>(UIEdges, RecursiveTreeObject::getChildren);
+
+    treeViewEdges.getColumns().setAll(IDE, Node1, Node2);
+
+    IDE.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    Node1.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    Node2.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+
+    treeViewEdges.setRoot(rootE);
+    treeViewEdges.setEditable(true);
+    treeViewEdges.setShowRoot(false);
+
+    filterTextFieldEdges
+        .textProperty()
+        .addListener(
+            new ChangeListener<String>() {
+              @Override
+              public void changed(
+                  ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                treeView.setPredicate(
+                    new Predicate<TreeItem<UINode>>() {
+                      @Override
+                      public boolean test(TreeItem<UINode> UINode) {
+                        Boolean flag = UINode.getValue().ID.getValue().contains(newValue);
                         return flag;
                       }
                     });
@@ -187,45 +266,7 @@ public class DataManipulatorController implements Initializable {
             });
   }
 
-  public Node createNodefromDB() {
-    return null;
-  }
-
   public void clearText(MouseEvent mouseEvent) {
-    filterTextField.setText("");
-  }
-
-  static class Node extends RecursiveTreeObject<Node> {
-
-    StringProperty ID;
-    StringProperty xCoord;
-    StringProperty yCoord;
-    StringProperty building;
-    StringProperty floor;
-    StringProperty longName;
-    StringProperty shortName;
-    StringProperty nodeType;
-    StringProperty edges;
-
-    public Node(
-        String ID,
-        String xCoord,
-        String yCoord,
-        String building,
-        String floor,
-        String longName,
-        String shortName,
-        String nodeType,
-        String edges) {
-      this.ID = new SimpleStringProperty(ID);
-      this.xCoord = new SimpleStringProperty(xCoord);
-      this.yCoord = new SimpleStringProperty(yCoord);
-      this.building = new SimpleStringProperty(building);
-      this.floor = new SimpleStringProperty(floor);
-      this.longName = new SimpleStringProperty(longName);
-      this.shortName = new SimpleStringProperty(shortName);
-      this.nodeType = new SimpleStringProperty(nodeType);
-      this.edges = new SimpleStringProperty(edges);
-    }
+    filterTextFieldNodes.setText("");
   }
 }

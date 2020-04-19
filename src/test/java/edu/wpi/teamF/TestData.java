@@ -1,8 +1,9 @@
 package edu.wpi.teamF;
 
+import edu.wpi.teamF.ModelClasses.Account.*;
+import edu.wpi.teamF.ModelClasses.Appointment;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
-import edu.wpi.teamF.ModelClasses.ValidationException;
 
 public class TestData {
 
@@ -132,12 +133,62 @@ public class TestData {
         validFloors[3])
   };
 
+  public Node[] validNodesWithEdges = validNodes;
+
   public Edge[] validEdges = {
-    new Edge(validEdgeIDs[0], validNodes[0], validNodes[7]),
-    new Edge(validEdgeIDs[1], validNodes[1], validNodes[6]),
-    new Edge(validEdgeIDs[2], validNodes[2], validNodes[5]),
-    new Edge(validEdgeIDs[3], validNodes[3], validNodes[4])
+    new Edge(validEdgeIDs[0], validNodeIDs[0], validNodeIDs[7]),
+    new Edge(validEdgeIDs[1], validNodeIDs[1], validNodeIDs[6]),
+    new Edge(validEdgeIDs[2], validNodeIDs[2], validNodeIDs[5]),
+    new Edge(validEdgeIDs[3], validNodeIDs[3], validNodeIDs[4])
   };
 
-  public TestData() throws ValidationException {}
+  public String[] validRooms = {"White Room", "Red room", "OR", "OP"};
+
+  public String[] validUserIDs = {"12345632", "12300220", "20120323", "dsjfe1232"};
+  public String[] validPCPs = {"John", "Jack", "Jill", "Jimmy"};
+  public Appointment[] validAppointments = {
+    new Appointment(validNodeIDs[0], validNodes[0], validRooms[0], validUserIDs[0], validPCPs[0]),
+    new Appointment(validNodeIDs[1], validNodes[1], validRooms[1], validUserIDs[1], validPCPs[1]),
+    new Appointment(validNodeIDs[2], validNodes[2], validRooms[2], validUserIDs[2], validPCPs[2]),
+    new Appointment(validNodeIDs[3], validNodes[3], validRooms[3], validUserIDs[3], validPCPs[3]),
+  };
+
+  public String[] validUsernames = {"This one", "TheCuddleMonster", "sjmulhern", "Snuggles"};
+
+  public String[] invalidUsernames = {
+    "", null, "this string is waaaaaaaaay toooooooo loooooooong to be valid"
+  };
+
+  public String[] validPasswords = {
+    "Areally$tr0ngPassw@rd", "aWeakerPassw0rd", "weakPassword", "password"
+  };
+
+  public String[] invalidPasswords = {
+    "weakPWD", "", null, "this string is waaaaaaaaay toooooooo loooooooong to be valid"
+  };
+
+  public String[] validNames = {"Ferdinand", "Nikolas", "Constantine", "Nero"};
+
+  public String[] invalidNames = {
+    "", null, "this string is waaaaaaaaay toooooooo loooooooong to be valid"
+  };
+
+  public String[] validEmails = {
+    "sjmulhern@wpi.edu", "joeBiden@usa.gov", "putin@rus.ru", "wack@giggle.pig"
+  };
+
+  public String[] invalidEmails = {"sjmulhern", "@wpi.edu", "", null};
+
+  public Account.Type[] validAccountTypes = Account.Type.values();
+
+  public Account.Type[] invalidAccountTypes = null;
+
+  public Account[] validAccounts = {
+    new Admin(validNames[0], validNames[0], validEmails[0], validUsernames[0], validPasswords[0]),
+    new Staff(validNames[1], validNames[1], validEmails[1], validUsernames[1], validPasswords[1]),
+    new User(validNames[2], validNames[2], validEmails[2], validUsernames[2], validPasswords[2]),
+    new User(validNames[3], validNames[3], validEmails[3], validUsernames[3], validPasswords[3])
+  };
+
+  public TestData() throws Exception {}
 }

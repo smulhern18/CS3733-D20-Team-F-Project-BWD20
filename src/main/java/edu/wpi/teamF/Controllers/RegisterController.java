@@ -3,6 +3,7 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.AccountFactory;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Account.User;
@@ -34,25 +35,20 @@ public class RegisterController {
   @FXML private JFXButton RegisterButton;
 
   AccountFactory accountFactory = AccountFactory.getFactory();
-  SceneController sceneController = new SceneController();
+  SceneController sceneController = App.getSceneController();
 
   @FXML
-  void attemptRegister(ActionEvent event) throws IOException {
+  void attemptRegister(ActionEvent event) throws Exception {
     String firstName = firstNameInput.getText();
     String lastName = lastNameInput.getText();
     String email = emailInput.getText();
     String username = usernameInput.getText();
     String password = passwordInput.getText();
-    Account account = accountFactory.getAccountByUsername(username);
+    Account account = accountFactory.read(username);
 
     if (account == null && password.length() >= 8 && email.contains("@")) { // The account is valid
       System.out.println("The account is valid");
-      Account newAccount = new User();
-      newAccount.setFirstName(firstName);
-      newAccount.setLastName(lastName);
-      newAccount.setAddress(email);
-      newAccount.setUsername(username);
-      newAccount.setPassword(password);
+      Account newAccount = new User(firstName, lastName, email, username, password);
       accountFactory.create(newAccount);
       switchToLogin(event);
     } else if (!email.contains("@")) { // The email is not valid
@@ -63,7 +59,7 @@ public class RegisterController {
       incorrectLabel.setVisible(true);
       incorrectLabel.setText("The username already exists");
       usernameInput.setUnFocusColor(Color.RED);
-    } else { // The password entered contains less than 8 charaters
+    } else { // The password entered contains less than 8 characters
       incorrectLabel.setVisible(true);
       incorrectLabel.setText("The password needs to contain atleast 8 characters");
       passwordInput.setUnFocusColor(Color.RED);

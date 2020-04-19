@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.management.InstanceNotFoundException;
 
 public class NodeFactory {
 
@@ -78,7 +79,7 @@ public class NodeFactory {
    * @param id the node id to read
    * @return the node read
    */
-  public Node read(String id) throws Exception {
+  public Node read(String id) throws InstanceNotFoundException {
     Node node = null;
     String selectStatement =
         "SELECT * FROM "
@@ -93,17 +94,18 @@ public class NodeFactory {
 
       try {
         ResultSet resultSet = preparedStatement.executeQuery();
-        resultSet.next();
-        node =
-            new Node(
-                resultSet.getString(DatabaseManager.NODEID_KEY),
-                resultSet.getShort(DatabaseManager.X_COORDINATE_KEY),
-                resultSet.getShort(DatabaseManager.Y_COORDINATE_KEY),
-                resultSet.getString(DatabaseManager.BUILDING_KEY),
-                resultSet.getString(DatabaseManager.LONG_NAME_KEY),
-                resultSet.getString(DatabaseManager.SHORT_NAME_KEY),
-                Node.NodeType.getEnum(resultSet.getString(DatabaseManager.TYPE_KEY)),
-                resultSet.getShort(DatabaseManager.FLOOR_KEY));
+        if (resultSet.next()) {
+          node =
+              new Node(
+                  resultSet.getString(DatabaseManager.NODEID_KEY),
+                  resultSet.getShort(DatabaseManager.X_COORDINATE_KEY),
+                  resultSet.getShort(DatabaseManager.Y_COORDINATE_KEY),
+                  resultSet.getString(DatabaseManager.BUILDING_KEY),
+                  resultSet.getString(DatabaseManager.LONG_NAME_KEY),
+                  resultSet.getString(DatabaseManager.SHORT_NAME_KEY),
+                  Node.NodeType.getEnum(resultSet.getString(DatabaseManager.TYPE_KEY)),
+                  resultSet.getShort(DatabaseManager.FLOOR_KEY));
+        }
       } catch (ValidationException e) {
         throw e;
       }
