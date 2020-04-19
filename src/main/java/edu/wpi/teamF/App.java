@@ -29,7 +29,7 @@ public class App extends Application {
   public void start(Stage primaryStage) throws IOException {
 
     try {
-      Parent root = FXMLLoader.load(getClass().getResource("views/MainMenu.fxml"));
+      Parent root = FXMLLoader.load(getClass().getResource("Views/MainMenu.fxml"));
       Scene scene = new Scene(root);
       primaryStage.setScene(scene);
       PS = primaryStage;
