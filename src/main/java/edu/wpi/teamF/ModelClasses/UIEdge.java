@@ -12,7 +12,7 @@ public class UIEdge extends RecursiveTreeObject<UIEdge> {
 
   public UIEdge(Edge edge) {
     this.ID = new SimpleStringProperty(edge.getId());
-    this.node1ID = new SimpleStringProperty(edge.getNode1().getId());
-    this.node2ID = new SimpleStringProperty(edge.getNode1().getId());
+    this.node1ID = new SimpleStringProperty(edge.getNode1());
+    this.node2ID = new SimpleStringProperty(edge.getNode2());
   }
 }

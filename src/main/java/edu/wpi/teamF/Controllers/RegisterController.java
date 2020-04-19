@@ -14,8 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 
-import javax.management.InstanceNotFoundException;
-
 public class RegisterController {
 
   @FXML private Label incorrectLabel;
@@ -40,7 +38,7 @@ public class RegisterController {
   SceneController sceneController = App.getSceneController();
 
   @FXML
-  void attemptRegister(ActionEvent event) throws Exception{
+  void attemptRegister(ActionEvent event) throws Exception {
     String firstName = firstNameInput.getText();
     String lastName = lastNameInput.getText();
     String email = emailInput.getText();
@@ -50,7 +48,7 @@ public class RegisterController {
 
     if (account == null && password.length() >= 8 && email.contains("@")) { // The account is valid
       System.out.println("The account is valid");
-      Account newAccount = new User(firstName, lastName, email, username,password);
+      Account newAccount = new User(firstName, lastName, email, username, password);
       accountFactory.create(newAccount);
       switchToLogin(event);
     } else if (!email.contains("@")) { // The email is not valid

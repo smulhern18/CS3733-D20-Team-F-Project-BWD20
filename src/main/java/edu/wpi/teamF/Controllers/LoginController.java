@@ -5,17 +5,13 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.AccountFactory;
-import edu.wpi.teamF.ModelClasses.Account.Account;
-import java.io.IOException;
-
 import edu.wpi.teamF.ModelClasses.Account.PasswordHasher;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
-
-import javax.management.InstanceNotFoundException;
 
 public class LoginController {
 

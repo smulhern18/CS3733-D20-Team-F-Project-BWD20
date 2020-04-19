@@ -2,7 +2,6 @@ package edu.wpi.teamF.ModelClasses;
 
 import java.util.HashSet;
 import java.util.Set;
-import lombok.Data;
 
 public class Node {
 
