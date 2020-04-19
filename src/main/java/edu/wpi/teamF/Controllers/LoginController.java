@@ -3,6 +3,7 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.AccountFactory;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import java.io.IOException;
@@ -11,7 +12,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
-
 
 public class LoginController {
 
@@ -27,7 +27,7 @@ public class LoginController {
 
   private AccountFactory accountFactory = AccountFactory.getFactory();
 
-  SceneController sceneController = new SceneController();
+  SceneController sceneController = App.getSceneController();
 
   @FXML
   void enableLogin(KeyEvent event) {
@@ -64,5 +64,4 @@ public class LoginController {
   void switchToRegister(ActionEvent event) throws IOException {
     sceneController.switchScene("Register");
   }
-
 }
