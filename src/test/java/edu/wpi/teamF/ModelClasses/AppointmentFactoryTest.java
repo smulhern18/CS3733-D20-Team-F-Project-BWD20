@@ -25,12 +25,14 @@ public class AppointmentFactoryTest {
 
   @Test
   public void testCreateReadDelete() {
+
      try {
     appointmentFactory.create(null);
     fail("Creating a null value is unacceptable");
     } catch (ValidationException e) {
     //ignore as expected
      }
+
     try {
       for (Appointment appointment : validAppointments) {
         appointmentFactory.create(appointment);

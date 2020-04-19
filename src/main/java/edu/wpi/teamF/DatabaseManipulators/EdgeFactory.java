@@ -1,16 +1,14 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
 import edu.wpi.teamF.ModelClasses.Edge;
-import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import java.util.List;
+import javax.management.InstanceNotFoundException;
 
 public class EdgeFactory {
 
@@ -22,7 +20,6 @@ public class EdgeFactory {
     return factory;
   }
 
-
   /**
    * Creates edge entries in database
    *
@@ -31,22 +28,22 @@ public class EdgeFactory {
    */
   public void create(Edge edge) throws ValidationException {
     String insertStatement =
-            "INSERT INTO "
-                    + DatabaseManager.EDGES_TABLE_NAME
-                    + " ( "
-                    + DatabaseManager.EDGEID_KEY
-                    + ", "
-                    + DatabaseManager.NODE_1_KEY
-                    + ", "
-                    + DatabaseManager.NODE_A_KEY
-                    + " ) "
-                    + "VALUES (?, ?, ?)";
+        "INSERT INTO "
+            + DatabaseManager.EDGES_TABLE_NAME
+            + " ( "
+            + DatabaseManager.EDGEID_KEY
+            + ", "
+            + DatabaseManager.NODE_1_KEY
+            + ", "
+            + DatabaseManager.NODE_A_KEY
+            + " ) "
+            + "VALUES (?, ?, ?)";
     Validators.edgeValidation(edge);
     try (PreparedStatement prepareStatement =
-                 DatabaseManager.getConnection().prepareStatement(insertStatement)) {
+        DatabaseManager.getConnection().prepareStatement(insertStatement)) {
       int param = 1;
       prepareStatement.setString(param++, edge.getId());
-      prepareStatement.setString(param++,edge.getNode1().getId());
+      prepareStatement.setString(param++, edge.getNode1().getId());
       prepareStatement.setString(param++, edge.getNode2().getId());
       try {
         int numRows = prepareStatement.executeUpdate();
@@ -67,28 +64,30 @@ public class EdgeFactory {
    * @param id the id of the edge to read
    * @return the edge read
    */
-  public Edge read(String id){
+  public Edge read(String id) throws Exception {
     Edge edge = null;
     String selectStatement =
-            "SELECT * FROM "
-                    + DatabaseManager.EDGES_TABLE_NAME
-                    + " WHERE "
-                    + DatabaseManager.EDGEID_KEY
-                    + " = ?";
+        "SELECT * FROM "
+            + DatabaseManager.EDGES_TABLE_NAME
+            + " WHERE "
+            + DatabaseManager.EDGEID_KEY
+            + " = ?";
 
     try (PreparedStatement preparedStatement =
-                 DatabaseManager.getConnection().prepareStatement(selectStatement)) {
+        DatabaseManager.getConnection().prepareStatement(selectStatement)) {
       preparedStatement.setString(1, id);
 
       try {
         ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.next();
         edge =
-                new Edge(
-                        resultSet.getString(DatabaseManager.EDGEID_KEY),
-                        nodeFactory.read(resultSet.getString(DatabaseManager.NODE_1_KEY)),
-                        nodeFactory.read(resultSet.getString(DatabaseManager.NODE_A_KEY)));
+            new Edge(
+                resultSet.getString(DatabaseManager.EDGEID_KEY),
+                nodeFactory.read(resultSet.getString(DatabaseManager.NODE_1_KEY)),
+                nodeFactory.read(resultSet.getString(DatabaseManager.NODE_A_KEY)));
       } catch (ValidationException e) {
+        throw e;
+      } catch (InstanceNotFoundException e) {
         throw e;
       }
     } catch (IllegalArgumentException e) {
@@ -99,7 +98,6 @@ public class EdgeFactory {
     return edge;
   }
 
-
   /**
    * Updates edge entries in the database
    *
@@ -107,24 +105,25 @@ public class EdgeFactory {
    */
   public void update(Edge edge) {
     String updateStatement =
-            "UPDATE "
-                    + DatabaseManager.EDGES_TABLE_NAME
-                    + " SET "
-                    + DatabaseManager.EDGEID_KEY
-                    + " = ?, "
-                    + DatabaseManager.NODE_1_KEY
-                    + " = ?, "
-                    + DatabaseManager.NODE_A_KEY
-                    + " = ? "
-                    + "WHERE "
-                    + DatabaseManager.EDGEID_KEY
-                    + " = ?";
+        "UPDATE "
+            + DatabaseManager.EDGES_TABLE_NAME
+            + " SET "
+            + DatabaseManager.EDGEID_KEY
+            + " = ?, "
+            + DatabaseManager.NODE_1_KEY
+            + " = ?, "
+            + DatabaseManager.NODE_A_KEY
+            + " = ? "
+            + "WHERE "
+            + DatabaseManager.EDGEID_KEY
+            + " = ?";
     try (PreparedStatement preparedStatement =
-                 DatabaseManager.getConnection().prepareStatement(updateStatement)) {
+        DatabaseManager.getConnection().prepareStatement(updateStatement)) {
       int param = 1;
       preparedStatement.setString(param++, edge.getId());
       preparedStatement.setString(param++, edge.getNode1().getId());
       preparedStatement.setString(param++, edge.getNode2().getId());
+      preparedStatement.setString(param++, edge.getId());
       int numRows = preparedStatement.executeUpdate();
       if (numRows != 1) {
         throw new Exception("Updated " + numRows + " rows");
@@ -132,7 +131,6 @@ public class EdgeFactory {
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
-
   }
 
   /**
@@ -142,13 +140,13 @@ public class EdgeFactory {
    */
   public void delete(String id) {
     String deleteStatement =
-            "DELETE FROM "
-                    + DatabaseManager.EDGES_TABLE_NAME
-                    + " WHERE "
-                    + DatabaseManager.EDGEID_KEY
-                    + " = ?";
+        "DELETE FROM "
+            + DatabaseManager.EDGES_TABLE_NAME
+            + " WHERE "
+            + DatabaseManager.EDGEID_KEY
+            + " = ?";
     try (PreparedStatement preparedStatement =
-                 DatabaseManager.getConnection().prepareStatement(deleteStatement)) {
+        DatabaseManager.getConnection().prepareStatement(deleteStatement)) {
       preparedStatement.setString(1, id);
 
       int numRows = preparedStatement.executeUpdate();
@@ -158,7 +156,6 @@ public class EdgeFactory {
     } catch (SQLException e) {
       System.out.println("Error: " + e.getMessage() + ", " + e.getCause());
     }
-
   }
 
   /**
@@ -171,20 +168,20 @@ public class EdgeFactory {
     String selectStatement = "SELECT * FROM " + DatabaseManager.EDGES_TABLE_NAME;
 
     try (PreparedStatement preparedStatement =
-                 DatabaseManager.getConnection().prepareStatement(selectStatement);
-         ResultSet resultSet = preparedStatement.executeQuery()) {;
+            DatabaseManager.getConnection().prepareStatement(selectStatement);
+        ResultSet resultSet = preparedStatement.executeQuery()) {;
       edges = new ArrayList<>();
       while (resultSet.next()) {
         edges.add(
-                new Edge(
-                        resultSet.getString(DatabaseManager.EDGEID_KEY),
-                        nodeFactory.read(resultSet.getString(DatabaseManager.NODE_1_KEY)),
-                        nodeFactory.read(resultSet.getString(DatabaseManager.NODE_A_KEY))));
+            new Edge(
+                resultSet.getString(DatabaseManager.EDGEID_KEY),
+                nodeFactory.read(resultSet.getString(DatabaseManager.NODE_1_KEY)),
+                nodeFactory.read(resultSet.getString(DatabaseManager.NODE_A_KEY))));
       }
     } catch (Exception e) {
       System.out.println(
-              "Exception in EdgeFactory getAllEdges: " + e.getMessage() + ", " + e.getClass());
+          "Exception in EdgeFactory getAllEdges: " + e.getMessage() + ", " + e.getClass());
     }
     return edges;
   }
-  }
+}

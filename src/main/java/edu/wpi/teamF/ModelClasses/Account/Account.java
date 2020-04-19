@@ -3,30 +3,29 @@ package edu.wpi.teamF.ModelClasses.Account;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
 import java.util.Objects;
-import javax.swing.*;
 import lombok.Data;
 
 @Data
 public abstract class Account {
 
-  public enum Type {
-    ADMIN("Admin"),
-    STAFF("Staff"),
-    USER("User");
+  public static enum Type {
+    ADMIN(0),
+    STAFF(1),
+    USER(2);
 
-    private String typeString;
+    private Integer typeOrdinal;
 
-    Type(String typeString) {
-      this.typeString = typeString;
+    Type(Integer typeOrdinal) {
+      this.typeOrdinal = typeOrdinal;
     }
 
-    public String getTypeString() {
-      return typeString;
+    public Integer getTypeOrdinal() {
+      return typeOrdinal;
     }
 
-    public Type getEnum(String type) {
+    public static Type getEnum(Integer type) {
       for (Type v : values()) {
-        if (v.getTypeString().equals(type)) {
+        if (v.getTypeOrdinal().equals(type)) {
           return v;
         }
       }
@@ -34,7 +33,7 @@ public abstract class Account {
     }
   }
 
-  private String FirstName;
+  private String firstName;
   private String lastName;
   private String Address;
   private String Username;
@@ -43,30 +42,28 @@ public abstract class Account {
   private Type type;
 
   public Account(
-      String FirstName,
+      String firstName,
       String lastName,
-      String Address,
-      String Username,
+      String address,
+      String username,
       String password,
-      String email,
       Type type)
-      throws ValidationException {
-    setFirstName(FirstName);
+      throws Exception {
+    setFirstName(firstName);
     setLastName(lastName);
-    setAddress(Address);
-    setUsername(Username);
+    setAddress(address);
+    setUsername(username);
     setPassword(password);
-    setEmail(email);
     setType(type);
   }
 
   public String getFirstName() {
-    return FirstName;
+    return firstName;
   }
 
   public void setFirstName(String firstName) throws ValidationException {
     Validators.nameValidation(firstName);
-    this.FirstName = firstName;
+    this.firstName = firstName;
   }
 
   public String getLastName() {
@@ -128,7 +125,7 @@ public abstract class Account {
     if (this == o) return true;
     if (!(o instanceof Account)) return false;
     Account account = (Account) o;
-    return Objects.equals(FirstName, account.FirstName)
+    return Objects.equals(firstName, account.firstName)
         && Objects.equals(lastName, account.lastName)
         && Objects.equals(Address, account.Address)
         && Objects.equals(Username, account.Username)

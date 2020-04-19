@@ -3,7 +3,6 @@ package edu.wpi.teamF.DatabaseManipulators;
 import edu.wpi.teamF.ModelClasses.Appointment;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,9 +16,12 @@ public class AppointmentFactory {
     return factory;
   }
 
-
-  public void create(Appointment appointment) throws ValidationException{
-
+  public void create(Appointment appointment) throws ValidationException {
+    try {
+      Validators.appointmentValidation(appointment);
+    } catch (ValidationException e) {
+      System.out.println(e.getMessage() + ", " + e.getClass());
+    }
     String insertStatement =
         "INSERT INTO "
             + DatabaseManager.APPOINTMENTS_TABLE_NAME
@@ -48,9 +50,8 @@ public class AppointmentFactory {
       try {
         int numRows = prepareStatement.executeUpdate();
         if (numRows < 1) {
-          throw new SQLException("Created more than one rows");
+          throw new SQLException("Created more than one row");
         }
-
       } catch (SQLException e) {
         System.out.println(e.getMessage());
       }
@@ -108,8 +109,8 @@ public class AppointmentFactory {
             + DatabaseManager.USERID_KEY
             + " = ?, "
             + DatabaseManager.PCP_KEY
-            + " = ?, "
-            + "WHERE "
+            + " = ? "
+            + "WHERE  "
             + DatabaseManager.APPOINTMENT_ID_KEY
             + " = ?";
     try (PreparedStatement preparedStatement =
