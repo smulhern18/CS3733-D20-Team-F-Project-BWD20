@@ -124,7 +124,7 @@ public class MaintenanceRequestTest {
   }
 
   @Test
-  public void testGetAllNodes() {
+  public void testGetAllMaintenanceRequests() {
     MaintenanceRequest main1 = validMaintenanceRequest[0];
     MaintenanceRequest main2 = validMaintenanceRequest[1];
     MaintenanceRequest main3 = validMaintenanceRequest[2];

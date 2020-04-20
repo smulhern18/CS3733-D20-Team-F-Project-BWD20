@@ -7,7 +7,9 @@ import edu.wpi.teamF.ModelClasses.Validators;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MaintenanceRequestFactory {
@@ -41,7 +43,8 @@ public class MaintenanceRequestFactory {
       prepareStatement.setString(param++, maintenanceRequest.getId());
       prepareStatement.setString(param++, maintenanceRequest.getLocation().getId());
       prepareStatement.setString(param++, maintenanceRequest.getDescription());
-      prepareStatement.setString(param++, maintenanceRequest.getDateTimeSubmitted().toString());
+      prepareStatement.setTimestamp(
+          param++, new Timestamp(maintenanceRequest.getDateTimeSubmitted().getTime()));
       prepareStatement.setInt(param++, maintenanceRequest.getPriority());
 
       try {
@@ -78,7 +81,7 @@ public class MaintenanceRequestFactory {
                   resultSet.getString(DatabaseManager.SERVICEID_KEY),
                   nodeFactory.read(resultSet.getString(DatabaseManager.NODEID_KEY)),
                   resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
-                  resultSet.getDate(DatabaseManager.TIME_CREATED_KEY),
+                  new Date(resultSet.getTimestamp(DatabaseManager.TIME_CREATED_KEY).getTime()),
                   resultSet.getInt(DatabaseManager.PRIORITY_KEY));
         }
       } catch (ValidationException e) {
@@ -117,7 +120,8 @@ public class MaintenanceRequestFactory {
       preparedStatement.setString(param++, maintenanceRequest.getId());
       preparedStatement.setString(param++, maintenanceRequest.getLocation().getId());
       preparedStatement.setString(param++, maintenanceRequest.getDescription());
-      preparedStatement.setString(param++, maintenanceRequest.getDateTimeSubmitted().toString());
+      preparedStatement.setTimestamp(
+          param++, new Timestamp(maintenanceRequest.getDateTimeSubmitted().getTime()));
       preparedStatement.setInt(param++, maintenanceRequest.getPriority());
       int numRows = preparedStatement.executeUpdate();
       if (numRows != 1) {
@@ -171,7 +175,7 @@ public class MaintenanceRequestFactory {
                   resultSet.getString(DatabaseManager.SERVICEID_KEY),
                   nodeFactory.read(resultSet.getString(DatabaseManager.NODEID_KEY)),
                   resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
-                  resultSet.getDate(DatabaseManager.TIME_CREATED_KEY),
+                  new Date(resultSet.getTimestamp(DatabaseManager.TIME_CREATED_KEY).getTime()),
                   resultSet.getInt(DatabaseManager.PRIORITY_KEY)));
         }
       } catch (ValidationException e) {
@@ -199,7 +203,7 @@ public class MaintenanceRequestFactory {
                 resultSet.getString(DatabaseManager.SERVICEID_KEY),
                 nodeFactory.read(resultSet.getString(DatabaseManager.NODEID_KEY)),
                 resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
-                resultSet.getDate(DatabaseManager.TIME_CREATED_KEY),
+                new Date(resultSet.getTimestamp(DatabaseManager.TIME_CREATED_KEY).getTime()),
                 resultSet.getInt(DatabaseManager.PRIORITY_KEY)));
       }
     } catch (Exception e) {
