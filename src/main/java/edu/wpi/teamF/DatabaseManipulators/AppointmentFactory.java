@@ -16,8 +16,6 @@ public class AppointmentFactory {
     return factory;
   }
 
-
-
   public void create(Appointment appointment) throws ValidationException {
     try {
       Validators.appointmentValidation(appointment);
@@ -152,7 +150,4 @@ public class AppointmentFactory {
       System.out.println("Error: " + e.getMessage() + ", " + e.getCause());
     }
   }
-
-
-  public void delete(String id) {}
 }

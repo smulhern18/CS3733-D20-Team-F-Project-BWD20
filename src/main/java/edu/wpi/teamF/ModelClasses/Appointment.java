@@ -8,7 +8,6 @@ public class Appointment {
   private String userID;
   private String PCP;
 
-
   public Appointment(String id, Node location, String room, String userID, String PCP)
       throws ValidationException {
     setId(id);
@@ -112,5 +111,4 @@ public class Appointment {
     Validators.PCPValidation(PCP);
     this.PCP = PCP;
   }
-
 }

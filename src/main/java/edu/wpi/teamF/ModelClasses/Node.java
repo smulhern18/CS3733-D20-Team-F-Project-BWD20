@@ -1,11 +1,8 @@
 package edu.wpi.teamF.ModelClasses;
 
+import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import java.util.HashSet;
 import java.util.Set;
-
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
-import lombok.Data;
-
 import javax.management.InstanceNotFoundException;
 
 public class Node {
@@ -121,11 +118,10 @@ public class Node {
    */
   public void setEdges(Set<Edge> edge) throws InstanceNotFoundException {
     this.edges = edge;
-    for (Edge anEdge : edge){
-      if (anEdge.getNode1().equals(this.id)){
+    for (Edge anEdge : edge) {
+      if (anEdge.getNode1().equals(this.id)) {
         neighborNodes.add(nodeFactory.read(anEdge.getNode2()));
-      }
-      else {
+      } else {
         neighborNodes.add(nodeFactory.read(anEdge.getNode1()));
       }
     }
@@ -138,10 +134,9 @@ public class Node {
    */
   public void addEdge(Edge edge) throws InstanceNotFoundException {
     this.edges.add(edge);
-    if (edge.getNode1().equals(this.id)){
+    if (edge.getNode1().equals(this.id)) {
       neighborNodes.add(nodeFactory.read(edge.getNode2()));
-    }
-    else {
+    } else {
       neighborNodes.add(nodeFactory.read(edge.getNode1()));
     }
   }
@@ -329,10 +324,7 @@ public class Node {
     this.floor = floor;
   }
 
-
-  public Set<Node> getNeighborNodes(){ return neighborNodes; }
-
+  public Set<Node> getNeighborNodes() {
+    return neighborNodes;
+  }
 }
-
-
-

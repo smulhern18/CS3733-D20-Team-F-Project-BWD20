@@ -39,9 +39,6 @@ public abstract class Account {
   private String Username;
   private String password;
   private Type type;
-<<<<<<< HEAD
-=======
-
 
   public Account(
       String firstName,
@@ -133,6 +130,4 @@ public abstract class Account {
       return false;
     }
   }
-
->>>>>>> pathfinderController
 }

@@ -10,7 +10,6 @@ public class RouteNode implements Comparable<RouteNode> {
   private double routeScore;
   private double estimatedScore;
 
-
   public RouteNode(Node node) {
     this(node, null, Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
   }
@@ -30,13 +29,11 @@ public class RouteNode implements Comparable<RouteNode> {
 
   public void setNode(Node node) {
     this.node = node;
-
   }
 
   public RouteNode getPrevious() {
     return previous;
   }
-<<<<<<< HEAD
 
   public void setPrevious(RouteNode previous) {
     this.previous = previous;
@@ -69,6 +66,3 @@ public class RouteNode implements Comparable<RouteNode> {
     }
   }
 }
-=======
-}
->>>>>>> pathfinderController

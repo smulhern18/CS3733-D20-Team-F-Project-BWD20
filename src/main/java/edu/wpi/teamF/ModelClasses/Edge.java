@@ -38,8 +38,6 @@ public class Edge {
     this.Node2 = node2;
   }
 
-
-
   public boolean equals(Object other) {
     boolean isEqual = false;
     if (other instanceof Edge) {
@@ -51,6 +49,4 @@ public class Edge {
     }
     return isEqual;
   }
-
-
 }
