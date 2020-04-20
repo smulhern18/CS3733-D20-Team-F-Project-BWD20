@@ -3,9 +3,7 @@ package edu.wpi.teamF.ModelClasses.Account;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
 import java.util.Objects;
-import lombok.Data;
 
-@Data
 public abstract class Account {
 
   public static enum Type {
