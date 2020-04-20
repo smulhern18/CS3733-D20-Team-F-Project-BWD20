@@ -31,14 +31,44 @@ public class UINode extends RecursiveTreeObject<UINode> {
   }
 
   public Node UItoNode() throws ValidationException {
-    return new Node(
-        "" + ID,
-        Short.parseShort(xCoord.toString()),
-        Short.parseShort(yCoord.toString()),
-        building.toString(),
-        longName.toString(),
-        shortName.toString(),
-        Node.NodeType.getEnum(nodeType.toString()),
-        Short.parseShort(floor.toString()));
+    try {
+      return new Node(
+          "" + ID.get(),
+          Short.parseShort(xCoord.get()),
+          Short.parseShort(yCoord.get()),
+          building.get(),
+          longName.get(),
+          shortName.get(),
+          Node.NodeType.getEnum(nodeType.get()),
+          Short.parseShort(floor.get()));
+    } catch (Exception e) {
+      System.out.println(e.getClass() + "" + e.getMessage());
+      System.out.println(xCoord.get());
+    }
+    return null;
+  }
+
+  /**
+   * Checks if two nodes are equal
+   *
+   * @param other the otherNode to check against
+   * @return if the nodes are equal without edges
+   */
+  public boolean equalsNode(Object other) {
+    boolean isEqual = false;
+    if (other instanceof Node) {
+      Node otherNode = (Node) other;
+
+      isEqual =
+          this.ID.toString().equals(otherNode.getId())
+              && this.getXCoord().get().equals("" + otherNode.getXCoord())
+              && this.getYCoord().get().equals("" + otherNode.getYCoord())
+              && this.getFloor().get().equals("" + otherNode.getFloor())
+              && this.getNodeType().get().equals(otherNode.getType().getTypeString())
+              && this.getBuilding().get().equals(otherNode.getBuilding())
+              && this.getLongName().get().equals(otherNode.getLongName())
+              && this.getShortName().get().equals(otherNode.getShortName());
+    }
+    return isEqual;
   }
 }

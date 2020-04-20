@@ -5,10 +5,7 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.DatabaseManipulators.CSVManipulator;
 import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
-import edu.wpi.teamF.ModelClasses.Edge;
-import edu.wpi.teamF.ModelClasses.Node;
-import edu.wpi.teamF.ModelClasses.UIEdge;
-import edu.wpi.teamF.ModelClasses.UINode;
+import edu.wpi.teamF.ModelClasses.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -39,6 +36,9 @@ public class DataManipulatorController implements Initializable {
   public JFXToggleButton switcher;
   public JFXButton updateNodesButton;
   public JFXButton updateEdgesButton;
+  public JFXButton deleteNodeButton;
+  public JFXTextField nodeToDelete;
+  public JFXTextField edgeToDelete;
   NodeFactory nodes = NodeFactory.getFactory();
   EdgeFactory edges = EdgeFactory.getFactory();
   FileChooser nodesChooser = new FileChooser();
@@ -165,7 +165,7 @@ public class DataManipulatorController implements Initializable {
         .getColumns()
         .setAll(ID, xCoord, yCoord, building, floor, longName, shortName, UINodeType);
 
-    ID.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    // ID.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     xCoord.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     yCoord.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     building.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
@@ -311,23 +311,40 @@ public class DataManipulatorController implements Initializable {
     csvM.readCSVFileNode(new FileInputStream(file));
   }
 
-  public void updateNodes(ActionEvent actionEvent) throws InstanceNotFoundException {
+  public void updateNodes(ActionEvent actionEvent)
+      throws InstanceNotFoundException, ValidationException {
     for (UINode nodeUI : UINodes) {
-      boolean isSame = nodeUI.equals(new UINode(nodes.read(nodeUI.getID().toString())));
+      boolean isSame = nodeUI.equalsNode(nodes.read(nodeUI.getID().toString()));
       if (!isSame) {
         // update that node in the db to the new values of that nodeUI
-
+        nodes.update(nodeUI.UItoNode());
       }
     }
   }
 
   public void updateEdges(ActionEvent actionEvent) throws Exception {
     for (UIEdge edgeUI : UIEdges) {
-      boolean isSame = edgeUI.equals(new UIEdge(edges.read(edgeUI.getID().toString())));
+      boolean isSame = edgeUI.equalsEdge(edges.read(edgeUI.getID().toString()));
       if (!isSame) {
         // update that edge in the db to the new values of that nodeUI
-
+        edges.update(edgeUI.UItoEdge());
       }
     }
+  }
+
+  public void deleteNode(ActionEvent actionEvent) {
+    String nodeID = nodeToDelete.getText();
+    nodes.delete(nodeID);
+    UINodes.removeIf(node -> node.getID().get().equals(nodeID));
+
+    treeViewNodes.refresh();
+  }
+
+  public void deleteEdge(ActionEvent actionEvent) {
+    String edgeID = edgeToDelete.getText();
+    edges.delete(edgeID);
+    UIEdges.removeIf(node -> node.getID().get().equals(edgeID));
+
+    treeViewNodes.refresh();
   }
 }

@@ -19,4 +19,20 @@ public class UIEdge extends RecursiveTreeObject<UIEdge> {
     this.node1ID = new SimpleStringProperty(edge.getNode1());
     this.node2ID = new SimpleStringProperty(edge.getNode2());
   }
+
+  public Edge UItoEdge() throws ValidationException {
+    return new Edge("" + ID.get(), node1ID.get(), node2ID.get());
+  }
+
+  public boolean equalsEdge(Object other) {
+    boolean isEqual = false;
+    if (other instanceof Edge) {
+      Edge otherEdge = (Edge) other;
+      isEqual =
+          this.ID.get().equals(otherEdge.getId())
+              && this.node1ID.get().equals(otherEdge.getNode1())
+              && this.node2ID.get().equals(otherEdge.getNode2());
+    }
+    return isEqual;
+  }
 }
