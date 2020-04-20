@@ -39,6 +39,7 @@ public class DataManipulatorController implements Initializable {
   public JFXButton deleteNodeButton;
   public JFXTextField nodeToDelete;
   public JFXTextField edgeToDelete;
+  public JFXButton deleteEdgeButton;
   NodeFactory nodes = NodeFactory.getFactory();
   EdgeFactory edges = EdgeFactory.getFactory();
   FileChooser nodesChooser = new FileChooser();
@@ -287,6 +288,10 @@ public class DataManipulatorController implements Initializable {
       updateEdgesButton.setVisible(false);
       treeViewNodes.setVisible(false);
       treeViewEdges.setVisible(false);
+      deleteEdgeButton.setVisible(false);
+      deleteNodeButton.setVisible(false);
+      edgeToDelete.setVisible(false);
+      nodeToDelete.setVisible(false);
 
       // set map stuff visible
     } else {
@@ -296,6 +301,10 @@ public class DataManipulatorController implements Initializable {
       updateEdgesButton.setVisible(true);
       treeViewNodes.setVisible(true);
       treeViewEdges.setVisible(true);
+      deleteEdgeButton.setVisible(true);
+      deleteNodeButton.setVisible(true);
+      edgeToDelete.setVisible(true);
+      nodeToDelete.setVisible(true);
     }
   }
 
@@ -336,7 +345,6 @@ public class DataManipulatorController implements Initializable {
     String nodeID = nodeToDelete.getText();
     nodes.delete(nodeID);
     UINodes.removeIf(node -> node.getID().get().equals(nodeID));
-
     treeViewNodes.refresh();
   }
 
@@ -344,7 +352,6 @@ public class DataManipulatorController implements Initializable {
     String edgeID = edgeToDelete.getText();
     edges.delete(edgeID);
     UIEdges.removeIf(node -> node.getID().get().equals(edgeID));
-
     treeViewNodes.refresh();
   }
 }
