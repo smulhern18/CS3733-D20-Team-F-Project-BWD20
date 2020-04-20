@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Line;
 
 public class DataMapViewController implements Initializable {
   @FXML private AnchorPane mapPane;
@@ -63,29 +64,21 @@ public class DataMapViewController implements Initializable {
 
   @FXML private Label errorEdgeLabel;
 
-  @FXML
-  private JFXButton modifyEdgeButton;
+  @FXML private JFXButton modifyEdgeButton;
 
-  @FXML
-  private JFXTextField edgeModifyIDInput;
+  @FXML private JFXTextField edgeModifyIDInput;
 
-  @FXML
-  private JFXTextField node1ModifyInput;
+  @FXML private JFXTextField node1ModifyInput;
 
-  @FXML
-  private JFXTextField node2ModifyInput;
+  @FXML private JFXTextField node2ModifyInput;
 
-  @FXML
-  private JFXButton cancelModifyEdgeButton;
+  @FXML private JFXButton cancelModifyEdgeButton;
 
-  @FXML
-  private Label errorModifyEdgeLabel;
+  @FXML private Label errorModifyEdgeLabel;
 
-  @FXML
-  private JFXButton deleteEdgeButton;
+  @FXML private JFXButton deleteEdgeButton;
 
-  @FXML
-  private JFXButton searchEdgeButton;
+  @FXML private JFXButton searchEdgeButton;
 
   JFXButton nodeButton = null;
 
@@ -107,8 +100,8 @@ public class DataMapViewController implements Initializable {
   }
 
   private void drawNode(Node node) {
-    double heightRatio = mapPane.getHeight() / MAP_HEIGHT;
-    double widthRatio = mapPane.getWidth() / MAP_WIDTH;
+    double heightRatio = mapPane.getMaxHeight() / MAP_HEIGHT;
+    double widthRatio = mapPane.getMaxWidth() / MAP_WIDTH;
 
     JFXButton button = new JFXButton();
     button.setMinSize(12, 12);
@@ -128,6 +121,31 @@ public class DataMapViewController implements Initializable {
           modifyButton.setDisable(true);
           displayData();
         });
+    mapPane.getChildren().add(button);
+  }
+
+  private void drawEdge(Edge edge) {
+    double heightRatio = mapPane.getMaxHeight() / MAP_HEIGHT;
+    double widthRatio = mapPane.getMaxWidth() / MAP_WIDTH;
+
+    Line line = new Line();
+    .setMinSize(12, 12);
+    button.setMaxSize(12, 12);
+    button.setPrefSize(12, 12);
+    button.setStyle(
+            "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px");
+    int xPos = (int) (200 * widthRatio);
+    int yPos = (int) (200 * heightRatio);
+    button.setLayoutX(xPos);
+    button.setLayoutY(yPos);
+    button.setOnAction(
+            action -> {
+              nodeButton = button;
+              this.node = node;
+              modifyNodePane.setVisible(true);
+              modifyButton.setDisable(true);
+              displayData();
+            });
     mapPane.getChildren().add(button);
   }
 
@@ -309,9 +327,16 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  public void searchEdge(){
+  public void searchEdge() {}
 
-  }
+  @FXML
+  public void addEdgeModifyPane() {}
+
+  @FXML
+  public void modifyEdge() {}
+
+  @FXML
+  public void deleteEdge() {}
 
   @FXML
   public void validateNodeText(KeyEvent keyEvent) {

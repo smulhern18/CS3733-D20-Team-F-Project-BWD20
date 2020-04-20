@@ -129,7 +129,7 @@
                   </StackPane>
                </children>
             </StackPane>
-            <StackPane fx:id="modifyEdgePane" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #00000050;">
+            <StackPane fx:id="modifyEdgePane" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #00000050;" visible="false">
                <children>
                   <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="239.0" prefWidth="529.0" style="-fx-background-color: #B53389;">
                      <children>
