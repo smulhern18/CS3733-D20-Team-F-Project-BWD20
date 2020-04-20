@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #B53389;" xmlns="http://javafx.com/javafx/11.0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.LoginController">
+   <children>
+      <StackPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <children>
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="711.0" prefWidth="333.0">
+               <children>
+                  <Label prefHeight="55.0" prefWidth="99.0" text="Login" textFill="#4d4d4d">
+                     <font>
+                        <Font name="System Bold" size="35.0" />
+                     </font>
+                  </Label>
+                  <Line endX="17.5999755859375" endY="7.62939453125E-6" startX="-20.0" startY="7.62939453125E-6" stroke="#b53389" strokeWidth="2.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Line>
+                  <Label fx:id="incorrectLabel" text="The username or password is incorrect" textFill="RED" visible="false">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <JFXTextField fx:id="usernameInput" focusColor="#b53389" onKeyReleased="#enableLogin" prefHeight="26.0" prefWidth="543.0" promptText="Username" unFocusColor="#b53389">
+                     <VBox.margin>
+                        <Insets bottom="15.0" />
+                     </VBox.margin>
+                  </JFXTextField>
+                  <JFXPasswordField fx:id="passwordInput" focusColor="#b53389" onKeyReleased="#enableLogin" prefHeight="26.0" prefWidth="277.0" promptText="Password" unFocusColor="#b53389">
+                     <VBox.margin>
+                        <Insets bottom="30.0" />
+                     </VBox.margin>
+                  </JFXPasswordField>
+                  <JFXButton fx:id="loginButton" disable="true" onAction="#attemptLogin" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #B53389;" text="Login" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <Label text="or">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <JFXButton fx:id="registerButton" onAction="#switchToRegister" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #4d4d4d;" text="Register" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="RegisterButton" onAction="#switchToMainMenu" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #4d4d4d;" text="Main Menu" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>

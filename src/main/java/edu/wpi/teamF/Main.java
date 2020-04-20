@@ -2,15 +2,17 @@ package edu.wpi.teamF;
 
 import edu.wpi.teamF.DatabaseManipulators.CSVManipulator;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Main {
+  private static CSVManipulator csvm = new CSVManipulator();
+  private static DatabaseManager dbm = new DatabaseManager();
 
-  public static void main(String[] args) throws FileNotFoundException {
+  public static void main(String[] args) throws IOException {
 
     try {
       Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+      initDB();
     } catch (ClassNotFoundException e) {
       System.out.println("Driver Not found");
     }
@@ -19,12 +21,16 @@ public class Main {
     databaseManager.initialize();
     CSVManipulator newManipulator = new CSVManipulator();
     newManipulator.readCSVFileNode(
-        new FileInputStream(
-            "C:\\Users\\rfcar\\IdeaProjects\\CS3733-D20-Team-F-Project-BWD20\\src\\main\\resources\\edu\\wpi\\teamF\\CSVFiles\\MapFAllnodes.csv"));
+        Main.class.getResource("CSVFiles/MapFAllnodes.csv").openStream());
     newManipulator.readCSVFileEdge(
-        new FileInputStream(
-            "C:\\Users\\rfcar\\IdeaProjects\\CS3733-D20-Team-F-Project-BWD20\\src\\main\\resources\\edu\\wpi\\teamF\\CSVFiles\\MapFAlledges.csv"));
+        Main.class.getResource("CSVFiles/MapFAlledges.csv").openStream());
 
     App.launch(App.class, args);
+  }
+
+  public static void initDB() {
+    dbm.initialize();
+    csvm.readCSVFileNode(Main.class.getResourceAsStream("CSVFiles/MapFAllnodes.csv"));
+    csvm.readCSVFileEdge(Main.class.getResourceAsStream("CSVFiles/MapFAlledges.csv"));
   }
 }

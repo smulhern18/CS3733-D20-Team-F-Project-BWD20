@@ -1,3 +1,8 @@
 package edu.wpi.teamF.Controllers;
 
-public class MainMenuController {}
+import javafx.scene.layout.AnchorPane;
+
+public class MainMenuController {
+
+  public AnchorPane root;
+}

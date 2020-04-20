@@ -19,19 +19,23 @@ public class PathfinderController implements Initializable {
   public static int MAP_HEIGHT = 1485;
   public static int MAP_WIDTH = 2475;
   public AnchorPane mapPane;
+
   private NodeFactory nodeFactory = NodeFactory.getFactory();
 
   Node startNode = null;
   Node endNode = null;
   PathfindAlgorithm pathFindAlgorithm = new SingleFloorAStar();
 
-  public PathfinderController() throws Exception {
+  public PathfinderController() {
+
     // startNode = nodeFactory.read("FELEV00Z05");
   }
 
   public void draw() {
+
     Path path = pathFindAlgorithm.pathfind(startNode, endNode);
     List<Node> nodeList = path.getPath();
+
     double heightRatio = mapPane.getHeight() / MAP_HEIGHT;
     double widthRatio = mapPane.getWidth() / MAP_WIDTH;
 
@@ -48,6 +52,7 @@ public class PathfinderController implements Initializable {
   }
 
   public void placeButton(Node node) {
+
     double heightRatio = mapPane.getHeight() / MAP_HEIGHT;
     double widthRatio = mapPane.getWidth() / MAP_WIDTH;
 
@@ -57,6 +62,7 @@ public class PathfinderController implements Initializable {
     button.setPrefSize(12, 12);
     button.setStyle(
         "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px");
+
     int xPos = (int) (node.getXCoord() * widthRatio);
     int yPos = (int) (node.getYCoord() * heightRatio);
     button.setLayoutX(xPos);
