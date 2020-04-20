@@ -20,15 +20,15 @@ public class Node {
     SERV("SERV"),
     STAF("STAF");
 
+    // Constructor
     private String typeString;
     // Constructor
-    NodeType(String type) {
-      this.typeString = type;
+    NodeType(String string) {
+      this.typeString = string;
     }
 
-    // Get the string value from enum type
-    public final String getTypeString() {
-      return typeString;
+    public String getTypeString() {
+      return this.typeString;
     }
 
     // Get enum type from string
