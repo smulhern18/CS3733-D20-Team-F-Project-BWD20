@@ -24,7 +24,8 @@
             </ImageView>
             <AnchorPane fx:id="mapPane" prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <JFXButton fx:id="addButton" onAction="#addWindow" style="-fx-background-color: #B53389;" text="Add" textFill="WHITE" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="25.0" />
+                  <JFXButton fx:id="addNodeButton" onAction="#addWindow" style="-fx-background-color: #B53389;" text="Add Node" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="100.0" />
+                  <JFXButton fx:id="addEdgeButton" layoutX="10.0" layoutY="10.0" onAction="#addWindow" style="-fx-background-color: #B53389;" text="Add Edge" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="25.0" />
                </children></AnchorPane>
             <StackPane fx:id="modifyPane" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #00000050;" visible="false">
                <children>
@@ -56,14 +57,14 @@
                               <Label text="Floor:" GridPane.columnIndex="2" GridPane.rowIndex="4" />
                               <JFXButton fx:id="deleteButton" onKeyPressed="#deleteData" style="-fx-background-color: #B53389;" text="Delete" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                               <JFXButton fx:id="modifyButton" onKeyPressed="#modifyData" style="-fx-background-color: #B53389;" text="Modify" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                              <JFXTextField fx:id="nodeIDInput" focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateText" prefHeight="26.0" prefWidth="100.0" unFocusColor="#b53389" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <JFXTextField fx:id="yCoorInput" focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateText" prefHeight="26.0" prefWidth="100.0" unFocusColor="#b53389" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <JFXTextField focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateText" prefHeight="26.0" prefWidth="100.0" unFocusColor="#b53389" GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="xCoorInput" />
-                              <JFXTextField fx:id="typeInput" focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateText" prefHeight="26.0" prefWidth="100.0" unFocusColor="#b53389" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                              <JFXTextField fx:id="shortNameInput" focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateText" prefHeight="26.0" prefWidth="100.0" unFocusColor="#b53389" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                              <JFXTextField fx:id="longNameInput" focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateText" prefHeight="26.0" prefWidth="100.0" unFocusColor="#b53389" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                              <JFXTextField fx:id="buildingInput" focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateText" prefHeight="26.0" prefWidth="100.0" unFocusColor="#b53389" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                              <JFXTextField fx:id="floorInput" focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateText" prefHeight="26.0" prefWidth="101.0" unFocusColor="#b53389" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                              <JFXTextField fx:id="nodeIDInput" editable="false" focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateText" prefHeight="26.0" prefWidth="100.0" promptText="Ex. &quot;FHALL00105&quot;" unFocusColor="#b53389" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <JFXTextField fx:id="yCoorInput" focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateText" prefHeight="26.0" prefWidth="100.0" promptText="Ex. &quot;1&quot;" unFocusColor="#b53389" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <JFXTextField focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateText" prefHeight="26.0" prefWidth="100.0" promptText="Ex. &quot;1&quot;" unFocusColor="#b53389" GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="xCoorInput" />
+                              <JFXTextField fx:id="typeInput" focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateText" prefHeight="26.0" prefWidth="100.0" promptText="Ex. &quot;HALL&quot;" unFocusColor="#b53389" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <JFXTextField fx:id="shortNameInput" focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateText" prefHeight="26.0" prefWidth="100.0" promptText="Ex. &quot;Admin Office&quot;" unFocusColor="#b53389" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                              <JFXTextField fx:id="longNameInput" focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateText" prefHeight="26.0" prefWidth="100.0" promptText="Ex. &quot;Administrative Office&quot;" unFocusColor="#b53389" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                              <JFXTextField fx:id="buildingInput" focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateText" prefHeight="26.0" prefWidth="100.0" promptText="Ex. &quot;1&quot;" unFocusColor="#b53389" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                              <JFXTextField fx:id="floorInput" focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateText" prefHeight="26.0" prefWidth="101.0" promptText="Ex. &quot;1&quot;" unFocusColor="#b53389" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                               <JFXButton fx:id="cancelButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#cancel" onKeyPressed="#deleteData" prefHeight="25.0" prefWidth="25.0" style="-fx-background-color: #ffffff; -fx-border-color: #B53389; -fx-border-radius: 30; -fx-background-radius: 30;" text="X" textAlignment="CENTER" textFill="#b53389" GridPane.columnIndex="3" GridPane.halignment="RIGHT" GridPane.valignment="TOP">
                                  <GridPane.margin>
                                     <Insets right="10.0" top="10.0" />
@@ -73,6 +74,7 @@
                                  </font>
                               </JFXButton>
                               <JFXButton fx:id="addButtonWindow" onAction="#addData" onKeyPressed="#deleteData" style="-fx-background-color: #B53389;" text="Add" textFill="WHITE" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                              <Label fx:id="errorLabel" textFill="RED" visible="false" GridPane.columnIndex="1" />
                            </children>
                            <StackPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

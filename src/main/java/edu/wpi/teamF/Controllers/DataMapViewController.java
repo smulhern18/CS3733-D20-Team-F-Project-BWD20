@@ -1,5 +1,7 @@
 package edu.wpi.teamF.Controllers;
 
+import static javafx.scene.paint.Color.RED;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
@@ -10,6 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -42,6 +45,8 @@ public class DataMapViewController implements Initializable {
   @FXML private JFXTextField floorInput;
 
   @FXML private JFXButton addButtonWindow;
+
+  @FXML private Label errorLabel;
 
   JFXButton nodeButton = null;
 
@@ -120,10 +125,11 @@ public class DataMapViewController implements Initializable {
     deleteButton.setVisible(false);
     addButtonWindow.setVisible(true);
     addButtonWindow.setDisable(true);
+    nodeIDInput.setEditable(true);
   }
 
   @FXML
-  private void addData() throws ValidationException {
+  private void addData() throws Exception {
     String ID = nodeIDInput.getText();
     short xCoordinate = Short.parseShort(xCoorInput.getText());
     short yCoordinate = Short.parseShort(yCoorInput.getText());
@@ -133,24 +139,36 @@ public class DataMapViewController implements Initializable {
     Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getText());
     short floorNumber = Short.parseShort(floorInput.getText());
 
-    node.setId(ID);
-    node.setXCoord(xCoordinate);
-    node.setYCoord(yCoordinate);
-    node.setBuilding(building);
-    node.setLongName(longName);
-    node.setShortName(shortName);
-    node.setType(nodeType);
-    node.setFloor(floorNumber);
+    node = nodeFactory.read(ID);
 
-    nodeFactory.create(node);
-    drawNode(node);
-    reset();
-    modifyPane.setVisible(false);
+    try { //is the input valid?
+      if (node == null) { //is the ID available?
+        node.setId(ID);
+        node.setXCoord(xCoordinate);
+        node.setYCoord(yCoordinate);
+        node.setBuilding(building);
+        node.setLongName(longName);
+        node.setShortName(shortName);
+        node.setType(nodeType);
+        node.setFloor(floorNumber);
+
+        nodeFactory.create(node);
+        drawNode(node);
+        reset();
+        modifyPane.setVisible(false);
+      } else {
+        errorLabel.setText("The ID already exists");
+        errorLabel.setVisible(true);
+        nodeIDInput.setUnFocusColor(RED);
+      }
+    } catch (Exception e) {
+      errorLabel.setText("The input has an incorrect format");
+      errorLabel.setVisible(true);
+    }
   }
 
   @FXML
   private void modifyData() throws ValidationException {
-    String ID = nodeIDInput.getText();
     short xCoordinate = Short.parseShort(xCoorInput.getText());
     short yCoordinate = Short.parseShort(yCoorInput.getText());
     String building = buildingInput.getText();
@@ -159,7 +177,6 @@ public class DataMapViewController implements Initializable {
     Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getText());
     short floorNumber = Short.parseShort(floorInput.getText());
 
-    node.setId(ID);
     node.setXCoord(xCoordinate);
     node.setYCoord(yCoordinate);
     node.setBuilding(building);
@@ -218,5 +235,7 @@ public class DataMapViewController implements Initializable {
     modifyButton.setVisible(true);
     deleteButton.setVisible(true);
     addButtonWindow.setVisible(false);
+    nodeIDInput.setEditable(false);
+    errorLabel.setText("");
   }
 }
