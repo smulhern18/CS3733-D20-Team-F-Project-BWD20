@@ -54,7 +54,8 @@ public abstract class ServiceRequest {
     return dateTimeSubmitted;
   }
 
-  public void setDateTimeSubmitted(Date dateTimeSubmitted) {
+  public void setDateTimeSubmitted(Date dateTimeSubmitted) throws ValidationException {
+    Validators.dateValidation(dateTimeSubmitted);
     this.dateTimeSubmitted = dateTimeSubmitted;
   }
 
@@ -62,7 +63,8 @@ public abstract class ServiceRequest {
     return priority;
   }
 
-  public void setPriority(int priority) {
+  public void setPriority(int priority) throws ValidationException {
+    Validators.priorityValidation(priority);
     this.priority = priority;
   }
 }

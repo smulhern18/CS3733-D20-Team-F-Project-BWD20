@@ -1,6 +1,9 @@
 package edu.wpi.teamF.ModelClasses;
 
 import edu.wpi.teamF.ModelClasses.Account.Account;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import java.util.Date;
 
 public class Validators {
 
@@ -32,6 +35,8 @@ public class Validators {
   public static final int ADDRESS_MAX_LENGTH = 64;
   public static final int DESCRIPTION_MIN_LENGTH = 1;
   public static final int DESCRIPTION_MAX_LENGTH = 64;
+  public static final int PRIORITY_MIN_LENGTH = 1;
+  public static final int PRIORITY_MAX_LENGTH = 3;
 
   public static <T extends Account> void accountValidation(T t, int... constraints)
       throws ValidationException {
@@ -280,6 +285,44 @@ public class Validators {
   }
 
   /**
+   * Validation for Maintenance Requests
+   *
+   * @param t an instance of Maintenance Request to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static <T extends MaintenanceRequest> void maintenanceRequestValidation(
+      T t, int... constraints) throws ValidationException {
+    nullCheckValidation(t, constraints);
+    MaintenanceRequest maintenanceRequestObject = (MaintenanceRequest) t;
+
+    idValidation(maintenanceRequestObject.getId());
+    nodeValidation(maintenanceRequestObject.getLocation());
+    descriptionValidation(maintenanceRequestObject.getDescription());
+    dateValidation(maintenanceRequestObject.getDateTimeSubmitted());
+    priorityValidation(maintenanceRequestObject.getPriority());
+  }
+
+  /**
+   * Validation for Security Requests
+   *
+   * @param t an instance of Security Request to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static <T extends SecurityRequest> void securityRequestValidation(T t, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(t, constraints);
+    SecurityRequest securityRequestObject = (SecurityRequest) t;
+
+    idValidation(securityRequestObject.getId());
+    nodeValidation(securityRequestObject.getLocation());
+    descriptionValidation(securityRequestObject.getDescription());
+    dateValidation(securityRequestObject.getDateTimeSubmitted());
+    priorityValidation(securityRequestObject.getPriority());
+  }
+
+  /**
    * Validation for descriptions
    *
    * @param description the desciption to validate
@@ -292,6 +335,35 @@ public class Validators {
     if (description.length() < DESCRIPTION_MIN_LENGTH
         || description.length() > DESCRIPTION_MAX_LENGTH) {
       throw new ValidationException("Description is out of bounds");
+    }
+  }
+
+  /**
+   * Validation for dates
+   *
+   * @param date the date to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static void dateValidation(Object date, int... constraints) throws ValidationException {
+    nullCheckValidation(date, constraints);
+    if (!(date instanceof Date)) {
+      throw new ValidationException("Provided object is not a date");
+    }
+  }
+
+  /**
+   * Validation for priority
+   *
+   * @param priority the priority to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static void priorityValidation(int priority, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(priority, constraints);
+    if (priority < PRIORITY_MIN_LENGTH || priority > PRIORITY_MAX_LENGTH) {
+      throw new ValidationException("Priority is outside accepted values");
     }
   }
 
