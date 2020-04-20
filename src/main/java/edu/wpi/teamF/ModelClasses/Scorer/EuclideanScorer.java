@@ -8,4 +8,7 @@ public class EuclideanScorer implements Scorer {
             Math.pow(from.getXCoord() - to.getXCoord(), 2)
                     + Math.pow(from.getYCoord() - to.getYCoord(), 2));
   }
+
 }
+
+

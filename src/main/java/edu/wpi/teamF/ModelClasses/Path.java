@@ -10,6 +10,7 @@ public class Path {
 
   private List<Node> path;
 
+
   public Path() {}
 
   public Path(List<Node> path) {
@@ -52,4 +53,5 @@ public class Path {
   public void setLastNode(Node lastNode) {
     path.add(path.size(), lastNode);
   }
+
 }

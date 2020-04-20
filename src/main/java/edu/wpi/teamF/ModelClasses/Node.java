@@ -3,7 +3,14 @@ package edu.wpi.teamF.ModelClasses;
 import java.util.HashSet;
 import java.util.Set;
 
+import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
+import lombok.Data;
+
+import javax.management.InstanceNotFoundException;
+
 public class Node {
+
+  private static NodeFactory nodeFactory = NodeFactory.getFactory();
 
   public enum NodeType {
     // Values
@@ -20,15 +27,15 @@ public class Node {
     SERV("SERV"),
     STAF("STAF");
 
+    // Constructor
     private String typeString;
     // Constructor
-    NodeType(String type) {
-      this.typeString = type;
+    NodeType(String string) {
+      this.typeString = string;
     }
 
-    // Get the string value from enum type
-    public final String getTypeString() {
-      return typeString;
+    public String getTypeString() {
+      return this.typeString;
     }
 
     // Get enum type from string
@@ -68,15 +75,15 @@ public class Node {
    * @throws ValidationException should anything go wrong
    */
   public Node(
-          String id,
-          short xCoord,
-          short yCoord,
-          String building,
-          String longName,
-          String shortName,
-          NodeType nodeType,
-          short floor)
-          throws ValidationException {
+      String id,
+      short xCoord,
+      short yCoord,
+      String building,
+      String longName,
+      String shortName,
+      NodeType nodeType,
+      short floor)
+      throws ValidationException {
     setXCoord(xCoord);
     setYCoord(yCoord);
     setBuilding(building);
@@ -88,16 +95,16 @@ public class Node {
   }
 
   public Node(
-          String id,
-          short xCoord,
-          short yCoord,
-          String building,
-          String longName,
-          String shortName,
-          NodeType nodeType,
-          short floor,
-          Set<Edge> edge)
-          throws ValidationException {
+      String id,
+      short xCoord,
+      short yCoord,
+      String building,
+      String longName,
+      String shortName,
+      NodeType nodeType,
+      short floor,
+      Set<Edge> edge)
+      throws Exception {
     this(id, xCoord, yCoord, building, longName, shortName, nodeType, floor);
     setEdges(edge);
   }
@@ -112,14 +119,14 @@ public class Node {
    *
    * @param edge the edge to add
    */
-  public void setEdges(Set<Edge> edge) {
+  public void setEdges(Set<Edge> edge) throws InstanceNotFoundException {
     this.edges = edge;
     for (Edge anEdge : edge){
-      if (anEdge.getNode1().equals(this)){
-        neighborNodes.add(anEdge.getNode2());
+      if (anEdge.getNode1().equals(this.id)){
+        neighborNodes.add(nodeFactory.read(anEdge.getNode2()));
       }
       else {
-        neighborNodes.add(anEdge.getNode1());
+        neighborNodes.add(nodeFactory.read(anEdge.getNode1()));
       }
     }
   }
@@ -129,13 +136,13 @@ public class Node {
    *
    * @param edge the edges to add
    */
-  public void addEdge(Edge edge) {
+  public void addEdge(Edge edge) throws InstanceNotFoundException {
     this.edges.add(edge);
-    if (edge.getNode1().equals(this)){
-      neighborNodes.add(edge.getNode2());
+    if (edge.getNode1().equals(this.id)){
+      neighborNodes.add(nodeFactory.read(edge.getNode2()));
     }
     else {
-      neighborNodes.add(edge.getNode1());
+      neighborNodes.add(nodeFactory.read(edge.getNode1()));
     }
   }
 
@@ -151,15 +158,15 @@ public class Node {
       Node otherNode = (Node) other;
 
       isEqual =
-              this.id.equals(otherNode.getId())
-                      && this.getXCoord() == otherNode.getXCoord()
-                      && this.getYCoord() == otherNode.getYCoord()
-                      && this.getFloor() == otherNode.getFloor()
-                      && this.getType() == otherNode.getType()
-                      && this.edges.equals((otherNode).edges)
-                      && this.getBuilding().equals(otherNode.getBuilding())
-                      && this.getLongName().equals(otherNode.getLongName())
-                      && this.getShortName().equals(otherNode.getShortName());
+          this.id.equals(otherNode.getId())
+              && this.getXCoord() == otherNode.getXCoord()
+              && this.getYCoord() == otherNode.getYCoord()
+              && this.getFloor() == otherNode.getFloor()
+              && this.getType() == otherNode.getType()
+              && this.edges.equals((otherNode).edges)
+              && this.getBuilding().equals(otherNode.getBuilding())
+              && this.getLongName().equals(otherNode.getLongName())
+              && this.getShortName().equals(otherNode.getShortName());
     }
     return isEqual;
   }
@@ -322,5 +329,10 @@ public class Node {
     this.floor = floor;
   }
 
+
   public Set<Node> getNeighborNodes(){ return neighborNodes; }
+
 }
+
+
+

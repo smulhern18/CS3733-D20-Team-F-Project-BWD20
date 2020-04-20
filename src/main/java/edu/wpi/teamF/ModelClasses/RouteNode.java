@@ -36,6 +36,7 @@ public class RouteNode implements Comparable<RouteNode> {
   public RouteNode getPrevious() {
     return previous;
   }
+<<<<<<< HEAD
 
   public void setPrevious(RouteNode previous) {
     this.previous = previous;
@@ -68,3 +69,6 @@ public class RouteNode implements Comparable<RouteNode> {
     }
   }
 }
+=======
+}
+>>>>>>> pathfinderController

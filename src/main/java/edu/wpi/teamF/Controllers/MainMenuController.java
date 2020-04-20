@@ -1,3 +1,3 @@
 package edu.wpi.teamF.Controllers;
 
-public class SignUpController {}
+public class MainMenuController {}

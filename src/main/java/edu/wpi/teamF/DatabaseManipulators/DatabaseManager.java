@@ -12,7 +12,8 @@ public class DatabaseManager {
 
   static final String EDGES_TABLE_NAME = "edgesTable";
   static final String SERVICEREQUEST_TABLE_NAME = "serviceRequestsTable";
-  static final String USER_TABLE_NAME = "usersTable";
+  static final String ACCOUNT_TABLE_NAME = "accountsTable";
+  static final String APPOINTMENTS_TABLE_NAME = "appointmentsTable";
   /** Column Names */
   // node
   static final String X_COORDINATE_KEY = "xCoord";
@@ -35,14 +36,20 @@ public class DatabaseManager {
   static final String TIME_CREATED_KEY = "timeCreated";
   static final String PRIORITY_KEY = "priority";
 
-  // User
+  // account
   static final String USER_NAME_KEY = "userName";
   static final String PASSWORD_KEY = "password";
   static final String FIRST_NAME_KEY = "firstName";
   static final String LAST_NAME_KEY = "lastName";
-  static final String ADDRESS_KEY = "address";
-  static final String EMAIL_KEY = "email";
+  static final String EMAIL_ADDRESS_KEY = "email";
   static final String USER_TYPE_KEY = "userType";
+
+  // Appointments
+  static final String APPOINTMENT_ID_KEY = "appointmentId";
+  static final String LOCATION_KEY = "location";
+  static final String ROOM_KEY = "room";
+  static final String USERID_KEY = "userID";
+  static final String PCP_KEY = "PCP";
 
   static Connection connection = null;
 
@@ -103,6 +110,7 @@ public class DatabaseManager {
                     + SERVICEID_KEY
                     + "))";
 
+<<<<<<< HEAD
     String userTableCreationStatement =
             "CREATE TABLE "
                     + USER_TABLE_NAME
@@ -124,6 +132,45 @@ public class DatabaseManager {
                     + "PRIMARY KEY ("
                     + USER_NAME_KEY
                     + "))";
+=======
+    String accountTableCreationStatement =
+        "CREATE TABLE "
+            + ACCOUNT_TABLE_NAME
+            + " ( "
+            + USER_NAME_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + PASSWORD_KEY
+            + " VARCHAR(128) NOT NULL, "
+            + FIRST_NAME_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + LAST_NAME_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + EMAIL_ADDRESS_KEY
+            + " VARCHAR(64) NOT NULL, "
+            + USER_TYPE_KEY
+            + " SMALLINT NOT NULL, "
+            + "PRIMARY KEY ("
+            + USER_NAME_KEY
+            + "))";
+>>>>>>> pathfinderController
+
+    String appointmentTableCreationStatement =
+        "CREATE TABLE "
+            + APPOINTMENTS_TABLE_NAME
+            + " ( "
+            + APPOINTMENT_ID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + LOCATION_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + ROOM_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + USERID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + PCP_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + "PRIMARY KEY ("
+            + APPOINTMENT_ID_KEY
+            + "))";
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
     preparedStatement.execute();
@@ -131,13 +178,15 @@ public class DatabaseManager {
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(serviceTableCreationStatement);
     preparedStatement.execute();
-    preparedStatement = connection.prepareStatement(userTableCreationStatement);
+    preparedStatement = connection.prepareStatement(accountTableCreationStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(appointmentTableCreationStatement);
     preparedStatement.execute();
     System.out.println("Created Tables Successfully");
   }
 
   public void initialize() {
-    String dbURL = "jdbc:derby:teamF;create=true";
+    String dbURL = "jdbc:derby:database;create=true";
     try {
       DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
     } catch (SQLException e) {
@@ -161,7 +210,8 @@ public class DatabaseManager {
     String nodeDropStatement = "DROP TABLE " + NODES_TABLE_NAME;
     String edgeDropStatement = "DROP TABLE " + EDGES_TABLE_NAME;
     String serviceDropStatement = "DROP TABLE " + SERVICEREQUEST_TABLE_NAME;
-    String userDropStatement = "DROP TABLE " + USER_TABLE_NAME;
+    String accountDropStatement = "DROP TABLE " + ACCOUNT_TABLE_NAME;
+    String appointmentDropStatement = "DROP TABLE " + APPOINTMENTS_TABLE_NAME;
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeDropStatement);
     preparedStatement.execute();
@@ -169,7 +219,9 @@ public class DatabaseManager {
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(serviceDropStatement);
     preparedStatement.execute();
-    preparedStatement = connection.prepareStatement(userDropStatement);
+    preparedStatement = connection.prepareStatement(accountDropStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(appointmentDropStatement);
     preparedStatement.execute();
     createTables();
   }
@@ -177,5 +229,8 @@ public class DatabaseManager {
   public static Connection getConnection() {
     return connection;
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> pathfinderController
 }

@@ -78,5 +78,4 @@ public class SingleFloorAStar implements PathfindAlgorithm {
     }
     return shortestPath;
   }
-
 }
