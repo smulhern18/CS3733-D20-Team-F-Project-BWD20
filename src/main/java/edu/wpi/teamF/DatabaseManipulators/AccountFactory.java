@@ -194,6 +194,6 @@ public class AccountFactory {
       System.out.println(e.getMessage() + ", " + e.getClass());
     }
     return hashword;
->>>>>>> origin/develop
+
   }
 }
