@@ -1,9 +1,11 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
+import edu.wpi.teamF.ModelClasses.Node;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Date;
 
 public class DatabaseManager {
 
@@ -11,7 +13,8 @@ public class DatabaseManager {
   static final String NODES_TABLE_NAME = "nodesTable";
 
   static final String EDGES_TABLE_NAME = "edgesTable";
-  static final String SERVICEREQUEST_TABLE_NAME = "serviceRequestsTable";
+  static final String SECURITYQUEST_TABLE_NAME = "securityRequestsTable";
+  static final String MAINTENANCEQUEST_TABLE_NAME = "maintenanceRequestsTable";
   static final String ACCOUNT_TABLE_NAME = "accountsTable";
   static final String APPOINTMENTS_TABLE_NAME = "appointmentsTable";
   /** Column Names */
@@ -36,6 +39,8 @@ public class DatabaseManager {
   static final String TIME_CREATED_KEY = "timeCreated";
   static final String PRIORITY_KEY = "priority";
 
+
+
   // account
   static final String USER_NAME_KEY = "userName";
   static final String PASSWORD_KEY = "password";
@@ -50,6 +55,8 @@ public class DatabaseManager {
   static final String ROOM_KEY = "room";
   static final String USERID_KEY = "userID";
   static final String PCP_KEY = "PCP";
+  //Security requests
+
 
   static Connection connection = null;
 
@@ -92,9 +99,27 @@ public class DatabaseManager {
             + EDGEID_KEY
             + "))";
 
-    String serviceTableCreationStatement =
+    String securityTableCreationStatement =
         "CREATE TABLE "
-            + SERVICEREQUEST_TABLE_NAME
+            + SECURITYQUEST_TABLE_NAME
+            + " ( "
+            + SERVICEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + NODEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + TIME_CREATED_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + DESCRIPTION_KEY
+            + " VARCHAR(128) NOT NULL, "
+            + PRIORITY_KEY
+            + " INTEGER NOT NULL, "
+            + "PRIMARY KEY ("
+            + SERVICEID_KEY
+            + "))";
+
+    String maintenanceTableCreationStatement =
+        "CREATE TABLE "
+            + MAINTENANCEQUEST_TABLE_NAME
             + " ( "
             + SERVICEID_KEY
             + " VARCHAR(32) NOT NULL, "
@@ -148,11 +173,14 @@ public class DatabaseManager {
             + APPOINTMENT_ID_KEY
             + "))";
 
+
     PreparedStatement preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(edgeTableCreationStatement);
     preparedStatement.execute();
-    preparedStatement = connection.prepareStatement(serviceTableCreationStatement);
+    preparedStatement = connection.prepareStatement(maintenanceTableCreationStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(securityTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(accountTableCreationStatement);
     preparedStatement.execute();
@@ -185,7 +213,8 @@ public class DatabaseManager {
   public void reset() throws SQLException {
     String nodeDropStatement = "DROP TABLE " + NODES_TABLE_NAME;
     String edgeDropStatement = "DROP TABLE " + EDGES_TABLE_NAME;
-    String serviceDropStatement = "DROP TABLE " + SERVICEREQUEST_TABLE_NAME;
+    String maintenanceTableCreationStatement= "DROP TABLE " + MAINTENANCEQUEST_TABLE_NAME;
+    String securityTableCreationStatement= "DROP TABLE " + SECURITYQUEST_TABLE_NAME;
     String accountDropStatement = "DROP TABLE " + ACCOUNT_TABLE_NAME;
     String appointmentDropStatement = "DROP TABLE " + APPOINTMENTS_TABLE_NAME;
 
@@ -193,7 +222,9 @@ public class DatabaseManager {
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(edgeDropStatement);
     preparedStatement.execute();
-    preparedStatement = connection.prepareStatement(serviceDropStatement);
+    preparedStatement = connection.prepareStatement(maintenanceTableCreationStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(securityTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(accountDropStatement);
     preparedStatement.execute();
