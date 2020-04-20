@@ -4,20 +4,21 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.PathfinderController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.PathfinderController">
    <children>
       <fx:include source="MenuBar.fxml" />
-      <AnchorPane fx:id="masterPane" layoutX="20.0" layoutY="133.0" prefHeight="546.0" prefWidth="908.0">
+      <Button layoutX="1026.0" layoutY="234.0" mnemonicParsing="false" text="Draw Line" />
+      <StackPane fx:id="masterPane" layoutX="22.0" layoutY="158.0" prefHeight="579.0" prefWidth="959.0">
          <children>
-            <ImageView fitHeight="572.0" fitWidth="934.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="-7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ImageView fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Maps/Floor5LM.jpg" />
                </image>
             </ImageView>
-            <AnchorPane fx:id="mapPane" prefHeight="334.0" prefWidth="387.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <AnchorPane fx:id="mapPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
          </children>
-      </AnchorPane>
-      <Button layoutX="1026.0" layoutY="234.0" mnemonicParsing="false" text="Draw Line" />
+      </StackPane>
    </children>
 </AnchorPane>

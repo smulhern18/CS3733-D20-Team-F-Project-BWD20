@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
@@ -19,6 +20,7 @@ public class PathfinderController implements Initializable {
   public static int MAP_HEIGHT = 1485;
   public static int MAP_WIDTH = 2475;
   public AnchorPane mapPane;
+  public StackPane masterPane;
 
   private NodeFactory nodeFactory = NodeFactory.getFactory();
 
@@ -53,8 +55,8 @@ public class PathfinderController implements Initializable {
 
   public void placeButton(Node node) {
 
-    double heightRatio = mapPane.getHeight() / MAP_HEIGHT;
-    double widthRatio = mapPane.getWidth() / MAP_WIDTH;
+    double heightRatio = (double) mapPane.getPrefHeight() / MAP_HEIGHT;
+    double widthRatio = (double) mapPane.getPrefWidth() / MAP_WIDTH;
 
     Button button = new Button();
     button.setMinSize(12, 12);
@@ -65,6 +67,7 @@ public class PathfinderController implements Initializable {
 
     int xPos = (int) (node.getXCoord() * widthRatio);
     int yPos = (int) (node.getYCoord() * heightRatio);
+
     button.setLayoutX(xPos);
     button.setLayoutY(yPos);
     mapPane.getChildren().add(button);
@@ -83,9 +86,10 @@ public class PathfinderController implements Initializable {
   public void initialize(URL url, ResourceBundle resourceBundle) {
     mapPane.getChildren().clear();
     List<Node> someNodes = nodeFactory.getAllNodes();
-    System.out.println(someNodes.size());
+
     for (Node node : nodeFactory.getAllNodes()) {
       if (node.getId().charAt(0) == 'X') {
+
         placeButton(node);
       }
     }
