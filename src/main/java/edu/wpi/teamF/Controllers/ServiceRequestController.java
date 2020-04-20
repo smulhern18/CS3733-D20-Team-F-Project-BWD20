@@ -4,6 +4,8 @@ import com.jfoenix.controls.JFXTextField;
 import edu.wpi.teamF.DatabaseManipulators.ServiceRequestFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -55,12 +57,19 @@ public class ServiceRequestController implements Initializable {
   }
 
   public void submit(ActionEvent actionEvent) {
-    String ID = choiceBoxLoc.getValue();
-    switch(ID){
-      //case "Intensive Care Unit": serviceRequest.create();
+    int priority = Integer.parseInt(choiceBoxPriority.getValue());
+    String locationName = choiceBoxLoc.getValue();
+    String nodeID = null;
+    if (locationName.equals("Intensive Care Unit")) {
+      nodeID = "FDEPT00105";
     }
-    System.out.println(ID);
-    // serviceRequest.create();
+
+    String serviceType = choiceBoxType.getValue();
+    if (serviceType.equals("Security")) {
+
+    } else if (serviceType.equals("Maintenance")) {
+
+    }
 
   }
 
