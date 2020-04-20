@@ -10,7 +10,9 @@ import edu.wpi.teamF.ModelClasses.Validators;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class SecurityRequestFactory {
@@ -44,7 +46,7 @@ public class SecurityRequestFactory {
             prepareStatement.setString(param++, securityRequest.getId());
             prepareStatement.setString(param++, securityRequest.getLocation().getId());
             prepareStatement.setString(param++, securityRequest.getDescription());
-            prepareStatement.setString(param++, securityRequest.getDateTimeSubmitted().toString());
+            prepareStatement.setTimestamp(param++, new Timestamp(securityRequest.getDateTimeSubmitted().getTime()));
             prepareStatement.setInt(param++, securityRequest.getPriority());
 
             try {
@@ -82,7 +84,7 @@ public class SecurityRequestFactory {
                                     resultSet.getString(DatabaseManager.SERVICEID_KEY),
                                     nodeFactory.read(resultSet.getString(DatabaseManager.NODEID_KEY)),
                                     resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
-                                    resultSet.getDate(DatabaseManager.TIME_CREATED_KEY),
+                                    new Date(resultSet.getTimestamp(DatabaseManager.TIME_CREATED_KEY).getTime()),
                                     resultSet.getInt(DatabaseManager.PRIORITY_KEY));
                 }
             } catch (ValidationException e) {
@@ -121,7 +123,7 @@ public class SecurityRequestFactory {
             preparedStatement.setString(param++, securityRequest.getId());
             preparedStatement.setString(param++, securityRequest.getLocation().getId());
             preparedStatement.setString(param++, securityRequest.getDescription());
-            preparedStatement.setString(param++, securityRequest.getDateTimeSubmitted().toString());
+            preparedStatement.setTimestamp(param++, new Timestamp(securityRequest.getDateTimeSubmitted().getTime()));
             preparedStatement.setInt(param++, securityRequest.getPriority());
             int numRows = preparedStatement.executeUpdate();
             if (numRows != 1) {
