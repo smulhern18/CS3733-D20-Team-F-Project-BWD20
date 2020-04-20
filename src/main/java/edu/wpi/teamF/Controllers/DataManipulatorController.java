@@ -23,6 +23,7 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import javax.management.InstanceNotFoundException;
@@ -40,6 +41,7 @@ public class DataManipulatorController implements Initializable {
   public JFXTextField nodeToDelete;
   public JFXTextField edgeToDelete;
   public JFXButton deleteEdgeButton;
+  public AnchorPane mapView;
   NodeFactory nodes = NodeFactory.getFactory();
   EdgeFactory edges = EdgeFactory.getFactory();
   FileChooser nodesChooser = new FileChooser();
@@ -282,6 +284,7 @@ public class DataManipulatorController implements Initializable {
   public void viewerSwitcher(ActionEvent actionEvent) {
     boolean isSelected = switcher.isSelected();
     if (isSelected) {
+
       filterTextFieldEdges.setVisible(false);
       filterTextFieldNodes.setVisible(false);
       updateNodesButton.setVisible(false);
@@ -292,6 +295,7 @@ public class DataManipulatorController implements Initializable {
       deleteNodeButton.setVisible(false);
       edgeToDelete.setVisible(false);
       nodeToDelete.setVisible(false);
+      mapView.setVisible(true);
 
       // set map stuff visible
     } else {
@@ -305,6 +309,7 @@ public class DataManipulatorController implements Initializable {
       deleteNodeButton.setVisible(true);
       edgeToDelete.setVisible(true);
       nodeToDelete.setVisible(true);
+      mapView.setVisible(false);
     }
   }
 

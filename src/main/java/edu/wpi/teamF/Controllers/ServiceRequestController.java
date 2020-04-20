@@ -4,8 +4,6 @@ import com.jfoenix.controls.JFXTextField;
 import edu.wpi.teamF.DatabaseManipulators.ServiceRequestFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -70,7 +68,6 @@ public class ServiceRequestController implements Initializable {
     } else if (serviceType.equals("Maintenance")) {
 
     }
-
   }
 
   public void clearTextFilter(MouseEvent mouseDragEvent) {
