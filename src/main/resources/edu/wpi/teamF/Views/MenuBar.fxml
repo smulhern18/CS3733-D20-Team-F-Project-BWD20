@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox prefWidth="1200.0" style="-fx-background-color: #bf3389;" xmlns="http://javafx.com/javafx/11.0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MenuBarController">
+<HBox style="-fx-background-color: #bf3389;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MenuBarController">
    <children>
       <JFXButton fx:id="loginButton" buttonType="RAISED" onAction="#login" prefHeight="100.0" prefWidth="250.0" ripplerFill="#c91e1e" style="-fx-background-color: white;" text="Login">
          <font>
