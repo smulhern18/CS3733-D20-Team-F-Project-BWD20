@@ -248,7 +248,7 @@ public class DataManipulatorController implements Initializable {
 
     treeViewEdges.getColumns().setAll(IDE, Node1, Node2);
 
-    IDE.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    // IDE.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     Node1.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     Node2.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
