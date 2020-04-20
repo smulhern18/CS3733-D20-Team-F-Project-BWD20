@@ -17,14 +17,6 @@ public class Main {
       System.out.println("Driver Not found");
     }
 
-    DatabaseManager databaseManager = new DatabaseManager();
-    databaseManager.initialize();
-    CSVManipulator newManipulator = new CSVManipulator();
-    newManipulator.readCSVFileNode(
-        Main.class.getResource("CSVFiles/MapFAllnodes.csv").openStream());
-    newManipulator.readCSVFileEdge(
-        Main.class.getResource("CSVFiles/MapFAlledges.csv").openStream());
-
     App.launch(App.class, args);
   }
 
