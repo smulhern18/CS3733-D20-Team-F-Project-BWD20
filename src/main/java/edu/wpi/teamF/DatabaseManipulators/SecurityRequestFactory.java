@@ -10,39 +10,34 @@ import edu.wpi.teamF.ModelClasses.Validators;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SecurityRequestFactory {
+    NodeFactory nodeFactory = NodeFactory.getFactory();
     private static final SecurityRequestFactory factory = new SecurityRequestFactory();
 
     public static SecurityRequestFactory getFactory() {
         return factory;
     }
 
-    public void create(SecurityRequest securityRequest) {
-
+    public void create(SecurityRequest securityRequest) throws ValidationException{
         String insertStatement =
                 "INSERT INTO "
-                        + DatabaseManager.NODES_TABLE_NAME
+                        + DatabaseManager.SECURITYQUEST_TABLE_NAME
                         + " ( "
+                        + DatabaseManager.SERVICEID_KEY
+                        + ", "
                         + DatabaseManager.NODEID_KEY
                         + ", "
-                        + DatabaseManager.X_COORDINATE_KEY
+                        + DatabaseManager.DESCRIPTION_KEY
                         + ", "
-                        + DatabaseManager.Y_COORDINATE_KEY
+                        + DatabaseManager.TIME_CREATED_KEY
                         + ", "
-                        + DatabaseManager.BUILDING_KEY
-                        + ", "
-                        + DatabaseManager.LONG_NAME_KEY
-                        + ", "
-                        + DatabaseManager.SHORT_NAME_KEY
-                        + ", "
-                        + DatabaseManager.TYPE_KEY
-                        + ", "
-                        + DatabaseManager.FLOOR_KEY
+                        + DatabaseManager.PRIORITY_KEY
                         + " ) "
-                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        Validators.nodeValidation(node);
+                        + "VALUES (?, ?, ?, ?, ?)";
+        Validators.securityRequestValidation(securityRequest);
         try (PreparedStatement prepareStatement =
                      DatabaseManager.getConnection().prepareStatement(insertStatement)) {
             int param = 1;
@@ -67,13 +62,12 @@ public class SecurityRequestFactory {
     }
 
     public SecurityRequest read(String id) {
-
         SecurityRequest securityRequest = null;
         String selectStatement =
                 "SELECT * FROM "
-                        + DatabaseManager.NODES_TABLE_NAME
+                        + DatabaseManager.SECURITYQUEST_TABLE_NAME
                         + " WHERE "
-                        + DatabaseManager.NODEID_KEY
+                        + DatabaseManager.SERVICEID_KEY
                         + " = ?";
 
         try (PreparedStatement preparedStatement =
@@ -85,14 +79,11 @@ public class SecurityRequestFactory {
                 if (resultSet.next()) {
                     securityRequest =
                             new SecurityRequest(
-                                    resultSet.getString(DatabaseManager.NODEID_KEY),
-                                    resultSet.getShort(DatabaseManager.X_COORDINATE_KEY),
-                                    resultSet.getShort(DatabaseManager.Y_COORDINATE_KEY),
-                                    resultSet.getString(DatabaseManager.BUILDING_KEY),
-                                    resultSet.getString(DatabaseManager.LONG_NAME_KEY),
-                                    resultSet.getString(DatabaseManager.SHORT_NAME_KEY),
-                                    Node.NodeType.getEnum(resultSet.getString(DatabaseManager.TYPE_KEY)),
-                                    resultSet.getShort(DatabaseManager.FLOOR_KEY));
+                                    resultSet.getString(DatabaseManager.SERVICEID_KEY),
+                                    nodeFactory.read(resultSet.getString(DatabaseManager.NODEID_KEY)),
+                                    resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
+                                    resultSet.getDate(DatabaseManager.TIME_CREATED_KEY),
+                                    resultSet.getInt(DatabaseManager.PRIORITY_KEY));
                 }
             } catch (ValidationException e) {
                 throw e;
@@ -109,26 +100,20 @@ public class SecurityRequestFactory {
 
         String updateStatement =
                 "UPDATE "
-                        + DatabaseManager.NODES_TABLE_NAME
+                        + DatabaseManager.SECURITYQUEST_TABLE_NAME
                         + " SET "
+                        + DatabaseManager.SERVICEID_KEY
+                        + " = ?, "
                         + DatabaseManager.NODEID_KEY
                         + " = ?, "
-                        + DatabaseManager.X_COORDINATE_KEY
+                        + DatabaseManager.DESCRIPTION_KEY
                         + " = ?, "
-                        + DatabaseManager.Y_COORDINATE_KEY
+                        + DatabaseManager.TIME_CREATED_KEY
                         + " = ?, "
-                        + DatabaseManager.BUILDING_KEY
+                        + DatabaseManager.PRIORITY_KEY
                         + " = ?, "
-                        + DatabaseManager.LONG_NAME_KEY
-                        + " = ?, "
-                        + DatabaseManager.SHORT_NAME_KEY
-                        + " = ?, "
-                        + DatabaseManager.TYPE_KEY
-                        + " = ?, "
-                        + DatabaseManager.FLOOR_KEY
-                        + " = ? "
                         + "WHERE "
-                        + DatabaseManager.NODEID_KEY
+                        + DatabaseManager.SERVICEID_KEY
                         + " = ?";
         try (PreparedStatement preparedStatement =
                      DatabaseManager.getConnection().prepareStatement(updateStatement)) {
@@ -145,16 +130,15 @@ public class SecurityRequestFactory {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
     }
 
     public void delete(String id) {
 
         String deleteStatement =
                 "DELETE FROM "
-                        + DatabaseManager.NODES_TABLE_NAME
+                        + DatabaseManager.SECURITYQUEST_TABLE_NAME
                         + " WHERE "
-                        + DatabaseManager.NODEID_KEY
+                        + DatabaseManager.SERVICEID_KEY
                         + " = ?";
         try (PreparedStatement preparedStatement =
                      DatabaseManager.getConnection().prepareStatement(deleteStatement)) {
@@ -167,14 +151,66 @@ public class SecurityRequestFactory {
         } catch (SQLException e) {
             System.out.println("Error: " + e.getMessage() + ", " + e.getCause());
         }
-
     }
 
     public List<SecurityRequest> getSecurityRequestsByLocation(Node location) {
-        return null;
+        List<SecurityRequest> securityRequest = null;
+        String selectStatement =
+                "SELECT * FROM "
+                        + DatabaseManager.SECURITYQUEST_TABLE_NAME
+                        + " WHERE "
+                        + DatabaseManager.NODEID_KEY
+                        + " = ?";
+
+        try (PreparedStatement preparedStatement =
+                     DatabaseManager.getConnection().prepareStatement(selectStatement)) {
+            preparedStatement.setString(1, location.getId());
+
+            try {
+                securityRequest = new ArrayList<>();
+                ResultSet resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    securityRequest.add(
+                            new SecurityRequest(
+                                    resultSet.getString(DatabaseManager.SERVICEID_KEY),
+                                    nodeFactory.read(resultSet.getString(DatabaseManager.NODEID_KEY)),
+                                    resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
+                                    resultSet.getDate(DatabaseManager.TIME_CREATED_KEY),
+                                    resultSet.getInt(DatabaseManager.PRIORITY_KEY)));
+                }
+            } catch (ValidationException e) {
+                throw e;
+            }
+        } catch (IllegalArgumentException e) {
+            throw e;
+        } catch (Exception e) {
+            System.out.println("Exception in NodeFactory read: " + e.getMessage() + ", " + e.getClass());
+        }
+        return securityRequest;
     }
 
     public List<SecurityRequest> getAllSecurityRequests() {
-        return null;
+        List<SecurityRequest> securityRequest = null;
+        String selectStatement =
+                "SELECT * FROM "
+                        + DatabaseManager.SECURITYQUEST_TABLE_NAME;
+
+        try (PreparedStatement preparedStatement =
+                     DatabaseManager.getConnection().prepareStatement(selectStatement);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+            securityRequest = new ArrayList<>();;
+            while (resultSet.next()) {
+                securityRequest.add(
+                        new SecurityRequest(
+                                resultSet.getString(DatabaseManager.SERVICEID_KEY),
+                                nodeFactory.read(resultSet.getString(DatabaseManager.NODEID_KEY)),
+                                resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
+                                resultSet.getDate(DatabaseManager.TIME_CREATED_KEY),
+                                resultSet.getInt(DatabaseManager.PRIORITY_KEY)));
+            }
+        } catch (Exception e) {
+            System.out.println("Exception in NodeFactory read: " + e.getMessage() + ", " + e.getClass());
+        }
+        return securityRequest;
     }
 }

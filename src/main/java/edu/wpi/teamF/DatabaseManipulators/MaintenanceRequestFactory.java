@@ -1,7 +1,9 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
+import edu.wpi.teamF.Main;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
@@ -9,38 +11,34 @@ import edu.wpi.teamF.ModelClasses.Validators;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MaintenanceRequestFactory {
+    NodeFactory nodeFactory = NodeFactory.getFactory();
     private static final MaintenanceRequestFactory factory = new MaintenanceRequestFactory();
 
     public static MaintenanceRequestFactory getFactory() {
         return factory;
     }
 
-    public void create(MaintenanceRequest maintenanceRequest) {
+    public void create(MaintenanceRequest maintenanceRequest) throws ValidationException {
         String insertStatement =
                 "INSERT INTO "
-                        + DatabaseManager.NODES_TABLE_NAME
+                        + DatabaseManager.MAINTENANCEQUEST_TABLE_NAME
                         + " ( "
+                        + DatabaseManager.SERVICEID_KEY
+                        + ", "
                         + DatabaseManager.NODEID_KEY
                         + ", "
-                        + DatabaseManager.X_COORDINATE_KEY
+                        + DatabaseManager.DESCRIPTION_KEY
                         + ", "
-                        + DatabaseManager.Y_COORDINATE_KEY
+                        + DatabaseManager.TIME_CREATED_KEY
                         + ", "
-                        + DatabaseManager.BUILDING_KEY
-                        + ", "
-                        + DatabaseManager.LONG_NAME_KEY
-                        + ", "
-                        + DatabaseManager.SHORT_NAME_KEY
-                        + ", "
-                        + DatabaseManager.TYPE_KEY
-                        + ", "
-                        + DatabaseManager.FLOOR_KEY
+                        + DatabaseManager.PRIORITY_KEY
                         + " ) "
-                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        Validators.nodeValidation(node);
+                        + "VALUES (?, ?, ?, ?, ?)";
+        Validators.maintenanceRequestValidation(maintenanceRequest);
         try (PreparedStatement prepareStatement =
                      DatabaseManager.getConnection().prepareStatement(insertStatement)) {
             int param = 1;
@@ -68,9 +66,9 @@ public class MaintenanceRequestFactory {
         MaintenanceRequest maintenanceRequest = null;
         String selectStatement =
                 "SELECT * FROM "
-                        + DatabaseManager.NODES_TABLE_NAME
+                        + DatabaseManager.MAINTENANCEQUEST_TABLE_NAME
                         + " WHERE "
-                        + DatabaseManager.NODEID_KEY
+                        + DatabaseManager.SERVICEID_KEY
                         + " = ?";
 
         try (PreparedStatement preparedStatement =
@@ -82,14 +80,11 @@ public class MaintenanceRequestFactory {
                 if (resultSet.next()) {
                     maintenanceRequest =
                             new MaintenanceRequest(
-                                    resultSet.getString(DatabaseManager.NODEID_KEY),
-                                    resultSet.getShort(DatabaseManager.X_COORDINATE_KEY),
-                                    resultSet.getShort(DatabaseManager.Y_COORDINATE_KEY),
-                                    resultSet.getString(DatabaseManager.BUILDING_KEY),
-                                    resultSet.getString(DatabaseManager.LONG_NAME_KEY),
-                                    resultSet.getString(DatabaseManager.SHORT_NAME_KEY),
-                                    Node.NodeType.getEnum(resultSet.getString(DatabaseManager.TYPE_KEY)),
-                                    resultSet.getShort(DatabaseManager.FLOOR_KEY));
+                                    resultSet.getString(DatabaseManager.SERVICEID_KEY),
+                                    nodeFactory.read(resultSet.getString(DatabaseManager.NODEID_KEY)),
+                                    resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
+                                    resultSet.getDate(DatabaseManager.TIME_CREATED_KEY),
+                                    resultSet.getInt(DatabaseManager.PRIORITY_KEY));
                 }
             } catch (ValidationException e) {
                 throw e;
@@ -106,26 +101,20 @@ public class MaintenanceRequestFactory {
 
         String updateStatement =
                 "UPDATE "
-                        + DatabaseManager.NODES_TABLE_NAME
+                        + DatabaseManager.MAINTENANCEQUEST_TABLE_NAME
                         + " SET "
+                        + DatabaseManager.SERVICEID_KEY
+                        + " = ?, "
                         + DatabaseManager.NODEID_KEY
                         + " = ?, "
-                        + DatabaseManager.X_COORDINATE_KEY
+                        + DatabaseManager.DESCRIPTION_KEY
                         + " = ?, "
-                        + DatabaseManager.Y_COORDINATE_KEY
+                        + DatabaseManager.TIME_CREATED_KEY
                         + " = ?, "
-                        + DatabaseManager.BUILDING_KEY
+                        + DatabaseManager.PRIORITY_KEY
                         + " = ?, "
-                        + DatabaseManager.LONG_NAME_KEY
-                        + " = ?, "
-                        + DatabaseManager.SHORT_NAME_KEY
-                        + " = ?, "
-                        + DatabaseManager.TYPE_KEY
-                        + " = ?, "
-                        + DatabaseManager.FLOOR_KEY
-                        + " = ? "
                         + "WHERE "
-                        + DatabaseManager.NODEID_KEY
+                        + DatabaseManager.SERVICEID_KEY
                         + " = ?";
         try (PreparedStatement preparedStatement =
                      DatabaseManager.getConnection().prepareStatement(updateStatement)) {
@@ -148,9 +137,9 @@ public class MaintenanceRequestFactory {
 
         String deleteStatement =
                 "DELETE FROM "
-                        + DatabaseManager.NODES_TABLE_NAME
+                        + DatabaseManager.MAINTENANCEQUEST_TABLE_NAME
                         + " WHERE "
-                        + DatabaseManager.NODEID_KEY
+                        + DatabaseManager.SERVICEID_KEY
                         + " = ?";
         try (PreparedStatement preparedStatement =
                      DatabaseManager.getConnection().prepareStatement(deleteStatement)) {
@@ -166,10 +155,63 @@ public class MaintenanceRequestFactory {
     }
 
     public List<MaintenanceRequest> getMaintenanceRequestsByLocation(Node location) {
-        return null;
+        List<MaintenanceRequest> maintenanceRequest = null;
+        String selectStatement =
+                "SELECT * FROM "
+                        + DatabaseManager.MAINTENANCEQUEST_TABLE_NAME
+                        + " WHERE "
+                        + DatabaseManager.NODEID_KEY
+                        + " = ?";
+
+        try (PreparedStatement preparedStatement =
+                     DatabaseManager.getConnection().prepareStatement(selectStatement)) {
+            preparedStatement.setString(1, location.getId());
+
+            try {
+                ResultSet resultSet = preparedStatement.executeQuery();
+                maintenanceRequest = new ArrayList<>();
+                while (resultSet.next()) {
+                    maintenanceRequest.add(
+                            new MaintenanceRequest(
+                                    resultSet.getString(DatabaseManager.SERVICEID_KEY),
+                                    nodeFactory.read(resultSet.getString(DatabaseManager.NODEID_KEY)),
+                                    resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
+                                    resultSet.getDate(DatabaseManager.TIME_CREATED_KEY),
+                                    resultSet.getInt(DatabaseManager.PRIORITY_KEY)));
+                }
+            } catch (ValidationException e) {
+                throw e;
+            }
+        } catch (IllegalArgumentException e) {
+            throw e;
+        } catch (Exception e) {
+            System.out.println("Exception in NodeFactory read: " + e.getMessage() + ", " + e.getClass());
+        }
+        return maintenanceRequest;
     }
 
     public List<MaintenanceRequest> getAllMaintenanceRequests() {
-        return null;
+        List<MaintenanceRequest> maintenanceRequest = null;
+        String selectStatement =
+                "SELECT * FROM "
+                        + DatabaseManager.MAINTENANCEQUEST_TABLE_NAME;
+
+        try (PreparedStatement preparedStatement =
+                     DatabaseManager.getConnection().prepareStatement(selectStatement);
+             ResultSet resultSet = preparedStatement.executeQuery()) {;
+                maintenanceRequest = new ArrayList<>();
+                while (resultSet.next()) {
+                    maintenanceRequest.add(
+                            new MaintenanceRequest(
+                                    resultSet.getString(DatabaseManager.SERVICEID_KEY),
+                                    nodeFactory.read(resultSet.getString(DatabaseManager.NODEID_KEY)),
+                                    resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
+                                    resultSet.getDate(DatabaseManager.TIME_CREATED_KEY),
+                                    resultSet.getInt(DatabaseManager.PRIORITY_KEY)));
+                }
+        } catch (Exception e) {
+            System.out.println("Exception in NodeFactory read: " + e.getMessage() + ", " + e.getClass());
+        }
+        return maintenanceRequest;
     }
 }

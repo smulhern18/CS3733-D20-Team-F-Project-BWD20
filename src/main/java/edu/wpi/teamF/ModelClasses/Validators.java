@@ -1,6 +1,8 @@
 package edu.wpi.teamF.ModelClasses;
 
 import edu.wpi.teamF.ModelClasses.Account.Account;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
 
 import java.util.Date;
 
@@ -281,6 +283,44 @@ public class Validators {
     if (PCP.length() < PCP_MIN_LENGTH || PCP.length() > PCP_MAX_LENGTH) {
       throw new ValidationException("PCP is outside the accepted values");
     }
+  }
+
+  /**
+   *  Validation for Maintenance Requests
+   *
+   * @param t an instance of Maintenance Request to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static <T extends MaintenanceRequest> void maintenanceRequestValidation(T t, int... constraints)
+          throws ValidationException {
+    nullCheckValidation(t, constraints);
+    MaintenanceRequest maintenanceRequestObject = (MaintenanceRequest) t;
+
+    idValidation(maintenanceRequestObject.getId());
+    nodeValidation(maintenanceRequestObject.getLocation());
+    descriptionValidation(maintenanceRequestObject.getDescription());
+    dateValidation(maintenanceRequestObject.getDateTimeSubmitted());
+    priorityValidation(maintenanceRequestObject.getPriority());
+  }
+
+  /**
+   * Validation for Security Requests
+   *
+   * @param t an instance of Security Request to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static <T extends SecurityRequest> void securityRequestValidation(T t, int... constraints)
+          throws ValidationException {
+    nullCheckValidation(t, constraints);
+    SecurityRequest securityRequestObject = (SecurityRequest) t;
+
+    idValidation(securityRequestObject.getId());
+    nodeValidation(securityRequestObject.getLocation());
+    descriptionValidation(securityRequestObject.getDescription());
+    dateValidation(securityRequestObject.getDateTimeSubmitted());
+    priorityValidation(securityRequestObject.getPriority());
   }
 
   /**
