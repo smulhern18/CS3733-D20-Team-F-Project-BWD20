@@ -1,5 +1,9 @@
 package edu.wpi.teamF.ModelClasses;
 
+import edu.wpi.teamF.ModelClasses.Account.Account;
+
+import java.util.Date;
+
 public class Validators {
 
   public static final int COORDINATE_MIN_VALUE = 0;
@@ -18,6 +22,48 @@ public class Validators {
   public static final int ID_MAX_LENGTH = 32;
   public static final int EDGE_ID_MIN_LENGTH = 3;
   public static final int EDGE_ID_MAX_LENGTH = 65;
+  public static final int ROOM_MIN_LENGTH = 1;
+  public static final int ROOM_MAX_LENGTH = 32;
+  public static final int USERID_MIN_LENGTH = 1;
+  public static final int USERID_MAX_LENGTH = 32;
+  public static final int PCP_MIN_LENGTH = 1;
+  public static final int PCP_MAX_LENGTH = 32;
+  public static final int PASSWORD_MIN_LENGTH = 1;
+  public static final int PASSWORD_MAX_LENGTH = 128;
+  public static final int ADDRESS_MIN_LENGTH = 1;
+  public static final int ADDRESS_MAX_LENGTH = 64;
+  public static final int DESCRIPTION_MIN_LENGTH = 1;
+  public static final int DESCRIPTION_MAX_LENGTH = 64;
+  public static final int PRIORITY_MIN_LENGTH = 1;
+  public static final int PRIORITY_MAX_LENGTH = 3;
+
+  public static <T extends Account> void accountValidation(T t, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(t, constraints);
+    Account accountObject = (Account) t;
+
+    emailAddressValidation(accountObject.getEmailAddress());
+    nameValidation(accountObject.getFirstName());
+    nameValidation(accountObject.getLastName());
+    userIDValidation(accountObject.getUsername());
+  }
+
+  public static void emailAddressValidation(String address, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(address, constraints);
+    if ((!address.contains("@") || !address.contains("."))
+        && (address.length() > ADDRESS_MIN_LENGTH && address.length() < ADDRESS_MAX_LENGTH)) {
+      throw new ValidationException("Invalid Email Address: " + address);
+    }
+  }
+
+  public static void passwordValidation(String password, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(password, constraints);
+    if (password.length() < PASSWORD_MIN_LENGTH || password.length() > PASSWORD_MAX_LENGTH) {
+      throw new ValidationException("Invalid password length");
+    }
+  }
 
   /**
    * Validation for Node
@@ -174,6 +220,112 @@ public class Validators {
     if (string.length() > NAME_MAX_LENGTH || string.length() < NAME_MIN_LENGTH) {
       throw new ValidationException("string is out of bounds");
     }
+  }
+
+  /**
+   * Validation for Appointment
+   *
+   * @param t an instance of appointment
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static <T extends Appointment> void appointmentValidation(T t, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(t, constraints);
+    Appointment appointmentObject = (Appointment) t;
+    idValidation(appointmentObject.getId());
+    nodeValidation(appointmentObject.getLocation());
+    roomValidation(appointmentObject.getRoom());
+    userIDValidation(appointmentObject.getUserID());
+    PCPValidation(appointmentObject.getPCP());
+  }
+
+  /**
+   * Validation for rooms
+   *
+   * @param room the room to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static void roomValidation(String room, int... constraints) throws ValidationException {
+    nullCheckValidation(room, constraints);
+    if (room.length() < ROOM_MIN_LENGTH || room.length() > ROOM_MAX_LENGTH) {
+      throw new ValidationException("Room is outside of accepted values");
+    }
+  }
+
+  /**
+   * Validation for userIDs
+   *
+   * @param userID the userID to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static void userIDValidation(String userID, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(userID, constraints);
+    if (userID.length() < USERID_MIN_LENGTH || userID.length() > USERID_MAX_LENGTH) {
+      throw new ValidationException("UserID is invalid");
+    }
+  }
+
+  /**
+   * Validation for PCPs
+   *
+   * @param PCP the PCP to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static void PCPValidation(String PCP, int... constraints) throws ValidationException {
+    nullCheckValidation(PCP, constraints);
+    if (PCP.length() < PCP_MIN_LENGTH || PCP.length() > PCP_MAX_LENGTH) {
+      throw new ValidationException("PCP is outside the accepted values");
+    }
+  }
+
+  /**
+   * Validation for descriptions
+   *
+   * @param description the desciption to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static void descriptionValidation(String description, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(description, constraints);
+    if (description.length() < DESCRIPTION_MIN_LENGTH
+        || description.length() > DESCRIPTION_MAX_LENGTH) {
+      throw new ValidationException("Description is out of bounds");
+    }
+  }
+
+  /**
+   * Validation for dates
+   *
+   * @param date the date to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static void dateValidation(Object date, int... constraints) throws ValidationException{
+    nullCheckValidation(date, constraints);
+    if(!(date instanceof Date)){
+      throw new ValidationException("Provided object is not a date");
+    }
+  }
+
+  /**
+   * Validation for priority
+   *
+   * @param priority the priority to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static void priorityValidation(int priority, int... constraints) throws ValidationException {
+    nullCheckValidation(priority, constraints);
+    if(priority < PRIORITY_MIN_LENGTH || priority > PRIORITY_MAX_LENGTH){
+      throw new ValidationException("Priority is outside accepted values");
+    }
+
   }
 
   /**
