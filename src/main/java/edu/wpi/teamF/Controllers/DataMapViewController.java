@@ -306,6 +306,7 @@ public class DataMapViewController implements Initializable {
     addEdgeButton.setDisable(true);
     modifyEdgeButton.setVisible(false);
     deleteEdgeButton.setVisible(false);
+    addEdgeButton.setVisible(true);
   }
 
   @FXML
