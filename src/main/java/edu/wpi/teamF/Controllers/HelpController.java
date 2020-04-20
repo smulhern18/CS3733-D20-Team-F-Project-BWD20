@@ -3,6 +3,7 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -13,11 +14,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.*;
 import javafx.scene.text.Text;
+import javax.swing.*;
+import javax.swing.text.*;
 
 public class HelpController implements Initializable {
 
   @FXML public AnchorPane rootPane;
   @FXML private StackPane stackPane;
+  // @FXML
+  // private JFXButton textfield;
+  // @FXML
+  // private JFXButton search;
 
   @Override
   public void initialize(URL url, ResourceBundle rb) {}
@@ -156,3 +163,35 @@ public class HelpController implements Initializable {
     dialog6.show();
   }
 }
+/*
+  @FXML
+  private void highlight(java.awt.event.ActionEvent event) {
+    // highlight(textfield, search.getText());
+
+  }
+
+  class MyHighlightPainter extends DefaultHighlighter.DefaultHighlightPainter {
+    public MyHighlightPainter(Color color) {
+      super(color);
+    }
+
+    Highlighter.HighlightPainter myHighlightPainter = new MyHighlightPainter(Color.PINK);
+
+    public void highlight(JTextComponent textComponent, String pattern) {
+      try {
+        Highlighter hilite = textComponent.getHighlighter();
+        Document doc = textComponent.getDocument();
+        String text = doc.getText(0, doc.getLength());
+        int pos = 0;
+
+        while ((pos = text.toUpperCase().indexOf(pattern.toUpperCase(), pos)) >= 0) {
+          hilite.addHighlight(pos, pos + pattern.length(), myHighlightPainter);
+          pos += pattern.length();
+        }
+
+      } catch (Exception e) {
+      }
+    }
+  }
+}
+ */
