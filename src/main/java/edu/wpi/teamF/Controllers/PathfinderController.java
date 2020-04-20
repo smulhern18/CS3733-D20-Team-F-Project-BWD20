@@ -2,21 +2,24 @@ package edu.wpi.teamF.Controllers;
 
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Node;
+import edu.wpi.teamF.ModelClasses.Path;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.PathfindAlgorithm;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.SingleFloorAStar;
-import java.util.ArrayList;
+import java.net.URL;
 import java.util.List;
+import java.util.ResourceBundle;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
-public class PathfinderController {
+public class PathfinderController implements Initializable {
 
   public static int MAP_HEIGHT = 1485;
   public static int MAP_WIDTH = 2475;
   public AnchorPane mapPane;
-  private NodeFactory nodeFactory;
+  private NodeFactory nodeFactory = NodeFactory.getFactory();
 
   Node startNode = null;
   Node endNode = null;
@@ -27,8 +30,8 @@ public class PathfinderController {
   }
 
   public void draw() {
-    // Path path = pathFindAlgorithm.pathfind(startNode, endNode);
-    List<Node> nodeList = new ArrayList<Node>();
+    Path path = pathFindAlgorithm.pathfind(startNode, endNode);
+    List<Node> nodeList = path.getPath();
     double heightRatio = mapPane.getHeight() / MAP_HEIGHT;
     double widthRatio = mapPane.getWidth() / MAP_WIDTH;
 
@@ -44,7 +47,7 @@ public class PathfinderController {
     }
   }
 
-  public void placeButton() {
+  public void placeButton(Node node) {
     double heightRatio = mapPane.getHeight() / MAP_HEIGHT;
     double widthRatio = mapPane.getWidth() / MAP_WIDTH;
 
@@ -54,10 +57,31 @@ public class PathfinderController {
     button.setPrefSize(12, 12);
     button.setStyle(
         "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px");
-    int xPos = (int) (955 * widthRatio);
-    int yPos = (int) (1215 * heightRatio);
+    int xPos = (int) (node.getXCoord() * widthRatio);
+    int yPos = (int) (node.getYCoord() * heightRatio);
     button.setLayoutX(xPos);
     button.setLayoutY(yPos);
     mapPane.getChildren().add(button);
+    button.setOnAction(
+        actionEvent -> {
+          if (startNode == null) {
+            startNode = node;
+          } else if (endNode == null) {
+            endNode = node;
+            draw();
+          }
+        });
+  }
+
+  @Override
+  public void initialize(URL url, ResourceBundle resourceBundle) {
+    mapPane.getChildren().clear();
+    List<Node> someNodes = nodeFactory.getAllNodes();
+    System.out.println(someNodes.size());
+    for (Node node : nodeFactory.getAllNodes()) {
+      if (node.getId().charAt(0) == 'X') {
+        placeButton(node);
+      }
+    }
   }
 }
