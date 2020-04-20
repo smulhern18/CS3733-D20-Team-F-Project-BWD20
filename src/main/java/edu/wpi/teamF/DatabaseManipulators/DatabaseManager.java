@@ -1,11 +1,9 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
-import edu.wpi.teamF.ModelClasses.Node;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.Date;
 
 public class DatabaseManager {
 
@@ -39,8 +37,6 @@ public class DatabaseManager {
   static final String TIME_CREATED_KEY = "timeCreated";
   static final String PRIORITY_KEY = "priority";
 
-
-
   // account
   static final String USER_NAME_KEY = "userName";
   static final String PASSWORD_KEY = "password";
@@ -55,8 +51,7 @@ public class DatabaseManager {
   static final String ROOM_KEY = "room";
   static final String USERID_KEY = "userID";
   static final String PCP_KEY = "PCP";
-  //Security requests
-
+  // Security requests
 
   static Connection connection = null;
 
@@ -173,7 +168,6 @@ public class DatabaseManager {
             + APPOINTMENT_ID_KEY
             + "))";
 
-
     PreparedStatement preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(edgeTableCreationStatement);
@@ -213,8 +207,8 @@ public class DatabaseManager {
   public void reset() throws SQLException {
     String nodeDropStatement = "DROP TABLE " + NODES_TABLE_NAME;
     String edgeDropStatement = "DROP TABLE " + EDGES_TABLE_NAME;
-    String maintenanceTableCreationStatement= "DROP TABLE " + MAINTENANCEQUEST_TABLE_NAME;
-    String securityTableCreationStatement= "DROP TABLE " + SECURITYQUEST_TABLE_NAME;
+    String maintenanceTableCreationStatement = "DROP TABLE " + MAINTENANCEQUEST_TABLE_NAME;
+    String securityTableCreationStatement = "DROP TABLE " + SECURITYQUEST_TABLE_NAME;
     String accountDropStatement = "DROP TABLE " + ACCOUNT_TABLE_NAME;
     String appointmentDropStatement = "DROP TABLE " + APPOINTMENTS_TABLE_NAME;
 

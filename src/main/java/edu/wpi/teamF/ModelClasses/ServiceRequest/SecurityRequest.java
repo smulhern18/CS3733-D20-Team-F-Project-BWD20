@@ -22,7 +22,6 @@ public class SecurityRequest extends ServiceRequest {
     if (other instanceof SecurityRequest) {
       SecurityRequest otherSecurity = (SecurityRequest) other;
 
-
       isEqual =
           this.getId().equals(otherSecurity.getId())
               && this.getLocation().equals(otherSecurity.getLocation())

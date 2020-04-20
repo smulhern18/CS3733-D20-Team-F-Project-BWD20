@@ -3,7 +3,6 @@ package edu.wpi.teamF.ModelClasses;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
-
 import java.util.Date;
 
 public class Validators {
@@ -286,14 +285,14 @@ public class Validators {
   }
 
   /**
-   *  Validation for Maintenance Requests
+   * Validation for Maintenance Requests
    *
    * @param t an instance of Maintenance Request to validate
    * @param constraints the optional constraints for validation
    * @throws ValidationException should the validation fail
    */
-  public static <T extends MaintenanceRequest> void maintenanceRequestValidation(T t, int... constraints)
-          throws ValidationException {
+  public static <T extends MaintenanceRequest> void maintenanceRequestValidation(
+      T t, int... constraints) throws ValidationException {
     nullCheckValidation(t, constraints);
     MaintenanceRequest maintenanceRequestObject = (MaintenanceRequest) t;
 
@@ -312,7 +311,7 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static <T extends SecurityRequest> void securityRequestValidation(T t, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(t, constraints);
     SecurityRequest securityRequestObject = (SecurityRequest) t;
 
@@ -346,9 +345,9 @@ public class Validators {
    * @param constraints the optional constraints for validation
    * @throws ValidationException should the validation fail
    */
-  public static void dateValidation(Object date, int... constraints) throws ValidationException{
+  public static void dateValidation(Object date, int... constraints) throws ValidationException {
     nullCheckValidation(date, constraints);
-    if(!(date instanceof Date)){
+    if (!(date instanceof Date)) {
       throw new ValidationException("Provided object is not a date");
     }
   }
@@ -360,12 +359,12 @@ public class Validators {
    * @param constraints the optional constraints for validation
    * @throws ValidationException should the validation fail
    */
-  public static void priorityValidation(int priority, int... constraints) throws ValidationException {
+  public static void priorityValidation(int priority, int... constraints)
+      throws ValidationException {
     nullCheckValidation(priority, constraints);
-    if(priority < PRIORITY_MIN_LENGTH || priority > PRIORITY_MAX_LENGTH){
+    if (priority < PRIORITY_MIN_LENGTH || priority > PRIORITY_MAX_LENGTH) {
       throw new ValidationException("Priority is outside accepted values");
     }
-
   }
 
   /**
