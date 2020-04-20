@@ -29,7 +29,7 @@ public class CSVManipulator {
       while (i < (data.size() - 1)) {
         Node node =
             new Node(
-                data.get(i), // name
+                data.get(i), // nodeID
                 Short.parseShort(data.get(i + 1)), // xcoord
                 Short.parseShort(data.get(i + 2)), // ycoord
                 data.get(i + 4), // building
