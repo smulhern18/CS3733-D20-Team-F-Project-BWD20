@@ -4,6 +4,8 @@ import edu.wpi.teamF.ModelClasses.Account.*;
 import edu.wpi.teamF.ModelClasses.Appointment;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import java.util.Date;
 
 public class TestData {
 
@@ -188,6 +190,28 @@ public class TestData {
     new Staff(validNames[1], validNames[1], validEmails[1], validUsernames[1], validPasswords[1]),
     new User(validNames[2], validNames[2], validEmails[2], validUsernames[2], validPasswords[2]),
     new User(validNames[3], validNames[3], validEmails[3], validUsernames[3], validPasswords[3])
+  };
+
+
+  public Date[] validDates ={new Date(0),new Date(10),new Date(110),new Date(1110) };
+   public String[] validIDs = {
+       "12312442","123124134","124134123412","213124124"
+   };
+  public String[] validDescriptions = {
+      "12312442","123124134","124134123412","213124124"
+  };
+
+  public SecurityRequest[] validSecurityRequests = {
+      new SecurityRequest(validIDs[0],validNodes[0],validDescriptions[0],validDates[0],2),
+      new SecurityRequest(validIDs[1],validNodes[1],validDescriptions[1],validDates[1],2),
+      new SecurityRequest(validIDs[2],validNodes[2],validDescriptions[2],validDates[2],2),
+      new SecurityRequest(validIDs[3],validNodes[3],validDescriptions[3],validDates[3],2),
+  };
+  public SecurityRequest[] validMaintenanceRequests = {
+      new SecurityRequest(validIDs[0],validNodes[0],validDescriptions[0],validDates[0],2),
+      new SecurityRequest(validIDs[1],validNodes[1],validDescriptions[1],validDates[1],2),
+      new SecurityRequest(validIDs[2],validNodes[2],validDescriptions[2],validDates[2],2),
+      new SecurityRequest(validIDs[3],validNodes[3],validDescriptions[3],validDates[3],2),
   };
 
   public TestData() throws Exception {}
