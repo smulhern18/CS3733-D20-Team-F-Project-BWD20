@@ -4,18 +4,27 @@ import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
 import edu.wpi.teamF.App;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.concurrent.TimeoutException;
 import javafx.stage.Stage;
 import javax.management.InstanceNotFoundException;
+import org.junit.After;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
 
 public class MainMenuBarTest extends ApplicationTest {
 
+  private static DatabaseManager db = new DatabaseManager();
+
   @BeforeAll
   public static void setUp() throws Exception {
+    db.initialize();
     ApplicationTest.launch(App.class);
   }
 
@@ -24,12 +33,14 @@ public class MainMenuBarTest extends ApplicationTest {
     stage.show();
   }
 
-  @Test
-  void testLoginButton() throws InstanceNotFoundException {
-    clickOn("Login");
+  @AfterEach
+  public void tearDown() throws SQLException {
+    db.reset();
+  }
 
-    // check that the incorrect label is on the login screen
-    verifyThat("#incorrectLabel", hasText("The username or password is incorrect"));
+  @After
+  public void afterEachTest() throws TimeoutException {
+    FxToolkit.hideStage();
   }
 
   //  @Test
@@ -62,5 +73,14 @@ public class MainMenuBarTest extends ApplicationTest {
 
     // check that the delete node button is on the page
     verifyThat("#generalquestions", hasText("General Questions"));
+  }
+
+  @Test
+  void testLoginButton() throws InstanceNotFoundException {
+    clickOn("Login");
+
+    // check that the incorrect label is on the login screen
+    verifyThat("#loginText", hasText("Login"));
+    clickOn("Main Menu");
   }
 }
