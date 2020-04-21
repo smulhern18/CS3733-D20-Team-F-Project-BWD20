@@ -110,7 +110,7 @@ public class MaintenanceRequestFactory {
             + DatabaseManager.TIME_CREATED_KEY
             + " = ?, "
             + DatabaseManager.PRIORITY_KEY
-            + " = ?, "
+            + " = ? "
             + "WHERE "
             + DatabaseManager.SERVICEID_KEY
             + " = ?";
@@ -123,6 +123,7 @@ public class MaintenanceRequestFactory {
       preparedStatement.setTimestamp(
           param++, new Timestamp(maintenanceRequest.getDateTimeSubmitted().getTime()));
       preparedStatement.setInt(param++, maintenanceRequest.getPriority());
+      preparedStatement.setString(param++, maintenanceRequest.getId());
       int numRows = preparedStatement.executeUpdate();
       if (numRows != 1) {
         throw new Exception("Updated " + numRows + " rows");

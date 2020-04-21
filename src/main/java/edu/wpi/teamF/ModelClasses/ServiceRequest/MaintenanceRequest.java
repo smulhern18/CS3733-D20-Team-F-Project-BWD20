@@ -24,8 +24,8 @@ public class MaintenanceRequest extends ServiceRequest {
       isEqual =
           this.getId().equals(otherMaintenance.getId())
               && this.getLocation().equals(otherMaintenance.getLocation())
-              && this.getDescription() == otherMaintenance.getDescription()
-              && this.getDateTimeSubmitted() == otherMaintenance.getDateTimeSubmitted()
+              && this.getDescription().equals(otherMaintenance.getDescription())
+              && this.getDateTimeSubmitted().equals(otherMaintenance.getDateTimeSubmitted())
               && this.getPriority() == otherMaintenance.getPriority();
     }
     return isEqual;

@@ -21,12 +21,15 @@ public class MaintenanceRequestTest {
   MaintenanceRequestFactory maintenanceRequestFactory = MaintenanceRequestFactory.getFactory();
   NodeFactory nodeFactory = NodeFactory.getFactory();
   static DatabaseManager databaseManager = new DatabaseManager();
+  static Node[] validNodes = null;
 
   @BeforeEach
   public void initialize() throws Exception {
     testData = new TestData();
     validMaintenanceRequest = testData.validMaintenanceRequests;
+    validNodes = testData.validNodes;
     databaseManager.initialize();
+    databaseManager.reset();
   }
 
   @AfterAll
@@ -41,6 +44,15 @@ public class MaintenanceRequestTest {
       fail("Creating a null value is unacceptable");
     } catch (ValidationException e) {
       // ignore as expected
+    }
+    try {
+      nodeFactory.create(validNodes[0]);
+      nodeFactory.create(validNodes[1]);
+      nodeFactory.create(validNodes[2]);
+      nodeFactory.create(validNodes[3]);
+
+    } catch (Exception e) {
+
     }
     try {
       for (MaintenanceRequest maintenanceRequest : validMaintenanceRequest) {
@@ -68,7 +80,18 @@ public class MaintenanceRequestTest {
 
   @Test
   public void testCreateReadUpdateDelete() {
+
     try {
+      nodeFactory.create(validNodes[0]);
+      nodeFactory.create(validNodes[1]);
+      nodeFactory.create(validNodes[2]);
+      nodeFactory.create(validNodes[3]);
+
+    } catch (Exception e) {
+
+    }
+    try {
+
       for (MaintenanceRequest maintenanceRequest : validMaintenanceRequest) {
         maintenanceRequestFactory.create(maintenanceRequest);
 
@@ -88,6 +111,15 @@ public class MaintenanceRequestTest {
 
   @Test
   public void testGetMainByLocation() {
+    try {
+      nodeFactory.create(validNodes[0]);
+      nodeFactory.create(validNodes[1]);
+      nodeFactory.create(validNodes[2]);
+      nodeFactory.create(validNodes[3]);
+
+    } catch (Exception e) {
+
+    }
     MaintenanceRequest main1 = validMaintenanceRequest[0];
     MaintenanceRequest main2 = validMaintenanceRequest[1];
     MaintenanceRequest main3 = validMaintenanceRequest[2];
@@ -125,6 +157,15 @@ public class MaintenanceRequestTest {
 
   @Test
   public void testGetAllMaintenanceRequests() {
+    try {
+      nodeFactory.create(validNodes[0]);
+      nodeFactory.create(validNodes[1]);
+      nodeFactory.create(validNodes[2]);
+      nodeFactory.create(validNodes[3]);
+
+    } catch (Exception e) {
+
+    }
     MaintenanceRequest main1 = validMaintenanceRequest[0];
     MaintenanceRequest main2 = validMaintenanceRequest[1];
     MaintenanceRequest main3 = validMaintenanceRequest[2];
