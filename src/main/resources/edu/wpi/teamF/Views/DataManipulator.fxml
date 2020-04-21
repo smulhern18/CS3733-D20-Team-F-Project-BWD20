@@ -11,7 +11,7 @@
       <JFXTreeTableView fx:id="treeViewNodes" layoutX="68.0" layoutY="209.0" stylesheets="@../CSS/treeview.css" />
       <JFXTextField fx:id="filterTextFieldNodes" layoutX="68.0" layoutY="161.0" onMouseClicked="#clearText" prefHeight="25.0" prefWidth="157.0" text="Enter NodeID or NodeType" />
       <fx:include source="MenuBar.fxml" />
-      <JFXButton buttonType="RAISED" layoutX="60.0" layoutY="697.0" onAction="#uploadNodes" prefHeight="59.0" prefWidth="131.0" ripplerFill="#ffe100" text="Upload Nodes" />
+      <JFXButton fx:id="uploadNodesButton" buttonType="RAISED" layoutX="60.0" layoutY="697.0" onAction="#uploadNodes" prefHeight="59.0" prefWidth="131.0" ripplerFill="#ffe100" text="Upload Nodes" />
       <JFXButton buttonType="RAISED" layoutX="201.0" layoutY="697.0" onAction="#uploadEdges" prefHeight="59.0" prefWidth="131.0" ripplerFill="#ffe100" text="Upload Edges" />
       <JFXButton buttonType="RAISED" layoutX="349.0" layoutY="697.0" onAction="#backupDB" prefHeight="59.0" prefWidth="131.0" ripplerFill="#ffe100" text="Backup" />
       <JFXTreeTableView fx:id="treeViewEdges" layoutX="809.0" layoutY="209.0" stylesheets="@../CSS/treeview.css" />

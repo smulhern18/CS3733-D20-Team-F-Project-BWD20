@@ -10,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.*;
@@ -20,6 +21,7 @@ import javax.swing.text.*;
 public class HelpController implements Initializable {
 
   @FXML public AnchorPane rootPane;
+  public Label generalquestions;
   @FXML private StackPane stackPane;
   // @FXML
   // private JFXButton textfield;

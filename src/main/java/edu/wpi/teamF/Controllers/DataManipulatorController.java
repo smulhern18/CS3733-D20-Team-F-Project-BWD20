@@ -46,6 +46,7 @@ public class DataManipulatorController implements Initializable {
   public JFXButton deleteEdgeButton;
   public AnchorPane mapView;
   public AnchorPane rootPane;
+  public JFXButton uploadNodesButton;
   NodeFactory nodes = NodeFactory.getFactory();
   EdgeFactory edges = EdgeFactory.getFactory();
   FileChooser nodesChooser = new FileChooser();

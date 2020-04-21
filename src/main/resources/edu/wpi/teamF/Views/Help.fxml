@@ -12,7 +12,7 @@
 <AnchorPane fx:id="rootPane" prefHeight="873.0" prefWidth="1141.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.HelpController">
    <children>
       <fx:include source="MenuBar.fxml" />
-      <Label layoutX="98.0" layoutY="281.0" text="General Questions">
+      <Label fx:id="generalquestions" layoutX="98.0" layoutY="281.0" text="General Questions">
          <font>
             <Font size="36.0" />
          </font>
