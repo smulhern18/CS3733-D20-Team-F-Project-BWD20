@@ -45,17 +45,19 @@ public class LoginController {
     String password = passwordInput.getText();
     try {
       if (PasswordHasher.verifyPassword(
-          password,
-          accountFactory.getPasswordByUsername(
-              username))) { // checks if the password matches what is in the db using the hasher
+          password, accountFactory.getPasswordByUsername(username))) { // does the password match
+        incorrectLabel.setText("");
         System.out.println("The account is valid");
+        switchToMainMenu2();
         // code that logs the user into the application
+      } else {
+        incorrectLabel.setText("The username or password is incorrect");
+        usernameInput.setUnFocusColor(Color.RED);
+        passwordInput.setUnFocusColor(Color.RED); // sets the unfocused colors to red
+        passwordInput.setText("");
       }
-    } catch (
-        Exception
-            e) { // if there is an error, the username or password does not match an account in the
-      // db
-      incorrectLabel.setVisible(true);
+    } catch (Exception e) { // no existing account in the db
+      incorrectLabel.setText("The username or password is incorrect");
       usernameInput.setUnFocusColor(Color.RED);
       passwordInput.setUnFocusColor(Color.RED); // sets the unfocused colors to red
       passwordInput.setText("");
@@ -64,6 +66,11 @@ public class LoginController {
 
   @FXML
   void switchToMainMenu(ActionEvent event) throws IOException {
+    sceneController.switchScene("MainMenu");
+  }
+
+  @FXML
+  void switchToMainMenu2() throws IOException {
     sceneController.switchScene("MainMenu");
   }
 

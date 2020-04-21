@@ -27,7 +27,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Line>
-                  <Label fx:id="incorrectLabel" text="The username or password is incorrect" textFill="RED" visible="false">
+                  <Label fx:id="incorrectLabel" textFill="RED">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>

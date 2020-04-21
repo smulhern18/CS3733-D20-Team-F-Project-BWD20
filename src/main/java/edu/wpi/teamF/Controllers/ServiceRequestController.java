@@ -275,13 +275,13 @@ public class ServiceRequestController implements Initializable {
   public void updateRequests(ActionEvent actionEvent) throws ValidationException {
     for (UIServiceRequest req : serviceRequests) {
       if (req.serviceType.get().equals("Maintenance")
-          && !req.equals(new UIServiceRequest(maintenanceRequestFactory.read(req.id.get())))) {
+          && req.equals(new UIServiceRequest(maintenanceRequestFactory.read(req.id.get())))) {
         MaintenanceRequest maintenanceRequest = maintenanceRequestFactory.read(req.id.get());
         maintenanceRequest.setDescription(req.description.get());
         maintenanceRequestFactory.update(maintenanceRequest);
 
       } else if (req.serviceType.get().equals("Security")
-          && !req.equals(new UIServiceRequest(securityRequestFactory.read(req.id.get())))) {
+          && req.equals(new UIServiceRequest(securityRequestFactory.read(req.id.get())))) {
         SecurityRequest securityRequest = securityRequestFactory.read(req.id.get());
         securityRequest.setDescription(req.description.get());
         securityRequestFactory.update(securityRequest);
