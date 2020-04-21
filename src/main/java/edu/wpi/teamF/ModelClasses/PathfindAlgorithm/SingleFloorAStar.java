@@ -83,10 +83,12 @@ public class SingleFloorAStar implements PathfindAlgorithm {
 
   @Override
   public Path pathfind(Node start, Node.NodeType nodeType) throws InstanceNotFoundException {
-    List<Node> nodes = nodeFactory.getNodesByType(nodeType);
     List<Path> paths = new ArrayList<>();
-    for (Node node : nodes) {
-      paths.add(pathfind(start, node));
+    for (Node node : nodeMap.values()) {
+      if (node.getType().getTypeString().equals(nodeType.getTypeString())
+          && node.getId().charAt(0) == 'X') {
+        paths.add(pathfind(start, node));
+      }
     }
     double shortestLength = Double.MAX_VALUE;
     Path shortestPath = null;

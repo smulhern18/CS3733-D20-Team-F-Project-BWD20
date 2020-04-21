@@ -20,5 +20,8 @@
             <AnchorPane fx:id="mapPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
          </children>
       </StackPane>
+      <Button fx:id="elevBtn" layoutX="1026.0" layoutY="320.0" mnemonicParsing="false" onMouseClicked="#findElevator" text="Find Elevator" />
+      <Button fx:id="stairsBtn" layoutX="1026.0" layoutY="276.0" mnemonicParsing="false" onMouseClicked="#findStairs" text="Find Stairs" />
+      <Button fx:id="bathBtn" layoutX="1026.0" layoutY="365.0" mnemonicParsing="false" onMouseClicked="#findBathroom" text="FInd Bathroom" />
    </children>
 </AnchorPane>

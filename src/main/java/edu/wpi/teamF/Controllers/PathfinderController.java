@@ -6,12 +6,14 @@ import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.PathfindAlgorithm;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.SingleFloorAStar;
+import edu.wpi.teamF.ModelClasses.Scorer.EuclideanScorer;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -26,6 +28,9 @@ public class PathfinderController implements Initializable {
   public AnchorPane mapPane;
   public StackPane masterPane;
   public List<Node> nodeList;
+  public Button stairsBtn;
+  public Button elevBtn;
+  public Button bathBtn;
 
   private NodeFactory nodeFactory = NodeFactory.getFactory();
   private static EdgeFactory edgeFactory = EdgeFactory.getFactory();
@@ -33,15 +38,15 @@ public class PathfinderController implements Initializable {
   Node startNode = null;
   Node endNode = null;
   PathfindAlgorithm pathFindAlgorithm;
+  EuclideanScorer euclideanScorer = new EuclideanScorer();
 
   public PathfinderController() {
 
     // startNode = nodeFactory.read("FELEV00Z05");
   }
 
-  public void draw() throws InstanceNotFoundException {
+  public void draw(Path path) throws InstanceNotFoundException {
 
-    Path path = pathFindAlgorithm.pathfind(startNode, endNode);
     List<Node> nodeList = path.getPath();
 
     double heightRatio = mapPane.getHeight() / MAP_HEIGHT;
@@ -81,14 +86,23 @@ public class PathfinderController implements Initializable {
         actionEvent -> {
           if (startNode == null) {
             startNode = node;
+            stairsBtn.setDisable(false);
+            elevBtn.setDisable(false);
+            bathBtn.setDisable(false);
             button.setStyle(
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #800000; -fx-border-color: #000000; -fx-border-width: 1px");
           } else if (endNode == null) {
             endNode = node;
             button.setStyle(
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00cc00; -fx-border-color: #000000; -fx-border-width: 1px");
+            Path path = null;
             try {
-              draw();
+              path = pathFindAlgorithm.pathfind(startNode, endNode);
+            } catch (InstanceNotFoundException e) {
+              e.printStackTrace();
+            }
+            try {
+              draw(path);
             } catch (InstanceNotFoundException e) {
               e.printStackTrace();
             }
@@ -100,6 +114,10 @@ public class PathfinderController implements Initializable {
     mapPane.getChildren().clear();
     startNode = null;
     endNode = null;
+
+    stairsBtn.setDisable(true);
+    elevBtn.setDisable(true);
+    bathBtn.setDisable(true);
 
     for (Node node : nodeList) {
       if (node.getId().charAt(0) == 'X' && node.getId().charAt(node.getId().length() - 1) == '5') {
@@ -117,10 +135,25 @@ public class PathfinderController implements Initializable {
       if (node.getId().charAt(node.getId().length() - 1) == '5') {
         nodeList.add(node);
         node.setEdges(edgeFactory.getAllEdgesConnectedToNode(node.getId()));
-        System.out.println(node.getId() + " - " + node.getNeighborNodes());
+        // System.out.println(node.getId() + " - " + node.getNeighborNodes());
       }
     }
     pathFindAlgorithm = new SingleFloorAStar(nodeList);
     resetPane();
+  }
+
+  public void findElevator(MouseEvent mouseEvent) throws InstanceNotFoundException {
+    Path newPath = pathFindAlgorithm.pathfind(startNode, Node.NodeType.getEnum("ELEV"));
+    draw(newPath);
+  }
+
+  public void findStairs(MouseEvent mouseEvent) throws InstanceNotFoundException {
+    Path newPath = pathFindAlgorithm.pathfind(startNode, Node.NodeType.getEnum("STAI"));
+    draw(newPath);
+  }
+
+  public void findBathroom(MouseEvent mouseEvent) throws InstanceNotFoundException {
+    Path newPath = pathFindAlgorithm.pathfind(startNode, Node.NodeType.getEnum("REST"));
+    draw(newPath);
   }
 }
