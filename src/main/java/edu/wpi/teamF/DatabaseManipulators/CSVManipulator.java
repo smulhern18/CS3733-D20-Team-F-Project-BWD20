@@ -180,7 +180,13 @@ public class CSVManipulator {
 
       int i = 5;
       while (i < (data.size() - 1)) {
-        maintenanceRequestFactory.create(new MaintenanceRequest(data.get(i), nodeFactory.read(data.get(i + 1)), data.get(i + 2), new Date(data.get(i + 3)), Integer.parseInt(data.get(i + 4))));
+        maintenanceRequestFactory.create(
+            new MaintenanceRequest(
+                data.get(i),
+                nodeFactory.read(data.get(i + 1)),
+                data.get(i + 2),
+                new Date(data.get(i + 3)),
+                Integer.parseInt(data.get(i + 4))));
 
         i = i + 5;
       }
@@ -200,7 +206,6 @@ public class CSVManipulator {
     List<MaintenanceRequest> maintenanceRequests =
         maintenanceRequestFactory.getAllMaintenanceRequests();
 
-
     try (FileWriter fw = new FileWriter(path.toString() + "/EdgesBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
@@ -208,7 +213,7 @@ public class CSVManipulator {
 
       for (MaintenanceRequest m : maintenanceRequests) {
         bw.newLine();
-         bw.write((formatMaintenanceService(m)));
+        bw.write((formatMaintenanceService(m)));
       }
       bw.close();
     } catch (IOException e) {
@@ -219,7 +224,16 @@ public class CSVManipulator {
 
   public String formatMaintenanceService(MaintenanceRequest m) {
     String Main = "";
-    Main = m.getId() + "," + m.getLocation().getId() + ","+ m.getDescription() + ","+ m.getDateTimeSubmitted().getTime() + ","+ m.getPriority();
+    Main =
+        m.getId()
+            + ","
+            + m.getLocation().getId()
+            + ","
+            + m.getDescription()
+            + ","
+            + m.getDateTimeSubmitted().getTime()
+            + ","
+            + m.getPriority();
     return Main;
   }
   /**
@@ -238,7 +252,13 @@ public class CSVManipulator {
 
       int i = 5;
       while (i < (data.size() - 1)) {
-        securityRequestFactory.create(new SecurityRequest(data.get(i), nodeFactory.read(data.get(i + 1)), data.get(i + 2), new Date(data.get(i + 3)), Integer.parseInt(data.get(i + 4))));
+        securityRequestFactory.create(
+            new SecurityRequest(
+                data.get(i),
+                nodeFactory.read(data.get(i + 1)),
+                data.get(i + 2),
+                new Date(data.get(i + 3)),
+                Integer.parseInt(data.get(i + 4))));
 
         i = i + 5;
       }
@@ -255,9 +275,7 @@ public class CSVManipulator {
   /** Writes to the CSV file so that it can become persistant */
   public void writeCSVFileSecurityService(Path path) {
     // writing to the file
-    List<SecurityRequest> securityRequests =
-        securityRequestFactory.getAllSecurityRequests();
-
+    List<SecurityRequest> securityRequests = securityRequestFactory.getAllSecurityRequests();
 
     try (FileWriter fw = new FileWriter(path.toString() + "/EdgesBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
@@ -274,10 +292,19 @@ public class CSVManipulator {
       // exception handling left as an exercise for the reader
     }
   }
-//this transformeressss the secur bruh
+  // this transformeressss the secur bruh
   public String formatSecurityService(SecurityRequest m) {
     String Main = "";
-    Main = m.getId() + "," + m.getLocation().getId() + ","+ m.getDescription() + ","+ m.getDateTimeSubmitted().getTime() + ","+ m.getPriority();
+    Main =
+        m.getId()
+            + ","
+            + m.getLocation().getId()
+            + ","
+            + m.getDescription()
+            + ","
+            + m.getDateTimeSubmitted().getTime()
+            + ","
+            + m.getPriority();
     return Main;
   }
   /**
