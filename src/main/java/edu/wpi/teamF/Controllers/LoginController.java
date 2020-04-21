@@ -5,9 +5,8 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.AccountFactory;
-import java.io.IOException;
-
 import edu.wpi.teamF.ModelClasses.Account.PasswordHasher;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -45,7 +44,8 @@ public class LoginController {
     String username = usernameInput.getText();
     String password = passwordInput.getText();
     try {
-      if (PasswordHasher.verifyPassword(password, accountFactory.getPasswordByUsername(username))) { // does the password match
+      if (PasswordHasher.verifyPassword(
+          password, accountFactory.getPasswordByUsername(username))) { // does the password match
         incorrectLabel.setText("");
         System.out.println("The account is valid");
         switchToMainMenu2();

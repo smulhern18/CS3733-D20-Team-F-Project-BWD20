@@ -94,7 +94,7 @@ public class LoginTest extends ApplicationTest {
 
     // Password:
     clickOn("#passwordInput");
-    write("weakPassword");
+    write("aWeakerPassw0rd");
 
     // Attempt login
     clickOn("#loginButton");
