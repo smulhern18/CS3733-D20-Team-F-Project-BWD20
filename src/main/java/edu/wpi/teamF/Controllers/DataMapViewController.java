@@ -423,9 +423,7 @@ public class DataMapViewController implements Initializable {
 
   private void displayEdgeData() {
     selectNode1Button.setText(edge.getNode1());
-    selectNode2Button.setText(
-        edge.getNode2()); // Sets the text of the two buttons to the ID of the node they correspond
-    // to
+    selectNode2Button.setText(edge.getNode2()); // Sets the text of the two buttons to the IDs
     modifyEdgeButton.setVisible(true);
     deleteEdgeButton.setVisible(true); // sets the modify and delete button to visible
     addEdgeButton.setVisible(false); // the add button is not visible
@@ -471,7 +469,8 @@ public class DataMapViewController implements Initializable {
 
   @FXML
   public void validateNodeText(KeyEvent keyEvent) {
-    if (!xCoorInput.getText().isEmpty()
+    if (!nodeIDInput.getText().isEmpty()
+        && !xCoorInput.getText().isEmpty()
         && !yCoorInput.getText().isEmpty()
         && !buildingInput.getText().isEmpty()
         && !longNameInput.getText().isEmpty()
@@ -480,7 +479,7 @@ public class DataMapViewController implements Initializable {
         && !floorInput.getText().isEmpty()) { // if every input is occupied:
       modifyButton.setDisable(false);
       addNodeButton.setDisable(false); // the add button and the modify button should be enabled
-      // delete assumes the the node clicked on by the user is always the selected node
+      // delete assumes the node clicked on by the user is always the selected node
     } else {
       modifyButton.setDisable(true);
       addNodeButton.setDisable(
@@ -497,14 +496,12 @@ public class DataMapViewController implements Initializable {
     shortNameInput.setText("");
     typeInput.setText("");
     floorInput.setText("");
-    nodeIDInput.setText(""); // sets all of the input to empty strings
+    nodeIDInput.setText("");
     modifyButton.setVisible(true);
-    deleteButton.setVisible(true); // modify and delete button are visible
-    addNodeButton.setVisible(
-        false); // add button is not visible, only accessible by pressing the add node button on the
-    // bottom right of the screen
+    deleteButton.setVisible(true);
+    addNodeButton.setVisible(false);
     nodeIDInput.setEditable(false); // the node ID should not be changed, needed to update the node
-    errorNodeLabel.setVisible(false); // The error label is reset
+    errorNodeLabel.setVisible(false);
     errorNodeLabel.setText("");
   }
 
