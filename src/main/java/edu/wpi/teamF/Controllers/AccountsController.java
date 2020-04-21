@@ -1,5 +1,6 @@
 package edu.wpi.teamF.Controllers;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
@@ -11,6 +12,7 @@ import edu.wpi.teamF.ModelClasses.Account.Admin;
 import edu.wpi.teamF.ModelClasses.Account.Staff;
 import edu.wpi.teamF.ModelClasses.Account.User;
 import edu.wpi.teamF.ModelClasses.UIAccount;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -27,6 +29,7 @@ import lombok.SneakyThrows;
 
 public class AccountsController implements Initializable {
   public JFXTreeTableView<UIAccount> accountsView;
+  public JFXButton updateStaff;
   SceneController sceneController = App.getSceneController();
   AccountFactory accounts = AccountFactory.getFactory();
   ObservableList<UIAccount> uiAccount = FXCollections.observableArrayList();
@@ -166,5 +169,9 @@ public class AccountsController implements Initializable {
       }
     }
     accountsView.refresh();
+  }
+
+  public void backtoData(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("DataManipulator");
   }
 }

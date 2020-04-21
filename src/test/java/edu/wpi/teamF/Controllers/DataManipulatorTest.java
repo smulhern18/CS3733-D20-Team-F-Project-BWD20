@@ -31,7 +31,7 @@ public class DataManipulatorTest extends ApplicationTest {
   public static void setUp() throws Exception {
     db.initialize();
     TestData testData = new TestData();
-    for (Node node : testData.validNodesWithEdges) {
+    for (Node node : testData.validNodes) {
       nodes.create(node);
     }
     ApplicationTest.launch(App.class);
