@@ -1,22 +1,23 @@
 package edu.wpi.teamF.Controllers;
 
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXTreeTableColumn;
+import edu.wpi.teamF.DatabaseManipulators.MaintenanceRequestFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
+import edu.wpi.teamF.DatabaseManipulators.SecurityRequestFactory;
 import edu.wpi.teamF.DatabaseManipulators.ServiceRequestFactory;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.UIServiceRequest;
+import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.net.URL;
 import java.util.Date;
 import java.util.ResourceBundle;
-
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
-import edu.wpi.teamF.ModelClasses.ValidationException;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.MouseEvent;
-
 import javax.management.InstanceNotFoundException;
 
 public class ServiceRequestController implements Initializable {
@@ -28,11 +29,24 @@ public class ServiceRequestController implements Initializable {
   public ChoiceBox<String> choiceBoxType;
   public ServiceRequestFactory serviceRequest = ServiceRequestFactory.getFactory();
   public NodeFactory nodeFactory = NodeFactory.getFactory();
-  public SecurityRequestFactory securityRequestFactory =  SecurityRequestFactory.getFactory();
-  public ServiceRequestFactory serviceRequest = ServiceRequestFactory.getFactory();
+  public SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
+  public MaintenanceRequestFactory maintenanceRequestFactory =
+      MaintenanceRequestFactory.getFactory();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    // columns for table
+    JFXTreeTableColumn<UIServiceRequest, String> Time =
+        new JFXTreeTableColumn<UIServiceRequest, String>("Time");
+    JFXTreeTableColumn<UIServiceRequest, String> Priority =
+        new JFXTreeTableColumn<UIServiceRequest, String>("Priority");
+    JFXTreeTableColumn<UIServiceRequest, String> Location =
+        new JFXTreeTableColumn<UIServiceRequest, String>("Location");
+    JFXTreeTableColumn<UIServiceRequest, String> ServiceType =
+        new JFXTreeTableColumn<UIServiceRequest, String>("Service Type");
+    JFXTreeTableColumn<UIServiceRequest, String> Description =
+        new JFXTreeTableColumn<UIServiceRequest, String>("Description");
+
     // add all location nodes in choiceboxLoc
 
     // priority chocies
@@ -66,91 +80,89 @@ public class ServiceRequestController implements Initializable {
     choiceBoxLoc.getItems().add("Primary Care Physicians");
   }
 
-  public void submit(ActionEvent actionEvent) throws InstanceNotFoundException, ValidationException {
+  public void submit(ActionEvent actionEvent)
+      throws InstanceNotFoundException, ValidationException {
+    // get priority & location
     int priority = Integer.parseInt(choiceBoxPriority.getValue());
     String locationName = choiceBoxLoc.getValue();
     String nodeID = null;
+    // check which location
     if (locationName.equals("Intensive Care Unit")) {
       nodeID = "FDEPT00105";
-    }
-    else if(locationName.equals("Hemo / Dialysis")) {
+    } else if (locationName.equals("Hemo / Dialysis")) {
       nodeID = "FDEPT00205";
-    }
-    else if(locationName.equals("Residents")) {
+    } else if (locationName.equals("Residents")) {
       nodeID = "FDEPT00405";
-    }
-    else if(locationName.equals("Outpatient Infusion Center")) {
+    } else if (locationName.equals("Outpatient Infusion Center")) {
       nodeID = "FDEPT00305";
-    }
-    else if(locationName.equals("Oncology")) {
+    } else if (locationName.equals("Oncology")) {
       nodeID = "FDEPT00505";
-    }
-    else if(locationName.equals("X-ray")) {
+    } else if (locationName.equals("X-ray")) {
       nodeID = "FDEPT00605";
-    }
-    else if(locationName.equals("Ambulatory Clinic")) {
+    } else if (locationName.equals("Ambulatory Clinic")) {
       nodeID = "FDEPT01305";
-    }
-    else if(locationName.equals("Ambulatory Care Room 1")) {
+    } else if (locationName.equals("Ambulatory Care Room 1")) {
       nodeID = "FDEPT00705";
-    }
-    else if(locationName.equals("Ambulatory Care Room 2")) {
+    } else if (locationName.equals("Ambulatory Care Room 2")) {
       nodeID = "FDEPT00905";
-    }
-    else if(locationName.equals("Ambulatory Care Room 3")) {
+    } else if (locationName.equals("Ambulatory Care Room 3")) {
       nodeID = "FDEPT01005";
-    }
-    else if(locationName.equals("Ambulatory Care Room 4")) {
+    } else if (locationName.equals("Ambulatory Care Room 4")) {
       nodeID = "FDEPT01105";
-    }
-    else if(locationName.equals("Internal Medicine")) {
+    } else if (locationName.equals("Internal Medicine")) {
       nodeID = "FDEPT01405";
-    }
-    else if(locationName.equals("Suite 5940")) {
+    } else if (locationName.equals("Suite 5940")) {
       nodeID = "FSERV00305";
-    }
-    else if(locationName.equals("Suite 5945")) {
+    } else if (locationName.equals("Suite 5945")) {
       nodeID = "FSERV00205";
-    }
-    else if(locationName.equals("Suite 51")) {
+    } else if (locationName.equals("Suite 51")) {
       nodeID = "FSERV00405";
-    }
-    else if(locationName.equals("Suite 58")) {
+    } else if (locationName.equals("Suite 58")) {
       nodeID = "FSERV00505";
-    }
-    else if(locationName.equals("Ent / Eye Physical / Derm")) {
+    } else if (locationName.equals("Ent / Eye Physical / Derm")) {
       nodeID = "FDEPT01605";
-    }
-    else if(locationName.equals("Orthopedic")) {
+    } else if (locationName.equals("Orthopedic")) {
       nodeID = "FDEPT01705";
-    }
-    else if(locationName.equals("BWH Surgical Specialties")) {
+    } else if (locationName.equals("BWH Surgical Specialties")) {
       nodeID = "FDEPT01805";
-    }
-    else if(locationName.equals("Endocrinology/ Diabetes/ Hem-Onc")) {
+    } else if (locationName.equals("Endocrinology/ Diabetes/ Hem-Onc")) {
       nodeID = "FDEPT01505";
-    }
-    else if(locationName.equals("Primary Care Physicians")) {
+    } else if (locationName.equals("Primary Care Physicians")) {
       nodeID = "FDEPT00805";
     }
-
-
-
+    // check the type of service requested & date
     String serviceType = choiceBoxType.getValue();
     Date date = new Date(System.currentTimeMillis());
     String id = nodeID + date;
     if (serviceType.equals("Security")) {
-      SecurityRequest secRequest = new SecurityRequest(id, nodeFactory.read(nodeID), textAreaDesc.getText(), date, priority);
+      SecurityRequest secRequest =
+          new SecurityRequest(id, nodeFactory.read(nodeID), textAreaDesc.getText(), date, priority);
+      securityRequestFactory.create(secRequest);
 
     } else if (serviceType.equals("Maintenance")) {
-      MaintenanceRequest maintenanceRequest = new MaintenanceRequest(id, nodeFactory.read(nodeID), textAreaDesc.getText(), date, priority);
+      MaintenanceRequest maintenanceRequest =
+          new MaintenanceRequest(
+              id, nodeFactory.read(nodeID), textAreaDesc.getText(), date, priority);
+      maintenanceRequestFactory.create(maintenanceRequest);
     }
-
+    reset();
   }
 
   public void clearTextFilter(MouseEvent mouseDragEvent) {
     filterLoc.setText("");
   }
 
-  public void cancel(ActionEvent actionEvent) {}
+  public void cancel(ActionEvent actionEvent) {
+    reset();
+  }
+
+  public void reset() {
+    choiceBoxLoc.setValue("");
+    filterLoc.setText("");
+    textAreaDesc.setText("");
+    choiceBoxPriority.setValue("");
+    choiceBoxType.setValue("");
+  }
+
+  public void showServiceRequests(ActionEvent actionEvent) {}
 }

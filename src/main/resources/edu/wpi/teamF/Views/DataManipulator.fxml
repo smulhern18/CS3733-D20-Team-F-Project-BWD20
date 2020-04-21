@@ -6,7 +6,7 @@
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1191.0" style="-fx-border-color: #bf3389; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/11.0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.DataManipulatorController">
+<AnchorPane prefHeight="800.0" prefWidth="1191.0" style="-fx-border-color: #bf3389; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.DataManipulatorController">
    <children>
       <JFXTreeTableView fx:id="treeViewNodes" layoutX="68.0" layoutY="209.0" stylesheets="@../CSS/treeview.css" />
       <JFXTextField fx:id="filterTextFieldNodes" layoutX="68.0" layoutY="161.0" onMouseClicked="#clearText" prefHeight="25.0" prefWidth="157.0" text="Enter NodeID or NodeType" />
@@ -24,5 +24,6 @@
       <JFXTextField fx:id="nodeToDelete" layoutX="186.0" layoutY="623.0" />
       <JFXButton fx:id="deleteEdgeButton" buttonType="RAISED" layoutX="809.0" layoutY="620.0" onAction="#deleteEdge" prefHeight="31.0" prefWidth="123.0" ripplerFill="#179e41" text="Delete Edge" />
       <JFXTextField fx:id="edgeToDelete" layoutX="932.0" layoutY="623.0" />
+      <fx:include fx:id="mapView" layoutX="160.0" layoutY="120.0" source="DataMapView.fxml" />
    </children>
 </AnchorPane>

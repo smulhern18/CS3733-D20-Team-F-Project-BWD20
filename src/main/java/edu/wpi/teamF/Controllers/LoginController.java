@@ -21,20 +21,21 @@ public class LoginController {
 
   @FXML private JFXPasswordField passwordInput;
 
-  @FXML private Label incorrectLabel; //label that is displayed if teh input is not valid
+  @FXML private Label incorrectLabel; // label that is displayed if teh input is not valid
 
   private AccountFactory accountFactory = AccountFactory.getFactory();
 
-  SceneController sceneController = App.getSceneController(); //used to switch between scenes
+  SceneController sceneController = App.getSceneController(); // used to switch between scenes
 
   @FXML
-  void enableLogin(KeyEvent event) { //called on each key release for both inputs
+  void enableLogin(KeyEvent event) { // called on each key release for both inputs
     String username = usernameInput.getText();
     String password = passwordInput.getText();
     if (!username.isEmpty() && !password.isEmpty()) {
-      loginButton.setDisable(false); //the login button is enabled only when there is text in the two input
+      loginButton.setDisable(
+          false); // the login button is enabled only when there is text in the two input
     } else {
-      loginButton.setDisable(true); //checks if the user entered text and then deleted the text
+      loginButton.setDisable(true); // checks if the user entered text and then deleted the text
     }
   }
 
@@ -43,14 +44,20 @@ public class LoginController {
     String username = usernameInput.getText();
     String password = passwordInput.getText();
     try {
-      if (PasswordHasher.verifyPassword(password, accountFactory.getPasswordByUsername(username))) { //checks if the password matches what is in the db using the hasher
+      if (PasswordHasher.verifyPassword(
+          password,
+          accountFactory.getPasswordByUsername(
+              username))) { // checks if the password matches what is in the db using the hasher
         System.out.println("The account is valid");
         // code that logs the user into the application
       }
-    } catch (Exception e) { //if there is an error, the username or password does not match an account in the db
+    } catch (
+        Exception
+            e) { // if there is an error, the username or password does not match an account in the
+      // db
       incorrectLabel.setVisible(true);
       usernameInput.setUnFocusColor(Color.RED);
-      passwordInput.setUnFocusColor(Color.RED); //sets the unfocused colors to red
+      passwordInput.setUnFocusColor(Color.RED); // sets the unfocused colors to red
       passwordInput.setText("");
     }
   }
