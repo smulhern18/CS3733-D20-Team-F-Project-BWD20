@@ -1,5 +1,6 @@
 package edu.wpi.teamF.Controllers;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
@@ -27,6 +28,7 @@ import lombok.SneakyThrows;
 
 public class AccountsController implements Initializable {
   public JFXTreeTableView<UIAccount> accountsView;
+  public JFXButton updateStaff;
   SceneController sceneController = App.getSceneController();
   AccountFactory accounts = AccountFactory.getFactory();
   ObservableList<UIAccount> uiAccount = FXCollections.observableArrayList();
