@@ -207,8 +207,8 @@ public class DatabaseManager {
   public void reset() throws SQLException {
     String nodeDropStatement = "DROP TABLE " + NODES_TABLE_NAME;
     String edgeDropStatement = "DROP TABLE " + EDGES_TABLE_NAME;
-    String maintenanceTableCreationStatement = "DROP TABLE " + MAINTENANCEQUEST_TABLE_NAME;
-    String securityTableCreationStatement = "DROP TABLE " + SECURITYQUEST_TABLE_NAME;
+    String maintenanceTableDropStatement = "DROP TABLE " + MAINTENANCEQUEST_TABLE_NAME;
+    String securityTableDropStatement = "DROP TABLE " + SECURITYQUEST_TABLE_NAME;
     String accountDropStatement = "DROP TABLE " + ACCOUNT_TABLE_NAME;
     String appointmentDropStatement = "DROP TABLE " + APPOINTMENTS_TABLE_NAME;
 
@@ -216,9 +216,9 @@ public class DatabaseManager {
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(edgeDropStatement);
     preparedStatement.execute();
-    preparedStatement = connection.prepareStatement(maintenanceTableCreationStatement);
+    preparedStatement = connection.prepareStatement(maintenanceTableDropStatement);
     preparedStatement.execute();
-    preparedStatement = connection.prepareStatement(securityTableCreationStatement);
+    preparedStatement = connection.prepareStatement(securityTableDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(accountDropStatement);
     preparedStatement.execute();
