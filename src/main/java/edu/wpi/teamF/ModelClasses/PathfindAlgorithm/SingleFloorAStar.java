@@ -16,8 +16,8 @@ public class SingleFloorAStar implements PathfindAlgorithm {
 
   @Override
   public Path pathfind(Node startNode, Node endNode) throws InstanceNotFoundException {
-    System.out.println(startNode.getEdges());
-    System.out.println(endNode.getEdges());
+    System.out.println(startNode.getNeighborNodes());
+    System.out.println(endNode.getNeighborNodes());
     PriorityQueue<RouteNode> priorityQueue = new PriorityQueue<RouteNode>();
     HashSet<Node> visited = new HashSet<Node>();
     EuclideanScorer scorer = new EuclideanScorer();
@@ -26,6 +26,8 @@ public class SingleFloorAStar implements PathfindAlgorithm {
     priorityQueue.add(start);
     while (!priorityQueue.isEmpty()) {
       RouteNode currentNode = priorityQueue.poll();
+      System.out.println(currentNode.getNode().getId());
+      System.out.println(currentNode.getNode().getNeighborNodes());
       if (!visited.contains(currentNode.getNode())) {
         visited.add(currentNode.getNode());
         if (currentNode.getNode().equals(endNode)) {

@@ -9,7 +9,7 @@
 <AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.PathfinderController">
    <children>
       <fx:include source="MenuBar.fxml" />
-      <Button layoutX="1026.0" layoutY="234.0" mnemonicParsing="false" text="Draw Line" />
+      <Button layoutX="1026.0" layoutY="234.0" mnemonicParsing="false" onAction="#resetPane" text="Reset" />
       <StackPane fx:id="masterPane" layoutX="22.0" layoutY="158.0" prefHeight="579.0" prefWidth="959.0">
          <children>
             <ImageView fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
