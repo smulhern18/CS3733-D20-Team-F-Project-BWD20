@@ -1,8 +1,8 @@
 package edu.wpi.teamF.Controllers;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
+
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
@@ -24,58 +24,57 @@ import org.testfx.framework.junit5.Start;
 
 public class DataManipulatorTest extends ApplicationTest {
 
-    private static DatabaseManager db = new DatabaseManager();
-    private static NodeFactory nodes = NodeFactory.getFactory();
+  private static DatabaseManager db = new DatabaseManager();
+  private static NodeFactory nodes = NodeFactory.getFactory();
 
-    @BeforeAll
-    public static void setUp() throws Exception {
-        db.initialize();
-        TestData testData = new TestData();
-        for (Node node : testData.validNodesWithEdges) {
-            nodes.create(node);
-        }
-        ApplicationTest.launch(App.class);
+  @BeforeAll
+  public static void setUp() throws Exception {
+    db.initialize();
+    TestData testData = new TestData();
+    for (Node node : testData.validNodesWithEdges) {
+      nodes.create(node);
     }
+    ApplicationTest.launch(App.class);
+  }
 
-    @Start
-    public void start(Stage stage) throws IOException {
-        stage.show();
-        clickOn("Admin");
-    }
+  @Start
+  public void start(Stage stage) throws IOException {
+    stage.show();
+    clickOn("Admin");
+  }
 
-    @After
-    public void afterEachTest() throws TimeoutException {
-        FxToolkit.hideStage();
-    }
+  @After
+  public void afterEachTest() throws TimeoutException {
+    FxToolkit.hideStage();
+  }
 
-    @AfterEach
-    public static void tearDown() throws SQLException {
-        db.reset();
-    }
+  @AfterEach
+  public void tearDown() throws SQLException {
+    db.reset();
+  }
 
-    @Test
-    void testNodeSearch() throws InstanceNotFoundException {
-        clickOn("#filterTextFieldNodes");
+  @Test
+  void testNodeSearch() throws InstanceNotFoundException {
 
-        // Nodes to edit
-        write("LSTAF00402");
-        clickOn("1000");
-        write("1200");
-        press(KeyCode.ENTER);
-        clickOn("Update Nodes");
-        // change a value
+    // Nodes to edit
+    clickOn("#filterTextFieldNodes");
+    write("nodeA");
+    press(KeyCode.ENTER);
 
-        // click on update nodes
-        // verify that new data is there -> check in database that that value is updated
-        short xCoord = nodes.read("LSTAF00402").getXCoord();
-        assertEquals(xCoord, (short) 1000);
-    }
+    clickOn("#filterTextFieldNodes");
+    write("nodeB");
+    press(KeyCode.ENTER);
 
-    @Test
-    void testUserAccounts() {
-        // when click
-        clickOn("User Accounts");
+    clickOn("#filterTextFieldNodes");
+    write("nodeC");
+    press(KeyCode.ENTER);
+  }
 
-        verifyThat("#updateStaff", hasText("Update Staff"));
-    }
+  @Test
+  void testUserAccounts() {
+    // when click
+    clickOn("User Accounts");
+
+    verifyThat("#updateStaff", hasText("Update Staff"));
+  }
 }
