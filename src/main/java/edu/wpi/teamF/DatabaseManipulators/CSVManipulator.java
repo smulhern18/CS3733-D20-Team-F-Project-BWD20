@@ -36,9 +36,9 @@ public class CSVManipulator {
                 data.get(i + 6), // longname
                 data.get(i + 7), // shortname
                 Node.NodeType.getEnum(data.get(i + 5)), // nodetype
-                Short.parseShort(data.get(i + 3)));
+                Short.parseShort(data.get(i + 3))); // floor
         System.out.println("Created Node on line " + i / 8 + ", " + node.getId());
-        nodeFactory.create(node); // floor
+        nodeFactory.create(node);
         i = i + 8;
       }
 
