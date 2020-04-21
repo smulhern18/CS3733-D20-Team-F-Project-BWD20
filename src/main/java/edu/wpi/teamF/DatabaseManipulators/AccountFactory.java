@@ -263,7 +263,7 @@ public class AccountFactory {
                 resultSet.getString(DatabaseManager.LAST_NAME_KEY),
                 resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
                 resultSet.getString(DatabaseManager.USER_NAME_KEY),
-                Account.Type.getEnum(resultSet.getInt(DatabaseManager.TYPE_KEY))));
+                Account.Type.getEnum(resultSet.getInt(DatabaseManager.USER_TYPE_KEY))));
       }
     } catch (Exception e) {
       System.out.println(e.getMessage() + ", " + e.getClass());
