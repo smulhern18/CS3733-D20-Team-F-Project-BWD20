@@ -378,5 +378,6 @@ public class DataManipulatorController implements Initializable {
 
     // backup
     csvM.writeCSVFileNode(selDir.toPath());
+    //csvM.writeCSVFileEdge(selDir.toPath());
   }
 }

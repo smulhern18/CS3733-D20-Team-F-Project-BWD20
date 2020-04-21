@@ -8,6 +8,7 @@ import java.util.Date;
 public abstract class ServiceRequest {
 
   private String id;
+  private String complete = "";
   private Node location;
   private String description;
   private Date dateTimeSubmitted;
@@ -66,5 +67,13 @@ public abstract class ServiceRequest {
   public void setPriority(int priority) throws ValidationException {
     Validators.priorityValidation(priority);
     this.priority = priority;
+  }
+
+  public String getComplete() {
+    return complete;
+  }
+
+  public void setComplete(String complete) {
+    this.complete = complete;
   }
 }
