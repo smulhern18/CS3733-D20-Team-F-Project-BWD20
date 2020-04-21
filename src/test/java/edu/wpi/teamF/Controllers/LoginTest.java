@@ -105,3 +105,4 @@ public class LoginTest extends ApplicationTest {
     verifyThat("#textMenu", hasText("click a button above"));
   }
 }
+
