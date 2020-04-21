@@ -24,6 +24,11 @@ public abstract class ServiceRequest {
     setPriority(priority);
   }
 
+  public ServiceRequest(Node location, String description, Date dateTimeSubmitted, int priority)
+      throws ValidationException {
+    this("" + System.currentTimeMillis(), location, description, dateTimeSubmitted, priority);
+  }
+
   public String getId() {
     return id;
   }

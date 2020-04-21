@@ -11,6 +11,11 @@ public class SecurityRequest extends ServiceRequest {
     super(id, location, description, dateTimeSubmitted, priority);
   }
 
+  public SecurityRequest(Node location, String description, Date dateTimeSubmitted, int priority)
+      throws ValidationException {
+    super(location, description, dateTimeSubmitted, priority);
+  }
+
   /**
    * Checks if two Maintenance are equal
    *

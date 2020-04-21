@@ -10,6 +10,11 @@ public class MaintenanceRequest extends ServiceRequest {
       throws ValidationException {
     super(id, location, description, dateTimeSubmitted, priority);
   }
+
+  public MaintenanceRequest(Node location, String description, Date dateTimeSubmitted, int priority)
+      throws ValidationException {
+    super(location, description, dateTimeSubmitted, priority);
+  }
   /**
    * Checks if two Maintenance are equal
    *
