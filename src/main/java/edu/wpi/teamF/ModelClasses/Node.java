@@ -2,7 +2,6 @@ package edu.wpi.teamF.ModelClasses;
 
 import java.util.HashSet;
 import java.util.Set;
-import lombok.Data;
 
 public class Node {
 
@@ -68,15 +67,15 @@ public class Node {
    * @throws ValidationException should anything go wrong
    */
   public Node(
-          String id,
-          short xCoord,
-          short yCoord,
-          String building,
-          String longName,
-          String shortName,
-          NodeType nodeType,
-          short floor)
-          throws ValidationException {
+      String id,
+      short xCoord,
+      short yCoord,
+      String building,
+      String longName,
+      String shortName,
+      NodeType nodeType,
+      short floor)
+      throws ValidationException {
     setXCoord(xCoord);
     setYCoord(yCoord);
     setBuilding(building);
@@ -88,16 +87,16 @@ public class Node {
   }
 
   public Node(
-          String id,
-          short xCoord,
-          short yCoord,
-          String building,
-          String longName,
-          String shortName,
-          NodeType nodeType,
-          short floor,
-          Set<Edge> edge)
-          throws ValidationException {
+      String id,
+      short xCoord,
+      short yCoord,
+      String building,
+      String longName,
+      String shortName,
+      NodeType nodeType,
+      short floor,
+      Set<Edge> edge)
+      throws ValidationException {
     this(id, xCoord, yCoord, building, longName, shortName, nodeType, floor);
     setEdges(edge);
   }
@@ -137,15 +136,15 @@ public class Node {
       Node otherNode = (Node) other;
 
       isEqual =
-              this.id.equals(otherNode.getId())
-                      && this.getXCoord() == otherNode.getXCoord()
-                      && this.getYCoord() == otherNode.getYCoord()
-                      && this.getFloor() == otherNode.getFloor()
-                      && this.getType() == otherNode.getType()
-                      && this.edges.equals((otherNode).edges)
-                      && this.getBuilding().equals(otherNode.getBuilding())
-                      && this.getLongName().equals(otherNode.getLongName())
-                      && this.getShortName().equals(otherNode.getShortName());
+          this.id.equals(otherNode.getId())
+              && this.getXCoord() == otherNode.getXCoord()
+              && this.getYCoord() == otherNode.getYCoord()
+              && this.getFloor() == otherNode.getFloor()
+              && this.getType() == otherNode.getType()
+              && this.edges.equals((otherNode).edges)
+              && this.getBuilding().equals(otherNode.getBuilding())
+              && this.getLongName().equals(otherNode.getLongName())
+              && this.getShortName().equals(otherNode.getShortName());
     }
     return isEqual;
   }
