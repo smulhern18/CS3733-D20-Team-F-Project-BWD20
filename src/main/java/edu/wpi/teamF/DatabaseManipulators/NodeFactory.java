@@ -1,5 +1,6 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
+import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
@@ -8,11 +9,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.management.InstanceNotFoundException;
 
 public class NodeFactory {
 
   private static final NodeFactory factory = new NodeFactory();
+
+  private EdgeFactory edgeFactory = EdgeFactory.getFactory();
 
   public static NodeFactory getFactory() {
     return factory;
@@ -59,11 +63,13 @@ public class NodeFactory {
       prepareStatement.setString(param++, node.getShortName());
       prepareStatement.setString(param++, node.getType().getTypeString());
       prepareStatement.setInt(param++, node.getFloor());
-
       try {
         int numRows = prepareStatement.executeUpdate();
         if (numRows < 1) {
           throw new SQLException("Created more than one rows");
+        }
+        for (Edge e : node.getEdges()) {
+          edgeFactory.create(e);
         }
       } catch (SQLException e) {
         System.out.println(e.getMessage());
@@ -105,6 +111,8 @@ public class NodeFactory {
                   resultSet.getString(DatabaseManager.SHORT_NAME_KEY),
                   Node.NodeType.getEnum(resultSet.getString(DatabaseManager.TYPE_KEY)),
                   resultSet.getShort(DatabaseManager.FLOOR_KEY));
+          Set<Edge> edges = edgeFactory.getAllEdgesConnectedToNode(node.getId());
+          node.setEdges(edges);
         }
       } catch (ValidationException e) {
         throw e;
@@ -123,6 +131,7 @@ public class NodeFactory {
    * @param node the node to update
    */
   public void update(Node node) {
+    edgeFactory.deleteByNodeID(node.getId());
     String updateStatement =
         "UPDATE "
             + DatabaseManager.NODES_TABLE_NAME
@@ -162,6 +171,9 @@ public class NodeFactory {
       if (numRows != 1) {
         throw new Exception("Updated " + numRows + " rows");
       }
+      for (Edge edge : node.getEdges()) {
+        edgeFactory.create(edge);
+      }
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
@@ -187,6 +199,7 @@ public class NodeFactory {
       if (numRows > 1) {
         throw new SQLException("Deleted " + numRows + " rows");
       }
+      edgeFactory.deleteByNodeID(id);
     } catch (SQLException e) {
       System.out.println("Error: " + e.getMessage() + ", " + e.getCause());
     }

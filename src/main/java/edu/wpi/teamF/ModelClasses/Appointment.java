@@ -1,5 +1,7 @@
 package edu.wpi.teamF.ModelClasses;
 
+import java.util.Objects;
+
 public class Appointment {
 
   private String id;
@@ -110,5 +112,17 @@ public class Appointment {
   public void setPCP(String PCP) throws ValidationException {
     Validators.PCPValidation(PCP);
     this.PCP = PCP;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof Appointment)) return false;
+    Appointment that = (Appointment) o;
+    return Objects.equals(getId(), that.getId())
+        && getLocation().equals(that.getLocation())
+        && Objects.equals(getRoom(), that.getRoom())
+        && Objects.equals(getUserID(), that.getUserID())
+        && Objects.equals(getPCP(), that.getPCP());
   }
 }

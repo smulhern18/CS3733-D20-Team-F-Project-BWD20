@@ -29,7 +29,6 @@ public class EdgeFactoryTest {
   public static void initializeDatabase() {
     try {
       databaseManager.initialize();
-      databaseManager.reset();
       testData = new TestData();
       for (Node node : testData.validNodes) {
         nodeFactory.create(node);
@@ -39,7 +38,7 @@ public class EdgeFactoryTest {
     } catch (ValidationException e) {
       System.out.println(e.getMessage());
     } catch (Exception e) {
-      fail(e.getMessage());
+      fail(e.getMessage() + e.getClass());
     }
   }
 
