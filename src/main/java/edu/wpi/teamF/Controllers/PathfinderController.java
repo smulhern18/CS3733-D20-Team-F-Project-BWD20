@@ -18,6 +18,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Text;
 import javax.management.InstanceNotFoundException;
 import lombok.SneakyThrows;
 
@@ -31,6 +32,7 @@ public class PathfinderController implements Initializable {
   public Button stairsBtn;
   public Button elevBtn;
   public Button bathBtn;
+  public Text commandText;
 
   private NodeFactory nodeFactory = NodeFactory.getFactory();
   private static EdgeFactory edgeFactory = EdgeFactory.getFactory();
@@ -74,7 +76,7 @@ public class PathfinderController implements Initializable {
     button.setMaxSize(12, 12);
     button.setPrefSize(12, 12);
     button.setStyle(
-        "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px");
+        "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #3281a8; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
 
     int xPos = (int) ((node.getXCoord() * widthRatio) - 6);
     int yPos = (int) ((node.getYCoord() * heightRatio) - 6);
@@ -90,12 +92,16 @@ public class PathfinderController implements Initializable {
             elevBtn.setDisable(false);
             bathBtn.setDisable(false);
             button.setStyle(
-                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #800000; -fx-border-color: #000000; -fx-border-width: 1px");
+                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px"); // 800000
+            commandText.setText("Select End Location or Building Feature");
           } else if (endNode == null) {
             endNode = node;
             button.setStyle(
-                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00cc00; -fx-border-color: #000000; -fx-border-width: 1px");
+                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00cc00; -fx-border-color: #000000; -fx-border-width: 1px"); // 00cc00
             Path path = null;
+            elevBtn.setDisable(true);
+            bathBtn.setDisable(true);
+            stairsBtn.setDisable(true);
             try {
               path = pathFindAlgorithm.pathfind(startNode, endNode);
             } catch (InstanceNotFoundException e) {
@@ -106,6 +112,7 @@ public class PathfinderController implements Initializable {
             } catch (InstanceNotFoundException e) {
               e.printStackTrace();
             }
+            commandText.setText("See Details Below or Reset for New Path");
           }
         });
   }
@@ -118,6 +125,7 @@ public class PathfinderController implements Initializable {
     stairsBtn.setDisable(true);
     elevBtn.setDisable(true);
     bathBtn.setDisable(true);
+    commandText.setText("Select Starting Location");
 
     for (Node node : nodeList) {
       if (node.getId().charAt(0) == 'X' && node.getId().charAt(node.getId().length() - 1) == '5') {
@@ -145,15 +153,18 @@ public class PathfinderController implements Initializable {
   public void findElevator(MouseEvent mouseEvent) throws InstanceNotFoundException {
     Path newPath = pathFindAlgorithm.pathfind(startNode, Node.NodeType.getEnum("ELEV"));
     draw(newPath);
+    commandText.setText("See Details Below or Reset for New Path");
   }
 
   public void findStairs(MouseEvent mouseEvent) throws InstanceNotFoundException {
     Path newPath = pathFindAlgorithm.pathfind(startNode, Node.NodeType.getEnum("STAI"));
     draw(newPath);
+    commandText.setText("See Details Below or Reset for New Path");
   }
 
   public void findBathroom(MouseEvent mouseEvent) throws InstanceNotFoundException {
     Path newPath = pathFindAlgorithm.pathfind(startNode, Node.NodeType.getEnum("REST"));
     draw(newPath);
+    commandText.setText("See Details Below or Reset for New Path");
   }
 }
