@@ -111,7 +111,7 @@ public class SecurityRequestFactory {
             + DatabaseManager.TIME_CREATED_KEY
             + " = ?, "
             + DatabaseManager.PRIORITY_KEY
-            + " = ?, "
+            + " = ? "
             + "WHERE "
             + DatabaseManager.SERVICEID_KEY
             + " = ?";
@@ -124,6 +124,7 @@ public class SecurityRequestFactory {
       preparedStatement.setTimestamp(
           param++, new Timestamp(securityRequest.getDateTimeSubmitted().getTime()));
       preparedStatement.setInt(param++, securityRequest.getPriority());
+      preparedStatement.setString(param++, securityRequest.getId());
       int numRows = preparedStatement.executeUpdate();
       if (numRows != 1) {
         throw new Exception("Updated " + numRows + " rows");
@@ -185,7 +186,7 @@ public class SecurityRequestFactory {
     } catch (IllegalArgumentException e) {
       throw e;
     } catch (Exception e) {
-      System.out.println("Exception in NodeFactory read: " + e.getMessage() + ", " + e.getClass());
+      System.out.println("Exception in SecurityFactory read: " + e.getMessage() + ", " + e.getClass());
     }
     return securityRequest;
   }
@@ -209,7 +210,7 @@ public class SecurityRequestFactory {
                 resultSet.getInt(DatabaseManager.PRIORITY_KEY)));
       }
     } catch (Exception e) {
-      System.out.println("Exception in NodeFactory read: " + e.getMessage() + ", " + e.getClass());
+      System.out.println("Exception in SecurityFactory read: " + e.getMessage() + ", " + e.getClass());
     }
     return securityRequest;
   }
