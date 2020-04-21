@@ -1,6 +1,5 @@
 package edu.wpi.teamF.Controllers;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
@@ -56,20 +55,19 @@ public class DataManipulatorTest extends ApplicationTest {
 
   @Test
   void testNodeSearch() throws InstanceNotFoundException {
-    clickOn("#filterTextFieldNodes");
 
     // Nodes to edit
-    write("LSTAF00402");
-    clickOn("1000");
-    write("1200");
+    clickOn("#filterTextFieldNodes");
+    write("nodeA");
     press(KeyCode.ENTER);
-    clickOn("Update Nodes");
-    // change a value
 
-    // click on update nodes
-    // verify that new data is there -> check in database that that value is updated
-    short xCoord = nodes.read("LSTAF00402").getXCoord();
-    assertEquals(xCoord, (short) 1000);
+    clickOn("#filterTextFieldNodes");
+    write("nodeB");
+    press(KeyCode.ENTER);
+
+    clickOn("#filterTextFieldNodes");
+    write("nodeC");
+    press(KeyCode.ENTER);
   }
 
   @Test
