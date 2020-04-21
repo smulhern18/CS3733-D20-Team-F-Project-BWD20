@@ -14,7 +14,7 @@
             <Image url="@../../../../Images/BWH.jpg" />
          </image></ImageView>
       <fx:include minWidth="-Infinity" source="MenuBar.fxml" />
-      <Label layoutX="479.0" layoutY="694.0" text="click a button above" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="textMenu" layoutX="479.0" layoutY="694.0" text="click a button above" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="HP Simplified" size="48.0" />
          </font>

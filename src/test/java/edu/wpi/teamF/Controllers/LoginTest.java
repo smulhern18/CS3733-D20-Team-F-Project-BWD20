@@ -9,12 +9,10 @@ import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.TestData;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.concurrent.TimeoutException;
 import javafx.stage.Stage;
 import javax.management.InstanceNotFoundException;
 import org.junit.After;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testfx.api.FxToolkit;
@@ -47,30 +45,63 @@ public class LoginTest extends ApplicationTest {
     FxToolkit.hideStage();
   }
 
-  @AfterEach
-  public static void tearDown() throws SQLException {
-    db.reset();
-  }
+  //  @AfterEach
+  //  public static void tearDown() throws SQLException {}
 
   @Test
   void testAccountNotValid() throws InstanceNotFoundException {
-    System.out.println("Starting testAccountNotValid test");
 
     // Login Page
     clickOn("Login");
 
     // Username:
     clickOn("#usernameInput");
-    write("Tyler");
+    write("TheCuddleMonster");
 
     // Password:
     clickOn("#passwordInput");
-    write("Jones");
+    write("Invalid password");
 
     // Attempt login
     clickOn("#loginButton");
 
     // Verify that the user remains on the login page
     verifyThat("#orLogin", hasText("or"));
+  }
+
+  @Test
+  void testErrorMessage() throws InstanceNotFoundException {
+
+    // Login Page
+    clickOn("Login");
+
+    // Password:
+    clickOn("#passwordInput");
+    write("Invalid password");
+
+    // Attempt login
+    clickOn("#loginButton");
+
+    // Verify that the user remains on the login page
+    verifyThat("#incorrectLabel", hasText("The username or password is incorrect"));
+  }
+
+  @Test
+  void testValidAccount() throws InstanceNotFoundException {
+
+    // Login Page
+    clickOn("Login");
+
+    // Password:
+    clickOn("#passwordInput");
+    write("weakPassword");
+
+    // Attempt login
+    clickOn("#loginButton");
+
+    sleep(500);
+
+    // Verify that the user changes to the main menu page
+    verifyThat("#textMenu", hasText("click a button above"));
   }
 }
