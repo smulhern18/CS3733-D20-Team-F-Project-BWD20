@@ -1,9 +1,13 @@
 package edu.wpi.teamF.ModelClasses;
 
+import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import java.util.HashSet;
 import java.util.Set;
+import javax.management.InstanceNotFoundException;
 
 public class Node {
+
+  private static NodeFactory nodeFactory = NodeFactory.getFactory();
 
   public enum NodeType {
     // Values
@@ -52,6 +56,7 @@ public class Node {
   private NodeType type;
   private short floor;
   private Set<Edge> edges = new HashSet<>();
+  private Set<Node> neighborNodes = new HashSet<>();
 
   /**
    * Constructor for Nodes
@@ -96,7 +101,7 @@ public class Node {
       NodeType nodeType,
       short floor,
       Set<Edge> edge)
-      throws ValidationException {
+      throws Exception {
     this(id, xCoord, yCoord, building, longName, shortName, nodeType, floor);
     setEdges(edge);
   }
@@ -111,8 +116,15 @@ public class Node {
    *
    * @param edge the edge to add
    */
-  public void setEdges(Set<Edge> edge) {
+  public void setEdges(Set<Edge> edge) throws InstanceNotFoundException {
     this.edges = edge;
+    //    for (Edge anEdge : edge) {
+    //      if (anEdge.getNode1().equals(this.id)) {
+    //        neighborNodes.add(nodeFactory.read(anEdge.getNode2()));
+    //      } else {
+    //        neighborNodes.add(nodeFactory.read(anEdge.getNode1()));
+    //      }
+    //    }
   }
 
   /**
@@ -120,8 +132,13 @@ public class Node {
    *
    * @param edge the edges to add
    */
-  public void addEdge(Edge edge) {
+  public void addEdge(Edge edge) throws InstanceNotFoundException {
     this.edges.add(edge);
+    if (edge.getNode1().equals(this.id)) {
+      neighborNodes.add(nodeFactory.read(edge.getNode2()));
+    } else {
+      neighborNodes.add(nodeFactory.read(edge.getNode1()));
+    }
   }
 
   /**
@@ -305,5 +322,10 @@ public class Node {
   public void setFloor(short floor) throws ValidationException {
     Validators.floorValidation(floor);
     this.floor = floor;
+  }
+
+  public Set<Node> getNeighborNodes() {
+
+    return neighborNodes;
   }
 }

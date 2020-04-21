@@ -260,7 +260,7 @@ public class NodeFactory {
 
     try (PreparedStatement preparedStatement =
             DatabaseManager.getConnection().prepareStatement(selectStatement);
-        ResultSet resultSet = preparedStatement.executeQuery()) {;
+        ResultSet resultSet = preparedStatement.executeQuery()) {
       nodes = new ArrayList<>();
       while (resultSet.next()) {
         nodes.add(

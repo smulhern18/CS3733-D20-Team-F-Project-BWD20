@@ -34,6 +34,7 @@ public class App extends Application {
 
   @Override
   public void start(Stage primaryStage) throws IOException {
+
     Scene primaryScene = new Scene(new AnchorPane());
     FXMLLoader fxmlLoader = new FXMLLoader();
     fxmlLoader.setControllerFactory(
