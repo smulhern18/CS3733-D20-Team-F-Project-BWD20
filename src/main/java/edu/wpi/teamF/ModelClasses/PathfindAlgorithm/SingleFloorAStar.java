@@ -8,13 +8,16 @@ import edu.wpi.teamF.ModelClasses.Scorer.EuclideanScorer;
 import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.management.InstanceNotFoundException;
 
 public class SingleFloorAStar implements PathfindAlgorithm {
 
   NodeFactory nodeFactory = NodeFactory.getFactory();
 
   @Override
-  public Path pathfind(Node startNode, Node endNode) {
+  public Path pathfind(Node startNode, Node endNode) throws InstanceNotFoundException {
+    System.out.println(startNode.getEdges());
+    System.out.println(endNode.getEdges());
     PriorityQueue<RouteNode> priorityQueue = new PriorityQueue<RouteNode>();
     HashSet<Node> visited = new HashSet<Node>();
     EuclideanScorer scorer = new EuclideanScorer();
@@ -58,7 +61,7 @@ public class SingleFloorAStar implements PathfindAlgorithm {
   }
 
   @Override
-  public Path pathfind(Node start, Node.NodeType nodeType) {
+  public Path pathfind(Node start, Node.NodeType nodeType) throws InstanceNotFoundException {
     List<Node> nodes = nodeFactory.getNodesByType(nodeType);
     List<Path> paths = new ArrayList<>();
     for (Node node : nodes) {

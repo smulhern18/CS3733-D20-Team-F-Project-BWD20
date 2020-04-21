@@ -1,5 +1,6 @@
 package edu.wpi.teamF.ModelClasses;
 
+import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import java.util.HashSet;
 import java.util.Set;
@@ -8,6 +9,7 @@ import javax.management.InstanceNotFoundException;
 public class Node {
 
   private static NodeFactory nodeFactory = NodeFactory.getFactory();
+  private static EdgeFactory edgeFactory = EdgeFactory.getFactory();
 
   public enum NodeType {
     // Values
@@ -324,7 +326,10 @@ public class Node {
     this.floor = floor;
   }
 
-  public Set<Node> getNeighborNodes() {
+  public Set<Node> getNeighborNodes() throws InstanceNotFoundException {
+    if (neighborNodes.isEmpty()) {
+      this.setEdges(edgeFactory.getAllEdgesConnectedToNode(this.id));
+    }
     return neighborNodes;
   }
 }

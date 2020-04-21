@@ -14,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javax.management.InstanceNotFoundException;
 
 public class PathfinderController implements Initializable {
 
@@ -33,7 +34,7 @@ public class PathfinderController implements Initializable {
     // startNode = nodeFactory.read("FELEV00Z05");
   }
 
-  public void draw() {
+  public void draw() throws InstanceNotFoundException {
 
     Path path = pathFindAlgorithm.pathfind(startNode, endNode);
     List<Node> nodeList = path.getPath();
@@ -73,11 +74,16 @@ public class PathfinderController implements Initializable {
     mapPane.getChildren().add(button);
     button.setOnAction(
         actionEvent -> {
+          // button.setStyle();
           if (startNode == null) {
             startNode = node;
           } else if (endNode == null) {
             endNode = node;
-            draw();
+            try {
+              draw();
+            } catch (InstanceNotFoundException e) {
+              e.printStackTrace();
+            }
           }
         });
   }
