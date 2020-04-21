@@ -118,13 +118,13 @@ public class Node {
    */
   public void setEdges(Set<Edge> edge) throws InstanceNotFoundException {
     this.edges = edge;
-    for (Edge anEdge : edge) {
-      if (anEdge.getNode1().equals(this.id)) {
-        neighborNodes.add(nodeFactory.read(anEdge.getNode2()));
-      } else {
-        neighborNodes.add(nodeFactory.read(anEdge.getNode1()));
-      }
-    }
+    //    for (Edge anEdge : edge) {
+    //      if (anEdge.getNode1().equals(this.id)) {
+    //        neighborNodes.add(nodeFactory.read(anEdge.getNode2()));
+    //      } else {
+    //        neighborNodes.add(nodeFactory.read(anEdge.getNode1()));
+    //      }
+    //    }
   }
 
   /**
@@ -325,6 +325,7 @@ public class Node {
   }
 
   public Set<Node> getNeighborNodes() {
+
     return neighborNodes;
   }
 }

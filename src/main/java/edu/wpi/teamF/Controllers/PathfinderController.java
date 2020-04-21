@@ -32,7 +32,7 @@ public class PathfinderController implements Initializable {
 
   Node startNode = null;
   Node endNode = null;
-  PathfindAlgorithm pathFindAlgorithm = new SingleFloorAStar();
+  PathfindAlgorithm pathFindAlgorithm;
 
   public PathfinderController() {
 
@@ -112,6 +112,7 @@ public class PathfinderController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     nodeList = new ArrayList<>();
+
     for (Node node : nodeFactory.getAllNodes()) {
       if (node.getId().charAt(node.getId().length() - 1) == '5') {
         nodeList.add(node);
@@ -119,6 +120,7 @@ public class PathfinderController implements Initializable {
         System.out.println(node.getId() + " - " + node.getNeighborNodes());
       }
     }
+    pathFindAlgorithm = new SingleFloorAStar(nodeList);
     resetPane();
   }
 }

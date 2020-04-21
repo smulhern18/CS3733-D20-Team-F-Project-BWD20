@@ -1,6 +1,7 @@
 package edu.wpi.teamF.ModelClasses.PathfindAlgorithm;
 
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
+import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
 import edu.wpi.teamF.ModelClasses.RouteNode;
@@ -11,6 +12,14 @@ import java.util.List;
 import javax.management.InstanceNotFoundException;
 
 public class SingleFloorAStar implements PathfindAlgorithm {
+
+  private final Map<String, Node> nodeMap = new HashMap<>();
+
+  public SingleFloorAStar(List<Node> nodeList) {
+    for (Node node : nodeList) {
+      nodeMap.put(node.getId(), node);
+    }
+  }
 
   NodeFactory nodeFactory = NodeFactory.getFactory();
 
@@ -28,6 +37,7 @@ public class SingleFloorAStar implements PathfindAlgorithm {
       RouteNode currentNode = priorityQueue.poll();
       System.out.println(currentNode.getNode().getId());
       System.out.println(currentNode.getNode().getNeighborNodes());
+
       if (!visited.contains(currentNode.getNode())) {
         visited.add(currentNode.getNode());
         if (currentNode.getNode().equals(endNode)) {
@@ -41,7 +51,16 @@ public class SingleFloorAStar implements PathfindAlgorithm {
           return finalPath;
         }
         // Make a list of all of the neighbors of this node
-        Set<Node> neighbors = currentNode.getNode().getNeighborNodes();
+        Set<Edge> neighborEdges = currentNode.getNode().getEdges();
+        Set<Node> neighbors = new HashSet<>();
+        for (Edge edge : neighborEdges) {
+          if (edge.getNode1().equals(currentNode.getNode().getId())) {
+            neighbors.add(nodeMap.get(edge.getNode2()));
+          } else {
+            neighbors.add(nodeMap.get(edge.getNode1()));
+          }
+        }
+
         for (Node neighbor : neighbors) {
           if (!visited.contains(neighbor)) {
             double distanceToEnd =
