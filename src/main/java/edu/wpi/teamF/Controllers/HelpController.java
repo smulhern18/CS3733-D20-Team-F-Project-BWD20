@@ -1,3 +1,8 @@
 package edu.wpi.teamF.Controllers;
 
-public class HelpController {}
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.*;
+
+public class HelpController {
+  public AnchorPane rootPane;
+}
