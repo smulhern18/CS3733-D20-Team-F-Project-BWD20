@@ -1,62 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextArea?>
-<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ServiceRequestController">
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-border-color: #B53389; -fx-border-width: 2.5; -fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ServiceRequestController">
    <children>
-      <JFXButton buttonType="RAISED" layoutX="79.0" layoutY="169.0" onAction="#reqSecurity" ripplerFill="#b91010" text="Request Security">
-         <font>
-            <Font size="24.0" />
-         </font></JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="50.0" layoutY="458.0" prefHeight="58.0" prefWidth="266.0" ripplerFill="#48a424" text="Request Maintenance">
-         <font>
-            <Font size="24.0" />
-         </font></JFXButton>
       <fx:include source="MenuBar.fxml" />
-      <JFXButton buttonType="RAISED" layoutX="896.0" layoutY="674.0" onAction="#submit" prefHeight="51.0" prefWidth="113.0" style="-fx-background-color: #B53389;" text="Submit">
+      <Text layoutX="552.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request">
          <font>
-            <Font size="20.0" />
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Text>
+      <Line endX="113.0" layoutX="644.0" layoutY="182.0" startX="-108.0" stroke="#b53389" />
+      <JFXButton buttonType="RAISED" layoutX="682.0" layoutY="670.0" onAction="#cancel" prefHeight="54.0" prefWidth="209.0" ripplerFill="#b53389" style="-fx-background-color: white;" text="Cancel">
+         <font>
+            <Font size="25.0" />
          </font>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="1046.0" layoutY="674.0" prefHeight="51.0" prefWidth="113.0" style="-fx-background-color: #B53389;" text="Cancel">
+      <Text layoutX="305.0" layoutY="560.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Priority:" wrappingWidth="141.5283203125">
          <font>
-            <Font size="22.0" />
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Text>
+      <Text layoutX="305.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Text>
+      <Text layoutX="305.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location:" wrappingWidth="141.5283203125">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Text>
+      <JFXButton buttonType="RAISED" layoutX="394.0" layoutY="670.0" onAction="#submit" ripplerFill="#b53389" style="-fx-background-color: white;" text="Submit Request">
+         <font>
+            <Font size="25.0" />
          </font>
       </JFXButton>
-      <JFXTextField layoutX="623.0" layoutY="303.0" style="visibility: false;" />
-      <JFXTextField layoutX="623.0" layoutY="379.0" />
-      <JFXTextArea layoutX="610.0" layoutY="436.0" prefHeight="168.0" prefWidth="221.0" />
-      <ChoiceBox fx:id="choiceBox" layoutX="1009.0" layoutY="316.0" prefWidth="150.0" style="visibility: false;" />
-      <Text layoutX="880.0" layoutY="338.0" strokeType="OUTSIDE" strokeWidth="0.0" style="visibility: false;" text="Priority:">
+      <ChoiceBox fx:id="choiceBoxLoc" layoutX="468.0" layoutY="248.0" prefWidth="150.0" />
+      <TextArea fx:id="textAreaDesc" layoutX="468.0" layoutY="312.0" prefHeight="202.0" prefWidth="323.0" />
+      <ChoiceBox fx:id="choiceBoxPriority" layoutX="468.0" layoutY="538.0" prefWidth="150.0" />
+      <Text layoutX="305.0" layoutY="620.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:" wrappingWidth="141.5283203125">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font>
+      </Text>
+      <ChoiceBox fx:id="choiceBoxType" layoutX="468.0" layoutY="599.0" prefWidth="150.0" />
+      <JFXButton buttonType="RAISED" layoutX="930.0" layoutY="670.0" onAction="#cancel" prefHeight="54.0" prefWidth="331.0" ripplerFill="#b53389" style="-fx-background-color: white;" text="Ongoing Service Requests">
          <font>
             <Font size="25.0" />
          </font>
-      </Text>
-      <Text layoutX="450.0" layoutY="401.0" strokeType="OUTSIDE" strokeWidth="0.0" style="visibility: false;" text="Location:">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Text>
-      <Text layoutX="453.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" style="visibility: false;" text="ID:">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Text>
-      <Text layoutX="453.0" layoutY="463.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Text>
-      <Text fx:id="confirmationSecurity" layoutX="430.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" style="visibility: false;" text="Security Officers are on the way.">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </Text>
+      </JFXButton>
    </children>
 </AnchorPane>

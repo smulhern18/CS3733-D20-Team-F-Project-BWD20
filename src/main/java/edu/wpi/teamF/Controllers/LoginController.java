@@ -5,7 +5,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.AccountFactory;
-import edu.wpi.teamF.ModelClasses.Account.Account;
+import edu.wpi.teamF.ModelClasses.Account.PasswordHasher;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,37 +21,43 @@ public class LoginController {
 
   @FXML private JFXPasswordField passwordInput;
 
-  @FXML private JFXButton registerButton;
-
-  @FXML private Label incorrectLabel;
+  @FXML private Label incorrectLabel; // label that is displayed if teh input is not valid
 
   private AccountFactory accountFactory = AccountFactory.getFactory();
 
-  SceneController sceneController = App.getSceneController();
+  SceneController sceneController = App.getSceneController(); // used to switch between scenes
 
   @FXML
-  void enableLogin(KeyEvent event) {
+  void enableLogin(KeyEvent event) { // called on each key release for both inputs
     String username = usernameInput.getText();
     String password = passwordInput.getText();
     if (!username.isEmpty() && !password.isEmpty()) {
-      loginButton.setDisable(false);
+      loginButton.setDisable(
+          false); // the login button is enabled only when there is text in the two input
     } else {
-      loginButton.setDisable(true);
+      loginButton.setDisable(true); // checks if the user entered text and then deleted the text
     }
   }
 
   @FXML
-  void attemptLogin(ActionEvent event) throws InterruptedException {
+  void attemptLogin(ActionEvent event) throws Exception {
     String username = usernameInput.getText();
     String password = passwordInput.getText();
-    Account account = accountFactory.getAccountByUsername(username);
-    if (account != null && account.getPassword().equals(password)) {
-      System.out.println("The account is valid");
-      // code that logs the user into the application
-    } else {
+    try {
+      if (PasswordHasher.verifyPassword(
+          password,
+          accountFactory.getPasswordByUsername(
+              username))) { // checks if the password matches what is in the db using the hasher
+        System.out.println("The account is valid");
+        // code that logs the user into the application
+      }
+    } catch (
+        Exception
+            e) { // if there is an error, the username or password does not match an account in the
+      // db
       incorrectLabel.setVisible(true);
       usernameInput.setUnFocusColor(Color.RED);
-      passwordInput.setUnFocusColor(Color.RED);
+      passwordInput.setUnFocusColor(Color.RED); // sets the unfocused colors to red
       passwordInput.setText("");
     }
   }

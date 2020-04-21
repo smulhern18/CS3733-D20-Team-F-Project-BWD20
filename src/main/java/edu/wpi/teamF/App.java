@@ -27,7 +27,6 @@ public class App extends Application {
   private PathfinderController pathfinderController = new PathfinderController();
   private RegisterController registerController = new RegisterController();
   private ServiceRequestController serviceRequestController = new ServiceRequestController();
-  private SplashController splashController = new SplashController();
 
   @Override
   public void init() {}
@@ -54,8 +53,6 @@ public class App extends Application {
             return registerController;
           } else if (controllerClass.equals(ServiceRequestController.class)) {
             return serviceRequestController;
-          } else if (controllerClass.equals(SplashController.class)) {
-            return splashController;
           }
           return null;
         });
