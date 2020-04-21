@@ -4,9 +4,7 @@ import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import java.io.*;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class CSVManipulator {
   private NodeFactory nodeFactory = NodeFactory.getFactory();
@@ -25,7 +23,7 @@ public class CSVManipulator {
         data.addAll(Arrays.asList(row.split(",")));
       }
 
-      int i = 8;
+      int i = 9;
       while (i < (data.size() - 1)) {
         Node node =
             new Node(
@@ -37,9 +35,9 @@ public class CSVManipulator {
                 data.get(i + 7), // shortname
                 Node.NodeType.getEnum(data.get(i + 5)), // nodetype
                 Short.parseShort(data.get(i + 3))); // floor
-        System.out.println("Created Node on line " + i / 8 + ", " + node.getId());
+        System.out.println("Created Node on line " + i / 9 + ", " + node.getId());
         nodeFactory.create(node);
-        i = i + 8;
+        i = i + 9;
       }
 
     } catch (FileNotFoundException e) {
@@ -63,7 +61,7 @@ public class CSVManipulator {
       // csvString = csvString + formatNode(n);
       formatNode(n);
     }
-    try (FileWriter fw = new FileWriter(path.toString() + "/PrototypeNodes.csv");
+    try (FileWriter fw = new FileWriter(path.toString() + "/NodesBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
       bw.write("nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName,teamAssigned");

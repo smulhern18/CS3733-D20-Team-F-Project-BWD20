@@ -26,6 +26,7 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import javax.management.InstanceNotFoundException;
@@ -44,10 +45,12 @@ public class DataManipulatorController implements Initializable {
   public JFXTextField edgeToDelete;
   public JFXButton deleteEdgeButton;
   public AnchorPane mapView;
+  public AnchorPane rootPane;
   NodeFactory nodes = NodeFactory.getFactory();
   EdgeFactory edges = EdgeFactory.getFactory();
   FileChooser nodesChooser = new FileChooser();
   FileChooser edgesChooser = new FileChooser();
+  DirectoryChooser backup = new DirectoryChooser();
   CSVManipulator csvM = new CSVManipulator();
   ObservableList<UINode> UINodes = FXCollections.observableArrayList();
   ObservableList<UIEdge> UIEdges = FXCollections.observableArrayList();
@@ -318,13 +321,13 @@ public class DataManipulatorController implements Initializable {
 
   public void uploadNodes(ActionEvent actionEvent) throws FileNotFoundException {
     nodesChooser.setTitle("Select CSV File Nodes");
-    File file = nodesChooser.showOpenDialog(treeViewNodes.getScene().getWindow());
+    File file = nodesChooser.showOpenDialog(rootPane.getScene().getWindow());
     csvM.readCSVFileNode(new FileInputStream(file));
   }
 
   public void uploadEdges(ActionEvent actionEvent) throws FileNotFoundException {
-    edgesChooser.setTitle("Select CSV File Nodes");
-    File file = edgesChooser.showOpenDialog(treeViewEdges.getScene().getWindow());
+    edgesChooser.setTitle("Select CSV File Edges");
+    File file = edgesChooser.showOpenDialog(rootPane.getScene().getWindow());
     csvM.readCSVFileNode(new FileInputStream(file));
   }
 
@@ -367,5 +370,13 @@ public class DataManipulatorController implements Initializable {
 
   public void switchToUserAccounts(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("Accounts");
+  }
+
+  public void backupDB(ActionEvent actionEvent) {
+    backup.setTitle("Select Where to Backup Database");
+    File selDir = backup.showDialog(rootPane.getScene().getWindow());
+
+    // backup
+    csvM.writeCSVFileNode(selDir.toPath());
   }
 }

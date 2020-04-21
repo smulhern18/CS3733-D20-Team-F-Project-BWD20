@@ -113,7 +113,7 @@ public class AccountsController implements Initializable {
     accountsView.setRoot(root);
     accountsView.setEditable(true);
     accountsView.setShowRoot(false);
-    //testData();
+    // testData();
   }
 
   public void testData() throws Exception {
