@@ -27,6 +27,7 @@ public class App extends Application {
   private PathfinderController pathfinderController = new PathfinderController();
   private RegisterController registerController = new RegisterController();
   private ServiceRequestController serviceRequestController = new ServiceRequestController();
+  private AccountsController accountsController = new AccountsController();
 
   @Override
   public void init() {}
@@ -53,6 +54,8 @@ public class App extends Application {
             return registerController;
           } else if (controllerClass.equals(ServiceRequestController.class)) {
             return serviceRequestController;
+          } else if (controllerClass.equals(AccountsController.class)) {
+            return accountsController;
           }
           return null;
         });

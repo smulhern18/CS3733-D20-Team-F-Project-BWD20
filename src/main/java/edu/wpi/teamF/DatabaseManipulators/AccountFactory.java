@@ -4,16 +4,14 @@ import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Account.Admin;
 import edu.wpi.teamF.ModelClasses.Account.Staff;
 import edu.wpi.teamF.ModelClasses.Account.User;
+import edu.wpi.teamF.ModelClasses.UIAccount;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
-import org.apache.derby.iapi.db.Database;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.management.InstanceNotFoundException;
-import javax.xml.crypto.Data;
 
 public class AccountFactory {
 
@@ -202,23 +200,23 @@ public class AccountFactory {
 
   public ArrayList<UIAccount> getAccounts() {
     ArrayList<UIAccount> accounts = null;
-      String selectStatement =
-              " SELECT * FROM " +
-                      DatabaseManager.ACCOUNT_TABLE_NAME;
-      try (PreparedStatement preparedStatement = DatabaseManager.getConnection().prepareStatement(selectStatement)){
-        ResultSet resultSet = preparedStatement.executeQuery();
-        accounts = new ArrayList<>();
-        while (resultSet.next()){
-          accounts.add(new UIAccount(
-                  resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
-                  resultSet.getString(DatabaseManager.LAST_NAME_KEY),
-                  resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
-                  Account.Type.getEnum(resultSet.getInt(DatabaseManager.TYPE_KEY))
-                  ));
-        }
-      } catch (Exception e) {
-        System.out.println(e.getMessage() + ", " + e.getClass());
+    String selectStatement = " SELECT * FROM " + DatabaseManager.ACCOUNT_TABLE_NAME;
+    try (PreparedStatement preparedStatement =
+        DatabaseManager.getConnection().prepareStatement(selectStatement)) {
+      ResultSet resultSet = preparedStatement.executeQuery();
+      accounts = new ArrayList<>();
+      while (resultSet.next()) {
+        accounts.add(
+            new UIAccount(
+                resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                Account.Type.getEnum(resultSet.getInt(DatabaseManager.USER_TYPE_KEY))));
       }
-      return accounts;
+    } catch (Exception e) {
+      System.out.println(e.getMessage() + ", " + e.getClass());
+    }
+    return accounts;
   }
 }

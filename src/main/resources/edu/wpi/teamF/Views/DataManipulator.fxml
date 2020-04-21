@@ -25,5 +25,6 @@
       <JFXButton fx:id="deleteEdgeButton" buttonType="RAISED" layoutX="809.0" layoutY="620.0" onAction="#deleteEdge" prefHeight="31.0" prefWidth="123.0" ripplerFill="#179e41" text="Delete Edge" />
       <JFXTextField fx:id="edgeToDelete" layoutX="932.0" layoutY="623.0" />
       <fx:include fx:id="mapView" layoutX="160.0" layoutY="120.0" source="DataMapView.fxml" />
+      <JFXButton layoutX="871.0" layoutY="714.0" onAction="#switchToUserAccounts" text="User Accounts" />
    </children>
 </AnchorPane>

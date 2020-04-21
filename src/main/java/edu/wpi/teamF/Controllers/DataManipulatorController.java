@@ -2,6 +2,7 @@ package edu.wpi.teamF.Controllers;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.CSVManipulator;
 import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
@@ -9,6 +10,7 @@ import edu.wpi.teamF.ModelClasses.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -49,6 +51,7 @@ public class DataManipulatorController implements Initializable {
   CSVManipulator csvM = new CSVManipulator();
   ObservableList<UINode> UINodes = FXCollections.observableArrayList();
   ObservableList<UIEdge> UIEdges = FXCollections.observableArrayList();
+  SceneController sceneController = App.getSceneController();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -334,6 +337,7 @@ public class DataManipulatorController implements Initializable {
         nodes.update(nodeUI.UItoNode());
       }
     }
+    treeViewNodes.refresh();
   }
 
   public void updateEdges(ActionEvent actionEvent) throws Exception {
@@ -344,6 +348,7 @@ public class DataManipulatorController implements Initializable {
         edges.update(edgeUI.UItoEdge());
       }
     }
+    treeViewEdges.refresh();
   }
 
   public void deleteNode(ActionEvent actionEvent) {
@@ -358,5 +363,9 @@ public class DataManipulatorController implements Initializable {
     edges.delete(edgeID);
     UIEdges.removeIf(node -> node.getID().get().equals(edgeID));
     treeViewNodes.refresh();
+  }
+
+  public void switchToUserAccounts(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("Accounts");
   }
 }
