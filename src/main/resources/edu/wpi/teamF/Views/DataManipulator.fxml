@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.wpi.teamF.Views.DataManipulator"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane prefHeight="800.0" prefWidth="1191.0" style="-fx-border-color: #bf3389; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.DataManipulatorController">
+   <children>
+      <JFXTreeTableView fx:id="treeView" layoutX="68.0" layoutY="209.0" stylesheets="@../CSS/treeview.css" />
+      <JFXTextField fx:id="filterTextFieldNodes" layoutX="68.0" layoutY="161.0" onMouseClicked="#clearText" prefHeight="25.0" prefWidth="157.0" text="Enter NodeID or NodeType" />
+      <fx:include source="MenuBar.fxml" />
+      <JFXButton buttonType="RAISED" layoutX="68.0" layoutY="664.0" prefHeight="59.0" prefWidth="131.0" ripplerFill="#ffe100" text="Upload Nodes" />
+      <JFXButton buttonType="RAISED" layoutX="494.0" layoutY="664.0" prefHeight="59.0" prefWidth="131.0" ripplerFill="#ffe100" text="Download Edges" />
+      <JFXButton buttonType="RAISED" layoutX="209.0" layoutY="664.0" prefHeight="59.0" prefWidth="131.0" ripplerFill="#ffe100" text="Upload Edges" />
+      <JFXButton buttonType="RAISED" layoutX="357.0" layoutY="664.0" prefHeight="59.0" prefWidth="131.0" ripplerFill="#ffe100" text="Download Nodes" />
+      <JFXTreeTableView fx:id="treeViewEdges" layoutX="775.0" layoutY="200.0" stylesheets="@../CSS/treeview.css" />
+      <JFXTextField fx:id="filterTextFieldEdges" layoutX="775.0" layoutY="167.0" onMouseClicked="#clearText" prefHeight="25.0" prefWidth="157.0" text="Enter Edge ID" />
+   </children>
 </AnchorPane>
