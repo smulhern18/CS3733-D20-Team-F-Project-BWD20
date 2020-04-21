@@ -321,7 +321,7 @@ public class CSVManipulator {
         data.addAll(Arrays.asList(row.split(",")));
       }
 
-      int i = 3;
+      int i = 6;
       while (i < (data.size() - 1)) {
 
         try {
@@ -374,35 +374,40 @@ public class CSVManipulator {
   }
 
   /** Writes to the CSV file so that it can become persistant */
-  /*
-    public void writeCSVFileAccount(Path path) {
-      // writing to the file
-     List<Account> Account = accountFactory.getAllAccounts();
+  public void writeCSVFileAccount(Path path) {
+    // writing to the file
+    List<Account> Account = accountFactory.getAllAccounts();
 
-      try (FileWriter fw = new FileWriter(path.toString() + "/EdgesBackup.csv");
-          BufferedWriter bw = new BufferedWriter(fw); ) {
+    try (FileWriter fw = new FileWriter(path.toString() + "/AccountBackup.csv");
+        BufferedWriter bw = new BufferedWriter(fw); ) {
 
-        bw.write("edgeID,startNode,endNode");
+      bw.write("edgeID,startNode,endNode");
 
-        for (Account a : Account) {
-          bw.newLine();
-          bw.write(formatAccount(a));
-        }
-        bw.close();
-      } catch (IOException e) {
-        System.out.println(e.getMessage() + "" + e.getClass());
-        // exception handling left as an exercise for the reader
+      for (Account a : Account) {
+        bw.newLine();
+        bw.write(formatAccount(a));
       }
+      bw.close();
+    } catch (IOException e) {
+      System.out.println(e.getMessage() + "" + e.getClass());
+      // exception handling left as an exercise for the reader
     }
+  }
 
-    public String formatAccount(Account a) {
-      String account = "";
-      account = a.getUsername() + "," + a.getPassword() + "," + a.getFirstName() + "," + a.getLastName() + "," + a.getEmailAddress() + "," + a.getType().getTypeOrdinal();
-      return account;
-    }
-
-
-
-  */
-
+  public String formatAccount(Account a) {
+    String account = "";
+    account =
+        a.getUsername()
+            + ","
+            + a.getPassword()
+            + ","
+            + a.getFirstName()
+            + ","
+            + a.getLastName()
+            + ","
+            + a.getEmailAddress()
+            + ","
+            + a.getType().getTypeOrdinal();
+    return account;
+  }
 }
