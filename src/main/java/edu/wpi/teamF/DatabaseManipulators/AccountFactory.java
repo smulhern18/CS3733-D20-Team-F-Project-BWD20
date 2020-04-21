@@ -196,24 +196,25 @@ public class AccountFactory {
     return hashword;
   }
 
-//    public ArrayList<UIAccount> getAccounts() {
-//      ArrayList<UIAccount> accounts = null;
-//      String selectStatement = " SELECT * FROM " + DatabaseManager.ACCOUNT_TABLE_NAME;
-//      try (PreparedStatement preparedStatement =
-//          DatabaseManager.getConnection().prepareStatement(selectStatement)) {
-//        ResultSet resultSet = preparedStatement.executeQuery();
-//        accounts = new ArrayList<>();
-//        while (resultSet.next()) {
-//          accounts.add(
-//              new UIAccount(
-//                  resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
-//                  resultSet.getString(DatabaseManager.LAST_NAME_KEY),
-//                  resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
-//                  Account.Type.getEnum(resultSet.getInt(DatabaseManager.TYPE_KEY))));
-//        }
-//      } catch (Exception e) {
-//        System.out.println(e.getMessage() + ", " + e.getClass());
-//      }
-//        return accounts;
-//    }
+  //    public ArrayList<UIAccount> getAccounts() {
+  //      ArrayList<UIAccount> accounts = null;
+  //      String selectStatement = " SELECT * FROM " + DatabaseManager.ACCOUNT_TABLE_NAME;
+  //      try (PreparedStatement preparedStatement =
+  //          DatabaseManager.getConnection().prepareStatement(selectStatement)) {
+  //        ResultSet resultSet = preparedStatement.executeQuery();
+  //        accounts = new ArrayList<>();
+  //        while (resultSet.next()) {
+  //          accounts.add(
+  //              new UIAccount(
+  //                  resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+  //                  resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+  //                  resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+  //                  Account.Type.getEnum(resultSet.getInt(DatabaseManager.TYPE_KEY))));
+  //        }
+  //      } catch (Exception e) {
+  //        System.out.println(e.getMessage() + ", " + e.getClass());
+  //      }
+  //        return accounts;
+  //    }
+
 }

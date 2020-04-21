@@ -186,7 +186,8 @@ public class SecurityRequestFactory {
     } catch (IllegalArgumentException e) {
       throw e;
     } catch (Exception e) {
-      System.out.println("Exception in SecurityFactory read: " + e.getMessage() + ", " + e.getClass());
+      System.out.println(
+          "Exception in SecurityFactory read: " + e.getMessage() + ", " + e.getClass());
     }
     return securityRequest;
   }
@@ -210,7 +211,8 @@ public class SecurityRequestFactory {
                 resultSet.getInt(DatabaseManager.PRIORITY_KEY)));
       }
     } catch (Exception e) {
-      System.out.println("Exception in SecurityFactory read: " + e.getMessage() + ", " + e.getClass());
+      System.out.println(
+          "Exception in SecurityFactory read: " + e.getMessage() + ", " + e.getClass());
     }
     return securityRequest;
   }
