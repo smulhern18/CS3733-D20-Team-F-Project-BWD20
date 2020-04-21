@@ -27,6 +27,7 @@ public class TestCSV {
   static EdgeFactory edgeFactory = EdgeFactory.getFactory();
 
   Node[] validNodes = null;
+  Edge[] validEdge = null;
   HashSet<String> validNeighbors1 = null;
 
   @BeforeEach
@@ -34,7 +35,8 @@ public class TestCSV {
     try {
 
       testData = new TestData();
-      // validNodes = testData.getValidNodes();
+      validNodes = testData.validNodes;
+      validEdge = testData.validEdges;
       //  validNeighbors1 = testData.getValidNeighbors1();
 
       // testData = new TestData();
@@ -86,19 +88,33 @@ public class TestCSV {
               new File(getClass().getResource("/edu/wpi/teamF/CSVNodeTest.csv").toURI()).toPath());
       assertTrue(Arrays.equals(f1, f2));
     } catch (Exception e) {
-
+      System.out.println(e.getMessage());
     }
   }
 
   @Test
   public void testReadAndWriteCSVEdges() {
     Edge edge;
+    int i = 0;
     csvManipulator.readCSVFileEdge(
         getClass().getResourceAsStream("/edu/wpi/teamF/CSVEdgeTest.csv"));
     try {
-      edge = edgeFactory.read("NodeA");
-      Assertions.assertTrue(edge.equals(validNeighbors1));
+      List<Edge> list = edgeFactory.getAllEdges();
+      for (Edge e : list) {
+        Assertions.assertTrue(e.equals(validEdge[i]));
+        i++;
+      }
+    } catch (Exception e) {
 
+    }
+    File wfile = new File("src/test/java/edu/wpi/teamF/Test/");
+    csvManipulator.writeCSVFileEdge(wfile.toPath());
+    try {
+      byte[] f1 = Files.readAllBytes(wfile.toPath());
+      byte[] f2 =
+          Files.readAllBytes(
+              new File(getClass().getResource("/edu/wpi/teamF/CSVEdgeTest.csv").toURI()).toPath());
+      assertTrue(Arrays.equals(f1, f2));
     } catch (Exception e) {
 
     }

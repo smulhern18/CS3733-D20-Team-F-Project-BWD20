@@ -90,7 +90,8 @@ public class MaintenanceRequestFactory {
     } catch (IllegalArgumentException e) {
       throw e;
     } catch (Exception e) {
-      System.out.println("Exception in NodeFactory read: " + e.getMessage() + ", " + e.getClass());
+      System.out.println(
+          "Exception in MaintenanceFactory read: " + e.getMessage() + ", " + e.getClass());
     }
     return maintenanceRequest;
   }
@@ -185,7 +186,8 @@ public class MaintenanceRequestFactory {
     } catch (IllegalArgumentException e) {
       throw e;
     } catch (Exception e) {
-      System.out.println("Exception in NodeFactory read: " + e.getMessage() + ", " + e.getClass());
+      System.out.println(
+          "Exception in MaintenanceFactory read: " + e.getMessage() + ", " + e.getClass());
     }
     return maintenanceRequest;
   }
@@ -208,7 +210,8 @@ public class MaintenanceRequestFactory {
                 resultSet.getInt(DatabaseManager.PRIORITY_KEY)));
       }
     } catch (Exception e) {
-      System.out.println("Exception in NodeFactory read: " + e.getMessage() + ", " + e.getClass());
+      System.out.println(
+          "Exception in MaintenanceFactory read: " + e.getMessage() + ", " + e.getClass());
     }
     return maintenanceRequest;
   }

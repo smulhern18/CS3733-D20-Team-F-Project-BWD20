@@ -25,8 +25,8 @@ public class SecurityRequest extends ServiceRequest {
       isEqual =
           this.getId().equals(otherSecurity.getId())
               && this.getLocation().equals(otherSecurity.getLocation())
-              && this.getDescription() == otherSecurity.getDescription()
-              && this.getDateTimeSubmitted() == otherSecurity.getDateTimeSubmitted()
+              && this.getDescription().equals(otherSecurity.getDescription())
+              && this.getDateTimeSubmitted().equals(otherSecurity.getDateTimeSubmitted())
               && this.getPriority() == otherSecurity.getPriority();
     }
     return isEqual;
