@@ -286,6 +286,7 @@ public class ServiceRequestController implements Initializable {
         securityRequest.setDescription(req.description.get());
         securityRequestFactory.update(securityRequest);
       }
+      serviceTable.refresh();
     }
   }
 }
