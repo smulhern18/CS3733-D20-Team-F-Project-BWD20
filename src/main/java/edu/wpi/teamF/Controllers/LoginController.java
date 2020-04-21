@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 
 public class LoginController {
 
+  public Label loginText;
   @FXML private JFXButton loginButton;
 
   @FXML private JFXTextField usernameInput;

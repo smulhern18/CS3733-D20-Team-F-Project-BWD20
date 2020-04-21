@@ -1,7 +1,9 @@
 package edu.wpi.teamF.Controllers;
 
 import edu.wpi.teamF.App;
+import edu.wpi.teamF.DatabaseManipulators.AccountFactory;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.TestData;
@@ -23,12 +25,14 @@ public class DataManipulatorTest extends ApplicationTest {
 
   private static DatabaseManager db = new DatabaseManager();
   private static NodeFactory nodes = NodeFactory.getFactory();
+  private static EdgeFactory edges = EdgeFactory.getFactory();
+  private static AccountFactory accounts = AccountFactory.getFactory();
 
   @BeforeAll
   public static void setUp() throws Exception {
     db.initialize();
     TestData testData = new TestData();
-    for (Node node : testData.validNodesWithEdges) {
+    for (Node node : testData.validNodes) {
       nodes.create(node);
     }
     ApplicationTest.launch(App.class);
