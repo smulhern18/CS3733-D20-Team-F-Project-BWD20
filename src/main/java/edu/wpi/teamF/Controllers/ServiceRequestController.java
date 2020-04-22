@@ -5,7 +5,6 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.DatabaseManipulators.MaintenanceRequestFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.DatabaseManipulators.SecurityRequestFactory;
-import edu.wpi.teamF.DatabaseManipulators.ServiceRequestFactory;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.UIServiceRequest;
@@ -37,7 +36,6 @@ public class ServiceRequestController implements Initializable {
   public TextArea textAreaDesc;
   public ChoiceBox<String> choiceBoxPriority;
   public ChoiceBox<String> choiceBoxType;
-  public ServiceRequestFactory serviceRequest = ServiceRequestFactory.getFactory();
   public NodeFactory nodeFactory = NodeFactory.getFactory();
   public SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
   public MaintenanceRequestFactory maintenanceRequestFactory =
@@ -47,6 +45,9 @@ public class ServiceRequestController implements Initializable {
   public AnchorPane mapView;
   public JFXButton submitRequestButton;
   public JFXButton cancelButton;
+  public JFXButton cancelOngoing;
+  public JFXButton ongoingButton;
+  public JFXButton updateButton;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -172,6 +173,9 @@ public class ServiceRequestController implements Initializable {
     cancelButton.setVisible(false);
 
     mapView.setVisible(true);
+    cancelOngoing.setVisible(true);
+    ongoingButton.setVisible(false);
+    updateButton.setVisible(true);
 
     JFXTreeTableColumn<UIServiceRequest, String> Time =
         new JFXTreeTableColumn<UIServiceRequest, String>("Time");
@@ -275,18 +279,28 @@ public class ServiceRequestController implements Initializable {
   public void updateRequests(ActionEvent actionEvent) throws ValidationException {
     for (UIServiceRequest req : serviceRequests) {
       if (req.serviceType.get().equals("Maintenance")
-          && req.equals(new UIServiceRequest(maintenanceRequestFactory.read(req.id.get())))) {
+          && !req.equals(new UIServiceRequest(maintenanceRequestFactory.read(req.id.get())))) {
         MaintenanceRequest maintenanceRequest = maintenanceRequestFactory.read(req.id.get());
         maintenanceRequest.setDescription(req.description.get());
         maintenanceRequestFactory.update(maintenanceRequest);
 
       } else if (req.serviceType.get().equals("Security")
-          && req.equals(new UIServiceRequest(securityRequestFactory.read(req.id.get())))) {
+          && !req.equals(new UIServiceRequest(securityRequestFactory.read(req.id.get())))) {
         SecurityRequest securityRequest = securityRequestFactory.read(req.id.get());
         securityRequest.setDescription(req.description.get());
         securityRequestFactory.update(securityRequest);
       }
       serviceTable.refresh();
     }
+  }
+
+  public void backtoInput(ActionEvent actionEvent) {
+    submitRequestButton.setVisible(true);
+    cancelButton.setVisible(true);
+
+    mapView.setVisible(false);
+    cancelOngoing.setVisible(false);
+    ongoingButton.setVisible(true);
+    updateButton.setVisible(false);
   }
 }
