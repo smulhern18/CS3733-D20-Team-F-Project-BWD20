@@ -378,7 +378,7 @@ public class CSVManipulator {
     try (FileWriter fw = new FileWriter(path.toString() + "/AccountBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
-      bw.write("edgeID,startNode,endNode");
+      bw.write("Username,password,firstName,lastName,emailAddress,type");
 
       for (Account a : Account) {
         bw.newLine();
