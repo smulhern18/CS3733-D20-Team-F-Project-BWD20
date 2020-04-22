@@ -33,7 +33,7 @@ public class CSVManipulator {
         data.addAll(Arrays.asList(row.split(",")));
       }
 
-      int i = 8;
+      int i = 9;
       while (i < (data.size() - 1)) {
         Node node =
             new Node(
@@ -45,9 +45,9 @@ public class CSVManipulator {
                 data.get(i + 7), // shortname
                 Node.NodeType.getEnum(data.get(i + 5)), // nodetype
                 Short.parseShort(data.get(i + 3))); // floor
-        System.out.println("Created Node on line " + i / 8 + ", " + node.getId());
+        System.out.println("Created Node on line " + i / 9 + ", " + node.getId());
         nodeFactory.create(node);
-        i = i + 8;
+        i = i + 9;
       }
 
     } catch (FileNotFoundException e) {
