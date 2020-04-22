@@ -169,6 +169,7 @@ public class ServiceRequestController implements Initializable {
   }
 
   public void showServiceRequests(ActionEvent actionEvent) {
+    serviceRequests = FXCollections.observableArrayList();
     submitRequestButton.setVisible(false);
     cancelButton.setVisible(false);
 

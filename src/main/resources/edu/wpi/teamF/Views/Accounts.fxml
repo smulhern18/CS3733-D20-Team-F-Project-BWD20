@@ -16,8 +16,14 @@
          </font>
       </Text>
       <Line endX="100.0" layoutX="637.0" layoutY="190.0" startX="-100.0" />
-      <JFXTreeTableView fx:id="accountsView" layoutX="407.0" layoutY="256.0" prefHeight="400.0" prefWidth="528.0" />
-      <JFXButton fx:id="updateStaff" layoutX="413.0" layoutY="231.0" onAction="#updateAccounts" text="Update Staff" />
-      <JFXButton layoutX="403.0" layoutY="687.0" onAction="#backtoData" text="Cancel" />
+      <JFXTreeTableView fx:id="accountsView" layoutX="307.0" layoutY="256.0" prefHeight="400.0" prefWidth="717.0" />
+      <JFXButton fx:id="updateStaff" buttonType="RAISED" layoutX="307.0" layoutY="205.0" onAction="#updateAccounts" prefHeight="44.0" prefWidth="170.0" style="-fx-background-color: white;" text="Update Staff">
+         <font>
+            <Font size="20.0" />
+         </font></JFXButton>
+      <JFXButton buttonType="RAISED" layoutX="307.0" layoutY="683.0" onAction="#backtoData" prefHeight="33.0" prefWidth="122.0" style="-fx-background-color: white;" text="Cancel">
+         <font>
+            <Font size="19.0" />
+         </font></JFXButton>
    </children>
 </AnchorPane>
