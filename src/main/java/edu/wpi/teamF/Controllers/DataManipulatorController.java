@@ -553,4 +553,8 @@ public class DataManipulatorController implements Initializable {
     addEdgeButton.setDisable(true);
     edgeErrorLabel.setText("");
   }
+
+  public void clearEdge(MouseEvent mouseEvent) {
+    filterTextFieldEdges.setText("");
+  }
 }
