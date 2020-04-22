@@ -202,7 +202,7 @@ public class AccountFactory {
 
   public List<Account> getAllAccounts() {
     List<Account> accounts = null;
-    String selectStatement = "SELECT * FROM" + DatabaseManager.ACCOUNT_TABLE_NAME;
+    String selectStatement = "SELECT * FROM " + DatabaseManager.ACCOUNT_TABLE_NAME;
     try (PreparedStatement preparedStatement =
         DatabaseManager.getConnection().prepareStatement(selectStatement)) {
       ResultSet resultSet = preparedStatement.executeQuery();
