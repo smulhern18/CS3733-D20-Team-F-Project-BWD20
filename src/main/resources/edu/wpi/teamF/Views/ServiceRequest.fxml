@@ -52,9 +52,11 @@
          </font>
       </Text>
       <ChoiceBox fx:id="choiceBoxType" layoutX="468.0" layoutY="599.0" prefWidth="150.0" />
-      <AnchorPane fx:id="mapView" layoutX="276.0" layoutY="212.0" prefHeight="425.0" prefWidth="742.0" style="-fx-background-color: white;" visible="false">
+      <AnchorPane fx:id="mapView" layoutX="166.0" layoutY="212.0" prefHeight="425.0" prefWidth="852.0" style="-fx-background-color: white;" visible="false">
          <children>
+
             <JFXTreeTableView fx:id="serviceTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="382.0" prefWidth="742.0" />
+
          </children>
       </AnchorPane>
       <JFXButton fx:id="ongoingButton" buttonType="RAISED" layoutX="930.0" layoutY="670.0" onAction="#showServiceRequests" prefHeight="54.0" prefWidth="331.0" ripplerFill="#b53389" style="-fx-background-color: white;" text="Ongoing Service Requests">

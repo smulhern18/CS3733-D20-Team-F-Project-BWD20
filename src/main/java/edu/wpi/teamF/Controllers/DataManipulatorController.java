@@ -429,7 +429,10 @@ public class DataManipulatorController implements Initializable {
 
     // backup
     csvM.writeCSVFileNode(selDir.toPath());
-    // csvM.writeCSVFileEdge(selDir.toPath());
+    csvM.writeCSVFileEdge(selDir.toPath());
+    csvM.writeCSVFileMaintenanceService(selDir.toPath());
+    csvM.writeCSVFileSecurityService(selDir.toPath());
+    csvM.writeCSVFileAccount(selDir.toPath());
   }
 
   @FXML
