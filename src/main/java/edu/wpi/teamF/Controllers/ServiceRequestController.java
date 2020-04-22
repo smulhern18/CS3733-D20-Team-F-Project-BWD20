@@ -47,6 +47,9 @@ public class ServiceRequestController implements Initializable {
   public AnchorPane mapView;
   public JFXButton submitRequestButton;
   public JFXButton cancelButton;
+  public JFXButton cancelOngoing;
+  public JFXButton ongoingButton;
+  public JFXButton updateButton;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -172,6 +175,9 @@ public class ServiceRequestController implements Initializable {
     cancelButton.setVisible(false);
 
     mapView.setVisible(true);
+    cancelOngoing.setVisible(true);
+    ongoingButton.setVisible(false);
+    updateButton.setVisible(true);
 
     JFXTreeTableColumn<UIServiceRequest, String> Time =
         new JFXTreeTableColumn<UIServiceRequest, String>("Time");
@@ -288,5 +294,15 @@ public class ServiceRequestController implements Initializable {
       }
       serviceTable.refresh();
     }
+  }
+
+  public void backtoInput(ActionEvent actionEvent) {
+    submitRequestButton.setVisible(true);
+    cancelButton.setVisible(true);
+
+    mapView.setVisible(false);
+    cancelOngoing.setVisible(false);
+    ongoingButton.setVisible(true);
+    updateButton.setVisible(false);
   }
 }
