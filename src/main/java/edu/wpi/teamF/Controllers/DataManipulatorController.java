@@ -483,11 +483,9 @@ public class DataManipulatorController implements Initializable {
   private void resetNodePane() {
     xCoorInput.setText("");
     yCoorInput.setText("");
-    buildingInput.setText("");
     longNameInput.setText("");
     shortNameInput.setText("");
     typeInput.setText("");
-    floorInput.setText("");
     nodeIDInput.setText(""); // sets all of the input to empty strings
     nodeErrorLabel.setText("");
   }
