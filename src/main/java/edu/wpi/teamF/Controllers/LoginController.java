@@ -48,8 +48,6 @@ public class LoginController {
       if (PasswordHasher.verifyPassword(
           password, accountFactory.getPasswordByUsername(username))) { // does the password match
         System.out.println("The account is valid");
-        incorrectLabel.setTextFill(Color.GREEN);
-        incorrectLabel.setText("You have been logged in!");
         switchToMainMenu2();
         // code that logs the user into the application
       } else {
