@@ -55,6 +55,7 @@ public class LoginController {
         incorrectLabel.setText("You have been logged in!");
         sleep(2000);
         switchToMainMenu2();
+        incorrectLabel.setText("");
         // code that logs the user into the application
       } else {
         incorrectLabel.setText("The username or password is incorrect");
