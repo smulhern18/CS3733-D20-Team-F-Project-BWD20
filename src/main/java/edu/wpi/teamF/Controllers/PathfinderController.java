@@ -86,7 +86,9 @@ public class PathfinderController implements Initializable {
     mapPane.getChildren().add(button);
     button.setOnAction(
         actionEvent -> {
-          if (startNode == null) {
+          if (startNode == node && endNode == null) { // Click again to de-select
+            resetPane();
+          } else if (startNode == null) {
             startNode = node;
             stairsBtn.setDisable(false);
             elevBtn.setDisable(false);
