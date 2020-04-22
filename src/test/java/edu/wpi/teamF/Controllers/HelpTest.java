@@ -77,14 +77,6 @@ public class HelpTest extends ApplicationTest {
   }
 
   @Test
-  void testrequestmainButton() throws InstanceNotFoundException {
-    clickOn("#requestmain");
-
-    // check if the dialog is exist or not
-    verifyThat("#requestmain", hasText("How to request maintenance service?"));
-  }
-
-  @Test
   void testaddnodesButton() throws InstanceNotFoundException {
     clickOn("#addnodes");
 
