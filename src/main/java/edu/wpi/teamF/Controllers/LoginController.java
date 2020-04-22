@@ -1,7 +1,5 @@
 package edu.wpi.teamF.Controllers;
 
-import static java.lang.Thread.sleep;
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
@@ -49,11 +47,7 @@ public class LoginController {
     try {
       if (PasswordHasher.verifyPassword(
           password, accountFactory.getPasswordByUsername(username))) { // does the password match
-        incorrectLabel.setText("");
         System.out.println("The account is valid");
-        incorrectLabel.setTextFill(Color.GREEN);
-        incorrectLabel.setText("You have been logged in!");
-        sleep(2000);
         switchToMainMenu2();
         // code that logs the user into the application
       } else {
