@@ -382,10 +382,11 @@ public class DataManipulatorController implements Initializable {
   public void updateNodes(ActionEvent actionEvent)
       throws InstanceNotFoundException, ValidationException {
     for (UINode nodeUI : UINodes) {
-      boolean isSame = nodeUI.equalsNode(nodes.read(nodeUI.getID().toString()));
-      if (!isSame) {
+      Node node = nodeUI.UItoNode();
+      node.setEdges(edgeFactory.getAllEdgesConnectedToNode(node.getId()));
+      if (!node.equals(nodes.read(node.getId()))) {
         // update that node in the db to the new values of that nodeUI
-        nodes.update(nodeUI.UItoNode());
+        nodes.update(node);
       }
     }
     treeViewNodes.refresh();
@@ -483,11 +484,9 @@ public class DataManipulatorController implements Initializable {
   private void resetNodePane() {
     xCoorInput.setText("");
     yCoorInput.setText("");
-    buildingInput.setText("");
     longNameInput.setText("");
     shortNameInput.setText("");
     typeInput.setText("");
-    floorInput.setText("");
     nodeIDInput.setText(""); // sets all of the input to empty strings
     nodeErrorLabel.setText("");
   }

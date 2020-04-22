@@ -26,7 +26,7 @@ public class NodeFactoryTest {
   public void initialize() throws Exception {
     testData = new TestData();
     validNodes = testData.validNodes;
-    databaseManager.initialize();
+    databaseManager.reset();
   }
 
   @AfterAll
