@@ -1,13 +1,13 @@
 package edu.wpi.teamF.Controllers;
 
 import static org.testfx.api.FxAssert.verifyThat;
+import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.concurrent.TimeoutException;
-import javafx.scene.Node;
 import javafx.stage.Stage;
 import javax.management.InstanceNotFoundException;
 import org.junit.After;
@@ -45,10 +45,42 @@ public class HelpTest extends ApplicationTest {
   }
 
   @Test
-  void testsignupButton() throws InstanceNotFoundException {
-    clickOn("#signup");
+  void testloginButton() throws InstanceNotFoundException {
+    clickOn("#login");
 
     // check if the dialog is exist or not
-    verifyThat("#signupButton", Node::isVisible);
+    verifyThat("#loginButton", hasText(""));
+  }
+
+  @Test
+  void testfindpathButton() throws InstanceNotFoundException {
+    clickOn("#findpath");
+
+    // check if the dialog is exist or not
+    verifyThat("#findpathButton", hasText(""));
+  }
+
+  @Test
+  void testrequestserviceButton() throws InstanceNotFoundException {
+    clickOn("#requestservice");
+
+    // check if the dialog is exist or not
+    verifyThat("#requestserviceButton", hasText(""));
+  }
+
+  @Test
+  void testrequestmainButton() throws InstanceNotFoundException {
+    clickOn("#requestmain");
+
+    // check if the dialog is exist or not
+    verifyThat("#requestmain", hasText(""));
+  }
+
+  @Test
+  void testaddnodesButton() throws InstanceNotFoundException {
+    clickOn("#addnodes");
+
+    // check if the dialog is exist or not
+    verifyThat("#addnodes", hasText(""));
   }
 }
