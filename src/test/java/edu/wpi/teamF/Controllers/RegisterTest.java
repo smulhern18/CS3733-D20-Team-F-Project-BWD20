@@ -126,5 +126,4 @@ public class RegisterTest extends ApplicationTest {
 
     verifyThat("#incorrectLabel", hasText("The email is not valid"));
   }
-
 }

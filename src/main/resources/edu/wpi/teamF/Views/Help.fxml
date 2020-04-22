@@ -27,32 +27,32 @@
          <children>
             <VBox prefHeight="460.0" prefWidth="880.0">
                <children>
-                  <JFXButton onAction="#loadDialogsignup" text="How to sign up?" textAlignment="JUSTIFY">
+                  <JFXButton fx:id="signup"  onAction="#loadDialogsignup" text="How to sign up?" textAlignment="JUSTIFY">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton onAction="#loadDialoglogin" text="How to login?">
+                  <JFXButton fx:id="login" onAction="#loadDialoglogin" text="How to login?">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton onAction="#loadDialogpath" text="How to find a path?">
+                  <JFXButton fx:id="findpath" onAction="#loadDialogpath" text="How to find a path?">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton onAction="#loadDialogservicerequest" text="How to request a service?">
+                  <JFXButton fx:id="requestservice" onAction="#loadDialogservicerequest" text="How to request a service?">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton onAction="#loadDialogrequestmain" text="How to request maintenance service?">
+                  <JFXButton fx:id="requestmain" onAction="#loadDialogrequestmain" text="How to request maintenance service?">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton onAction="#loadDialogadmin" text="How to add/edit/delete nodes?">
+                  <JFXButton fx:id="addnodes" onAction="#loadDialogadmin" text="How to add/edit/delete nodes?">
                      <font>
                         <Font size="24.0" />
                      </font>
