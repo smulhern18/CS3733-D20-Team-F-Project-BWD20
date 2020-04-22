@@ -52,6 +52,8 @@ public class DataManipulatorController implements Initializable {
   public AnchorPane mapView;
   public AnchorPane rootPane;
   public JFXButton uploadNodesButton;
+  public JFXButton cancelEdgeButton;
+  public JFXButton cancelButton;
   NodeFactory nodes = NodeFactory.getFactory();
   EdgeFactory edges = EdgeFactory.getFactory();
   FileChooser nodesChooser = new FileChooser();
@@ -550,5 +552,9 @@ public class DataManipulatorController implements Initializable {
     node2Input.setText(""); // resets the text in the two buttons
     addEdgeButton.setDisable(true);
     edgeErrorLabel.setText("");
+  }
+
+  public void clearEdge(MouseEvent mouseEvent) {
+    filterTextFieldEdges.setText("");
   }
 }

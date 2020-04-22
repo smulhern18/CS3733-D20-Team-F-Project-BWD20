@@ -10,7 +10,9 @@ import java.util.Date;
 
 public class TestData {
 
-  public String[] validEdgeIDs = {"nodeA_nodeH", "nodeB_nodeG", "nodeC_nodeF", "nodeD_nodeE"};
+  public String[] validEdgeIDs = {
+    "nodeA_nodeH", "nodeB_nodeG", "nodeC_nodeF", "nodeD_nodeE", "nodeT_nodeT"
+  };
 
   public String[] invalidEdgeIDs = {
     "nodeA", "", null, "this string is waaaaaaaaay toooooooo loooooooong to be valid"
@@ -142,7 +144,8 @@ public class TestData {
     new Edge(validEdgeIDs[0], validNodeIDs[0], validNodeIDs[7]),
     new Edge(validEdgeIDs[1], validNodeIDs[1], validNodeIDs[6]),
     new Edge(validEdgeIDs[2], validNodeIDs[2], validNodeIDs[5]),
-    new Edge(validEdgeIDs[3], validNodeIDs[3], validNodeIDs[4])
+    new Edge(validEdgeIDs[3], validNodeIDs[3], validNodeIDs[4]),
+    new Edge("nodeT_nodeT", "nodeT", "nodeG")
   };
 
   public String[] validRooms = {"White Room", "Red room", "OR", "OP"};

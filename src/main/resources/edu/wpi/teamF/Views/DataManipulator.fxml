@@ -22,7 +22,7 @@
       <JFXButton buttonType="RAISED" layoutX="201.0" layoutY="697.0" onAction="#uploadEdges" prefHeight="59.0" prefWidth="131.0" ripplerFill="#ffe100" text="Upload Edges" />
       <JFXButton buttonType="RAISED" layoutX="349.0" layoutY="697.0" onAction="#backupDB" prefHeight="59.0" prefWidth="131.0" ripplerFill="#ffe100" text="Backup" />
       <JFXTreeTableView fx:id="treeViewEdges" layoutX="809.0" layoutY="209.0" stylesheets="@../CSS/treeview.css" />
-      <JFXTextField fx:id="filterTextFieldEdges" layoutX="809.0" layoutY="174.0" onMouseClicked="#clearText" prefHeight="25.0" prefWidth="157.0" text="Enter Edge ID" />
+      <JFXTextField fx:id="filterTextFieldEdges" layoutX="809.0" layoutY="174.0" onMouseClicked="#clearEdge" prefHeight="25.0" prefWidth="157.0" text="Enter Edge ID" />
       <JFXToggleButton fx:id="switcher" layoutX="765.0" layoutY="698.0" onAction="#viewerSwitcher" text="Map View" />
       <JFXButton fx:id="updateNodesButton" buttonType="RAISED" layoutX="253.0" layoutY="159.0" onAction="#updateNodes" prefHeight="31.0" prefWidth="123.0" ripplerFill="#179e41" text="Update Nodes" />
       <JFXButton fx:id="updateEdgesButton" buttonType="RAISED" layoutX="979.0" layoutY="174.0" onAction="#updateEdges" prefHeight="31.0" prefWidth="123.0" ripplerFill="#15a138" text="Update Edges" />

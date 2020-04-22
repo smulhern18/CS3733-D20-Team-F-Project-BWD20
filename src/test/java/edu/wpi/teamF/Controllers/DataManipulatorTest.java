@@ -141,9 +141,10 @@ public class DataManipulatorTest extends ApplicationTest {
     clickOn("#filterTextFieldEdges");
     write("nodeT_nodeT");
     sleep(500);
-    doubleClickOn("nodeWQ");
+    doubleClickOn("nodeT");
     write("nodeC");
     press(KeyCode.ENTER);
+    clickOn("#updateEdgesButton");
 
     assertEquals(edges.read("nodeT_nodeT").getNode1(), "nodeC");
   }

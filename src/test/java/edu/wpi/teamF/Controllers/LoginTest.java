@@ -70,6 +70,7 @@ public class LoginTest extends ApplicationTest {
     write("Invalid password");
     // Attempt login
     clickOn("#loginButton");
+    sleep(1000);
     // Verify that the user remains on the login page
     verifyThat("#incorrectLabel", hasText("The username or password is incorrect"));
   }

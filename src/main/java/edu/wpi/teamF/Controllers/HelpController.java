@@ -10,7 +10,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.*;
@@ -21,7 +20,6 @@ import javax.swing.text.*;
 public class HelpController implements Initializable {
 
   @FXML public AnchorPane rootPane;
-  public Label generalquestions;
   @FXML private StackPane stackPane;
   // @FXML
   // private JFXButton textfield;
@@ -83,9 +81,10 @@ public class HelpController implements Initializable {
     content3.setBody(
         new Text(
             "Click on the 'Service Request' button on Main Menu. You will go to the Service \n"
-                + "Request page. You could request services for security and maintenance. If you \n"
-                + "want to request service for security, click on 'Request Security'. If you want \n"
-                + "to request service for maintenance, click on 'Request Maintenance'."));
+                + "Request page. You could request services for security and maintenance. Enter or\n"
+                + " select the information for location, description, priority, and type. Then click on \n"
+                + "'Submit Request'. If you want to cancel the request, click on 'Cancel'. \n"
+                + "If you want to check service your request, click on 'Ongoing Service Request'."));
     JFXDialog dialog3 = new JFXDialog(stackPane, content3, JFXDialog.DialogTransition.CENTER);
     JFXButton button3 = new JFXButton("Close");
     button3.setOnAction(
@@ -132,8 +131,8 @@ public class HelpController implements Initializable {
                 + "'Map View'. Click again on 'Map View' brings you back to table view. You \n"
                 + "could quick search for nodes or edges by typing their ID in the text field.\n"
                 + "If you want to upload nodes or edges, click on 'Upload Nodes' or 'Upload \n"
-                + "Edges'. If you want to download nodes or edges, click on 'Download Nodes' \n"
-                + "or 'Download Edges'. "));
+                + "Edges'. If you want to download nodes or edges, click on 'Backup'. You could enter\n "
+                + "NodeID and click on 'Delete Node' to delete node."));
     JFXDialog dialog5 = new JFXDialog(stackPane, content5, JFXDialog.DialogTransition.CENTER);
     JFXButton button5 = new JFXButton("Close");
     button5.setOnAction(
@@ -151,7 +150,14 @@ public class HelpController implements Initializable {
   private void loadDialogpath(ActionEvent actionEvent) {
     JFXDialogLayout content6 = new JFXDialogLayout();
     content6.setHeading(new Text("How to find a path?"));
-    content6.setBody(new Text("To be added later."));
+    content6.setBody(
+        new Text(
+            "Click on the 'Pathfinder' button on Main Menu. You will go to the Pathfinder \n"
+                + "page. You could click on nodes’ circles on the map as start points. Then \n"
+                + " select the destination. The shortest path will be shown on the map. After \n"
+                + "you select start point and want to find stairs, elevators, and bathrooms, click\n"
+                + "on 'Find Stairs', 'Find Elevator' or 'Find Bathroom'. Click on 'Reset' if you\n"
+                + "want to find another path. "));
     JFXDialog dialog6 = new JFXDialog(stackPane, content6, JFXDialog.DialogTransition.CENTER);
     JFXButton button6 = new JFXButton("Close");
     button6.setOnAction(
