@@ -382,10 +382,11 @@ public class DataManipulatorController implements Initializable {
   public void updateNodes(ActionEvent actionEvent)
       throws InstanceNotFoundException, ValidationException {
     for (UINode nodeUI : UINodes) {
-      boolean isSame = nodeUI.equalsNode(nodes.read(nodeUI.getID().toString()));
-      if (!isSame) {
+      Node node = nodeUI.UItoNode();
+      node.setEdges(edgeFactory.getAllEdgesConnectedToNode(node.getId()));
+      if (!node.equals(nodes.read(node.getId()))) {
         // update that node in the db to the new values of that nodeUI
-        nodes.update(nodeUI.UItoNode());
+        nodes.update(node);
       }
     }
     treeViewNodes.refresh();
