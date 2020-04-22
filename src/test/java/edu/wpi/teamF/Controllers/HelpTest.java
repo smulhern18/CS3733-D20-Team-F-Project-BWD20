@@ -57,7 +57,7 @@ public class HelpTest extends ApplicationTest {
     clickOn("#login");
 
     // check if the dialog is exist or not
-    verifyThat("#loginButton", hasText("How to login?"));
+    verifyThat("#login", hasText("How to login?"));
   }
 
   @Test
@@ -65,7 +65,7 @@ public class HelpTest extends ApplicationTest {
     clickOn("#findpath");
 
     // check if the dialog is exist or not
-    verifyThat("#findpathButton", hasText(""));
+    verifyThat("#findpath", hasText("How to find a path?"));
   }
 
   @Test
@@ -73,7 +73,7 @@ public class HelpTest extends ApplicationTest {
     clickOn("#requestservice");
 
     // check if the dialog is exist or not
-    verifyThat("#requestserviceButton", hasText("How to request a service?"));
+    verifyThat("#requestservice", hasText("How to request a service?"));
   }
 
   @Test
@@ -90,13 +90,5 @@ public class HelpTest extends ApplicationTest {
 
     // check if the dialog is exist or not
     verifyThat("#addnodes", hasText("How to add/edit/delete nodes?"));
-  }
-
-  @Test
-  void textpathButton() throws InstanceNotFoundException {
-    clickOn("#findpath");
-
-    // check if the dialog is exist or not
-    verifyThat("#findpath", hasText("How to find a path?"));
   }
 }
