@@ -7,13 +7,10 @@ import edu.wpi.teamF.DatabaseManipulators.*;
 import edu.wpi.teamF.Main;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
-import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
-import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javax.management.InstanceNotFoundException;
 import org.junit.After;
@@ -97,32 +94,5 @@ public class ServiceRequestTest extends ApplicationTest {
     assertEquals(1, requests.size());
     assertEquals(3, requests.get(0).getPriority());
     assertEquals("FSERV00405", requests.get(0).getLocation().getId());
-  }
-
-  @Test
-  void assignStaffTest() throws InstanceNotFoundException, ValidationException {
-    MaintenanceRequest testRequest =
-        new MaintenanceRequest(nodeFactory.read("FSERV00405"), "NOT ASSIGNED", new Date(), 3);
-    MaintenanceRequestFactory maintenanceRequestFactory = MaintenanceRequestFactory.getFactory();
-    maintenanceRequestFactory.create(testRequest);
-    List<MaintenanceRequest> requests = maintenanceRequestFactory.getAllMaintenanceRequests();
-
-    clickOn("#ongoingButton");
-    doubleClickOn("NOT ASSIGNED");
-
-    write("Denver");
-    press(KeyCode.ENTER);
-    clickOn("#updateButton");
-    clickOn("Admin");
-    clickOn("Service Request");
-    clickOn("#ongoingButton");
-    sleep(3000);
-
-    // check that a security request with that information is in the database
-    assertEquals(1, requests.size());
-    assertEquals(3, requests.get(0).getPriority());
-    assertEquals("FSERV00405", requests.get(0).getLocation().getId());
-    assertEquals("Denver", requests.get(0).getDescription());
-    maintenanceRequestFactory.delete(testRequest.getId());
   }
 }
