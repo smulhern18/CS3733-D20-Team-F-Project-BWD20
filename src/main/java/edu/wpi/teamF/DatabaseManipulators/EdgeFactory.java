@@ -215,4 +215,24 @@ public class EdgeFactory {
     }
     return edges;
   }
+
+  public void deleteByNodeID(String id) {
+    String deleteStatement =
+        "DELETE FROM "
+            + DatabaseManager.EDGES_TABLE_NAME
+            + " WHERE "
+            + DatabaseManager.NODE_A_KEY
+            + " = ? OR "
+            + DatabaseManager.NODE_1_KEY
+            + " = ?";
+    try (PreparedStatement preparedStatement =
+        DatabaseManager.getConnection().prepareStatement(deleteStatement)) {
+      preparedStatement.setString(1, id);
+      preparedStatement.setString(2, id);
+
+      preparedStatement.execute();
+    } catch (Exception e) {
+      System.out.println(e.getMessage() + ", " + e.getClass());
+    }
+  }
 }

@@ -4,11 +4,14 @@ import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Account.Admin;
 import edu.wpi.teamF.ModelClasses.Account.Staff;
 import edu.wpi.teamF.ModelClasses.Account.User;
+import edu.wpi.teamF.ModelClasses.UIAccount;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.management.InstanceNotFoundException;
 
 public class AccountFactory {
@@ -68,38 +71,39 @@ public class AccountFactory {
       preparedStatement.setString(1, username);
 
       ResultSet resultSet = preparedStatement.executeQuery();
-      resultSet.next();
-      Account.Type type = Account.Type.getEnum(resultSet.getInt(DatabaseManager.USER_TYPE_KEY));
-      switch (type.getTypeOrdinal()) {
-        case (0):
-          account =
-              new Admin(
-                  resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
-                  resultSet.getString(DatabaseManager.LAST_NAME_KEY),
-                  resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
-                  resultSet.getString(DatabaseManager.USER_NAME_KEY),
-                  resultSet.getString(DatabaseManager.PASSWORD_KEY));
-          break;
-        case (1):
-          account =
-              new Staff(
-                  resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
-                  resultSet.getString(DatabaseManager.LAST_NAME_KEY),
-                  resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
-                  resultSet.getString(DatabaseManager.USER_NAME_KEY),
-                  resultSet.getString(DatabaseManager.PASSWORD_KEY));
-          break;
-        case (2):
-          account =
-              new User(
-                  resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
-                  resultSet.getString(DatabaseManager.LAST_NAME_KEY),
-                  resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
-                  resultSet.getString(DatabaseManager.USER_NAME_KEY),
-                  resultSet.getString(DatabaseManager.PASSWORD_KEY));
-          break;
-        default:
-          throw new ValidationException("Illegal Type of Account: " + type.getTypeOrdinal());
+      if (resultSet.next()) {
+        Account.Type type = Account.Type.getEnum(resultSet.getInt(DatabaseManager.USER_TYPE_KEY));
+        switch (type.getTypeOrdinal()) {
+          case (0):
+            account =
+                new Admin(
+                    resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                    resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                    resultSet.getString(DatabaseManager.PASSWORD_KEY));
+            break;
+          case (1):
+            account =
+                new Staff(
+                    resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                    resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                    resultSet.getString(DatabaseManager.PASSWORD_KEY));
+            break;
+          case (2):
+            account =
+                new User(
+                    resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                    resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                    resultSet.getString(DatabaseManager.PASSWORD_KEY));
+            break;
+          default:
+            throw new ValidationException("Illegal Type of Account: " + type.getTypeOrdinal());
+        }
       }
     } catch (InstanceNotFoundException e) {
       throw e;
@@ -194,5 +198,76 @@ public class AccountFactory {
       System.out.println(e.getMessage() + ", " + e.getClass());
     }
     return hashword;
+  }
+
+  public List<Account> getAllAccounts() {
+    List<Account> accounts = null;
+    String selectStatement = "SELECT * FROM " + DatabaseManager.ACCOUNT_TABLE_NAME;
+    try (PreparedStatement preparedStatement =
+        DatabaseManager.getConnection().prepareStatement(selectStatement)) {
+      ResultSet resultSet = preparedStatement.executeQuery();
+      accounts = new ArrayList<>();
+      while (resultSet.next()) {
+        Account account = null;
+        Account.Type type = Account.Type.getEnum(resultSet.getInt(DatabaseManager.USER_TYPE_KEY));
+        switch (type.getTypeOrdinal()) {
+          case (0):
+            account =
+                new Admin(
+                    resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                    resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                    resultSet.getString(DatabaseManager.PASSWORD_KEY));
+            break;
+          case (1):
+            account =
+                new Staff(
+                    resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                    resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                    resultSet.getString(DatabaseManager.PASSWORD_KEY));
+            break;
+          case (2):
+            account =
+                new User(
+                    resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                    resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                    resultSet.getString(DatabaseManager.PASSWORD_KEY));
+            break;
+          default:
+            throw new ValidationException("Illegal Type of Account: " + type.getTypeOrdinal());
+        }
+        accounts.add(account);
+      }
+    } catch (Exception e) {
+      System.out.println(e.getMessage() + ", " + e.getClass());
+    }
+    return accounts;
+  }
+
+  public ArrayList<UIAccount> getAccounts() {
+    ArrayList<UIAccount> accounts = null;
+    String selectStatement = " SELECT * FROM " + DatabaseManager.ACCOUNT_TABLE_NAME;
+    try (PreparedStatement preparedStatement =
+        DatabaseManager.getConnection().prepareStatement(selectStatement)) {
+      ResultSet resultSet = preparedStatement.executeQuery();
+      accounts = new ArrayList<>();
+      while (resultSet.next()) {
+        accounts.add(
+            new UIAccount(
+                resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                Account.Type.getEnum(resultSet.getInt(DatabaseManager.USER_TYPE_KEY))));
+      }
+    } catch (Exception e) {
+      System.out.println(e.getMessage() + ", " + e.getClass());
+    }
+    return accounts;
   }
 }

@@ -15,26 +15,28 @@ import javafx.scene.paint.Color;
 
 public class LoginController {
 
+  public Label loginText;
   @FXML private JFXButton loginButton;
 
   @FXML private JFXTextField usernameInput;
 
   @FXML private JFXPasswordField passwordInput;
 
-  @FXML private Label incorrectLabel; //label that is displayed if teh input is not valid
+  @FXML private Label incorrectLabel; // label that is displayed if teh input is not valid
 
   private AccountFactory accountFactory = AccountFactory.getFactory();
 
-  SceneController sceneController = App.getSceneController(); //used to switch between scenes
+  SceneController sceneController = App.getSceneController(); // used to switch between scenes
 
   @FXML
-  void enableLogin(KeyEvent event) { //called on each key release for both inputs
+  void enableLogin(KeyEvent event) { // called on each key release for both inputs
     String username = usernameInput.getText();
     String password = passwordInput.getText();
     if (!username.isEmpty() && !password.isEmpty()) {
-      loginButton.setDisable(false); //the login button is enabled only when there is text in the two input
+      loginButton.setDisable(
+          false); // the login button is enabled only when there is text in the two input
     } else {
-      loginButton.setDisable(true); //checks if the user entered text and then deleted the text
+      loginButton.setDisable(true); // checks if the user entered text and then deleted the text
     }
   }
 
@@ -43,20 +45,32 @@ public class LoginController {
     String username = usernameInput.getText();
     String password = passwordInput.getText();
     try {
-      if (PasswordHasher.verifyPassword(password, accountFactory.getPasswordByUsername(username))) { //checks if the password matches what is in the db using the hasher
+      if (PasswordHasher.verifyPassword(
+          password, accountFactory.getPasswordByUsername(username))) { // does the password match
         System.out.println("The account is valid");
+        switchToMainMenu2();
         // code that logs the user into the application
+      } else {
+        incorrectLabel.setText("The username or password is incorrect");
+        usernameInput.setUnFocusColor(Color.RED);
+        passwordInput.setUnFocusColor(Color.RED); // sets the unfocused colors to red
+        passwordInput.setText("");
       }
-    } catch (Exception e) { //if there is an error, the username or password does not match an account in the db
-      incorrectLabel.setVisible(true);
+    } catch (Exception e) { // no existing account in the db
+      incorrectLabel.setText("The username or password is incorrect");
       usernameInput.setUnFocusColor(Color.RED);
-      passwordInput.setUnFocusColor(Color.RED); //sets the unfocused colors to red
+      passwordInput.setUnFocusColor(Color.RED); // sets the unfocused colors to red
       passwordInput.setText("");
     }
   }
 
   @FXML
   void switchToMainMenu(ActionEvent event) throws IOException {
+    sceneController.switchScene("MainMenu");
+  }
+
+  @FXML
+  void switchToMainMenu2() throws IOException {
     sceneController.switchScene("MainMenu");
   }
 

@@ -8,6 +8,7 @@ import java.util.Date;
 public abstract class ServiceRequest {
 
   private String id;
+  private String complete = "";
   private Node location;
   private String description;
   private Date dateTimeSubmitted;
@@ -21,6 +22,11 @@ public abstract class ServiceRequest {
     setDescription(description);
     setDateTimeSubmitted(dateTimeSubmitted);
     setPriority(priority);
+  }
+
+  public ServiceRequest(Node location, String description, Date dateTimeSubmitted, int priority)
+      throws ValidationException {
+    this("" + System.currentTimeMillis(), location, description, dateTimeSubmitted, priority);
   }
 
   public String getId() {
@@ -54,7 +60,8 @@ public abstract class ServiceRequest {
     return dateTimeSubmitted;
   }
 
-  public void setDateTimeSubmitted(Date dateTimeSubmitted) {
+  public void setDateTimeSubmitted(Date dateTimeSubmitted) throws ValidationException {
+    Validators.dateValidation(dateTimeSubmitted);
     this.dateTimeSubmitted = dateTimeSubmitted;
   }
 
@@ -62,7 +69,16 @@ public abstract class ServiceRequest {
     return priority;
   }
 
-  public void setPriority(int priority) {
+  public void setPriority(int priority) throws ValidationException {
+    Validators.priorityValidation(priority);
     this.priority = priority;
+  }
+
+  public String getComplete() {
+    return complete;
+  }
+
+  public void setComplete(String complete) {
+    this.complete = complete;
   }
 }

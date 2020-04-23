@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import edu.wpi.teamF.DatabaseManipulators.AppointmentFactory;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.TestData;
 import java.sql.SQLException;
 import org.junit.jupiter.api.AfterAll;
@@ -16,6 +17,7 @@ public class AppointmentFactoryTest {
   static TestData testData = null;
   static Appointment[] validAppointments = null;
   AppointmentFactory appointmentFactory = AppointmentFactory.getFactory();
+  NodeFactory nodeFactory = NodeFactory.getFactory();
   static DatabaseManager databaseManager = new DatabaseManager();
 
   @BeforeEach
@@ -41,6 +43,7 @@ public class AppointmentFactoryTest {
     try {
       for (Appointment appointment : validAppointments) {
         appointmentFactory.create(appointment);
+        nodeFactory.create(appointment.getLocation());
 
         Appointment readAppointment = appointmentFactory.read(appointment.getId());
 
@@ -64,6 +67,7 @@ public class AppointmentFactoryTest {
     try {
       for (Appointment appointment : validAppointments) {
         appointmentFactory.create(appointment);
+        nodeFactory.create(appointment.getLocation());
 
         appointment.setPCP("Hello");
         appointmentFactory.update(appointment);
@@ -73,6 +77,7 @@ public class AppointmentFactoryTest {
         assertTrue(appointment.equals(readAppointment));
 
         appointmentFactory.delete(appointment.getId());
+        nodeFactory.delete(appointment.getLocation().getId());
       }
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());

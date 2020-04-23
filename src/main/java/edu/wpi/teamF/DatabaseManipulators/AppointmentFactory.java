@@ -121,6 +121,7 @@ public class AppointmentFactory {
       preparedStatement.setString(param++, appointment.getRoom());
       preparedStatement.setString(param++, appointment.getUserID());
       preparedStatement.setString(param++, appointment.getPCP());
+      preparedStatement.setString(param++, appointment.getId());
       int numRows = preparedStatement.executeUpdate();
       if (numRows != 1) {
         throw new Exception("Updated " + numRows + " rows");
