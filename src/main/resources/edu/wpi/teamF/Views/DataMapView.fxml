@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="dataMap" prefHeight="560.0" prefWidth="924.0" style="-fx-background-color: #B53389;" visible="false" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.DataMapViewController">
+<AnchorPane fx:id="dataMap" prefHeight="560.0" prefWidth="924.0" style="-fx-background-color: #B53389;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.DataMapViewController">
    <children>
       <StackPane layoutX="214.0" layoutY="125.0" prefHeight="551.0" prefWidth="912.0" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
