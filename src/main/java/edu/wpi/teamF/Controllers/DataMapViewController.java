@@ -14,8 +14,11 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -71,6 +74,10 @@ public class DataMapViewController implements Initializable {
 
   @FXML private JFXButton displayEdgePaneButton; // "Add Edge" button
 
+  @FXML private StackPane imageStackPane;
+
+  @FXML private ImageView imageView;
+
   JFXButton nodeButton = null;
   Line edgeLine = null;
 
@@ -90,15 +97,6 @@ public class DataMapViewController implements Initializable {
   private NodeFactory nodeFactory = NodeFactory.getFactory();
   private EdgeFactory edgeFactory = EdgeFactory.getFactory();
 
-  public DataMapViewController() {
-    //    List<Node> nodes = nodeFactory.getAllNodes();
-    //    List<Edge> edges = edgeFactory.getAllEdges();
-
-    //    for (Node node : nodes) {
-    //      drawNode(node);
-    //    }
-  }
-
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     for (Node node : nodeFactory.getAllNodes()) {
@@ -112,6 +110,31 @@ public class DataMapViewController implements Initializable {
         drawEdge(edge);
       }
     } // for every edge that connects two nodes on the fifth floor, draw the edge on the map
+  }
+
+  public void zoom(ScrollEvent event) {
+    double zoomFactor = 1.5;
+    if (event.getDeltaY() <= 0) {
+      // zoom out
+      zoomFactor = 1 / zoomFactor;
+    }
+    zoom(imageStackPane, zoomFactor, event.getSceneX(), event.getSceneY());
+  }
+
+  public void zoom(javafx.scene.Node node, double factor, double x, double y) {
+    // determine scale
+    double oldScale = node.getScaleX();
+    double scale = oldScale * factor;
+    double f = (scale / oldScale) - 1;
+
+    // determine offset that we will have to move the node
+    Bounds bounds = node.localToScene(node.getBoundsInLocal());
+    double dx = (x - (bounds.getWidth() / 2 + bounds.getMinX()));
+    double dy = (y - (bounds.getHeight() / 2 + bounds.getMinY()));
+    node.setTranslateX(node.getTranslateX() - f * dx);
+    node.setTranslateY(node.getTranslateY() - f * dx);
+    node.setScaleX(scale);
+    node.setScaleY(scale);
   }
 
   private void drawNode(Node node) { // draws the given node on the map
