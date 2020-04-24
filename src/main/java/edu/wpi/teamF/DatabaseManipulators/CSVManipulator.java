@@ -175,17 +175,19 @@ public class CSVManipulator {
         data.addAll(Arrays.asList(row.split(",")));
       }
 
-      int i = 5;
+      int i = 7;
       while (i < (data.size() - 1)) {
         maintenanceRequestFactory.create(
             new MaintenanceRequest(
                 data.get(i),
                 nodeFactory.read(data.get(i + 1)),
                 data.get(i + 2),
-                new Date(Integer.parseInt(data.get(i + 3))),
-                Integer.parseInt(data.get(i + 4))));
+                data.get(i + 3),
+                new Date(Integer.parseInt(data.get(i + 4))),
+                Integer.parseInt(data.get(i + 5)),
+                Boolean.parseBoolean(data.get(i + 6))));
 
-        i = i + 5;
+        i = i + 7;
       }
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File Not found!");
@@ -247,17 +249,19 @@ public class CSVManipulator {
         data.addAll(Arrays.asList(row.split(",")));
       }
 
-      int i = 5;
+      int i = 7;
       while (i < (data.size() - 1)) {
         securityRequestFactory.create(
             new SecurityRequest(
                 data.get(i),
                 nodeFactory.read(data.get(i + 1)),
                 data.get(i + 2),
-                new Date(Integer.parseInt(data.get(i + 3))),
-                Integer.parseInt(data.get(i + 4))));
+                data.get(i + 3),
+                new Date(Integer.parseInt(data.get(i + 4))),
+                Integer.parseInt(data.get(i + 5)),
+                Boolean.parseBoolean(data.get(i + 6))));
 
-        i = i + 5;
+        i = i + 7;
       }
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File Not found!");

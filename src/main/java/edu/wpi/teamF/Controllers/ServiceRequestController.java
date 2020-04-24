@@ -93,6 +93,7 @@ public class ServiceRequestController implements Initializable {
     int priority = Integer.parseInt(choiceBoxPriority.getValue());
     String locationName = choiceBoxLoc.getValue();
     String nodeID = null;
+    String description = textAreaDesc.getText();
     // check which location
     if (locationName.equals("Intensive Care Unit")) {
       nodeID = "FDEPT00105";
@@ -144,12 +145,14 @@ public class ServiceRequestController implements Initializable {
 
     if (serviceType.equals("Security")) {
       SecurityRequest secRequest =
-          new SecurityRequest(nodeFactory.read(nodeID), "NOT ASSIGNED", date, priority);
+          new SecurityRequest(
+              nodeFactory.read(nodeID), "NOT ASSIGNED", description, date, priority);
       securityRequestFactory.create(secRequest);
 
     } else if (serviceType.equals("Maintenance")) {
       MaintenanceRequest maintenanceRequest =
-          new MaintenanceRequest(nodeFactory.read(nodeID), "NOT ASSIGNED", date, priority);
+          new MaintenanceRequest(
+              nodeFactory.read(nodeID), "NOT ASSIGNED", description, date, priority);
       maintenanceRequestFactory.create(maintenanceRequest);
     }
 

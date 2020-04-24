@@ -11,6 +11,7 @@ import edu.wpi.teamF.TestData;
 import java.sql.SQLException;
 import java.util.List;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,12 +24,16 @@ public class SecurityRequestTest {
   static DatabaseManager databaseManager = new DatabaseManager();
   static Node[] validNodes = null;
 
+  @BeforeAll
+  public static void databaseIntialize() throws Exception {
+    databaseManager.initialize();
+  }
+
   @BeforeEach
   public void initialize() throws Exception {
     testData = new TestData();
     validSecurityRequest = testData.validSecurityRequests;
     validNodes = testData.validNodes;
-    databaseManager.initialize();
     databaseManager.reset();
   }
 

@@ -3,6 +3,7 @@ package edu.wpi.teamF.ModelClasses;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
 import java.util.Date;
 
 public class Validators {
@@ -37,6 +38,20 @@ public class Validators {
   public static final int DESCRIPTION_MAX_LENGTH = 64;
   public static final int PRIORITY_MIN_LENGTH = 1;
   public static final int PRIORITY_MAX_LENGTH = 3;
+
+  public static <T extends ServiceRequest> void serviceRequestValidation(T t, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(t, constraints);
+    ServiceRequest serviceRequest = (ServiceRequest) t;
+
+    idValidation(serviceRequest.getId());
+    nodeValidation(serviceRequest.getLocation());
+    descriptionValidation(serviceRequest.getDescription());
+    dateValidation(serviceRequest.getDateTimeSubmitted());
+    priorityValidation(serviceRequest.getPriority());
+    booleanValidation(serviceRequest.getComplete());
+    nameValidation(serviceRequest.getAssignee());
+  }
 
   public static <T extends Account> void accountValidation(T t, int... constraints)
       throws ValidationException {
@@ -314,12 +329,6 @@ public class Validators {
       throws ValidationException {
     nullCheckValidation(t, constraints);
     SecurityRequest securityRequestObject = (SecurityRequest) t;
-
-    idValidation(securityRequestObject.getId());
-    nodeValidation(securityRequestObject.getLocation());
-    descriptionValidation(securityRequestObject.getDescription());
-    dateValidation(securityRequestObject.getDateTimeSubmitted());
-    priorityValidation(securityRequestObject.getPriority());
   }
 
   /**
@@ -364,6 +373,16 @@ public class Validators {
     nullCheckValidation(priority, constraints);
     if (priority < PRIORITY_MIN_LENGTH || priority > PRIORITY_MAX_LENGTH) {
       throw new ValidationException("Priority is outside accepted values");
+    }
+  }
+
+  public static void booleanValidation(boolean bool, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(bool, constraints);
+    if (bool || !bool) {
+      // ignore
+    } else {
+      throw new ValidationException("boolean is not a true or false value");
     }
   }
 
