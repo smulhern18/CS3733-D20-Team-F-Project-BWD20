@@ -3,7 +3,6 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -75,7 +74,7 @@
                               <JFXButton fx:id="addNodeButton" onAction="#addNode" style="-fx-background-color: #B53389;" text="Add" textFill="WHITE" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="5" />
                               <Label fx:id="errorNodeLabel" textFill="RED" visible="false" GridPane.columnIndex="1" />
                               <Label text="Location:" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                              <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                              <JFXButton fx:id="locationButton" onAction="#selectLocation" style="-fx-background-color: #ffffff; -fx-border-color: #B53389;" text="Click Here" GridPane.columnIndex="3" GridPane.rowIndex="3" />
                            </children>
                            <StackPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

@@ -16,7 +16,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
@@ -76,7 +75,7 @@ public class DataMapViewController implements Initializable {
 
   @FXML private StackPane imageStackPane;
 
-  @FXML private ImageView imageView;
+  @FXML private JFXButton locationButton;
 
   JFXButton nodeButton = null;
   Line edgeLine = null;
@@ -425,6 +424,15 @@ public class DataMapViewController implements Initializable {
     }
   }
 
+  @FXML
+  void selectLocation(ActionEvent event) { // called when the "Select Node 1" button is pressed
+    modifyNodePane.setVisible(false);
+    displayNodePaneButton.setVisible(false);
+    displayEdgePaneButton.setVisible(false);
+    this.nodeButton.setStyle(
+        "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #B53389; -fx-border-color: #000000; -fx-border-width: 1px");
+  }
+
   private void displayEdgeData() {
     selectNode1Button.setText(edge.getNode1());
     selectNode2Button.setText(edge.getNode2()); // Sets the text of the two buttons to the IDs
@@ -475,8 +483,7 @@ public class DataMapViewController implements Initializable {
   public void validateNodeText(KeyEvent keyEvent) {
     System.out.println("Before if");
     if (!nodeIDInput.getText().isEmpty()
-        && !xCoorInput.getText().isEmpty()
-        && !yCoorInput.getText().isEmpty()
+        // && !locationButton.getText().equals("Click Here")
         // && !buildingInput.getText().isEmpty()
         && !longNameInput.getText().isEmpty()
         && !shortNameInput.getText().isEmpty()
@@ -495,8 +502,7 @@ public class DataMapViewController implements Initializable {
 
   @FXML
   private void resetNodePane() {
-    xCoorInput.setText("");
-    yCoorInput.setText("");
+    locationButton.setText("Click Here");
     longNameInput.setText("");
     shortNameInput.setText("");
     typeInput.setText("");
