@@ -4,11 +4,7 @@ import com.jfoenix.controls.JFXButton;
 
 public class ButtonFormatter {
 
-    public void setDarkFormat(JFXButton button) {
+  public void setDarkFormat(JFXButton button) {}
 
-    }
-
-    public void setLightFormat(JFXButton button) {
-
-    }
+  public void setLightFormat(JFXButton button) {}
 }

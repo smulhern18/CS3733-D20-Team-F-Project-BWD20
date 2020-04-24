@@ -4,6 +4,7 @@ import static javafx.scene.paint.Color.RED;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Edge;
@@ -14,10 +15,9 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Bounds;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -77,6 +77,12 @@ public class DataMapViewController implements Initializable {
 
   @FXML private JFXButton locationButton;
 
+  @FXML private ScrollPane imageScrollPane;
+
+  @FXML private Label xLabel;
+
+  @FXML private Label yLabel;
+
   JFXButton nodeButton = null;
   Line edgeLine = null;
 
@@ -86,6 +92,11 @@ public class DataMapViewController implements Initializable {
   boolean selectNode2 = false;
   Node node1 = null;
   Node node2 = null;
+
+  double deltaX = 0;
+  double deltaY = 0;
+
+  UISetting uiSetting = new UISetting();
 
   private static final int MAP_HEIGHT = 1485;
   private static final int MAP_WIDTH = 2475; // height and width of the map
@@ -109,31 +120,8 @@ public class DataMapViewController implements Initializable {
         drawEdge(edge);
       }
     } // for every edge that connects two nodes on the fifth floor, draw the edge on the map
-  }
 
-  public void zoom(ScrollEvent event) {
-    double zoomFactor = 1.5;
-    if (event.getDeltaY() <= 0) {
-      // zoom out
-      zoomFactor = 1 / zoomFactor;
-    }
-    zoom(imageStackPane, zoomFactor, event.getSceneX(), event.getSceneY());
-  }
-
-  public void zoom(javafx.scene.Node node, double factor, double x, double y) {
-    // determine scale
-    double oldScale = node.getScaleX();
-    double scale = oldScale * factor;
-    double f = (scale / oldScale) - 1;
-
-    // determine offset that we will have to move the node
-    Bounds bounds = node.localToScene(node.getBoundsInLocal());
-    double dx = (x - (bounds.getWidth() / 2 + bounds.getMinX()));
-    double dy = (y - (bounds.getHeight() / 2 + bounds.getMinY()));
-    node.setTranslateX(node.getTranslateX() - f * dx);
-    node.setTranslateY(node.getTranslateY() - f * dx);
-    node.setScaleX(scale);
-    node.setScaleY(scale);
+    uiSetting.makeZoomable(imageScrollPane, imageStackPane);
   }
 
   private void drawNode(Node node) { // draws the given node on the map
@@ -153,20 +141,33 @@ public class DataMapViewController implements Initializable {
         (node.getYCoord() * heightRatio - buttonSize / 2.0); // points to the center of the button
     button.setLayoutX(xPos);
     button.setLayoutY(yPos);
-    button.setOnAction( // when a user clicks a node:
+    button.setOnAction(
         action -> {
           nodeButton = button; // sets classes button variable to the selected button
-          this.node = node; // sets the classes node variable to the selected node
+          this.node = node;
           if (!edgeSelection(node)) {
             modifyNodePane.setVisible(true);
             modifyButton.setDisable(true);
             displayData();
-          } // This makes sure that the action of selecting 2 nodes for an edge on a map differs
-          // from selecting and displaying a node
-          // If the user is selecting 2 nodes for an edge, the modify pane as well as the nodes info
-          // should not be visible
+          }
         });
     mapPane.getChildren().add(button);
+    setNodeDraggable(button);
+  }
+
+  private void setNodeDraggable(JFXButton button) {
+    button.setOnMousePressed(
+        mouseEvent -> {
+          deltaX = button.getLayoutX() - mouseEvent.getSceneX();
+          deltaY = button.getLayoutY() - mouseEvent.getSceneY();
+        });
+    button.setOnMouseDragged(
+        mouseEvent -> {
+          button.setLayoutX(mouseEvent.getSceneX() + deltaX);
+          xLabel.setText("" + mouseEvent.getSceneX());
+          button.setLayoutY(mouseEvent.getSceneY() + deltaY);
+          yLabel.setText("" + mouseEvent.getSceneY());
+        });
   }
 
   private void drawEdge(Edge edge) {

@@ -1,5 +1,6 @@
 package edu.wpi.teamF.Controllers;
 
+import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -28,19 +29,22 @@ public class ZoomController implements Initializable {
   @FXML private ImageView mapImage;
   @FXML private Label testLabel;
 
+  UISetting uiSetting = new UISetting();
+
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     // zoomPane = new ZoomableScrollPane(scrollPane);
-    zoomNode = new Group(mapPane);
-    scrollPane.setContent(outerNode(zoomNode));
-
-    scrollPane.setPannable(true);
-    scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-    scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-    scrollPane.setFitToHeight(true); // center
-    scrollPane.setFitToWidth(true); // center
-    scaleValue = 1;
-    updateScale();
+    //    zoomNode = new Group(mapPane);
+    //    scrollPane.setContent(outerNode(zoomNode));
+    //
+    //    scrollPane.setPannable(true);
+    //    scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+    //    scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+    //    scrollPane.setFitToHeight(true); // center
+    //    scrollPane.setFitToWidth(true); // center
+    //    scaleValue = 1;
+    //    updateScale();
+    uiSetting.makeZoomable(scrollPane, mapPane);
   }
 
   private Node outerNode(Node node) {
