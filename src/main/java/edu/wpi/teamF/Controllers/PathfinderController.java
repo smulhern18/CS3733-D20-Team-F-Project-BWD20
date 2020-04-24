@@ -1,5 +1,7 @@
 package edu.wpi.teamF.Controllers;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Node;
@@ -12,8 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -30,13 +30,13 @@ public class PathfinderController implements Initializable {
   public AnchorPane mapPane;
   public StackPane masterPane;
   public List<Node> nodeList;
-  public Button stairsBtn;
-  public Button elevBtn;
-  public Button bathBtn;
+  public JFXButton stairsBtn;
+  public JFXButton elevBtn;
+  public JFXButton bathBtn;
   public Text commandText;
-  public ChoiceBox<String> startNodeChoice;
-  public ChoiceBox<String> endNodeChoice;
-  public Button pathButton;
+  public JFXComboBox startCombo;
+  public JFXComboBox endCombo;
+  public JFXButton pathButton;
 
   private NodeFactory nodeFactory = NodeFactory.getFactory();
   private static EdgeFactory edgeFactory = EdgeFactory.getFactory();
@@ -46,10 +46,7 @@ public class PathfinderController implements Initializable {
   PathfindAlgorithm pathFindAlgorithm;
   EuclideanScorer euclideanScorer = new EuclideanScorer();
 
-  public PathfinderController() {
-
-    // startNode = nodeFactory.read("FELEV00Z05");
-  }
+  public PathfinderController() {}
 
   public void draw(Path path) throws InstanceNotFoundException {
 
@@ -75,30 +72,13 @@ public class PathfinderController implements Initializable {
     double heightRatio = (double) mapPane.getPrefHeight() / MAP_HEIGHT;
     double widthRatio = (double) mapPane.getPrefWidth() / MAP_WIDTH;
 
-    Button button = new Button();
+    JFXButton button = new JFXButton();
     button.setMinSize(12, 12);
     button.setMaxSize(12, 12);
     button.setPrefSize(12, 12);
     button.setStyle(
         "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #3281a8; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
 
-    //    if (endNodeChoice.getValue() != null) {
-    //      if (node.getLongName() == startNodeChoice.getValue()) {
-    //        startNode = node;
-    //        button.setStyle(
-    //            "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color:
-    // #00cc00; -fx-border-color: #000000; -fx-border-width: 1px");
-    //        commandText.setText("See Details Below or Reset for New Path");
-    //      }
-    //    } else if (startNodeChoice.getValue() != null) {
-    //      if (node.getLongName() == startNodeChoice.getValue()) {
-    //        startNode = node;
-    //        button.setStyle(
-    //            "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color:
-    // #ff0000; -fx-border-color: #000000; -fx-border-width: 1px"); // 800000
-    //        commandText.setText("Select End Location or Building Feature");
-    //      }
-    //    } else {
     int xPos = (int) ((node.getXCoord() * widthRatio) - 6);
     int yPos = (int) ((node.getYCoord() * heightRatio) - 6);
 
@@ -123,24 +103,9 @@ public class PathfinderController implements Initializable {
             endNode = node;
             button.setStyle(
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00cc00; -fx-border-color: #000000; -fx-border-width: 1px"); // 00cc00
-            //            Path path = null;
-            //            elevBtn.setDisable(true);
-            //            bathBtn.setDisable(true);
-            //            stairsBtn.setDisable(true);
-            //                        try {
-            //                          path = pathFindAlgorithm.pathfind(startNode, endNode);
-            //                        } catch (InstanceNotFoundException e) {
-            //                          e.printStackTrace();
-            //                        }
-            //                        try {
-            //                          draw(path);
-            //                        } catch (InstanceNotFoundException e) {
-            //                          e.printStackTrace();
-            //                        }
             commandText.setText("See Details Below or Reset for New Path");
           }
         });
-    // }
   }
 
   public void resetPane() {
@@ -153,8 +118,8 @@ public class PathfinderController implements Initializable {
     bathBtn.setDisable(true);
     commandText.setText("Select Starting Location");
 
-    endNodeChoice.setValue(null);
-    startNodeChoice.setValue(null);
+    endCombo.setValue(null);
+    startCombo.setValue(null);
 
     for (Node node : nodeList) {
       if (node.getId().charAt(0) == 'X' && node.getId().charAt(node.getId().length() - 1) == '5') {
@@ -179,8 +144,8 @@ public class PathfinderController implements Initializable {
 
     for (Node node : nodeList) {
       if (node.getId().charAt(0) == 'X' && node.getId().charAt(node.getId().length() - 1) == '5') {
-        startNodeChoice.getItems().add(node.getLongName());
-        endNodeChoice.getItems().add(node.getLongName());
+        startCombo.getItems().add(node.getLongName());
+        endCombo.getItems().add(node.getLongName());
       }
     }
 
@@ -207,9 +172,9 @@ public class PathfinderController implements Initializable {
   }
 
   public void choiceSelectStart() {
-    if (startNodeChoice.getValue() != null) {
+    if (startCombo.getValue() != null) {
       for (Node node : nodeList) {
-        if (node.getLongName() == startNodeChoice.getValue() && node.getId().charAt(0) == 'X') {
+        if (node.getLongName() == startCombo.getValue() && node.getId().charAt(0) == 'X') {
           startNode = node;
           stairsBtn.setDisable(false);
           elevBtn.setDisable(false);
@@ -220,9 +185,9 @@ public class PathfinderController implements Initializable {
   }
 
   public void choiceSelectEnd() {
-    if (endNodeChoice.getValue() != null) {
+    if (endCombo.getValue() != null) {
       for (Node node : nodeList) {
-        if (node.getLongName() == endNodeChoice.getValue() && node.getId().charAt(0) == 'X') {
+        if (node.getLongName() == endCombo.getValue() && node.getId().charAt(0) == 'X') {
           endNode = node;
           stairsBtn.setDisable(true);
           elevBtn.setDisable(true);
