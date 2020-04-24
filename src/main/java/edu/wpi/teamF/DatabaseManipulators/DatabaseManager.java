@@ -16,6 +16,7 @@ public class DatabaseManager {
   static final String MAINTENANCE_REQUEST_TABLE_NAME = "maintenanceRequestsTable";
   static final String ACCOUNT_TABLE_NAME = "accountsTable";
   static final String APPOINTMENTS_TABLE_NAME = "appointmentsTable";
+  static final String COMPUTER_REQUEST_TABLE_NAME = "ComputerRequestsTable";
   /** Column Names */
   // node
   static final String X_COORDINATE_KEY = "xCoord";
@@ -60,128 +61,146 @@ public class DatabaseManager {
   static final String ROOM_KEY = "room";
   static final String USERID_KEY = "userID";
   static final String PCP_KEY = "PCP";
-  // Security requests
+  // ComputerService requests
+  static final String OS_ID_KEY = "OperatingSystem";
+  static final String MAKE_KEY = "Make";
+  static final String HARDWARESOFTWARE_KEY = "HardwareOrSoftware";
 
   static Connection connection = null;
 
   public void createTables() throws SQLException {
     String nodeTableCreationStatement =
-        "CREATE TABLE "
-            + NODES_TABLE_NAME
-            + " ( "
-            + NODEID_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + X_COORDINATE_KEY
-            + " SMALLINT NOT NULL, "
-            + Y_COORDINATE_KEY
-            + " SMALLINT NOT NULL, "
-            + BUILDING_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + LONG_NAME_KEY
-            + " VARCHAR(64) NOT NULL, "
-            + SHORT_NAME_KEY
-            + " VARCHAR(16) NOT NULL, "
-            + TYPE_KEY
-            + " VARCHAR(4) NOT NULL, "
-            + FLOOR_KEY
-            + " SMALLINT NOT NULL, "
-            + "PRIMARY KEY ("
-            + NODEID_KEY
-            + "))";
+            "CREATE TABLE "
+                    + NODES_TABLE_NAME
+                    + " ( "
+                    + NODEID_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + X_COORDINATE_KEY
+                    + " SMALLINT NOT NULL, "
+                    + Y_COORDINATE_KEY
+                    + " SMALLINT NOT NULL, "
+                    + BUILDING_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + LONG_NAME_KEY
+                    + " VARCHAR(64) NOT NULL, "
+                    + SHORT_NAME_KEY
+                    + " VARCHAR(16) NOT NULL, "
+                    + TYPE_KEY
+                    + " VARCHAR(4) NOT NULL, "
+                    + FLOOR_KEY
+                    + " SMALLINT NOT NULL, "
+                    + "PRIMARY KEY ("
+                    + NODEID_KEY
+                    + "))";
 
     String edgeTableCreationStatement =
-        "CREATE TABLE "
-            + EDGES_TABLE_NAME
-            + " ( "
-            + EDGEID_KEY
-            + " VARCHAR(65) NOT NULL, "
-            + NODE_1_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + NODE_A_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + "PRIMARY KEY ("
-            + EDGEID_KEY
-            + "))";
+            "CREATE TABLE "
+                    + EDGES_TABLE_NAME
+                    + " ( "
+                    + EDGEID_KEY
+                    + " VARCHAR(65) NOT NULL, "
+                    + NODE_1_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + NODE_A_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + "PRIMARY KEY ("
+                    + EDGEID_KEY
+                    + "))";
 
     String serviceRequestTableCreationStatement =
-        "CREATE TABLE "
-            + SERVICE_REQUEST_TABLE
-            + " ( "
-            + SERVICEID_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + NODEID_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + TIME_CREATED_KEY
-            + " TIMESTAMP NOT NULL, "
-            + DESCRIPTION_KEY
-            + " VARCHAR(128) NOT NULL, "
-            + ASSIGNED_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + PRIORITY_KEY
-            + " INTEGER NOT NULL, "
-            + COMPLETED_KEY
-            + " BOOLEAN NOT NULL, "
-            + "PRIMARY KEY ("
-            + SERVICEID_KEY
-            + "))";
+            "CREATE TABLE "
+                    + SERVICE_REQUEST_TABLE
+                    + " ( "
+                    + SERVICEID_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + NODEID_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + TIME_CREATED_KEY
+                    + " TIMESTAMP NOT NULL, "
+                    + DESCRIPTION_KEY
+                    + " VARCHAR(128) NOT NULL, "
+                    + ASSIGNED_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + PRIORITY_KEY
+                    + " INTEGER NOT NULL, "
+                    + COMPLETED_KEY
+                    + " BOOLEAN NOT NULL, "
+                    + "PRIMARY KEY ("
+                    + SERVICEID_KEY
+                    + "))";
 
     String securityTableCreationStatement =
-        "CREATE TABLE "
-            + SECURITY_REQUEST_TABLE_NAME
-            + " ( "
-            + SERVICEID_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + "PRIMARY KEY ("
-            + SERVICEID_KEY
-            + "))";
+            "CREATE TABLE "
+                    + SECURITY_REQUEST_TABLE_NAME
+                    + " ( "
+                    + SERVICEID_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + "PRIMARY KEY ("
+                    + SERVICEID_KEY
+                    + "))";
 
     String maintenanceTableCreationStatement =
-        "CREATE TABLE "
-            + MAINTENANCE_REQUEST_TABLE_NAME
-            + " ( "
-            + SERVICEID_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + "PRIMARY KEY ("
-            + SERVICEID_KEY
-            + "))";
+            "CREATE TABLE "
+                    + MAINTENANCE_REQUEST_TABLE_NAME
+                    + " ( "
+                    + SERVICEID_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + "PRIMARY KEY ("
+                    + SERVICEID_KEY
+                    + "))";
+    String computerTableCreationStatement =
+            "CREATE TABLE "
+                    + COMPUTER_REQUEST_TABLE_NAME
+                    + " ( "
+                    + SERVICEID_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + MAKE_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + HARDWARESOFTWARE_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + OS_ID_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + "PRIMARY KEY ("
+                    + SERVICEID_KEY
+                    + "))";
 
     String accountTableCreationStatement =
-        "CREATE TABLE "
-            + ACCOUNT_TABLE_NAME
-            + " ( "
-            + USER_NAME_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + PASSWORD_KEY
-            + " VARCHAR(128) NOT NULL, "
-            + FIRST_NAME_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + LAST_NAME_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + EMAIL_ADDRESS_KEY
-            + " VARCHAR(64) NOT NULL, "
-            + USER_TYPE_KEY
-            + " SMALLINT NOT NULL, "
-            + "PRIMARY KEY ("
-            + USER_NAME_KEY
-            + "))";
+            "CREATE TABLE "
+                    + ACCOUNT_TABLE_NAME
+                    + " ( "
+                    + USER_NAME_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + PASSWORD_KEY
+                    + " VARCHAR(128) NOT NULL, "
+                    + FIRST_NAME_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + LAST_NAME_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + EMAIL_ADDRESS_KEY
+                    + " VARCHAR(64) NOT NULL, "
+                    + USER_TYPE_KEY
+                    + " SMALLINT NOT NULL, "
+                    + "PRIMARY KEY ("
+                    + USER_NAME_KEY
+                    + "))";
 
     String appointmentTableCreationStatement =
-        "CREATE TABLE "
-            + APPOINTMENTS_TABLE_NAME
-            + " ( "
-            + APPOINTMENT_ID_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + LOCATION_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + ROOM_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + USERID_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + PCP_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + "PRIMARY KEY ("
-            + APPOINTMENT_ID_KEY
-            + "))";
+            "CREATE TABLE "
+                    + APPOINTMENTS_TABLE_NAME
+                    + " ( "
+                    + APPOINTMENT_ID_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + LOCATION_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + ROOM_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + USERID_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + PCP_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + "PRIMARY KEY ("
+                    + APPOINTMENT_ID_KEY
+                    + "))";
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
     preparedStatement.execute();
@@ -192,6 +211,8 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(maintenanceTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(securityTableCreationStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(computerTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(accountTableCreationStatement);
     preparedStatement.execute();
@@ -229,6 +250,7 @@ public class DatabaseManager {
     String securityTableDropStatement = "DROP TABLE " + SECURITY_REQUEST_TABLE_NAME;
     String accountDropStatement = "DROP TABLE " + ACCOUNT_TABLE_NAME;
     String appointmentDropStatement = "DROP TABLE " + APPOINTMENTS_TABLE_NAME;
+    String computerDropStatement = "DROP TABLE " + COMPUTER_REQUEST_TABLE_NAME;
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeDropStatement);
     preparedStatement.execute();
@@ -237,6 +259,8 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(serviceRequestTableDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(maintenanceTableDropStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(computerDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(securityTableDropStatement);
     preparedStatement.execute();
