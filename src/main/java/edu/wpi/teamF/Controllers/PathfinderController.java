@@ -30,6 +30,7 @@ public class PathfinderController implements Initializable {
   public AnchorPane mapPane;
   public StackPane masterPane;
   public List<Node> nodeList;
+  public List<Node> fullNodeList;
   public JFXButton stairsBtn;
   public JFXButton elevBtn;
   public JFXButton bathBtn;
@@ -37,6 +38,7 @@ public class PathfinderController implements Initializable {
   public JFXComboBox startCombo;
   public JFXComboBox endCombo;
   public JFXButton pathButton;
+  public int state;
 
   private NodeFactory nodeFactory = NodeFactory.getFactory();
   private static EdgeFactory edgeFactory = EdgeFactory.getFactory();
@@ -73,6 +75,7 @@ public class PathfinderController implements Initializable {
     double widthRatio = (double) mapPane.getPrefWidth() / MAP_WIDTH;
 
     JFXButton button = new JFXButton();
+    button.setId(node.getId());
     button.setMinSize(12, 12);
     button.setMaxSize(12, 12);
     button.setPrefSize(12, 12);
@@ -87,11 +90,20 @@ public class PathfinderController implements Initializable {
     mapPane.getChildren().add(button);
     button.setOnAction(
         actionEvent -> {
-          if (startNode == node && endNode == null) { // Click again to de-select
-            resetPane();
-          } else if (endNode == node) {
-            resetPane();
-          } else if (startNode == null) {
+          if (startNode == node && state == 1) { // Click again to de-select if start has been set
+            startNode = null;
+            button.setStyle(
+                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #3281a8; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+            state = 0;
+            startCombo.setDisable(false);
+          } else if (endNode == node) { // deselect if end has been set, return to 1
+            endNode = null;
+            button.setStyle(
+                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #3281a8; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+            state = 1;
+            pathButton.setDisable(true);
+            endCombo.setDisable(false);
+          } else if (state == 0) { // if nothing has been set
             startNode = node;
             stairsBtn.setDisable(false);
             elevBtn.setDisable(false);
@@ -99,11 +111,17 @@ public class PathfinderController implements Initializable {
             button.setStyle(
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px"); // 800000
             commandText.setText("Select End Location or Building Feature");
-          } else if (endNode == null) {
+            state = 1;
+            startCombo.setDisable(true);
+            endCombo.setDisable(false);
+          } else if (state == 1) { // select end if not set
             endNode = node;
             button.setStyle(
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00cc00; -fx-border-color: #000000; -fx-border-width: 1px"); // 00cc00
-            commandText.setText("See Details Below or Reset for New Path");
+            commandText.setText("Select Find Path or Reset");
+            state = 2;
+            endCombo.setDisable(true);
+            pathButton.setDisable(false);
           }
         });
   }
@@ -112,17 +130,56 @@ public class PathfinderController implements Initializable {
     mapPane.getChildren().clear();
     startNode = null;
     endNode = null;
+    state = 0;
 
+    startCombo.setDisable(false);
+    endCombo.setDisable(true);
+    pathButton.setDisable(true);
     stairsBtn.setDisable(true);
     elevBtn.setDisable(true);
     bathBtn.setDisable(true);
     commandText.setText("Select Starting Location");
 
-    endCombo.setValue(null);
     startCombo.setValue(null);
+    endCombo.setValue(null);
 
-    for (Node node : nodeList) {
-      if (node.getId().charAt(0) == 'X' && node.getId().charAt(node.getId().length() - 1) == '5') {
+    startCombo.setOnAction(
+        actionEvent -> {
+          if (startCombo.getValue() != null) {
+            choiceSelectStart();
+            state = 1;
+            commandText.setText("Select End Location or Building Feature");
+            endCombo.setDisable(false);
+
+            //            Circle startCircle = new Circle();
+            //            startCircle.setCenterX(startNode.getXCoord());
+            //            startCircle.setCenterY(startNode.getYCoord());
+            //            startCircle.setStyle(
+            //                "-fx-background-radius: 6px; -fx-border-radius: 6px;
+            // -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px"); //
+            // 800000
+          }
+        });
+
+    endCombo.setOnAction(
+        actionEvent -> {
+          if (endCombo.getValue() != null) {
+            choiceSelectEnd();
+            state = 2;
+            commandText.setText("Select Find Path or Reset");
+            pathButton.setDisable(false);
+            //            Circle endCircle = new Circle();
+            //            endCircle.setCenterX(endNode.getXCoord());
+            //            endCircle.setCenterY(endNode.getYCoord());
+            //            endCircle.setStyle(
+            //                "-fx-background-radius: 6px; -fx-border-radius: 6px;
+            // -fx-background-color: #00cc00; -fx-border-color: #000000; -fx-border-width: 1px");
+          }
+        });
+
+    for (Node node : fullNodeList) {
+      if (node.getId().charAt(0) == 'X'
+          && node.getId().charAt(node.getId().length() - 1) == '5') { // change for floors
         placeButton(node);
         pathButtonGo();
       }
@@ -133,17 +190,24 @@ public class PathfinderController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     nodeList = new ArrayList<>();
+    // fullNodeList = nodeFactory.getAllNodes();
+    fullNodeList = new ArrayList<>();
 
     for (Node node : nodeFactory.getAllNodes()) {
-      if (node.getId().charAt(node.getId().length() - 1) == '5') {
-        nodeList.add(node);
-        node.setEdges(edgeFactory.getAllEdgesConnectedToNode(node.getId()));
-        // System.out.println(node.getId() + " - " + node.getNeighborNodes());
-      }
+      fullNodeList.add(node);
+      node.setEdges(edgeFactory.getAllEdgesConnectedToNode(node.getId()));
+      //      if (node.getId().charAt(node.getId().length() - 1) == '5') {
+      //        nodeList.add(node);
+      //        node.setEdges(edgeFactory.getAllEdgesConnectedToNode(node.getId()));
+      // System.out.println(node.getId() + " - " + node.getNeighborNodes());
+      //      }
     }
 
-    for (Node node : nodeList) {
-      if (node.getId().charAt(0) == 'X' && node.getId().charAt(node.getId().length() - 1) == '5') {
+    for (Node node : fullNodeList) {
+      if (node.getId().charAt(node.getId().length() - 1) == '5') { // change for floors
+        nodeList.add(node);
+      }
+      if (!node.getType().equals(Node.NodeType.getEnum("HALL"))) {
         startCombo.getItems().add(node.getLongName());
         endCombo.getItems().add(node.getLongName());
       }
@@ -173,8 +237,8 @@ public class PathfinderController implements Initializable {
 
   public void choiceSelectStart() {
     if (startCombo.getValue() != null) {
-      for (Node node : nodeList) {
-        if (node.getLongName() == startCombo.getValue() && node.getId().charAt(0) == 'X') {
+      for (Node node : fullNodeList) {
+        if (node.getLongName() == startCombo.getValue()) {
           startNode = node;
           stairsBtn.setDisable(false);
           elevBtn.setDisable(false);
@@ -186,8 +250,8 @@ public class PathfinderController implements Initializable {
 
   public void choiceSelectEnd() {
     if (endCombo.getValue() != null) {
-      for (Node node : nodeList) {
-        if (node.getLongName() == endCombo.getValue() && node.getId().charAt(0) == 'X') {
+      for (Node node : fullNodeList) {
+        if (node.getLongName() == endCombo.getValue()) {
           endNode = node;
           stairsBtn.setDisable(true);
           elevBtn.setDisable(true);
@@ -201,8 +265,8 @@ public class PathfinderController implements Initializable {
 
     pathButton.setOnAction(
         actionEvent -> {
-          choiceSelectEnd();
-          choiceSelectStart();
+          //          choiceSelectEnd();
+          //          choiceSelectStart();
           Path path = null;
           try {
             path = pathFindAlgorithm.pathfind(startNode, endNode);
@@ -210,6 +274,7 @@ public class PathfinderController implements Initializable {
             e.printStackTrace();
           }
           try {
+            commandText.setText("See Path Below for Directions");
             draw(path);
           } catch (InstanceNotFoundException e) {
             e.printStackTrace();
