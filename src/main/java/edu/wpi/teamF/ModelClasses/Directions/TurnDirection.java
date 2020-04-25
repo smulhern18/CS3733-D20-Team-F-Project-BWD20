@@ -13,11 +13,11 @@ public class TurnDirection extends Direction {
   private int floor;
 
   public TurnDirection(float angle, int atIntersectionNumber, int floor) {
-    if (angle < -45.0) {
+    if (angle > 45.0) {
       this.turn = Turn.LEFT;
-    } else if (angle < 0.0) {
+    } else if (angle > 0.0) {
       this.turn = Turn.SLIGHT_LEFT;
-    } else if (angle < 45.0) {
+    } else if (angle > -45.0) {
       this.turn = Turn.SLIGHT_RIGHT;
     } else {
       this.turn = Turn.RIGHT;

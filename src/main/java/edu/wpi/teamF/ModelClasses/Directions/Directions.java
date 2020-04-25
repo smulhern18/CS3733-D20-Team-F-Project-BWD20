@@ -17,10 +17,8 @@ public class Directions {
     }
 
     List<Node> pathNodeList = path.getPath();
-    directionList.add(
-        new StartDirection(
-            getAngle(pathNodeList.get(0), pathNodeList.get(1), pathNodeList.get(2)),
-            pathNodeList.get(0).getFloor()));
+    float startTurnAngle = getAngle(pathNodeList.get(0), pathNodeList.get(1), pathNodeList.get(2));
+    directionList.add(new StartDirection(startTurnAngle, pathNodeList.get(0).getFloor()));
     StraightDirection currHall = new StraightDirection(0, 0, pathNodeList.get(0).getFloor());
 
     for (int i = 1;
@@ -40,9 +38,9 @@ public class Directions {
           if (currHall.getDistance() > 0) {
             directionList.add(currHall);
           }
-          float goalAngle =
+          float goalTurnAngle =
               getAngle(pathNodeList.get(i - 1), pathNodeList.get(i), pathNodeList.get(i + 1));
-          directionList.add(new GoalDirection(goalAngle, pathNodeList.get(i).getFloor()));
+          directionList.add(new GoalDirection(goalTurnAngle, pathNodeList.get(i).getFloor()));
           break;
         } else if (pathNodeList.get(i + 1).getType().equals(Node.NodeType.getEnum("ELEV"))) {
           // Next node is an elevator
@@ -94,18 +92,30 @@ public class Directions {
   }
 
   private float getAngle(Node previous, Node current, Node next) {
+    //The angle represents positive degrees to the left of straight ahead and negative degrees to the right of straight
     float angleA =
         (float)
             Math.atan2(
                 (current.getYCoord() - previous.getYCoord()),
-                (current.getXCoord() - previous.getYCoord()));
+                (current.getXCoord() - previous.getXCoord()));
     angleA = (float) Math.toDegrees(angleA);
     float angleB =
         (float)
             Math.atan2(
-                (next.getYCoord() - current.getYCoord()), (next.getXCoord() - current.getYCoord()));
+                (next.getYCoord() - current.getYCoord()), (next.getXCoord() - current.getXCoord()));
     angleB = (float) Math.toDegrees(angleB);
-    return angleA - angleB;
+    float angle = angleA - angleB;
+    if (angle < 0.0) {
+      angle += 360.0;
+    }
+    angle -= 360.0;
+    if (angle > 180.0) {
+      angle -= 360.0;
+    }
+    if (angle < -180.0) {
+      angle += 360.0;
+    }
+    return angle;
   }
 
   public List<Direction> getDirectionList() {

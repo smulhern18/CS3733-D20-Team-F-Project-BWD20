@@ -11,9 +11,9 @@ public class StartDirection extends Direction {
   private int floor;
 
   public StartDirection(float angle, int floor) {
-    if (angle < -45.0) {
+    if (angle > 20.0) {
       this.turn = Turn.LEFT;
-    } else if (angle < 45.0) {
+    } else if (angle > -20.0) {
       this.turn = Turn.STRAIGHT;
     } else {
       this.turn = Turn.RIGHT;
@@ -31,7 +31,7 @@ public class StartDirection extends Direction {
     } else if (this.turn == Turn.STRAIGHT) {
       return "Proceed straight into the hallway.";
     } else {
-      return "Turn right into the hallway";
+      return "Turn right into the hallway.";
     }
   }
 }

@@ -11,9 +11,9 @@ public class GoalDirection extends Direction {
   private int floor;
 
   public GoalDirection(float angle, int floor) {
-    if (angle < -45.0) {
+    if (angle > 20.0) {
       this.turn = Turn.LEFT;
-    } else if (angle < 45.0) {
+    } else if (angle > -20.0) {
       this.turn = Turn.STRAIGHT;
     } else {
       this.turn = Turn.RIGHT;

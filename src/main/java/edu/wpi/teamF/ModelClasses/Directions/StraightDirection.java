@@ -29,6 +29,9 @@ public class StraightDirection extends Direction {
     int distance = (int) (this.distance * distanceConversion);
     distance = distance / 10;
     distance = distance * 10;
+    if (distance == 0) {
+      distance = 10;
+    }
     // Check if we pass any hallways
     if (intersectionsPassed == 0) {
       return ("Walk for about " + Integer.toString(distance) + "ft.");
