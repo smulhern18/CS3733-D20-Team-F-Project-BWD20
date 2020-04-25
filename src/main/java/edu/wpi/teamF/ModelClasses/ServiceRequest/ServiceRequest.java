@@ -8,7 +8,7 @@ import java.util.Date;
 public abstract class ServiceRequest {
 
   private String id;
-  private String assignee = "";
+  private String assignee = "Not Assigned";
   private Node location;
   private String description;
   private Date dateTimeSubmitted;

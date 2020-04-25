@@ -19,11 +19,11 @@ public class ComputerServiceRequest extends ServiceRequest {
       int priority,
       boolean complete,
       String make,
-      String HardwareSoftware,
+      String hardwareSoftware,
       String OS)
       throws ValidationException {
     super(id, location, assignee, description, dateTimeSubmitted, priority, complete);
-    setHardwareSoftware(HardwareSoftware);
+    setHardwareSoftware(hardwareSoftware);
     setMake(make);
     setOS(OS);
   }

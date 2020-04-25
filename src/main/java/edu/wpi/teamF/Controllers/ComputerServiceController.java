@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -78,53 +78,59 @@ public class ComputerServiceController implements Initializable {
     priorityChoice.getItems().add("Medium");
     priorityChoice.getItems().add("High");
 
+    // ID
+    JFXTreeTableColumn<UIComputerServiceRequest, String> ID = new JFXTreeTableColumn<>("Location");
+    ID.setPrefWidth(70);
+    ID.setCellValueFactory(
+        cellData -> new SimpleStringProperty(cellData.getValue().getValue().getID()));
+
     // Location column
     JFXTreeTableColumn<UIComputerServiceRequest, String> loc = new JFXTreeTableColumn<>("Location");
     loc.setPrefWidth(70);
     loc.setCellValueFactory(
-        cellData -> new ReadOnlyStringWrapper(cellData.getValue().getValue().getLocation()));
+        cellData -> new SimpleStringProperty(cellData.getValue().getValue().getLocation()));
+
     // make column
     JFXTreeTableColumn<UIComputerServiceRequest, String> make = new JFXTreeTableColumn<>("Make");
     make.setPrefWidth(70);
     make.setCellValueFactory(
-        cellData -> new ReadOnlyStringWrapper(cellData.getValue().getValue().getMake()));
+        cellData -> new SimpleStringProperty(cellData.getValue().getValue().getMake()));
     // OS column
     JFXTreeTableColumn<UIComputerServiceRequest, String> OS =
         new JFXTreeTableColumn<>("Operation System");
     OS.setPrefWidth(70);
     OS.setCellValueFactory(
-        cellData -> new ReadOnlyStringWrapper(cellData.getValue().getValue().getOS()));
+        cellData -> new SimpleStringProperty(cellData.getValue().getValue().getOS()));
     // type column
     JFXTreeTableColumn<UIComputerServiceRequest, String> type =
         new JFXTreeTableColumn<>("Service Type");
     type.setPrefWidth(70);
     type.setCellValueFactory(
-        cellData ->
-            new ReadOnlyStringWrapper(cellData.getValue().getValue().getHardwareSoftware()));
+        cellData -> new SimpleStringProperty(cellData.getValue().getValue().getHardwareSoftware()));
     // desc column
     JFXTreeTableColumn<UIComputerServiceRequest, String> desc =
         new JFXTreeTableColumn<>("Description");
     desc.setPrefWidth(70);
     desc.setCellValueFactory(
-        cellData -> new ReadOnlyStringWrapper(cellData.getValue().getValue().getDescription()));
+        cellData -> new SimpleStringProperty(cellData.getValue().getValue().getDescription()));
     // priority column
     JFXTreeTableColumn<UIComputerServiceRequest, String> priority =
         new JFXTreeTableColumn<>("Priority");
     priority.setPrefWidth(70);
     priority.setCellValueFactory(
-        cellData -> new ReadOnlyStringWrapper(cellData.getValue().getValue().getPriority()));
+        cellData -> new SimpleStringProperty(cellData.getValue().getValue().getPriority()));
     // assignee column
     JFXTreeTableColumn<UIComputerServiceRequest, String> assignee =
         new JFXTreeTableColumn<>("Assignee");
-    priority.setPrefWidth(70);
-    priority.setCellValueFactory(
-        cellData -> new ReadOnlyStringWrapper(cellData.getValue().getValue().getAssignee()));
+    assignee.setPrefWidth(70);
+    assignee.setCellValueFactory(
+        cellData -> new SimpleStringProperty(cellData.getValue().getValue().getAssignee()));
     // Completed column
     JFXTreeTableColumn<UIComputerServiceRequest, String> completed =
         new JFXTreeTableColumn<>("Completed");
-    priority.setPrefWidth(70);
-    priority.setCellValueFactory(
-        cellData -> new ReadOnlyStringWrapper(cellData.getValue().getValue().getCompleted()));
+    completed.setPrefWidth(70);
+    completed.setCellValueFactory(
+        cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCompleted()));
 
     // Load the database into the tableview
 
@@ -137,7 +143,9 @@ public class ComputerServiceController implements Initializable {
 
     // set the columns for the tableview
 
-    treeTableComputer.getColumns().setAll(loc, make, OS, type, desc, priority, assignee, completed);
+    treeTableComputer
+        .getColumns()
+        .setAll(ID, loc, make, OS, type, desc, priority, assignee, completed);
 
     // set as editable
 
@@ -160,6 +168,7 @@ public class ComputerServiceController implements Initializable {
     String OS = OSChoice.getValue();
     String desc = descText.getText();
     String priority = priorityChoice.getValue();
+    System.out.println(priority);
     int priorityDB = 1;
     if (priority.equals("Low")) {
       priorityDB = 1;
@@ -177,6 +186,12 @@ public class ComputerServiceController implements Initializable {
     computerServiceRequest.create(csRequest);
     csrUI.add(new UIComputerServiceRequest(csRequest));
     treeTableComputer.refresh();
+    descText.setText("");
+    OSChoice.setValue(null);
+    locationChoice.setValue(null);
+    priorityChoice.setValue(null);
+    makeChoice.setValue(null);
+    issueChoice.setValue(null);
   }
 
   public void cancel(ActionEvent actionEvent) {
@@ -190,9 +205,8 @@ public class ComputerServiceController implements Initializable {
 
   public void update(ActionEvent actionEvent) throws ValidationException {
     for (UIComputerServiceRequest csrui : csrUI) {
-      ComputerServiceRequest csupdate = computerServiceRequest.read(csrui.getLocation());
-      csupdate.setAssignee(csrui.getAssignee());
-      csupdate.setComplete(Boolean.parseBoolean(csrui.getCompleted()));
+      //TODO: Yeah take a break
+
     }
     treeTableComputer.refresh();
   }
