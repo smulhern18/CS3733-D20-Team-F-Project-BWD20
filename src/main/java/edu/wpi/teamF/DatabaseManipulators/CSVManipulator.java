@@ -22,6 +22,20 @@ public class CSVManipulator {
   private SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
   private MaintenanceRequestFactory maintenanceRequestFactory =
       MaintenanceRequestFactory.getFactory();
+
+  /**
+   * calls all of the writes and puts the data there safetly in a csv
+   * @param path
+   */
+  public void backupDatabase(Path path){
+    writeCSVFileAccount(path);
+    writeCSVFileSecurityService(path);
+    writeCSVFileMaintenanceService(path);
+    writeCSVFileEdge(path);
+    writeCSVFileNode(path);
+  }
+
+
   /**
    * reads a csv file that contains nodes and inserts the data in the file into the correct place in
    * the database
