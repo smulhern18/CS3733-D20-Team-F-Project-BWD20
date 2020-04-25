@@ -7,6 +7,8 @@ import edu.wpi.teamF.DatabaseManipulators.CSVManipulator;
 import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.*;
+import edu.wpi.teamF.ModelClasses.UIClasses.UIEdge;
+import edu.wpi.teamF.ModelClasses.UIClasses.UINode;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

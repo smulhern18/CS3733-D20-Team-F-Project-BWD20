@@ -7,7 +7,7 @@ import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.DatabaseManipulators.SecurityRequestFactory;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.UIServiceRequest;
+import edu.wpi.teamF.ModelClasses.UIClasses.UIServiceRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.net.URL;
 import java.text.DateFormat;

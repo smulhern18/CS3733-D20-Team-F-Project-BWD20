@@ -104,11 +104,11 @@ public class ComputerServiceRequestFactory {
             + DatabaseManager.COMPUTER_REQUEST_TABLE_NAME
             + " SET "
             + DatabaseManager.SERVICEID_KEY
-            + " = ? "
+            + " = ?, "
             + DatabaseManager.MAKE_KEY
-            + " = ? "
+            + " = ?, "
             + DatabaseManager.HARDWARESOFTWARE_KEY
-            + " = ? "
+            + " = ?, "
             + DatabaseManager.OS_ID_KEY
             + " = ? "
             + "WHERE "

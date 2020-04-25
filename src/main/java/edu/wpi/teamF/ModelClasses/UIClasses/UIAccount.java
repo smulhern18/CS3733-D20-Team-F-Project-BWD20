@@ -1,4 +1,4 @@
-package edu.wpi.teamF.ModelClasses;
+package edu.wpi.teamF.ModelClasses.UIClasses;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.ModelClasses.Account.Account;

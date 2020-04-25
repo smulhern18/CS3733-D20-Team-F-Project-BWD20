@@ -6,7 +6,7 @@ import edu.wpi.teamF.DatabaseManipulators.ComputerServiceRequestFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
-import edu.wpi.teamF.ModelClasses.UIComputerServiceRequest;
+import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,7 +23,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.util.Callback;
 import javax.management.InstanceNotFoundException;
 
 public class ComputerServiceController implements Initializable {
@@ -82,55 +84,128 @@ public class ComputerServiceController implements Initializable {
     JFXTreeTableColumn<UIComputerServiceRequest, String> ID = new JFXTreeTableColumn<>("ID");
     ID.setPrefWidth(100);
     ID.setCellValueFactory(
-        cellData -> new SimpleStringProperty(cellData.getValue().getValue().getID()));
+        new Callback<
+            TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String>,
+            ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String> param) {
+            return param.getValue().getValue().getID();
+          }
+        });
 
     // Location column
     JFXTreeTableColumn<UIComputerServiceRequest, String> loc = new JFXTreeTableColumn<>("Location");
     loc.setPrefWidth(100);
     loc.setCellValueFactory(
-        cellData -> new SimpleStringProperty(cellData.getValue().getValue().getLocation()));
+        new Callback<
+            TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String>,
+            ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String> param) {
+            return param.getValue().getValue().getLocation();
+          }
+        });
 
     // make column
     JFXTreeTableColumn<UIComputerServiceRequest, String> make = new JFXTreeTableColumn<>("Make");
     make.setPrefWidth(70);
     make.setCellValueFactory(
-        cellData -> new SimpleStringProperty(cellData.getValue().getValue().getMake()));
+        new Callback<
+            TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String>,
+            ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String> param) {
+            return param.getValue().getValue().getMake();
+          }
+        });
     // OS column
     JFXTreeTableColumn<UIComputerServiceRequest, String> OS =
         new JFXTreeTableColumn<>("Operating System");
     OS.setPrefWidth(110);
     OS.setCellValueFactory(
-        cellData -> new SimpleStringProperty(cellData.getValue().getValue().getOS()));
+        new Callback<
+            TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String>,
+            ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String> param) {
+            return param.getValue().getValue().getOS();
+          }
+        });
     // type column
     JFXTreeTableColumn<UIComputerServiceRequest, String> type =
         new JFXTreeTableColumn<>("Service Type");
     type.setPrefWidth(90);
     type.setCellValueFactory(
-        cellData -> new SimpleStringProperty(cellData.getValue().getValue().getHardwareSoftware()));
+        new Callback<
+            TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String>,
+            ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String> param) {
+            return param.getValue().getValue().getHardwareSoftware();
+          }
+        });
+
     // desc column
     JFXTreeTableColumn<UIComputerServiceRequest, String> desc =
         new JFXTreeTableColumn<>("Description");
     desc.setPrefWidth(80);
     desc.setCellValueFactory(
-        cellData -> new SimpleStringProperty(cellData.getValue().getValue().getDescription()));
+        new Callback<
+            TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String>,
+            ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String> param) {
+            return param.getValue().getValue().getDescription();
+          }
+        });
     // priority column
     JFXTreeTableColumn<UIComputerServiceRequest, String> priority =
         new JFXTreeTableColumn<>("Priority");
     priority.setPrefWidth(50);
     priority.setCellValueFactory(
-        cellData -> new SimpleStringProperty(cellData.getValue().getValue().getPriority()));
+        new Callback<
+            TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String>,
+            ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String> param) {
+            return param.getValue().getValue().getPriority();
+          }
+        });
     // assignee column
     JFXTreeTableColumn<UIComputerServiceRequest, String> assignee =
         new JFXTreeTableColumn<>("Assignee");
     assignee.setPrefWidth(80);
     assignee.setCellValueFactory(
-        cellData -> new SimpleStringProperty(cellData.getValue().getValue().getAssignee()));
-    // Completed column
+        new Callback<
+            TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String>,
+            ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String> param) {
+            return param.getValue().getValue().getAssignee();
+          }
+        });
+
     JFXTreeTableColumn<UIComputerServiceRequest, String> completed =
         new JFXTreeTableColumn<>("Completed");
-    completed.setPrefWidth(70);
+    completed.setPrefWidth(80);
     completed.setCellValueFactory(
-        cellData -> new SimpleStringProperty(cellData.getValue().getValue().getCompleted()));
+        new Callback<
+            TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String>,
+            ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String> param) {
+            return param.getValue().getValue().getCompleted();
+          }
+        });
 
     // Load the database into the tableview
 
@@ -206,16 +281,18 @@ public class ComputerServiceController implements Initializable {
   public void update(ActionEvent actionEvent)
       throws ValidationException, InstanceNotFoundException {
     for (UIComputerServiceRequest csrui : csrUI) {
-      boolean isSame = csrui.equalsCSR(computerServiceRequest.read(csrui.getID()));
+      ComputerServiceRequest toUpdate = computerServiceRequest.read(csrui.getID().get());
+      boolean isSame = csrui.equalsCSR(toUpdate);
       if (!isSame) {
-        computerServiceRequest.read(csrui.getID()).setAssignee(csrui.getAssignee());
-        String completed = csrui.getCompleted();
-        if (completed.equals("F")) {
-          computerServiceRequest.read(csrui.getID()).setComplete(false);
+        toUpdate.setAssignee(csrui.getAssignee().get());
+        String completed = csrui.getCompleted().get();
+        if (completed.equals("Incomplete")) {
+          toUpdate.setComplete(false);
 
-        } else if (completed.equals("T")) {
-          computerServiceRequest.read(csrui.getID()).setComplete(true);
+        } else if (completed.equals("Complete")) {
+          toUpdate.setComplete(true);
         }
+        computerServiceRequest.update(toUpdate);
       }
     }
     treeTableComputer.refresh();
