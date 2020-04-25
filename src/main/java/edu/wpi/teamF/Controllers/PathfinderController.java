@@ -234,10 +234,26 @@ public class PathfinderController implements Initializable {
     if (startCombo.getValue() != null) {
       for (Node node : fullNodeList) {
         if (node.getLongName() == startCombo.getValue()) {
+          if (startNode != null) {
+            for (javafx.scene.Node component : currentPane.getChildren()) {
+              if (component.getId() == startNode.getId()) {
+                component.setStyle(
+                    "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #3281a8; "
+                        + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
+              }
+            }
+          }
           startNode = node;
           stairsBtn.setDisable(false);
           elevBtn.setDisable(false);
           bathBtn.setDisable(false);
+          for (javafx.scene.Node component : currentPane.getChildren()) {
+            if (component.getId() == node.getId()) {
+              component.setStyle(
+                  "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; "
+                      + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
+            }
+          }
         }
       }
     }
@@ -247,10 +263,26 @@ public class PathfinderController implements Initializable {
     if (endCombo.getValue() != null) {
       for (Node node : fullNodeList) {
         if (node.getLongName() == endCombo.getValue()) {
+          if (endNode != null) {
+            for (javafx.scene.Node component : currentPane.getChildren()) {
+              if (component.getId() == endNode.getId()) {
+                component.setStyle(
+                    "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #3281a8; "
+                        + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
+              }
+            }
+          }
           endNode = node;
           stairsBtn.setDisable(true);
           elevBtn.setDisable(true);
           bathBtn.setDisable(true);
+          for (javafx.scene.Node component : currentPane.getChildren()) {
+            if (component.getId() == node.getId()) {
+              component.setStyle(
+                  "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00cc00; "
+                      + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
+            }
+          }
         }
       }
     }
