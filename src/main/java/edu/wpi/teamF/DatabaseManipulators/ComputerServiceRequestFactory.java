@@ -34,7 +34,7 @@ public class ComputerServiceRequestFactory {
             + ", "
             + DatabaseManager.OS_ID_KEY
             + " ) "
-            + "VALUES (?)";
+            + "VALUES (?, ?, ?, ?)";
     Validators.computerServiceValidation(computerServiceRequest);
     serviceRequestFactory.create(computerServiceRequest);
     try (PreparedStatement prepareStatement =

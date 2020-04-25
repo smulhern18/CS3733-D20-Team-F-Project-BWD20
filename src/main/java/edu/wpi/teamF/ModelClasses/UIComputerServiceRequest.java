@@ -22,11 +22,11 @@ public class UIComputerServiceRequest extends RecursiveTreeObject<UIComputerServ
 
   public UIComputerServiceRequest(ComputerServiceRequest csr) {
     DateFormat date = new SimpleDateFormat("yyyy-mm-dd");
-    boolean completed = csr.getComplete();
+    boolean isCompleted = csr.getComplete();
     String cmp;
-    if(completed){
+    if (isCompleted) {
       cmp = "T";
-    }else{
+    } else {
       cmp = "F";
     }
 

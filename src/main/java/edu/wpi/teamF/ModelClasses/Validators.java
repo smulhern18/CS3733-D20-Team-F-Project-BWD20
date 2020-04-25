@@ -47,7 +47,7 @@ public class Validators {
   public static final int OS_MAX_LENGTH = 8;
 
   public static <T extends ServiceRequest> void serviceRequestValidation(T t, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(t, constraints);
     ServiceRequest serviceRequest = (ServiceRequest) t;
 
@@ -61,7 +61,7 @@ public class Validators {
   }
 
   public static <T extends Account> void accountValidation(T t, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(t, constraints);
     Account accountObject = (Account) t;
 
@@ -72,16 +72,16 @@ public class Validators {
   }
 
   public static void emailAddressValidation(String address, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(address, constraints);
     if ((!address.contains("@") || !address.contains("."))
-            && (address.length() > ADDRESS_MIN_LENGTH && address.length() < ADDRESS_MAX_LENGTH)) {
+        && (address.length() > ADDRESS_MIN_LENGTH && address.length() < ADDRESS_MAX_LENGTH)) {
       throw new ValidationException("Invalid Email Address: " + address);
     }
   }
 
   public static void passwordValidation(String password, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(password, constraints);
     if (password.length() < PASSWORD_MIN_LENGTH || password.length() > PASSWORD_MAX_LENGTH) {
       throw new ValidationException("Invalid password length");
@@ -96,10 +96,10 @@ public class Validators {
   }
 
   public static void hardwareSoftwareValidation(String hardwareSoftware, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(hardwareSoftware, constraints);
     if (hardwareSoftware.length() < HARDWARESOFTWARE_MIN_LENGTH
-            || hardwareSoftware.length() > HARDWARESOFTWARE_MAX_LENGTH) {
+        || hardwareSoftware.length() > HARDWARESOFTWARE_MAX_LENGTH) {
       throw new ValidationException("Invalid hardwareSoftware length");
     }
   }
@@ -119,7 +119,7 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static <T extends Node> void nodeValidation(T t, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(t, constraints);
     Node nodeObject = (Node) t;
 
@@ -144,7 +144,7 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static <T extends Edge> void edgeValidation(T t, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(t, constraints);
     Edge edgeObject = (Edge) t;
     idValidation(edgeObject.getId());
@@ -172,7 +172,7 @@ public class Validators {
    * @throws ValidationException should anything go wrong
    */
   public static void edgeIdValidation(String edgeId, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(edgeId, constraints);
     if (!(edgeId.length() < EDGE_ID_MAX_LENGTH && edgeId.length() > EDGE_ID_MIN_LENGTH)) {
       throw new ValidationException("edge ID is invalid: " + edgeId);
@@ -202,7 +202,7 @@ public class Validators {
    * @throws ValidationException should the building be invalid
    */
   public static void buildingValidation(String building, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(building, constraints);
     if (building.length() > BUILDING_MAX_LENGTH || building.length() < BUILDING_MIN_LENGTH) {
       throw new ValidationException("Building string is out of bounds");
@@ -217,7 +217,7 @@ public class Validators {
    * @throws ValidationException should the longName be invalid
    */
   public static void longNameValidation(String longName, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(longName, constraints);
     if (longName.length() < LONG_NAME_MIN_LENGTH || longName.length() > LONG_NAME_MAX_LENGTH) {
       throw new ValidationException("Long Name string is out of bounds");
@@ -232,7 +232,7 @@ public class Validators {
    * @throws ValidationException should the shortName be invalid
    */
   public static void shortNameValidation(String shortName, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(shortName, constraints);
     if (shortName.length() < SHORT_NAME_MIN_LENGTH || shortName.length() > SHORT_NAME_MAX_LENGTH) {
       throw new ValidationException("Short Name string is out of bounds");
@@ -276,7 +276,7 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static <T extends Appointment> void appointmentValidation(T t, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(t, constraints);
     Appointment appointmentObject = (Appointment) t;
     idValidation(appointmentObject.getId());
@@ -308,7 +308,7 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static void userIDValidation(String userID, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(userID, constraints);
     if (userID.length() < USERID_MIN_LENGTH || userID.length() > USERID_MAX_LENGTH) {
       throw new ValidationException("UserID is invalid");
@@ -337,7 +337,7 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static <T extends MaintenanceRequest> void maintenanceRequestValidation(
-          T t, int... constraints) throws ValidationException {
+      T t, int... constraints) throws ValidationException {
     nullCheckValidation(t, constraints);
     MaintenanceRequest maintenanceRequestObject = (MaintenanceRequest) t;
 
@@ -356,7 +356,7 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static <T extends ComputerServiceRequest> void computerServiceValidation(
-          T t, int... constraints) throws ValidationException {
+      T t, int... constraints) throws ValidationException {
     nullCheckValidation(t, constraints);
     ComputerServiceRequest computerRequestObject = (ComputerServiceRequest) t;
 
@@ -377,7 +377,7 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static <T extends SecurityRequest> void securityRequestValidation(T t, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(t, constraints);
     SecurityRequest securityRequestObject = (SecurityRequest) t;
   }
@@ -390,10 +390,10 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static void descriptionValidation(String description, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(description, constraints);
     if (description.length() < DESCRIPTION_MIN_LENGTH
-            || description.length() > DESCRIPTION_MAX_LENGTH) {
+        || description.length() > DESCRIPTION_MAX_LENGTH) {
       throw new ValidationException("Description is out of bounds");
     }
   }
@@ -420,7 +420,7 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static void priorityValidation(int priority, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(priority, constraints);
     if (priority < PRIORITY_MIN_LENGTH || priority > PRIORITY_MAX_LENGTH) {
       throw new ValidationException("Priority is outside accepted values");
@@ -428,7 +428,7 @@ public class Validators {
   }
 
   public static void booleanValidation(boolean bool, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(bool, constraints);
     if (bool || !bool) {
       // ignore
@@ -445,7 +445,7 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static void nullCheckValidation(Object object, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     baseValidation(object, constraints);
     if (object == null) {
       throw new ValidationException("object cannot be null");
