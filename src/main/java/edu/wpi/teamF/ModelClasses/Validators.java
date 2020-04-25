@@ -42,7 +42,7 @@ public class Validators {
   public static final int MAKE_MIN_LENGTH = 1;
   public static final int MAKE_MAX_LENGTH = 32;
   public static final int HARDWARESOFTWARE_MIN_LENGTH = 1;
-  public static final int HARDWARESOFTWARE_MAX_LENGTH = 8;
+  public static final int HARDWARESOFTWARE_MAX_LENGTH = 32;
   public static final int OS_MIN_LENGTH = 1;
   public static final int OS_MAX_LENGTH = 8;
 

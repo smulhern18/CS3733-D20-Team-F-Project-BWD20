@@ -10,10 +10,11 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class UIComputerServiceRequest extends RecursiveTreeObject<UIComputerServiceRequest> {
+  public String ID;
   public String location;
   public String make;
   public String OS;
-  public String HardwareSoftware;
+  public String hardwareSoftware;
   public String description;
   public String priority;
   public String assignee;
@@ -30,14 +31,27 @@ public class UIComputerServiceRequest extends RecursiveTreeObject<UIComputerServ
       cmp = "F";
     }
 
+    this.ID = csr.getId();
     this.location = csr.getLocation().getId();
     this.make = csr.getMake();
     this.OS = csr.getOS();
-    this.HardwareSoftware = csr.getHardwareSoftware();
+    this.hardwareSoftware = csr.getHardwareSoftware();
     this.description = csr.getDescription();
     this.priority = "" + csr.getPriority();
     this.assignee = csr.getAssignee();
     this.dateSubmitted = date.format(csr.getDateTimeSubmitted());
     this.completed = cmp;
+  }
+
+  public boolean equalsCSR(Object other) {
+    boolean isEqual = false;
+    if (other instanceof ComputerServiceRequest) {
+      ComputerServiceRequest otherCS = (ComputerServiceRequest) other;
+      isEqual =
+          this.description.equals(otherCS.getDescription())
+              && this.location.equals(otherCS.getLocation())
+              && this.ID.equals(otherCS.getId());
+    }
+    return isEqual;
   }
 }

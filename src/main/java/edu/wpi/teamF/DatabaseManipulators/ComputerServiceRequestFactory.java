@@ -172,7 +172,7 @@ public class ComputerServiceRequestFactory {
 
   public List<ComputerServiceRequest> getAllComputerRequests() {
     List<ComputerServiceRequest> computerRequests = null;
-    String selectStatement = "SELECT * FROM " + DatabaseManager.MAINTENANCE_REQUEST_TABLE_NAME;
+    String selectStatement = "SELECT * FROM " + DatabaseManager.COMPUTER_REQUEST_TABLE_NAME;
 
     try (PreparedStatement preparedStatement =
             DatabaseManager.getConnection().prepareStatement(selectStatement);
