@@ -2,6 +2,7 @@ package edu.wpi.teamF.Controllers;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.MaintenanceRequestFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.DatabaseManipulators.SecurityRequestFactory;
@@ -48,12 +49,16 @@ public class ServiceRequestController implements Initializable {
   public JFXButton cancelOngoing;
   public JFXButton ongoingButton;
   public JFXButton updateButton;
+  public JFXComboBox newComboBox;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // columns for table
 
     // add all location nodes in choicebox
+
+    UISetting uiSetting = new UISetting();
+    uiSetting.setAsLocationComboBox(newComboBox);
 
     // priority choices
     choiceBoxPriority.getItems().add("1");
