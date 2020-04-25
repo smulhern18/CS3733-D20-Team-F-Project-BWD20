@@ -4,7 +4,7 @@ public class StraightDirection extends Direction {
   private double distance;
   private int intersectionsPassed;
   private int floor;
-  private static double distanceConversion = 1.0; // Conversion multiplier from pixels to ft
+  private static double distanceConversion = 0.254; // Conversion multiplier from pixels to ft
 
   public StraightDirection(double distance, int intersectionsPassed, int floor) {
     this.distance = distance;

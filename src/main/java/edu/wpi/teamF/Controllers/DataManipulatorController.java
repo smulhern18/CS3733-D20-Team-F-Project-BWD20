@@ -378,7 +378,7 @@ public class DataManipulatorController implements Initializable {
   public void uploadEdges(ActionEvent actionEvent) throws FileNotFoundException {
     edgesChooser.setTitle("Select CSV File Edges");
     File file = edgesChooser.showOpenDialog(rootPane.getScene().getWindow());
-    csvM.readCSVFileNode(new FileInputStream(file));
+    csvM.readCSVFileEdge(new FileInputStream(file));
   }
 
   public void updateNodes(ActionEvent actionEvent)
