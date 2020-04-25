@@ -27,6 +27,7 @@ public class PathfinderController implements Initializable {
 
   public static int MAP_HEIGHT = 1485;
   public static int MAP_WIDTH = 2475;
+  public int currentFloor;
   public AnchorPane currentPane;
   public AnchorPane mapPaneFaulkner5;
   public AnchorPane mapPaneFaulkner4;
@@ -161,26 +162,7 @@ public class PathfinderController implements Initializable {
     startCombo.setValue(null);
     endCombo.setValue(null);
 
-    startCombo.setOnAction(
-        actionEvent -> {
-          if (startCombo.getValue() != null) {
-            choiceSelectStart();
-            state = 1;
-            commandText.setText("Select End Location or Building Feature");
-            endCombo.setDisable(false);
-
-          }
-        });
-
-    endCombo.setOnAction(
-        actionEvent -> {
-          if (endCombo.getValue() != null) {
-            choiceSelectEnd();
-            state = 2;
-            commandText.setText("Select Find Path or Reset");
-            pathButton.setDisable(false);
-          }
-        });
+    setComboBehavior();
 
     for (Node node : nodeList) {
       if (!node.getType().equals(Node.NodeType.getEnum("HALL"))) {
@@ -196,6 +178,7 @@ public class PathfinderController implements Initializable {
     nodeList = new ArrayList<>();
     fullNodeList = new ArrayList<>();
     currentPane = mapPaneFaulkner5;
+    currentFloor = 5;
     setAllInvisible();
     masterPaneFaulkner5.setVisible(true);
     floorButtonsSet();
@@ -316,6 +299,7 @@ public class PathfinderController implements Initializable {
     floor1Button.setOnAction(
         actionEvent -> {
           currentPane = mapPaneFaulkner1;
+          currentFloor = 1;
           setNodeList(1);
           resetPane();
           setAllInvisible();
@@ -324,6 +308,7 @@ public class PathfinderController implements Initializable {
     floor2Button.setOnAction(
         actionEvent -> {
           currentPane = mapPaneFaulkner2;
+          currentFloor = 2;
           setNodeList(2);
           resetPane();
           setAllInvisible();
@@ -332,6 +317,7 @@ public class PathfinderController implements Initializable {
     floor3Button.setOnAction(
         actionEvent -> {
           currentPane = mapPaneFaulkner3;
+          currentFloor = 3;
           setNodeList(3);
           resetPane();
           setAllInvisible();
@@ -340,6 +326,7 @@ public class PathfinderController implements Initializable {
     floor4Button.setOnAction(
         actionEvent -> {
           currentPane = mapPaneFaulkner4;
+          currentFloor = 4;
           setNodeList(4);
           resetPane();
           setAllInvisible();
@@ -348,6 +335,7 @@ public class PathfinderController implements Initializable {
     floor5Button.setOnAction(
         actionEvent -> {
           currentPane = mapPaneFaulkner5;
+          currentFloor = 5;
           setNodeList(5);
           resetPane();
           setAllInvisible();
@@ -370,5 +358,112 @@ public class PathfinderController implements Initializable {
     masterPaneFaulkner3.setVisible(false);
     masterPaneFaulkner4.setVisible(false);
     masterPaneFaulkner5.setVisible(false);
+  }
+
+  public void switchToFloor(int floorNum) {
+    if (floorNum == 1) {
+      Node holdNode = startNode;
+      currentPane = mapPaneFaulkner1;
+      currentFloor = 1;
+      setNodeList(1);
+      resetPane();
+      setAllInvisible();
+      masterPaneFaulkner1.setVisible(true);
+      startNode = holdNode;
+      startCombo.setValue(startNode.getLongName());
+    }
+    if (floorNum == 2) {
+      Node holdNode = startNode;
+      currentPane = mapPaneFaulkner2;
+      currentFloor = 2;
+      setNodeList(2);
+      resetPane();
+      setAllInvisible();
+      masterPaneFaulkner2.setVisible(true);
+      startNode = holdNode;
+      startCombo.setValue(startNode.getLongName());
+    }
+    if (floorNum == 3) {
+      Node holdNode = startNode;
+      currentPane = mapPaneFaulkner3;
+      currentFloor = 3;
+      setNodeList(3);
+      resetPane();
+      setAllInvisible();
+      masterPaneFaulkner3.setVisible(true);
+      startNode = holdNode;
+      startCombo.setValue(startNode.getLongName());
+    }
+    if (floorNum == 4) {
+      Node holdNode = startNode;
+      currentPane = mapPaneFaulkner4;
+      currentFloor = 4;
+      setNodeList(4);
+      resetPane();
+      setAllInvisible();
+      masterPaneFaulkner4.setVisible(true);
+      startNode = holdNode;
+      startCombo.setValue(startNode.getLongName());
+    }
+    if (floorNum == 5) {
+      Node holdNode = startNode;
+      currentPane = mapPaneFaulkner5;
+      currentFloor = 5;
+      setNodeList(5);
+      resetPane();
+      setAllInvisible();
+      masterPaneFaulkner5.setVisible(true);
+      startNode = holdNode;
+      startCombo.setValue(startNode.getLongName());
+    }
+  }
+
+  public Node findChoiceStart() {
+    Node returnNode = null;
+    if (startCombo.getValue() != null) {
+      for (Node node : fullNodeList) {
+        if (node.getLongName() == startCombo.getValue()) {
+          returnNode = node;
+        }
+      }
+    }
+    return returnNode;
+  }
+
+  public Node findChoiceEnd() {
+    Node returnNode = null;
+    if (endCombo.getValue() != null) {
+      for (Node node : fullNodeList) {
+        if (node.getLongName() == endCombo.getValue()) {
+          returnNode = node;
+        }
+      }
+    }
+    return returnNode;
+  }
+
+  public void setComboBehavior() {
+    startCombo.setOnAction(
+        actionEvent -> {
+          if (startCombo.getValue() != null) {
+            choiceSelectStart();
+            state = 1;
+            commandText.setText("Select End Location or Building Feature");
+            endCombo.setDisable(false);
+            if (findChoiceStart().getFloor() != currentFloor) {
+              switchToFloor(findChoiceStart().getFloor());
+            }
+          }
+        });
+
+    endCombo.setOnAction(
+        actionEvent -> {
+          if (endCombo.getValue() != null) {
+            choiceSelectEnd();
+            state = 2;
+            commandText.setText("Select Find Path or Reset");
+            pathButton.setDisable(false);
+          }
+        });
   }
 }
