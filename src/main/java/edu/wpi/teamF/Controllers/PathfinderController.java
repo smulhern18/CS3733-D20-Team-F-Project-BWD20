@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
+import edu.wpi.teamF.ModelClasses.Directions.Directions;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.PathfindAlgorithm;
@@ -67,6 +68,10 @@ public class PathfinderController implements Initializable {
       line.setStrokeWidth(2);
       mapPane.getChildren().add(line);
     }
+
+    // TODO Remove this code before pushing, for testing only
+    Directions directions = new Directions(fullNodeList, path, startNode, endNode);
+    System.out.println(directions.getFullDirectionsString());
   }
 
   public void placeButton(Node node) {
