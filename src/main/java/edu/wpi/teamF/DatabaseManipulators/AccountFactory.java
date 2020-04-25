@@ -1,9 +1,6 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
-import edu.wpi.teamF.ModelClasses.Account.Account;
-import edu.wpi.teamF.ModelClasses.Account.Admin;
-import edu.wpi.teamF.ModelClasses.Account.Staff;
-import edu.wpi.teamF.ModelClasses.Account.User;
+import edu.wpi.teamF.ModelClasses.Account.*;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
 import java.sql.PreparedStatement;
@@ -99,6 +96,24 @@ public class AccountFactory {
                   resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
                   resultSet.getString(DatabaseManager.USER_NAME_KEY),
                   resultSet.getString(DatabaseManager.PASSWORD_KEY));
+          break;
+        case (3):
+          account =
+                  new Patient(
+                          resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                          resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                          resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                          resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                          resultSet.getString(DatabaseManager.PASSWORD_KEY));
+          break;
+        case (4):
+          account =
+                  new Janitor(
+                          resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                          resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                          resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                          resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                          resultSet.getString(DatabaseManager.PASSWORD_KEY));
           break;
         default:
           throw new ValidationException("Illegal Type of Account: " + type.getTypeOrdinal());
@@ -235,6 +250,24 @@ public class AccountFactory {
                     resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
                     resultSet.getString(DatabaseManager.USER_NAME_KEY),
                     resultSet.getString(DatabaseManager.PASSWORD_KEY));
+            break;
+          case (3):
+            account =
+                    new Patient(
+                            resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                            resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                            resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                            resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                            resultSet.getString(DatabaseManager.PASSWORD_KEY));
+            break;
+          case (4):
+            account =
+                    new Janitor(
+                            resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                            resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                            resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                            resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                            resultSet.getString(DatabaseManager.PASSWORD_KEY));
             break;
           default:
             throw new ValidationException("Illegal Type of Account: " + type.getTypeOrdinal());
