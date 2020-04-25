@@ -177,9 +177,8 @@ public class PathfinderController implements Initializable {
           }
         });
 
-    for (Node node : fullNodeList) {
-      if (node.getId().charAt(0) == 'X'
-          && node.getId().charAt(node.getId().length() - 1) == '5') { // change for floors
+    for (Node node : nodeList) {
+      if (!node.getType().equals(Node.NodeType.getEnum("HALL"))) {
         placeButton(node);
         pathButtonGo();
       }
@@ -201,10 +200,8 @@ public class PathfinderController implements Initializable {
       fullNodeList.add(node);
     }
 
+    setNodeList(5);
     for (Node node : fullNodeList) {
-      if (node.getFloor() == 1) { // change for floors
-        nodeList.add(node);
-      }
       if (!node.getType().equals(Node.NodeType.getEnum("HALL"))) {
         startCombo.getItems().add(node.getLongName());
         endCombo.getItems().add(node.getLongName());
@@ -283,40 +280,46 @@ public class PathfinderController implements Initializable {
         actionEvent -> {
           currentPane = mapPaneFaulkner1;
           setNodeList(1);
+          resetPane();
           setAllInvisible();
           masterPaneFaulkner1.setVisible(true);
         });
     floor2Button.setOnAction(
         actionEvent -> {
-          currentPane = mapPaneFaulkner1;
+          currentPane = mapPaneFaulkner2;
           setNodeList(2);
+          resetPane();
           setAllInvisible();
           masterPaneFaulkner2.setVisible(true);
         });
     floor3Button.setOnAction(
         actionEvent -> {
-          currentPane = mapPaneFaulkner1;
+          currentPane = mapPaneFaulkner3;
           setNodeList(3);
+          resetPane();
           setAllInvisible();
           masterPaneFaulkner3.setVisible(true);
         });
     floor4Button.setOnAction(
         actionEvent -> {
-          currentPane = mapPaneFaulkner1;
+          currentPane = mapPaneFaulkner4;
           setNodeList(4);
+          resetPane();
           setAllInvisible();
           masterPaneFaulkner4.setVisible(true);
         });
     floor5Button.setOnAction(
         actionEvent -> {
-          currentPane = mapPaneFaulkner1;
+          currentPane = mapPaneFaulkner5;
           setNodeList(5);
+          resetPane();
           setAllInvisible();
           masterPaneFaulkner5.setVisible(true);
         });
   }
 
   public void setNodeList(int floorNum) {
+    nodeList = new ArrayList<>();
     for (Node node : fullNodeList) {
       if (node.getFloor() == floorNum) { // change for floors
         nodeList.add(node);
