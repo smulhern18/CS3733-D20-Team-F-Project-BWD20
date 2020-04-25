@@ -197,8 +197,8 @@ public class PathfinderController implements Initializable {
     floorButtonsSet();
 
     for (Node node : nodeFactory.getAllNodes()) {
-      fullNodeList.add(node);
       node.setEdges(edgeFactory.getAllEdgesConnectedToNode(node.getId()));
+      fullNodeList.add(node);
     }
 
     for (Node node : fullNodeList) {
@@ -211,7 +211,7 @@ public class PathfinderController implements Initializable {
       }
     }
 
-    pathFindAlgorithm = new SingleFloorAStar(nodeList);
+    pathFindAlgorithm = new SingleFloorAStar(fullNodeList);
     resetPane();
   }
 
