@@ -42,4 +42,16 @@ public class UIComputerServiceRequest extends RecursiveTreeObject<UIComputerServ
     this.dateSubmitted = date.format(csr.getDateTimeSubmitted());
     this.completed = cmp;
   }
+
+  public boolean equalsCSR(Object other) {
+    boolean isEqual = false;
+    if (other instanceof ComputerServiceRequest) {
+      ComputerServiceRequest otherCS = (ComputerServiceRequest) other;
+      isEqual =
+          this.description.equals(otherCS.getDescription())
+              && this.location.equals(otherCS.getLocation())
+              && this.ID.equals(otherCS.getId());
+    }
+    return isEqual;
+  }
 }
