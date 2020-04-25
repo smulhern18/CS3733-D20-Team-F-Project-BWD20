@@ -109,12 +109,14 @@ public class PathfinderController implements Initializable {
             button.setStyle(
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #3281a8; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
             state = 0;
+            startCombo.setValue(null);
             startCombo.setDisable(false);
           } else if (endNode == node) { // deselect if end has been set, return to 1
             endNode = null;
             button.setStyle(
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #3281a8; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
             state = 1;
+            endCombo.setValue(null);
             pathButton.setDisable(true);
             endCombo.setDisable(false);
           } else if (state == 0) { // if nothing has been set
@@ -126,7 +128,8 @@ public class PathfinderController implements Initializable {
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px"); // 800000
             commandText.setText("Select End Location or Building Feature");
             state = 1;
-            startCombo.setDisable(true);
+            // startCombo.setDisable(true);
+            startCombo.setValue(node.getLongName());
             endCombo.setDisable(false);
           } else if (state == 1) { // select end if not set
             endNode = node;
@@ -134,7 +137,8 @@ public class PathfinderController implements Initializable {
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00cc00; -fx-border-color: #000000; -fx-border-width: 1px"); // 00cc00
             commandText.setText("Select Find Path or Reset");
             state = 2;
-            endCombo.setDisable(true);
+            // endCombo.setDisable(true);
+            endCombo.setValue(node.getLongName());
             pathButton.setDisable(false);
           }
         });
@@ -164,6 +168,7 @@ public class PathfinderController implements Initializable {
             state = 1;
             commandText.setText("Select End Location or Building Feature");
             endCombo.setDisable(false);
+
           }
         });
 
