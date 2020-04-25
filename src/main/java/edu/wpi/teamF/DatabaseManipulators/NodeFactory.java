@@ -131,7 +131,6 @@ public class NodeFactory {
    * @param node the node to update
    */
   public void update(Node node) {
-    edgeFactory.deleteByNodeID(node.getId());
     String updateStatement =
         "UPDATE "
             + DatabaseManager.NODES_TABLE_NAME
@@ -170,9 +169,6 @@ public class NodeFactory {
       int numRows = preparedStatement.executeUpdate();
       if (numRows != 1) {
         throw new Exception("Updated " + numRows + " rows");
-      }
-      for (Edge edge : node.getEdges()) {
-        edgeFactory.create(edge);
       }
     } catch (Exception e) {
       System.out.println(e.getMessage());

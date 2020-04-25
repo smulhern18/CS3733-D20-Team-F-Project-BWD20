@@ -1,9 +1,18 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
+import edu.wpi.teamF.ModelClasses.Account.Account;
+import edu.wpi.teamF.ModelClasses.Account.PasswordHasher;
+import edu.wpi.teamF.ModelClasses.Edge;
+import edu.wpi.teamF.ModelClasses.Node;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
+
+import javax.management.InstanceNotFoundException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Set;
 
 public class DatabaseManager {
 
@@ -65,6 +74,16 @@ public class DatabaseManager {
   static final String OS_ID_KEY = "OperatingSystem";
   static final String MAKE_KEY = "Make";
   static final String HARDWARESOFTWARE_KEY = "HardwareOrSoftware";
+
+  // Factories
+  private NodeFactory nodeFactory = NodeFactory.getFactory();
+  private EdgeFactory edgeFactory = EdgeFactory.getFactory();
+  private AccountFactory accountFactory = AccountFactory.getFactory();
+  private ServiceRequestFactory serviceRequestFactory = ServiceRequestFactory.getFactory();
+  private SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
+  private MaintenanceRequestFactory maintenanceRequestFactory = MaintenanceRequestFactory.getFactory();
+  private AppointmentFactory appointmentFactory = AppointmentFactory.getFactory();
+  private CSVManipulator csvManipulator = new CSVManipulator();
 
   static Connection connection = null;
 
@@ -140,14 +159,15 @@ public class DatabaseManager {
             + "))";
 
     String maintenanceTableCreationStatement =
-        "CREATE TABLE "
-            + MAINTENANCE_REQUEST_TABLE_NAME
-            + " ( "
-            + SERVICEID_KEY
-            + " VARCHAR(32) NOT NULL, "
-            + "PRIMARY KEY ("
-            + SERVICEID_KEY
-            + "))";
+            "CREATE TABLE "
+                    + MAINTENANCE_REQUEST_TABLE_NAME
+                    + " ( "
+                    + SERVICEID_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + "PRIMARY KEY ("
+                    + SERVICEID_KEY
+                    + "))";
+
     String computerTableCreationStatement =
         "CREATE TABLE "
             + COMPUTER_REQUEST_TABLE_NAME
@@ -273,5 +293,88 @@ public class DatabaseManager {
 
   public static Connection getConnection() {
     return connection;
+  }
+
+
+  /*
+   * Node Factory methods
+   */
+  public void manipulateNode(Node node) throws Exception{
+    try {
+      nodeFactory.read(node.getId());
+      nodeFactory.update(node);
+    } catch (InstanceNotFoundException e){
+      nodeFactory.create(node);
+    }
+  }
+
+  public Node readNode(String nodeId) throws Exception {
+      return nodeFactory.read(nodeId);
+  }
+
+  public void deleteNode(String nodeId) throws Exception {
+      nodeFactory.delete(nodeId);
+  }
+
+  public List<Node> getAllNodes() throws Exception {
+    return nodeFactory.getAllNodes();
+  }
+
+  public List<Node> getNodesByType(Node.NodeType type) throws Exception {
+    return nodeFactory.getNodesByType(type);
+  }
+
+  /*
+   * Edge Factory methods
+   */
+  public void manipulateEdge(Edge edge) throws Exception {
+    if (edgeFactory.read(edge.getId()) == null){
+      edgeFactory.create(edge);
+    } else {
+      edgeFactory.update(edge);
+    }
+  }
+
+  public Edge readEdge(String edgeId) throws Exception {
+    return edgeFactory.read(edgeId);
+  }
+
+  public void deleteEdge(String edgeId) throws Exception {
+    edgeFactory.delete(edgeId);
+  }
+
+  public List<Edge> getAllEdges() throws Exception {
+    return edgeFactory.getAllEdges();
+  }
+
+  public Set<Edge> getAllEdgesConnectedToNode(String nodeId) throws Exception {
+    return edgeFactory.getAllEdgesConnectedToNode(nodeId);
+  }
+
+  public void deleteEdgesByNodeId(String nodeId) throws Exception {
+    edgeFactory.deleteByNodeID(nodeId);
+  }
+
+  /*
+   * Account Factory methods
+   */
+  public void manipulateAccount(Account account) throws Exception {
+    if (accountFactory.read(account.getUsername()) == null) {
+      accountFactory.create(account);
+    } else {
+      accountFactory.update(account);
+    }
+  }
+
+  public Account readAccount(String username) throws Exception {
+    return accountFactory.read(username);
+  }
+
+  public void deleteAccount(String username) throws Exception {
+    accountFactory.delete(username);
+  }
+
+  public boolean verifyPassword(String username, String password) throws Exception {
+    return PasswordHasher.verifyPassword(password, accountFactory.getPasswordByUsername(username));
   }
 }
