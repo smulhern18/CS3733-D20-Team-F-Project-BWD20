@@ -23,12 +23,12 @@ public class Directions {
       // Check if there's only a single node between start and goal
       directionList.add(new StartDirection(0, pathNodeList.get(0).getFloor()));
     } else {
-      //There are enough intermediate nodes to logically state a room exit angle
+      // There are enough intermediate nodes to logically state a room exit angle
       float startTurnAngle =
           getAngle(pathNodeList.get(0), pathNodeList.get(1), pathNodeList.get(2));
       directionList.add(new StartDirection(startTurnAngle, pathNodeList.get(0).getFloor()));
     }
-    //Make a new hallway walking direction, we will always keep an object of this type active
+    // Make a new hallway walking direction, we will always keep an object of this type active
     StraightDirection currHall = new StraightDirection(0, 0, pathNodeList.get(0).getFloor());
 
     for (int i = 1;
