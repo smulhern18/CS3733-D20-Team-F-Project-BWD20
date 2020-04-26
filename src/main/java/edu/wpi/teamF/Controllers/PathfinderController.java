@@ -329,18 +329,21 @@ public class PathfinderController implements Initializable {
   }
 
   public void findElevator(MouseEvent mouseEvent) throws InstanceNotFoundException {
+    switchToFloor(startNode.getFloor());
     Path newPath = pathFindAlgorithm.pathfind(startNode, Node.NodeType.getEnum("ELEV"));
     draw(newPath);
     commandText.setText("See Details Below or Reset for New Path");
   }
 
   public void findStairs(MouseEvent mouseEvent) throws InstanceNotFoundException {
+    switchToFloor(startNode.getFloor());
     Path newPath = pathFindAlgorithm.pathfind(startNode, Node.NodeType.getEnum("STAI"));
     draw(newPath);
     commandText.setText("See Details Below or Reset for New Path");
   }
 
   public void findBathroom(MouseEvent mouseEvent) throws InstanceNotFoundException {
+    switchToFloor(startNode.getFloor());
     Path newPath = pathFindAlgorithm.pathfind(startNode, Node.NodeType.getEnum("REST"));
     draw(newPath);
     commandText.setText("See Details Below or Reset for New Path");
