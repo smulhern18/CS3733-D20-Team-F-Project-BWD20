@@ -304,7 +304,8 @@ public class PathfinderController implements Initializable {
   }
 
   private void findBestOfType(String nodeType) throws InstanceNotFoundException {
-    //TODO Add a check that the node must be connected to a hall or the startNode, this will prevent paths through the ICU to get to stairs
+    // TODO Add a check that the node must be connected to a hall or the startNode, this will
+    // prevent paths through the ICU to get to stairs
     switchToFloor(startNode.getFloor());
     double lowestCost = 0.0;
     Node bestNode = null;
@@ -328,15 +329,21 @@ public class PathfinderController implements Initializable {
   }
 
   public void findElevator(MouseEvent mouseEvent) throws InstanceNotFoundException {
-    findBestOfType("ELEV");
+    Path newPath = pathFindAlgorithm.pathfind(startNode, Node.NodeType.getEnum("ELEV"));
+    draw(newPath);
+    commandText.setText("See Details Below or Reset for New Path");
   }
 
   public void findStairs(MouseEvent mouseEvent) throws InstanceNotFoundException {
-    findBestOfType("STAI");
+    Path newPath = pathFindAlgorithm.pathfind(startNode, Node.NodeType.getEnum("STAI"));
+    draw(newPath);
+    commandText.setText("See Details Below or Reset for New Path");
   }
 
   public void findBathroom(MouseEvent mouseEvent) throws InstanceNotFoundException {
-    findBestOfType("BATH");
+    Path newPath = pathFindAlgorithm.pathfind(startNode, Node.NodeType.getEnum("REST"));
+    draw(newPath);
+    commandText.setText("See Details Below or Reset for New Path");
   }
 
   public void choiceSelectStart() {

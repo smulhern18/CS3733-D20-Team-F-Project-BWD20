@@ -96,6 +96,22 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
 
   @Override
   public Path pathfind(Node start, Node.NodeType nodeType) throws InstanceNotFoundException {
-    return null;
+    List<Path> paths = new ArrayList<>();
+    for (Node node : nodeMap.values()) {
+      if (node.getType().getTypeString().equals(nodeType.getTypeString())
+          && node.getId().charAt(0) == 'X') {
+        paths.add(pathfind(start, node));
+      }
+    }
+    double shortestLength = Double.MAX_VALUE;
+    Path shortestPath = null;
+    for (int i = 0; i < paths.size(); i++) {
+      double length = paths.get(i).getPathLength();
+      if (length < shortestLength) {
+        shortestPath = paths.get(i);
+        shortestLength = length;
+      }
+    }
+    return shortestPath;
   }
 }
