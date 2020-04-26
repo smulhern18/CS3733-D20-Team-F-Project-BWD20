@@ -18,7 +18,6 @@ import java.util.concurrent.TimeoutException;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javax.management.InstanceNotFoundException;
-import org.junit.After;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -54,12 +53,6 @@ public class DataManipulatorTest extends ApplicationTest {
     stage.show();
     clickOn("Admin");
   }
-
-  @After
-  public void afterEachTest() throws TimeoutException {
-    FxToolkit.hideStage();
-  }
-
   @AfterAll
   static void tearDown() throws SQLException {
     db.reset();
