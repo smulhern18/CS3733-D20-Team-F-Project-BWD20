@@ -330,6 +330,8 @@ public class PathfinderController implements Initializable {
 
   public void findElevator(MouseEvent mouseEvent) throws InstanceNotFoundException {
     switchToFloor(startNode.getFloor());
+    startCombo.setDisable(true);
+    endCombo.setDisable(true);
     Path newPath = pathFindAlgorithm.pathfind(startNode, Node.NodeType.getEnum("ELEV"));
     draw(newPath);
     commandText.setText("See Details Below or Reset for New Path");
@@ -337,6 +339,8 @@ public class PathfinderController implements Initializable {
 
   public void findStairs(MouseEvent mouseEvent) throws InstanceNotFoundException {
     switchToFloor(startNode.getFloor());
+    startCombo.setDisable(true);
+    endCombo.setDisable(true);
     Path newPath = pathFindAlgorithm.pathfind(startNode, Node.NodeType.getEnum("STAI"));
     draw(newPath);
     commandText.setText("See Details Below or Reset for New Path");
@@ -344,6 +348,8 @@ public class PathfinderController implements Initializable {
 
   public void findBathroom(MouseEvent mouseEvent) throws InstanceNotFoundException {
     switchToFloor(startNode.getFloor());
+    startCombo.setDisable(true);
+    endCombo.setDisable(true);
     Path newPath = pathFindAlgorithm.pathfind(startNode, Node.NodeType.getEnum("REST"));
     draw(newPath);
     commandText.setText("See Details Below or Reset for New Path");
@@ -408,9 +414,10 @@ public class PathfinderController implements Initializable {
   }
 
   public void pathButtonGo() {
-
     pathButton.setOnAction(
         actionEvent -> {
+          startCombo.setDisable(true);
+          endCombo.setDisable(true);
           Path path = null;
           try {
             path = pathFindAlgorithm.pathfind(startNode, endNode);
