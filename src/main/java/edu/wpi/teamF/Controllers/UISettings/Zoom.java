@@ -57,7 +57,7 @@ public class Zoom {
 
   private void onScroll(double wheelDelta, Point2D mousePoint) {
     double zoomFactor = Math.exp(wheelDelta * zoomIntensity);
-    //System.out.println(zoomFactor);
+    // System.out.println(zoomFactor);
 
     Bounds innerBounds = zoomNode.getLayoutBounds();
     Bounds viewportBounds = scrollPane.getViewportBounds();
