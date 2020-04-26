@@ -11,7 +11,8 @@ public abstract class Account {
     STAFF(1),
     USER(2),
     PATIENT(3),
-    JANITOR(4);
+    JANITOR(4),
+    NURSE(5);
 
     private Integer typeOrdinal;
 
