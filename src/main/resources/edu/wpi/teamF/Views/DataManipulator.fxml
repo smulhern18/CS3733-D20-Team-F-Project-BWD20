@@ -159,7 +159,7 @@
       <JFXTextField layoutX="422.0" layoutY="89.0" prefHeight="25.0" prefWidth="553.0" promptText="Search..." />
       <ImageView fitHeight="14.0" fitWidth="92.0" layoutX="207.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../Images/pink%20bar.png" />
+            <Image url="@../../../../Images/pink bar.png" />
          </image>
       </ImageView>
    </children>

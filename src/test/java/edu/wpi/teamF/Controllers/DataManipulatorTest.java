@@ -14,14 +14,12 @@ import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.TestData;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.concurrent.TimeoutException;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javax.management.InstanceNotFoundException;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
 
@@ -53,6 +51,7 @@ public class DataManipulatorTest extends ApplicationTest {
     stage.show();
     clickOn("Admin");
   }
+
   @AfterAll
   static void tearDown() throws SQLException {
     db.reset();

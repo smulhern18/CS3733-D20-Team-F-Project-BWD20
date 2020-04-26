@@ -7,16 +7,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="407.0" prefWidth="784.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Views.ServiceRequestMain">
+<AnchorPane prefHeight="407.0" prefWidth="784.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ServiceRequestMainController">
    <children>
       <Label layoutX="398.0" layoutY="49.0" prefHeight="61.0" prefWidth="167.0" text="Service Request">
          <font>
             <Font name="STIXGeneral-Regular" size="24.0" />
          </font>
       </Label>
-      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="236.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="computerService" fitHeight="72.0" fitWidth="72.0" layoutX="236.0" layoutY="129.0" onMouseClicked="#switchToComputerService" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../Images/icons8-qzemail03.png" />
+            <Image url="@../../../../Images/computericon.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="340.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
@@ -104,7 +104,7 @@
             <Font name="STIXGeneral-Regular" size="13.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="241.0" layoutY="194.0" text="Security">
+      <JFXButton layoutX="212.0" layoutY="193.0" text="Computer Service">
          <font>
             <Font name="STIXGeneral-Regular" size="13.0" />
          </font>

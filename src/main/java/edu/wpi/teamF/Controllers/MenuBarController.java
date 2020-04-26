@@ -16,7 +16,7 @@ public class MenuBarController {
   }
 
   public void serviceRequest(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("ServiceRequest");
+    sceneController.switchScene("ServiceRequestMain");
   }
 
   public void admin(ActionEvent actionEvent) throws IOException {
