@@ -171,7 +171,7 @@ public class ServiceRequestFactory {
   }
 
   public List<ServiceRequest> getServiceRequestsByLocation(Node location) {
-    ArrayList<ServiceRequest> serviceRequests = null;
+    ArrayList<ServiceRequest> serviceRequests = new ArrayList<>();
     String selectStatement =
         "SELECT * FROM "
             + DatabaseManager.SERVICE_REQUEST_TABLE
