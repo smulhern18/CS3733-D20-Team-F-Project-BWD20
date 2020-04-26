@@ -5,10 +5,12 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.DatabaseManipulators.SecurityRequestFactory;
+import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UISecurityRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -41,6 +43,8 @@ public class SecurityRequestController implements Initializable {
   public JFXComboBox<String> priorityComboBox;
   public JFXComboBox<String> guardsRequestedComboBox;
   public JFXTreeTableView<UISecurityRequest> table;
+  public GridPane servicePane;
+  public AnchorPane checkStatusPane;
 
   public AnchorPane anchorPane;
   NodeFactory nodeFactory = NodeFactory.getFactory();
@@ -125,7 +129,10 @@ public class SecurityRequestController implements Initializable {
   public void submit(ActionEvent actionEvent)
       throws ValidationException, InstanceNotFoundException {
     String location = locationComboBox.getValue();
-    String nodeID = location.substring(location.length() - 11);
+    String nodeID = location.substring(location.length() - 10);
+    System.out.println(location);
+    System.out.println(nodeID);
+    Node node = nodeFactory.read(nodeID);
     String priorityString = priorityComboBox.getValue();
     int priority = 0;
     if (priorityString.equals("Low")) {
@@ -135,15 +142,70 @@ public class SecurityRequestController implements Initializable {
     } else if (priorityString.equals("High")) {
       priority = 3;
     }
+    String guardsRequestedString = guardsRequestedComboBox.getValue();
+    int guardsRequested = 0;
+    if (guardsRequestedString.equals("1")) {
+      guardsRequested = 1;
+    } else if (guardsRequestedString.equals("2")) {
+      guardsRequested = 2;
+    } else if (guardsRequestedString.equals("3")) {
+      guardsRequested = 3;
+    } else if (guardsRequestedString.equals("4")) {
+      guardsRequested = 4;
+    } else if (guardsRequestedString.equals("5")) {
+      guardsRequested = 5;
+    }
+
+    Date date = new Date(System.currentTimeMillis());
+    SecurityRequest securityRequest =
+        new SecurityRequest(
+            node, "Not Assigned", "No Description", date, priority, guardsRequested);
+    securityRequestFactory.create(securityRequest);
+    uiSecurityRequests.add(new UISecurityRequest(securityRequest));
+    table.refresh();
+    resetRequest();
   }
 
-  public void cancel(ActionEvent actionEvent) {}
+  private void resetRequest() {
+    locationComboBox.setValue(null);
+    priorityComboBox.setValue(null);
+    guardsRequestedComboBox.setValue(null);
+  }
 
-  public void request(ActionEvent actionEvent) {}
+  public void cancel(ActionEvent actionEvent) {
+    resetRequest();
+  }
 
-  public void update(ActionEvent actionEvent) {}
+  public void request(ActionEvent actionEvent) {
+    servicePane.setVisible(true);
+    checkStatusPane.setVisible(false);
+  }
 
-  public void delete(ActionEvent actionEvent) {}
+  public void update(ActionEvent actionEvent) throws ValidationException {
+    for (UISecurityRequest uiSR : uiSecurityRequests) {
+      SecurityRequest toUpdate = securityRequestFactory.read(uiSR.getID().get());
+      if (!uiSR.equalsCSR(toUpdate)) {
+        toUpdate.setAssignee(uiSR.getAssignee().get());
+        String completed = uiSR.getCompleted().get();
+        if (completed.equals("Incomplete")) {
+          toUpdate.setComplete(false);
+        } else if (completed.equals("Complete")) {
+          toUpdate.setComplete(true);
+        }
+        securityRequestFactory.update(toUpdate);
+      }
+    }
+    table.refresh();
+  }
 
-  public void checkStatus(ActionEvent actionEvent) {}
+  public void delete(ActionEvent actionEvent) {
+    String toDelete = deleteText.getText();
+    securityRequestFactory.delete(toDelete);
+    uiSecurityRequests.removeIf(securityRequest -> securityRequest.getID().get().equals(toDelete));
+  }
+
+  public void checkStatus(ActionEvent actionEvent) {
+    servicePane.setVisible(false);
+    checkStatusPane.setVisible(true);
+  }
 }

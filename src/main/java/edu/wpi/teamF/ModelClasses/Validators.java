@@ -116,8 +116,10 @@ public class Validators {
   public static void guardsRequestedValidation(int guardsRequested, int... constraints)
       throws ValidationException {
     nullCheckValidation(guardsRequested, constraints);
+
     if (!(guardsRequested >= GUARDS_MIN_VALUE && guardsRequested <= GUARDS_MAX_VALUE)) {
-      throw new ValidationException("Guards requested outside of accepted values");
+
+      throw new ValidationException(" Guards requested outside of accepted values");
     }
   }
 

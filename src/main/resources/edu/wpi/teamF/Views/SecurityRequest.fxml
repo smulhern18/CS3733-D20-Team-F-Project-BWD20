@@ -111,7 +111,11 @@
                   </JFXButton>
                </children>
             </StackPane>
-            <JFXTreeTableView fx:id="table" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="99.0" />
+            <StackPane layoutX="10.0" layoutY="99.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="99.0">
+               <children>
+                  <JFXTreeTableView fx:id="table" />
+               </children>
+            </StackPane>
             <GridPane fx:id="deletePane" layoutX="217.0" layoutY="70.0" AnchorPane.rightAnchor="10.0">
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
