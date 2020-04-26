@@ -255,7 +255,7 @@ public class NodeFactory {
    * @return a list of all nodes in the database
    */
   public List<Node> getAllNodes() {
-    List<Node> nodes = null;
+    List<Node> nodes = new ArrayList<>();
     String selectStatement = "SELECT * FROM " + DatabaseManager.NODES_TABLE_NAME;
 
     try (PreparedStatement preparedStatement =
