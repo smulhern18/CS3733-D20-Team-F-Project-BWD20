@@ -6,5 +6,4 @@ public class Nurse extends Account {
       throws Exception {
     super(firstName, lastName, address, username, password, Type.NURSE);
   }
-
 }

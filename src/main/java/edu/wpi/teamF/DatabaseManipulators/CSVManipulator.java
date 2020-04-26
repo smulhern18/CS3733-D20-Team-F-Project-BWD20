@@ -73,7 +73,6 @@ public class CSVManipulator {
       bw.close();
     } catch (IOException e) {
       System.out.println(e.getMessage() + "" + e.getClass());
-      // exception handling left as an exercise for the reader
     }
   }
 
@@ -146,7 +145,6 @@ public class CSVManipulator {
       bw.close();
     } catch (IOException e) {
       System.out.println(e.getMessage() + "" + e.getClass());
-      // exception handling left as an exercise for the reader
     }
   }
 
@@ -283,10 +281,9 @@ public class CSVManipulator {
       bw.close();
     } catch (IOException e) {
       System.out.println(e.getMessage() + "" + e.getClass());
-      // exception handling left as an exercise for the reader
     }
   }
-  // this transformeressss the secur bruh
+  //
   public String formatSecurityService(SecurityRequest m) {
     String Main = "";
     Main =
@@ -384,7 +381,6 @@ public class CSVManipulator {
       bw.close();
     } catch (IOException e) {
       System.out.println(e.getMessage() + "" + e.getClass());
-      // exception handling left as an exercise for the reader
     }
   }
 

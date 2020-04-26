@@ -100,31 +100,32 @@ public class AccountFactory {
           break;
         case (3):
           account =
-                  new Patient(
-                          resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
-                          resultSet.getString(DatabaseManager.LAST_NAME_KEY),
-                          resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
-                          resultSet.getString(DatabaseManager.USER_NAME_KEY),
-                          resultSet.getString(DatabaseManager.PASSWORD_KEY));
+              new Patient(
+                  resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                  resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                  resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                  resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                  resultSet.getString(DatabaseManager.PASSWORD_KEY));
           break;
         case (4):
           account =
-                  new Janitor(
-                          resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
-                          resultSet.getString(DatabaseManager.LAST_NAME_KEY),
-                          resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
-                          resultSet.getString(DatabaseManager.USER_NAME_KEY),
-                          resultSet.getString(DatabaseManager.PASSWORD_KEY));
+              new Janitor(
+                  resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                  resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                  resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                  resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                  resultSet.getString(DatabaseManager.PASSWORD_KEY));
           break;
         case (5):
           account =
-              new Nurse( resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+              new Nurse(
+                  resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
                   resultSet.getString(DatabaseManager.LAST_NAME_KEY),
                   resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
                   resultSet.getString(DatabaseManager.USER_NAME_KEY),
                   resultSet.getString(DatabaseManager.PASSWORD_KEY));
 
-              break;
+          break;
         default:
           throw new ValidationException("Illegal Type of Account: " + type.getTypeOrdinal());
       }
@@ -263,25 +264,26 @@ public class AccountFactory {
             break;
           case (3):
             account =
-                    new Patient(
-                            resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
-                            resultSet.getString(DatabaseManager.LAST_NAME_KEY),
-                            resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
-                            resultSet.getString(DatabaseManager.USER_NAME_KEY),
-                            resultSet.getString(DatabaseManager.PASSWORD_KEY));
+                new Patient(
+                    resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                    resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                    resultSet.getString(DatabaseManager.PASSWORD_KEY));
             break;
           case (4):
             account =
-                    new Janitor(
-                            resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
-                            resultSet.getString(DatabaseManager.LAST_NAME_KEY),
-                            resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
-                            resultSet.getString(DatabaseManager.USER_NAME_KEY),
-                            resultSet.getString(DatabaseManager.PASSWORD_KEY));
+                new Janitor(
+                    resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                    resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                    resultSet.getString(DatabaseManager.PASSWORD_KEY));
             break;
           case (5):
             account =
-                new Nurse( resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                new Nurse(
+                    resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
                     resultSet.getString(DatabaseManager.LAST_NAME_KEY),
                     resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
                     resultSet.getString(DatabaseManager.USER_NAME_KEY),
