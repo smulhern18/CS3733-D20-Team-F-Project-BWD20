@@ -303,31 +303,6 @@ public class PathfinderController implements Initializable {
     drawNodes();
   }
 
-  private void findBestOfType(String nodeType) throws InstanceNotFoundException {
-    // TODO Add a check that the node must be connected to a hall or the startNode, this will
-    // prevent paths through the ICU to get to stairs
-    switchToFloor(startNode.getFloor());
-    double lowestCost = 0.0;
-    Node bestNode = null;
-    for (Node node : nodeList) {
-      if (node.getType().equals(Node.NodeType.getEnum(nodeType))) {
-        double score = euclideanScorer.computeCost(startNode, node);
-        if (score < lowestCost || lowestCost < 0.1) {
-          lowestCost = score;
-          bestNode = node;
-        }
-      }
-    }
-    if (bestNode != null) {
-      Path newPath = pathFindAlgorithm.pathfind(startNode, bestNode);
-      draw(newPath);
-      commandText.setText("See Details Below or Reset for New Path");
-    } else {
-      System.out.println("No " + nodeType + " could ne found on floor: " + startNode.getFloor());
-      throw new InstanceNotFoundException();
-    }
-  }
-
   public void findElevator(MouseEvent mouseEvent) throws InstanceNotFoundException {
     switchToFloor(startNode.getFloor());
     startCombo.setDisable(true);
