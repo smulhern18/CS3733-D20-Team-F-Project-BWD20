@@ -36,11 +36,11 @@
       <font>
          <Font size="18.0" />
       </font></JFXButton>
-      <JFXButton fx:id="floor1Button" layoutX="731.0" layoutY="140.0" text="Floor 1" />
-      <JFXButton fx:id="floor2Button" layoutX="805.0" layoutY="144.0" text="Floor 2" />
-      <JFXButton fx:id="floor3Button" layoutX="891.0" layoutY="144.0" text="Floor 3" />
-      <JFXButton fx:id="floor4Button" layoutX="985.0" layoutY="144.0" text="Floor 4" />
-      <JFXButton fx:id="floor5Button" layoutX="1074.0" layoutY="148.0" text="Floor 5" />
+      <JFXButton fx:id="floor1Button" layoutX="862.0" layoutY="144.0" text="Floor 1" />
+      <JFXButton fx:id="floor2Button" layoutX="937.0" layoutY="144.0" text="Floor 2" />
+      <JFXButton fx:id="floor3Button" layoutX="1015.0" layoutY="144.0" text="Floor 3" />
+      <JFXButton fx:id="floor4Button" layoutX="1093.0" layoutY="144.0" text="Floor 4" />
+      <JFXButton fx:id="floor5Button" layoutX="1168.0" layoutY="144.0" text="Floor 5" />
    <StackPane fx:id="masterPaneFaulkner1" layoutX="20.0" layoutY="195.0" prefHeight="579.0" prefWidth="959.0">
       <children>
          <ImageView fx:id="imageVIewFaulkner1" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">

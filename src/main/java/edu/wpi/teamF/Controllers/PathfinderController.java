@@ -177,10 +177,10 @@ public class PathfinderController implements Initializable {
   public void initialize(URL url, ResourceBundle resourceBundle) {
     nodeList = new ArrayList<>();
     fullNodeList = new ArrayList<>();
-    currentPane = mapPaneFaulkner5;
-    currentFloor = 5;
+    currentPane = mapPaneFaulkner1;
+    currentFloor = 1;
     setAllInvisible();
-    masterPaneFaulkner5.setVisible(true);
+    masterPaneFaulkner1.setVisible(true);
     floorButtonsSet();
 
     for (Node node : nodeFactory.getAllNodes()) {
@@ -188,7 +188,7 @@ public class PathfinderController implements Initializable {
       fullNodeList.add(node);
     }
 
-    setNodeList(5);
+    setNodeList(1);
     for (Node node : fullNodeList) {
       if (!node.getType().equals(Node.NodeType.getEnum("HALL"))) {
         startCombo.getItems().add(node.getLongName());
