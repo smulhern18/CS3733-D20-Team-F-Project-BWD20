@@ -199,18 +199,75 @@ public class TestData {
   public Date[] validDates = {new Date(0), new Date(10), new Date(110), new Date(1110)};
   public String[] validIDs = {"12312442", "123124134", "124134123412", "213124124"};
   public String[] validDescriptions = {"12312442", "123124134", "124134123412", "213124124"};
+  public String[] validAssignees = {"Roman", "Sully", "Denver", "Charles"};
 
   public SecurityRequest[] validSecurityRequests = {
-    new SecurityRequest(validIDs[0], validNodes[0], validDescriptions[0], validDates[0], 2),
-    new SecurityRequest(validIDs[1], validNodes[1], validDescriptions[1], validDates[1], 2),
-    new SecurityRequest(validIDs[2], validNodes[2], validDescriptions[2], validDates[2], 2),
-    new SecurityRequest(validIDs[3], validNodes[3], validDescriptions[3], validDates[3], 2),
+    new SecurityRequest(
+        validIDs[0],
+        validNodes[0],
+        validAssignees[0],
+        validDescriptions[0],
+        validDates[0],
+        2,
+        false),
+    new SecurityRequest(
+        validIDs[1],
+        validNodes[1],
+        validAssignees[1],
+        validDescriptions[1],
+        validDates[1],
+        2,
+        true),
+    new SecurityRequest(
+        validIDs[2],
+        validNodes[2],
+        validAssignees[2],
+        validDescriptions[2],
+        validDates[2],
+        2,
+        false),
+    new SecurityRequest(
+        validIDs[3],
+        validNodes[3],
+        validAssignees[3],
+        validDescriptions[3],
+        validDates[3],
+        2,
+        true),
   };
   public MaintenanceRequest[] validMaintenanceRequests = {
-    new MaintenanceRequest(validIDs[0], validNodes[0], validDescriptions[0], validDates[0], 2),
-    new MaintenanceRequest(validIDs[1], validNodes[1], validDescriptions[1], validDates[1], 2),
-    new MaintenanceRequest(validIDs[2], validNodes[2], validDescriptions[2], validDates[2], 2),
-    new MaintenanceRequest(validIDs[3], validNodes[3], validDescriptions[3], validDates[3], 2),
+    new MaintenanceRequest(
+        validIDs[0],
+        validNodes[0],
+        validAssignees[0],
+        validDescriptions[0],
+        validDates[0],
+        2,
+        true),
+    new MaintenanceRequest(
+        validIDs[1],
+        validNodes[1],
+        validAssignees[1],
+        validDescriptions[1],
+        validDates[1],
+        2,
+        false),
+    new MaintenanceRequest(
+        validIDs[2],
+        validNodes[2],
+        validAssignees[2],
+        validDescriptions[2],
+        validDates[2],
+        2,
+        true),
+    new MaintenanceRequest(
+        validIDs[3],
+        validNodes[3],
+        validAssignees[3],
+        validDescriptions[3],
+        validDates[3],
+        2,
+        false),
   };
 
   public TestData() throws Exception {}
