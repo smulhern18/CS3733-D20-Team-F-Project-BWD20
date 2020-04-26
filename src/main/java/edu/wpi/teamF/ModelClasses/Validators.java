@@ -1,10 +1,8 @@
 package edu.wpi.teamF.ModelClasses;
 
 import edu.wpi.teamF.ModelClasses.Account.Account;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
+
 import java.util.Date;
 
 public class Validators {
@@ -45,6 +43,8 @@ public class Validators {
   public static final int HARDWARESOFTWARE_MAX_LENGTH = 32;
   public static final int OS_MIN_LENGTH = 1;
   public static final int OS_MAX_LENGTH = 8;
+  public static final int SANITATION_TYPE_MIN_LENGTH = 1;
+  public static final int SANITATION_TYPE_MAX_LENGTH = 32;
 
   public static <T extends ServiceRequest> void serviceRequestValidation(T t, int... constraints)
       throws ValidationException {
@@ -109,6 +109,13 @@ public class Validators {
     if (OS.length() < HARDWARESOFTWARE_MIN_LENGTH || OS.length() > HARDWARESOFTWARE_MAX_LENGTH) {
       throw new ValidationException("Invalid hardwareSoftware length");
     }
+  }
+
+    public static void sanitationTypeValidation(String sanitationType, int... constraints) throws ValidationException {
+      nullCheckValidation(sanitationType, constraints);
+      if (sanitationType.length() < SANITATION_TYPE_MIN_LENGTH || sanitationType.length() > SANITATION_TYPE_MAX_LENGTH) {
+        throw new ValidationException("Invalid sanitation type length");
+      }
   }
 
   /**
@@ -369,6 +376,22 @@ public class Validators {
     makeValidation(computerRequestObject.getMake());
     hardwareSoftwareValidation(computerRequestObject.getHardwareSoftware());
   }
+
+  /**
+   * Validation for Maintenance Requests
+   *
+   * @param t an instance of Maintenance Request to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static <T extends SanitationServiceRequest> void sanitationServiceValidation(
+          T t, int... constraints) throws ValidationException {
+    nullCheckValidation(t, constraints);
+    SanitationServiceRequest sanitationServiceRequestObject = (SanitationServiceRequest) t;
+
+    sanitationTypeValidation(sanitationServiceRequestObject.getType());
+  }
+
   /**
    * Validation for Security Requests
    *

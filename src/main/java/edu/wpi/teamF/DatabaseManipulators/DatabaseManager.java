@@ -17,6 +17,8 @@ public class DatabaseManager {
   static final String ACCOUNT_TABLE_NAME = "accountsTable";
   static final String APPOINTMENTS_TABLE_NAME = "appointmentsTable";
   static final String COMPUTER_REQUEST_TABLE_NAME = "ComputerRequestsTable";
+  static final String SANITATION_REQUEST_TABLE_NAME = "SanitationRequestsTable";
+
   /** Column Names */
   // node
   static final String X_COORDINATE_KEY = "xCoord";
@@ -61,10 +63,14 @@ public class DatabaseManager {
   static final String ROOM_KEY = "room";
   static final String USERID_KEY = "userID";
   static final String PCP_KEY = "PCP";
+
   // ComputerService requests
   static final String OS_ID_KEY = "OperatingSystem";
   static final String MAKE_KEY = "Make";
   static final String HARDWARESOFTWARE_KEY = "HardwareOrSoftware";
+
+  // SanitationService requests
+  static final String SANITATION_TYPE_KEY = "SanitationType";
 
   static Connection connection = null;
 
@@ -202,6 +208,18 @@ public class DatabaseManager {
             + APPOINTMENT_ID_KEY
             + "))";
 
+    String sanitationTableCreationStatement =
+        "CREATE TABLE "
+            + SANITATION_REQUEST_TABLE_NAME
+            + " ( "
+            + SERVICEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + SANITATION_TYPE_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + "PRIMARY KEY ("
+            + SERVICEID_KEY
+            + "))";
+
     PreparedStatement preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(edgeTableCreationStatement);
@@ -217,6 +235,8 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(accountTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(appointmentTableCreationStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(sanitationTableCreationStatement);
     preparedStatement.execute();
     System.out.println("Created Tables Successfully");
   }
@@ -251,6 +271,7 @@ public class DatabaseManager {
     String accountDropStatement = "DROP TABLE " + ACCOUNT_TABLE_NAME;
     String appointmentDropStatement = "DROP TABLE " + APPOINTMENTS_TABLE_NAME;
     String computerDropStatement = "DROP TABLE " + COMPUTER_REQUEST_TABLE_NAME;
+    String sanitationDropStatement = "DROP TABLE " + SANITATION_REQUEST_TABLE_NAME;
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeDropStatement);
     preparedStatement.execute();
@@ -267,6 +288,8 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(accountDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(appointmentDropStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(sanitationDropStatement);
     preparedStatement.execute();
     createTables();
   }
