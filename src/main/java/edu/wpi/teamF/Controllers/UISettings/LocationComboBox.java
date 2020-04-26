@@ -47,9 +47,9 @@ public class LocationComboBox {
 
     comboBox.setOnKeyReleased(
         keyEvent -> {
-          if (keyEvent.getCode() != KeyCode.ENTER) {
-            comboBox.show();
-          }
+            if(keyEvent.getCode() != KeyCode.ENTER) {
+                comboBox.show();
+            }
         });
     ComboBoxListViewSkin<String> comboBoxListViewSkin = new ComboBoxListViewSkin<String>(comboBox);
     comboBoxListViewSkin
