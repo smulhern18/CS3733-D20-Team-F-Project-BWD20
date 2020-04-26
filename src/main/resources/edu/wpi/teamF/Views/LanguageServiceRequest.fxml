@@ -12,7 +12,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.LanguageServiceController">
     <children>
-        <Label fx:id="locLabel" layoutX="66.0" layoutY="43.0" prefHeight="31.0" prefWidth="83.0" text="Location:">
+        <Label fx:id="locationLabel" layoutX="66.0" layoutY="43.0" prefHeight="31.0" prefWidth="83.0" text="Location:">
             <font>
                 <Font name="System Bold" size="15.0" />
             </font>
@@ -22,20 +22,20 @@
                 <Font name="System Bold" size="15.0" />
             </font>
         </Label>
-        <Label fx:id="descLabel" layoutX="65.0" layoutY="237.0" prefHeight="31.0" prefWidth="83.0" text="Description">
+        <Label fx:id="descriptionLabel" layoutX="65.0" layoutY="237.0" prefHeight="31.0" prefWidth="83.0" text="Description">
             <font>
                 <Font name="System Bold" size="15.0" />
             </font>
         </Label>
-        <Label fx:id="issueLabel" layoutX="66.0" layoutY="136.0" prefHeight="31.0" prefWidth="167.0" text="Issue Type:">
+        <Label fx:id="problemTypeLabel" layoutX="66.0" layoutY="136.0" prefHeight="31.0" prefWidth="167.0" text="Issue Type:">
             <font>
                 <Font name="System Bold" size="15.0" />
             </font>
         </Label>
         <ChoiceBox fx:id="locationChoice" layoutX="218.0" layoutY="46.0" prefWidth="150.0" />
         <ChoiceBox fx:id="languageChoice" layoutX="218.0" layoutY="94.0" prefWidth="150.0" />
-        <ChoiceBox fx:id="issueChoice" layoutX="218.0" layoutY="139.0" prefWidth="150.0" />
-        <JFXTextArea fx:id="descText" layoutX="217.0" layoutY="217.0" prefHeight="98.0" prefWidth="150.0" />
+        <ChoiceBox fx:id="problemTypeChoice" layoutX="218.0" layoutY="139.0" prefWidth="150.0" />
+        <JFXTextArea fx:id="descriptionText" layoutX="217.0" layoutY="217.0" prefHeight="98.0" prefWidth="150.0" />
         <JFXButton fx:id="submit" buttonType="RAISED" layoutX="51.0" layoutY="324.0" onAction="#submit" prefHeight="51.0" prefWidth="126.0" style="-fx-background-color: grey;" text="Submit Request">
             <font>
                 <Font name="System Bold" size="14.0" />
@@ -46,8 +46,8 @@
                 <Font name="System Bold" size="14.0" />
             </font>
         </JFXButton>
-        <JFXTreeTableView fx:id="treeTableComputer" layoutX="47.0" layoutY="37.0" prefHeight="261.0" prefWidth="614.0" visible="false" />
-        <Label fx:id="prioLabel" layoutX="393.0" layoutY="43.0" prefHeight="31.0" prefWidth="83.0" text="Priority:">
+        <JFXTreeTableView fx:id="treeTableLanguage" layoutX="47.0" layoutY="37.0" prefHeight="261.0" prefWidth="614.0" visible="false" />
+        <Label fx:id="priorityLabel" layoutX="393.0" layoutY="43.0" prefHeight="31.0" prefWidth="83.0" text="Priority:">
             <font>
                 <Font name="System Bold" size="15.0" />
             </font>

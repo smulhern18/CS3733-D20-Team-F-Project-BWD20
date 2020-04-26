@@ -1,10 +1,7 @@
 package edu.wpi.teamF.ModelClasses;
 
 import edu.wpi.teamF.ModelClasses.Account.Account;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
 import java.util.Date;
 
 public class Validators {
@@ -45,6 +42,10 @@ public class Validators {
   public static final int HARDWARESOFTWARE_MAX_LENGTH = 32;
   public static final int OS_MIN_LENGTH = 1;
   public static final int OS_MAX_LENGTH = 8;
+  public static final int PROBLEMTYPE_MIN_LENGTH = 1;
+  public static final int PROBLEMTYPE_MAX_LENGTH = 32;
+  public static final int LANGUAGE_MIN_LENGTH = 1;
+  public static final int LANGUAGE_MAX_LENGTH = 32;
 
   public static <T extends ServiceRequest> void serviceRequestValidation(T t, int... constraints)
       throws ValidationException {
@@ -369,6 +370,28 @@ public class Validators {
     makeValidation(computerRequestObject.getMake());
     hardwareSoftwareValidation(computerRequestObject.getHardwareSoftware());
   }
+
+  /**
+   * Validation for Language Requests
+   *
+   * @param t an instance of Language Request to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static <T extends LanguageServiceRequest> void languageServiceValidation(
+      T t, int... constraints) throws ValidationException {
+    nullCheckValidation(t, constraints);
+    LanguageServiceRequest languageRequestObject = (LanguageServiceRequest) t;
+
+    idValidation(languageRequestObject.getId());
+    nodeValidation(languageRequestObject.getLocation());
+    descriptionValidation(languageRequestObject.getDescription());
+    dateValidation(languageRequestObject.getDateTimeSubmitted());
+    priorityValidation(languageRequestObject.getPriority());
+    makeValidation(languageRequestObject.getLanguage());
+    hardwareSoftwareValidation(languageRequestObject.getProblemType());
+  }
+
   /**
    * Validation for Security Requests
    *
