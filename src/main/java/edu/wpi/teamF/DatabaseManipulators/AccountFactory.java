@@ -18,7 +18,7 @@ public class AccountFactory {
 
   private static final AccountFactory factory = new AccountFactory();
 
-  public static AccountFactory getFactory() {
+  static AccountFactory getFactory() {
     return factory;
   }
 

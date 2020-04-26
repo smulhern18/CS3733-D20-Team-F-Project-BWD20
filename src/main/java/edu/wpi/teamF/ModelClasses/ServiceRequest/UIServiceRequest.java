@@ -1,7 +1,6 @@
 package edu.wpi.teamF.ModelClasses.ServiceRequest;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,7 +13,6 @@ public class UIServiceRequest extends RecursiveTreeObject<UIServiceRequest> {
   public StringProperty id;
   public StringProperty description;
   public StringProperty serviceType;
-  public NodeFactory nodeFactory = NodeFactory.getFactory();
 
   public UIServiceRequest(ServiceRequest serviceRequest) {
     int prio = serviceRequest.getPriority();

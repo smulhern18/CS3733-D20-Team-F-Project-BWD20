@@ -20,7 +20,7 @@ import org.testfx.framework.junit5.Start;
 
 public class HelpTest extends ApplicationTest {
 
-  private static DatabaseManager db = new DatabaseManager();
+  private static DatabaseManager db = DatabaseManager.getManager();
 
   @BeforeAll
   public static void setUp() throws Exception {

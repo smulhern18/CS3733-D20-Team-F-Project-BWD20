@@ -12,7 +12,7 @@ public class AppointmentFactory {
 
   private static final AppointmentFactory factory = new AppointmentFactory();
 
-  public static AppointmentFactory getFactory() {
+  static AppointmentFactory getFactory() {
     return factory;
   }
 

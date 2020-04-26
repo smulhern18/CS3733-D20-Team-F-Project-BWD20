@@ -2,11 +2,15 @@ package edu.wpi.teamF.DatabaseManipulators;
 
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Account.PasswordHasher;
+import edu.wpi.teamF.ModelClasses.Appointment;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
-
-import javax.management.InstanceNotFoundException;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.UIAccount;
+import java.io.InputStream;
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -81,11 +85,21 @@ public class DatabaseManager {
   private AccountFactory accountFactory = AccountFactory.getFactory();
   private ServiceRequestFactory serviceRequestFactory = ServiceRequestFactory.getFactory();
   private SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
-  private MaintenanceRequestFactory maintenanceRequestFactory = MaintenanceRequestFactory.getFactory();
+  private MaintenanceRequestFactory maintenanceRequestFactory =
+      MaintenanceRequestFactory.getFactory();
+  private ComputerServiceRequestFactory computerServiceRequestFactory =
+      ComputerServiceRequestFactory.getFactory();
   private AppointmentFactory appointmentFactory = AppointmentFactory.getFactory();
-  private CSVManipulator csvManipulator = new CSVManipulator();
 
   static Connection connection = null;
+
+  private static DatabaseManager manager = new DatabaseManager();
+
+  private DatabaseManager() {}
+
+  public static DatabaseManager getManager() {
+    return manager;
+  }
 
   public void createTables() throws SQLException {
     String nodeTableCreationStatement =
@@ -159,14 +173,14 @@ public class DatabaseManager {
             + "))";
 
     String maintenanceTableCreationStatement =
-            "CREATE TABLE "
-                    + MAINTENANCE_REQUEST_TABLE_NAME
-                    + " ( "
-                    + SERVICEID_KEY
-                    + " VARCHAR(32) NOT NULL, "
-                    + "PRIMARY KEY ("
-                    + SERVICEID_KEY
-                    + "))";
+        "CREATE TABLE "
+            + MAINTENANCE_REQUEST_TABLE_NAME
+            + " ( "
+            + SERVICEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + "PRIMARY KEY ("
+            + SERVICEID_KEY
+            + "))";
 
     String computerTableCreationStatement =
         "CREATE TABLE "
@@ -295,25 +309,23 @@ public class DatabaseManager {
     return connection;
   }
 
-
   /*
    * Node Factory methods
    */
-  public void manipulateNode(Node node) throws Exception{
-    try {
-      nodeFactory.read(node.getId());
-      nodeFactory.update(node);
-    } catch (InstanceNotFoundException e){
+  public void manipulateNode(Node node) throws Exception {
+    if (nodeFactory.read(node.getId()) == null) {
       nodeFactory.create(node);
+    } else {
+      nodeFactory.update(node);
     }
   }
 
   public Node readNode(String nodeId) throws Exception {
-      return nodeFactory.read(nodeId);
+    return nodeFactory.read(nodeId);
   }
 
   public void deleteNode(String nodeId) throws Exception {
-      nodeFactory.delete(nodeId);
+    nodeFactory.delete(nodeId);
   }
 
   public List<Node> getAllNodes() throws Exception {
@@ -328,7 +340,7 @@ public class DatabaseManager {
    * Edge Factory methods
    */
   public void manipulateEdge(Edge edge) throws Exception {
-    if (edgeFactory.read(edge.getId()) == null){
+    if (edgeFactory.read(edge.getId()) == null) {
       edgeFactory.create(edge);
     } else {
       edgeFactory.update(edge);
@@ -356,6 +368,25 @@ public class DatabaseManager {
   }
 
   /*
+   * Appointment Factory methods
+   */
+  public void manipulateAppointment(Appointment appointment) throws Exception {
+    if (appointmentFactory.read(appointment.getId()) == null) {
+      appointmentFactory.create(appointment);
+    } else {
+      appointmentFactory.update(appointment);
+    }
+  }
+
+  public Appointment readAppointment(String id) throws Exception {
+    return appointmentFactory.read(id);
+  }
+
+  public void deleteAppointment(String id) throws Exception {
+    appointmentFactory.delete(id);
+  }
+
+  /*
    * Account Factory methods
    */
   public void manipulateAccount(Account account) throws Exception {
@@ -376,5 +407,126 @@ public class DatabaseManager {
 
   public boolean verifyPassword(String username, String password) throws Exception {
     return PasswordHasher.verifyPassword(password, accountFactory.getPasswordByUsername(username));
+  }
+
+  public List<Account> getAllAccounts() throws Exception {
+    return accountFactory.getAllAccounts();
+  }
+
+  public List<UIAccount> getAllUIAccounts() throws Exception {
+    return accountFactory.getAccounts();
+  }
+
+  /*
+   * Service Request Factory Methods
+   */
+  public void manipulateServiceRequest(MaintenanceRequest serviceRequest) throws Exception {
+    if (maintenanceRequestFactory.read(serviceRequest.getId()) == null) {
+      maintenanceRequestFactory.create(serviceRequest);
+    } else {
+      maintenanceRequestFactory.update(serviceRequest);
+    }
+  }
+
+  public void manipulateServiceRequest(SecurityRequest serviceRequest) throws Exception {
+    if (securityRequestFactory.read(serviceRequest.getId()) == null) {
+      securityRequestFactory.create(serviceRequest);
+    } else {
+      serviceRequestFactory.update(serviceRequest);
+    }
+  }
+
+  public void manipulateServiceRequest(ComputerServiceRequest serviceRequest) throws Exception {
+    if (computerServiceRequestFactory.read(serviceRequest.getId()) == null) {
+      computerServiceRequestFactory.create(serviceRequest);
+    } else {
+      computerServiceRequestFactory.update(serviceRequest);
+    }
+  }
+
+  public MaintenanceRequest readMaintenanceRequest(String serviceId) throws Exception {
+    return maintenanceRequestFactory.read(serviceId);
+  }
+
+  public SecurityRequest readSecurityRequest(String serviceId) throws Exception {
+    return securityRequestFactory.read(serviceId);
+  }
+
+  public ComputerServiceRequest readComputerServiceRequest(String serviceId) throws Exception {
+    return ComputerServiceRequestFactory.read(serviceId);
+  }
+
+  public void deleteComputerServiceRequest(String serviceId) throws Exception {
+    computerServiceRequestFactory.delete(serviceId);
+  }
+
+  public void deleteMaintenanceRequest(String serviceId) throws Exception {
+    maintenanceRequestFactory.delete(serviceId);
+  }
+
+  public void deleteSecurityRequest(String serviceId) throws Exception {
+    securityRequestFactory.delete(serviceId);
+  }
+
+  public List<MaintenanceRequest> getMaintenanceRequestsByLocation(Node node) throws Exception {
+    return maintenanceRequestFactory.getMaintenanceRequestsByLocation(node);
+  }
+
+  public List<SecurityRequest> getSecurityRequestsByLocation(Node node) throws Exception {
+    return securityRequestFactory.getSecurityRequestsByLocation(node);
+  }
+
+  public List<ComputerServiceRequest> getComputerServiceRequestsByLocation(Node node)
+      throws Exception {
+    return computerServiceRequestFactory.getComputerRequestsByLocation(node);
+  }
+
+  public List<MaintenanceRequest> getAllMaintenanceRequests() throws Exception {
+    return maintenanceRequestFactory.getAllMaintenanceRequests();
+  }
+
+  public List<SecurityRequest> getAllSecurityRequests() throws Exception {
+    return securityRequestFactory.getAllSecurityRequests();
+  }
+
+  public List<ComputerServiceRequest> getAllComputerServiceRequests() throws Exception {
+    return computerServiceRequestFactory.getAllComputerRequests();
+  }
+
+  /*
+   * CSV Manipulator Methods
+   */
+  public void backup(Path path) throws Exception {
+    CSVManipulator csvManipulator = new CSVManipulator();
+    csvManipulator.writeCSVFileAccount(path);
+    csvManipulator.writeCSVFileEdge(path);
+    csvManipulator.writeCSVFileMaintenanceService(path);
+    csvManipulator.writeCSVFileNode(path);
+    csvManipulator.writeCSVFileSecurityService(path);
+  }
+
+  public void readNodes(InputStream stream) {
+    CSVManipulator csvManipulator = new CSVManipulator();
+    csvManipulator.readCSVFileNode(stream);
+  }
+
+  public void readEdges(InputStream stream) {
+    CSVManipulator csvManipulator = new CSVManipulator();
+    csvManipulator.readCSVFileEdge(stream);
+  }
+
+  public void readMaintenanceRequests(InputStream stream) {
+    CSVManipulator csvManipulator = new CSVManipulator();
+    csvManipulator.readCSVFileMaintenanceService(stream);
+  }
+
+  public void readSecurityRequests(InputStream stream) {
+    CSVManipulator csvManipulator = new CSVManipulator();
+    csvManipulator.readCSVFileSecurityService(stream);
+  }
+
+  public void readAccounts(InputStream stream) {
+    CSVManipulator csvManipulator = new CSVManipulator();
+    csvManipulator.readCSVFileAccount(stream);
   }
 }

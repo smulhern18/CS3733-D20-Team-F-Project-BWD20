@@ -3,13 +3,8 @@ package edu.wpi.teamF.ModelClasses;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import edu.wpi.teamF.DatabaseManipulators.AccountFactory;
 import edu.wpi.teamF.DatabaseManipulators.CSVManipulator;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
-import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
-import edu.wpi.teamF.DatabaseManipulators.MaintenanceRequestFactory;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
-import edu.wpi.teamF.DatabaseManipulators.SecurityRequestFactory;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
@@ -25,17 +20,11 @@ import org.junit.jupiter.api.*;
 public class TestCSV {
 
   /** Utility classes instantiation */
-  static DatabaseManager databaseManager = new DatabaseManager();
+  static DatabaseManager databaseManager = DatabaseManager.getManager();
 
   static CSVManipulator csvManipulator = new CSVManipulator();
-  static NodeFactory nodeFactory = NodeFactory.getFactory();
-  static TestData testData = null;
-  static EdgeFactory edgeFactory = EdgeFactory.getFactory();
-  static MaintenanceRequestFactory maintenanceRequestFactory =
-      MaintenanceRequestFactory.getFactory();
-  static SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
-  static AccountFactory accountFactory = AccountFactory.getFactory();
 
+  TestData testData = null;
   Node[] validNodes = null;
   Edge[] validEdge = null;
   MaintenanceRequest[] validMaintenance = null;
@@ -75,11 +64,11 @@ public class TestCSV {
   }
 
   @Test
-  public void testReadAndWriteCSVNodes() {
+  public void testReadAndWriteCSVNodes() throws Exception {
     int i = 0;
     csvManipulator.readCSVFileNode(
         getClass().getResourceAsStream("/edu/wpi/teamF/CSVNodeTest.csv"));
-    List<Node> list = nodeFactory.getAllNodes();
+    List<Node> list = databaseManager.getAllNodes();
     for (Node n : list) {
 
       Assertions.assertTrue(n.equals(validNodes[i]));
@@ -102,14 +91,14 @@ public class TestCSV {
   }
 
   @Test
-  public void testReadAndWriteCSVEdges() {
+  public void testReadAndWriteCSVEdges() throws Exception {
     Edge edge;
     int i = 0;
 
     csvManipulator.readCSVFileEdge(
         getClass().getResourceAsStream("/edu/wpi/teamF/CSVEdgeTest.csv"));
     try {
-      List<Edge> list = edgeFactory.getAllEdges();
+      List<Edge> list = databaseManager.getAllEdges();
       for (Edge e : list) {
         Assertions.assertTrue(e.equals(validEdge[i]));
         i++;
@@ -132,20 +121,20 @@ public class TestCSV {
   }
 
   @Test
-  public void testReadAndWriteCSVMaintenance() {
+  public void testReadAndWriteCSVMaintenance() throws Exception {
     int i = 0;
     try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
     csvManipulator.readCSVFileMaintenanceService(
         getClass().getResourceAsStream("/edu/wpi/teamF/CSVMaintenanceRequestTest.csv"));
 
-    List<MaintenanceRequest> list = maintenanceRequestFactory.getAllMaintenanceRequests();
+    List<MaintenanceRequest> list = databaseManager.getAllMaintenanceRequests();
     for (MaintenanceRequest m : list) {
 
       Assertions.assertTrue(m.equals(validMaintenance[i]));
@@ -172,20 +161,20 @@ public class TestCSV {
   }
 
   @Test
-  public void testReadAndWriteCSVSecurity() {
+  public void testReadAndWriteCSVSecurity() throws Exception {
     int i = 0;
     try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
     csvManipulator.readCSVFileSecurityService(
         getClass().getResourceAsStream("/edu/wpi/teamF/CSVSecurityTest.csv"));
 
-    List<SecurityRequest> list = securityRequestFactory.getAllSecurityRequests();
+    List<SecurityRequest> list = databaseManager.getAllSecurityRequests();
     for (SecurityRequest n : list) {
 
       Assertions.assertTrue(n.equals(validSecurityRequest[i]));
@@ -209,13 +198,13 @@ public class TestCSV {
   }
 
   @Test
-  public void testReadAndWriteCSVAccount() {
+  public void testReadAndWriteCSVAccount() throws Exception {
     int i = 0;
 
     csvManipulator.readCSVFileAccount(
         getClass().getResourceAsStream("/edu/wpi/teamF/CSVAccountTest.csv"));
 
-    List<Account> list = accountFactory.getAllAccounts();
+    List<Account> list = databaseManager.getAllAccounts();
     for (Account a : list) {
 
       //  Assertions.assertTrue(a.getFirstName().equals(validAccounts[i].getFirstName()));

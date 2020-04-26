@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
-import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.TestData;
 import java.sql.SQLException;
 import java.util.List;
@@ -18,9 +16,7 @@ public class NodeFactoryTest {
 
   static TestData testData = null;
   static Node[] validNodes = null;
-  NodeFactory nodeFactory = NodeFactory.getFactory();
-  EdgeFactory edgeFactory = EdgeFactory.getFactory();
-  static DatabaseManager databaseManager = new DatabaseManager();
+  static DatabaseManager databaseManager = DatabaseManager.getManager();
 
   @BeforeEach
   public void initialize() throws Exception {
@@ -35,24 +31,24 @@ public class NodeFactoryTest {
   }
 
   @Test
-  public void testCreateReadDelete() {
+  public void testCreateReadDelete() throws Exception {
     try {
-      nodeFactory.create(null);
+      databaseManager.manipulateNode(null);
       fail("Creating a null value is unacceptable");
-    } catch (ValidationException e) {
+    } catch (NullPointerException e) {
       // ignore as expected
     }
     try {
       for (Node node : validNodes) {
-        nodeFactory.create(node);
+        databaseManager.manipulateNode(node);
 
-        Node readNode = nodeFactory.read(node.getId());
+        Node readNode = databaseManager.readNode(node.getId());
         assertTrue(readNode.equals(node));
 
-        nodeFactory.delete(node.getId());
+        databaseManager.deleteNode(node.getId());
 
         try {
-          readNode = nodeFactory.read(node.getId());
+          readNode = databaseManager.readNode(node.getId());
         } catch (InstanceNotFoundException e) {
           // ignore
         } catch (Exception e) {
@@ -68,16 +64,16 @@ public class NodeFactoryTest {
   public void testCreateReadUpdateDelete() {
     try {
       for (Node node : validNodes) {
-        nodeFactory.create(node);
+        databaseManager.manipulateNode(node);
 
         node.setBuilding("Hello");
-        nodeFactory.update(node);
+        databaseManager.manipulateNode(node);
 
-        Node readNode = nodeFactory.read(node.getId());
+        Node readNode = databaseManager.readNode(node.getId());
 
         assertTrue(node.equals(readNode));
 
-        nodeFactory.delete(node.getId());
+        databaseManager.deleteNode(node.getId());
       }
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
@@ -96,28 +92,26 @@ public class NodeFactoryTest {
     node3.setType(Node.NodeType.CONF);
     node4.setType(Node.NodeType.DEPT);
 
-    NodeFactory nodeFactory = NodeFactory.getFactory();
-
     try {
-      nodeFactory.create(node1);
-      nodeFactory.create(node2);
-      nodeFactory.create(node3);
-      nodeFactory.create(node4);
+      databaseManager.manipulateNode(node1);
+      databaseManager.manipulateNode(node2);
+      databaseManager.manipulateNode(node3);
+      databaseManager.manipulateNode(node4);
 
-      List<Node> elevatorNodes = nodeFactory.getNodesByType(Node.NodeType.ELEV);
+      List<Node> elevatorNodes = databaseManager.getNodesByType(Node.NodeType.ELEV);
 
       assertTrue(elevatorNodes.contains(node1));
       assertTrue(elevatorNodes.contains(node2));
       assertTrue(elevatorNodes.size() == 2);
 
-      List<Node> conferenceNodes = nodeFactory.getNodesByType(Node.NodeType.CONF);
+      List<Node> conferenceNodes = databaseManager.getNodesByType(Node.NodeType.CONF);
       assertTrue(conferenceNodes.contains(node3));
       assertTrue(conferenceNodes.size() == 1);
 
-      nodeFactory.delete(node1.getId());
-      nodeFactory.delete(node2.getId());
-      nodeFactory.delete(node3.getId());
-      nodeFactory.delete(node4.getId());
+      databaseManager.deleteNode(node1.getId());
+      databaseManager.deleteNode(node2.getId());
+      databaseManager.deleteNode(node3.getId());
+      databaseManager.deleteNode(node4.getId());
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
     }
@@ -135,15 +129,13 @@ public class NodeFactoryTest {
     node3.setType(Node.NodeType.CONF);
     node4.setType(Node.NodeType.DEPT);
 
-    NodeFactory nodeFactory = NodeFactory.getFactory();
-
     try {
-      nodeFactory.create(node1);
-      nodeFactory.create(node2);
-      nodeFactory.create(node3);
-      nodeFactory.create(node4);
+      databaseManager.manipulateNode(node1);
+      databaseManager.manipulateNode(node2);
+      databaseManager.manipulateNode(node3);
+      databaseManager.manipulateNode(node4);
 
-      List<Node> elevatorNodes = nodeFactory.getAllNodes();
+      List<Node> elevatorNodes = databaseManager.getAllNodes();
 
       assertTrue(elevatorNodes.contains(node1));
       assertTrue(elevatorNodes.contains(node2));
@@ -151,10 +143,10 @@ public class NodeFactoryTest {
       assertTrue(elevatorNodes.contains(node4));
       assertTrue(elevatorNodes.size() == 4);
 
-      nodeFactory.delete(node1.getId());
-      nodeFactory.delete(node2.getId());
-      nodeFactory.delete(node3.getId());
-      nodeFactory.delete(node4.getId());
+      databaseManager.deleteNode(node1.getId());
+      databaseManager.deleteNode(node2.getId());
+      databaseManager.deleteNode(node3.getId());
+      databaseManager.deleteNode(node4.getId());
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
     }

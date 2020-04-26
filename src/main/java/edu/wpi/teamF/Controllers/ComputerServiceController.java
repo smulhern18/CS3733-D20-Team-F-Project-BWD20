@@ -2,12 +2,10 @@ package edu.wpi.teamF.Controllers;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import edu.wpi.teamF.DatabaseManipulators.ComputerServiceRequestFactory;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIComputerServiceRequest;
-import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,7 +22,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
-import javax.management.InstanceNotFoundException;
 
 public class ComputerServiceController implements Initializable {
   public JFXTreeTableView<UIComputerServiceRequest> treeTableComputer;
@@ -45,16 +42,22 @@ public class ComputerServiceController implements Initializable {
   public ChoiceBox<String> OSChoice;
   public JFXTextArea descText;
   public ChoiceBox<String> priorityChoice;
-  NodeFactory nodeFactory = NodeFactory.getFactory();
-  ComputerServiceRequestFactory computerServiceRequest = ComputerServiceRequestFactory.getFactory();
+  DatabaseManager databaseManager = DatabaseManager.getManager();
   List<ComputerServiceRequest> computerServiceRequests =
-      computerServiceRequest.getAllComputerRequests();
+      databaseManager.getAllComputerServiceRequests();
+
+  public ComputerServiceController() throws Exception {}
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // add the different choices to the choicebox
     // Replace this with long names, linked to IDs
-    List<Node> nodes = nodeFactory.getAllNodes();
+    List<Node> nodes = null;
+    try {
+      nodes = databaseManager.getAllNodes();
+    } catch (Exception e) {
+      System.out.println(e.getMessage() + e.getClass());
+    }
     for (Node node : nodes) {
       locationChoice.getItems().add(node.getId());
     }
@@ -158,11 +161,10 @@ public class ComputerServiceController implements Initializable {
     treeTableComputer.setShowRoot(false);
   }
 
-  public void submit(ActionEvent actionEvent)
-      throws ValidationException, InstanceNotFoundException {
+  public void submit(ActionEvent actionEvent) throws Exception {
     // Get the values
     String location = locationChoice.getValue();
-    Node node = nodeFactory.read(location);
+    Node node = databaseManager.readNode(location);
     String make = makeChoice.getValue();
     String issueType = issueChoice.getValue();
     String OS = OSChoice.getValue();
@@ -183,7 +185,7 @@ public class ComputerServiceController implements Initializable {
     ComputerServiceRequest csRequest =
         new ComputerServiceRequest(
             node, desc, "Not Assigned", date, priorityDB, make, issueType, OS);
-    computerServiceRequest.create(csRequest);
+    databaseManager.manipulateServiceRequest(csRequest);
     csrUI.add(new UIComputerServiceRequest(csRequest));
     treeTableComputer.refresh();
     descText.setText("");
@@ -203,23 +205,23 @@ public class ComputerServiceController implements Initializable {
     issueChoice.setValue(null);
   }
 
-  public void update(ActionEvent actionEvent)
-      throws ValidationException, InstanceNotFoundException {
-    for (UIComputerServiceRequest csrui : csrUI) {
-      boolean isSame = csrui.equalsCSR(computerServiceRequest.read(csrui.getID()));
-      if (!isSame) {
-        computerServiceRequest.read(csrui.getID()).setAssignee(csrui.getAssignee());
-        String completed = csrui.getCompleted();
-        if (completed.equals("F")) {
-          computerServiceRequest.read(csrui.getID()).setComplete(false);
-
-        } else if (completed.equals("T")) {
-          computerServiceRequest.read(csrui.getID()).setComplete(true);
-        }
-      }
-    }
-    treeTableComputer.refresh();
-  }
+  //  public void update(ActionEvent actionEvent)
+  //      throws ValidationException, InstanceNotFoundException {
+  //    for (UIComputerServiceRequest csrui : csrUI) {
+  //      boolean isSame = csrui.equalsCSR(computerServiceRequest.read(csrui.getID()));
+  //      if (!isSame) {
+  //        computerServiceRequest.read(csrui.getID()).setAssignee(csrui.getAssignee());
+  //        String completed = csrui.getCompleted();
+  //        if (completed.equals("F")) {
+  //          computerServiceRequest.read(csrui.getID()).setComplete(false);
+  //
+  //        } else if (completed.equals("T")) {
+  //          computerServiceRequest.read(csrui.getID()).setComplete(true);
+  //        }
+  //      }
+  //    }
+  //    treeTableComputer.refresh();
+  //  }
 
   public void switchView(ActionEvent actionEvent) {
     boolean isSelected = switcher.isSelected();

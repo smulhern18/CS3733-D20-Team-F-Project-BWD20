@@ -74,8 +74,9 @@ public class Validators {
   public static void emailAddressValidation(String address, int... constraints)
       throws ValidationException {
     nullCheckValidation(address, constraints);
-    if ((!address.contains("@") || !address.contains("."))
-        && (address.length() > ADDRESS_MIN_LENGTH && address.length() < ADDRESS_MAX_LENGTH)) {
+    if (address.matches(
+            "^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
+        && !(address.length() > ADDRESS_MIN_LENGTH || address.length() < ADDRESS_MAX_LENGTH)) {
       throw new ValidationException("Invalid Email Address: " + address);
     }
   }

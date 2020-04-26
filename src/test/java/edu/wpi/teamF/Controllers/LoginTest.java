@@ -4,7 +4,6 @@ import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
 import edu.wpi.teamF.App;
-import edu.wpi.teamF.DatabaseManipulators.AccountFactory;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.TestData;
@@ -20,15 +19,14 @@ import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
 
 public class LoginTest extends ApplicationTest {
-  private static DatabaseManager db = new DatabaseManager();
-  private static AccountFactory accountFactory = AccountFactory.getFactory();
+  private static DatabaseManager db = DatabaseManager.getManager();
 
   @BeforeAll
   public static void setUp() throws Exception {
     db.initialize();
     TestData testData = new TestData();
     for (Account account : testData.validAccounts) {
-      accountFactory.create(account);
+      db.manipulateAccount(account);
     }
     ApplicationTest.launch(App.class);
   }

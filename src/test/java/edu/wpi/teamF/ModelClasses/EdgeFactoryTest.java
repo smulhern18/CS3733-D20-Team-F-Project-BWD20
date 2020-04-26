@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
-import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.TestData;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -21,9 +19,7 @@ public class EdgeFactoryTest {
   static TestData testData = null;
   static String[] validNodeIDs = null;
   static Edge[] validEdges = null;
-  static NodeFactory nodeFactory = NodeFactory.getFactory();
-  static DatabaseManager databaseManager = new DatabaseManager();
-  EdgeFactory edgeFactory = EdgeFactory.getFactory();
+  static DatabaseManager databaseManager = DatabaseManager.getManager();
 
   @BeforeAll
   public static void initializeDatabase() {
@@ -31,7 +27,7 @@ public class EdgeFactoryTest {
       databaseManager.initialize();
       testData = new TestData();
       for (Node node : testData.validNodes) {
-        nodeFactory.create(node);
+        databaseManager.manipulateNode(node);
       }
     } catch (SQLException e) {
       // Ignore
@@ -56,25 +52,25 @@ public class EdgeFactoryTest {
   }
 
   @Test
-  public void testCreateReadDelete() {
+  public void testCreateReadDelete() throws Exception {
     try {
-      edgeFactory.create(null);
+      databaseManager.manipulateEdge(null);
       fail("Creating a null value is unacceptable");
-    } catch (ValidationException e) {
+    } catch (NullPointerException e) {
       // ignore as expected
     }
     try {
       for (Edge edge : validEdges) {
-        edgeFactory.create(edge);
+        databaseManager.manipulateEdge(edge);
 
-        Edge readEdge = edgeFactory.read(edge.getId());
+        Edge readEdge = databaseManager.readEdge(edge.getId());
 
         assertTrue(readEdge.equals(edge));
 
-        edgeFactory.delete(edge.getId());
+        databaseManager.deleteEdge(edge.getId());
 
         try {
-          readEdge = edgeFactory.read(edge.getId());
+          readEdge = databaseManager.readEdge(edge.getId());
         } catch (InstanceNotFoundException e) {
           // ignore
         } catch (Exception e) {
@@ -90,16 +86,16 @@ public class EdgeFactoryTest {
   public void testCreateReadUpdateDelete() {
     try {
       for (Edge edge : validEdges) {
-        edgeFactory.create(edge);
+        databaseManager.manipulateEdge(edge);
 
         edge.setNode1(validNodeIDs[6]);
-        edgeFactory.update(edge);
+        databaseManager.manipulateEdge(edge);
 
-        Edge readEdge = edgeFactory.read(edge.getId());
+        Edge readEdge = databaseManager.readEdge(edge.getId());
 
         assertTrue(edge.equals(readEdge));
 
-        edgeFactory.delete(edge.getId());
+        databaseManager.deleteEdge(edge.getId());
       }
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
@@ -110,12 +106,12 @@ public class EdgeFactoryTest {
   public void testGetAllEdgesForNode() {
     try {
       validEdges[1].setNode2(validNodeIDs[0]);
-      edgeFactory.create(validEdges[0]);
-      edgeFactory.create(validEdges[1]);
-      edgeFactory.create(validEdges[2]);
-      edgeFactory.create(validEdges[3]);
+      databaseManager.manipulateEdge(validEdges[0]);
+      databaseManager.manipulateEdge(validEdges[1]);
+      databaseManager.manipulateEdge(validEdges[2]);
+      databaseManager.manipulateEdge(validEdges[3]);
       ArrayList<Edge> readEdges = new ArrayList<>();
-      for (Edge e : edgeFactory.getAllEdgesConnectedToNode(validNodeIDs[0])) {
+      for (Edge e : databaseManager.getAllEdgesConnectedToNode(validNodeIDs[0])) {
         readEdges.add(e);
       }
       assertTrue(readEdges.size() == 2);
@@ -131,11 +127,11 @@ public class EdgeFactoryTest {
   @Test
   public void testGetAllEdges() {
     try {
-      edgeFactory.create(validEdges[0]);
-      edgeFactory.create(validEdges[1]);
-      edgeFactory.create(validEdges[2]);
-      edgeFactory.create(validEdges[3]);
-      ArrayList<Edge> readEdges = new ArrayList<>(edgeFactory.getAllEdges());
+      databaseManager.manipulateEdge(validEdges[0]);
+      databaseManager.manipulateEdge(validEdges[1]);
+      databaseManager.manipulateEdge(validEdges[2]);
+      databaseManager.manipulateEdge(validEdges[3]);
+      ArrayList<Edge> readEdges = new ArrayList<>(databaseManager.getAllEdges());
       assertTrue(readEdges.size() == 4);
       assertTrue(readEdges.get(0).equals(validEdges[0]));
       assertTrue(readEdges.get(1).equals(validEdges[1]));
