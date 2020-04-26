@@ -40,7 +40,7 @@
                 <Font name="System Bold" size="14.0" />
             </font>
         </JFXButton>
-        <JFXTreeTableView fx:id="treeTableComputer" layoutX="47.0" layoutY="37.0" prefHeight="261.0" prefWidth="614.0" visible="false" />
+        <JFXTreeTableView fx:id="treeTableSanitation" layoutX="47.0" layoutY="37.0" prefHeight="261.0" prefWidth="614.0" visible="false" />
         <Label fx:id="priorityLabel" layoutX="66.0" layoutY="267.0" prefHeight="31.0" prefWidth="68.0" text="Priority:">
             <font>
                 <Font name="System Bold" size="15.0" />
