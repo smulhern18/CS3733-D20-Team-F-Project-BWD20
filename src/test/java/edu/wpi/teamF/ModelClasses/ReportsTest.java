@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 import edu.wpi.teamF.DatabaseManipulators.CSVManipulator;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.DatabaseManipulators.ServiceRequestStats;
-import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
 import edu.wpi.teamF.TestData;
@@ -14,7 +13,6 @@ import java.io.File;
 import java.nio.file.Files;
 import java.sql.SQLException;
 import java.util.Arrays;
-import java.util.HashSet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,11 +25,8 @@ public class ReportsTest {
 
   TestData testData = null;
   Node[] validNodes = null;
-  Edge[] validEdge = null;
   MaintenanceRequest[] validMaintenance = null;
   SecurityRequest[] validSecurityRequest = null;
-  Account[] validAccounts = null;
-  HashSet<String> validNeighbors1 = null;
 
   @BeforeEach
   public void cleanTests() {
