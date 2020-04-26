@@ -131,22 +131,15 @@ public class DataMapViewController implements Initializable {
     mapPane.setOnMouseClicked(
         new EventHandler<MouseEvent>() {
           public void handle(MouseEvent mouseEvent) {
-            short xVal = (short) mouseEvent.getX();
-            short yVal = (short) mouseEvent.getY();
-            //            heightRatio = (short) heightRatio;
-            //            widthRatio = (short) widthRatio;
-            //            xVal = (short) (xVal * widthRatio);
-            //            yVal = (short) (yVal * heightRatio);
+            double xValDouble = mouseEvent.getX();
+            double yValDouble = mouseEvent.getY();
+            short xVal = (short) (xValDouble / widthRatio);
+            short yVal = (short) (yValDouble / heightRatio);
 
             xCoorInput.setText("" + xVal);
             yCoorInput.setText("" + yVal);
           }
         });
-    //    mapPane.setOnMouseClicked(
-    //        mouseEvent -> {
-    //          xCoorInput.setText("" + (mouseEvent.getX()));
-    //          yCoorInput.setText("" + (mouseEvent.getX()));
-    //        });
     outlineNode();
   }
 
@@ -245,7 +238,11 @@ public class DataMapViewController implements Initializable {
         action -> {
           nodeButton = button; // sets classes button variable to the selected button
           this.node = node;
-          displayNodeData();
+          if (selectNode1 || selectNode2) {
+            edgeSelection(node);
+          } else {
+            displayNodeData();
+          }
         });
     mapPane.getChildren().add(button);
     // setNodeDraggable(button);
@@ -355,8 +352,7 @@ public class DataMapViewController implements Initializable {
       node.setType(nodeType);
       node.setFloor(floorNumber); // sets the node to the provided values
 
-      nodeFactory.update(
-          node); // finds the node by the ID (this is why the ID is uneditable) and updates the node
+      nodeFactory.update(node);
       for (Edge edge :
           edgeFactory.getAllEdgesConnectedToNode(
               node.getId())) { // for all of the edges connected to the node
@@ -368,8 +364,7 @@ public class DataMapViewController implements Initializable {
               && children
                   .getId()
                   .equals(
-                      edge.getId())) { // if a child is an instance of a line and the ID matches one
-            // of the ID that is connected to the node
+                      edge.getId())) {
             Line line = (Line) children;
             if (edge.getNode1()
                 .equals(node.getId())) { // if node one then it is a starting coordinate
@@ -395,9 +390,7 @@ public class DataMapViewController implements Initializable {
     }
   }
 
-  private boolean edgeSelection(
-      Node node) { // this function helps differentiate when a user is selecting a node or selecting
-    // two nodes for creating an edge
+  private boolean edgeSelection(Node node) {
     if (selectNode1) {
       node1 = node;
       selectNode1 = false;
@@ -416,22 +409,16 @@ public class DataMapViewController implements Initializable {
   void selectNode1(ActionEvent event) {
     selectNode1 = true;
     node1 = null;
-    if (!selectNode2Button.getText().equals("Select Node 2")) { // checks the other button
+    if (!selectNode2Button.getText().equals("Select Node 2")) {
       addEdgeButton.setDisable(false);
     }
   }
 
   @FXML
-  void selectNode2(
-      ActionEvent
-          event) { // called when the "Select Node 1" button is pressed (when the user is adding an
-    // edge)
+  void selectNode2(ActionEvent event) {
     selectNode2 = true;
     node2 = null;
-    if (!selectNode1Button
-        .getText()
-        .equals("Select Node 1")) { // checks the other button, if populated, the add button is
-      // activated
+    if (!selectNode1Button.getText().equals("Select Node 1")) {
       addEdgeButton.setDisable(false);
     }
   }
