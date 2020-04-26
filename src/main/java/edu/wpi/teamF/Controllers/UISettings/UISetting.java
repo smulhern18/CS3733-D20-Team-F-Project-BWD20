@@ -3,7 +3,6 @@ package edu.wpi.teamF.Controllers.UISettings;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 public class UISetting {
@@ -13,7 +12,7 @@ public class UISetting {
   private LocationComboBox locationComboBox = new LocationComboBox();
 
   public void makeZoomable(ScrollPane scrollPane, StackPane stackPane) {
-    zoom.makeZoomable( scrollPane,  stackPane);
+    zoom.makeZoomable(scrollPane, stackPane);
   }
 
   public void setAsLocationComboBox(JFXComboBox comboBox) {

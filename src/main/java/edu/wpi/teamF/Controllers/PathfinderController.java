@@ -2,6 +2,7 @@ package edu.wpi.teamF.Controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Directions.Directions;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -40,6 +42,11 @@ public class PathfinderController implements Initializable {
   public StackPane masterPaneFaulkner3;
   public StackPane masterPaneFaulkner4;
   public StackPane masterPaneFaulkner5;
+  public ScrollPane scrollPaneFaulkner1;
+  public ScrollPane scrollPaneFaulkner2;
+  public ScrollPane scrollPaneFaulkner3;
+  public ScrollPane scrollPaneFaulkner4;
+  public ScrollPane scrollPaneFaulkner5;
   public List<Node> nodeList;
   public List<Node> fullNodeList;
   public JFXButton stairsBtn;
@@ -55,6 +62,7 @@ public class PathfinderController implements Initializable {
   public JFXComboBox endCombo;
   public JFXButton pathButton;
   public int state;
+  public UISetting uiSetting = new UISetting();
 
   private NodeFactory nodeFactory = NodeFactory.getFactory();
   private static EdgeFactory edgeFactory = EdgeFactory.getFactory();
@@ -170,7 +178,10 @@ public class PathfinderController implements Initializable {
     setComboBehavior();
 
     for (Node node : nodeList) {
-      if (!node.getType().equals(Node.NodeType.getEnum("HALL"))) {
+      if (!node.getType().equals(Node.NodeType.getEnum("HALL"))
+          && !node.getType().equals(Node.NodeType.getEnum("STAI"))
+          && !node.getType().equals(Node.NodeType.getEnum("ELEV"))
+          && !node.getType().equals(Node.NodeType.getEnum("REST"))) {
         placeButton(node);
         pathButtonGo();
       }
@@ -187,6 +198,11 @@ public class PathfinderController implements Initializable {
     setAllInvisible();
     masterPaneFaulkner1.setVisible(true);
     floorButtonsSet();
+    uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1);
+    uiSetting.makeZoomable(scrollPaneFaulkner2, masterPaneFaulkner2);
+    uiSetting.makeZoomable(scrollPaneFaulkner3, masterPaneFaulkner3);
+    uiSetting.makeZoomable(scrollPaneFaulkner4, masterPaneFaulkner4);
+    uiSetting.makeZoomable(scrollPaneFaulkner5, masterPaneFaulkner5);
 
     for (Node node : nodeFactory.getAllNodes()) {
       node.setEdges(edgeFactory.getAllEdgesConnectedToNode(node.getId()));

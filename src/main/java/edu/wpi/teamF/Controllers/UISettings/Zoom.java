@@ -37,10 +37,10 @@ public class Zoom {
   private Node outerNode(Node node) {
     Node outerNode = centeredNode(node);
     outerNode.setOnScroll(
-            e -> {
-              e.consume();
-              onScroll(e.getTextDeltaY(), new Point2D(e.getX(), e.getY()));
-            });
+        e -> {
+          e.consume();
+          onScroll(e.getTextDeltaY(), new Point2D(e.getX(), e.getY()));
+        });
     return outerNode;
   }
 
@@ -62,7 +62,7 @@ public class Zoom {
     Bounds innerBounds = zoomNode.getLayoutBounds();
     Bounds viewportBounds = scrollPane.getViewportBounds();
     System.out.println(
-            innerBounds.getWidth() + " " + viewportBounds.getWidth() + " " + scrollPane.getHvalue());
+        innerBounds.getWidth() + " " + viewportBounds.getWidth() + " " + scrollPane.getHvalue());
 
     // calculate pixel offsets from [0, 1] range
     double valX = scrollPane.getHvalue() * (innerBounds.getWidth() - viewportBounds.getWidth());
@@ -77,16 +77,16 @@ public class Zoom {
 
     // calculate adjustment of scroll position (pixels)
     Point2D adjustment =
-            stackPane
-                    .getLocalToParentTransform()
-                    .deltaTransform(posInZoomTarget.multiply(zoomFactor - 1));
+        stackPane
+            .getLocalToParentTransform()
+            .deltaTransform(posInZoomTarget.multiply(zoomFactor - 1));
 
     // convert back to [0, 1] range
     // (too large/small values are automatically corrected by ScrollPane)
     Bounds updatedInnerBounds = zoomNode.getBoundsInLocal();
     scrollPane.setHvalue(
-            (valX + adjustment.getX()) / (updatedInnerBounds.getWidth() - viewportBounds.getWidth()));
+        (valX + adjustment.getX()) / (updatedInnerBounds.getWidth() - viewportBounds.getWidth()));
     scrollPane.setVvalue(
-            (valY + adjustment.getY()) / (updatedInnerBounds.getHeight() - viewportBounds.getHeight()));
+        (valY + adjustment.getY()) / (updatedInnerBounds.getHeight() - viewportBounds.getHeight()));
   }
 }
