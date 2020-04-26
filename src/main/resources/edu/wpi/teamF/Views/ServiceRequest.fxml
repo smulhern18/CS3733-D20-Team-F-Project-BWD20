@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -17,7 +18,7 @@
          </font>
       </Text>
       <Line endX="113.0" layoutX="644.0" layoutY="182.0" startX="-108.0" stroke="#b53389" />
-      <JFXButton buttonType="RAISED" layoutX="682.0" layoutY="670.0" onAction="#cancel" prefHeight="54.0" prefWidth="209.0" ripplerFill="#b53389" style="-fx-background-color: white;" text="Cancel">
+      <JFXButton fx:id="cancelButton" buttonType="RAISED" layoutX="682.0" layoutY="670.0" onAction="#cancel" prefHeight="54.0" prefWidth="209.0" ripplerFill="#b53389" style="-fx-background-color: white;" text="Cancel">
          <font>
             <Font size="25.0" />
          </font>
@@ -37,7 +38,7 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Text>
-      <JFXButton buttonType="RAISED" layoutX="394.0" layoutY="670.0" onAction="#submit" ripplerFill="#b53389" style="-fx-background-color: white;" text="Submit Request">
+      <JFXButton fx:id="submitRequestButton" buttonType="RAISED" layoutX="394.0" layoutY="670.0" onAction="#submit" ripplerFill="#b53389" style="-fx-background-color: white;" text="Submit Request">
          <font>
             <Font size="25.0" />
          </font>
@@ -51,10 +52,23 @@
          </font>
       </Text>
       <ChoiceBox fx:id="choiceBoxType" layoutX="468.0" layoutY="599.0" prefWidth="150.0" />
-      <JFXButton buttonType="RAISED" layoutX="930.0" layoutY="670.0" onAction="#cancel" prefHeight="54.0" prefWidth="331.0" ripplerFill="#b53389" style="-fx-background-color: white;" text="Ongoing Service Requests">
+      <AnchorPane fx:id="mapView" layoutX="166.0" layoutY="212.0" prefHeight="425.0" prefWidth="852.0" style="-fx-background-color: white;" visible="false">
+         <children>
+
+            <JFXTreeTableView fx:id="serviceTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="382.0" prefWidth="742.0" />
+
+         </children>
+      </AnchorPane>
+      <JFXButton fx:id="ongoingButton" buttonType="RAISED" layoutX="930.0" layoutY="670.0" onAction="#showServiceRequests" prefHeight="54.0" prefWidth="331.0" ripplerFill="#b53389" style="-fx-background-color: white;" text="Ongoing Service Requests">
          <font>
             <Font size="25.0" />
          </font>
       </JFXButton>
+      <JFXButton fx:id="cancelOngoing" buttonType="RAISED" layoutX="930.0" layoutY="670.0" onAction="#backtoInput" prefHeight="54.0" prefWidth="331.0" style="-fx-background-color: white;" text="Cancel" visible="false">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="updateButton" buttonType="RAISED" layoutX="1032.0" layoutY="212.0" onAction="#updateRequests" prefHeight="41.0" prefWidth="142.0" style="-fx-background-color: white;" text="Update" visible="false" />
    </children>
 </AnchorPane>

@@ -57,10 +57,10 @@ public class HelpController implements Initializable {
     content2.setHeading(new Text("How to login?"));
     content2.setBody(
         new Text(
-            "Click on the 'Login' button on Main Menu. You will go to the Login page. \n"
-                + "If you have an account, enter the Username and Password. Then click \n"
-                + "on the 'Login' button. If you don't have an account, then click on the\n"
-                + " 'Register' button to sign up."));
+            "Click on the 'Login' button on Main Menu. You will go to the Login page.\n"
+                + "If  you have an account,  enter the Username and  Password. Then click\n"
+                + "on the 'Login' button. If you don't have an account,  then click on the 'R-\n"
+                + "egister' button to sign up."));
     JFXDialog dialog2 = new JFXDialog(stackPane, content2, JFXDialog.DialogTransition.CENTER);
     JFXButton button2 = new JFXButton("Close");
     button2.setOnAction(
@@ -80,10 +80,11 @@ public class HelpController implements Initializable {
     content3.setHeading(new Text("How to request a service?"));
     content3.setBody(
         new Text(
-            "Click on the 'Service Request' button on Main Menu. You will go to the Service \n"
-                + "Request page. You could request services for security and maintenance. If you \n"
-                + "want to request service for security, click on 'Request Security'. If you want \n"
-                + "to request service for maintenance, click on 'Request Maintenance'."));
+            "Click on the 'Service Request' button on Main Menu. You will go to the Service\n"
+                + "Request page. You could request services for security and maintenance. Enter\n"
+                + "or select the information for location, description, priority, and type. Then click\n"
+                + "on'Submit Request'. If you want to cancel the request, click on 'Cancel’.  If you\n"
+                + "want to check service your request, click on 'Ongoing Service Request'."));
     JFXDialog dialog3 = new JFXDialog(stackPane, content3, JFXDialog.DialogTransition.CENTER);
     JFXButton button3 = new JFXButton("Close");
     button3.setOnAction(
@@ -98,40 +99,18 @@ public class HelpController implements Initializable {
   }
 
   @FXML
-  private void loadDialogrequestmain(ActionEvent actionEvent) {
-    JFXDialogLayout content4 = new JFXDialogLayout();
-    content4.setHeading(new Text("How to request maintenance service?"));
-    content4.setBody(
-        new Text(
-            "Click on the 'Request Maintenance' button on Service Request page. Enter ID, \n"
-                + "location and description of the service and choose its priority. Then click \n"
-                + "on 'Submit'. If you want to cancel the request, click on 'Cancel'. "));
-    JFXDialog dialog4 = new JFXDialog(stackPane, content4, JFXDialog.DialogTransition.CENTER);
-    JFXButton button4 = new JFXButton("Close");
-    button4.setOnAction(
-        new EventHandler<ActionEvent>() {
-          @Override
-          public void handle(ActionEvent event) {
-            dialog4.close();
-          }
-        });
-    content4.setActions(button4);
-    dialog4.show();
-  }
-
-  @FXML
   private void loadDialogadmin(ActionEvent actionEvent) {
     JFXDialogLayout content5 = new JFXDialogLayout();
     content5.setHeading(new Text("How to add/edit/delete nodes?"));
     content5.setBody(
         new Text(
-            "Click on the 'Admin' button on main menu. The information about nodes \n"
-                + "and edges are shown in the table. If you want to view it in a map, click on \n"
-                + "'Map View'. Click again on 'Map View' brings you back to table view. You \n"
-                + "could quick search for nodes or edges by typing their ID in the text field.\n"
-                + "If you want to upload nodes or edges, click on 'Upload Nodes' or 'Upload \n"
-                + "Edges'. If you want to download nodes or edges, click on 'Download Nodes' \n"
-                + "or 'Download Edges'. "));
+            "Click on the 'Admin' button on main menu.   The information about  nodes\n"
+                + "and edges are shown in the table.  If you want to view it in a map, click on\n"
+                + "'Map View'. Click again on 'Map View' brings you back to table view.  You\n"
+                + "could quick search for node or edges by typing their ID in the text field. If\n"
+                + "you want to upload nodes and edges,  click on 'Upload Nodes' or 'Upload\n"
+                + "Edges'.  If you want to download nodes or edges,  click on 'Backup'.  You\n "
+                + "could enter NodeID and click on 'Delete Node' to delete node."));
     JFXDialog dialog5 = new JFXDialog(stackPane, content5, JFXDialog.DialogTransition.CENTER);
     JFXButton button5 = new JFXButton("Close");
     button5.setOnAction(
@@ -149,7 +128,14 @@ public class HelpController implements Initializable {
   private void loadDialogpath(ActionEvent actionEvent) {
     JFXDialogLayout content6 = new JFXDialogLayout();
     content6.setHeading(new Text("How to find a path?"));
-    content6.setBody(new Text("To be added later."));
+    content6.setBody(
+        new Text(
+            "Click on the 'Pathfinder' button on Main Menu.  You will go to the Pathfinder \n"
+                + "page. You could click on nodes’ circles on the map as start points.  Then s-\n"
+                + "elect the destination. The shortest path will be shown on the map. After you\n"
+                + "select start point and want to find stairs, elevators, and bathrooms, click on\n"
+                + "'Find Stairs', 'Find Elevator' or 'Find Bathroom'.   Click on 'Reset' if you want\n"
+                + "to find another path. "));
     JFXDialog dialog6 = new JFXDialog(stackPane, content6, JFXDialog.DialogTransition.CENTER);
     JFXButton button6 = new JFXButton("Close");
     button6.setOnAction(

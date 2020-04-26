@@ -2,13 +2,14 @@ package edu.wpi.teamF.Controllers;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import edu.wpi.teamF.DatabaseManipulators.CSVManipulator;
+import edu.wpi.teamF.App;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -18,15 +19,20 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.util.Callback;
-import javax.management.InstanceNotFoundException;
 
 public class DataManipulatorController implements Initializable {
 
@@ -42,13 +48,55 @@ public class DataManipulatorController implements Initializable {
   public JFXTextField edgeToDelete;
   public JFXButton deleteEdgeButton;
   public AnchorPane mapView;
-  NodeFactory nodes = NodeFactory.getFactory();
-  EdgeFactory edges = EdgeFactory.getFactory();
+  public AnchorPane rootPane;
+  public JFXButton uploadNodesButton;
+  public JFXButton cancelEdgeButton;
+  public JFXButton cancelButton;
   FileChooser nodesChooser = new FileChooser();
   FileChooser edgesChooser = new FileChooser();
-  CSVManipulator csvM = new CSVManipulator();
+  DirectoryChooser backup = new DirectoryChooser();
   ObservableList<UINode> UINodes = FXCollections.observableArrayList();
   ObservableList<UIEdge> UIEdges = FXCollections.observableArrayList();
+  SceneController sceneController = App.getSceneController();
+  DatabaseManager databaseManager = DatabaseManager.getManager();
+
+  @FXML private StackPane modifyNodePane;
+
+  @FXML private JFXButton addNodeButton;
+
+  @FXML private JFXTextField nodeIDInput;
+
+  @FXML private JFXTextField yCoorInput;
+
+  @FXML private JFXTextField xCoorInput;
+
+  @FXML private JFXTextField typeInput;
+
+  @FXML private JFXTextField shortNameInput;
+
+  @FXML private JFXTextField longNameInput;
+
+  @FXML private JFXTextField buildingInput;
+
+  @FXML private JFXTextField floorInput;
+
+  @FXML private StackPane addEdgePane;
+
+  @FXML private JFXButton addEdgeButton;
+
+  @FXML private JFXTextField node1Input;
+
+  @FXML private JFXTextField node2Input;
+
+  @FXML private Label edgeErrorLabel;
+
+  @FXML private Label nodeErrorLabel;
+
+  @FXML private JFXButton addNodePaneButton;
+
+  @FXML private JFXButton addEdgePaneButton;
+
+  EdgeFactory edgeFactory = new EdgeFactory();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -156,8 +204,13 @@ public class DataManipulatorController implements Initializable {
         });
 
     // Add UINodes to the table, by creating new UINodes
-    List<Node> Nodes = nodes.getAllNodes();
-    for (Node node : Nodes) {
+    List<Node> nodes = null;
+    try {
+      nodes = databaseManager.getAllNodes();
+    } catch (Exception e) {
+      System.out.println(e.getMessage() + ", " + e.getClass());
+    }
+    for (Node node : nodes) {
       UINodes.add(new UINode(node));
     }
 
@@ -240,8 +293,13 @@ public class DataManipulatorController implements Initializable {
           }
         });
 
-    List<Edge> Edges = edges.getAllEdges();
-    for (Edge edge : Edges) {
+    List<Edge> edges = null;
+    try {
+      edges = databaseManager.getAllEdges();
+    } catch (Exception e) {
+      System.out.println(e.getMessage() + ", " + e.getClass());
+    }
+    for (Edge edge : edges) {
       UIEdges.add(new UIEdge(edge));
     }
 
@@ -296,6 +354,8 @@ public class DataManipulatorController implements Initializable {
       edgeToDelete.setVisible(false);
       nodeToDelete.setVisible(false);
       mapView.setVisible(true);
+      addNodePaneButton.setVisible(false);
+      addEdgePaneButton.setVisible(false);
 
       // set map stuff visible
     } else {
@@ -310,53 +370,195 @@ public class DataManipulatorController implements Initializable {
       edgeToDelete.setVisible(true);
       nodeToDelete.setVisible(true);
       mapView.setVisible(false);
+      addNodePaneButton.setVisible(true);
+      addEdgePaneButton.setVisible(true);
     }
   }
 
   public void uploadNodes(ActionEvent actionEvent) throws FileNotFoundException {
     nodesChooser.setTitle("Select CSV File Nodes");
-    File file = nodesChooser.showOpenDialog(treeViewNodes.getScene().getWindow());
-    csvM.readCSVFileNode(new FileInputStream(file));
+    File file = nodesChooser.showOpenDialog(rootPane.getScene().getWindow());
+    databaseManager.readNodes(new FileInputStream(file));
   }
 
   public void uploadEdges(ActionEvent actionEvent) throws FileNotFoundException {
-    edgesChooser.setTitle("Select CSV File Nodes");
-    File file = edgesChooser.showOpenDialog(treeViewEdges.getScene().getWindow());
-    csvM.readCSVFileNode(new FileInputStream(file));
+    edgesChooser.setTitle("Select CSV File Edges");
+    File file = edgesChooser.showOpenDialog(rootPane.getScene().getWindow());
+    databaseManager.readEdges(new FileInputStream(file));
   }
 
-  public void updateNodes(ActionEvent actionEvent)
-      throws InstanceNotFoundException, ValidationException {
+  public void updateNodes(ActionEvent actionEvent) throws Exception {
     for (UINode nodeUI : UINodes) {
-      boolean isSame = nodeUI.equalsNode(nodes.read(nodeUI.getID().toString()));
-      if (!isSame) {
+      Node node = nodeUI.UItoNode();
+      node.setEdges(edgeFactory.getAllEdgesConnectedToNode(node.getId()));
+      if (!node.equals(databaseManager.readNode(node.getId()))) {
         // update that node in the db to the new values of that nodeUI
-        nodes.update(nodeUI.UItoNode());
+        databaseManager.manipulateNode(node);
       }
     }
+    treeViewNodes.refresh();
   }
 
   public void updateEdges(ActionEvent actionEvent) throws Exception {
     for (UIEdge edgeUI : UIEdges) {
-      boolean isSame = edgeUI.equalsEdge(edges.read(edgeUI.getID().toString()));
+      boolean isSame = edgeUI.equalsEdge(databaseManager.readEdge(edgeUI.getID().toString()));
       if (!isSame) {
         // update that edge in the db to the new values of that nodeUI
-        edges.update(edgeUI.UItoEdge());
+        databaseManager.manipulateEdge(edgeUI.UItoEdge());
       }
     }
+    treeViewEdges.refresh();
   }
 
-  public void deleteNode(ActionEvent actionEvent) {
+  public void deleteNode(ActionEvent actionEvent) throws Exception {
     String nodeID = nodeToDelete.getText();
-    nodes.delete(nodeID);
+    databaseManager.deleteNode(nodeID);
     UINodes.removeIf(node -> node.getID().get().equals(nodeID));
     treeViewNodes.refresh();
   }
 
-  public void deleteEdge(ActionEvent actionEvent) {
+  public void deleteEdge(ActionEvent actionEvent) throws Exception {
     String edgeID = edgeToDelete.getText();
-    edges.delete(edgeID);
+    databaseManager.deleteEdge(edgeID);
     UIEdges.removeIf(node -> node.getID().get().equals(edgeID));
     treeViewNodes.refresh();
+  }
+
+  public void switchToUserAccounts(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("Accounts");
+  }
+
+  public void backupDB(ActionEvent actionEvent) throws Exception {
+    backup.setTitle("Select Where to Backup Database");
+    File selDir = backup.showDialog(rootPane.getScene().getWindow());
+
+    // backup
+    databaseManager.backup(selDir.toPath());
+  }
+
+  @FXML
+  private void cancelNodePane() {
+    resetNodePane();
+    modifyNodePane.setVisible(false);
+  }
+
+  @FXML
+  private void addNodePane() throws ValidationException {
+    modifyNodePane.setVisible(true); // set the pane to be visible
+    addNodeButton.setVisible(true);
+    addNodeButton.setDisable(true);
+  }
+
+  @FXML
+  private void addNode() throws Exception {
+    String ID = nodeIDInput.getText();
+    short xCoordinate = Short.parseShort(xCoorInput.getText());
+    short yCoordinate = Short.parseShort(yCoorInput.getText());
+    String building = buildingInput.getText();
+    String longName = longNameInput.getText();
+    String shortName = shortNameInput.getText();
+    Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getText());
+    short floorNumber = Short.parseShort(floorInput.getText()); // stores the inputs into
+
+    Node testNode = databaseManager.readNode(ID); // does the ID exist?
+
+    try { // is the input valid?
+      if (testNode == null) { // is the ID available?
+        Node newNode =
+            new Node(
+                ID,
+                xCoordinate,
+                yCoordinate,
+                building,
+                longName,
+                shortName,
+                nodeType,
+                floorNumber); // creates a new node
+        databaseManager.manipulateNode(newNode); // creates the node in the db
+        resetNodePane();
+        modifyNodePane.setVisible(false);
+      } else { // fails the if statement if the ID already exists
+        nodeIDInput.setUnFocusColor(Color.RED);
+        nodeErrorLabel.setText("The ID already exists");
+      }
+    } catch (Exception e) { // throws an error if the input provided by the user is invalid
+      nodeErrorLabel.setText("The input is invalid");
+    }
+  }
+
+  @FXML
+  private void resetNodePane() {
+    xCoorInput.setText("");
+    yCoorInput.setText("");
+    longNameInput.setText("");
+    shortNameInput.setText("");
+    typeInput.setText("");
+    nodeIDInput.setText(""); // sets all of the input to empty strings
+    nodeErrorLabel.setText("");
+  }
+
+  @FXML
+  public void validateNodeText(KeyEvent keyEvent) {
+    if (!nodeIDInput.getText().isEmpty()
+        && !xCoorInput.getText().isEmpty()
+        && !yCoorInput.getText().isEmpty()
+        && !buildingInput.getText().isEmpty()
+        && !longNameInput.getText().isEmpty()
+        && !shortNameInput.getText().isEmpty()
+        && !typeInput.getText().isEmpty()
+        && !floorInput.getText().isEmpty()) {
+      addNodeButton.setDisable(false);
+    } else {
+      addNodeButton.setDisable(true);
+    }
+  }
+
+  @FXML
+  public void validateEdgeText(KeyEvent keyEvent) {
+    if (!node1Input.getText().isEmpty() && !node2Input.getText().isEmpty()) {
+      addEdgeButton.setDisable(false);
+    } else {
+      addEdgeButton.setDisable(false);
+    }
+  }
+
+  @FXML
+  private void cancelEdgePane() {
+    resetEdgeAddPane();
+    addEdgePane.setVisible(false);
+  }
+
+  @FXML
+  private void addEdgePane() throws ValidationException {
+    addEdgePane.setVisible(true);
+    addEdgeButton.setDisable(true); // the edge should be enabled only when two nodes are selected
+    addEdgeButton.setVisible(true);
+  }
+
+  @FXML
+  private void addEdge() throws Exception {
+    String node1ID = node1Input.getText();
+    String node2ID = node2Input.getText();
+    String ID = node1ID + "_" + node2ID; // The edge ID is the two node IDs combined with a "_"
+    try {
+      Edge newEdge = new Edge(ID, node1ID, node2ID);
+      edgeFactory.create(newEdge); // adds edge to db
+      addEdgePane.setVisible(false);
+      resetEdgeAddPane();
+    } catch (Exception e) {
+      edgeErrorLabel.setText("The input is invalid");
+    }
+  }
+
+  @FXML
+  private void resetEdgeAddPane() {
+    node1Input.setText("");
+    node2Input.setText(""); // resets the text in the two buttons
+    addEdgeButton.setDisable(true);
+    edgeErrorLabel.setText("");
+  }
+
+  public void clearEdge(MouseEvent mouseEvent) {
+    filterTextFieldEdges.setText("");
   }
 }

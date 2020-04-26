@@ -4,8 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import edu.wpi.teamF.App;
-import edu.wpi.teamF.DatabaseManipulators.AccountFactory;
-import edu.wpi.teamF.ModelClasses.Account.PasswordHasher;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +14,7 @@ import javafx.scene.paint.Color;
 
 public class LoginController {
 
+  public Label loginText;
   @FXML private JFXButton loginButton;
 
   @FXML private JFXTextField usernameInput;
@@ -23,9 +23,9 @@ public class LoginController {
 
   @FXML private Label incorrectLabel; // label that is displayed if teh input is not valid
 
-  private AccountFactory accountFactory = AccountFactory.getFactory();
-
   SceneController sceneController = App.getSceneController(); // used to switch between scenes
+
+  DatabaseManager databaseManager = DatabaseManager.getManager();
 
   @FXML
   void enableLogin(KeyEvent event) { // called on each key release for both inputs
@@ -44,18 +44,18 @@ public class LoginController {
     String username = usernameInput.getText();
     String password = passwordInput.getText();
     try {
-      if (PasswordHasher.verifyPassword(
-          password,
-          accountFactory.getPasswordByUsername(
-              username))) { // checks if the password matches what is in the db using the hasher
+      if (databaseManager.verifyPassword(username, password)) { // does the password match
         System.out.println("The account is valid");
+        switchToMainMenu2();
         // code that logs the user into the application
+      } else {
+        incorrectLabel.setText("The username or password is incorrect");
+        usernameInput.setUnFocusColor(Color.RED);
+        passwordInput.setUnFocusColor(Color.RED); // sets the unfocused colors to red
+        passwordInput.setText("");
       }
-    } catch (
-        Exception
-            e) { // if there is an error, the username or password does not match an account in the
-      // db
-      incorrectLabel.setVisible(true);
+    } catch (Exception e) { // no existing account in the db
+      incorrectLabel.setText("The username or password is incorrect");
       usernameInput.setUnFocusColor(Color.RED);
       passwordInput.setUnFocusColor(Color.RED); // sets the unfocused colors to red
       passwordInput.setText("");
@@ -64,6 +64,11 @@ public class LoginController {
 
   @FXML
   void switchToMainMenu(ActionEvent event) throws IOException {
+    sceneController.switchScene("MainMenu");
+  }
+
+  @FXML
+  void switchToMainMenu2() throws IOException {
     sceneController.switchScene("MainMenu");
   }
 

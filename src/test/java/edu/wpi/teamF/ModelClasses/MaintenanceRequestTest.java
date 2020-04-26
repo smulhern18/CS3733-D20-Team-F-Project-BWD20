@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
-import edu.wpi.teamF.DatabaseManipulators.MaintenanceRequestFactory;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.TestData;
 import java.sql.SQLException;
@@ -18,9 +16,7 @@ public class MaintenanceRequestTest {
 
   static TestData testData = null;
   static MaintenanceRequest[] validMaintenanceRequest = null;
-  MaintenanceRequestFactory maintenanceRequestFactory = MaintenanceRequestFactory.getFactory();
-  NodeFactory nodeFactory = NodeFactory.getFactory();
-  static DatabaseManager databaseManager = new DatabaseManager();
+  static DatabaseManager databaseManager = DatabaseManager.getManager();
   static Node[] validNodes = null;
 
   @BeforeEach
@@ -38,34 +34,34 @@ public class MaintenanceRequestTest {
   }
 
   @Test
-  public void testCreateReadDelete() {
+  public void testCreateReadDelete() throws Exception {
     try {
-      maintenanceRequestFactory.create(null);
+      databaseManager.manipulateServiceRequest((MaintenanceRequest) null);
       fail("Creating a null value is unacceptable");
-    } catch (ValidationException e) {
+    } catch (NullPointerException e) {
       // ignore as expected
     }
     try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
 
     } catch (Exception e) {
 
     }
     try {
       for (MaintenanceRequest maintenanceRequest : validMaintenanceRequest) {
-        maintenanceRequestFactory.create(maintenanceRequest);
+        databaseManager.manipulateServiceRequest(maintenanceRequest);
 
         MaintenanceRequest readMaintenance =
-            maintenanceRequestFactory.read(maintenanceRequest.getId());
+            databaseManager.readMaintenanceRequest(maintenanceRequest.getId());
         assertTrue(readMaintenance.equals(maintenanceRequest));
 
-        maintenanceRequestFactory.delete(maintenanceRequest.getId());
+        databaseManager.deleteMaintenanceRequest(maintenanceRequest.getId());
 
         try {
-          readMaintenance = maintenanceRequestFactory.read(maintenanceRequest.getId());
+          readMaintenance = databaseManager.readMaintenanceRequest(maintenanceRequest.getId());
         } // catch (InstanceNotFoundException e) {
         // ignore
         // }
@@ -82,10 +78,10 @@ public class MaintenanceRequestTest {
   public void testCreateReadUpdateDelete() {
 
     try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
 
     } catch (Exception e) {
 
@@ -93,16 +89,17 @@ public class MaintenanceRequestTest {
     try {
 
       for (MaintenanceRequest maintenanceRequest : validMaintenanceRequest) {
-        maintenanceRequestFactory.create(maintenanceRequest);
+        databaseManager.manipulateServiceRequest(maintenanceRequest);
 
         maintenanceRequest.setDescription("Hello");
-        maintenanceRequestFactory.update(maintenanceRequest);
+        databaseManager.manipulateServiceRequest(maintenanceRequest);
 
-        MaintenanceRequest readMain = maintenanceRequestFactory.read(maintenanceRequest.getId());
+        MaintenanceRequest readMain =
+            databaseManager.readMaintenanceRequest(maintenanceRequest.getId());
 
         assertTrue(maintenanceRequest.equals(readMain));
 
-        maintenanceRequestFactory.delete(maintenanceRequest.getId());
+        databaseManager.readMaintenanceRequest(maintenanceRequest.getId());
       }
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
@@ -112,10 +109,10 @@ public class MaintenanceRequestTest {
   @Test
   public void testGetMainByLocation() {
     try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
 
     } catch (Exception e) {
 
@@ -125,31 +122,29 @@ public class MaintenanceRequestTest {
     MaintenanceRequest main3 = validMaintenanceRequest[2];
     MaintenanceRequest main4 = validMaintenanceRequest[3];
 
-    NodeFactory nodeFactory = NodeFactory.getFactory();
-
     try {
-      maintenanceRequestFactory.create(main1);
-      maintenanceRequestFactory.create(main2);
-      maintenanceRequestFactory.create(main3);
-      maintenanceRequestFactory.create(main4);
+      databaseManager.manipulateServiceRequest(main1);
+      databaseManager.manipulateServiceRequest(main2);
+      databaseManager.manipulateServiceRequest(main3);
+      databaseManager.manipulateServiceRequest(main4);
 
       List<MaintenanceRequest> maintenanceAtBathroom =
-          maintenanceRequestFactory.getMaintenanceRequestsByLocation(testData.validNodes[0]);
+          databaseManager.getMaintenanceRequestsByLocation(testData.validNodes[0]);
 
       assertTrue(maintenanceAtBathroom.contains(main1));
 
       assertTrue(maintenanceAtBathroom.size() == 1);
 
       List<MaintenanceRequest> maintenanceAtnode2 =
-          maintenanceRequestFactory.getMaintenanceRequestsByLocation(testData.validNodes[1]);
+          databaseManager.getMaintenanceRequestsByLocation(testData.validNodes[1]);
 
       assertTrue(maintenanceAtnode2.contains(main2));
       assertTrue(maintenanceAtnode2.size() == 1);
 
-      maintenanceRequestFactory.delete(main1.getId());
-      maintenanceRequestFactory.delete(main2.getId());
-      maintenanceRequestFactory.delete(main3.getId());
-      maintenanceRequestFactory.delete(main4.getId());
+      databaseManager.deleteMaintenanceRequest(main1.getId());
+      databaseManager.deleteMaintenanceRequest(main2.getId());
+      databaseManager.deleteMaintenanceRequest(main3.getId());
+      databaseManager.deleteMaintenanceRequest(main4.getId());
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
     }
@@ -158,10 +153,10 @@ public class MaintenanceRequestTest {
   @Test
   public void testGetAllMaintenanceRequests() {
     try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
 
     } catch (Exception e) {
 
@@ -172,13 +167,12 @@ public class MaintenanceRequestTest {
     MaintenanceRequest main4 = validMaintenanceRequest[3];
 
     try {
-      maintenanceRequestFactory.create(main1);
-      maintenanceRequestFactory.create(main2);
-      maintenanceRequestFactory.create(main3);
-      maintenanceRequestFactory.create(main4);
+      databaseManager.manipulateServiceRequest(main1);
+      databaseManager.manipulateServiceRequest(main2);
+      databaseManager.manipulateServiceRequest(main3);
+      databaseManager.manipulateServiceRequest(main4);
 
-      List<MaintenanceRequest> maintenanceAll =
-          maintenanceRequestFactory.getAllMaintenanceRequests();
+      List<MaintenanceRequest> maintenanceAll = databaseManager.getAllMaintenanceRequests();
 
       assertTrue(maintenanceAll.contains(main1));
       assertTrue(maintenanceAll.contains(main2));
@@ -186,10 +180,10 @@ public class MaintenanceRequestTest {
       assertTrue(maintenanceAll.contains(main4));
       assertTrue(maintenanceAll.size() == 4);
 
-      nodeFactory.delete(main1.getId());
-      nodeFactory.delete(main2.getId());
-      nodeFactory.delete(main3.getId());
-      nodeFactory.delete(main4.getId());
+      databaseManager.deleteNode(main1.getId());
+      databaseManager.deleteNode(main2.getId());
+      databaseManager.deleteNode(main3.getId());
+      databaseManager.deleteNode(main4.getId());
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
     }

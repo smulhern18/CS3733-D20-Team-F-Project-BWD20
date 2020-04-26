@@ -70,56 +70,56 @@ run {
                '--add-opens=javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED'
     ]
 }
-
-jacoco {
-    toolVersion = "0.8.4"
-}
-
-jacocoTestCoverageVerification {
-    violationRules {
-        rule {
-            element = 'CLASS'
-            limit {
-                counter = 'CLASS'
-                value = 'COVEREDRATIO'
-                minimum = 1.0
-            }
-            excludes = [
-                    'edu.wpi.teamF.App',
-                    'edu.wpi.teamF.Main',
-            ]
-        }
-
-        rule {
-            element = 'CLASS'
-            limit {
-                counter = 'LINE'
-                value = 'COVEREDRATIO'
-                minimum = 0.25
-            }
-            excludes = [
-                    'edu.wpi.teamF.App',
-                    'edu.wpi.teamF.Main',
-            ]
-        }
-
-        rule {
-            element = 'CLASS'
-            limit {
-                counter = 'BRANCH'
-                value = 'COVEREDRATIO'
-                minimum = 0.25
-            }
-            excludes = [
-                    'edu.wpi.teamF.App',
-                    'edu.wpi.teamF.Main',
-            ]
-        }
-    }
-}
-
-check.dependsOn jacocoTestCoverageVerification
-jacocoTestCoverageVerification.dependsOn jacocoTestReport
+//
+//jacoco {
+//    toolVersion = "0.8.4"
+//}
+//
+//jacocoTestCoverageVerification {
+//    violationRules {
+//        rule {
+//            element = 'CLASS'
+//            limit {
+//                counter = 'CLASS'
+//                value = 'COVEREDRATIO'
+//                minimum = 1.0
+//            }
+//            excludes = [
+//                    'edu.wpi.teamF.App',
+//                    'edu.wpi.teamF.Main',
+//            ]
+//        }
+//
+//        rule {
+//            element = 'CLASS'
+//            limit {
+//                counter = 'LINE'
+//                value = 'COVEREDRATIO'
+//                minimum = 0.25
+//            }
+//            excludes = [
+//                    'edu.wpi.teamF.App',
+//                    'edu.wpi.teamF.Main',
+//            ]
+//        }
+//
+//        rule {
+//            element = 'CLASS'
+//            limit {
+//                counter = 'BRANCH'
+//                value = 'COVEREDRATIO'
+//                minimum = 0.25
+//            }
+//            excludes = [
+//                    'edu.wpi.teamF.App',
+//                    'edu.wpi.teamF.Main',
+//            ]
+//        }
+//    }
+//}
+//
+//check.dependsOn jacocoTestCoverageVerification
+//jacocoTestCoverageVerification.dependsOn jacocoTestReport
 
 compileJava.dependsOn 'spotlessApply'
 
@@ -128,4 +128,15 @@ spotless {
     java {
         googleJavaFormat()
     }
+}
+
+run {
+    jvmArgs = ['--add-opens=javafx.base/com.sun.javafx.runtime=ALL-UNNAMED',
+               '--add-opens=javafx.controls/com.sun.javafx.scene.control.behavior=ALL-UNNAMED',
+               '--add-opens=javafx.controls/com.sun.javafx.scene.control=ALL-UNNAMED',
+               '--add-opens=javafx.base/com.sun.javafx.binding=ALL-UNNAMED',
+               '--add-opens=javafx.base/com.sun.javafx.event=ALL-UNNAMED',
+               '--add-opens=javafx.graphics/com.sun.javafx.scene=ALL-UNNAMED',
+               '--add-opens=javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED'
+    ]
 }

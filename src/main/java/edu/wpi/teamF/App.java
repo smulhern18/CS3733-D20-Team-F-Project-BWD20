@@ -27,12 +27,14 @@ public class App extends Application {
   private PathfinderController pathfinderController = new PathfinderController();
   private RegisterController registerController = new RegisterController();
   private ServiceRequestController serviceRequestController = new ServiceRequestController();
+  private AccountsController accountsController = new AccountsController();
 
   @Override
   public void init() {}
 
   @Override
   public void start(Stage primaryStage) throws IOException {
+
     Scene primaryScene = new Scene(new AnchorPane());
     FXMLLoader fxmlLoader = new FXMLLoader();
     fxmlLoader.setControllerFactory(
@@ -53,11 +55,13 @@ public class App extends Application {
             return registerController;
           } else if (controllerClass.equals(ServiceRequestController.class)) {
             return serviceRequestController;
+          } else if (controllerClass.equals(AccountsController.class)) {
+            return accountsController;
           }
           return null;
         });
     sceneController = new SceneController(fxmlLoader, primaryStage, primaryScene);
-    Parent root = fxmlLoader.load(getClass().getResource("Views/MainMenu.fxml"));
+    Parent root = fxmlLoader.load(getClass().getResource("Views/ComputerServiceRequest.fxml"));
     primaryScene.setRoot(root);
     primaryStage.setScene(primaryScene);
     primaryStage.setAlwaysOnTop(true);

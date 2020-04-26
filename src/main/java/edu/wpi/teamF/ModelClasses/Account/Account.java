@@ -1,10 +1,11 @@
 package edu.wpi.teamF.ModelClasses.Account;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
 import java.util.Objects;
 
-public abstract class Account {
+public abstract class Account extends RecursiveTreeObject<Account> {
 
   public static enum Type {
     ADMIN(0),

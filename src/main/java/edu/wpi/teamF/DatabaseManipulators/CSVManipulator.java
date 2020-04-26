@@ -10,32 +10,10 @@ import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
 import java.io.*;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class CSVManipulator {
-  private NodeFactory nodeFactory = NodeFactory.getFactory();
-  private EdgeFactory edgeFactory = EdgeFactory.getFactory();
-  private AccountFactory accountFactory = AccountFactory.getFactory();
-  private SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
-  private MaintenanceRequestFactory maintenanceRequestFactory =
-      MaintenanceRequestFactory.getFactory();
-
-  /**
-   * calls all of the writes and puts the data there safetly in a csv
-   * @param path
-   */
-  public void backupDatabase(Path path){
-    writeCSVFileAccount(path);
-    writeCSVFileSecurityService(path);
-    writeCSVFileMaintenanceService(path);
-    writeCSVFileEdge(path);
-    writeCSVFileNode(path);
-  }
-
-
+  private DatabaseManager databaseManager = DatabaseManager.getManager();
   /**
    * reads a csv file that contains nodes and inserts the data in the file into the correct place in
    * the database
@@ -63,7 +41,7 @@ public class CSVManipulator {
                 Node.NodeType.getEnum(data.get(i + 5)), // nodetype
                 Short.parseShort(data.get(i + 3))); // floor
         System.out.println("Created Node on line " + i / 9 + ", " + node.getId());
-        nodeFactory.create(node);
+        databaseManager.manipulateNode(node);
         i = i + 9;
       }
 
@@ -80,9 +58,9 @@ public class CSVManipulator {
   }
 
   /** Writes to the CSV file so that it can become persistant */
-  public void writeCSVFileNode(Path path) {
+  public void writeCSVFileNode(Path path) throws Exception {
     // writing to the file
-    List<Node> nodes = nodeFactory.getAllNodes();
+    List<Node> nodes = databaseManager.getAllNodes();
     try (FileWriter fw = new FileWriter(path.toString() + "/NodesBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
@@ -105,7 +83,7 @@ public class CSVManipulator {
    * @param node
    * @return returns a node in the form of a string
    */
-  public String formatNode(Node node) {
+  private String formatNode(Node node) {
     String string = "";
     string = node.getId() + ",";
     string = string + String.valueOf(node.getXCoord()) + ",";
@@ -136,8 +114,7 @@ public class CSVManipulator {
 
       int i = 3;
       while (i < (data.size() - 1)) {
-        edgeFactory.create(new Edge(data.get(i), data.get(i + 1), data.get(i + 2)));
-
+        databaseManager.manipulateEdge(new Edge(data.get(i), data.get(i + 1), data.get(i + 2)));
         i = i + 3;
       }
     } catch (FileNotFoundException e) {
@@ -151,9 +128,9 @@ public class CSVManipulator {
     }
   }
   /** Writes to the CSV file so that it can become persistant */
-  public void writeCSVFileEdge(Path path) {
+  public void writeCSVFileEdge(Path path) throws Exception {
     // writing to the file
-    List<Edge> Edges = edgeFactory.getAllEdges();
+    List<Edge> Edges = databaseManager.getAllEdges();
 
     // csvString = csvString + formatNode(n);
 
@@ -192,17 +169,19 @@ public class CSVManipulator {
         data.addAll(Arrays.asList(row.split(",")));
       }
 
-      int i = 5;
+      int i = 7;
       while (i < (data.size() - 1)) {
-        maintenanceRequestFactory.create(
+        databaseManager.manipulateServiceRequest(
             new MaintenanceRequest(
                 data.get(i),
-                nodeFactory.read(data.get(i + 1)),
+                databaseManager.readNode(data.get(i + 1)),
                 data.get(i + 2),
-                new Date(Integer.parseInt(data.get(i + 3))),
-                Integer.parseInt(data.get(i + 4))));
+                data.get(i + 3),
+                new Date(Integer.parseInt(data.get(i + 4))),
+                Integer.parseInt(data.get(i + 5)),
+                Boolean.parseBoolean(data.get(i + 6))));
 
-        i = i + 5;
+        i = i + 7;
       }
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File Not found!");
@@ -215,10 +194,9 @@ public class CSVManipulator {
     }
   }
   /** Writes to the CSV file so that it can become persistant */
-  public void writeCSVFileMaintenanceService(Path path) {
+  public void writeCSVFileMaintenanceService(Path path) throws Exception {
     // writing to the file
-    List<MaintenanceRequest> maintenanceRequests =
-        maintenanceRequestFactory.getAllMaintenanceRequests();
+    List<MaintenanceRequest> maintenanceRequests = databaseManager.getAllMaintenanceRequests();
 
     try (FileWriter fw = new FileWriter(path.toString() + "/MaintenanceBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
@@ -264,17 +242,19 @@ public class CSVManipulator {
         data.addAll(Arrays.asList(row.split(",")));
       }
 
-      int i = 5;
+      int i = 7;
       while (i < (data.size() - 1)) {
-        securityRequestFactory.create(
+        databaseManager.manipulateServiceRequest(
             new SecurityRequest(
                 data.get(i),
-                nodeFactory.read(data.get(i + 1)),
+                databaseManager.readNode(data.get(i + 1)),
                 data.get(i + 2),
-                new Date(Integer.parseInt(data.get(i + 3))),
-                Integer.parseInt(data.get(i + 4))));
+                data.get(i + 3),
+                new Date(Integer.parseInt(data.get(i + 4))),
+                Integer.parseInt(data.get(i + 5)),
+                Boolean.parseBoolean(data.get(i + 6))));
 
-        i = i + 5;
+        i = i + 7;
       }
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File Not found!");
@@ -287,9 +267,9 @@ public class CSVManipulator {
     }
   }
   /** Writes to the CSV file so that it can become persistant */
-  public void writeCSVFileSecurityService(Path path) {
+  public void writeCSVFileSecurityService(Path path) throws Exception {
     // writing to the file
-    List<SecurityRequest> securityRequests = securityRequestFactory.getAllSecurityRequests();
+    List<SecurityRequest> securityRequests = databaseManager.getAllSecurityRequests();
 
     try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
@@ -342,7 +322,7 @@ public class CSVManipulator {
           Account.Type type = Account.Type.getEnum(Integer.parseInt(data.get(i + 5)));
           switch (type.getTypeOrdinal()) {
             case (0):
-              accountFactory.create(
+              databaseManager.manipulateAccount(
                   new Admin(
                       data.get(i + 2),
                       data.get(i + 3),
@@ -351,7 +331,7 @@ public class CSVManipulator {
                       data.get(i + 1)));
               break;
             case (1):
-              accountFactory.create(
+              databaseManager.manipulateAccount(
                   new Staff(
                       data.get(i + 2),
                       data.get(i + 3),
@@ -360,7 +340,7 @@ public class CSVManipulator {
                       data.get(i + 1)));
               break;
             case (2):
-              accountFactory.create(
+              databaseManager.manipulateAccount(
                   new User(
                       data.get(i + 2),
                       data.get(i + 3),
@@ -388,14 +368,14 @@ public class CSVManipulator {
   }
 
   /** Writes to the CSV file so that it can become persistant */
-  public void writeCSVFileAccount(Path path) {
+  public void writeCSVFileAccount(Path path) throws Exception {
     // writing to the file
-    List<Account> Account = accountFactory.getAllAccounts();
+    List<Account> Account = databaseManager.getAllAccounts();
 
     try (FileWriter fw = new FileWriter(path.toString() + "/AccountBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
-      bw.write("edgeID,startNode,endNode");
+      bw.write("Username,password,firstName,lastName,emailAddress,type");
 
       for (Account a : Account) {
         bw.newLine();

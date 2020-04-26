@@ -2,50 +2,39 @@ package edu.wpi.teamF.DatabaseManipulators;
 
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class MaintenanceRequestFactory {
   NodeFactory nodeFactory = NodeFactory.getFactory();
   private static final MaintenanceRequestFactory factory = new MaintenanceRequestFactory();
+  private static final ServiceRequestFactory serviceRequestFactory =
+      ServiceRequestFactory.getFactory();
 
-  public static MaintenanceRequestFactory getFactory() {
+  static MaintenanceRequestFactory getFactory() {
     return factory;
   }
 
   public void create(MaintenanceRequest maintenanceRequest) throws ValidationException {
     String insertStatement =
         "INSERT INTO "
-            + DatabaseManager.MAINTENANCEQUEST_TABLE_NAME
+            + DatabaseManager.MAINTENANCE_REQUEST_TABLE_NAME
             + " ( "
             + DatabaseManager.SERVICEID_KEY
-            + ", "
-            + DatabaseManager.NODEID_KEY
-            + ", "
-            + DatabaseManager.DESCRIPTION_KEY
-            + ", "
-            + DatabaseManager.TIME_CREATED_KEY
-            + ", "
-            + DatabaseManager.PRIORITY_KEY
             + " ) "
-            + "VALUES (?, ?, ?, ?, ?)";
+            + "VALUES (?)";
     Validators.maintenanceRequestValidation(maintenanceRequest);
+    serviceRequestFactory.create(maintenanceRequest);
     try (PreparedStatement prepareStatement =
         DatabaseManager.getConnection().prepareStatement(insertStatement)) {
       int param = 1;
       prepareStatement.setString(param++, maintenanceRequest.getId());
-      prepareStatement.setString(param++, maintenanceRequest.getLocation().getId());
-      prepareStatement.setString(param++, maintenanceRequest.getDescription());
-      prepareStatement.setTimestamp(
-          param++, new Timestamp(maintenanceRequest.getDateTimeSubmitted().getTime()));
-      prepareStatement.setInt(param++, maintenanceRequest.getPriority());
 
       try {
         int numRows = prepareStatement.executeUpdate();
@@ -64,7 +53,7 @@ public class MaintenanceRequestFactory {
     MaintenanceRequest maintenanceRequest = null;
     String selectStatement =
         "SELECT * FROM "
-            + DatabaseManager.MAINTENANCEQUEST_TABLE_NAME
+            + DatabaseManager.MAINTENANCE_REQUEST_TABLE_NAME
             + " WHERE "
             + DatabaseManager.SERVICEID_KEY
             + " = ?";
@@ -76,13 +65,16 @@ public class MaintenanceRequestFactory {
       try {
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
+          ServiceRequest serviceRequest = serviceRequestFactory.read(id);
           maintenanceRequest =
               new MaintenanceRequest(
-                  resultSet.getString(DatabaseManager.SERVICEID_KEY),
-                  nodeFactory.read(resultSet.getString(DatabaseManager.NODEID_KEY)),
-                  resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
-                  new Date(resultSet.getTimestamp(DatabaseManager.TIME_CREATED_KEY).getTime()),
-                  resultSet.getInt(DatabaseManager.PRIORITY_KEY));
+                  serviceRequest.getId(),
+                  serviceRequest.getLocation(),
+                  serviceRequest.getAssignee(),
+                  serviceRequest.getDescription(),
+                  serviceRequest.getDateTimeSubmitted(),
+                  serviceRequest.getPriority(),
+                  serviceRequest.getComplete());
         }
       } catch (ValidationException e) {
         throw e;
@@ -90,27 +82,17 @@ public class MaintenanceRequestFactory {
     } catch (IllegalArgumentException e) {
       throw e;
     } catch (Exception e) {
-      System.out.println(
-          "Exception in MaintenanceFactory read: " + e.getMessage() + ", " + e.getClass());
+      System.out.println("Exception in NodeFactory read: " + e.getMessage() + ", " + e.getClass());
     }
     return maintenanceRequest;
   }
 
   public void update(MaintenanceRequest maintenanceRequest) {
-
     String updateStatement =
         "UPDATE "
-            + DatabaseManager.MAINTENANCEQUEST_TABLE_NAME
+            + DatabaseManager.MAINTENANCE_REQUEST_TABLE_NAME
             + " SET "
             + DatabaseManager.SERVICEID_KEY
-            + " = ?, "
-            + DatabaseManager.NODEID_KEY
-            + " = ?, "
-            + DatabaseManager.DESCRIPTION_KEY
-            + " = ?, "
-            + DatabaseManager.TIME_CREATED_KEY
-            + " = ?, "
-            + DatabaseManager.PRIORITY_KEY
             + " = ? "
             + "WHERE "
             + DatabaseManager.SERVICEID_KEY
@@ -118,12 +100,8 @@ public class MaintenanceRequestFactory {
     try (PreparedStatement preparedStatement =
         DatabaseManager.getConnection().prepareStatement(updateStatement)) {
       int param = 1;
+      serviceRequestFactory.update(maintenanceRequest);
       preparedStatement.setString(param++, maintenanceRequest.getId());
-      preparedStatement.setString(param++, maintenanceRequest.getLocation().getId());
-      preparedStatement.setString(param++, maintenanceRequest.getDescription());
-      preparedStatement.setTimestamp(
-          param++, new Timestamp(maintenanceRequest.getDateTimeSubmitted().getTime()));
-      preparedStatement.setInt(param++, maintenanceRequest.getPriority());
       preparedStatement.setString(param++, maintenanceRequest.getId());
       int numRows = preparedStatement.executeUpdate();
       if (numRows != 1) {
@@ -138,10 +116,11 @@ public class MaintenanceRequestFactory {
 
     String deleteStatement =
         "DELETE FROM "
-            + DatabaseManager.MAINTENANCEQUEST_TABLE_NAME
+            + DatabaseManager.MAINTENANCE_REQUEST_TABLE_NAME
             + " WHERE "
             + DatabaseManager.SERVICEID_KEY
             + " = ?";
+    serviceRequestFactory.delete(id);
     try (PreparedStatement preparedStatement =
         DatabaseManager.getConnection().prepareStatement(deleteStatement)) {
       preparedStatement.setString(1, id);
@@ -156,63 +135,47 @@ public class MaintenanceRequestFactory {
   }
 
   public List<MaintenanceRequest> getMaintenanceRequestsByLocation(Node location) {
-    List<MaintenanceRequest> maintenanceRequest = null;
-    String selectStatement =
-        "SELECT * FROM "
-            + DatabaseManager.MAINTENANCEQUEST_TABLE_NAME
-            + " WHERE "
-            + DatabaseManager.NODEID_KEY
-            + " = ?";
-
-    try (PreparedStatement preparedStatement =
-        DatabaseManager.getConnection().prepareStatement(selectStatement)) {
-      preparedStatement.setString(1, location.getId());
-
-      try {
-        ResultSet resultSet = preparedStatement.executeQuery();
-        maintenanceRequest = new ArrayList<>();
-        while (resultSet.next()) {
-          maintenanceRequest.add(
-              new MaintenanceRequest(
-                  resultSet.getString(DatabaseManager.SERVICEID_KEY),
-                  nodeFactory.read(resultSet.getString(DatabaseManager.NODEID_KEY)),
-                  resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
-                  new Date(resultSet.getTimestamp(DatabaseManager.TIME_CREATED_KEY).getTime()),
-                  resultSet.getInt(DatabaseManager.PRIORITY_KEY)));
-        }
-      } catch (ValidationException e) {
-        throw e;
+    List<MaintenanceRequest> maintenanceRequests = new ArrayList<>();
+    for (ServiceRequest serviceRequest :
+        serviceRequestFactory.getServiceRequestsByLocation(location)) {
+      MaintenanceRequest maintenanceRequest = read(serviceRequest.getId());
+      if (maintenanceRequest != null) {
+        maintenanceRequests.add(maintenanceRequest);
       }
-    } catch (IllegalArgumentException e) {
-      throw e;
-    } catch (Exception e) {
-      System.out.println(
-          "Exception in MaintenanceFactory read: " + e.getMessage() + ", " + e.getClass());
     }
-    return maintenanceRequest;
+    if (maintenanceRequests.size() == 0) {
+      return null;
+    } else {
+      return maintenanceRequests;
+    }
   }
 
   public List<MaintenanceRequest> getAllMaintenanceRequests() {
-    List<MaintenanceRequest> maintenanceRequest = null;
-    String selectStatement = "SELECT * FROM " + DatabaseManager.MAINTENANCEQUEST_TABLE_NAME;
+    List<MaintenanceRequest> maintenanceRequests = null;
+    String selectStatement = "SELECT * FROM " + DatabaseManager.MAINTENANCE_REQUEST_TABLE_NAME;
 
     try (PreparedStatement preparedStatement =
             DatabaseManager.getConnection().prepareStatement(selectStatement);
-        ResultSet resultSet = preparedStatement.executeQuery()) {;
-      maintenanceRequest = new ArrayList<>();
+        ResultSet resultSet = preparedStatement.executeQuery()) {
+      maintenanceRequests = new ArrayList<>();
+      ;
       while (resultSet.next()) {
-        maintenanceRequest.add(
+        ServiceRequest serviceRequest =
+            serviceRequestFactory.read(resultSet.getString(DatabaseManager.SERVICEID_KEY));
+        maintenanceRequests.add(
             new MaintenanceRequest(
-                resultSet.getString(DatabaseManager.SERVICEID_KEY),
-                nodeFactory.read(resultSet.getString(DatabaseManager.NODEID_KEY)),
-                resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
-                new Date(resultSet.getTimestamp(DatabaseManager.TIME_CREATED_KEY).getTime()),
-                resultSet.getInt(DatabaseManager.PRIORITY_KEY)));
+                serviceRequest.getId(),
+                serviceRequest.getLocation(),
+                serviceRequest.getAssignee(),
+                serviceRequest.getDescription(),
+                serviceRequest.getDateTimeSubmitted(),
+                serviceRequest.getPriority(),
+                serviceRequest.getComplete()));
       }
     } catch (Exception e) {
       System.out.println(
-          "Exception in MaintenanceFactory read: " + e.getMessage() + ", " + e.getClass());
+          "Exception in SecurityFactory read: " + e.getMessage() + ", " + e.getClass());
     }
-    return maintenanceRequest;
+    return maintenanceRequests;
   }
 }

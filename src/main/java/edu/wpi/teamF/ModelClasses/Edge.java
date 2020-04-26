@@ -1,9 +1,9 @@
 package edu.wpi.teamF.ModelClasses;
 
 public class Edge {
-  private String Id;
-  private String Node1;
-  private String Node2;
+  private String id;
+  private String node1;
+  private String node2;
 
   public Edge(String id, String node1, String node2) throws ValidationException {
     setId(id);
@@ -12,30 +12,30 @@ public class Edge {
   }
 
   public String getId() {
-    return Id;
+    return id;
   }
 
   public void setId(String id) throws ValidationException {
     Validators.edgeIdValidation(id);
-    this.Id = id;
+    this.id = id;
   }
 
   public String getNode1() {
-    return Node1;
+    return node1;
   }
 
   public void setNode1(String node1) throws ValidationException {
     Validators.idValidation(node1);
-    this.Node1 = node1;
+    this.node1 = node1;
   }
 
   public String getNode2() {
-    return Node2;
+    return node2;
   }
 
   public void setNode2(String node2) throws ValidationException {
     Validators.idValidation(node2);
-    this.Node2 = node2;
+    this.node2 = node2;
   }
 
   public boolean equals(Object other) {
@@ -43,9 +43,9 @@ public class Edge {
     if (other instanceof Edge) {
       Edge otherEdge = (Edge) other;
       isEqual =
-          this.Id.equals(otherEdge.Id)
-              && this.Node1.equals(otherEdge.Node1)
-              && this.Node2.equals(otherEdge.Node2);
+          this.id.equals(otherEdge.id)
+              && this.node1.equals(otherEdge.node1)
+              && this.node2.equals(otherEdge.node2);
     }
     return isEqual;
   }

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ComputerServiceController">
+   <children>
+      <Label fx:id="locLabel" layoutX="66.0" layoutY="43.0" prefHeight="31.0" prefWidth="83.0" text="Location:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="makeLabel" layoutX="66.0" layoutY="91.0" prefHeight="31.0" prefWidth="98.0" text="Make:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="descLabel" layoutX="65.0" layoutY="237.0" prefHeight="31.0" prefWidth="83.0" text="Description">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="issueLabel" layoutX="66.0" layoutY="136.0" prefHeight="31.0" prefWidth="167.0" text="Issue Type:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="locationChoice" layoutX="218.0" layoutY="46.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="makeChoice" layoutX="218.0" layoutY="94.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="issueChoice" layoutX="218.0" layoutY="139.0" prefWidth="150.0" />
+      <JFXTextArea fx:id="descText" layoutX="217.0" layoutY="217.0" prefHeight="98.0" prefWidth="150.0" />
+      <JFXButton fx:id="submit" buttonType="RAISED" layoutX="51.0" layoutY="324.0" onAction="#submit" prefHeight="51.0" prefWidth="126.0" style="-fx-background-color: grey;" text="Submit Request">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="cancel" buttonType="RAISED" layoutX="193.0" layoutY="324.0" onAction="#cancel" prefHeight="51.0" prefWidth="126.0" style="-fx-background-color: grey;" text="Cancel">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXTreeTableView fx:id="treeTableComputer" layoutX="440.0" layoutY="162.0" prefHeight="496.0" prefWidth="742.0" />
+      <Label fx:id="OSLabel" layoutX="65.0" layoutY="185.0" prefHeight="31.0" prefWidth="167.0" text="Operating System:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="OSChoice" layoutX="217.0" layoutY="188.0" prefWidth="150.0" />
+      <Label fx:id="prioLabel" layoutX="393.0" layoutY="43.0" prefHeight="31.0" prefWidth="83.0" text="Priority:">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="priorityChoice" layoutX="467.0" layoutY="46.0" prefHeight="25.0" prefWidth="68.0" />
+      <JFXToggleButton fx:id="switcher" layoutX="987.0" layoutY="708.0" onAction="#switchView" text="Ongoing Requests" visible="false" />
+      <JFXButton fx:id="update" buttonType="RAISED" layoutX="835.0" layoutY="712.0" onAction="#update" prefHeight="51.0" prefWidth="126.0" style="-fx-background-color: grey;" text="Update">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

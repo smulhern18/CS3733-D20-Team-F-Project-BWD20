@@ -18,7 +18,7 @@ public class NodeFactory {
 
   private EdgeFactory edgeFactory = EdgeFactory.getFactory();
 
-  public static NodeFactory getFactory() {
+  static NodeFactory getFactory() {
     return factory;
   }
 
@@ -131,7 +131,6 @@ public class NodeFactory {
    * @param node the node to update
    */
   public void update(Node node) {
-    edgeFactory.deleteByNodeID(node.getId());
     String updateStatement =
         "UPDATE "
             + DatabaseManager.NODES_TABLE_NAME
@@ -170,9 +169,6 @@ public class NodeFactory {
       int numRows = preparedStatement.executeUpdate();
       if (numRows != 1) {
         throw new Exception("Updated " + numRows + " rows");
-      }
-      for (Edge edge : node.getEdges()) {
-        edgeFactory.create(edge);
       }
     } catch (Exception e) {
       System.out.println(e.getMessage());
@@ -260,7 +256,7 @@ public class NodeFactory {
 
     try (PreparedStatement preparedStatement =
             DatabaseManager.getConnection().prepareStatement(selectStatement);
-        ResultSet resultSet = preparedStatement.executeQuery()) {;
+        ResultSet resultSet = preparedStatement.executeQuery()) {
       nodes = new ArrayList<>();
       while (resultSet.next()) {
         nodes.add(

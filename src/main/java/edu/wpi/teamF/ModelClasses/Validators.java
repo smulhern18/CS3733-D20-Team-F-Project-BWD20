@@ -1,8 +1,10 @@
 package edu.wpi.teamF.ModelClasses;
 
 import edu.wpi.teamF.ModelClasses.Account.Account;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
 import java.util.Date;
 
 public class Validators {
@@ -37,6 +39,26 @@ public class Validators {
   public static final int DESCRIPTION_MAX_LENGTH = 64;
   public static final int PRIORITY_MIN_LENGTH = 1;
   public static final int PRIORITY_MAX_LENGTH = 3;
+  public static final int MAKE_MIN_LENGTH = 1;
+  public static final int MAKE_MAX_LENGTH = 32;
+  public static final int HARDWARESOFTWARE_MIN_LENGTH = 1;
+  public static final int HARDWARESOFTWARE_MAX_LENGTH = 32;
+  public static final int OS_MIN_LENGTH = 1;
+  public static final int OS_MAX_LENGTH = 8;
+
+  public static <T extends ServiceRequest> void serviceRequestValidation(T t, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(t, constraints);
+    ServiceRequest serviceRequest = (ServiceRequest) t;
+
+    idValidation(serviceRequest.getId());
+    nodeValidation(serviceRequest.getLocation());
+    descriptionValidation(serviceRequest.getDescription());
+    dateValidation(serviceRequest.getDateTimeSubmitted());
+    priorityValidation(serviceRequest.getPriority());
+    booleanValidation(serviceRequest.getComplete());
+    nameValidation(serviceRequest.getAssignee());
+  }
 
   public static <T extends Account> void accountValidation(T t, int... constraints)
       throws ValidationException {
@@ -52,8 +74,9 @@ public class Validators {
   public static void emailAddressValidation(String address, int... constraints)
       throws ValidationException {
     nullCheckValidation(address, constraints);
-    if ((!address.contains("@") || !address.contains("."))
-        && (address.length() > ADDRESS_MIN_LENGTH && address.length() < ADDRESS_MAX_LENGTH)) {
+    if (address.matches(
+            "^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
+        && !(address.length() > ADDRESS_MIN_LENGTH || address.length() < ADDRESS_MAX_LENGTH)) {
       throw new ValidationException("Invalid Email Address: " + address);
     }
   }
@@ -63,6 +86,29 @@ public class Validators {
     nullCheckValidation(password, constraints);
     if (password.length() < PASSWORD_MIN_LENGTH || password.length() > PASSWORD_MAX_LENGTH) {
       throw new ValidationException("Invalid password length");
+    }
+  }
+
+  public static void makeValidation(String make, int... constraints) throws ValidationException {
+    nullCheckValidation(make, constraints);
+    if (make.length() < MAKE_MIN_LENGTH || make.length() > MAKE_MAX_LENGTH) {
+      throw new ValidationException("Invalid make length");
+    }
+  }
+
+  public static void hardwareSoftwareValidation(String hardwareSoftware, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(hardwareSoftware, constraints);
+    if (hardwareSoftware.length() < HARDWARESOFTWARE_MIN_LENGTH
+        || hardwareSoftware.length() > HARDWARESOFTWARE_MAX_LENGTH) {
+      throw new ValidationException("Invalid hardwareSoftware length");
+    }
+  }
+
+  public static void osValidation(String OS, int... constraints) throws ValidationException {
+    nullCheckValidation(OS, constraints);
+    if (OS.length() < HARDWARESOFTWARE_MIN_LENGTH || OS.length() > HARDWARESOFTWARE_MAX_LENGTH) {
+      throw new ValidationException("Invalid hardwareSoftware length");
     }
   }
 
@@ -304,6 +350,27 @@ public class Validators {
   }
 
   /**
+   * Validation for Maintenance Requests
+   *
+   * @param t an instance of Maintenance Request to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static <T extends ComputerServiceRequest> void computerServiceValidation(
+      T t, int... constraints) throws ValidationException {
+    nullCheckValidation(t, constraints);
+    ComputerServiceRequest computerRequestObject = (ComputerServiceRequest) t;
+
+    idValidation(computerRequestObject.getId());
+    nodeValidation(computerRequestObject.getLocation());
+    descriptionValidation(computerRequestObject.getDescription());
+    dateValidation(computerRequestObject.getDateTimeSubmitted());
+    priorityValidation(computerRequestObject.getPriority());
+    osValidation(computerRequestObject.getOS());
+    makeValidation(computerRequestObject.getMake());
+    hardwareSoftwareValidation(computerRequestObject.getHardwareSoftware());
+  }
+  /**
    * Validation for Security Requests
    *
    * @param t an instance of Security Request to validate
@@ -314,12 +381,6 @@ public class Validators {
       throws ValidationException {
     nullCheckValidation(t, constraints);
     SecurityRequest securityRequestObject = (SecurityRequest) t;
-
-    idValidation(securityRequestObject.getId());
-    nodeValidation(securityRequestObject.getLocation());
-    descriptionValidation(securityRequestObject.getDescription());
-    dateValidation(securityRequestObject.getDateTimeSubmitted());
-    priorityValidation(securityRequestObject.getPriority());
   }
 
   /**
@@ -364,6 +425,16 @@ public class Validators {
     nullCheckValidation(priority, constraints);
     if (priority < PRIORITY_MIN_LENGTH || priority > PRIORITY_MAX_LENGTH) {
       throw new ValidationException("Priority is outside accepted values");
+    }
+  }
+
+  public static void booleanValidation(boolean bool, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(bool, constraints);
+    if (bool || !bool) {
+      // ignore
+    } else {
+      throw new ValidationException("boolean is not a true or false value");
     }
   }
 

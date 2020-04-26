@@ -4,7 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import edu.wpi.teamF.App;
-import edu.wpi.teamF.DatabaseManipulators.AccountFactory;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Account.User;
 import java.io.IOException;
@@ -30,7 +30,7 @@ public class RegisterController {
 
   @FXML private JFXButton registerButton;
 
-  AccountFactory accountFactory = AccountFactory.getFactory();
+  DatabaseManager databaseManager = DatabaseManager.getManager();
   SceneController sceneController = App.getSceneController();
 
   @FXML
@@ -40,13 +40,13 @@ public class RegisterController {
     String email = emailInput.getText();
     String username = usernameInput.getText();
     String password = passwordInput.getText();
-    Account account = accountFactory.read(username);
+    Account account = databaseManager.readAccount(username);
 
     if (account == null && password.length() >= 8 && email.contains("@")) { // The account is valid
       System.out.println("The account is valid");
       Account newAccount = new User(firstName, lastName, email, username, password);
-      accountFactory.create(newAccount); // creates an account with the input
-      switchToLogin(event);
+      databaseManager.manipulateAccount(newAccount); // creates an account with the input
+      switchToLogin2();
     } else if (!email.contains("@")) { // The email is not valid (no "@" symbol)
       incorrectLabel.setVisible(true);
       incorrectLabel.setText("The email is not valid");
@@ -91,5 +91,10 @@ public class RegisterController {
   @FXML
   void switchToMainMenu(ActionEvent event) throws IOException {
     sceneController.switchScene("MainMenu");
+  }
+
+  @FXML
+  void switchToLogin2() throws IOException {
+    sceneController.switchScene("Login");
   }
 }

@@ -1,6 +1,7 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
 import edu.wpi.teamF.ModelClasses.Account.*;
+import edu.wpi.teamF.ModelClasses.UIAccount;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
 import java.sql.PreparedStatement;
@@ -14,7 +15,7 @@ public class AccountFactory {
 
   private static final AccountFactory factory = new AccountFactory();
 
-  public static AccountFactory getFactory() {
+  static AccountFactory getFactory() {
     return factory;
   }
 
@@ -298,24 +299,25 @@ public class AccountFactory {
     return accounts;
   }
 
-  //    public ArrayList<UIAccount> getAccounts() {
-  //      ArrayList<UIAccount> accounts = null;
-  //      String selectStatement = " SELECT * FROM " + DatabaseManager.ACCOUNT_TABLE_NAME;
-  //      try (PreparedStatement preparedStatement =
-  //          DatabaseManager.getConnection().prepareStatement(selectStatement)) {
-  //        ResultSet resultSet = preparedStatement.executeQuery();
-  //        accounts = new ArrayList<>();
-  //        while (resultSet.next()) {
-  //          accounts.add(
-  //              new UIAccount(
-  //                  resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
-  //                  resultSet.getString(DatabaseManager.LAST_NAME_KEY),
-  //                  resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
-  //                  Account.Type.getEnum(resultSet.getInt(DatabaseManager.TYPE_KEY))));
-  //        }
-  //      } catch (Exception e) {
-  //        System.out.println(e.getMessage() + ", " + e.getClass());
-  //      }
-  //        return accounts;
-  //    }
+  public ArrayList<UIAccount> getAccounts() {
+    ArrayList<UIAccount> accounts = null;
+    String selectStatement = " SELECT * FROM " + DatabaseManager.ACCOUNT_TABLE_NAME;
+    try (PreparedStatement preparedStatement =
+        DatabaseManager.getConnection().prepareStatement(selectStatement)) {
+      ResultSet resultSet = preparedStatement.executeQuery();
+      accounts = new ArrayList<>();
+      while (resultSet.next()) {
+        accounts.add(
+            new UIAccount(
+                resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                Account.Type.getEnum(resultSet.getInt(DatabaseManager.USER_TYPE_KEY))));
+      }
+    } catch (Exception e) {
+      System.out.println(e.getMessage() + ", " + e.getClass());
+    }
+    return accounts;
+  }
 }

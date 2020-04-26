@@ -4,8 +4,7 @@ import static javafx.scene.paint.Color.RED;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ValidationException;
@@ -87,8 +86,7 @@ public class DataMapViewController implements Initializable {
   private static final int PANE_WIDTH = 920; // height and width of the pane/image
   private double heightRatio = (double) PANE_HEIGHT / MAP_HEIGHT;
   private double widthRatio = (double) PANE_WIDTH / MAP_WIDTH; // ratio of pane to map
-  private NodeFactory nodeFactory = NodeFactory.getFactory();
-  private EdgeFactory edgeFactory = EdgeFactory.getFactory();
+  private DatabaseManager databaseManager = DatabaseManager.getManager();
 
   public DataMapViewController() {
     //    List<Node> nodes = nodeFactory.getAllNodes();
@@ -101,17 +99,25 @@ public class DataMapViewController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    for (Node node : nodeFactory.getAllNodes()) {
-      if (node.getFloor() == 5) {
-        drawNode(node);
-      } // for every node on the fifth floor, draw the node on the map
-    }
-    for (Edge edge : edgeFactory.getAllEdges()) {
-      if (edge.getNode1().charAt(edge.getNode1().length() - 1) == '5'
-          && edge.getNode2().charAt(edge.getNode2().length() - 1) == '5') {
-        drawEdge(edge);
+    try {
+      for (Node node : databaseManager.getAllNodes()) {
+        if (node.getFloor() == 5) {
+          drawNode(node);
+        } // for every node on the fifth floor, draw the node on the map
       }
-    } // for every edge that connects two nodes on the fifth floor, draw the edge on the map
+    } catch (Exception e) {
+      System.out.println(e.getMessage() + ", " + e.getClass());
+    }
+    try {
+      for (Edge edge : databaseManager.getAllEdges()) {
+        if (edge.getNode1().charAt(edge.getNode1().length() - 1) == '5'
+            && edge.getNode2().charAt(edge.getNode2().length() - 1) == '5') {
+          drawEdge(edge);
+        }
+      } // for every edge that connects two nodes on the fifth floor, draw the edge on the map
+    } catch (Exception e) {
+      System.out.println(e.getMessage() + ", " + e.getClass());
+    }
   }
 
   private void drawNode(Node node) { // draws the given node on the map
@@ -147,12 +153,12 @@ public class DataMapViewController implements Initializable {
     mapPane.getChildren().add(button);
   }
 
-  private void drawEdge(Edge edge) {
+  private void drawEdge(Edge edge) throws Exception {
     try {
       double heightRatio = (double) PANE_HEIGHT / MAP_HEIGHT;
       double widthRatio = (double) PANE_WIDTH / MAP_WIDTH;
-      Node node1 = nodeFactory.read(edge.getNode1());
-      Node node2 = nodeFactory.read(edge.getNode2());
+      Node node1 = databaseManager.readNode(edge.getNode1());
+      Node node2 = databaseManager.readNode(edge.getNode2());
       int startX = (int) (node1.getXCoord() * widthRatio);
       int startY = (int) (node1.getYCoord() * heightRatio); // start values correspond to node 1
       int endX = (int) (node2.getXCoord() * widthRatio);
@@ -185,44 +191,33 @@ public class DataMapViewController implements Initializable {
   private ModifyType modifyType;
 
   @FXML
-  private void
-      cancelNodePane() { // this is called when the red x button is clicked (top right corner of the
-    // pane)
+  private void cancelNodePane() { // this is called when the red x button is clicked
     resetNodePane(); // resets the values in the node pane
     modifyNodePane.setVisible(false); // makes the pane not visible
   }
 
   @FXML
-  private void
-      cancelEdgePane() { // this is called when the red x button is clicked (top right corner of the
-    // pane)
+  private void cancelEdgePane() { // this is called when the red x button is clicked
     resetEdgeAddPane(); // resets the values in the edge pane
     addEdgePane.setVisible(false); // makes the pane not visible
   }
 
   @FXML
-  private void deleteData() {
-    nodeFactory.delete(node.getId()); // removes the node in the database
+  private void deleteData() throws Exception {
     mapPane.getChildren().remove(nodeButton); // removes the node on the map
     resetNodePane();
-    for (Edge edge :
-        edgeFactory.getAllEdgesConnectedToNode(
-            node.getId())) { // for every edge connected to the selected node
+    for (Edge edge : databaseManager.getAllEdgesConnectedToNode(node.getId())) {
       for (int i = 0; i < mapPane.getChildren().size(); i++) { // for child in the pane
         javafx.scene.Node children = mapPane.getChildren().get(i);
         System.out.println(children.getId());
-        if (children instanceof Line
-            && children
-                .getId()
-                .equals(
-                    edge.getId())) { // if the children is of type line and equals an edge that is
-          // connected to the selected node
+        if (children instanceof Line && children.getId().equals(edge.getId())) {
           mapPane.getChildren().remove(children); // remove the edge from the map
-          edgeFactory.delete(children.getId()); // remove the edge from the database
+          databaseManager.deleteEdge(children.getId()); // remove the edge from the database
           break;
         }
       }
     }
+    databaseManager.deleteNode(node.getId()); // removes the node in the database
     modifyNodePane.setVisible(false);
   }
 
@@ -230,10 +225,9 @@ public class DataMapViewController implements Initializable {
   private void addNodePane() throws ValidationException {
     modifyNodePane.setVisible(true); // set the pane to be visible
     modifyButton.setVisible(false);
-    deleteButton.setVisible(
-        false); // modify and delete button are not visible, these buttons are only visible when the
-    // user selects on a node on the map
-    addNodeButton.setVisible(true); // the add button should be visible
+    deleteButton.setVisible(false); // modify and delete button are not visible
+
+    addNodeButton.setVisible(true);
     addNodeButton.setDisable(
         true); // the add button should only be enabled when all fields are occupied
     nodeIDInput.setEditable(true); // The node ID can be edited, it can NOT when modifying and node
@@ -250,7 +244,7 @@ public class DataMapViewController implements Initializable {
     Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getText());
     short floorNumber = Short.parseShort(floorInput.getText()); // stores the inputs into variables
 
-    Node newNode = nodeFactory.read(ID); // does the ID exist?
+    Node newNode = databaseManager.readNode(ID); // does the ID exist?
 
     try { // is the input valid?
       if (newNode == null) { // is the ID available?
@@ -264,7 +258,7 @@ public class DataMapViewController implements Initializable {
                 shortName,
                 nodeType,
                 floorNumber); // creates a new node
-        nodeFactory.create(newNode); // creates the node in the db
+        databaseManager.manipulateNode(newNode); // creates the node in the db
         drawNode(newNode); // creates the node on the map
         resetNodePane();
         modifyNodePane.setVisible(false);
@@ -298,10 +292,10 @@ public class DataMapViewController implements Initializable {
       node.setType(nodeType);
       node.setFloor(floorNumber); // sets the node to the provided values
 
-      nodeFactory.update(
+      databaseManager.manipulateNode(
           node); // finds the node by the ID (this is why the ID is uneditable) and updates the node
       for (Edge edge :
-          edgeFactory.getAllEdgesConnectedToNode(
+          databaseManager.getAllEdgesConnectedToNode(
               node.getId())) { // for all of the edges connected to the node
         for (int i = 0;
             i < mapPane.getChildren().size();
@@ -383,21 +377,14 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  void selectNode1(
-      ActionEvent
-          event) { // called when the "Select Node 1" button is pressed (when the user is adding an
-    // edge)
+  void selectNode1(ActionEvent event) {
     addEdgePane.setVisible(false); // displays the map
     selectNode1 = true;
     node1 = null;
     displayNodePaneButton.setVisible(false);
     displayEdgePaneButton.setVisible(
         false); // sets the two buttons in the bottom right corner to be invisible
-    if (!selectNode2Button
-        .getText()
-        .equals(
-            "Select Node 2")) { // checks the other button (Select Node 2), if populated, the add
-      // button is activated
+    if (!selectNode2Button.getText().equals("Select Node 2")) { // checks the other button
       addEdgeButton.setDisable(false);
     }
   }
@@ -423,12 +410,10 @@ public class DataMapViewController implements Initializable {
 
   private void displayEdgeData() {
     selectNode1Button.setText(edge.getNode1());
-    selectNode2Button.setText(
-        edge.getNode2()); // Sets the text of the two buttons to the ID of the node they correspond
-    // to
+    selectNode2Button.setText(edge.getNode2()); // Sets the text of the two buttons to the IDs
     modifyEdgeButton.setVisible(true);
     deleteEdgeButton.setVisible(true); // sets the modify and delete button to visible
-    addEdgeButton.setVisible(false); // the add button is not visible
+    addEdgeButton.setVisible(false);
   }
 
   @FXML
@@ -437,21 +422,21 @@ public class DataMapViewController implements Initializable {
     String node2ID = selectNode2Button.getText();
     String ID = node1ID + "_" + node2ID; // The edge ID is the two node IDs combined with a "_"
     Edge edge = new Edge(ID, node1ID, node2ID);
-    edgeFactory.create(edge); // creates the edge in the db
+    databaseManager.manipulateEdge(edge); // creates the edge in the db
     drawEdge(edge); // creates the edge on the map
     addEdgePane.setVisible(false);
     resetEdgeAddPane();
   }
 
   @FXML
-  public void modifyEdge() throws ValidationException {
+  public void modifyEdge() throws Exception {
     String node1ID = selectNode1Button.getText();
     String node2ID = selectNode2Button.getText();
     String ID = node1ID + "_" + node2ID; // The edge ID is the two node IDs combined with a "_"
     Edge newEdge = new Edge(ID, node1ID, node2ID);
-    edgeFactory.delete(edge.getId()); // deletes the edge in the db
+    databaseManager.deleteEdge(edge.getId()); // deletes the edge in the db
     mapPane.getChildren().remove(edgeLine); // deletes the edge on the map
-    edgeFactory.create(newEdge); // creates the edge in the db
+    databaseManager.manipulateEdge(newEdge); // creates the edge in the db
     drawEdge(newEdge); // creates the new edge on the map
     // the reason we delete then add for modifying is because the edgeFactory needs the ID to NOT
     // change in order to update the values
@@ -462,8 +447,8 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  public void deleteEdge() {
-    edgeFactory.delete(edge.getId()); // deletes the edge in the db
+  public void deleteEdge() throws Exception {
+    databaseManager.deleteEdge(edge.getId()); // deletes the edge in the db
     mapPane.getChildren().remove(edgeLine); // deletes the edge on the map
     addEdgePane.setVisible(false);
     resetEdgeAddPane();
@@ -471,16 +456,19 @@ public class DataMapViewController implements Initializable {
 
   @FXML
   public void validateNodeText(KeyEvent keyEvent) {
-    if (!xCoorInput.getText().isEmpty()
+    System.out.println("Before if");
+    if (!nodeIDInput.getText().isEmpty()
+        && !xCoorInput.getText().isEmpty()
         && !yCoorInput.getText().isEmpty()
-        && !buildingInput.getText().isEmpty()
+        // && !buildingInput.getText().isEmpty()
         && !longNameInput.getText().isEmpty()
         && !shortNameInput.getText().isEmpty()
         && !typeInput.getText().isEmpty()
-        && !floorInput.getText().isEmpty()) { // if every input is occupied:
+    //  && !floorInput.getText().isEmpty()
+    ) { // if every input is occupied:
       modifyButton.setDisable(false);
       addNodeButton.setDisable(false); // the add button and the modify button should be enabled
-      // delete assumes the the node clicked on by the user is always the selected node
+      // delete assumes the node clicked on by the user is always the selected node
     } else {
       modifyButton.setDisable(true);
       addNodeButton.setDisable(
@@ -492,19 +480,15 @@ public class DataMapViewController implements Initializable {
   private void resetNodePane() {
     xCoorInput.setText("");
     yCoorInput.setText("");
-    buildingInput.setText("");
     longNameInput.setText("");
     shortNameInput.setText("");
     typeInput.setText("");
-    floorInput.setText("");
-    nodeIDInput.setText(""); // sets all of the input to empty strings
+    nodeIDInput.setText("");
     modifyButton.setVisible(true);
-    deleteButton.setVisible(true); // modify and delete button are visible
-    addNodeButton.setVisible(
-        false); // add button is not visible, only accessible by pressing the add node button on the
-    // bottom right of the screen
+    deleteButton.setVisible(true);
+    addNodeButton.setVisible(false);
     nodeIDInput.setEditable(false); // the node ID should not be changed, needed to update the node
-    errorNodeLabel.setVisible(false); // The error label is reset
+    errorNodeLabel.setVisible(false);
     errorNodeLabel.setText("");
   }
 
