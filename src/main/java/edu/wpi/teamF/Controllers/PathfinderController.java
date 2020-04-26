@@ -77,6 +77,9 @@ public class PathfinderController implements Initializable {
   public void draw(Path path) throws InstanceNotFoundException {
 
     List<Node> pathNodes = path.getPath();
+    if (endNode == null) {
+      endNode = pathNodes.get(pathNodes.size() - 1);
+    }
 
     double heightRatio = currentPane.getHeight() / MAP_HEIGHT;
     double widthRatio = currentPane.getWidth() / MAP_WIDTH;
