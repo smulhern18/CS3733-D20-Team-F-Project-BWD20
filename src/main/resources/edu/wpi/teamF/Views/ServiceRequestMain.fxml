@@ -1,14 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.wpi.teamF.Views.ServiceRequestMain"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Views.ServiceRequestMain">
+   <children>
+      <Label layoutX="223.0" layoutY="49.0" prefHeight="61.0" prefWidth="167.0" text="Service Request">
+         <font>
+            <Font name="STIXGeneral-Regular" size="24.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="61.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../../Downloads/icons8-qzemail03.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="70.0" layoutY="194.0" text="Button" />
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="165.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../../Downloads/icons8-qzemail03.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="174.0" layoutY="194.0" text="Button" />
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="270.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../../Downloads/icons8-qzemail03.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="279.0" layoutY="194.0" text="Button" />
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="368.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../../Downloads/icons8-qzemail03.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="377.0" layoutY="194.0" text="Button" />
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="469.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../../Downloads/icons8-qzemail03.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="478.0" layoutY="194.0" text="Button" />
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="66.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../../Downloads/icons8-qzemail03.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="75.0" layoutY="315.0" text="Button" />
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="170.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../../Downloads/icons8-qzemail03.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="179.0" layoutY="315.0" text="Button" />
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="275.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../../Downloads/icons8-qzemail03.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="284.0" layoutY="315.0" text="Button" />
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="373.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../../Downloads/icons8-qzemail03.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="382.0" layoutY="315.0" text="Button" />
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="474.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../../Downloads/icons8-qzemail03.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="483.0" layoutY="315.0" text="Button" />
+   </children>
 </AnchorPane>
