@@ -2,12 +2,13 @@ package edu.wpi.teamF.Controllers;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.MaintenanceRequestFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.DatabaseManipulators.SecurityRequestFactory;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.UIServiceRequest;
+import edu.wpi.teamF.ModelClasses.UIClasses.UIServiceRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -48,12 +49,16 @@ public class ServiceRequestController implements Initializable {
   public JFXButton cancelOngoing;
   public JFXButton ongoingButton;
   public JFXButton updateButton;
+  public JFXComboBox newComboBox;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // columns for table
 
     // add all location nodes in choicebox
+
+    UISetting uiSetting = new UISetting();
+    uiSetting.setAsLocationComboBox(newComboBox);
 
     // priority choices
     choiceBoxPriority.getItems().add("1");
@@ -93,6 +98,7 @@ public class ServiceRequestController implements Initializable {
     int priority = Integer.parseInt(choiceBoxPriority.getValue());
     String locationName = choiceBoxLoc.getValue();
     String nodeID = null;
+    String description = textAreaDesc.getText();
     // check which location
     if (locationName.equals("Intensive Care Unit")) {
       nodeID = "FDEPT00105";
@@ -144,12 +150,14 @@ public class ServiceRequestController implements Initializable {
 
     if (serviceType.equals("Security")) {
       SecurityRequest secRequest =
-          new SecurityRequest(nodeFactory.read(nodeID), "NOT ASSIGNED", date, priority);
+          new SecurityRequest(
+              nodeFactory.read(nodeID), "NOT ASSIGNED", description, date, priority);
       securityRequestFactory.create(secRequest);
 
     } else if (serviceType.equals("Maintenance")) {
       MaintenanceRequest maintenanceRequest =
-          new MaintenanceRequest(nodeFactory.read(nodeID), "NOT ASSIGNED", date, priority);
+          new MaintenanceRequest(
+              nodeFactory.read(nodeID), "NOT ASSIGNED", description, date, priority);
       maintenanceRequestFactory.create(maintenanceRequest);
     }
 

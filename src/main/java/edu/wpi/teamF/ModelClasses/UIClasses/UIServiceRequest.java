@@ -1,7 +1,10 @@
-package edu.wpi.teamF.ModelClasses.ServiceRequest;
+package edu.wpi.teamF.ModelClasses.UIClasses;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javafx.beans.property.SimpleStringProperty;
@@ -17,10 +20,17 @@ public class UIServiceRequest extends RecursiveTreeObject<UIServiceRequest> {
   public NodeFactory nodeFactory = NodeFactory.getFactory();
 
   public UIServiceRequest(ServiceRequest serviceRequest) {
+    int prio = serviceRequest.getPriority();
+    if (prio == 1) {
+      priority = new SimpleStringProperty("Low");
+    } else if (prio == 2) {
+      priority = new SimpleStringProperty("Medium");
+    } else if (prio == 3) {
+      priority = new SimpleStringProperty("High");
+    }
     DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
 
     date = new SimpleStringProperty(dateformat.format(serviceRequest.getDateTimeSubmitted()));
-    priority = new SimpleStringProperty("" + serviceRequest.getPriority());
     location = new SimpleStringProperty(serviceRequest.getLocation().getId());
     id = new SimpleStringProperty(serviceRequest.getId());
     description = new SimpleStringProperty((serviceRequest.getDescription()));

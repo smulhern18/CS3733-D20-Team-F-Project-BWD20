@@ -8,25 +8,42 @@ import java.util.Date;
 public abstract class ServiceRequest {
 
   private String id;
-  private String complete = "";
+  private String assignee = "Not Assigned";
   private Node location;
   private String description;
   private Date dateTimeSubmitted;
   private int priority;
+  private boolean complete;
 
   public ServiceRequest(
-      String id, Node location, String description, Date dateTimeSubmitted, int priority)
+      String id,
+      Node location,
+      String assignee,
+      String description,
+      Date dateTimeSubmitted,
+      int priority,
+      boolean complete)
       throws ValidationException {
     setId(id);
     setLocation(location);
+    setAssignee(assignee);
     setDescription(description);
     setDateTimeSubmitted(dateTimeSubmitted);
     setPriority(priority);
+    setComplete(complete);
   }
 
-  public ServiceRequest(Node location, String description, Date dateTimeSubmitted, int priority)
+  public ServiceRequest(
+      Node location, String assignee, String description, Date dateTimeSubmitted, int priority)
       throws ValidationException {
-    this("" + System.currentTimeMillis(), location, description, dateTimeSubmitted, priority);
+    this(
+        "" + System.currentTimeMillis(),
+        location,
+        assignee,
+        description,
+        dateTimeSubmitted,
+        priority,
+        false);
   }
 
   public String getId() {
@@ -45,6 +62,15 @@ public abstract class ServiceRequest {
   public void setLocation(Node location) throws ValidationException {
     Validators.nodeValidation(location);
     this.location = location;
+  }
+
+  public String getAssignee() {
+    return assignee;
+  }
+
+  public void setAssignee(String assignee) throws ValidationException {
+    Validators.nameValidation(assignee);
+    this.assignee = assignee;
   }
 
   public String getDescription() {
@@ -74,11 +100,35 @@ public abstract class ServiceRequest {
     this.priority = priority;
   }
 
-  public String getComplete() {
+  public boolean getComplete() {
     return complete;
   }
 
-  public void setComplete(String complete) {
+  public void setComplete(boolean complete) throws ValidationException {
+    Validators.booleanValidation(complete);
     this.complete = complete;
+  }
+
+  /**
+   * Checks if two service requests are equal
+   *
+   * @param other the other service request to check against
+   * @return if the service requests are equal or not
+   */
+  public boolean equals(Object other) {
+    boolean isEqual = false;
+    if (other instanceof ServiceRequest) {
+      ServiceRequest otherServiceRequest = (ServiceRequest) other;
+
+      isEqual =
+          this.getId().equals(otherServiceRequest.getId())
+              && this.getLocation().equals(otherServiceRequest.getLocation())
+              && this.getDescription().equals(otherServiceRequest.getDescription())
+              && this.getDateTimeSubmitted().equals(otherServiceRequest.getDateTimeSubmitted())
+              && this.getPriority() == otherServiceRequest.getPriority()
+              && this.getComplete() == otherServiceRequest.getComplete()
+              && this.getAssignee().equals(otherServiceRequest.getAssignee());
+    }
+    return isEqual;
   }
 }

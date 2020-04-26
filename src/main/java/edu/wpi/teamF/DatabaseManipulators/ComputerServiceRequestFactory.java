@@ -1,7 +1,7 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
 import edu.wpi.teamF.ModelClasses.Node;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
@@ -11,30 +11,39 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SecurityRequestFactory {
-
+public class ComputerServiceRequestFactory {
   NodeFactory nodeFactory = NodeFactory.getFactory();
-  private static final SecurityRequestFactory factory = new SecurityRequestFactory();
+  private static final ComputerServiceRequestFactory factory = new ComputerServiceRequestFactory();
   private static final ServiceRequestFactory serviceRequestFactory =
       ServiceRequestFactory.getFactory();
 
-  public static SecurityRequestFactory getFactory() {
+  public static ComputerServiceRequestFactory getFactory() {
     return factory;
   }
 
-  public void create(SecurityRequest securityRequest) throws ValidationException {
+  public void create(ComputerServiceRequest computerServiceRequest) throws ValidationException {
     String insertStatement =
         "INSERT INTO "
-            + DatabaseManager.SECURITY_REQUEST_TABLE_NAME
+            + DatabaseManager.COMPUTER_REQUEST_TABLE_NAME
             + " ( "
             + DatabaseManager.SERVICEID_KEY
+            + ", "
+            + DatabaseManager.MAKE_KEY
+            + ", "
+            + DatabaseManager.HARDWARESOFTWARE_KEY
+            + ", "
+            + DatabaseManager.OS_ID_KEY
             + " ) "
-            + "VALUES (?)";
-    Validators.securityRequestValidation(securityRequest);
-    serviceRequestFactory.create(securityRequest);
+            + "VALUES (?, ?, ?, ?)";
+    Validators.computerServiceValidation(computerServiceRequest);
+    serviceRequestFactory.create(computerServiceRequest);
     try (PreparedStatement prepareStatement =
         DatabaseManager.getConnection().prepareStatement(insertStatement)) {
-      prepareStatement.setString(1, securityRequest.getId());
+      int param = 1;
+      prepareStatement.setString(param++, computerServiceRequest.getId());
+      prepareStatement.setString(param++, computerServiceRequest.getMake());
+      prepareStatement.setString(param++, computerServiceRequest.getHardwareSoftware());
+      prepareStatement.setString(param++, computerServiceRequest.getOS());
       try {
         int numRows = prepareStatement.executeUpdate();
         if (numRows < 1) {
@@ -48,11 +57,11 @@ public class SecurityRequestFactory {
     }
   }
 
-  public SecurityRequest read(String id) {
-    SecurityRequest securityRequest = null;
+  public ComputerServiceRequest read(String id) {
+    ComputerServiceRequest computerService = null;
     String selectStatement =
         "SELECT * FROM "
-            + DatabaseManager.SECURITY_REQUEST_TABLE_NAME
+            + DatabaseManager.COMPUTER_REQUEST_TABLE_NAME
             + " WHERE "
             + DatabaseManager.SERVICEID_KEY
             + " = ?";
@@ -65,15 +74,18 @@ public class SecurityRequestFactory {
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
           ServiceRequest serviceRequest = serviceRequestFactory.read(id);
-          securityRequest =
-              new SecurityRequest(
+          computerService =
+              new ComputerServiceRequest(
                   serviceRequest.getId(),
                   serviceRequest.getLocation(),
                   serviceRequest.getAssignee(),
                   serviceRequest.getDescription(),
                   serviceRequest.getDateTimeSubmitted(),
                   serviceRequest.getPriority(),
-                  serviceRequest.getComplete());
+                  serviceRequest.getComplete(),
+                  resultSet.getString(DatabaseManager.MAKE_KEY),
+                  resultSet.getString(DatabaseManager.HARDWARESOFTWARE_KEY),
+                  resultSet.getString(DatabaseManager.OS_ID_KEY));
         }
       } catch (ValidationException e) {
         throw e;
@@ -83,15 +95,21 @@ public class SecurityRequestFactory {
     } catch (Exception e) {
       System.out.println("Exception in NodeFactory read: " + e.getMessage() + ", " + e.getClass());
     }
-    return securityRequest;
+    return computerService;
   }
 
-  public void update(SecurityRequest securityRequest) {
+  public void update(ComputerServiceRequest computerServiceRequest) {
     String updateStatement =
         "UPDATE "
-            + DatabaseManager.SECURITY_REQUEST_TABLE_NAME
+            + DatabaseManager.COMPUTER_REQUEST_TABLE_NAME
             + " SET "
             + DatabaseManager.SERVICEID_KEY
+            + " = ?, "
+            + DatabaseManager.MAKE_KEY
+            + " = ?, "
+            + DatabaseManager.HARDWARESOFTWARE_KEY
+            + " = ?, "
+            + DatabaseManager.OS_ID_KEY
             + " = ? "
             + "WHERE "
             + DatabaseManager.SERVICEID_KEY
@@ -99,9 +117,12 @@ public class SecurityRequestFactory {
     try (PreparedStatement preparedStatement =
         DatabaseManager.getConnection().prepareStatement(updateStatement)) {
       int param = 1;
-      preparedStatement.setString(param++, securityRequest.getId());
-      preparedStatement.setString(param++, securityRequest.getId());
-      serviceRequestFactory.update(securityRequest);
+      serviceRequestFactory.update(computerServiceRequest);
+      preparedStatement.setString(param++, computerServiceRequest.getId());
+      preparedStatement.setString(param++, computerServiceRequest.getMake());
+      preparedStatement.setString(param++, computerServiceRequest.getHardwareSoftware());
+      preparedStatement.setString(param++, computerServiceRequest.getOS());
+      preparedStatement.setString(param++, computerServiceRequest.getId());
       int numRows = preparedStatement.executeUpdate();
       if (numRows != 1) {
         throw new Exception("Updated " + numRows + " rows");
@@ -115,7 +136,7 @@ public class SecurityRequestFactory {
 
     String deleteStatement =
         "DELETE FROM "
-            + DatabaseManager.SECURITY_REQUEST_TABLE_NAME
+            + DatabaseManager.COMPUTER_REQUEST_TABLE_NAME
             + " WHERE "
             + DatabaseManager.SERVICEID_KEY
             + " = ?";
@@ -133,48 +154,53 @@ public class SecurityRequestFactory {
     }
   }
 
-  public List<SecurityRequest> getSecurityRequestsByLocation(Node location) {
-    List<SecurityRequest> securityRequests = new ArrayList<>();
+  public List<ComputerServiceRequest> getComputerRequestsByLocation(Node location) {
+    List<ComputerServiceRequest> computerRequests = new ArrayList<>();
     for (ServiceRequest serviceRequest :
         serviceRequestFactory.getServiceRequestsByLocation(location)) {
-      SecurityRequest securityRequest = read(serviceRequest.getId());
-      if (securityRequest != null) {
-        securityRequests.add(securityRequest);
+      ComputerServiceRequest computerReadRequest = read(serviceRequest.getId());
+      if (computerReadRequest != null) {
+        computerRequests.add(computerReadRequest);
       }
     }
-    if (securityRequests.size() == 0) {
+    if (computerRequests.size() == 0) {
       return null;
     } else {
-      return securityRequests;
+      return computerRequests;
     }
   }
 
-  public List<SecurityRequest> getAllSecurityRequests() {
-    List<SecurityRequest> securityRequest = null;
-    String selectStatement = "SELECT * FROM " + DatabaseManager.SECURITY_REQUEST_TABLE_NAME;
+  public List<ComputerServiceRequest> getAllComputerRequests() {
+    List<ComputerServiceRequest> computerRequests = null;
+    String selectStatement = "SELECT * FROM " + DatabaseManager.COMPUTER_REQUEST_TABLE_NAME;
 
     try (PreparedStatement preparedStatement =
             DatabaseManager.getConnection().prepareStatement(selectStatement);
         ResultSet resultSet = preparedStatement.executeQuery()) {
-      securityRequest = new ArrayList<>();
+      computerRequests = new ArrayList<>();
       ;
       while (resultSet.next()) {
         ServiceRequest serviceRequest =
             serviceRequestFactory.read(resultSet.getString(DatabaseManager.SERVICEID_KEY));
-        securityRequest.add(
-            new SecurityRequest(
+        ComputerServiceRequest computerServiceRequest =
+            factory.read(resultSet.getString(DatabaseManager.SERVICEID_KEY));
+        computerRequests.add(
+            new ComputerServiceRequest(
                 serviceRequest.getId(),
                 serviceRequest.getLocation(),
                 serviceRequest.getAssignee(),
                 serviceRequest.getDescription(),
                 serviceRequest.getDateTimeSubmitted(),
                 serviceRequest.getPriority(),
-                serviceRequest.getComplete()));
+                serviceRequest.getComplete(),
+                computerServiceRequest.getMake(),
+                computerServiceRequest.getHardwareSoftware(),
+                computerServiceRequest.getOS()));
       }
     } catch (Exception e) {
       System.out.println(
           "Exception in SecurityFactory read: " + e.getMessage() + ", " + e.getClass());
     }
-    return securityRequest;
+    return computerRequests;
   }
 }
