@@ -177,6 +177,7 @@ public class LanguageServiceController implements Initializable {
 
     problemTypeChoice.getItems().add("Require Interpreter");
     problemTypeChoice.getItems().add("Require Form Translation");
+    problemTypeChoice.getItems().add("Require TTY Machine");
 
     languageChoice.getItems().add("Spanish");
     languageChoice.getItems().add("Sign Language");
