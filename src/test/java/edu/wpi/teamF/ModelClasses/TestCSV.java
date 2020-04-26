@@ -87,6 +87,7 @@ public class TestCSV {
       assertTrue(Arrays.equals(f1, f2));
     } catch (Exception e) {
       System.out.println(e.getMessage());
+      fail(e.getMessage());
     }
   }
 
@@ -104,7 +105,7 @@ public class TestCSV {
         i++;
       }
     } catch (Exception e) {
-
+      fail(e.getMessage());
     }
     File wfile = new File("src/test/java/edu/wpi/teamF/Test/");
     File file = new File("src/test/java/edu/wpi/teamF/Test/EdgesBackup.csv");
@@ -116,13 +117,13 @@ public class TestCSV {
               new File(getClass().getResource("/edu/wpi/teamF/CSVEdgeTest.csv").toURI()).toPath());
       assertTrue(Arrays.equals(f1, f2));
     } catch (Exception e) {
-
+      fail(e.getMessage());
     }
   }
 
   @Test
   public void testReadAndWriteCSVMaintenance() throws Exception {
-    int i = 0;
+
     try {
       databaseManager.manipulateNode(validNodes[0]);
       databaseManager.manipulateNode(validNodes[1]);
@@ -130,17 +131,17 @@ public class TestCSV {
       databaseManager.manipulateNode(validNodes[3]);
     } catch (Exception e) {
       System.out.println(e.getMessage());
+      fail(e.getMessage());
     }
     csvManipulator.readCSVFileMaintenanceService(
         getClass().getResourceAsStream("/edu/wpi/teamF/CSVMaintenanceRequestTest.csv"));
 
     List<MaintenanceRequest> list = databaseManager.getAllMaintenanceRequests();
-    for (MaintenanceRequest m : list) {
 
-      Assertions.assertTrue(m.equals(validMaintenance[i]));
-      i++;
-    }
-
+    Assertions.assertTrue(list.get(0).equals(validMaintenance[1]));
+    Assertions.assertTrue(list.get(1).equals(validMaintenance[0]));
+    Assertions.assertTrue(list.get(2).equals(validMaintenance[2]));
+    Assertions.assertTrue(list.get(3).equals(validMaintenance[3]));
     /** Valid data */
     File wfile = new File("src/test/java/edu/wpi/teamF/Test/");
     File file = new File("src/test/java/edu/wpi/teamF/Test/MaintenanceBackup.csv");
@@ -157,6 +158,7 @@ public class TestCSV {
       assertTrue(Arrays.equals(f1, f2));
     } catch (Exception e) {
       System.out.println(e.getMessage());
+      fail(e.getMessage());
     }
   }
 
@@ -170,16 +172,17 @@ public class TestCSV {
       databaseManager.manipulateNode(validNodes[3]);
     } catch (Exception e) {
       System.out.println(e.getMessage());
+      fail(e.getMessage());
     }
     csvManipulator.readCSVFileSecurityService(
         getClass().getResourceAsStream("/edu/wpi/teamF/CSVSecurityTest.csv"));
 
     List<SecurityRequest> list = databaseManager.getAllSecurityRequests();
-    for (SecurityRequest n : list) {
-
-      Assertions.assertTrue(n.equals(validSecurityRequest[i]));
-      i++;
-    }
+    int j = 0;
+    Assertions.assertTrue(list.get(0).equals(validSecurityRequest[1]));
+    Assertions.assertTrue(list.get(1).equals(validSecurityRequest[0]));
+    Assertions.assertTrue(list.get(2).equals(validSecurityRequest[2]));
+    Assertions.assertTrue(list.get(3).equals(validSecurityRequest[3]));
 
     /** Valid data */
     File wfile = new File("src/test/java/edu/wpi/teamF/Test/");
@@ -194,6 +197,7 @@ public class TestCSV {
       assertTrue(Arrays.equals(f1, f2));
     } catch (Exception e) {
       System.out.println(e.getMessage());
+      fail(e.getMessage());
     }
   }
 
@@ -224,6 +228,7 @@ public class TestCSV {
       // assertTrue(Arrays.equals(f1, f2));
     } catch (Exception e) {
       System.out.println(e.getMessage());
+      fail(e.getMessage());
     }
   }
 }
