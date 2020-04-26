@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="414.0" prefWidth="174.0" style="-fx-background-color: #FFD9F6#FFD9F6;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MenuBarController">
+<AnchorPane style="-fx-background-color: #FFD9F6#FFD9F6;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MenuBarController">
    <children>
       <Circle fill="WHITE" layoutX="91.0" layoutY="80.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
       <JFXButton layoutX="14.0" layoutY="349.0" onAction="#settings" prefHeight="35.0" prefWidth="165.0" text="Setting" textFill="#000000cc">
