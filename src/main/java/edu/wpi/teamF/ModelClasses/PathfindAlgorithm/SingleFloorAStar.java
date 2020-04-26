@@ -55,7 +55,6 @@ public class SingleFloorAStar implements PathfindAlgorithm {
             neighbors.add(nodeMap.get(edge.getNode1()));
           }
         }
-
         for (Node neighbor : neighbors) {
           if (!visited.contains(neighbor)) {
             double distanceToEnd =
