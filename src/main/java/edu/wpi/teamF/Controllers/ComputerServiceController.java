@@ -40,6 +40,8 @@ public class ComputerServiceController implements Initializable {
   public Label prioLabel;
   public JFXToggleButton switcher;
   public JFXButton update;
+  public JFXTextField deleteText;
+  public JFXButton delete;
   ObservableList<UIComputerServiceRequest> csrUI = FXCollections.observableArrayList();
   public ChoiceBox<String> locationChoice;
   public ChoiceBox<String> makeChoice;
@@ -317,6 +319,8 @@ public class ComputerServiceController implements Initializable {
       issueLabel.setVisible(false);
       issueChoice.setVisible(false);
       update.setVisible(true);
+      deleteText.setVisible(true);
+      delete.setVisible(true);
 
     } else {
       treeTableComputer.setVisible(false);
@@ -335,6 +339,16 @@ public class ComputerServiceController implements Initializable {
       issueLabel.setVisible(true);
       issueChoice.setVisible(true);
       update.setVisible(false);
+      deleteText.setVisible(false);
+      delete.setVisible(false);
     }
+  }
+
+  public void delete(ActionEvent actionEvent) {
+    String toDelte = deleteText.getText();
+    computerServiceRequest.delete(toDelte);
+    csrUI.removeIf(computerServiceRequest -> computerServiceRequest.getID().get().equals(toDelte));
+    deleteText.setText("");
+    treeTableComputer.refresh();
   }
 }

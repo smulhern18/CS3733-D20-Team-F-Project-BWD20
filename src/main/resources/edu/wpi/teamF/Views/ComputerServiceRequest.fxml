@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXToggleButton?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.scene.control.ChoiceBox?>
@@ -9,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ComputerServiceController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ComputerServiceController">
    <children>
       <Label fx:id="locLabel" layoutX="66.0" layoutY="43.0" prefHeight="31.0" prefWidth="83.0" text="Location:">
          <font>
@@ -45,7 +46,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXTreeTableView fx:id="treeTableComputer" layoutX="440.0" layoutY="162.0" prefHeight="496.0" prefWidth="742.0" />
+      <JFXTreeTableView fx:id="treeTableComputer" layoutX="47.0" layoutY="37.0" prefHeight="261.0" prefWidth="614.0" visible="false" />
       <Label fx:id="OSLabel" layoutX="65.0" layoutY="185.0" prefHeight="31.0" prefWidth="167.0" text="Operating System:">
          <font>
             <Font name="System Bold" size="15.0" />
@@ -58,8 +59,14 @@
          </font>
       </Label>
       <ChoiceBox fx:id="priorityChoice" layoutX="467.0" layoutY="46.0" prefHeight="25.0" prefWidth="68.0" />
-      <JFXToggleButton fx:id="switcher" layoutX="987.0" layoutY="708.0" onAction="#switchView" text="Ongoing Requests" visible="false" />
-      <JFXButton fx:id="update" buttonType="RAISED" layoutX="835.0" layoutY="712.0" onAction="#update" prefHeight="51.0" prefWidth="126.0" style="-fx-background-color: grey;" text="Update">
+      <JFXToggleButton fx:id="switcher" layoutX="535.0" layoutY="321.0" onAction="#switchView" text="Ongoing Requests" />
+      <JFXButton fx:id="update" buttonType="RAISED" layoutX="330.0" layoutY="324.0" onAction="#update" prefHeight="51.0" prefWidth="126.0" style="-fx-background-color: grey;" text="Update" visible="false">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXTextField fx:id="deleteText" layoutX="552.0" layoutY="-1.0" visible="false" />
+      <JFXButton fx:id="delete" buttonType="RAISED" layoutX="435.0" layoutY="-1.0" onAction="#delete" prefHeight="31.0" prefWidth="106.0" style="-fx-background-color: grey;" text="Delete" visible="false">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
