@@ -125,17 +125,6 @@ public class PathfinderController implements Initializable {
 
     button.setLayoutX(xPos);
     button.setLayoutY(yPos);
-    if (node.getFloor() == 1) {
-      mapPaneFaulkner1.getChildren().add(button);
-    } else if (node.getFloor() == 2) {
-      mapPaneFaulkner2.getChildren().add(button);
-    } else if (node.getFloor() == 3) {
-      mapPaneFaulkner3.getChildren().add(button);
-    } else if (node.getFloor() == 4) {
-      mapPaneFaulkner4.getChildren().add(button);
-    } else if (node.getFloor() == 5) {
-      mapPaneFaulkner5.getChildren().add(button);
-    }
 
     button.setOnAction(
         actionEvent -> {
@@ -177,6 +166,17 @@ public class PathfinderController implements Initializable {
             pathButton.setDisable(false);
           }
         });
+    if (node.getFloor() == 1) {
+      mapPaneFaulkner1.getChildren().add(button);
+    } else if (node.getFloor() == 2) {
+      mapPaneFaulkner2.getChildren().add(button);
+    } else if (node.getFloor() == 3) {
+      mapPaneFaulkner3.getChildren().add(button);
+    } else if (node.getFloor() == 4) {
+      mapPaneFaulkner4.getChildren().add(button);
+    } else if (node.getFloor() == 5) {
+      mapPaneFaulkner5.getChildren().add(button);
+    }
   }
 
   public void reset() {
@@ -184,33 +184,60 @@ public class PathfinderController implements Initializable {
   }
 
   public void resetPane() {
-
+    List<javafx.scene.Node> nodesToRemove1 = new ArrayList<>();
     for (javafx.scene.Node node : mapPaneFaulkner1.getChildren()) {
       if (node instanceof Line) {
-        mapPaneFaulkner1.getChildren().remove(node);
+        nodesToRemove1.add(node);
       }
     }
+    mapPaneFaulkner1.getChildren().removeAll(nodesToRemove1);
+    List<javafx.scene.Node> nodesToRemove2 = new ArrayList<>();
     for (javafx.scene.Node node : mapPaneFaulkner2.getChildren()) {
       if (node instanceof Line) {
-        mapPaneFaulkner2.getChildren().remove(node);
+        nodesToRemove2.add(node);
       }
     }
+    mapPaneFaulkner2.getChildren().removeAll(nodesToRemove2);
+    List<javafx.scene.Node> nodesToRemove3 = new ArrayList<>();
     for (javafx.scene.Node node : mapPaneFaulkner3.getChildren()) {
       if (node instanceof Line) {
-        mapPaneFaulkner3.getChildren().remove(node);
+        nodesToRemove3.add(node);
       }
     }
+    mapPaneFaulkner3.getChildren().removeAll(nodesToRemove3);
+    List<javafx.scene.Node> nodesToRemove4 = new ArrayList<>();
     for (javafx.scene.Node node : mapPaneFaulkner4.getChildren()) {
       if (node instanceof Line) {
-        mapPaneFaulkner4.getChildren().remove(node);
+        nodesToRemove4.add(node);
       }
     }
+    mapPaneFaulkner4.getChildren().removeAll(nodesToRemove4);
+    List<javafx.scene.Node> nodesToRemove5 = new ArrayList<>();
     for (javafx.scene.Node node : mapPaneFaulkner5.getChildren()) {
       if (node instanceof Line) {
-        mapPaneFaulkner5.getChildren().remove(node);
+        nodesToRemove5.add(node);
       }
     }
+    mapPaneFaulkner5.getChildren().removeAll(nodesToRemove5);
 
+    if (startNode != null) {
+      for (javafx.scene.Node component : currentPane.getChildren()) {
+        if (component.getId().equals(startNode.getId())) {
+          component.setStyle(
+              "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #3281a8; "
+                  + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
+        }
+      }
+    }
+    if (endNode != null) {
+      for (javafx.scene.Node component : currentPane.getChildren()) {
+        if (component.getId().equals(endNode.getId())) {
+          component.setStyle(
+              "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #3281a8; "
+                  + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
+        }
+      }
+    }
     startNode = null;
     endNode = null;
     state = 0;
@@ -300,7 +327,7 @@ public class PathfinderController implements Initializable {
         if (node.getLongName() == startCombo.getValue()) {
           if (startNode != null) {
             for (javafx.scene.Node component : currentPane.getChildren()) {
-              if (component.getId() == startNode.getId()) {
+              if (component.getId().equals(startNode.getId())) {
                 component.setStyle(
                     "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #3281a8; "
                         + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
@@ -312,7 +339,7 @@ public class PathfinderController implements Initializable {
           elevBtn.setDisable(false);
           bathBtn.setDisable(false);
           for (javafx.scene.Node component : currentPane.getChildren()) {
-            if (component.getId() == node.getId()) {
+            if (component.getId().equals(node.getId())) {
               component.setStyle(
                   "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; "
                       + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
@@ -329,7 +356,7 @@ public class PathfinderController implements Initializable {
         if (node.getLongName() == endCombo.getValue()) {
           if (endNode != null) {
             for (javafx.scene.Node component : currentPane.getChildren()) {
-              if (component.getId() == endNode.getId()) {
+              if (component.getId().equals(endNode.getId())) {
                 component.setStyle(
                     "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #3281a8; "
                         + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
@@ -341,7 +368,7 @@ public class PathfinderController implements Initializable {
           elevBtn.setDisable(true);
           bathBtn.setDisable(true);
           for (javafx.scene.Node component : currentPane.getChildren()) {
-            if (component.getId() == node.getId()) {
+            if (component.getId().equals(node.getId())) {
               component.setStyle(
                   "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00cc00; "
                       + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
