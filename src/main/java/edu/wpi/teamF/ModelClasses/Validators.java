@@ -2,7 +2,6 @@ package edu.wpi.teamF.ModelClasses;
 
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
-
 import java.util.Date;
 
 public class Validators {
@@ -379,13 +378,14 @@ public class Validators {
    * @param constraints the optional constraints for validation
    * @throws ValidationException should the validation fail
    */
-  public static void medicineTypeValidation (String medicineType, int... constraints) throws ValidationException {
+  public static void medicineTypeValidation(String medicineType, int... constraints)
+      throws ValidationException {
     nullCheckValidation(medicineType, constraints);
-    if (medicineType.length() < MEDICINE_TYPE_MIN_LENGTH || medicineType.length() > MEDICINE_TYPE_MAX_LENGTH) {
+    if (medicineType.length() < MEDICINE_TYPE_MIN_LENGTH
+        || medicineType.length() > MEDICINE_TYPE_MAX_LENGTH) {
       throw new ValidationException("Medicine type length is out of bounds");
     }
   }
-
 
   /**
    * Validation for medicine delivery instructions
@@ -394,9 +394,11 @@ public class Validators {
    * @param constraints the optional constraints for validation
    * @throws ValidationException should the validation fail
    */
-  public static void instructionsValidation (String instructions, int... constraints) throws ValidationException {
+  public static void instructionsValidation(String instructions, int... constraints)
+      throws ValidationException {
     nullCheckValidation(instructions, constraints);
-    if (instructions.length() < INSTRUCTIONS_MIN_LENGTH || instructions.length() > INSTRUCTIONS_MAX_LENGTH) {
+    if (instructions.length() < INSTRUCTIONS_MIN_LENGTH
+        || instructions.length() > INSTRUCTIONS_MAX_LENGTH) {
       throw new ValidationException("Instructions length is out of bounds");
     }
   }
@@ -409,7 +411,7 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static <T extends MedicineDeliveryRequest> void medicineDeliveryRequestValidation(
-          T t, int... constraints) throws ValidationException {
+      T t, int... constraints) throws ValidationException {
     nullCheckValidation(t, constraints);
     MedicineDeliveryRequest medicineDeliveryRequestObject = (MedicineDeliveryRequest) t;
 

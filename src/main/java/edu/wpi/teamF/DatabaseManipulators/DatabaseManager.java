@@ -67,7 +67,7 @@ public class DatabaseManager {
   static final String MAKE_KEY = "Make";
   static final String HARDWARESOFTWARE_KEY = "HardwareOrSoftware";
 
-  //MedicineDelivery Requests
+  // MedicineDelivery Requests
   static final String MEDICINE_TYPE_KEY = "medicineType";
   static final String INSTRUCTIONS_KEY = "instructions";
 
@@ -170,18 +170,18 @@ public class DatabaseManager {
             + "))";
 
     String medicineDeliveryTableCreationStatement =
-            "CREATE TABLE "
-                    + MAINTENANCE_REQUEST_TABLE_NAME
-                    + " ( "
-                    + SERVICEID_KEY
-                    + " VARCHAR(32) NOT NULL, "
-                    + MEDICINE_TYPE_KEY
-                    + "VARCHAR(64) NOT NULL, "
-                    + INSTRUCTIONS_KEY
-                    + "VARCHAR(64) NOT NULL, "
-                    + "PRIMARY KEY ("
-                    + SERVICEID_KEY
-                    + "))";
+        "CREATE TABLE "
+            + MAINTENANCE_REQUEST_TABLE_NAME
+            + " ( "
+            + SERVICEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + MEDICINE_TYPE_KEY
+            + "VARCHAR(64) NOT NULL, "
+            + INSTRUCTIONS_KEY
+            + "VARCHAR(64) NOT NULL, "
+            + "PRIMARY KEY ("
+            + SERVICEID_KEY
+            + "))";
 
     String accountTableCreationStatement =
         "CREATE TABLE "
@@ -269,7 +269,8 @@ public class DatabaseManager {
     String serviceRequestTableDropStatement = "DROP TABLE " + SERVICE_REQUEST_TABLE;
     String maintenanceTableDropStatement = "DROP TABLE " + MAINTENANCE_REQUEST_TABLE_NAME;
     String securityTableDropStatement = "DROP TABLE " + SECURITY_REQUEST_TABLE_NAME;
-    String medicineDeliveryTableDropStatement = "DROP TABLE " + MEDICINE_DELIVERY_REQUEST_TABLE_NAME;
+    String medicineDeliveryTableDropStatement =
+        "DROP TABLE " + MEDICINE_DELIVERY_REQUEST_TABLE_NAME;
     String accountDropStatement = "DROP TABLE " + ACCOUNT_TABLE_NAME;
     String appointmentDropStatement = "DROP TABLE " + APPOINTMENTS_TABLE_NAME;
     String computerDropStatement = "DROP TABLE " + COMPUTER_REQUEST_TABLE_NAME;
