@@ -259,7 +259,8 @@ public class CSVManipulator {
                 data.get(i + 3),
                 new Date(Integer.parseInt(data.get(i + 4))),
                 Integer.parseInt(data.get(i + 5)),
-                Boolean.parseBoolean(data.get(i + 6))));
+                Boolean.parseBoolean(data.get(i + 6)),
+                0));
 
         i = i + 7;
       }
@@ -276,7 +277,7 @@ public class CSVManipulator {
   /** Writes to the CSV file so that it can become persistant */
   public void writeCSVFileSecurityService(Path path) {
     // writing to the file
-    List<SecurityRequest> securityRequests = securityRequestFactory.getAllSecurityRequests();
+    List<SecurityRequest> securityRequests = securityRequestFactory.getAllSecurityRequest();
 
     try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {

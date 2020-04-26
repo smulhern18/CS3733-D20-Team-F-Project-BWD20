@@ -45,7 +45,7 @@ public class DatabaseManager {
   static final String MAINTENCE_REQUEST_ID_KEY = "serviceId";
 
   // Security Request
-  static final String SECRURITY_REQUEST_ID_KEY = "serviceId";
+  static final String GUARDS_REQUESTED_KEY = "guardsRequested";
 
   // account
   static final String USER_NAME_KEY = "userName";
@@ -134,6 +134,8 @@ public class DatabaseManager {
             + SECURITY_REQUEST_TABLE_NAME
             + " ( "
             + SERVICEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + GUARDS_REQUESTED_KEY
             + " VARCHAR(32) NOT NULL, "
             + "PRIMARY KEY ("
             + SERVICEID_KEY

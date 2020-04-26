@@ -2,7 +2,6 @@ package edu.wpi.teamF.DatabaseManipulators;
 
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
@@ -188,14 +187,14 @@ public class ServiceRequestFactory {
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
           serviceRequests.add(
-              new SecurityRequest(
+              new ServiceRequest(
                   resultSet.getString(DatabaseManager.SERVICEID_KEY),
                   location,
                   resultSet.getString(DatabaseManager.ASSIGNED_KEY),
                   resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
                   new Date(resultSet.getTimestamp(DatabaseManager.TIME_CREATED_KEY).getTime()),
                   resultSet.getInt(DatabaseManager.PRIORITY_KEY),
-                  resultSet.getBoolean(DatabaseManager.COMPLETED_KEY)));
+                  resultSet.getBoolean(DatabaseManager.COMPLETED_KEY)) {});
         }
       } catch (ValidationException e) {
         throw e;
