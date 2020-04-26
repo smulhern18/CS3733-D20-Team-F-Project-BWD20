@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Views.Flowers">
+   <children>
+      <Label layoutX="57.0" layoutY="22.0" text="Flower Delivery Request">
+         <font>
+            <Font name="Eras Light ITC" size="18.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="recipientInput" layoutX="168.0" layoutY="96.0" />
+      <Label layoutX="63.0" layoutY="109.0" text="Recipient's Name:" />
+      <JFXTextField fx:id="departmentnput" layoutX="168.0" layoutY="127.0" />
+      <Label layoutX="111.0" layoutY="140.0" text="Building:" />
+      <JFXTextField fx:id="roomInput" layoutX="168.0" layoutY="158.0" />
+      <Label layoutX="21.0" layoutY="171.0" prefHeight="18.0" prefWidth="146.0" text="Room Number (optional):" />
+      <Label layoutX="109.0" layoutY="200.0" prefHeight="18.0" prefWidth="58.0" text="Bouquet:" />
+      <JFXComboBox fx:id="flowerComboBox" layoutX="168.0" layoutY="187.0" prefHeight="26.0" prefWidth="135.0" />
+      <Label layoutX="38.0" layoutY="225.0" text="Message for Recipient:" />
+      <JFXTextArea fx:id="messageInput" layoutX="168.0" layoutY="225.0" prefHeight="112.0" prefWidth="135.0" />
+      <ImageView fx:id="flowerImage" fitHeight="202.0" fitWidth="186.0" layoutX="360.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" />
+      <JFXCheckBox fx:id="giftWrap" layoutX="345.0" layoutY="243.0" text="Gift Wrap (free)" />
+      <JFXTextField fx:id="buyerName" layoutX="442.0" layoutY="281.0" />
+      <Label layoutX="365.0" layoutY="294.0" text="Buyer Name:" />
+      <Label layoutX="315.0" layoutY="328.0" text="Buyer Phone Number:" />
+      <JFXTextField fx:id="buyerPhoneNumber" layoutX="442.0" layoutY="315.0" />
+   </children>
+</AnchorPane>

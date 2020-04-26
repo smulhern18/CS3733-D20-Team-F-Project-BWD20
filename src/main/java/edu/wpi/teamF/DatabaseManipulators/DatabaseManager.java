@@ -17,6 +17,7 @@ public class DatabaseManager {
   static final String ACCOUNT_TABLE_NAME = "accountsTable";
   static final String APPOINTMENTS_TABLE_NAME = "appointmentsTable";
   static final String COMPUTER_REQUEST_TABLE_NAME = "ComputerRequestsTable";
+  static final String FLOWER_REQUEST_TABLE_NAME = "flowerRequestsTable";
   /** Column Names */
   // node
   static final String X_COORDINATE_KEY = "xCoord";
@@ -65,6 +66,15 @@ public class DatabaseManager {
   static final String OS_ID_KEY = "OperatingSystem";
   static final String MAKE_KEY = "Make";
   static final String HARDWARESOFTWARE_KEY = "HardwareOrSoftware";
+
+  // Flower request
+  static final String RECIPIENT_NAME_KEY = "recipientInput";
+  static final String ROOM_NUMBER_KEY = "roomInput";
+  static final String BOUQUET_KEY = "choice";
+  static final String MESSAGE_KEY = "messageInput";
+  static final String BUYER_NAME_KEY = "buyerName";
+  static final String PHONE_NUMBER_KEY = "phoneNumber";
+  static final String GIFT_WRAP_KEY = "giftWrap";
 
   static Connection connection = null;
 
@@ -202,6 +212,29 @@ public class DatabaseManager {
             + APPOINTMENT_ID_KEY
             + "))";
 
+    String flowerTableCreationStatement = "CREATE TABLE"
+            + FLOWER_REQUEST_TABLE_NAME
+            + " ( "
+            + SERVICEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + RECIPIENT_NAME_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + ROOM_NUMBER_KEY
+            + " INTEGER, "
+            + BOUQUET_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + MESSAGE_KEY
+            + " VARCHAR(128), "
+            + BUYER_NAME_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + PHONE_NUMBER_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + GIFT_WRAP_KEY
+            + " BOOLEAN NOT NULL "
+            + "PRIMARY KEY ("
+            + SERVICEID_KEY
+            + "))";
+
     PreparedStatement preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(edgeTableCreationStatement);
@@ -217,6 +250,8 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(accountTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(appointmentTableCreationStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(flowerTableCreationStatement);
     preparedStatement.execute();
     System.out.println("Created Tables Successfully");
   }
@@ -251,6 +286,7 @@ public class DatabaseManager {
     String accountDropStatement = "DROP TABLE " + ACCOUNT_TABLE_NAME;
     String appointmentDropStatement = "DROP TABLE " + APPOINTMENTS_TABLE_NAME;
     String computerDropStatement = "DROP TABLE " + COMPUTER_REQUEST_TABLE_NAME;
+    String flowerDropStatement = "DROP TABLE " + FLOWER_REQUEST_TABLE_NAME;
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeDropStatement);
     preparedStatement.execute();
@@ -267,6 +303,8 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(accountDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(appointmentDropStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(flowerDropStatement);
     preparedStatement.execute();
     createTables();
   }
