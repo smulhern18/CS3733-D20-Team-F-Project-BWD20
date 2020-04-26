@@ -65,11 +65,6 @@ public class LoginController {
   }
 
   @FXML
-  void switchToMainMenu(ActionEvent event) throws IOException {
-    sceneController.switchScene("MainMenu");
-  }
-
-  @FXML
   void switchToMainMenu2() throws IOException {
     sceneController.switchScene("MainMenu");
   }
