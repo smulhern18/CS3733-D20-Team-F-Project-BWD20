@@ -2,12 +2,14 @@ package edu.wpi.teamF.Controllers;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.ComputerServiceRequestFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
+import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -20,33 +22,47 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 import javafx.util.Callback;
 import javax.management.InstanceNotFoundException;
 
 public class ComputerServiceController implements Initializable {
   public JFXTreeTableView<UIComputerServiceRequest> treeTableComputer;
-  public Label locLabel;
+  public AnchorPane anchorPane;
+  public GridPane optionBar;
+  public JFXButton requestServiceButton;
+  public GridPane servicePane;
+  public Label locationLabel;
+  public JFXComboBox<String> locationChoice;
   public Label makeLabel;
-  public Label descLabel;
-  public Label issueLabel;
-  public JFXButton submit;
-  public JFXButton cancel;
+  public JFXComboBox<String> makeChoice;
+  public JFXButton submitButton;
+  public JFXButton cancelButton;
+  public Label typeLabel;
+  public JFXComboBox<String> issueChoice;
+  public Label securityRequestLabel;
   public Label OSLabel;
+  public JFXComboBox<String> OSChoice;
+  public Label descLabel;
+  public JFXTextField descText;
   public Label prioLabel;
-  public JFXToggleButton switcher;
+  public JFXComboBox<String> priorityChoice;
+  public AnchorPane mainMenu;
+  public AnchorPane checkStatusPane;
   public JFXButton update;
+  public GridPane deletePane;
+  public JFXTextField deleteText;
+  public JFXButton delete;
+  public JFXButton backButton;
+  SceneController sceneController = App.getSceneController();
+
   ObservableList<UIComputerServiceRequest> csrUI = FXCollections.observableArrayList();
-  public ChoiceBox<String> locationChoice;
-  public ChoiceBox<String> makeChoice;
-  public ChoiceBox<String> issueChoice;
-  public ChoiceBox<String> OSChoice;
-  public JFXTextArea descText;
-  public ChoiceBox<String> priorityChoice;
   NodeFactory nodeFactory = NodeFactory.getFactory();
   ComputerServiceRequestFactory computerServiceRequest = ComputerServiceRequestFactory.getFactory();
   List<ComputerServiceRequest> computerServiceRequests =
@@ -54,6 +70,16 @@ public class ComputerServiceController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+
+    anchorPane
+        .widthProperty()
+        .addListener(
+            (observable, oldWidth, newWidth) -> {
+              if (newWidth.doubleValue() != oldWidth.doubleValue()) {
+                resize(newWidth.doubleValue());
+              }
+            });
+
     // add the different choices to the choicebox
     // Replace this with long names, linked to IDs
     List<Node> nodes = nodeFactory.getAllNodes();
@@ -298,43 +324,42 @@ public class ComputerServiceController implements Initializable {
     treeTableComputer.refresh();
   }
 
-  public void switchView(ActionEvent actionEvent) {
-    boolean isSelected = switcher.isSelected();
-    if (isSelected) {
-      treeTableComputer.setVisible(true);
-      OSLabel.setVisible(false);
-      OSChoice.setVisible(false);
-      locLabel.setVisible(false);
-      locationChoice.setVisible(false);
-      makeLabel.setVisible(false);
-      makeChoice.setVisible(false);
-      descLabel.setVisible(false);
-      descText.setVisible(false);
-      prioLabel.setVisible(false);
-      priorityChoice.setVisible(false);
-      submit.setVisible(false);
-      cancel.setVisible(false);
-      issueLabel.setVisible(false);
-      issueChoice.setVisible(false);
-      update.setVisible(true);
+  public void delete(ActionEvent actionEvent) {
+    String toDelte = deleteText.getText();
+    computerServiceRequest.delete(toDelte);
+    csrUI.removeIf(computerServiceRequest -> computerServiceRequest.getID().get().equals(toDelte));
+    deleteText.setText("");
+    treeTableComputer.refresh();
+  }
 
-    } else {
-      treeTableComputer.setVisible(false);
-      OSLabel.setVisible(true);
-      OSChoice.setVisible(true);
-      locLabel.setVisible(true);
-      locationChoice.setVisible(true);
-      makeLabel.setVisible(true);
-      makeChoice.setVisible(true);
-      descLabel.setVisible(true);
-      descText.setVisible(true);
-      prioLabel.setVisible(true);
-      priorityChoice.setVisible(true);
-      submit.setVisible(true);
-      cancel.setVisible(true);
-      issueLabel.setVisible(true);
-      issueChoice.setVisible(true);
-      update.setVisible(false);
-    }
+  public void request(ActionEvent actionEvent) {
+    servicePane.setVisible(true);
+    checkStatusPane.setVisible(false);
+  }
+
+  public void statusView(ActionEvent actionEvent) {
+    servicePane.setVisible(false);
+    checkStatusPane.setVisible(true);
+  }
+
+  private void resize(double width) {
+    System.out.println(width);
+    Font newFont = new Font(width / 50);
+    locationLabel.setFont(newFont);
+    makeLabel.setFont(newFont);
+    typeLabel.setFont(newFont);
+    OSLabel.setFont(newFont);
+    descLabel.setFont(newFont);
+    prioLabel.setFont(newFont);
+    securityRequestLabel.setFont(new Font(width / 20));
+    submitButton.setFont(newFont);
+    cancelButton.setFont(newFont);
+    // deleteButton.setFont(new Font(width / 50));
+    update.setFont(newFont);
+    backButton.setFont(newFont);
+  }
+
+  public void backToServiceRequestMain(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("ServiceRequestMain");
   }
 }
