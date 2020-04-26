@@ -18,7 +18,7 @@ public class ServiceRequestStats {
   public void MaintenanceRequestStats(Path path) {
     List<MaintenanceRequest> maintenanceRequestList =
         maintenanceRequestFactory.getAllMaintenanceRequests();
-    try (FileWriter fw = new FileWriter(path.toString() + "/MaintenanceStatistics.csv");
+    try (FileWriter fw = new FileWriter(path.toString() + "/MaintenanceReport.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
       bw.write("EmployeeName,NumberOfRequestsAssigned");
       ArrayList<String> stats = new ArrayList<String>();
