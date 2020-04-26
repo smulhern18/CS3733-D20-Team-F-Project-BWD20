@@ -66,7 +66,28 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
           }
           if (neighbor.getFloor() == startNode.getFloor()
               || neighbor.getFloor() == endNode.getFloor()) {
-            neighbors.add(neighbor);
+            // If the neighbor is on a relevant floor
+            // Verify it's accessible by a hall or the room you're starting at
+            Boolean isAccessible = false;
+            Set<Edge> neighborEdges2 = neighbor.getEdges();
+            for (Edge edge2 : neighborEdges2) {
+              if (edge2.getNode1().equals(neighbor.getId())) {
+                if (nodeMap.get(edge2.getNode2()).getType().equals(Node.NodeType.getEnum("HALL"))
+                    || edge2.getNode2().equals(startNode.getId())) {
+                  isAccessible = true;
+                  break;
+                }
+              } else {
+                if (nodeMap.get(edge2.getNode1()).getType().equals(Node.NodeType.getEnum("HALL"))
+                    || edge2.getNode1().equals(startNode.getId())) {
+                  isAccessible = true;
+                  break;
+                }
+              }
+            }
+            if (isAccessible) {
+              neighbors.add(neighbor);
+            }
           }
         }
         for (Node neighbor : neighbors) {
