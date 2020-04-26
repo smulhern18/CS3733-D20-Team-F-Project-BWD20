@@ -10,37 +10,37 @@
 <AnchorPane prefHeight="414.0" prefWidth="174.0" style="-fx-background-color: #FFD9F6#FFD9F6;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MenuBarController">
    <children>
       <Circle fill="WHITE" layoutX="91.0" layoutY="80.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
-      <JFXButton layoutX="-3.0" layoutY="350.0" onAction="#settings" prefHeight="27.0" prefWidth="186.0" text="Setting" textFill="#000000cc">
+      <JFXButton layoutX="14.0" layoutY="349.0" onAction="#settings" prefHeight="35.0" prefWidth="165.0" text="Setting" textFill="#000000cc">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="-2.0" layoutY="318.0" onAction="#help" prefHeight="32.0" prefWidth="186.0" text="Help" textFill="#000000cc">
+      <JFXButton layoutX="14.0" layoutY="317.0" onAction="#help" prefHeight="35.0" prefWidth="165.0" text="Help" textFill="#000000cc">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="-4.0" layoutY="287.0" onAction="#admin" prefHeight="32.0" prefWidth="190.0" text="Admin" textFill="#000000cc">
+      <JFXButton layoutX="9.0" layoutY="286.0" onAction="#admin" prefHeight="35.0" prefWidth="175.0" text="Admin" textFill="#000000cc">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="1.0" layoutY="248.0" onAction="#pathfinder" prefHeight="27.0" prefWidth="186.0" text="Pathfinder" textFill="#000000cc">
+      <JFXButton layoutX="19.0" layoutY="250.0" onAction="#pathfinder" prefHeight="35.0" prefWidth="165.0" text="Pathfinder" textFill="#000000cc">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="6.0" layoutY="216.0" onAction="#serviceRequest" prefHeight="39.0" prefWidth="175.0" text="Service Request" textFill="#000000cc">
+      <JFXButton layoutX="14.0" layoutY="216.0" onAction="#serviceRequest" prefHeight="39.0" prefWidth="175.0" text="Service Request" textFill="#000000cc">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutY="188.0" onAction="#login" prefHeight="27.0" prefWidth="186.0" text="Login" textFill="#000000cc">
+      <JFXButton layoutX="9.0" layoutY="189.0" onAction="#login" prefHeight="35.0" prefWidth="175.0" text="Login" textFill="#000000cc">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="2.0" layoutY="138.0" onAction="#mainMenu" prefHeight="32.0" prefWidth="182.0" text="Main Menu" textFill="#000000cc">
+      <JFXButton layoutX="19.0" layoutY="140.0" onAction="#mainMenu" prefHeight="35.0" prefWidth="156.0" text="Main Menu" textFill="#000000cc">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -50,32 +50,32 @@
             <Image url="@../../../../Images/1.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="39.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="48.0" layoutY="198.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Images/2.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="5.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="12.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Images/icons8-service-90.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="21.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="30.0" layoutY="259.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Images/3.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="39.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="48.0" layoutY="295.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Images/4.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="48.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="55.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Images/icons8-help-52.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="39.0" layoutY="357.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="46.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Images/6.png" />
          </image>
