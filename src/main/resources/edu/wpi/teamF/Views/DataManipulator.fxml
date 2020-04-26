@@ -6,6 +6,8 @@
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -15,8 +17,8 @@
 
 <AnchorPane fx:id="rootPane" prefHeight="800.0" prefWidth="1191.0" style="-fx-border-color: #bf3389; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.DataManipulatorController">
    <children>
-      <JFXTreeTableView fx:id="treeViewNodes" layoutX="68.0" layoutY="209.0" stylesheets="@../CSS/treeview.css" />
-      <JFXTextField fx:id="filterTextFieldNodes" layoutX="68.0" layoutY="161.0" onMouseClicked="#clearText" prefHeight="25.0" prefWidth="157.0" text="Enter NodeID or NodeType" />
+      <JFXTreeTableView fx:id="treeViewNodes" layoutX="332.0" layoutY="184.0" stylesheets="@../CSS/treeview.css" />
+      <JFXTextField fx:id="filterTextFieldNodes" layoutX="336.0" layoutY="146.0" onMouseClicked="#clearText" prefHeight="25.0" prefWidth="157.0" text="Enter NodeID or NodeType" />
       <fx:include source="MenuBar.fxml" />
       <JFXButton buttonType="RAISED" layoutX="60.0" layoutY="697.0" onAction="#uploadNodes" prefHeight="59.0" prefWidth="131.0" ripplerFill="#ffe100" text="Upload Nodes" />
       <JFXButton buttonType="RAISED" layoutX="201.0" layoutY="697.0" onAction="#uploadEdges" prefHeight="59.0" prefWidth="131.0" ripplerFill="#ffe100" text="Upload Edges" />
@@ -24,10 +26,10 @@
       <JFXTreeTableView fx:id="treeViewEdges" layoutX="827.0" layoutY="206.0" stylesheets="@../CSS/treeview.css" />
       <JFXTextField fx:id="filterTextFieldEdges" layoutX="827.0" layoutY="171.0" onMouseClicked="#clearEdge" prefHeight="25.0" prefWidth="157.0" text="Enter Edge ID" />
       <JFXToggleButton fx:id="switcher" layoutX="765.0" layoutY="698.0" onAction="#viewerSwitcher" text="Map View" />
-      <JFXButton fx:id="updateNodesButton" buttonType="RAISED" layoutX="253.0" layoutY="159.0" onAction="#updateNodes" prefHeight="31.0" prefWidth="123.0" ripplerFill="#179e41" text="Update Nodes" />
+      <JFXButton fx:id="updateNodesButton" buttonType="RAISED" layoutX="476.0" layoutY="146.0" onAction="#updateNodes" prefHeight="31.0" prefWidth="123.0" ripplerFill="#179e41" text="Update Nodes" />
       <JFXButton fx:id="updateEdgesButton" buttonType="RAISED" layoutX="997.0" layoutY="171.0" onAction="#updateEdges" prefHeight="31.0" prefWidth="123.0" ripplerFill="#15a138" text="Update Edges" />
-      <JFXButton fx:id="deleteNodeButton" buttonType="RAISED" layoutX="64.0" layoutY="620.0" onAction="#deleteNode" prefHeight="31.0" prefWidth="123.0" ripplerFill="#179e41" text="Delete Node" />
-      <JFXTextField fx:id="nodeToDelete" layoutX="186.0" layoutY="623.0" />
+      <JFXButton fx:id="deleteNodeButton" buttonType="RAISED" layoutX="225.0" layoutY="630.0" onAction="#deleteNode" prefHeight="31.0" prefWidth="123.0" ripplerFill="#179e41" text="Delete Node" />
+      <JFXTextField fx:id="nodeToDelete" layoutX="376.0" layoutY="623.0" />
       <JFXButton fx:id="deleteEdgeButton" buttonType="RAISED" layoutX="827.0" layoutY="617.0" onAction="#deleteEdge" prefHeight="31.0" prefWidth="123.0" ripplerFill="#179e41" text="Delete Edge" />
       <JFXTextField fx:id="edgeToDelete" layoutX="950.0" layoutY="620.0" />
       <fx:include fx:id="mapView" layoutX="160.0" layoutY="120.0" source="DataMapView.fxml" />
@@ -87,7 +89,7 @@
             </StackPane>
          </children>
       </StackPane>
-      <JFXButton fx:id="addNodePaneButton" layoutX="349.0" layoutY="623.0" onAction="#addNodePane" style="-fx-background-color: #B53389;" text="Add Node" textFill="WHITE" />
+      <JFXButton fx:id="addNodePaneButton" layoutX="516.0" layoutY="623.0" onAction="#addNodePane" style="-fx-background-color: #B53389;" text="Add Node" textFill="WHITE" />
       <JFXButton fx:id="addEdgePaneButton" layoutX="1120.0" layoutY="620.0" onAction="#addEdgePane" style="-fx-background-color: #B53389;" text="Add Edge" textFill="WHITE" />
       <StackPane fx:id="addEdgePane" layoutX="380.0" layoutY="289.0" prefHeight="239.0" prefWidth="531.0" style="-fx-background-color: #00000050;" visible="false">
          <children>
@@ -129,5 +131,36 @@
             </StackPane>
          </children>
       </StackPane>
+      <JFXButton layoutX="191.0" prefHeight="57.0" prefWidth="123.0" text="Nodes">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="415.0" prefHeight="57.0" prefWidth="123.0" text="Edges">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="637.0" prefHeight="57.0" prefWidth="123.0" text="Add">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="860.0" prefHeight="57.0" prefWidth="123.0" text="Delete">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="1075.0" prefHeight="57.0" prefWidth="123.0" text="Edit">
+         <font>
+            <Font size="27.0" />
+         </font>
+      </JFXButton>
+      <JFXTextField layoutX="422.0" layoutY="89.0" prefHeight="25.0" prefWidth="553.0" promptText="Search..." />
+      <ImageView fitHeight="14.0" fitWidth="92.0" layoutX="207.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/pink%20bar.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
