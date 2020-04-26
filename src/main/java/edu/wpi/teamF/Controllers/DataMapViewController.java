@@ -15,10 +15,13 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javax.management.InstanceNotFoundException;
@@ -62,6 +65,14 @@ public class DataMapViewController implements Initializable {
   @FXML private JFXButton selectNode2Button;
 
   @FXML private ChoiceBox typeInput;
+
+  @FXML private Label nodeErrorLabel;
+
+  @FXML private Label edgeErrorLabel;
+
+  @FXML private ScrollPane imageScrollPane;
+
+  @FXML private StackPane imageStackPane;
 
   JFXButton nodeButton = null;
   Line edgeLine = null;
@@ -118,7 +129,7 @@ public class DataMapViewController implements Initializable {
             "STAI");
     typeInput.setValue("CONF");
 
-    // uiSetting.makeZoomable(imageScrollPane, imageStackPane);
+    uiSetting.makeZoomable(imageScrollPane, imageStackPane);
   }
 
   @FXML
@@ -146,6 +157,8 @@ public class DataMapViewController implements Initializable {
   @FXML
   public void outlineNode() {
     clearNode();
+    clearEdge();
+    edgeGridPane.setStyle("-fx-background-color: #eeeeee; -fx-background-radius: 10");
     nodeGridPane.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 10");
     modifyNodeButton.setVisible(false);
     deleteNodeButton.setVisible(false);
@@ -155,10 +168,14 @@ public class DataMapViewController implements Initializable {
   @FXML
   public void outlineEdge() {
     clearEdge();
+    clearNode();
     edgeGridPane.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 10");
+    nodeGridPane.setStyle("-fx-background-color: #eeeeee; -fx-background-radius: 10");
     modifyEdgeButton.setVisible(false);
     deleteEdgeButton.setVisible(false);
     addEdgeButton.setVisible(true);
+    selectNode1Button.setDisable(false);
+    selectNode2Button.setDisable(false);
   }
 
   @FXML
@@ -177,6 +194,8 @@ public class DataMapViewController implements Initializable {
     addNodeButton.setDisable(true);
     deleteNodeButton.setVisible(true);
     deleteNodeButton.setDisable(true);
+    mapPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {});
+    nodeErrorLabel.setText("");
   }
 
   @FXML
@@ -186,8 +205,15 @@ public class DataMapViewController implements Initializable {
     selectNode2Button.setText("Select Node 2"); // resets the text in the two buttons
     modifyEdgeButton.setVisible(true);
     modifyEdgeButton.setDisable(true);
+    deleteEdgeButton.setVisible(true);
+    deleteEdgeButton.setDisable(true);
+    deleteNodeButton.setDisable(true);
     addEdgeButton.setVisible(false);
     addEdgeButton.setDisable(true);
+    selectNode1Button.setDisable(true);
+    selectNode2Button.setDisable(true);
+    mapPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {});
+    edgeErrorLabel.setText("");
   }
 
   private void drawEdge(Edge edge) {
@@ -240,8 +266,14 @@ public class DataMapViewController implements Initializable {
           this.node = node;
           if (selectNode1 || selectNode2) {
             edgeSelection(node);
+            // addEdgeButton.setDisable(false);
           } else {
             displayNodeData();
+          }
+
+          if (!selectNode1Button.getText().equals("Select Node 1")
+              && !selectNode2Button.getText().equals("Select Node 2")) {
+            addEdgeButton.setDisable(false);
           }
         });
     mapPane.getChildren().add(button);
@@ -304,15 +336,17 @@ public class DataMapViewController implements Initializable {
 
   @FXML
   private void addNode() throws Exception {
-    short xCoordinate = Short.parseShort(xCoorInput.getText());
-    short yCoordinate = Short.parseShort(yCoorInput.getText());
-    String building = buildingInput.getText();
-    String longName = longNameInput.getText();
-    String shortName = shortNameInput.getText();
-    Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getValue().toString());
-    short floorNumber = Short.parseShort(floorInput.getText());
+
 
     try { // is the input valid?
+      short xCoordinate = Short.parseShort(xCoorInput.getText());
+      short yCoordinate = Short.parseShort(yCoorInput.getText());
+      String building = buildingInput.getText();
+      String longName = longNameInput.getText();
+      String shortName = shortNameInput.getText();
+      Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getValue().toString());
+      short floorNumber = Short.parseShort(floorInput.getText());
+
       Node newNode =
           new Node(
               "testID",
@@ -326,11 +360,10 @@ public class DataMapViewController implements Initializable {
       nodeFactory.create(newNode); // creates the node in the db
       drawNode(newNode); // creates the node on the map
       clearNode();
+      mapPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {});
     } catch (Exception e) { // throws an error if the input provided by the user is invalid
-
+      nodeErrorLabel.setText("The input is not valid");
     }
-    mapPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {});
-    clearNode();
   }
 
   @FXML
@@ -360,11 +393,7 @@ public class DataMapViewController implements Initializable {
             i < mapPane.getChildren().size();
             i++) { // for all of the children in the pane
           javafx.scene.Node children = mapPane.getChildren().get(i);
-          if (children instanceof Line
-              && children
-                  .getId()
-                  .equals(
-                      edge.getId())) {
+          if (children instanceof Line && children.getId().equals(edge.getId())) {
             Line line = (Line) children;
             if (edge.getNode1()
                 .equals(node.getId())) { // if node one then it is a starting coordinate
@@ -409,18 +438,18 @@ public class DataMapViewController implements Initializable {
   void selectNode1(ActionEvent event) {
     selectNode1 = true;
     node1 = null;
-    if (!selectNode2Button.getText().equals("Select Node 2")) {
-      addEdgeButton.setDisable(false);
-    }
+    //    if (!selectNode2Button.getText().equals("Select Node 2")) {
+    //      addEdgeButton.setDisable(false);
+    //    }
   }
 
   @FXML
   void selectNode2(ActionEvent event) {
     selectNode2 = true;
     node2 = null;
-    if (!selectNode1Button.getText().equals("Select Node 1")) {
-      addEdgeButton.setDisable(false);
-    }
+    //    if (!selectNode1Button.getText().equals("Select Node 1")) {
+    //      addEdgeButton.setDisable(false);
+    //    }
   }
 
   @FXML
