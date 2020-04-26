@@ -98,9 +98,29 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
   public Path pathfind(Node start, Node.NodeType nodeType) throws InstanceNotFoundException {
     List<Path> paths = new ArrayList<>();
     for (Node node : nodeMap.values()) {
-      if (node.getType().getTypeString().equals(nodeType.getTypeString())
-          && node.getId().charAt(0) == 'X') {
-        paths.add(pathfind(start, node));
+      if (node.getType().getTypeString().equals(nodeType.getTypeString())) {
+        // If the node is of the correct type, verify it's accessible by a hall or the room you're
+        // starting at
+        Boolean isAccessible = false;
+        Set<Edge> neighborEdges = node.getEdges();
+        for (Edge edge : neighborEdges) {
+          if (edge.getNode1().equals(node.getId())) {
+            if (nodeMap.get(edge.getNode2()).getType().equals(Node.NodeType.getEnum("HALL"))
+                || edge.getNode2().equals(start.getId())) {
+              isAccessible = true;
+              break;
+            }
+          } else {
+            if (nodeMap.get(edge.getNode1()).getType().equals(Node.NodeType.getEnum("HALL"))
+                || edge.getNode1().equals(start.getId())) {
+              isAccessible = true;
+              break;
+            }
+          }
+        }
+        if (isAccessible) {
+          paths.add(pathfind(start, node));
+        }
       }
     }
     double shortestLength = Double.MAX_VALUE;
