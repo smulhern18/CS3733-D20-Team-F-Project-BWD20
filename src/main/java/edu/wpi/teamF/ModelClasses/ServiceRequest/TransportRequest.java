@@ -2,6 +2,7 @@ package edu.wpi.teamF.ModelClasses.ServiceRequest;
 
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ValidationException;
+import edu.wpi.teamF.ModelClasses.Validators;
 
 import java.util.Date;
 
@@ -41,11 +42,13 @@ public class TransportRequest extends ServiceRequest{
         return destination;
     }
 
-    public void setType(String type){
+    public void setType(String type) throws ValidationException{
+        Validators.transportTypeValidation(type);
         this.type = type;
     }
 
-    public void setDestination(Node destination){
+    public void setDestination(Node destination) throws ValidationException{
+        Validators.nodeValidation(destination);
         this.destination = destination;
     }
 

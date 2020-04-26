@@ -24,18 +24,16 @@ public class TransportRequestFactory {
     public void create(TransportRequest transportRequest) throws ValidationException {
         String insertStatement =
                 "INSERT INTO "
-                        + DatabaseManager.COMPUTER_REQUEST_TABLE_NAME
+                        + DatabaseManager.TRANSPORT_REQUEST_TABLE_NAME
                         + " ( "
                         + DatabaseManager.SERVICEID_KEY
                         + ", "
-                        + DatabaseManager.MAKE_KEY
+                        + DatabaseManager.TRANSPORT_TYPE_KEY
                         + ", "
-                        + DatabaseManager.HARDWARESOFTWARE_KEY
-                        + ", "
-                        + DatabaseManager.OS_ID_KEY
+                        + DatabaseManager.DESTINATION_KEY
                         + " ) "
-                        + "VALUES (?, ?, ?, ?)";
-        Validators.computerServiceValidation(computerServiceRequest);
+                        + "VALUES (?, ?, ?)";
+        Validators.transportRequestValidation(transportRequest);
         serviceRequestFactory.create(transportRequest);
         try (PreparedStatement prepareStatement =
                      DatabaseManager.getConnection().prepareStatement(insertStatement)) {
@@ -60,7 +58,7 @@ public class TransportRequestFactory {
         TransportRequest transportRequest = null;
         String selectStatement =
                 "SELECT * FROM "
-                        + DatabaseManager.COMPUTER_REQUEST_TABLE_NAME
+                        + DatabaseManager.TRANSPORT_REQUEST_TABLE_NAME
                         + " WHERE "
                         + DatabaseManager.SERVICEID_KEY
                         + " = ?";
@@ -82,9 +80,8 @@ public class TransportRequestFactory {
                                     serviceRequest.getDateTimeSubmitted(),
                                     serviceRequest.getPriority(),
                                     serviceRequest.getComplete(),
-                                    resultSet.getString(DatabaseManager.MAKE_KEY),
-                                    resultSet.getString(DatabaseManager.HARDWARESOFTWARE_KEY),
-                                    resultSet.getString(DatabaseManager.OS_ID_KEY));
+                                    resultSet.getString(DatabaseManager.TRANSPORT_TYPE_KEY),
+                                    nodeFactory.read(resultSet.getString(DatabaseManager.DESTINATION_KEY)));
                 }
             } catch (ValidationException e) {
                 throw e;
@@ -100,16 +97,14 @@ public class TransportRequestFactory {
     public void update(TransportRequest transportRequest) {
         String updateStatement =
                 "UPDATE "
-                        + DatabaseManager.COMPUTER_REQUEST_TABLE_NAME
+                        + DatabaseManager.TRANSPORT_REQUEST_TABLE_NAME
                         + " SET "
                         + DatabaseManager.SERVICEID_KEY
                         + " = ?, "
-                        + DatabaseManager.MAKE_KEY
+                        + DatabaseManager.TRANSPORT_TYPE_KEY
                         + " = ?, "
-                        + DatabaseManager.HARDWARESOFTWARE_KEY
+                        + DatabaseManager.DESTINATION_KEY
                         + " = ?, "
-                        + DatabaseManager.OS_ID_KEY
-                        + " = ? "
                         + "WHERE "
                         + DatabaseManager.SERVICEID_KEY
                         + " = ?";
@@ -134,7 +129,7 @@ public class TransportRequestFactory {
 
         String deleteStatement =
                 "DELETE FROM "
-                        + DatabaseManager.COMPUTER_REQUEST_TABLE_NAME
+                        + DatabaseManager.TRANSPORT_REQUEST_TABLE_NAME
                         + " WHERE "
                         + DatabaseManager.SERVICEID_KEY
                         + " = ?";
@@ -170,7 +165,7 @@ public class TransportRequestFactory {
 
     public List<TransportRequest> getAllTransportRequests() {
         List<TransportRequest> transportRequests = null;
-        String selectStatement = "SELECT * FROM " + DatabaseManager.COMPUTER_REQUEST_TABLE_NAME;
+        String selectStatement = "SELECT * FROM " + DatabaseManager.TRANSPORT_REQUEST_TABLE_NAME;
 
         try (PreparedStatement preparedStatement =
                      DatabaseManager.getConnection().prepareStatement(selectStatement);
@@ -192,7 +187,7 @@ public class TransportRequestFactory {
                                 serviceRequest.getPriority(),
                                 serviceRequest.getComplete(),
                                 transportRequest.getType(),
-                                transportRequest.getDestination());
+                                transportRequest.getDestination()));
             }
         } catch (Exception e) {
             System.out.println(
