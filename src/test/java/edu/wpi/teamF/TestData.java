@@ -270,69 +270,56 @@ public class TestData {
         2,
         false),
   };
-  public String[] validOS = {
-      "Mac", "Linux", "Windows", "Newton"
-  };
-  public String[] validHardwareSoftware = {
-      "Soft", "Hard", "Soft", "Hard"
-  };
-  public String[] validMake = {
-      "Mac 10", "Linux 11", "Windows 12", "Newton 23"
-  };
+  public String[] validOS = {"Mac", "Linux", "Windows", "Newton"};
+  public String[] validHardwareSoftware = {"Soft", "Hard", "Soft", "Hard"};
+  public String[] validMake = {"Mac 10", "Linux 11", "Windows 12", "Newton 23"};
 
-
-  public ComputerServiceRequest[] validComputerServiceRequests ={
-      new ComputerServiceRequest(
+  public ComputerServiceRequest[] validComputerServiceRequests = {
+    new ComputerServiceRequest(
         validIDs[0],
-          validNodes[0],
-          validAssignees[0],
-          validDescriptions[0],
-          validDates[0],
-          2,
-          false,
-          validMake[0],
-          validHardwareSoftware[0],
-          validOS[0]
-          ),
-      new ComputerServiceRequest(
-          validIDs[1],
-          validNodes[1],
-          validAssignees[1],
-          validDescriptions[1],
-          validDates[1],
-          1,
-          true,
-          validMake[1],
-          validHardwareSoftware[1],
-          validOS[1]
-      ),
-      new ComputerServiceRequest(
-          validIDs[2],
-          validNodes[2],
-          validAssignees[2],
-          validDescriptions[2],
-          validDates[2],
-          2,
-          false,
-          validMake[2],
-          validHardwareSoftware[2],
-          validOS[2]
-      ),
-      new ComputerServiceRequest(
-          validIDs[3],
-          validNodes[3],
-          validAssignees[3],
-          validDescriptions[3],
-          validDates[3],
-          2,
-          false,
-          validMake[3],
-          validHardwareSoftware[3],
-          validOS[3]
-      ),
+        validNodes[0],
+        validAssignees[0],
+        validDescriptions[0],
+        validDates[0],
+        2,
+        false,
+        validMake[0],
+        validHardwareSoftware[0],
+        validOS[0]),
+    new ComputerServiceRequest(
+        validIDs[1],
+        validNodes[1],
+        validAssignees[1],
+        validDescriptions[1],
+        validDates[1],
+        1,
+        true,
+        validMake[1],
+        validHardwareSoftware[1],
+        validOS[1]),
+    new ComputerServiceRequest(
+        validIDs[2],
+        validNodes[2],
+        validAssignees[2],
+        validDescriptions[2],
+        validDates[2],
+        2,
+        false,
+        validMake[2],
+        validHardwareSoftware[2],
+        validOS[2]),
+    new ComputerServiceRequest(
+        validIDs[3],
+        validNodes[3],
+        validAssignees[3],
+        validDescriptions[3],
+        validDates[3],
+        2,
+        false,
+        validMake[3],
+        validHardwareSoftware[3],
+        validOS[3]),
   };
-
-
 
   public TestData() throws Exception {}
 }
