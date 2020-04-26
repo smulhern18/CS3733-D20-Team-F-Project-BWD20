@@ -23,6 +23,18 @@ public class SanitationServiceRequest extends ServiceRequest{
         setType(type);
     }
 
+    public SanitationServiceRequest(
+            Node location,
+            String description,
+            String assignee,
+            Date dateTimeSubmitted,
+            int priority,
+            String type)
+            throws ValidationException {
+        super(location, assignee, description, dateTimeSubmitted, priority);
+        setType(type);
+    }
+
     public String getType(){
         return this.type;
     }
