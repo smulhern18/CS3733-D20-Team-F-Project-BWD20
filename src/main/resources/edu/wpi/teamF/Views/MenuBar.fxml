@@ -1,52 +1,84 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<HBox style="-fx-background-color: #bf3389;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MenuBarController">
+<AnchorPane prefHeight="414.0" prefWidth="174.0" style="-fx-background-color: #FFD9F6#FFD9F6;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MenuBarController">
    <children>
-      <JFXButton fx:id="loginButton" buttonType="RAISED" onAction="#login" prefHeight="100.0" prefWidth="250.0" ripplerFill="#c91e1e" style="-fx-background-color: white;" text="Login">
+      <Circle fill="WHITE" layoutX="91.0" layoutY="80.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
+      <JFXButton layoutX="-3.0" layoutY="350.0" onAction="#settings" prefHeight="27.0" prefWidth="186.0" text="Setting" textFill="#000000cc">
          <font>
-            <Font name="Bebas" size="24.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <HBox.margin>
-            <Insets bottom="5.0" left="5.0" right="2.5" top="5.0" />
-         </HBox.margin></JFXButton>
-      <JFXButton buttonType="RAISED" onAction="#pathfinder" prefHeight="100.0" prefWidth="250.0" ripplerFill="#c91e1e" style="-fx-background-color: white;" text="Pathfinder">
+      </JFXButton>
+      <JFXButton layoutX="-2.0" layoutY="318.0" onAction="#help" prefHeight="32.0" prefWidth="186.0" text="Help" textFill="#000000cc">
          <font>
-            <Font name="Bebas" size="24.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <HBox.margin>
-            <Insets bottom="5.0" left="2.5" right="2.5" top="5.0" />
-         </HBox.margin></JFXButton>
-      <JFXButton buttonType="RAISED" onAction="#serviceRequest" prefHeight="100.0" prefWidth="250.0" ripplerFill="#c91e1e" style="-fx-background-color: white;" text="Service Request">
+      </JFXButton>
+      <JFXButton layoutX="-4.0" layoutY="287.0" onAction="#admin" prefHeight="32.0" prefWidth="190.0" text="Admin" textFill="#000000cc">
          <font>
-            <Font name="Bebas" size="24.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
-         <HBox.margin>
-            <Insets bottom="5.0" left="2.5" right="2.5" top="5.0" />
-         </HBox.margin></JFXButton>
-      <JFXButton buttonType="RAISED" onAction="#admin" prefHeight="100.0" prefWidth="250.0" ripplerFill="#c91e1e" style="-fx-background-color: white;" text="Admin">
+      </JFXButton>
+      <JFXButton layoutX="1.0" layoutY="248.0" onAction="#pathfinder" prefHeight="27.0" prefWidth="186.0" text="Pathfinder" textFill="#000000cc">
          <font>
-            <Font name="Bebas" size="24.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
-         <HBox.margin>
-            <Insets bottom="5.0" left="2.5" right="2.5" top="5.0" />
-         </HBox.margin></JFXButton>
-      <JFXButton buttonType="RAISED" onAction="#help" prefHeight="100.0" prefWidth="250.0" ripplerFill="#c91e1e" style="-fx-background-color: white;" text="Help">
+      </JFXButton>
+      <JFXButton layoutX="6.0" layoutY="216.0" onAction="#serviceRequest" prefHeight="39.0" prefWidth="175.0" text="Service Request" textFill="#000000cc">
          <font>
-            <Font name="Bebas" size="24.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
-         <HBox.margin>
-            <Insets bottom="5.0" left="2.5" right="5.0" top="5.0" />
-         </HBox.margin></JFXButton>
+      </JFXButton>
+      <JFXButton layoutY="188.0" onAction="#login" prefHeight="27.0" prefWidth="186.0" text="Login" textFill="#000000cc">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="2.0" layoutY="138.0" onAction="#mainMenu" prefHeight="32.0" prefWidth="182.0" text="Main Menu" textFill="#000000cc">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="21.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="39.0" layoutY="197.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="5.0" layoutY="226.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/icons8-service-90.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="21.0" layoutY="258.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/3.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="39.0" layoutY="294.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/4.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="48.0" layoutY="325.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/icons8-help-52.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="39.0" layoutY="357.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/6.png" />
+         </image>
+      </ImageView>
    </children>
-</HBox>
+</AnchorPane>
