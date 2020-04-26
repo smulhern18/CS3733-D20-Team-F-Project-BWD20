@@ -76,20 +76,30 @@ public class PathfinderController implements Initializable {
 
   public void draw(Path path) throws InstanceNotFoundException {
 
-    List<Node> nodeList = path.getPath();
+    List<Node> pathNodes = path.getPath();
 
     double heightRatio = currentPane.getHeight() / MAP_HEIGHT;
     double widthRatio = currentPane.getWidth() / MAP_WIDTH;
 
-    for (int i = 0; i < nodeList.size() - 1; i++) {
-      int startX = (int) (nodeList.get(i).getXCoord() * widthRatio);
-      int startY = (int) (nodeList.get(i).getYCoord() * heightRatio);
-      int endX = (int) (nodeList.get(i + 1).getXCoord() * widthRatio);
-      int endY = (int) (nodeList.get(i + 1).getYCoord() * heightRatio);
+    for (int i = 0; i < pathNodes.size() - 1; i++) {
+      int startX = (int) (pathNodes.get(i).getXCoord() * widthRatio);
+      int startY = (int) (pathNodes.get(i).getYCoord() * heightRatio);
+      int endX = (int) (pathNodes.get(i + 1).getXCoord() * widthRatio);
+      int endY = (int) (pathNodes.get(i + 1).getYCoord() * heightRatio);
       Line line = new Line(startX, startY, endX, endY);
       line.setStroke(Color.RED);
       line.setStrokeWidth(2);
-      currentPane.getChildren().add(line);
+      if (pathNodes.get(i).getFloor() == 1) {
+        mapPaneFaulkner1.getChildren().add(line);
+      } else if (pathNodes.get(i).getFloor() == 2) {
+        mapPaneFaulkner2.getChildren().add(line);
+      } else if (pathNodes.get(i).getFloor() == 3) {
+        mapPaneFaulkner3.getChildren().add(line);
+      } else if (pathNodes.get(i).getFloor() == 4) {
+        mapPaneFaulkner4.getChildren().add(line);
+      } else if (pathNodes.get(i).getFloor() == 5) {
+        mapPaneFaulkner5.getChildren().add(line);
+      }
     }
 
     // TODO Remove this code before pushing, for testing only
@@ -115,7 +125,18 @@ public class PathfinderController implements Initializable {
 
     button.setLayoutX(xPos);
     button.setLayoutY(yPos);
-    currentPane.getChildren().add(button);
+    if (node.getFloor() == 1) {
+      mapPaneFaulkner1.getChildren().add(button);
+    } else if (node.getFloor() == 2) {
+      mapPaneFaulkner2.getChildren().add(button);
+    } else if (node.getFloor() == 3) {
+      mapPaneFaulkner3.getChildren().add(button);
+    } else if (node.getFloor() == 4) {
+      mapPaneFaulkner4.getChildren().add(button);
+    } else if (node.getFloor() == 5) {
+      mapPaneFaulkner5.getChildren().add(button);
+    }
+
     button.setOnAction(
         actionEvent -> {
           if (startNode == node && state == 1) { // Click again to de-select if start has been set
@@ -158,8 +179,38 @@ public class PathfinderController implements Initializable {
         });
   }
 
+  public void reset() {
+    resetPane();
+  }
+
   public void resetPane() {
-    currentPane.getChildren().clear();
+
+    for (javafx.scene.Node node : mapPaneFaulkner1.getChildren()) {
+      if (node instanceof Line) {
+        mapPaneFaulkner1.getChildren().remove(node);
+      }
+    }
+    for (javafx.scene.Node node : mapPaneFaulkner2.getChildren()) {
+      if (node instanceof Line) {
+        mapPaneFaulkner2.getChildren().remove(node);
+      }
+    }
+    for (javafx.scene.Node node : mapPaneFaulkner3.getChildren()) {
+      if (node instanceof Line) {
+        mapPaneFaulkner3.getChildren().remove(node);
+      }
+    }
+    for (javafx.scene.Node node : mapPaneFaulkner4.getChildren()) {
+      if (node instanceof Line) {
+        mapPaneFaulkner4.getChildren().remove(node);
+      }
+    }
+    for (javafx.scene.Node node : mapPaneFaulkner5.getChildren()) {
+      if (node instanceof Line) {
+        mapPaneFaulkner5.getChildren().remove(node);
+      }
+    }
+
     startNode = null;
     endNode = null;
     state = 0;
@@ -176,8 +227,10 @@ public class PathfinderController implements Initializable {
     endCombo.setValue(null);
 
     setComboBehavior();
+  }
 
-    for (Node node : nodeList) {
+  public void drawNodes() {
+    for (Node node : fullNodeList) {
       if (!node.getType().equals(Node.NodeType.getEnum("HALL"))
           && !node.getType().equals(Node.NodeType.getEnum("STAI"))
           && !node.getType().equals(Node.NodeType.getEnum("ELEV"))
@@ -198,6 +251,7 @@ public class PathfinderController implements Initializable {
     setAllInvisible();
     scrollPaneFaulkner1.setVisible(true);
     floorButtonsSet();
+
     //    uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1);
     //    uiSetting.makeZoomable(scrollPaneFaulkner2, masterPaneFaulkner2);
     //    uiSetting.makeZoomable(scrollPaneFaulkner3, masterPaneFaulkner3);
@@ -219,6 +273,7 @@ public class PathfinderController implements Initializable {
 
     pathFindAlgorithm = new MultipleFloorAStar(fullNodeList);
     resetPane();
+    drawNodes();
   }
 
   public void findElevator(MouseEvent mouseEvent) throws InstanceNotFoundException {
@@ -322,7 +377,7 @@ public class PathfinderController implements Initializable {
           currentPane = mapPaneFaulkner1;
           currentFloor = 1;
           setNodeList(1);
-          resetPane();
+          // resetPane();
           setAllInvisible();
           scrollPaneFaulkner1.setVisible(true);
         });
@@ -331,7 +386,7 @@ public class PathfinderController implements Initializable {
           currentPane = mapPaneFaulkner2;
           currentFloor = 2;
           setNodeList(2);
-          resetPane();
+          // resetPane();
           setAllInvisible();
           scrollPaneFaulkner2.setVisible(true);
         });
@@ -340,7 +395,7 @@ public class PathfinderController implements Initializable {
           currentPane = mapPaneFaulkner3;
           currentFloor = 3;
           setNodeList(3);
-          resetPane();
+          // resetPane();
           setAllInvisible();
           scrollPaneFaulkner3.setVisible(true);
         });
@@ -349,7 +404,7 @@ public class PathfinderController implements Initializable {
           currentPane = mapPaneFaulkner4;
           currentFloor = 4;
           setNodeList(4);
-          resetPane();
+          // resetPane();
           setAllInvisible();
           scrollPaneFaulkner4.setVisible(true);
         });
@@ -358,7 +413,7 @@ public class PathfinderController implements Initializable {
           currentPane = mapPaneFaulkner5;
           currentFloor = 5;
           setNodeList(5);
-          resetPane();
+          // resetPane();
           setAllInvisible();
           scrollPaneFaulkner5.setVisible(true);
         });
