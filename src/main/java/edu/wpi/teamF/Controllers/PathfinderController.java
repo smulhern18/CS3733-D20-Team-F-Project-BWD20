@@ -8,8 +8,8 @@ import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Directions.Directions;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
+import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.MultipleFloorAStar;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.PathfindAlgorithm;
-import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.SingleFloorAStar;
 import edu.wpi.teamF.ModelClasses.Scorer.EuclideanScorer;
 import java.net.URL;
 import java.util.ArrayList;
@@ -196,13 +196,13 @@ public class PathfinderController implements Initializable {
     currentPane = mapPaneFaulkner1;
     currentFloor = 1;
     setAllInvisible();
-    masterPaneFaulkner1.setVisible(true);
+    scrollPaneFaulkner1.setVisible(true);
     floorButtonsSet();
-    uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1);
-    uiSetting.makeZoomable(scrollPaneFaulkner2, masterPaneFaulkner2);
-    uiSetting.makeZoomable(scrollPaneFaulkner3, masterPaneFaulkner3);
-    uiSetting.makeZoomable(scrollPaneFaulkner4, masterPaneFaulkner4);
-    uiSetting.makeZoomable(scrollPaneFaulkner5, masterPaneFaulkner5);
+    //    uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1);
+    //    uiSetting.makeZoomable(scrollPaneFaulkner2, masterPaneFaulkner2);
+    //    uiSetting.makeZoomable(scrollPaneFaulkner3, masterPaneFaulkner3);
+    //    uiSetting.makeZoomable(scrollPaneFaulkner4, masterPaneFaulkner4);
+    //    uiSetting.makeZoomable(scrollPaneFaulkner5, masterPaneFaulkner5);
 
     for (Node node : nodeFactory.getAllNodes()) {
       node.setEdges(edgeFactory.getAllEdgesConnectedToNode(node.getId()));
@@ -217,7 +217,7 @@ public class PathfinderController implements Initializable {
       }
     }
 
-    pathFindAlgorithm = new SingleFloorAStar(fullNodeList);
+    pathFindAlgorithm = new MultipleFloorAStar(fullNodeList);
     resetPane();
   }
 
@@ -324,7 +324,7 @@ public class PathfinderController implements Initializable {
           setNodeList(1);
           resetPane();
           setAllInvisible();
-          masterPaneFaulkner1.setVisible(true);
+          scrollPaneFaulkner1.setVisible(true);
         });
     floor2Button.setOnAction(
         actionEvent -> {
@@ -333,7 +333,7 @@ public class PathfinderController implements Initializable {
           setNodeList(2);
           resetPane();
           setAllInvisible();
-          masterPaneFaulkner2.setVisible(true);
+          scrollPaneFaulkner2.setVisible(true);
         });
     floor3Button.setOnAction(
         actionEvent -> {
@@ -342,7 +342,7 @@ public class PathfinderController implements Initializable {
           setNodeList(3);
           resetPane();
           setAllInvisible();
-          masterPaneFaulkner3.setVisible(true);
+          scrollPaneFaulkner3.setVisible(true);
         });
     floor4Button.setOnAction(
         actionEvent -> {
@@ -351,7 +351,7 @@ public class PathfinderController implements Initializable {
           setNodeList(4);
           resetPane();
           setAllInvisible();
-          masterPaneFaulkner4.setVisible(true);
+          scrollPaneFaulkner4.setVisible(true);
         });
     floor5Button.setOnAction(
         actionEvent -> {
@@ -360,7 +360,7 @@ public class PathfinderController implements Initializable {
           setNodeList(5);
           resetPane();
           setAllInvisible();
-          masterPaneFaulkner5.setVisible(true);
+          scrollPaneFaulkner5.setVisible(true);
         });
   }
 
@@ -374,11 +374,11 @@ public class PathfinderController implements Initializable {
   }
 
   public void setAllInvisible() {
-    masterPaneFaulkner1.setVisible(false);
-    masterPaneFaulkner2.setVisible(false);
-    masterPaneFaulkner3.setVisible(false);
-    masterPaneFaulkner4.setVisible(false);
-    masterPaneFaulkner5.setVisible(false);
+    scrollPaneFaulkner1.setVisible(false);
+    scrollPaneFaulkner2.setVisible(false);
+    scrollPaneFaulkner3.setVisible(false);
+    scrollPaneFaulkner4.setVisible(false);
+    scrollPaneFaulkner5.setVisible(false);
   }
 
   public void switchToFloor(int floorNum) {
@@ -389,7 +389,7 @@ public class PathfinderController implements Initializable {
       setNodeList(1);
       resetPane();
       setAllInvisible();
-      masterPaneFaulkner1.setVisible(true);
+      scrollPaneFaulkner1.setVisible(true);
       startNode = holdNode;
       startCombo.setValue(startNode.getLongName());
     }
@@ -400,7 +400,7 @@ public class PathfinderController implements Initializable {
       setNodeList(2);
       resetPane();
       setAllInvisible();
-      masterPaneFaulkner2.setVisible(true);
+      scrollPaneFaulkner2.setVisible(true);
       startNode = holdNode;
       startCombo.setValue(startNode.getLongName());
     }
@@ -411,7 +411,7 @@ public class PathfinderController implements Initializable {
       setNodeList(3);
       resetPane();
       setAllInvisible();
-      masterPaneFaulkner3.setVisible(true);
+      scrollPaneFaulkner3.setVisible(true);
       startNode = holdNode;
       startCombo.setValue(startNode.getLongName());
     }
@@ -422,7 +422,7 @@ public class PathfinderController implements Initializable {
       setNodeList(4);
       resetPane();
       setAllInvisible();
-      masterPaneFaulkner4.setVisible(true);
+      scrollPaneFaulkner4.setVisible(true);
       startNode = holdNode;
       startCombo.setValue(startNode.getLongName());
     }
@@ -433,7 +433,7 @@ public class PathfinderController implements Initializable {
       setNodeList(5);
       resetPane();
       setAllInvisible();
-      masterPaneFaulkner5.setVisible(true);
+      scrollPaneFaulkner5.setVisible(true);
       startNode = holdNode;
       startCombo.setValue(startNode.getLongName());
     }

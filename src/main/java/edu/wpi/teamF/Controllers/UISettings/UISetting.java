@@ -12,6 +12,7 @@ public class UISetting {
   private LocationComboBox locationComboBox = new LocationComboBox();
 
   public void makeZoomable(ScrollPane scrollPane, StackPane stackPane) {
+    zoom = new Zoom();
     zoom.makeZoomable(scrollPane, stackPane);
   }
 

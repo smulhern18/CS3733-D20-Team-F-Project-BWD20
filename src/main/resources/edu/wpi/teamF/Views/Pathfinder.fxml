@@ -42,20 +42,24 @@
       <JFXButton fx:id="floor3Button" layoutX="1015.0" layoutY="144.0" text="Floor 3" />
       <JFXButton fx:id="floor4Button" layoutX="1093.0" layoutY="144.0" text="Floor 4" />
       <JFXButton fx:id="floor5Button" layoutX="1168.0" layoutY="144.0" text="Floor 5" />
-      <ScrollPane fx:id="scrollPaneFaulkner1" layoutX="20.0" layoutY="195.0">
-         <content>
-         <StackPane fx:id="masterPaneFaulkner1" prefHeight="579.0" prefWidth="959.0">
-            <children>
-               <ImageView fx:id="imageVIewFaulkner1" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../Maps/Floor1LM_edited.jpg" />
-                  </image>
-               </ImageView>
-               <AnchorPane fx:id="mapPaneFaulkner1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" style="-fx-border-color: #b53389; -fx-border-width: 5;" />
-            </children>
-         </StackPane>
-         </content>
-      </ScrollPane>
+      <AnchorPane layoutX="19.399999618530273" layoutY="194.39999389648438">
+         <children>
+            <ScrollPane fx:id="scrollPaneFaulkner1" layoutX="0.6000003814697266" layoutY="0.600006103515625">
+               <content>
+               <StackPane fx:id="masterPaneFaulkner1" prefHeight="579.0" prefWidth="959.0">
+                  <children>
+                     <ImageView fx:id="imageVIewFaulkner1" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../Maps/Floor1LM_edited.jpg" />
+                        </image>
+                     </ImageView>
+                     <AnchorPane fx:id="mapPaneFaulkner1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" style="-fx-border-color: #b53389; -fx-border-width: 5;" />
+                  </children>
+               </StackPane>
+               </content>
+            </ScrollPane>
+         </children>
+      </AnchorPane>
       <ScrollPane fx:id="scrollPaneFaulkner2" layoutX="20.0" layoutY="195.0" prefHeight="582.0" prefWidth="961.0">
          <content>
             <StackPane fx:id="masterPaneFaulkner2" prefHeight="150.0" prefWidth="200.0">
@@ -98,7 +102,7 @@
             </StackPane>
          </content>
       </ScrollPane>
-      <ScrollPane layoutX="20.0" layoutY="195.0" prefHeight="583.0" prefWidth="961.0">
+      <ScrollPane fx:id="scrollPaneFaulkner5" layoutX="20.0" layoutY="195.0" prefHeight="583.0" prefWidth="961.0">
          <content>
             <StackPane fx:id="masterPaneFaulkner5" prefHeight="150.0" prefWidth="200.0">
                <children>
