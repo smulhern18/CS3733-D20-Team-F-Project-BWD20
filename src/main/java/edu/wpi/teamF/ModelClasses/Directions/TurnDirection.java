@@ -46,16 +46,16 @@ public class TurnDirection extends Direction {
       returnString += ".";
     } else if ((atIntersectionNumber % 10) == 1 && (atIntersectionNumber != 11)) {
       returnString =
-          returnString + " at the " + Integer.toString(atIntersectionNumber) + "st intersection.";
+          returnString + " at the " + Integer.toString(atIntersectionNumber) + "st intersecting hallway.";
     } else if ((atIntersectionNumber % 10) == 2 && (atIntersectionNumber != 12)) {
       returnString =
-          returnString + " at the " + Integer.toString(atIntersectionNumber) + "nd intersection.";
+          returnString + " at the " + Integer.toString(atIntersectionNumber) + "nd intersecting hallway.";
     } else if ((atIntersectionNumber % 10) == 3 && (atIntersectionNumber != 13)) {
       returnString =
-          returnString + " at the " + Integer.toString(atIntersectionNumber) + "rd intersection.";
+          returnString + " at the " + Integer.toString(atIntersectionNumber) + "rd intersecting hallway.";
     } else {
       returnString =
-          returnString + " at the " + Integer.toString(atIntersectionNumber) + "th intersection.";
+          returnString + " at the " + Integer.toString(atIntersectionNumber) + "th intersecting hallway.";
     }
     return returnString;
   }

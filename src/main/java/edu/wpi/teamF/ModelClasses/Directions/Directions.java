@@ -17,8 +17,18 @@ public class Directions {
     }
 
     List<Node> pathNodeList = path.getPath();
-    float startTurnAngle = getAngle(pathNodeList.get(0), pathNodeList.get(1), pathNodeList.get(2));
-    directionList.add(new StartDirection(startTurnAngle, pathNodeList.get(0).getFloor()));
+
+    // Create the starting directions
+    if (pathNodeList.get(2).getId().equals(endNode.getId())) {
+      // Check if there's only a single node between start and goal
+      directionList.add(new StartDirection(0, pathNodeList.get(0).getFloor()));
+    } else {
+      //There are enough intermediate nodes to logically state a room exit angle
+      float startTurnAngle =
+          getAngle(pathNodeList.get(0), pathNodeList.get(1), pathNodeList.get(2));
+      directionList.add(new StartDirection(startTurnAngle, pathNodeList.get(0).getFloor()));
+    }
+    //Make a new hallway walking direction, we will always keep an object of this type active
     StraightDirection currHall = new StraightDirection(0, 0, pathNodeList.get(0).getFloor());
 
     for (int i = 1;
@@ -92,7 +102,8 @@ public class Directions {
   }
 
   private float getAngle(Node previous, Node current, Node next) {
-    //The angle represents positive degrees to the left of straight ahead and negative degrees to the right of straight
+    // The angle represents positive degrees to the left of straight ahead and negative degrees to
+    // the right of straight
     float angleA =
         (float)
             Math.atan2(
