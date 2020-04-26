@@ -66,26 +66,7 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
           }
           if (neighbor.getFloor() == startNode.getFloor()
               || neighbor.getFloor() == endNode.getFloor()) {
-            // If the neighbor is on a relevant floor
-            // Verify it's accessible by a hall or the room you're starting at
-            Boolean isAccessible = false;
-            Set<Edge> neighborEdges2 = neighbor.getEdges();
-            for (Edge edge2 : neighborEdges2) {
-              if (edge2.getNode1().equals(neighbor.getId())) {
-                if (nodeMap.get(edge2.getNode2()).getType().equals(Node.NodeType.getEnum("HALL"))
-                    || edge2.getNode2().equals(startNode.getId())) {
-                  isAccessible = true;
-                  break;
-                }
-              } else {
-                if (nodeMap.get(edge2.getNode1()).getType().equals(Node.NodeType.getEnum("HALL"))
-                    || edge2.getNode1().equals(startNode.getId())) {
-                  isAccessible = true;
-                  break;
-                }
-              }
-            }
-            if (isAccessible) {
+            if (isAccessible(startNode, endNode, neighbor)) {
               neighbors.add(neighbor);
             }
           }
@@ -119,29 +100,9 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
   public Path pathfind(Node start, Node.NodeType nodeType) throws InstanceNotFoundException {
     List<Path> paths = new ArrayList<>();
     for (Node node : nodeMap.values()) {
-      if (node.getType().getTypeString().equals(nodeType.getTypeString())) {
-        // If the node is of the correct type, verify it's accessible by a hall or the room you're
-        // starting at
-        Boolean isAccessible = false;
-        Set<Edge> neighborEdges = node.getEdges();
-        for (Edge edge : neighborEdges) {
-          if (edge.getNode1().equals(node.getId())) {
-            if (nodeMap.get(edge.getNode2()).getType().equals(Node.NodeType.getEnum("HALL"))
-                || edge.getNode2().equals(start.getId())) {
-              isAccessible = true;
-              break;
-            }
-          } else {
-            if (nodeMap.get(edge.getNode1()).getType().equals(Node.NodeType.getEnum("HALL"))
-                || edge.getNode1().equals(start.getId())) {
-              isAccessible = true;
-              break;
-            }
-          }
-        }
-        if (isAccessible) {
-          paths.add(pathfind(start, node));
-        }
+      if (node.getType().getTypeString().equals(nodeType.getTypeString())
+          && isAccessible(start, start, node)) {
+        paths.add(pathfind(start, node));
       }
     }
     double shortestLength = Double.MAX_VALUE;
@@ -154,5 +115,25 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
       }
     }
     return shortestPath;
+  }
+
+  public Boolean isAccessible(Node startNode, Node endNode, Node neighbor) {
+    Set<Edge> neighborEdges2 = neighbor.getEdges();
+    for (Edge edge2 : neighborEdges2) {
+      if (edge2.getNode1().equals(neighbor.getId())) {
+        if (nodeMap.get(edge2.getNode2()).getType().equals(Node.NodeType.getEnum("HALL"))
+            || edge2.getNode2().equals(startNode.getId())
+            || edge2.getNode2().equals(endNode.getId())) {
+          return true;
+        }
+      } else {
+        if (nodeMap.get(edge2.getNode1()).getType().equals(Node.NodeType.getEnum("HALL"))
+            || edge2.getNode1().equals(startNode.getId())
+            || edge2.getNode1().equals(endNode.getId())) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }
