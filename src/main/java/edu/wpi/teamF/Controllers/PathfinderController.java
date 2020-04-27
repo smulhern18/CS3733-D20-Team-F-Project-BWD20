@@ -9,6 +9,7 @@ import edu.wpi.teamF.ModelClasses.Directions.Directions;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.BreadthFirst;
+import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.MultipleFloorAStar;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.PathfindAlgorithm;
 import edu.wpi.teamF.ModelClasses.Scorer.EuclideanScorer;
 import java.net.URL;
@@ -52,6 +53,7 @@ public class PathfinderController implements Initializable {
   public JFXButton stairsBtn;
   public JFXButton elevBtn;
   public JFXButton bathBtn;
+  public AnchorPane selectFloorPane;
   public JFXButton floor1Button;
   public JFXButton floor2Button;
   public JFXButton floor3Button;
@@ -309,7 +311,7 @@ public class PathfinderController implements Initializable {
     //      }
     //    }
 
-    pathFindAlgorithm = new BreadthFirst(fullNodeList);
+    pathFindAlgorithm = new MultipleFloorAStar(fullNodeList);
     resetPane();
     drawNodes();
   }
@@ -492,6 +494,9 @@ public class PathfinderController implements Initializable {
           // resetPane();
           setAllInvisible();
           scrollPaneFaulkner1.setVisible(true);
+          deselectFloorButtons();
+          deselectFloorButtons();
+          floor1Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
         });
     floor2Button.setOnAction(
         actionEvent -> {
@@ -501,6 +506,8 @@ public class PathfinderController implements Initializable {
           // resetPane();
           setAllInvisible();
           scrollPaneFaulkner2.setVisible(true);
+          deselectFloorButtons();
+          floor2Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
         });
     floor3Button.setOnAction(
         actionEvent -> {
@@ -510,6 +517,8 @@ public class PathfinderController implements Initializable {
           // resetPane();
           setAllInvisible();
           scrollPaneFaulkner3.setVisible(true);
+          deselectFloorButtons();
+          floor3Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
         });
     floor4Button.setOnAction(
         actionEvent -> {
@@ -519,6 +528,8 @@ public class PathfinderController implements Initializable {
           // resetPane();
           setAllInvisible();
           scrollPaneFaulkner4.setVisible(true);
+          deselectFloorButtons();
+          floor4Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
         });
     floor5Button.setOnAction(
         actionEvent -> {
@@ -528,7 +539,15 @@ public class PathfinderController implements Initializable {
           // resetPane();
           setAllInvisible();
           scrollPaneFaulkner5.setVisible(true);
+          deselectFloorButtons();
+          floor5Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
         });
+  }
+
+  public void deselectFloorButtons() {
+    for (javafx.scene.Node btn : selectFloorPane.getChildren()) {
+      btn.setStyle("-fx-background-color: #4c5e76; -fx-background-radius: 10px");
+    }
   }
 
   public void setNodeList(int floorNum) {
@@ -559,6 +578,8 @@ public class PathfinderController implements Initializable {
       scrollPaneFaulkner1.setVisible(true);
       startNode = holdNode;
       startCombo.setValue(startNode.getLongName());
+      deselectFloorButtons();
+      floor1Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
     }
     if (floorNum == 2) {
       Node holdNode = startNode;
@@ -570,6 +591,8 @@ public class PathfinderController implements Initializable {
       scrollPaneFaulkner2.setVisible(true);
       startNode = holdNode;
       startCombo.setValue(startNode.getLongName());
+      deselectFloorButtons();
+      floor2Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
     }
     if (floorNum == 3) {
       Node holdNode = startNode;
@@ -581,6 +604,8 @@ public class PathfinderController implements Initializable {
       scrollPaneFaulkner3.setVisible(true);
       startNode = holdNode;
       startCombo.setValue(startNode.getLongName());
+      deselectFloorButtons();
+      floor3Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
     }
     if (floorNum == 4) {
       Node holdNode = startNode;
@@ -592,6 +617,8 @@ public class PathfinderController implements Initializable {
       scrollPaneFaulkner4.setVisible(true);
       startNode = holdNode;
       startCombo.setValue(startNode.getLongName());
+      deselectFloorButtons();
+      floor4Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
     }
     if (floorNum == 5) {
       Node holdNode = startNode;
@@ -603,6 +630,8 @@ public class PathfinderController implements Initializable {
       scrollPaneFaulkner5.setVisible(true);
       startNode = holdNode;
       startCombo.setValue(startNode.getLongName());
+      deselectFloorButtons();
+      floor5Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
     }
   }
 }
