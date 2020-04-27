@@ -1,5 +1,6 @@
 package edu.wpi.teamF.ModelClasses.UIClasses;
 
+import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.FlowerRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -7,7 +8,7 @@ import javafx.beans.property.SimpleStringProperty;
 import lombok.Data;
 
 @Data
-public class UiFlowerServiceRequest {
+public class UiFlowerServiceRequest extends RecursiveTreeObject<UiFlowerServiceRequest> {
   public SimpleStringProperty ID;
   public SimpleStringProperty location;
   public SimpleStringProperty recipientName;
