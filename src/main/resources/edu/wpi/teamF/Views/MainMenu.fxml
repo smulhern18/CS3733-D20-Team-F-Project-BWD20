@@ -1,10 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <fx:include source="MenuBar.fxml" />
+      <ImageView fitHeight="414.0" fitWidth="408.0" layoutX="189.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/main%20menu%20back.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="336.0" layoutY="89.0" text="Main Menu">
+         <font>
+            <Font name="STIXGeneral-Regular" size="24.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="68.0" fitWidth="72.0" layoutX="227.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/icons8-login-50.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="236.0" layoutY="221.0" text="Login">
+         <font>
+            <Font name="STIXGeneral-Regular" size="13.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="68.0" fitWidth="72.0" layoutX="358.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/icons8-service-bell-100.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="342.0" layoutY="221.0" text="Service Request">
+         <font>
+            <Font name="STIXGeneral-Regular" size="13.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="68.0" fitWidth="72.0" layoutX="288.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/icons8-path-100.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="286.0" layoutY="345.0" text="Pathfinder">
+         <font>
+            <Font name="STIXGeneral-Regular" size="13.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="68.0" fitWidth="72.0" layoutX="481.0" layoutY="153.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/icons8-system-administrator-female-50.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="488.0" layoutY="221.0" text="Admin">
+         <font>
+            <Font name="STIXGeneral-Regular" size="13.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="68.0" fitWidth="72.0" layoutX="425.0" layoutY="277.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/icons8-help-100.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="437.0" layoutY="345.0" text="Help">
+         <font>
+            <Font name="STIXGeneral-Regular" size="13.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

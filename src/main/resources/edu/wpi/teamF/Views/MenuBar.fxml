@@ -12,37 +12,37 @@
       <Circle fill="WHITE" layoutX="91.0" layoutY="80.0" radius="27.0" stroke="BLACK" strokeType="INSIDE" />
       <JFXButton layoutX="14.0" layoutY="349.0" onAction="#settings" prefHeight="35.0" prefWidth="165.0" text="Setting" textFill="#000000cc">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="STIXGeneral-Bold" size="18.0" />
          </font>
       </JFXButton>
       <JFXButton layoutX="14.0" layoutY="317.0" onAction="#help" prefHeight="35.0" prefWidth="165.0" text="Help" textFill="#000000cc">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="STIXGeneral-Bold" size="18.0" />
          </font>
       </JFXButton>
       <JFXButton layoutX="9.0" layoutY="286.0" onAction="#admin" prefHeight="35.0" prefWidth="175.0" text="Admin" textFill="#000000cc">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="STIXGeneral-Bold" size="18.0" />
          </font>
       </JFXButton>
       <JFXButton layoutX="19.0" layoutY="250.0" onAction="#pathfinder" prefHeight="35.0" prefWidth="165.0" text="Pathfinder" textFill="#000000cc">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="STIXGeneral-Bold" size="18.0" />
          </font>
       </JFXButton>
       <JFXButton layoutX="14.0" layoutY="216.0" onAction="#serviceRequest" prefHeight="39.0" prefWidth="175.0" text="Service Request" textFill="#000000cc">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="STIXGeneral-Bold" size="18.0" />
          </font>
       </JFXButton>
       <JFXButton layoutX="9.0" layoutY="189.0" onAction="#login" prefHeight="35.0" prefWidth="175.0" text="Login" textFill="#000000cc">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="STIXGeneral-Bold" size="18.0" />
          </font>
       </JFXButton>
       <JFXButton layoutX="19.0" layoutY="140.0" onAction="#mainMenu" prefHeight="35.0" prefWidth="156.0" text="Main Menu" textFill="#000000cc">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font name="STIXGeneral-Bold" size="18.0" />
          </font>
       </JFXButton>
       <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="21.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
@@ -78,6 +78,11 @@
       <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="46.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Images/6.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="67.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/icons8-flamingo-100.png" />
          </image>
       </ImageView>
    </children>

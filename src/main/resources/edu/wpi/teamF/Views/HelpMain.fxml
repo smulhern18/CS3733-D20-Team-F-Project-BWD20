@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <fx:include source="MenuBar.fxml" />
+      <Label layoutX="367.0" layoutY="82.0" text="Help">
+         <font>
+            <Font name="STIXGeneral-Regular" size="24.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="68.0" fitWidth="72.0" layoutX="240.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/icons8-question-mark-100.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="217.0" layoutY="275.0" text="Genearl Questions">
+         <font>
+            <Font name="STIXGeneral-Regular" size="13.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="68.0" fitWidth="72.0" layoutX="372.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/icons8-ask-question-100.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="348.0" layoutY="275.0" text="Specific Questions">
+         <font>
+            <Font name="STIXGeneral-Regular" size="13.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="68.0" fitWidth="72.0" layoutX="490.0" layoutY="207.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/icons8-email-100.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="486.0" layoutY="275.0" text="Contact Us">
+         <font>
+            <Font name="STIXGeneral-Regular" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXTextField layoutX="228.0" layoutY="140.0" prefHeight="27.0" prefWidth="324.0" promptText="Search ..." />
+   </children>
+</AnchorPane>
