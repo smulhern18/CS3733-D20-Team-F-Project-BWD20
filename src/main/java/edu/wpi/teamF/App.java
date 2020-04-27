@@ -15,7 +15,10 @@ public class App extends Application {
 
   private static SceneController sceneController;
 
-  public static SceneController getSceneController() {
+    public App() throws Exception {
+    }
+
+    public static SceneController getSceneController() {
     return sceneController;
   }
 

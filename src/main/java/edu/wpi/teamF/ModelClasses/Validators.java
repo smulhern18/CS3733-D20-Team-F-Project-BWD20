@@ -2,7 +2,10 @@ package edu.wpi.teamF.ModelClasses;
 
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/TylerSanitationServiceRequest
 import java.util.Date;
 
 public class Validators {
@@ -43,10 +46,15 @@ public class Validators {
   public static final int HARDWARESOFTWARE_MAX_LENGTH = 32;
   public static final int OS_MIN_LENGTH = 1;
   public static final int OS_MAX_LENGTH = 8;
+<<<<<<< HEAD
   public static final int TRANSPORT_TYPE_MIN_LENGTH = 1;
   public static final int TRANSPORT_TYPE_MAX_LENGTH = 32;
   private static final int GUARDS_MIN_VALUE = 1;
   private static final int GUARDS_MAX_VALUE = 10;
+=======
+  public static final int SANITATION_TYPE_MIN_LENGTH = 1;
+  public static final int SANITATION_TYPE_MAX_LENGTH = 32;
+>>>>>>> origin/TylerSanitationServiceRequest
 
   public static <T extends ServiceRequest> void serviceRequestValidation(T t, int... constraints)
       throws ValidationException {
@@ -121,6 +129,15 @@ public class Validators {
     if (!(guardsRequested >= GUARDS_MIN_VALUE && guardsRequested <= GUARDS_MAX_VALUE)) {
 
       throw new ValidationException(" Guards requested outside of accepted values");
+    }
+  }
+
+  public static void sanitationTypeValidation(String sanitationType, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(sanitationType, constraints);
+    if (sanitationType.length() < SANITATION_TYPE_MIN_LENGTH
+        || sanitationType.length() > SANITATION_TYPE_MAX_LENGTH) {
+      throw new ValidationException("Invalid sanitation type length");
     }
   }
 
@@ -382,6 +399,22 @@ public class Validators {
     makeValidation(computerRequestObject.getMake());
     hardwareSoftwareValidation(computerRequestObject.getHardwareSoftware());
   }
+
+  /**
+   * Validation for Maintenance Requests
+   *
+   * @param t an instance of Maintenance Request to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static <T extends SanitationServiceRequest> void sanitationServiceValidation(
+      T t, int... constraints) throws ValidationException {
+    nullCheckValidation(t, constraints);
+    SanitationServiceRequest sanitationServiceRequestObject = (SanitationServiceRequest) t;
+
+    sanitationTypeValidation(sanitationServiceRequestObject.getType());
+  }
+
   /**
    * Validation for Security Requests
    *
