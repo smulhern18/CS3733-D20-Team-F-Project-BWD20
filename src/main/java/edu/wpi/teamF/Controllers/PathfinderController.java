@@ -136,14 +136,14 @@ public class PathfinderController implements Initializable {
             button.setStyle(
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #3281a8; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
             state = 0;
-            startCombo.setValue(null);
+            startCombo.setValue("");
             startCombo.setDisable(false);
           } else if (endNode == node) { // deselect if end has been set, return to 1
             endNode = null;
             button.setStyle(
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #3281a8; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
             state = 1;
-            endCombo.setValue(null);
+            endCombo.setValue("");
             pathButton.setDisable(true);
             endCombo.setDisable(false);
           } else if (state == 0) { // if nothing has been set
@@ -253,8 +253,8 @@ public class PathfinderController implements Initializable {
     bathBtn.setDisable(true);
     commandText.setText("Select Starting Location");
 
-    startCombo.setValue(null);
-    endCombo.setValue(null);
+    startCombo.setValue("");
+    endCombo.setValue("");
 
     setComboBehavior();
   }
@@ -286,8 +286,8 @@ public class PathfinderController implements Initializable {
     uiSetting.setAsLocationComboBox(startCombo);
     uiSetting.setAsLocationComboBox(endCombo);
     String startLocation = startCombo.getValue();
+    //    String startID = startLocation.substring(startLocation.length() - 10);
     String endLocation = endCombo.getValue();
-    //    String startID = startLocation.substring(endLocation.length() - 10);
     //    String endID = endLocation.substring(endLocation.length() - 10);
 
     //    uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1);
@@ -344,7 +344,9 @@ public class PathfinderController implements Initializable {
   public void comboSelectStart() {
     if (startCombo.getValue() != null) {
       for (Node node : fullNodeList) {
-        if (node.getLongName() == startCombo.getValue()) {
+        String startLocation = startCombo.getValue();
+        String startID = startLocation.substring(startLocation.length() - 10);
+        if (node.getId() == startID) {
           if (startNode != null) {
             for (javafx.scene.Node component : currentPane.getChildren()) {
               if (component.getId().equals(startNode.getId())) {
@@ -373,7 +375,9 @@ public class PathfinderController implements Initializable {
   public void comboSelectEnd() {
     if (endCombo.getValue() != null) {
       for (Node node : fullNodeList) {
-        if (node.getLongName() == endCombo.getValue()) {
+        String endLocation = endCombo.getValue();
+        String endID = endLocation.substring(endLocation.length() - 10);
+        if (node.getId() == endID) {
           if (endNode != null) {
             for (javafx.scene.Node component : currentPane.getChildren()) {
               if (component.getId().equals(endNode.getId())) {
@@ -402,8 +406,11 @@ public class PathfinderController implements Initializable {
   public Node findComboStart() {
     Node returnNode = null;
     if (startCombo.getValue() != null) {
+      String startLocation = startCombo.getValue();
+      String startID = startLocation.substring(startLocation.length() - 10);
+      System.out.println(startNode);
       for (Node node : fullNodeList) {
-        if (node.getLongName() == startCombo.getValue()) {
+        if (node.getId().equals(startID)) {
           returnNode = node;
         }
       }
@@ -414,12 +421,16 @@ public class PathfinderController implements Initializable {
   public Node findComboEnd() {
     Node returnNode = null;
     if (endCombo.getValue() != null) {
+      String endLocation = endCombo.getValue();
+      String endID = endLocation.substring(endLocation.length() - 10);
+      System.out.println("end" + endID);
       for (Node node : fullNodeList) {
-        if (node.getLongName() == endCombo.getValue()) {
+        if (node.getId().equals(endID)) {
           returnNode = node;
         }
       }
     }
+    System.out.println(returnNode);
     return returnNode;
   }
 
@@ -453,6 +464,10 @@ public class PathfinderController implements Initializable {
         actionEvent -> {
           startCombo.setDisable(true);
           endCombo.setDisable(true);
+          startNode = findComboStart();
+          endNode = findComboEnd();
+          System.out.println(startNode);
+          System.out.println(endNode);
           Path path = null;
           try {
             path = pathFindAlgorithm.pathfind(startNode, endNode);
