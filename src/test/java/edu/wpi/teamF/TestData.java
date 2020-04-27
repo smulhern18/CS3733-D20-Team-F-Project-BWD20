@@ -4,6 +4,7 @@ import edu.wpi.teamF.ModelClasses.Account.*;
 import edu.wpi.teamF.ModelClasses.Appointment;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.LanguageServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
 import java.util.Date;
@@ -268,6 +269,17 @@ public class TestData {
         validDates[3],
         2,
         false),
+  };
+
+  public LanguageServiceRequest[] validLanguageServiceRequests = {
+          new LanguageServiceRequest(
+                  validIDs[0],
+                  validNodes[0],
+                  validAssignees[0],
+                  validDescriptions[0],
+                  validDates[0],
+                  "Spanish",
+                  "Require Interpreter"),
   };
 
   public TestData() throws Exception {}
