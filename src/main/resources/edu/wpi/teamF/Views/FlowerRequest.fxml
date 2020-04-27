@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.SecurityRequestController">
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.FlowersController">
     <children>
         <GridPane fx:id="optionBar" layoutX="190.0" style="-fx-border-color: pink;" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
@@ -91,7 +91,7 @@
             <RowConstraints maxHeight="83.40004882812502" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fitHeight="72.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="72.0" fitWidth="78.0" onMouseClicked="#selectOccasion" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../../Images/all-occasion-classic-300x300.jpg" />
                </image>

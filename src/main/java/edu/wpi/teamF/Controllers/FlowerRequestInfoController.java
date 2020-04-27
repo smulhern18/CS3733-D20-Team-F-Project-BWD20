@@ -11,11 +11,13 @@ import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.FlowerRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UiFlowerServiceRequest;
+import edu.wpi.teamF.Controllers.FlowersController;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
@@ -35,7 +37,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class FlowerRequestInfoController {
+public class FlowerRequestInfoController implements Initializable {
+
+
+
     public JFXButton requestServiceButton;
     public AnchorPane anchorPane;
     public GridPane optionBar;
@@ -76,6 +81,9 @@ public class FlowerRequestInfoController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        FlowersController flowersController = new FlowersController();
+        String selected = flowersController.flowerPicked;
 
         UISetting uiSetting = new UISetting();
         uiSetting.setAsLocationComboBox(locationChoice);
