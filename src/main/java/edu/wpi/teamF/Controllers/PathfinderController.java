@@ -9,7 +9,6 @@ import edu.wpi.teamF.ModelClasses.Directions.Directions;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.BreadthFirst;
-import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.MultipleFloorAStar;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.PathfindAlgorithm;
 import edu.wpi.teamF.ModelClasses.Scorer.EuclideanScorer;
 import java.net.URL;
@@ -59,8 +58,8 @@ public class PathfinderController implements Initializable {
   public JFXButton floor4Button;
   public JFXButton floor5Button;
   public Text commandText;
-  public JFXComboBox startCombo;
-  public JFXComboBox endCombo;
+  public JFXComboBox<String> startCombo;
+  public JFXComboBox<String> endCombo;
   public JFXButton pathButton;
   public int state;
   public UISetting uiSetting = new UISetting();
@@ -283,11 +282,11 @@ public class PathfinderController implements Initializable {
     scrollPaneFaulkner1.setVisible(true);
     floorButtonsSet();
 
-    //    UISetting uiSetting = new UISetting();
-    //    uiSetting.setAsLocationComboBox(startCombo);
-    //    uiSetting.setAsLocationComboBox(endCombo);
-    //    String startLocation = startCombo.getValue();
-    //    String endLocation = endCombo.getValue();
+    UISetting uiSetting = new UISetting();
+    uiSetting.setAsLocationComboBox(startCombo);
+    uiSetting.setAsLocationComboBox(endCombo);
+    String startLocation = startCombo.getValue();
+    String endLocation = endCombo.getValue();
     //    String startID = startLocation.substring(endLocation.length() - 10);
     //    String endID = endLocation.substring(endLocation.length() - 10);
 
@@ -303,14 +302,14 @@ public class PathfinderController implements Initializable {
     }
 
     setNodeList(1);
-    for (Node node : fullNodeList) {
-      if (!node.getType().equals(Node.NodeType.getEnum("HALL"))) {
-        startCombo.getItems().add(node.getLongName());
-        endCombo.getItems().add(node.getLongName());
-      }
-    }
+    //    for (Node node : fullNodeList) {
+    //      if (!node.getType().equals(Node.NodeType.getEnum("HALL"))) {
+    //        startCombo.getItems().add(node.getLongName());
+    //        endCombo.getItems().add(node.getLongName());
+    //      }
+    //    }
 
-    pathFindAlgorithm = new MultipleFloorAStar(fullNodeList);
+    pathFindAlgorithm = new BreadthFirst(fullNodeList);
     resetPane();
     drawNodes();
   }

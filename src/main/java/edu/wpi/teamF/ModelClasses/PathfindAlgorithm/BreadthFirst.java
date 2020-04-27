@@ -24,6 +24,7 @@ public class BreadthFirst implements PathfindAlgorithm {
     HashSet<Node> visited = new HashSet<>();
 
     RouteNode startRoute = new RouteNode(start, null, 0, 0);
+    nodeQueue.add(startRoute);
 
     while (!nodeQueue.isEmpty()) {
       RouteNode currentNode = nodeQueue.poll();

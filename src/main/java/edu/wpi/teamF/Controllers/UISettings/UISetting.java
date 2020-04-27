@@ -17,6 +17,7 @@ public class UISetting {
   }
 
   public void setAsLocationComboBox(JFXComboBox comboBox) {
+    locationComboBox = new LocationComboBox();
     locationComboBox.setAsLocationComboBox(comboBox);
   }
 
