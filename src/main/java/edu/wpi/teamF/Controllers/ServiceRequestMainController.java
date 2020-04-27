@@ -26,4 +26,8 @@ public class ServiceRequestMainController {
   public void mariachiService(MouseEvent mouseEvent) throws IOException {
     sceneController.switchScene("MariachiRequest");
   }
+
+  public void securityRequest(MouseEvent mouseEvent) throws IOException {
+    sceneController.switchScene("SecurityRequest");
+  }
 }
