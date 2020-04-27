@@ -17,11 +17,7 @@ public class MariachiRequestFactory {
   private static final ServiceRequestFactory serviceRequestFactory =
       ServiceRequestFactory.getFactory();
 
-<<<<<<< HEAD:src/main/java/edu/wpi/teamF/DatabaseManipulators/SecurityRequestFactory.java
-  static SecurityRequestFactory getFactory() {
-=======
   public static MariachiRequestFactory getFactory() {
->>>>>>> origin/KevinMariachiRequest:src/main/java/edu/wpi/teamF/DatabaseManipulators/MariachiRequestFactory.java
     return factory;
   }
 
@@ -101,13 +97,8 @@ public class MariachiRequestFactory {
             + " SET "
             + DatabaseManager.SERVICEID_KEY
             + " = ?, "
-<<<<<<< HEAD:src/main/java/edu/wpi/teamF/DatabaseManipulators/SecurityRequestFactory.java
-            + DatabaseManager.GUARDS_REQUESTED_KEY
-            + " = ? "
-=======
             + DatabaseManager.SONG_REQUEST_KEY
-            + " = ?, "
->>>>>>> origin/KevinMariachiRequest:src/main/java/edu/wpi/teamF/DatabaseManipulators/MariachiRequestFactory.java
+            + " = ? "
             + "WHERE "
             + DatabaseManager.SERVICEID_KEY
             + " = ?";

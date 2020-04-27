@@ -7,6 +7,7 @@ import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
 
 import java.io.InputStream;
@@ -61,6 +62,9 @@ public class DatabaseManager {
   // Maintainence Request
   static final String MAINTENCE_REQUEST_ID_KEY = "serviceId";
 
+  // Security Request
+  static final String GUARDS_REQUESTED_KEY = "guardsRequested";
+
   // Mariachi Request
   static final String SONG_REQUEST_KEY = "songRequest";
 
@@ -95,6 +99,8 @@ public class DatabaseManager {
   private ServiceRequestFactory serviceRequestFactory = ServiceRequestFactory.getFactory();
   private MaintenanceRequestFactory maintenanceRequestFactory =
       MaintenanceRequestFactory.getFactory();
+  private SecurityRequestFactory securityRequestFactory =
+      SecurityRequestFactory.getFactory();
   private ComputerServiceRequestFactory computerServiceRequestFactory =
       ComputerServiceRequestFactory.getFactory();
   private AppointmentFactory appointmentFactory = AppointmentFactory.getFactory();

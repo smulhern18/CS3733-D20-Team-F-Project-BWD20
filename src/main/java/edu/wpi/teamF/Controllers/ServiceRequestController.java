@@ -259,7 +259,7 @@ public class ServiceRequestController implements Initializable {
       }
     }
 
-    List<MariachiRequest> mariachiRequests = mariachiRequestFactory.getAllMariachiRequest();
+    List<MariachiRequest> mariachiRequests = databaseManager.getAllMariachiRequests();
     if (mariachiRequests != null) {
       for (int i = 0; i < mariachiRequests.size(); i++) {
         serviceRequests.add(new UIServiceRequest(mariachiRequests.get(i)));

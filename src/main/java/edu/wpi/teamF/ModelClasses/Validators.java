@@ -1,14 +1,7 @@
 package edu.wpi.teamF.ModelClasses;
 
 import edu.wpi.teamF.ModelClasses.Account.Account;
-<<<<<<< HEAD
 import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
-=======
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
->>>>>>> origin/KevinMariachiRequest
 import java.util.Date;
 
 public class Validators {
@@ -64,6 +57,13 @@ public class Validators {
   public static final int INSTRUCTIONS_MIN_LENGTH = 0;
   public static final int INSTRUCTIONS_MAX_LENGTH = 64;
 
+  public static <T extends  SecurityRequest> void securityRequestValidation(T t, int... constraints) throws ValidationException {
+    serviceRequestValidation(t, constraints);
+    SecurityRequest securityRequest = (SecurityRequest) t;
+
+    guardsRequestedValidation(securityRequest.getGuardsRequested(), constraints);
+  }
+
   public static <T extends ServiceRequest> void serviceRequestValidation(T t, int... constraints)
       throws ValidationException {
     nullCheckValidation(t, constraints);
@@ -76,6 +76,17 @@ public class Validators {
     priorityValidation(serviceRequest.getPriority());
     booleanValidation(serviceRequest.getComplete());
     nameValidation(serviceRequest.getAssignee());
+  }
+
+  /** Validation for Security */
+  public static void guardsRequestedValidation(int guardsRequested, int... constraints)
+          throws ValidationException {
+    nullCheckValidation(guardsRequested, constraints);
+
+    if (!(guardsRequested >= GUARDS_MIN_VALUE && guardsRequested <= GUARDS_MAX_VALUE)) {
+
+      throw new ValidationException(" Guards requested outside of accepted values");
+    }
   }
 
   public static <T extends Account> void accountValidation(T t, int... constraints)
