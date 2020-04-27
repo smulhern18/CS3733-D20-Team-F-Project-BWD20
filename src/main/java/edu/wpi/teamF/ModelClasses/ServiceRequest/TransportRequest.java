@@ -9,6 +9,7 @@ import java.util.Date;
 public class TransportRequest extends ServiceRequest{
     public String type;
     public Node destination;
+    public Date dateTimeCompleted;
 
     public TransportRequest(
             String id,
@@ -17,20 +18,22 @@ public class TransportRequest extends ServiceRequest{
             String description,
             Date dateTimeSubmitted,
             int priority,
-            boolean complete, String type, Node destination)
+            boolean complete, String type, Node destination, Date dateTimeCompleted)
             throws ValidationException {
         super(id, location, assignee, description, dateTimeSubmitted, priority, complete);
         setType(type);
         setDestination(destination);
+        setDateTimeCompleted(dateTimeCompleted);
 
     }
 
     public TransportRequest(
-            Node location, String assignee, String description, Date dateTimeSubmitted, int priority, String type, Node destination)
+            Node location, String assignee, String description, Date dateTimeSubmitted, int priority, String type, Node destination, Date dateTimeCompleted)
             throws ValidationException {
         super(location, assignee, description, dateTimeSubmitted, priority);
         setType(type);
         setDestination(destination);
+        setDateTimeCompleted(dateTimeCompleted);
     }
 
 
@@ -38,18 +41,27 @@ public class TransportRequest extends ServiceRequest{
         return type;
     }
 
-    public Node getDestination(){
-        return destination;
-    }
-
     public void setType(String type) throws ValidationException{
         Validators.transportTypeValidation(type);
         this.type = type;
     }
 
+    public Node getDestination() {
+        return destination;
+    }
+
     public void setDestination(Node destination) throws ValidationException{
         Validators.nodeValidation(destination);
         this.destination = destination;
+    }
+
+    public Date getDateTimeCompleted(){
+        return dateTimeCompleted;
+    }
+
+    public void setDateTimeCompleted(Date dateTimeCompleted) throws ValidationException{
+        Validators.dateValidation(dateTimeCompleted);
+        this.dateTimeCompleted = dateTimeCompleted;
     }
 
 
