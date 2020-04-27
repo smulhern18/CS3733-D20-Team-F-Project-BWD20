@@ -341,7 +341,7 @@ public class PathfinderController implements Initializable {
     commandText.setText("See Details Below or Reset for New Path");
   }
 
-  public void choiceSelectStart() {
+  public void comboSelectStart() {
     if (startCombo.getValue() != null) {
       for (Node node : fullNodeList) {
         if (node.getLongName() == startCombo.getValue()) {
@@ -370,7 +370,7 @@ public class PathfinderController implements Initializable {
     }
   }
 
-  public void choiceSelectEnd() {
+  public void comboSelectEnd() {
     if (endCombo.getValue() != null) {
       for (Node node : fullNodeList) {
         if (node.getLongName() == endCombo.getValue()) {
@@ -397,6 +397,55 @@ public class PathfinderController implements Initializable {
         }
       }
     }
+  }
+
+  public Node findComboStart() {
+    Node returnNode = null;
+    if (startCombo.getValue() != null) {
+      for (Node node : fullNodeList) {
+        if (node.getLongName() == startCombo.getValue()) {
+          returnNode = node;
+        }
+      }
+    }
+    return returnNode;
+  }
+
+  public Node findComboEnd() {
+    Node returnNode = null;
+    if (endCombo.getValue() != null) {
+      for (Node node : fullNodeList) {
+        if (node.getLongName() == endCombo.getValue()) {
+          returnNode = node;
+        }
+      }
+    }
+    return returnNode;
+  }
+
+  public void setComboBehavior() {
+    startCombo.setOnAction(
+            actionEvent -> {
+              if (startCombo.getValue() != null) {
+                comboSelectStart();
+                state = 1;
+                commandText.setText("Select End Location or Building Feature");
+                endCombo.setDisable(false);
+                if (findComboStart().getFloor() != currentFloor) {
+                  switchToFloor(findComboStart().getFloor());
+                }
+              }
+            });
+
+    endCombo.setOnAction(
+            actionEvent -> {
+              if (endCombo.getValue() != null) {
+                comboSelectEnd();
+                state = 2;
+                commandText.setText("Select Find Path or Reset");
+                pathButton.setDisable(false);
+              }
+            });
   }
 
   public void pathButtonGo() {
@@ -542,52 +591,5 @@ public class PathfinderController implements Initializable {
     }
   }
 
-  public Node findChoiceStart() {
-    Node returnNode = null;
-    if (startCombo.getValue() != null) {
-      for (Node node : fullNodeList) {
-        if (node.getLongName() == startCombo.getValue()) {
-          returnNode = node;
-        }
-      }
-    }
-    return returnNode;
-  }
 
-  public Node findChoiceEnd() {
-    Node returnNode = null;
-    if (endCombo.getValue() != null) {
-      for (Node node : fullNodeList) {
-        if (node.getLongName() == endCombo.getValue()) {
-          returnNode = node;
-        }
-      }
-    }
-    return returnNode;
-  }
-
-  public void setComboBehavior() {
-    startCombo.setOnAction(
-        actionEvent -> {
-          if (startCombo.getValue() != null) {
-            choiceSelectStart();
-            state = 1;
-            commandText.setText("Select End Location or Building Feature");
-            endCombo.setDisable(false);
-            if (findChoiceStart().getFloor() != currentFloor) {
-              switchToFloor(findChoiceStart().getFloor());
-            }
-          }
-        });
-
-    endCombo.setOnAction(
-        actionEvent -> {
-          if (endCombo.getValue() != null) {
-            choiceSelectEnd();
-            state = 2;
-            commandText.setText("Select Find Path or Reset");
-            pathButton.setDisable(false);
-          }
-        });
-  }
 }
