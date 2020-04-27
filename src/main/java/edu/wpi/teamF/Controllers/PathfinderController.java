@@ -8,7 +8,6 @@ import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Directions.Directions;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
-import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.BreadthFirst;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.MultipleFloorAStar;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.PathfindAlgorithm;
 import edu.wpi.teamF.ModelClasses.Scorer.EuclideanScorer;
@@ -466,8 +465,8 @@ public class PathfinderController implements Initializable {
         actionEvent -> {
           startCombo.setDisable(true);
           endCombo.setDisable(true);
-          startNode = findComboStart();
-          endNode = findComboEnd();
+          //          startNode = findComboStart();
+          //          endNode = findComboEnd();
           System.out.println(startNode);
           System.out.println(endNode);
           Path path = null;

@@ -153,24 +153,26 @@ public class DataMapViewController implements Initializable {
       double widthRatio = (double) PANE_WIDTH / MAP_WIDTH;
       Node node1 = nodeFactory.read(edge.getNode1());
       Node node2 = nodeFactory.read(edge.getNode2());
-      int startX = (int) (node1.getXCoord() * widthRatio);
-      int startY = (int) (node1.getYCoord() * heightRatio); // start values correspond to node 1
-      int endX = (int) (node2.getXCoord() * widthRatio);
-      int endY = (int) (node2.getYCoord() * heightRatio); // end values correspond to node 2
-      Line line = new Line(startX, startY, endX, endY);
-      line.setId(edge.getId()); // allows us to keep track of what line is what edge
-      line.setStroke(Color.BLACK);
-      line.setStrokeWidth(1.5);
-      line.setOnMouseClicked(
-          mouseEvent -> { // when a user clicks on a line:
-            edgeLine = line;
-            this.edge = edge; // updates the classes' variables
-            addEdgePane.setVisible(true);
-            displayEdgeData(); // The edge pain that displays the edges information should be
-            // displayed
-          });
+      if (node1 != null && node2 != null) {
+        int startX = (int) (node1.getXCoord() * widthRatio);
+        int startY = (int) (node1.getYCoord() * heightRatio); // start values correspond to node 1
+        int endX = (int) (node2.getXCoord() * widthRatio);
+        int endY = (int) (node2.getYCoord() * heightRatio); // end values correspond to node 2
+        Line line = new Line(startX, startY, endX, endY);
+        line.setId(edge.getId()); // allows us to keep track of what line is what edge
+        line.setStroke(Color.BLACK);
+        line.setStrokeWidth(1.5);
+        line.setOnMouseClicked(
+            mouseEvent -> { // when a user clicks on a line:
+              edgeLine = line;
+              this.edge = edge; // updates the classes' variables
+              addEdgePane.setVisible(true);
+              displayEdgeData(); // The edge pain that displays the edges information should be
+              // displayed
+            });
 
-      mapPane.getChildren().add(0, line); // adds the line as a child to the pane
+        mapPane.getChildren().add(0, line); // adds the line as a child to the pane
+      }
     } catch (InstanceNotFoundException e) {
       e.printStackTrace();
     }
