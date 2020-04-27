@@ -1,7 +1,7 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
 import edu.wpi.teamF.ModelClasses.Node;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
@@ -11,33 +11,37 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SecurityRequestFactory {
+public class MariachiRequestFactory {
   NodeFactory nodeFactory = NodeFactory.getFactory();
-  private static final SecurityRequestFactory factory = new SecurityRequestFactory();
+  private static final MariachiRequestFactory factory = new MariachiRequestFactory();
   private static final ServiceRequestFactory serviceRequestFactory =
       ServiceRequestFactory.getFactory();
 
+<<<<<<< HEAD:src/main/java/edu/wpi/teamF/DatabaseManipulators/SecurityRequestFactory.java
   static SecurityRequestFactory getFactory() {
+=======
+  public static MariachiRequestFactory getFactory() {
+>>>>>>> origin/KevinMariachiRequest:src/main/java/edu/wpi/teamF/DatabaseManipulators/MariachiRequestFactory.java
     return factory;
   }
 
-  public void create(SecurityRequest securityRequest) throws ValidationException {
+  public void create(MariachiRequest mariachiRequest) throws ValidationException {
     String insertStatement =
         "INSERT INTO "
             + DatabaseManager.SECURITY_REQUEST_TABLE_NAME
             + " ( "
             + DatabaseManager.SERVICEID_KEY
             + ", "
-            + DatabaseManager.GUARDS_REQUESTED_KEY
+            + DatabaseManager.SONG_REQUEST_KEY
             + " ) "
             + "VALUES (?, ?)";
-    Validators.securityRequestValidation(securityRequest);
-    serviceRequestFactory.create(securityRequest);
+    Validators.mariachiRequestValidation(mariachiRequest);
+    serviceRequestFactory.create(mariachiRequest);
     try (PreparedStatement prepareStatement =
         DatabaseManager.getConnection().prepareStatement(insertStatement)) {
       int param = 1;
-      prepareStatement.setString(param++, securityRequest.getId());
-      prepareStatement.setInt(param++, securityRequest.getGuardsRequested());
+      prepareStatement.setString(param++, mariachiRequest.getId());
+      prepareStatement.setString(param++, mariachiRequest.getSongRequest());
       try {
         int numRows = prepareStatement.executeUpdate();
         if (numRows < 1) {
@@ -51,8 +55,8 @@ public class SecurityRequestFactory {
     }
   }
 
-  public SecurityRequest read(String id) {
-    SecurityRequest securityRequest = null;
+  public MariachiRequest read(String id) {
+    MariachiRequest mariachiRequest = null;
     String selectStatement =
         "SELECT * FROM "
             + DatabaseManager.SECURITY_REQUEST_TABLE_NAME
@@ -68,8 +72,8 @@ public class SecurityRequestFactory {
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
           ServiceRequest serviceRequest = serviceRequestFactory.read(id);
-          securityRequest =
-              new SecurityRequest(
+          mariachiRequest =
+              new MariachiRequest(
                   serviceRequest.getId(),
                   serviceRequest.getLocation(),
                   serviceRequest.getAssignee(),
@@ -77,7 +81,7 @@ public class SecurityRequestFactory {
                   serviceRequest.getDateTimeSubmitted(),
                   serviceRequest.getPriority(),
                   serviceRequest.getComplete(),
-                  resultSet.getInt(DatabaseManager.GUARDS_REQUESTED_KEY));
+                  resultSet.getString(DatabaseManager.SONG_REQUEST_KEY));
         }
       } catch (ValidationException e) {
         throw e;
@@ -87,27 +91,32 @@ public class SecurityRequestFactory {
     } catch (Exception e) {
       System.out.println("Exception in NodeFactory read: " + e.getMessage() + ", " + e.getClass());
     }
-    return securityRequest;
+    return mariachiRequest;
   }
 
-  public void update(SecurityRequest securityRequest) {
+  public void update(MariachiRequest mariachiRequest) {
     String updateStatement =
         "UPDATE "
             + DatabaseManager.SECURITY_REQUEST_TABLE_NAME
             + " SET "
             + DatabaseManager.SERVICEID_KEY
             + " = ?, "
+<<<<<<< HEAD:src/main/java/edu/wpi/teamF/DatabaseManipulators/SecurityRequestFactory.java
             + DatabaseManager.GUARDS_REQUESTED_KEY
             + " = ? "
+=======
+            + DatabaseManager.SONG_REQUEST_KEY
+            + " = ?, "
+>>>>>>> origin/KevinMariachiRequest:src/main/java/edu/wpi/teamF/DatabaseManipulators/MariachiRequestFactory.java
             + "WHERE "
             + DatabaseManager.SERVICEID_KEY
             + " = ?";
     try (PreparedStatement preparedStatement =
         DatabaseManager.getConnection().prepareStatement(updateStatement)) {
       int param = 1;
-      serviceRequestFactory.update(securityRequest);
-      preparedStatement.setString(param++, securityRequest.getId());
-      preparedStatement.setInt(param++, securityRequest.getGuardsRequested());
+      serviceRequestFactory.update(mariachiRequest);
+      preparedStatement.setString(param++, mariachiRequest.getId());
+      preparedStatement.setString(param++, mariachiRequest.getSongRequest());
 
       int numRows = preparedStatement.executeUpdate();
       if (numRows != 1) {
@@ -140,38 +149,38 @@ public class SecurityRequestFactory {
     }
   }
 
-  public List<SecurityRequest> getSecurityRequestsByLocation(Node location) {
-    List<SecurityRequest> securityRequests = new ArrayList<>();
+  public List<MariachiRequest> getSecurityRequestsByLocation(Node location) {
+    List<MariachiRequest> mariachiRequests = new ArrayList<>();
     for (ServiceRequest serviceRequest :
         serviceRequestFactory.getServiceRequestsByLocation(location)) {
-      SecurityRequest securityReadRequest = read(serviceRequest.getId());
-      if (securityReadRequest != null) {
-        securityRequests.add(securityReadRequest);
+      MariachiRequest mariachiReadRequest = read(serviceRequest.getId());
+      if (mariachiReadRequest != null) {
+        mariachiRequests.add(mariachiReadRequest);
       }
     }
-    if (securityRequests.size() == 0) {
+    if (mariachiRequests.size() == 0) {
       return new ArrayList<>();
     } else {
-      return securityRequests;
+      return mariachiRequests;
     }
   }
 
-  public List<SecurityRequest> getAllSecurityRequest() {
-    List<SecurityRequest> securityRequests = new ArrayList<>();
+  public List<MariachiRequest> getAllMariachiRequest() {
+    List<MariachiRequest> mariachiRequests = new ArrayList<>();
     String selectStatement = "SELECT * FROM " + DatabaseManager.SECURITY_REQUEST_TABLE_NAME;
 
     try (PreparedStatement preparedStatement =
             DatabaseManager.getConnection().prepareStatement(selectStatement);
         ResultSet resultSet = preparedStatement.executeQuery()) {
-      securityRequests = new ArrayList<>();
+      mariachiRequests = new ArrayList<>();
       ;
       while (resultSet.next()) {
         ServiceRequest serviceRequest =
             serviceRequestFactory.read(resultSet.getString(DatabaseManager.SERVICEID_KEY));
-        SecurityRequest securityRequest =
+        MariachiRequest mariachiRequest =
             factory.read(resultSet.getString(DatabaseManager.SERVICEID_KEY));
-        securityRequests.add(
-            new SecurityRequest(
+        mariachiRequests.add(
+            new MariachiRequest(
                 serviceRequest.getId(),
                 serviceRequest.getLocation(),
                 serviceRequest.getAssignee(),
@@ -179,12 +188,12 @@ public class SecurityRequestFactory {
                 serviceRequest.getDateTimeSubmitted(),
                 serviceRequest.getPriority(),
                 serviceRequest.getComplete(),
-                securityRequest.getGuardsRequested()));
+                mariachiRequest.getSongRequest()));
       }
     } catch (Exception e) {
       System.out.println(
           "Exception in SecurityFactory read: " + e.getMessage() + ", " + e.getClass());
     }
-    return securityRequests;
+    return mariachiRequests;
   }
 }

@@ -21,8 +21,17 @@ public class Main {
 
   public static void initDB() throws Exception {
     dbm.initialize();
+<<<<<<< HEAD
     csvm.readCSVFileNode(Main.class.getResourceAsStream("CSVFiles/MapFAllnodes.csv"));
     csvm.readCSVFileEdge(Main.class.getResourceAsStream("CSVFiles/MapFAlledges.csv"));
     dbm.manipulateAccount(new Admin("admin", "admin", "admin@gmail.com", "admin", "password"));
+=======
+    AccountFactory accounts = AccountFactory.getFactory();
+    // csvm.readCSVFileNode(Main.class.getResourceAsStream("CSVFiles/MapFAllnodes.csv"));
+    // csvm.readCSVFileEdge(Main.class.getResourceAsStream("CSVFiles/MapFAlledges.csv"));
+    if (accounts.read("admin") == null) {
+      accounts.create(new Admin("admin", "admin", "admin@gmail.com", "admin", "password"));
+    }
+>>>>>>> origin/KevinMariachiRequest
   }
 }

@@ -7,7 +7,7 @@ import edu.wpi.teamF.ModelClasses.Account.User;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
 import java.io.*;
 import java.nio.file.Path;
 import java.sql.SQLException;
@@ -16,10 +16,17 @@ import java.util.*;
 public class CSVManipulator {
   private NodeFactory nodeFactory = NodeFactory.getFactory();
   private EdgeFactory edgeFactory = EdgeFactory.getFactory();
+<<<<<<< HEAD
   private MaintenanceRequestFactory maintenanceRequestFactory = MaintenanceRequestFactory.getFactory();
   private SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
   private AccountFactory accountFactory = AccountFactory.getFactory();
 
+=======
+  private AccountFactory accountFactory = AccountFactory.getFactory();
+  private MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
+  private MaintenanceRequestFactory maintenanceRequestFactory =
+      MaintenanceRequestFactory.getFactory();
+>>>>>>> origin/KevinMariachiRequest
   /**
    * reads a csv file that contains nodes and inserts the data in the file into the correct place in
    * the database
@@ -256,8 +263,8 @@ public class CSVManipulator {
 
       int i = 7;
       while (i < (data.size() - 1)) {
-        securityRequestFactory.create(
-            new SecurityRequest(
+        mariachiRequestFactory.create(
+            new MariachiRequest(
                 data.get(i),
                 nodeFactory.read(data.get(i + 1)),
                 data.get(i + 2),
@@ -265,7 +272,7 @@ public class CSVManipulator {
                 new Date(Integer.parseInt(data.get(i + 4))),
                 Integer.parseInt(data.get(i + 5)),
                 Boolean.parseBoolean(data.get(i + 6)),
-                0));
+                ""));
 
         i = i + 7;
       }
@@ -282,14 +289,14 @@ public class CSVManipulator {
   /** Writes to the CSV file so that it can become persistant */
   public void writeCSVFileSecurityService(Path path) throws Exception {
     // writing to the file
-    List<SecurityRequest> securityRequests = securityRequestFactory.getAllSecurityRequest();
+    List<MariachiRequest> mariachiRequests = mariachiRequestFactory.getAllMariachiRequest();
 
     try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
       bw.write("id,location,assignee,description,dateTimeSubmitted,priority,complete");
 
-      for (SecurityRequest s : securityRequests) {
+      for (MariachiRequest s : mariachiRequests) {
         bw.newLine();
         bw.write((formatSecurityService(s)));
       }
@@ -298,8 +305,13 @@ public class CSVManipulator {
       System.out.println(e.getMessage() + "" + e.getClass());
     }
   }
+<<<<<<< HEAD
   //
   public String formatSecurityService(SecurityRequest m) {
+=======
+  // this transformeressss the secur bruh
+  public String formatSecurityService(MariachiRequest m) {
+>>>>>>> origin/KevinMariachiRequest
     String Main = "";
     Main =
         m.getId()

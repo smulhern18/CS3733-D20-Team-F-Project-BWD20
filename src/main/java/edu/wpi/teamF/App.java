@@ -67,8 +67,12 @@ public class App extends Application {
           return null;
         });
     sceneController = new SceneController(fxmlLoader, primaryStage, primaryScene);
+<<<<<<< HEAD
     Parent root = fxmlLoader.load(getClass().getResource("Views/LanguageServiceController2.fxml"));
 
+=======
+    Parent root = fxmlLoader.load(getClass().getResource("Views/MariachiRequest.fxml"));
+>>>>>>> origin/KevinMariachiRequest
     primaryScene.setRoot(root);
     primaryStage.setScene(primaryScene);
     primaryStage.setAlwaysOnTop(true);

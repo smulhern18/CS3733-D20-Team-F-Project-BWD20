@@ -2,7 +2,7 @@ package edu.wpi.teamF.ModelClasses.UIClasses;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -35,7 +35,7 @@ public class UIServiceRequest extends RecursiveTreeObject<UIServiceRequest> {
     if (serviceRequest instanceof MaintenanceRequest) {
       serviceType = new SimpleStringProperty("Maintenance");
     }
-    if (serviceRequest instanceof SecurityRequest) {
+    if (serviceRequest instanceof MariachiRequest) {
       serviceType = new SimpleStringProperty("Security");
     }
   }

@@ -5,9 +5,16 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import edu.wpi.teamF.DatabaseManipulators.CSVManipulator;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+<<<<<<< HEAD
+=======
+import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
+import edu.wpi.teamF.DatabaseManipulators.MaintenanceRequestFactory;
+import edu.wpi.teamF.DatabaseManipulators.MariachiRequestFactory;
+import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
+>>>>>>> origin/KevinMariachiRequest
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
 import edu.wpi.teamF.TestData;
 import java.io.File;
 import java.nio.file.Files;
@@ -23,12 +30,22 @@ public class TestCSV {
   static DatabaseManager databaseManager = DatabaseManager.getManager();
 
   static CSVManipulator csvManipulator = new CSVManipulator();
+<<<<<<< HEAD
+=======
+  static NodeFactory nodeFactory = NodeFactory.getFactory();
+  static TestData testData = null;
+  static EdgeFactory edgeFactory = EdgeFactory.getFactory();
+  static MaintenanceRequestFactory maintenanceRequestFactory =
+      MaintenanceRequestFactory.getFactory();
+  static MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
+  static AccountFactory accountFactory = AccountFactory.getFactory();
+>>>>>>> origin/KevinMariachiRequest
 
   TestData testData = null;
   Node[] validNodes = null;
   Edge[] validEdge = null;
   MaintenanceRequest[] validMaintenance = null;
-  SecurityRequest[] validSecurityRequest = null;
+  MariachiRequest[] validMariachiRequest = null;
   Account[] validAccounts = null;
   HashSet<String> validNeighbors1 = null;
 
@@ -40,7 +57,7 @@ public class TestCSV {
       validNodes = testData.validNodes;
       validEdge = testData.validEdges;
       validMaintenance = testData.validMaintenanceRequests;
-      validSecurityRequest = testData.validSecurityRequests;
+      validMariachiRequest = testData.validMariachiRequests;
       validAccounts = testData.validAccounts;
 
     } catch (Exception e) {
@@ -177,12 +194,21 @@ public class TestCSV {
     csvManipulator.readCSVFileSecurityService(
         getClass().getResourceAsStream("/edu/wpi/teamF/CSVSecurityTest.csv"));
 
+<<<<<<< HEAD
     List<SecurityRequest> list = databaseManager.getAllSecurityRequests();
     int j = 0;
     Assertions.assertTrue(list.get(0).equals(validSecurityRequest[1]));
     Assertions.assertTrue(list.get(1).equals(validSecurityRequest[0]));
     Assertions.assertTrue(list.get(2).equals(validSecurityRequest[2]));
     Assertions.assertTrue(list.get(3).equals(validSecurityRequest[3]));
+=======
+    List<MariachiRequest> list = mariachiRequestFactory.getAllMariachiRequest();
+    for (MariachiRequest n : list) {
+
+      assertTrue(n.equals(validMariachiRequest[i]));
+      i++;
+    }
+>>>>>>> origin/KevinMariachiRequest
 
     /** Valid data */
     File wfile = new File("src/test/java/edu/wpi/teamF/Test/");

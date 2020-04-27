@@ -6,7 +6,7 @@ import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.*;
 import edu.wpi.teamF.Main;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
@@ -48,7 +48,11 @@ public class ServiceRequestTest extends ApplicationTest {
   }
 
   @Test
+<<<<<<< HEAD
   void securityTest() throws Exception {
+=======
+  void mariachiTest() throws InstanceNotFoundException {
+>>>>>>> origin/KevinMariachiRequest
 
     clickOn("#choiceBoxLoc");
     clickOn("Intensive Care Unit");
@@ -61,7 +65,12 @@ public class ServiceRequestTest extends ApplicationTest {
     clickOn("Submit Request");
 
     // get access to all the security requests in the database
+<<<<<<< HEAD
     List<SecurityRequest> requests = db.getAllSecurityRequests();
+=======
+    MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
+    List<MariachiRequest> requests = mariachiRequestFactory.getAllMariachiRequest();
+>>>>>>> origin/KevinMariachiRequest
 
     // check that a security request with that information is in the database
     assertEquals(1, requests.size());

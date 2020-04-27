@@ -1,7 +1,14 @@
 package edu.wpi.teamF.ModelClasses;
 
 import edu.wpi.teamF.ModelClasses.Account.Account;
+<<<<<<< HEAD
 import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
+=======
+import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
+>>>>>>> origin/KevinMariachiRequest
 import java.util.Date;
 
 public class Validators {
@@ -123,13 +130,13 @@ public class Validators {
     }
   }
   /** Validation for Security */
-  public static void guardsRequestedValidation(int guardsRequested, int... constraints)
+  public static void songRequestValidation(String songRequest, int... constraints)
       throws ValidationException {
-    nullCheckValidation(guardsRequested, constraints);
+    nullCheckValidation(songRequest, constraints);
 
-    if (!(guardsRequested >= GUARDS_MIN_VALUE && guardsRequested <= GUARDS_MAX_VALUE)) {
+    if (songRequest.length() == 0) {
 
-      throw new ValidationException(" Guards requested outside of accepted values");
+      throw new ValidationException("Must enter a song request");
     }
   }
 
@@ -482,17 +489,17 @@ public class Validators {
    * @param constraints the optional constraints for validation
    * @throws ValidationException should the validation fail
    */
-  public static <T extends SecurityRequest> void securityRequestValidation(T t, int... constraints)
+  public static <T extends MariachiRequest> void mariachiRequestValidation(T t, int... constraints)
       throws ValidationException {
     nullCheckValidation(t, constraints);
-    SecurityRequest securityRequest = (SecurityRequest) t;
+    MariachiRequest mariachiRequest = (MariachiRequest) t;
 
-    idValidation(securityRequest.getId());
-    nodeValidation(securityRequest.getLocation());
-    descriptionValidation(securityRequest.getDescription());
-    dateValidation(securityRequest.getDateTimeSubmitted());
-    priorityValidation(securityRequest.getPriority());
-    guardsRequestedValidation(securityRequest.getGuardsRequested());
+    idValidation(mariachiRequest.getId());
+    nodeValidation(mariachiRequest.getLocation());
+    descriptionValidation(mariachiRequest.getDescription());
+    dateValidation(mariachiRequest.getDateTimeSubmitted());
+    priorityValidation(mariachiRequest.getPriority());
+    songRequestValidation(mariachiRequest.getSongRequest());
   }
 
   /**

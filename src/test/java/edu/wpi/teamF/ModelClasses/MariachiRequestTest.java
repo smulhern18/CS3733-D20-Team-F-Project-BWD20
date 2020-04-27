@@ -4,7 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+<<<<<<< HEAD:src/test/java/edu/wpi/teamF/ModelClasses/SecurityRequestTest.java
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+=======
+import edu.wpi.teamF.DatabaseManipulators.MariachiRequestFactory;
+import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
+>>>>>>> origin/KevinMariachiRequest:src/test/java/edu/wpi/teamF/ModelClasses/MariachiRequestTest.java
 import edu.wpi.teamF.TestData;
 import java.sql.SQLException;
 import java.util.List;
@@ -13,11 +19,18 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class SecurityRequestTest {
+public class MariachiRequestTest {
 
   static TestData testData = null;
+<<<<<<< HEAD:src/test/java/edu/wpi/teamF/ModelClasses/SecurityRequestTest.java
   static SecurityRequest[] validSecurityRequest = null;
   static DatabaseManager databaseManager = DatabaseManager.getManager();
+=======
+  static MariachiRequest[] validMariachiRequest = null;
+  MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
+  NodeFactory nodeFactory = NodeFactory.getFactory();
+  static DatabaseManager databaseManager = new DatabaseManager();
+>>>>>>> origin/KevinMariachiRequest:src/test/java/edu/wpi/teamF/ModelClasses/MariachiRequestTest.java
   static Node[] validNodes = null;
 
   @BeforeAll
@@ -28,7 +41,7 @@ public class SecurityRequestTest {
   @BeforeEach
   public void initialize() throws Exception {
     testData = new TestData();
-    validSecurityRequest = testData.validSecurityRequests;
+    validMariachiRequest = testData.validMariachiRequests;
     validNodes = testData.validNodes;
     databaseManager.reset();
   }
@@ -41,7 +54,11 @@ public class SecurityRequestTest {
   @Test
   public void testCreateReadDelete() throws Exception {
     try {
+<<<<<<< HEAD:src/test/java/edu/wpi/teamF/ModelClasses/SecurityRequestTest.java
       databaseManager.manipulateServiceRequest((SecurityRequest) null);
+=======
+      mariachiRequestFactory.create(null);
+>>>>>>> origin/KevinMariachiRequest:src/test/java/edu/wpi/teamF/ModelClasses/MariachiRequestTest.java
       fail("Creating a null value is unacceptable");
     } catch (NullPointerException e) {
       // ignore as expected
@@ -56,6 +73,7 @@ public class SecurityRequestTest {
 
     }
     try {
+<<<<<<< HEAD:src/test/java/edu/wpi/teamF/ModelClasses/SecurityRequestTest.java
       for (SecurityRequest securityRequest : validSecurityRequest) {
         databaseManager.manipulateServiceRequest(securityRequest);
 
@@ -66,6 +84,18 @@ public class SecurityRequestTest {
 
         try {
           readSecurity = databaseManager.readSecurityRequest(securityRequest.getId());
+=======
+      for (MariachiRequest mariachiRequest : validMariachiRequest) {
+        mariachiRequestFactory.create(mariachiRequest);
+
+        MariachiRequest readSecurity = mariachiRequestFactory.read(mariachiRequest.getId());
+        assertTrue(readSecurity.equals(mariachiRequest));
+
+        mariachiRequestFactory.delete(mariachiRequest.getId());
+
+        try {
+          readSecurity = mariachiRequestFactory.read(mariachiRequest.getId());
+>>>>>>> origin/KevinMariachiRequest:src/test/java/edu/wpi/teamF/ModelClasses/MariachiRequestTest.java
         } // catch (InstanceNotFoundException e) {
         // ignore
         // }
@@ -92,6 +122,7 @@ public class SecurityRequestTest {
     }
     try {
 
+<<<<<<< HEAD:src/test/java/edu/wpi/teamF/ModelClasses/SecurityRequestTest.java
       for (SecurityRequest securityRequest : validSecurityRequest) {
         databaseManager.manipulateServiceRequest(securityRequest);
 
@@ -99,10 +130,23 @@ public class SecurityRequestTest {
         databaseManager.manipulateServiceRequest(securityRequest);
 
         SecurityRequest readMain = databaseManager.readSecurityRequest(securityRequest.getId());
+=======
+      for (MariachiRequest mariachiRequest : validMariachiRequest) {
+        mariachiRequestFactory.create(mariachiRequest);
 
-        assertTrue(securityRequest.equals(readMain));
+        mariachiRequest.setDescription("Hello");
+        mariachiRequestFactory.update(mariachiRequest);
 
+        MariachiRequest readMain = mariachiRequestFactory.read(mariachiRequest.getId());
+>>>>>>> origin/KevinMariachiRequest:src/test/java/edu/wpi/teamF/ModelClasses/MariachiRequestTest.java
+
+        assertTrue(mariachiRequest.equals(readMain));
+
+<<<<<<< HEAD:src/test/java/edu/wpi/teamF/ModelClasses/SecurityRequestTest.java
         databaseManager.deleteSecurityRequest(securityRequest.getId());
+=======
+        mariachiRequestFactory.delete(mariachiRequest.getId());
+>>>>>>> origin/KevinMariachiRequest:src/test/java/edu/wpi/teamF/ModelClasses/MariachiRequestTest.java
       }
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
@@ -120,12 +164,13 @@ public class SecurityRequestTest {
     } catch (Exception e) {
 
     }
-    SecurityRequest main1 = validSecurityRequest[0];
-    SecurityRequest main2 = validSecurityRequest[1];
-    SecurityRequest main3 = validSecurityRequest[2];
-    SecurityRequest main4 = validSecurityRequest[3];
+    MariachiRequest main1 = validMariachiRequest[0];
+    MariachiRequest main2 = validMariachiRequest[1];
+    MariachiRequest main3 = validMariachiRequest[2];
+    MariachiRequest main4 = validMariachiRequest[3];
 
     try {
+<<<<<<< HEAD:src/test/java/edu/wpi/teamF/ModelClasses/SecurityRequestTest.java
       databaseManager.manipulateServiceRequest(main1);
       databaseManager.manipulateServiceRequest(main2);
       databaseManager.manipulateServiceRequest(main3);
@@ -133,21 +178,42 @@ public class SecurityRequestTest {
 
       List<SecurityRequest> securityAtBathroom =
           databaseManager.getSecurityRequestsByLocation(testData.validNodes[0]);
+=======
+      mariachiRequestFactory.create(main1);
+      mariachiRequestFactory.create(main2);
+      mariachiRequestFactory.create(main3);
+      mariachiRequestFactory.create(main4);
 
-      assertTrue(securityAtBathroom.contains(main1));
+      List<MariachiRequest> mariachiAtBathroom =
+          mariachiRequestFactory.getSecurityRequestsByLocation(testData.validNodes[0]);
+>>>>>>> origin/KevinMariachiRequest:src/test/java/edu/wpi/teamF/ModelClasses/MariachiRequestTest.java
 
-      assertTrue(securityAtBathroom.size() == 1);
+      assertTrue(mariachiAtBathroom.contains(main1));
 
+      assertTrue(mariachiAtBathroom.size() == 1);
+
+<<<<<<< HEAD:src/test/java/edu/wpi/teamF/ModelClasses/SecurityRequestTest.java
       List<SecurityRequest> securityAtnode2 =
           databaseManager.getSecurityRequestsByLocation(testData.validNodes[1]);
+=======
+      List<MariachiRequest> mariachiAtnode2 =
+          mariachiRequestFactory.getSecurityRequestsByLocation(testData.validNodes[1]);
+>>>>>>> origin/KevinMariachiRequest:src/test/java/edu/wpi/teamF/ModelClasses/MariachiRequestTest.java
 
-      assertTrue(securityAtnode2.contains(main2));
-      assertTrue(securityAtnode2.size() == 1);
+      assertTrue(mariachiAtnode2.contains(main2));
+      assertTrue(mariachiAtnode2.size() == 1);
 
+<<<<<<< HEAD:src/test/java/edu/wpi/teamF/ModelClasses/SecurityRequestTest.java
       databaseManager.deleteSecurityRequest(main1.getId());
       databaseManager.deleteSecurityRequest(main2.getId());
       databaseManager.deleteSecurityRequest(main3.getId());
       databaseManager.deleteSecurityRequest(main4.getId());
+=======
+      mariachiRequestFactory.delete(main1.getId());
+      mariachiRequestFactory.delete(main2.getId());
+      mariachiRequestFactory.delete(main3.getId());
+      mariachiRequestFactory.delete(main4.getId());
+>>>>>>> origin/KevinMariachiRequest:src/test/java/edu/wpi/teamF/ModelClasses/MariachiRequestTest.java
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
     }
@@ -164,12 +230,13 @@ public class SecurityRequestTest {
     } catch (Exception e) {
 
     }
-    SecurityRequest main1 = validSecurityRequest[0];
-    SecurityRequest main2 = validSecurityRequest[1];
-    SecurityRequest main3 = validSecurityRequest[2];
-    SecurityRequest main4 = validSecurityRequest[3];
+    MariachiRequest main1 = validMariachiRequest[0];
+    MariachiRequest main2 = validMariachiRequest[1];
+    MariachiRequest main3 = validMariachiRequest[2];
+    MariachiRequest main4 = validMariachiRequest[3];
 
     try {
+<<<<<<< HEAD:src/test/java/edu/wpi/teamF/ModelClasses/SecurityRequestTest.java
       databaseManager.manipulateServiceRequest(main1);
       databaseManager.manipulateServiceRequest(main2);
       databaseManager.manipulateServiceRequest(main3);
@@ -182,6 +249,20 @@ public class SecurityRequestTest {
       assertTrue(securityAll.contains(main3));
       assertTrue(securityAll.contains(main4));
       assertTrue(securityAll.size() == 4);
+=======
+      mariachiRequestFactory.create(main1);
+      mariachiRequestFactory.create(main2);
+      mariachiRequestFactory.create(main3);
+      mariachiRequestFactory.create(main4);
+
+      List<MariachiRequest> mariachiAll = mariachiRequestFactory.getAllMariachiRequest();
+
+      assertTrue(mariachiAll.contains(main1));
+      assertTrue(mariachiAll.contains(main2));
+      assertTrue(mariachiAll.contains(main3));
+      assertTrue(mariachiAll.contains(main4));
+      assertTrue(mariachiAll.size() == 4);
+>>>>>>> origin/KevinMariachiRequest:src/test/java/edu/wpi/teamF/ModelClasses/MariachiRequestTest.java
 
       databaseManager.deleteSecurityRequest(main1.getId());
       databaseManager.deleteSecurityRequest(main2.getId());

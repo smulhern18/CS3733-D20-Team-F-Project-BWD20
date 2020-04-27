@@ -5,11 +5,11 @@ import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
 import java.util.Date;
 
-public class SecurityRequest extends ServiceRequest {
+public class MariachiRequest extends ServiceRequest {
 
-  int guardsRequested;
+  String songRequest;
 
-  public SecurityRequest(
+  public MariachiRequest(
       String id,
       Node location,
       String assignee,
@@ -17,30 +17,30 @@ public class SecurityRequest extends ServiceRequest {
       Date dateTimeSubmitted,
       int priority,
       boolean complete,
-      int guardsRequested)
+      String songRequest)
       throws ValidationException {
     super(id, location, assignee, description, dateTimeSubmitted, priority, complete);
-    setGuardsRequested(guardsRequested);
+    setSongRequest(songRequest);
   }
 
-  public SecurityRequest(
+  public MariachiRequest(
       Node location,
       String assignee,
       String description,
       Date dateTimeSubmitted,
       int priority,
-      int guardsRequested)
+      String songRequest)
       throws ValidationException {
     super(location, assignee, description, dateTimeSubmitted, priority);
-    setGuardsRequested(guardsRequested);
+    setSongRequest(songRequest);
   }
 
-  private void setGuardsRequested(int guardsRequested) throws ValidationException {
-    Validators.guardsRequestedValidation(guardsRequested);
-    this.guardsRequested = guardsRequested;
+  private void setSongRequest(String songRequest) throws ValidationException {
+    Validators.songRequestValidation(songRequest);
+    this.songRequest = songRequest;
   }
 
-  public int getGuardsRequested() {
-    return guardsRequested;
+  public String getSongRequest() {
+    return songRequest;
   }
 }

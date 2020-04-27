@@ -3,11 +3,11 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
+import edu.wpi.teamF.DatabaseManipulators.MariachiRequestFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
-import edu.wpi.teamF.DatabaseManipulators.SecurityRequestFactory;
 import edu.wpi.teamF.ModelClasses.Node;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
-import edu.wpi.teamF.ModelClasses.UIClasses.UISecurityRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
+import edu.wpi.teamF.ModelClasses.UIClasses.UIMariachiRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.net.URL;
 import java.util.Date;
@@ -24,13 +24,13 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javax.management.InstanceNotFoundException;
 
-public class SecurityRequestController implements Initializable {
+public class MariachiRequestController implements Initializable {
   public GridPane optionBar;
   public AnchorPane mainMenu;
   public Label locationLabel;
-  public Label guardsRequestedLabel;
+  public Label songRequestLabel;
   public Label priorityLabel;
-  public Label securityRequestLabel;
+  public Label mariachiRequestLabel;
   public JFXButton requestServiceButton;
   public JFXButton checkStatusButton;
   public JFXButton submitButton;
@@ -41,15 +41,15 @@ public class SecurityRequestController implements Initializable {
   public GridPane deletePane;
   public JFXComboBox<String> locationComboBox;
   public JFXComboBox<String> priorityComboBox;
-  public JFXComboBox<String> guardsRequestedComboBox;
-  public JFXTreeTableView<UISecurityRequest> table;
+  public JFXTextField songRequestEntry;
+  public JFXTreeTableView<UIMariachiRequest> table;
   public GridPane servicePane;
   public AnchorPane checkStatusPane;
   public AnchorPane anchorPane;
   NodeFactory nodeFactory = NodeFactory.getFactory();
-  SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
-  List<SecurityRequest> securityRequestList = securityRequestFactory.getAllSecurityRequest();
-  ObservableList<UISecurityRequest> uiSecurityRequests = FXCollections.observableArrayList();
+  MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
+  List<MariachiRequest> mariachiRequestList = mariachiRequestFactory.getAllMariachiRequest();
+  ObservableList<UIMariachiRequest> uiMariachiRequests = FXCollections.observableArrayList();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -59,38 +59,38 @@ public class SecurityRequestController implements Initializable {
     UISetting uiSetting = new UISetting();
     uiSetting.setAsLocationComboBox(locationComboBox);
     priorityComboBox.setItems(FXCollections.observableArrayList("Low", "Medium", "High"));
-    guardsRequestedComboBox.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5"));
+    // guardsRequestedComboBox.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5"));
 
-    JFXTreeTableColumn<UISecurityRequest, String> ID = new JFXTreeTableColumn<>("ID");
+    JFXTreeTableColumn<UIMariachiRequest, String> ID = new JFXTreeTableColumn<>("ID");
     ID.setPrefWidth(100);
     ID.setCellValueFactory(param -> param.getValue().getValue().getID());
-    JFXTreeTableColumn<UISecurityRequest, String> loc = new JFXTreeTableColumn<>("Location");
+    JFXTreeTableColumn<UIMariachiRequest, String> loc = new JFXTreeTableColumn<>("Location");
     loc.setPrefWidth(100);
     loc.setCellValueFactory(param -> param.getValue().getValue().getLocation());
-    JFXTreeTableColumn<UISecurityRequest, String> priority = new JFXTreeTableColumn<>("Priority");
+    JFXTreeTableColumn<UIMariachiRequest, String> priority = new JFXTreeTableColumn<>("Priority");
     priority.setPrefWidth(100);
     priority.setCellValueFactory(param -> param.getValue().getValue().getPriority());
 
-    JFXTreeTableColumn<UISecurityRequest, String> date = new JFXTreeTableColumn<>("Date");
+    JFXTreeTableColumn<UIMariachiRequest, String> date = new JFXTreeTableColumn<>("Date");
     date.setPrefWidth(100);
     date.setCellValueFactory(param -> param.getValue().getValue().getDateSubmitted());
-    JFXTreeTableColumn<UISecurityRequest, String> guardsRequested =
-        new JFXTreeTableColumn<>("Guards Requested");
+    JFXTreeTableColumn<UIMariachiRequest, String> guardsRequested =
+        new JFXTreeTableColumn<>("Song Request");
     guardsRequested.setPrefWidth(100);
-    guardsRequested.setCellValueFactory(param -> param.getValue().getValue().getGuardsRequested());
-    JFXTreeTableColumn<UISecurityRequest, String> assignee = new JFXTreeTableColumn<>("Assignee");
+    guardsRequested.setCellValueFactory(param -> param.getValue().getValue().getSongRequest());
+    JFXTreeTableColumn<UIMariachiRequest, String> assignee = new JFXTreeTableColumn<>("Assignee");
     assignee.setPrefWidth(100);
     assignee.setCellValueFactory(param -> param.getValue().getValue().getAssignee());
-    JFXTreeTableColumn<UISecurityRequest, String> completed =
+    JFXTreeTableColumn<UIMariachiRequest, String> completed =
         new JFXTreeTableColumn<>("Compeleted");
     completed.setPrefWidth(100);
     completed.setCellValueFactory(param -> param.getValue().getValue().getCompleted());
 
-    for (SecurityRequest sr : securityRequestList) {
-      uiSecurityRequests.add(new UISecurityRequest(sr));
+    for (MariachiRequest sr : mariachiRequestList) {
+      uiMariachiRequests.add(new UIMariachiRequest(sr));
     }
-    final TreeItem<UISecurityRequest> root =
-        new RecursiveTreeItem<>(uiSecurityRequests, RecursiveTreeObject::getChildren);
+    final TreeItem<UIMariachiRequest> root =
+        new RecursiveTreeItem<>(uiMariachiRequests, RecursiveTreeObject::getChildren);
 
     table.getColumns().setAll(ID, date, loc, priority, guardsRequested, assignee, completed);
 
@@ -118,8 +118,8 @@ public class SecurityRequestController implements Initializable {
     locationLabel.setFont(newFont);
     priorityLabel.setFont(newFont);
 
-    guardsRequestedLabel.setFont(newFont);
-    securityRequestLabel.setFont(new Font(width / 20));
+    songRequestLabel.setFont(newFont);
+    mariachiRequestLabel.setFont(new Font(width / 20));
     submitButton.setFont(newFont);
     cancelButton.setFont(newFont);
     // deleteButton.setFont(new Font(width / 50));
@@ -142,26 +142,14 @@ public class SecurityRequestController implements Initializable {
     } else if (priorityString.equals("High")) {
       priority = 3;
     }
-    String guardsRequestedString = guardsRequestedComboBox.getValue();
-    int guardsRequested = 0;
-    if (guardsRequestedString.equals("1")) {
-      guardsRequested = 1;
-    } else if (guardsRequestedString.equals("2")) {
-      guardsRequested = 2;
-    } else if (guardsRequestedString.equals("3")) {
-      guardsRequested = 3;
-    } else if (guardsRequestedString.equals("4")) {
-      guardsRequested = 4;
-    } else if (guardsRequestedString.equals("5")) {
-      guardsRequested = 5;
-    }
 
+    String songRequestString = songRequestEntry.getText();
     Date date = new Date(System.currentTimeMillis());
-    SecurityRequest securityRequest =
-        new SecurityRequest(
-            node, "Not Assigned", "No Description", date, priority, guardsRequested);
-    securityRequestFactory.create(securityRequest);
-    uiSecurityRequests.add(new UISecurityRequest(securityRequest));
+    MariachiRequest mariachiRequest =
+        new MariachiRequest(
+            node, "Not Assigned", "No Description", date, priority, songRequestString);
+    mariachiRequestFactory.create(mariachiRequest);
+    uiMariachiRequests.add(new UIMariachiRequest(mariachiRequest));
     table.refresh();
     resetRequest();
   }
@@ -169,7 +157,7 @@ public class SecurityRequestController implements Initializable {
   private void resetRequest() {
     locationComboBox.setValue(null);
     priorityComboBox.setValue(null);
-    guardsRequestedComboBox.setValue(null);
+    songRequestEntry.clear();
   }
 
   public void cancel(ActionEvent actionEvent) {
@@ -182,8 +170,8 @@ public class SecurityRequestController implements Initializable {
   }
 
   public void update(ActionEvent actionEvent) throws ValidationException {
-    for (UISecurityRequest uiSR : uiSecurityRequests) {
-      SecurityRequest toUpdate = securityRequestFactory.read(uiSR.getID().get());
+    for (UIMariachiRequest uiSR : uiMariachiRequests) {
+      MariachiRequest toUpdate = mariachiRequestFactory.read(uiSR.getID().get());
       if (!uiSR.equalsCSR(toUpdate)) {
         toUpdate.setAssignee(uiSR.getAssignee().get());
         String completed = uiSR.getCompleted().get();
@@ -192,7 +180,7 @@ public class SecurityRequestController implements Initializable {
         } else if (completed.equals("Complete")) {
           toUpdate.setComplete(true);
         }
-        securityRequestFactory.update(toUpdate);
+        mariachiRequestFactory.update(toUpdate);
       }
     }
     table.refresh();
@@ -200,8 +188,8 @@ public class SecurityRequestController implements Initializable {
 
   public void delete(ActionEvent actionEvent) {
     String toDelete = deleteText.getText();
-    securityRequestFactory.delete(toDelete);
-    uiSecurityRequests.removeIf(securityRequest -> securityRequest.getID().get().equals(toDelete));
+    mariachiRequestFactory.delete(toDelete);
+    uiMariachiRequests.removeIf(mariachiRequest -> mariachiRequest.getID().get().equals(toDelete));
   }
 
   public void checkStatus(ActionEvent actionEvent) {

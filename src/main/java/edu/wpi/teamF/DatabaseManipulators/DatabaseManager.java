@@ -7,7 +7,6 @@ import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
 
 import java.io.InputStream;
@@ -62,8 +61,8 @@ public class DatabaseManager {
   // Maintainence Request
   static final String MAINTENCE_REQUEST_ID_KEY = "serviceId";
 
-  // Security Request
-  static final String GUARDS_REQUESTED_KEY = "guardsRequested";
+  // Mariachi Request
+  static final String SONG_REQUEST_KEY = "songRequest";
 
   // account
   static final String USER_NAME_KEY = "userName";
@@ -94,7 +93,6 @@ public class DatabaseManager {
   private EdgeFactory edgeFactory = EdgeFactory.getFactory();
   private AccountFactory accountFactory = AccountFactory.getFactory();
   private ServiceRequestFactory serviceRequestFactory = ServiceRequestFactory.getFactory();
-  private SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
   private MaintenanceRequestFactory maintenanceRequestFactory =
       MaintenanceRequestFactory.getFactory();
   private ComputerServiceRequestFactory computerServiceRequestFactory =
@@ -188,7 +186,7 @@ public class DatabaseManager {
             + " ( "
             + SERVICEID_KEY
             + " VARCHAR(32) NOT NULL, "
-            + GUARDS_REQUESTED_KEY
+            + SONG_REQUEST_KEY
             + " VARCHAR(32) NOT NULL, "
             + "PRIMARY KEY ("
             + SERVICEID_KEY
@@ -255,9 +253,9 @@ public class DatabaseManager {
             + SERVICEID_KEY
             + " VARCHAR(32) NOT NULL, "
             + MEDICINE_TYPE_KEY
-            + "VARCHAR(64) NOT NULL, "
+            + " VARCHAR(64) NOT NULL, "
             + INSTRUCTIONS_KEY
-            + "VARCHAR(64) NOT NULL, "
+            + " VARCHAR(64) NOT NULL, "
             + "PRIMARY KEY ("
             + SERVICEID_KEY
             + "))";
@@ -386,6 +384,8 @@ public class DatabaseManager {
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(languageDropStatement);
     preparedStatement.execute();
+    // preparedStatement = connection.prepareStatement(computerDropStatement);
+    // preparedStatement.execute();
     preparedStatement = connection.prepareStatement(securityTableDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(medicineDeliveryTableDropStatement);
