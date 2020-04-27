@@ -25,7 +25,7 @@ public class Main {
     dbm.initialize();
     AccountFactory accounts = AccountFactory.getFactory();
     csvm.readCSVFileNode(Main.class.getResourceAsStream("CSVFiles/TeamFAllNodes2.csv"));
-    csvm.readCSVFileEdge(Main.class.getResourceAsStream("CSVFiles/MapFAlledges.csv"));
+    csvm.readCSVFileEdge(Main.class.getResourceAsStream("CSVFiles/TeamFAllEdges.csv"));
     if (accounts.read("admin") == null) {
       accounts.create(new Admin("admin", "admin", "admin@gmail.com", "admin", "password"));
     }

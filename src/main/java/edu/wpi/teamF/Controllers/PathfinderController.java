@@ -465,8 +465,8 @@ public class PathfinderController implements Initializable {
         actionEvent -> {
           startCombo.setDisable(true);
           endCombo.setDisable(true);
-          startNode = findComboStart();
-          endNode = findComboEnd();
+          //          startNode = findComboStart();
+          //          endNode = findComboEnd();
           System.out.println(startNode);
           System.out.println(endNode);
           Path path = null;
