@@ -7,6 +7,8 @@ import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.LanguageServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ValidationException;
+
 import java.util.Date;
 
 public class TestData {
@@ -236,6 +238,7 @@ public class TestData {
         2,
         true),
   };
+
   public MaintenanceRequest[] validMaintenanceRequests = {
     new MaintenanceRequest(
         validIDs[0],
@@ -273,14 +276,24 @@ public class TestData {
 
   public LanguageServiceRequest[] validLanguageServiceRequests = {
           new LanguageServiceRequest(
-                  validIDs[0],
                   validNodes[0],
-                  validAssignees[0],
                   validDescriptions[0],
+                  validAssignees[0],
                   validDates[0],
+                  1,
                   "Spanish",
                   "Require Interpreter"),
+          new LanguageServiceRequest(
+                  validNodes[1],
+                  validDescriptions[1],
+                  validAssignees[1],
+                  validDates[1],
+                  1,
+                  "Sign Language",
+                  "Require Interpreter"),
+
   };
+
 
   public TestData() throws Exception {}
 }

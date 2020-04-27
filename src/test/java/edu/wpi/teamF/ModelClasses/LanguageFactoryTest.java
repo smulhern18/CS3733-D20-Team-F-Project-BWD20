@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import edu.wpi.teamF.DatabaseManipulators.LanguageServiceRequestFactory;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.LanguageServiceRequest;
 import edu.wpi.teamF.TestData;
 import java.sql.SQLException;
 import java.util.List;
@@ -14,11 +14,11 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class anguageFactoryTest {
+public class LanguageFactoryTest {
 
     static TestData testData = null;
-    static ComputerServiceRequest[] validLanguageServiceRequest = null;
-    LanguageServiceRequestFactory computerServiceRequestFactory =
+    static LanguageServiceRequest[] validLanguageServiceRequest = null;
+    LanguageServiceRequestFactory languageServiceRequestFactory =
             LanguageServiceRequestFactory.getFactory();
     NodeFactory nodeFactory = NodeFactory.getFactory();
     static DatabaseManager databaseManager = new DatabaseManager();
@@ -41,7 +41,7 @@ public class anguageFactoryTest {
     @Test
     public void testCreateReadDelete() {
         try {
-            computerServiceRequestFactory.create(null);
+            languageServiceRequestFactory.create(null);
             fail("Creating a null value is unacceptable");
         } catch (ValidationException e) {
             // ignore as expected
@@ -56,17 +56,17 @@ public class anguageFactoryTest {
 
         }
         try {
-            for (ComputerServiceRequest computerServiceRequest : validLanguageServiceRequest) {
-                computerServiceRequestFactory.create(computerServiceRequest);
+            for (LanguageServiceRequest languageServiceRequest : validLanguageServiceRequest) {
+                languageServiceRequestFactory.create(languageServiceRequest);
 
-                ComputerServiceRequest readComputer =
-                        computerServiceRequestFactory.read(computerServiceRequest.getId());
-                assertTrue(readComputer.equals(computerServiceRequest));
+                LanguageServiceRequest readLanguage =
+                        languageServiceRequestFactory.read(languageServiceRequest.getId());
+                assertTrue(readLanguage.equals(languageServiceRequest));
 
-                computerServiceRequestFactory.delete(computerServiceRequest.getId());
+                languageServiceRequestFactory.delete(languageServiceRequest.getId());
 
                 try {
-                    readComputer = computerServiceRequestFactory.read(computerServiceRequest.getId());
+                    readLanguage = languageServiceRequestFactory.read(languageServiceRequest.getId());
                 } // catch (InstanceNotFoundException e) {
                 // ignore
                 // }
@@ -93,18 +93,18 @@ public class anguageFactoryTest {
         }
         try {
 
-            for (ComputerServiceRequest computerServiceRequest : validLanguageServiceRequest) {
-                computerServiceRequestFactory.create(computerServiceRequest);
+            for (LanguageServiceRequest languageServiceRequest : validLanguageServiceRequest) {
+                languageServiceRequestFactory.create(languageServiceRequest);
 
-                computerServiceRequest.setDescription("Hello");
-                computerServiceRequestFactory.update(computerServiceRequest);
+                languageServiceRequest.setDescription("Hello");
+                languageServiceRequestFactory.update(languageServiceRequest);
 
-                ComputerServiceRequest readComp =
-                        computerServiceRequestFactory.read(computerServiceRequest.getId());
+                LanguageServiceRequest readLanguage =
+                        languageServiceRequestFactory.read(languageServiceRequest.getId());
 
-                assertTrue(computerServiceRequest.equals(readComp));
+                assertTrue(languageServiceRequest.equals(readLanguage));
 
-                computerServiceRequestFactory.delete(computerServiceRequest.getId());
+                languageServiceRequestFactory.delete(languageServiceRequest.getId());
             }
         } catch (Exception e) {
             fail(e.getMessage() + ", " + e.getClass());
@@ -122,36 +122,36 @@ public class anguageFactoryTest {
         } catch (Exception e) {
 
         }
-        ComputerServiceRequest main1 = validLanguageServiceRequest[0];
-        ComputerServiceRequest main2 = validLanguageServiceRequest[1];
-        ComputerServiceRequest main3 = validLanguageServiceRequest[2];
-        ComputerServiceRequest main4 = validLanguageServiceRequest[3];
+        LanguageServiceRequest main1 = validLanguageServiceRequest[0];
+        LanguageServiceRequest main2 = validLanguageServiceRequest[1];
+        LanguageServiceRequest main3 = validLanguageServiceRequest[2];
+        LanguageServiceRequest main4 = validLanguageServiceRequest[3];
 
         NodeFactory nodeFactory = NodeFactory.getFactory();
 
         try {
-            computerServiceRequestFactory.create(main1);
-            computerServiceRequestFactory.create(main2);
-            computerServiceRequestFactory.create(main3);
-            computerServiceRequestFactory.create(main4);
+            languageServiceRequestFactory.create(main1);
+            languageServiceRequestFactory.create(main2);
+            languageServiceRequestFactory.create(main3);
+            languageServiceRequestFactory.create(main4);
 
-            List<ComputerServiceRequest> computerAtBathroom =
-                    computerServiceRequestFactory.getComputerRequestsByLocation(testData.validNodes[0]);
+            List<LanguageServiceRequest> languageAtBathroom =
+                    languageServiceRequestFactory.getLanguageRequestsByLocation(testData.validNodes[0]);
 
-            assertTrue(computerAtBathroom.contains(main1));
+            assertTrue(languageAtBathroom.contains(main1));
 
-            assertTrue(computerAtBathroom.size() == 1);
+            assertTrue(languageAtBathroom.size() == 1);
 
-            List<ComputerServiceRequest> computerAtnode2 =
-                    computerServiceRequestFactory.getComputerRequestsByLocation(testData.validNodes[1]);
+            List<LanguageServiceRequest> languageAtnode2 =
+                    languageServiceRequestFactory.getLanguageRequestsByLocation(testData.validNodes[1]);
 
-            assertTrue(computerAtnode2.contains(main2));
-            assertTrue(computerAtnode2.size() == 1);
+            assertTrue(languageAtnode2.contains(main2));
+            assertTrue(languageAtnode2.size() == 1);
 
-            computerServiceRequestFactory.delete(main1.getId());
-            computerServiceRequestFactory.delete(main2.getId());
-            computerServiceRequestFactory.delete(main3.getId());
-            computerServiceRequestFactory.delete(main4.getId());
+            languageServiceRequestFactory.delete(main1.getId());
+            languageServiceRequestFactory.delete(main2.getId());
+            languageServiceRequestFactory.delete(main3.getId());
+            languageServiceRequestFactory.delete(main4.getId());
         } catch (Exception e) {
             fail(e.getMessage() + ", " + e.getClass());
         }
@@ -168,29 +168,29 @@ public class anguageFactoryTest {
         } catch (Exception e) {
 
         }
-        ComputerServiceRequest main1 = validLanguageServiceRequest[0];
-        ComputerServiceRequest main2 = validLanguageServiceRequest[1];
-        ComputerServiceRequest main3 = validLanguageServiceRequest[2];
-        ComputerServiceRequest main4 = validLanguageServiceRequest[3];
+        LanguageServiceRequest main1 = validLanguageServiceRequest[0];
+        LanguageServiceRequest main2 = validLanguageServiceRequest[1];
+        LanguageServiceRequest main3 = validLanguageServiceRequest[2];
+        LanguageServiceRequest main4 = validLanguageServiceRequest[3];
 
         try {
-            computerServiceRequestFactory.create(main1);
-            computerServiceRequestFactory.create(main2);
-            computerServiceRequestFactory.create(main3);
-            computerServiceRequestFactory.create(main4);
-            List<ComputerServiceRequest> computerAll =
-                    computerServiceRequestFactory.getAllComputerRequests();
+            languageServiceRequestFactory.create(main1);
+            languageServiceRequestFactory.create(main2);
+            languageServiceRequestFactory.create(main3);
+            languageServiceRequestFactory.create(main4);
+            List<LanguageServiceRequest> languageAll =
+                    languageServiceRequestFactory.getAllLanguageRequests();
 
-            assertTrue(computerAll.contains(main1));
-            assertTrue(computerAll.contains(main2));
-            assertTrue(computerAll.contains(main3));
-            assertTrue(computerAll.contains(main4));
-            assertTrue(computerAll.size() == 4);
+            assertTrue(languageAll.contains(main1));
+            assertTrue(languageAll.contains(main2));
+            assertTrue(languageAll.contains(main3));
+            assertTrue(languageAll.contains(main4));
+            assertTrue(languageAll.size() == 4);
 
-            computerServiceRequestFactory.delete(main1.getId());
-            computerServiceRequestFactory.delete(main2.getId());
-            computerServiceRequestFactory.delete(main3.getId());
-            computerServiceRequestFactory.delete(main4.getId());
+            languageServiceRequestFactory.delete(main1.getId());
+            languageServiceRequestFactory.delete(main2.getId());
+            languageServiceRequestFactory.delete(main3.getId());
+            languageServiceRequestFactory.delete(main4.getId());
         } catch (Exception e) {
             fail(e.getMessage() + ", " + e.getClass());
         }
