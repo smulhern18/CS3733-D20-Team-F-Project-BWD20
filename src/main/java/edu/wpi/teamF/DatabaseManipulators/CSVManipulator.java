@@ -10,10 +10,16 @@ import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
 import java.io.*;
 import java.nio.file.Path;
+import java.sql.SQLException;
 import java.util.*;
 
 public class CSVManipulator {
-  private DatabaseManager databaseManager = DatabaseManager.getManager();
+  private NodeFactory nodeFactory = NodeFactory.getFactory();
+  private EdgeFactory edgeFactory = EdgeFactory.getFactory();
+  private MaintenanceRequestFactory maintenanceRequestFactory = MaintenanceRequestFactory.getFactory();
+  private SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
+  private AccountFactory accountFactory = AccountFactory.getFactory();
+
   /**
    * reads a csv file that contains nodes and inserts the data in the file into the correct place in
    * the database
@@ -41,7 +47,13 @@ public class CSVManipulator {
                 Node.NodeType.getEnum(data.get(i + 5)), // nodetype
                 Short.parseShort(data.get(i + 3))); // floor
         System.out.println("Created Node on line " + i / 9 + ", " + node.getId());
-        databaseManager.manipulateNode(node);
+        try {
+          nodeFactory.create(node);
+        } catch (SQLException e) {
+          // ignore
+        } catch (Exception e) {
+          System.out.println(e.getMessage() + ", " + e.getClass());
+        }
         i = i + 9;
       }
 
@@ -60,7 +72,7 @@ public class CSVManipulator {
   /** Writes to the CSV file so that it can become persistant */
   public void writeCSVFileNode(Path path) throws Exception {
     // writing to the file
-    List<Node> nodes = databaseManager.getAllNodes();
+    List<Node> nodes = nodeFactory.getAllNodes();
     try (FileWriter fw = new FileWriter(path.toString() + "/NodesBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
@@ -114,15 +126,13 @@ public class CSVManipulator {
 
       int i = 3;
       while (i < (data.size() - 1)) {
-        databaseManager.manipulateEdge(new Edge(data.get(i), data.get(i + 1), data.get(i + 2)));
+        edgeFactory.create(new Edge(data.get(i), data.get(i + 1), data.get(i + 2)));
         i = i + 3;
       }
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File Not found!");
-    } catch (EOFException e) {
-      // Expected use to end read csv
-    } catch (IOException e) {
-
+    } catch (SQLException e) {
+      // ignore
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
@@ -130,7 +140,7 @@ public class CSVManipulator {
   /** Writes to the CSV file so that it can become persistant */
   public void writeCSVFileEdge(Path path) throws Exception {
     // writing to the file
-    List<Edge> Edges = databaseManager.getAllEdges();
+    List<Edge> Edges = edgeFactory.getAllEdges();
 
     // csvString = csvString + formatNode(n);
 
@@ -171,10 +181,10 @@ public class CSVManipulator {
 
       int i = 7;
       while (i < (data.size() - 1)) {
-        databaseManager.manipulateServiceRequest(
+        maintenanceRequestFactory.create(
             new MaintenanceRequest(
                 data.get(i),
-                databaseManager.readNode(data.get(i + 1)),
+                nodeFactory.read(data.get(i + 1)),
                 data.get(i + 2),
                 data.get(i + 3),
                 new Date(Integer.parseInt(data.get(i + 4))),
@@ -196,7 +206,7 @@ public class CSVManipulator {
   /** Writes to the CSV file so that it can become persistant */
   public void writeCSVFileMaintenanceService(Path path) throws Exception {
     // writing to the file
-    List<MaintenanceRequest> maintenanceRequests = databaseManager.getAllMaintenanceRequests();
+    List<MaintenanceRequest> maintenanceRequests = maintenanceRequestFactory.getAllMaintenanceRequests();
 
     try (FileWriter fw = new FileWriter(path.toString() + "/MaintenanceBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
@@ -244,10 +254,10 @@ public class CSVManipulator {
 
       int i = 7;
       while (i < (data.size() - 1)) {
-        databaseManager.manipulateServiceRequest(
+        securityRequestFactory.create(
             new SecurityRequest(
                 data.get(i),
-                databaseManager.readNode(data.get(i + 1)),
+                nodeFactory.read(data.get(i + 1)),
                 data.get(i + 2),
                 data.get(i + 3),
                 new Date(Integer.parseInt(data.get(i + 4))),
@@ -269,7 +279,7 @@ public class CSVManipulator {
   /** Writes to the CSV file so that it can become persistant */
   public void writeCSVFileSecurityService(Path path) throws Exception {
     // writing to the file
-    List<SecurityRequest> securityRequests = databaseManager.getAllSecurityRequests();
+    List<SecurityRequest> securityRequests = securityRequestFactory.getAllSecurityRequests();
 
     try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {

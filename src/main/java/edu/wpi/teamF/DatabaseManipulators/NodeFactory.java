@@ -29,7 +29,7 @@ public class NodeFactory {
    *
    * @param node the node to add
    */
-  public void create(Node node) throws ValidationException {
+  public void create(Node node) throws Exception {
     String insertStatement =
         "INSERT INTO "
             + DatabaseManager.NODES_TABLE_NAME
@@ -72,10 +72,10 @@ public class NodeFactory {
           edgeFactory.create(e);
         }
       } catch (SQLException e) {
-        System.out.println(e.getMessage());
+        throw e;
       }
     } catch (SQLException e) {
-      System.out.println(e.getMessage());
+      throw e;
     }
   }
 
