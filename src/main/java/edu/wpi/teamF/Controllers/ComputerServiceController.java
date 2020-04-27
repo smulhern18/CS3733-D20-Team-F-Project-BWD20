@@ -3,6 +3,7 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.App;
+import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.ComputerServiceRequestFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Node;
@@ -70,6 +71,9 @@ public class ComputerServiceController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+
+    UISetting uiSetting = new UISetting();
+    uiSetting.setAsLocationComboBox(locationChoice);
 
     anchorPane
         .widthProperty()
@@ -261,7 +265,7 @@ public class ComputerServiceController implements Initializable {
 
   public void submit(ActionEvent actionEvent)
       throws ValidationException, InstanceNotFoundException {
-    // Get the values
+    // Get the valuesgit s
     String location = locationChoice.getValue();
     Node node = nodeFactory.read(location);
     String make = makeChoice.getValue();
