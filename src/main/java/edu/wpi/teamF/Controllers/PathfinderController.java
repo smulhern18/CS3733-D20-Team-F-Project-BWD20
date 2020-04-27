@@ -425,27 +425,27 @@ public class PathfinderController implements Initializable {
 
   public void setComboBehavior() {
     startCombo.setOnAction(
-            actionEvent -> {
-              if (startCombo.getValue() != null) {
-                comboSelectStart();
-                state = 1;
-                commandText.setText("Select End Location or Building Feature");
-                endCombo.setDisable(false);
-                if (findComboStart().getFloor() != currentFloor) {
-                  switchToFloor(findComboStart().getFloor());
-                }
-              }
-            });
+        actionEvent -> {
+          if (startCombo.getValue() != null) {
+            comboSelectStart();
+            state = 1;
+            commandText.setText("Select End Location or Building Feature");
+            endCombo.setDisable(false);
+            if (findComboStart().getFloor() != currentFloor) {
+              switchToFloor(findComboStart().getFloor());
+            }
+          }
+        });
 
     endCombo.setOnAction(
-            actionEvent -> {
-              if (endCombo.getValue() != null) {
-                comboSelectEnd();
-                state = 2;
-                commandText.setText("Select Find Path or Reset");
-                pathButton.setDisable(false);
-              }
-            });
+        actionEvent -> {
+          if (endCombo.getValue() != null) {
+            comboSelectEnd();
+            state = 2;
+            commandText.setText("Select Find Path or Reset");
+            pathButton.setDisable(false);
+          }
+        });
   }
 
   public void pathButtonGo() {
@@ -590,6 +590,4 @@ public class PathfinderController implements Initializable {
       startCombo.setValue(startNode.getLongName());
     }
   }
-
-
 }

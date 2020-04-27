@@ -54,33 +54,35 @@ public class Directions {
               getAngle(pathNodeList.get(i - 1), pathNodeList.get(i), pathNodeList.get(i + 1));
           directionList.add(new GoalDirection(goalTurnAngle, pathNodeList.get(i).getFloor()));
           break;
-        }
-
-        else if (pathNodeList.get(i + 1).getType().equals(Node.NodeType.getEnum("ELEV"))) {
+        } else if (pathNodeList.get(i + 1).getType().equals(Node.NodeType.getEnum("ELEV"))) {
           // Next node is an elevator
           if (currHall.getDistance() > 0) {
             directionList.add(currHall);
           }
-          float exitAngle = getAngle(pathNodeList.get(i+2), pathNodeList.get(i+3), pathNodeList.get(i+4));
+          float exitAngle =
+              getAngle(pathNodeList.get(i + 2), pathNodeList.get(i + 3), pathNodeList.get(i + 4));
           directionList.add(
-                  new ElevatorDirection(pathNodeList.get(i+1).getFloor(), pathNodeList.get(i+2).getFloor(), exitAngle));
-          //Create a new hallway node where the elevator finishes
-          currHall = new StraightDirection(0, 0, pathNodeList.get(i+2).getFloor());
-        }
-
-        else if (pathNodeList.get(i + 1).getType().equals(Node.NodeType.getEnum("STAI"))) {
+              new ElevatorDirection(
+                  pathNodeList.get(i + 1).getFloor(),
+                  pathNodeList.get(i + 2).getFloor(),
+                  exitAngle));
+          // Create a new hallway node where the elevator finishes
+          currHall = new StraightDirection(0, 0, pathNodeList.get(i + 2).getFloor());
+        } else if (pathNodeList.get(i + 1).getType().equals(Node.NodeType.getEnum("STAI"))) {
           // Next node is a stairwell
           if (currHall.getDistance() > 0) {
             directionList.add(currHall);
           }
-          float exitAngle = getAngle(pathNodeList.get(i+2), pathNodeList.get(i+3), pathNodeList.get(i+4));
+          float exitAngle =
+              getAngle(pathNodeList.get(i + 2), pathNodeList.get(i + 3), pathNodeList.get(i + 4));
           directionList.add(
-                  new StairsDirection(pathNodeList.get(i+1).getFloor(), pathNodeList.get(i+2).getFloor(), exitAngle));
-          //Create a new hallway node where the elevator finishes
-          currHall = new StraightDirection(0, 0, pathNodeList.get(i+2).getFloor());
-        }
-
-        else { // Can now investigate this hall node as a part of the continuing route
+              new StairsDirection(
+                  pathNodeList.get(i + 1).getFloor(),
+                  pathNodeList.get(i + 2).getFloor(),
+                  exitAngle));
+          // Create a new hallway node where the elevator finishes
+          currHall = new StraightDirection(0, 0, pathNodeList.get(i + 2).getFloor());
+        } else { // Can now investigate this hall node as a part of the continuing route
           // If the current hall node is an intersection, could be a turn or a continue straight
           // past intersection
           // First, calculate how many neighboring nodes are hallways
