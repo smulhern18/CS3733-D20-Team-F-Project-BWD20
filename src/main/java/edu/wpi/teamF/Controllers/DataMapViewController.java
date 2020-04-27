@@ -87,6 +87,10 @@ public class DataMapViewController implements Initializable {
   double deltaX = 0;
   double deltaY = 0;
 
+  int tracker;
+  int instance;
+  int newInstance;
+
   UISetting uiSetting = new UISetting();
 
   private static final int MAP_HEIGHT = 1485;
@@ -337,6 +341,9 @@ public class DataMapViewController implements Initializable {
   @FXML
   private void addNode() throws Exception {
 
+    tracker = 0;
+    instance = 0;
+    newInstance = 0;
 
     try { // is the input valid?
       short xCoordinate = Short.parseShort(xCoorInput.getText());
@@ -346,6 +353,28 @@ public class DataMapViewController implements Initializable {
       String shortName = shortNameInput.getText();
       Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getValue().toString());
       short floorNumber = Short.parseShort(floorInput.getText());
+
+      //      List<Node> typeNodes = nodeFactory.getNodesByType(nodeType);
+      //
+      //
+      //      if(typeNodes.size() > 0){
+      //        for(int i = 0; i < typeNodes.size(); i ++){
+      //          instance = Integer.parseInt(typeNodes.get(i).getId().substring(6, 8));
+      //          if(instance-tracker > 1){
+      //            newInstance = tracker + 1;
+      //          } else{
+      //            tracker = instance;
+      //          }
+      //        }
+      //      } else {
+      //        newInstance = 1;
+      //      }
+      //
+      //      String strInstance = "" + newInstance;
+      //      strInstance = String.format("%03d", strInstance);
+      //      String strFloor = String.format("%02d", floorInput.getText());
+      //
+      //      String ID = typeInput.getValue() + strInstance + strFloor;
 
       Node newNode =
           new Node(
