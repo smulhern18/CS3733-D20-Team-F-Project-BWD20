@@ -2,7 +2,6 @@ package edu.wpi.teamF.ModelClasses;
 
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
-
 import java.util.Date;
 
 public class Validators {
@@ -111,11 +110,13 @@ public class Validators {
     }
   }
 
-    public static void sanitationTypeValidation(String sanitationType, int... constraints) throws ValidationException {
-      nullCheckValidation(sanitationType, constraints);
-      if (sanitationType.length() < SANITATION_TYPE_MIN_LENGTH || sanitationType.length() > SANITATION_TYPE_MAX_LENGTH) {
-        throw new ValidationException("Invalid sanitation type length");
-      }
+  public static void sanitationTypeValidation(String sanitationType, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(sanitationType, constraints);
+    if (sanitationType.length() < SANITATION_TYPE_MIN_LENGTH
+        || sanitationType.length() > SANITATION_TYPE_MAX_LENGTH) {
+      throw new ValidationException("Invalid sanitation type length");
+    }
   }
 
   /**
@@ -385,7 +386,7 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static <T extends SanitationServiceRequest> void sanitationServiceValidation(
-          T t, int... constraints) throws ValidationException {
+      T t, int... constraints) throws ValidationException {
     nullCheckValidation(t, constraints);
     SanitationServiceRequest sanitationServiceRequestObject = (SanitationServiceRequest) t;
 
