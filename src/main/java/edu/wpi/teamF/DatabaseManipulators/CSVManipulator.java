@@ -85,7 +85,6 @@ public class CSVManipulator {
       bw.close();
     } catch (IOException e) {
       System.out.println(e.getMessage() + "" + e.getClass());
-      // exception handling left as an exercise for the reader
     }
   }
 
@@ -156,7 +155,6 @@ public class CSVManipulator {
       bw.close();
     } catch (IOException e) {
       System.out.println(e.getMessage() + "" + e.getClass());
-      // exception handling left as an exercise for the reader
     }
   }
 
@@ -211,7 +209,7 @@ public class CSVManipulator {
     try (FileWriter fw = new FileWriter(path.toString() + "/MaintenanceBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
-      bw.write("id,location,description,dateTimeSubmitted,priority");
+      bw.write("id,location,assignee,description,dateTimeSubmitted,priority,complete");
 
       for (MaintenanceRequest m : maintenanceRequests) {
         bw.newLine();
@@ -231,11 +229,15 @@ public class CSVManipulator {
             + ","
             + m.getLocation().getId()
             + ","
+            + m.getAssignee()
+            + ","
             + m.getDescription()
             + ","
             + m.getDateTimeSubmitted().getTime()
             + ","
-            + m.getPriority();
+            + m.getPriority()
+            + ","
+            + m.getComplete();
     return Main;
   }
   /**
@@ -284,7 +286,7 @@ public class CSVManipulator {
     try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
-      bw.write("id,location,description,dateTimeSubmitted,priority");
+      bw.write("id,location,assignee,description,dateTimeSubmitted,priority,complete");
 
       for (SecurityRequest s : securityRequests) {
         bw.newLine();
@@ -293,10 +295,9 @@ public class CSVManipulator {
       bw.close();
     } catch (IOException e) {
       System.out.println(e.getMessage() + "" + e.getClass());
-      // exception handling left as an exercise for the reader
     }
   }
-  // this transformeressss the secur bruh
+  //
   public String formatSecurityService(SecurityRequest m) {
     String Main = "";
     Main =
@@ -304,11 +305,15 @@ public class CSVManipulator {
             + ","
             + m.getLocation().getId()
             + ","
+            + m.getAssignee()
+            + ","
             + m.getDescription()
             + ","
             + m.getDateTimeSubmitted().getTime()
             + ","
-            + m.getPriority();
+            + m.getPriority()
+            + ","
+            + m.getComplete();
     return Main;
   }
   /**
@@ -394,7 +399,6 @@ public class CSVManipulator {
       bw.close();
     } catch (IOException e) {
       System.out.println(e.getMessage() + "" + e.getClass());
-      // exception handling left as an exercise for the reader
     }
   }
 

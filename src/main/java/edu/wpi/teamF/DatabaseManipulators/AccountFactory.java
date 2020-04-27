@@ -115,6 +115,19 @@ public class AccountFactory {
                   resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
                   resultSet.getString(DatabaseManager.USER_NAME_KEY),
                   resultSet.getString(DatabaseManager.PASSWORD_KEY));
+<<<<<<< HEAD
+=======
+          break;
+        case (5):
+          account =
+              new Nurse(
+                  resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                  resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                  resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                  resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                  resultSet.getString(DatabaseManager.PASSWORD_KEY));
+
+>>>>>>> d8950984fe17a3c57d65d8ebf54c9f120dec161a
           break;
         default:
           throw new ValidationException("Illegal Type of Account: " + type.getTypeOrdinal());
@@ -269,6 +282,19 @@ public class AccountFactory {
                     resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
                     resultSet.getString(DatabaseManager.USER_NAME_KEY),
                     resultSet.getString(DatabaseManager.PASSWORD_KEY));
+<<<<<<< HEAD
+=======
+            break;
+          case (5):
+            account =
+                new Nurse(
+                    resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                    resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                    resultSet.getString(DatabaseManager.PASSWORD_KEY));
+
+>>>>>>> d8950984fe17a3c57d65d8ebf54c9f120dec161a
             break;
           default:
             throw new ValidationException("Illegal Type of Account: " + type.getTypeOrdinal());

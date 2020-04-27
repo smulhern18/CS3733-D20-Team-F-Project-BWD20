@@ -30,6 +30,7 @@ public class DatabaseManager {
   static final String ACCOUNT_TABLE_NAME = "accountsTable";
   static final String APPOINTMENTS_TABLE_NAME = "appointmentsTable";
   static final String COMPUTER_REQUEST_TABLE_NAME = "ComputerRequestsTable";
+  static final String TRANSPORT_REQUEST_TABLE_NAME = "TransportRequestsTable";
   /** Column Names */
   // node
   static final String X_COORDINATE_KEY = "xCoord";
@@ -78,6 +79,9 @@ public class DatabaseManager {
   static final String OS_ID_KEY = "OperatingSystem";
   static final String MAKE_KEY = "Make";
   static final String HARDWARESOFTWARE_KEY = "HardwareOrSoftware";
+  // Transport requests
+  static final String TRANSPORT_TYPE_KEY = "type";
+  static final String DESTINATION_KEY = "destination";
 
   // Factories
   private NodeFactory nodeFactory = NodeFactory.getFactory();
@@ -198,6 +202,21 @@ public class DatabaseManager {
             + SERVICEID_KEY
             + "))";
 
+    String transportTableCreationStatement =
+            "CREATE TABLE "
+                    + TRANSPORT_REQUEST_TABLE_NAME
+                    + " ( "
+                    + SERVICEID_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + TRANSPORT_TYPE_KEY
+                    +" VARCHAR(32) NOT NULL, "
+                    + DESTINATION_KEY
+                    +" VARCHAR(32) NOT NULL, "
+                    + "PRIMARY KEY ("
+                    + SERVICEID_KEY
+                    + "))";
+
+
     String accountTableCreationStatement =
         "CREATE TABLE "
             + ACCOUNT_TABLE_NAME
@@ -252,6 +271,8 @@ public class DatabaseManager {
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(appointmentTableCreationStatement);
     preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(transportTableCreationStatement);
+    preparedStatement.execute();
     System.out.println("Created Tables Successfully");
   }
 
@@ -285,6 +306,7 @@ public class DatabaseManager {
     String accountDropStatement = "DROP TABLE " + ACCOUNT_TABLE_NAME;
     String appointmentDropStatement = "DROP TABLE " + APPOINTMENTS_TABLE_NAME;
     String computerDropStatement = "DROP TABLE " + COMPUTER_REQUEST_TABLE_NAME;
+    String transportDropStatement = "DROP TABLE " + TRANSPORT_REQUEST_TABLE_NAME;
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeDropStatement);
     preparedStatement.execute();
@@ -301,6 +323,8 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(accountDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(appointmentDropStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(transportDropStatement);
     preparedStatement.execute();
     createTables();
   }
