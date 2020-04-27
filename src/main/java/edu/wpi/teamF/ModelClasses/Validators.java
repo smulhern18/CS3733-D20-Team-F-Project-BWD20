@@ -2,10 +2,6 @@ package edu.wpi.teamF.ModelClasses;
 
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/TylerSanitationServiceRequest
 import java.util.Date;
 
 public class Validators {
@@ -46,15 +42,16 @@ public class Validators {
   public static final int HARDWARESOFTWARE_MAX_LENGTH = 32;
   public static final int OS_MIN_LENGTH = 1;
   public static final int OS_MAX_LENGTH = 8;
-<<<<<<< HEAD
   public static final int TRANSPORT_TYPE_MIN_LENGTH = 1;
   public static final int TRANSPORT_TYPE_MAX_LENGTH = 32;
+  public static final int PROBLEMTYPE_MIN_LENGTH = 1;
+  public static final int PROBLEMTYPE_MAX_LENGTH = 32;
+  public static final int LANGUAGE_MIN_LENGTH = 1;
+  public static final int LANGUAGE_MAX_LENGTH = 32;
   private static final int GUARDS_MIN_VALUE = 1;
   private static final int GUARDS_MAX_VALUE = 10;
-=======
   public static final int SANITATION_TYPE_MIN_LENGTH = 1;
   public static final int SANITATION_TYPE_MAX_LENGTH = 32;
->>>>>>> origin/TylerSanitationServiceRequest
 
   public static <T extends ServiceRequest> void serviceRequestValidation(T t, int... constraints)
       throws ValidationException {
@@ -353,8 +350,8 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static void PCPValidation(String PCP, int... constraints) throws ValidationException {
-    nullCheckValidation(PCP, constraints);
-    if (PCP.length() < PCP_MIN_LENGTH || PCP.length() > PCP_MAX_LENGTH) {
+    nullCheckValidation(PCP, constraints);`
+    if (PCP.length() < PCP_MIN_LENGTH || PCP.length() > PCP_MAX_LENGTH) {`
       throw new ValidationException("PCP is outside the accepted values");
     }
   }
@@ -401,18 +398,24 @@ public class Validators {
   }
 
   /**
-   * Validation for Maintenance Requests
+   * Validation for Language Requests
    *
-   * @param t an instance of Maintenance Request to validate
+   * @param t an instance of Language Request to validate
    * @param constraints the optional constraints for validation
    * @throws ValidationException should the validation fail
    */
-  public static <T extends SanitationServiceRequest> void sanitationServiceValidation(
+  public static <T extends LanguageServiceRequest> void languageServiceValidation(
       T t, int... constraints) throws ValidationException {
     nullCheckValidation(t, constraints);
-    SanitationServiceRequest sanitationServiceRequestObject = (SanitationServiceRequest) t;
+    LanguageServiceRequest languageRequestObject = (LanguageServiceRequest) t;
 
-    sanitationTypeValidation(sanitationServiceRequestObject.getType());
+    idValidation(languageRequestObject.getId());
+    nodeValidation(languageRequestObject.getLocation());
+    descriptionValidation(languageRequestObject.getDescription());
+    dateValidation(languageRequestObject.getDateTimeSubmitted());
+    priorityValidation(languageRequestObject.getPriority());
+    makeValidation(languageRequestObject.getLanguage());
+    hardwareSoftwareValidation(languageRequestObject.getProblemType());
   }
 
   /**

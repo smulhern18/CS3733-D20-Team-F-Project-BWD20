@@ -5,8 +5,11 @@ import edu.wpi.teamF.ModelClasses.Appointment;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.LanguageServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ValidationException;
+
 import java.util.Date;
 
 public class TestData {
@@ -210,7 +213,8 @@ public class TestData {
         validDescriptions[0],
         validDates[0],
         2,
-        false),
+        false,
+        1),
     new SecurityRequest(
         validIDs[1],
         validNodes[1],
@@ -218,7 +222,8 @@ public class TestData {
         validDescriptions[1],
         validDates[1],
         2,
-        true),
+        true,
+          2),
     new SecurityRequest(
         validIDs[2],
         validNodes[2],
@@ -226,7 +231,8 @@ public class TestData {
         validDescriptions[2],
         validDates[2],
         2,
-        false),
+        false,
+            3),
     new SecurityRequest(
         validIDs[3],
         validNodes[3],
@@ -234,8 +240,10 @@ public class TestData {
         validDescriptions[3],
         validDates[3],
         2,
-        true),
+        true,
+            10),
   };
+
   public MaintenanceRequest[] validMaintenanceRequests = {
     new MaintenanceRequest(
         validIDs[0],
@@ -320,6 +328,27 @@ public class TestData {
         validHardwareSoftware[3],
         validOS[3]),
   };
+
+  public LanguageServiceRequest[] validLanguageServiceRequests = {
+          new LanguageServiceRequest(
+                  validNodes[0],
+                  validDescriptions[0],
+                  validAssignees[0],
+                  validDates[0],
+                  1,
+                  "Spanish",
+                  "Require Interpreter"),
+          new LanguageServiceRequest(
+                  validNodes[1],
+                  validDescriptions[1],
+                  validAssignees[1],
+                  validDates[1],
+                  1,
+                  "Sign Language",
+                  "Require Interpreter"),
+
+  };
+
 
   public TestData() throws Exception {}
 }

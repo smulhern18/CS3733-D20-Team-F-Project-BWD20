@@ -33,6 +33,7 @@ public class DatabaseManager {
   static final String COMPUTER_REQUEST_TABLE_NAME = "ComputerRequestsTable";
   static final String TRANSPORT_REQUEST_TABLE_NAME = "TransportRequestsTable";
   static final String SANITATION_REQUEST_TABLE_NAME = "SanitationRequestsTable";
+  static final String LANGUAGE_REQUEST_TABLE_NAME = "LanguageRequestsTable";
   /** Column Names */
   // node
   static final String X_COORDINATE_KEY = "xCoord";
@@ -82,6 +83,7 @@ public class DatabaseManager {
   static final String OS_ID_KEY = "OperatingSystem";
   static final String MAKE_KEY = "Make";
   static final String HARDWARESOFTWARE_KEY = "HardwareOrSoftware";
+
   // Transport requests
   static final String TRANSPORT_TYPE_KEY = "type";
   static final String DESTINATION_KEY = "destination";
@@ -100,6 +102,10 @@ public class DatabaseManager {
 
   // SanitationService requests
   static final String SANITATION_TYPE_KEY = "SanitationType";
+
+  // Language service requests
+  static final String LANGUAGE_KEY = "Language";
+  static final String PROBLEMTYPE_KEY = "ProblemType";
 
   static Connection connection = null;
 
@@ -224,6 +230,19 @@ public class DatabaseManager {
                     + SERVICEID_KEY
                     + "))";
 
+    String languageTableCreationStatement =
+        "CREATE TABLE "
+            + LANGUAGE_REQUEST_TABLE_NAME
+            + " ( "
+            + SERVICEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + LANGUAGE_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + PROBLEMTYPE_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + "PRIMARY KEY ("
+            + SERVICEID_KEY
+            + "))";
 
     String accountTableCreationStatement =
         "CREATE TABLE "
@@ -287,6 +306,8 @@ public class DatabaseManager {
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(computerTableCreationStatement);
     preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(languageTableCreationStatement);
+    preparedStatement.execute();
     preparedStatement = connection.prepareStatement(accountTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(appointmentTableCreationStatement);
@@ -329,6 +350,7 @@ public class DatabaseManager {
     String computerDropStatement = "DROP TABLE " + COMPUTER_REQUEST_TABLE_NAME;
     String transportDropStatement = "DROP TABLE " + TRANSPORT_REQUEST_TABLE_NAME;
     String sanitationDropStatement = "DROP TABLE " + SANITATION_REQUEST_TABLE_NAME;
+    String languageDropStatement = "DROP TABLE " + LANGUAGE_REQUEST_TABLE_NAME;
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeDropStatement);
     preparedStatement.execute();
@@ -339,6 +361,8 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(maintenanceTableDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(computerDropStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(languageDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(securityTableDropStatement);
     preparedStatement.execute();
