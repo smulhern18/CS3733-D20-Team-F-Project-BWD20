@@ -20,7 +20,9 @@ public class LocationComboBox {
     comboBox.setEditable(true);
     ObservableList<String> locations = FXCollections.observableArrayList();
     for (Node node : nodeFactory.getAllNodes()) {
-      locations.add(node.getLongName() + " " + node.getId());
+      if (!node.getType().equals(Node.NodeType.getEnum("HALL"))) {
+        locations.add(node.getLongName() + " " + node.getId());
+      }
     }
     FilteredList<String> filteredLocations = new FilteredList<String>(locations, p -> true);
 
