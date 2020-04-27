@@ -45,7 +45,6 @@ public class SecurityRequestController implements Initializable {
   public JFXTreeTableView<UISecurityRequest> table;
   public GridPane servicePane;
   public AnchorPane checkStatusPane;
-
   public AnchorPane anchorPane;
   NodeFactory nodeFactory = NodeFactory.getFactory();
   SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
@@ -118,6 +117,7 @@ public class SecurityRequestController implements Initializable {
     Font newFont = new Font(width / 50);
     locationLabel.setFont(newFont);
     priorityLabel.setFont(newFont);
+
     guardsRequestedLabel.setFont(newFont);
     securityRequestLabel.setFont(new Font(width / 20));
     submitButton.setFont(newFont);
