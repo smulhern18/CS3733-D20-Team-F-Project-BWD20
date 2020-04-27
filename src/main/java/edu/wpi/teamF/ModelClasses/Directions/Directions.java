@@ -10,11 +10,15 @@ public class Directions {
   private List<Direction> directionList = new ArrayList<>();
   private EuclideanScorer scorer = new EuclideanScorer();
   private final Map<String, Node> nodeMap = new HashMap<>();
+  private Node startNode;
+  private Node endNode;
 
   public Directions(List<Node> fullNodeList, Path path, Node startNode, Node endNode) {
     for (Node node : fullNodeList) {
       nodeMap.put(node.getId(), node);
     }
+    this.startNode = startNode;
+    this.endNode = endNode;
 
     List<Node> pathNodeList = path.getPath();
 
@@ -163,5 +167,35 @@ public class Directions {
       returnString = returnString + direction.getDirectionText() + "\n";
     }
     return returnString;
+  }
+
+  public String getFullDirectionsStringForFloor(int floor) {
+    String returnString = "";
+    for (Direction direction : directionList) {
+      if (direction.getFloor() == floor) {
+        returnString = returnString + direction.getDirectionText() + "\n";
+      }
+    }
+    return returnString;
+  }
+
+  public String getKeyDirectionForFloor(int floor) {
+    String returnString = "";
+    for (Direction direction : directionList) {
+      if (direction.getFloor() == floor) {
+        if (direction instanceof GoalDirection){
+          return ("Directions to: " + endNode.getLongName() + ".");
+        }
+        else if (direction instanceof ElevatorDirection){
+          return ("Take the elevator from floor " + Integer.toString(startNode.getFloor()) + " to floor " + Integer.toString(endNode.getFloor()) + ".");
+        }
+        else if (direction instanceof StairsDirection){
+          return ("Take the stairs from floor " + Integer.toString(startNode.getFloor()) + " to floor " + Integer.toString(endNode.getFloor()) + ".");
+        }
+        else {
+          return "";
+        }
+      }
+    }
   }
 }
