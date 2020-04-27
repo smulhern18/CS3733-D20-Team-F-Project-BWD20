@@ -62,7 +62,7 @@ public class App extends Application {
         });
     sceneController = new SceneController(fxmlLoader, primaryStage, primaryScene);
 
-    Parent root = fxmlLoader.load(getClass().getResource("Views/MainMenu.fxml"));
+    Parent root = fxmlLoader.load(getClass().getResource("Views/Pathfinder.fxml"));
 
     primaryScene.setRoot(root);
     primaryStage.setScene(primaryScene);
