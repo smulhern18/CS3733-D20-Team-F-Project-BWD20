@@ -42,6 +42,7 @@ public class FlowerRequestInfoController {
     public JFXTreeTableView<UiFlowerServiceRequest> treeTableComputer;
     public GridPane servicePane;
     public Label locationLabel;
+    public Label flowerRequestLabel;
     public JFXComboBox<String> locationChoice;
     public JFXButton submitButton;
     public JFXButton cancelButton;
@@ -366,7 +367,8 @@ public class FlowerRequestInfoController {
         messageLabel.setFont(newFont);
         buyerNameLabel.setFont(newFont);
         prioLabel.setFont(newFont);
-        flowerLabel.setFont(new Font(width / 20));
+        phoneNumberLabel.setFont(newFont);
+        flowerRequestLabel.setFont(new Font(width / 20));
         submitButton.setFont(newFont);
         cancelButton.setFont(newFont);
         // deleteButton.setFont(new Font(width / 50));
