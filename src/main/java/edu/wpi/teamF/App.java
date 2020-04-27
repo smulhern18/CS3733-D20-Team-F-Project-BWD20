@@ -28,6 +28,7 @@ public class App extends Application {
   private RegisterController registerController = new RegisterController();
   private ServiceRequestController serviceRequestController = new ServiceRequestController();
   private AccountsController accountsController = new AccountsController();
+  private ComputerServiceController computerController = new ComputerServiceController();
 
   @Override
   public void init() {}
@@ -57,6 +58,8 @@ public class App extends Application {
             return serviceRequestController;
           } else if (controllerClass.equals(AccountsController.class)) {
             return accountsController;
+          } else if (controllerClass.equals(ComputerServiceController.class)) {
+            return computerController;
           }
           return null;
         });

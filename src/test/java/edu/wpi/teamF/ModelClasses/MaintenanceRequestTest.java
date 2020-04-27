@@ -186,10 +186,10 @@ public class MaintenanceRequestTest {
       assertTrue(maintenanceAll.contains(main4));
       assertTrue(maintenanceAll.size() == 4);
 
-      nodeFactory.delete(main1.getId());
-      nodeFactory.delete(main2.getId());
-      nodeFactory.delete(main3.getId());
-      nodeFactory.delete(main4.getId());
+      maintenanceRequestFactory.delete(main1.getId());
+      maintenanceRequestFactory.delete(main2.getId());
+      maintenanceRequestFactory.delete(main3.getId());
+      maintenanceRequestFactory.delete(main4.getId());
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
     }

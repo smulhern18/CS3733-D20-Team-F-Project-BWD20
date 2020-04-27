@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="417.0" prefWidth="864.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.RegisterController">
+<AnchorPane prefHeight="412.0" prefWidth="864.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.RegisterController">
     <children>
       <fx:include source="MenuBar.fxml" />
       <Label contentDisplay="CENTER" layoutX="485.0" layoutY="31.0" prefHeight="83.0" prefWidth="120.0" text="Register" textAlignment="CENTER">
@@ -17,7 +17,7 @@
       </Label>
       <JFXTextField fx:id="firstnameInput" layoutX="370.0" layoutY="148.0" onKeyReleased="#enableRegister" />
       <JFXTextField fx:id="lastNameInput" layoutX="370.0" layoutY="198.0" onKeyReleased="#enableRegister" />
-      <JFXTextField fx:id="emailInput" layoutX="369.0" layoutY="251.0" onKeyReleased="#enableRegister" />
+      <JFXTextField fx:id="emailInput" layoutX="370.0" layoutY="251.0" onKeyReleased="#enableRegister" />
       <JFXTextField fx:id="usernameInput" layoutX="666.0" layoutY="147.0" onKeyReleased="#enableRegister" />
       <Label layoutX="254.0" layoutY="154.0" prefHeight="31.0" prefWidth="102.0" text="First Name">
          <font>
@@ -54,7 +54,7 @@
             <Font name="STIXGeneral-Bold" size="18.0" />
          </font>
       </JFXButton>
-      <Label fx:id="incorrectLabel" layoutX="470.0" layoutY="100.0" prefHeight="28.0" prefWidth="162.0" text="Invalid input for Account.">
+      <Label fx:id="incorrectLabel" layoutX="470.0" layoutY="99.0" prefHeight="28.0" prefWidth="162.0" text="Invalid input for Account.">
          <font>
             <Font name="STIXGeneral-Regular" size="14.0" />
          </font></Label>

@@ -9,42 +9,39 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="415.0" prefWidth="768.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.LoginController">
+<AnchorPane fx:id="anchorPane" prefHeight="415.0" prefWidth="679.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.LoginController">
    <children>
       <fx:include source="MenuBar.fxml" />
-      <Circle fill="WHITE" layoutX="486.0" layoutY="63.0" radius="34.0" stroke="BLACK" strokeType="INSIDE" />
-      <JFXTextField fx:id="usernameInput" layoutX="322.0" layoutY="143.0" onKeyReleased="#enableLogin" prefHeight="27.0" prefWidth="327.0" promptText="Username...">
-         <font>
-            <Font name="STIXGeneral-Regular" size="13.0" />
-         </font></JFXTextField>
-      <Label fx:id="loginText" layoutX="464.0" layoutY="97.0" text="Login">
+      <Circle fill="WHITE" layoutX="436.0" layoutY="68.0" radius="37.0" stroke="BLACK" strokeType="INSIDE" />
+      <JFXTextField fx:id="usernameInput" layoutX="266.0" layoutY="152.0" onKeyReleased="#enableLogin" prefHeight="27.0" prefWidth="327.0" promptText="Username..." />
+      <Label fx:id="loginText" layoutX="410.0" layoutY="105.0" text="Login">
          <font>
             <Font name="STIXGeneral-Regular" size="20.0" />
          </font>
       </Label>
-      <JFXButton fx:id="loginButton" disable="true" layoutX="323.0" layoutY="252.0" onAction="#attemptLogin" prefHeight="27.0" prefWidth="326.0" style="-fx-background-color: #EB3E79#EB3E79;" text="Login">
+      <JFXButton fx:id="loginButton" disable="true" layoutX="267.0" layoutY="261.0" onAction="#attemptLogin" prefHeight="27.0" prefWidth="326.0" style="-fx-background-color: #EB3E79#EB3E79;" text="Login">
          <font>
             <Font name="STIXGeneral-Regular" size="13.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="326.0" layoutY="347.0" onAction="#switchToRegister" prefHeight="27.0" prefWidth="326.0" style="-fx-background-color: grey;" text="Register">
+      <JFXButton fx:id="registerButton" layoutX="267.0" layoutY="356.0" onAction="#switchToRegister" prefHeight="27.0" prefWidth="326.0" style="-fx-background-color: grey;" text="Register">
          <font>
             <Font name="STIXGeneral-Regular" size="13.0" />
          </font>
       </JFXButton>
-      <Line endX="226.0" layoutX="425.0" layoutY="319.0" startX="-100.0" />
-      <Label layoutX="483.0" layoutY="320.0" text="or">
+      <Line endX="218.0" layoutX="374.0" layoutY="327.0" startX="-100.0" />
+      <Label fx:id="orText" layoutX="428.0" layoutY="328.0" text="or">
          <font>
             <Font name="STIXGeneral-Regular" size="13.0" />
          </font>
       </Label>
-      <Label layoutX="556.0" layoutY="283.0" text="Forgot Password?">
+      <Label fx:id="forgotText" layoutX="500.0" layoutY="292.0" text="Forgot Password?">
          <font>
             <Font name="STIXGeneral-Regular" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="incorrectLabel" layoutX="384.0" layoutY="126.0" text="The username or password is incorrect" textFill="RED" visible="false" />
-      <JFXPasswordField fx:id="passwordInput" layoutX="322.0" layoutY="194.0" onKeyReleased="#enableLogin" prefHeight="27.0" prefWidth="327.0" promptText="Password...">
+      <Label fx:id="incorrectLabel" layoutX="334.0" layoutY="136.0" text="The username or password is incorrect" textFill="RED" visible="false" />
+      <JFXPasswordField fx:id="passwordInput" layoutX="265.0" layoutY="193.0" onKeyReleased="#enableLogin" prefHeight="27.0" prefWidth="327.0" promptText="Password...">
          <font>
             <Font name="STIXGeneral-Regular" size="13.0" />
          </font></JFXPasswordField>
