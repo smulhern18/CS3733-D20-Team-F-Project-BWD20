@@ -62,21 +62,22 @@ public class MedicineDeliveryController implements Initializable {
 
   ObservableList<UIMedicineDeliveryRequest> mdrUI = FXCollections.observableArrayList();
   NodeFactory nodeFactory = NodeFactory.getFactory();
-  MedicineDeliveryRequestFactory medicineDeliveryRequest = MedicineDeliveryRequestFactory.getFactory();
+  MedicineDeliveryRequestFactory medicineDeliveryRequest =
+      MedicineDeliveryRequestFactory.getFactory();
   List<MedicineDeliveryRequest> medicineDeliveryRequests =
-          medicineDeliveryRequest.getAllMedicineDeliveryRequests();
+      medicineDeliveryRequest.getAllMedicineDeliveryRequests();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
     anchorPane
-            .widthProperty()
-            .addListener(
-                    (observable, oldWidth, newWidth) -> {
-                      if (newWidth.doubleValue() != oldWidth.doubleValue()) {
-                        resize(newWidth.doubleValue());
-                      }
-                    });
+        .widthProperty()
+        .addListener(
+            (observable, oldWidth, newWidth) -> {
+              if (newWidth.doubleValue() != oldWidth.doubleValue()) {
+                resize(newWidth.doubleValue());
+              }
+            });
 
     // add the different choices to the choicebox
     // Replace this with long names, linked to IDs
@@ -93,114 +94,115 @@ public class MedicineDeliveryController implements Initializable {
     JFXTreeTableColumn<UIMedicineDeliveryRequest, String> ID = new JFXTreeTableColumn<>("ID");
     ID.setPrefWidth(100);
     ID.setCellValueFactory(
-            new Callback<
-                    TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String>,
-                    ObservableValue<String>>() {
-              @Override
-              public ObservableValue<String> call(
-                      TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String> param) {
-                return param.getValue().getValue().getID();
-              }
-            });
+        new Callback<
+            TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String>,
+            ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String> param) {
+            return param.getValue().getValue().getID();
+          }
+        });
 
     // Location column
-    JFXTreeTableColumn<UIMedicineDeliveryRequest, String> loc = new JFXTreeTableColumn<>("Location");
+    JFXTreeTableColumn<UIMedicineDeliveryRequest, String> loc =
+        new JFXTreeTableColumn<>("Location");
     loc.setPrefWidth(100);
     loc.setCellValueFactory(
-            new Callback<
-                    TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String>,
-                    ObservableValue<String>>() {
-              @Override
-              public ObservableValue<String> call(
-                      TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String> param) {
-                return param.getValue().getValue().getLocation();
-              }
-            });
+        new Callback<
+            TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String>,
+            ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String> param) {
+            return param.getValue().getValue().getLocation();
+          }
+        });
 
     JFXTreeTableColumn<UIMedicineDeliveryRequest, String> medicine =
-            new JFXTreeTableColumn<>("Medicine");
+        new JFXTreeTableColumn<>("Medicine");
     medicine.setPrefWidth(80);
     medicine.setCellValueFactory(
-            new Callback<
-                    TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String>,
-                    ObservableValue<String>>() {
-              @Override
-              public ObservableValue<String> call(
-                      TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String> param) {
-                return param.getValue().getValue().getMedicineType();
-              }
-            });
+        new Callback<
+            TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String>,
+            ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String> param) {
+            return param.getValue().getValue().getMedicineType();
+          }
+        });
 
     JFXTreeTableColumn<UIMedicineDeliveryRequest, String> instructions =
-            new JFXTreeTableColumn<>("Instructions");
+        new JFXTreeTableColumn<>("Instructions");
     instructions.setPrefWidth(80);
     instructions.setCellValueFactory(
-            new Callback<
-                    TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String>,
-                    ObservableValue<String>>() {
-              @Override
-              public ObservableValue<String> call(
-                      TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String> param) {
-                return param.getValue().getValue().getInstructions();
-              }
-            });
+        new Callback<
+            TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String>,
+            ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String> param) {
+            return param.getValue().getValue().getInstructions();
+          }
+        });
 
     // desc column
     JFXTreeTableColumn<UIMedicineDeliveryRequest, String> desc =
-            new JFXTreeTableColumn<>("Description");
+        new JFXTreeTableColumn<>("Description");
     desc.setPrefWidth(80);
     desc.setCellValueFactory(
-            new Callback<
-                    TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String>,
-                    ObservableValue<String>>() {
-              @Override
-              public ObservableValue<String> call(
-                      TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String> param) {
-                return param.getValue().getValue().getDescription();
-              }
-            });
+        new Callback<
+            TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String>,
+            ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String> param) {
+            return param.getValue().getValue().getDescription();
+          }
+        });
     // priority column
     JFXTreeTableColumn<UIMedicineDeliveryRequest, String> priority =
-            new JFXTreeTableColumn<>("Priority");
+        new JFXTreeTableColumn<>("Priority");
     priority.setPrefWidth(50);
     priority.setCellValueFactory(
-            new Callback<
-                    TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String>,
-                    ObservableValue<String>>() {
-              @Override
-              public ObservableValue<String> call(
-                      TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String> param) {
-                return param.getValue().getValue().getPriority();
-              }
-            });
+        new Callback<
+            TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String>,
+            ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String> param) {
+            return param.getValue().getValue().getPriority();
+          }
+        });
     // assignee column
     JFXTreeTableColumn<UIMedicineDeliveryRequest, String> assignee =
-            new JFXTreeTableColumn<>("Assignee");
+        new JFXTreeTableColumn<>("Assignee");
     assignee.setPrefWidth(80);
     assignee.setCellValueFactory(
-            new Callback<
-                    TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String>,
-                    ObservableValue<String>>() {
-              @Override
-              public ObservableValue<String> call(
-                      TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String> param) {
-                return param.getValue().getValue().getAssignee();
-              }
-            });
+        new Callback<
+            TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String>,
+            ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String> param) {
+            return param.getValue().getValue().getAssignee();
+          }
+        });
 
     JFXTreeTableColumn<UIMedicineDeliveryRequest, String> completed =
-            new JFXTreeTableColumn<>("Completed");
+        new JFXTreeTableColumn<>("Completed");
     completed.setPrefWidth(80);
     completed.setCellValueFactory(
-            new Callback<
-                    TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String>,
-                    ObservableValue<String>>() {
-              @Override
-              public ObservableValue<String> call(
-                      TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String> param) {
-                return param.getValue().getValue().getCompleted();
-              }
-            });
+        new Callback<
+            TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String>,
+            ObservableValue<String>>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String> param) {
+            return param.getValue().getValue().getCompleted();
+          }
+        });
 
     // Load the database into the tableview
 
@@ -209,13 +211,13 @@ public class MedicineDeliveryController implements Initializable {
     }
 
     final TreeItem<UIMedicineDeliveryRequest> root =
-            new RecursiveTreeItem<UIMedicineDeliveryRequest>(mdrUI, RecursiveTreeObject::getChildren);
+        new RecursiveTreeItem<UIMedicineDeliveryRequest>(mdrUI, RecursiveTreeObject::getChildren);
 
     // set the columns for the tableview
 
     treeTableMedicine
-            .getColumns()
-            .setAll(ID, loc, medicine, instructions, desc, priority, assignee, completed);
+        .getColumns()
+        .setAll(ID, loc, medicine, instructions, desc, priority, assignee, completed);
 
     // set as editable
 
@@ -229,7 +231,7 @@ public class MedicineDeliveryController implements Initializable {
   }
 
   public void submit(ActionEvent actionEvent)
-          throws ValidationException, InstanceNotFoundException {
+      throws ValidationException, InstanceNotFoundException {
     // Get the values
     String location = locationChoice.getValue();
     Node node = nodeFactory.read(location);
@@ -250,8 +252,8 @@ public class MedicineDeliveryController implements Initializable {
     DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
     Date date = new Date(System.currentTimeMillis());
     MedicineDeliveryRequest mdRequest =
-            new MedicineDeliveryRequest(
-                    node, desc, "Not Assigned", date, priorityDB, medicine, instructions);
+        new MedicineDeliveryRequest(
+            node, desc, "Not Assigned", date, priorityDB, medicine, instructions);
     medicineDeliveryRequest.create(mdRequest);
     mdrUI.add(new UIMedicineDeliveryRequest(mdRequest));
     treeTableMedicine.refresh();
@@ -271,7 +273,7 @@ public class MedicineDeliveryController implements Initializable {
   }
 
   public void update(ActionEvent actionEvent)
-          throws ValidationException, InstanceNotFoundException {
+      throws ValidationException, InstanceNotFoundException {
     for (UIMedicineDeliveryRequest mdrui : mdrUI) {
       MedicineDeliveryRequest toUpdate = medicineDeliveryRequest.read(mdrui.getID().get());
       boolean isSame = mdrui.equalsMDR(toUpdate);
@@ -293,7 +295,8 @@ public class MedicineDeliveryController implements Initializable {
   public void delete(ActionEvent actionEvent) {
     String toDelte = deleteText.getText();
     medicineDeliveryRequest.delete(toDelte);
-    mdrUI.removeIf(medicineDeliveryRequest -> medicineDeliveryRequest.getID().get().equals(toDelte));
+    mdrUI.removeIf(
+        medicineDeliveryRequest -> medicineDeliveryRequest.getID().get().equals(toDelte));
     deleteText.setText("");
     treeTableMedicine.refresh();
   }
