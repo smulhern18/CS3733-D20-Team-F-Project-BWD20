@@ -283,6 +283,14 @@ public class PathfinderController implements Initializable {
     scrollPaneFaulkner1.setVisible(true);
     floorButtonsSet();
 
+    //    UISetting uiSetting = new UISetting();
+    //    uiSetting.setAsLocationComboBox(startCombo);
+    //    uiSetting.setAsLocationComboBox(endCombo);
+    //    String startLocation = startCombo.getValue();
+    //    String endLocation = endCombo.getValue();
+    //    String startID = startLocation.substring(endLocation.length() - 10);
+    //    String endID = endLocation.substring(endLocation.length() - 10);
+
     //    uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1);
     //    uiSetting.makeZoomable(scrollPaneFaulkner2, masterPaneFaulkner2);
     //    uiSetting.makeZoomable(scrollPaneFaulkner3, masterPaneFaulkner3);
