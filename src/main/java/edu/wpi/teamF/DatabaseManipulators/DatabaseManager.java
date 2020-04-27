@@ -212,7 +212,8 @@ public class DatabaseManager {
             + APPOINTMENT_ID_KEY
             + "))";
 
-    String flowerTableCreationStatement = "CREATE TABLE"
+    String flowerTableCreationStatement =
+        "CREATE TABLE "
             + FLOWER_REQUEST_TABLE_NAME
             + " ( "
             + SERVICEID_KEY
@@ -230,7 +231,7 @@ public class DatabaseManager {
             + PHONE_NUMBER_KEY
             + " VARCHAR(32) NOT NULL, "
             + GIFT_WRAP_KEY
-            + " BOOLEAN NOT NULL "
+            + " BOOLEAN NOT NULL, "
             + "PRIMARY KEY ("
             + SERVICEID_KEY
             + "))";

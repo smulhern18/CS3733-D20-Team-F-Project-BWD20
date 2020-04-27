@@ -2,7 +2,6 @@ package edu.wpi.teamF.ModelClasses;
 
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
-
 import java.util.Date;
 
 public class Validators {
@@ -462,16 +461,17 @@ public class Validators {
     // accept everything as valid
   }
 
-  public static void messageValidation(
-          String message, int... constraints) throws ValidationException {
-    if(message.length() < MESSAGE_MIN_LENGTH || message.length() > MESSAGE_MAX_LENGTH) {
+  public static void messageValidation(String message, int... constraints)
+      throws ValidationException {
+    if (message.length() < MESSAGE_MIN_LENGTH || message.length() > MESSAGE_MAX_LENGTH) {
       throw new ValidationException("message for flower request is out of bounds" + message);
     }
   }
-  public static void phoneNumberValidation(
-          String phoneNumber, int... constraints) throws ValidationException {
+
+  public static void phoneNumberValidation(String phoneNumber, int... constraints)
+      throws ValidationException {
     nullCheckValidation(phoneNumber);
-    if(!phoneNumber.matches("^[+]*[(]?[0-9]{1,4}[)]?[-\\s./0-9]*$")) {
+    if (!phoneNumber.matches("^[+]*[(]?[0-9]{1,4}[)]?[-\\s./0-9]*$")) {
       throw new ValidationException("this is not a phone number");
     }
   }
@@ -482,8 +482,8 @@ public class Validators {
    * @param constraints the optional constraints for validation
    * @throws ValidationException should the validation fail
    */
-  public static <T extends FlowerRequest> void FlowerValidation(
-          T t, int... constraints) throws ValidationException {
+  public static <T extends FlowerRequest> void FlowerValidation(T t, int... constraints)
+      throws ValidationException {
     nullCheckValidation(t, constraints);
     FlowerRequest flowerRequestObject = (FlowerRequest) t;
 
