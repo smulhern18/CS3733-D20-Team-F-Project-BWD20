@@ -1,6 +1,8 @@
-package edu.wpi.teamF.ModelClasses;
+package edu.wpi.teamF.ModelClasses.UIClasses;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import edu.wpi.teamF.ModelClasses.Node;
+import edu.wpi.teamF.ModelClasses.ValidationException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import lombok.Data;

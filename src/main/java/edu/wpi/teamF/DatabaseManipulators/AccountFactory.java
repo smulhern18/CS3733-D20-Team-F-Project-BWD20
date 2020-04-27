@@ -1,7 +1,7 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
 import edu.wpi.teamF.ModelClasses.Account.*;
-import edu.wpi.teamF.ModelClasses.UIAccount;
+import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
 import java.sql.PreparedStatement;
@@ -124,7 +124,6 @@ public class AccountFactory {
                   resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
                   resultSet.getString(DatabaseManager.USER_NAME_KEY),
                   resultSet.getString(DatabaseManager.PASSWORD_KEY));
-
           break;
         default:
           throw new ValidationException("Illegal Type of Account: " + type.getTypeOrdinal());
@@ -225,7 +224,7 @@ public class AccountFactory {
   }
 
   public List<Account> getAllAccounts() {
-    List<Account> accounts = null;
+    List<Account> accounts = new ArrayList<>();
     String selectStatement = "SELECT * FROM " + DatabaseManager.ACCOUNT_TABLE_NAME;
     try (PreparedStatement preparedStatement =
         DatabaseManager.getConnection().prepareStatement(selectStatement)) {
@@ -288,7 +287,6 @@ public class AccountFactory {
                     resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
                     resultSet.getString(DatabaseManager.USER_NAME_KEY),
                     resultSet.getString(DatabaseManager.PASSWORD_KEY));
-
             break;
           default:
             throw new ValidationException("Illegal Type of Account: " + type.getTypeOrdinal());

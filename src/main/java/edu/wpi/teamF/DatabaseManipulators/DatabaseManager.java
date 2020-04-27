@@ -8,7 +8,8 @@ import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
-import edu.wpi.teamF.ModelClasses.UIAccount;
+import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
+
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.sql.Connection;
