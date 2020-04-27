@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SecurityRequestFactory {
-
   NodeFactory nodeFactory = NodeFactory.getFactory();
   private static final SecurityRequestFactory factory = new SecurityRequestFactory();
   private static final ServiceRequestFactory serviceRequestFactory =
@@ -28,13 +27,17 @@ public class SecurityRequestFactory {
             + DatabaseManager.SECURITY_REQUEST_TABLE_NAME
             + " ( "
             + DatabaseManager.SERVICEID_KEY
+            + ", "
+            + DatabaseManager.GUARDS_REQUESTED_KEY
             + " ) "
-            + "VALUES (?)";
+            + "VALUES (?, ?)";
     Validators.securityRequestValidation(securityRequest);
     serviceRequestFactory.create(securityRequest);
     try (PreparedStatement prepareStatement =
         DatabaseManager.getConnection().prepareStatement(insertStatement)) {
-      prepareStatement.setString(1, securityRequest.getId());
+      int param = 1;
+      prepareStatement.setString(param++, securityRequest.getId());
+      prepareStatement.setInt(param++, securityRequest.getGuardsRequested());
       try {
         int numRows = prepareStatement.executeUpdate();
         if (numRows < 1) {
@@ -73,7 +76,8 @@ public class SecurityRequestFactory {
                   serviceRequest.getDescription(),
                   serviceRequest.getDateTimeSubmitted(),
                   serviceRequest.getPriority(),
-                  serviceRequest.getComplete());
+                  serviceRequest.getComplete(),
+                  resultSet.getInt(DatabaseManager.GUARDS_REQUESTED_KEY));
         }
       } catch (ValidationException e) {
         throw e;
@@ -92,16 +96,19 @@ public class SecurityRequestFactory {
             + DatabaseManager.SECURITY_REQUEST_TABLE_NAME
             + " SET "
             + DatabaseManager.SERVICEID_KEY
-            + " = ? "
+            + " = ?, "
+            + DatabaseManager.GUARDS_REQUESTED_KEY
+            + " = ?, "
             + "WHERE "
             + DatabaseManager.SERVICEID_KEY
             + " = ?";
     try (PreparedStatement preparedStatement =
         DatabaseManager.getConnection().prepareStatement(updateStatement)) {
       int param = 1;
-      preparedStatement.setString(param++, securityRequest.getId());
-      preparedStatement.setString(param++, securityRequest.getId());
       serviceRequestFactory.update(securityRequest);
+      preparedStatement.setString(param++, securityRequest.getId());
+      preparedStatement.setInt(param++, securityRequest.getGuardsRequested());
+
       int numRows = preparedStatement.executeUpdate();
       if (numRows != 1) {
         throw new Exception("Updated " + numRows + " rows");
@@ -137,31 +144,33 @@ public class SecurityRequestFactory {
     List<SecurityRequest> securityRequests = new ArrayList<>();
     for (ServiceRequest serviceRequest :
         serviceRequestFactory.getServiceRequestsByLocation(location)) {
-      SecurityRequest securityRequest = read(serviceRequest.getId());
-      if (securityRequest != null) {
-        securityRequests.add(securityRequest);
+      SecurityRequest securityReadRequest = read(serviceRequest.getId());
+      if (securityReadRequest != null) {
+        securityRequests.add(securityReadRequest);
       }
     }
     if (securityRequests.size() == 0) {
-      return null;
+      return new ArrayList<>();
     } else {
       return securityRequests;
     }
   }
 
-  public List<SecurityRequest> getAllSecurityRequests() {
-    List<SecurityRequest> securityRequest = null;
+  public List<SecurityRequest> getAllSecurityRequest() {
+    List<SecurityRequest> securityRequests = new ArrayList<>();
     String selectStatement = "SELECT * FROM " + DatabaseManager.SECURITY_REQUEST_TABLE_NAME;
 
     try (PreparedStatement preparedStatement =
             DatabaseManager.getConnection().prepareStatement(selectStatement);
         ResultSet resultSet = preparedStatement.executeQuery()) {
-      securityRequest = new ArrayList<>();
+      securityRequests = new ArrayList<>();
       ;
       while (resultSet.next()) {
         ServiceRequest serviceRequest =
             serviceRequestFactory.read(resultSet.getString(DatabaseManager.SERVICEID_KEY));
-        securityRequest.add(
+        SecurityRequest securityRequest =
+            factory.read(resultSet.getString(DatabaseManager.SERVICEID_KEY));
+        securityRequests.add(
             new SecurityRequest(
                 serviceRequest.getId(),
                 serviceRequest.getLocation(),
@@ -169,12 +178,13 @@ public class SecurityRequestFactory {
                 serviceRequest.getDescription(),
                 serviceRequest.getDateTimeSubmitted(),
                 serviceRequest.getPriority(),
-                serviceRequest.getComplete()));
+                serviceRequest.getComplete(),
+                securityRequest.getGuardsRequested()));
       }
     } catch (Exception e) {
       System.out.println(
           "Exception in SecurityFactory read: " + e.getMessage() + ", " + e.getClass());
     }
-    return securityRequest;
+    return securityRequests;
   }
 }

@@ -62,6 +62,7 @@ public class App extends Application {
         });
     sceneController = new SceneController(fxmlLoader, primaryStage, primaryScene);
     Parent root = fxmlLoader.load(getClass().getResource("Views/LanguageServiceRequest.fxml"));
+
     primaryScene.setRoot(root);
     primaryStage.setScene(primaryScene);
     primaryStage.setAlwaysOnTop(true);
