@@ -76,7 +76,7 @@
          </image>
       </ImageView>
       <ImageView fitHeight="18.0" fitWidth="24.0" layoutX="46.0" layoutY="358.0" pickOnBounds="true" preserveRatio="true">
-         <image>git
+         <image>
             <Image url="@../../../../Images/6.png" />
          </image>
       </ImageView>

@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
@@ -47,22 +48,23 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
                     <children>
                         <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="         Location:         " />
-                        <JFXComboBox fx:id="locationComboBox" prefHeight="27.0" prefWidth="183.0" />
+                        <JFXComboBox fx:id="locationCombobox" prefHeight="27.0" prefWidth="183.0" />
                     </children>
                 </HBox>
                 <HBox alignment="BOTTOM_CENTER" GridPane.rowIndex="2">
                     <children>
                         <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="          Priority:         " />
-                        <JFXComboBox fx:id="priorityComboBox" prefHeight="27.0" prefWidth="182.0" />
+                        <JFXComboBox fx:id="priorityCombobox" prefHeight="27.0" prefWidth="182.0" />
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
                     <children>
                         <JFXButton fx:id="submitButton" onAction="#submit" style="-fx-background-color: #FFD3DF#FFD3DF;" text="Submit" textFill="#000000cc">
                             <font>
@@ -84,10 +86,16 @@
                 </HBox>
                 <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                     <children>
-                        <Label fx:id="guardsRequestedLabel" alignment="BOTTOM_CENTER" text="Guards Requested: " />
-                        <JFXComboBox fx:id="guardsRequestedComboBox" prefHeight="27.0" prefWidth="182.0" />
+                        <Label fx:id="languageLabel" alignment="BOTTOM_CENTER" prefHeight="18.0" prefWidth="112.0" text="Language:" />
+                        <JFXComboBox fx:id="languageCombobox" prefHeight="27.0" prefWidth="182.0" />
                     </children>
                 </HBox>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="4">
+               <children>
+                  <Label fx:id="problemTypeLabel" alignment="BOTTOM_CENTER" text="         Problem Type:         " />
+                  <JFXComboBox fx:id="problemTypeCombobox" prefHeight="27.0" prefWidth="183.0" />
+               </children>
+            </HBox>
                 <StackPane prefHeight="86.0" prefWidth="410.0">
                     <children>
                         <Label fx:id="securityRequestLabel" text="Security Request" StackPane.alignment="TOP_CENTER">
@@ -97,6 +105,12 @@
                         </Label>
                     </children>
                 </StackPane>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="5">
+               <children>
+                  <Label fx:id="descriptionLabel" alignment="BOTTOM_CENTER" text="         Description:         " />
+                  <JFXTextArea fx:id="descriptionText" prefHeight="54.0" prefWidth="182.0" />
+               </children>
+            </HBox>
             </children>
         </GridPane>
         <fx:include fx:id="mainMenu" source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />

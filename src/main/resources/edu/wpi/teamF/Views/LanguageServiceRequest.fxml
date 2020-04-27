@@ -32,9 +32,9 @@
                 <Font name="System Bold" size="15.0" />
             </font>
         </Label>
-        <ChoiceBox fx:id="locationChoice" layoutX="218.0" layoutY="46.0" prefWidth="150.0" />
-        <ChoiceBox fx:id="languageChoice" layoutX="218.0" layoutY="94.0" prefWidth="150.0" />
-        <ChoiceBox fx:id="problemTypeChoice" layoutX="218.0" layoutY="139.0" prefWidth="150.0" />
+        <ChoiceBox fx:id="locationCombobox" layoutX="218.0" layoutY="46.0" prefWidth="150.0" />
+        <ChoiceBox fx:id="languageCombobox" layoutX="218.0" layoutY="94.0" prefWidth="150.0" />
+        <ChoiceBox fx:id="problemTypeCombobox" layoutX="218.0" layoutY="139.0" prefWidth="150.0" />
         <JFXTextArea fx:id="descriptionText" layoutX="217.0" layoutY="217.0" prefHeight="98.0" prefWidth="150.0" />
         <JFXButton fx:id="submit" buttonType="RAISED" layoutX="51.0" layoutY="324.0" onAction="#submit" prefHeight="51.0" prefWidth="126.0" style="-fx-background-color: grey;" text="Submit Request">
             <font>
@@ -46,13 +46,13 @@
                 <Font name="System Bold" size="14.0" />
             </font>
         </JFXButton>
-        <JFXTreeTableView fx:id="treeTableLanguage" layoutX="47.0" layoutY="37.0" prefHeight="261.0" prefWidth="614.0" visible="false" />
+        <JFXTreeTableView fx:id="table" layoutX="47.0" layoutY="37.0" prefHeight="261.0" prefWidth="614.0" visible="false" />
         <Label fx:id="priorityLabel" layoutX="393.0" layoutY="43.0" prefHeight="31.0" prefWidth="83.0" text="Priority:">
             <font>
                 <Font name="System Bold" size="15.0" />
             </font>
         </Label>
-        <ChoiceBox fx:id="priorityChoice" layoutX="467.0" layoutY="46.0" prefHeight="25.0" prefWidth="68.0" />
+        <ChoiceBox fx:id="priorityCombobox" layoutX="467.0" layoutY="46.0" prefHeight="25.0" prefWidth="68.0" />
         <JFXToggleButton fx:id="switcher" layoutX="535.0" layoutY="321.0" onAction="#switchView" text="Ongoing Requests" />
         <JFXButton fx:id="update" buttonType="RAISED" layoutX="330.0" layoutY="324.0" onAction="#update" prefHeight="51.0" prefWidth="126.0" style="-fx-background-color: grey;" text="Update" visible="false">
             <font>

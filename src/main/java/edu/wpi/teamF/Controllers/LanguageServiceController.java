@@ -2,6 +2,7 @@ package edu.wpi.teamF.Controllers;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.LanguageServiceRequestFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Node;
@@ -20,16 +21,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
 import javax.management.InstanceNotFoundException;
 
 public class LanguageServiceController implements Initializable {
-  public JFXTreeTableView<UILanguageServiceRequest> treeTableLanguage;
+  public JFXTreeTableView<UILanguageServiceRequest> table;
+  public GridPane servicePane;
+  public AnchorPane checkStatusPane;
   public Label locationLabel;
   public Label languageLabel;
   public Label descriptionLabel;
@@ -42,11 +46,11 @@ public class LanguageServiceController implements Initializable {
   public JFXTextField deleteText;
   public JFXButton delete;
   ObservableList<UILanguageServiceRequest> langUI = FXCollections.observableArrayList();
-  public ChoiceBox<String> locationChoice;
-  public ChoiceBox<String> languageChoice;
-  public ChoiceBox<String> problemTypeChoice;
+  public JFXComboBox<String> locationCombobox;
+  public JFXComboBox<String> languageCombobox;
+  public JFXComboBox<String> problemTypeCombobox;
   public JFXTextArea descriptionText;
-  public ChoiceBox<String> priorityChoice;
+  public JFXComboBox<String> priorityCombobox;
   NodeFactory nodeFactory = NodeFactory.getFactory();
   LanguageServiceRequestFactory languageServiceRequest =
       LanguageServiceRequestFactory.getFactory(); // need to do
@@ -56,12 +60,13 @@ public class LanguageServiceController implements Initializable {
   public void submit(ActionEvent actionEvent)
       throws ValidationException, InstanceNotFoundException {
     // Get the values
-    String location = locationChoice.getValue();
-    Node node = nodeFactory.read(location);
-    String language = languageChoice.getValue();
-    String problemType = problemTypeChoice.getValue();
+    String location = locationCombobox.getValue();
+    String nodeId = location.substring(location.length() - 10);
+    Node node = nodeFactory.read(nodeId);
+    String language = languageCombobox.getValue();
+    String problemType = problemTypeCombobox.getValue();
     String desc = descriptionText.getText();
-    String priority = priorityChoice.getValue();
+    String priority = priorityCombobox.getValue();
     System.out.println(priority);
     int priorityDB = 1;
     if (priority.equals("Low")) {
@@ -79,20 +84,20 @@ public class LanguageServiceController implements Initializable {
             node, desc, "Not Assigned", date, priorityDB, language, problemType);
     languageServiceRequest.create(langRequest);
     langUI.add(new UILanguageServiceRequest(langRequest));
-    treeTableLanguage.refresh();
+    table.refresh();
     descriptionText.setText("");
-    locationChoice.setValue(null);
-    priorityChoice.setValue(null);
-    languageChoice.setValue(null);
-    problemTypeChoice.setValue(null);
+    locationCombobox.setValue(null);
+    priorityCombobox.setValue(null);
+    languageCombobox.setValue(null);
+    problemTypeCombobox.setValue(null);
   }
 
   public void cancel(ActionEvent actionEvent) {
     descriptionText.setText("");
-    locationChoice.setValue(null);
-    priorityChoice.setValue(null);
-    languageChoice.setValue(null);
-    problemTypeChoice.setValue(null);
+    locationCombobox.setValue(null);
+    priorityCombobox.setValue(null);
+    languageCombobox.setValue(null);
+    problemTypeCombobox.setValue(null);
   }
 
   public void update(ActionEvent actionEvent)
@@ -112,43 +117,43 @@ public class LanguageServiceController implements Initializable {
         languageServiceRequest.update(toUpdate);
       }
     }
-    treeTableLanguage.refresh();
+    table.refresh();
   }
 
   public void switchView(ActionEvent actionEvent) {
     boolean isSelected = switcher.isSelected();
     if (isSelected) {
-      treeTableLanguage.setVisible(true);
+      table.setVisible(true);
       locationLabel.setVisible(false);
-      locationChoice.setVisible(false);
+      locationCombobox.setVisible(false);
       languageLabel.setVisible(false);
-      languageChoice.setVisible(false);
+      languageCombobox.setVisible(false);
       descriptionLabel.setVisible(false);
       descriptionText.setVisible(false);
       priorityLabel.setVisible(false);
-      priorityChoice.setVisible(false);
+      priorityCombobox.setVisible(false);
       submit.setVisible(false);
       cancel.setVisible(false);
       problemTypeLabel.setVisible(false);
-      problemTypeChoice.setVisible(false);
+      problemTypeCombobox.setVisible(false);
       update.setVisible(true);
       deleteText.setVisible(true);
       delete.setVisible(true);
 
     } else {
-      treeTableLanguage.setVisible(false);
+      table.setVisible(false);
       locationLabel.setVisible(true);
-      locationChoice.setVisible(true);
+      locationCombobox.setVisible(true);
       languageLabel.setVisible(true);
-      languageChoice.setVisible(true);
+      languageCombobox.setVisible(true);
       descriptionLabel.setVisible(true);
       descriptionText.setVisible(true);
       priorityLabel.setVisible(true);
-      priorityChoice.setVisible(true);
+      priorityCombobox.setVisible(true);
       submit.setVisible(true);
       cancel.setVisible(true);
       problemTypeLabel.setVisible(true);
-      problemTypeChoice.setVisible(true);
+      problemTypeCombobox.setVisible(true);
       update.setVisible(false);
       deleteText.setVisible(false);
       delete.setVisible(false);
@@ -160,28 +165,24 @@ public class LanguageServiceController implements Initializable {
     languageServiceRequest.delete(toDelte);
     langUI.removeIf(languageServiceRequest -> languageServiceRequest.getID().get().equals(toDelte));
     deleteText.setText("");
-    treeTableLanguage.refresh();
+    table.refresh();
   }
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
 
     List<Node> nodes = nodeFactory.getAllNodes();
-    for (Node node : nodes) {
-      locationChoice.getItems().add(node.getId());
-    }
+    UISetting uiSetting = new UISetting();
+    uiSetting.setAsLocationComboBox(locationCombobox);
 
-    priorityChoice.getItems().add("Low");
-    priorityChoice.getItems().add("Medium");
-    priorityChoice.getItems().add("High");
+    priorityCombobox.setItems(FXCollections.observableArrayList("Low", "Medium", "High"));
 
-    problemTypeChoice.getItems().add("Require Interpreter");
-    problemTypeChoice.getItems().add("Require Form Translation");
-    problemTypeChoice.getItems().add("Require TTY Machine");
+    problemTypeCombobox.setItems(
+        FXCollections.observableArrayList(
+            "Require Interpreter", "Require Form Translation", "Require TTY Machine"));
 
-    languageChoice.getItems().add("Spanish");
-    languageChoice.getItems().add("Sign Language");
-    languageChoice.getItems().add("Other (please describe)");
+    languageCombobox.setItems(
+        FXCollections.observableArrayList("Spanish", "Sign Language", "Other (please describe)"));
 
     // ID
     JFXTreeTableColumn<UILanguageServiceRequest, String> ID = new JFXTreeTableColumn<>("ID");
@@ -308,9 +309,7 @@ public class LanguageServiceController implements Initializable {
 
     // set the columns for the tableview
 
-    treeTableLanguage
-        .getColumns()
-        .setAll(ID, loc, language, problemType, desc, priority, assignee, completed);
+    table.getColumns().setAll(ID, loc, language, problemType, desc, priority, assignee, completed);
 
     // set as editable
 
@@ -318,8 +317,18 @@ public class LanguageServiceController implements Initializable {
     completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     priority.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
-    treeTableLanguage.setRoot(root);
-    treeTableLanguage.setEditable(true);
-    treeTableLanguage.setShowRoot(false);
+    table.setRoot(root);
+    table.setEditable(true);
+    table.setShowRoot(false);
+  }
+
+  public void request(ActionEvent actionEvent) {
+    servicePane.setVisible(true);
+    checkStatusPane.setVisible(false);
+  }
+
+  public void checkStatus(ActionEvent actionEvent) {
+    servicePane.setVisible(false);
+    checkStatusPane.setVisible(true);
   }
 }
