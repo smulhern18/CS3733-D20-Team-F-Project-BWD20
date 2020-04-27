@@ -57,6 +57,7 @@ public class DatabaseManager {
 
   // Maintainence Request
   static final String MAINTENCE_REQUEST_ID_KEY = "serviceId";
+  static final String DATECOMPLETED_KEY = "DateCompleted";
 
   // Security Request
   static final String SECRURITY_REQUEST_ID_KEY = "serviceId";
@@ -182,6 +183,8 @@ public class DatabaseManager {
             + " ( "
             + SERVICEID_KEY
             + " VARCHAR(32) NOT NULL, "
+            + DATECOMPLETED_KEY
+            + " TIMESTAMP NOT NULL, "
             + "PRIMARY KEY ("
             + SERVICEID_KEY
             + "))";
@@ -203,19 +206,18 @@ public class DatabaseManager {
             + "))";
 
     String transportTableCreationStatement =
-            "CREATE TABLE "
-                    + TRANSPORT_REQUEST_TABLE_NAME
-                    + " ( "
-                    + SERVICEID_KEY
-                    + " VARCHAR(32) NOT NULL, "
-                    + TRANSPORT_TYPE_KEY
-                    +" VARCHAR(32) NOT NULL, "
-                    + DESTINATION_KEY
-                    +" VARCHAR(32) NOT NULL, "
-                    + "PRIMARY KEY ("
-                    + SERVICEID_KEY
-                    + "))";
-
+        "CREATE TABLE "
+            + TRANSPORT_REQUEST_TABLE_NAME
+            + " ( "
+            + SERVICEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + TRANSPORT_TYPE_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + DESTINATION_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + "PRIMARY KEY ("
+            + SERVICEID_KEY
+            + "))";
 
     String accountTableCreationStatement =
         "CREATE TABLE "

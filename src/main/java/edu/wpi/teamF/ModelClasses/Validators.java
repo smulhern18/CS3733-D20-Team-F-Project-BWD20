@@ -2,7 +2,6 @@ package edu.wpi.teamF.ModelClasses;
 
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
-
 import java.util.Date;
 
 public class Validators {
@@ -347,6 +346,7 @@ public class Validators {
     descriptionValidation(maintenanceRequestObject.getDescription());
     dateValidation(maintenanceRequestObject.getDateTimeSubmitted());
     priorityValidation(maintenanceRequestObject.getPriority());
+    dateValidation(maintenanceRequestObject.getTimeCompleted());
   }
 
   /**
@@ -436,10 +436,9 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static void transportTypeValidation(String type, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(type, constraints);
-    if (type.length() < TRANSPORT_TYPE_MIN_LENGTH
-            || type.length() > TRANSPORT_TYPE_MAX_LENGTH) {
+    if (type.length() < TRANSPORT_TYPE_MIN_LENGTH || type.length() > TRANSPORT_TYPE_MAX_LENGTH) {
       throw new ValidationException("Transport type is outside accepted values");
     }
   }
@@ -451,8 +450,8 @@ public class Validators {
    * @param constraints the optional constraints for validation
    * @throws ValidationException should the validation fail
    */
-  public static <T extends TransportRequest> void transportRequestValidation(T t, int... constraints)
-          throws ValidationException {
+  public static <T extends TransportRequest> void transportRequestValidation(
+      T t, int... constraints) throws ValidationException {
     nullCheckValidation(t, constraints);
     TransportRequest transportRequestObject = (TransportRequest) t;
     idValidation(transportRequestObject.getId());

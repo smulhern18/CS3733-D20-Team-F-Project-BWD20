@@ -144,7 +144,12 @@ public class ServiceRequestController implements Initializable {
     } else if (serviceType.equals("Maintenance")) {
       MaintenanceRequest maintenanceRequest =
           new MaintenanceRequest(
-              databaseManager.readNode(nodeID), "NOT ASSIGNED", description, date, priority);
+              databaseManager.readNode(nodeID),
+              "NOT ASSIGNED",
+              description,
+              date,
+              priority,
+              new Date(0));
       databaseManager.manipulateServiceRequest(maintenanceRequest);
     }
 

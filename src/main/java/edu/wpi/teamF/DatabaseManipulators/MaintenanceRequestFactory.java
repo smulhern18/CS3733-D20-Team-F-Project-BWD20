@@ -8,6 +8,7 @@ import edu.wpi.teamF.ModelClasses.Validators;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +57,8 @@ public class MaintenanceRequestFactory {
             + DatabaseManager.MAINTENANCE_REQUEST_TABLE_NAME
             + " WHERE "
             + DatabaseManager.SERVICEID_KEY
+            + " = ?"
+            + DatabaseManager.DATECOMPLETED_KEY
             + " = ?";
 
     try (PreparedStatement preparedStatement =
@@ -74,7 +77,8 @@ public class MaintenanceRequestFactory {
                   serviceRequest.getDescription(),
                   serviceRequest.getDateTimeSubmitted(),
                   serviceRequest.getPriority(),
-                  serviceRequest.getComplete());
+                  serviceRequest.getComplete(),
+                  resultSet.getDate(DatabaseManager.DATECOMPLETED_KEY));
         }
       } catch (ValidationException e) {
         throw e;
@@ -94,6 +98,8 @@ public class MaintenanceRequestFactory {
             + " SET "
             + DatabaseManager.SERVICEID_KEY
             + " = ? "
+            + DatabaseManager.DATECOMPLETED_KEY
+            + " = ? "
             + "WHERE "
             + DatabaseManager.SERVICEID_KEY
             + " = ?";
@@ -102,6 +108,8 @@ public class MaintenanceRequestFactory {
       int param = 1;
       serviceRequestFactory.update(maintenanceRequest);
       preparedStatement.setString(param++, maintenanceRequest.getId());
+      preparedStatement.setTimestamp(
+          param++, new Timestamp(maintenanceRequest.getTimeCompleted().getTime()));
       preparedStatement.setString(param++, maintenanceRequest.getId());
       int numRows = preparedStatement.executeUpdate();
       if (numRows != 1) {
@@ -170,7 +178,8 @@ public class MaintenanceRequestFactory {
                 serviceRequest.getDescription(),
                 serviceRequest.getDateTimeSubmitted(),
                 serviceRequest.getPriority(),
-                serviceRequest.getComplete()));
+                serviceRequest.getComplete(),
+                resultSet.getDate(DatabaseManager.DATECOMPLETED_KEY)));
       }
     } catch (Exception e) {
       System.out.println(

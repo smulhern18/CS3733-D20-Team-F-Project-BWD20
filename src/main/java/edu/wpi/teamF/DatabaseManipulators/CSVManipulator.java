@@ -167,7 +167,7 @@ public class CSVManipulator {
         data.addAll(Arrays.asList(row.split(",")));
       }
 
-      int i = 7;
+      int i = 8;
       while (i < (data.size() - 1)) {
         databaseManager.manipulateServiceRequest(
             new MaintenanceRequest(
@@ -177,9 +177,10 @@ public class CSVManipulator {
                 data.get(i + 3),
                 new Date(Integer.parseInt(data.get(i + 4))),
                 Integer.parseInt(data.get(i + 5)),
-                Boolean.parseBoolean(data.get(i + 6))));
+                Boolean.parseBoolean(data.get(i + 6)),
+                new Date(Integer.parseInt(data.get(i + 8)))));
 
-        i = i + 7;
+        i = i + 8;
       }
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File Not found!");
@@ -227,7 +228,9 @@ public class CSVManipulator {
             + ","
             + m.getPriority()
             + ","
-            + m.getComplete();
+            + m.getComplete()
+            + ","
+            + m.getTimeCompleted().getTime();
     return Main;
   }
   /**

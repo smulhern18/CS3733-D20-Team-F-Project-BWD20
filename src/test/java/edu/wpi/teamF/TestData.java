@@ -197,6 +197,7 @@ public class TestData {
   };
 
   public Date[] validDates = {new Date(0), new Date(10), new Date(110), new Date(1110)};
+  public Date[] validCompletedDates = {new Date(10), new Date(100), new Date(300), new Date(2000)};
   public String[] validIDs = {"12312442", "123124134", "124134123412", "213124124"};
   public String[] validDescriptions = {"12312442", "123124134", "124134123412", "213124124"};
   public String[] validAssignees = {"Roman", "Sully", "Denver", "Charles"};
@@ -243,7 +244,8 @@ public class TestData {
         validDescriptions[0],
         validDates[0],
         2,
-        true),
+        true,
+        validCompletedDates[0]),
     new MaintenanceRequest(
         validIDs[1],
         validNodes[1],
@@ -251,7 +253,8 @@ public class TestData {
         validDescriptions[1],
         validDates[1],
         2,
-        false),
+        false,
+        validCompletedDates[1]),
     new MaintenanceRequest(
         validIDs[2],
         validNodes[2],
@@ -259,7 +262,8 @@ public class TestData {
         validDescriptions[2],
         validDates[2],
         2,
-        true),
+        true,
+        validCompletedDates[2]),
     new MaintenanceRequest(
         validIDs[3],
         validNodes[3],
@@ -267,7 +271,8 @@ public class TestData {
         validDescriptions[3],
         validDates[3],
         2,
-        false),
+        false,
+        validCompletedDates[3]),
   };
 
   public TestData() throws Exception {}
