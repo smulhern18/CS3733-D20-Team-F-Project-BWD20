@@ -4,10 +4,10 @@ import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.MaintenanceRequestFactory;
+import edu.wpi.teamF.DatabaseManipulators.MariachiRequestFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
-import edu.wpi.teamF.DatabaseManipulators.SecurityRequestFactory;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIServiceRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.net.URL;
@@ -38,7 +38,7 @@ public class ServiceRequestController implements Initializable {
   public ChoiceBox<String> choiceBoxPriority;
   public ChoiceBox<String> choiceBoxType;
   public NodeFactory nodeFactory = NodeFactory.getFactory();
-  public SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
+  public MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
   public MaintenanceRequestFactory maintenanceRequestFactory =
       MaintenanceRequestFactory.getFactory();
   public ObservableList<UIServiceRequest> serviceRequests = FXCollections.observableArrayList();
@@ -149,7 +149,7 @@ public class ServiceRequestController implements Initializable {
     DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
 
     if (serviceType.equals("Security")) {
-      SecurityRequest secRequest = null;
+      MariachiRequest secRequest = null;
       //          new SecurityRequest(
       //              nodeFactory.read(nodeID), "NOT ASSIGNED", description, date, priority);
       //      securityRequestFactory.create(secRequest);
@@ -266,10 +266,10 @@ public class ServiceRequestController implements Initializable {
       }
     }
 
-    List<SecurityRequest> securityRequests = securityRequestFactory.getAllSecurityRequest();
-    if (securityRequests != null) {
-      for (int i = 0; i < securityRequests.size(); i++) {
-        serviceRequests.add(new UIServiceRequest(securityRequests.get(i)));
+    List<MariachiRequest> mariachiRequests = mariachiRequestFactory.getAllMariachiRequest();
+    if (mariachiRequests != null) {
+      for (int i = 0; i < mariachiRequests.size(); i++) {
+        serviceRequests.add(new UIServiceRequest(mariachiRequests.get(i)));
       }
     }
 
@@ -294,10 +294,10 @@ public class ServiceRequestController implements Initializable {
         maintenanceRequestFactory.update(maintenanceRequest);
 
       } else if (req.serviceType.get().equals("Security")
-          && !req.equals(new UIServiceRequest(securityRequestFactory.read(req.id.get())))) {
-        SecurityRequest securityRequest = securityRequestFactory.read(req.id.get());
-        securityRequest.setDescription(req.description.get());
-        securityRequestFactory.update(securityRequest);
+          && !req.equals(new UIServiceRequest(mariachiRequestFactory.read(req.id.get())))) {
+        MariachiRequest mariachiRequest = mariachiRequestFactory.read(req.id.get());
+        mariachiRequest.setDescription(req.description.get());
+        mariachiRequestFactory.update(mariachiRequest);
       }
       serviceTable.refresh();
     }

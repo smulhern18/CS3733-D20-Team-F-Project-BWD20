@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+import edu.wpi.teamF.DatabaseManipulators.MariachiRequestFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
-import edu.wpi.teamF.DatabaseManipulators.SecurityRequestFactory;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
 import edu.wpi.teamF.TestData;
 import java.sql.SQLException;
 import java.util.List;
@@ -15,11 +15,11 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class SecurityRequestTest {
+public class MariachiRequestTest {
 
   static TestData testData = null;
-  static SecurityRequest[] validSecurityRequest = null;
-  SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
+  static MariachiRequest[] validMariachiRequest = null;
+  MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
   NodeFactory nodeFactory = NodeFactory.getFactory();
   static DatabaseManager databaseManager = new DatabaseManager();
   static Node[] validNodes = null;
@@ -32,7 +32,7 @@ public class SecurityRequestTest {
   @BeforeEach
   public void initialize() throws Exception {
     testData = new TestData();
-    validSecurityRequest = testData.validSecurityRequests;
+    validMariachiRequest = testData.validMariachiRequests;
     validNodes = testData.validNodes;
     databaseManager.reset();
   }
@@ -45,7 +45,7 @@ public class SecurityRequestTest {
   @Test
   public void testCreateReadDelete() {
     try {
-      securityRequestFactory.create(null);
+      mariachiRequestFactory.create(null);
       fail("Creating a null value is unacceptable");
     } catch (ValidationException e) {
       // ignore as expected
@@ -60,16 +60,16 @@ public class SecurityRequestTest {
 
     }
     try {
-      for (SecurityRequest securityRequest : validSecurityRequest) {
-        securityRequestFactory.create(securityRequest);
+      for (MariachiRequest mariachiRequest : validMariachiRequest) {
+        mariachiRequestFactory.create(mariachiRequest);
 
-        SecurityRequest readSecurity = securityRequestFactory.read(securityRequest.getId());
-        assertTrue(readSecurity.equals(securityRequest));
+        MariachiRequest readSecurity = mariachiRequestFactory.read(mariachiRequest.getId());
+        assertTrue(readSecurity.equals(mariachiRequest));
 
-        securityRequestFactory.delete(securityRequest.getId());
+        mariachiRequestFactory.delete(mariachiRequest.getId());
 
         try {
-          readSecurity = securityRequestFactory.read(securityRequest.getId());
+          readSecurity = mariachiRequestFactory.read(mariachiRequest.getId());
         } // catch (InstanceNotFoundException e) {
         // ignore
         // }
@@ -96,17 +96,17 @@ public class SecurityRequestTest {
     }
     try {
 
-      for (SecurityRequest securityRequest : validSecurityRequest) {
-        securityRequestFactory.create(securityRequest);
+      for (MariachiRequest mariachiRequest : validMariachiRequest) {
+        mariachiRequestFactory.create(mariachiRequest);
 
-        securityRequest.setDescription("Hello");
-        securityRequestFactory.update(securityRequest);
+        mariachiRequest.setDescription("Hello");
+        mariachiRequestFactory.update(mariachiRequest);
 
-        SecurityRequest readMain = securityRequestFactory.read(securityRequest.getId());
+        MariachiRequest readMain = mariachiRequestFactory.read(mariachiRequest.getId());
 
-        assertTrue(securityRequest.equals(readMain));
+        assertTrue(mariachiRequest.equals(readMain));
 
-        securityRequestFactory.delete(securityRequest.getId());
+        mariachiRequestFactory.delete(mariachiRequest.getId());
       }
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
@@ -124,36 +124,36 @@ public class SecurityRequestTest {
     } catch (Exception e) {
 
     }
-    SecurityRequest main1 = validSecurityRequest[0];
-    SecurityRequest main2 = validSecurityRequest[1];
-    SecurityRequest main3 = validSecurityRequest[2];
-    SecurityRequest main4 = validSecurityRequest[3];
+    MariachiRequest main1 = validMariachiRequest[0];
+    MariachiRequest main2 = validMariachiRequest[1];
+    MariachiRequest main3 = validMariachiRequest[2];
+    MariachiRequest main4 = validMariachiRequest[3];
 
     NodeFactory nodeFactory = NodeFactory.getFactory();
 
     try {
-      securityRequestFactory.create(main1);
-      securityRequestFactory.create(main2);
-      securityRequestFactory.create(main3);
-      securityRequestFactory.create(main4);
+      mariachiRequestFactory.create(main1);
+      mariachiRequestFactory.create(main2);
+      mariachiRequestFactory.create(main3);
+      mariachiRequestFactory.create(main4);
 
-      List<SecurityRequest> securityAtBathroom =
-          securityRequestFactory.getSecurityRequestsByLocation(testData.validNodes[0]);
+      List<MariachiRequest> mariachiAtBathroom =
+          mariachiRequestFactory.getSecurityRequestsByLocation(testData.validNodes[0]);
 
-      assertTrue(securityAtBathroom.contains(main1));
+      assertTrue(mariachiAtBathroom.contains(main1));
 
-      assertTrue(securityAtBathroom.size() == 1);
+      assertTrue(mariachiAtBathroom.size() == 1);
 
-      List<SecurityRequest> securityAtnode2 =
-          securityRequestFactory.getSecurityRequestsByLocation(testData.validNodes[1]);
+      List<MariachiRequest> mariachiAtnode2 =
+          mariachiRequestFactory.getSecurityRequestsByLocation(testData.validNodes[1]);
 
-      assertTrue(securityAtnode2.contains(main2));
-      assertTrue(securityAtnode2.size() == 1);
+      assertTrue(mariachiAtnode2.contains(main2));
+      assertTrue(mariachiAtnode2.size() == 1);
 
-      securityRequestFactory.delete(main1.getId());
-      securityRequestFactory.delete(main2.getId());
-      securityRequestFactory.delete(main3.getId());
-      securityRequestFactory.delete(main4.getId());
+      mariachiRequestFactory.delete(main1.getId());
+      mariachiRequestFactory.delete(main2.getId());
+      mariachiRequestFactory.delete(main3.getId());
+      mariachiRequestFactory.delete(main4.getId());
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
     }
@@ -170,24 +170,24 @@ public class SecurityRequestTest {
     } catch (Exception e) {
 
     }
-    SecurityRequest main1 = validSecurityRequest[0];
-    SecurityRequest main2 = validSecurityRequest[1];
-    SecurityRequest main3 = validSecurityRequest[2];
-    SecurityRequest main4 = validSecurityRequest[3];
+    MariachiRequest main1 = validMariachiRequest[0];
+    MariachiRequest main2 = validMariachiRequest[1];
+    MariachiRequest main3 = validMariachiRequest[2];
+    MariachiRequest main4 = validMariachiRequest[3];
 
     try {
-      securityRequestFactory.create(main1);
-      securityRequestFactory.create(main2);
-      securityRequestFactory.create(main3);
-      securityRequestFactory.create(main4);
+      mariachiRequestFactory.create(main1);
+      mariachiRequestFactory.create(main2);
+      mariachiRequestFactory.create(main3);
+      mariachiRequestFactory.create(main4);
 
-      List<SecurityRequest> securityAll = securityRequestFactory.getAllSecurityRequests();
+      List<MariachiRequest> mariachiAll = mariachiRequestFactory.getAllMariachiRequest();
 
-      assertTrue(securityAll.contains(main1));
-      assertTrue(securityAll.contains(main2));
-      assertTrue(securityAll.contains(main3));
-      assertTrue(securityAll.contains(main4));
-      assertTrue(securityAll.size() == 4);
+      assertTrue(mariachiAll.contains(main1));
+      assertTrue(mariachiAll.contains(main2));
+      assertTrue(mariachiAll.contains(main3));
+      assertTrue(mariachiAll.contains(main4));
+      assertTrue(mariachiAll.size() == 4);
 
       nodeFactory.delete(main1.getId());
       nodeFactory.delete(main2.getId());

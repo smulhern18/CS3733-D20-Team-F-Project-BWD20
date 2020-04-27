@@ -8,11 +8,11 @@ import edu.wpi.teamF.DatabaseManipulators.CSVManipulator;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
 import edu.wpi.teamF.DatabaseManipulators.MaintenanceRequestFactory;
+import edu.wpi.teamF.DatabaseManipulators.MariachiRequestFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
-import edu.wpi.teamF.DatabaseManipulators.SecurityRequestFactory;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
 import edu.wpi.teamF.TestData;
 import java.io.File;
 import java.nio.file.Files;
@@ -33,13 +33,13 @@ public class TestCSV {
   static EdgeFactory edgeFactory = EdgeFactory.getFactory();
   static MaintenanceRequestFactory maintenanceRequestFactory =
       MaintenanceRequestFactory.getFactory();
-  static SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
+  static MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
   static AccountFactory accountFactory = AccountFactory.getFactory();
 
   Node[] validNodes = null;
   Edge[] validEdge = null;
   MaintenanceRequest[] validMaintenance = null;
-  SecurityRequest[] validSecurityRequest = null;
+  MariachiRequest[] validMariachiRequest = null;
   Account[] validAccounts = null;
   HashSet<String> validNeighbors1 = null;
 
@@ -51,7 +51,7 @@ public class TestCSV {
       validNodes = testData.validNodes;
       validEdge = testData.validEdges;
       validMaintenance = testData.validMaintenanceRequests;
-      validSecurityRequest = testData.validSecurityRequests;
+      validMariachiRequest = testData.validMariachiRequests;
       validAccounts = testData.validAccounts;
 
     } catch (Exception e) {
@@ -185,10 +185,10 @@ public class TestCSV {
     csvManipulator.readCSVFileSecurityService(
         getClass().getResourceAsStream("/edu/wpi/teamF/CSVSecurityTest.csv"));
 
-    List<SecurityRequest> list = securityRequestFactory.getAllSecurityRequests();
-    for (SecurityRequest n : list) {
+    List<MariachiRequest> list = mariachiRequestFactory.getAllMariachiRequest();
+    for (MariachiRequest n : list) {
 
-      Assertions.assertTrue(n.equals(validSecurityRequest[i]));
+      assertTrue(n.equals(validMariachiRequest[i]));
       i++;
     }
 

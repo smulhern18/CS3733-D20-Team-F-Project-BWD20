@@ -44,8 +44,8 @@ public class DatabaseManager {
   // Maintainence Request
   static final String MAINTENCE_REQUEST_ID_KEY = "serviceId";
 
-  // Security Request
-  static final String GUARDS_REQUESTED_KEY = "guardsRequested";
+  // Mariachi Request
+  static final String SONG_REQUEST_KEY = "songRequest";
 
   // account
   static final String USER_NAME_KEY = "userName";
@@ -135,7 +135,7 @@ public class DatabaseManager {
             + " ( "
             + SERVICEID_KEY
             + " VARCHAR(32) NOT NULL, "
-            + GUARDS_REQUESTED_KEY
+            + SONG_REQUEST_KEY
             + " VARCHAR(32) NOT NULL, "
             + "PRIMARY KEY ("
             + SERVICEID_KEY
@@ -214,8 +214,8 @@ public class DatabaseManager {
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(securityTableCreationStatement);
     preparedStatement.execute();
-    preparedStatement = connection.prepareStatement(computerTableCreationStatement);
-    preparedStatement.execute();
+    // preparedStatement = connection.prepareStatement(computerTableCreationStatement);
+    // preparedStatement.execute();
     preparedStatement = connection.prepareStatement(accountTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(appointmentTableCreationStatement);
@@ -262,8 +262,8 @@ public class DatabaseManager {
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(maintenanceTableDropStatement);
     preparedStatement.execute();
-    preparedStatement = connection.prepareStatement(computerDropStatement);
-    preparedStatement.execute();
+    // preparedStatement = connection.prepareStatement(computerDropStatement);
+    // preparedStatement.execute();
     preparedStatement = connection.prepareStatement(securityTableDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(accountDropStatement);

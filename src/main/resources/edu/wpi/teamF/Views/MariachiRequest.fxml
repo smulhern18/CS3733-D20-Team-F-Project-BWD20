@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.SecurityRequestController">
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MariachiRequestController">
 <children>
       <GridPane fx:id="optionBar" layoutX="190.0" style="-fx-border-color: pink;" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -52,13 +52,13 @@
          <children>
             <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
                <children>
-                  <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="         Location:         " />
+                  <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="Location:  " />
                 <JFXComboBox fx:id="locationComboBox" prefHeight="27.0" prefWidth="183.0" />
                </children>
             </HBox>
             <HBox alignment="BOTTOM_CENTER" GridPane.rowIndex="2">
                <children>
-                  <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="          Priority:         " />
+                  <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="Priority:  " textAlignment="RIGHT" />
                 <JFXComboBox fx:id="priorityComboBox" prefHeight="27.0" prefWidth="182.0" />
                </children>
             </HBox>
@@ -84,13 +84,13 @@
             </HBox>
             <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                <children>
-                  <Label fx:id="guardsRequestedLabel" alignment="BOTTOM_CENTER" text="Guards Requested: " />
-                  <JFXComboBox fx:id="guardsRequestedComboBox" prefHeight="27.0" prefWidth="182.0" />
+                  <Label fx:id="songRequestLabel" alignment="BOTTOM_CENTER" text="Song Request:  " />
+                  <JFXTextField fx:id="songRequestEntry" prefHeight="27.0" prefWidth="189.0" promptText=" (required)" />
                </children>
             </HBox>
             <StackPane prefHeight="86.0" prefWidth="410.0">
                <children>
-                  <Label fx:id="securityRequestLabel" text="Security Request" StackPane.alignment="TOP_CENTER">
+                  <Label fx:id="mariachiRequestLabel" text="Mariachi Band Request" StackPane.alignment="TOP_CENTER">
                      <font>
                         <Font size="36.0" />
                      </font>

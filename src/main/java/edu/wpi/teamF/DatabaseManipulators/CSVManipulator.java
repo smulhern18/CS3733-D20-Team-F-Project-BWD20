@@ -7,7 +7,7 @@ import edu.wpi.teamF.ModelClasses.Account.User;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
 import java.io.*;
 import java.nio.file.Path;
 import java.util.*;
@@ -16,7 +16,7 @@ public class CSVManipulator {
   private NodeFactory nodeFactory = NodeFactory.getFactory();
   private EdgeFactory edgeFactory = EdgeFactory.getFactory();
   private AccountFactory accountFactory = AccountFactory.getFactory();
-  private SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
+  private MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
   private MaintenanceRequestFactory maintenanceRequestFactory =
       MaintenanceRequestFactory.getFactory();
   /**
@@ -251,8 +251,8 @@ public class CSVManipulator {
 
       int i = 7;
       while (i < (data.size() - 1)) {
-        securityRequestFactory.create(
-            new SecurityRequest(
+        mariachiRequestFactory.create(
+            new MariachiRequest(
                 data.get(i),
                 nodeFactory.read(data.get(i + 1)),
                 data.get(i + 2),
@@ -260,7 +260,7 @@ public class CSVManipulator {
                 new Date(Integer.parseInt(data.get(i + 4))),
                 Integer.parseInt(data.get(i + 5)),
                 Boolean.parseBoolean(data.get(i + 6)),
-                0));
+                ""));
 
         i = i + 7;
       }
@@ -277,14 +277,14 @@ public class CSVManipulator {
   /** Writes to the CSV file so that it can become persistant */
   public void writeCSVFileSecurityService(Path path) {
     // writing to the file
-    List<SecurityRequest> securityRequests = securityRequestFactory.getAllSecurityRequest();
+    List<MariachiRequest> mariachiRequests = mariachiRequestFactory.getAllMariachiRequest();
 
     try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
       bw.write("id,location,description,dateTimeSubmitted,priority");
 
-      for (SecurityRequest s : securityRequests) {
+      for (MariachiRequest s : mariachiRequests) {
         bw.newLine();
         bw.write((formatSecurityService(s)));
       }
@@ -295,7 +295,7 @@ public class CSVManipulator {
     }
   }
   // this transformeressss the secur bruh
-  public String formatSecurityService(SecurityRequest m) {
+  public String formatSecurityService(MariachiRequest m) {
     String Main = "";
     Main =
         m.getId()
