@@ -52,6 +52,10 @@ public class Validators {
   private static final int GUARDS_MAX_VALUE = 10;
   public static final int SANITATION_TYPE_MIN_LENGTH = 1;
   public static final int SANITATION_TYPE_MAX_LENGTH = 32;
+  public static final int MEDICINE_TYPE_MIN_LENGTH = 0;
+  public static final int MEDICINE_TYPE_MAX_LENGTH = 64;
+  public static final int INSTRUCTIONS_MIN_LENGTH = 0;
+  public static final int INSTRUCTIONS_MAX_LENGTH = 64;
 
   public static <T extends ServiceRequest> void serviceRequestValidation(T t, int... constraints)
       throws ValidationException {
@@ -350,7 +354,7 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static void PCPValidation(String PCP, int... constraints) throws ValidationException {
-    nullCheckValidation(PCP, constraints);`
+    nullCheckValidation(PCP, constraints);
     if (PCP.length() < PCP_MIN_LENGTH || PCP.length() > PCP_MAX_LENGTH) {
       throw new ValidationException("PCP is outside the accepted values");
     }
@@ -416,6 +420,59 @@ public class Validators {
     priorityValidation(languageRequestObject.getPriority());
     makeValidation(languageRequestObject.getLanguage());
     hardwareSoftwareValidation(languageRequestObject.getProblemType());
+  }
+
+  /*
+   * Validation for medicine types
+   *
+   * @param medicineType the medicine type to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static void medicineTypeValidation(String medicineType, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(medicineType, constraints);
+    if (medicineType.length() < MEDICINE_TYPE_MIN_LENGTH
+        || medicineType.length() > MEDICINE_TYPE_MAX_LENGTH) {
+      throw new ValidationException("Medicine type length is out of bounds");
+    }
+  }
+
+  /**
+   * Validation for medicine delivery instructions
+   *
+   * @param instructions the instructions to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static void instructionsValidation(String instructions, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(instructions, constraints);
+    if (instructions.length() < INSTRUCTIONS_MIN_LENGTH
+        || instructions.length() > INSTRUCTIONS_MAX_LENGTH) {
+      throw new ValidationException("Instructions length is out of bounds");
+    }
+  }
+
+  /**
+   * Validation for Medicine Delivery Requests
+   *
+   * @param t an instance of a Medicine Delivery Request to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static <T extends MedicineDeliveryRequest> void medicineDeliveryRequestValidation(
+      T t, int... constraints) throws ValidationException {
+    nullCheckValidation(t, constraints);
+    MedicineDeliveryRequest medicineDeliveryRequestObject = (MedicineDeliveryRequest) t;
+
+    idValidation(medicineDeliveryRequestObject.getId());
+    nodeValidation(medicineDeliveryRequestObject.getLocation());
+    descriptionValidation(medicineDeliveryRequestObject.getDescription());
+    dateValidation(medicineDeliveryRequestObject.getDateTimeSubmitted());
+    priorityValidation(medicineDeliveryRequestObject.getPriority());
+    medicineTypeValidation(medicineDeliveryRequestObject.getMedicineType());
+    instructionsValidation(medicineDeliveryRequestObject.getInstructions());
   }
 
   /**
