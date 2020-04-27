@@ -5,13 +5,15 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.UIServiceRequest;
+import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import edu.wpi.teamF.ModelClasses.UIClasses.UIServiceRequest;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -41,12 +43,16 @@ public class ServiceRequestController implements Initializable {
   public JFXButton ongoingButton;
   public JFXButton updateButton;
   public DatabaseManager databaseManager = DatabaseManager.getManager();
+  public JFXComboBox newComboBox;
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // columns for table
 
     // add all location nodes in choicebox
+
+    UISetting uiSetting = new UISetting();
+    uiSetting.setAsLocationComboBox(newComboBox);
 
     // priority choices
     choiceBoxPriority.getItems().add("1");

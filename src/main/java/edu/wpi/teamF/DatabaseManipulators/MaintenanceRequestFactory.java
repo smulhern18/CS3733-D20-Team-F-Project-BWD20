@@ -151,7 +151,7 @@ public class MaintenanceRequestFactory {
   }
 
   public List<MaintenanceRequest> getAllMaintenanceRequests() {
-    List<MaintenanceRequest> maintenanceRequests = null;
+    List<MaintenanceRequest> maintenanceRequests = new ArrayList<>();
     String selectStatement = "SELECT * FROM " + DatabaseManager.MAINTENANCE_REQUEST_TABLE_NAME;
 
     try (PreparedStatement preparedStatement =

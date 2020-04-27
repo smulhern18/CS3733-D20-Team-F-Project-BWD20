@@ -159,7 +159,7 @@ public class EdgeFactory {
   }
 
   public Set<Edge> getAllEdgesConnectedToNode(String nodeId) {
-    Set<Edge> edges = null;
+    Set<Edge> edges = new HashSet<>();
     String selectStatement =
         "SELECT * FROM "
             + DatabaseManager.EDGES_TABLE_NAME

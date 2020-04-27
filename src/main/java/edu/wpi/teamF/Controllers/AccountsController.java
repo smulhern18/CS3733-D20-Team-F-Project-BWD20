@@ -11,7 +11,7 @@ import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Account.Admin;
 import edu.wpi.teamF.ModelClasses.Account.Staff;
 import edu.wpi.teamF.ModelClasses.Account.User;
-import edu.wpi.teamF.ModelClasses.UIAccount;
+import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
