@@ -45,6 +45,8 @@ public class Validators {
   public static final int HARDWARESOFTWARE_MAX_LENGTH = 32;
   public static final int OS_MIN_LENGTH = 1;
   public static final int OS_MAX_LENGTH = 8;
+  private static final int GUARDS_MIN_VALUE = 1;
+  private static final int GUARDS_MAX_VALUE = 10;
 
   public static <T extends ServiceRequest> void serviceRequestValidation(T t, int... constraints)
       throws ValidationException {
@@ -108,6 +110,16 @@ public class Validators {
     nullCheckValidation(OS, constraints);
     if (OS.length() < HARDWARESOFTWARE_MIN_LENGTH || OS.length() > HARDWARESOFTWARE_MAX_LENGTH) {
       throw new ValidationException("Invalid hardwareSoftware length");
+    }
+  }
+  /** Validation for Security */
+  public static void guardsRequestedValidation(int guardsRequested, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(guardsRequested, constraints);
+
+    if (!(guardsRequested >= GUARDS_MIN_VALUE && guardsRequested <= GUARDS_MAX_VALUE)) {
+
+      throw new ValidationException(" Guards requested outside of accepted values");
     }
   }
 
@@ -379,7 +391,14 @@ public class Validators {
   public static <T extends SecurityRequest> void securityRequestValidation(T t, int... constraints)
       throws ValidationException {
     nullCheckValidation(t, constraints);
-    SecurityRequest securityRequestObject = (SecurityRequest) t;
+    SecurityRequest securityRequest = (SecurityRequest) t;
+
+    idValidation(securityRequest.getId());
+    nodeValidation(securityRequest.getLocation());
+    descriptionValidation(securityRequest.getDescription());
+    dateValidation(securityRequest.getDateTimeSubmitted());
+    priorityValidation(securityRequest.getPriority());
+    guardsRequestedValidation(securityRequest.getGuardsRequested());
   }
 
   /**

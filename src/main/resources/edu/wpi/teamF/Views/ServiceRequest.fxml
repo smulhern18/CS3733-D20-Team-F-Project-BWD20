@@ -2,75 +2,67 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXTreeTableView?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-border-color: #B53389; -fx-border-width: 2.5; -fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ServiceRequestController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <JFXButton layoutX="311.0" layoutY="67.0" prefHeight="32.0" prefWidth="182.0" text="Service Request">
+         <font>
+            <Font name="STFangsong" size="24.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="44.0" fitWidth="423.0" layoutX="186.0" layoutY="2.0">
+         <image>
+            <Image url="@../../../../Images/white%20bar.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="184.0" layoutY="7.0" prefHeight="32.0" prefWidth="209.0" text="Request Service" textFill="#000000cc">
+         <font>
+            <Font name="STFangsong" size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="404.0" layoutY="7.0" prefHeight="32.0" prefWidth="205.0" text="Check Status" textFill="#000000cc">
+         <font>
+            <Font name="STFangsong" size="18.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="11.0" fitWidth="111.0" layoutX="233.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/pink%20bar.png" />
+         </image>
+      </ImageView>
+      <TextArea fx:id="textAreaDesc" layoutX="349.0" layoutY="188.0" prefHeight="63.0" prefWidth="185.0" />
+      <JFXButton layoutX="239.0" layoutY="137.0" prefHeight="32.0" prefWidth="106.0" text="Location:">
+         <font>
+            <Font name="STFangsong" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="220.0" layoutY="172.0" prefHeight="32.0" prefWidth="127.0" text="Description:">
+         <font>
+            <Font name="STFangsong" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXComboBox layoutX="350.0" layoutY="133.0" prefHeight="27.0" prefWidth="183.0" />
+      <JFXButton layoutX="234.0" layoutY="258.0" prefHeight="32.0" prefWidth="127.0" text="Priority:">
+         <font>
+            <Font name="STFangsong" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXComboBox layoutX="350.0" layoutY="261.0" prefHeight="27.0" prefWidth="182.0" />
+      <JFXButton layoutX="310.0" layoutY="344.0" prefHeight="32.0" prefWidth="89.0" style="-fx-background-color: #FFD3DF#FFD3DF;" text="Submit" textFill="#000000cc">
+         <font>
+            <Font name="STFangsong" size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="441.0" layoutY="343.0" prefHeight="32.0" prefWidth="82.0" style="-fx-background-color: #FFD3DF#FFD3DF;" text="Cancel" textFill="#000000cc">
+         <font>
+            <Font name="STFangsong" size="18.0" />
+         </font>
+      </JFXButton>
       <fx:include source="MenuBar.fxml" />
-      <Text layoutX="552.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Service Request">
-         <font>
-            <Font name="System Bold" size="25.0" />
-         </font>
-      </Text>
-      <Line endX="113.0" layoutX="644.0" layoutY="182.0" startX="-108.0" stroke="#b53389" />
-      <JFXButton fx:id="cancelButton" buttonType="RAISED" layoutX="682.0" layoutY="670.0" onAction="#cancel" prefHeight="54.0" prefWidth="209.0" ripplerFill="#b53389" style="-fx-background-color: white;" text="Cancel">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </JFXButton>
-      <Text layoutX="305.0" layoutY="560.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Priority:" wrappingWidth="141.5283203125">
-         <font>
-            <Font name="System Bold" size="25.0" />
-         </font>
-      </Text>
-      <Text layoutX="305.0" layoutY="339.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description:">
-         <font>
-            <Font name="System Bold" size="25.0" />
-         </font>
-      </Text>
-      <Text layoutX="305.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location:" wrappingWidth="141.5283203125">
-         <font>
-            <Font name="System Bold" size="25.0" />
-         </font>
-      </Text>
-      <JFXButton fx:id="submitRequestButton" buttonType="RAISED" layoutX="394.0" layoutY="670.0" onAction="#submit" ripplerFill="#b53389" style="-fx-background-color: white;" text="Submit Request">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </JFXButton>
-      <ChoiceBox fx:id="choiceBoxLoc" layoutX="468.0" layoutY="248.0" prefWidth="150.0" />
-      <TextArea fx:id="textAreaDesc" layoutX="468.0" layoutY="312.0" prefHeight="202.0" prefWidth="323.0" />
-      <ChoiceBox fx:id="choiceBoxPriority" layoutX="468.0" layoutY="538.0" prefWidth="150.0" />
-      <Text layoutX="305.0" layoutY="620.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type:" wrappingWidth="141.5283203125">
-         <font>
-            <Font name="System Bold" size="25.0" />
-         </font>
-      </Text>
-      <ChoiceBox fx:id="choiceBoxType" layoutX="468.0" layoutY="599.0" prefWidth="150.0" />
-      <AnchorPane fx:id="mapView" layoutX="166.0" layoutY="212.0" prefHeight="425.0" prefWidth="852.0" style="-fx-background-color: white;" visible="false">
-         <children>
-
-            <JFXTreeTableView fx:id="serviceTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="382.0" prefWidth="742.0" />
-
-         </children>
-      </AnchorPane>
-      <JFXButton fx:id="ongoingButton" buttonType="RAISED" layoutX="930.0" layoutY="670.0" onAction="#showServiceRequests" prefHeight="54.0" prefWidth="331.0" ripplerFill="#b53389" style="-fx-background-color: white;" text="Ongoing Service Requests">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </JFXButton>
-      <JFXButton fx:id="cancelOngoing" buttonType="RAISED" layoutX="930.0" layoutY="670.0" onAction="#backtoInput" prefHeight="54.0" prefWidth="331.0" style="-fx-background-color: white;" text="Cancel" visible="false">
-         <font>
-            <Font size="25.0" />
-         </font>
-      </JFXButton>
-      <JFXButton fx:id="updateButton" buttonType="RAISED" layoutX="1032.0" layoutY="212.0" onAction="#updateRequests" prefHeight="41.0" prefWidth="142.0" style="-fx-background-color: white;" text="Update" visible="false" />
-      <JFXComboBox fx:id="newComboBox" layoutX="643.0" layoutY="248.0" />
    </children>
 </AnchorPane>

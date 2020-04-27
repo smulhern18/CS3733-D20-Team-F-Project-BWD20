@@ -149,10 +149,10 @@ public class ServiceRequestController implements Initializable {
     DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
 
     if (serviceType.equals("Security")) {
-      SecurityRequest secRequest =
-          new SecurityRequest(
-              nodeFactory.read(nodeID), "NOT ASSIGNED", description, date, priority);
-      securityRequestFactory.create(secRequest);
+      SecurityRequest secRequest = null;
+      //          new SecurityRequest(
+      //              nodeFactory.read(nodeID), "NOT ASSIGNED", description, date, priority);
+      //      securityRequestFactory.create(secRequest);
 
     } else if (serviceType.equals("Maintenance")) {
       MaintenanceRequest maintenanceRequest =
@@ -266,7 +266,7 @@ public class ServiceRequestController implements Initializable {
       }
     }
 
-    List<SecurityRequest> securityRequests = securityRequestFactory.getAllSecurityRequests();
+    List<SecurityRequest> securityRequests = securityRequestFactory.getAllSecurityRequest();
     if (securityRequests != null) {
       for (int i = 0; i < securityRequests.size(); i++) {
         serviceRequests.add(new UIServiceRequest(securityRequests.get(i)));

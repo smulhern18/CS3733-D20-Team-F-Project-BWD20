@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="407.0" prefWidth="784.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Views.ServiceRequestMain">
+   <children>
+      <Label layoutX="398.0" layoutY="49.0" prefHeight="61.0" prefWidth="167.0" text="Service Request">
+         <font>
+            <Font name="STIXGeneral-Regular" size="24.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="236.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/icons8-qzemail03.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="340.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/icons8-qzemail03.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="445.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/icons8-qzemail03.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="543.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/icons8-qzemail03.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="644.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/icons8-qzemail03.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="653.0" layoutY="194.0" text="Security">
+         <font>
+            <Font name="STIXGeneral-Regular" size="13.0" />
+         </font>
+      </JFXButton>
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="241.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/icons8-qzemail03.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="345.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/icons8-qzemail03.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="450.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/icons8-qzemail03.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="548.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/icons8-qzemail03.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="649.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Images/icons8-qzemail03.png" />
+         </image>
+      </ImageView>
+      <JFXButton layoutX="654.0" layoutY="313.0" text="Security">
+         <font>
+            <Font name="STIXGeneral-Regular" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="553.0" layoutY="313.0" text="Security">
+         <font>
+            <Font name="STIXGeneral-Regular" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="553.0" layoutY="194.0" text="Security">
+         <font>
+            <Font name="STIXGeneral-Regular" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="455.0" layoutY="194.0" text="Security">
+         <font>
+            <Font name="STIXGeneral-Regular" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="459.0" layoutY="313.0" text="Security">
+         <font>
+            <Font name="STIXGeneral-Regular" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="345.0" layoutY="194.0" text="Security">
+         <font>
+            <Font name="STIXGeneral-Regular" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="350.0" layoutY="313.0" text="Security">
+         <font>
+            <Font name="STIXGeneral-Regular" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="241.0" layoutY="194.0" text="Security">
+         <font>
+            <Font name="STIXGeneral-Regular" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="241.0" layoutY="313.0" text="Security">
+         <font>
+            <Font name="STIXGeneral-Regular" size="13.0" />
+         </font>
+      </JFXButton>
+      <fx:include source="MenuBar.fxml" />
+   </children>
+</AnchorPane>
