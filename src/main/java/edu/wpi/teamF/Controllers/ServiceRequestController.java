@@ -145,8 +145,8 @@ public class ServiceRequestController implements Initializable {
       SecurityRequest secRequest =
           new SecurityRequest(
               databaseManager.readNode(nodeID), "NOT ASSIGNED", description, date, priority);
+      // needs a number of security people to be inserted
       databaseManager.manipulateServiceRequest(secRequest);
-
     } else if (serviceType.equals("Maintenance")) {
       MaintenanceRequest maintenanceRequest =
           new MaintenanceRequest(

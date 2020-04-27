@@ -91,7 +91,8 @@ public class ServiceRequestFactory {
                   resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
                   new Date(resultSet.getTimestamp(DatabaseManager.TIME_CREATED_KEY).getTime()),
                   resultSet.getInt(DatabaseManager.PRIORITY_KEY),
-                  resultSet.getBoolean(DatabaseManager.COMPLETED_KEY));
+                  resultSet.getBoolean(DatabaseManager.COMPLETED_KEY),
+                      0);
         }
       } catch (ValidationException e) {
         throw e;
@@ -187,14 +188,14 @@ public class ServiceRequestFactory {
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
           serviceRequests.add(
-              new SecurityRequest(
+              new ServiceRequest(
                   resultSet.getString(DatabaseManager.SERVICEID_KEY),
                   location,
                   resultSet.getString(DatabaseManager.ASSIGNED_KEY),
                   resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
                   new Date(resultSet.getTimestamp(DatabaseManager.TIME_CREATED_KEY).getTime()),
                   resultSet.getInt(DatabaseManager.PRIORITY_KEY),
-                  resultSet.getBoolean(DatabaseManager.COMPLETED_KEY)));
+                  resultSet.getBoolean(DatabaseManager.COMPLETED_KEY)) {});
         }
       } catch (ValidationException e) {
         throw e;
