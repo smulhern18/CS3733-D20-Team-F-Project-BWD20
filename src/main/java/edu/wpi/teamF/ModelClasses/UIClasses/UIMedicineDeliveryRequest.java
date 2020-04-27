@@ -11,7 +11,6 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class UIMedicineDeliveryRequest extends RecursiveTreeObject<UIMedicineDeliveryRequest> {
-
   public SimpleStringProperty ID;
   public SimpleStringProperty location;
   public SimpleStringProperty medicineType;
@@ -48,9 +47,9 @@ public class UIMedicineDeliveryRequest extends RecursiveTreeObject<UIMedicineDel
     if (other instanceof MedicineDeliveryRequest) {
       MedicineDeliveryRequest otherMedicineDeliveryRequest = (MedicineDeliveryRequest) other;
       isEqual =
-          this.description.equals(otherMedicineDeliveryRequest.getDescription())
-              && this.location.equals(otherMedicineDeliveryRequest.getLocation())
-              && this.ID.equals(otherMedicineDeliveryRequest.getId());
+              this.description.equals(otherMedicineDeliveryRequest.getDescription())
+                      && this.location.equals(otherMedicineDeliveryRequest.getLocation())
+                      && this.ID.equals(otherMedicineDeliveryRequest.getId());
     }
     return isEqual;
   }
