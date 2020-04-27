@@ -84,13 +84,6 @@ public class ComputerServiceController implements Initializable {
               }
             });
 
-    // add the different choices to the choicebox
-    // Replace this with long names, linked to IDs
-    List<Node> nodes = nodeFactory.getAllNodes();
-    for (Node node : nodes) {
-      locationChoice.getItems().add(node.getId());
-    }
-
     makeChoice.getItems().add("Apple");
     makeChoice.getItems().add("DELL");
     makeChoice.getItems().add("Lenovo");

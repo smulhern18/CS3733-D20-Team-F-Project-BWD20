@@ -12,7 +12,7 @@ public class MenuBarController {
   }
 
   public void pathfinder(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("Pathfinder");
+    sceneController.switchScene("PathfinderVersion2");
   }
 
   public void serviceRequest(ActionEvent actionEvent) throws IOException {
