@@ -51,6 +51,7 @@ public class MariachiRequestController implements Initializable {
   List<MariachiRequest> mariachiRequestList = mariachiRequestFactory.getAllMariachiRequest();
   ObservableList<UIMariachiRequest> uiMariachiRequests = FXCollections.observableArrayList();
 
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // add the different choices to the choicebox

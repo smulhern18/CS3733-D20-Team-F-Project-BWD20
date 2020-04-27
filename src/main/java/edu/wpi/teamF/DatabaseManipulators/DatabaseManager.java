@@ -6,9 +6,11 @@ import edu.wpi.teamF.ModelClasses.Appointment;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.LanguageServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
+import edu.wpi.teamF.ModelClasses.ValidationException;
 
 import java.io.InputStream;
 import java.nio.file.Path;
@@ -104,6 +106,7 @@ public class DatabaseManager {
   private ComputerServiceRequestFactory computerServiceRequestFactory =
       ComputerServiceRequestFactory.getFactory();
   private AppointmentFactory appointmentFactory = AppointmentFactory.getFactory();
+  private LanguageServiceRequestFactory languageServiceRequestFactory = LanguageServiceRequestFactory.getFactory();
 
   // SanitationService requests
   static final String SANITATION_TYPE_KEY = "SanitationType";
@@ -545,6 +548,15 @@ public class DatabaseManager {
     }
   }
 
+  public void manipulateServiceRequest(LanguageServiceRequest langRequest) throws ValidationException {
+    if (languageServiceRequestFactory.read(langRequest.getId()) == null) {
+      languageServiceRequestFactory.create(langRequest);
+    } else {
+      languageServiceRequestFactory.update(langRequest);
+    }
+
+  }
+
   public MaintenanceRequest readMaintenanceRequest(String serviceId) throws Exception {
     return maintenanceRequestFactory.read(serviceId);
   }
@@ -557,6 +569,10 @@ public class DatabaseManager {
     return ComputerServiceRequestFactory.read(serviceId);
   }
 
+  public LanguageServiceRequest readLanguageServiceRequest(String serviceId) throws Exception {
+    return LanguageServiceRequestFactory.read(serviceId);
+  }
+
   public void deleteComputerServiceRequest(String serviceId) throws Exception {
     computerServiceRequestFactory.delete(serviceId);
   }
@@ -567,6 +583,10 @@ public class DatabaseManager {
 
   public void deleteSecurityRequest(String serviceId) throws Exception {
     securityRequestFactory.delete(serviceId);
+  }
+
+  public void deleteLanguageServiceRequest(String serviceId) throws Exception {
+    languageServiceRequestFactory.delete(serviceId);
   }
 
   public List<MaintenanceRequest> getMaintenanceRequestsByLocation(Node node) throws Exception {
@@ -592,6 +612,10 @@ public class DatabaseManager {
 
   public List<ComputerServiceRequest> getAllComputerServiceRequests() throws Exception {
     return computerServiceRequestFactory.getAllComputerRequests();
+  }
+
+  public List<LanguageServiceRequest> getAllLanguageServiceRequests() throws Exception{
+    return languageServiceRequestFactory.getAllLanguageRequests();
   }
 
   /*
@@ -630,4 +654,5 @@ public class DatabaseManager {
     CSVManipulator csvManipulator = new CSVManipulator();
     csvManipulator.readCSVFileAccount(stream);
   }
+
 }

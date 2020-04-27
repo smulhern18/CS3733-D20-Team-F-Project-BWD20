@@ -54,7 +54,7 @@ public class LanguageServiceRequestFactory {
     }
   }
 
-  public LanguageServiceRequest read(String id) {
+  public static LanguageServiceRequest read(String id) {
     LanguageServiceRequest languageService = null;
     String selectStatement =
         "SELECT * FROM "

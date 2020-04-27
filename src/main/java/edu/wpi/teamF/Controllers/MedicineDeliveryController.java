@@ -67,6 +67,8 @@ public class MedicineDeliveryController implements Initializable {
   List<MedicineDeliveryRequest> medicineDeliveryRequests =
       medicineDeliveryRequest.getAllMedicineDeliveryRequests();
 
+
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 

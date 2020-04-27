@@ -98,9 +98,9 @@
             </HBox>
                 <StackPane prefHeight="86.0" prefWidth="410.0">
                     <children>
-                        <Label fx:id="securityRequestLabel" text="Security Request" StackPane.alignment="TOP_CENTER">
+                        <Label fx:id="securityRequestLabel" text="Language Service Request" StackPane.alignment="TOP_CENTER">
                             <font>
-                                <Font size="36.0" />
+                                <Font size="30.0" />
                             </font>
                         </Label>
                     </children>

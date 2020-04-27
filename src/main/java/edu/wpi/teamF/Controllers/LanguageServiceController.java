@@ -3,10 +3,13 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.DatabaseManipulators.LanguageServiceRequestFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Node;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.LanguageServiceRequest;
+import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UILanguageServiceRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.net.URL;
@@ -51,18 +54,21 @@ public class LanguageServiceController implements Initializable {
   public JFXComboBox<String> problemTypeCombobox;
   public JFXTextArea descriptionText;
   public JFXComboBox<String> priorityCombobox;
-  NodeFactory nodeFactory = NodeFactory.getFactory();
-  LanguageServiceRequestFactory languageServiceRequest =
-      LanguageServiceRequestFactory.getFactory(); // need to do
+
+
+  DatabaseManager databaseManager = DatabaseManager.getManager();
   List<LanguageServiceRequest> languageServiceRequests =
-      languageServiceRequest.getAllLanguageRequests();
+          databaseManager.getAllLanguageServiceRequests();
+
+  public LanguageServiceController() throws Exception {
+  }
 
   public void submit(ActionEvent actionEvent)
-      throws ValidationException, InstanceNotFoundException {
+          throws Exception {
     // Get the values
     String location = locationCombobox.getValue();
     String nodeId = location.substring(location.length() - 10);
-    Node node = nodeFactory.read(nodeId);
+    Node node = databaseManager.readNode(nodeId);
     String language = languageCombobox.getValue();
     String problemType = problemTypeCombobox.getValue();
     String desc = descriptionText.getText();
@@ -82,7 +88,7 @@ public class LanguageServiceController implements Initializable {
     LanguageServiceRequest langRequest =
         new LanguageServiceRequest(
             node, desc, "Not Assigned", date, priorityDB, language, problemType);
-    languageServiceRequest.create(langRequest);
+    databaseManager.manipulateServiceRequest(langRequest);
     langUI.add(new UILanguageServiceRequest(langRequest));
     table.refresh();
     descriptionText.setText("");
@@ -101,9 +107,9 @@ public class LanguageServiceController implements Initializable {
   }
 
   public void update(ActionEvent actionEvent)
-      throws ValidationException, InstanceNotFoundException {
+          throws Exception {
     for (UILanguageServiceRequest langui : langUI) {
-      LanguageServiceRequest toUpdate = languageServiceRequest.read(langui.getID().get());
+      LanguageServiceRequest toUpdate = databaseManager.readLanguageServiceRequest(langui.getID().get());
       boolean isSame = langui.equalsLang(toUpdate);
       if (!isSame) {
         toUpdate.setAssignee(langui.getAssignee().get());
@@ -114,7 +120,7 @@ public class LanguageServiceController implements Initializable {
         } else if (completed.equals("Complete")) {
           toUpdate.setComplete(true);
         }
-        languageServiceRequest.update(toUpdate);
+        databaseManager.manipulateServiceRequest(toUpdate);
       }
     }
     table.refresh();
@@ -160,9 +166,9 @@ public class LanguageServiceController implements Initializable {
     }
   }
 
-  public void delete(ActionEvent actionEvent) {
+  public void delete(ActionEvent actionEvent) throws Exception {
     String toDelte = deleteText.getText();
-    languageServiceRequest.delete(toDelte);
+    databaseManager.deleteLanguageServiceRequest(toDelte);
     langUI.removeIf(languageServiceRequest -> languageServiceRequest.getID().get().equals(toDelte));
     deleteText.setText("");
     table.refresh();
@@ -171,7 +177,15 @@ public class LanguageServiceController implements Initializable {
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
 
-    List<Node> nodes = nodeFactory.getAllNodes();
+    List<Node> nodes = null;
+    try {
+      nodes = databaseManager.getAllNodes();
+    } catch (Exception e) {
+      System.out.println(e.getMessage() + e.getClass());
+    }
+    for (Node node : nodes) {
+      locationCombobox.getItems().add(node.getId());
+    }
     UISetting uiSetting = new UISetting();
     uiSetting.setAsLocationComboBox(locationCombobox);
 
