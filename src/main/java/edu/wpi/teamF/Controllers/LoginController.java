@@ -4,8 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import edu.wpi.teamF.App;
-import edu.wpi.teamF.DatabaseManipulators.AccountFactory;
-import edu.wpi.teamF.ModelClasses.Account.PasswordHasher;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -33,9 +32,9 @@ public class LoginController implements Initializable {
 
   @FXML private Label incorrectLabel; // label that is displayed if teh input is not valid
 
-  private AccountFactory accountFactory = AccountFactory.getFactory();
-
   SceneController sceneController = App.getSceneController(); // used to switch between scenes
+
+  DatabaseManager databaseManager = DatabaseManager.getManager();
 
   @FXML
   void enableLogin(KeyEvent event) { // called on each key release for both inputs
@@ -54,8 +53,7 @@ public class LoginController implements Initializable {
     String username = usernameInput.getText();
     String password = passwordInput.getText();
     try {
-      if (PasswordHasher.verifyPassword(
-          password, accountFactory.getPasswordByUsername(username))) { // does the password match
+      if (databaseManager.verifyPassword(username, password)) { // does the password match
         System.out.println("The account is valid");
         switchToMainMenu2();
         // code that logs the user into the application

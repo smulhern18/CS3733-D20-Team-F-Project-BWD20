@@ -10,7 +10,10 @@ public abstract class Account extends RecursiveTreeObject<Account> {
   public static enum Type {
     ADMIN(0),
     STAFF(1),
-    USER(2);
+    USER(2),
+    PATIENT(3),
+    JANITOR(4),
+    NURSE(5);
 
     private Integer typeOrdinal;
 

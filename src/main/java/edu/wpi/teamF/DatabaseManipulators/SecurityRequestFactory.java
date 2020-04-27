@@ -18,7 +18,7 @@ public class SecurityRequestFactory {
   private static final ServiceRequestFactory serviceRequestFactory =
       ServiceRequestFactory.getFactory();
 
-  public static SecurityRequestFactory getFactory() {
+  static SecurityRequestFactory getFactory() {
     return factory;
   }
 

@@ -2,20 +2,18 @@ package edu.wpi.teamF.Controllers;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import edu.wpi.teamF.Controllers.UISettings.UISetting;
-import edu.wpi.teamF.DatabaseManipulators.MaintenanceRequestFactory;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
-import edu.wpi.teamF.DatabaseManipulators.SecurityRequestFactory;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
-import edu.wpi.teamF.ModelClasses.UIClasses.UIServiceRequest;
-import edu.wpi.teamF.ModelClasses.ValidationException;
+import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import edu.wpi.teamF.ModelClasses.UIClasses.UIServiceRequest;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -28,7 +26,6 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
-import javax.management.InstanceNotFoundException;
 
 public class ServiceRequestController implements Initializable {
 
@@ -37,10 +34,6 @@ public class ServiceRequestController implements Initializable {
   public TextArea textAreaDesc;
   public ChoiceBox<String> choiceBoxPriority;
   public ChoiceBox<String> choiceBoxType;
-  public NodeFactory nodeFactory = NodeFactory.getFactory();
-  public SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
-  public MaintenanceRequestFactory maintenanceRequestFactory =
-      MaintenanceRequestFactory.getFactory();
   public ObservableList<UIServiceRequest> serviceRequests = FXCollections.observableArrayList();
   public JFXTreeTableView<UIServiceRequest> serviceTable;
   public AnchorPane mapView;
@@ -49,6 +42,7 @@ public class ServiceRequestController implements Initializable {
   public JFXButton cancelOngoing;
   public JFXButton ongoingButton;
   public JFXButton updateButton;
+  public DatabaseManager databaseManager = DatabaseManager.getManager();
   public JFXComboBox newComboBox;
 
   @Override
@@ -91,8 +85,7 @@ public class ServiceRequestController implements Initializable {
     choiceBoxLoc.getItems().add("Primary Care Physicians");
   }
 
-  public void submit(ActionEvent actionEvent)
-      throws InstanceNotFoundException, ValidationException {
+  public void submit(ActionEvent actionEvent) throws Exception {
 
     // get priority & location
     int priority = Integer.parseInt(choiceBoxPriority.getValue());
@@ -151,14 +144,14 @@ public class ServiceRequestController implements Initializable {
     if (serviceType.equals("Security")) {
       SecurityRequest secRequest =
           new SecurityRequest(
-              nodeFactory.read(nodeID), "NOT ASSIGNED", description, date, priority);
-      securityRequestFactory.create(secRequest);
+              databaseManager.readNode(nodeID), "NOT ASSIGNED", description, date, priority);
+      databaseManager.manipulateServiceRequest(secRequest);
 
     } else if (serviceType.equals("Maintenance")) {
       MaintenanceRequest maintenanceRequest =
           new MaintenanceRequest(
-              nodeFactory.read(nodeID), "NOT ASSIGNED", description, date, priority);
-      maintenanceRequestFactory.create(maintenanceRequest);
+              databaseManager.readNode(nodeID), "NOT ASSIGNED", description, date, priority);
+      databaseManager.manipulateServiceRequest(maintenanceRequest);
     }
 
     reset();
@@ -176,7 +169,7 @@ public class ServiceRequestController implements Initializable {
     textAreaDesc.setText("");
   }
 
-  public void showServiceRequests(ActionEvent actionEvent) {
+  public void showServiceRequests(ActionEvent actionEvent) throws Exception {
     serviceRequests = FXCollections.observableArrayList();
     submitRequestButton.setVisible(false);
     cancelButton.setVisible(false);
@@ -258,15 +251,14 @@ public class ServiceRequestController implements Initializable {
             return param.getValue().getValue().id;
           }
         });
-    List<MaintenanceRequest> maintenanceRequests =
-        maintenanceRequestFactory.getAllMaintenanceRequests();
+    List<MaintenanceRequest> maintenanceRequests = databaseManager.getAllMaintenanceRequests();
     if (maintenanceRequests != null) {
       for (int i = 0; i < maintenanceRequests.size(); i++) {
         serviceRequests.add(new UIServiceRequest(maintenanceRequests.get(i)));
       }
     }
 
-    List<SecurityRequest> securityRequests = securityRequestFactory.getAllSecurityRequests();
+    List<SecurityRequest> securityRequests = databaseManager.getAllSecurityRequests();
     if (securityRequests != null) {
       for (int i = 0; i < securityRequests.size(); i++) {
         serviceRequests.add(new UIServiceRequest(securityRequests.get(i)));
@@ -285,19 +277,21 @@ public class ServiceRequestController implements Initializable {
     serviceTable.setShowRoot(false);
   }
 
-  public void updateRequests(ActionEvent actionEvent) throws ValidationException {
+  public void updateRequests(ActionEvent actionEvent) throws Exception {
     for (UIServiceRequest req : serviceRequests) {
       if (req.serviceType.get().equals("Maintenance")
-          && !req.equals(new UIServiceRequest(maintenanceRequestFactory.read(req.id.get())))) {
-        MaintenanceRequest maintenanceRequest = maintenanceRequestFactory.read(req.id.get());
+          && !req.equals(
+              new UIServiceRequest(databaseManager.readMaintenanceRequest(req.id.get())))) {
+        MaintenanceRequest maintenanceRequest =
+            databaseManager.readMaintenanceRequest(req.id.get());
         maintenanceRequest.setDescription(req.description.get());
-        maintenanceRequestFactory.update(maintenanceRequest);
+        databaseManager.manipulateServiceRequest(maintenanceRequest);
 
       } else if (req.serviceType.get().equals("Security")
-          && !req.equals(new UIServiceRequest(securityRequestFactory.read(req.id.get())))) {
-        SecurityRequest securityRequest = securityRequestFactory.read(req.id.get());
+          && !req.equals(new UIServiceRequest(databaseManager.readSecurityRequest(req.id.get())))) {
+        SecurityRequest securityRequest = databaseManager.readSecurityRequest((req.id.get()));
         securityRequest.setDescription(req.description.get());
-        securityRequestFactory.update(securityRequest);
+        databaseManager.manipulateServiceRequest(securityRequest);
       }
       serviceTable.refresh();
     }

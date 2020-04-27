@@ -1,10 +1,8 @@
 package edu.wpi.teamF.ModelClasses;
 
 import edu.wpi.teamF.ModelClasses.Account.Account;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
+
 import java.util.Date;
 
 public class Validators {
@@ -45,6 +43,8 @@ public class Validators {
   public static final int HARDWARESOFTWARE_MAX_LENGTH = 32;
   public static final int OS_MIN_LENGTH = 1;
   public static final int OS_MAX_LENGTH = 8;
+  public static final int TRANSPORT_TYPE_MIN_LENGTH = 1;
+  public static final int TRANSPORT_TYPE_MAX_LENGTH = 32;
 
   public static <T extends ServiceRequest> void serviceRequestValidation(T t, int... constraints)
       throws ValidationException {
@@ -74,8 +74,9 @@ public class Validators {
   public static void emailAddressValidation(String address, int... constraints)
       throws ValidationException {
     nullCheckValidation(address, constraints);
-    if ((!address.contains("@") || !address.contains("."))
-        && (address.length() > ADDRESS_MIN_LENGTH && address.length() < ADDRESS_MAX_LENGTH)) {
+    if (address.matches(
+            "^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
+        && !(address.length() > ADDRESS_MIN_LENGTH || address.length() < ADDRESS_MAX_LENGTH)) {
       throw new ValidationException("Invalid Email Address: " + address);
     }
   }
@@ -425,6 +426,42 @@ public class Validators {
     if (priority < PRIORITY_MIN_LENGTH || priority > PRIORITY_MAX_LENGTH) {
       throw new ValidationException("Priority is outside accepted values");
     }
+  }
+
+  /**
+   * Validation for transport types
+   *
+   * @param type the type to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static void transportTypeValidation(String type, int... constraints)
+          throws ValidationException {
+    nullCheckValidation(type, constraints);
+    if (type.length() < TRANSPORT_TYPE_MIN_LENGTH
+            || type.length() > TRANSPORT_TYPE_MAX_LENGTH) {
+      throw new ValidationException("Transport type is outside accepted values");
+    }
+  }
+
+  /**
+   * Validation for Transport Requests
+   *
+   * @param t a transport request to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static <T extends TransportRequest> void transportRequestValidation(T t, int... constraints)
+          throws ValidationException {
+    nullCheckValidation(t, constraints);
+    TransportRequest transportRequestObject = (TransportRequest) t;
+    idValidation(transportRequestObject.getId());
+    nodeValidation(transportRequestObject.getLocation());
+    descriptionValidation(transportRequestObject.getDescription());
+    dateValidation(transportRequestObject.getDateTimeSubmitted());
+    priorityValidation(transportRequestObject.getPriority());
+    transportTypeValidation(transportRequestObject.getType());
+    nodeValidation(transportRequestObject.getDestination());
   }
 
   public static void booleanValidation(boolean bool, int... constraints)

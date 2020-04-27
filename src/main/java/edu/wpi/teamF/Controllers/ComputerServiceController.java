@@ -5,6 +5,7 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.ComputerServiceRequestFactory;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
@@ -64,25 +65,28 @@ public class ComputerServiceController implements Initializable {
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UIComputerServiceRequest> csrUI = FXCollections.observableArrayList();
-  NodeFactory nodeFactory = NodeFactory.getFactory();
-  ComputerServiceRequestFactory computerServiceRequest = ComputerServiceRequestFactory.getFactory();
+  DatabaseManager databaseManager = DatabaseManager.getManager();
   List<ComputerServiceRequest> computerServiceRequests =
-      computerServiceRequest.getAllComputerRequests();
+      databaseManager.getAllComputerServiceRequests();
+
+  public ComputerServiceController() throws Exception {}
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    // add the different choices to the choicebox
+    // Replace this with long names, linked to IDs
+    List<Node> nodes = null;
+    try {
+      nodes = databaseManager.getAllNodes();
+    } catch (Exception e) {
+      System.out.println(e.getMessage() + e.getClass());
+    }
+    for (Node node : nodes) {
+      locationChoice.getItems().add(node.getId());
+    }
 
     UISetting uiSetting = new UISetting();
     uiSetting.setAsLocationComboBox(locationChoice);
-
-    anchorPane
-        .widthProperty()
-        .addListener(
-            (observable, oldWidth, newWidth) -> {
-              if (newWidth.doubleValue() != oldWidth.doubleValue()) {
-                resize(newWidth.doubleValue());
-              }
-            });
 
     makeChoice.getItems().add("Apple");
     makeChoice.getItems().add("DELL");
@@ -256,11 +260,10 @@ public class ComputerServiceController implements Initializable {
     treeTableComputer.setShowRoot(false);
   }
 
-  public void submit(ActionEvent actionEvent)
-      throws ValidationException, InstanceNotFoundException {
-    // Get the valuesgit s
+  public void submit(ActionEvent actionEvent) throws Exception {
+    // Get the values
     String location = locationChoice.getValue();
-    Node node = nodeFactory.read(location);
+    Node node = databaseManager.readNode(location);
     String make = makeChoice.getValue();
     String issueType = issueChoice.getValue();
     String OS = OSChoice.getValue();
@@ -281,7 +284,7 @@ public class ComputerServiceController implements Initializable {
     ComputerServiceRequest csRequest =
         new ComputerServiceRequest(
             node, desc, "Not Assigned", date, priorityDB, make, issueType, OS);
-    computerServiceRequest.create(csRequest);
+    databaseManager.manipulateServiceRequest(csRequest);
     csrUI.add(new UIComputerServiceRequest(csRequest));
     treeTableComputer.refresh();
     descText.setText("");
@@ -302,9 +305,9 @@ public class ComputerServiceController implements Initializable {
   }
 
   public void update(ActionEvent actionEvent)
-      throws ValidationException, InstanceNotFoundException {
+      throws Exception{
     for (UIComputerServiceRequest csrui : csrUI) {
-      ComputerServiceRequest toUpdate = computerServiceRequest.read(csrui.getID().get());
+      ComputerServiceRequest toUpdate = databaseManager.readComputerServiceRequest(csrui.getID().get());
       boolean isSame = csrui.equalsCSR(toUpdate);
       if (!isSame) {
         toUpdate.setAssignee(csrui.getAssignee().get());
@@ -315,15 +318,15 @@ public class ComputerServiceController implements Initializable {
         } else if (completed.equals("Complete")) {
           toUpdate.setComplete(true);
         }
-        computerServiceRequest.update(toUpdate);
+        databaseManager.manipulateServiceRequest(toUpdate);
       }
     }
     treeTableComputer.refresh();
   }
 
-  public void delete(ActionEvent actionEvent) {
+  public void delete(ActionEvent actionEvent) throws Exception{
     String toDelte = deleteText.getText();
-    computerServiceRequest.delete(toDelte);
+    databaseManager.deleteComputerServiceRequest(toDelte);
     csrUI.removeIf(computerServiceRequest -> computerServiceRequest.getID().get().equals(toDelte));
     deleteText.setText("");
     treeTableComputer.refresh();

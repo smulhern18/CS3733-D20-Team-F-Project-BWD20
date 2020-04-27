@@ -1,9 +1,23 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
+import edu.wpi.teamF.ModelClasses.Account.Account;
+import edu.wpi.teamF.ModelClasses.Account.PasswordHasher;
+import edu.wpi.teamF.ModelClasses.Appointment;
+import edu.wpi.teamF.ModelClasses.Edge;
+import edu.wpi.teamF.ModelClasses.Node;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
+
+import java.io.InputStream;
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Set;
 
 public class DatabaseManager {
 
@@ -17,6 +31,7 @@ public class DatabaseManager {
   static final String ACCOUNT_TABLE_NAME = "accountsTable";
   static final String APPOINTMENTS_TABLE_NAME = "appointmentsTable";
   static final String COMPUTER_REQUEST_TABLE_NAME = "ComputerRequestsTable";
+  static final String TRANSPORT_REQUEST_TABLE_NAME = "TransportRequestsTable";
   /** Column Names */
   // node
   static final String X_COORDINATE_KEY = "xCoord";
@@ -65,8 +80,31 @@ public class DatabaseManager {
   static final String OS_ID_KEY = "OperatingSystem";
   static final String MAKE_KEY = "Make";
   static final String HARDWARESOFTWARE_KEY = "HardwareOrSoftware";
+  // Transport requests
+  static final String TRANSPORT_TYPE_KEY = "type";
+  static final String DESTINATION_KEY = "destination";
+
+  // Factories
+  private NodeFactory nodeFactory = NodeFactory.getFactory();
+  private EdgeFactory edgeFactory = EdgeFactory.getFactory();
+  private AccountFactory accountFactory = AccountFactory.getFactory();
+  private ServiceRequestFactory serviceRequestFactory = ServiceRequestFactory.getFactory();
+  private SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
+  private MaintenanceRequestFactory maintenanceRequestFactory =
+      MaintenanceRequestFactory.getFactory();
+  private ComputerServiceRequestFactory computerServiceRequestFactory =
+      ComputerServiceRequestFactory.getFactory();
+  private AppointmentFactory appointmentFactory = AppointmentFactory.getFactory();
 
   static Connection connection = null;
+
+  private static DatabaseManager manager = new DatabaseManager();
+
+  private DatabaseManager() {}
+
+  public static DatabaseManager getManager() {
+    return manager;
+  }
 
   public void createTables() throws SQLException {
     String nodeTableCreationStatement =
@@ -148,6 +186,7 @@ public class DatabaseManager {
             + "PRIMARY KEY ("
             + SERVICEID_KEY
             + "))";
+
     String computerTableCreationStatement =
         "CREATE TABLE "
             + COMPUTER_REQUEST_TABLE_NAME
@@ -163,6 +202,21 @@ public class DatabaseManager {
             + "PRIMARY KEY ("
             + SERVICEID_KEY
             + "))";
+
+    String transportTableCreationStatement =
+            "CREATE TABLE "
+                    + TRANSPORT_REQUEST_TABLE_NAME
+                    + " ( "
+                    + SERVICEID_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + TRANSPORT_TYPE_KEY
+                    +" VARCHAR(32) NOT NULL, "
+                    + DESTINATION_KEY
+                    +" VARCHAR(32) NOT NULL, "
+                    + "PRIMARY KEY ("
+                    + SERVICEID_KEY
+                    + "))";
+
 
     String accountTableCreationStatement =
         "CREATE TABLE "
@@ -218,6 +272,8 @@ public class DatabaseManager {
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(appointmentTableCreationStatement);
     preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(transportTableCreationStatement);
+    preparedStatement.execute();
     System.out.println("Created Tables Successfully");
   }
 
@@ -251,6 +307,7 @@ public class DatabaseManager {
     String accountDropStatement = "DROP TABLE " + ACCOUNT_TABLE_NAME;
     String appointmentDropStatement = "DROP TABLE " + APPOINTMENTS_TABLE_NAME;
     String computerDropStatement = "DROP TABLE " + COMPUTER_REQUEST_TABLE_NAME;
+    String transportDropStatement = "DROP TABLE " + TRANSPORT_REQUEST_TABLE_NAME;
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeDropStatement);
     preparedStatement.execute();
@@ -268,10 +325,233 @@ public class DatabaseManager {
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(appointmentDropStatement);
     preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(transportDropStatement);
+    preparedStatement.execute();
     createTables();
   }
 
   public static Connection getConnection() {
     return connection;
+  }
+
+  /*
+   * Node Factory methods
+   */
+  public void manipulateNode(Node node) throws Exception {
+    if (nodeFactory.read(node.getId()) == null) {
+      nodeFactory.create(node);
+    } else {
+      nodeFactory.update(node);
+    }
+  }
+
+  public Node readNode(String nodeId) throws Exception {
+    return nodeFactory.read(nodeId);
+  }
+
+  public void deleteNode(String nodeId) throws Exception {
+    nodeFactory.delete(nodeId);
+  }
+
+  public List<Node> getAllNodes() throws Exception {
+    return nodeFactory.getAllNodes();
+  }
+
+  public List<Node> getNodesByType(Node.NodeType type) throws Exception {
+    return nodeFactory.getNodesByType(type);
+  }
+
+  /*
+   * Edge Factory methods
+   */
+  public void manipulateEdge(Edge edge) throws Exception {
+    if (edgeFactory.read(edge.getId()) == null) {
+      edgeFactory.create(edge);
+    } else {
+      edgeFactory.update(edge);
+    }
+  }
+
+  public Edge readEdge(String edgeId) throws Exception {
+    return edgeFactory.read(edgeId);
+  }
+
+  public void deleteEdge(String edgeId) throws Exception {
+    edgeFactory.delete(edgeId);
+  }
+
+  public List<Edge> getAllEdges() throws Exception {
+    return edgeFactory.getAllEdges();
+  }
+
+  public Set<Edge> getAllEdgesConnectedToNode(String nodeId) throws Exception {
+    return edgeFactory.getAllEdgesConnectedToNode(nodeId);
+  }
+
+  public void deleteEdgesByNodeId(String nodeId) throws Exception {
+    edgeFactory.deleteByNodeID(nodeId);
+  }
+
+  /*
+   * Appointment Factory methods
+   */
+  public void manipulateAppointment(Appointment appointment) throws Exception {
+    if (appointmentFactory.read(appointment.getId()) == null) {
+      appointmentFactory.create(appointment);
+    } else {
+      appointmentFactory.update(appointment);
+    }
+  }
+
+  public Appointment readAppointment(String id) throws Exception {
+    return appointmentFactory.read(id);
+  }
+
+  public void deleteAppointment(String id) throws Exception {
+    appointmentFactory.delete(id);
+  }
+
+  /*
+   * Account Factory methods
+   */
+  public void manipulateAccount(Account account) throws Exception {
+    if (accountFactory.read(account.getUsername()) == null) {
+      accountFactory.create(account);
+    } else {
+      accountFactory.update(account);
+    }
+  }
+
+  public Account readAccount(String username) throws Exception {
+    return accountFactory.read(username);
+  }
+
+  public void deleteAccount(String username) throws Exception {
+    accountFactory.delete(username);
+  }
+
+  public boolean verifyPassword(String username, String password) throws Exception {
+    return PasswordHasher.verifyPassword(password, accountFactory.getPasswordByUsername(username));
+  }
+
+  public List<Account> getAllAccounts() throws Exception {
+    return accountFactory.getAllAccounts();
+  }
+
+  public List<UIAccount> getAllUIAccounts() throws Exception {
+    return accountFactory.getAccounts();
+  }
+
+  /*
+   * Service Request Factory Methods
+   */
+  public void manipulateServiceRequest(MaintenanceRequest serviceRequest) throws Exception {
+    if (maintenanceRequestFactory.read(serviceRequest.getId()) == null) {
+      maintenanceRequestFactory.create(serviceRequest);
+    } else {
+      maintenanceRequestFactory.update(serviceRequest);
+    }
+  }
+
+  public void manipulateServiceRequest(SecurityRequest serviceRequest) throws Exception {
+    if (securityRequestFactory.read(serviceRequest.getId()) == null) {
+      securityRequestFactory.create(serviceRequest);
+    } else {
+      serviceRequestFactory.update(serviceRequest);
+    }
+  }
+
+  public void manipulateServiceRequest(ComputerServiceRequest serviceRequest) throws Exception {
+    if (computerServiceRequestFactory.read(serviceRequest.getId()) == null) {
+      computerServiceRequestFactory.create(serviceRequest);
+    } else {
+      computerServiceRequestFactory.update(serviceRequest);
+    }
+  }
+
+  public MaintenanceRequest readMaintenanceRequest(String serviceId) throws Exception {
+    return maintenanceRequestFactory.read(serviceId);
+  }
+
+  public SecurityRequest readSecurityRequest(String serviceId) throws Exception {
+    return securityRequestFactory.read(serviceId);
+  }
+
+  public ComputerServiceRequest readComputerServiceRequest(String serviceId) throws Exception {
+    return ComputerServiceRequestFactory.read(serviceId);
+  }
+
+  public void deleteComputerServiceRequest(String serviceId) throws Exception {
+    computerServiceRequestFactory.delete(serviceId);
+  }
+
+  public void deleteMaintenanceRequest(String serviceId) throws Exception {
+    maintenanceRequestFactory.delete(serviceId);
+  }
+
+  public void deleteSecurityRequest(String serviceId) throws Exception {
+    securityRequestFactory.delete(serviceId);
+  }
+
+  public List<MaintenanceRequest> getMaintenanceRequestsByLocation(Node node) throws Exception {
+    return maintenanceRequestFactory.getMaintenanceRequestsByLocation(node);
+  }
+
+  public List<SecurityRequest> getSecurityRequestsByLocation(Node node) throws Exception {
+    return securityRequestFactory.getSecurityRequestsByLocation(node);
+  }
+
+  public List<ComputerServiceRequest> getComputerServiceRequestsByLocation(Node node)
+      throws Exception {
+    return computerServiceRequestFactory.getComputerRequestsByLocation(node);
+  }
+
+  public List<MaintenanceRequest> getAllMaintenanceRequests() throws Exception {
+    return maintenanceRequestFactory.getAllMaintenanceRequests();
+  }
+
+  public List<SecurityRequest> getAllSecurityRequests() throws Exception {
+    return securityRequestFactory.getAllSecurityRequests();
+  }
+
+  public List<ComputerServiceRequest> getAllComputerServiceRequests() throws Exception {
+    return computerServiceRequestFactory.getAllComputerRequests();
+  }
+
+  /*
+   * CSV Manipulator Methods
+   */
+  public void backup(Path path) throws Exception {
+    CSVManipulator csvManipulator = new CSVManipulator();
+    csvManipulator.writeCSVFileAccount(path);
+    csvManipulator.writeCSVFileEdge(path);
+    csvManipulator.writeCSVFileMaintenanceService(path);
+    csvManipulator.writeCSVFileNode(path);
+    csvManipulator.writeCSVFileSecurityService(path);
+  }
+
+  public void readNodes(InputStream stream) {
+    CSVManipulator csvManipulator = new CSVManipulator();
+    csvManipulator.readCSVFileNode(stream);
+  }
+
+  public void readEdges(InputStream stream) {
+    CSVManipulator csvManipulator = new CSVManipulator();
+    csvManipulator.readCSVFileEdge(stream);
+  }
+
+  public void readMaintenanceRequests(InputStream stream) {
+    CSVManipulator csvManipulator = new CSVManipulator();
+    csvManipulator.readCSVFileMaintenanceService(stream);
+  }
+
+  public void readSecurityRequests(InputStream stream) {
+    CSVManipulator csvManipulator = new CSVManipulator();
+    csvManipulator.readCSVFileSecurityService(stream);
+  }
+
+  public void readAccounts(InputStream stream) {
+    CSVManipulator csvManipulator = new CSVManipulator();
+    csvManipulator.readCSVFileAccount(stream);
   }
 }

@@ -5,7 +5,6 @@ import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
 import edu.wpi.teamF.App;
-import edu.wpi.teamF.DatabaseManipulators.AccountFactory;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.TestData;
@@ -21,8 +20,7 @@ import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
 
 public class RegisterTest extends ApplicationTest {
-  private static DatabaseManager db = new DatabaseManager();
-  private static AccountFactory accountFactory = AccountFactory.getFactory();
+  private static DatabaseManager db = DatabaseManager.getManager();
 
   @BeforeAll
   public static void setUp() throws Exception {
@@ -30,7 +28,7 @@ public class RegisterTest extends ApplicationTest {
     db.reset();
     TestData testData = new TestData();
     for (Account account : testData.validAccounts) {
-      accountFactory.create(account);
+      db.manipulateAccount(account);
     }
     ApplicationTest.launch(App.class);
   }
@@ -47,7 +45,7 @@ public class RegisterTest extends ApplicationTest {
   }
 
   @Test
-  void testRegisterValidAccount() throws InstanceNotFoundException {
+  void testRegisterValidAccount() throws Exception {
     // Login Page
     clickOn("Login");
     // Register Page
@@ -70,7 +68,7 @@ public class RegisterTest extends ApplicationTest {
 
     clickOn("#registerButton");
 
-    assertEquals(accountFactory.read("tyler").getLastName(), "Jones");
+    assertEquals(db.readAccount("tyler").getLastName(), "Jones");
   }
 
   @Test

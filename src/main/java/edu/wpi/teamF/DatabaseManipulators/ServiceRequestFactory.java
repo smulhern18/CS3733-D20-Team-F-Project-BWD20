@@ -1,7 +1,6 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
 import edu.wpi.teamF.ModelClasses.Node;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
@@ -18,7 +17,7 @@ public class ServiceRequestFactory {
   NodeFactory nodeFactory = NodeFactory.getFactory();
   private static final ServiceRequestFactory factory = new ServiceRequestFactory();
 
-  public static ServiceRequestFactory getFactory() {
+  static ServiceRequestFactory getFactory() {
     return factory;
   }
 
@@ -85,7 +84,7 @@ public class ServiceRequestFactory {
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
           serviceRequest =
-              new MaintenanceRequest(
+              new SecurityRequest(
                   resultSet.getString(DatabaseManager.SERVICEID_KEY),
                   nodeFactory.read(resultSet.getString(DatabaseManager.NODEID_KEY)),
                   resultSet.getString(DatabaseManager.ASSIGNED_KEY),

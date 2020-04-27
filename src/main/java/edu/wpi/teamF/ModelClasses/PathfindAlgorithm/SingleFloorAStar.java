@@ -1,6 +1,5 @@
 package edu.wpi.teamF.ModelClasses.PathfindAlgorithm;
 
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
@@ -20,8 +19,6 @@ public class SingleFloorAStar implements PathfindAlgorithm {
       nodeMap.put(node.getId(), node);
     }
   }
-
-  NodeFactory nodeFactory = NodeFactory.getFactory();
 
   @Override
   public Path pathfind(Node startNode, Node endNode) throws InstanceNotFoundException {

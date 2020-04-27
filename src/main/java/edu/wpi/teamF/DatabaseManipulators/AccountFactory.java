@@ -1,9 +1,6 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
-import edu.wpi.teamF.ModelClasses.Account.Account;
-import edu.wpi.teamF.ModelClasses.Account.Admin;
-import edu.wpi.teamF.ModelClasses.Account.Staff;
-import edu.wpi.teamF.ModelClasses.Account.User;
+import edu.wpi.teamF.ModelClasses.Account.*;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
@@ -18,7 +15,7 @@ public class AccountFactory {
 
   private static final AccountFactory factory = new AccountFactory();
 
-  public static AccountFactory getFactory() {
+  static AccountFactory getFactory() {
     return factory;
   }
 
@@ -71,39 +68,65 @@ public class AccountFactory {
       preparedStatement.setString(1, username);
 
       ResultSet resultSet = preparedStatement.executeQuery();
-      if (resultSet.next()) {
-        Account.Type type = Account.Type.getEnum(resultSet.getInt(DatabaseManager.USER_TYPE_KEY));
-        switch (type.getTypeOrdinal()) {
-          case (0):
-            account =
-                new Admin(
-                    resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
-                    resultSet.getString(DatabaseManager.LAST_NAME_KEY),
-                    resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
-                    resultSet.getString(DatabaseManager.USER_NAME_KEY),
-                    resultSet.getString(DatabaseManager.PASSWORD_KEY));
-            break;
-          case (1):
-            account =
-                new Staff(
-                    resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
-                    resultSet.getString(DatabaseManager.LAST_NAME_KEY),
-                    resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
-                    resultSet.getString(DatabaseManager.USER_NAME_KEY),
-                    resultSet.getString(DatabaseManager.PASSWORD_KEY));
-            break;
-          case (2):
-            account =
-                new User(
-                    resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
-                    resultSet.getString(DatabaseManager.LAST_NAME_KEY),
-                    resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
-                    resultSet.getString(DatabaseManager.USER_NAME_KEY),
-                    resultSet.getString(DatabaseManager.PASSWORD_KEY));
-            break;
-          default:
-            throw new ValidationException("Illegal Type of Account: " + type.getTypeOrdinal());
-        }
+      resultSet.next();
+      Account.Type type = Account.Type.getEnum(resultSet.getInt(DatabaseManager.USER_TYPE_KEY));
+      switch (type.getTypeOrdinal()) {
+        case (0):
+          account =
+              new Admin(
+                  resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                  resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                  resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                  resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                  resultSet.getString(DatabaseManager.PASSWORD_KEY));
+          break;
+        case (1):
+          account =
+              new Staff(
+                  resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                  resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                  resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                  resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                  resultSet.getString(DatabaseManager.PASSWORD_KEY));
+          break;
+        case (2):
+          account =
+              new User(
+                  resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                  resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                  resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                  resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                  resultSet.getString(DatabaseManager.PASSWORD_KEY));
+          break;
+        case (3):
+          account =
+              new Patient(
+                  resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                  resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                  resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                  resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                  resultSet.getString(DatabaseManager.PASSWORD_KEY));
+          break;
+        case (4):
+          account =
+              new Janitor(
+                  resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                  resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                  resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                  resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                  resultSet.getString(DatabaseManager.PASSWORD_KEY));
+          break;
+        case (5):
+          account =
+              new Nurse(
+                  resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                  resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                  resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                  resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                  resultSet.getString(DatabaseManager.PASSWORD_KEY));
+          break;
+        default:
+          throw new ValidationException("Illegal Type of Account: " + type.getTypeOrdinal());
       }
     } catch (InstanceNotFoundException e) {
       throw e;
@@ -232,6 +255,33 @@ public class AccountFactory {
           case (2):
             account =
                 new User(
+                    resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                    resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                    resultSet.getString(DatabaseManager.PASSWORD_KEY));
+            break;
+          case (3):
+            account =
+                new Patient(
+                    resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                    resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                    resultSet.getString(DatabaseManager.PASSWORD_KEY));
+            break;
+          case (4):
+            account =
+                new Janitor(
+                    resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.LAST_NAME_KEY),
+                    resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
+                    resultSet.getString(DatabaseManager.USER_NAME_KEY),
+                    resultSet.getString(DatabaseManager.PASSWORD_KEY));
+            break;
+          case (5):
+            account =
+                new Nurse(
                     resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
                     resultSet.getString(DatabaseManager.LAST_NAME_KEY),
                     resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),

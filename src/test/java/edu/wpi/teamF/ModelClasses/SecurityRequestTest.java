@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
-import edu.wpi.teamF.DatabaseManipulators.SecurityRequestFactory;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
 import edu.wpi.teamF.TestData;
 import java.sql.SQLException;
@@ -19,9 +17,7 @@ public class SecurityRequestTest {
 
   static TestData testData = null;
   static SecurityRequest[] validSecurityRequest = null;
-  SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
-  NodeFactory nodeFactory = NodeFactory.getFactory();
-  static DatabaseManager databaseManager = new DatabaseManager();
+  static DatabaseManager databaseManager = DatabaseManager.getManager();
   static Node[] validNodes = null;
 
   @BeforeAll
@@ -43,33 +39,33 @@ public class SecurityRequestTest {
   }
 
   @Test
-  public void testCreateReadDelete() {
+  public void testCreateReadDelete() throws Exception {
     try {
-      securityRequestFactory.create(null);
+      databaseManager.manipulateServiceRequest((SecurityRequest) null);
       fail("Creating a null value is unacceptable");
-    } catch (ValidationException e) {
+    } catch (NullPointerException e) {
       // ignore as expected
     }
     try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
 
     } catch (Exception e) {
 
     }
     try {
       for (SecurityRequest securityRequest : validSecurityRequest) {
-        securityRequestFactory.create(securityRequest);
+        databaseManager.manipulateServiceRequest(securityRequest);
 
-        SecurityRequest readSecurity = securityRequestFactory.read(securityRequest.getId());
+        SecurityRequest readSecurity = databaseManager.readSecurityRequest(securityRequest.getId());
         assertTrue(readSecurity.equals(securityRequest));
 
-        securityRequestFactory.delete(securityRequest.getId());
+        databaseManager.deleteSecurityRequest(securityRequest.getId());
 
         try {
-          readSecurity = securityRequestFactory.read(securityRequest.getId());
+          readSecurity = databaseManager.readSecurityRequest(securityRequest.getId());
         } // catch (InstanceNotFoundException e) {
         // ignore
         // }
@@ -86,10 +82,10 @@ public class SecurityRequestTest {
   public void testCreateReadUpdateDelete() {
 
     try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
 
     } catch (Exception e) {
 
@@ -97,16 +93,16 @@ public class SecurityRequestTest {
     try {
 
       for (SecurityRequest securityRequest : validSecurityRequest) {
-        securityRequestFactory.create(securityRequest);
+        databaseManager.manipulateServiceRequest(securityRequest);
 
         securityRequest.setDescription("Hello");
-        securityRequestFactory.update(securityRequest);
+        databaseManager.manipulateServiceRequest(securityRequest);
 
-        SecurityRequest readMain = securityRequestFactory.read(securityRequest.getId());
+        SecurityRequest readMain = databaseManager.readSecurityRequest(securityRequest.getId());
 
         assertTrue(securityRequest.equals(readMain));
 
-        securityRequestFactory.delete(securityRequest.getId());
+        databaseManager.deleteSecurityRequest(securityRequest.getId());
       }
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
@@ -116,10 +112,10 @@ public class SecurityRequestTest {
   @Test
   public void testGetSecurityByLocation() {
     try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
 
     } catch (Exception e) {
 
@@ -129,31 +125,29 @@ public class SecurityRequestTest {
     SecurityRequest main3 = validSecurityRequest[2];
     SecurityRequest main4 = validSecurityRequest[3];
 
-    NodeFactory nodeFactory = NodeFactory.getFactory();
-
     try {
-      securityRequestFactory.create(main1);
-      securityRequestFactory.create(main2);
-      securityRequestFactory.create(main3);
-      securityRequestFactory.create(main4);
+      databaseManager.manipulateServiceRequest(main1);
+      databaseManager.manipulateServiceRequest(main2);
+      databaseManager.manipulateServiceRequest(main3);
+      databaseManager.manipulateServiceRequest(main4);
 
       List<SecurityRequest> securityAtBathroom =
-          securityRequestFactory.getSecurityRequestsByLocation(testData.validNodes[0]);
+          databaseManager.getSecurityRequestsByLocation(testData.validNodes[0]);
 
       assertTrue(securityAtBathroom.contains(main1));
 
       assertTrue(securityAtBathroom.size() == 1);
 
       List<SecurityRequest> securityAtnode2 =
-          securityRequestFactory.getSecurityRequestsByLocation(testData.validNodes[1]);
+          databaseManager.getSecurityRequestsByLocation(testData.validNodes[1]);
 
       assertTrue(securityAtnode2.contains(main2));
       assertTrue(securityAtnode2.size() == 1);
 
-      securityRequestFactory.delete(main1.getId());
-      securityRequestFactory.delete(main2.getId());
-      securityRequestFactory.delete(main3.getId());
-      securityRequestFactory.delete(main4.getId());
+      databaseManager.deleteSecurityRequest(main1.getId());
+      databaseManager.deleteSecurityRequest(main2.getId());
+      databaseManager.deleteSecurityRequest(main3.getId());
+      databaseManager.deleteSecurityRequest(main4.getId());
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
     }
@@ -162,10 +156,10 @@ public class SecurityRequestTest {
   @Test
   public void testGetAllSecurityRequests() {
     try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
 
     } catch (Exception e) {
 
@@ -176,12 +170,12 @@ public class SecurityRequestTest {
     SecurityRequest main4 = validSecurityRequest[3];
 
     try {
-      securityRequestFactory.create(main1);
-      securityRequestFactory.create(main2);
-      securityRequestFactory.create(main3);
-      securityRequestFactory.create(main4);
+      databaseManager.manipulateServiceRequest(main1);
+      databaseManager.manipulateServiceRequest(main2);
+      databaseManager.manipulateServiceRequest(main3);
+      databaseManager.manipulateServiceRequest(main4);
 
-      List<SecurityRequest> securityAll = securityRequestFactory.getAllSecurityRequests();
+      List<SecurityRequest> securityAll = databaseManager.getAllSecurityRequests();
 
       assertTrue(securityAll.contains(main1));
       assertTrue(securityAll.contains(main2));
@@ -189,10 +183,10 @@ public class SecurityRequestTest {
       assertTrue(securityAll.contains(main4));
       assertTrue(securityAll.size() == 4);
 
-      securityRequestFactory.delete(main1.getId());
-      securityRequestFactory.delete(main2.getId());
-      securityRequestFactory.delete(main3.getId());
-      securityRequestFactory.delete(main4.getId());
+      databaseManager.deleteSecurityRequest(main1.getId());
+      databaseManager.deleteSecurityRequest(main2.getId());
+      databaseManager.deleteSecurityRequest(main3.getId());
+      databaseManager.deleteSecurityRequest(main4.getId());
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
     }
