@@ -1,0 +1,257 @@
+nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName,teamAssigned
+FSTAI00101,1315,380,1,Faulkner,STAI,Staircase Intersection 1 Level 1,Stair F0101,F
+FDEPT00201,1750,940,1,Faulkner,DEPT,Operation Rooms,Department F0201,F
+FLABS00101,1080,620,1,Faulkner,LABS,Blood Draw Lab,Labs F0101,F
+FDEPT00101,700,680,1,Faulkner,DEPT,Emergency Department,Department F0101,F
+FLABS00201,1070,900,1,Faulkner,LABS,Endoscopy,Labs F0201,F
+FSERV00101,1350,950,1,Faulkner,SERV,Linens,Service F0101,F
+FSERV00201,1282,1077,1,Faulkner,SERV,QR MAT Management,Service F0201,F
+FLABS00501,1780,550,1,Faulkner,LABS,Radiology,Labs F0501,F
+FLABS00601,1430,400,1,Faulkner,LABS,MRI/CT,Labs F0601,F
+FLABS00701,1690,1160,1,Faulkner,LABS,Labs,Labs F0701,F
+FDEPT00301,2180,1145,1,Faulkner,DEPT,Operation Room,Department F0301,F
+FDEPT00401,2075,775,1,Faulkner,DEPT,Recovery,Department F0401,F
+FDEPT00501,1190,785,1,Faulkner,DEPT,Special Testing,Department F0501,F
+FDEPT00601,1340,565,1,Faulkner,DEPT,Pre-Admittance Screening,Department F0601,F
+FLABS00801,1190,540,1,Faulkner,LABS,Cardiac Rehab,Labs F0801,F
+FSERV00301,1040,430,1,Faulkner,SERV,Admitting,Service F0301,F
+FREST00101,1115,480,1,Faulkner,REST,Restroom 1 Level 1,Restroom F0101,F
+FREST00201,1190,480,1,Faulkner,REST,Restroom 2 Level 1,Restroom F0201,F
+FSTAI00301,1200,1060,1,Faulkner,STAI,Staircase Intersection 3 Level 1,Staircase F0301,F
+FDEPT00701,1260,220,1,Faulkner,DEPT,Waiting area,Department F0701,F
+FREST00301,1325,480,1,Faulkner,REST,Restroom 3 Level 1,Restroom F0301,F
+FELEV00X01,1190,410,1,Faulkner,ELEV,Elevator X Level 1,Elevator F0X01,F
+FELEV00Y01,1155,1160,1,Faulkner,ELEV,Elevator Y Level 1,Elevator F0Y01,F
+FLABS00401,1270,870,1,Faulkner,LABS,PULM Lab,Labs F0401,F
+FLABS00301,1270,927,1,Faulkner,LABS,VASC Lab,Labs F0301,F
+FRETL00101,1038,250,1,Faulkner,RETL,Starbucks,Starbucks,F
+FEXIT00101,1254,165,1,Faulkner,EXIT,Atrium Main Entrance,Entrance,F
+FINFO00101,1300,250,1,Faulkner,INFO,Path Finding Kiosk,Kiosk,F
+FELEV00Z01,1350,1160,1,Faulkner,ELEV,Elevator Z Level 1,Elevator 0Z01,F
+FSTAF00402,370,1177,2,Faulkner,STAF,Floor 2 Mechanical Space,STAFF L2004,F
+FSTAF00102,717,711,2,Faulkner,STAF,Floor 2 Facilities 1,STAFF L2001,F
+FDEPT00302,675,795,2,Faulkner,DEPT,Morgue,DEPT L2003,F
+FSTAF00202,675,990,2,Faulkner,STAF,Floor 2 Facilities 2,STAFF L2002,F
+FSTAF00302,745,545,2,Faulkner,STAF,Material Management,STAFF L2003,F
+FDEPT00602,871,763,2,Faulkner,DEPT,Pharmacy,DEPT L2006,F
+FSTAF00502,821,946,2,Faulkner,STAF,Central Sterile Supply 1,STAFF L2001,F
+FDEPT00102,800,1118,2,Faulkner,DEPT,Biomedical Engineering,DEPT L2001,F
+FELEV00Y02,1150,1150,2,Faulkner,ELEV,Elevator Y Level 2,ELEV L2001,F
+FDEPT00502,1060,320,2,Faulkner,DEPT,Otolaryngology,DEPT L2005,F
+FDEPT00902,1200,1264,2,Faulkner,DEPT,Psych/Addiction Care,DEPT L2009,F
+FELEV00X02,1347,1132,2,Faulkner,ELEV,Elevator X Level 2,ELEV L2003,F
+FSTAI00102,1195,1050,2,Faulkner,STAI,Staircase 1 Level 2,STAIR L2001,F
+FSTAI00202,1320,384,2,Faulkner,STAI,Staircase 2 Level 2,STAIR L2002,F
+FRETL00102,1284,585,2,Faulkner,RETL,Food Service,FOOD L2001,F
+FDEPT00802,1473,313,2,Faulkner,DEPT,Plastic Surgery,DEPT L2008,F
+FELEV00Z02,1182,413,2,Faulkner,ELEV,Elevator Z Level 2,ELEV L2002,F
+FSTAF00602,1300,936,2,Faulkner,STAF,Central Sterile Supply 2,STAFF L2002,F
+FDEPT00702,1548,743,2,Faulkner,DEPT,Physical Therapy,DEPT L2007,F
+FDEPT00402,1488,1081,2,Faulkner,DEPT,Occupational Therapy,DEPT L2004,F
+FREST00102,1480,1132,2,Faulkner,REST,Restroom 1 Level 2,REST L2001,F
+FDEPT01002,1200,1270,2,Faulkner,DEPT,Psychiatric Inpatient Care,DEPT L2010,F
+FSERV00102,1130,740,2,Faulkner,SERV,Laundry,Laundry,F
+FHALL00101,1254,415,1,Faulkner,HALL,Floor 1 Stair 1 Hall,HallF1Stair1,F
+FHALL00201,1750,1113,1,Faulkner,HALL,Operation Rooms Hall,HallF1OpRooms,F
+FHALL00301,1110,580,1,Faulkner,HALL,Blood Draw Lab Hall,HallF1BDL,F
+FHALL00401,940,830,1,Faulkner,HALL,Emergency Department Hall,HallF1ED,F
+FHALL00501,940,865,1,Faulkner,HALL,Endoscopy Hall,HallF1Endo,F
+FHALL00601,1400,950,1,Faulkner,HALL,Linens Hall,HallF1Linens,F
+FHALL00701,1254,1111,1,Faulkner,HALL,QR MAT Management Hall,HallF1QRMAT,F
+FHALL00801,1510,524,1,Faulkner,HALL,Radiology Hall,HallF1Radiology,F
+FHALL00901,1400,524,1,Faulkner,HALL,MRI/CT Hall,HallF1MRICT,F
+FHALL01001,1435,1175,1,Faulkner,HALL,Labs Hall,HallF1Labs,F
+FHALL01101,2245,1115,1,Faulkner,HALL,Operation Room Hall,HallF1OpRoom,F
+FHALL01201,1800,742,1,Faulkner,HALL,Recovery Hall,HallF1Recovery,F
+FHALL01301,1254,777,1,Faulkner,HALL,Special Testing Hall,HallF1Special Test,F
+FHALL01401,1254,555,1,Faulkner,HALL,Pre-Admittance Screening Hall,HallF1PAS,F
+FHALL01501,1190,515,1,Faulkner,HALL,Cardiac Rehab Hall,HallF1CR,F
+FHALL01601,1040,515,1,Faulkner,HALL,Admitting Hall,HallF1Admitting,F
+FHALL01701,1115,515,1,Faulkner,HALL,Restroom 1 Level 1 Hall,HallF1Rest1,F
+FHALL01801,1190,515,1,Faulkner,HALL,Restroom 2 Level 1 Hall,HallF1Rest2,F
+FHALL01901,1254,1080,1,Faulkner,HALL,Staircase Intersection 3 Level 1 Hall,HallF1Stair3,F
+FHALL02001,1254,270,1,Faulkner,HALL,Waiting area Hall,HallF1Wait,F
+FHALL02101,1280,524,1,Faulkner,HALL,Restroom 3 Level 1 Hall,HallF1Rest3,F
+FHALL02201,1254,410,1,Faulkner,HALL,Elevator X Level 1 Hall,HallF1ElevX,F
+FHALL02301,1254,1160,1,Faulkner,HALL,Elevator YZ Level 1 Hall,HallF1ElevY,F
+FHALL02401,1254,870,1,Faulkner,HALL,PULM Lab Hall,HallF1PULM,F
+FHALL02501,1254,927,1,Faulkner,HALL,VASC Lab Hall,HallF1VASC,F
+FHALL02601,1080,250,1,Faulkner,HALL,Starbucks Hall,HallF1Starbucks,F
+FHALL02701,1254,180,1,Faulkner,HALL,Atrium Main Entrance Hall,HallF1MainEntrance,F
+FHALL02801,1260,250,1,Faulkner,HALL,Path Finding Kiosk Hall,HallF1Kiosk,F
+FHALL02802,1254,250,1,Faulkner,HALL,Intersection 1,HallF1Int1,F
+FHALL02803,1254,515,1,Faulkner,HALL,Intersection 2,HallF1Int2,F
+FHALL02804,1254,524,1,Faulkner,HALL,Intersection 3,HallF1Int3,F
+FHALL02805,1110,515,1,Faulkner,HALL,Intersection 4,HallF1Int4,F
+FHALL02806,1400,524,1,Faulkner,HALL,Intersection 5,HallF1Int5,F
+FHALL02807,1400,742,1,Faulkner,HALL,Intersection 6,HallF1Int6,F
+FHALL02808,1400,830,1,Faulkner,HALL,Intersection 7,HallF1Int7,F
+FHALL02809,1254,830,1,Faulkner,HALL,Intersection 8,HallF1Int8,F
+FHALL02810,1400,1115,1,Faulkner,HALL,Intersection 9,HallF1Int9,F
+FHALL02811,2125,742,1,Faulkner,HALL,Extra Hall 1,HallF1Extra1,F
+FHALL02812,946,515,1,Faulkner,HALL,Extra Hall 2,HallF1Extra2,F
+FHALL02813,956,515,1,Faulkner,HALL,Extra Hall 3,HallF1Extra3,F
+FHALL00102,680,1204,2,Faulkner,HALL,Floor 2 Mechanical Space Hall,STAFF L2004,F
+FHALL00202,745,711,2,Faulkner,HALL,Floor 2 Facilities 1 Hall,STAFF L2001,F
+FHALL00302,745,795,2,Faulkner,HALL,Morgue/Pharmacy Hall,DEPT L2003,F
+FHALL00402,745,990,2,Faulkner,HALL,Facilities 2/Central Sterile Supply 1 Hall,STAFF L2002,F
+FHALL00502,745,656,2,Faulkner,HALL,Material Management Hall,STAFF L2003,F
+FHALL00602,745,1118,2,Faulkner,HALL,Biomedical Engineering Hall,DEPT L2001,F
+FHALL00702,1150,1204,2,Faulkner,HALL,Elevator Y/Restroom Hall,ELEV L2001,F
+FHALL00802,1180,285,2,Faulkner,HALL,Otolaryngology Hall,DEPT L2005,F
+FHALL00902,1200,1204,2,Faulkner,HALL,Psych/Addiction Care Hall,DEPT L2009,F
+FHALL01002,1432,1132,2,Faulkner,HALL,Elevator X Level 2 Hall,ELEV L2003,F
+FHALL01102,1248,413,2,Faulkner,HALL,Staircase 2/Elev Z Hall,STAIR L2002,F
+FHALL01202,1432,560,2,Faulkner,HALL,Food Service Hall,FOOD L2001,F
+FHALL01302,1352,285,2,Faulkner,HALL,Plastic Surgery Hall,DEPT L2008,F
+FHALL01402,1432,936,2,Faulkner,HALL,Central Sterile Supply 2 Hall,STAFF L2002,F
+FHALL01502,1432,725,2,Faulkner,HALL,Physical Therapy Hall,DEPT L2007,F
+FHALL01602,1432,1055,2,Faulkner,HALL,Occupational Therapy Hall,DEPT L2004,F
+FHALL01702,1200,1204,2,Faulkner,HALL,Psychiatric Inpatient Care Hall,DEPT L2010,F
+FHALL01802,673,656,2,Faulkner,HALL,Floor 2 Extra Hall 1,F2HallEx1,F
+FHALL01902,745,1204,2,Faulkner,HALL,Floor 2 Intersection 1,F2Int1,F
+FHALL02002,1432,1204,2,Faulkner,HALL,Floor 2 Intersection 2,F2Int2,F
+FHALL02102,1432,500,2,Faulkner,HALL,Floor 2 Intersection 3,F2Int3,F
+FHALL02202,1352,500,2,Faulkner,HALL,Floor 2 Intersection 4,F2Int4,F
+FHALL02302,1352,475,2,Faulkner,HALL,Floor 2 Intersection 5,F2Int5,F
+FHALL02402,1248,475,2,Faulkner,HALL,Floor 2 Intersection 6,F2Int6,F
+FHALL02502,1248,285,2,Faulkner,HALL,Floor 2 Intersection 7,F2Int7,F
+FHALL00103,1255,1360,3,Faulkner,HALL,Hall,Hall,F
+FHALL00203,1255,1240,3,Faulkner,HALL,Hall,Hall,F
+FHALL00303,1255,1165,3,Faulkner,HALL,Hall,Hall,F
+FHALL00403,1255,1063,3,Faulkner,HALL,Hall,Hall,F
+FHALL00503,1255,975,3,Faulkner,HALL,Hall,Hall,F
+FHALL00603,1255,803,3,Faulkner,HALL,Hall,Hall,F
+FHALL00703,1255,685,3,Faulkner,HALL,Hall,Hall,F
+FHALL00803,1122,685,3,Faulkner,HALL,Hall,Hall,F
+FHALL00903,1210,634,3,Faulkner,HALL,Hall,Hall,F
+FHALL01003,1210,564,3,Faulkner,HALL,Hall,Hall,F
+FHALL01103,1210,492,3,Faulkner,HALL,Hall,Hall,F
+FHALL01203,1210,465,3,Faulkner,HALL,Hall,Hall,F
+FHALL01303,1365,465,3,Faulkner,HALL,Hall,Hall,F
+FHALL01403,1365,442,3,Faulkner,HALL,Hall,Hall,F
+FHALL01503,1365,334,3,Faulkner,HALL,Hall,Hall,F
+FHALL01603,1365,290,3,Faulkner,HALL,Hall,Hall,F
+FHALL01703,1312,268,3,Faulkner,HALL,Hall,Hall,F
+FHALL01803,1255,300,3,Faulkner,HALL,Hall,Hall,F
+FHALL01903,1255,390,3,Faulkner,HALL,Hall,Hall,F
+FHALL02003,1255,465,3,Faulkner,HALL,Hall,Hall,F
+FHALL02103,1200,268,3,Faulkner,HALL,Hall,Hall,F
+FHALL02203,1145,465,3,Faulkner,HALL,Hall,Hall,F
+FHALL02303,1145,343,3,Faulkner,HALL,Hall,Hall,F
+FHALL02403,1145,290,3,Faulkner,HALL,Hall,Hall,F
+FHALL02403,1210,685,3,Faulkner,HALL,Hall,Hall,F
+FHALL02503,1255,268,3,Faulkner,HALL,Hall,Hall,F
+FSERV00103,1255,1455,3,Faulkner,SERV,Shuttle Pickup,Shuttle Pickup,F
+FSERV00203,1070,1360,3,Faulkner,SERV,Chapel,Chapel,F
+FSERV00303,1435,1360,3,Faulkner,SERV,Volunteer,Volunteer,F
+FSERV00403,900,1240,3,Faulkner,SERV,Mechanical Space,Mechanical Space,F
+FSERV00503,1600,1240,3,Faulkner,SERV,Mechanical Space,Mechanical Space,F
+FELEV00Y03,1150,1165,3,Faulkner,ELEV,Elevator Y,Elevator Y,F
+FELEV00Z03,1350,1165,3,Faulkner,ELEV,Elevator Z,Elevator Z,F
+FSTAI00103,1200,1063,3,Faulkner,STAI,Stairs,Stairs,F
+FRETL00103,1210,975,3,Faulkner,RETL,Gift Shop,Gift Shop,F
+FSERV00603,1200,803,3,Faulkner,SERV,Huvos Auditorium,Huvos Auditorium,F
+FRETL00203,1350,803,3,Faulkner,RETL,Cafeteria,Cafeteria,F
+FREST00103,1122,640,3,Faulkner,REST,Restroom,Restroom,F
+FDEPT00103,1130,492,3,Faulkner,DEPT,Family Patient Resources,Family Patient Resources,F
+FDEPT00203,1400,442,3,Faulkner,DEPT,Med Staff Lounge,Med Staff Lounge,F
+FDEPT00303,1400,334,3,Faulkner,DEPT,Division of GYN,Division of GYN,F
+FDEPT00403,1450,270,3,Faulkner,DEPT,OB/GYN Association,OB/GYN Association,F
+FDEPT00503,1350,170,3,Faulkner,DEPT,Gynocolgy/Oncology,Gynocolgy/Oncology,F
+FDEPT00603,1050,343,3,Faulkner,DEPT,Roslindale Pediatric Association,Roslindale Pediatric Association,F
+FREST00203,1215,290,3,Faulkner,REST,Restroom,Restroom,F
+FREST00303,1290,290,3,Faulkner,REST,Restroom,Restroom,F
+FELEV00X03,1185,390,3,Faulkner,ELEV,Elevator X,Elevator X,F
+FSTAI00203,1330,390,3,Faulkner,STAI,Stairs,Stairs,F
+FHALL00104,255,1220,4,Faulkner,HALL,Hall,Hall,F
+FHALL00204,450,1220,4,Faulkner,HALL,Hall,Hall,F
+FHALL00304,720,1220,4,Faulkner,HALL,Hall,Hall,F
+FHALL00404,910,1220,4,Faulkner,HALL,Hall,Hall,F
+FHALL00504,985,1220,4,Faulkner,HALL,Hall,Hall,F
+FHALL00604,1010,1220,4,Faulkner,HALL,Hall,Hall,F
+FHALL00704,1120,1220,4,Faulkner,HALL,Hall,Hall,F
+FHALL00804,1250,1220,4,Faulkner,HALL,Hall,Hall,F
+FHALL00904,1465,1220,4,Faulkner,HALL,Hall,Hall,F
+FHALL01004,1580,1220,4,Faulkner,HALL,Hall,Hall,F
+FHALL01104,1695,1220,4,Faulkner,HALL,Hall,Hall,F
+FHALL01204,1780,1220,4,Faulkner,HALL,Hall,Hall,F
+FHALL01304,1860,1220,4,Faulkner,HALL,Hall,Hall,F
+FHALL01404,1920,1220,4,Faulkner,HALL,Hall,Hall,F
+FHALL01504,1965,1220,4,Faulkner,HALL,Hall,Hall,F
+FHALL01604,2025,1220,4,Faulkner,HALL,Hall,Hall,F
+FHALL01704,2115,1220,4,Faulkner,HALL,Hall,Hall,F
+FHALL01804,2180,1220,4,Faulkner,HALL,Hall,Hall,F
+FHALL01904,2235,1220,4,Faulkner,HALL,Hall,Hall,F
+FHALL02004,2290,1220,4,Faulkner,HALL,Hall,Hall,F
+FHALL02104,1250,1160,4,Faulkner,HALL,Hall,Hall,F
+FHALL02204,1250,1035,4,Faulkner,HALL,Hall,Hall,F
+FHALL02304,1250,975,4,Faulkner,HALL,Hall,Hall,F
+FHALL02404,1250,910,4,Faulkner,HALL,Hall,Hall,F
+FHALL02504,1250,820,4,Faulkner,HALL,Hall,Hall,F
+FHALL02604,1250,700,4,Faulkner,HALL,Hall,Hall,F
+FHALL02704,1250,570,4,Faulkner,HALL,Hall,Hall,F
+FHALL02804,1250,480,4,Faulkner,HALL,Hall,Hall,F
+FHALL02904,1250,415,4,Faulkner,HALL,Hall,Hall,F
+FHALL03004,1250,310,4,Faulkner,HALL,Hall,Hall,F
+FHALL03104,1250,285,4,Faulkner,HALL,Hall,Hall,F
+FHALL03204,1145,480,4,Faulkner,HALL,Hall,Hall,F
+FHALL03304,1355,480,4,Faulkner,HALL,Hall,Hall,F
+FHALL03404,1145,445,4,Faulkner,HALL,Hall,Hall,F
+FHALL03504,1355,445,4,Faulkner,HALL,Hall,Hall,F
+FHALL03604,1145,340,4,Faulkner,HALL,Hall,Hall,F
+FHALL03704,1355,340,4,Faulkner,HALL,Hall,Hall,F
+FHALL03804,1145,305,4,Faulkner,HALL,Hall,Hall,F
+FHALL03904,1355,305,4,Faulkner,HALL,Hall,Hall,F
+FHALL04004,1190,285,4,Faulkner,HALL,Hall,Hall,F
+FHALL04104,1310,285,4,Faulkner,HALL,Hall,Hall,F
+FHALL04204,1250,285,4,Faulkner,HALL,Hall,Hall,F
+FDEPT00104,1065,445,4,Faulkner,DEPT,Cardiology,Cardiology,F
+FDEPT00204,1455,445,4,Faulkner,DEPT,Rheumatology Center,Rheumatology Center,F
+FDEPT00304,1065,340,4,Faulkner,DEPT,HVMA Internal Medicine,HVMA Internal Medicine,F
+FDEPT00404,1455,340,4,Faulkner,DEPT,HVMA Neurology,HVMA Neurology,F
+FDEPT00504,1325,255,4,Faulkner,DEPT,Gastroentology Associates,Gastroentology Associates,F
+FELEV00Y04,1150,1160,4,Faulkner,ELEV,Elevator Y,Elevator Y,F
+FELEV00Z04,1350,1160,4,Faulkner,ELEV,Elevator Z,Elevator Z,F
+FSTAI00104,1200,1035,4,Faulkner,STAI,Stairs,Stairs,F
+FDEPT00604,1325,1035,4,Faulkner,DEPT,Lung Research,Lung Research,F
+FDEPT00704,1325,975,4,Faulkner,DEPT,House Keeping,House Keeping,F
+FDEPT00804,1325,910,4,Faulkner,DEPT,Nurse's Suite,Nurse's Suite,F
+FDEPT00904,1200,910,4,Faulkner,DEPT,MOHS Clinic,MOHS Clinic,F
+FDEPT01004,1325,820,4,Faulkner,DEPT,Pulmonary Services,Pulmonary Services,F
+FDEPT01104,1325,700,4,Faulkner,DEPT,Neurology,Neurology,F
+FDEPT01204,1200,700,4,Faulkner,DEPT,BD Cardiology,BD Cardiology,F
+FDEPT01304,1325,570,4,Faulkner,DEPT,Suites,Suites,F
+FELEV00X04,1185,415,4,Faulkner,ELEV,Elevator X,Elevator X,F
+FSTAI00204,1320,415,4,Faulkner,STAI,Stairs,Stairs,F
+FREST00104,1210,310,4,Faulkner,REST,Restroom,Restroom,F
+FREST00204,1290,310,4,Faulkner,REST,Restroom,Restroom,F
+FDEPT01404,255,1270,4,Faulkner,DEPT,Medical Records,Medical Records,F
+FDEPT01504,450,1180,4,Faulkner,DEPT,Urology,Urology,F
+FDEPT01604,450,1270,4,Faulkner,DEPT,Tynan Conference Room,Tynan Conference Room,F
+FSTAI00304,720,1270,4,Faulkner,STAI,Stairs,Stairs,F
+FDEPT01704,910,1180,4,Faulkner,DEPT,Department Office,Department Office,F
+FREST00304,910,1270,4,Faulkner,REST,Restroom,Restroom,F
+FDEPT01804,985,1270,4,Faulkner,DEPT,Medical Library,Medical Library,F
+FDEPT01904,1010,1180,4,Faulkner,DEPT,Admin,Admin,F
+FDEPT02004,1120,1270,4,Faulkner,DEPT,Social Work,Social Work,F
+FDEPT02104,1120,1270,4,Faulkner,DEPT,Sadpwsky Conference Room,Sadpwsky Conference Room,F
+FDEPT02204,1250,1180,4,Faulkner,DEPT,Administration,Administration,F
+FDEPT02304,1465,1180,4,Faulkner,DEPT,PATSAFE,PATSAFE,F
+FDEPT02404,1580,1270,4,Faulkner,DEPT,Primary Care Physicians,Primary Care Physicians,F
+FDEPT02504,1580,1180,4,Faulkner,DEPT,Surgery Department,Surgery Department,F
+FDEPT02604,1695,1180,4,Faulkner,DEPT,QUALIMP,QUALIMP,F
+FDEPT02704,1780,1180,4,Faulkner,DEPT,SURGSPEC,SURGSPEC,F
+FSTAI00404,1780,1270,4,Faulkner,STAI,Stairs,Stairs,F
+FDEPT02804,1860,1180,4,Faulkner,DEPT,HR,HR,F
+FDEPT02904,1860,1270,4,Faulkner,DEPT,Compliance/Patient Relations,Compliance/Patient Relations,F
+FSERV00104,1920,1180,4,Faulkner,SERV,Finance,Finance,F
+FSERV00204,1920,1270,4,Faulkner,SERV,Finance,Finance,F
+FDEPT03004,1965,1270,4,Faulkner,DEPT,VP Clinical Service,VP Clinical Service,F
+FSERV00304,2025,1180,4,Faulkner,SERV,Lockers,Lockers,F
+FDEPT03104,2025,1270,4,Faulkner,DEPT,Compliance/Patient Relations,Compliance/Patient Relations,F
+FDEPT03204,2115,1270,4,Faulkner,DEPT,BWH Plastics,BWH Plastics,F
+FDEPT03304,2115,1180,4,Faulkner,DEPT,Foot and Ankle Center,Foot and Ankle Center,F
+FDEPT03404,2235,1180,4,Faulkner,DEPT,Spine FAC,Spine FAC,F
+FSERV00404,2180,1270,4,Faulkner,SERV,Finance Office,Finance Office,F
+FDEPT03504,2290,1270,4,Faulkner,DEPT,IS,IS,F
