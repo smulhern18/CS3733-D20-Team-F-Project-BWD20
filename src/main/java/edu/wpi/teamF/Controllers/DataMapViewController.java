@@ -9,6 +9,9 @@ import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -143,6 +146,12 @@ public class DataMapViewController implements Initializable {
     System.out.println(mapPane.getLayoutX());
     System.out.println(nodeDeltaX);
     System.out.println(nodeDeltaY);
+    outlineNode();
+    locationSelector();
+  }
+
+  @FXML
+  public void locationSelector() {
     mapPane.setOnMouseClicked(
         new EventHandler<MouseEvent>() {
           public void handle(MouseEvent mouseEvent) {
@@ -155,7 +164,6 @@ public class DataMapViewController implements Initializable {
             yCoorInput.setText("" + yVal);
           }
         });
-    outlineNode();
   }
 
   @FXML
@@ -198,8 +206,9 @@ public class DataMapViewController implements Initializable {
     addNodeButton.setDisable(true);
     deleteNodeButton.setVisible(true);
     deleteNodeButton.setDisable(true);
-    mapPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {});
+    mapPane.setOnMouseClicked(mouseEvent -> {});
     nodeErrorLabel.setText("");
+    System.out.println("clearNode called");
   }
 
   @FXML
@@ -268,11 +277,13 @@ public class DataMapViewController implements Initializable {
         action -> {
           nodeButton = button; // sets classes button variable to the selected button
           this.node = node;
+          System.out.println(node.getId());
           if (selectNode1 || selectNode2) {
             edgeSelection(node);
             // addEdgeButton.setDisable(false);
           } else {
             displayNodeData();
+            locationSelector();
           }
 
           if (!selectNode1Button.getText().equals("Select Node 1")
@@ -354,31 +365,41 @@ public class DataMapViewController implements Initializable {
       Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getValue().toString());
       short floorNumber = Short.parseShort(floorInput.getText());
 
-      //      List<Node> typeNodes = nodeFactory.getNodesByType(nodeType);
-      //
-      //
-      //      if(typeNodes.size() > 0){
-      //        for(int i = 0; i < typeNodes.size(); i ++){
-      //          instance = Integer.parseInt(typeNodes.get(i).getId().substring(6, 8));
-      //          if(instance-tracker > 1){
-      //            newInstance = tracker + 1;
-      //          } else{
-      //            tracker = instance;
-      //          }
-      //        }
-      //      } else {
-      //        newInstance = 1;
-      //      }
-      //
-      //      String strInstance = "" + newInstance;
-      //      strInstance = String.format("%03d", strInstance);
-      //      String strFloor = String.format("%02d", floorInput.getText());
-      //
-      //      String ID = typeInput.getValue() + strInstance + strFloor;
+      List<Node> typeNodes = nodeFactory.getNodesByType(nodeType);
+
+      List<Integer> typeInstances = new ArrayList<>();
+
+      for (int i = 0;
+          i < typeNodes.size();
+          i++) { // collects all of the instances for the given type
+        int instanceNum = Integer.parseInt(typeNodes.get(i).getId().substring(5, 7));
+        typeInstances.add(instanceNum);
+      }
+
+      Collections.sort(typeInstances); // sorts the list
+
+      if (typeNodes.size() > 0) {
+        for (int i = 0; i < typeNodes.size(); i++) {
+          instance = Integer.parseInt(typeNodes.get(i).getId().substring(5, 7));
+          if (instance - tracker > 1) {
+            newInstance = tracker + 1;
+          } else {
+            tracker = instance;
+          }
+        }
+      } else {
+        newInstance = 1;
+      }
+
+      String strInstance = "" + newInstance;
+      strInstance = String.format("%03d", strInstance);
+      String strFloor = String.format("%02d", floorInput.getText());
+
+      String ID = "F" + typeInput.getValue() + strInstance + strFloor;
 
       Node newNode =
           new Node(
-              "testID",
+              ID,
               xCoordinate,
               yCoordinate,
               building,
