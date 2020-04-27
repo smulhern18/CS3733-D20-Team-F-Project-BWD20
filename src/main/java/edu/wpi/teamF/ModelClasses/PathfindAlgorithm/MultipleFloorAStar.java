@@ -100,9 +100,11 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
   public Path pathfind(Node start, Node.NodeType nodeType) throws InstanceNotFoundException {
     List<Path> paths = new ArrayList<>();
     for (Node node : nodeMap.values()) {
-      if (node.getType().getTypeString().equals(nodeType.getTypeString())
-          && isAccessible(start, start, node)) {
-        paths.add(pathfind(start, node));
+      if (node.getFloor() == start.getFloor()) {
+        if (node.getType().getTypeString().equals(nodeType.getTypeString())
+            && isAccessible(start, start, node)) {
+          paths.add(pathfind(start, node));
+        }
       }
     }
     double shortestLength = Double.MAX_VALUE;
@@ -118,6 +120,7 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
   }
 
   public Boolean isAccessible(Node startNode, Node endNode, Node neighbor) {
+    // TODO solve issue when an edge has a node that doesn't exist
     Set<Edge> neighborEdges2 = neighbor.getEdges();
     for (Edge edge2 : neighborEdges2) {
       if (edge2.getNode1().equals(neighbor.getId())) {
