@@ -7,15 +7,24 @@ import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.AccountFactory;
 import edu.wpi.teamF.ModelClasses.Account.PasswordHasher;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
-public class LoginController {
+public class LoginController implements Initializable {
 
   public Label loginText;
+  public AnchorPane anchorPane;
+  public JFXButton registerButton;
+  public Label orText;
+  public Label forgotText;
   @FXML private JFXButton loginButton;
 
   @FXML private JFXTextField usernameInput;
@@ -65,11 +74,6 @@ public class LoginController {
   }
 
   @FXML
-  void switchToMainMenu(ActionEvent event) throws IOException {
-    sceneController.switchScene("MainMenu");
-  }
-
-  @FXML
   void switchToMainMenu2() throws IOException {
     sceneController.switchScene("MainMenu");
   }
@@ -77,5 +81,31 @@ public class LoginController {
   @FXML
   void switchToRegister(ActionEvent event) throws IOException {
     sceneController.switchScene("Register");
+  }
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    anchorPane
+        .widthProperty()
+        .addListener(
+            (observable, oldWidth, newWidth) -> {
+              if (newWidth.doubleValue() != oldWidth.doubleValue()) {
+                resize(newWidth.doubleValue());
+              }
+            });
+  }
+
+  private void resize(double width) {
+    System.out.println(width);
+    Font newFont = new Font(width / 50);
+    loginText.setFont(newFont);
+    usernameInput.setFont(newFont);
+    passwordInput.setFont(newFont);
+    loginButton.setFont(newFont);
+    registerButton.setFont(newFont);
+    orText.setFont(newFont);
+    forgotText.setFont(newFont);
+    incorrectLabel.setFont(newFont);
+    // deleteButton.setFont(new Font(width / 50));
   }
 }

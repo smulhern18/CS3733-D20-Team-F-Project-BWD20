@@ -189,10 +189,10 @@ public class SecurityRequestTest {
       assertTrue(securityAll.contains(main4));
       assertTrue(securityAll.size() == 4);
 
-      nodeFactory.delete(main1.getId());
-      nodeFactory.delete(main2.getId());
-      nodeFactory.delete(main3.getId());
-      nodeFactory.delete(main4.getId());
+      securityRequestFactory.delete(main1.getId());
+      securityRequestFactory.delete(main2.getId());
+      securityRequestFactory.delete(main3.getId());
+      securityRequestFactory.delete(main4.getId());
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
     }

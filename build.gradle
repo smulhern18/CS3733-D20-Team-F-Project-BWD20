@@ -39,6 +39,7 @@ dependencies {
             'org.testfx:openjfx-monocle:8u76-b04',
     )
     implementation 'org.testng:testng:6.9.6'
+    implementation 'junit:junit:4.12'
 }
 
 javafx {

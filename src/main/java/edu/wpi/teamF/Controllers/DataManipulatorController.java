@@ -56,6 +56,9 @@ public class DataManipulatorController implements Initializable {
   public JFXButton uploadNodesButton;
   public JFXButton cancelEdgeButton;
   public JFXButton cancelButton;
+  public AnchorPane mapPane;
+  public AnchorPane edgePane;
+  public AnchorPane nodesPane;
   NodeFactory nodes = NodeFactory.getFactory();
   EdgeFactory edges = EdgeFactory.getFactory();
   FileChooser nodesChooser = new FileChooser();
@@ -335,42 +338,6 @@ public class DataManipulatorController implements Initializable {
     filterTextFieldNodes.setText("");
   }
 
-  public void viewerSwitcher(ActionEvent actionEvent) {
-    boolean isSelected = switcher.isSelected();
-    if (isSelected) {
-
-      filterTextFieldEdges.setVisible(false);
-      filterTextFieldNodes.setVisible(false);
-      updateNodesButton.setVisible(false);
-      updateEdgesButton.setVisible(false);
-      treeViewNodes.setVisible(false);
-      treeViewEdges.setVisible(false);
-      deleteEdgeButton.setVisible(false);
-      deleteNodeButton.setVisible(false);
-      edgeToDelete.setVisible(false);
-      nodeToDelete.setVisible(false);
-      mapView.setVisible(true);
-      addNodePaneButton.setVisible(false);
-      addEdgePaneButton.setVisible(false);
-
-      // set map stuff visible
-    } else {
-      filterTextFieldEdges.setVisible(true);
-      filterTextFieldNodes.setVisible(true);
-      updateNodesButton.setVisible(true);
-      updateEdgesButton.setVisible(true);
-      treeViewNodes.setVisible(true);
-      treeViewEdges.setVisible(true);
-      deleteEdgeButton.setVisible(true);
-      deleteNodeButton.setVisible(true);
-      edgeToDelete.setVisible(true);
-      nodeToDelete.setVisible(true);
-      mapView.setVisible(false);
-      addNodePaneButton.setVisible(true);
-      addEdgePaneButton.setVisible(true);
-    }
-  }
-
   public void uploadNodes(ActionEvent actionEvent) throws FileNotFoundException {
     nodesChooser.setTitle("Select CSV File Nodes");
     File file = nodesChooser.showOpenDialog(rootPane.getScene().getWindow());
@@ -561,5 +528,27 @@ public class DataManipulatorController implements Initializable {
 
   public void clearEdge(MouseEvent mouseEvent) {
     filterTextFieldEdges.setText("");
+  }
+
+  public void switchToNodes(ActionEvent actionEvent) {
+    edgePane.setVisible(false);
+    mapPane.setVisible(false);
+    nodesPane.setVisible(true);
+    mapView.setVisible(false);
+  }
+
+  public void switchToEdges(ActionEvent actionEvent) {
+    edgePane.setVisible(true);
+    nodesPane.setVisible(false);
+    mapPane.setVisible(false);
+    modifyNodePane.setVisible(false);
+    mapView.setVisible(false);
+  }
+
+  public void switchToMap(ActionEvent actionEvent) {
+    edgePane.setVisible(false);
+    mapPane.setVisible(true);
+    nodesPane.setVisible(false);
+    mapView.setVisible(true);
   }
 }
