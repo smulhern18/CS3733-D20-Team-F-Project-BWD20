@@ -7,7 +7,7 @@ import edu.wpi.teamF.ModelClasses.RouteNode;
 import java.util.*;
 import javax.management.InstanceNotFoundException;
 
-public class BreadthFirst {
+public class BreadthFirst implements PathfindAlgorithm {
 
   private final Map<String, Node> nodeMap = new HashMap<>();
 
@@ -17,7 +17,8 @@ public class BreadthFirst {
     }
   }
 
-  Path pathfind(Node start, Node end) throws InstanceNotFoundException {
+  @Override
+  public Path pathfind(Node start, Node end) throws InstanceNotFoundException {
     Queue<RouteNode> nodeQueue = new LinkedList<>();
 
     HashSet<Node> visited = new HashSet<>();
@@ -65,7 +66,7 @@ public class BreadthFirst {
     return new Path();
   }
 
-  Path pathfind(Node start, Node.NodeType nodeType) throws InstanceNotFoundException {
+  public Path pathfind(Node start, Node.NodeType nodeType) throws InstanceNotFoundException {
     List<Path> paths = new ArrayList<>();
     for (Node node : nodeMap.values()) {
       if (node.getType().getTypeString().equals(nodeType.getTypeString())
