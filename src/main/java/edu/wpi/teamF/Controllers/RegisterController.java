@@ -84,17 +84,11 @@ public class RegisterController {
   }
 
   @FXML
-  void switchToLogin(ActionEvent event) throws IOException {
+  void switchToLogin2() throws IOException {
     sceneController.switchScene("Login");
   }
 
-  @FXML
-  void switchToMainMenu(ActionEvent event) throws IOException {
-    sceneController.switchScene("MainMenu");
-  }
-
-  @FXML
-  void switchToLogin2() throws IOException {
+  public void cancel(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("Login");
   }
 }

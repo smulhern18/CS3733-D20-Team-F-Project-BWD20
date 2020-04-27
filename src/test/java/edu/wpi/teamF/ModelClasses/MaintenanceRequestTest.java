@@ -180,10 +180,10 @@ public class MaintenanceRequestTest {
       assertTrue(maintenanceAll.contains(main4));
       assertTrue(maintenanceAll.size() == 4);
 
-      databaseManager.deleteNode(main1.getId());
-      databaseManager.deleteNode(main2.getId());
-      databaseManager.deleteNode(main3.getId());
-      databaseManager.deleteNode(main4.getId());
+      databaseManager.deleteMaintenanceRequest(main1.getId());
+      databaseManager.deleteMaintenanceRequest(main2.getId());
+      databaseManager.deleteMaintenanceRequest(main3.getId());
+      databaseManager.deleteMaintenanceRequest(main4.getId());
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
     }
