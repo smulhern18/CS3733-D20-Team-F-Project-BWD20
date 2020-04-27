@@ -594,6 +594,37 @@ public class Validators {
     nodeValidation(transportRequestObject.getDestination());
   }
 
+  public static <T extends SanitationServiceRequest> void sanitationServiceValidation(T t, int... constraints)
+          throws ValidationException {
+    nullCheckValidation(t, constraints);
+    SanitationServiceRequest sanitationServiceRequest = (SanitationServiceRequest) t;
+    idValidation(sanitationServiceRequest.getId());
+    nodeValidation(sanitationServiceRequest.getLocation());
+    descriptionValidation(sanitationServiceRequest.getDescription());
+    dateValidation(sanitationServiceRequest.getDateTimeSubmitted());
+    priorityValidation(sanitationServiceRequest.getPriority());
+    transportTypeValidation(sanitationServiceRequest.getType());
+  }
+
+
+  public static void languageValidation(String type, int... constraints)
+          throws ValidationException {
+    nullCheckValidation(type, constraints);
+    if (type.length() < LANGUAGE_MIN_LENGTH
+            || type.length() > LANGUAGE_MAX_LENGTH) {
+      throw new ValidationException("Language is outside values.");
+    }
+  }
+
+  public static void problemValidation(String type, int... constraints)
+          throws ValidationException {
+    nullCheckValidation(type, constraints);
+    if (type.length() < PROBLEMTYPE_MIN_LENGTH
+            || type.length() > LANGUAGE_MAX_LENGTH) {
+      throw new ValidationException("Problem Type outside values.");
+    }
+  }
+
   public static void booleanValidation(boolean bool, int... constraints)
       throws ValidationException {
     nullCheckValidation(bool, constraints);
@@ -628,4 +659,5 @@ public class Validators {
   public static void baseValidation(Object object, int... constraints) {
     // accept everything as valid
   }
+
 }

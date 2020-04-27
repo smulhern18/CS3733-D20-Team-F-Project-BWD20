@@ -3,10 +3,13 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.DatabaseManipulators.SanitationServiceRequestFactory;
 import edu.wpi.teamF.ModelClasses.Node;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SanitationServiceRequest;
+import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UISanitationServiceRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.net.URL;
@@ -46,11 +49,9 @@ public class SanitationRequestController implements Initializable {
   public GridPane servicePane;
   public AnchorPane checkStatusPane;
   public AnchorPane anchorPane;
-  NodeFactory nodeFactory = NodeFactory.getFactory();
-  SanitationServiceRequestFactory sanitationServiceRequestFactory =
-      SanitationServiceRequestFactory.getFactory();
+  DatabaseManager databaseManager = DatabaseManager.getManager();
   List<SanitationServiceRequest> sanitationRequestList =
-      sanitationServiceRequestFactory.getAllSanitationRequests();
+      databaseManager.getAllSanitationRequests();
   ObservableList<UISanitationServiceRequest> uiSanitationRequests =
       FXCollections.observableArrayList();
 
@@ -145,12 +146,12 @@ public class SanitationRequestController implements Initializable {
   }
 
   public void submit(ActionEvent actionEvent)
-      throws ValidationException, InstanceNotFoundException {
+          throws Exception {
     String location = locationComboBox.getValue();
     String nodeID = location.substring(location.length() - 10);
     System.out.println(location);
     System.out.println(nodeID);
-    Node node = nodeFactory.read(nodeID);
+    Node node = databaseManager.readNode(nodeID);
     String priorityString = priorityComboBox.getValue();
     int priority = 0;
     if (priorityString.equals("Low")) {
@@ -166,7 +167,7 @@ public class SanitationRequestController implements Initializable {
     SanitationServiceRequest sanitationRequest =
         new SanitationServiceRequest(
             node, "Not Assigned", "No Description", date, priority, sanitationType);
-    sanitationServiceRequestFactory.create(sanitationRequest);
+    databaseManager.manipulateServiceRequest(sanitationRequest);
     uiSanitationRequests.add(new UISanitationServiceRequest(sanitationRequest));
     table.refresh();
     resetRequest();
@@ -187,9 +188,9 @@ public class SanitationRequestController implements Initializable {
     checkStatusPane.setVisible(false);
   }
 
-  public void update(ActionEvent actionEvent) throws ValidationException {
+  public void update(ActionEvent actionEvent) throws Exception {
     for (UISanitationServiceRequest uiSR : uiSanitationRequests) {
-      SanitationServiceRequest toUpdate = sanitationServiceRequestFactory.read(uiSR.getID().get());
+      SanitationServiceRequest toUpdate = databaseManager.readSanitationServiceRequest(uiSR.getID().get());
       if (!uiSR.equalsCSR(toUpdate)) {
         toUpdate.setAssignee(uiSR.getAssignee().get());
         String completed = uiSR.getCompleted().get();
@@ -198,7 +199,7 @@ public class SanitationRequestController implements Initializable {
         } else if (completed.equals("Complete")) {
           toUpdate.setComplete(true);
         }
-        sanitationServiceRequestFactory.update(toUpdate);
+        databaseManager.manipulateServiceRequest(toUpdate);
       }
     }
     table.refresh();
@@ -206,7 +207,7 @@ public class SanitationRequestController implements Initializable {
 
   public void delete(ActionEvent actionEvent) {
     String toDelete = deleteText.getText();
-    sanitationServiceRequestFactory.delete(toDelete);
+    databaseManager.deleteSanitationService(toDelete);
     uiSanitationRequests.removeIf(
         sanitationRequest -> sanitationRequest.getID().get().equals(toDelete));
   }

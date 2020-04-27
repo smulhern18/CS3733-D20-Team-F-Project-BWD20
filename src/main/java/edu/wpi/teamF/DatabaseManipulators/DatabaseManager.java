@@ -5,10 +5,7 @@ import edu.wpi.teamF.ModelClasses.Account.PasswordHasher;
 import edu.wpi.teamF.ModelClasses.Appointment;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.LanguageServiceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 
@@ -107,6 +104,9 @@ public class DatabaseManager {
       ComputerServiceRequestFactory.getFactory();
   private AppointmentFactory appointmentFactory = AppointmentFactory.getFactory();
   private LanguageServiceRequestFactory languageServiceRequestFactory = LanguageServiceRequestFactory.getFactory();
+  private SanitationServiceRequestFactory sanitationServiceRequestFactory = SanitationServiceRequestFactory.getFactory();
+  private MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
+  private MedicineDeliveryRequestFactory medicineDeliveryRequestFactory = MedicineDeliveryRequestFactory.getFactory();
 
   // SanitationService requests
   static final String SANITATION_TYPE_KEY = "SanitationType";
@@ -549,12 +549,35 @@ public class DatabaseManager {
   }
 
   public void manipulateServiceRequest(LanguageServiceRequest langRequest) throws ValidationException {
-    if (languageServiceRequestFactory.read(langRequest.getId()) == null) {
+    if (LanguageServiceRequestFactory.read(langRequest.getId()) == null) {
       languageServiceRequestFactory.create(langRequest);
     } else {
       languageServiceRequestFactory.update(langRequest);
     }
 
+  }
+  public void manipulateServiceRequest(SanitationServiceRequest sanitationRequest) throws ValidationException{
+    if (sanitationServiceRequestFactory.read(sanitationRequest.getId()) == null) {
+      sanitationServiceRequestFactory.create(sanitationRequest);
+    } else {
+      sanitationServiceRequestFactory.update(sanitationRequest);
+    }
+  }
+
+  public void manipulateServiceRequest(MariachiRequest mariachiRequest) throws ValidationException{
+    if (mariachiRequestFactory.read(mariachiRequest.getId()) == null) {
+      mariachiRequestFactory.create(mariachiRequest);
+    } else {
+      mariachiRequestFactory.update(mariachiRequest);
+    }
+  }
+
+  public void manipulateServiceRequest(MedicineDeliveryRequest mdRequest) throws ValidationException{
+    if (medicineDeliveryRequestFactory.read(mdRequest.getId()) == null) {
+      medicineDeliveryRequestFactory.create(mdRequest);
+    } else {
+      medicineDeliveryRequestFactory.update(mdRequest);
+    }
   }
 
   public MaintenanceRequest readMaintenanceRequest(String serviceId) throws Exception {
@@ -655,4 +678,42 @@ public class DatabaseManager {
     csvManipulator.readCSVFileAccount(stream);
   }
 
+  public List<SanitationServiceRequest> getAllSanitationRequests() {
+    return sanitationServiceRequestFactory.getAllSanitationRequests();
+
+  }
+
+  public SanitationServiceRequest readSanitationServiceRequest(String s) {
+    return sanitationServiceRequestFactory.read(s);
+
+  }
+
+  public void deleteSanitationService(String toDelete) {
+    sanitationServiceRequestFactory.delete(toDelete);
+  }
+
+  public List<MariachiRequest> getAllMariachiServiceRequests() {
+    return mariachiRequestFactory.getAllMariachiRequest();
+  }
+
+
+  public MariachiRequest readMariachiServiceRequest(String s) {
+    return mariachiRequestFactory.read(s);
+  }
+
+  public void deleteMariachiServiceRequest(String toDelete) {
+    mariachiRequestFactory.delete(toDelete);
+  }
+
+  public List<MedicineDeliveryRequest> getAllMedicineDeliveryRequests() {
+    return medicineDeliveryRequestFactory.getAllMedicineDeliveryRequests();
+  }
+
+  public MedicineDeliveryRequest readMedicineDeliveryService(String s) {
+    return medicineDeliveryRequestFactory.read(s);
+  }
+
+  public void deleteMedicineDeliveryRequest(String toDelete) {
+    medicineDeliveryRequestFactory.delete(toDelete);
+  }
 }
