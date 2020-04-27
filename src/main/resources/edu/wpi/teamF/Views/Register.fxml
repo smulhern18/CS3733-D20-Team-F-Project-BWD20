@@ -3,89 +3,60 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #B53389;" xmlns="http://javafx.com/javafx/11.0.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.RegisterController">
+<AnchorPane prefHeight="417.0" prefWidth="929.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.RegisterController">
     <children>
-        <StackPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-            <children>
-                <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="711.0" prefWidth="333.0">
-                    <children>
-                        <Label prefHeight="55.0" prefWidth="136.0" text="Register" textFill="#4d4d4d">
-                            <font>
-                                <Font name="System Bold" size="35.0" />
-                            </font>
-                        </Label>
-                        <Line endX="30.385835647583008" endY="0.38579103350639343" startX="-20.0" startY="7.62939453125E-6" stroke="#b53389" strokeWidth="2.0">
-                            <VBox.margin>
-                                <Insets bottom="10.0" />
-                            </VBox.margin>
-                        </Line>
-                        <Label fx:id="incorrectLabel" textFill="RED" visible="false">
-                            <VBox.margin>
-                                <Insets bottom="10.0" />
-                            </VBox.margin>
-                        </Label>
-                  <JFXTextField fx:id="firstNameInput" focusColor="#b53389" onKeyReleased="#enableRegister" promptText="First Name" unFocusColor="#b53389">
-                     <VBox.margin>
-                        <Insets bottom="15.0" />
-                     </VBox.margin>
-                  </JFXTextField>
-                  <JFXTextField fx:id="lastNameInput" focusColor="#b53389" onKeyReleased="#enableRegister" promptText="Last Name" unFocusColor="#b53389">
-                     <VBox.margin>
-                        <Insets bottom="15.0" />
-                     </VBox.margin>
-                  </JFXTextField>
-                  <JFXTextField fx:id="emailInput" focusColor="#b53389" onKeyReleased="#enableRegister" promptText="Email Address" unFocusColor="#b53389">
-                     <VBox.margin>
-                        <Insets bottom="30.0" />
-                     </VBox.margin>
-                  </JFXTextField>
-                        <JFXTextField fx:id="usernameInput" focusColor="#b53389" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableRegister" prefHeight="26.0" prefWidth="267.0" promptText="Username" unFocusColor="#b53389">
-                            <VBox.margin>
-                                <Insets bottom="15.0" />
-                            </VBox.margin>
-                        </JFXTextField>
-                        <JFXPasswordField fx:id="passwordInput" focusColor="#b53389" onKeyReleased="#enableRegister" prefHeight="26.0" prefWidth="277.0" promptText="Password" unFocusColor="#b53389">
-                            <VBox.margin>
-                                <Insets bottom="30.0" />
-                            </VBox.margin>
-                        </JFXPasswordField>
-                        <JFXButton fx:id="registerButton" disable="true" onAction="#attemptRegister" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #B53389;" text="Register" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="12.0" />
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="10.0" />
-                            </VBox.margin>
-                        </JFXButton>
-                        <Label text="or">
-                            <VBox.margin>
-                                <Insets bottom="10.0" />
-                            </VBox.margin>
-                        </Label>
-                        <JFXButton fx:id="loginButton" onAction="#switchToLogin" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #4d4d4d;" text="Login" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="12.0" />
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="10.0" />
-                            </VBox.margin>
-                        </JFXButton>
-                        <JFXButton fx:id="RegisterButton" onAction="#switchToMainMenu" prefHeight="25.0" prefWidth="135.0" style="-fx-background-color: #4d4d4d;" text="Main Menu" textFill="WHITE">
-                            <font>
-                                <Font name="System Bold" size="12.0" />
-                            </font>
-                        </JFXButton>
-                    </children>
-                </VBox>
-            </children>
-        </StackPane>
+      <fx:include source="MenuBar.fxml" />
+      <Label contentDisplay="CENTER" layoutX="489.0" layoutY="-19.0" prefHeight="83.0" prefWidth="170.0" text="Register" textAlignment="CENTER">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="firstnameInput" layoutX="379.0" layoutY="58.0" onKeyReleased="#enableRegister" />
+      <JFXTextField fx:id="lastNameInput" layoutX="379.0" layoutY="108.0" onKeyReleased="#enableRegister" />
+      <JFXTextField fx:id="emailInput" layoutX="378.0" layoutY="161.0" onKeyReleased="#enableRegister" />
+      <JFXTextField fx:id="usernameInput" layoutX="640.0" layoutY="62.0" onKeyReleased="#enableRegister" />
+      <Label layoutX="263.0" layoutY="64.0" prefHeight="31.0" prefWidth="102.0" text="First Name">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="263.0" layoutY="112.0" prefHeight="31.0" prefWidth="102.0" text="Last Name">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="240.0" layoutY="167.0" prefHeight="27.0" prefWidth="125.0" text="Email Address">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="531.0" layoutY="70.0" prefHeight="0.0" prefWidth="102.0" text="Username">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="531.0" layoutY="115.0" prefHeight="0.0" prefWidth="102.0" text="Password">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="registerButton" disable="true" layoutX="449.0" layoutY="231.0" onAction="#attemptRegister" prefHeight="44.0" prefWidth="125.0" style="-fx-background-color: #EB3E79;" text="Register">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="449.0" layoutY="315.0" onAction="#cancel" prefHeight="44.0" prefWidth="125.0" style="-fx-background-color: grey;" text="Cancel">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </JFXButton>
+      <Line endX="100.0" layoutX="514.0" layoutY="297.0" startX="-100.0" style="-fx-fill: black;" />
+      <Label fx:id="incorrectLabel" layoutX="619.0" layoutY="194.0" prefHeight="17.0" prefWidth="188.0" text="Invalid input for Account." />
+      <JFXPasswordField fx:id="passwordInput" layoutX="640.0" layoutY="121.0" onKeyReleased="#enableRegister" />
     </children>
 </AnchorPane>

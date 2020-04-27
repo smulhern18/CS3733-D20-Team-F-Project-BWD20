@@ -26,4 +26,8 @@ public class MenuBarController {
   public void help(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("Help");
   }
+
+  public void settings(ActionEvent actionEvent) {}
+
+  public void mainMenu(ActionEvent actionEvent) {}
 }
