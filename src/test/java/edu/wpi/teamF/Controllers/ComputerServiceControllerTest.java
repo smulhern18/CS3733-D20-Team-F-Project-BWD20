@@ -17,16 +17,17 @@ public class ComputerServiceControllerTest extends ApplicationTest {
 
   // Initialize the databases needed. Need database manager, nodes (for locations) and obv. the
   // computerservicerequest
-  private static DatabaseManager db = new DatabaseManager();
-  private static NodeFactory nodes = NodeFactory.getFactory();
-  private static ComputerServiceRequestFactory computerServiceRequestFactory =
-      ComputerServiceRequestFactory.getFactory();
+  DatabaseManager databaseManager = DatabaseManager.getManager();
+  ComputerServiceRequestFactory computerServiceRequestFactory = databaseManager.getAllComputerServiceRequests();
+
+  public ComputerServiceControllerTest() throws Exception {
+  }
+
 
   // populate the factories with the needed data
 
   @BeforeAll
   public static void setUp() throws Exception {
-    db.initialize();
     TestData testData = new TestData();
     for (ComputerServiceRequest csr : testData.validComputerServiceRequests) {
       computerServiceRequestFactory.create(csr);
