@@ -9,6 +9,7 @@ import edu.wpi.teamF.ModelClasses.Directions.Directions;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.DepthFirstSearch;
+import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.MultipleFloorAStar;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.PathfindAlgorithm;
 import edu.wpi.teamF.ModelClasses.Scorer.EuclideanScorer;
 import java.net.URL;
@@ -301,7 +302,7 @@ public class PathfinderController implements Initializable {
       }
     }
 
-    pathFindAlgorithm = new DepthFirstSearch(fullNodeList); // TODO Undo this
+    pathFindAlgorithm = new MultipleFloorAStar(fullNodeList);
     resetPane();
     drawNodes();
   }
