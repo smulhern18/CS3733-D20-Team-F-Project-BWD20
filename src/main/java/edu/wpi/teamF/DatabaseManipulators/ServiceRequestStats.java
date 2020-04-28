@@ -99,13 +99,4 @@ public class ServiceRequestStats {
     total = total + " " + timeDifference / 60 + " Minutes";
     return total;
   }
-
-
-
-
-
-
-
-
-
 }

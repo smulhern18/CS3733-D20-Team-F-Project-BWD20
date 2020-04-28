@@ -138,8 +138,7 @@ public class DatabaseManager {
       LaundryServiceRequestFactory.getFactory();
   private FlowerServiceRequestFactory flowerServiceRequestFactory =
       FlowerServiceRequestFactory.getFactory();
-  private TransportRequestFactory transportRequestFactory =
-      TransportRequestFactory.getFactory();
+  private TransportRequestFactory transportRequestFactory = TransportRequestFactory.getFactory();
 
   static Connection connection = null;
 
@@ -873,7 +872,8 @@ public class DatabaseManager {
     return transportRequestFactory.getAllTransportRequests();
   }
 
-  public void manipulateServiceRequest(TransportRequest transportRequest) throws ValidationException {
+  public void manipulateServiceRequest(TransportRequest transportRequest)
+      throws ValidationException {
     Validators.transportRequestValidation(transportRequest);
     if (transportRequestFactory.read(transportRequest.getId()) == null) {
       transportRequestFactory.create(transportRequest);

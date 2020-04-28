@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class UITransportRequest  extends RecursiveTreeObject<UITransportRequest> {
+public class UITransportRequest extends RecursiveTreeObject<UITransportRequest> {
   public SimpleStringProperty ID;
   public SimpleStringProperty location;
   public SimpleStringProperty destination;
@@ -20,9 +20,10 @@ public class UITransportRequest  extends RecursiveTreeObject<UITransportRequest>
   public SimpleStringProperty priority;
   public SimpleStringProperty assignee;
   public SimpleStringProperty dateSubmitted;
-  public SimpleBooleanProperty completed;
+  public SimpleStringProperty completed;
   public SimpleStringProperty description;
   public SimpleStringProperty type;
+
   public UITransportRequest(TransportRequest csr) {
     DateFormat date = new SimpleDateFormat("yyyy-mm-dd");
 
@@ -33,7 +34,11 @@ public class UITransportRequest  extends RecursiveTreeObject<UITransportRequest>
     this.priority = new SimpleStringProperty("" + csr.getPriority());
     this.assignee = new SimpleStringProperty(csr.getAssignee());
     this.dateSubmitted = new SimpleStringProperty(date.format(csr.getDateTimeSubmitted()));
-    this.completed = new SimpleBooleanProperty();
+    if (csr.getComplete()) {
+      this.completed = new SimpleStringProperty("Complete");
+    } else {
+      this.completed = new SimpleStringProperty("Incomplete");
+    }
     this.description = new SimpleStringProperty(csr.getDescription());
     this.type = new SimpleStringProperty(csr.getType());
   }
