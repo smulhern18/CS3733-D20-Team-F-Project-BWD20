@@ -43,7 +43,7 @@ public class MainMenuController {
   }
 
   public void pathfinder1(MouseEvent mouseEvent) throws IOException {
-    sceneController.switchScene("PathfinderVersion2");
+    sceneController.switchScene("Pathfinder");
   }
 
   public void admin1(MouseEvent mouseEvent) throws IOException {

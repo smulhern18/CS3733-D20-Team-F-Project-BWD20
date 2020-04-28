@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -26,7 +25,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.CheckBoxTreeTableCell;
 import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
@@ -67,10 +65,15 @@ public class ComputerServiceController implements Initializable {
 
   ObservableList<UIComputerServiceRequest> csrUI = FXCollections.observableArrayList();
   DatabaseManager databaseManager = DatabaseManager.getManager();
-  List<ComputerServiceRequest> computerServiceRequests =
-      databaseManager.getAllComputerServiceRequests();
+  List<ComputerServiceRequest> computerServiceRequests;
 
-  public ComputerServiceController() throws Exception {}
+  public ComputerServiceController() {
+    try {
+      computerServiceRequests = databaseManager.getAllComputerServiceRequests();
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+  }
 
   @SneakyThrows
   @Override
@@ -224,7 +227,6 @@ public class ComputerServiceController implements Initializable {
         });
 
      */
-
     /*
     JFXTreeTableColumn<UIComputerServiceRequest, String> completed =
         new JFXTreeTableColumn<>("Completed");
@@ -242,6 +244,40 @@ public class ComputerServiceController implements Initializable {
 
      */
 
+    ObservableList<String> completedList = FXCollections.observableArrayList();
+    completedList.add("Completed");
+    completedList.add("Incomplete");
+
+    JFXTreeTableColumn<UIComputerServiceRequest, String> completed =
+        new JFXTreeTableColumn<>("Completed");
+    completed.setPrefWidth(200);
+    completed.setCellValueFactory(
+        (JFXTreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String> param) ->
+            param.getValue().getValue().getCompleted());
+    completed.setCellFactory(
+        new Callback<
+            TreeTableColumn<UIComputerServiceRequest, String>,
+            TreeTableCell<UIComputerServiceRequest, String>>() {
+          @Override
+          public TreeTableCell<UIComputerServiceRequest, String> call(
+              TreeTableColumn<UIComputerServiceRequest, String> param) {
+            return new TextFieldTreeTableCell<>();
+          }
+        });
+    completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    completed.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(completedList));
+    completed.setOnEditCommit(
+        new EventHandler<TreeTableColumn.CellEditEvent<UIComputerServiceRequest, String>>() {
+          @Override
+          public void handle(
+              TreeTableColumn.CellEditEvent<UIComputerServiceRequest, String> event) {
+            TreeItem<UIComputerServiceRequest> current =
+                treeTableComputer.getTreeItem(event.getTreeTablePosition().getRow());
+            current.getValue().setCompleted(new SimpleStringProperty(event.getNewValue()));
+          }
+        });
+
+    /*
     // Combobox completed
     JFXTreeTableColumn<UIComputerServiceRequest, Boolean> completed =
         new JFXTreeTableColumn<>("Completed");
@@ -256,6 +292,8 @@ public class ComputerServiceController implements Initializable {
             return new SimpleBooleanProperty(false);
           }
         });
+
+     */
 
     // Assignee choicebox
 
@@ -370,8 +408,8 @@ public class ComputerServiceController implements Initializable {
       boolean isSame = csrui.equalsCSR(toUpdate);
       if (!isSame) {
         toUpdate.setAssignee(csrui.getAssignee().get());
-        boolean completed = csrui.getCompleted().get();
-        if (completed) {
+        String completed = csrui.getCompleted().get();
+        if (completed.equals("True")) {
           toUpdate.setComplete(true);
 
         } else {

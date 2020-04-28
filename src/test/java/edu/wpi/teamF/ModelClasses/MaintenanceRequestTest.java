@@ -48,7 +48,7 @@ public class MaintenanceRequestTest {
       databaseManager.manipulateNode(validNodes[3]);
 
     } catch (Exception e) {
-
+      System.out.println(e.getMessage());
     }
     try {
       for (MaintenanceRequest maintenanceRequest : validMaintenanceRequest) {

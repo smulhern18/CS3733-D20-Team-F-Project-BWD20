@@ -185,7 +185,7 @@ public class MariachiRequestTest {
       databaseManager.manipulateServiceRequest(main3);
       databaseManager.manipulateServiceRequest(main4);
 
-      List<SecurityRequest> securityAll = databaseManager.getAllSecurityRequests();
+      List<MariachiRequest> securityAll = databaseManager.getAllMariachiServiceRequests();
 
       assertTrue(securityAll.contains(main1));
       assertTrue(securityAll.contains(main2));
