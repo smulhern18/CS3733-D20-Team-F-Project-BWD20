@@ -277,24 +277,6 @@ public class ComputerServiceController implements Initializable {
           }
         });
 
-    /*
-    // Combobox completed
-    JFXTreeTableColumn<UIComputerServiceRequest, Boolean> completed =
-        new JFXTreeTableColumn<>("Completed");
-    completed.setCellFactory(CheckBoxTreeTableCell.forTreeTableColumn(completed));
-    completed.setCellValueFactory(
-        param -> {
-          if (param.getValue().getValue().getCompleted().get()) {
-            System.out.println(param.getValue().getValue().getCompleted().get());
-            return new SimpleBooleanProperty(true);
-          } else {
-            System.out.println(param.getValue().getValue().getCompleted().get());
-            return new SimpleBooleanProperty(false);
-          }
-        });
-
-     */
-
     // Assignee choicebox
 
     List<Account> employeeNames = databaseManager.getAllAccounts();
