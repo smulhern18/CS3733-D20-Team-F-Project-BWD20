@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -39,7 +40,25 @@ public class DataMapViewController implements Initializable {
 
   @FXML private GridPane edgeGridPane;
 
-  @FXML private AnchorPane mapPane;
+  @FXML private AnchorPane mapPane1;
+
+  @FXML private ImageView imageView1;
+
+  @FXML private AnchorPane mapPane2;
+
+  @FXML private ImageView imageView2;
+
+  @FXML private AnchorPane mapPane3;
+
+  @FXML private ImageView imageView3;
+
+  @FXML private AnchorPane mapPane4;
+
+  @FXML private ImageView imageView4;
+
+  @FXML private AnchorPane mapPane5;
+
+  @FXML private ImageView imageView5;
 
   @FXML private JFXTextField yCoorInput;
 
@@ -75,7 +94,21 @@ public class DataMapViewController implements Initializable {
 
   @FXML private ScrollPane imageScrollPane;
 
+  @FXML private JFXButton floor1Button;
+
+  @FXML private JFXButton floor2Button;
+
+  @FXML private JFXButton floor3Button;
+
+  @FXML private JFXButton floor4Button;
+
+  @FXML private JFXButton floor5Button;
+
   @FXML private StackPane imageStackPane;
+
+  private AnchorPane mapPane;
+
+  private int paneNumber;
 
   JFXButton nodeButton = null;
   Line edgeLine = null;
@@ -89,10 +122,6 @@ public class DataMapViewController implements Initializable {
 
   double deltaX = 0;
   double deltaY = 0;
-
-  int tracker;
-  int instance;
-  int newInstance;
 
   UISetting uiSetting = new UISetting();
 
@@ -116,17 +145,16 @@ public class DataMapViewController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
+    mapPane = mapPane1;
+
+    changeToFloor1();
+
     for (Edge edge : edgeFactory.getAllEdges()) {
-      if (edge.getNode1().charAt(edge.getNode1().length() - 1) == '5'
-          && edge.getNode2().charAt(edge.getNode2().length() - 1) == '5') {
-        drawEdge(edge);
-      }
+      drawEdge(edge);
     } // for every edge that connects two nodes on the fifth floor, draw the edge on the map
 
     for (Node node : nodeFactory.getAllNodes()) {
-      if (node.getFloor() == 5) {
-        drawNode(node);
-      } // for every node on the fifth floor, draw the node on the map
+      drawNode(node);
     }
 
     typeInput
@@ -137,6 +165,61 @@ public class DataMapViewController implements Initializable {
     typeInput.setValue("CONF");
 
     uiSetting.makeZoomable(imageScrollPane, imageStackPane);
+  }
+
+  @FXML
+  public void changeToFloor1() {
+    resetImages();
+    mapPane1.setVisible(true);
+    imageView1.setVisible(true);
+    mapPane = mapPane1;
+  }
+
+  @FXML
+  public void changeToFloor2() {
+    resetImages();
+    mapPane2.setVisible(true);
+    imageView2.setVisible(true);
+    mapPane = mapPane2;
+  }
+
+  @FXML
+  public void changeToFloor3() {
+    resetImages();
+    mapPane3.setVisible(true);
+    imageView3.setVisible(true);
+    mapPane = mapPane3;
+  }
+
+  @FXML
+  public void changeToFloor4() {
+    resetImages();
+    mapPane4.setVisible(true);
+    imageView4.setVisible(true);
+    mapPane = mapPane4;
+  }
+
+  @FXML
+  public void changeToFloor5() {
+    resetImages();
+    mapPane5.setVisible(true);
+    imageView5.setVisible(true);
+    mapPane = mapPane5;
+  }
+
+  public void resetImages() {
+    mapPane1.setVisible(false);
+    imageView1.setVisible(false);
+    mapPane2.setVisible(false);
+    imageView2.setVisible(false);
+    mapPane3.setVisible(false);
+    imageView3.setVisible(false);
+    mapPane3.setVisible(false);
+    imageView3.setVisible(false);
+    mapPane4.setVisible(false);
+    imageView4.setVisible(false);
+    mapPane5.setVisible(false);
+    imageView4.setVisible(false);
   }
 
   @FXML
@@ -233,24 +316,46 @@ public class DataMapViewController implements Initializable {
     try {
       double heightRatio = (double) PANE_HEIGHT / MAP_HEIGHT;
       double widthRatio = (double) PANE_WIDTH / MAP_WIDTH;
+      System.out.println("node factory: " + nodeFactory);
+      System.out.println(edge);
+      System.out.println(edge.getNode1());
       Node node1 = nodeFactory.read(edge.getNode1());
       Node node2 = nodeFactory.read(edge.getNode2());
-      int startX = (int) (node1.getXCoord() * widthRatio);
-      int startY = (int) (node1.getYCoord() * heightRatio); // start values correspond to node 1
-      int endX = (int) (node2.getXCoord() * widthRatio);
-      int endY = (int) (node2.getYCoord() * heightRatio); // end values correspond to node 2
-      Line line = new Line(startX, startY, endX, endY);
-      line.setId(edge.getId()); // allows us to keep track of what line is what edge
-      line.setStroke(Color.BLACK);
-      line.setStrokeWidth(1.5);
-      line.setOnMouseClicked(
-          mouseEvent -> { // when a user clicks on a line:
-            edgeLine = line;
-            this.edge = edge;
-            displayEdgeData();
-          });
+      if (node1.getFloor()
+          == node2.getFloor()) { // if the edge connects two nodes on the same floor
+        int startX = (int) (node1.getXCoord() * widthRatio);
+        int startY = (int) (node1.getYCoord() * heightRatio); // start values correspond to node 1
+        int endX = (int) (node2.getXCoord() * widthRatio);
+        int endY = (int) (node2.getYCoord() * heightRatio); // end values correspond to node 2
+        Line line = new Line(startX, startY, endX, endY);
+        line.setId(edge.getId()); // allows us to keep track of what line is what edge
+        line.setStroke(Color.BLACK);
+        line.setStrokeWidth(1.5);
+        line.setOnMouseClicked(
+            mouseEvent -> { // when a user clicks on a line:
+              edgeLine = line;
+              this.edge = edge;
+              displayEdgeData();
+            });
 
-      mapPane.getChildren().add(line);
+        switch (node1.getFloor()) {
+          case 1:
+            mapPane1.getChildren().add(line);
+            break;
+          case 2:
+            mapPane2.getChildren().add(line);
+            break;
+          case 3:
+            mapPane3.getChildren().add(line);
+            break;
+          case 4:
+            mapPane4.getChildren().add(line);
+            break;
+          case 5:
+            mapPane5.getChildren().add(line);
+            break;
+        }
+      }
     } catch (InstanceNotFoundException e) {
       e.printStackTrace();
     }
@@ -291,7 +396,23 @@ public class DataMapViewController implements Initializable {
             addEdgeButton.setDisable(false);
           }
         });
-    mapPane.getChildren().add(button);
+    switch (node.getFloor()) {
+      case 1:
+        mapPane1.getChildren().add(button);
+        break;
+      case 2:
+        mapPane2.getChildren().add(button);
+        break;
+      case 3:
+        mapPane3.getChildren().add(button);
+        break;
+      case 4:
+        mapPane4.getChildren().add(button);
+        break;
+      case 5:
+        mapPane5.getChildren().add(button);
+        break;
+    }
     // setNodeDraggable(button);
   }
 
@@ -352,9 +473,10 @@ public class DataMapViewController implements Initializable {
   @FXML
   private void addNode() throws Exception {
 
-    tracker = 0;
-    instance = 0;
-    newInstance = 0;
+    int tracker = 0;
+    int instance = 0;
+    int newInstance = 0;
+    int instanceNum = 0;
 
     try { // is the input valid?
       short xCoordinate = Short.parseShort(xCoorInput.getText());
@@ -369,18 +491,18 @@ public class DataMapViewController implements Initializable {
 
       List<Integer> typeInstances = new ArrayList<>();
 
-      for (int i = 0;
-          i < typeNodes.size();
-          i++) { // collects all of the instances for the given type
-        int instanceNum = Integer.parseInt(typeNodes.get(i).getId().substring(5, 7));
-        typeInstances.add(instanceNum);
+      for (int i = 0; i < typeNodes.size(); i++) { // collects all of the instances for the given type
+        if(typeNodes.get(i).getFloor() == node.getFloor()){
+          instanceNum = Integer.parseInt(typeNodes.get(i).getId().substring(5, 8));
+          typeInstances.add(instanceNum);
+        }
       }
 
       Collections.sort(typeInstances); // sorts the list
 
       if (typeNodes.size() > 0) {
         for (int i = 0; i < typeNodes.size(); i++) {
-          instance = Integer.parseInt(typeNodes.get(i).getId().substring(5, 7));
+          instance = Integer.parseInt(typeNodes.get(i).getId().substring(5, 8));
           if (instance - tracker > 1) {
             newInstance = tracker + 1;
           } else {
