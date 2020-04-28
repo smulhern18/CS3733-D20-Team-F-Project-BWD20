@@ -5,6 +5,7 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MedicineDeliveryRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIMedicineDeliveryRequest;
@@ -17,14 +18,18 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -82,8 +87,6 @@ public class MedicineDeliveryController implements Initializable {
               }
             });
 
-    // add the different choices to the choicebox
-    // Replace this with long names, linked to IDs
     List<Node> nodes = null;
     try {
       nodes = databaseManager.getAllNodes();
@@ -98,7 +101,6 @@ public class MedicineDeliveryController implements Initializable {
     priorityChoice.getItems().add("Medium");
     priorityChoice.getItems().add("High");
 
-    // ID
     JFXTreeTableColumn<UIMedicineDeliveryRequest, String> ID = new JFXTreeTableColumn<>("ID");
     ID.setPrefWidth(100);
     ID.setCellValueFactory(
@@ -112,7 +114,6 @@ public class MedicineDeliveryController implements Initializable {
           }
         });
 
-    // Location column
     JFXTreeTableColumn<UIMedicineDeliveryRequest, String> loc =
         new JFXTreeTableColumn<>("Location");
     loc.setPrefWidth(100);
@@ -154,8 +155,6 @@ public class MedicineDeliveryController implements Initializable {
             return param.getValue().getValue().getInstructions();
           }
         });
-
-    // desc column
     JFXTreeTableColumn<UIMedicineDeliveryRequest, String> desc =
         new JFXTreeTableColumn<>("Description");
     desc.setPrefWidth(80);
@@ -169,7 +168,6 @@ public class MedicineDeliveryController implements Initializable {
             return param.getValue().getValue().getDescription();
           }
         });
-    // priority column
     JFXTreeTableColumn<UIMedicineDeliveryRequest, String> priority =
         new JFXTreeTableColumn<>("Priority");
     priority.setPrefWidth(50);
@@ -183,36 +181,72 @@ public class MedicineDeliveryController implements Initializable {
             return param.getValue().getValue().getPriority();
           }
         });
-    // assignee column
-    JFXTreeTableColumn<UIMedicineDeliveryRequest, String> assignee =
+
+    List<Account> employeeNames = databaseManager.getAllAccounts();
+    ObservableList<String> employees = FXCollections.observableArrayList();
+    for (Account account : employeeNames) {
+      employees.add(account.getFirstName());
+    }
+    JFXTreeTableColumn<UIMedicineDeliveryRequest, String> column =
         new JFXTreeTableColumn<>("Assignee");
-    assignee.setPrefWidth(80);
-    assignee.setCellValueFactory(
+    column.setCellValueFactory(
+        (JFXTreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String> param) ->
+            param.getValue().getValue().getAssignee());
+    column.setCellFactory(
         new Callback<
-            TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String>,
-            ObservableValue<String>>() {
+            TreeTableColumn<UIMedicineDeliveryRequest, String>,
+            TreeTableCell<UIMedicineDeliveryRequest, String>>() {
           @Override
-          public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String> param) {
-            return param.getValue().getValue().getAssignee();
+          public TreeTableCell<UIMedicineDeliveryRequest, String> call(
+              TreeTableColumn<UIMedicineDeliveryRequest, String> param) {
+            return new TextFieldTreeTableCell<>();
           }
         });
+    column.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    column.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(employees));
+    column.setOnEditCommit(
+        new EventHandler<TreeTableColumn.CellEditEvent<UIMedicineDeliveryRequest, String>>() {
+          @Override
+          public void handle(
+              TreeTableColumn.CellEditEvent<UIMedicineDeliveryRequest, String> event) {
+            TreeItem<UIMedicineDeliveryRequest> current =
+                treeTableMedicine.getTreeItem(event.getTreeTablePosition().getRow());
+            current.getValue().setAssignee(new SimpleStringProperty(event.getNewValue()));
+          }
+        });
+
+    ObservableList<String> completedList = FXCollections.observableArrayList();
+    completedList.add("Completed");
+    completedList.add("Incomplete");
 
     JFXTreeTableColumn<UIMedicineDeliveryRequest, String> completed =
         new JFXTreeTableColumn<>("Completed");
-    completed.setPrefWidth(80);
+    completed.setPrefWidth(200);
     completed.setCellValueFactory(
+        (JFXTreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String> param) ->
+            param.getValue().getValue().getCompleted());
+    completed.setCellFactory(
         new Callback<
-            TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String>,
-            ObservableValue<String>>() {
+            TreeTableColumn<UIMedicineDeliveryRequest, String>,
+            TreeTableCell<UIMedicineDeliveryRequest, String>>() {
           @Override
-          public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<UIMedicineDeliveryRequest, String> param) {
-            return param.getValue().getValue().getCompleted();
+          public TreeTableCell<UIMedicineDeliveryRequest, String> call(
+              TreeTableColumn<UIMedicineDeliveryRequest, String> param) {
+            return new TextFieldTreeTableCell<>();
           }
         });
-
-    // Load the database into the tableview
+    completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    completed.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(completedList));
+    completed.setOnEditCommit(
+        new EventHandler<TreeTableColumn.CellEditEvent<UIMedicineDeliveryRequest, String>>() {
+          @Override
+          public void handle(
+              TreeTableColumn.CellEditEvent<UIMedicineDeliveryRequest, String> event) {
+            TreeItem<UIMedicineDeliveryRequest> current =
+                treeTableMedicine.getTreeItem(event.getTreeTablePosition().getRow());
+            current.getValue().setCompleted(new SimpleStringProperty(event.getNewValue()));
+          }
+        });
 
     for (MedicineDeliveryRequest mdr : medicineDeliveryRequests) {
       mdrUI.add(new UIMedicineDeliveryRequest(mdr));
@@ -221,15 +255,10 @@ public class MedicineDeliveryController implements Initializable {
     final TreeItem<UIMedicineDeliveryRequest> root =
         new RecursiveTreeItem<UIMedicineDeliveryRequest>(mdrUI, RecursiveTreeObject::getChildren);
 
-    // set the columns for the tableview
-
     treeTableMedicine
         .getColumns()
-        .setAll(ID, loc, medicine, instructions, desc, priority, assignee, completed);
+        .setAll(ID, loc, medicine, instructions, desc, priority, column, completed);
 
-    // set as editable
-
-    assignee.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     priority.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
@@ -239,7 +268,6 @@ public class MedicineDeliveryController implements Initializable {
   }
 
   public void submit(ActionEvent actionEvent) throws Exception {
-    // Get the values
     String location = locationComboBox.getValue();
     Node node = databaseManager.readNode(location);
     String medicine = medicineText.getText();

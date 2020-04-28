@@ -89,6 +89,12 @@ public class TransportServiceController implements Initializable {
     priorityChoice.getItems().add("Medium");
     priorityChoice.getItems().add("High");
 
+
+    //Add the types here
+    issueChoice.getItems().add("");
+    issueChoice.getItems().add("");
+    issueChoice.getItems().add("");
+
     // ID
     JFXTreeTableColumn<UITransportRequest, String> ID = new JFXTreeTableColumn<>("ID");
     ID.setPrefWidth(100);
