@@ -84,13 +84,28 @@ public class ServiceRequestStats {
   private String CalculateAverageTime(List<MaintenanceRequest> maintenanceRequest) {
     String total = "";
     Long timeDifference = (long) 0;
-
+    int numOfRequests = 0;
     for (MaintenanceRequest m : maintenanceRequest) {
       if (m.getTimeCompleted() != null) {
         timeDifference = m.getTimeCompleted().getTime() - m.getDateTimeSubmitted().getTime();
+        numOfRequests++;
       }
     }
-    total = "" + timeDifference + " Miliseconds";
+    timeDifference = timeDifference / (long) numOfRequests / 1000;
+
+    total = timeDifference / 3600 + " hours";
+    timeDifference = timeDifference % 3600;
+
+    total = total + " " + timeDifference / 60 + " Minutes";
     return total;
   }
+
+
+
+
+
+
+
+
+
 }
