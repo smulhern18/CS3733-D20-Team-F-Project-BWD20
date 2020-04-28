@@ -34,9 +34,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.util.Callback;
 import javax.management.InstanceNotFoundException;
-import javax.swing.*;
 
 public class FlowerRequestInfoController implements Initializable {
+
   public JFXButton requestServiceButton;
   public AnchorPane anchorPane;
   public GridPane optionBar;

@@ -7,9 +7,17 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.input.MouseEvent;
+import lombok.Data;
+
 import javax.swing.text.html.ImageView;
 
+@Data
 public class FlowersController implements Initializable {
+
+
+
+  public FlowersController flowersController;
 
   @FXML private JFXTextField recipientInput;
 
@@ -23,6 +31,18 @@ public class FlowersController implements Initializable {
 
   private ImageView flowerImage;
 
+  public String flowerPicked;
+  public FlowersController(String flowerPicked){
+    this.flowerPicked = flowerPicked;
+  }
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {}
+
+  public void selectOccasion(MouseEvent mouseEvent) {
+    flowerPicked = "All Occasion";
+    FlowersController flowersController = new FlowersController(flowerPicked);
+  }
+
+
 }
