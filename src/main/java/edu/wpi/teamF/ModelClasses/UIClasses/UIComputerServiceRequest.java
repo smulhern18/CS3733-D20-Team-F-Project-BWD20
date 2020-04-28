@@ -4,6 +4,7 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,7 +21,7 @@ public class UIComputerServiceRequest extends RecursiveTreeObject<UIComputerServ
   public SimpleStringProperty priority;
   public SimpleStringProperty assignee;
   public SimpleStringProperty dateSubmitted;
-  public SimpleStringProperty completed;
+  public SimpleBooleanProperty completed;
 
   public UIComputerServiceRequest(ComputerServiceRequest csr) {
     DateFormat date = new SimpleDateFormat("yyyy-mm-dd");
@@ -41,7 +42,7 @@ public class UIComputerServiceRequest extends RecursiveTreeObject<UIComputerServ
     this.priority = new SimpleStringProperty("" + csr.getPriority());
     this.assignee = new SimpleStringProperty(csr.getAssignee());
     this.dateSubmitted = new SimpleStringProperty(date.format(csr.getDateTimeSubmitted()));
-    this.completed = new SimpleStringProperty(cmp);
+    this.completed = new SimpleBooleanProperty(false);
   }
 
   public boolean equalsCSR(Object other) {

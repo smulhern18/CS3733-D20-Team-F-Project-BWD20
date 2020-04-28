@@ -608,7 +608,7 @@ public class DatabaseManager {
   }
 
   public void manipulateServiceRequest(ComputerServiceRequest serviceRequest) throws Exception {
-    if (computerServiceRequestFactory.read(serviceRequest.getId()) == null) {
+    if (ComputerServiceRequestFactory.read(serviceRequest.getId()) == null) {
       computerServiceRequestFactory.create(serviceRequest);
     } else {
       computerServiceRequestFactory.update(serviceRequest);

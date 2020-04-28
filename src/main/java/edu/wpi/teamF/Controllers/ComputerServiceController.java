@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.cell.CheckBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -218,6 +220,7 @@ public class ComputerServiceController implements Initializable {
           }
         });
 
+    /*
     JFXTreeTableColumn<UIComputerServiceRequest, String> completed =
         new JFXTreeTableColumn<>("Completed");
     completed.setPrefWidth(80);
@@ -229,6 +232,20 @@ public class ComputerServiceController implements Initializable {
           public ObservableValue<String> call(
               TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String> param) {
             return param.getValue().getValue().getCompleted();
+          }
+        });
+
+     */
+
+    JFXTreeTableColumn<UIComputerServiceRequest, Boolean> completed =
+        new JFXTreeTableColumn<>("Completed");
+    completed.setCellFactory(CheckBoxTreeTableCell.forTreeTableColumn(completed));
+    completed.setCellValueFactory(
+        param -> {
+          if (param.getValue().getValue().getCompleted().get()) {
+            return new SimpleBooleanProperty(true);
+          } else {
+            return new SimpleBooleanProperty(false);
           }
         });
 
@@ -250,7 +267,7 @@ public class ComputerServiceController implements Initializable {
     // set as editable
 
     assignee.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-    completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    // completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     priority.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
     treeTableComputer.setRoot(root);
@@ -310,7 +327,7 @@ public class ComputerServiceController implements Initializable {
       boolean isSame = csrui.equalsCSR(toUpdate);
       if (!isSame) {
         toUpdate.setAssignee(csrui.getAssignee().get());
-        String completed = csrui.getCompleted().get();
+        String completed = "" + csrui.getCompleted().get();
         if (completed.equals("Incomplete")) {
           toUpdate.setComplete(false);
 
