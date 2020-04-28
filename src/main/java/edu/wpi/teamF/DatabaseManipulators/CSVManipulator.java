@@ -6,7 +6,12 @@ import edu.wpi.teamF.ModelClasses.Account.Staff;
 import edu.wpi.teamF.ModelClasses.Account.User;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.FlowerRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.LanguageServiceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.LaundryServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
 import java.io.*;
 import java.nio.file.Path;
@@ -21,6 +26,19 @@ public class CSVManipulator {
   private SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
   private AccountFactory accountFactory = AccountFactory.getFactory();
   private MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
+  private ComputerServiceRequestFactory computerServiceRequestFactory =
+      ComputerServiceRequestFactory.getFactory();
+  private FlowerServiceRequestFactory flowerServiceRequestFactory =
+      FlowerServiceRequestFactory.getFactory();
+  private LanguageServiceRequestFactory languageServiceRequestFactory =
+      LanguageServiceRequestFactory.getFactory();
+  private LaundryServiceRequestFactory laundryServiceRequestFactory =
+      LaundryServiceRequestFactory.getFactory();
+  private MedicineDeliveryRequestFactory medicineDeliveryRequestFactory =
+      MedicineDeliveryRequestFactory.getFactory();
+  private SanitationServiceRequestFactory sanitationServiceRequestFactory =
+      SanitationServiceRequestFactory.getFactory();
+  private TransportRequestFactory transportRequestFactory = TransportRequestFactory.getFactory();
   /**
    * reads a csv file that contains nodes and inserts the data in the file into the correct place in
    * the database
@@ -70,7 +88,7 @@ public class CSVManipulator {
     }
   }
 
-  /** Writes to the CSV file so that it can become persistant */
+  /** Writes the nodes to the CSV file so that it can become persistant */
   public void writeCSVFileNode(Path path) throws Exception {
     // writing to the file
     List<Node> nodes = nodeFactory.getAllNodes();
@@ -137,7 +155,7 @@ public class CSVManipulator {
       System.out.println(e.getMessage());
     }
   }
-  /** Writes to the CSV file so that it can become persistant */
+  /** Writes the edges to the CSV file so that it can become persistant */
   public void writeCSVFileEdge(Path path) throws Exception {
     // writing to the file
     List<Edge> Edges = edgeFactory.getAllEdges();
@@ -165,8 +183,8 @@ public class CSVManipulator {
     return edge;
   }
   /**
-   * reads a csv file that contains edges and inserts the data in the file into the correct place in
-   * the database
+   * reads a csv file that contains MaintenanceRequests and inserts the data in the file into the
+   * correct place in the database
    */
   public void readCSVFileMaintenanceService(InputStream stream) {
     String row = "";
@@ -243,8 +261,8 @@ public class CSVManipulator {
     return Main;
   }
   /**
-   * reads a csv file that contains edges and inserts the data in the file into the correct place in
-   * the database
+   * reads a csv file that contains Security Requests and inserts the data in the file into the
+   * correct place in the database
    */
   public void readCSVFileSecurityService(InputStream stream) {
     String row = "";
@@ -256,7 +274,7 @@ public class CSVManipulator {
         data.addAll(Arrays.asList(row.split(",")));
       }
 
-      int i = 7;
+      int i = 8;
       while (i < (data.size() - 1)) {
         securityRequestFactory.create(
             new SecurityRequest(
@@ -269,7 +287,7 @@ public class CSVManipulator {
                 Boolean.parseBoolean(data.get(i + 6)),
                 Integer.parseInt(data.get(i + 7))));
 
-        i = i + 7;
+        i = i + 8;
       }
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File Not found!");
@@ -284,14 +302,15 @@ public class CSVManipulator {
   /** Writes to the CSV file so that it can become persistant */
   public void writeCSVFileSecurityService(Path path) throws Exception {
     // writing to the file
-    List<SecurityRequest> mariachiRequests = securityRequestFactory.getAllSecurityRequest();
+    List<SecurityRequest> securityRequests = securityRequestFactory.getAllSecurityRequest();
 
     try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
-      bw.write("id,location,assignee,description,dateTimeSubmitted,priority,complete");
+      bw.write(
+          "id,location,assignee,description,dateTimeSubmitted,priority,complete,GuardsRequested");
 
-      for (SecurityRequest s : mariachiRequests) {
+      for (SecurityRequest s : securityRequests) {
         bw.newLine();
         bw.write((formatSecurityService(s)));
       }
@@ -316,12 +335,14 @@ public class CSVManipulator {
             + ","
             + m.getPriority()
             + ","
-            + m.getComplete();
+            + m.getComplete()
+            + ","
+            + m.getGuardsRequested();
     return Main;
   }
   /**
-   * reads a csv file that contains edges and inserts the data in the file into the correct place in
-   * the database
+   * reads a csv file that contains Accounts and inserts the data in the file into the correct place
+   * in the database
    */
   public void readCSVFileAccount(InputStream stream) {
     String row = "";
@@ -420,5 +441,444 @@ public class CSVManipulator {
             + ","
             + a.getType().getTypeOrdinal();
     return account;
+  }
+
+  /**
+   * reads a csv file that contains Computer Requests and inserts the data in the file into the
+   * correct place in the database
+   */
+  public void readCSVFileComputerService(InputStream stream) {
+    String row = "";
+    ArrayList<String> data = new ArrayList<>();
+    try {
+      // goes to get the file
+      BufferedReader csvReader = new BufferedReader(new InputStreamReader(stream));
+      while ((row = csvReader.readLine()) != null) {
+        data.addAll(Arrays.asList(row.split(",")));
+      }
+
+      int i = 10;
+      while (i < (data.size() - 1)) {
+        computerServiceRequestFactory.create(
+            new ComputerServiceRequest(
+                data.get(i),
+                nodeFactory.read(data.get(i + 1)),
+                data.get(i + 2),
+                data.get(i + 3),
+                new Date(Integer.parseInt(data.get(i + 4))),
+                Integer.parseInt(data.get(i + 5)),
+                Boolean.parseBoolean(data.get(i + 6)),
+                data.get(i + 7),
+                data.get(i + 8),
+                data.get(i + 9)));
+
+        i = i + 10;
+      }
+    } catch (FileNotFoundException e) {
+      throw new IllegalArgumentException("File Not found!");
+    } catch (EOFException e) {
+      // Expected use to end read csv
+    } catch (IOException e) {
+
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+  }
+  /** Writes to the CSV file so that it can become persistant */
+  public void writeCSVFileComputerService(Path path) throws Exception {
+    // writing to the file
+    List<ComputerServiceRequest> computerServiceRequest =
+        computerServiceRequestFactory.getAllComputerRequests();
+
+    try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
+        BufferedWriter bw = new BufferedWriter(fw); ) {
+
+      bw.write(
+          "id,location,assignee,description,dateTimeSubmitted,priority,complete,make,hardwareOrSoftware,OS");
+
+      for (ComputerServiceRequest s : computerServiceRequest) {
+        bw.newLine();
+        bw.write((formatComputerService(s)));
+      }
+      bw.close();
+    } catch (IOException e) {
+      System.out.println(e.getMessage() + "" + e.getClass());
+    }
+  }
+  //
+  public String formatComputerService(ComputerServiceRequest m) {
+    String Main = "";
+    Main =
+        m.getId()
+            + ","
+            + m.getLocation().getId()
+            + ","
+            + m.getAssignee()
+            + ","
+            + m.getDescription()
+            + ","
+            + m.getDateTimeSubmitted().getTime()
+            + ","
+            + m.getPriority()
+            + ","
+            + m.getComplete()
+            + ","
+            + m.getMake()
+            + ","
+            + m.getHardwareSoftware()
+            + ","
+            + m.getOS();
+    return Main;
+  }
+  /**
+   * reads a csv file that contains Flower Requests and inserts the data in the file into the
+   * correct place in the database
+   */
+  public void readCSVFileFlowerService(InputStream stream) {
+    String row = "";
+    ArrayList<String> data = new ArrayList<>();
+    try {
+      // goes to get the file
+      BufferedReader csvReader = new BufferedReader(new InputStreamReader(stream));
+      while ((row = csvReader.readLine()) != null) {
+        data.addAll(Arrays.asList(row.split(",")));
+      }
+
+      int i = 14;
+      while (i < (data.size() - 1)) {
+        flowerServiceRequestFactory.create(
+            new FlowerRequest(
+                data.get(i),
+                nodeFactory.read(data.get(i + 1)),
+                data.get(i + 2),
+                data.get(i + 3),
+                new Date(Integer.parseInt(data.get(i + 4))),
+                Integer.parseInt(data.get(i + 5)),
+                data.get(i + 6),
+                data.get(i + 7),
+                data.get(i + 8),
+                data.get(i + 9),
+                data.get(i + 10),
+                data.get(i + 11),
+                Boolean.parseBoolean(data.get(i + 12)),
+                Boolean.parseBoolean((data.get(i + 13)))));
+
+        i = i + 14;
+      }
+    } catch (FileNotFoundException e) {
+      throw new IllegalArgumentException("File Not found!");
+    } catch (EOFException e) {
+      // Expected use to end read csv
+    } catch (IOException e) {
+
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+  }
+  /** Writes to the CSV file so that it can become persistant */
+  public void writeCSVFileFlowerService(Path path) throws Exception {
+    // writing to the file
+    List<FlowerRequest> flowerRequests = flowerServiceRequestFactory.getAllFlowerRequests();
+
+    try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
+        BufferedWriter bw = new BufferedWriter(fw); ) {
+
+      bw.write(
+          "iid,location,assignee,description,dateTimeSubmitted,priority,recipientInput,roomInput,choice,messageInput,buyerName,phoneNumber,iftWrap,complete");
+
+      for (FlowerRequest s : flowerRequests) {
+        bw.newLine();
+        bw.write((formatFlowerService(s)));
+      }
+      bw.close();
+    } catch (IOException e) {
+      System.out.println(e.getMessage() + "" + e.getClass());
+    }
+  }
+  //
+  public String formatFlowerService(FlowerRequest m) {
+    String Main = "";
+    Main =
+        m.getId()
+            + ","
+            + m.getLocation().getId()
+            + ","
+            + m.getAssignee()
+            + ","
+            + m.getDescription()
+            + ","
+            + m.getDateTimeSubmitted().getTime()
+            + ","
+            + m.getPriority()
+            + ","
+            + m.getRecipientInput()
+            + ","
+            + m.getRoomInput()
+            + ","
+            + m.getChoice()
+            + ","
+            + m.getMessageInput()
+            + ","
+            + m.getBuyerName()
+            + ","
+            + m.getPhoneNumber()
+            + ","
+            + m.getGiftWrap()
+            + ","
+            + m.getComplete();
+    return Main;
+  }
+
+  /**
+   * reads a csv file that contains Mariachi Requests and inserts the data in the file into the
+   * correct place in the database
+   */
+  public void readCSVFileMariachiService(InputStream stream) {
+    String row = "";
+    ArrayList<String> data = new ArrayList<>();
+    try {
+      // goes to get the file
+      BufferedReader csvReader = new BufferedReader(new InputStreamReader(stream));
+      while ((row = csvReader.readLine()) != null) {
+        data.addAll(Arrays.asList(row.split(",")));
+      }
+
+      int i = 8;
+      while (i < (data.size() - 1)) {
+        mariachiRequestFactory.create(
+            new MariachiRequest(
+                data.get(i),
+                nodeFactory.read(data.get(i + 1)),
+                data.get(i + 2),
+                data.get(i + 3),
+                new Date(Integer.parseInt(data.get(i + 4))),
+                Integer.parseInt(data.get(i + 5)),
+                Boolean.parseBoolean(data.get(i + 6)),
+                data.get(i + 7)));
+
+        i = i + 8;
+      }
+    } catch (FileNotFoundException e) {
+      throw new IllegalArgumentException("File Not found!");
+    } catch (EOFException e) {
+      // Expected use to end read csv
+    } catch (IOException e) {
+
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+  }
+  /** Writes to the CSV file so that it can become persistant */
+  public void writeCSVFileMariachiService(Path path) throws Exception {
+    // writing to the file
+    List<MariachiRequest> mariachiRequests = mariachiRequestFactory.getAllMariachiRequest();
+
+    try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
+        BufferedWriter bw = new BufferedWriter(fw); ) {
+
+      bw.write(
+          "id,location,assignee,description,dateTimeSubmitted,priority,complete,SongRequested");
+
+      for (MariachiRequest s : mariachiRequests) {
+        bw.newLine();
+        bw.write((formatMariahiService(s)));
+      }
+      bw.close();
+    } catch (IOException e) {
+      System.out.println(e.getMessage() + "" + e.getClass());
+    }
+  }
+  //
+  public String formatMariahiService(MariachiRequest m) {
+    String Main = "";
+    Main =
+        m.getId()
+            + ","
+            + m.getLocation().getId()
+            + ","
+            + m.getAssignee()
+            + ","
+            + m.getDescription()
+            + ","
+            + m.getDateTimeSubmitted().getTime()
+            + ","
+            + m.getPriority()
+            + ","
+            + m.getComplete()
+            + ","
+            + m.getSongRequest();
+    return Main;
+  }
+
+  /**
+   * reads a csv file that contains Language Requests and inserts the data in the file into the
+   * correct place in the database
+   */
+  public void readCSVFileLanguageService(InputStream stream) {
+    String row = "";
+    ArrayList<String> data = new ArrayList<>();
+    try {
+      // goes to get the file
+      BufferedReader csvReader = new BufferedReader(new InputStreamReader(stream));
+      while ((row = csvReader.readLine()) != null) {
+        data.addAll(Arrays.asList(row.split(",")));
+      }
+
+      int i = 9;
+      while (i < (data.size() - 1)) {
+        languageServiceRequestFactory.create(
+            new LanguageServiceRequest(
+                data.get(i),
+                nodeFactory.read(data.get(i + 1)),
+                data.get(i + 2),
+                data.get(i + 3),
+                new Date(Integer.parseInt(data.get(i + 4))),
+                Integer.parseInt(data.get(i + 5)),
+                Boolean.parseBoolean(data.get(i + 6)),
+                data.get(i + 7),
+                data.get(i + 8)));
+
+        i = i + 9;
+      }
+    } catch (FileNotFoundException e) {
+      throw new IllegalArgumentException("File Not found!");
+    } catch (EOFException e) {
+      // Expected use to end read csv
+    } catch (IOException e) {
+
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+  }
+  /** Writes to the CSV file so that it can become persistant */
+  public void writeCSVFileLanguageService(Path path) throws Exception {
+    // writing to the file
+    List<LanguageServiceRequest> languageServiceRequests =
+        languageServiceRequestFactory.getAllLanguageRequests();
+
+    try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
+        BufferedWriter bw = new BufferedWriter(fw); ) {
+
+      bw.write(
+          "id,location,assignee,description,dateTimeSubmitted,priority,complete,language,problemType");
+
+      for (LanguageServiceRequest s : languageServiceRequests) {
+        bw.newLine();
+        bw.write((formatLanguageService(s)));
+      }
+      bw.close();
+    } catch (IOException e) {
+      System.out.println(e.getMessage() + "" + e.getClass());
+    }
+  }
+  //
+  public String formatLanguageService(LanguageServiceRequest m) {
+    String Main = "";
+    Main =
+        m.getId()
+            + ","
+            + m.getLocation().getId()
+            + ","
+            + m.getAssignee()
+            + ","
+            + m.getDescription()
+            + ","
+            + m.getDateTimeSubmitted().getTime()
+            + ","
+            + m.getPriority()
+            + ","
+            + m.getComplete()
+            + ","
+            + m.getLanguage()
+            + ","
+            + m.getProblemType();
+    return Main;
+  }
+  /**
+   * reads a csv file that contains Laundry Requests and inserts the data in the file into the
+   * correct place in the database
+   */
+  public void readCSVFileLaundryService(InputStream stream) {
+    String row = "";
+    ArrayList<String> data = new ArrayList<>();
+    try {
+      // goes to get the file
+      BufferedReader csvReader = new BufferedReader(new InputStreamReader(stream));
+      while ((row = csvReader.readLine()) != null) {
+        data.addAll(Arrays.asList(row.split(",")));
+      }
+
+      int i = 10;
+      while (i < (data.size() - 1)) {
+        laundryServiceRequestFactory.create(
+            new LaundryServiceRequest(
+                data.get(i),
+                nodeFactory.read(data.get(i + 1)),
+                data.get(i + 2),
+                data.get(i + 3),
+                new Date(Integer.parseInt(data.get(i + 4))),
+                Integer.parseInt(data.get(i + 5)),
+                Boolean.parseBoolean(data.get(i + 6)),
+                data.get(i + 7),
+                data.get(i + 8),
+                data.get(i + 9)));
+
+        i = i + 10;
+      }
+    } catch (FileNotFoundException e) {
+      throw new IllegalArgumentException("File Not found!");
+    } catch (EOFException e) {
+      // Expected use to end read csv
+    } catch (IOException e) {
+
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+  }
+  /** Writes to the CSV file so that it can become persistant */
+  public void writeCSVFileLaundryService(Path path) throws Exception {
+    // writing to the file
+    List<LaundryServiceRequest> laundryServiceRequests =
+        laundryServiceRequestFactory.getAllLaundryRequests();
+
+    try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
+        BufferedWriter bw = new BufferedWriter(fw); ) {
+
+      bw.write(
+          "id,location,assignee,description,dateTimeSubmitted,priority,complete,language,problemType");
+
+      for (LaundryServiceRequest s : laundryServiceRequests) {
+        bw.newLine();
+        bw.write((formatLaundryService(s)));
+      }
+      bw.close();
+    } catch (IOException e) {
+      System.out.println(e.getMessage() + "" + e.getClass());
+    }
+  }
+  //
+  public String formatLaundryService(LaundryServiceRequest m) {
+    String Main = "";
+    Main =
+        m.getId()
+            + ","
+            + m.getLocation().getId()
+            + ","
+            + m.getAssignee()
+            + ","
+            + m.getDescription()
+            + ","
+            + m.getDateTimeSubmitted().getTime()
+            + ","
+            + m.getPriority()
+            + ","
+            + m.getComplete()
+            + ","
+            + m.getItems()
+            + ","
+            + m.getQuantity()
+            + ","
+            + m.getTemperature();
+    return Main;
   }
 }
