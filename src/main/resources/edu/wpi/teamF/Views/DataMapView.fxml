@@ -105,7 +105,7 @@
                      <content>
                         <StackPane fx:id="imageStackPane" prefHeight="551.0" prefWidth="912.0" style="-fx-background-color: #FFFFFF;">
                            <children>
-                              <ImageView fx:id="imageView5" fitHeight="568.0" fitWidth="920.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                              <ImageView fx:id="imageView5" fitHeight="550.0" fitWidth="914.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
                                     <Image url="@../Maps/Floor5LM.jpg" />
                                  </image>
@@ -113,22 +113,22 @@
                                     <Insets />
                                  </StackPane.margin>
                               </ImageView>
-                              <ImageView fx:id="imageView1" fitHeight="568.0" fitWidth="920.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                              <ImageView fx:id="imageView1" fitHeight="550.0" fitWidth="914.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
                                     <Image url="@../Maps/Floor1LM_edited.jpg" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="imageView2" fitHeight="568.0" fitWidth="920.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                              <ImageView fx:id="imageView2" fitHeight="550.0" fitWidth="914.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
                                     <Image url="@../Maps/Floor2LM.jpg" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="imageView3" fitHeight="568.0" fitWidth="920.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                              <ImageView fx:id="imageView3" fitHeight="550.0" fitWidth="914.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
                                     <Image url="@../Maps/Floor3LM_edited.jpg" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="imageView4" fitHeight="568.0" fitWidth="920.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                              <ImageView fx:id="imageView4" fitHeight="550.0" fitWidth="914.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
                                     <Image url="@../Maps/Floor4LM.jpg" />
                                  </image>
