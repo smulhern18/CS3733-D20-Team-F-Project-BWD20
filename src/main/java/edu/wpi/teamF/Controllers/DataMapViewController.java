@@ -318,6 +318,7 @@ public class DataMapViewController implements Initializable {
     edgeErrorLabel.setText("");
   }
 
+  @FXML
   private void drawEdge(Edge edge) {
     try {
       double heightRatio = (double) PANE_HEIGHT / MAP_HEIGHT;
@@ -439,6 +440,7 @@ public class DataMapViewController implements Initializable {
     modifyNodeButton.setOpacity(1);
   }
 
+  @FXML
   private void displayEdgeData() {
     clearEdge();
     clearNode();
@@ -615,6 +617,7 @@ public class DataMapViewController implements Initializable {
     }
   }
 
+  @FXML
   private boolean edgeSelection(Node node) {
     if (selectNode1) {
       node1 = node;
