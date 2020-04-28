@@ -13,8 +13,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="dataMap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1181.0" style="-fx-background-color: #B53389;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.DataMapViewController">
+<AnchorPane fx:id="dataMap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1181.0" style="-fx-background-color: #00008B;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.DataMapViewController">
    <children>
       <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -25,76 +26,81 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <GridPane>
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" percentHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            <AnchorPane>
                <children>
-                  <GridPane fx:id="edgeGridPane" alignment="CENTER_LEFT" prefHeight="231.0" prefWidth="295.0" style="-fx-background-color: #eeeeee; -fx-background-radius: 10;">
-                     <columnConstraints>
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" percentHeight="12.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="67.4" minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="41.39999999999999" minHeight="10.0" prefHeight="34.39999999999999" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <Label text="Node 2 ID:" GridPane.rowIndex="2" />
-                        <Label text="Node 1 ID:" GridPane.rowIndex="1" />
-                        <JFXButton fx:id="selectNode1Button" disable="true" onAction="#selectNode1" text="Select Node 1" textFill="#000000c5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <JFXButton fx:id="selectNode2Button" disable="true" onAction="#selectNode2" text="Select Node 2" textFill="#000000c5" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <JFXButton fx:id="deleteEdgeButton" disable="true" onAction="#deleteEdge" style="-fx-background-color: #B53389;" text="Delete" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-                        <JFXButton fx:id="modifyEdgeButton" disable="true" onAction="#modifyEdge" style="-fx-background-color: #B53389;" text="Modify" textFill="WHITE" GridPane.rowIndex="3" />
-                        <JFXButton fx:id="addEdgeButton" onAction="#addEdge" style="-fx-background-color: #B53389;" text="Add" textFill="WHITE" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label fx:id="edgeErrorLabel" textAlignment="CENTER" textFill="RED" />
-                     </children>
-                  </GridPane>
-                  <GridPane fx:id="nodeGridPane" alignment="CENTER_LEFT" prefHeight="379.0" prefWidth="258.0" style="-fx-background-color: #eeeeee; -fx-background-radius: 10;" GridPane.rowIndex="1">
+                  <GridPane AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
                     <columnConstraints>
-                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" percentHeight="5.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" percentHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" percentHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="1.0" minHeight="1.0" prefHeight="1.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" percentHeight="70.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Short Name:" GridPane.rowIndex="1" />
-                        <Label text="Long Name:" GridPane.rowIndex="2" />
-                        <Label text="Building:" GridPane.rowIndex="6" />
-                        <Label text="Type:" GridPane.rowIndex="3" />
-                        <Label text="Floor:" GridPane.rowIndex="7" />
-                        <JFXButton fx:id="deleteNodeButton" disable="true" onAction="#deleteNode" style="-fx-background-color: #B53389;" text="Delete" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <JFXButton fx:id="modifyNodeButton" disable="true" onAction="#modifyNode" style="-fx-background-color: #B53389;" text="Modify" textFill="WHITE" GridPane.rowIndex="8" />
-                        <JFXTextField fx:id="shortNameInput" focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateNodeText" prefHeight="26.0" prefWidth="100.0" promptText="Ex. &quot;Admin Office&quot;" unFocusColor="#b53389" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <JFXTextField fx:id="longNameInput" focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateNodeText" prefHeight="26.0" prefWidth="100.0" promptText="Ex. &quot;Administrative Office&quot;" unFocusColor="#b53389" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <JFXTextField fx:id="buildingInput" focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateNodeText" prefHeight="26.0" prefWidth="100.0" promptText="Ex: &quot;Faulkner&quot;" unFocusColor="#b53389" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                        <JFXTextField fx:id="floorInput" focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateNodeText" prefHeight="26.0" prefWidth="101.0" promptText="Ex: &quot;5&quot;" unFocusColor="#b53389" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <Label text="X-Coordinate:" GridPane.rowIndex="4" />
-                        <Label text="Y-Coordinate" GridPane.rowIndex="5" />
-                        <JFXTextField focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateNodeText" prefHeight="26.0" prefWidth="100.0" promptText="Ex. &quot;1&quot;" unFocusColor="#b53389" GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="xCoorInput" />
-                        <JFXTextField fx:id="yCoorInput" focusColor="#b53389" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateNodeText" prefHeight="26.0" prefWidth="100.0" promptText="Ex. &quot;1&quot;" unFocusColor="#b53389" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <JFXButton fx:id="addNodeButton" disable="true" onAction="#addNode" style="-fx-background-color: #B53389;" text="Add" textFill="WHITE" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <ChoiceBox fx:id="typeInput" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: #eeeeee; -fx-border-color: #b53389; -fx-border-radius: 3;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label fx:id="nodeErrorLabel" textAlignment="RIGHT" textFill="RED" />
+                        <GridPane fx:id="edgeGridPane" alignment="CENTER_LEFT" prefHeight="231.0" prefWidth="295.0" style="-fx-background-color: #E0DED7;">
+                           <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="67.4" minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="41.39999999999999" minHeight="10.0" prefHeight="34.39999999999999" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="5.0" minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <Label text="Node 2 ID:" GridPane.rowIndex="1" />
+                              <Label text="Node 1 ID:" />
+                              <JFXButton fx:id="selectNode1Button" disable="true" onAction="#selectNode1" text="Select Node 1" textFill="#000000c5" GridPane.columnIndex="1" />
+                              <JFXButton fx:id="selectNode2Button" disable="true" onAction="#selectNode2" text="Select Node 2" textFill="#000000c5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <JFXButton fx:id="deleteEdgeButton" disable="true" onAction="#deleteEdge" style="-fx-background-color: #00008B;" text="Delete" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                              <JFXButton fx:id="modifyEdgeButton" disable="true" onAction="#modifyEdge" style="-fx-background-color: #00008B;" text="Modify" textFill="WHITE" GridPane.rowIndex="2" />
+                              <JFXButton fx:id="addEdgeButton" onAction="#addEdge" style="-fx-background-color: #00008B;" text="Add" textFill="WHITE" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                           </children>
+                        </GridPane>
+                        <GridPane fx:id="nodeGridPane" alignment="CENTER_LEFT" prefHeight="382.0" prefWidth="292.0" style="-fx-background-color: #E0DED7;" GridPane.rowIndex="3">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints minHeight="10.0" percentHeight="5.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label text="Short Name:" GridPane.rowIndex="1" />
+                              <Label text="Long Name:" GridPane.rowIndex="2" />
+                              <Label text="Building:" GridPane.rowIndex="6" />
+                              <Label text="Type:" GridPane.rowIndex="3" />
+                              <Label text="Floor:" GridPane.rowIndex="7" />
+                              <JFXButton fx:id="deleteNodeButton" disable="true" onAction="#deleteNode" style="-fx-background-color: #00008B;" text="Delete" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                              <JFXButton fx:id="modifyNodeButton" disable="true" onAction="#modifyNode" style="-fx-background-color: #00008B;" text="Modify" textFill="WHITE" GridPane.rowIndex="8" />
+                              <JFXTextField fx:id="shortNameInput" focusColor="DARKBLUE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateNodeText" prefHeight="26.0" prefWidth="100.0" promptText="Ex. &quot;Admin Office&quot;" unFocusColor="DARKBLUE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <JFXTextField fx:id="longNameInput" focusColor="DARKBLUE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateNodeText" prefHeight="26.0" prefWidth="100.0" promptText="Ex. &quot;Administrative Office&quot;" unFocusColor="DARKBLUE" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <JFXTextField fx:id="buildingInput" focusColor="DARKBLUE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateNodeText" prefHeight="26.0" prefWidth="100.0" promptText="Ex: &quot;Faulkner&quot;" unFocusColor="DARKBLUE" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <JFXTextField fx:id="floorInput" focusColor="DARKBLUE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateNodeText" prefHeight="26.0" prefWidth="101.0" promptText="Ex: &quot;5&quot;" unFocusColor="DARKBLUE" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                              <Label text="X-Coordinate:" GridPane.rowIndex="4" />
+                              <Label text="Y-Coordinate" GridPane.rowIndex="5" />
+                              <JFXTextField focusColor="DARKBLUE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateNodeText" prefHeight="26.0" prefWidth="100.0" promptText="Ex. &quot;1&quot;" unFocusColor="DARKBLUE" GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="xCoorInput" />
+                              <JFXTextField fx:id="yCoorInput" focusColor="DARKBLUE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateNodeText" prefHeight="26.0" prefWidth="100.0" promptText="Ex. &quot;1&quot;" unFocusColor="DARKBLUE" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <JFXButton fx:id="addNodeButton" disable="true" onAction="#addNode" style="-fx-background-color: #00008B;" text="Add" textFill="WHITE" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                              <ChoiceBox fx:id="typeInput" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: #E0DED7; -fx-border-color: #00008B; -fx-border-radius: 3;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label fx:id="nodeErrorLabel" textAlignment="RIGHT" textFill="RED" />
+                           </children>
+                        </GridPane>
                      </children>
                   </GridPane>
                </children>
-            </GridPane>
+            </AnchorPane>
             <GridPane GridPane.columnIndex="1">
               <rowConstraints>
                 <RowConstraints minHeight="10.0" percentHeight="90.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -107,7 +113,7 @@
                            <children>
                               <ImageView fx:id="imageView5" fitHeight="550.0" fitWidth="914.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
-                                    <Image url="@../Maps/Floor5LM.jpg" />
+                                    <Image url="@../Maps/Floor5LM.png" />
                                  </image>
                                  <StackPane.margin>
                                     <Insets />
@@ -115,22 +121,22 @@
                               </ImageView>
                               <ImageView fx:id="imageView1" fitHeight="550.0" fitWidth="914.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
-                                    <Image url="@../Maps/Floor1LM_edited.jpg" />
+                                    <Image url="@../Maps/Floor1LM.png" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="imageView2" fitHeight="550.0" fitWidth="914.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
-                                    <Image url="@../Maps/Floor2LM.jpg" />
+                                    <Image url="@../Maps/Floor2LM.png" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="imageView3" fitHeight="550.0" fitWidth="914.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
-                                    <Image url="@../Maps/Floor3LM_edited.jpg" />
+                                    <Image url="@../Maps/Floor3LM.png" />
                                  </image>
                               </ImageView>
                               <ImageView fx:id="imageView4" fitHeight="550.0" fitWidth="914.0" pickOnBounds="true" preserveRatio="true" visible="false">
                                  <image>
-                                    <Image url="@../Maps/Floor4LM.jpg" />
+                                    <Image url="@../Maps/Floor4LM.png" />
                                  </image>
                               </ImageView>
                               <AnchorPane fx:id="mapPane4" prefHeight="550.0" prefWidth="914.0" />
@@ -142,25 +148,68 @@
                         </StackPane>
                      </content>
                   </ScrollPane>
-                  <GridPane style="-fx-background-color: white;" GridPane.rowIndex="1">
-                    <columnConstraints>
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                    </rowConstraints>
+                  <AnchorPane GridPane.rowIndex="1">
                      <children>
-                        <JFXButton fx:id="floor1Button" onAction="#changeToFloor1" text="Floor 1" textAlignment="CENTER" />
-                        <JFXButton fx:id="floor4Button" onAction="#changeToFloor4" text="Floor 4" textAlignment="CENTER" GridPane.columnIndex="3" />
-                        <JFXButton fx:id="floor3Button" onAction="#changeToFloor3" text="Floor 3" textAlignment="CENTER" GridPane.columnIndex="2" />
-                        <JFXButton fx:id="floor2Button" onAction="#changeToFloor2" text="Floor 2" textAlignment="CENTER" GridPane.columnIndex="1" />
-                        <JFXButton fx:id="floor5Button" onAction="#changeToFloor5" text="Floor 5" textAlignment="CENTER" GridPane.columnIndex="4" />
+                        <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columnConstraints>
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.0" minWidth="1.0" prefWidth="1.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.0" minWidth="1.0" prefWidth="1.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.0" minWidth="1.0" prefWidth="1.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.0" minWidth="1.0" prefWidth="1.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.0" minWidth="1.0" prefWidth="1.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.0" minWidth="1.0" prefWidth="1.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.0" minWidth="1.0" prefWidth="1.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                              <RowConstraints maxHeight="1.0" minHeight="1.0" prefHeight="1.0" valignment="CENTER" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="1.0" minHeight="1.0" prefHeight="1.0" valignment="CENTER" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <JFXButton fx:id="floor1Button" onAction="#changeToFloor1" prefHeight="150.0" prefWidth="250.0" style="-fx-background-color: #E0DED7;" text="Floor 1" textAlignment="CENTER" textFill="DARKBLUE" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="floor2Button" onAction="#changeToFloor2" prefHeight="150.0" prefWidth="250.0" style="-fx-background-color: #E0DED7;" text="Floor 2" textAlignment="CENTER" textFill="DARKBLUE" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="floor3Button" onAction="#changeToFloor3" prefHeight="150.0" prefWidth="250.0" style="-fx-background-color: #E0DED7;" text="Floor 3" textAlignment="CENTER" textFill="DARKBLUE" GridPane.columnIndex="5" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="floor4Button" onAction="#changeToFloor4" prefHeight="150.0" prefWidth="250.0" style="-fx-background-color: #E0DED7;" text="Floor 4" textAlignment="CENTER" textFill="DARKBLUE" GridPane.columnIndex="7" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </JFXButton>
+                              <JFXButton fx:id="floor5Button" onAction="#changeToFloor5" prefHeight="150.0" prefWidth="250.0" style="-fx-background-color: #E0DED7;" text="Floor 5" textAlignment="CENTER" textFill="DARKBLUE" GridPane.columnIndex="9" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </GridPane>
                      </children>
-                  </GridPane>
+                  </AnchorPane>
+                  <JFXButton fx:id="clearNodeButton" onAction="#addNodeLocation" style="-fx-background-color: #00008B;" text="Add Node" textFill="WHITE" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets left="25.0" top="15.0" />
+                     </GridPane.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="clearEdgeButton" onAction="#outlineEdge" style="-fx-background-color: #00008B;" text="Add Edge" textFill="WHITE" GridPane.halignment="LEFT" GridPane.valignment="TOP">
+                     <GridPane.margin>
+                        <Insets left="125.0" top="15.0" />
+                     </GridPane.margin>
+                  </JFXButton>
                </children>
                <columnConstraints>
                   <ColumnConstraints />
@@ -168,7 +217,5 @@
             </GridPane>
          </children>
       </GridPane>
-      <JFXButton fx:id="clearEdgeButton" onAction="#outlineEdge" style="-fx-background-color: #B53389;" text="Add Edge" textFill="WHITE" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="25.0" />
-      <JFXButton fx:id="clearNodeButton" onAction="#addNodeLocation" style="-fx-background-color: #B53389;" text="Add Node" textFill="WHITE" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="25.0" />
    </children>
 </AnchorPane>
