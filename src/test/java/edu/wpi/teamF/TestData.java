@@ -3,18 +3,8 @@ package edu.wpi.teamF;
 import edu.wpi.teamF.ModelClasses.Account.*;
 import edu.wpi.teamF.ModelClasses.Appointment;
 import edu.wpi.teamF.ModelClasses.Edge;
-import edu.wpi.teamF.ModelClasses.Node;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.LanguageServiceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-<<<<<<< HEAD
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MedicineDeliveryRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
-import edu.wpi.teamF.ModelClasses.ValidationException;
-
-=======
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
->>>>>>> origin/KevinMariachiRequest
+import edu.wpi.teamF.ModelClasses.Node;;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
 import java.util.Date;
 
 public class TestData {
@@ -211,6 +201,45 @@ public class TestData {
   public String[] validAssignees = {"Roman", "Sully", "Denver", "Charles"};
   public String[] validSongs = {"AAA", "BBB", "CCC", "DDD"};
 
+  public SecurityRequest[] validSecurityRequests = {
+          new SecurityRequest(
+                  validIDs[0],
+                  validNodes[0],
+                  validAssignees[0],
+                  validDescriptions[0],
+                  validDates[0],
+                  2,
+                  false,
+                  1),
+          new SecurityRequest(
+                  validIDs[1],
+                  validNodes[1],
+                  validAssignees[1],
+                  validDescriptions[1],
+                  validDates[1],
+                  2,
+                  true,
+                  2),
+          new SecurityRequest(
+                  validIDs[2],
+                  validNodes[2],
+                  validAssignees[2],
+                  validDescriptions[2],
+                  validDates[2],
+                  2,
+                  false,
+                  3),
+          new SecurityRequest(
+                  validIDs[3],
+                  validNodes[3],
+                  validAssignees[3],
+                  validDescriptions[3],
+                  validDates[3],
+                  2,
+                  true,
+                  10),
+  };
+
   public MariachiRequest[] validMariachiRequests = {
     new MariachiRequest(
         validIDs[0],
@@ -220,13 +249,8 @@ public class TestData {
         validDates[0],
         2,
         false,
-<<<<<<< HEAD
-        1),
-    new SecurityRequest(
-=======
         validSongs[0]),
     new MariachiRequest(
->>>>>>> origin/KevinMariachiRequest
         validIDs[1],
         validNodes[1],
         validAssignees[1],
@@ -234,13 +258,8 @@ public class TestData {
         validDates[1],
         2,
         true,
-<<<<<<< HEAD
-          2),
-    new SecurityRequest(
-=======
         validSongs[1]),
     new MariachiRequest(
->>>>>>> origin/KevinMariachiRequest
         validIDs[2],
         validNodes[2],
         validAssignees[2],
@@ -248,13 +267,8 @@ public class TestData {
         validDates[2],
         2,
         false,
-<<<<<<< HEAD
-            3),
-    new SecurityRequest(
-=======
         validSongs[2]),
     new MariachiRequest(
->>>>>>> origin/KevinMariachiRequest
         validIDs[3],
         validNodes[3],
         validAssignees[3],
@@ -262,11 +276,7 @@ public class TestData {
         validDates[3],
         2,
         true,
-<<<<<<< HEAD
-            10),
-=======
         validSongs[3]),
->>>>>>> origin/KevinMariachiRequest
   };
 
   public MaintenanceRequest[] validMaintenanceRequests = {
