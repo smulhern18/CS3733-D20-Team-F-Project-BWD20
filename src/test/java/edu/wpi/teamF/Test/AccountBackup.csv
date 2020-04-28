@@ -1,5 +1,13 @@
 Username,password,firstName,lastName,emailAddress,type
+<<<<<<< Updated upstream
 This one,sha1:64000:18:7ivL69E7mDZMgs2Fy4BvM+MjsaKQDAM9:bKQCDERcxTYowE0Ru/p0RsRT,Ferdinand,Ferdinand,sjmulhern@wpi.edu,0
 TheCuddleMonster,sha1:64000:18:HtqUAgF688NZGzmqgRHCkWroWXlAopQY:LNBnlc3m9CFdF50d+/5IAXTT,Nikolas,Nikolas,joeBiden@usa.gov,1
 sjmulhern,sha1:64000:18:i0PQv+i58VXsaIw1GuHp0NHWIJ4vlQ6+:JZZLO9ojsNKUSkIS97tM992U,Constantine,Constantine,putin@rus.ru,2
 Snuggles,sha1:64000:18:ZI8z47L4iv5srI4ElhvtSZKzlTabmPe7:1QTyXxQao3X6dw7NgxjYRM+t,Nero,Nero,wack@giggle.pig,2
+=======
+This one,sha1:64000:18:AtAJVvzGkh+bW9vNdZpEOy5bPMzhngqa:jQRI9AEdmb64EMd22FEsT7ug,Ferdinand,Ferdinand,sjmulhern@wpi.edu,0
+TheCuddleMonster,sha1:64000:18:VtC1/thD+JU3ag3iPhyZ3JsZCWS8ccSi:CZEYNiQNYFg0hETeKRQXZ/fW,Nikolas,Nikolas,joeBiden@usa.gov,1
+sjmulhern,sha1:64000:18:je3yhUE00t4GF2F+rUjM9MqxPL/IuReM:K56X1VrfKz/3DTEaVjrRTnlX,Constantine,Constantine,putin@rus.ru,2
+Snuggles,sha1:64000:18:vxDOrMC6DbGGuQA3r4p4iXfv3KIoYZAy:49b06i9krnxlILfDy63XwP3Y,Nero,Nero,wack@giggle.pig,2
+Username,password,firstName,lastName,emailAddress,type
+>>>>>>> Stashed changes
