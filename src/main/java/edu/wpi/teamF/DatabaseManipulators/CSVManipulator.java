@@ -10,15 +10,17 @@ import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
 import java.io.*;
 import java.nio.file.Path;
+import java.sql.SQLException;
 import java.util.*;
 
 public class CSVManipulator {
   private NodeFactory nodeFactory = NodeFactory.getFactory();
   private EdgeFactory edgeFactory = EdgeFactory.getFactory();
-  private AccountFactory accountFactory = AccountFactory.getFactory();
-  private SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
   private MaintenanceRequestFactory maintenanceRequestFactory =
       MaintenanceRequestFactory.getFactory();
+  private SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
+  private AccountFactory accountFactory = AccountFactory.getFactory();
+  private MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
   /**
    * reads a csv file that contains nodes and inserts the data in the file into the correct place in
    * the database
@@ -46,7 +48,13 @@ public class CSVManipulator {
                 Node.NodeType.getEnum(data.get(i + 5)), // nodetype
                 Short.parseShort(data.get(i + 3))); // floor
         System.out.println("Created Node on line " + i / 9 + ", " + node.getId());
-        nodeFactory.create(node);
+        try {
+          nodeFactory.create(node);
+        } catch (SQLException e) {
+          // ignore
+        } catch (Exception e) {
+          System.out.println(e.getMessage() + ", " + e.getClass());
+        }
         i = i + 9;
       }
 
@@ -63,7 +71,7 @@ public class CSVManipulator {
   }
 
   /** Writes to the CSV file so that it can become persistant */
-  public void writeCSVFileNode(Path path) {
+  public void writeCSVFileNode(Path path) throws Exception {
     // writing to the file
     List<Node> nodes = nodeFactory.getAllNodes();
     try (FileWriter fw = new FileWriter(path.toString() + "/NodesBackup.csv");
@@ -78,7 +86,6 @@ public class CSVManipulator {
       bw.close();
     } catch (IOException e) {
       System.out.println(e.getMessage() + "" + e.getClass());
-      // exception handling left as an exercise for the reader
     }
   }
 
@@ -88,7 +95,7 @@ public class CSVManipulator {
    * @param node
    * @return returns a node in the form of a string
    */
-  public String formatNode(Node node) {
+  private String formatNode(Node node) {
     String string = "";
     string = node.getId() + ",";
     string = string + String.valueOf(node.getXCoord()) + ",";
@@ -120,21 +127,18 @@ public class CSVManipulator {
       int i = 3;
       while (i < (data.size() - 1)) {
         edgeFactory.create(new Edge(data.get(i), data.get(i + 1), data.get(i + 2)));
-
         i = i + 3;
       }
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File Not found!");
-    } catch (EOFException e) {
-      // Expected use to end read csv
-    } catch (IOException e) {
-
+    } catch (SQLException e) {
+      // ignore
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
   }
   /** Writes to the CSV file so that it can become persistant */
-  public void writeCSVFileEdge(Path path) {
+  public void writeCSVFileEdge(Path path) throws Exception {
     // writing to the file
     List<Edge> Edges = edgeFactory.getAllEdges();
 
@@ -152,7 +156,6 @@ public class CSVManipulator {
       bw.close();
     } catch (IOException e) {
       System.out.println(e.getMessage() + "" + e.getClass());
-      // exception handling left as an exercise for the reader
     }
   }
 
@@ -200,7 +203,7 @@ public class CSVManipulator {
     }
   }
   /** Writes to the CSV file so that it can become persistant */
-  public void writeCSVFileMaintenanceService(Path path) {
+  public void writeCSVFileMaintenanceService(Path path) throws Exception {
     // writing to the file
     List<MaintenanceRequest> maintenanceRequests =
         maintenanceRequestFactory.getAllMaintenanceRequests();
@@ -208,7 +211,7 @@ public class CSVManipulator {
     try (FileWriter fw = new FileWriter(path.toString() + "/MaintenanceBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
-      bw.write("id,location,description,dateTimeSubmitted,priority");
+      bw.write("id,location,assignee,description,dateTimeSubmitted,priority,complete");
 
       for (MaintenanceRequest m : maintenanceRequests) {
         bw.newLine();
@@ -228,11 +231,15 @@ public class CSVManipulator {
             + ","
             + m.getLocation().getId()
             + ","
+            + m.getAssignee()
+            + ","
             + m.getDescription()
             + ","
             + m.getDateTimeSubmitted().getTime()
             + ","
-            + m.getPriority();
+            + m.getPriority()
+            + ","
+            + m.getComplete();
     return Main;
   }
   /**
@@ -259,7 +266,8 @@ public class CSVManipulator {
                 data.get(i + 3),
                 new Date(Integer.parseInt(data.get(i + 4))),
                 Integer.parseInt(data.get(i + 5)),
-                Boolean.parseBoolean(data.get(i + 6))));
+                Boolean.parseBoolean(data.get(i + 6)),
+                Integer.parseInt(data.get(i + 7))));
 
         i = i + 7;
       }
@@ -274,26 +282,25 @@ public class CSVManipulator {
     }
   }
   /** Writes to the CSV file so that it can become persistant */
-  public void writeCSVFileSecurityService(Path path) {
+  public void writeCSVFileSecurityService(Path path) throws Exception {
     // writing to the file
-    List<SecurityRequest> securityRequests = securityRequestFactory.getAllSecurityRequests();
+    List<SecurityRequest> mariachiRequests = securityRequestFactory.getAllSecurityRequest();
 
     try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
-      bw.write("id,location,description,dateTimeSubmitted,priority");
+      bw.write("id,location,assignee,description,dateTimeSubmitted,priority,complete");
 
-      for (SecurityRequest s : securityRequests) {
+      for (SecurityRequest s : mariachiRequests) {
         bw.newLine();
         bw.write((formatSecurityService(s)));
       }
       bw.close();
     } catch (IOException e) {
       System.out.println(e.getMessage() + "" + e.getClass());
-      // exception handling left as an exercise for the reader
     }
   }
-  // this transformeressss the secur bruh
+  //
   public String formatSecurityService(SecurityRequest m) {
     String Main = "";
     Main =
@@ -301,11 +308,15 @@ public class CSVManipulator {
             + ","
             + m.getLocation().getId()
             + ","
+            + m.getAssignee()
+            + ","
             + m.getDescription()
             + ","
             + m.getDateTimeSubmitted().getTime()
             + ","
-            + m.getPriority();
+            + m.getPriority()
+            + ","
+            + m.getComplete();
     return Main;
   }
   /**
@@ -375,7 +386,7 @@ public class CSVManipulator {
   }
 
   /** Writes to the CSV file so that it can become persistant */
-  public void writeCSVFileAccount(Path path) {
+  public void writeCSVFileAccount(Path path) throws Exception {
     // writing to the file
     List<Account> Account = accountFactory.getAllAccounts();
 
@@ -391,7 +402,6 @@ public class CSVManipulator {
       bw.close();
     } catch (IOException e) {
       System.out.println(e.getMessage() + "" + e.getClass());
-      // exception handling left as an exercise for the reader
     }
   }
 

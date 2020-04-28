@@ -4,47 +4,38 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import edu.wpi.teamF.App;
-import edu.wpi.teamF.DatabaseManipulators.AccountFactory;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
-import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.TestData;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.concurrent.TimeoutException;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javax.management.InstanceNotFoundException;
-import org.junit.After;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
 
 public class DataManipulatorTest extends ApplicationTest {
 
-  private static DatabaseManager db = new DatabaseManager();
-  private static NodeFactory nodes = NodeFactory.getFactory();
-  private static EdgeFactory edges = EdgeFactory.getFactory();
-  private static AccountFactory accounts = AccountFactory.getFactory();
+  private static DatabaseManager db = DatabaseManager.getManager();
 
   @BeforeAll
   public static void setUp() throws Exception {
     db.initialize();
     TestData testData = new TestData();
     for (Node node : testData.validNodes) {
-      nodes.create(node);
+      db.manipulateNode(node);
     }
     for (Edge edge : testData.validEdges) {
-      edges.create(edge);
+      db.manipulateEdge(edge);
     }
     for (Account account : testData.validAccounts) {
-      accounts.create(account);
+      db.manipulateAccount(account);
     }
     ApplicationTest.launch(App.class);
   }
@@ -53,11 +44,6 @@ public class DataManipulatorTest extends ApplicationTest {
   public void start(Stage stage) throws IOException {
     stage.show();
     clickOn("Admin");
-  }
-
-  @After
-  public void afterEachTest() throws TimeoutException {
-    FxToolkit.hideStage();
   }
 
   @AfterAll
@@ -100,7 +86,7 @@ public class DataManipulatorTest extends ApplicationTest {
     clickOn("#longNameInput");
     write("TEST");
     clickOn("#addNodeButton");
-    String ID = nodes.read("NODETEST").getId();
+    String ID = db.readNode("NODETEST").getId();
     assertEquals("NODETEST", ID);
   }
 
@@ -115,7 +101,7 @@ public class DataManipulatorTest extends ApplicationTest {
     press(KeyCode.ENTER);
     clickOn("#updateNodesButton");
 
-    short xCoord = nodes.read("nodeA").getXCoord();
+    short xCoord = db.readNode("nodeA").getXCoord();
     assertEquals((short) 1200, xCoord);
   }
 
@@ -126,7 +112,7 @@ public class DataManipulatorTest extends ApplicationTest {
     write("nodeB");
     clickOn("#deleteNodeButton");
 
-    assertNull(nodes.read("nodeB"));
+    assertNull(db.readNode("nodeB"));
   }
 
   // Table view test Edges
@@ -146,7 +132,7 @@ public class DataManipulatorTest extends ApplicationTest {
     press(KeyCode.ENTER);
     clickOn("#updateEdgesButton");
 
-    assertEquals(edges.read("nodeT_nodeT").getNode1(), "nodeC");
+    assertEquals(db.readEdge("nodeT_nodeT").getNode1(), "nodeC");
   }
 
   @Test

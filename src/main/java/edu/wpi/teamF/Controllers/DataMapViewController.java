@@ -3,8 +3,7 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
-import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ValidationException;
@@ -29,6 +28,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javax.management.InstanceNotFoundException;
+import lombok.SneakyThrows;
 
 public class DataMapViewController implements Initializable {
 
@@ -131,8 +131,9 @@ public class DataMapViewController implements Initializable {
   private static final int PANE_WIDTH = 912; // height and width of the pane/image
   private double heightRatio = (double) PANE_HEIGHT / MAP_HEIGHT;
   private double widthRatio = (double) PANE_WIDTH / MAP_WIDTH; // ratio of pane to map
-  private NodeFactory nodeFactory = NodeFactory.getFactory();
-  private EdgeFactory edgeFactory = EdgeFactory.getFactory();
+  private DatabaseManager databaseManager = DatabaseManager.getManager();
+
+  public DataMapViewController() throws Exception {}
 
   private enum ModifyType {
     DELETE,
@@ -142,6 +143,7 @@ public class DataMapViewController implements Initializable {
 
   private ModifyType modifyType;
 
+  @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
@@ -149,11 +151,11 @@ public class DataMapViewController implements Initializable {
 
     changeToFloor1();
 
-    for (Edge edge : edgeFactory.getAllEdges()) {
+    for (Edge edge : databaseManager.getAllEdges()) {
       drawEdge(edge);
     } // for every edge that connects two nodes on the fifth floor, draw the edge on the map
 
-    for (Node node : nodeFactory.getAllNodes()) {
+    for (Node node : databaseManager.getAllNodes()) {
       drawNode(node);
     }
 
@@ -323,8 +325,8 @@ public class DataMapViewController implements Initializable {
     try {
       double heightRatio = (double) PANE_HEIGHT / MAP_HEIGHT;
       double widthRatio = (double) PANE_WIDTH / MAP_WIDTH;
-      Node node1 = nodeFactory.read(edge.getNode1());
-      Node node2 = nodeFactory.read(edge.getNode2());
+      Node node1 = databaseManager.readNode(edge.getNode1());
+      Node node2 = databaseManager.readNode(edge.getNode2());
       if (node1.getFloor()
           == node2.getFloor()) { // if the edge connects two nodes on the same floor
         int startX = (int) (node1.getXCoord() * widthRatio);
@@ -361,6 +363,8 @@ public class DataMapViewController implements Initializable {
         }
       }
     } catch (InstanceNotFoundException e) {
+      e.printStackTrace();
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
@@ -467,20 +471,20 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  private void deleteNode() {
+  private void deleteNode() throws Exception {
     mapPane.getChildren().remove(nodeButton); // removes the node on the map
     clearNode();
-    for (Edge edge : edgeFactory.getAllEdgesConnectedToNode(node.getId())) {
+    for (Edge edge : databaseManager.getAllEdgesConnectedToNode(node.getId())) {
       for (int i = 0; i < mapPane.getChildren().size(); i++) { // for child in the pane
         javafx.scene.Node children = mapPane.getChildren().get(i);
         if (children instanceof Line && children.getId().equals(edge.getId())) {
           mapPane.getChildren().remove(children); // remove the edge from the map
-          edgeFactory.delete(children.getId()); // remove the edge from the database
+          databaseManager.deleteEdge(children.getId()); // remove the edge from the database
           break;
         }
       }
     }
-    nodeFactory.delete(node.getId()); // removes the node in the database
+    databaseManager.deleteNode(node.getId()); // removes the node in the database
   }
 
   @FXML
@@ -499,7 +503,7 @@ public class DataMapViewController implements Initializable {
     String shortName = shortNameInput.getText();
     Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getValue().toString());
     short floorNumber = Short.parseShort(floorInput.getText());
-    List<Node> typeNodes = nodeFactory.getNodesByType(nodeType);
+    List<Node> typeNodes = databaseManager.getNodesByType(nodeType);
     List<Integer> typeInstances = new ArrayList<>();
     for (int i = 0; i < typeNodes.size(); i++) { // collects all of the instances for the given type
       if (typeNodes.get(i).getFloor() == floorNumber) {
@@ -547,7 +551,7 @@ public class DataMapViewController implements Initializable {
             shortName,
             nodeType,
             floorNumber); // creates a new node
-    nodeFactory.create(newNode); // creates the node in the db
+    databaseManager.manipulateNode(newNode); // creates the node in the db
     drawNode(newNode); // creates the node on the map
     clearNode();
     mapPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {});
@@ -574,13 +578,12 @@ public class DataMapViewController implements Initializable {
       node.setShortName(shortName);
       node.setType(nodeType);
       node.setFloor(floorNumber); // sets the node to the provided values
-
-      System.out.println(edgeFactory.getAllEdgesConnectedToNode(node.getId()).size());
-      nodeFactory.update(node);
+      System.out.println(databaseManager.getAllEdgesConnectedToNode(node.getId()).size());
+      databaseManager.manipulateNode(node);
       System.out.println("here1");
-      System.out.println(edgeFactory.getAllEdgesConnectedToNode(node.getId()).size());
+      System.out.println(databaseManager.getAllEdgesConnectedToNode(node.getId()).size());
       for (Edge edge :
-          edgeFactory.getAllEdgesConnectedToNode(
+          databaseManager.getAllEdgesConnectedToNode(
               node.getId())) { // for all of the edges connected to the node
         System.out.println("here2");
         for (int i = 0;
@@ -659,28 +662,28 @@ public class DataMapViewController implements Initializable {
     String node2ID = selectNode2Button.getText();
     String ID = node1ID + "_" + node2ID; // The edge ID is the two node IDs combined with a "_"
     Edge edge = new Edge(ID, node1ID, node2ID);
-    edgeFactory.create(edge); // creates the edge in the db
+    databaseManager.manipulateEdge(edge); // creates the edge in the db
     drawEdge(edge); // creates the edge on the map
     clearEdge();
   }
 
   @FXML
-  public void modifyEdge() throws ValidationException {
+  public void modifyEdge() throws Exception {
     String node1ID = selectNode1Button.getText();
     String node2ID = selectNode2Button.getText();
     String ID = node1ID + "_" + node2ID; // The edge ID is the two node IDs combined with a "_"
     Edge newEdge = new Edge(ID, node1ID, node2ID);
-    edgeFactory.delete(edge.getId()); // deletes the edge in the db
+    databaseManager.deleteEdge(edge.getId()); // deletes the edge in the db
     mapPane.getChildren().remove(edgeLine); // deletes the edge on the map
-    edgeFactory.create(newEdge); // creates the edge in the db
+    databaseManager.manipulateEdge(newEdge); // creates the edge in the db
     drawEdge(newEdge); // creates the new edge on the map
     // the reason we delete then add for modifying is because the edgeFactory needs the ID to NOT
     clearEdge();
   }
 
   @FXML
-  public void deleteEdge() {
-    edgeFactory.delete(edge.getId()); // deletes the edge in the db
+  public void deleteEdge() throws Exception {
+    databaseManager.deleteEdge(edge.getId()); // deletes the edge in the db
     mapPane.getChildren().remove(edgeLine); // deletes the edge on the map
     clearEdge();
   }

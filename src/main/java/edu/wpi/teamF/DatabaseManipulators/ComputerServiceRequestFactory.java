@@ -17,7 +17,7 @@ public class ComputerServiceRequestFactory {
   private static final ServiceRequestFactory serviceRequestFactory =
       ServiceRequestFactory.getFactory();
 
-  public static ComputerServiceRequestFactory getFactory() {
+  static ComputerServiceRequestFactory getFactory() {
     return factory;
   }
 
@@ -57,7 +57,7 @@ public class ComputerServiceRequestFactory {
     }
   }
 
-  public ComputerServiceRequest read(String id) {
+  public static ComputerServiceRequest read(String id) {
     ComputerServiceRequest computerService = null;
     String selectStatement =
         "SELECT * FROM "

@@ -12,11 +12,11 @@ public class MenuBarController {
   }
 
   public void pathfinder(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("Pathfinder");
+    sceneController.switchScene("PathfinderVersion2");
   }
 
   public void serviceRequest(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("ServiceRequest");
+    sceneController.switchScene("ServiceRequestMain");
   }
 
   public void admin(ActionEvent actionEvent) throws IOException {
@@ -27,7 +27,9 @@ public class MenuBarController {
     sceneController.switchScene("Help");
   }
 
-  public void settings(ActionEvent actionEvent) {}
+  public void settings(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("Accounts");
+  }
 
   public void mainMenu(ActionEvent actionEvent) {}
 }

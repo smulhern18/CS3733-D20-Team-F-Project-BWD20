@@ -7,20 +7,17 @@ import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.concurrent.TimeoutException;
 import javafx.stage.Stage;
 import javax.management.InstanceNotFoundException;
-import org.junit.After;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.testfx.api.FxToolkit;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
 
 public class HelpTest extends ApplicationTest {
 
-  private static DatabaseManager db = new DatabaseManager();
+  private static DatabaseManager db = DatabaseManager.getManager();
 
   @BeforeAll
   public static void setUp() throws Exception {
@@ -37,11 +34,6 @@ public class HelpTest extends ApplicationTest {
   @AfterEach
   public void tearDown() throws SQLException {
     db.reset();
-  }
-
-  @After
-  public void afterEachTest() throws TimeoutException {
-    FxToolkit.hideStage();
   }
 
   @Test

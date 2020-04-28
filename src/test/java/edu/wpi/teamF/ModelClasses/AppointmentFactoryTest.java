@@ -3,9 +3,7 @@ package edu.wpi.teamF.ModelClasses;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import edu.wpi.teamF.DatabaseManipulators.AppointmentFactory;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.TestData;
 import java.sql.SQLException;
 import org.junit.jupiter.api.AfterAll;
@@ -16,9 +14,7 @@ public class AppointmentFactoryTest {
 
   static TestData testData = null;
   static Appointment[] validAppointments = null;
-  AppointmentFactory appointmentFactory = AppointmentFactory.getFactory();
-  NodeFactory nodeFactory = NodeFactory.getFactory();
-  static DatabaseManager databaseManager = new DatabaseManager();
+  static DatabaseManager databaseManager = DatabaseManager.getManager();
 
   @BeforeEach
   public void initialize() throws Exception {
@@ -33,26 +29,26 @@ public class AppointmentFactoryTest {
   }
 
   @Test
-  public void testCreateReadDelete() {
+  public void testCreateReadDelete() throws Exception {
     try {
-      appointmentFactory.create(null);
+      databaseManager.manipulateAppointment(null);
       fail("Creating a null value is unacceptable");
-    } catch (ValidationException e) {
+    } catch (NullPointerException e) {
       // ignore as expected
     }
     try {
       for (Appointment appointment : validAppointments) {
-        appointmentFactory.create(appointment);
-        nodeFactory.create(appointment.getLocation());
+        databaseManager.manipulateAppointment(appointment);
+        databaseManager.manipulateNode(appointment.getLocation());
 
-        Appointment readAppointment = appointmentFactory.read(appointment.getId());
+        Appointment readAppointment = databaseManager.readAppointment(appointment.getId());
 
         assertTrue(readAppointment.equals(appointment));
 
-        appointmentFactory.delete(appointment.getId());
+        databaseManager.deleteAppointment(appointment.getId());
 
         try {
-          readAppointment = appointmentFactory.read(appointment.getId());
+          readAppointment = databaseManager.readAppointment(appointment.getId());
         } catch (Exception e) {
           fail(e.getMessage() + ", " + e.getClass());
         }
@@ -66,18 +62,18 @@ public class AppointmentFactoryTest {
   public void testCreateReadUpdateDelete() {
     try {
       for (Appointment appointment : validAppointments) {
-        appointmentFactory.create(appointment);
-        nodeFactory.create(appointment.getLocation());
+        databaseManager.manipulateAppointment(appointment);
+        databaseManager.manipulateNode(appointment.getLocation());
 
         appointment.setPCP("Hello");
-        appointmentFactory.update(appointment);
+        databaseManager.manipulateAppointment(appointment);
 
-        Appointment readAppointment = appointmentFactory.read(appointment.getId());
+        Appointment readAppointment = databaseManager.readAppointment(appointment.getId());
 
         assertTrue(appointment.equals(readAppointment));
 
-        appointmentFactory.delete(appointment.getId());
-        nodeFactory.delete(appointment.getLocation().getId());
+        databaseManager.deleteAppointment(appointment.getId());
+        databaseManager.deleteNode(appointment.getLocation().getId());
       }
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
