@@ -12,7 +12,10 @@ import edu.wpi.teamF.ModelClasses.ServiceRequest.LanguageServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.LaundryServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MedicineDeliveryRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.SanitationServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.TransportRequest;
 import java.io.*;
 import java.nio.file.Path;
 import java.sql.SQLException;
@@ -881,4 +884,257 @@ public class CSVManipulator {
             + m.getTemperature();
     return Main;
   }
+  /**
+   * reads a csv file that contains Medicine Delivery Requests and inserts the data in the file into the
+   * correct place in the database
+   */
+  public void readCSVFileMedicineDeliveryService(InputStream stream) {
+    String row = "";
+    ArrayList<String> data = new ArrayList<>();
+    try {
+      // goes to get the file
+      BufferedReader csvReader = new BufferedReader(new InputStreamReader(stream));
+      while ((row = csvReader.readLine()) != null) {
+        data.addAll(Arrays.asList(row.split(",")));
+      }
+
+      int i = 9;
+      while (i < (data.size() - 1)) {
+        medicineDeliveryRequestFactory.create(
+            new MedicineDeliveryRequest(
+                data.get(i),
+                nodeFactory.read(data.get(i + 1)),
+                data.get(i + 2),
+                data.get(i + 3),
+                new Date(Integer.parseInt(data.get(i + 4))),
+                Integer.parseInt(data.get(i + 5)),
+                Boolean.parseBoolean(data.get(i + 6)),
+                data.get(i + 7),
+                data.get(i + 8)));
+
+        i = i + 9;
+      }
+    } catch (FileNotFoundException e) {
+      throw new IllegalArgumentException("File Not found!");
+    } catch (EOFException e) {
+      // Expected use to end read csv
+    } catch (IOException e) {
+
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+  }
+  /** Writes to the CSV file so that it can become persistant */
+  public void writeCSVFileMedicineDeliveryService(Path path) throws Exception {
+    // writing to the file
+    List<MedicineDeliveryRequest> medicineDeliveryRequests =
+        medicineDeliveryRequestFactory.getAllMedicineDeliveryRequests();
+
+    try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
+        BufferedWriter bw = new BufferedWriter(fw); ) {
+
+      bw.write(
+          "id,location,assignee,description,dateTimeSubmitted,priority,complete,medicineType,instructions");
+
+      for (MedicineDeliveryRequest m : medicineDeliveryRequests) {
+        bw.newLine();
+        bw.write((formatMedicineDeliveryService(m)));
+      }
+      bw.close();
+    } catch (IOException e) {
+      System.out.println(e.getMessage() + "" + e.getClass());
+    }
+  }
+  //
+  public String formatMedicineDeliveryService(MedicineDeliveryRequest m) {
+    String Main = "";
+    Main =
+        m.getId()
+            + ","
+            + m.getLocation().getId()
+            + ","
+            + m.getAssignee()
+            + ","
+            + m.getDescription()
+            + ","
+            + m.getDateTimeSubmitted().getTime()
+            + ","
+            + m.getPriority()
+            + ","
+            + m.getComplete()
+            + ","
+            + m.getMedicineType()
+            + ","
+            + m.getInstructions();
+    return Main;
+  }
+
+  /**
+   * reads a csv file that contains sanitation Requests and inserts the data in the file into the
+   * correct place in the database
+   */
+  public void readCSVFileSanitationService(InputStream stream) {
+    String row = "";
+    ArrayList<String> data = new ArrayList<>();
+    try {
+      // goes to get the file
+      BufferedReader csvReader = new BufferedReader(new InputStreamReader(stream));
+      while ((row = csvReader.readLine()) != null) {
+        data.addAll(Arrays.asList(row.split(",")));
+      }
+
+      int i = 8;
+      while (i < (data.size() - 1)) {
+        sanitationServiceRequestFactory.create(
+            new SanitationServiceRequest(
+                data.get(i),
+                nodeFactory.read(data.get(i + 1)),
+                data.get(i + 2),
+                data.get(i + 3),
+                new Date(Integer.parseInt(data.get(i + 4))),
+                Integer.parseInt(data.get(i + 5)),
+                Boolean.parseBoolean(data.get(i + 6)),
+                data.get(i + 7)));
+
+        i = i + 8;
+      }
+    } catch (FileNotFoundException e) {
+      throw new IllegalArgumentException("File Not found!");
+    } catch (EOFException e) {
+      // Expected use to end read csv
+    } catch (IOException e) {
+
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+  }
+  /** Writes to the CSV file so that it can become persistant */
+  public void writeCSVFileSanitationService(Path path) throws Exception {
+    // writing to the file
+    List<SanitationServiceRequest> sanitationServiceRequests = sanitationServiceRequestFactory.getAllSanitationRequests();
+
+    try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
+        BufferedWriter bw = new BufferedWriter(fw); ) {
+
+      bw.write(
+          "id,location,assignee,description,dateTimeSubmitted,priority,complete,type");
+
+      for (SanitationServiceRequest s : sanitationServiceRequests) {
+        bw.newLine();
+        bw.write((formatSanitationService(s)));
+      }
+      bw.close();
+    } catch (IOException e) {
+      System.out.println(e.getMessage() + "" + e.getClass());
+    }
+  }
+  //
+  public String formatSanitationService(SanitationServiceRequest m) {
+    String Main = "";
+    Main =
+        m.getId()
+            + ","
+            + m.getLocation().getId()
+            + ","
+            + m.getAssignee()
+            + ","
+            + m.getDescription()
+            + ","
+            + m.getDateTimeSubmitted().getTime()
+            + ","
+            + m.getPriority()
+            + ","
+            + m.getComplete()
+            + ","
+            + m.getType();
+    return Main;
+  }
+  /**
+   * reads a csv file that contains Transport Requests and inserts the data in the file into the
+   * correct place in the database
+   */
+  public void readCSVFileTransportService(InputStream stream) {
+    String row = "";
+    ArrayList<String> data = new ArrayList<>();
+    try {
+      // goes to get the file
+      BufferedReader csvReader = new BufferedReader(new InputStreamReader(stream));
+      while ((row = csvReader.readLine()) != null) {
+        data.addAll(Arrays.asList(row.split(",")));
+      }
+
+      int i = 10;
+      while (i < (data.size() - 1)) {
+        transportRequestFactory.create(
+            new TransportRequest(
+                data.get(i),
+                nodeFactory.read(data.get(i + 1)),
+                data.get(i + 2),
+                data.get(i + 3),
+                new Date(Integer.parseInt(data.get(i + 4))),
+                Integer.parseInt(data.get(i + 5)),
+                Boolean.parseBoolean(data.get(i + 6)),
+                data.get(i + 7),
+                nodeFactory.read(data.get(i + 8)),
+                new Date(Integer.parseInt(data.get(i + 9)))));
+
+        i = i + 10;
+      }
+    } catch (FileNotFoundException e) {
+      throw new IllegalArgumentException("File Not found!");
+    } catch (EOFException e) {
+      // Expected use to end read csv
+    } catch (IOException e) {
+
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+  }
+  /** Writes to the CSV file so that it can become persistant */
+  public void writeCSVFileTransportService(Path path) throws Exception {
+    // writing to the file
+    List<TransportRequest> transportRequests =
+        transportRequestFactory.getAllTransportRequests();
+
+    try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
+        BufferedWriter bw = new BufferedWriter(fw); ) {
+
+      bw.write(
+          "id,location,assignee,description,dateTimeSubmitted,priority,complete,type,destination,dateTimeCompleted");
+
+      for (TransportRequest s : transportRequests) {
+        bw.newLine();
+        bw.write((formatTransportService(s)));
+      }
+      bw.close();
+    } catch (IOException e) {
+      System.out.println(e.getMessage() + "" + e.getClass());
+    }
+  }
+  //
+  public String formatTransportService(TransportRequest m) {
+    String Main = "";
+    Main =
+        m.getId()
+            + ","
+            + m.getLocation().getId()
+            + ","
+            + m.getAssignee()
+            + ","
+            + m.getDescription()
+            + ","
+            + m.getDateTimeSubmitted().getTime()
+            + ","
+            + m.getPriority()
+            + ","
+            + m.getComplete()
+            + ","
+            + m.getType()
+            + ","
+            + m.getDestination().getId()
+            + ","
+            + m.getDateTimeCompleted().getTime();
+    return Main;
+  }
+
 }
