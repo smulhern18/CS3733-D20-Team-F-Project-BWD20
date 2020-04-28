@@ -143,7 +143,10 @@ public class PathfinderController implements Initializable {
     System.out.println(directions.getFullDirectionsString());
     directionsDisplay.setText(directions.getFullDirectionsString());
     pathSwitchFloorPane.setVisible(true);
-    pathSwitchFloor.setText("Next: Go to floor " + Integer.toString(endNode.getFloor()));
+    if (startNode.getFloor() != endNode.getFloor()) {
+      pathSwitchFloor.setVisible(true);
+      pathSwitchFloor.setText("Next: Go to floor " + Integer.toString(endNode.getFloor()));
+    }
   }
 
   public void placeButton(Node node) {
@@ -350,6 +353,7 @@ public class PathfinderController implements Initializable {
     mapPaneFaulkner1.setVisible(true);
     imageViewFaulkner1.setVisible(true);
     floorButtonsSet();
+    pathSwitchFloor.setVisible(false);
 
     UISetting uiSetting = new UISetting();
     uiSetting.setAsLocationComboBox(startCombo);

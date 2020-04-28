@@ -33,8 +33,8 @@ public class LoginController implements Initializable {
   @FXML private JFXPasswordField passwordInput;
 
   @FXML private Label incorrectLabel; // label that is displayed if teh input is not valid
-  private ImageView background;
-  private StackPane stackPane;
+  @FXML private ImageView background;
+  @FXML private StackPane stackPane;
 
   SceneController sceneController = App.getSceneController(); // used to switch between scenes
 

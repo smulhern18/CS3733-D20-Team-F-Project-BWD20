@@ -34,22 +34,18 @@ import javafx.util.Callback;
 import lombok.SneakyThrows;
 
 public class TransportServiceController implements Initializable {
-  public JFXTreeTableView<UITransportRequest> treeTableComputer;
+  public JFXTreeTableView<UITransportRequest> treeTableTransport;
   public AnchorPane anchorPane;
   public GridPane optionBar;
   public JFXButton requestServiceButton;
   public GridPane servicePane;
   public Label locationLabel;
   public JFXComboBox<String> locationChoice;
-  public Label makeLabel;
-  public JFXComboBox<String> makeChoice;
   public JFXButton submitButton;
   public JFXButton cancelButton;
   public Label typeLabel;
   public JFXComboBox<String> issueChoice;
   public Label securityRequestLabel;
-  public Label OSLabel;
-  public JFXComboBox<String> OSChoice;
   public Label descLabel;
   public JFXTextField descText;
   public Label prioLabel;
@@ -61,6 +57,10 @@ public class TransportServiceController implements Initializable {
   public JFXTextField deleteText;
   public JFXButton delete;
   public JFXButton backButton;
+  public Label destLabel;
+  public JFXButton updateButton;
+  public JFXButton deleteButton;
+  public JFXComboBox<String> destChoice;
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UITransportRequest> csrUI = FXCollections.observableArrayList();
@@ -79,23 +79,21 @@ public class TransportServiceController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // add the different choices to the choicebox
-    // Replace this with long names, linked to IDs
-    List<Node> nodes = null;
-    try {
-      nodes = databaseManager.getAllNodes();
-    } catch (Exception e) {
-      System.out.println(e.getMessage() + e.getClass());
-    }
-    for (Node node : nodes) {
-      locationChoice.getItems().add(node.getId());
-    }
+    // Replace this with long names, linked to ID
 
     UISetting uiSetting = new UISetting();
     uiSetting.setAsLocationComboBox(locationChoice);
+    uiSetting.setAsLocationComboBox(destChoice);
 
     priorityChoice.getItems().add("Low");
     priorityChoice.getItems().add("Medium");
     priorityChoice.getItems().add("High");
+
+
+    //Add the types here
+    issueChoice.getItems().add("");
+    issueChoice.getItems().add("");
+    issueChoice.getItems().add("");
 
     // ID
     JFXTreeTableColumn<UITransportRequest, String> ID = new JFXTreeTableColumn<>("ID");
@@ -177,7 +175,7 @@ public class TransportServiceController implements Initializable {
           @Override
           public void handle(TreeTableColumn.CellEditEvent<UITransportRequest, String> event) {
             TreeItem<UITransportRequest> current =
-                treeTableComputer.getTreeItem(event.getTreeTablePosition().getRow());
+                treeTableTransport.getTreeItem(event.getTreeTablePosition().getRow());
             current.getValue().setAssignee(new SimpleStringProperty(event.getNewValue()));
           }
         });
@@ -209,7 +207,7 @@ public class TransportServiceController implements Initializable {
           @Override
           public void handle(TreeTableColumn.CellEditEvent<UITransportRequest, String> event) {
             TreeItem<UITransportRequest> current =
-                treeTableComputer.getTreeItem(event.getTreeTablePosition().getRow());
+                treeTableTransport.getTreeItem(event.getTreeTablePosition().getRow());
             current.getValue().setCompleted(new SimpleStringProperty(event.getNewValue()));
           }
         });
@@ -235,19 +233,20 @@ public class TransportServiceController implements Initializable {
     // completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     priority.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
-    treeTableComputer.setRoot(root);
-    treeTableComputer.setEditable(true);
-    treeTableComputer.setShowRoot(false);
+    treeTableTransport.setRoot(root);
+    treeTableTransport.setEditable(true);
+    treeTableTransport.setShowRoot(false);
   }
 
   public void submit(ActionEvent actionEvent) throws Exception {
     // Get the values
     String location = locationChoice.getValue();
     String nodeID = location.substring(location.length() - 10);
-    Node node = databaseManager.readNode(nodeID);
-    String make = makeChoice.getValue();
+    Node nodeL = databaseManager.readNode(nodeID);
+    String dest = destChoice.getValue();
+    String destID = dest.substring(location.length() - 10);
+    Node nodeD = databaseManager.readNode(destID);
     String issueType = issueChoice.getValue();
-    String OS = OSChoice.getValue();
     String desc = descText.getText();
     String priority = priorityChoice.getValue();
     System.out.println(priority);
@@ -262,26 +261,23 @@ public class TransportServiceController implements Initializable {
     LocalDateTime now = LocalDateTime.now();
     DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
     Date date = new Date(System.currentTimeMillis());
-    //        TransportRequest csRequest =
-    //                new TransportRequest(
-    //                        node, desc, "Not Assigned", date, priorityDB,  );
-    //        databaseManager.manipulateServiceRequest(csRequest);
-    //        csrUI.add(new UITransportRequest(csRequest));
-    treeTableComputer.refresh();
+    TransportRequest tsRequest =
+        new TransportRequest(nodeL, "Not Assigned", desc, date, priorityDB, issueType, nodeD, null);
+    databaseManager.manipulateServiceRequest(tsRequest);
+    csrUI.add(new UITransportRequest(tsRequest));
+    treeTableTransport.refresh();
     descText.setText("");
-    OSChoice.setValue(null);
+    destChoice.setValue(null);
     locationChoice.setValue(null);
     priorityChoice.setValue(null);
-    makeChoice.setValue(null);
     issueChoice.setValue(null);
   }
 
   public void cancel(ActionEvent actionEvent) {
     descText.setText("");
-    OSChoice.setValue(null);
+    destChoice.setValue(null);
     locationChoice.setValue(null);
     priorityChoice.setValue(null);
-    makeChoice.setValue(null);
     issueChoice.setValue(null);
   }
 
@@ -295,6 +291,8 @@ public class TransportServiceController implements Initializable {
         String completed = csrui.getCompleted().get();
         if (completed.equals("Complete")) {
           toUpdate.setComplete(true);
+          Date date = new Date();
+          toUpdate.setDateTimeCompleted(date);
         } else if (completed.equals("Incomplete")) {
           toUpdate.setComplete(false);
         } else {
@@ -304,7 +302,7 @@ public class TransportServiceController implements Initializable {
         databaseManager.manipulateServiceRequest(toUpdate);
       }
     }
-    treeTableComputer.refresh();
+    treeTableTransport.refresh();
   }
 
   public void delete(ActionEvent actionEvent) throws Exception {
@@ -312,7 +310,7 @@ public class TransportServiceController implements Initializable {
     databaseManager.deleteComputerServiceRequest(toDelte);
     csrUI.removeIf(transportRequest -> transportRequest.getID().get().equals(toDelte));
     deleteText.setText("");
-    treeTableComputer.refresh();
+    treeTableTransport.refresh();
   }
 
   public void request(ActionEvent actionEvent) {
@@ -320,18 +318,12 @@ public class TransportServiceController implements Initializable {
     checkStatusPane.setVisible(false);
   }
 
-  public void statusView(ActionEvent actionEvent) {
-    servicePane.setVisible(false);
-    checkStatusPane.setVisible(true);
-  }
-
   private void resize(double width) {
     System.out.println(width);
     Font newFont = new Font(width / 50);
     locationLabel.setFont(newFont);
-    makeLabel.setFont(newFont);
+    destLabel.setFont(newFont);
     typeLabel.setFont(newFont);
-    OSLabel.setFont(newFont);
     descLabel.setFont(newFont);
     prioLabel.setFont(newFont);
     securityRequestLabel.setFont(new Font(width / 20));
@@ -344,5 +336,10 @@ public class TransportServiceController implements Initializable {
 
   public void backToServiceRequestMain(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("ServiceRequestMain");
+  }
+
+  public void checkStatus(ActionEvent actionEvent) {
+    servicePane.setVisible(false);
+    checkStatusPane.setVisible(true);
   }
 }
