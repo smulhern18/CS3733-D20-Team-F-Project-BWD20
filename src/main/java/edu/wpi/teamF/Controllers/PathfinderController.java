@@ -160,7 +160,7 @@ public class PathfinderController implements Initializable {
     button.setMaxSize(12, 12);
     button.setPrefSize(12, 12);
     button.setStyle(
-        "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #0067b1; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+        "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
 
     int xPos = (int) ((node.getXCoord() * widthRatioFaulkner5) - 6);
     int yPos = (int) ((node.getYCoord() * heightRatioFaulkner5) - 6);
@@ -173,14 +173,14 @@ public class PathfinderController implements Initializable {
           if (startNode == node && state == 1) { // Click again to de-select if start has been set
             startNode = null;
             button.setStyle(
-                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #0067b1; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
             state = 0;
             startCombo.setValue(null);
             startCombo.setDisable(false);
           } else if (endNode == node) { // deselect if end has been set, return to 1
             endNode = null;
             button.setStyle(
-                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #0067b1; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
             state = 1;
             endCombo.setValue(null);
             pathButton.setDisable(true);
@@ -233,7 +233,7 @@ public class PathfinderController implements Initializable {
       } else if (node instanceof JFXButton) {
         JFXButton button = (JFXButton) node;
         button.setStyle(
-            "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #0067b1; "
+            "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; "
                 + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
       }
     }
@@ -245,7 +245,7 @@ public class PathfinderController implements Initializable {
       } else if (node instanceof JFXButton) {
         JFXButton button = (JFXButton) node;
         button.setStyle(
-            "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #0067b1; "
+            "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; "
                 + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
       }
     }
@@ -257,7 +257,7 @@ public class PathfinderController implements Initializable {
       } else if (node instanceof JFXButton) {
         JFXButton button = (JFXButton) node;
         button.setStyle(
-            "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #0067b1; "
+            "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; "
                 + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
       }
     }
@@ -269,7 +269,7 @@ public class PathfinderController implements Initializable {
       } else if (node instanceof JFXButton) {
         JFXButton button = (JFXButton) node;
         button.setStyle(
-            "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #0067b1; "
+            "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; "
                 + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
       }
     }
@@ -281,7 +281,7 @@ public class PathfinderController implements Initializable {
       } else if (node instanceof JFXButton) {
         JFXButton button = (JFXButton) node;
         button.setStyle(
-            "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #0067b1; "
+            "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; "
                 + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
       }
     }
@@ -291,7 +291,7 @@ public class PathfinderController implements Initializable {
       for (javafx.scene.Node component : currentPane.getChildren()) {
         if (component.getId().equals(startNode.getId())) {
           component.setStyle(
-              "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #0067b1; "
+              "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; "
                   + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
         }
       }
@@ -300,7 +300,7 @@ public class PathfinderController implements Initializable {
       for (javafx.scene.Node component : currentPane.getChildren()) {
         if (component.getId().equals(endNode.getId())) {
           component.setStyle(
-              "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #0067b1; "
+              "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; "
                   + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
         }
       }
@@ -331,10 +331,9 @@ public class PathfinderController implements Initializable {
   public void drawNodes() {
     for (Node node : fullNodeList) {
       if (!node.getType().equals(Node.NodeType.getEnum("HALL"))
-      //          && !node.getType().equals(Node.NodeType.getEnum("STAI"))
-      //          && !node.getType().equals(Node.NodeType.getEnum("ELEV"))
-      //          && !node.getType().equals(Node.NodeType.getEnum("REST"))
-      ) {
+          && !node.getType().equals(Node.NodeType.getEnum("STAI"))
+          && !node.getType().equals(Node.NodeType.getEnum("ELEV"))
+          && !node.getType().equals(Node.NodeType.getEnum("REST"))) {
         placeButton(node);
         pathButtonGo();
       }
@@ -394,7 +393,7 @@ public class PathfinderController implements Initializable {
     resetPane();
     drawNodes();
     deselectFloorButtons();
-    floor1Button.setStyle("-fx-background-color: #0067b1; -fx-background-radius: 10px");
+    floor1Button.setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
     directionsPane.setVisible(false);
   }
 
@@ -435,7 +434,7 @@ public class PathfinderController implements Initializable {
             for (javafx.scene.Node component : currentPane.getChildren()) {
               if (component.getId().equals(startNode.getId())) {
                 component.setStyle(
-                    "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #0067b1; "
+                    "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; "
                         + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
               }
             }
@@ -469,7 +468,7 @@ public class PathfinderController implements Initializable {
             for (javafx.scene.Node component : currentPane.getChildren()) {
               if (component.getId().equals(endNode.getId())) {
                 component.setStyle(
-                    "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #0067b1; "
+                    "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; "
                         + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
               }
             }
@@ -590,7 +589,7 @@ public class PathfinderController implements Initializable {
           mapPaneFaulkner1.setVisible(true);
           imageViewFaulkner1.setVisible(true);
           deselectFloorButtons();
-          floor1Button.setStyle("-fx-background-color: #0067b1; -fx-background-radius: 10px");
+          floor1Button.setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
         });
     floor2Button.setOnAction(
         actionEvent -> {
@@ -602,7 +601,7 @@ public class PathfinderController implements Initializable {
           mapPaneFaulkner2.setVisible(true);
           imageViewFaulkner2.setVisible(true);
           deselectFloorButtons();
-          floor2Button.setStyle("-fx-background-color: #0067b1; -fx-background-radius: 10px");
+          floor2Button.setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
         });
     floor3Button.setOnAction(
         actionEvent -> {
@@ -614,7 +613,7 @@ public class PathfinderController implements Initializable {
           mapPaneFaulkner3.setVisible(true);
           imageViewFaulkner3.setVisible(true);
           deselectFloorButtons();
-          floor3Button.setStyle("-fx-background-color: #0067b1; -fx-background-radius: 10px");
+          floor3Button.setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
         });
     floor4Button.setOnAction(
         actionEvent -> {
@@ -626,7 +625,7 @@ public class PathfinderController implements Initializable {
           mapPaneFaulkner4.setVisible(true);
           imageViewFaulkner4.setVisible(true);
           deselectFloorButtons();
-          floor4Button.setStyle("-fx-background-color: #0067b1; -fx-background-radius: 10px");
+          floor4Button.setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
         });
     floor5Button.setOnAction(
         actionEvent -> {
@@ -638,13 +637,13 @@ public class PathfinderController implements Initializable {
           mapPaneFaulkner5.setVisible(true);
           imageViewFaulkner5.setVisible(true);
           deselectFloorButtons();
-          floor5Button.setStyle("-fx-background-color: #0067b1; -fx-background-radius: 10px");
+          floor5Button.setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
         });
   }
 
   public void deselectFloorButtons() {
     for (javafx.scene.Node btn : selectFloorPane.getChildren()) {
-      btn.setStyle("-fx-background-color: #76c6ff; -fx-background-radius: 10px");
+      btn.setStyle("-fx-background-color: #4d6c8b; -fx-background-radius: 10px");
     }
   }
 
@@ -683,7 +682,7 @@ public class PathfinderController implements Initializable {
       startNode = holdNode;
       startCombo.setValue(startNode.getLongName() + " " + startNode.getId());
       deselectFloorButtons();
-      floor1Button.setStyle("-fx-background-color: #0067b1; -fx-background-radius: 10px");
+      floor1Button.setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
     }
     if (floorNum == 2) {
       Node holdNode = startNode;
@@ -697,7 +696,7 @@ public class PathfinderController implements Initializable {
       startNode = holdNode;
       startCombo.setValue(startNode.getLongName() + " " + startNode.getId());
       deselectFloorButtons();
-      floor2Button.setStyle("-fx-background-color: #0067b1; -fx-background-radius: 10px");
+      floor2Button.setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
     }
     if (floorNum == 3) {
       Node holdNode = startNode;
@@ -711,7 +710,7 @@ public class PathfinderController implements Initializable {
       startNode = holdNode;
       startCombo.setValue(startNode.getLongName() + " " + startNode.getId());
       deselectFloorButtons();
-      floor3Button.setStyle("-fx-background-color: #0067b1; -fx-background-radius: 10px");
+      floor3Button.setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
     }
     if (floorNum == 4) {
       Node holdNode = startNode;
@@ -725,7 +724,7 @@ public class PathfinderController implements Initializable {
       startNode = holdNode;
       startCombo.setValue(startNode.getLongName() + " " + startNode.getId());
       deselectFloorButtons();
-      floor4Button.setStyle("-fx-background-color: #0067b1; -fx-background-radius: 10px");
+      floor4Button.setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
     }
     if (floorNum == 5) {
       Node holdNode = startNode;
@@ -739,7 +738,7 @@ public class PathfinderController implements Initializable {
       startNode = holdNode;
       startCombo.setValue(startNode.getLongName() + " " + startNode.getId());
       deselectFloorButtons();
-      floor5Button.setStyle("-fx-background-color: #0067b1; -fx-background-radius: 10px");
+      floor5Button.setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
     }
   }
 
