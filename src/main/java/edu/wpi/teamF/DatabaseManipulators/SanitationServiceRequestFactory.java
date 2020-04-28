@@ -189,5 +189,4 @@ public class SanitationServiceRequestFactory {
     }
     return sanitationRequests;
   }
-
 }

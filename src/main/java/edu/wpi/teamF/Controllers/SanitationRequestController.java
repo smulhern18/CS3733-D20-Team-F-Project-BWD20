@@ -4,14 +4,9 @@ import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
-import edu.wpi.teamF.DatabaseManipulators.SanitationServiceRequestFactory;
 import edu.wpi.teamF.ModelClasses.Node;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SanitationServiceRequest;
-import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UISanitationServiceRequest;
-import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
@@ -25,7 +20,7 @@ import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
-import javax.management.InstanceNotFoundException;
+import lombok.SneakyThrows;
 
 public class SanitationRequestController implements Initializable {
   public GridPane optionBar;
@@ -50,11 +45,11 @@ public class SanitationRequestController implements Initializable {
   public AnchorPane checkStatusPane;
   public AnchorPane anchorPane;
   DatabaseManager databaseManager = DatabaseManager.getManager();
-  List<SanitationServiceRequest> sanitationRequestList =
-      databaseManager.getAllSanitationRequests();
+  List<SanitationServiceRequest> sanitationRequestList = databaseManager.getAllSanitationRequests();
   ObservableList<UISanitationServiceRequest> uiSanitationRequests =
       FXCollections.observableArrayList();
 
+  @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // add the different choices to the choicebox
@@ -145,8 +140,7 @@ public class SanitationRequestController implements Initializable {
     updateButton.setFont(newFont);
   }
 
-  public void submit(ActionEvent actionEvent)
-          throws Exception {
+  public void submit(ActionEvent actionEvent) throws Exception {
     String location = locationComboBox.getValue();
     String nodeID = location.substring(location.length() - 10);
     System.out.println(location);
@@ -190,7 +184,8 @@ public class SanitationRequestController implements Initializable {
 
   public void update(ActionEvent actionEvent) throws Exception {
     for (UISanitationServiceRequest uiSR : uiSanitationRequests) {
-      SanitationServiceRequest toUpdate = databaseManager.readSanitationServiceRequest(uiSR.getID().get());
+      SanitationServiceRequest toUpdate =
+          databaseManager.readSanitationServiceRequest(uiSR.getID().get());
       if (!uiSR.equalsCSR(toUpdate)) {
         toUpdate.setAssignee(uiSR.getAssignee().get());
         String completed = uiSR.getCompleted().get();

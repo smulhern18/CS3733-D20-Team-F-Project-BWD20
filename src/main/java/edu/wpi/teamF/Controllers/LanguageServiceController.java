@@ -4,14 +4,9 @@ import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
-import edu.wpi.teamF.DatabaseManipulators.LanguageServiceRequestFactory;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Node;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.LanguageServiceRequest;
-import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UILanguageServiceRequest;
-import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -31,7 +26,7 @@ import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
-import javax.management.InstanceNotFoundException;
+import lombok.SneakyThrows;
 
 public class LanguageServiceController implements Initializable {
   public JFXTreeTableView<UILanguageServiceRequest> table;
@@ -55,16 +50,13 @@ public class LanguageServiceController implements Initializable {
   public JFXTextArea descriptionText;
   public JFXComboBox<String> priorityCombobox;
 
-
   DatabaseManager databaseManager = DatabaseManager.getManager();
   List<LanguageServiceRequest> languageServiceRequests =
-          databaseManager.getAllLanguageServiceRequests();
+      databaseManager.getAllLanguageServiceRequests();
 
-  public LanguageServiceController() throws Exception {
-  }
+  public LanguageServiceController() throws Exception {}
 
-  public void submit(ActionEvent actionEvent)
-          throws Exception {
+  public void submit(ActionEvent actionEvent) throws Exception {
     // Get the values
     String location = locationCombobox.getValue();
     String nodeId = location.substring(location.length() - 10);
@@ -106,10 +98,10 @@ public class LanguageServiceController implements Initializable {
     problemTypeCombobox.setValue(null);
   }
 
-  public void update(ActionEvent actionEvent)
-          throws Exception {
+  public void update(ActionEvent actionEvent) throws Exception {
     for (UILanguageServiceRequest langui : langUI) {
-      LanguageServiceRequest toUpdate = databaseManager.readLanguageServiceRequest(langui.getID().get());
+      LanguageServiceRequest toUpdate =
+          databaseManager.readLanguageServiceRequest(langui.getID().get());
       boolean isSame = langui.equalsLang(toUpdate);
       if (!isSame) {
         toUpdate.setAssignee(langui.getAssignee().get());
@@ -174,6 +166,7 @@ public class LanguageServiceController implements Initializable {
     table.refresh();
   }
 
+  @SneakyThrows
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
 

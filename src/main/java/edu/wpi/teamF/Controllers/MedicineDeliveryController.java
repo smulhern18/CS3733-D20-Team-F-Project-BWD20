@@ -4,12 +4,8 @@ import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
-import edu.wpi.teamF.DatabaseManipulators.MedicineDeliveryRequestFactory;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Node;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MedicineDeliveryRequest;
-import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIMedicineDeliveryRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.io.IOException;
@@ -63,14 +59,10 @@ public class MedicineDeliveryController implements Initializable {
   public JFXButton backButton;
   SceneController sceneController = App.getSceneController();
 
-
   DatabaseManager databaseManager = DatabaseManager.getManager();
   ObservableList<UIMedicineDeliveryRequest> mdrUI = FXCollections.observableArrayList();
   List<MedicineDeliveryRequest> medicineDeliveryRequests =
       databaseManager.getAllMedicineDeliveryRequests();
-
-
-
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -240,8 +232,7 @@ public class MedicineDeliveryController implements Initializable {
     treeTableMedicine.setShowRoot(false);
   }
 
-  public void submit(ActionEvent actionEvent)
-          throws Exception {
+  public void submit(ActionEvent actionEvent) throws Exception {
     // Get the values
     String location = locationChoice.getValue();
     Node node = databaseManager.readNode(location);
@@ -285,7 +276,8 @@ public class MedicineDeliveryController implements Initializable {
   public void update(ActionEvent actionEvent)
       throws ValidationException, InstanceNotFoundException {
     for (UIMedicineDeliveryRequest mdrui : mdrUI) {
-      MedicineDeliveryRequest toUpdate = databaseManager.readMedicineDeliveryService(mdrui.getID().get());
+      MedicineDeliveryRequest toUpdate =
+          databaseManager.readMedicineDeliveryService(mdrui.getID().get());
       boolean isSame = mdrui.equalsMDR(toUpdate);
       if (!isSame) {
         toUpdate.setAssignee(mdrui.getAssignee().get());

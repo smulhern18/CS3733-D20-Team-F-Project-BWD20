@@ -3,7 +3,7 @@ package edu.wpi.teamF;
 import edu.wpi.teamF.ModelClasses.Account.*;
 import edu.wpi.teamF.ModelClasses.Appointment;
 import edu.wpi.teamF.ModelClasses.Edge;
-import edu.wpi.teamF.ModelClasses.Node;;
+import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
 import java.util.Date;
 
@@ -202,42 +202,42 @@ public class TestData {
   public String[] validSongs = {"AAA", "BBB", "CCC", "DDD"};
 
   public SecurityRequest[] validSecurityRequests = {
-          new SecurityRequest(
-                  validIDs[0],
-                  validNodes[0],
-                  validAssignees[0],
-                  validDescriptions[0],
-                  validDates[0],
-                  2,
-                  false,
-                  1),
-          new SecurityRequest(
-                  validIDs[1],
-                  validNodes[1],
-                  validAssignees[1],
-                  validDescriptions[1],
-                  validDates[1],
-                  2,
-                  true,
-                  2),
-          new SecurityRequest(
-                  validIDs[2],
-                  validNodes[2],
-                  validAssignees[2],
-                  validDescriptions[2],
-                  validDates[2],
-                  2,
-                  false,
-                  3),
-          new SecurityRequest(
-                  validIDs[3],
-                  validNodes[3],
-                  validAssignees[3],
-                  validDescriptions[3],
-                  validDates[3],
-                  2,
-                  true,
-                  10),
+    new SecurityRequest(
+        validIDs[0],
+        validNodes[0],
+        validAssignees[0],
+        validDescriptions[0],
+        validDates[0],
+        2,
+        false,
+        1),
+    new SecurityRequest(
+        validIDs[1],
+        validNodes[1],
+        validAssignees[1],
+        validDescriptions[1],
+        validDates[1],
+        2,
+        true,
+        2),
+    new SecurityRequest(
+        validIDs[2],
+        validNodes[2],
+        validAssignees[2],
+        validDescriptions[2],
+        validDates[2],
+        2,
+        false,
+        3),
+    new SecurityRequest(
+        validIDs[3],
+        validNodes[3],
+        validAssignees[3],
+        validDescriptions[3],
+        validDates[3],
+        2,
+        true,
+        10),
   };
 
   public MariachiRequest[] validMariachiRequests = {
@@ -365,23 +365,22 @@ public class TestData {
   };
 
   public LanguageServiceRequest[] validLanguageServiceRequests = {
-          new LanguageServiceRequest(
-                  validNodes[0],
-                  validDescriptions[0],
-                  validAssignees[0],
-                  validDates[0],
-                  1,
-                  "Spanish",
-                  "Require Interpreter"),
-          new LanguageServiceRequest(
-                  validNodes[1],
-                  validDescriptions[1],
-                  validAssignees[1],
-                  validDates[1],
-                  1,
-                  "Sign Language",
-                  "Require Interpreter"),
-
+    new LanguageServiceRequest(
+        validNodes[0],
+        validDescriptions[0],
+        validAssignees[0],
+        validDates[0],
+        1,
+        "Spanish",
+        "Require Interpreter"),
+    new LanguageServiceRequest(
+        validNodes[1],
+        validDescriptions[1],
+        validAssignees[1],
+        validDates[1],
+        1,
+        "Sign Language",
+        "Require Interpreter"),
   };
 
   public String[] validMedicineTypes = {"Advil", "Penicillin", "Potassium", "Dopamine"};

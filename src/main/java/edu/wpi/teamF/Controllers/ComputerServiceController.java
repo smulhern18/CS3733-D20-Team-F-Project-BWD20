@@ -4,13 +4,10 @@ import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
-import edu.wpi.teamF.DatabaseManipulators.ComputerServiceRequestFactory;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
-import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -32,7 +29,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.util.Callback;
-import javax.management.InstanceNotFoundException;
+import lombok.SneakyThrows;
 
 public class ComputerServiceController implements Initializable {
   public JFXTreeTableView<UIComputerServiceRequest> treeTableComputer;
@@ -71,6 +68,7 @@ public class ComputerServiceController implements Initializable {
 
   public ComputerServiceController() throws Exception {}
 
+  @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // add the different choices to the choicebox
@@ -304,10 +302,10 @@ public class ComputerServiceController implements Initializable {
     issueChoice.setValue(null);
   }
 
-  public void update(ActionEvent actionEvent)
-      throws Exception{
+  public void update(ActionEvent actionEvent) throws Exception {
     for (UIComputerServiceRequest csrui : csrUI) {
-      ComputerServiceRequest toUpdate = databaseManager.readComputerServiceRequest(csrui.getID().get());
+      ComputerServiceRequest toUpdate =
+          databaseManager.readComputerServiceRequest(csrui.getID().get());
       boolean isSame = csrui.equalsCSR(toUpdate);
       if (!isSame) {
         toUpdate.setAssignee(csrui.getAssignee().get());
@@ -324,7 +322,7 @@ public class ComputerServiceController implements Initializable {
     treeTableComputer.refresh();
   }
 
-  public void delete(ActionEvent actionEvent) throws Exception{
+  public void delete(ActionEvent actionEvent) throws Exception {
     String toDelte = deleteText.getText();
     databaseManager.deleteComputerServiceRequest(toDelte);
     csrUI.removeIf(computerServiceRequest -> computerServiceRequest.getID().get().equals(toDelte));

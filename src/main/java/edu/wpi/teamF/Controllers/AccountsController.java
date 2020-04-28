@@ -28,14 +28,13 @@ public class AccountsController implements Initializable {
   public JFXTreeTableView<UIAccount> accountsView;
   public JFXButton updateStaff;
   public JFXComboBox<String> algoChoiceBox;
-    SceneController sceneController = App.getSceneController();
+  SceneController sceneController = App.getSceneController();
   DatabaseManager databaseManager = DatabaseManager.getManager();
   ObservableList<UIAccount> uiAccount = FXCollections.observableArrayList();
 
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
 
     // ID column
     JFXTreeTableColumn<UIAccount, String> firstName = new JFXTreeTableColumn<>("First Name");
