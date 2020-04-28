@@ -703,10 +703,12 @@ public class DataMapViewController implements Initializable {
       modifyNodeButton.setDisable(false);
       modifyNodeButton.setOpacity(1);
       addNodeButton.setDisable(false);
+      addNodeButton.setOpacity(1);
     } else {
       modifyNodeButton.setDisable(true);
       modifyNodeButton.setOpacity(.4);
       addNodeButton.setDisable(true);
+      addNodeButton.setOpacity(.4);
     }
   }
 }
