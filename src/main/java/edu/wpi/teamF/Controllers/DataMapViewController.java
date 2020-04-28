@@ -171,6 +171,11 @@ public class DataMapViewController implements Initializable {
     mapPane1.setVisible(true);
     imageView1.setVisible(true);
     mapPane = mapPane1;
+    floor1Button.setStyle("-fx-background-color: #888888");
+    floor2Button.setStyle("-fx-background-color: #E0DED7");
+    floor3Button.setStyle("-fx-background-color: #E0DED7");
+    floor4Button.setStyle("-fx-background-color: #E0DED7");
+    floor5Button.setStyle("-fx-background-color: #E0DED7");
   }
 
   @FXML
@@ -179,6 +184,11 @@ public class DataMapViewController implements Initializable {
     mapPane2.setVisible(true);
     imageView2.setVisible(true);
     mapPane = mapPane2;
+    floor2Button.setStyle("-fx-background-color: #888888");
+    floor1Button.setStyle("-fx-background-color: #E0DED7");
+    floor3Button.setStyle("-fx-background-color: #E0DED7");
+    floor4Button.setStyle("-fx-background-color: #E0DED7");
+    floor5Button.setStyle("-fx-background-color: #E0DED7");
   }
 
   @FXML
@@ -187,6 +197,11 @@ public class DataMapViewController implements Initializable {
     mapPane3.setVisible(true);
     imageView3.setVisible(true);
     mapPane = mapPane3;
+    floor3Button.setStyle("-fx-background-color: #888888");
+    floor2Button.setStyle("-fx-background-color: #E0DED7");
+    floor1Button.setStyle("-fx-background-color: #E0DED7");
+    floor4Button.setStyle("-fx-background-color: #E0DED7");
+    floor5Button.setStyle("-fx-background-color: #E0DED7");
   }
 
   @FXML
@@ -195,6 +210,11 @@ public class DataMapViewController implements Initializable {
     mapPane4.setVisible(true);
     imageView4.setVisible(true);
     mapPane = mapPane4;
+    floor4Button.setStyle("-fx-background-color: #888888");
+    floor2Button.setStyle("-fx-background-color: #E0DED7");
+    floor3Button.setStyle("-fx-background-color: #E0DED7");
+    floor1Button.setStyle("-fx-background-color: #E0DED7");
+    floor5Button.setStyle("-fx-background-color: #E0DED7");
   }
 
   @FXML
@@ -203,6 +223,11 @@ public class DataMapViewController implements Initializable {
     mapPane5.setVisible(true);
     imageView5.setVisible(true);
     mapPane = mapPane5;
+    floor5Button.setStyle("-fx-background-color: #888888");
+    floor2Button.setStyle("-fx-background-color: #E0DED7");
+    floor3Button.setStyle("-fx-background-color: #E0DED7");
+    floor4Button.setStyle("-fx-background-color: #E0DED7");
+    floor1Button.setStyle("-fx-background-color: #E0DED7");
   }
 
   public void resetImages() {
@@ -278,10 +303,10 @@ public class DataMapViewController implements Initializable {
   public void outlineNode() {
     clearNode();
     clearEdge();
-    edgeGridPane.setStyle("-fx-background-color: #eeeeee; -fx-background-radius: 10");
+    edgeGridPane.setStyle("-fx-background-color: #e0ded7; -fx-background-radius: 10");
     nodeGridPane.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 10");
     typeInput.setStyle(
-        "-fx-background-color: #ffffff; -fx-border-radius: 3; -fx-border-color: #b53389");
+        "-fx-background-color: #ffffff; -fx-border-radius: 3; -fx-border-color: #00008b");
     modifyNodeButton.setVisible(false);
     deleteNodeButton.setVisible(false);
     addNodeButton.setVisible(true);
@@ -292,7 +317,7 @@ public class DataMapViewController implements Initializable {
     clearEdge();
     clearNode();
     edgeGridPane.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 10");
-    nodeGridPane.setStyle("-fx-background-color: #eeeeee; -fx-background-radius: 10");
+    nodeGridPane.setStyle("-fx-background-color: #e0ded7; -fx-background-radius: 10");
     modifyEdgeButton.setVisible(false);
     deleteEdgeButton.setVisible(false);
     addEdgeButton.setVisible(true);
@@ -304,20 +329,24 @@ public class DataMapViewController implements Initializable {
 
   @FXML
   public void clearNode() {
+    JFXButton deletedNode = null;
     for (javafx.scene.Node node : mapPane.getChildren()) {
       if (node instanceof JFXButton) {
         JFXButton oldNode = (JFXButton) node;
         if (oldNode.getId() != null) {
-          mapPane.getChildren().remove(node);
+          deletedNode = oldNode;
         }
       }
     }
+
+    mapPane.getChildren().remove(deletedNode);
+
     if (nodeButton != null) {
       nodeButton.setOpacity(0.7);
     }
-    nodeGridPane.setStyle("-fx-background-color: #eeeeee; -fx-background-radius: 10");
+    nodeGridPane.setStyle("-fx-background-color: #e0ded7; -fx-background-radius: 10");
     typeInput.setStyle(
-        "-fx-background-color: #eeeeee; -fx-border-radius: 3; -fx-border-color: #b53389");
+        "-fx-background-color: #e0ded7; -fx-border-radius: 3; -fx-border-color: #00008b");
     longNameInput.setText("");
     shortNameInput.setText("");
     typeInput.setValue("CONF");
@@ -342,7 +371,7 @@ public class DataMapViewController implements Initializable {
     if (edgeLine != null) {
       edgeLine.setOpacity(0.7);
     }
-    edgeGridPane.setStyle("-fx-background-color: #eeeeee; -fx-background-radius: 10");
+    edgeGridPane.setStyle("-fx-background-color: #e0ded7; -fx-background-radius: 10");
     selectNode1Button.setText("Select Node 1");
     selectNode2Button.setText("Select Node 2"); // resets the text in the two buttons
     modifyEdgeButton.setVisible(true);
@@ -361,7 +390,7 @@ public class DataMapViewController implements Initializable {
     selectNode2Button.setDisable(true);
     selectNode2Button.setOpacity(.4);
     mapPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {});
-    edgeErrorLabel.setText("");
+    nodeErrorLabel.setText("");
   }
 
   @FXML
@@ -443,6 +472,7 @@ public class DataMapViewController implements Initializable {
           } else {
             displayNodeData();
             locationSelector();
+            nodeButton.setOpacity(1);
           }
           if (!selectNode1Button.getText().equals("Select Node 1")
               && !selectNode2Button.getText().equals("Select Node 2")) {
@@ -451,8 +481,6 @@ public class DataMapViewController implements Initializable {
             modifyEdgeButton.setDisable(false);
             modifyEdgeButton.setOpacity(1);
           }
-
-          nodeButton.setOpacity(1);
         });
     switch (node.getFloor()) {
       case 1:
@@ -481,7 +509,7 @@ public class DataMapViewController implements Initializable {
     clearNode();
     nodeGridPane.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 10");
     typeInput.setStyle(
-        "-fx-background-color: #ffffff; -fx-border-radius: 3; -fx-border-color: #b53389");
+        "-fx-background-color: #ffffff; -fx-border-radius: 3; -fx-border-color: #00008b");
     yCoorInput.setText("" + node.getYCoord());
     xCoorInput.setText("" + node.getXCoord());
     buildingInput.setText(node.getBuilding());
