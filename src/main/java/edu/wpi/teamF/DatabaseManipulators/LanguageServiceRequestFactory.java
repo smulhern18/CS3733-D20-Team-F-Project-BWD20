@@ -32,7 +32,7 @@ public class LanguageServiceRequestFactory {
             + ", "
             + DatabaseManager.PROBLEMTYPE_KEY
             + " ) "
-            + "VALUES (?, ?, ?, ?)";
+            + "VALUES (?, ?, ?)";
     Validators.languageServiceValidation(languageServiceRequest);
     serviceRequestFactory.create(languageServiceRequest);
     try (PreparedStatement prepareStatement =
@@ -89,7 +89,8 @@ public class LanguageServiceRequestFactory {
     } catch (IllegalArgumentException e) {
       throw e;
     } catch (Exception e) {
-      System.out.println("Exception in NodeFactory read: " + e.getMessage() + ", " + e.getClass());
+      System.out.println(
+          "Exception in LanguageService read: " + e.getMessage() + ", " + e.getClass());
     }
     return languageService;
   }
@@ -104,7 +105,7 @@ public class LanguageServiceRequestFactory {
             + DatabaseManager.LANGUAGE_KEY
             + " = ?, "
             + DatabaseManager.PROBLEMTYPE_KEY
-            + " = ?, "
+            + " = ? "
             + "WHERE "
             + DatabaseManager.SERVICEID_KEY
             + " = ?";
@@ -173,21 +174,7 @@ public class LanguageServiceRequestFactory {
       languageRequests = new ArrayList<>();
       ;
       while (resultSet.next()) {
-        ServiceRequest serviceRequest =
-            serviceRequestFactory.read(resultSet.getString(DatabaseManager.SERVICEID_KEY));
-        LanguageServiceRequest languageServiceRequest =
-            factory.read(resultSet.getString(DatabaseManager.SERVICEID_KEY));
-        languageRequests.add(
-            new LanguageServiceRequest(
-                serviceRequest.getId(),
-                serviceRequest.getLocation(),
-                serviceRequest.getAssignee(),
-                serviceRequest.getDescription(),
-                serviceRequest.getDateTimeSubmitted(),
-                serviceRequest.getPriority(),
-                serviceRequest.getComplete(),
-                languageServiceRequest.getLanguage(),
-                languageServiceRequest.getProblemType()));
+        languageRequests.add(read(resultSet.getString(DatabaseManager.SERVICEID_KEY)));
       }
     } catch (Exception e) {
       System.out.println(

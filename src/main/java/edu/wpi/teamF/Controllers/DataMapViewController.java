@@ -162,8 +162,7 @@ public class DataMapViewController implements Initializable {
     typeInput
         .getItems()
         .addAll(
-            "CONF", "DEPT", "ELEV", "EXIT", "HALL", "INFO", "LABS", "REST", "RETL", "SERV", "STAF",
-            "STAI");
+            "CONF", "DEPT", "EXIT", "HALL", "INFO", "LABS", "REST", "RETL", "SERV", "STAF", "STAI");
     typeInput.setValue("CONF");
 
     uiSetting.makeZoomable(imageScrollPane, imageStackPane);
@@ -254,6 +253,8 @@ public class DataMapViewController implements Initializable {
     clearEdge();
     edgeGridPane.setStyle("-fx-background-color: #eeeeee; -fx-background-radius: 10");
     nodeGridPane.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 10");
+    typeInput.setStyle(
+        "-fx-background-color: #ffffff; -fx-border-radius: 3; -fx-border-color: #b53389");
     modifyNodeButton.setVisible(false);
     deleteNodeButton.setVisible(false);
     addNodeButton.setVisible(true);
@@ -277,6 +278,8 @@ public class DataMapViewController implements Initializable {
   @FXML
   public void clearNode() {
     nodeGridPane.setStyle("-fx-background-color: #eeeeee; -fx-background-radius: 10");
+    typeInput.setStyle(
+        "-fx-background-color: #eeeeee; -fx-border-radius: 3; -fx-border-color: #b53389");
     longNameInput.setText("");
     shortNameInput.setText("");
     typeInput.setValue("CONF");
@@ -431,6 +434,8 @@ public class DataMapViewController implements Initializable {
     clearEdge();
     clearNode();
     nodeGridPane.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 10");
+    typeInput.setStyle(
+        "-fx-background-color: #ffffff; -fx-border-radius: 3; -fx-border-color: #b53389");
     yCoorInput.setText("" + node.getYCoord());
     xCoorInput.setText("" + node.getXCoord());
     buildingInput.setText(node.getBuilding());
@@ -440,8 +445,6 @@ public class DataMapViewController implements Initializable {
     floorInput.setText("" + node.getFloor());
     deleteNodeButton.setDisable(false);
     deleteNodeButton.setOpacity(1);
-    modifyNodeButton.setDisable(false);
-    modifyNodeButton.setOpacity(1);
   }
 
   @FXML
@@ -562,15 +565,15 @@ public class DataMapViewController implements Initializable {
 
   @FXML
   private void modifyNode() throws ValidationException {
-    short xCoordinate = Short.parseShort(xCoorInput.getText());
-    short yCoordinate = Short.parseShort(yCoorInput.getText());
-    String building = buildingInput.getText();
-    String longName = longNameInput.getText();
-    String shortName = shortNameInput.getText();
-    Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getValue().toString());
-    short floorNumber = Short.parseShort(floorInput.getText()); // stores the input in variables
-
     try { // is the input correct?
+      short xCoordinate = Short.parseShort(xCoorInput.getText());
+      short yCoordinate = Short.parseShort(yCoorInput.getText());
+      String building = buildingInput.getText();
+      String longName = longNameInput.getText();
+      String shortName = shortNameInput.getText();
+      Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getValue().toString());
+      short floorNumber = Short.parseShort(floorInput.getText()); // stores the input in variables
+
       node.setXCoord(xCoordinate);
       node.setYCoord(yCoordinate);
       node.setBuilding(building);
@@ -616,7 +619,8 @@ public class DataMapViewController implements Initializable {
       clearNode();
 
     } catch (Exception e) { // throws an error if the input is not valid
-
+      System.out.println("In here");
+      nodeErrorLabel.setText("The input is invalid");
     }
   }
 
@@ -699,10 +703,12 @@ public class DataMapViewController implements Initializable {
       modifyNodeButton.setDisable(false);
       modifyNodeButton.setOpacity(1);
       addNodeButton.setDisable(false);
+      addNodeButton.setOpacity(1);
     } else {
       modifyNodeButton.setDisable(true);
       modifyNodeButton.setOpacity(.4);
       addNodeButton.setDisable(true);
+      addNodeButton.setOpacity(.4);
     }
   }
 }

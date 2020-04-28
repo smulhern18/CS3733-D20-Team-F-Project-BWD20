@@ -12,13 +12,13 @@
 // import java.util.List;
 // import java.util.concurrent.TimeoutException;
 // import javafx.stage.Stage;
-// import org.junit.After;
 // import org.junit.jupiter.api.AfterEach;
 // import org.junit.jupiter.api.BeforeAll;
 // import org.junit.jupiter.api.Test;
 // import org.testfx.api.FxToolkit;
 // import org.testfx.framework.junit5.ApplicationTest;
 // import org.testfx.framework.junit5.Start;
+// import static org.junit.jupiter.api.Assertions.assertEquals;
 //
 // public class ServiceRequestTest extends ApplicationTest {
 //
@@ -42,17 +42,8 @@
 //  @AfterEach
 //  public void tearDown() throws SQLException {}
 //
-//  @After
-//  public void afterEachTest() throws TimeoutException {
-//    FxToolkit.hideStage();
-//  }
-//
 //  @Test
-// <<<<<<< HEAD
 //  void securityTest() throws Exception {
-// =======
-//  void mariachiTest() throws InstanceNotFoundException {
-// >>>>>>> origin/KevinMariachiRequest
 //
 //    clickOn("#choiceBoxLoc");
 //    clickOn("Intensive Care Unit");
@@ -65,12 +56,9 @@
 //    clickOn("Submit Request");
 //
 //    // get access to all the security requests in the database
-// <<<<<<< HEAD
 //    List<SecurityRequest> requests = db.getAllSecurityRequests();
-// =======
 //    MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
-//    List<MariachiRequest> requests = mariachiRequestFactory.getAllMariachiRequest();
-// >>>>>>> origin/KevinMariachiRequest
+//    List<MariachiRequest> requests = mariachiRequestFactory.getAllMariachiRequest();t
 //
 //    // check that a security request with that information is in the database
 //    assertEquals(1, requests.size());

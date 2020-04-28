@@ -195,7 +195,7 @@ public class TestData {
     new User(validNames[3], validNames[3], validEmails[3], validUsernames[3], validPasswords[3])
   };
 
-  public Date[] validDates = {new Date(0), new Date(10), new Date(110), new Date(1110)};
+  public Date[] validDates = {new Date(0), new Date(25), new Date(110), new Date(1110)};
   public String[] validIDs = {"12312442", "123124134", "124134123412", "213124124"};
   public String[] validDescriptions = {"12312442", "123124134", "124134123412", "213124124"};
   public String[] validAssignees = {"Roman", "Sully", "Denver", "Charles"};

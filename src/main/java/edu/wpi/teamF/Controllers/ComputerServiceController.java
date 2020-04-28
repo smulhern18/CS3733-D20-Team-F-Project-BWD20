@@ -5,6 +5,7 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
@@ -16,14 +17,19 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import javafx.beans.binding.Bindings;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTreeTableCell;
+import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -218,6 +224,7 @@ public class ComputerServiceController implements Initializable {
           }
         });
 
+    /*
     JFXTreeTableColumn<UIComputerServiceRequest, String> completed =
         new JFXTreeTableColumn<>("Completed");
     completed.setPrefWidth(80);
@@ -232,6 +239,50 @@ public class ComputerServiceController implements Initializable {
           }
         });
 
+     */
+
+    JFXTreeTableColumn<UIComputerServiceRequest, Boolean> completed =
+        new JFXTreeTableColumn<>("Completed");
+    completed.setCellFactory(CheckBoxTreeTableCell.forTreeTableColumn(completed));
+    completed.setCellValueFactory(
+        param -> {
+          if (param.getValue().getValue().getCompleted().get()) {
+            return new SimpleBooleanProperty(true);
+          } else {
+            return new SimpleBooleanProperty(false);
+          }
+        });
+
+    JFXTreeTableColumn<UIComputerServiceRequest, StringProperty> column = new JFXTreeTableColumn<>("Assignee");
+    column.setCellValueFactory(i -> {
+      final StringProperty value = i.getValue().getValue().getAssignee();
+      // binding to constant value
+      return Bindings.createObjectBinding(() -> value);
+    });
+
+    List<Account> employeeNames = databaseManager.getAllAccounts();
+    ObservableList<String> employees = FXCollections.observableArrayList();
+    for(Account account: employeeNames){
+      employees.add(account.getFirstName());
+    }
+
+    column.setCellFactory(col -> {
+      TableCell<UIComputerServiceRequest, StringProperty> c = new TableCell<>();
+      ComboBox<String> comboBox = new ComboBox<>(employees);
+      c.itemProperty().addListener((observable, oldValue, newValue) -> {
+        if (oldValue != null) {
+          comboBox.valueProperty().unbindBidirectional(oldValue);
+        }
+        if (newValue != null) {
+          comboBox.valueProperty().bindBidirectional(newValue);
+        }
+      });
+      c.graphicProperty().bind(Bindings.when(c.emptyProperty()).then((Node) null).otherwise(comboBox));
+      return c;
+    });
+
+
+
     // Load the database into the tableview
 
     for (ComputerServiceRequest csr : computerServiceRequests) {
@@ -245,12 +296,12 @@ public class ComputerServiceController implements Initializable {
 
     treeTableComputer
         .getColumns()
-        .setAll(ID, loc, make, OS, type, desc, priority, assignee, completed);
+        .setAll(ID, loc, make, OS, type, desc, priority, assignee, completed, assignee2);
 
     // set as editable
 
     assignee.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-    completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    // completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     priority.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
     treeTableComputer.setRoot(root);
@@ -310,7 +361,7 @@ public class ComputerServiceController implements Initializable {
       boolean isSame = csrui.equalsCSR(toUpdate);
       if (!isSame) {
         toUpdate.setAssignee(csrui.getAssignee().get());
-        String completed = csrui.getCompleted().get();
+        String completed = "" + csrui.getCompleted().get();
         if (completed.equals("Incomplete")) {
           toUpdate.setComplete(false);
 
