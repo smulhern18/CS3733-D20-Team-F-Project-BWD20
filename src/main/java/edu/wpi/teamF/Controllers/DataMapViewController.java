@@ -387,6 +387,7 @@ public class DataMapViewController implements Initializable {
             edgeSelection(node);
             // addEdgeButton.setDisable(false);
           } else {
+            System.out.println(node.getId());
             displayNodeData();
             locationSelector();
           }
@@ -478,66 +479,78 @@ public class DataMapViewController implements Initializable {
     int newInstance = 0;
     int instanceNum = 0;
 
-    try { // is the input valid?
-      short xCoordinate = Short.parseShort(xCoorInput.getText());
-      short yCoordinate = Short.parseShort(yCoorInput.getText());
-      String building = buildingInput.getText();
-      String longName = longNameInput.getText();
-      String shortName = shortNameInput.getText();
-      Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getValue().toString());
-      short floorNumber = Short.parseShort(floorInput.getText());
-
-      List<Node> typeNodes = nodeFactory.getNodesByType(nodeType);
-
-      List<Integer> typeInstances = new ArrayList<>();
-
-      for (int i = 0;
-          i < typeNodes.size();
-          i++) { // collects all of the instances for the given type
-        if (typeNodes.get(i).getFloor() == node.getFloor()) {
-          instanceNum = Integer.parseInt(typeNodes.get(i).getId().substring(5, 8));
-          typeInstances.add(instanceNum);
-        }
+    // try { // is the input valid?
+    short xCoordinate = Short.parseShort(xCoorInput.getText());
+    short yCoordinate = Short.parseShort(yCoorInput.getText());
+    String building = buildingInput.getText();
+    String longName = longNameInput.getText();
+    String shortName = shortNameInput.getText();
+    Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getValue().toString());
+    short floorNumber = Short.parseShort(floorInput.getText());
+    System.out.println("here1");
+    List<Node> typeNodes = nodeFactory.getNodesByType(nodeType);
+    System.out.println(typeNodes.size());
+    System.out.println("here2");
+    List<Integer> typeInstances = new ArrayList<>();
+    System.out.println("here3");
+    for (int i = 0; i < typeNodes.size(); i++) { // collects all of the instances for the given type
+      System.out.println("here4");
+      if (typeNodes.get(i).getFloor() == floorNumber) {
+        System.out.println("here5");
+        instanceNum = Integer.parseInt(typeNodes.get(i).getId().substring(5, 8));
+        System.out.println("here6");
+        typeInstances.add(instanceNum);
       }
-
-      Collections.sort(typeInstances); // sorts the list
-
-      if (typeNodes.size() > 0) {
-        for (int i = 0; i < typeNodes.size(); i++) {
-          instance = Integer.parseInt(typeNodes.get(i).getId().substring(5, 8));
-          if (instance - tracker > 1) {
-            newInstance = tracker + 1;
-          } else {
-            tracker = instance;
-          }
-        }
-      } else {
-        newInstance = 1;
-      }
-
-      String strInstance = "" + newInstance;
-      strInstance = String.format("%03d", strInstance);
-      String strFloor = String.format("%02d", floorInput.getText());
-
-      String ID = "F" + typeInput.getValue() + strInstance + strFloor;
-
-      Node newNode =
-          new Node(
-              ID,
-              xCoordinate,
-              yCoordinate,
-              building,
-              longName,
-              shortName,
-              nodeType,
-              floorNumber); // creates a new node
-      nodeFactory.create(newNode); // creates the node in the db
-      drawNode(newNode); // creates the node on the map
-      clearNode();
-      mapPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {});
-    } catch (Exception e) { // throws an error if the input provided by the user is invalid
-      nodeErrorLabel.setText("The input is not valid");
     }
+
+    Collections.sort(typeInstances); // sorts the list
+
+    if (typeNodes.size() > 0) {
+      for (int i = 0; i < typeNodes.size(); i++) {
+        instance = Integer.parseInt(typeNodes.get(i).getId().substring(5, 8));
+        System.out.println(instanceNum);
+        if (instance - tracker > 1) {
+          newInstance = tracker + 1;
+        } else {
+          tracker++;
+        }
+      }
+    } else {
+      System.out.println("Here7");
+      newInstance = 1;
+    }
+
+    String strInstance = "" + newInstance;
+    String strFloor = "0" + floorNumber;
+
+    switch (strInstance.length()) {
+      case 1:
+        strInstance = "00" + strInstance;
+        break;
+      case 2:
+        strInstance = "0" + strInstance;
+        break;
+    }
+
+    String ID = "F" + typeInput.getValue() + strInstance + strFloor;
+
+    Node newNode =
+        new Node(
+            ID,
+            xCoordinate,
+            yCoordinate,
+            building,
+            longName,
+            shortName,
+            nodeType,
+            floorNumber); // creates a new node
+    nodeFactory.create(newNode); // creates the node in the db
+    drawNode(newNode); // creates the node on the map
+    clearNode();
+    mapPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {});
+    // } catch (Exception e) { // throws an error if the input provided by the user is invalid
+    //   nodeErrorLabel.setText("The input is not valid");
+    // }
   }
 
   @FXML
