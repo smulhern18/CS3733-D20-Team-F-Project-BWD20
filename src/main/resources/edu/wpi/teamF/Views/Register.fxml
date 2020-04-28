@@ -35,7 +35,7 @@
             </StackPane>
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2">
                <children>
-                  <Label fx:id="incorrectLabel" prefHeight="28.0" prefWidth="162.0" text="Invalid input for Account.">
+                  <Label fx:id="incorrectLabel" prefHeight="28.0" prefWidth="162.0" text="Invalid input for Account." textFill="RED" visible="false">
                      <font>
                         <Font name="STIXGeneral-Regular" size="14.0" />
                      </font>
