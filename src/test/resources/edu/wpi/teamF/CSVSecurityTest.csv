@@ -1,5 +1,5 @@
-id,location,assignee,description,dateTimeSubmitted,priority,complete
-123124134,nodeB,Sully,123124134,10,2,true
-12312442,nodeA,Roman,12312442,0,2,false
-124134123412,nodeC,Denver,124134123412,110,2,false
-213124124,nodeD,Charles,213124124,1110,2,true
+id,location,assignee,description,dateTimeSubmitted,priority,complete,GuardsRequested
+123124134,nodeB,Sully,123124134,10,2,true,1
+12312442,nodeA,Roman,12312442,0,2,false,2
+124134123412,nodeC,Denver,124134123412,110,2,false,3
+213124124,nodeD,Charles,213124124,1110,2,true,10
