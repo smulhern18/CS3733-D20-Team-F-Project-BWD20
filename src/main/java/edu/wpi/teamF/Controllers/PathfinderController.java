@@ -15,6 +15,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -65,6 +66,8 @@ public class PathfinderController implements Initializable {
   public JFXComboBox<String> endCombo;
   public JFXButton pathButton;
   public Label directionsDisplay;
+  public AnchorPane pathSwitchFloorPane;
+  public JFXButton pathSwitchFloor;
   public int state;
   public UISetting uiSetting = new UISetting();
 
@@ -114,6 +117,8 @@ public class PathfinderController implements Initializable {
     Directions directions = new Directions(fullNodeList, path, startNode, endNode);
     System.out.println(directions.getFullDirectionsString());
     directionsDisplay.setText(directions.getFullDirectionsString());
+    pathSwitchFloorPane.setVisible(true);
+    pathSwitchFloor.setText("Next: Go to floor " + Integer.toString(startNode.getFloor()));
   }
 
   public void placeButton(Node node) {
@@ -162,7 +167,7 @@ public class PathfinderController implements Initializable {
             commandText.setText("Select End Location or Building Feature");
             state = 1;
             // startCombo.setDisable(true);
-            startCombo.setValue(node.getLongName());
+            startCombo.setValue(node.getLongName() + " " + node.getId());
             endCombo.setDisable(false);
           } else if (state == 1) { // select end if not set
             endNode = node;
@@ -171,7 +176,7 @@ public class PathfinderController implements Initializable {
             commandText.setText("Select Find Path or Reset");
             state = 2;
             // endCombo.setDisable(true);
-            endCombo.setValue(node.getLongName());
+            endCombo.setValue(node.getLongName() + " " + node.getId());
             pathButton.setDisable(false);
           }
         });
@@ -260,6 +265,7 @@ public class PathfinderController implements Initializable {
     commandText.setText("Select Starting Location");
     directionsPane.setVisible(false);
     selectButtonsPane.setVisible(true);
+    pathSwitchFloorPane.setVisible(false);
 
     startCombo.setValue(null);
     endCombo.setValue(null);
@@ -421,6 +427,7 @@ public class PathfinderController implements Initializable {
     String startLocation = startCombo.getValue();
     if (startLocation.length() > 10) {
       String startID = startLocation.substring(startLocation.length() - 10);
+      System.out.println("Start ID: " + startID);
       System.out.println(startNode);
       for (Node node : fullNodeList) {
         if (node.getId().equals(startID)) {
@@ -434,6 +441,7 @@ public class PathfinderController implements Initializable {
   public Node findComboEnd() {
     Node returnNode = null;
     String endLocation = endCombo.getValue();
+    System.out.println("EndLocation: " + endLocation);
     if (endLocation.length() > 10) {
       String endID = endLocation.substring(endLocation.length() - 10);
       System.out.println("end" + endID);
@@ -483,12 +491,8 @@ public class PathfinderController implements Initializable {
         actionEvent -> {
           startCombo.setDisable(true);
           endCombo.setDisable(true);
-          if (startCombo.getValue() == null) {
-            startNode = findComboStart();
-          }
-          if (endCombo.getValue() == null) {
-            endNode = findComboEnd();
-          }
+          startNode = findComboStart();
+          endNode = findComboEnd();
           System.out.println("start" + startNode);
           System.out.println("end" + endNode);
           Path path = null;
@@ -593,11 +597,11 @@ public class PathfinderController implements Initializable {
       currentPane = mapPaneFaulkner1;
       currentFloor = 1;
       setNodeList(1);
-      resetPane();
+      // resetPane();
       setAllInvisible();
       scrollPaneFaulkner1.setVisible(true);
       startNode = holdNode;
-      startCombo.setValue(startNode.getLongName());
+      startCombo.setValue(startNode.getLongName() + " " + startNode.getId());
       deselectFloorButtons();
       floor1Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
     }
@@ -606,11 +610,11 @@ public class PathfinderController implements Initializable {
       currentPane = mapPaneFaulkner2;
       currentFloor = 2;
       setNodeList(2);
-      resetPane();
+      // resetPane();
       setAllInvisible();
       scrollPaneFaulkner2.setVisible(true);
       startNode = holdNode;
-      startCombo.setValue(startNode.getLongName());
+      startCombo.setValue(startNode.getLongName() + " " + startNode.getId());
       deselectFloorButtons();
       floor2Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
     }
@@ -619,11 +623,11 @@ public class PathfinderController implements Initializable {
       currentPane = mapPaneFaulkner3;
       currentFloor = 3;
       setNodeList(3);
-      resetPane();
+      // resetPane();
       setAllInvisible();
       scrollPaneFaulkner3.setVisible(true);
       startNode = holdNode;
-      startCombo.setValue(startNode.getLongName());
+      startCombo.setValue(startNode.getLongName() + " " + startNode.getId());
       deselectFloorButtons();
       floor3Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
     }
@@ -632,11 +636,11 @@ public class PathfinderController implements Initializable {
       currentPane = mapPaneFaulkner4;
       currentFloor = 4;
       setNodeList(4);
-      resetPane();
+      // resetPane();
       setAllInvisible();
       scrollPaneFaulkner4.setVisible(true);
       startNode = holdNode;
-      startCombo.setValue(startNode.getLongName());
+      startCombo.setValue(startNode.getLongName() + " " + startNode.getId());
       deselectFloorButtons();
       floor4Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
     }
@@ -645,13 +649,39 @@ public class PathfinderController implements Initializable {
       currentPane = mapPaneFaulkner5;
       currentFloor = 5;
       setNodeList(5);
-      resetPane();
+      // resetPane();
       setAllInvisible();
       scrollPaneFaulkner5.setVisible(true);
       startNode = holdNode;
-      startCombo.setValue(startNode.getLongName());
+      startCombo.setValue(startNode.getLongName() + " " + startNode.getId());
       deselectFloorButtons();
       floor5Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
+    }
+  }
+
+  public void pathSwitchFloor(ActionEvent actionEvent) {
+    if (currentFloor == startNode.getFloor()) {
+      // Currently on the start floor, want to go to the end floor
+      switchToFloor(endNode.getFloor());
+      pathSwitchFloor.setText(
+          "Previous: Go back to floor " + Integer.toString(startNode.getFloor()));
+    } else {
+      switchToFloor(startNode.getFloor());
+      pathSwitchFloor.setText("Previous: Go back to floor " + Integer.toString(endNode.getFloor()));
+    }
+  }
+
+  public AnchorPane getPaneForFloor(int floorNum) {
+    if (floorNum == 1) {
+      return scrollPaneFaulkner1;
+    } else if (floorNum == 2) {
+      return scrollPaneFaulkner2;
+    } else if (floorNum == 3) {
+      return scrollPaneFaulkner3;
+    } else if (floorNum == 4) {
+      return scrollPaneFaulkner4;
+    } else {
+      return scrollPaneFaulkner5;
     }
   }
 }

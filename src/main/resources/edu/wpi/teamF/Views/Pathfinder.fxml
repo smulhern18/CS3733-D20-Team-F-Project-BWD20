@@ -139,8 +139,8 @@
                <Font size="18.0" />
             </font>
             </JFXButton>
-         <JFXComboBox fx:id="startCombo" layoutX="76.0" layoutY="238.0" prefWidth="150.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="180.0" />
-         <JFXComboBox fx:id="endCombo" layoutX="74.0" layoutY="312.0" prefWidth="150.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="320.0" />
+         <JFXComboBox fx:id="startCombo" layoutX="76.0" layoutY="238.0" prefWidth="150.0" style="-fx-border-color: #000000; -fx-border-width: 1px;" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="180.0" />
+         <JFXComboBox fx:id="endCombo" layoutX="74.0" layoutY="312.0" prefWidth="150.0" style="-fx-border-color: #000000; -fx-border-width: 1px;" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="320.0" />
             <JFXButton fx:id="pathButton" layoutX="113.0" layoutY="654.0" maxHeight="150.0" minHeight="50.0" prefHeight="50.0" style="-fx-background-color: #001a3c; -fx-background-radius: 10px;" text="Find Path" textFill="WHITE" AnchorPane.bottomAnchor="120.0" AnchorPane.leftAnchor="60.0" AnchorPane.rightAnchor="60.0">
                <font>
                   <Font size="20.0" />
@@ -176,6 +176,18 @@
                   </Label>
                </children>
             </VBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="pathSwitchFloorPane" maxHeight="80.0" prefHeight="80.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="80.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="270.0">
+               <children>
+                  <JFXButton fx:id="pathSwitchFloor" alignment="CENTER" maxHeight="150.0" minHeight="50.0" onAction="#pathSwitchFloor" prefHeight="50.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Next: Go to Floor 5" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </JFXButton>
+               </children></VBox>
          </children>
       </AnchorPane>
    <JFXButton layoutX="1025.0" layoutY="448.0" minHeight="50.0" minWidth="150.0" mnemonicParsing="false" onAction="#resetPane" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Reset" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="60.0">
