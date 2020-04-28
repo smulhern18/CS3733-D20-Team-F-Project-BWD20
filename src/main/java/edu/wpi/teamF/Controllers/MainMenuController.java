@@ -85,15 +85,15 @@ public class MainMenuController implements Initializable {
             });
   }
 
-  //  private void resize(double width) {
-  //    System.out.println(width);
-  //    Font newFont = new Font(width / 50);
-  //    loginImage.setFitWidth(gridPane.getCellBounds(0, 1).getWidth());
-  //    loginImage.setFitHeight(gridPane.getCellBounds(0, 1).getHeight());
-  //    pathImage.setFitWidth(gridPane.getCellBounds(0, 2).getWidth());
-  //    pathImage.setFitHeight(gridPane.getCellBounds(0, 2).getHeight());
-  //    helpImage.setFitHeight(gridPane.getCellBounds(0, 3).getWidth());
-  //    helpImage.setFitWidth(gridPane.getCellBounds(0, 3).getHeight());
-  //    welcomeLabel.setFont(newFont);
-  //  }
+  //    private void resize(double width) {
+  //      System.out.println(width);
+  //      Font newFont = new Font(width / 50);
+  //      loginImage.setFitWidth(gridPane.getCellBounds(0, 1).getWidth());
+  //      loginImage.setFitHeight(gridPane.getCellBounds(0, 1).getHeight());
+  //      pathImage.setFitWidth(gridPane.getCellBounds(0, 2).getWidth());
+  //      pathImage.setFitHeight(gridPane.getCellBounds(0, 2).getHeight());
+  //      helpImage.setFitHeight(gridPane.getCellBounds(0, 3).getWidth());
+  //      helpImage.setFitWidth(gridPane.getCellBounds(0, 3).getHeight());
+  //      welcomeLabel.setFont(newFont);
+  //    }
 }
