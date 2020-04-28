@@ -12,8 +12,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
@@ -31,6 +33,8 @@ public class LoginController implements Initializable {
   @FXML private JFXPasswordField passwordInput;
 
   @FXML private Label incorrectLabel; // label that is displayed if teh input is not valid
+  private ImageView background;
+  private StackPane stackPane;
 
   SceneController sceneController = App.getSceneController(); // used to switch between scenes
 
@@ -91,6 +95,8 @@ public class LoginController implements Initializable {
                 resize(newWidth.doubleValue());
               }
             });
+    background.fitHeightProperty().bind(stackPane.widthProperty());
+    background.fitWidthProperty().bind(stackPane.heightProperty());
   }
 
   private void resize(double width) {
