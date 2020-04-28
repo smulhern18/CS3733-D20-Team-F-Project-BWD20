@@ -62,6 +62,8 @@ public class Validators {
   public static final int ITEMS_MAX_LENGTH = 32;
   public static final int QUANTITY_MIN_LENGTH = 1;
   public static final int QUANTITY_MAX_LENGTH = 32;
+  public static final int MESSAGE_MIN_LENGTH = 1;
+  public static final int MESSAGE_MAX_LENGTH = 128;
 
   public static <T extends SecurityRequest> void securityRequestValidation(T t, int... constraints)
       throws ValidationException {
@@ -405,9 +407,9 @@ public class Validators {
   }
 
   /**
-   * Validation for Maintenance Requests
+   * Validation for Computer Requests
    *
-   * @param t an instance of Maintenance Request to validate
+   * @param t an instance of Computer Request to validate
    * @param constraints the optional constraints for validation
    * @throws ValidationException should the validation fail
    */
@@ -706,5 +708,43 @@ public class Validators {
    */
   public static void baseValidation(Object object, int... constraints) {
     // accept everything as valid
+  }
+
+  public static void messageValidation(String message, int... constraints)
+      throws ValidationException {
+    if (message.length() < MESSAGE_MIN_LENGTH || message.length() > MESSAGE_MAX_LENGTH) {
+      throw new ValidationException("message for flower request is out of bounds" + message);
+    }
+  }
+
+  public static void phoneNumberValidation(String phoneNumber, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(phoneNumber);
+    //    if (!phoneNumber.matches("^[+]*[(]?[0-9]{1,4}[)]?[-\\s./0-9]*$")) {
+    //      throw new ValidationException("this is not a phone number");
+    //    }
+  }
+  /**
+   * Validation for Flower Requests
+   *
+   * @param t an instance of Flower Request to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static <T extends FlowerRequest> void FlowerValidation(T t, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(t, constraints);
+    FlowerRequest flowerRequestObject = (FlowerRequest) t;
+
+    idValidation(flowerRequestObject.getId());
+    nodeValidation(flowerRequestObject.getLocation());
+    descriptionValidation(flowerRequestObject.getDescription());
+    dateValidation(flowerRequestObject.getDateTimeSubmitted());
+    priorityValidation(flowerRequestObject.getPriority());
+    nameValidation(flowerRequestObject.getRecipientInput());
+    nameValidation(flowerRequestObject.getChoice());
+    messageValidation(flowerRequestObject.getMessageInput());
+    nameValidation(flowerRequestObject.getBuyerName());
+    booleanValidation(flowerRequestObject.getGiftWrap());
   }
 }

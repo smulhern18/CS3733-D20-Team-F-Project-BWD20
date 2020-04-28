@@ -36,6 +36,7 @@ public class DatabaseManager {
   static final String LANGUAGE_REQUEST_TABLE_NAME = "LanguageRequestsTable";
   static final String MEDICINE_DELIVERY_REQUEST_TABLE_NAME = "medicineDeliveryRequestsTable";
   static final String LAUNDRY_REQUEST_TABLE_NAME = "LaundryRequestsTable";
+  static final String FLOWER_REQUEST_TABLE_NAME = "flowerRequestsTable";
   /** Column Names */
   // node
   static final String X_COORDINATE_KEY = "xCoord";
@@ -99,6 +100,24 @@ public class DatabaseManager {
   static final String TEMPERTURE_KEY = "Temperature";
   static final String ITEMS_KEY = "Items";
 
+    // SanitationService requests
+    static final String SANITATION_TYPE_KEY = "SanitationType";
+
+    // Language service requests
+    static final String LANGUAGE_KEY = "Language";
+    static final String PROBLEMTYPE_KEY = "ProblemType";
+    // MedicineDelivery Requests
+    static final String MEDICINE_TYPE_KEY = "medicineType";
+    static final String INSTRUCTIONS_KEY = "instructions";
+    // Flower request
+    static final String RECIPIENT_NAME_KEY = "recipientInput";
+    static final String ROOM_NUMBER_KEY = "roomInput";
+    static final String BOUQUET_KEY = "choice";
+    static final String MESSAGE_KEY = "messageInput";
+    static final String BUYER_NAME_KEY = "buyerName";
+    static final String PHONE_NUMBER_KEY = "phoneNumber";
+    static final String GIFT_WRAP_KEY = "giftWrap";
+
   // Factories
   private NodeFactory nodeFactory = NodeFactory.getFactory();
   private EdgeFactory edgeFactory = EdgeFactory.getFactory();
@@ -118,16 +137,6 @@ public class DatabaseManager {
   private MedicineDeliveryRequestFactory medicineDeliveryRequestFactory =
       MedicineDeliveryRequestFactory.getFactory();
   private LaundryServiceRequestFactory laundryServiceRequestFactory = LaundryServiceRequestFactory.getFactory();
-
-  // SanitationService requests
-  static final String SANITATION_TYPE_KEY = "SanitationType";
-
-  // Language service requests
-  static final String LANGUAGE_KEY = "Language";
-  static final String PROBLEMTYPE_KEY = "ProblemType";
-  // MedicineDelivery Requests
-  static final String MEDICINE_TYPE_KEY = "medicineType";
-  static final String INSTRUCTIONS_KEY = "instructions";
 
   static Connection connection = null;
 
@@ -347,6 +356,29 @@ public class DatabaseManager {
             + "PRIMARY KEY ("
             + SERVICEID_KEY
             + "))";
+    String flowerTableCreationStatement =
+        "CREATE TABLE "
+            + FLOWER_REQUEST_TABLE_NAME
+            + " ( "
+            + SERVICEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + RECIPIENT_NAME_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + ROOM_NUMBER_KEY
+            + " INTEGER, "
+            + BOUQUET_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + MESSAGE_KEY
+            + " VARCHAR(128), "
+            + BUYER_NAME_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + PHONE_NUMBER_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + GIFT_WRAP_KEY
+            + " BOOLEAN NOT NULL, "
+            + "PRIMARY KEY ("
+            + SERVICEID_KEY
+            + "))";
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
     preparedStatement.execute();
@@ -369,7 +401,10 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(appointmentTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(transportTableCreationStatement);
+    preparedStatement.execute();
     preparedStatement = connection.prepareStatement(sanitationTableCreationStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(flowerTableCreationStatement);
     preparedStatement.execute();
     System.out.println("Created Tables Successfully");
   }
@@ -409,6 +444,7 @@ public class DatabaseManager {
     String transportDropStatement = "DROP TABLE " + TRANSPORT_REQUEST_TABLE_NAME;
     String sanitationDropStatement = "DROP TABLE " + SANITATION_REQUEST_TABLE_NAME;
     String languageDropStatement = "DROP TABLE " + LANGUAGE_REQUEST_TABLE_NAME;
+    String flowerDropStatement = "DROP TABLE " + FLOWER_REQUEST_TABLE_NAME;
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeDropStatement);
     preparedStatement.execute();
@@ -422,8 +458,8 @@ public class DatabaseManager {
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(languageDropStatement);
     preparedStatement.execute();
-    // preparedStatement = connection.prepareStatement(computerDropStatement);
-    // preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(computerDropStatement);
+    preparedStatement.execute();
     preparedStatement = connection.prepareStatement(securityTableDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(medicineDeliveryTableDropStatement);
@@ -433,7 +469,10 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(appointmentDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(transportDropStatement);
+    preparedStatement.execute();
     preparedStatement = connection.prepareStatement(sanitationDropStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(flowerDropStatement);
     preparedStatement.execute();
     createTables();
   }
