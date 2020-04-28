@@ -1,15 +1,10 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
+import edu.wpi.teamF.ModelClasses.*;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Account.PasswordHasher;
-import edu.wpi.teamF.ModelClasses.Appointment;
-import edu.wpi.teamF.ModelClasses.Edge;
-import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
-import edu.wpi.teamF.ModelClasses.ValidationException;
-import org.w3c.dom.ls.LSResourceResolver;
-
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.sql.Connection;
@@ -30,12 +25,12 @@ public class DatabaseManager {
   static final String MAINTENANCE_REQUEST_TABLE_NAME = "maintenanceRequestsTable";
   static final String ACCOUNT_TABLE_NAME = "accountsTable";
   static final String APPOINTMENTS_TABLE_NAME = "appointmentsTable";
-  static final String COMPUTER_REQUEST_TABLE_NAME = "ComputerRequestsTable";
-  static final String TRANSPORT_REQUEST_TABLE_NAME = "TransportRequestsTable";
-  static final String SANITATION_REQUEST_TABLE_NAME = "SanitationRequestsTable";
-  static final String LANGUAGE_REQUEST_TABLE_NAME = "LanguageRequestsTable";
+  static final String COMPUTER_REQUEST_TABLE_NAME = "computerRequestsTable";
+  static final String TRANSPORT_REQUEST_TABLE_NAME = "transportRequestsTable";
+  static final String SANITATION_REQUEST_TABLE_NAME = "sanitationRequestsTable";
+  static final String LANGUAGE_REQUEST_TABLE_NAME = "languageRequestsTable";
   static final String MEDICINE_DELIVERY_REQUEST_TABLE_NAME = "medicineDeliveryRequestsTable";
-  static final String LAUNDRY_REQUEST_TABLE_NAME = "LaundryRequestsTable";
+  static final String LAUNDRY_REQUEST_TABLE_NAME = "laundryRequestsTable";
   static final String FLOWER_REQUEST_TABLE_NAME = "flowerRequestsTable";
   /** Column Names */
   // node
@@ -100,23 +95,23 @@ public class DatabaseManager {
   static final String TEMPERTURE_KEY = "Temperature";
   static final String ITEMS_KEY = "Items";
 
-    // SanitationService requests
-    static final String SANITATION_TYPE_KEY = "SanitationType";
+  // SanitationService requests
+  static final String SANITATION_TYPE_KEY = "SanitationType";
 
-    // Language service requests
-    static final String LANGUAGE_KEY = "Language";
-    static final String PROBLEMTYPE_KEY = "ProblemType";
-    // MedicineDelivery Requests
-    static final String MEDICINE_TYPE_KEY = "medicineType";
-    static final String INSTRUCTIONS_KEY = "instructions";
-    // Flower request
-    static final String RECIPIENT_NAME_KEY = "recipientInput";
-    static final String ROOM_NUMBER_KEY = "roomInput";
-    static final String BOUQUET_KEY = "choice";
-    static final String MESSAGE_KEY = "messageInput";
-    static final String BUYER_NAME_KEY = "buyerName";
-    static final String PHONE_NUMBER_KEY = "phoneNumber";
-    static final String GIFT_WRAP_KEY = "giftWrap";
+  // Language service requests
+  static final String LANGUAGE_KEY = "Language";
+  static final String PROBLEMTYPE_KEY = "ProblemType";
+  // MedicineDelivery Requests
+  static final String MEDICINE_TYPE_KEY = "medicineType";
+  static final String INSTRUCTIONS_KEY = "instructions";
+  // Flower request
+  static final String RECIPIENT_NAME_KEY = "recipientInput";
+  static final String ROOM_NUMBER_KEY = "roomInput";
+  static final String BOUQUET_KEY = "choice";
+  static final String MESSAGE_KEY = "messageInput";
+  static final String BUYER_NAME_KEY = "buyerName";
+  static final String PHONE_NUMBER_KEY = "phoneNumber";
+  static final String GIFT_WRAP_KEY = "giftWrap";
 
   // Factories
   private NodeFactory nodeFactory = NodeFactory.getFactory();
@@ -136,7 +131,10 @@ public class DatabaseManager {
   private MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
   private MedicineDeliveryRequestFactory medicineDeliveryRequestFactory =
       MedicineDeliveryRequestFactory.getFactory();
-  private LaundryServiceRequestFactory laundryServiceRequestFactory = LaundryServiceRequestFactory.getFactory();
+  private LaundryServiceRequestFactory laundryServiceRequestFactory =
+      LaundryServiceRequestFactory.getFactory();
+  private FlowerServiceRequestFactory flowerServiceRequestFactory =
+      FlowerServiceRequestFactory.getFactory();
 
   static Connection connection = null;
 
@@ -248,20 +246,20 @@ public class DatabaseManager {
             + "))";
 
     String laundryTableCreationStatement =
-            "CREATE TABLE "
-                    + LAUNDRY_REQUEST_TABLE_NAME
-                    + " ( "
-                    + SERVICEID_KEY
-                    + " VARCHAR(32) NOT NULL, "
-                    + ITEMS_KEY
-                    + " VARCHAR(32) NOT NULL, "
-                    + QUANTITY_KEY
-                    + " VARCHAR(32) NOT NULL, "
-                    + TEMPERTURE_KEY
-                    + " VARCHAR(32) NOT NULL, "
-                    + "PRIMARY KEY ("
-                    + SERVICEID_KEY
-                    + "))";
+        "CREATE TABLE "
+            + LAUNDRY_REQUEST_TABLE_NAME
+            + " ( "
+            + SERVICEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + ITEMS_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + QUANTITY_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + TEMPERTURE_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + "PRIMARY KEY ("
+            + SERVICEID_KEY
+            + "))";
 
     String transportTableCreationStatement =
         "CREATE TABLE "
@@ -380,7 +378,10 @@ public class DatabaseManager {
             + SERVICEID_KEY
             + "))";
 
-    PreparedStatement preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
+    PreparedStatement preparedStatement =
+        connection.prepareStatement(computerTableCreationStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(edgeTableCreationStatement);
     preparedStatement.execute();
@@ -391,8 +392,6 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(securityTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(medicineDeliveryTableCreationStatement);
-    preparedStatement.execute();
-    preparedStatement = connection.prepareStatement(computerTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(languageTableCreationStatement);
     preparedStatement.execute();
@@ -405,6 +404,8 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(sanitationTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(flowerTableCreationStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(laundryTableCreationStatement);
     preparedStatement.execute();
     System.out.println("Created Tables Successfully");
   }
@@ -445,6 +446,7 @@ public class DatabaseManager {
     String sanitationDropStatement = "DROP TABLE " + SANITATION_REQUEST_TABLE_NAME;
     String languageDropStatement = "DROP TABLE " + LANGUAGE_REQUEST_TABLE_NAME;
     String flowerDropStatement = "DROP TABLE " + FLOWER_REQUEST_TABLE_NAME;
+    String laundryDropStatement = "DROP TABLE " + LAUNDRY_REQUEST_TABLE_NAME;
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeDropStatement);
     preparedStatement.execute();
@@ -457,8 +459,6 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(computerDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(languageDropStatement);
-    preparedStatement.execute();
-    preparedStatement = connection.prepareStatement(computerDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(securityTableDropStatement);
     preparedStatement.execute();
@@ -473,6 +473,8 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(sanitationDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(flowerDropStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(laundryDropStatement);
     preparedStatement.execute();
     createTables();
   }
@@ -651,7 +653,7 @@ public class DatabaseManager {
     }
   }
 
-  public void manipulateServiceRequest(LaundryServiceRequest lsRequest) throws ValidationException{
+  public void manipulateServiceRequest(LaundryServiceRequest lsRequest) throws ValidationException {
     if (laundryServiceRequestFactory.read(lsRequest.getId()) == null) {
       laundryServiceRequestFactory.create(lsRequest);
     } else {
@@ -803,5 +805,30 @@ public class DatabaseManager {
 
   public void deleteLaundryServiceRequest(String toDelte) {
     laundryServiceRequestFactory.delete(toDelte);
+  }
+
+  public void manipulateServiceRequest(FlowerRequest flowerRequest) throws ValidationException {
+    Validators.FlowerValidation(flowerRequest);
+    if (flowerServiceRequestFactory.read(flowerRequest.getId()) == null) {
+      flowerServiceRequestFactory.create(flowerRequest);
+    } else {
+      flowerServiceRequestFactory.update(flowerRequest);
+    }
+  }
+
+  public FlowerRequest readFlowerRequest(String id) {
+    return flowerServiceRequestFactory.read(id);
+  }
+
+  public void deleteFlowerRequest(String id) {
+    flowerServiceRequestFactory.delete(id);
+  }
+
+  public List<FlowerRequest> getFlowerRequestsByLocation(Node node) {
+    return flowerServiceRequestFactory.getFlowerRequestsByLocation(node);
+  }
+
+  public List<FlowerRequest> getAllFlowerRequests() {
+    return flowerServiceRequestFactory.getAllFlowerRequests();
   }
 }
