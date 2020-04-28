@@ -303,8 +303,8 @@ public class DataMapViewController implements Initializable {
   public void outlineNode() {
     clearNode();
     clearEdge();
-    edgeGridPane.setStyle("-fx-background-color: #e0ded7; -fx-background-radius: 10");
-    nodeGridPane.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 10");
+    edgeGridPane.setStyle("-fx-background-color: #e0ded7");
+    nodeGridPane.setStyle("-fx-background-color: #ffffff");
     typeInput.setStyle(
         "-fx-background-color: #ffffff; -fx-border-radius: 3; -fx-border-color: #00008b");
     modifyNodeButton.setVisible(false);
@@ -316,8 +316,8 @@ public class DataMapViewController implements Initializable {
   public void outlineEdge() {
     clearEdge();
     clearNode();
-    edgeGridPane.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 10");
-    nodeGridPane.setStyle("-fx-background-color: #e0ded7; -fx-background-radius: 10");
+    edgeGridPane.setStyle("-fx-background-color: #ffffff");
+    nodeGridPane.setStyle("-fx-background-color: #e0ded7");
     modifyEdgeButton.setVisible(false);
     deleteEdgeButton.setVisible(false);
     addEdgeButton.setVisible(true);
@@ -344,7 +344,7 @@ public class DataMapViewController implements Initializable {
     if (nodeButton != null) {
       nodeButton.setOpacity(0.7);
     }
-    nodeGridPane.setStyle("-fx-background-color: #e0ded7; -fx-background-radius: 10");
+    nodeGridPane.setStyle("-fx-background-color: #e0ded7");
     typeInput.setStyle(
         "-fx-background-color: #e0ded7; -fx-border-radius: 3; -fx-border-color: #00008b");
     longNameInput.setText("");
@@ -371,7 +371,7 @@ public class DataMapViewController implements Initializable {
     if (edgeLine != null) {
       edgeLine.setOpacity(0.7);
     }
-    edgeGridPane.setStyle("-fx-background-color: #e0ded7; -fx-background-radius: 10");
+    edgeGridPane.setStyle("-fx-background-color: #e0ded7");
     selectNode1Button.setText("Select Node 1");
     selectNode2Button.setText("Select Node 2"); // resets the text in the two buttons
     modifyEdgeButton.setVisible(true);
@@ -507,7 +507,7 @@ public class DataMapViewController implements Initializable {
   private void displayNodeData() {
     clearEdge();
     clearNode();
-    nodeGridPane.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 10");
+    nodeGridPane.setStyle("-fx-background-color: #ffffff");
     typeInput.setStyle(
         "-fx-background-color: #ffffff; -fx-border-radius: 3; -fx-border-color: #00008b");
     yCoorInput.setText("" + node.getYCoord());
@@ -527,7 +527,7 @@ public class DataMapViewController implements Initializable {
     clearNode();
     selectNode1Button.setDisable(false);
     selectNode2Button.setDisable(false);
-    edgeGridPane.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 10");
+    edgeGridPane.setStyle("-fx-background-color: #ffffff");
     selectNode1Button.setText(edge.getNode1());
     selectNode2Button.setText(edge.getNode2()); // Sets the text of the two buttons to the IDs
     deleteEdgeButton.setDisable(false); // sets the modify and delete button to visible
