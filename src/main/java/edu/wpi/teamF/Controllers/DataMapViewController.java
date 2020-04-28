@@ -6,7 +6,6 @@ import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
-import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -107,8 +106,6 @@ public class DataMapViewController implements Initializable {
   @FXML private StackPane imageStackPane;
 
   private AnchorPane mapPane;
-
-  private int paneNumber;
 
   JFXButton nodeButton = null;
   Line edgeLine = null;
@@ -236,6 +233,21 @@ public class DataMapViewController implements Initializable {
     mapPane.setOnMouseClicked(
         new EventHandler<MouseEvent>() {
           public void handle(MouseEvent mouseEvent) {
+
+            JFXButton oldButton = null;
+            for (javafx.scene.Node node : mapPane.getChildren()) {
+              if (node instanceof JFXButton) {
+                JFXButton oldNode = (JFXButton) node;
+                if (oldNode.getId() != null) {
+                  oldButton = (JFXButton) node;
+                }
+              }
+            }
+
+            if (oldButton != null) {
+              mapPane.getChildren().remove(oldButton);
+            }
+
             double xValDouble = mouseEvent.getX();
             double yValDouble = mouseEvent.getY();
             short xVal = (short) (xValDouble / widthRatio);
@@ -243,6 +255,21 @@ public class DataMapViewController implements Initializable {
 
             xCoorInput.setText("" + xVal);
             yCoorInput.setText("" + yVal);
+
+            JFXButton locationNode = new JFXButton();
+            int buttonSize =
+                6; // this can be adjusted if we feel like the size is too small or large
+            locationNode.setMinSize(buttonSize, buttonSize);
+            locationNode.setMaxSize(buttonSize, buttonSize);
+            locationNode.setPrefSize(buttonSize, buttonSize); // the button size will not vary
+            locationNode.setStyle(
+                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ADD8E6; -fx-border-color: #000000; -fx-border-width: 1px");
+            locationNode.setId("locationNode");
+            mapPane.getChildren().add(locationNode);
+            locationNode.setLayoutX(xValDouble - buttonSize / 2.0);
+            locationNode.setLayoutY(yValDouble - buttonSize / 2.0);
+            modifyNodeButton.setDisable(false);
+            modifyNodeButton.setOpacity(1);
           }
         });
   }
@@ -277,6 +304,15 @@ public class DataMapViewController implements Initializable {
 
   @FXML
   public void clearNode() {
+    for (javafx.scene.Node node : mapPane.getChildren()) {
+      if (node instanceof JFXButton) {
+        JFXButton oldNode = (JFXButton) node;
+        if (oldNode.getId() != null) {
+          System.out.println("Here2");
+          mapPane.getChildren().remove(node);
+        }
+      }
+    }
     nodeGridPane.setStyle("-fx-background-color: #eeeeee; -fx-background-radius: 10");
     typeInput.setStyle(
         "-fx-background-color: #eeeeee; -fx-border-radius: 3; -fx-border-color: #b53389");
@@ -384,7 +420,7 @@ public class DataMapViewController implements Initializable {
     button.setMaxSize(buttonSize, buttonSize);
     button.setPrefSize(buttonSize, buttonSize); // the button size will not vary
     button.setStyle(
-        "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px");
+        "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00008B; -fx-border-color: #000000; -fx-border-width: 1px");
     double xPos = (node.getXCoord() * widthRatio - buttonSize / 2.0);
     double yPos = (node.getYCoord() * heightRatio - buttonSize / 2.0);
     button.setLayoutX(xPos);
@@ -564,7 +600,16 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  private void modifyNode() throws ValidationException {
+  private void modifyNode() {
+
+    short oldXCoordinate = node.getXCoord();
+    short oldYCoordinate = node.getYCoord();
+    String oldBuilding = node.getBuilding();
+    String oldLongName = node.getLongName();
+    String oldShortName = (node.getShortName());
+    Node.NodeType oldNodeType = node.getType();
+    short oldFloorNumber = node.getFloor(); // stores the input in variables
+
     try { // is the input correct?
       short xCoordinate = Short.parseShort(xCoorInput.getText());
       short yCoordinate = Short.parseShort(yCoorInput.getText());
@@ -581,6 +626,7 @@ public class DataMapViewController implements Initializable {
       node.setShortName(shortName);
       node.setType(nodeType);
       node.setFloor(floorNumber); // sets the node to the provided values
+
       System.out.println(databaseManager.getAllEdgesConnectedToNode(node.getId()).size());
       databaseManager.manipulateNode(node);
       System.out.println("here1");
@@ -613,14 +659,19 @@ public class DataMapViewController implements Initializable {
       }
 
       nodeButton.setLayoutX(xCoordinate * widthRatio - 3);
-      nodeButton.setLayoutY(
-          yCoordinate * heightRatio
-              - 3); // if the position of the node is changes, then the edges are updated as well
+      nodeButton.setLayoutY(yCoordinate * heightRatio - 3);
       clearNode();
 
     } catch (Exception e) { // throws an error if the input is not valid
-      System.out.println("In here");
-      nodeErrorLabel.setText("The input is invalid");
+      if (oldXCoordinate == node.getXCoord()
+          && oldYCoordinate == node.getYCoord()
+          && oldBuilding == node.getBuilding()
+          && oldLongName.equals(node.getLongName())
+          && oldShortName.equals(node.getShortName())
+          && oldNodeType.equals(node.getType())
+          && oldFloorNumber == node.getFloor()) {
+        nodeErrorLabel.setText("The input is invalid");
+      }
     }
   }
 
@@ -644,20 +695,12 @@ public class DataMapViewController implements Initializable {
   void selectNode1(ActionEvent event) {
     selectNode1 = true;
     node1 = null;
-    //    if (!selectNode2Button.getText().equals("Select Node 2")) {
-    //      modifyEdgeButton.setDisable(false);
-    //      modifyEdgeButton.setOpacity(1);
-    //    }
   }
 
   @FXML
   void selectNode2(ActionEvent event) {
     selectNode2 = true;
     node2 = null;
-    //    if (!selectNode1Button.getText().equals("Select Node 1")) {
-    //      modifyEdgeButton.setDisable(false);
-    //      modifyEdgeButton.setOpacity(1);
-    //    }
   }
 
   @FXML
