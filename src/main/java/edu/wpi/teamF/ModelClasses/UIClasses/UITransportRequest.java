@@ -5,7 +5,6 @@ import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.TransportRequest;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

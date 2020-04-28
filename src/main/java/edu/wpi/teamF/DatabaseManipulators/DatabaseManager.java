@@ -892,22 +892,4 @@ public class DatabaseManager {
   public List<FlowerRequest> getAllFlowerRequests() {
     return flowerServiceRequestFactory.getAllFlowerRequests();
   }
-
-  public List<TransportRequest> getAllTransportRequests() {
-    return transportRequestFactory.getAllTransportRequests();
-  }
-
-  public void manipulateServiceRequest(TransportRequest transportRequest)
-      throws ValidationException {
-    Validators.transportRequestValidation(transportRequest);
-    if (transportRequestFactory.read(transportRequest.getId()) == null) {
-      transportRequestFactory.create(transportRequest);
-    } else {
-      transportRequestFactory.update(transportRequest);
-    }
-  }
-
-  public TransportRequest readTransportRequest(String id) throws ValidationException {
-    return transportRequestFactory.read(id);
-  }
 }

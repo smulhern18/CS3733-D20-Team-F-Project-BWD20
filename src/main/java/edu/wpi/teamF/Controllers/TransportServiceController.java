@@ -8,7 +8,6 @@ import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.TransportRequest;
-import edu.wpi.teamF.ModelClasses.UIClasses.UIMaintenenceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UITransportRequest;
 import java.io.IOException;
 import java.net.URL;
@@ -188,33 +187,32 @@ public class TransportServiceController implements Initializable {
     completedList.add("Incomplete");
 
     JFXTreeTableColumn<UITransportRequest, String> completed =
-            new JFXTreeTableColumn<>("Completed");
+        new JFXTreeTableColumn<>("Completed");
     completed.setPrefWidth(200);
     completed.setCellValueFactory(
-            (JFXTreeTableColumn.CellDataFeatures<UITransportRequest, String> param) ->
-                    param.getValue().getValue().getCompleted());
+        (JFXTreeTableColumn.CellDataFeatures<UITransportRequest, String> param) ->
+            param.getValue().getValue().getCompleted());
     completed.setCellFactory(
-            new Callback<
-                    TreeTableColumn<UITransportRequest, String>,
-                    TreeTableCell<UITransportRequest, String>>() {
-              @Override
-              public TreeTableCell<UITransportRequest, String> call(
-                      TreeTableColumn<UITransportRequest, String> param) {
-                return new TextFieldTreeTableCell<>();
-              }
-            });
+        new Callback<
+            TreeTableColumn<UITransportRequest, String>,
+            TreeTableCell<UITransportRequest, String>>() {
+          @Override
+          public TreeTableCell<UITransportRequest, String> call(
+              TreeTableColumn<UITransportRequest, String> param) {
+            return new TextFieldTreeTableCell<>();
+          }
+        });
     completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     completed.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(completedList));
     completed.setOnEditCommit(
-            new EventHandler<TreeTableColumn.CellEditEvent<UITransportRequest, String>>() {
-              @Override
-              public void handle(
-                      TreeTableColumn.CellEditEvent<UITransportRequest, String> event) {
-                TreeItem<UITransportRequest> current =
-                        treeTableComputer.getTreeItem(event.getTreeTablePosition().getRow());
-                current.getValue().setCompleted(new SimpleStringProperty(event.getNewValue()));
-              }
-            });
+        new EventHandler<TreeTableColumn.CellEditEvent<UITransportRequest, String>>() {
+          @Override
+          public void handle(TreeTableColumn.CellEditEvent<UITransportRequest, String> event) {
+            TreeItem<UITransportRequest> current =
+                treeTableComputer.getTreeItem(event.getTreeTablePosition().getRow());
+            current.getValue().setCompleted(new SimpleStringProperty(event.getNewValue()));
+          }
+        });
 
     // Load the database into the tableview
 
@@ -297,10 +295,11 @@ public class TransportServiceController implements Initializable {
         String completed = csrui.getCompleted().get();
         if (completed.equals("Complete")) {
           toUpdate.setComplete(true);
-        } else if (completed.equals("Incomplete")){
+        } else if (completed.equals("Incomplete")) {
           toUpdate.setComplete(false);
         } else {
-          throw new IllegalArgumentException("This doesn't belong in the completed attribute: " + completed);
+          throw new IllegalArgumentException(
+              "This doesn't belong in the completed attribute: " + completed);
         }
         databaseManager.manipulateServiceRequest(toUpdate);
       }
