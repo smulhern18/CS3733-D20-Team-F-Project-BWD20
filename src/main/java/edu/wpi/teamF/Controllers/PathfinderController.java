@@ -41,20 +41,12 @@ public class PathfinderController implements Initializable {
   public AnchorPane mapPaneFaulkner2;
   public AnchorPane mapPaneFaulkner1;
   public StackPane masterPaneFaulkner1;
-  //  public StackPane masterPaneFaulkner2;
-  //  public StackPane masterPaneFaulkner3;
-  //  public StackPane masterPaneFaulkner4;
-  //  public StackPane masterPaneFaulkner5;
   public ImageView imageViewFaulkner1;
   public ImageView imageViewFaulkner2;
   public ImageView imageViewFaulkner3;
   public ImageView imageViewFaulkner4;
   public ImageView imageViewFaulkner5;
   public ScrollPane scrollPaneFaulkner1;
-  //  public AnchorPane scrollPaneFaulkner2;
-  //  public AnchorPane scrollPaneFaulkner3;
-  //  public AnchorPane scrollPaneFaulkner4;
-  //  public AnchorPane scrollPaneFaulkner5;
   public List<Node> nodeList;
   public List<Node> fullNodeList;
   public AnchorPane selectButtonsPane;
@@ -274,6 +266,8 @@ public class PathfinderController implements Initializable {
     selectButtonsPane.setVisible(true);
     pathSwitchFloorPane.setVisible(false);
 
+    uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1);
+
     startCombo.setValue(null);
     endCombo.setValue(null);
 
@@ -315,10 +309,6 @@ public class PathfinderController implements Initializable {
     //    String endID = endLocation.substring(endLocation.length() - 10);
 
     uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1);
-    //    uiSetting.makeZoomable(scrollPaneFaulkner3, masterPaneFaulkner3);
-    //    uiSetting.makeZoomable(scrollPaneFaulkner2, masterPaneFaulkner2);
-    //    uiSetting.makeZoomable(scrollPaneFaulkner4, masterPaneFaulkner4);
-    //    uiSetting.makeZoomable(scrollPaneFaulkner5, masterPaneFaulkner5);
 
     for (Node node : nodeFactory.getAllNodes()) {
       node.setEdges(edgeFactory.getAllEdgesConnectedToNode(node.getId()));

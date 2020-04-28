@@ -27,23 +27,6 @@
    <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <AnchorPane layoutX="19.399999618530273" layoutY="194.39999389648438" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="210.0" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="120.0">
          <children>
-            <AnchorPane fx:id="scrollPaneFaulkner1X" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <AnchorPane fx:id="scrollPaneFaulkner2" layoutX="-0.6000000238418579" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <StackPane fx:id="masterPaneFaulkner2" prefHeight="150.0" prefWidth="200.0" />
-               </children></AnchorPane>
-            <AnchorPane fx:id="scrollPaneFaulkner3" layoutX="-0.6000000238418579" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <StackPane fx:id="masterPaneFaulkner3" prefHeight="150.0" prefWidth="200.0" />
-               </children></AnchorPane>
-            <AnchorPane fx:id="scrollPaneFaulkner4" layoutX="-0.6000000238418579" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <StackPane fx:id="masterPaneFaulkner4" prefHeight="150.0" prefWidth="200.0" />
-               </children></AnchorPane>
-            <AnchorPane fx:id="scrollPaneFaulkner5" layoutX="-0.6000000238418579" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <StackPane fx:id="masterPaneFaulkner5" prefHeight="150.0" prefWidth="200.0" />
-               </children></AnchorPane>
             <ScrollPane fx:id="scrollPaneFaulkner1" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <content>
                <StackPane fx:id="masterPaneFaulkner1" prefHeight="579.0" prefWidth="959.0">
