@@ -131,7 +131,6 @@ public class NodeFactory {
    * @param node the node to update
    */
   public void update(Node node) {
-    edgeFactory.deleteByNodeID(node.getId());
     String updateStatement =
         "UPDATE "
             + DatabaseManager.NODES_TABLE_NAME

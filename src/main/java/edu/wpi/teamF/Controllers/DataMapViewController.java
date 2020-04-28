@@ -226,9 +226,6 @@ public class DataMapViewController implements Initializable {
   public void addNodeLocation() {
     double nodeDeltaX = dataMap.getLayoutX() - mapPane.getLayoutX();
     double nodeDeltaY = dataMap.getLayoutY() - mapPane.getLayoutY();
-    System.out.println(mapPane.getLayoutX());
-    System.out.println(nodeDeltaX);
-    System.out.println(nodeDeltaY);
     outlineNode();
     locationSelector();
   }
@@ -270,7 +267,9 @@ public class DataMapViewController implements Initializable {
     deleteEdgeButton.setVisible(false);
     addEdgeButton.setVisible(true);
     selectNode1Button.setDisable(false);
+    selectNode1Button.setOpacity(1);
     selectNode2Button.setDisable(false);
+    selectNode2Button.setOpacity(1);
   }
 
   @FXML
@@ -285,13 +284,14 @@ public class DataMapViewController implements Initializable {
     floorInput.setText("");
     modifyNodeButton.setVisible(true);
     modifyNodeButton.setDisable(true);
+    modifyNodeButton.setOpacity(.4);
     addNodeButton.setVisible(false);
     addNodeButton.setDisable(true);
     deleteNodeButton.setVisible(true);
     deleteNodeButton.setDisable(true);
+    deleteNodeButton.setOpacity(.4);
     mapPane.setOnMouseClicked(mouseEvent -> {});
     nodeErrorLabel.setText("");
-    System.out.println("clearNode called");
   }
 
   @FXML
@@ -303,11 +303,16 @@ public class DataMapViewController implements Initializable {
     modifyEdgeButton.setDisable(true);
     deleteEdgeButton.setVisible(true);
     deleteEdgeButton.setDisable(true);
+    deleteEdgeButton.setOpacity(.4);
     deleteNodeButton.setDisable(true);
+    deleteNodeButton.setOpacity(.4);
     addEdgeButton.setVisible(false);
     addEdgeButton.setDisable(true);
+    addEdgeButton.setOpacity(.4);
     selectNode1Button.setDisable(true);
+    selectNode1Button.setOpacity(.4);
     selectNode2Button.setDisable(true);
+    selectNode2Button.setOpacity(.4);
     mapPane.removeEventHandler(MouseEvent.MOUSE_CLICKED, mouseEvent -> {});
     edgeErrorLabel.setText("");
   }
@@ -316,9 +321,6 @@ public class DataMapViewController implements Initializable {
     try {
       double heightRatio = (double) PANE_HEIGHT / MAP_HEIGHT;
       double widthRatio = (double) PANE_WIDTH / MAP_WIDTH;
-      System.out.println("node factory: " + nodeFactory);
-      System.out.println(edge);
-      System.out.println(edge.getNode1());
       Node node1 = nodeFactory.read(edge.getNode1());
       Node node2 = nodeFactory.read(edge.getNode2());
       if (node1.getFloor()
@@ -382,12 +384,10 @@ public class DataMapViewController implements Initializable {
         action -> {
           nodeButton = button; // sets classes button variable to the selected button
           this.node = node;
-          System.out.println(node.getId());
           if (selectNode1 || selectNode2) {
             edgeSelection(node);
             // addEdgeButton.setDisable(false);
           } else {
-            System.out.println(node.getId());
             displayNodeData();
             locationSelector();
           }
@@ -395,6 +395,7 @@ public class DataMapViewController implements Initializable {
           if (!selectNode1Button.getText().equals("Select Node 1")
               && !selectNode2Button.getText().equals("Select Node 2")) {
             addEdgeButton.setDisable(false);
+            addEdgeButton.setOpacity(1);
           }
         });
     switch (node.getFloor()) {
@@ -430,15 +431,21 @@ public class DataMapViewController implements Initializable {
     typeInput.setValue("" + node.getType());
     floorInput.setText("" + node.getFloor());
     deleteNodeButton.setDisable(false);
+    deleteNodeButton.setOpacity(1);
+    modifyNodeButton.setDisable(false);
+    modifyNodeButton.setOpacity(1);
   }
 
   private void displayEdgeData() {
     clearEdge();
     clearNode();
+    selectNode1Button.setDisable(false);
+    selectNode2Button.setDisable(false);
     edgeGridPane.setStyle("-fx-background-color: #ffffff; -fx-background-radius: 10");
     selectNode1Button.setText(edge.getNode1());
     selectNode2Button.setText(edge.getNode2()); // Sets the text of the two buttons to the IDs
     deleteEdgeButton.setDisable(false); // sets the modify and delete button to visible
+    deleteEdgeButton.setOpacity(1);
   }
 
   private void setNodeDraggable(JFXButton button) {
@@ -487,18 +494,11 @@ public class DataMapViewController implements Initializable {
     String shortName = shortNameInput.getText();
     Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getValue().toString());
     short floorNumber = Short.parseShort(floorInput.getText());
-    System.out.println("here1");
     List<Node> typeNodes = nodeFactory.getNodesByType(nodeType);
-    System.out.println(typeNodes.size());
-    System.out.println("here2");
     List<Integer> typeInstances = new ArrayList<>();
-    System.out.println("here3");
     for (int i = 0; i < typeNodes.size(); i++) { // collects all of the instances for the given type
-      System.out.println("here4");
       if (typeNodes.get(i).getFloor() == floorNumber) {
-        System.out.println("here5");
         instanceNum = Integer.parseInt(typeNodes.get(i).getId().substring(5, 8));
-        System.out.println("here6");
         typeInstances.add(instanceNum);
       }
     }
@@ -508,7 +508,6 @@ public class DataMapViewController implements Initializable {
     if (typeNodes.size() > 0) {
       for (int i = 0; i < typeNodes.size(); i++) {
         instance = Integer.parseInt(typeNodes.get(i).getId().substring(5, 8));
-        System.out.println(instanceNum);
         if (instance - tracker > 1) {
           newInstance = tracker + 1;
         } else {
@@ -516,7 +515,6 @@ public class DataMapViewController implements Initializable {
         }
       }
     } else {
-      System.out.println("Here7");
       newInstance = 1;
     }
 
@@ -554,7 +552,7 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  private void modifyData() throws ValidationException {
+  private void modifyNode() throws ValidationException {
     short xCoordinate = Short.parseShort(xCoorInput.getText());
     short yCoordinate = Short.parseShort(yCoorInput.getText());
     String building = buildingInput.getText();
@@ -572,21 +570,29 @@ public class DataMapViewController implements Initializable {
       node.setType(nodeType);
       node.setFloor(floorNumber); // sets the node to the provided values
 
+      System.out.println(edgeFactory.getAllEdgesConnectedToNode(node.getId()).size());
       nodeFactory.update(node);
+      System.out.println("here1");
+      System.out.println(edgeFactory.getAllEdgesConnectedToNode(node.getId()).size());
       for (Edge edge :
           edgeFactory.getAllEdgesConnectedToNode(
               node.getId())) { // for all of the edges connected to the node
+        System.out.println("here2");
         for (int i = 0;
             i < mapPane.getChildren().size();
             i++) { // for all of the children in the pane
+          System.out.println("here3");
           javafx.scene.Node children = mapPane.getChildren().get(i);
           if (children instanceof Line && children.getId().equals(edge.getId())) {
+            System.out.println("here4");
             Line line = (Line) children;
             if (edge.getNode1()
                 .equals(node.getId())) { // if node one then it is a starting coordinate
+              System.out.println("here5");
               line.setStartX(xCoordinate * widthRatio);
               line.setStartY(yCoordinate * heightRatio);
             } else { // if node two then it is an ending coordinate
+              System.out.println("here6");
               line.setEndX(xCoordinate * widthRatio);
               line.setEndY(yCoordinate * heightRatio);
             }
@@ -680,9 +686,11 @@ public class DataMapViewController implements Initializable {
         && !shortNameInput.getText().isEmpty()
         && !floorInput.getText().isEmpty()) { // if every input is occupied:
       modifyNodeButton.setDisable(false);
+      modifyNodeButton.setOpacity(1);
       addNodeButton.setDisable(false);
     } else {
       modifyNodeButton.setDisable(true);
+      modifyNodeButton.setOpacity(.4);
       addNodeButton.setDisable(true);
     }
   }
