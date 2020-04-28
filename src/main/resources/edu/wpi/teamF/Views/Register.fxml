@@ -86,7 +86,7 @@
             </StackPane>
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
                <children>
-                  <JFXTextField fx:id="firstnameInput" onKeyReleased="#enableRegister" prefHeight="27.0" prefWidth="140.0" />
+                  <JFXTextField fx:id="firstNameInput" onKeyReleased="#enableRegister" prefHeight="27.0" prefWidth="140.0" />
                </children>
             </StackPane>
             <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
