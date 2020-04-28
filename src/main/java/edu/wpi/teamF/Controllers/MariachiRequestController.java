@@ -3,10 +3,12 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.DatabaseManipulators.MariachiRequestFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.SanitationServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIMariachiRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.net.URL;
@@ -46,10 +48,12 @@ public class MariachiRequestController implements Initializable {
   public GridPane servicePane;
   public AnchorPane checkStatusPane;
   public AnchorPane anchorPane;
-  NodeFactory nodeFactory = NodeFactory.getFactory();
-  MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
-  List<MariachiRequest> mariachiRequestList = mariachiRequestFactory.getAllMariachiRequest();
+
+  DatabaseManager databaseManager = DatabaseManager.getManager();
+  List<MariachiRequest> mariachiRequestList = databaseManager.getAllMariachiServiceRequests();
   ObservableList<UIMariachiRequest> uiMariachiRequests = FXCollections.observableArrayList();
+
+
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -127,12 +131,12 @@ public class MariachiRequestController implements Initializable {
   }
 
   public void submit(ActionEvent actionEvent)
-      throws ValidationException, InstanceNotFoundException {
+          throws Exception {
     String location = locationComboBox.getValue();
     String nodeID = location.substring(location.length() - 10);
     System.out.println(location);
     System.out.println(nodeID);
-    Node node = nodeFactory.read(nodeID);
+    Node node = databaseManager.readNode(nodeID);
     String priorityString = priorityComboBox.getValue();
     int priority = 0;
     if (priorityString.equals("Low")) {
@@ -148,7 +152,7 @@ public class MariachiRequestController implements Initializable {
     MariachiRequest mariachiRequest =
         new MariachiRequest(
             node, "Not Assigned", "No Description", date, priority, songRequestString);
-    mariachiRequestFactory.create(mariachiRequest);
+    databaseManager.manipulateServiceRequest(mariachiRequest);
     uiMariachiRequests.add(new UIMariachiRequest(mariachiRequest));
     table.refresh();
     resetRequest();
@@ -171,7 +175,7 @@ public class MariachiRequestController implements Initializable {
 
   public void update(ActionEvent actionEvent) throws ValidationException {
     for (UIMariachiRequest uiSR : uiMariachiRequests) {
-      MariachiRequest toUpdate = mariachiRequestFactory.read(uiSR.getID().get());
+      MariachiRequest toUpdate = databaseManager.readMariachiServiceRequest(uiSR.getID().get());
       if (!uiSR.equalsCSR(toUpdate)) {
         toUpdate.setAssignee(uiSR.getAssignee().get());
         String completed = uiSR.getCompleted().get();
@@ -180,7 +184,7 @@ public class MariachiRequestController implements Initializable {
         } else if (completed.equals("Complete")) {
           toUpdate.setComplete(true);
         }
-        mariachiRequestFactory.update(toUpdate);
+        databaseManager.manipulateServiceRequest(toUpdate);
       }
     }
     table.refresh();
@@ -188,7 +192,7 @@ public class MariachiRequestController implements Initializable {
 
   public void delete(ActionEvent actionEvent) {
     String toDelete = deleteText.getText();
-    mariachiRequestFactory.delete(toDelete);
+    databaseManager.deleteMariachiServiceRequest(toDelete);
     uiMariachiRequests.removeIf(mariachiRequest -> mariachiRequest.getID().get().equals(toDelete));
   }
 

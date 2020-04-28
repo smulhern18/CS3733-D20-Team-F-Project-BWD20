@@ -14,39 +14,39 @@
             <Font name="STIXGeneral-Regular" size="24.0" />
          </font>
       </Label>
-      <ImageView fx:id="computerService" fitHeight="72.0" fitWidth="72.0" layoutX="236.0" layoutY="129.0" onMouseClicked="#switchToComputerService" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="236.0" layoutY="129.0" onMouseClicked="#switchToComputerService" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../Images/computericon.png" />
+            <Image url="@../../../../Images/baseline_computer_black_18dp.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="340.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="340.0" layoutY="129.0" onMouseClicked="#medicineService" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../Images/icons8-qzemail03.png" />
+            <Image url="@../../../../Images/baseline_healing_black_18dp.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="445.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="445.0" layoutY="129.0" onMouseClicked="#languageService" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../Images/icons8-qzemail03.png" />
+            <Image url="@../../../../Images/baseline_language_black_18dp.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="543.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="543.0" layoutY="129.0" onMouseClicked="#sanitationRequest" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../Images/icons8-qzemail03.png" />
+            <Image url="@../../../../Images/baseline_pan_tool_black_18dp.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="644.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="644.0" layoutY="129.0" onMouseClicked="#mariachiService" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../Images/icons8-qzemail03.png" />
+            <Image url="@../../../../Images/baseline_music_note_black_18dp.png" />
          </image>
       </ImageView>
-      <JFXButton layoutX="653.0" layoutY="194.0" text="Security">
+      <JFXButton layoutX="653.0" layoutY="194.0" text="Mariachi">
          <font>
             <Font name="STIXGeneral-Regular" size="13.0" />
          </font>
       </JFXButton>
-      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="241.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="241.0" layoutY="250.0" onMouseClicked="#securityRequest" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../Images/icons8-qzemail03.png" />
+            <Image url="@../../../../Images/baseline_face_black_18dp.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="345.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
@@ -79,12 +79,12 @@
             <Font name="STIXGeneral-Regular" size="13.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="553.0" layoutY="194.0" text="Security">
+      <JFXButton layoutX="539.0" layoutY="194.0" text="Sanitation">
          <font>
             <Font name="STIXGeneral-Regular" size="13.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="455.0" layoutY="194.0" text="Security">
+      <JFXButton layoutX="419.0" layoutY="194.0" text="Language Request">
          <font>
             <Font name="STIXGeneral-Regular" size="13.0" />
          </font>
@@ -94,7 +94,7 @@
             <Font name="STIXGeneral-Regular" size="13.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="345.0" layoutY="194.0" text="Security">
+      <JFXButton layoutX="316.0" layoutY="194.0" text="Medicine Delivery">
          <font>
             <Font name="STIXGeneral-Regular" size="13.0" />
          </font>
@@ -104,7 +104,7 @@
             <Font name="STIXGeneral-Regular" size="13.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="212.0" layoutY="193.0" text="Computer Service">
+      <JFXButton layoutX="213.0" layoutY="194.0" prefWidth="120.0" text="Computer Service">
          <font>
             <Font name="STIXGeneral-Regular" size="13.0" />
          </font>

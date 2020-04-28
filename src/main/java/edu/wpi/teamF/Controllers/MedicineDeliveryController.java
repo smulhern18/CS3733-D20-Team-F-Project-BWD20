@@ -3,10 +3,13 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.App;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.DatabaseManipulators.MedicineDeliveryRequestFactory;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Node;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MedicineDeliveryRequest;
+import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIMedicineDeliveryRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.io.IOException;
@@ -60,12 +63,14 @@ public class MedicineDeliveryController implements Initializable {
   public JFXButton backButton;
   SceneController sceneController = App.getSceneController();
 
+
+  DatabaseManager databaseManager = DatabaseManager.getManager();
   ObservableList<UIMedicineDeliveryRequest> mdrUI = FXCollections.observableArrayList();
-  NodeFactory nodeFactory = NodeFactory.getFactory();
-  MedicineDeliveryRequestFactory medicineDeliveryRequest =
-      MedicineDeliveryRequestFactory.getFactory();
   List<MedicineDeliveryRequest> medicineDeliveryRequests =
-      medicineDeliveryRequest.getAllMedicineDeliveryRequests();
+      databaseManager.getAllMedicineDeliveryRequests();
+
+
+
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -81,7 +86,12 @@ public class MedicineDeliveryController implements Initializable {
 
     // add the different choices to the choicebox
     // Replace this with long names, linked to IDs
-    List<Node> nodes = nodeFactory.getAllNodes();
+    List<Node> nodes = null;
+    try {
+      nodes = databaseManager.getAllNodes();
+    } catch (Exception e) {
+      System.out.println(e.getMessage() + e.getClass());
+    }
     for (Node node : nodes) {
       locationChoice.getItems().add(node.getId());
     }
@@ -231,10 +241,10 @@ public class MedicineDeliveryController implements Initializable {
   }
 
   public void submit(ActionEvent actionEvent)
-      throws ValidationException, InstanceNotFoundException {
+          throws Exception {
     // Get the values
     String location = locationChoice.getValue();
-    Node node = nodeFactory.read(location);
+    Node node = databaseManager.readNode(location);
     String medicine = medicineText.getText();
     String instructions = instructionsText.getText();
     String desc = descText.getText();
@@ -254,7 +264,7 @@ public class MedicineDeliveryController implements Initializable {
     MedicineDeliveryRequest mdRequest =
         new MedicineDeliveryRequest(
             node, desc, "Not Assigned", date, priorityDB, medicine, instructions);
-    medicineDeliveryRequest.create(mdRequest);
+    databaseManager.manipulateServiceRequest(mdRequest);
     mdrUI.add(new UIMedicineDeliveryRequest(mdRequest));
     treeTableMedicine.refresh();
     descText.setText("");
@@ -275,7 +285,7 @@ public class MedicineDeliveryController implements Initializable {
   public void update(ActionEvent actionEvent)
       throws ValidationException, InstanceNotFoundException {
     for (UIMedicineDeliveryRequest mdrui : mdrUI) {
-      MedicineDeliveryRequest toUpdate = medicineDeliveryRequest.read(mdrui.getID().get());
+      MedicineDeliveryRequest toUpdate = databaseManager.readMedicineDeliveryService(mdrui.getID().get());
       boolean isSame = mdrui.equalsMDR(toUpdate);
       if (!isSame) {
         toUpdate.setAssignee(mdrui.getAssignee().get());
@@ -286,7 +296,7 @@ public class MedicineDeliveryController implements Initializable {
         } else if (completed.equals("Complete")) {
           toUpdate.setComplete(true);
         }
-        medicineDeliveryRequest.update(toUpdate);
+        databaseManager.manipulateServiceRequest(toUpdate);
       }
     }
     treeTableMedicine.refresh();
@@ -294,7 +304,7 @@ public class MedicineDeliveryController implements Initializable {
 
   public void delete(ActionEvent actionEvent) {
     String toDelte = deleteText.getText();
-    medicineDeliveryRequest.delete(toDelte);
+    databaseManager.deleteMedicineDeliveryRequest(toDelte);
     mdrUI.removeIf(
         medicineDeliveryRequest -> medicineDeliveryRequest.getID().get().equals(toDelte));
     deleteText.setText("");
