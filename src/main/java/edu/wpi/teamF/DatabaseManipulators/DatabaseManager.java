@@ -8,8 +8,6 @@ import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
 import edu.wpi.teamF.ModelClasses.ValidationException;
-import org.w3c.dom.ls.LSResourceResolver;
-
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.sql.Connection;
@@ -117,7 +115,8 @@ public class DatabaseManager {
   private MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
   private MedicineDeliveryRequestFactory medicineDeliveryRequestFactory =
       MedicineDeliveryRequestFactory.getFactory();
-  private LaundryServiceRequestFactory laundryServiceRequestFactory = LaundryServiceRequestFactory.getFactory();
+  private LaundryServiceRequestFactory laundryServiceRequestFactory =
+      LaundryServiceRequestFactory.getFactory();
 
   // SanitationService requests
   static final String SANITATION_TYPE_KEY = "SanitationType";
@@ -239,20 +238,20 @@ public class DatabaseManager {
             + "))";
 
     String laundryTableCreationStatement =
-            "CREATE TABLE "
-                    + LAUNDRY_REQUEST_TABLE_NAME
-                    + " ( "
-                    + SERVICEID_KEY
-                    + " VARCHAR(32) NOT NULL, "
-                    + ITEMS_KEY
-                    + " VARCHAR(32) NOT NULL, "
-                    + QUANTITY_KEY
-                    + " VARCHAR(32) NOT NULL, "
-                    + TEMPERTURE_KEY
-                    + " VARCHAR(32) NOT NULL, "
-                    + "PRIMARY KEY ("
-                    + SERVICEID_KEY
-                    + "))";
+        "CREATE TABLE "
+            + LAUNDRY_REQUEST_TABLE_NAME
+            + " ( "
+            + SERVICEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + ITEMS_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + QUANTITY_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + TEMPERTURE_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + "PRIMARY KEY ("
+            + SERVICEID_KEY
+            + "))";
 
     String transportTableCreationStatement =
         "CREATE TABLE "
@@ -612,7 +611,7 @@ public class DatabaseManager {
     }
   }
 
-  public void manipulateServiceRequest(LaundryServiceRequest lsRequest) throws ValidationException{
+  public void manipulateServiceRequest(LaundryServiceRequest lsRequest) throws ValidationException {
     if (laundryServiceRequestFactory.read(lsRequest.getId()) == null) {
       laundryServiceRequestFactory.create(lsRequest);
     } else {

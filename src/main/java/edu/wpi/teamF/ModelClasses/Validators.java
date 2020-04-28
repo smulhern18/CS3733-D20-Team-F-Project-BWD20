@@ -528,7 +528,7 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static <T extends LaundryServiceRequest> void launduaryServiceValidation(
-          T t, int... constraints) throws ValidationException {
+      T t, int... constraints) throws ValidationException {
     nullCheckValidation(t, constraints);
     LaundryServiceRequest launduaryRequestObject = (LaundryServiceRequest) t;
 
@@ -541,14 +541,16 @@ public class Validators {
     itemsValidation(launduaryRequestObject.getItems());
     quantityValidation(launduaryRequestObject.getQuantity());
   }
+
   public static void temperatureValidation(String temperature, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(temperature, constraints);
     if (temperature.length() < TEMPERTURE_MIN_LENGTH
-            || temperature.length() > TEMPERTURE_MAX_LENGTH) {
+        || temperature.length() > TEMPERTURE_MAX_LENGTH) {
       throw new ValidationException("Invalid temperature size");
     }
   }
+
   public static void itemsValidation(String items, int... constraints) throws ValidationException {
     nullCheckValidation(items, constraints);
     if (items.length() < ITEMS_MIN_LENGTH || items.length() > ITEMS_MAX_LENGTH) {
@@ -557,14 +559,12 @@ public class Validators {
   }
 
   public static void quantityValidation(String quantity, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(quantity, constraints);
     if (quantity.length() < QUANTITY_MIN_LENGTH || quantity.length() > QUANTITY_MAX_LENGTH) {
       throw new ValidationException("Invalid quantity length");
     }
   }
-
-
 
   /**
    * Validation for descriptions

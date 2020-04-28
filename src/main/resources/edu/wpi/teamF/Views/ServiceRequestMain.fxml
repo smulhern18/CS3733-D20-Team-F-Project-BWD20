@@ -49,9 +49,9 @@
             <Image url="@../../../../Images/baseline_face_black_18dp.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="345.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="345.0" layoutY="250.0" onMouseClicked="#switchToLaundryService" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../Images/icons8-qzemail03.png" />
+            <Image url="@../../../../Images/baseline_local_laundry_service_black_18dp.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="450.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
@@ -99,7 +99,7 @@
             <Font name="STIXGeneral-Regular" size="13.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="350.0" layoutY="313.0" text="Security">
+      <JFXButton layoutX="350.0" layoutY="313.0" text="Laundry">
          <font>
             <Font name="STIXGeneral-Regular" size="13.0" />
          </font>
