@@ -5,115 +5,246 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="407.0" prefWidth="784.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ServiceRequestMainController">
    <children>
-      <Label layoutX="398.0" layoutY="49.0" prefHeight="61.0" prefWidth="167.0" text="Service Request">
-         <font>
-            <Font name="STIXGeneral-Regular" size="24.0" />
-         </font>
-      </Label>
-      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="236.0" layoutY="129.0" onMouseClicked="#switchToComputerService" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Images/baseline_computer_black_18dp.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="340.0" layoutY="129.0" onMouseClicked="#medicineService" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Images/baseline_healing_black_18dp.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="445.0" layoutY="129.0" onMouseClicked="#languageService" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Images/baseline_language_black_18dp.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="543.0" layoutY="129.0" onMouseClicked="#sanitationRequest" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Images/baseline_pan_tool_black_18dp.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="644.0" layoutY="129.0" onMouseClicked="#mariachiService" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Images/baseline_music_note_black_18dp.png" />
-         </image>
-      </ImageView>
-      <JFXButton layoutX="653.0" layoutY="194.0" text="Mariachi">
-         <font>
-            <Font name="STIXGeneral-Regular" size="13.0" />
-         </font>
-      </JFXButton>
-      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="241.0" layoutY="250.0" onMouseClicked="#securityRequest" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Images/baseline_face_black_18dp.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="345.0" layoutY="250.0" onMouseClicked="#switchToLaundryService" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Images/baseline_local_laundry_service_black_18dp.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="450.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Images/icons8-qzemail03.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="548.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Images/icons8-qzemail03.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="72.0" fitWidth="72.0" layoutX="649.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../Images/icons8-qzemail03.png" />
-         </image>
-      </ImageView>
-      <JFXButton layoutX="654.0" layoutY="313.0" text="Security">
-         <font>
-            <Font name="STIXGeneral-Regular" size="13.0" />
-         </font>
-      </JFXButton>
-      <JFXButton layoutX="553.0" layoutY="313.0" text="Security">
-         <font>
-            <Font name="STIXGeneral-Regular" size="13.0" />
-         </font>
-      </JFXButton>
-      <JFXButton layoutX="539.0" layoutY="194.0" text="Sanitation">
-         <font>
-            <Font name="STIXGeneral-Regular" size="13.0" />
-         </font>
-      </JFXButton>
-      <JFXButton layoutX="419.0" layoutY="194.0" text="Language Request">
-         <font>
-            <Font name="STIXGeneral-Regular" size="13.0" />
-         </font>
-      </JFXButton>
-      <JFXButton layoutX="459.0" layoutY="313.0" text="Security">
-         <font>
-            <Font name="STIXGeneral-Regular" size="13.0" />
-         </font>
-      </JFXButton>
-      <JFXButton layoutX="316.0" layoutY="194.0" text="Medicine Delivery">
-         <font>
-            <Font name="STIXGeneral-Regular" size="13.0" />
-         </font>
-      </JFXButton>
-      <JFXButton layoutX="350.0" layoutY="313.0" text="Laundry">
-         <font>
-            <Font name="STIXGeneral-Regular" size="13.0" />
-         </font>
-      </JFXButton>
-      <JFXButton layoutX="213.0" layoutY="194.0" prefWidth="120.0" text="Computer Service">
-         <font>
-            <Font name="STIXGeneral-Regular" size="13.0" />
-         </font>
-      </JFXButton>
-      <JFXButton layoutX="241.0" layoutY="313.0" text="Security">
-         <font>
-            <Font name="STIXGeneral-Regular" size="13.0" />
-         </font>
-      </JFXButton>
       <fx:include source="MenuBar.fxml" />
+      <GridPane layoutX="332.0" layoutY="43.0" prefHeight="72.0" prefWidth="317.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="61.0" prefWidth="167.0" text="Service Request">
+                     <font>
+                        <Font name="STIXGeneral-Regular" size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+         </children>
+      </GridPane>
+      <GridPane layoutX="221.0" layoutY="126.0" prefHeight="263.0" prefWidth="542.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="20.0" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="20.0" />
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="20.0" />
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="20.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints percentHeight="40.0" vgrow="SOMETIMES" />
+          <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints percentHeight="40.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#switchToComputerService" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/baseline_computer_black_18dp.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#medicineService" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/baseline_healing_black_18dp.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2">
+               <children>
+                  <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#languageService" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/baseline_language_black_18dp.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3">
+               <children>
+                  <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#sanitationRequest" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/baseline_pan_tool_black_18dp.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4">
+               <children>
+                  <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#mariachiService" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/baseline_music_note_black_18dp.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <children>
+                  <JFXButton prefWidth="120.0" text="Computer">
+                     <font>
+                        <Font name="STIXGeneral-Regular" size="13.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="3">
+               <children>
+                  <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#securityRequest" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/baseline_face_black_18dp.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="4">
+               <children>
+                  <JFXButton text="Security">
+                     <font>
+                        <Font name="STIXGeneral-Regular" size="13.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <JFXButton text="Medicine">
+                     <font>
+                        <Font name="STIXGeneral-Regular" size="13.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#switchToLaundryService" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/baseline_local_laundry_service_black_18dp.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <children>
+                  <JFXButton text="Laundry">
+                     <font>
+                        <Font name="STIXGeneral-Regular" size="13.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <JFXButton text="Language">
+                     <font>
+                        <Font name="STIXGeneral-Regular" size="13.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <children>
+                  <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/icons8-qzemail03.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+               <children>
+                  <JFXButton text="Security">
+                     <font>
+                        <Font name="STIXGeneral-Regular" size="13.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <children>
+                  <JFXButton text="Sanitation">
+                     <font>
+                        <Font name="STIXGeneral-Regular" size="13.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <children>
+                  <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/icons8-qzemail03.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
+               <children>
+                  <JFXButton text="Security">
+                     <font>
+                        <Font name="STIXGeneral-Regular" size="13.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <children>
+                  <JFXButton text="Mariachi">
+                     <font>
+                        <Font name="STIXGeneral-Regular" size="13.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="3">
+               <children>
+                  <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/icons8-qzemail03.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4">
+               <children>
+                  <JFXButton text="Security">
+                     <font>
+                        <Font name="STIXGeneral-Regular" size="13.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </StackPane>
+            <JFXButton prefWidth="120.0" text="Service" GridPane.rowIndex="2">
+               <font>
+                  <Font name="STIXGeneral-Regular" size="13.0" />
+               </font>
+            </JFXButton>
+            <JFXButton prefHeight="31.0" prefWidth="109.0" text="Delivery" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <font>
+                  <Font name="STIXGeneral-Regular" size="13.0" />
+               </font>
+            </JFXButton>
+            <JFXButton prefHeight="31.0" prefWidth="109.0" text="Request" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <font>
+                  <Font name="STIXGeneral-Regular" size="13.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </GridPane>
    </children>
 </AnchorPane>

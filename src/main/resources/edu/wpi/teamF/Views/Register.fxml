@@ -5,59 +5,160 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="412.0" prefWidth="864.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.RegisterController">
     <children>
       <fx:include source="MenuBar.fxml" />
-      <Label contentDisplay="CENTER" layoutX="485.0" layoutY="31.0" prefHeight="83.0" prefWidth="120.0" text="Register" textAlignment="CENTER">
-         <font>
-            <Font name="STIXGeneral-Bold" size="30.0" />
-         </font>
-      </Label>
-      <JFXTextField fx:id="firstnameInput" layoutX="370.0" layoutY="148.0" onKeyReleased="#enableRegister" />
-      <JFXTextField fx:id="lastNameInput" layoutX="370.0" layoutY="198.0" onKeyReleased="#enableRegister" />
-      <JFXTextField fx:id="emailInput" layoutX="370.0" layoutY="251.0" onKeyReleased="#enableRegister" />
-      <JFXTextField fx:id="usernameInput" layoutX="666.0" layoutY="147.0" onKeyReleased="#enableRegister" />
-      <Label layoutX="254.0" layoutY="154.0" prefHeight="31.0" prefWidth="102.0" text="First Name">
-         <font>
-            <Font name="STIXGeneral-Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="257.0" layoutY="202.0" prefHeight="31.0" prefWidth="102.0" text="Last Name">
-         <font>
-            <Font name="STIXGeneral-Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="226.0" layoutY="257.0" prefHeight="27.0" prefWidth="125.0" text="Email Address">
-         <font>
-            <Font name="STIXGeneral-Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="564.0" layoutY="155.0" prefHeight="0.0" prefWidth="102.0" text="Username">
-         <font>
-            <Font name="STIXGeneral-Bold" size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="568.0" layoutY="200.0" prefHeight="0.0" prefWidth="102.0" text="Password">
-         <font>
-            <Font name="STIXGeneral-Bold" size="18.0" />
-         </font>
-      </Label>
-      <JFXButton fx:id="registerButton" disable="true" layoutX="374.0" layoutY="325.0" onAction="#attemptRegister" prefHeight="44.0" prefWidth="125.0" style="-fx-background-color: #EB3E79;" text="Register">
-         <font>
-            <Font name="STIXGeneral-Bold" size="18.0" />
-         </font>
-      </JFXButton>
-      <JFXButton layoutX="583.0" layoutY="327.0" onAction="#cancel" prefHeight="44.0" prefWidth="125.0" style="-fx-background-color: grey;" text="Cancel">
-         <font>
-            <Font name="STIXGeneral-Bold" size="18.0" />
-         </font>
-      </JFXButton>
-      <Label fx:id="incorrectLabel" layoutX="470.0" layoutY="99.0" prefHeight="28.0" prefWidth="162.0" text="Invalid input for Account.">
-         <font>
-            <Font name="STIXGeneral-Regular" size="14.0" />
-         </font></Label>
-      <JFXPasswordField fx:id="passwordInput" layoutX="666.0" layoutY="196.0" onKeyReleased="#enableRegister" />
+      <GridPane layoutX="205.0" layoutY="1.0" prefHeight="140.0" prefWidth="658.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+          <RowConstraints percentHeight="70.0" vgrow="SOMETIMES" />
+          <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <children>
+                  <Label contentDisplay="CENTER" prefHeight="83.0" prefWidth="120.0" text="Register" textAlignment="CENTER">
+                     <font>
+                        <Font name="STIXGeneral-Bold" size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <children>
+                  <Label fx:id="incorrectLabel" prefHeight="28.0" prefWidth="162.0" text="Invalid input for Account.">
+                     <font>
+                        <Font name="STIXGeneral-Regular" size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+         </children>
+      </GridPane>
+      <GridPane layoutX="246.0" layoutY="140.0" prefHeight="227.0" prefWidth="572.0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="20.0" />
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints percentHeight="33.0" vgrow="SOMETIMES" />
+          <RowConstraints percentHeight="33.0" vgrow="SOMETIMES" />
+          <RowConstraints percentHeight="34.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="102.0" text="First Name">
+                     <font>
+                        <Font name="STIXGeneral-Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
+               <children>
+                  <Label prefHeight="31.0" prefWidth="102.0" text="Last Name">
+                     <font>
+                        <Font name="STIXGeneral-Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <children>
+                  <Label prefHeight="27.0" prefWidth="125.0" text="Email Address">
+                     <font>
+                        <Font name="STIXGeneral-Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <JFXTextField fx:id="firstnameInput" onKeyReleased="#enableRegister" prefHeight="27.0" prefWidth="140.0" />
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <children>
+                  <JFXTextField fx:id="lastNameInput" onKeyReleased="#enableRegister" />
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <JFXTextField fx:id="emailInput" onKeyReleased="#enableRegister" />
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2">
+               <children>
+                  <Label prefHeight="28.0" prefWidth="81.0" text="Username">
+                     <font>
+                        <Font name="STIXGeneral-Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <children>
+                  <Label prefHeight="28.0" prefWidth="76.0" text="Password">
+                     <font>
+                        <Font name="STIXGeneral-Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3">
+               <children>
+                  <JFXTextField fx:id="usernameInput" onKeyReleased="#enableRegister" />
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <children>
+                  <JFXPasswordField fx:id="passwordInput" onKeyReleased="#enableRegister" />
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="251.0" layoutY="387.0" prefHeight="95.0" prefWidth="575.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints percentHeight="100.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <JFXButton fx:id="registerButton" disable="true" onAction="#attemptRegister" prefHeight="44.0" prefWidth="125.0" style="-fx-background-color: #EB3E79;" text="Register">
+                     <font>
+                        <Font name="STIXGeneral-Bold" size="18.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </StackPane>
+            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
+               <children>
+                  <JFXButton onAction="#cancel" prefHeight="44.0" prefWidth="125.0" style="-fx-background-color: grey;" text="Cancel">
+                     <font>
+                        <Font name="STIXGeneral-Bold" size="18.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </StackPane>
+         </children>
+      </GridPane>
     </children>
 </AnchorPane>
