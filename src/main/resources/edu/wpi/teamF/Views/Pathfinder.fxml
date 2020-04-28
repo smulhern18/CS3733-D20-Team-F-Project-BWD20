@@ -30,66 +30,54 @@
             <AnchorPane fx:id="scrollPaneFaulkner1X" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
             <AnchorPane fx:id="scrollPaneFaulkner2" layoutX="-0.6000000238418579" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <StackPane fx:id="masterPaneFaulkner2" prefHeight="150.0" prefWidth="200.0">
-                     <children>
-                     <ImageView fx:id="imageVIewFaulkner2" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                           <Image url="@../Maps/Floor2LM.jpg" />
-                        </image>
-                     </ImageView>
-                     <AnchorPane fx:id="mapPaneFaulkner2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" style="-fx-border-color: #001a3c; -fx-border-width: 5;" />
-                     </children>
-                  </StackPane>
+                  <StackPane fx:id="masterPaneFaulkner2" prefHeight="150.0" prefWidth="200.0" />
                </children></AnchorPane>
             <AnchorPane fx:id="scrollPaneFaulkner3" layoutX="-0.6000000238418579" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <StackPane fx:id="masterPaneFaulkner3" prefHeight="150.0" prefWidth="200.0">
-                     <children>
-                     <ImageView fx:id="imageVIewFaulkner3" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                           <Image url="@../Maps/Floor3LM_edited.jpg" />
-                        </image>
-                     </ImageView>
-                     <AnchorPane fx:id="mapPaneFaulkner3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" style="-fx-border-color: #001a3c; -fx-border-width: 5;" />
-                     </children>
-                  </StackPane>
+                  <StackPane fx:id="masterPaneFaulkner3" prefHeight="150.0" prefWidth="200.0" />
                </children></AnchorPane>
             <AnchorPane fx:id="scrollPaneFaulkner4" layoutX="-0.6000000238418579" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <StackPane fx:id="masterPaneFaulkner4" prefHeight="150.0" prefWidth="200.0">
-                     <children>
-                     <ImageView fx:id="imageVIewFaulkner4" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                           <Image url="@../Maps/Floor4LM.jpg" />
-                        </image>
-                     </ImageView>
-                     <AnchorPane fx:id="mapPaneFaulkner4" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" style="-fx-border-color: #001a3c; -fx-border-width: 5;" />
-                     </children>
-                  </StackPane>
+                  <StackPane fx:id="masterPaneFaulkner4" prefHeight="150.0" prefWidth="200.0" />
                </children></AnchorPane>
             <AnchorPane fx:id="scrollPaneFaulkner5" layoutX="-0.6000000238418579" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <StackPane fx:id="masterPaneFaulkner5" prefHeight="150.0" prefWidth="200.0">
-                     <children>
-                     <ImageView fx:id="imageVIewFaulkner5" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
-                        <image>
-                           <Image url="@../Maps/Floor5LM.jpg" />
-                        </image>
-                     </ImageView>
-                     <AnchorPane fx:id="mapPaneFaulkner5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="975.0" style="-fx-border-color: #001a3c; -fx-border-width: 5;" />
-                     </children>
-                  </StackPane>
+                  <StackPane fx:id="masterPaneFaulkner5" prefHeight="150.0" prefWidth="200.0" />
                </children></AnchorPane>
             <ScrollPane fx:id="scrollPaneFaulkner1" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <content>
                <StackPane fx:id="masterPaneFaulkner1" prefHeight="579.0" prefWidth="959.0">
                   <children>
-                     <ImageView fx:id="imageVIewFaulkner1" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
+                     <ImageView fx:id="imageViewFaulkner1" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
                         <image>
                            <Image url="@../Maps/Floor1LM_edited.jpg" />
                         </image>
                      </ImageView>
                      <AnchorPane fx:id="mapPaneFaulkner1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" style="-fx-border-color: #001a3c; -fx-border-width: 5;" />
+                     <ImageView fx:id="imageViewFaulkner2" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../Maps/Floor2LM.jpg" />
+                        </image>
+                     </ImageView>
+                     <AnchorPane fx:id="mapPaneFaulkner2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" style="-fx-border-color: #001a3c; -fx-border-width: 5;" />
+                     <ImageView fx:id="imageViewFaulkner3" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../Maps/Floor3LM_edited.jpg" />
+                        </image>
+                     </ImageView>
+                     <AnchorPane fx:id="mapPaneFaulkner3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" style="-fx-border-color: #001a3c; -fx-border-width: 5;" />
+                     <ImageView fx:id="imageViewFaulkner4" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../Maps/Floor4LM.jpg" />
+                        </image>
+                     </ImageView>
+                     <AnchorPane fx:id="mapPaneFaulkner4" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" style="-fx-border-color: #001a3c; -fx-border-width: 5;" />
+                     <ImageView fx:id="imageViewFaulkner5" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
+                        <image>
+                           <Image url="@../Maps/Floor5LM.jpg" />
+                        </image>
+                     </ImageView>
+                     <AnchorPane fx:id="mapPaneFaulkner5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="586.0" prefWidth="975.0" style="-fx-border-color: #001a3c; -fx-border-width: 5;" />
                   </children>
                </StackPane>
                </content>

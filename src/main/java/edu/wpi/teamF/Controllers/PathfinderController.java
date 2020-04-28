@@ -19,6 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -40,15 +41,20 @@ public class PathfinderController implements Initializable {
   public AnchorPane mapPaneFaulkner2;
   public AnchorPane mapPaneFaulkner1;
   public StackPane masterPaneFaulkner1;
-  public StackPane masterPaneFaulkner2;
-  public StackPane masterPaneFaulkner3;
-  public StackPane masterPaneFaulkner4;
-  public StackPane masterPaneFaulkner5;
+  //  public StackPane masterPaneFaulkner2;
+  //  public StackPane masterPaneFaulkner3;
+  //  public StackPane masterPaneFaulkner4;
+  //  public StackPane masterPaneFaulkner5;
+  public ImageView imageViewFaulkner1;
+  public ImageView imageViewFaulkner2;
+  public ImageView imageViewFaulkner3;
+  public ImageView imageViewFaulkner4;
+  public ImageView imageViewFaulkner5;
   public ScrollPane scrollPaneFaulkner1;
-  public AnchorPane scrollPaneFaulkner2;
-  public AnchorPane scrollPaneFaulkner3;
-  public AnchorPane scrollPaneFaulkner4;
-  public AnchorPane scrollPaneFaulkner5;
+  //  public AnchorPane scrollPaneFaulkner2;
+  //  public AnchorPane scrollPaneFaulkner3;
+  //  public AnchorPane scrollPaneFaulkner4;
+  //  public AnchorPane scrollPaneFaulkner5;
   public List<Node> nodeList;
   public List<Node> fullNodeList;
   public AnchorPane selectButtonsPane;
@@ -296,6 +302,8 @@ public class PathfinderController implements Initializable {
     currentFloor = 1;
     setAllInvisible();
     scrollPaneFaulkner1.setVisible(true);
+    mapPaneFaulkner1.setVisible(true);
+    imageViewFaulkner1.setVisible(true);
     floorButtonsSet();
 
     UISetting uiSetting = new UISetting();
@@ -520,7 +528,8 @@ public class PathfinderController implements Initializable {
           setNodeList(1);
           // resetPane();
           setAllInvisible();
-          scrollPaneFaulkner1.setVisible(true);
+          mapPaneFaulkner1.setVisible(true);
+          imageViewFaulkner1.setVisible(true);
           deselectFloorButtons();
           floor1Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
         });
@@ -531,7 +540,8 @@ public class PathfinderController implements Initializable {
           setNodeList(2);
           // resetPane();
           setAllInvisible();
-          scrollPaneFaulkner2.setVisible(true);
+          mapPaneFaulkner2.setVisible(true);
+          imageViewFaulkner2.setVisible(true);
           deselectFloorButtons();
           floor2Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
         });
@@ -542,7 +552,8 @@ public class PathfinderController implements Initializable {
           setNodeList(3);
           // resetPane();
           setAllInvisible();
-          scrollPaneFaulkner3.setVisible(true);
+          mapPaneFaulkner3.setVisible(true);
+          imageViewFaulkner3.setVisible(true);
           deselectFloorButtons();
           floor3Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
         });
@@ -553,7 +564,8 @@ public class PathfinderController implements Initializable {
           setNodeList(4);
           // resetPane();
           setAllInvisible();
-          scrollPaneFaulkner4.setVisible(true);
+          mapPaneFaulkner4.setVisible(true);
+          imageViewFaulkner4.setVisible(true);
           deselectFloorButtons();
           floor4Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
         });
@@ -564,7 +576,8 @@ public class PathfinderController implements Initializable {
           setNodeList(5);
           // resetPane();
           setAllInvisible();
-          scrollPaneFaulkner5.setVisible(true);
+          mapPaneFaulkner5.setVisible(true);
+          imageViewFaulkner5.setVisible(true);
           deselectFloorButtons();
           floor5Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
         });
@@ -586,11 +599,16 @@ public class PathfinderController implements Initializable {
   }
 
   public void setAllInvisible() {
-    scrollPaneFaulkner1.setVisible(false);
-    scrollPaneFaulkner2.setVisible(false);
-    scrollPaneFaulkner3.setVisible(false);
-    scrollPaneFaulkner4.setVisible(false);
-    scrollPaneFaulkner5.setVisible(false);
+    mapPaneFaulkner1.setVisible(false);
+    imageViewFaulkner1.setVisible(false);
+    mapPaneFaulkner2.setVisible(false);
+    imageViewFaulkner2.setVisible(false);
+    mapPaneFaulkner3.setVisible(false);
+    imageViewFaulkner3.setVisible(false);
+    mapPaneFaulkner4.setVisible(false);
+    imageViewFaulkner4.setVisible(false);
+    mapPaneFaulkner5.setVisible(false);
+    imageViewFaulkner5.setVisible(false);
   }
 
   public void switchToFloor(int floorNum) {
@@ -601,7 +619,8 @@ public class PathfinderController implements Initializable {
       setNodeList(1);
       // resetPane();
       setAllInvisible();
-      scrollPaneFaulkner1.setVisible(true);
+      mapPaneFaulkner1.setVisible(true);
+      imageViewFaulkner1.setVisible(true);
       startNode = holdNode;
       startCombo.setValue(startNode.getLongName() + " " + startNode.getId());
       deselectFloorButtons();
@@ -614,7 +633,8 @@ public class PathfinderController implements Initializable {
       setNodeList(2);
       // resetPane();
       setAllInvisible();
-      scrollPaneFaulkner2.setVisible(true);
+      mapPaneFaulkner2.setVisible(true);
+      imageViewFaulkner2.setVisible(true);
       startNode = holdNode;
       startCombo.setValue(startNode.getLongName() + " " + startNode.getId());
       deselectFloorButtons();
@@ -627,7 +647,8 @@ public class PathfinderController implements Initializable {
       setNodeList(3);
       // resetPane();
       setAllInvisible();
-      scrollPaneFaulkner3.setVisible(true);
+      mapPaneFaulkner3.setVisible(true);
+      imageViewFaulkner3.setVisible(true);
       startNode = holdNode;
       startCombo.setValue(startNode.getLongName() + " " + startNode.getId());
       deselectFloorButtons();
@@ -640,7 +661,8 @@ public class PathfinderController implements Initializable {
       setNodeList(4);
       // resetPane();
       setAllInvisible();
-      scrollPaneFaulkner4.setVisible(true);
+      mapPaneFaulkner4.setVisible(true);
+      imageViewFaulkner4.setVisible(true);
       startNode = holdNode;
       startCombo.setValue(startNode.getLongName() + " " + startNode.getId());
       deselectFloorButtons();
@@ -653,7 +675,8 @@ public class PathfinderController implements Initializable {
       setNodeList(5);
       // resetPane();
       setAllInvisible();
-      scrollPaneFaulkner5.setVisible(true);
+      mapPaneFaulkner5.setVisible(true);
+      imageViewFaulkner5.setVisible(true);
       startNode = holdNode;
       startCombo.setValue(startNode.getLongName() + " " + startNode.getId());
       deselectFloorButtons();
