@@ -13,11 +13,12 @@ public class UISetting {
 
   public UISetting() throws Exception {}
 
-  public void makeZoomable(ScrollPane scrollPane, StackPane stackPane) {
-    zoom.makeZoomable(scrollPane, stackPane);
+  public void makeZoomable(ScrollPane scrollPane, StackPane stackPane, double maxScaleFactor) {
+    zoom.makeZoomable(scrollPane, stackPane, maxScaleFactor);
   }
 
   public void setAsLocationComboBox(JFXComboBox<String> comboBox) throws Exception {
+
     locationComboBox.setAsLocationComboBox(comboBox);
   }
 
