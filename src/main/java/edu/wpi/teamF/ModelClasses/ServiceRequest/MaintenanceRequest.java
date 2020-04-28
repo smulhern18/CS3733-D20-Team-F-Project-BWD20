@@ -34,6 +34,17 @@ public class MaintenanceRequest extends ServiceRequest {
     setCompleted(completed);
   }
 
+  public MaintenanceRequest(
+      Node location, String description, String assignee, Date dateTimeSubmitted, int priority)
+      throws ValidationException {
+    super(location, assignee, description, dateTimeSubmitted, priority);
+    defaultCompleted();
+  }
+
+  private void defaultCompleted() throws ValidationException {
+    setCompleted(null);
+  }
+
   public Date getTimeCompleted() {
     return completed;
   }

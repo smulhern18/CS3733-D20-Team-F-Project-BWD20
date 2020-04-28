@@ -16,9 +16,11 @@ import java.util.*;
 public class CSVManipulator {
   private NodeFactory nodeFactory = NodeFactory.getFactory();
   private EdgeFactory edgeFactory = EdgeFactory.getFactory();
-  private MaintenanceRequestFactory maintenanceRequestFactory = MaintenanceRequestFactory.getFactory();
+  private MaintenanceRequestFactory maintenanceRequestFactory =
+      MaintenanceRequestFactory.getFactory();
   private SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
   private AccountFactory accountFactory = AccountFactory.getFactory();
+  private DatabaseManager databaseManager = DatabaseManager.getManager();
 
   /**
    * reads a csv file that contains nodes and inserts the data in the file into the correct place in
@@ -179,7 +181,7 @@ public class CSVManipulator {
 
       int i = 8;
       while (i < (data.size() - 1)) {
-        maintenanceRequestFactory.create(
+        databaseManager.manipulateServiceRequest(
             new MaintenanceRequest(
                 data.get(i),
                 nodeFactory.read(data.get(i + 1)),
@@ -188,7 +190,7 @@ public class CSVManipulator {
                 new Date(Integer.parseInt(data.get(i + 4))),
                 Integer.parseInt(data.get(i + 5)),
                 Boolean.parseBoolean(data.get(i + 6)),
-                new Date(Integer.parseInt(data.get(i + 8)))));
+                new Date(Integer.parseInt(data.get(i + 7)))));
 
         i = i + 8;
       }
@@ -205,12 +207,14 @@ public class CSVManipulator {
   /** Writes to the CSV file so that it can become persistant */
   public void writeCSVFileMaintenanceService(Path path) throws Exception {
     // writing to the file
-    List<MaintenanceRequest> maintenanceRequests = maintenanceRequestFactory.getAllMaintenanceRequests();
+    List<MaintenanceRequest> maintenanceRequests =
+        maintenanceRequestFactory.getAllMaintenanceRequests();
 
     try (FileWriter fw = new FileWriter(path.toString() + "/MaintenanceBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
-      bw.write("id,location,assignee,description,dateTimeSubmitted,priority,complete");
+      bw.write(
+          "id,location,assignee,description,dateTimeSubmitted,priority,complete,timeCompleted");
 
       for (MaintenanceRequest m : maintenanceRequests) {
         bw.newLine();

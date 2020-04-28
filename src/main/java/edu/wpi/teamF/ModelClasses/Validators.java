@@ -346,7 +346,6 @@ public class Validators {
     descriptionValidation(maintenanceRequestObject.getDescription());
     dateValidation(maintenanceRequestObject.getDateTimeSubmitted());
     priorityValidation(maintenanceRequestObject.getPriority());
-    dateValidation(maintenanceRequestObject.getTimeCompleted());
   }
 
   /**

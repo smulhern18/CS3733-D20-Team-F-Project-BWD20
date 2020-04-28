@@ -34,6 +34,9 @@ public class ServiceRequestStats {
         bw.newLine();
         bw.write(s);
       }
+      bw.newLine();
+      bw.write("Average time to complete request,");
+      bw.write(CalculateAverageTime(maintenanceRequestList));
 
     } catch (IOException e) {
       System.out.println(e.getMessage() + "" + e.getClass());
@@ -76,5 +79,18 @@ public class ServiceRequestStats {
     }
 
     return csvStyled;
+  }
+
+  private String CalculateAverageTime(List<MaintenanceRequest> maintenanceRequest) {
+    String total = "";
+    Long timeDifference = (long) 0;
+
+    for (MaintenanceRequest m : maintenanceRequest) {
+      if (m.getTimeCompleted() != null) {
+        timeDifference = m.getTimeCompleted().getTime() - m.getDateTimeSubmitted().getTime();
+      }
+    }
+    total = "" + timeDifference + " Miliseconds";
+    return total;
   }
 }

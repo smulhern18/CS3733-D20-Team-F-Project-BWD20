@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MaintenanceRequestFactory {
@@ -28,14 +29,18 @@ public class MaintenanceRequestFactory {
             + DatabaseManager.MAINTENANCE_REQUEST_TABLE_NAME
             + " ( "
             + DatabaseManager.SERVICEID_KEY
+            + ","
+            + DatabaseManager.DATECOMPLETED_KEY
             + " ) "
-            + "VALUES (?)";
+            + "VALUES (?,?)";
     Validators.maintenanceRequestValidation(maintenanceRequest);
     serviceRequestFactory.create(maintenanceRequest);
     try (PreparedStatement prepareStatement =
         DatabaseManager.getConnection().prepareStatement(insertStatement)) {
       int param = 1;
       prepareStatement.setString(param++, maintenanceRequest.getId());
+      prepareStatement.setTimestamp(
+          param++, new Timestamp(maintenanceRequest.getTimeCompleted().getTime()));
 
       try {
         int numRows = prepareStatement.executeUpdate();
@@ -57,8 +62,6 @@ public class MaintenanceRequestFactory {
             + DatabaseManager.MAINTENANCE_REQUEST_TABLE_NAME
             + " WHERE "
             + DatabaseManager.SERVICEID_KEY
-            + " = ?"
-            + DatabaseManager.DATECOMPLETED_KEY
             + " = ?";
 
     try (PreparedStatement preparedStatement =
@@ -78,7 +81,7 @@ public class MaintenanceRequestFactory {
                   serviceRequest.getDateTimeSubmitted(),
                   serviceRequest.getPriority(),
                   serviceRequest.getComplete(),
-                  resultSet.getDate(DatabaseManager.DATECOMPLETED_KEY));
+                  new Date(resultSet.getDate(DatabaseManager.DATECOMPLETED_KEY).getTime()));
         }
       } catch (ValidationException e) {
         throw e;
@@ -97,7 +100,7 @@ public class MaintenanceRequestFactory {
             + DatabaseManager.MAINTENANCE_REQUEST_TABLE_NAME
             + " SET "
             + DatabaseManager.SERVICEID_KEY
-            + " = ? "
+            + " = ?, "
             + DatabaseManager.DATECOMPLETED_KEY
             + " = ? "
             + "WHERE "
@@ -179,7 +182,7 @@ public class MaintenanceRequestFactory {
                 serviceRequest.getDateTimeSubmitted(),
                 serviceRequest.getPriority(),
                 serviceRequest.getComplete(),
-                resultSet.getDate(DatabaseManager.DATECOMPLETED_KEY)));
+                new Date(resultSet.getTimestamp(DatabaseManager.DATECOMPLETED_KEY).getTime())));
       }
     } catch (Exception e) {
       System.out.println(

@@ -1,7 +1,7 @@
 package edu.wpi.teamF.Controllers.UISettings;
 
 import com.jfoenix.controls.JFXComboBox;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Node;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -14,13 +14,17 @@ import javafx.scene.input.KeyEvent;
 
 public class LocationComboBox {
 
-  NodeFactory nodeFactory = NodeFactory.getFactory();
+  DatabaseManager databaseManager = DatabaseManager.getManager();
 
   public void setAsLocationComboBox(JFXComboBox<String> comboBox) {
     comboBox.setEditable(true);
     ObservableList<String> locations = FXCollections.observableArrayList();
-    for (Node node : nodeFactory.getAllNodes()) {
-      locations.add(node.getLongName() + " " + node.getId());
+    try {
+      for (Node node : databaseManager.getAllNodes()) {
+        locations.add(node.getLongName() + " " + node.getId());
+      }
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
     }
     FilteredList<String> filteredLocations = new FilteredList<String>(locations, p -> true);
 

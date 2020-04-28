@@ -3,9 +3,7 @@ package edu.wpi.teamF.ModelClasses;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import edu.wpi.teamF.DatabaseManipulators.ComputerServiceRequestFactory;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.TestData;
 import java.sql.SQLException;
@@ -18,10 +16,7 @@ public class ComputerServiceRequestTest {
 
   static TestData testData = null;
   static ComputerServiceRequest[] validComputerServiceRequest = null;
-  ComputerServiceRequestFactory computerServiceRequestFactory =
-      ComputerServiceRequestFactory.getFactory();
-  NodeFactory nodeFactory = NodeFactory.getFactory();
-  static DatabaseManager databaseManager = new DatabaseManager();
+  static DatabaseManager databaseManager = DatabaseManager.getManager();
   static Node[] validNodes = null;
 
   @BeforeEach
@@ -41,32 +36,26 @@ public class ComputerServiceRequestTest {
   @Test
   public void testCreateReadDelete() {
     try {
-      computerServiceRequestFactory.create(null);
-      fail("Creating a null value is unacceptable");
-    } catch (ValidationException e) {
-      // ignore as expected
-    }
-    try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
 
     } catch (Exception e) {
 
     }
     try {
       for (ComputerServiceRequest computerServiceRequest : validComputerServiceRequest) {
-        computerServiceRequestFactory.create(computerServiceRequest);
+        databaseManager.manipulateServiceRequest(computerServiceRequest);
 
         ComputerServiceRequest readComputer =
-            computerServiceRequestFactory.read(computerServiceRequest.getId());
+            databaseManager.readComputerServiceRequest(computerServiceRequest.getId());
         assertTrue(readComputer.equals(computerServiceRequest));
 
-        computerServiceRequestFactory.delete(computerServiceRequest.getId());
+        databaseManager.deleteComputerServiceRequest(computerServiceRequest.getId());
 
         try {
-          readComputer = computerServiceRequestFactory.read(computerServiceRequest.getId());
+          readComputer = databaseManager.readComputerServiceRequest(computerServiceRequest.getId());
         } // catch (InstanceNotFoundException e) {
         // ignore
         // }
@@ -83,10 +72,10 @@ public class ComputerServiceRequestTest {
   public void testCreateReadUpdateDelete() {
 
     try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
 
     } catch (Exception e) {
 
@@ -94,17 +83,17 @@ public class ComputerServiceRequestTest {
     try {
 
       for (ComputerServiceRequest computerServiceRequest : validComputerServiceRequest) {
-        computerServiceRequestFactory.create(computerServiceRequest);
+        databaseManager.manipulateServiceRequest(computerServiceRequest);
 
         computerServiceRequest.setDescription("Hello");
-        computerServiceRequestFactory.update(computerServiceRequest);
+        databaseManager.manipulateServiceRequest(computerServiceRequest);
 
         ComputerServiceRequest readComp =
-            computerServiceRequestFactory.read(computerServiceRequest.getId());
+            databaseManager.readComputerServiceRequest(computerServiceRequest.getId());
 
         assertTrue(computerServiceRequest.equals(readComp));
 
-        computerServiceRequestFactory.delete(computerServiceRequest.getId());
+        databaseManager.deleteComputerServiceRequest(computerServiceRequest.getId());
       }
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
@@ -114,10 +103,10 @@ public class ComputerServiceRequestTest {
   @Test
   public void testGetMainByLocation() {
     try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
 
     } catch (Exception e) {
 
@@ -127,31 +116,29 @@ public class ComputerServiceRequestTest {
     ComputerServiceRequest main3 = validComputerServiceRequest[2];
     ComputerServiceRequest main4 = validComputerServiceRequest[3];
 
-    NodeFactory nodeFactory = NodeFactory.getFactory();
-
     try {
-      computerServiceRequestFactory.create(main1);
-      computerServiceRequestFactory.create(main2);
-      computerServiceRequestFactory.create(main3);
-      computerServiceRequestFactory.create(main4);
+      databaseManager.manipulateServiceRequest(main1);
+      databaseManager.manipulateServiceRequest(main2);
+      databaseManager.manipulateServiceRequest(main3);
+      databaseManager.manipulateServiceRequest(main4);
 
       List<ComputerServiceRequest> computerAtBathroom =
-          computerServiceRequestFactory.getComputerRequestsByLocation(testData.validNodes[0]);
+          databaseManager.getComputerServiceRequestsByLocation(testData.validNodes[0]);
 
       assertTrue(computerAtBathroom.contains(main1));
 
       assertTrue(computerAtBathroom.size() == 1);
 
       List<ComputerServiceRequest> computerAtnode2 =
-          computerServiceRequestFactory.getComputerRequestsByLocation(testData.validNodes[1]);
+          databaseManager.getComputerServiceRequestsByLocation(testData.validNodes[1]);
 
       assertTrue(computerAtnode2.contains(main2));
       assertTrue(computerAtnode2.size() == 1);
 
-      computerServiceRequestFactory.delete(main1.getId());
-      computerServiceRequestFactory.delete(main2.getId());
-      computerServiceRequestFactory.delete(main3.getId());
-      computerServiceRequestFactory.delete(main4.getId());
+      databaseManager.deleteComputerServiceRequest(main1.getId());
+      databaseManager.deleteComputerServiceRequest(main2.getId());
+      databaseManager.deleteComputerServiceRequest(main3.getId());
+      databaseManager.deleteComputerServiceRequest(main4.getId());
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
     }
@@ -160,10 +147,10 @@ public class ComputerServiceRequestTest {
   @Test
   public void testGetAllMaintenanceRequests() {
     try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
 
     } catch (Exception e) {
 
@@ -174,12 +161,11 @@ public class ComputerServiceRequestTest {
     ComputerServiceRequest main4 = validComputerServiceRequest[3];
 
     try {
-      computerServiceRequestFactory.create(main1);
-      computerServiceRequestFactory.create(main2);
-      computerServiceRequestFactory.create(main3);
-      computerServiceRequestFactory.create(main4);
-      List<ComputerServiceRequest> computerAll =
-          computerServiceRequestFactory.getAllComputerRequests();
+      databaseManager.manipulateServiceRequest(main1);
+      databaseManager.manipulateServiceRequest(main2);
+      databaseManager.manipulateServiceRequest(main3);
+      databaseManager.manipulateServiceRequest(main4);
+      List<ComputerServiceRequest> computerAll = databaseManager.getAllComputerServiceRequests();
 
       assertTrue(computerAll.contains(main1));
       assertTrue(computerAll.contains(main2));
@@ -187,10 +173,10 @@ public class ComputerServiceRequestTest {
       assertTrue(computerAll.contains(main4));
       assertTrue(computerAll.size() == 4);
 
-      computerServiceRequestFactory.delete(main1.getId());
-      computerServiceRequestFactory.delete(main2.getId());
-      computerServiceRequestFactory.delete(main3.getId());
-      computerServiceRequestFactory.delete(main4.getId());
+      databaseManager.deleteComputerServiceRequest(main1.getId());
+      databaseManager.deleteComputerServiceRequest(main2.getId());
+      databaseManager.deleteComputerServiceRequest(main3.getId());
+      databaseManager.deleteComputerServiceRequest(main4.getId());
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
     }

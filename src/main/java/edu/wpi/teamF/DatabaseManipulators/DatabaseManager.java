@@ -9,7 +9,6 @@ import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
-
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.sql.Connection;
@@ -185,7 +184,7 @@ public class DatabaseManager {
             + SERVICEID_KEY
             + " VARCHAR(32) NOT NULL, "
             + DATECOMPLETED_KEY
-            + " TIMESTAMP NOT NULL, "
+            + " TIMESTAMP, "
             + "PRIMARY KEY ("
             + SERVICEID_KEY
             + "))";
