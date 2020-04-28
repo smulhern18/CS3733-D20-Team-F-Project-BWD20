@@ -31,7 +31,6 @@ import javafx.scene.text.Font;
 import javafx.util.Callback;
 import lombok.SneakyThrows;
 
-
 public class ComputerServiceController implements Initializable {
   public JFXTreeTableView<UIComputerServiceRequest> treeTableComputer;
   public AnchorPane anchorPane;

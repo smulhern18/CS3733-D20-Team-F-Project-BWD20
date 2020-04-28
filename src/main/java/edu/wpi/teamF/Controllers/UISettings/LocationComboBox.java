@@ -22,7 +22,6 @@ public class LocationComboBox {
     comboBox.setEditable(true);
     ObservableList<String> locations = FXCollections.observableArrayList();
 
-
     for (Node node : databaseManager.getAllNodes()) {
       locations.add(node.getLongName() + " " + node.getId());
     }
