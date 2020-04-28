@@ -491,8 +491,10 @@ public class DataMapViewController implements Initializable {
 
       List<Integer> typeInstances = new ArrayList<>();
 
-      for (int i = 0; i < typeNodes.size(); i++) { // collects all of the instances for the given type
-        if(typeNodes.get(i).getFloor() == node.getFloor()){
+      for (int i = 0;
+          i < typeNodes.size();
+          i++) { // collects all of the instances for the given type
+        if (typeNodes.get(i).getFloor() == node.getFloor()) {
           instanceNum = Integer.parseInt(typeNodes.get(i).getId().substring(5, 8));
           typeInstances.add(instanceNum);
         }
@@ -646,9 +648,6 @@ public class DataMapViewController implements Initializable {
     edgeFactory.create(newEdge); // creates the edge in the db
     drawEdge(newEdge); // creates the new edge on the map
     // the reason we delete then add for modifying is because the edgeFactory needs the ID to NOT
-    // change in order to update the values
-    // however, the ID of an edge is dependent on the two nodes it is connected to, and if the admin
-    // wants to change the connected nodes, the ID has to change as well
     clearEdge();
   }
 
