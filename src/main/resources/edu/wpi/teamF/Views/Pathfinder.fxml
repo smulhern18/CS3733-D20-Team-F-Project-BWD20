@@ -17,7 +17,7 @@
 
 <AnchorPane prefHeight="700.0" prefWidth="1400.0" style="-fx-background-color: #a2a2a2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.PathfinderController">
 
-   <children>
+<children>
 
       <StackPane layoutX="580.0" layoutY="18.1015625" prefHeight="120.0" prefWidth="975.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -29,7 +29,7 @@
          </children>
       </StackPane>
 
-      <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+   <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
 
       <AnchorPane fx:id="mainMapPane" layoutX="19.399999618530273" layoutY="194.39999389648438" style="-fx-background-color: #a2a2a2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -70,6 +70,7 @@
                         <AnchorPane fx:id="mapPaneFaulkner5" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
                      </children>
                   </StackPane>
+
 
                </content>
             </ScrollPane>
@@ -117,7 +118,9 @@
                      </VBox.margin>
                   </Label>
 
+
                   <VBox minHeight="250.0" prefHeight="250.0" style="-fx-border-color: #001a3c; -fx-border-width: 3px; -fx-background-color: #ffffff;">
+
 
                      <children>
                         <JFXTextArea fx:id="directionsDisplay">
