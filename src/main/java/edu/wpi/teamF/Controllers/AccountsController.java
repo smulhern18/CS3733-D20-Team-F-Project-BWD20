@@ -35,6 +35,8 @@ public class AccountsController implements Initializable {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    algoChoiceBox.setItems(
+        FXCollections.observableArrayList("A Star", "Breadth First", "Depth First"));
 
     // ID column
     JFXTreeTableColumn<UIAccount, String> firstName = new JFXTreeTableColumn<>("First Name");
@@ -172,5 +174,11 @@ public class AccountsController implements Initializable {
 
   public void backtoData(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("DataManipulator");
+  }
+
+  public void updatePathfinderAlgorithm(ActionEvent actionEvent) {
+    if (algoChoiceBox.getValue() != null) {
+      PathfinderController.setPathFindAlgorithm(algoChoiceBox.getValue());
+    }
   }
 }

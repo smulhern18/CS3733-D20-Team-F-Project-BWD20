@@ -16,7 +16,7 @@ public class LocationComboBox {
 
   DatabaseManager databaseManager = DatabaseManager.getManager();
 
-  public LocationComboBox() throws Exception {}
+  public LocationComboBox() {}
 
   public void setAsLocationComboBox(JFXComboBox<String> comboBox) throws Exception {
     comboBox.setEditable(true);

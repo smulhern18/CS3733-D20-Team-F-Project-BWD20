@@ -7,6 +7,8 @@ import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Directions.Directions;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
+import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.BreadthFirst;
+import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.DepthFirstSearch;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.MultipleFloorAStar;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.PathfindAlgorithm;
 import edu.wpi.teamF.ModelClasses.Scorer.EuclideanScorer;
@@ -72,11 +74,37 @@ public class PathfinderController implements Initializable {
 
   Node startNode = null;
   Node endNode = null;
-  PathfindAlgorithm pathFindAlgorithm;
+
   EuclideanScorer euclideanScorer = new EuclideanScorer();
   DatabaseManager databaseManager = DatabaseManager.getManager();
+  PathfindAlgorithm pathFindAlgorithm;
+  private static String newPathfind = " ";
 
-  public PathfinderController() throws Exception {}
+  public PathfinderController() {}
+
+  public static void setPathFindAlgorithm(String newPathFindAlgorithm) {
+    newPathfind = newPathFindAlgorithm;
+    System.out.println("set new pathfind: " + newPathFindAlgorithm);
+  }
+
+  private void updatePathFindAlgorithm() {
+    switch (newPathfind) {
+      case "A Star":
+        this.pathFindAlgorithm = new MultipleFloorAStar(fullNodeList);
+        System.out.println("successful astar");
+        break;
+      case "Breadth First":
+        this.pathFindAlgorithm = new BreadthFirst(fullNodeList);
+        System.out.println("successful breath");
+        break;
+      case "Depth First":
+        this.pathFindAlgorithm = new DepthFirstSearch(fullNodeList);
+        System.out.println("successful Depth first");
+        break;
+      default:
+        break;
+    }
+  }
 
   public void draw(Path path) throws InstanceNotFoundException {
 
@@ -332,6 +360,8 @@ public class PathfinderController implements Initializable {
     //    }
 
     pathFindAlgorithm = new MultipleFloorAStar(fullNodeList);
+    System.out.println("NEW PATHFIND:  " + newPathfind);
+    updatePathFindAlgorithm();
     resetPane();
     drawNodes();
     deselectFloorButtons();
@@ -467,7 +497,7 @@ public class PathfinderController implements Initializable {
     startCombo.setOnAction(
         actionEvent -> {
           String startLocation = startCombo.getValue();
-          if (startLocation.length() > 10) {
+          if (startLocation != null && startLocation.length() > 10) {
             comboSelectStart();
             state = 1;
             commandText.setText("Select End Location or Building Feature");
@@ -485,7 +515,7 @@ public class PathfinderController implements Initializable {
     endCombo.setOnAction(
         actionEvent -> {
           String endLocation = endCombo.getValue();
-          if (endLocation.length() > 10) {
+          if (endLocation != null && endLocation.length() > 10) {
             comboSelectEnd();
             state = 2;
             commandText.setText("Select Find Path or Reset");
