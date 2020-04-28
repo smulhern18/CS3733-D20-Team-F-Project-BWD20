@@ -1,37 +1,50 @@
-package edu.wpi.teamF.Controllers.UISettings;
+package edu.wpi.teamF.Controllers;
 
+import edu.wpi.teamF.Controllers.UISettings.UISetting;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
-public class Zoom {
+public class ZoomController implements Initializable {
 
   private Group zoomNode;
 
   private double scaleValue;
   private double zoomIntensity = 0.02;
 
-  private ScrollPane scrollPane;
-  private StackPane stackPane;
+  @FXML private ScrollPane scrollPane;
+  @FXML private StackPane mapPane;
 
-  public void makeZoomable(ScrollPane scrollPane, StackPane stackPane) {
-    this.scrollPane = scrollPane;
-    this.stackPane = stackPane;
-    zoomNode = new Group(this.stackPane);
-    scrollPane.setContent(outerNode(zoomNode));
+  @FXML private ImageView mapImage;
+  @FXML private Label testLabel;
 
-    scrollPane.setPannable(true);
-    scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-    scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-    scrollPane.setFitToHeight(true); // center
-    scrollPane.setFitToWidth(true); // center
-    scaleValue = 1;
-    updateScale();
+  UISetting uiSetting = new UISetting();
+
+  @Override
+  public void initialize(URL url, ResourceBundle resourceBundle) {
+    // zoomPane = new ZoomableScrollPane(scrollPane);
+    //    zoomNode = new Group(mapPane);
+    //    scrollPane.setContent(outerNode(zoomNode));
+    //
+    //    scrollPane.setPannable(true);
+    //    scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+    //    scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+    //    scrollPane.setFitToHeight(true); // center
+    //    scrollPane.setFitToWidth(true); // center
+    //    scaleValue = 1;
+    //    updateScale();
+    uiSetting.makeZoomable(scrollPane, mapPane);
   }
 
   private Node outerNode(Node node) {
@@ -40,6 +53,14 @@ public class Zoom {
         e -> {
           e.consume();
           onScroll(e.getTextDeltaY(), new Point2D(e.getX(), e.getY()));
+          testLabel.setText(
+              "H: "
+                  + scrollPane.getHeight()
+                  + ""
+                  + "W: "
+                  + scrollPane.getWidth()
+                  + "Scale: "
+                  + mapPane.getScaleX());
         });
     return outerNode;
   }
@@ -51,13 +72,12 @@ public class Zoom {
   }
 
   private void updateScale() {
-    stackPane.setScaleX(scaleValue);
-    stackPane.setScaleY(scaleValue);
+    mapPane.setScaleX(scaleValue);
+    mapPane.setScaleY(scaleValue);
   }
 
   private void onScroll(double wheelDelta, Point2D mousePoint) {
     double zoomFactor = Math.exp(wheelDelta * zoomIntensity);
-    // System.out.println(zoomFactor);
 
     Bounds innerBounds = zoomNode.getLayoutBounds();
     Bounds viewportBounds = scrollPane.getViewportBounds();
@@ -73,11 +93,11 @@ public class Zoom {
     scrollPane.layout(); // refresh ScrollPane scroll positions & target bounds
 
     // convert target coordinates to zoomTarget coordinates
-    Point2D posInZoomTarget = stackPane.parentToLocal(zoomNode.parentToLocal(mousePoint));
+    Point2D posInZoomTarget = mapPane.parentToLocal(zoomNode.parentToLocal(mousePoint));
 
     // calculate adjustment of scroll position (pixels)
     Point2D adjustment =
-        stackPane
+        mapPane
             .getLocalToParentTransform()
             .deltaTransform(posInZoomTarget.multiply(zoomFactor - 1));
 
