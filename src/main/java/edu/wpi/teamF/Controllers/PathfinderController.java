@@ -310,17 +310,16 @@ public class PathfinderController implements Initializable {
     //    String endID = endLocation.substring(endLocation.length() - 10);
 
     uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1);
-    imageViewFaulkner1.fitWidthProperty().bind(scrollPaneFaulkner1.widthProperty());
-    imageViewFaulkner1.fitHeightProperty().bind(scrollPaneFaulkner1.heightProperty());
-    imageViewFaulkner2.fitWidthProperty().bind(scrollPaneFaulkner1.widthProperty());
-    imageViewFaulkner2.fitHeightProperty().bind(scrollPaneFaulkner1.heightProperty());
-    imageViewFaulkner3.fitWidthProperty().bind(scrollPaneFaulkner1.widthProperty());
-    imageViewFaulkner3.fitHeightProperty().bind(scrollPaneFaulkner1.heightProperty());
-    imageViewFaulkner4.fitWidthProperty().bind(scrollPaneFaulkner1.widthProperty());
-    imageViewFaulkner4.fitHeightProperty().bind(scrollPaneFaulkner1.heightProperty());
-    imageViewFaulkner5.fitWidthProperty().bind(scrollPaneFaulkner1.widthProperty());
-    imageViewFaulkner5.fitHeightProperty().bind(scrollPaneFaulkner1.heightProperty());
-    // mapPaneFaulkner1.wid
+    //    imageViewFaulkner1.fitWidthProperty().bind(scrollPaneFaulkner1.widthProperty());
+    //    imageViewFaulkner1.fitHeightProperty().bind(scrollPaneFaulkner1.heightProperty());
+    //    imageViewFaulkner2.fitWidthProperty().bind(scrollPaneFaulkner1.widthProperty());
+    //    imageViewFaulkner2.fitHeightProperty().bind(scrollPaneFaulkner1.heightProperty());
+    //    imageViewFaulkner3.fitWidthProperty().bind(scrollPaneFaulkner1.widthProperty());
+    //    imageViewFaulkner3.fitHeightProperty().bind(scrollPaneFaulkner1.heightProperty());
+    //    imageViewFaulkner4.fitWidthProperty().bind(scrollPaneFaulkner1.widthProperty());
+    //    imageViewFaulkner4.fitHeightProperty().bind(scrollPaneFaulkner1.heightProperty());
+    //    imageViewFaulkner5.fitWidthProperty().bind(scrollPaneFaulkner1.widthProperty());
+    //    imageViewFaulkner5.fitHeightProperty().bind(scrollPaneFaulkner1.heightProperty());
 
     for (Node node : nodeFactory.getAllNodes()) {
       node.setEdges(edgeFactory.getAllEdgesConnectedToNode(node.getId()));
