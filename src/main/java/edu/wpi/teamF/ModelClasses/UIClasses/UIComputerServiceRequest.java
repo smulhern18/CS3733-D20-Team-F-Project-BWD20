@@ -25,13 +25,6 @@ public class UIComputerServiceRequest extends RecursiveTreeObject<UIComputerServ
 
   public UIComputerServiceRequest(ComputerServiceRequest csr) {
     DateFormat date = new SimpleDateFormat("yyyy-mm-dd");
-    boolean isCompleted = csr.getComplete();
-    String cmp;
-    if (isCompleted) {
-      cmp = "Complete";
-    } else {
-      cmp = "Incomplete";
-    }
 
     this.ID = new SimpleStringProperty(csr.getId());
     this.location = new SimpleStringProperty(csr.getLocation().getId());
@@ -42,7 +35,7 @@ public class UIComputerServiceRequest extends RecursiveTreeObject<UIComputerServ
     this.priority = new SimpleStringProperty("" + csr.getPriority());
     this.assignee = new SimpleStringProperty(csr.getAssignee());
     this.dateSubmitted = new SimpleStringProperty(date.format(csr.getDateTimeSubmitted()));
-    this.completed = new SimpleBooleanProperty(false);
+    this.completed = new SimpleBooleanProperty();
   }
 
   public boolean equalsCSR(Object other) {
