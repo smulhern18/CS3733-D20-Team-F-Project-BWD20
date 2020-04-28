@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class UITransportRequest  extends RecursiveTreeObject<UIComputerServiceRequest> {
+public class UITransportRequest extends RecursiveTreeObject<UIComputerServiceRequest> {
   public SimpleStringProperty ID;
   public SimpleStringProperty location;
   public SimpleStringProperty destination;
@@ -23,6 +23,7 @@ public class UITransportRequest  extends RecursiveTreeObject<UIComputerServiceRe
   public SimpleBooleanProperty completed;
   public SimpleStringProperty description;
   public SimpleStringProperty type;
+
   public UITransportRequest(TransportRequest csr) {
     DateFormat date = new SimpleDateFormat("yyyy-mm-dd");
 
