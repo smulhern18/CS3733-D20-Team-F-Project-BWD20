@@ -41,7 +41,7 @@ public class Validators {
   public static final int HARDWARESOFTWARE_MIN_LENGTH = 1;
   public static final int HARDWARESOFTWARE_MAX_LENGTH = 32;
   public static final int OS_MIN_LENGTH = 1;
-  public static final int OS_MAX_LENGTH = 8;
+  public static final int OS_MAX_LENGTH = 32;
   public static final int TRANSPORT_TYPE_MIN_LENGTH = 1;
   public static final int TRANSPORT_TYPE_MAX_LENGTH = 32;
   public static final int PROBLEMTYPE_MIN_LENGTH = 1;

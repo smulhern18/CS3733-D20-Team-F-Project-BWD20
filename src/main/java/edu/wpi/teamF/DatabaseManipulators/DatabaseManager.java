@@ -230,20 +230,20 @@ public class DatabaseManager {
             + "))";
 
     String transportTableCreationStatement =
-            "CREATE TABLE "
-                    + TRANSPORT_REQUEST_TABLE_NAME
-                    + " ( "
-                    + SERVICEID_KEY
-                    +" VARCHAR(32) NOT NULL, "
-                    + TRANSPORT_TYPE_KEY
-                    +" VARCHAR(32) NOT NULL, "
-                    + DESTINATION_KEY
-                    +" VARCHAR(32) NOT NULL, "
-                    + TIME_COMPLETED_KEY
-                    + " TIMESTAMP NOT NULL, "
-                    + "PRIMARY KEY ("
-                    + SERVICEID_KEY
-                    + "))";
+        "CREATE TABLE "
+            + TRANSPORT_REQUEST_TABLE_NAME
+            + " ( "
+            + SERVICEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + TRANSPORT_TYPE_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + DESTINATION_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + TIME_COMPLETED_KEY
+            + " TIMESTAMP NOT NULL, "
+            + "PRIMARY KEY ("
+            + SERVICEID_KEY
+            + "))";
 
     String languageTableCreationStatement =
         "CREATE TABLE "

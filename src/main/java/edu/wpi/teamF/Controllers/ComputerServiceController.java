@@ -261,7 +261,8 @@ public class ComputerServiceController implements Initializable {
   public void submit(ActionEvent actionEvent) throws Exception {
     // Get the values
     String location = locationChoice.getValue();
-    Node node = databaseManager.readNode(location);
+    String nodeID = location.substring(location.length() - 10);
+    Node node = databaseManager.readNode(nodeID);
     String make = makeChoice.getValue();
     String issueType = issueChoice.getValue();
     String OS = OSChoice.getValue();
