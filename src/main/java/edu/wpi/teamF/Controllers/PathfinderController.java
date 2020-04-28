@@ -227,6 +227,11 @@ public class PathfinderController implements Initializable {
     for (javafx.scene.Node node : mapPaneFaulkner1.getChildren()) {
       if (node instanceof Line) {
         nodesToRemove1.add(node);
+      } else if (node instanceof JFXButton) {
+        JFXButton button = (JFXButton) node;
+        button.setStyle(
+            "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #0067b1; "
+                + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
       }
     }
     mapPaneFaulkner1.getChildren().removeAll(nodesToRemove1);
@@ -234,6 +239,11 @@ public class PathfinderController implements Initializable {
     for (javafx.scene.Node node : mapPaneFaulkner2.getChildren()) {
       if (node instanceof Line) {
         nodesToRemove2.add(node);
+      } else if (node instanceof JFXButton) {
+        JFXButton button = (JFXButton) node;
+        button.setStyle(
+            "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #0067b1; "
+                + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
       }
     }
     mapPaneFaulkner2.getChildren().removeAll(nodesToRemove2);
@@ -241,6 +251,11 @@ public class PathfinderController implements Initializable {
     for (javafx.scene.Node node : mapPaneFaulkner3.getChildren()) {
       if (node instanceof Line) {
         nodesToRemove3.add(node);
+      } else if (node instanceof JFXButton) {
+        JFXButton button = (JFXButton) node;
+        button.setStyle(
+            "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #0067b1; "
+                + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
       }
     }
     mapPaneFaulkner3.getChildren().removeAll(nodesToRemove3);
@@ -248,6 +263,11 @@ public class PathfinderController implements Initializable {
     for (javafx.scene.Node node : mapPaneFaulkner4.getChildren()) {
       if (node instanceof Line) {
         nodesToRemove4.add(node);
+      } else if (node instanceof JFXButton) {
+        JFXButton button = (JFXButton) node;
+        button.setStyle(
+            "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #0067b1; "
+                + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
       }
     }
     mapPaneFaulkner4.getChildren().removeAll(nodesToRemove4);
@@ -255,6 +275,11 @@ public class PathfinderController implements Initializable {
     for (javafx.scene.Node node : mapPaneFaulkner5.getChildren()) {
       if (node instanceof Line) {
         nodesToRemove5.add(node);
+      } else if (node instanceof JFXButton) {
+        JFXButton button = (JFXButton) node;
+        button.setStyle(
+            "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #0067b1; "
+                + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
       }
     }
     mapPaneFaulkner5.getChildren().removeAll(nodesToRemove5);
@@ -415,7 +440,7 @@ public class PathfinderController implements Initializable {
           stairsBtn.setDisable(false);
           elevBtn.setDisable(false);
           bathBtn.setDisable(false);
-          for (javafx.scene.Node component : currentPane.getChildren()) {
+          for (javafx.scene.Node component : getFloorPane(node.getFloor()).getChildren()) {
             if (component.getId().equals(node.getId())) {
               component.setStyle(
                   "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; "
@@ -432,9 +457,10 @@ public class PathfinderController implements Initializable {
     if (endLocation.length() > 10) {
       //    String endLocation = endCombo.getValue();
       //    if (endCombo.getValue() != null) {
+      String endID = endLocation.substring(endLocation.length() - 10);
       for (Node node : fullNodeList) {
-        String endID = endLocation.substring(endLocation.length() - 10);
-        if (node.getId() == endID) {
+
+        if (node.getId().equals(endID)) {
           if (endNode != null) {
             for (javafx.scene.Node component : currentPane.getChildren()) {
               if (component.getId().equals(endNode.getId())) {
@@ -448,7 +474,7 @@ public class PathfinderController implements Initializable {
           stairsBtn.setDisable(true);
           elevBtn.setDisable(true);
           bathBtn.setDisable(true);
-          for (javafx.scene.Node component : currentPane.getChildren()) {
+          for (javafx.scene.Node component : getFloorPane(node.getFloor()).getChildren()) {
             if (component.getId().equals(node.getId())) {
               component.setStyle(
                   "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00cc00; "
@@ -534,6 +560,7 @@ public class PathfinderController implements Initializable {
           System.out.println("start" + startNode);
           System.out.println("end" + endNode);
           Path path = null;
+          switchToFloor(startNode.getFloor());
           try {
             path = pathFindAlgorithm.pathfind(startNode, endNode);
           } catch (InstanceNotFoundException e) {
@@ -720,6 +747,21 @@ public class PathfinderController implements Initializable {
     } else {
       switchToFloor(startNode.getFloor());
       pathSwitchFloor.setText("Next: Go to floor " + Integer.toString(endNode.getFloor()));
+    }
+  }
+
+  public AnchorPane getFloorPane(int floor) {
+    switch (floor) {
+      case 1:
+        return mapPaneFaulkner1;
+      case 2:
+        return mapPaneFaulkner2;
+      case 3:
+        return mapPaneFaulkner3;
+      case 4:
+        return mapPaneFaulkner4;
+      default:
+        return mapPaneFaulkner5;
     }
   }
 }

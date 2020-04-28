@@ -36,7 +36,7 @@ public class TransportRequestFactory {
             + ", "
             + DatabaseManager.TIME_COMPLETED_KEY
             + " ) "
-            + "VALUES (?, ?, ?)";
+            + "VALUES (?, ?, ?, ?)";
     Validators.transportRequestValidation(transportRequest);
     serviceRequestFactory.create(transportRequest);
     try (PreparedStatement prepareStatement =
