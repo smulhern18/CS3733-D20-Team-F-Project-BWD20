@@ -684,21 +684,8 @@ public class DatabaseManager {
     }
   }
 
-  public void manipulateServiceRequest(TransportRequest tRequest) throws ValidationException {
-    Validators.transportRequestValidation(tRequest);
-    if (transportRequestFactory.read(tRequest.getId()) == null) {
-      transportRequestFactory.create(tRequest);
-    } else {
-      transportRequestFactory.update(tRequest);
-    }
-  }
-
   public MaintenanceRequest readMaintenanceRequest(String serviceId) throws Exception {
     return maintenanceRequestFactory.read(serviceId);
-  }
-
-  public TransportRequest readTransportRequest(String serviceId) throws Exception {
-    return transportRequestFactory.read(serviceId);
   }
 
   public SecurityRequest readSecurityRequest(String serviceId) throws Exception {
@@ -752,10 +739,6 @@ public class DatabaseManager {
 
   public List<MaintenanceRequest> getAllMaintenanceRequests() throws Exception {
     return maintenanceRequestFactory.getAllMaintenanceRequests();
-  }
-
-  public List<TransportRequest> getAllTransportRequests() throws Exception {
-    return transportRequestFactory.getAllTransportRequests();
   }
 
   public List<SecurityRequest> getAllSecurityRequests() throws Exception {

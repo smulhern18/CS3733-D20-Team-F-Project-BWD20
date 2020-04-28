@@ -29,7 +29,7 @@
          <children>
             <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#switchToComputerService" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../Images/baseline_computer_black_18dp.png" />
+                  <Image url="@../../../../Images/baseline_computer_black_48dp.png" />
                </image>
             </ImageView>
             <JFXButton prefWidth="120.0" text="Computer Service" GridPane.rowIndex="1">
@@ -39,7 +39,7 @@
             </JFXButton>
             <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#medicineService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                <image>
-                  <Image url="@../../../../Images/baseline_healing_black_18dp.png" />
+                  <Image url="@../../../../Images/baseline_healing_black_48dp.png" />
                </image>
             </ImageView>
             <JFXButton text="Medicine Delivery" GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -49,7 +49,7 @@
             </JFXButton>
             <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#languageService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
-                  <Image url="@../../../../Images/baseline_language_black_18dp.png" />
+                  <Image url="@../../../../Images/baseline_record_voice_over_black_48dp.png" />
                </image>
             </ImageView>
             <JFXButton text="Language Request" GridPane.columnIndex="2" GridPane.rowIndex="1">
@@ -59,7 +59,7 @@
             </JFXButton>
             <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#sanitationRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                <image>
-                  <Image url="@../../../../Images/baseline_pan_tool_black_18dp.png" />
+                  <Image url="@../../../../Images/baseline_pan_tool_black_48dp.png" />
                </image>
             </ImageView>
             <JFXButton text="Sanitation" GridPane.columnIndex="3" GridPane.rowIndex="1">
@@ -69,7 +69,7 @@
             </JFXButton>
             <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#mariachiService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                <image>
-                  <Image url="@../../../../Images/baseline_music_note_black_18dp.png" />
+                  <Image url="@../../../../Images/baseline_audiotrack_black_48dp.png" />
                </image>
             </ImageView>
             <JFXButton text="Mariachi" GridPane.columnIndex="4" GridPane.rowIndex="1">
@@ -79,7 +79,7 @@
             </JFXButton>
             <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#securityRequest" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../../../Images/baseline_face_black_18dp.png" />
+                  <Image url="@../../../../Images/baseline_face_black_48dp.png" />
                </image>
             </ImageView>
             <JFXButton text="Security" GridPane.rowIndex="3">
@@ -89,7 +89,7 @@
             </JFXButton>
             <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#switchToLaundryService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../../../Images/baseline_local_laundry_service_black_18dp.png" />
+                  <Image url="@../../../../Images/baseline_local_laundry_service_black_48dp.png" />
                </image>
             </ImageView>
             <JFXButton text="Laundry" GridPane.columnIndex="1" GridPane.rowIndex="3">
@@ -99,7 +99,7 @@
             </JFXButton>
             <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#flowerRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../../../Images/baseline_local_florist_black_18dp.png" />
+                  <Image url="@../../../../Images/baseline_local_florist_black_48dp.png" />
                </image>
             </ImageView>
             <JFXButton text="Flower" GridPane.columnIndex="2" GridPane.rowIndex="3">
@@ -107,22 +107,22 @@
                   <Font name="STIXGeneral-Regular" size="13.0" />
                </font>
             </JFXButton>
-            <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#transportRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../../../Images/icons8-qzemail03.png" />
+                  <Image url="@../../../../Images/baseline_commute_black_48dp.png" />
                </image>
             </ImageView>
-            <JFXButton text="Security" GridPane.columnIndex="3" GridPane.rowIndex="3">
+            <JFXButton text="Transport" GridPane.columnIndex="3" GridPane.rowIndex="3">
                <font>
                   <Font name="STIXGeneral-Regular" size="13.0" />
                </font>
             </JFXButton>
-            <ImageView fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
+            <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#maintenanceRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../../../../Images/icons8-qzemail03.png" />
+                  <Image url="@../../../../Images/baseline_broken_image_black_48dp.png" />
                </image>
             </ImageView>
-            <JFXButton text="Security" GridPane.columnIndex="4" GridPane.rowIndex="3">
+            <JFXButton text="Maintance" GridPane.columnIndex="4" GridPane.rowIndex="3">
                <font>
                   <Font name="STIXGeneral-Regular" size="13.0" />
                </font>

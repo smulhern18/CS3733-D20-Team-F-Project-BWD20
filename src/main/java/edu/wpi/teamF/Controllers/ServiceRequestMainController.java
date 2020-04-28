@@ -38,4 +38,12 @@ public class ServiceRequestMainController {
   public void flowerRequest(MouseEvent mouseEvent) throws IOException {
     sceneController.switchScene("FlowerRequestInfo");
   }
+
+  public void maintenanceRequest(MouseEvent mouseEvent) throws IOException {
+    sceneController.switchScene("MaintenanceRequest");
+  }
+
+  public void transportRequest(MouseEvent mouseEvent) throws IOException {
+    sceneController.switchScene("TransportRequest");
+  }
 }

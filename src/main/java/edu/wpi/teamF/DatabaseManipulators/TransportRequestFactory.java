@@ -174,7 +174,7 @@ public class TransportRequestFactory {
   }
 
   public List<TransportRequest> getAllTransportRequests() {
-    List<TransportRequest> transportRequests = null;
+    List<TransportRequest> transportRequests = new ArrayList<>();
     String selectStatement = "SELECT * FROM " + DatabaseManager.TRANSPORT_REQUEST_TABLE_NAME;
     try (PreparedStatement preparedStatement =
             DatabaseManager.getConnection().prepareStatement(selectStatement);
