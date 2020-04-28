@@ -32,6 +32,7 @@ public class App extends Application {
       new ServiceRequestMainController();
   private AccountsController accountsController = new AccountsController();
   private ComputerServiceController computerController = new ComputerServiceController();
+  private MedicineDeliveryController medicineController = new MedicineDeliveryController();
 
   @Override
   public void init() {}
@@ -63,11 +64,13 @@ public class App extends Application {
             return accountsController;
           } else if (controllerClass.equals(ComputerServiceController.class)) {
             return computerController;
+          } else if (controllerClass.equals(MedicineDeliveryController.class)) {
+            return medicineController;
           }
           return null;
         });
     sceneController = new SceneController(fxmlLoader, primaryStage, primaryScene);
-    Parent root = fxmlLoader.load(getClass().getResource("Views/FlowerRequestInfo.fxml"));
+    Parent root = fxmlLoader.load(getClass().getResource("Views/MainMenu.fxml"));
     primaryScene.setRoot(root);
     primaryStage.setScene(primaryScene);
     primaryStage.setAlwaysOnTop(true);
