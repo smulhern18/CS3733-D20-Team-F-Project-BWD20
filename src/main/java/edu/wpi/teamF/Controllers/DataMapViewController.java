@@ -164,7 +164,7 @@ public class DataMapViewController implements Initializable {
             "STAI");
     typeInput.setValue("CONF");
 
-    uiSetting.makeZoomable(imageScrollPane, imageStackPane);
+    uiSetting.makeZoomable(imageScrollPane, imageStackPane, 1);
   }
 
   @FXML

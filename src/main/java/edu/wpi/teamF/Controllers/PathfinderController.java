@@ -267,7 +267,7 @@ public class PathfinderController implements Initializable {
     selectButtonsPane.setVisible(true);
     pathSwitchFloorPane.setVisible(false);
 
-    uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1);
+    uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1, 1.33);
 
     startCombo.setValue(null);
     endCombo.setValue(null);
@@ -309,7 +309,7 @@ public class PathfinderController implements Initializable {
     String endLocation = endCombo.getValue();
     //    String endID = endLocation.substring(endLocation.length() - 10);
 
-    uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1);
+    uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1, 1.33);
     //    imageViewFaulkner1.fitWidthProperty().bind(scrollPaneFaulkner1.widthProperty());
     //    imageViewFaulkner1.fitHeightProperty().bind(scrollPaneFaulkner1.heightProperty());
     //    imageViewFaulkner2.fitWidthProperty().bind(scrollPaneFaulkner1.widthProperty());
