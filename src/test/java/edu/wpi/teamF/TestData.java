@@ -318,6 +318,58 @@ public class TestData {
         false,
         validCompletedDates[3]),
   };
+
+  public String[] validTypes = {
+    "MRI machine", "patient on stretcher", "patient in wheelchair", "patient in bed"
+  };
+
+  public TransportRequest[] validTransportRequests = {
+    new TransportRequest(
+        validIDs[0],
+        validNodes[0],
+        validAssignees[0],
+        validDescriptions[0],
+        validDates[0],
+        2,
+        false,
+        validTypes[0],
+        validNodes[7],
+        validCompletedDates[0]),
+    new TransportRequest(
+        validIDs[1],
+        validNodes[1],
+        validAssignees[1],
+        validDescriptions[1],
+        validDates[1],
+        2,
+        false,
+        validTypes[1],
+        validNodes[6],
+        validCompletedDates[1]),
+    new TransportRequest(
+        validIDs[2],
+        validNodes[2],
+        validAssignees[2],
+        validDescriptions[2],
+        validDates[2],
+        2,
+        true,
+        validTypes[2],
+        validNodes[5],
+        validCompletedDates[2]),
+    new TransportRequest(
+        validIDs[3],
+        validNodes[3],
+        validAssignees[3],
+        validDescriptions[3],
+        validDates[3],
+        2,
+        false,
+        validTypes[3],
+        validNodes[4],
+        validCompletedDates[3]),
+  };
+
   public String[] validOS = {"Mac", "Linux", "Windows", "Newton"};
   public String[] validHardwareSoftware = {"Soft", "Hard", "Soft", "Hard"};
   public String[] validMake = {"Mac 10", "Linux 11", "Windows 12", "Newton 23"};
