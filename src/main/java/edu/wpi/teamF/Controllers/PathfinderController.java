@@ -63,7 +63,7 @@ public class PathfinderController implements Initializable {
   public JFXComboBox<String> startCombo;
   public JFXComboBox<String> endCombo;
   public JFXButton pathButton;
-  // public JFXTextField directionsDisplayField;
+  public Text directionsDisplay;
   public int state;
   public UISetting uiSetting = new UISetting();
 
@@ -112,7 +112,7 @@ public class PathfinderController implements Initializable {
     directionsPane.setVisible(true);
     Directions directions = new Directions(fullNodeList, path, startNode, endNode);
     System.out.println(directions.getFullDirectionsString());
-    // directionsDisplayField.setText(directions.getFullDirectionsString());
+    directionsDisplay.setText(directions.getFullDirectionsString());
   }
 
   public void placeButton(Node node) {
@@ -192,6 +192,7 @@ public class PathfinderController implements Initializable {
   }
 
   public void resetPane() {
+    System.out.println("Reset Clicked");
     List<javafx.scene.Node> nodesToRemove1 = new ArrayList<>();
     for (javafx.scene.Node node : mapPaneFaulkner1.getChildren()) {
       if (node instanceof Line) {
