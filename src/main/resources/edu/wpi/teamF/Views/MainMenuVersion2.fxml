@@ -20,9 +20,9 @@
             <Image url="@../../../../Images/Brigham-Social-1024x538.jpg" />
          </image>
       </ImageView>
-      <Pane layoutY="294.0" prefHeight="108.0" prefWidth="506.0">
+      <Pane layoutY="296.0" prefHeight="43.0" prefWidth="506.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#214d75" height="70.0" layoutY="-9.0" opacity="0.96" stroke="TRANSPARENT" strokeType="INSIDE" width="506.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#214d75" height="50.0" layoutY="-9.0" opacity="0.96" stroke="TRANSPARENT" strokeType="INSIDE" width="506.0" />
          </children>
       </Pane>
       <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -35,42 +35,43 @@
          <children>
             <GridPane fx:id="gridPane">
               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                  <ColumnConstraints hgrow="SOMETIMES" percentWidth="23.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="25.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints percentHeight="15.0" vgrow="SOMETIMES" />
-                <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
-                  <RowConstraints percentHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
-                  <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="29.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="170.0" minHeight="135.0" percentHeight="31.0" prefHeight="170.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="92.0" minHeight="5.0" percentHeight="0.0" prefHeight="10.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="3" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="4">
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="3">
                      <children>
                         <JFXButton fx:id="loginButton" buttonType="RAISED" onAction="#login" ripplerFill="#012d5a" style="-fx-background-color: white;" text="Login">
                            <font>
-                              <Font name="Microsoft YaHei Light" size="22.0" />
+                              <Font name="Microsoft YaHei Light" size="14.0" />
                            </font>
                         </JFXButton>
                      </children>
                   </StackPane>
-                  <JFXButton fx:id="pathfinderButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#pathfinder" ripplerFill="#012d5a" style="-fx-background-color: white;" text="Pathfinder" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                  <JFXButton fx:id="pathfinderButton" alignment="CENTER" buttonType="RAISED" contentDisplay="CENTER" onAction="#pathfinder" ripplerFill="#012d5a" style="-fx-background-color: white;" text="Pathfinder" GridPane.columnIndex="1" GridPane.rowIndex="3">
                      <font>
-                        <Font name="Microsoft YaHei Light" size="22.0" />
+                        <Font name="Microsoft YaHei Light" size="15.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="helpButton" alignment="CENTER" buttonType="RAISED" onAction="#help" ripplerFill="#012d5a" style="-fx-background-color: white;" text="Help" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                  <JFXButton fx:id="helpButton" alignment="CENTER" buttonType="RAISED" onAction="#help" ripplerFill="#012d5a" style="-fx-background-color: white;" text="Help" GridPane.columnIndex="3" GridPane.rowIndex="3">
                      <font>
-                        <Font name="Microsoft YaHei Light" size="22.0" />
+                        <Font name="Microsoft YaHei Light" size="14.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" contentDisplay="CENTER" ripplerFill="#012d5a" style="-fx-background-color: white;" text="Service Request" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Microsoft YaHei Light" size="14.0" />
                      </font>
                   </JFXButton>
                </children>
