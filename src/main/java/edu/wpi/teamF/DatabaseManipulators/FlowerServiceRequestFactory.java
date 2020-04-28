@@ -209,26 +209,7 @@ public class FlowerServiceRequestFactory {
       flowerRequests = new ArrayList<>();
       ;
       while (resultSet.next()) {
-        ServiceRequest serviceRequest =
-            serviceRequestFactory.read(resultSet.getString(DatabaseManager.SERVICEID_KEY));
-        FlowerRequest flowerRequest =
-            factory.read(resultSet.getString(DatabaseManager.SERVICEID_KEY));
-        flowerRequests.add(
-            new FlowerRequest(
-                serviceRequest.getId(),
-                serviceRequest.getLocation(),
-                serviceRequest.getAssignee(),
-                serviceRequest.getDescription(),
-                serviceRequest.getDateTimeSubmitted(),
-                serviceRequest.getPriority(),
-                flowerRequest.getRecipientInput(),
-                flowerRequest.getRoomInput(),
-                flowerRequest.getChoice(),
-                flowerRequest.getMessageInput(),
-                flowerRequest.getBuyerName(),
-                flowerRequest.getPhoneNumber(),
-                flowerRequest.getGiftWrap(),
-                serviceRequest.getComplete()));
+        flowerRequests.add(factory.read(resultSet.getString(DatabaseManager.SERVICEID_KEY)));
       }
     } catch (Exception e) {
       System.out.println(

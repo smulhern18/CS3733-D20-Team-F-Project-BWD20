@@ -5,8 +5,7 @@ import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
-import edu.wpi.teamF.DatabaseManipulators.FlowerServiceRequestFactory;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.FlowerRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UiFlowerServiceRequest;
@@ -106,9 +105,8 @@ public class FlowerRequestInfoController implements Initializable {
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UiFlowerServiceRequest> frUI = FXCollections.observableArrayList();
-  NodeFactory nodeFactory = NodeFactory.getFactory();
-  FlowerServiceRequestFactory flowerServiceRequest = FlowerServiceRequestFactory.getFactory();
-  List<FlowerRequest> flowerServiceRequests = flowerServiceRequest.getAllFlowerRequests();
+  DatabaseManager databaseManager = DatabaseManager.getManager();
+  List<FlowerRequest> flowerServiceRequests = databaseManager.getAllFlowerRequests();
 
   @SneakyThrows
   @Override
@@ -329,12 +327,11 @@ public class FlowerRequestInfoController implements Initializable {
     treeTableFlower.setShowRoot(false);
   }
 
-  public void submit(ActionEvent actionEvent)
-      throws ValidationException, InstanceNotFoundException {
+  public void submit(ActionEvent actionEvent) throws Exception {
     // Get the values git s
     String location = locationComboBox.getValue();
     String nodeID = location.substring(location.length() - 10);
-    Node node = nodeFactory.read(nodeID);
+    Node node = databaseManager.readNode(nodeID);
     String priority = priorityComboBox.getValue();
     String recipient = recipientInput.getText();
     String room = roomInput.getText();
@@ -370,7 +367,7 @@ public class FlowerRequestInfoController implements Initializable {
             buyerName,
             phoneNumber,
             giftWrap);
-    flowerServiceRequest.create(fsRequest);
+    databaseManager.manipulateServiceRequest(fsRequest);
     frUI.add(new UiFlowerServiceRequest(fsRequest));
     treeTableFlower.refresh();
     messsageInput.setText("");
@@ -402,7 +399,7 @@ public class FlowerRequestInfoController implements Initializable {
   public void update(ActionEvent actionEvent)
       throws ValidationException, InstanceNotFoundException {
     for (UiFlowerServiceRequest frui : frUI) {
-      FlowerRequest toUpdate = flowerServiceRequest.read(frui.getID().get());
+      FlowerRequest toUpdate = databaseManager.readFlowerRequest(frui.getID().get());
       boolean isSame = frui.equalsFR(toUpdate);
       if (!isSame) {
         toUpdate.setAssignee(frui.getAssignee().get());
@@ -413,7 +410,7 @@ public class FlowerRequestInfoController implements Initializable {
         } else if (completed.equals("Complete")) {
           toUpdate.setComplete(true);
         }
-        flowerServiceRequest.update(toUpdate);
+        databaseManager.manipulateServiceRequest(toUpdate);
       }
     }
     treeTableFlower.refresh();
@@ -421,7 +418,7 @@ public class FlowerRequestInfoController implements Initializable {
 
   public void delete(ActionEvent actionEvent) {
     String toDelete = deleteText.getText();
-    flowerServiceRequest.delete(toDelete);
+    databaseManager.deleteFlowerRequest(toDelete);
     frUI.removeIf(flowerServiceRequest -> flowerServiceRequest.getID().get().equals(toDelete));
     deleteText.setText("");
     treeTableFlower.refresh();
