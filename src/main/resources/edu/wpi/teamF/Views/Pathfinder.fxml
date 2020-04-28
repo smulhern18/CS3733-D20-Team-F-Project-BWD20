@@ -164,16 +164,16 @@
                   <Font name="Arial Bold" size="20.0" />
                </font>
             </Label>
-            <VBox prefHeight="350.0" style="-fx-border-color: #001a3c; -fx-border-width: 4px;" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="180.0">
+            <VBox maxWidth="210.0" minWidth="210.0" prefHeight="350.0" prefWidth="210.0" style="-fx-border-color: #001a3c; -fx-border-width: 4px;" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="180.0">
                <children>
-                  <Text fx:id="directionsDisplay" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
-                     <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </VBox.margin>
+                  <Label fx:id="directionsDisplay" text="" wrapText="true">
                      <font>
-                        <Font size="24.0" />
+                        <Font size="14.0" />
                      </font>
-                  </Text>
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </VBox.margin>
+                  </Label>
                </children>
             </VBox>
          </children>

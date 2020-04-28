@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -63,7 +64,7 @@ public class PathfinderController implements Initializable {
   public JFXComboBox<String> startCombo;
   public JFXComboBox<String> endCombo;
   public JFXButton pathButton;
-  public Text directionsDisplay;
+  public Label directionsDisplay;
   public int state;
   public UISetting uiSetting = new UISetting();
 
@@ -192,7 +193,6 @@ public class PathfinderController implements Initializable {
   }
 
   public void resetPane() {
-    System.out.println("Reset Clicked");
     List<javafx.scene.Node> nodesToRemove1 = new ArrayList<>();
     for (javafx.scene.Node node : mapPaneFaulkner1.getChildren()) {
       if (node instanceof Line) {
