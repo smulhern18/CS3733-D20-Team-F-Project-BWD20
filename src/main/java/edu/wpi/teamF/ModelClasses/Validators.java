@@ -471,9 +471,9 @@ public class Validators {
   public static void phoneNumberValidation(String phoneNumber, int... constraints)
       throws ValidationException {
     nullCheckValidation(phoneNumber);
-    if (!phoneNumber.matches("^[+]*[(]?[0-9]{1,4}[)]?[-\\s./0-9]*$")) {
-      throw new ValidationException("this is not a phone number");
-    }
+    //    if (!phoneNumber.matches("^[+]*[(]?[0-9]{1,4}[)]?[-\\s./0-9]*$")) {
+    //      throw new ValidationException("this is not a phone number");
+    //    }
   }
   /**
    * Validation for Flower Requests

@@ -50,7 +50,7 @@ public class FlowerServiceRequestFactory {
       int param = 1;
       prepareStatement.setString(param++, flowerRequest.getId());
       prepareStatement.setString(param++, flowerRequest.getRecipientInput());
-      prepareStatement.setInt(param++, flowerRequest.getRoomInput());
+      prepareStatement.setString(param++, flowerRequest.getRoomInput());
       prepareStatement.setString(param++, flowerRequest.getChoice());
       prepareStatement.setString(param++, flowerRequest.getMessageInput());
       prepareStatement.setString(param++, flowerRequest.getBuyerName());
@@ -95,7 +95,7 @@ public class FlowerServiceRequestFactory {
                   serviceRequest.getDateTimeSubmitted(),
                   serviceRequest.getPriority(),
                   resultSet.getString(DatabaseManager.RECIPIENT_NAME_KEY),
-                  resultSet.getInt(DatabaseManager.ROOM_NUMBER_KEY),
+                  resultSet.getString(DatabaseManager.ROOM_NUMBER_KEY),
                   resultSet.getString(DatabaseManager.BOUQUET_KEY),
                   resultSet.getString(DatabaseManager.MESSAGE_KEY),
                   resultSet.getString(DatabaseManager.BUYER_NAME_KEY),
@@ -144,7 +144,7 @@ public class FlowerServiceRequestFactory {
       serviceRequestFactory.update(flowerRequest);
       preparedStatement.setString(param++, flowerRequest.getId());
       preparedStatement.setString(param++, flowerRequest.getRecipientInput());
-      preparedStatement.setInt(param++, flowerRequest.getRoomInput());
+      preparedStatement.setString(param++, flowerRequest.getRoomInput());
       preparedStatement.setString(param++, flowerRequest.getChoice());
       preparedStatement.setString(param++, flowerRequest.getMessageInput());
       preparedStatement.setString(param++, flowerRequest.getBuyerName());

@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class FlowerRequest extends ServiceRequest {
   private String recipientInput;
-  private int roomInput;
+  private String roomInput;
   private String choice;
   private String messageInput;
   private String buyerName;
@@ -22,7 +22,7 @@ public class FlowerRequest extends ServiceRequest {
       Date dateTimeSubmitted,
       int priority,
       String recipientInput,
-      int roomInput,
+      String roomInput,
       String choice,
       String messageInput,
       String buyerName,
@@ -33,8 +33,8 @@ public class FlowerRequest extends ServiceRequest {
     super(id, location, assignee, description, dateTimeSubmitted, priority, complete);
     setRecipientInput(recipientInput);
     setChoice(choice);
-    setPhoneNumber(phoneNumber);
     setBuyerName(buyerName);
+    setPhoneNumber(phoneNumber);
     setGiftWrap(giftWrap);
     setMessageInput(messageInput);
     setRoomInput(roomInput);
@@ -47,11 +47,11 @@ public class FlowerRequest extends ServiceRequest {
       Date dateTimeSubmitted,
       int priority,
       String recipientInput,
-      int roomInput,
+      String roomInput,
       String choice,
       String messageInput,
-      String phoneNumber,
       String buyerName,
+      String phoneNumber,
       Boolean giftWrap)
       throws ValidationException {
     super(location, assignee, description, dateTimeSubmitted, priority);
@@ -73,11 +73,11 @@ public class FlowerRequest extends ServiceRequest {
     this.recipientInput = recipientInput;
   }
 
-  public int getRoomInput() {
+  public String getRoomInput() {
     return roomInput;
   }
 
-  public void setRoomInput(int roomInput) {
+  public void setRoomInput(String roomInput) {
     this.roomInput = roomInput;
   }
 
