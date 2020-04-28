@@ -261,7 +261,7 @@ public class DatabaseManager {
 
     String medicineDeliveryTableCreationStatement =
         "CREATE TABLE "
-            + MAINTENANCE_REQUEST_TABLE_NAME
+            + MEDICINE_DELIVERY_REQUEST_TABLE_NAME
             + " ( "
             + SERVICEID_KEY
             + " VARCHAR(32) NOT NULL, "

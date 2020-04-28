@@ -166,7 +166,7 @@ public class MedicineDeliveryRequestFactory {
   }
 
   public List<MedicineDeliveryRequest> getAllMedicineDeliveryRequests() {
-    List<MedicineDeliveryRequest> medicineDeliveryRequests = null;
+    List<MedicineDeliveryRequest> medicineDeliveryRequests = new ArrayList<>();
     String selectStatement =
         "SELECT * FROM " + DatabaseManager.MEDICINE_DELIVERY_REQUEST_TABLE_NAME;
 
