@@ -8,7 +8,9 @@ import edu.wpi.teamF.ModelClasses.Validators;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TransportRequestFactory {
@@ -31,6 +33,8 @@ public class TransportRequestFactory {
             + DatabaseManager.TRANSPORT_TYPE_KEY
             + ", "
             + DatabaseManager.DESTINATION_KEY
+            + ", "
+            + DatabaseManager.TIME_COMPLETED_KEY
             + " ) "
             + "VALUES (?, ?, ?)";
     Validators.transportRequestValidation(transportRequest);
@@ -41,6 +45,8 @@ public class TransportRequestFactory {
       prepareStatement.setString(param++, transportRequest.getId());
       prepareStatement.setString(param++, transportRequest.getType());
       prepareStatement.setString(param++, transportRequest.getDestination().getId());
+      prepareStatement.setTimestamp(
+          param++, new Timestamp(transportRequest.getDateTimeCompleted().getTime()));
       try {
         int numRows = prepareStatement.executeUpdate();
         if (numRows < 1) {
@@ -66,7 +72,6 @@ public class TransportRequestFactory {
     try (PreparedStatement preparedStatement =
         DatabaseManager.getConnection().prepareStatement(selectStatement)) {
       preparedStatement.setString(1, id);
-
       try {
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
@@ -81,7 +86,8 @@ public class TransportRequestFactory {
                   serviceRequest.getPriority(),
                   serviceRequest.getComplete(),
                   resultSet.getString(DatabaseManager.TRANSPORT_TYPE_KEY),
-                  nodeFactory.read(resultSet.getString(DatabaseManager.DESTINATION_KEY)));
+                  nodeFactory.read(resultSet.getString(DatabaseManager.DESTINATION_KEY)),
+                  new Date(resultSet.getTimestamp(DatabaseManager.TIME_COMPLETED_KEY).getTime()));
         }
       } catch (ValidationException e) {
         throw e;
@@ -105,6 +111,8 @@ public class TransportRequestFactory {
             + " = ?, "
             + DatabaseManager.DESTINATION_KEY
             + " = ?, "
+            + DatabaseManager.TIME_COMPLETED_KEY
+            + " = ? "
             + "WHERE "
             + DatabaseManager.SERVICEID_KEY
             + " = ?";
@@ -115,6 +123,8 @@ public class TransportRequestFactory {
       preparedStatement.setString(param++, transportRequest.getId());
       preparedStatement.setString(param++, transportRequest.getType());
       preparedStatement.setString(param++, transportRequest.getDestination().getId());
+      preparedStatement.setTimestamp(
+          param++, new Timestamp(transportRequest.getDateTimeCompleted().getTime()));
       preparedStatement.setString(param++, transportRequest.getId());
       int numRows = preparedStatement.executeUpdate();
       if (numRows != 1) {
@@ -187,7 +197,8 @@ public class TransportRequestFactory {
                 serviceRequest.getPriority(),
                 serviceRequest.getComplete(),
                 transportRequest.getType(),
-                transportRequest.getDestination()));
+                transportRequest.getDestination(),
+                transportRequest.getDateTimeCompleted()));
       }
     } catch (Exception e) {
       System.out.println(

@@ -27,7 +27,9 @@ public class MenuBarController {
     sceneController.switchScene("Help");
   }
 
-  public void settings(ActionEvent actionEvent) {}
+  public void settings(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("Accounts");
+  }
 
   public void mainMenu(ActionEvent actionEvent) {}
 }

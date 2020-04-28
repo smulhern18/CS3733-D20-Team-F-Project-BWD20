@@ -1,7 +1,9 @@
 package edu.wpi.teamF;
 
 import edu.wpi.teamF.DatabaseManipulators.*;
+import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Account.Admin;
+import java.util.List;
 
 public class Main {
   private static CSVManipulator csvm = new CSVManipulator();
@@ -24,5 +26,11 @@ public class Main {
     csvm.readCSVFileNode(Main.class.getResourceAsStream("CSVFiles/MapFAllnodes.csv"));
     csvm.readCSVFileEdge(Main.class.getResourceAsStream("CSVFiles/MapFAlledges.csv"));
     dbm.manipulateAccount(new Admin("admin", "admin", "admin@gmail.com", "admin", "password"));
+    List<Account> accounts = dbm.getAllAccounts();
+    // csvm.readCSVFileNode(Main.class.getResourceAsStream("CSVFiles/MapFAllnodes.csv"));
+    // csvm.readCSVFileEdge(Main.class.getResourceAsStream("CSVFiles/MapFAlledges.csv"));
+    if (dbm.readAccount("admin") == null) {
+      dbm.manipulateAccount(new Admin("admin", "admin", "admin@gmail.com", "admin", "password"));
+    }
   }
 }

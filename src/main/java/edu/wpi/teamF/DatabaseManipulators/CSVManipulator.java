@@ -21,6 +21,7 @@ public class CSVManipulator {
   private SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
   private AccountFactory accountFactory = AccountFactory.getFactory();
   private DatabaseManager databaseManager = DatabaseManager.getManager();
+  private MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
 
   /**
    * reads a csv file that contains nodes and inserts the data in the file into the correct place in
@@ -271,7 +272,8 @@ public class CSVManipulator {
                 data.get(i + 3),
                 new Date(Integer.parseInt(data.get(i + 4))),
                 Integer.parseInt(data.get(i + 5)),
-                Boolean.parseBoolean(data.get(i + 6))));
+                Boolean.parseBoolean(data.get(i + 6)),
+                Integer.parseInt(data.get(i + 7))));
 
         i = i + 7;
       }
@@ -288,14 +290,14 @@ public class CSVManipulator {
   /** Writes to the CSV file so that it can become persistant */
   public void writeCSVFileSecurityService(Path path) throws Exception {
     // writing to the file
-    List<SecurityRequest> securityRequests = securityRequestFactory.getAllSecurityRequests();
+    List<SecurityRequest> mariachiRequests = securityRequestFactory.getAllSecurityRequest();
 
     try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
       bw.write("id,location,assignee,description,dateTimeSubmitted,priority,complete");
 
-      for (SecurityRequest s : securityRequests) {
+      for (SecurityRequest s : mariachiRequests) {
         bw.newLine();
         bw.write((formatSecurityService(s)));
       }
@@ -344,7 +346,7 @@ public class CSVManipulator {
           Account.Type type = Account.Type.getEnum(Integer.parseInt(data.get(i + 5)));
           switch (type.getTypeOrdinal()) {
             case (0):
-              databaseManager.manipulateAccount(
+              accountFactory.create(
                   new Admin(
                       data.get(i + 2),
                       data.get(i + 3),
@@ -353,7 +355,7 @@ public class CSVManipulator {
                       data.get(i + 1)));
               break;
             case (1):
-              databaseManager.manipulateAccount(
+              accountFactory.create(
                   new Staff(
                       data.get(i + 2),
                       data.get(i + 3),
@@ -362,7 +364,7 @@ public class CSVManipulator {
                       data.get(i + 1)));
               break;
             case (2):
-              databaseManager.manipulateAccount(
+              accountFactory.create(
                   new User(
                       data.get(i + 2),
                       data.get(i + 3),
@@ -392,7 +394,7 @@ public class CSVManipulator {
   /** Writes to the CSV file so that it can become persistant */
   public void writeCSVFileAccount(Path path) throws Exception {
     // writing to the file
-    List<Account> Account = databaseManager.getAllAccounts();
+    List<Account> Account = accountFactory.getAllAccounts();
 
     try (FileWriter fw = new FileWriter(path.toString() + "/AccountBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {

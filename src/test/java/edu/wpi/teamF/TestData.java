@@ -4,9 +4,7 @@ import edu.wpi.teamF.ModelClasses.Account.*;
 import edu.wpi.teamF.ModelClasses.Appointment;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
 import java.util.Date;
 
 public class TestData {
@@ -202,6 +200,7 @@ public class TestData {
   public String[] validIDs = {"12312442", "123124134", "124134123412", "213124124"};
   public String[] validDescriptions = {"12312442", "123124134", "124134123412", "213124124"};
   public String[] validAssignees = {"Roman", "Sully", "Denver", "Charles"};
+  public String[] validSongs = {"AAA", "BBB", "CCC", "DDD"};
 
   public SecurityRequest[] validSecurityRequests = {
     new SecurityRequest(
@@ -211,7 +210,8 @@ public class TestData {
         validDescriptions[0],
         validDates[0],
         2,
-        false),
+        false,
+        1),
     new SecurityRequest(
         validIDs[1],
         validNodes[1],
@@ -219,7 +219,8 @@ public class TestData {
         validDescriptions[1],
         validDates[1],
         2,
-        true),
+        true,
+        2),
     new SecurityRequest(
         validIDs[2],
         validNodes[2],
@@ -227,7 +228,8 @@ public class TestData {
         validDescriptions[2],
         validDates[2],
         2,
-        false),
+        false,
+        3),
     new SecurityRequest(
         validIDs[3],
         validNodes[3],
@@ -235,8 +237,49 @@ public class TestData {
         validDescriptions[3],
         validDates[3],
         2,
-        true),
+        true,
+        10),
   };
+
+  public MariachiRequest[] validMariachiRequests = {
+    new MariachiRequest(
+        validIDs[0],
+        validNodes[0],
+        validAssignees[0],
+        validDescriptions[0],
+        validDates[0],
+        2,
+        false,
+        validSongs[0]),
+    new MariachiRequest(
+        validIDs[1],
+        validNodes[1],
+        validAssignees[1],
+        validDescriptions[1],
+        validDates[1],
+        2,
+        true,
+        validSongs[1]),
+    new MariachiRequest(
+        validIDs[2],
+        validNodes[2],
+        validAssignees[2],
+        validDescriptions[2],
+        validDates[2],
+        2,
+        false,
+        validSongs[2]),
+    new MariachiRequest(
+        validIDs[3],
+        validNodes[3],
+        validAssignees[3],
+        validDescriptions[3],
+        validDates[3],
+        2,
+        true,
+        validSongs[3]),
+  };
+
   public MaintenanceRequest[] validMaintenanceRequests = {
     new MaintenanceRequest(
         validIDs[0],
@@ -324,6 +367,76 @@ public class TestData {
         validMake[3],
         validHardwareSoftware[3],
         validOS[3]),
+  };
+
+  public LanguageServiceRequest[] validLanguageServiceRequests = {
+    new LanguageServiceRequest(
+        validNodes[0],
+        validDescriptions[0],
+        validAssignees[0],
+        validDates[0],
+        1,
+        "Spanish",
+        "Require Interpreter"),
+    new LanguageServiceRequest(
+        validNodes[1],
+        validDescriptions[1],
+        validAssignees[1],
+        validDates[1],
+        1,
+        "Sign Language",
+        "Require Interpreter"),
+  };
+
+  public String[] validMedicineTypes = {"Advil", "Penicillin", "Potassium", "Dopamine"};
+  public String[] validInstructions = {
+    "Take 2 twice a day",
+    "Take with food",
+    "Don't operate heavy machinery after taking",
+    "Take 1 once a day"
+  };
+
+  public MedicineDeliveryRequest[] validMedicineDeliveryRequests = {
+    new MedicineDeliveryRequest(
+        validIDs[0],
+        validNodes[0],
+        validAssignees[0],
+        validDescriptions[0],
+        validDates[0],
+        2,
+        false,
+        validMedicineTypes[0],
+        validInstructions[0]),
+    new MedicineDeliveryRequest(
+        validIDs[1],
+        validNodes[1],
+        validAssignees[1],
+        validDescriptions[1],
+        validDates[1],
+        1,
+        true,
+        validMedicineTypes[1],
+        validInstructions[1]),
+    new MedicineDeliveryRequest(
+        validIDs[2],
+        validNodes[2],
+        validAssignees[2],
+        validDescriptions[2],
+        validDates[2],
+        2,
+        false,
+        validMedicineTypes[2],
+        validInstructions[2]),
+    new MedicineDeliveryRequest(
+        validIDs[3],
+        validNodes[3],
+        validAssignees[3],
+        validDescriptions[3],
+        validDates[3],
+        2,
+        false,
+        validMedicineTypes[3],
+        validInstructions[3]),
   };
 
   public TestData() throws Exception {}

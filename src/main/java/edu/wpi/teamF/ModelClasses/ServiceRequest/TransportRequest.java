@@ -8,6 +8,7 @@ import java.util.Date;
 public class TransportRequest extends ServiceRequest {
   public String type;
   public Node destination;
+  public Date dateTimeCompleted;
 
   public TransportRequest(
       String id,
@@ -18,11 +19,13 @@ public class TransportRequest extends ServiceRequest {
       int priority,
       boolean complete,
       String type,
-      Node destination)
+      Node destination,
+      Date dateTimeCompleted)
       throws ValidationException {
     super(id, location, assignee, description, dateTimeSubmitted, priority, complete);
     setType(type);
     setDestination(destination);
+    setDateTimeCompleted(dateTimeCompleted);
   }
 
   public TransportRequest(
@@ -32,19 +35,17 @@ public class TransportRequest extends ServiceRequest {
       Date dateTimeSubmitted,
       int priority,
       String type,
-      Node destination)
+      Node destination,
+      Date dateTimeCompleted)
       throws ValidationException {
     super(location, assignee, description, dateTimeSubmitted, priority);
     setType(type);
     setDestination(destination);
+    setDateTimeCompleted(dateTimeCompleted);
   }
 
   public String getType() {
     return type;
-  }
-
-  public Node getDestination() {
-    return destination;
   }
 
   public void setType(String type) throws ValidationException {
@@ -52,8 +53,21 @@ public class TransportRequest extends ServiceRequest {
     this.type = type;
   }
 
+  public Node getDestination() {
+    return destination;
+  }
+
   public void setDestination(Node destination) throws ValidationException {
     Validators.nodeValidation(destination);
     this.destination = destination;
+  }
+
+  public Date getDateTimeCompleted() {
+    return dateTimeCompleted;
+  }
+
+  public void setDateTimeCompleted(Date dateTimeCompleted) throws ValidationException {
+    Validators.dateValidation(dateTimeCompleted);
+    this.dateTimeCompleted = dateTimeCompleted;
   }
 }

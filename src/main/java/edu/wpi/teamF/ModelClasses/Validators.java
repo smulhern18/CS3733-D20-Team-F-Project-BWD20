@@ -44,6 +44,26 @@ public class Validators {
   public static final int OS_MAX_LENGTH = 8;
   public static final int TRANSPORT_TYPE_MIN_LENGTH = 1;
   public static final int TRANSPORT_TYPE_MAX_LENGTH = 32;
+  public static final int PROBLEMTYPE_MIN_LENGTH = 1;
+  public static final int PROBLEMTYPE_MAX_LENGTH = 32;
+  public static final int LANGUAGE_MIN_LENGTH = 1;
+  public static final int LANGUAGE_MAX_LENGTH = 32;
+  private static final int GUARDS_MIN_VALUE = 1;
+  private static final int GUARDS_MAX_VALUE = 10;
+  public static final int SANITATION_TYPE_MIN_LENGTH = 1;
+  public static final int SANITATION_TYPE_MAX_LENGTH = 32;
+  public static final int MEDICINE_TYPE_MIN_LENGTH = 0;
+  public static final int MEDICINE_TYPE_MAX_LENGTH = 64;
+  public static final int INSTRUCTIONS_MIN_LENGTH = 0;
+  public static final int INSTRUCTIONS_MAX_LENGTH = 64;
+
+  public static <T extends SecurityRequest> void securityRequestValidation(T t, int... constraints)
+      throws ValidationException {
+    serviceRequestValidation(t, constraints);
+    SecurityRequest securityRequest = (SecurityRequest) t;
+
+    guardsRequestedValidation(securityRequest.getGuardsRequested(), constraints);
+  }
 
   public static <T extends ServiceRequest> void serviceRequestValidation(T t, int... constraints)
       throws ValidationException {
@@ -57,6 +77,17 @@ public class Validators {
     priorityValidation(serviceRequest.getPriority());
     booleanValidation(serviceRequest.getComplete());
     nameValidation(serviceRequest.getAssignee());
+  }
+
+  /** Validation for Security */
+  public static void guardsRequestedValidation(int guardsRequested, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(guardsRequested, constraints);
+
+    if (!(guardsRequested >= GUARDS_MIN_VALUE && guardsRequested <= GUARDS_MAX_VALUE)) {
+
+      throw new ValidationException(" Guards requested outside of accepted values");
+    }
   }
 
   public static <T extends Account> void accountValidation(T t, int... constraints)
@@ -108,6 +139,25 @@ public class Validators {
     nullCheckValidation(OS, constraints);
     if (OS.length() < HARDWARESOFTWARE_MIN_LENGTH || OS.length() > HARDWARESOFTWARE_MAX_LENGTH) {
       throw new ValidationException("Invalid hardwareSoftware length");
+    }
+  }
+  /** Validation for Security */
+  public static void songRequestValidation(String songRequest, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(songRequest, constraints);
+
+    if (songRequest.length() == 0) {
+
+      throw new ValidationException("Must enter a song request");
+    }
+  }
+
+  public static void sanitationTypeValidation(String sanitationType, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(sanitationType, constraints);
+    if (sanitationType.length() < SANITATION_TYPE_MIN_LENGTH
+        || sanitationType.length() > SANITATION_TYPE_MAX_LENGTH) {
+      throw new ValidationException("Invalid sanitation type length");
     }
   }
 
@@ -369,6 +419,81 @@ public class Validators {
     makeValidation(computerRequestObject.getMake());
     hardwareSoftwareValidation(computerRequestObject.getHardwareSoftware());
   }
+
+  /**
+   * Validation for Language Requests
+   *
+   * @param t an instance of Language Request to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static <T extends LanguageServiceRequest> void languageServiceValidation(
+      T t, int... constraints) throws ValidationException {
+    nullCheckValidation(t, constraints);
+    LanguageServiceRequest languageRequestObject = (LanguageServiceRequest) t;
+
+    idValidation(languageRequestObject.getId());
+    nodeValidation(languageRequestObject.getLocation());
+    descriptionValidation(languageRequestObject.getDescription());
+    dateValidation(languageRequestObject.getDateTimeSubmitted());
+    priorityValidation(languageRequestObject.getPriority());
+    makeValidation(languageRequestObject.getLanguage());
+    hardwareSoftwareValidation(languageRequestObject.getProblemType());
+  }
+
+  /*
+   * Validation for medicine types
+   *
+   * @param medicineType the medicine type to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static void medicineTypeValidation(String medicineType, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(medicineType, constraints);
+    if (medicineType.length() < MEDICINE_TYPE_MIN_LENGTH
+        || medicineType.length() > MEDICINE_TYPE_MAX_LENGTH) {
+      throw new ValidationException("Medicine type length is out of bounds");
+    }
+  }
+
+  /**
+   * Validation for medicine delivery instructions
+   *
+   * @param instructions the instructions to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static void instructionsValidation(String instructions, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(instructions, constraints);
+    if (instructions.length() < INSTRUCTIONS_MIN_LENGTH
+        || instructions.length() > INSTRUCTIONS_MAX_LENGTH) {
+      throw new ValidationException("Instructions length is out of bounds");
+    }
+  }
+
+  /**
+   * Validation for Medicine Delivery Requests
+   *
+   * @param t an instance of a Medicine Delivery Request to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static <T extends MedicineDeliveryRequest> void medicineDeliveryRequestValidation(
+      T t, int... constraints) throws ValidationException {
+    nullCheckValidation(t, constraints);
+    MedicineDeliveryRequest medicineDeliveryRequestObject = (MedicineDeliveryRequest) t;
+
+    idValidation(medicineDeliveryRequestObject.getId());
+    nodeValidation(medicineDeliveryRequestObject.getLocation());
+    descriptionValidation(medicineDeliveryRequestObject.getDescription());
+    dateValidation(medicineDeliveryRequestObject.getDateTimeSubmitted());
+    priorityValidation(medicineDeliveryRequestObject.getPriority());
+    medicineTypeValidation(medicineDeliveryRequestObject.getMedicineType());
+    instructionsValidation(medicineDeliveryRequestObject.getInstructions());
+  }
+
   /**
    * Validation for Security Requests
    *
@@ -376,10 +501,17 @@ public class Validators {
    * @param constraints the optional constraints for validation
    * @throws ValidationException should the validation fail
    */
-  public static <T extends SecurityRequest> void securityRequestValidation(T t, int... constraints)
+  public static <T extends MariachiRequest> void mariachiRequestValidation(T t, int... constraints)
       throws ValidationException {
     nullCheckValidation(t, constraints);
-    SecurityRequest securityRequestObject = (SecurityRequest) t;
+    MariachiRequest mariachiRequest = (MariachiRequest) t;
+
+    idValidation(mariachiRequest.getId());
+    nodeValidation(mariachiRequest.getLocation());
+    descriptionValidation(mariachiRequest.getDescription());
+    dateValidation(mariachiRequest.getDateTimeSubmitted());
+    priorityValidation(mariachiRequest.getPriority());
+    songRequestValidation(mariachiRequest.getSongRequest());
   }
 
   /**
@@ -460,6 +592,33 @@ public class Validators {
     priorityValidation(transportRequestObject.getPriority());
     transportTypeValidation(transportRequestObject.getType());
     nodeValidation(transportRequestObject.getDestination());
+  }
+
+  public static <T extends SanitationServiceRequest> void sanitationServiceValidation(
+      T t, int... constraints) throws ValidationException {
+    nullCheckValidation(t, constraints);
+    SanitationServiceRequest sanitationServiceRequest = (SanitationServiceRequest) t;
+    idValidation(sanitationServiceRequest.getId());
+    nodeValidation(sanitationServiceRequest.getLocation());
+    descriptionValidation(sanitationServiceRequest.getDescription());
+    dateValidation(sanitationServiceRequest.getDateTimeSubmitted());
+    priorityValidation(sanitationServiceRequest.getPriority());
+    transportTypeValidation(sanitationServiceRequest.getType());
+  }
+
+  public static void languageValidation(String type, int... constraints)
+      throws ValidationException {
+    nullCheckValidation(type, constraints);
+    if (type.length() < LANGUAGE_MIN_LENGTH || type.length() > LANGUAGE_MAX_LENGTH) {
+      throw new ValidationException("Language is outside values.");
+    }
+  }
+
+  public static void problemValidation(String type, int... constraints) throws ValidationException {
+    nullCheckValidation(type, constraints);
+    if (type.length() < PROBLEMTYPE_MIN_LENGTH || type.length() > LANGUAGE_MAX_LENGTH) {
+      throw new ValidationException("Problem Type outside values.");
+    }
   }
 
   public static void booleanValidation(boolean bool, int... constraints)

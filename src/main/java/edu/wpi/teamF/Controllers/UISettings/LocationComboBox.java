@@ -16,15 +16,22 @@ public class LocationComboBox {
 
   DatabaseManager databaseManager = DatabaseManager.getManager();
 
-  public void setAsLocationComboBox(JFXComboBox<String> comboBox) {
+  public LocationComboBox() throws Exception {}
+
+  public void setAsLocationComboBox(JFXComboBox<String> comboBox) throws Exception {
     comboBox.setEditable(true);
     ObservableList<String> locations = FXCollections.observableArrayList();
+<<<<<<< HEAD
     try {
       for (Node node : databaseManager.getAllNodes()) {
         locations.add(node.getLongName() + " " + node.getId());
       }
     } catch (Exception e) {
       System.out.println(e.getMessage());
+=======
+    for (Node node : databaseManager.getAllNodes()) {
+      locations.add(node.getLongName() + " " + node.getId());
+>>>>>>> 1d9873ee309d93ceea722a3750251c6c45682e5b
     }
     FilteredList<String> filteredLocations = new FilteredList<String>(locations, p -> true);
 

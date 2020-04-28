@@ -1,9 +1,6 @@
 package edu.wpi.teamF.Controllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
@@ -30,6 +27,7 @@ import lombok.SneakyThrows;
 public class AccountsController implements Initializable {
   public JFXTreeTableView<UIAccount> accountsView;
   public JFXButton updateStaff;
+  public JFXComboBox<String> algoChoiceBox;
   SceneController sceneController = App.getSceneController();
   DatabaseManager databaseManager = DatabaseManager.getManager();
   ObservableList<UIAccount> uiAccount = FXCollections.observableArrayList();
@@ -37,6 +35,7 @@ public class AccountsController implements Initializable {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+
     // ID column
     JFXTreeTableColumn<UIAccount, String> firstName = new JFXTreeTableColumn<>("First Name");
     firstName.setPrefWidth(100);
