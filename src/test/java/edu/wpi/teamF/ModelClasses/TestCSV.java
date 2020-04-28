@@ -143,10 +143,11 @@ public class TestCSV {
 
     List<MaintenanceRequest> list = databaseManager.getAllMaintenanceRequests();
 
-    Assertions.assertTrue(list.get(0).equals(validMaintenance[1]));
-    Assertions.assertTrue(list.get(1).equals(validMaintenance[0]));
-    Assertions.assertTrue(list.get(2).equals(validMaintenance[2]));
-    Assertions.assertTrue(list.get(3).equals(validMaintenance[3]));
+    Assertions.assertTrue(list.size() == 4);
+    Assertions.assertTrue(list.contains(validMaintenance[0]));
+    Assertions.assertTrue(list.contains(validMaintenance[1]));
+    Assertions.assertTrue(list.contains(validMaintenance[2]));
+    Assertions.assertTrue(list.contains(validMaintenance[3]));
     /** Valid data */
     File wfile = new File("src/test/java/edu/wpi/teamF/Test/");
     File file = new File("src/test/java/edu/wpi/teamF/Test/MaintenanceBackup.csv");
@@ -184,10 +185,11 @@ public class TestCSV {
 
     List<SecurityRequest> list = databaseManager.getAllSecurityRequests();
     int j = 0;
-    Assertions.assertTrue(list.get(0).equals(validSecurityRequest[1]));
-    Assertions.assertTrue(list.get(1).equals(validSecurityRequest[0]));
-    Assertions.assertTrue(list.get(2).equals(validSecurityRequest[2]));
-    Assertions.assertTrue(list.get(3).equals(validSecurityRequest[3]));
+    Assertions.assertTrue(list.size() == 4);
+    Assertions.assertTrue(list.contains(validSecurityRequest[0]));
+    Assertions.assertTrue(list.contains(validSecurityRequest[1]));
+    Assertions.assertTrue(list.contains(validSecurityRequest[2]));
+    Assertions.assertTrue(list.contains(validSecurityRequest[3]));
 
     /** Valid data */
     File wfile = new File("src/test/java/edu/wpi/teamF/Test/");

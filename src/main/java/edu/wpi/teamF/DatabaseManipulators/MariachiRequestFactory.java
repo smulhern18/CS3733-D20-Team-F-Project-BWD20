@@ -24,7 +24,7 @@ public class MariachiRequestFactory {
   public void create(MariachiRequest mariachiRequest) throws ValidationException {
     String insertStatement =
         "INSERT INTO "
-            + DatabaseManager.SECURITY_REQUEST_TABLE_NAME
+            + DatabaseManager.MARIACHI_REQUEST_TABLE_NAME
             + " ( "
             + DatabaseManager.SERVICEID_KEY
             + ", "
@@ -55,7 +55,7 @@ public class MariachiRequestFactory {
     MariachiRequest mariachiRequest = null;
     String selectStatement =
         "SELECT * FROM "
-            + DatabaseManager.SECURITY_REQUEST_TABLE_NAME
+            + DatabaseManager.MARIACHI_REQUEST_TABLE_NAME
             + " WHERE "
             + DatabaseManager.SERVICEID_KEY
             + " = ?";
@@ -93,7 +93,7 @@ public class MariachiRequestFactory {
   public void update(MariachiRequest mariachiRequest) {
     String updateStatement =
         "UPDATE "
-            + DatabaseManager.SECURITY_REQUEST_TABLE_NAME
+            + DatabaseManager.MARIACHI_REQUEST_TABLE_NAME
             + " SET "
             + DatabaseManager.SERVICEID_KEY
             + " = ?, "
@@ -122,7 +122,7 @@ public class MariachiRequestFactory {
 
     String deleteStatement =
         "DELETE FROM "
-            + DatabaseManager.SECURITY_REQUEST_TABLE_NAME
+            + DatabaseManager.MARIACHI_REQUEST_TABLE_NAME
             + " WHERE "
             + DatabaseManager.SERVICEID_KEY
             + " = ?";
@@ -158,7 +158,7 @@ public class MariachiRequestFactory {
 
   public List<MariachiRequest> getAllMariachiRequest() {
     List<MariachiRequest> mariachiRequests = new ArrayList<>();
-    String selectStatement = "SELECT * FROM " + DatabaseManager.SECURITY_REQUEST_TABLE_NAME;
+    String selectStatement = "SELECT * FROM " + DatabaseManager.MARIACHI_REQUEST_TABLE_NAME;
 
     try (PreparedStatement preparedStatement =
             DatabaseManager.getConnection().prepareStatement(selectStatement);
@@ -168,18 +168,7 @@ public class MariachiRequestFactory {
       while (resultSet.next()) {
         ServiceRequest serviceRequest =
             serviceRequestFactory.read(resultSet.getString(DatabaseManager.SERVICEID_KEY));
-        MariachiRequest mariachiRequest =
-            factory.read(resultSet.getString(DatabaseManager.SERVICEID_KEY));
-        mariachiRequests.add(
-            new MariachiRequest(
-                serviceRequest.getId(),
-                serviceRequest.getLocation(),
-                serviceRequest.getAssignee(),
-                serviceRequest.getDescription(),
-                serviceRequest.getDateTimeSubmitted(),
-                serviceRequest.getPriority(),
-                serviceRequest.getComplete(),
-                mariachiRequest.getSongRequest()));
+        mariachiRequests.add(read(serviceRequest.getId()));
       }
     } catch (Exception e) {
       System.out.println(

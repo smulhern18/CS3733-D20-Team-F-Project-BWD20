@@ -109,7 +109,7 @@ public class LanguageFactoryTest {
   }
 
   @Test
-  public void testGetMainByLocation() throws Exception {
+  public void testGetLanguageByLocation() throws Exception {
     try {
       databaseManager.manipulateNode(validNodes[2]);
       databaseManager.manipulateNode(validNodes[3]);
@@ -125,14 +125,13 @@ public class LanguageFactoryTest {
     databaseManager.manipulateServiceRequest(main2);
 
     List<LanguageServiceRequest> languageAtBathroom =
-        databaseManager.getLanguageRequestsByLocation(testData.validNodes[0]);
+        databaseManager.getLanguageRequestsByLocation(testData.validNodes[2]);
 
     assertTrue(languageAtBathroom.contains(main1));
-
     assertTrue(languageAtBathroom.size() == 1);
 
     List<LanguageServiceRequest> languageAtnode2 =
-        databaseManager.getLanguageRequestsByLocation(testData.validNodes[1]);
+        databaseManager.getLanguageRequestsByLocation(testData.validNodes[3]);
 
     assertTrue(languageAtnode2.contains(main2));
     assertTrue(languageAtnode2.size() == 1);
