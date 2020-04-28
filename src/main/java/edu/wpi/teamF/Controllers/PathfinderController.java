@@ -74,6 +74,7 @@ public class PathfinderController implements Initializable {
 
   Node startNode = null;
   Node endNode = null;
+  public Directions directions;
 
   EuclideanScorer euclideanScorer = new EuclideanScorer();
   DatabaseManager databaseManager = DatabaseManager.getManager();
@@ -139,13 +140,17 @@ public class PathfinderController implements Initializable {
 
     selectButtonsPane.setVisible(false);
     directionsPane.setVisible(true);
-    Directions directions = new Directions(fullNodeList, path, startNode, endNode);
+    this.directions = new Directions(fullNodeList, path, startNode, endNode);
     System.out.println(directions.getFullDirectionsString());
-    directionsDisplay.setText(directions.getFullDirectionsString());
     pathSwitchFloorPane.setVisible(true);
     if (startNode.getFloor() != endNode.getFloor()) {
+      // Spans multiple floors
       pathSwitchFloor.setVisible(true);
       pathSwitchFloor.setText("Next: Go to floor " + Integer.toString(endNode.getFloor()));
+      directionsDisplay.setText(directions.getFullDirectionsStringForFloor(startNode.getFloor()));
+    } else {
+      pathSwitchFloor.setVisible(false);
+      directionsDisplay.setText(directions.getFullDirectionsString());
     }
   }
 
@@ -747,9 +752,11 @@ public class PathfinderController implements Initializable {
       // Currently on the start floor, want to go to the end floor
       switchToFloor(endNode.getFloor());
       pathSwitchFloor.setText("Previous: Go to floor " + Integer.toString(startNode.getFloor()));
+      directionsDisplay.setText(directions.getFullDirectionsStringForFloor(endNode.getFloor()));
     } else {
       switchToFloor(startNode.getFloor());
       pathSwitchFloor.setText("Next: Go to floor " + Integer.toString(endNode.getFloor()));
+      directionsDisplay.setText(directions.getFullDirectionsStringForFloor(startNode.getFloor()));
     }
   }
 
