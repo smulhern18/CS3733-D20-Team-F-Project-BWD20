@@ -6,7 +6,6 @@ import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
-import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -236,12 +235,10 @@ public class DataMapViewController implements Initializable {
           public void handle(MouseEvent mouseEvent) {
 
             JFXButton oldButton = null;
-            System.out.println("Here1");
             for (javafx.scene.Node node : mapPane.getChildren()) {
               if (node instanceof JFXButton) {
                 JFXButton oldNode = (JFXButton) node;
                 if (oldNode.getId() != null) {
-                  System.out.println("Here2");
                   oldButton = (JFXButton) node;
                 }
               }
@@ -250,7 +247,6 @@ public class DataMapViewController implements Initializable {
             if (oldButton != null) {
               mapPane.getChildren().remove(oldButton);
             }
-            System.out.println("Here3");
 
             double xValDouble = mouseEvent.getX();
             double yValDouble = mouseEvent.getY();
@@ -267,12 +263,13 @@ public class DataMapViewController implements Initializable {
             locationNode.setMaxSize(buttonSize, buttonSize);
             locationNode.setPrefSize(buttonSize, buttonSize); // the button size will not vary
             locationNode.setStyle(
-                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px");
+                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ADD8E6; -fx-border-color: #000000; -fx-border-width: 1px");
             locationNode.setId("locationNode");
             mapPane.getChildren().add(locationNode);
             locationNode.setLayoutX(xValDouble - buttonSize / 2.0);
             locationNode.setLayoutY(yValDouble - buttonSize / 2.0);
-            System.out.println("End");
+            modifyNodeButton.setDisable(false);
+            modifyNodeButton.setOpacity(1);
           }
         });
   }
@@ -423,7 +420,7 @@ public class DataMapViewController implements Initializable {
     button.setMaxSize(buttonSize, buttonSize);
     button.setPrefSize(buttonSize, buttonSize); // the button size will not vary
     button.setStyle(
-        "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px");
+        "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00008B; -fx-border-color: #000000; -fx-border-width: 1px");
     double xPos = (node.getXCoord() * widthRatio - buttonSize / 2.0);
     double yPos = (node.getYCoord() * heightRatio - buttonSize / 2.0);
     button.setLayoutX(xPos);
@@ -603,7 +600,16 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  private void modifyNode() throws ValidationException {
+  private void modifyNode() {
+
+    short oldXCoordinate = node.getXCoord();
+    short oldYCoordinate = node.getYCoord();
+    String oldBuilding = node.getBuilding();
+    String oldLongName = node.getLongName();
+    String oldShortName = (node.getShortName());
+    Node.NodeType oldNodeType = node.getType();
+    short oldFloorNumber = node.getFloor(); // stores the input in variables
+
     try { // is the input correct?
       short xCoordinate = Short.parseShort(xCoorInput.getText());
       short yCoordinate = Short.parseShort(yCoorInput.getText());
@@ -620,21 +626,30 @@ public class DataMapViewController implements Initializable {
       node.setShortName(shortName);
       node.setType(nodeType);
       node.setFloor(floorNumber); // sets the node to the provided values
+
+      System.out.println(databaseManager.getAllEdgesConnectedToNode(node.getId()).size());
       databaseManager.manipulateNode(node);
+      System.out.println("here1");
+      System.out.println(databaseManager.getAllEdgesConnectedToNode(node.getId()).size());
       for (Edge edge :
           databaseManager.getAllEdgesConnectedToNode(
               node.getId())) { // for all of the edges connected to the node
+        System.out.println("here2");
         for (int i = 0;
             i < mapPane.getChildren().size();
             i++) { // for all of the children in the pane
+          System.out.println("here3");
           javafx.scene.Node children = mapPane.getChildren().get(i);
           if (children instanceof Line && children.getId().equals(edge.getId())) {
+            System.out.println("here4");
             Line line = (Line) children;
             if (edge.getNode1()
                 .equals(node.getId())) { // if node one then it is a starting coordinate
+              System.out.println("here5");
               line.setStartX(xCoordinate * widthRatio);
               line.setStartY(yCoordinate * heightRatio);
             } else { // if node two then it is an ending coordinate
+              System.out.println("here6");
               line.setEndX(xCoordinate * widthRatio);
               line.setEndY(yCoordinate * heightRatio);
             }
@@ -644,13 +659,19 @@ public class DataMapViewController implements Initializable {
       }
 
       nodeButton.setLayoutX(xCoordinate * widthRatio - 3);
-      nodeButton.setLayoutY(
-          yCoordinate * heightRatio
-              - 3); // if the position of the node is changes, then the edges are updated as well
+      nodeButton.setLayoutY(yCoordinate * heightRatio - 3);
       clearNode();
 
     } catch (Exception e) { // throws an error if the input is not valid
-      nodeErrorLabel.setText("The input is invalid");
+      if (oldXCoordinate == node.getXCoord()
+          && oldYCoordinate == node.getYCoord()
+          && oldBuilding == node.getBuilding()
+          && oldLongName.equals(node.getLongName())
+          && oldShortName.equals(node.getShortName())
+          && oldNodeType.equals(node.getType())
+          && oldFloorNumber == node.getFloor()) {
+        nodeErrorLabel.setText("The input is invalid");
+      }
     }
   }
 
