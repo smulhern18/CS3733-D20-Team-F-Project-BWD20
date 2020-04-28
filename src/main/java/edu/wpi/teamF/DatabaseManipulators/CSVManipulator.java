@@ -7,9 +7,7 @@ import edu.wpi.teamF.ModelClasses.Account.User;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
-
 import java.io.*;
 import java.nio.file.Path;
 import java.sql.SQLException;
@@ -18,7 +16,8 @@ import java.util.*;
 public class CSVManipulator {
   private NodeFactory nodeFactory = NodeFactory.getFactory();
   private EdgeFactory edgeFactory = EdgeFactory.getFactory();
-  private MaintenanceRequestFactory maintenanceRequestFactory = MaintenanceRequestFactory.getFactory();
+  private MaintenanceRequestFactory maintenanceRequestFactory =
+      MaintenanceRequestFactory.getFactory();
   private SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
   private AccountFactory accountFactory = AccountFactory.getFactory();
   private MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
@@ -206,7 +205,8 @@ public class CSVManipulator {
   /** Writes to the CSV file so that it can become persistant */
   public void writeCSVFileMaintenanceService(Path path) throws Exception {
     // writing to the file
-    List<MaintenanceRequest> maintenanceRequests = maintenanceRequestFactory.getAllMaintenanceRequests();
+    List<MaintenanceRequest> maintenanceRequests =
+        maintenanceRequestFactory.getAllMaintenanceRequests();
 
     try (FileWriter fw = new FileWriter(path.toString() + "/MaintenanceBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
@@ -267,7 +267,7 @@ public class CSVManipulator {
                 new Date(Integer.parseInt(data.get(i + 4))),
                 Integer.parseInt(data.get(i + 5)),
                 Boolean.parseBoolean(data.get(i + 6)),
-                Integer.parseInt(data.get(i+7))));
+                Integer.parseInt(data.get(i + 7))));
 
         i = i + 7;
       }

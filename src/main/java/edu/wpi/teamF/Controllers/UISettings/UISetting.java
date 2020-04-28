@@ -10,11 +10,13 @@ public class UISetting {
   private ButtonFormatter buttonFormatter = new ButtonFormatter();
   private LocationComboBox locationComboBox = new LocationComboBox();
 
+  public UISetting() throws Exception {}
+
   public void makeZoomable(Pane pane) {
     zoom.makeZoomable(pane);
   }
 
-  public void setAsLocationComboBox(JFXComboBox comboBox) {
+  public void setAsLocationComboBox(JFXComboBox<String> comboBox) throws Exception {
     locationComboBox.setAsLocationComboBox(comboBox);
   }
 

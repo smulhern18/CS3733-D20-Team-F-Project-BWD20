@@ -2,31 +2,25 @@ package edu.wpi.teamF.Controllers;
 
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.*;
-import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
-import edu.wpi.teamF.TestData;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
 
-import javax.xml.crypto.Data;
-
 public class ComputerServiceControllerTest extends ApplicationTest {
 
   // Initialize the databases needed. Need database manager, nodes (for locations) and obv. the
   // computerservicerequest
   DatabaseManager databaseManager = DatabaseManager.getManager();
-  List<ComputerServiceRequest> computerServiceRequest = databaseManager.getAllComputerServiceRequests();
+  List<ComputerServiceRequest> computerServiceRequest =
+      databaseManager.getAllComputerServiceRequests();
 
-  public ComputerServiceControllerTest() throws Exception {
-  }
-
+  public ComputerServiceControllerTest() throws Exception {}
 
   // populate the factories with the needed data
 

@@ -4,11 +4,8 @@ import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
-import edu.wpi.teamF.DatabaseManipulators.MariachiRequestFactory;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SanitationServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIMariachiRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.net.URL;
@@ -24,7 +21,7 @@ import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
-import javax.management.InstanceNotFoundException;
+import lombok.SneakyThrows;
 
 public class MariachiRequestController implements Initializable {
   public GridPane optionBar;
@@ -53,8 +50,7 @@ public class MariachiRequestController implements Initializable {
   List<MariachiRequest> mariachiRequestList = databaseManager.getAllMariachiServiceRequests();
   ObservableList<UIMariachiRequest> uiMariachiRequests = FXCollections.observableArrayList();
 
-
-
+  @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     // add the different choices to the choicebox
@@ -130,8 +126,7 @@ public class MariachiRequestController implements Initializable {
     updateButton.setFont(newFont);
   }
 
-  public void submit(ActionEvent actionEvent)
-          throws Exception {
+  public void submit(ActionEvent actionEvent) throws Exception {
     String location = locationComboBox.getValue();
     String nodeID = location.substring(location.length() - 10);
     System.out.println(location);

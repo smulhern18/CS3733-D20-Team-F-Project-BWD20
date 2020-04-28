@@ -15,10 +15,9 @@ public class App extends Application {
 
   private static SceneController sceneController;
 
-    public App() throws Exception {
-    }
+  public App() throws Exception {}
 
-    public static SceneController getSceneController() {
+  public static SceneController getSceneController() {
     return sceneController;
   }
 
@@ -29,7 +28,8 @@ public class App extends Application {
   private MenuBarController menuBarController = new MenuBarController();
   private PathfinderController pathfinderController = new PathfinderController();
   private RegisterController registerController = new RegisterController();
-  private ServiceRequestController serviceRequestController = new ServiceRequestController();
+  private ServiceRequestMainController serviceRequestController =
+      new ServiceRequestMainController();
   private AccountsController accountsController = new AccountsController();
   private ComputerServiceController computerController = new ComputerServiceController();
 
@@ -57,7 +57,7 @@ public class App extends Application {
             return pathfinderController;
           } else if (controllerClass.equals(RegisterController.class)) {
             return registerController;
-          } else if (controllerClass.equals(ServiceRequestController.class)) {
+          } else if (controllerClass.equals(ServiceRequestMainController.class)) {
             return serviceRequestController;
           } else if (controllerClass.equals(AccountsController.class)) {
             return accountsController;
@@ -67,12 +67,7 @@ public class App extends Application {
           return null;
         });
     sceneController = new SceneController(fxmlLoader, primaryStage, primaryScene);
-<<<<<<< HEAD
-    Parent root = fxmlLoader.load(getClass().getResource("Views/LanguageServiceController2.fxml"));
-
-=======
-    Parent root = fxmlLoader.load(getClass().getResource("Views/MariachiRequest.fxml"));
->>>>>>> origin/KevinMariachiRequest
+    Parent root = fxmlLoader.load(getClass().getResource("Views/MainMenu.fxml"));
     primaryScene.setRoot(root);
     primaryStage.setScene(primaryScene);
     primaryStage.setAlwaysOnTop(true);

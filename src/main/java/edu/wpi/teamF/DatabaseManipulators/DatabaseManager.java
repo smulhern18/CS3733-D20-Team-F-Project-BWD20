@@ -8,7 +8,6 @@ import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
 import edu.wpi.teamF.ModelClasses.ValidationException;
-
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.sql.Connection;
@@ -99,15 +98,17 @@ public class DatabaseManager {
   private ServiceRequestFactory serviceRequestFactory = ServiceRequestFactory.getFactory();
   private MaintenanceRequestFactory maintenanceRequestFactory =
       MaintenanceRequestFactory.getFactory();
-  private SecurityRequestFactory securityRequestFactory =
-      SecurityRequestFactory.getFactory();
+  private SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
   private ComputerServiceRequestFactory computerServiceRequestFactory =
       ComputerServiceRequestFactory.getFactory();
   private AppointmentFactory appointmentFactory = AppointmentFactory.getFactory();
-  private LanguageServiceRequestFactory languageServiceRequestFactory = LanguageServiceRequestFactory.getFactory();
-  private SanitationServiceRequestFactory sanitationServiceRequestFactory = SanitationServiceRequestFactory.getFactory();
+  private LanguageServiceRequestFactory languageServiceRequestFactory =
+      LanguageServiceRequestFactory.getFactory();
+  private SanitationServiceRequestFactory sanitationServiceRequestFactory =
+      SanitationServiceRequestFactory.getFactory();
   private MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
-  private MedicineDeliveryRequestFactory medicineDeliveryRequestFactory = MedicineDeliveryRequestFactory.getFactory();
+  private MedicineDeliveryRequestFactory medicineDeliveryRequestFactory =
+      MedicineDeliveryRequestFactory.getFactory();
 
   // SanitationService requests
   static final String SANITATION_TYPE_KEY = "SanitationType";
@@ -233,7 +234,7 @@ public class DatabaseManager {
                     + TRANSPORT_REQUEST_TABLE_NAME
                     + " ( "
                     + SERVICEID_KEY
-                    + " VARCHAR(32) NOT NULL, "
+                    +" VARCHAR(32) NOT NULL, "
                     + TRANSPORT_TYPE_KEY
                     +" VARCHAR(32) NOT NULL, "
                     + DESTINATION_KEY
@@ -551,15 +552,17 @@ public class DatabaseManager {
     }
   }
 
-  public void manipulateServiceRequest(LanguageServiceRequest langRequest) throws ValidationException {
+  public void manipulateServiceRequest(LanguageServiceRequest langRequest)
+      throws ValidationException {
     if (LanguageServiceRequestFactory.read(langRequest.getId()) == null) {
       languageServiceRequestFactory.create(langRequest);
     } else {
       languageServiceRequestFactory.update(langRequest);
     }
-
   }
-  public void manipulateServiceRequest(SanitationServiceRequest sanitationRequest) throws ValidationException{
+
+  public void manipulateServiceRequest(SanitationServiceRequest sanitationRequest)
+      throws ValidationException {
     if (sanitationServiceRequestFactory.read(sanitationRequest.getId()) == null) {
       sanitationServiceRequestFactory.create(sanitationRequest);
     } else {
@@ -567,7 +570,7 @@ public class DatabaseManager {
     }
   }
 
-  public void manipulateServiceRequest(MariachiRequest mariachiRequest) throws ValidationException{
+  public void manipulateServiceRequest(MariachiRequest mariachiRequest) throws ValidationException {
     if (mariachiRequestFactory.read(mariachiRequest.getId()) == null) {
       mariachiRequestFactory.create(mariachiRequest);
     } else {
@@ -575,7 +578,8 @@ public class DatabaseManager {
     }
   }
 
-  public void manipulateServiceRequest(MedicineDeliveryRequest mdRequest) throws ValidationException{
+  public void manipulateServiceRequest(MedicineDeliveryRequest mdRequest)
+      throws ValidationException {
     if (medicineDeliveryRequestFactory.read(mdRequest.getId()) == null) {
       medicineDeliveryRequestFactory.create(mdRequest);
     } else {
@@ -640,7 +644,7 @@ public class DatabaseManager {
     return computerServiceRequestFactory.getAllComputerRequests();
   }
 
-  public List<LanguageServiceRequest> getAllLanguageServiceRequests() throws Exception{
+  public List<LanguageServiceRequest> getAllLanguageServiceRequests() throws Exception {
     return languageServiceRequestFactory.getAllLanguageRequests();
   }
 
@@ -683,12 +687,10 @@ public class DatabaseManager {
 
   public List<SanitationServiceRequest> getAllSanitationRequests() {
     return sanitationServiceRequestFactory.getAllSanitationRequests();
-
   }
 
   public SanitationServiceRequest readSanitationServiceRequest(String s) {
     return sanitationServiceRequestFactory.read(s);
-
   }
 
   public void deleteSanitationService(String toDelete) {
@@ -698,7 +700,6 @@ public class DatabaseManager {
   public List<MariachiRequest> getAllMariachiServiceRequests() {
     return mariachiRequestFactory.getAllMariachiRequest();
   }
-
 
   public MariachiRequest readMariachiServiceRequest(String s) {
     return mariachiRequestFactory.read(s);
