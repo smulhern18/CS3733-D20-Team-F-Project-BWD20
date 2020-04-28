@@ -245,7 +245,7 @@ public class ComputerServiceController implements Initializable {
      */
 
     ObservableList<String> completedList = FXCollections.observableArrayList();
-    completedList.add("Completed");
+    completedList.add("Complete");
     completedList.add("Incomplete");
 
     JFXTreeTableColumn<UIComputerServiceRequest, String> completed =
@@ -276,24 +276,6 @@ public class ComputerServiceController implements Initializable {
             current.getValue().setCompleted(new SimpleStringProperty(event.getNewValue()));
           }
         });
-
-    /*
-    // Combobox completed
-    JFXTreeTableColumn<UIComputerServiceRequest, Boolean> completed =
-        new JFXTreeTableColumn<>("Completed");
-    completed.setCellFactory(CheckBoxTreeTableCell.forTreeTableColumn(completed));
-    completed.setCellValueFactory(
-        param -> {
-          if (param.getValue().getValue().getCompleted().get()) {
-            System.out.println(param.getValue().getValue().getCompleted().get());
-            return new SimpleBooleanProperty(true);
-          } else {
-            System.out.println(param.getValue().getValue().getCompleted().get());
-            return new SimpleBooleanProperty(false);
-          }
-        });
-
-     */
 
     // Assignee choicebox
 
@@ -409,10 +391,10 @@ public class ComputerServiceController implements Initializable {
       if (!isSame) {
         toUpdate.setAssignee(csrui.getAssignee().get());
         String completed = csrui.getCompleted().get();
-        if (completed.equals("True")) {
+        if (completed.equals("Complete")) {
           toUpdate.setComplete(true);
 
-        } else {
+        } else if (completed.equals("Incomplete")) {
           toUpdate.setComplete(false);
         }
         databaseManager.manipulateServiceRequest(toUpdate);

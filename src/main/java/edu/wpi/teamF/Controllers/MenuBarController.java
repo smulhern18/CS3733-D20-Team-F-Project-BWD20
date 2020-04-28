@@ -1,10 +1,18 @@
 package edu.wpi.teamF.Controllers;
 
+import com.jfoenix.controls.JFXButton;
 import edu.wpi.teamF.App;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 
 public class MenuBarController {
+  public JFXButton mainMenuButton;
+  public JFXButton loginButton;
+  public JFXButton serviceButton;
+  public JFXButton pathfindButton;
+  public JFXButton adminButton;
+  public JFXButton helpButton;
+  public JFXButton settingsButton;
   SceneController sceneController = App.getSceneController();
 
   public void login(ActionEvent actionEvent) throws IOException {
@@ -12,7 +20,7 @@ public class MenuBarController {
   }
 
   public void pathfinder(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("PathfinderVersion2");
+    sceneController.switchScene("Pathfinder");
   }
 
   public void serviceRequest(ActionEvent actionEvent) throws IOException {
@@ -31,5 +39,7 @@ public class MenuBarController {
     sceneController.switchScene("Accounts");
   }
 
-  public void mainMenu(ActionEvent actionEvent) {}
+  public void mainMenu(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("MainMenuVersion2");
+  }
 }

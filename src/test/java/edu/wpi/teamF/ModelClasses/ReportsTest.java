@@ -7,7 +7,7 @@ import edu.wpi.teamF.DatabaseManipulators.CSVManipulator;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.DatabaseManipulators.ServiceRequestStats;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.TransportRequest;
 import edu.wpi.teamF.TestData;
 import java.io.File;
 import java.nio.file.Files;
@@ -27,7 +27,7 @@ public class ReportsTest {
   TestData testData = null;
   Node[] validNodes = null;
   MaintenanceRequest[] validMaintenance = null;
-  SecurityRequest[] validSecurityRequest = null;
+  TransportRequest[] validTransportRequest = null;
 
   @BeforeEach
   public void cleanTests() {
@@ -82,10 +82,12 @@ public class ReportsTest {
       System.out.println(e.getMessage());
       fail(e.getMessage());
     }
+    // add transport tests
     File wfile = new File("src/test/java/edu/wpi/teamF/Test/");
-    File file = new File("src/test/java/edu/wpi/teamF/Test/MaintenanceReport.csv");
+    File file = new File("src/test/java/edu/wpi/teamF/Test/ServiceRequestReport.csv");
     ServiceRequestStats serviceRequestStats = new ServiceRequestStats();
     serviceRequestStats.MaintenanceRequestStats(wfile.toPath());
+    serviceRequestStats.TransportRequestStats(wfile.toPath());
     try {
       byte[] f1 = Files.readAllBytes(file.toPath());
       byte[] f2 =
