@@ -108,8 +108,6 @@ public class DataMapViewController implements Initializable {
 
   private AnchorPane mapPane;
 
-  private int paneNumber;
-
   JFXButton nodeButton = null;
   Line edgeLine = null;
 
@@ -236,6 +234,24 @@ public class DataMapViewController implements Initializable {
     mapPane.setOnMouseClicked(
         new EventHandler<MouseEvent>() {
           public void handle(MouseEvent mouseEvent) {
+
+            JFXButton oldButton = null;
+            System.out.println("Here1");
+            for (javafx.scene.Node node : mapPane.getChildren()) {
+              if (node instanceof JFXButton) {
+                JFXButton oldNode = (JFXButton) node;
+                if (oldNode.getId() != null) {
+                  System.out.println("Here2");
+                  oldButton = (JFXButton) node;
+                }
+              }
+            }
+
+            if (oldButton != null) {
+              mapPane.getChildren().remove(oldButton);
+            }
+            System.out.println("Here3");
+
             double xValDouble = mouseEvent.getX();
             double yValDouble = mouseEvent.getY();
             short xVal = (short) (xValDouble / widthRatio);
@@ -243,6 +259,20 @@ public class DataMapViewController implements Initializable {
 
             xCoorInput.setText("" + xVal);
             yCoorInput.setText("" + yVal);
+
+            JFXButton locationNode = new JFXButton();
+            int buttonSize =
+                6; // this can be adjusted if we feel like the size is too small or large
+            locationNode.setMinSize(buttonSize, buttonSize);
+            locationNode.setMaxSize(buttonSize, buttonSize);
+            locationNode.setPrefSize(buttonSize, buttonSize); // the button size will not vary
+            locationNode.setStyle(
+                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px");
+            locationNode.setId("locationNode");
+            mapPane.getChildren().add(locationNode);
+            locationNode.setLayoutX(xValDouble - buttonSize / 2.0);
+            locationNode.setLayoutY(yValDouble - buttonSize / 2.0);
+            System.out.println("End");
           }
         });
   }
@@ -277,6 +307,15 @@ public class DataMapViewController implements Initializable {
 
   @FXML
   public void clearNode() {
+    for (javafx.scene.Node node : mapPane.getChildren()) {
+      if (node instanceof JFXButton) {
+        JFXButton oldNode = (JFXButton) node;
+        if (oldNode.getId() != null) {
+          System.out.println("Here2");
+          mapPane.getChildren().remove(node);
+        }
+      }
+    }
     nodeGridPane.setStyle("-fx-background-color: #eeeeee; -fx-background-radius: 10");
     typeInput.setStyle(
         "-fx-background-color: #eeeeee; -fx-border-radius: 3; -fx-border-color: #b53389");
@@ -581,29 +620,21 @@ public class DataMapViewController implements Initializable {
       node.setShortName(shortName);
       node.setType(nodeType);
       node.setFloor(floorNumber); // sets the node to the provided values
-      System.out.println(databaseManager.getAllEdgesConnectedToNode(node.getId()).size());
       databaseManager.manipulateNode(node);
-      System.out.println("here1");
-      System.out.println(databaseManager.getAllEdgesConnectedToNode(node.getId()).size());
       for (Edge edge :
           databaseManager.getAllEdgesConnectedToNode(
               node.getId())) { // for all of the edges connected to the node
-        System.out.println("here2");
         for (int i = 0;
             i < mapPane.getChildren().size();
             i++) { // for all of the children in the pane
-          System.out.println("here3");
           javafx.scene.Node children = mapPane.getChildren().get(i);
           if (children instanceof Line && children.getId().equals(edge.getId())) {
-            System.out.println("here4");
             Line line = (Line) children;
             if (edge.getNode1()
                 .equals(node.getId())) { // if node one then it is a starting coordinate
-              System.out.println("here5");
               line.setStartX(xCoordinate * widthRatio);
               line.setStartY(yCoordinate * heightRatio);
             } else { // if node two then it is an ending coordinate
-              System.out.println("here6");
               line.setEndX(xCoordinate * widthRatio);
               line.setEndY(yCoordinate * heightRatio);
             }
@@ -619,7 +650,6 @@ public class DataMapViewController implements Initializable {
       clearNode();
 
     } catch (Exception e) { // throws an error if the input is not valid
-      System.out.println("In here");
       nodeErrorLabel.setText("The input is invalid");
     }
   }
@@ -644,20 +674,12 @@ public class DataMapViewController implements Initializable {
   void selectNode1(ActionEvent event) {
     selectNode1 = true;
     node1 = null;
-    //    if (!selectNode2Button.getText().equals("Select Node 2")) {
-    //      modifyEdgeButton.setDisable(false);
-    //      modifyEdgeButton.setOpacity(1);
-    //    }
   }
 
   @FXML
   void selectNode2(ActionEvent event) {
     selectNode2 = true;
     node2 = null;
-    //    if (!selectNode1Button.getText().equals("Select Node 1")) {
-    //      modifyEdgeButton.setDisable(false);
-    //      modifyEdgeButton.setOpacity(1);
-    //    }
   }
 
   @FXML
