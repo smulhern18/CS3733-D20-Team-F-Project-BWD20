@@ -124,8 +124,8 @@ public class DataMapViewController implements Initializable {
 
   private static final int MAP_HEIGHT = 1485;
   private static final int MAP_WIDTH = 2475; // height and width of the map
-  private static final int PANE_HEIGHT = 551;
-  private static final int PANE_WIDTH = 912; // height and width of the pane/image
+  private static final int PANE_HEIGHT = 550;
+  private static final int PANE_WIDTH = 914; // height and width of the pane/image
   private double heightRatio = (double) PANE_HEIGHT / MAP_HEIGHT;
   private double widthRatio = (double) PANE_WIDTH / MAP_WIDTH; // ratio of pane to map
   private DatabaseManager databaseManager = DatabaseManager.getManager();
@@ -263,7 +263,7 @@ public class DataMapViewController implements Initializable {
             locationNode.setMaxSize(buttonSize, buttonSize);
             locationNode.setPrefSize(buttonSize, buttonSize); // the button size will not vary
             locationNode.setStyle(
-                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ADD8E6; -fx-border-color: #000000; -fx-border-width: 1px");
+                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ADD8E6; -fx-border-color: #000000; -fx-border-width: 1px; -fx-opacity: 0.7");
             locationNode.setId("locationNode");
             mapPane.getChildren().add(locationNode);
             locationNode.setLayoutX(xValDouble - buttonSize / 2.0);
@@ -308,10 +308,12 @@ public class DataMapViewController implements Initializable {
       if (node instanceof JFXButton) {
         JFXButton oldNode = (JFXButton) node;
         if (oldNode.getId() != null) {
-          System.out.println("Here2");
           mapPane.getChildren().remove(node);
         }
       }
+    }
+    if (nodeButton != null) {
+      nodeButton.setOpacity(0.7);
     }
     nodeGridPane.setStyle("-fx-background-color: #eeeeee; -fx-background-radius: 10");
     typeInput.setStyle(
@@ -337,6 +339,9 @@ public class DataMapViewController implements Initializable {
 
   @FXML
   private void clearEdge() {
+    if (edgeLine != null) {
+      edgeLine.setOpacity(0.7);
+    }
     edgeGridPane.setStyle("-fx-background-color: #eeeeee; -fx-background-radius: 10");
     selectNode1Button.setText("Select Node 1");
     selectNode2Button.setText("Select Node 2"); // resets the text in the two buttons
@@ -368,14 +373,17 @@ public class DataMapViewController implements Initializable {
       Node node2 = databaseManager.readNode(edge.getNode2());
       if (node1.getFloor()
           == node2.getFloor()) { // if the edge connects two nodes on the same floor
-        int startX = (int) (node1.getXCoord() * widthRatio);
-        int startY = (int) (node1.getYCoord() * heightRatio); // start values correspond to node 1
-        int endX = (int) (node2.getXCoord() * widthRatio);
-        int endY = (int) (node2.getYCoord() * heightRatio); // end values correspond to node 2
+        int startX = (int) ((node1.getXCoord() * widthRatio) + 0.75);
+        int startY =
+            (int) ((node1.getYCoord() * heightRatio) + 0.75); // start values correspond to node 1
+        int endX = (int) ((node2.getXCoord() * widthRatio) + 0.75);
+        int endY =
+            (int) ((node2.getYCoord() * heightRatio) + 0.75); // end values correspond to node 2
         Line line = new Line(startX, startY, endX, endY);
         line.setId(edge.getId()); // allows us to keep track of what line is what edge
         line.setStroke(Color.BLACK);
         line.setStrokeWidth(1.5);
+        line.setOpacity(0.7);
         line.setOnMouseClicked(
             mouseEvent -> { // when a user clicks on a line:
               edgeLine = line;
@@ -420,7 +428,7 @@ public class DataMapViewController implements Initializable {
     button.setMaxSize(buttonSize, buttonSize);
     button.setPrefSize(buttonSize, buttonSize); // the button size will not vary
     button.setStyle(
-        "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00008B; -fx-border-color: #000000; -fx-border-width: 1px");
+        "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00008B; -fx-border-color: #000000; -fx-border-width: 1px; -fx-opacity: 0.7");
     double xPos = (node.getXCoord() * widthRatio - buttonSize / 2.0);
     double yPos = (node.getYCoord() * heightRatio - buttonSize / 2.0);
     button.setLayoutX(xPos);
@@ -443,6 +451,8 @@ public class DataMapViewController implements Initializable {
             modifyEdgeButton.setDisable(false);
             modifyEdgeButton.setOpacity(1);
           }
+
+          nodeButton.setOpacity(1);
         });
     switch (node.getFloor()) {
       case 1:
@@ -461,6 +471,7 @@ public class DataMapViewController implements Initializable {
         mapPane5.getChildren().add(button);
         break;
     }
+
     // setNodeDraggable(button);
   }
 
@@ -626,39 +637,59 @@ public class DataMapViewController implements Initializable {
       node.setType(nodeType);
       node.setFloor(floorNumber); // sets the node to the provided values
 
-      System.out.println(databaseManager.getAllEdgesConnectedToNode(node.getId()).size());
       databaseManager.manipulateNode(node);
-      System.out.println("here1");
-      System.out.println(databaseManager.getAllEdgesConnectedToNode(node.getId()).size());
-      for (Edge edge :
-          databaseManager.getAllEdgesConnectedToNode(
-              node.getId())) { // for all of the edges connected to the node
-        System.out.println("here2");
-        for (int i = 0;
-            i < mapPane.getChildren().size();
-            i++) { // for all of the children in the pane
-          System.out.println("here3");
-          javafx.scene.Node children = mapPane.getChildren().get(i);
-          if (children instanceof Line && children.getId().equals(edge.getId())) {
-            System.out.println("here4");
-            Line line = (Line) children;
-            if (edge.getNode1()
-                .equals(node.getId())) { // if node one then it is a starting coordinate
-              System.out.println("here5");
-              line.setStartX(xCoordinate * widthRatio);
-              line.setStartY(yCoordinate * heightRatio);
-            } else { // if node two then it is an ending coordinate
-              System.out.println("here6");
-              line.setEndX(xCoordinate * widthRatio);
-              line.setEndY(yCoordinate * heightRatio);
+
+      if (oldFloorNumber != floorNumber) { // not on the same floor
+        for (Edge edge :
+            databaseManager.getAllEdgesConnectedToNode(
+                node.getId())) { // for all the edges connected to the node
+          for (int i = 0; i < mapPane.getChildren().size(); i++) {
+            javafx.scene.Node children = mapPane.getChildren().get(i);
+            if (children instanceof Line && children.getId().equals(edge.getId())) {
+              mapPane.getChildren().remove(children);
             }
+          }
+        }
+        mapPane.getChildren().remove(nodeButton);
+        switch (floorNumber) {
+          case 1:
+            mapPane1.getChildren().add(nodeButton);
             break;
+          case 2:
+            mapPane2.getChildren().add(nodeButton);
+            break;
+          case 3:
+            mapPane3.getChildren().add(nodeButton);
+            break;
+          case 4:
+            mapPane4.getChildren().add(nodeButton);
+            break;
+          case 5:
+            mapPane5.getChildren().add(nodeButton);
+            break;
+        }
+      } else { // on the same floor
+        for (Edge edge : databaseManager.getAllEdgesConnectedToNode(node.getId())) {
+          for (int i = 0; i < mapPane.getChildren().size(); i++) {
+            javafx.scene.Node children = mapPane.getChildren().get(i);
+            if (children instanceof Line && children.getId().equals(edge.getId())) {
+              Line line = (Line) children;
+              if (edge.getNode1().equals(node.getId())) {
+                line.setStartX(xCoordinate * widthRatio);
+                line.setStartY(yCoordinate * heightRatio);
+              } else { // if node two then it is an ending coordinate
+                line.setEndX(xCoordinate * widthRatio);
+                line.setEndY(yCoordinate * heightRatio);
+              }
+              break;
+            }
           }
         }
       }
 
       nodeButton.setLayoutX(xCoordinate * widthRatio - 3);
       nodeButton.setLayoutY(yCoordinate * heightRatio - 3);
+
       clearNode();
 
     } catch (Exception e) { // throws an error if the input is not valid
