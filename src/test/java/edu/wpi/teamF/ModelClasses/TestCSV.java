@@ -88,7 +88,7 @@ public class TestCSV {
 
     /** Valid data */
     File wfile = new File("src/test/java/edu/wpi/teamF/Test/");
-    File file = new File("src/test/java/edu/wpi/teamF/Test/NodesBackup.csv");
+    File file = new File("src/test/java/edu/wpi/teamF/Test/MapFAllnodes.csv");
     csvManipulator.writeCSVFileNode(wfile.toPath());
     try {
       byte[] f1 = Files.readAllBytes(file.toPath());
@@ -118,7 +118,7 @@ public class TestCSV {
 
     }
     File wfile = new File("src/test/java/edu/wpi/teamF/Test/");
-    File file = new File("src/test/java/edu/wpi/teamF/Test/EdgesBackup.csv");
+    File file = new File("src/test/java/edu/wpi/teamF/Test/MapFAlledges.csv");
     csvManipulator.writeCSVFileEdge(wfile.toPath());
     try {
       byte[] f1 = Files.readAllBytes(file.toPath());
