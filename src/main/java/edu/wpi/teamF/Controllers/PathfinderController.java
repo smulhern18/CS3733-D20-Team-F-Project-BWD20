@@ -48,6 +48,8 @@ public class PathfinderController implements Initializable {
   public AnchorPane scrollPaneFaulkner5;
   public List<Node> nodeList;
   public List<Node> fullNodeList;
+  public AnchorPane selectButtonsPane;
+  public AnchorPane directionsPane;
   public JFXButton stairsBtn;
   public JFXButton elevBtn;
   public JFXButton bathBtn;
@@ -61,6 +63,7 @@ public class PathfinderController implements Initializable {
   public JFXComboBox<String> startCombo;
   public JFXComboBox<String> endCombo;
   public JFXButton pathButton;
+  public Text directionsDisplay;
   public int state;
   public UISetting uiSetting = new UISetting();
 
@@ -105,9 +108,11 @@ public class PathfinderController implements Initializable {
       }
     }
 
-    // TODO Remove this code before pushing, for testing only
+    selectButtonsPane.setVisible(false);
+    directionsPane.setVisible(true);
     Directions directions = new Directions(fullNodeList, path, startNode, endNode);
     System.out.println(directions.getFullDirectionsString());
+    directionsDisplay.setText(directions.getFullDirectionsString());
   }
 
   public void placeButton(Node node) {
@@ -187,6 +192,7 @@ public class PathfinderController implements Initializable {
   }
 
   public void resetPane() {
+    System.out.println("Reset Clicked");
     List<javafx.scene.Node> nodesToRemove1 = new ArrayList<>();
     for (javafx.scene.Node node : mapPaneFaulkner1.getChildren()) {
       if (node instanceof Line) {
@@ -252,6 +258,8 @@ public class PathfinderController implements Initializable {
     elevBtn.setDisable(true);
     bathBtn.setDisable(true);
     commandText.setText("Select Starting Location");
+    directionsPane.setVisible(false);
+    selectButtonsPane.setVisible(true);
 
     startCombo.setValue(null);
     endCombo.setValue(null);
@@ -312,6 +320,9 @@ public class PathfinderController implements Initializable {
     pathFindAlgorithm = new MultipleFloorAStar(fullNodeList);
     resetPane();
     drawNodes();
+    deselectFloorButtons();
+    floor1Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
+    directionsPane.setVisible(false);
   }
 
   public void findElevator(MouseEvent mouseEvent) throws InstanceNotFoundException {
@@ -504,7 +515,6 @@ public class PathfinderController implements Initializable {
           // resetPane();
           setAllInvisible();
           scrollPaneFaulkner1.setVisible(true);
-          deselectFloorButtons();
           deselectFloorButtons();
           floor1Button.setStyle("-fx-background-color: #001a3c; -fx-background-radius: 10px");
         });
