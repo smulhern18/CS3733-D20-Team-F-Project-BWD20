@@ -66,7 +66,7 @@ public class CSVManipulator {
   public void writeCSVFileNode(Path path) {
     // writing to the file
     List<Node> nodes = nodeFactory.getAllNodes();
-    try (FileWriter fw = new FileWriter(path.toString() + "/NodesBackup.csv");
+    try (FileWriter fw = new FileWriter(path.toString() + "/MapFAllnodes.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
       bw.write("nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName,teamAssigned");
@@ -140,7 +140,7 @@ public class CSVManipulator {
 
     // csvString = csvString + formatNode(n);
 
-    try (FileWriter fw = new FileWriter(path.toString() + "/EdgesBackup.csv");
+    try (FileWriter fw = new FileWriter(path.toString() + "/MapFAlledges.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
       bw.write("edgeID,startNode,endNode");
