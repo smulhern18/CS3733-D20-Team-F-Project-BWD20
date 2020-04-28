@@ -90,7 +90,7 @@
                         <Image url="@../../../../Images/icons8-service-90.png" />
                      </image>
                      <GridPane.margin>
-                        <Insets left="15.0" />
+                        <Insets left="25.0" />
                      </GridPane.margin>
                   </ImageView>
                   <ImageView fitHeight="18.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
@@ -127,7 +127,7 @@
                   </ImageView>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2">
                      <children>
-                        <JFXButton onAction="#serviceRequest" prefHeight="39.0" prefWidth="175.0" text="  Service Request" textFill="#000000cc">
+                        <JFXButton onAction="#serviceRequest" prefHeight="39.0" prefWidth="175.0" text="     Service Request" textFill="#000000cc">
                            <font>
                               <Font name="STIXGeneral-Bold" size="18.0" />
                            </font>
