@@ -4,6 +4,7 @@ import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.LanguageServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UILanguageServiceRequest;
@@ -14,14 +15,18 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -277,31 +282,99 @@ public class LanguageServiceController implements Initializable {
           }
         });
     // assignee column
-    JFXTreeTableColumn<UILanguageServiceRequest, String> assignee =
-        new JFXTreeTableColumn<>("Assignee");
-    assignee.setPrefWidth(80);
-    assignee.setCellValueFactory(
-        new Callback<
-            TreeTableColumn.CellDataFeatures<UILanguageServiceRequest, String>,
-            ObservableValue<String>>() {
-          @Override
-          public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<UILanguageServiceRequest, String> param) {
-            return param.getValue().getValue().getAssignee();
-          }
-        });
+    //    JFXTreeTableColumn<UILanguageServiceRequest, String> assignee =
+    //        new JFXTreeTableColumn<>("Assignee");
+    //    assignee.setPrefWidth(80);
+    //    assignee.setCellValueFactory(
+    //        new Callback<
+    //            TreeTableColumn.CellDataFeatures<UILanguageServiceRequest, String>,
+    //            ObservableValue<String>>() {
+    //          @Override
+    //          public ObservableValue<String> call(
+    //              TreeTableColumn.CellDataFeatures<UILanguageServiceRequest, String> param) {
+    //            return param.getValue().getValue().getAssignee();
+    //          }
+    //        });
+    //
+    //    JFXTreeTableColumn<UILanguageServiceRequest, String> completed =
+    //        new JFXTreeTableColumn<>("Completed");
+    //    completed.setPrefWidth(80);
+    //    completed.setCellValueFactory(
+    //        new Callback<
+    //            TreeTableColumn.CellDataFeatures<UILanguageServiceRequest, String>,
+    //            ObservableValue<String>>() {
+    //          @Override
+    //          public ObservableValue<String> call(
+    //              TreeTableColumn.CellDataFeatures<UILanguageServiceRequest, String> param) {
+    //            return param.getValue().getValue().getCompleted();
+    //          }
+    //        });
+
+    ObservableList<String> completedList = FXCollections.observableArrayList();
+    completedList.add("Completed");
+    completedList.add("Incomplete");
 
     JFXTreeTableColumn<UILanguageServiceRequest, String> completed =
         new JFXTreeTableColumn<>("Completed");
-    completed.setPrefWidth(80);
+    completed.setPrefWidth(200);
     completed.setCellValueFactory(
+        (JFXTreeTableColumn.CellDataFeatures<UILanguageServiceRequest, String> param) ->
+            param.getValue().getValue().getCompleted());
+    completed.setCellFactory(
         new Callback<
-            TreeTableColumn.CellDataFeatures<UILanguageServiceRequest, String>,
-            ObservableValue<String>>() {
+            TreeTableColumn<UILanguageServiceRequest, String>,
+            TreeTableCell<UILanguageServiceRequest, String>>() {
           @Override
-          public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<UILanguageServiceRequest, String> param) {
-            return param.getValue().getValue().getCompleted();
+          public TreeTableCell<UILanguageServiceRequest, String> call(
+              TreeTableColumn<UILanguageServiceRequest, String> param) {
+            return new TextFieldTreeTableCell<>();
+          }
+        });
+    completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    completed.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(completedList));
+    completed.setOnEditCommit(
+        new EventHandler<TreeTableColumn.CellEditEvent<UILanguageServiceRequest, String>>() {
+          @Override
+          public void handle(
+              TreeTableColumn.CellEditEvent<UILanguageServiceRequest, String> event) {
+            TreeItem<UILanguageServiceRequest> current =
+                table.getTreeItem(event.getTreeTablePosition().getRow());
+            current.getValue().setCompleted(new SimpleStringProperty(event.getNewValue()));
+          }
+        });
+
+    // Assignee choicebox
+
+    List<Account> employeeNames = databaseManager.getAllAccounts();
+    ObservableList<String> employees = FXCollections.observableArrayList();
+    for (Account account : employeeNames) {
+      employees.add(account.getFirstName());
+    }
+    JFXTreeTableColumn<UILanguageServiceRequest, String> column =
+        new JFXTreeTableColumn<>("Assignee");
+    column.setCellValueFactory(
+        (JFXTreeTableColumn.CellDataFeatures<UILanguageServiceRequest, String> param) ->
+            param.getValue().getValue().getAssignee());
+    column.setCellFactory(
+        new Callback<
+            TreeTableColumn<UILanguageServiceRequest, String>,
+            TreeTableCell<UILanguageServiceRequest, String>>() {
+          @Override
+          public TreeTableCell<UILanguageServiceRequest, String> call(
+              TreeTableColumn<UILanguageServiceRequest, String> param) {
+            return new TextFieldTreeTableCell<>();
+          }
+        });
+    column.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    column.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(employees));
+    column.setOnEditCommit(
+        new EventHandler<TreeTableColumn.CellEditEvent<UILanguageServiceRequest, String>>() {
+          @Override
+          public void handle(
+              TreeTableColumn.CellEditEvent<UILanguageServiceRequest, String> event) {
+            TreeItem<UILanguageServiceRequest> current =
+                table.getTreeItem(event.getTreeTablePosition().getRow());
+            current.getValue().setAssignee(new SimpleStringProperty(event.getNewValue()));
           }
         });
 
@@ -316,12 +389,12 @@ public class LanguageServiceController implements Initializable {
 
     // set the columns for the tableview
 
-    table.getColumns().setAll(ID, loc, language, problemType, desc, priority, assignee, completed);
+    table.getColumns().setAll(ID, loc, language, problemType, desc, priority, column, completed);
 
     // set as editable
 
-    assignee.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-    completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    //    assignee.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    //    completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     priority.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
     table.setRoot(root);
