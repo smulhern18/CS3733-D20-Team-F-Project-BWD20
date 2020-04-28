@@ -162,7 +162,7 @@ public class DataMapViewController implements Initializable {
             "CONF", "DEPT", "EXIT", "HALL", "INFO", "LABS", "REST", "RETL", "SERV", "STAF", "STAI");
     typeInput.setValue("CONF");
 
-    uiSetting.makeZoomable(imageScrollPane, imageStackPane);
+    uiSetting.makeZoomable(imageScrollPane, imageStackPane, 1);
   }
 
   @FXML
@@ -436,7 +436,6 @@ public class DataMapViewController implements Initializable {
             displayNodeData();
             locationSelector();
           }
-
           if (!selectNode1Button.getText().equals("Select Node 1")
               && !selectNode2Button.getText().equals("Select Node 2")) {
             addEdgeButton.setDisable(false);

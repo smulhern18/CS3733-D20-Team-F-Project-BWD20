@@ -168,18 +168,7 @@ public class SecurityRequestFactory {
       while (resultSet.next()) {
         ServiceRequest serviceRequest =
             serviceRequestFactory.read(resultSet.getString(DatabaseManager.SERVICEID_KEY));
-        SecurityRequest securityRequest =
-            factory.read(resultSet.getString(DatabaseManager.SERVICEID_KEY));
-        securityRequests.add(
-            new SecurityRequest(
-                serviceRequest.getId(),
-                serviceRequest.getLocation(),
-                serviceRequest.getAssignee(),
-                serviceRequest.getDescription(),
-                serviceRequest.getDateTimeSubmitted(),
-                serviceRequest.getPriority(),
-                serviceRequest.getComplete(),
-                securityRequest.getGuardsRequested()));
+        securityRequests.add(read(serviceRequest.getId()));
       }
     } catch (Exception e) {
       System.out.println(

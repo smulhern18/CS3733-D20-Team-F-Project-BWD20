@@ -33,6 +33,7 @@ public class DatabaseManager {
   static final String MEDICINE_DELIVERY_REQUEST_TABLE_NAME = "medicineDeliveryRequestsTable";
   static final String LAUNDRY_REQUEST_TABLE_NAME = "laundryRequestsTable";
   static final String FLOWER_REQUEST_TABLE_NAME = "flowerRequestsTable";
+  static final String MARIACHI_REQUEST_TABLE_NAME = "mariachiRequestsTable";
   /** Column Names */
   // node
   static final String X_COORDINATE_KEY = "xCoord";
@@ -59,6 +60,7 @@ public class DatabaseManager {
 
   // Maintainence Request
   static final String MAINTENCE_REQUEST_ID_KEY = "serviceId";
+  static final String DATECOMPLETED_KEY = "DateCompleted";
 
   // Security Request
   static final String GUARDS_REQUESTED_KEY = "guardsRequested";
@@ -214,6 +216,18 @@ public class DatabaseManager {
             + " ( "
             + SERVICEID_KEY
             + " VARCHAR(32) NOT NULL, "
+            + GUARDS_REQUESTED_KEY
+            + " INTEGER NOT NULL, "
+            + "PRIMARY KEY ("
+            + SERVICEID_KEY
+            + "))";
+
+    String mariachiTableCreationStatement =
+        "CREATE TABLE "
+            + MARIACHI_REQUEST_TABLE_NAME
+            + " ( "
+            + SERVICEID_KEY
+            + " VARCHAR(32) NOT NULL, "
             + SONG_REQUEST_KEY
             + " VARCHAR(32) NOT NULL, "
             + "PRIMARY KEY ("
@@ -226,6 +240,8 @@ public class DatabaseManager {
             + " ( "
             + SERVICEID_KEY
             + " VARCHAR(32) NOT NULL, "
+            + DATECOMPLETED_KEY
+            + " TIMESTAMP, "
             + "PRIMARY KEY ("
             + SERVICEID_KEY
             + "))";
@@ -408,6 +424,8 @@ public class DatabaseManager {
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(laundryTableCreationStatement);
     preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(mariachiTableCreationStatement);
+    preparedStatement.execute();
     System.out.println("Created Tables Successfully");
   }
 
@@ -448,6 +466,7 @@ public class DatabaseManager {
     String languageDropStatement = "DROP TABLE " + LANGUAGE_REQUEST_TABLE_NAME;
     String flowerDropStatement = "DROP TABLE " + FLOWER_REQUEST_TABLE_NAME;
     String laundryDropStatement = "DROP TABLE " + LAUNDRY_REQUEST_TABLE_NAME;
+    String mariachiDropStatement = "DROP TABLE " + MARIACHI_REQUEST_TABLE_NAME;
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeDropStatement);
     preparedStatement.execute();
@@ -476,6 +495,8 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(flowerDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(laundryDropStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(mariachiDropStatement);
     preparedStatement.execute();
     createTables();
   }

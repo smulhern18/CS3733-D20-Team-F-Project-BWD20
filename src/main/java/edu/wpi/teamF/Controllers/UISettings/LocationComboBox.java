@@ -21,8 +21,11 @@ public class LocationComboBox {
   public void setAsLocationComboBox(JFXComboBox<String> comboBox) throws Exception {
     comboBox.setEditable(true);
     ObservableList<String> locations = FXCollections.observableArrayList();
+
     for (Node node : databaseManager.getAllNodes()) {
-      locations.add(node.getLongName() + " " + node.getId());
+      if (!node.getType().equals(Node.NodeType.getEnum("HALL"))) {
+        locations.add(node.getLongName() + " " + node.getId());
+      }
     }
     FilteredList<String> filteredLocations = new FilteredList<String>(locations, p -> true);
 
