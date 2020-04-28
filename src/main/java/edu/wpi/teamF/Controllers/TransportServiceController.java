@@ -89,8 +89,7 @@ public class TransportServiceController implements Initializable {
     priorityChoice.getItems().add("Medium");
     priorityChoice.getItems().add("High");
 
-
-    //Add the types here
+    // Add the types here
     issueChoice.getItems().add("");
     issueChoice.getItems().add("");
     issueChoice.getItems().add("");
