@@ -102,14 +102,6 @@ public class LoginController implements Initializable {
   private void resize(double width) {
     System.out.println(width);
     Font newFont = new Font(width / 50);
-    loginText.setFont(newFont);
-    usernameInput.setFont(newFont);
-    passwordInput.setFont(newFont);
-    loginButton.setFont(newFont);
-    registerButton.setFont(newFont);
-    orText.setFont(newFont);
-    forgotText.setFont(newFont);
-    incorrectLabel.setFont(newFont);
     // deleteButton.setFont(new Font(width / 50));
   }
 }

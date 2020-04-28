@@ -4,6 +4,8 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
+
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -17,14 +19,17 @@
 <AnchorPane fx:id="anchorPane" prefHeight="415.0" prefWidth="679.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.LoginController">
    <children>
       <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+
       <StackPane fx:id="stackPane" layoutX="266.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fx:id="background" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
             <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="342.0">
+
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
               </columnConstraints>
               <rowConstraints>
+
                 <RowConstraints vgrow="SOMETIMES" />
                   <RowConstraints vgrow="SOMETIMES" />
                   <RowConstraints vgrow="SOMETIMES" />
@@ -96,10 +101,12 @@
                               <Label fx:id="orText" text="or">
                                  <font>
                                     <Font name="STIXGeneral-Regular" size="13.0" />
+
                                  </font>
                               </Label>
                            </children>
                         </StackPane>
+
                      </children>
                   </StackPane>
                   <Label fx:id="forgotText" text="Forgot Password?" GridPane.rowIndex="4">
@@ -117,6 +124,7 @@
                         <Font name="STIXGeneral-Regular" size="13.0" />
                      </font>
                   </JFXButton>
+
                </children>
             </GridPane>
          </children>
