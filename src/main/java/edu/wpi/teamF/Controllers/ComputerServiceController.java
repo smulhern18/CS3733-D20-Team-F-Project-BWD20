@@ -1,43 +1,40 @@
-package edu.wpi.teamF.Controllers;
+ package edu.wpi.teamF.Controllers;
 
-import com.jfoenix.controls.*;
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import edu.wpi.teamF.App;
-import edu.wpi.teamF.Controllers.UISettings.UISetting;
-import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
-import edu.wpi.teamF.ModelClasses.Account.Account;
-import edu.wpi.teamF.ModelClasses.Node;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
-import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
-import java.io.IOException;
-import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
-import java.util.ResourceBundle;
+ import com.jfoenix.controls.*;
+ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+ import edu.wpi.teamF.App;
+ import edu.wpi.teamF.Controllers.UISettings.UISetting;
+ import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+ import edu.wpi.teamF.ModelClasses.Account.Account;
+ import edu.wpi.teamF.ModelClasses.Node;
+ import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
+ import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
+ import java.io.IOException;
+ import java.net.URL;
+ import java.text.DateFormat;
+ import java.text.SimpleDateFormat;
+ import java.time.LocalDateTime;
+ import java.util.Date;
+ import java.util.List;
+ import java.util.ResourceBundle;
+ import javafx.beans.binding.Bindings;
+ import javafx.beans.property.SimpleBooleanProperty;
+ import javafx.beans.property.StringProperty;
+ import javafx.beans.value.ObservableValue;
+ import javafx.collections.FXCollections;
+ import javafx.collections.ObservableList;
+ import javafx.event.ActionEvent;
+ import javafx.fxml.Initializable;
+ import javafx.scene.control.*;
+ import javafx.scene.control.cell.CheckBoxTreeTableCell;
+ import javafx.scene.control.cell.TextFieldTreeTableCell;
+ import javafx.scene.layout.AnchorPane;
+ import javafx.scene.layout.GridPane;
+ import javafx.scene.text.Font;
+ import javafx.util.Callback;
+ import lombok.SneakyThrows;
 
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.CheckBoxTreeTableCell;
-import javafx.scene.control.cell.ComboBoxTableCell;
-import javafx.scene.control.cell.TextFieldTreeTableCell;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
-import javafx.util.Callback;
-import lombok.SneakyThrows;
-
-public class ComputerServiceController implements Initializable {
+ public class ComputerServiceController implements Initializable {
   public JFXTreeTableView<UIComputerServiceRequest> treeTableComputer;
   public AnchorPane anchorPane;
   public GridPane optionBar;
@@ -126,7 +123,8 @@ public class ComputerServiceController implements Initializable {
         });
 
     // Location column
-    JFXTreeTableColumn<UIComputerServiceRequest, String> loc = new JFXTreeTableColumn<>("Location");
+    JFXTreeTableColumn<UIComputerServiceRequest, String> loc = new
+ JFXTreeTableColumn<>("Location");
     loc.setPrefWidth(100);
     loc.setCellValueFactory(
         new Callback<
@@ -253,35 +251,39 @@ public class ComputerServiceController implements Initializable {
           }
         });
 
-    JFXTreeTableColumn<UIComputerServiceRequest, StringProperty> column = new JFXTreeTableColumn<>("Assignee");
-    column.setCellValueFactory(i -> {
-      final StringProperty value = i.getValue().getValue().getAssignee();
-      // binding to constant value
-      return Bindings.createObjectBinding(() -> value);
-    });
+    JFXTreeTableColumn<UIComputerServiceRequest, StringProperty> column =
+        new JFXTreeTableColumn<>("Assignee");
+    column.setCellValueFactory(
+        i -> {
+          final StringProperty value = i.getValue().getValue().getAssignee();
+          // binding to constant value
+          return Bindings.createObjectBinding(() -> value);
+        });
 
     List<Account> employeeNames = databaseManager.getAllAccounts();
     ObservableList<String> employees = FXCollections.observableArrayList();
-    for(Account account: employeeNames){
+    for (Account account : employeeNames) {
       employees.add(account.getFirstName());
     }
 
-    column.setCellFactory(col -> {
-      TableCell<UIComputerServiceRequest, StringProperty> c = new TableCell<>();
-      ComboBox<String> comboBox = new ComboBox<>(employees);
-      c.itemProperty().addListener((observable, oldValue, newValue) -> {
-        if (oldValue != null) {
-          comboBox.valueProperty().unbindBidirectional(oldValue);
-        }
-        if (newValue != null) {
-          comboBox.valueProperty().bindBidirectional(newValue);
-        }
-      });
-      c.graphicProperty().bind(Bindings.when(c.emptyProperty()).then((Node) null).otherwise(comboBox));
-      return c;
-    });
-
-
+    column.setCellFactory(
+        col -> {
+          TableCell<UIComputerServiceRequest, StringProperty> c = new TableCell<>();
+          ComboBox<String> comboBox = new ComboBox<>(employees);
+          c.itemProperty()
+              .addListener(
+                  (observable, oldValue, newValue) -> {
+                    if (oldValue != null) {
+                      comboBox.valueProperty().unbindBidirectional(oldValue);
+                    }
+                    if (newValue != null) {
+                      comboBox.valueProperty().bindBidirectional(newValue);
+                    }
+                  });
+         c.graphicProperty()
+             .bind(Bindings.when(c.emptyProperty()).then((Node) null).otherwise(comboBox));
+          return c;
+        });
 
     // Load the database into the tableview
 
@@ -296,7 +298,7 @@ public class ComputerServiceController implements Initializable {
 
     treeTableComputer
         .getColumns()
-        .setAll(ID, loc, make, OS, type, desc, priority, assignee, completed, assignee2);
+       .setAll(ID, loc, make, OS, type, desc, priority, assignee, completed, assignee2);
 
     // set as editable
 
@@ -377,7 +379,8 @@ public class ComputerServiceController implements Initializable {
   public void delete(ActionEvent actionEvent) throws Exception {
     String toDelte = deleteText.getText();
     databaseManager.deleteComputerServiceRequest(toDelte);
-    csrUI.removeIf(computerServiceRequest -> computerServiceRequest.getID().get().equals(toDelte));
+    csrUI.removeIf(computerServiceRequest ->
+ computerServiceRequest.getID().get().equals(toDelte));
     deleteText.setText("");
     treeTableComputer.refresh();
   }
@@ -412,4 +415,4 @@ public class ComputerServiceController implements Initializable {
   public void backToServiceRequestMain(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("ServiceRequestMain");
   }
-}
+ }

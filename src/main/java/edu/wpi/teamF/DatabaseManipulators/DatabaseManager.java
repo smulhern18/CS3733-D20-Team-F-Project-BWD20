@@ -794,6 +794,10 @@ public class DatabaseManager {
     mariachiRequestFactory.delete(toDelete);
   }
 
+  public List<MariachiRequest> getMariachiRequestByLocation(Node node) {
+    return mariachiRequestFactory.getSecurityRequestsByLocation(node);
+  }
+
   public List<MedicineDeliveryRequest> getAllMedicineDeliveryRequests() {
     return medicineDeliveryRequestFactory.getAllMedicineDeliveryRequests();
   }

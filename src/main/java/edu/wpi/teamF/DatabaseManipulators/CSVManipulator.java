@@ -12,7 +12,6 @@ import edu.wpi.teamF.ModelClasses.ServiceRequest.LanguageServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.LaundryServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MedicineDeliveryRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
 import java.io.*;
 import java.nio.file.Path;
@@ -27,12 +26,18 @@ public class CSVManipulator {
   private SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
   private AccountFactory accountFactory = AccountFactory.getFactory();
   private MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
-  private ComputerServiceRequestFactory computerServiceRequestFactory = ComputerServiceRequestFactory.getFactory();
-  private FlowerServiceRequestFactory flowerServiceRequestFactory = FlowerServiceRequestFactory.getFactory();
-  private LanguageServiceRequestFactory languageServiceRequestFactory = LanguageServiceRequestFactory.getFactory();
-  private LaundryServiceRequestFactory laundryServiceRequestFactory = LaundryServiceRequestFactory.getFactory();
-  private MedicineDeliveryRequestFactory medicineDeliveryRequestFactory = MedicineDeliveryRequestFactory.getFactory();
-  private SanitationServiceRequestFactory sanitationServiceRequestFactory = SanitationServiceRequestFactory.getFactory();
+  private ComputerServiceRequestFactory computerServiceRequestFactory =
+      ComputerServiceRequestFactory.getFactory();
+  private FlowerServiceRequestFactory flowerServiceRequestFactory =
+      FlowerServiceRequestFactory.getFactory();
+  private LanguageServiceRequestFactory languageServiceRequestFactory =
+      LanguageServiceRequestFactory.getFactory();
+  private LaundryServiceRequestFactory laundryServiceRequestFactory =
+      LaundryServiceRequestFactory.getFactory();
+  private MedicineDeliveryRequestFactory medicineDeliveryRequestFactory =
+      MedicineDeliveryRequestFactory.getFactory();
+  private SanitationServiceRequestFactory sanitationServiceRequestFactory =
+      SanitationServiceRequestFactory.getFactory();
   private TransportRequestFactory transportRequestFactory = TransportRequestFactory.getFactory();
   /**
    * reads a csv file that contains nodes and inserts the data in the file into the correct place in
@@ -178,8 +183,8 @@ public class CSVManipulator {
     return edge;
   }
   /**
-   * reads a csv file that contains MaintenanceRequests and inserts the data in the file into the correct place in
-   * the database
+   * reads a csv file that contains MaintenanceRequests and inserts the data in the file into the
+   * correct place in the database
    */
   public void readCSVFileMaintenanceService(InputStream stream) {
     String row = "";
@@ -256,8 +261,8 @@ public class CSVManipulator {
     return Main;
   }
   /**
-   * reads a csv file that contains Security Requests and inserts the data in the file into the correct place in
-   * the database
+   * reads a csv file that contains Security Requests and inserts the data in the file into the
+   * correct place in the database
    */
   public void readCSVFileSecurityService(InputStream stream) {
     String row = "";
@@ -302,7 +307,8 @@ public class CSVManipulator {
     try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
-      bw.write("id,location,assignee,description,dateTimeSubmitted,priority,complete,GuardsRequested");
+      bw.write(
+          "id,location,assignee,description,dateTimeSubmitted,priority,complete,GuardsRequested");
 
       for (SecurityRequest s : securityRequests) {
         bw.newLine();
@@ -335,8 +341,8 @@ public class CSVManipulator {
     return Main;
   }
   /**
-   * reads a csv file that contains Accounts and inserts the data in the file into the correct place in
-   * the database
+   * reads a csv file that contains Accounts and inserts the data in the file into the correct place
+   * in the database
    */
   public void readCSVFileAccount(InputStream stream) {
     String row = "";
@@ -437,10 +443,9 @@ public class CSVManipulator {
     return account;
   }
 
-
   /**
-   * reads a csv file that contains Computer Requests and inserts the data in the file into the correct place in
-   * the database
+   * reads a csv file that contains Computer Requests and inserts the data in the file into the
+   * correct place in the database
    */
   public void readCSVFileComputerService(InputStream stream) {
     String row = "";
@@ -463,9 +468,9 @@ public class CSVManipulator {
                 new Date(Integer.parseInt(data.get(i + 4))),
                 Integer.parseInt(data.get(i + 5)),
                 Boolean.parseBoolean(data.get(i + 6)),
-                data.get(i+7),
-                data.get(i+8),
-                data.get(i+9)));
+                data.get(i + 7),
+                data.get(i + 8),
+                data.get(i + 9)));
 
         i = i + 10;
       }
@@ -482,12 +487,14 @@ public class CSVManipulator {
   /** Writes to the CSV file so that it can become persistant */
   public void writeCSVFileComputerService(Path path) throws Exception {
     // writing to the file
-    List<ComputerServiceRequest> computerServiceRequest = computerServiceRequestFactory.getAllComputerRequests();
+    List<ComputerServiceRequest> computerServiceRequest =
+        computerServiceRequestFactory.getAllComputerRequests();
 
     try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
-      bw.write("id,location,assignee,description,dateTimeSubmitted,priority,complete,make,hardwareOrSoftware,OS");
+      bw.write(
+          "id,location,assignee,description,dateTimeSubmitted,priority,complete,make,hardwareOrSoftware,OS");
 
       for (ComputerServiceRequest s : computerServiceRequest) {
         bw.newLine();
@@ -524,8 +531,8 @@ public class CSVManipulator {
     return Main;
   }
   /**
-   * reads a csv file that contains Flower Requests and inserts the data in the file into the correct place in
-   * the database
+   * reads a csv file that contains Flower Requests and inserts the data in the file into the
+   * correct place in the database
    */
   public void readCSVFileFlowerService(InputStream stream) {
     String row = "";
@@ -547,12 +554,12 @@ public class CSVManipulator {
                 data.get(i + 3),
                 new Date(Integer.parseInt(data.get(i + 4))),
                 Integer.parseInt(data.get(i + 5)),
-                data.get(i+6),
-                data.get(i+7),
-                data.get(i+8),
-                data.get(i+9),
-                data.get(i+10),
-                data.get(i+11),
+                data.get(i + 6),
+                data.get(i + 7),
+                data.get(i + 8),
+                data.get(i + 9),
+                data.get(i + 10),
+                data.get(i + 11),
                 Boolean.parseBoolean(data.get(i + 12)),
                 Boolean.parseBoolean((data.get(i + 13)))));
 
@@ -576,7 +583,8 @@ public class CSVManipulator {
     try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
-      bw.write("iid,location,assignee,description,dateTimeSubmitted,priority,recipientInput,roomInput,choice,messageInput,buyerName,phoneNumber,iftWrap,complete");
+      bw.write(
+          "iid,location,assignee,description,dateTimeSubmitted,priority,recipientInput,roomInput,choice,messageInput,buyerName,phoneNumber,iftWrap,complete");
 
       for (FlowerRequest s : flowerRequests) {
         bw.newLine();
@@ -621,11 +629,9 @@ public class CSVManipulator {
     return Main;
   }
 
-
-
   /**
-   * reads a csv file that contains Mariachi Requests and inserts the data in the file into the correct place in
-   * the database
+   * reads a csv file that contains Mariachi Requests and inserts the data in the file into the
+   * correct place in the database
    */
   public void readCSVFileMariachiService(InputStream stream) {
     String row = "";
@@ -670,7 +676,8 @@ public class CSVManipulator {
     try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
-      bw.write("id,location,assignee,description,dateTimeSubmitted,priority,complete,SongRequested");
+      bw.write(
+          "id,location,assignee,description,dateTimeSubmitted,priority,complete,SongRequested");
 
       for (MariachiRequest s : mariachiRequests) {
         bw.newLine();
@@ -704,8 +711,8 @@ public class CSVManipulator {
   }
 
   /**
-   * reads a csv file that contains Language Requests and inserts the data in the file into the correct place in
-   * the database
+   * reads a csv file that contains Language Requests and inserts the data in the file into the
+   * correct place in the database
    */
   public void readCSVFileLanguageService(InputStream stream) {
     String row = "";
@@ -746,12 +753,14 @@ public class CSVManipulator {
   /** Writes to the CSV file so that it can become persistant */
   public void writeCSVFileLanguageService(Path path) throws Exception {
     // writing to the file
-    List<LanguageServiceRequest> languageServiceRequests = languageServiceRequestFactory.getAllLanguageRequests();
+    List<LanguageServiceRequest> languageServiceRequests =
+        languageServiceRequestFactory.getAllLanguageRequests();
 
     try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
-      bw.write("id,location,assignee,description,dateTimeSubmitted,priority,complete,language,problemType");
+      bw.write(
+          "id,location,assignee,description,dateTimeSubmitted,priority,complete,language,problemType");
 
       for (LanguageServiceRequest s : languageServiceRequests) {
         bw.newLine();
@@ -786,8 +795,8 @@ public class CSVManipulator {
     return Main;
   }
   /**
-   * reads a csv file that contains Laundry Requests and inserts the data in the file into the correct place in
-   * the database
+   * reads a csv file that contains Laundry Requests and inserts the data in the file into the
+   * correct place in the database
    */
   public void readCSVFileLaundryService(InputStream stream) {
     String row = "";
@@ -829,12 +838,14 @@ public class CSVManipulator {
   /** Writes to the CSV file so that it can become persistant */
   public void writeCSVFileLaundryService(Path path) throws Exception {
     // writing to the file
-    List<LaundryServiceRequest> laundryServiceRequests = laundryServiceRequestFactory.getAllLaundryRequests();
+    List<LaundryServiceRequest> laundryServiceRequests =
+        laundryServiceRequestFactory.getAllLaundryRequests();
 
     try (FileWriter fw = new FileWriter(path.toString() + "/SecurityBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
-      bw.write("id,location,assignee,description,dateTimeSubmitted,priority,complete,language,problemType");
+      bw.write(
+          "id,location,assignee,description,dateTimeSubmitted,priority,complete,language,problemType");
 
       for (LaundryServiceRequest s : laundryServiceRequests) {
         bw.newLine();
@@ -870,8 +881,4 @@ public class CSVManipulator {
             + m.getTemperature();
     return Main;
   }
-
-
-
-
 }
