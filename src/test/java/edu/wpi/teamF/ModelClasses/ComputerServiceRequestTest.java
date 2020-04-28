@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.TestData;
 import java.sql.SQLException;
@@ -17,7 +16,6 @@ public class ComputerServiceRequestTest {
 
   static TestData testData = null;
   static ComputerServiceRequest[] validComputerServiceRequest = null;
-  NodeFactory nodeFactory = NodeFactory.getFactory();
   static DatabaseManager databaseManager = DatabaseManager.getManager();
   static Node[] validNodes = null;
 
@@ -38,19 +36,10 @@ public class ComputerServiceRequestTest {
   @Test
   public void testCreateReadDelete() {
     try {
-      databaseManager.manipulateServiceRequest((ComputerServiceRequest) null);
-      fail("Creating a null value is unacceptable");
-    } catch (ValidationException e) {
-      // ignore as expected
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
-
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
     } catch (Exception e) {
 
     }
@@ -82,10 +71,10 @@ public class ComputerServiceRequestTest {
   public void testCreateReadUpdateDelete() {
 
     try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
 
     } catch (Exception e) {
 
@@ -113,10 +102,10 @@ public class ComputerServiceRequestTest {
   @Test
   public void testGetMainByLocation() {
     try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
 
     } catch (Exception e) {
 
@@ -125,8 +114,6 @@ public class ComputerServiceRequestTest {
     ComputerServiceRequest main2 = validComputerServiceRequest[1];
     ComputerServiceRequest main3 = validComputerServiceRequest[2];
     ComputerServiceRequest main4 = validComputerServiceRequest[3];
-
-    NodeFactory nodeFactory = NodeFactory.getFactory();
 
     try {
       databaseManager.manipulateServiceRequest(main1);
@@ -159,10 +146,10 @@ public class ComputerServiceRequestTest {
   @Test
   public void testGetAllMaintenanceRequests() {
     try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
 
     } catch (Exception e) {
 

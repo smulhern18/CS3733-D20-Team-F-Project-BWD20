@@ -67,10 +67,15 @@ public class ComputerServiceController implements Initializable {
 
   ObservableList<UIComputerServiceRequest> csrUI = FXCollections.observableArrayList();
   DatabaseManager databaseManager = DatabaseManager.getManager();
-  List<ComputerServiceRequest> computerServiceRequests =
-      databaseManager.getAllComputerServiceRequests();
+  List<ComputerServiceRequest> computerServiceRequests;
 
-  public ComputerServiceController() throws Exception {}
+  public ComputerServiceController() {
+    try {
+      computerServiceRequests = databaseManager.getAllComputerServiceRequests();
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+  }
 
   @SneakyThrows
   @Override

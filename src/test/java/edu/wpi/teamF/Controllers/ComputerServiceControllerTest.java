@@ -16,6 +16,7 @@ public class ComputerServiceControllerTest extends ApplicationTest {
 
   // Initialize the databases needed. Need database manager, nodes (for locations) and obv. the
   // computerservicerequest
+
   DatabaseManager databaseManager = DatabaseManager.getManager();
   List<ComputerServiceRequest> computerServiceRequest =
       databaseManager.getAllComputerServiceRequests();

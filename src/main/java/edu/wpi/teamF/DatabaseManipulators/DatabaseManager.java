@@ -60,6 +60,7 @@ public class DatabaseManager {
 
   // Maintainence Request
   static final String MAINTENCE_REQUEST_ID_KEY = "serviceId";
+  static final String DATECOMPLETED_KEY = "DateCompleted";
 
   // Security Request
   static final String GUARDS_REQUESTED_KEY = "guardsRequested";
@@ -239,6 +240,8 @@ public class DatabaseManager {
             + " ( "
             + SERVICEID_KEY
             + " VARCHAR(32) NOT NULL, "
+            + DATECOMPLETED_KEY
+            + " TIMESTAMP, "
             + "PRIMARY KEY ("
             + SERVICEID_KEY
             + "))";

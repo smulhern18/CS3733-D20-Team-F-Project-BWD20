@@ -28,6 +28,7 @@ public class CSVManipulator {
       MaintenanceRequestFactory.getFactory();
   private SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
   private AccountFactory accountFactory = AccountFactory.getFactory();
+  private DatabaseManager databaseManager = DatabaseManager.getManager();
   private MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
   private ComputerServiceRequestFactory computerServiceRequestFactory =
       ComputerServiceRequestFactory.getFactory();
@@ -199,9 +200,9 @@ public class CSVManipulator {
         data.addAll(Arrays.asList(row.split(",")));
       }
 
-      int i = 7;
+      int i = 8;
       while (i < (data.size() - 1)) {
-        maintenanceRequestFactory.create(
+        databaseManager.manipulateServiceRequest(
             new MaintenanceRequest(
                 data.get(i),
                 nodeFactory.read(data.get(i + 1)),
@@ -209,9 +210,10 @@ public class CSVManipulator {
                 data.get(i + 3),
                 new Date(Integer.parseInt(data.get(i + 4))),
                 Integer.parseInt(data.get(i + 5)),
-                Boolean.parseBoolean(data.get(i + 6))));
+                Boolean.parseBoolean(data.get(i + 6)),
+                new Date(Integer.parseInt(data.get(i + 7)))));
 
-        i = i + 7;
+        i = i + 8;
       }
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File Not found!");
@@ -232,7 +234,8 @@ public class CSVManipulator {
     try (FileWriter fw = new FileWriter(path.toString() + "/MaintenanceBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
-      bw.write("id,location,assignee,description,dateTimeSubmitted,priority,complete");
+      bw.write(
+          "id,location,assignee,description,dateTimeSubmitted,priority,complete,timeCompleted");
 
       for (MaintenanceRequest m : maintenanceRequests) {
         bw.newLine();
@@ -260,7 +263,9 @@ public class CSVManipulator {
             + ","
             + m.getPriority()
             + ","
-            + m.getComplete();
+            + m.getComplete()
+            + ","
+            + m.getTimeCompleted().getTime();
     return Main;
   }
   /**
