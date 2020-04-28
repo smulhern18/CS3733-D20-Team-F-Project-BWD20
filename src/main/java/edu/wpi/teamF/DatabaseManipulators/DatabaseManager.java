@@ -90,6 +90,7 @@ public class DatabaseManager {
   // Transport requests
   static final String TRANSPORT_TYPE_KEY = "type";
   static final String DESTINATION_KEY = "destination";
+  static final String TIME_COMPLETED_KEY = "dateCompleted";
 
   // Factories
   private NodeFactory nodeFactory = NodeFactory.getFactory();
@@ -237,6 +238,8 @@ public class DatabaseManager {
                     +" VARCHAR(32) NOT NULL, "
                     + DESTINATION_KEY
                     +" VARCHAR(32) NOT NULL, "
+                    + TIME_COMPLETED_KEY
+                    + " TIMESTAMP NOT NULL, "
                     + "PRIMARY KEY ("
                     + SERVICEID_KEY
                     + "))";
