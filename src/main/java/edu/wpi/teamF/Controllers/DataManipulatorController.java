@@ -353,6 +353,7 @@ public class DataManipulatorController implements Initializable {
   public void uploadEdges(ActionEvent actionEvent) throws FileNotFoundException {
     edgesChooser.setTitle("Select CSV File Edges");
     File file = edgesChooser.showOpenDialog(rootPane.getScene().getWindow());
+
     databaseManager.readEdges(new FileInputStream(file));
   }
 

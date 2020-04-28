@@ -34,4 +34,8 @@ public class ServiceRequestMainController {
   public void switchToLaundryService(MouseEvent mouseEvent) throws IOException {
     sceneController.switchScene("LaundryServiceRequest");
   }
+
+  public void flowerRequest(MouseEvent mouseEvent) throws IOException {
+    sceneController.switchScene("FlowerRequestInfo");
+  }
 }

@@ -46,7 +46,7 @@ public class ZoomController implements Initializable {
     //    scrollPane.setFitToWidth(true); // center
     //    scaleValue = 1;
     //    updateScale();
-    uiSetting.makeZoomable(scrollPane, mapPane);
+    uiSetting.makeZoomable(scrollPane, mapPane, 1);
   }
 
   private Node outerNode(Node node) {

@@ -11,6 +11,8 @@ import javafx.scene.layout.VBox;
 
 public class Zoom {
 
+  private double maxScaleFactor;
+
   private Group zoomNode;
 
   private double scaleValue;
@@ -19,7 +21,8 @@ public class Zoom {
   private ScrollPane scrollPane;
   private StackPane stackPane;
 
-  public void makeZoomable(ScrollPane scrollPane, StackPane stackPane) {
+  public void makeZoomable(ScrollPane scrollPane, StackPane stackPane, double maxScaleFactor) {
+    this.maxScaleFactor = maxScaleFactor;
     this.scrollPane = scrollPane;
     this.stackPane = stackPane;
     zoomNode = new Group(this.stackPane);
@@ -30,7 +33,7 @@ public class Zoom {
     scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     scrollPane.setFitToHeight(true); // center
     scrollPane.setFitToWidth(true); // center
-    scaleValue = 1;
+    scaleValue = maxScaleFactor;
     updateScale();
   }
 
@@ -57,7 +60,7 @@ public class Zoom {
 
   private void onScroll(double wheelDelta, Point2D mousePoint) {
     double zoomFactor = Math.exp(wheelDelta * zoomIntensity);
-    // System.out.println(zoomFactor);
+    System.out.println("Scale factor: " + scaleValue);
 
     Bounds innerBounds = zoomNode.getLayoutBounds();
     Bounds viewportBounds = scrollPane.getViewportBounds();
@@ -68,7 +71,8 @@ public class Zoom {
     double valX = scrollPane.getHvalue() * (innerBounds.getWidth() - viewportBounds.getWidth());
     double valY = scrollPane.getVvalue() * (innerBounds.getHeight() - viewportBounds.getHeight());
 
-    scaleValue = Math.max(1, scaleValue * zoomFactor);
+    scaleValue = Math.max(maxScaleFactor, scaleValue * zoomFactor);
+    System.out.println("Scale factor: " + scaleValue);
     updateScale();
     scrollPane.layout(); // refresh ScrollPane scroll positions & target bounds
 
