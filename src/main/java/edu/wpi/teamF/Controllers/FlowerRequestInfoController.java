@@ -34,6 +34,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.util.Callback;
 import javax.management.InstanceNotFoundException;
+import lombok.SneakyThrows;
 
 public class FlowerRequestInfoController implements Initializable {
 
@@ -108,6 +109,7 @@ public class FlowerRequestInfoController implements Initializable {
   FlowerServiceRequestFactory flowerServiceRequest = FlowerServiceRequestFactory.getFactory();
   List<FlowerRequest> flowerServiceRequests = flowerServiceRequest.getAllFlowerRequests();
 
+  @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 

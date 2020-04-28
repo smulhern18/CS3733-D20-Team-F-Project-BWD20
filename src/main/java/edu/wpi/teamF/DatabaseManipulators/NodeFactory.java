@@ -18,7 +18,7 @@ public class NodeFactory {
 
   private EdgeFactory edgeFactory = EdgeFactory.getFactory();
 
-  static NodeFactory getFactory() {
+  public static NodeFactory getFactory() {
     return factory;
   }
 
