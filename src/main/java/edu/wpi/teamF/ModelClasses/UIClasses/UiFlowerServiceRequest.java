@@ -6,7 +6,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javafx.beans.property.SimpleStringProperty;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class UiFlowerServiceRequest extends RecursiveTreeObject<UiFlowerServiceRequest> {
   public SimpleStringProperty ID;

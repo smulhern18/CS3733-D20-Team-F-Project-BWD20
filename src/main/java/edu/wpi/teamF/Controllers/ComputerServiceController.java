@@ -17,19 +17,17 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTreeTableCell;
-import javafx.scene.control.cell.ComboBoxTableCell;
+import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -209,6 +207,7 @@ public class ComputerServiceController implements Initializable {
             return param.getValue().getValue().getPriority();
           }
         });
+    /*
     // assignee column
     JFXTreeTableColumn<UIComputerServiceRequest, String> assignee =
         new JFXTreeTableColumn<>("Assignee");
@@ -223,6 +222,8 @@ public class ComputerServiceController implements Initializable {
             return param.getValue().getValue().getAssignee();
           }
         });
+
+     */
 
     /*
     JFXTreeTableColumn<UIComputerServiceRequest, String> completed =
@@ -241,47 +242,55 @@ public class ComputerServiceController implements Initializable {
 
      */
 
+    // Combobox completed
     JFXTreeTableColumn<UIComputerServiceRequest, Boolean> completed =
         new JFXTreeTableColumn<>("Completed");
     completed.setCellFactory(CheckBoxTreeTableCell.forTreeTableColumn(completed));
     completed.setCellValueFactory(
         param -> {
           if (param.getValue().getValue().getCompleted().get()) {
+            System.out.println(param.getValue().getValue().getCompleted().get());
             return new SimpleBooleanProperty(true);
           } else {
+            System.out.println(param.getValue().getValue().getCompleted().get());
             return new SimpleBooleanProperty(false);
           }
         });
 
-    JFXTreeTableColumn<UIComputerServiceRequest, StringProperty> column = new JFXTreeTableColumn<>("Assignee");
-    column.setCellValueFactory(i -> {
-      final StringProperty value = i.getValue().getValue().getAssignee();
-      // binding to constant value
-      return Bindings.createObjectBinding(() -> value);
-    });
+    // Assignee choicebox
 
     List<Account> employeeNames = databaseManager.getAllAccounts();
     ObservableList<String> employees = FXCollections.observableArrayList();
-    for(Account account: employeeNames){
+    for (Account account : employeeNames) {
       employees.add(account.getFirstName());
     }
-
-    column.setCellFactory(col -> {
-      TableCell<UIComputerServiceRequest, StringProperty> c = new TableCell<>();
-      ComboBox<String> comboBox = new ComboBox<>(employees);
-      c.itemProperty().addListener((observable, oldValue, newValue) -> {
-        if (oldValue != null) {
-          comboBox.valueProperty().unbindBidirectional(oldValue);
-        }
-        if (newValue != null) {
-          comboBox.valueProperty().bindBidirectional(newValue);
-        }
-      });
-      c.graphicProperty().bind(Bindings.when(c.emptyProperty()).then((Node) null).otherwise(comboBox));
-      return c;
-    });
-
-
+    JFXTreeTableColumn<UIComputerServiceRequest, String> column =
+        new JFXTreeTableColumn<>("Assignee");
+    column.setCellValueFactory(
+        (JFXTreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String> param) ->
+            param.getValue().getValue().getAssignee());
+    column.setCellFactory(
+        new Callback<
+            TreeTableColumn<UIComputerServiceRequest, String>,
+            TreeTableCell<UIComputerServiceRequest, String>>() {
+          @Override
+          public TreeTableCell<UIComputerServiceRequest, String> call(
+              TreeTableColumn<UIComputerServiceRequest, String> param) {
+            return new TextFieldTreeTableCell<>();
+          }
+        });
+    column.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    column.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(employees));
+    column.setOnEditCommit(
+        new EventHandler<TreeTableColumn.CellEditEvent<UIComputerServiceRequest, String>>() {
+          @Override
+          public void handle(
+              TreeTableColumn.CellEditEvent<UIComputerServiceRequest, String> event) {
+            TreeItem<UIComputerServiceRequest> current =
+                treeTableComputer.getTreeItem(event.getTreeTablePosition().getRow());
+            current.getValue().setAssignee(new SimpleStringProperty(event.getNewValue()));
+          }
+        });
 
     // Load the database into the tableview
 
@@ -296,11 +305,11 @@ public class ComputerServiceController implements Initializable {
 
     treeTableComputer
         .getColumns()
-        .setAll(ID, loc, make, OS, type, desc, priority, assignee, completed, assignee2);
+        .setAll(ID, loc, make, OS, type, desc, priority, completed, column);
 
     // set as editable
 
-    assignee.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    // assignee.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     // completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     priority.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
@@ -361,12 +370,12 @@ public class ComputerServiceController implements Initializable {
       boolean isSame = csrui.equalsCSR(toUpdate);
       if (!isSame) {
         toUpdate.setAssignee(csrui.getAssignee().get());
-        String completed = "" + csrui.getCompleted().get();
-        if (completed.equals("Incomplete")) {
-          toUpdate.setComplete(false);
-
-        } else if (completed.equals("Complete")) {
+        boolean completed = csrui.getCompleted().get();
+        if (completed) {
           toUpdate.setComplete(true);
+
+        } else {
+          toUpdate.setComplete(false);
         }
         databaseManager.manipulateServiceRequest(toUpdate);
       }
