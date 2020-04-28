@@ -17,7 +17,7 @@ public class EdgeFactory {
 
   NodeFactory nodeFactory = NodeFactory.getFactory();
 
-  public static EdgeFactory getFactory() {
+  static EdgeFactory getFactory() {
     return factory;
   }
 
@@ -27,7 +27,7 @@ public class EdgeFactory {
    * @param edge the edge to add
    * @throws ValidationException if anything goes wrong
    */
-  public void create(Edge edge) throws ValidationException {
+  public void create(Edge edge) throws Exception {
     String insertStatement =
         "INSERT INTO "
             + DatabaseManager.EDGES_TABLE_NAME
@@ -52,10 +52,10 @@ public class EdgeFactory {
           throw new SQLException("Created more than one rows");
         }
       } catch (SQLException e) {
-        System.out.println(e.getMessage());
+        throw e;
       }
     } catch (SQLException e) {
-      System.out.println(e.getMessage());
+      throw e;
     }
   }
 

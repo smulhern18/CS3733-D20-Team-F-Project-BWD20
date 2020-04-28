@@ -1,9 +1,19 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
+import edu.wpi.teamF.ModelClasses.*;
+import edu.wpi.teamF.ModelClasses.Account.Account;
+import edu.wpi.teamF.ModelClasses.Account.PasswordHasher;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
+import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
+import edu.wpi.teamF.ModelClasses.ValidationException;
+import java.io.InputStream;
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Set;
 
 public class DatabaseManager {
 
@@ -16,7 +26,13 @@ public class DatabaseManager {
   static final String MAINTENANCE_REQUEST_TABLE_NAME = "maintenanceRequestsTable";
   static final String ACCOUNT_TABLE_NAME = "accountsTable";
   static final String APPOINTMENTS_TABLE_NAME = "appointmentsTable";
-  static final String COMPUTER_REQUEST_TABLE_NAME = "ComputerRequestsTable";
+  static final String COMPUTER_REQUEST_TABLE_NAME = "computerRequestsTable";
+  static final String TRANSPORT_REQUEST_TABLE_NAME = "transportRequestsTable";
+  static final String SANITATION_REQUEST_TABLE_NAME = "sanitationRequestsTable";
+  static final String LANGUAGE_REQUEST_TABLE_NAME = "languageRequestsTable";
+  static final String MEDICINE_DELIVERY_REQUEST_TABLE_NAME = "medicineDeliveryRequestsTable";
+  static final String LAUNDRY_REQUEST_TABLE_NAME = "laundryRequestsTable";
+  static final String FLOWER_REQUEST_TABLE_NAME = "flowerRequestsTable";
   /** Column Names */
   // node
   static final String X_COORDINATE_KEY = "xCoord";
@@ -45,7 +61,10 @@ public class DatabaseManager {
   static final String MAINTENCE_REQUEST_ID_KEY = "serviceId";
 
   // Security Request
-  static final String SECRURITY_REQUEST_ID_KEY = "serviceId";
+  static final String GUARDS_REQUESTED_KEY = "guardsRequested";
+
+  // Mariachi Request
+  static final String SONG_REQUEST_KEY = "songRequest";
 
   // account
   static final String USER_NAME_KEY = "userName";
@@ -61,12 +80,72 @@ public class DatabaseManager {
   static final String ROOM_KEY = "room";
   static final String USERID_KEY = "userID";
   static final String PCP_KEY = "PCP";
+
   // ComputerService requests
   static final String OS_ID_KEY = "OperatingSystem";
   static final String MAKE_KEY = "Make";
   static final String HARDWARESOFTWARE_KEY = "HardwareOrSoftware";
 
+  // Transport requests
+  static final String TRANSPORT_TYPE_KEY = "type";
+  static final String DESTINATION_KEY = "destination";
+  static final String TIME_COMPLETED_KEY = "dateCompleted";
+
+  // Laundry
+  static final String QUANTITY_KEY = "Quantity";
+  static final String TEMPERTURE_KEY = "Temperature";
+  static final String ITEMS_KEY = "Items";
+
+  // SanitationService requests
+  static final String SANITATION_TYPE_KEY = "SanitationType";
+
+  // Language service requests
+  static final String LANGUAGE_KEY = "Language";
+  static final String PROBLEMTYPE_KEY = "ProblemType";
+  // MedicineDelivery Requests
+  static final String MEDICINE_TYPE_KEY = "medicineType";
+  static final String INSTRUCTIONS_KEY = "instructions";
+  // Flower request
+  static final String RECIPIENT_NAME_KEY = "recipientInput";
+  static final String ROOM_NUMBER_KEY = "roomInput";
+  static final String BOUQUET_KEY = "choice";
+  static final String MESSAGE_KEY = "messageInput";
+  static final String BUYER_NAME_KEY = "buyerName";
+  static final String PHONE_NUMBER_KEY = "phoneNumber";
+  static final String GIFT_WRAP_KEY = "giftWrap";
+
+  // Factories
+  private NodeFactory nodeFactory = NodeFactory.getFactory();
+  private EdgeFactory edgeFactory = EdgeFactory.getFactory();
+  private AccountFactory accountFactory = AccountFactory.getFactory();
+  private ServiceRequestFactory serviceRequestFactory = ServiceRequestFactory.getFactory();
+  private MaintenanceRequestFactory maintenanceRequestFactory =
+      MaintenanceRequestFactory.getFactory();
+  private SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
+  private ComputerServiceRequestFactory computerServiceRequestFactory =
+      ComputerServiceRequestFactory.getFactory();
+  private AppointmentFactory appointmentFactory = AppointmentFactory.getFactory();
+  private LanguageServiceRequestFactory languageServiceRequestFactory =
+      LanguageServiceRequestFactory.getFactory();
+  private SanitationServiceRequestFactory sanitationServiceRequestFactory =
+      SanitationServiceRequestFactory.getFactory();
+  private MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
+  private MedicineDeliveryRequestFactory medicineDeliveryRequestFactory =
+      MedicineDeliveryRequestFactory.getFactory();
+  private LaundryServiceRequestFactory laundryServiceRequestFactory =
+      LaundryServiceRequestFactory.getFactory();
+  private FlowerServiceRequestFactory flowerServiceRequestFactory =
+      FlowerServiceRequestFactory.getFactory();
+
   static Connection connection = null;
+
+  private static DatabaseManager manager = new DatabaseManager();
+
+  private DatabaseManager() {}
+
+  public static DatabaseManager getManager() {
+    return manager;
+  }
 
   public void createTables() throws SQLException {
     String nodeTableCreationStatement =
@@ -135,6 +214,8 @@ public class DatabaseManager {
             + " ( "
             + SERVICEID_KEY
             + " VARCHAR(32) NOT NULL, "
+            + SONG_REQUEST_KEY
+            + " VARCHAR(32) NOT NULL, "
             + "PRIMARY KEY ("
             + SERVICEID_KEY
             + "))";
@@ -148,6 +229,7 @@ public class DatabaseManager {
             + "PRIMARY KEY ("
             + SERVICEID_KEY
             + "))";
+
     String computerTableCreationStatement =
         "CREATE TABLE "
             + COMPUTER_REQUEST_TABLE_NAME
@@ -160,6 +242,66 @@ public class DatabaseManager {
             + " VARCHAR(32) NOT NULL, "
             + OS_ID_KEY
             + " VARCHAR(32) NOT NULL, "
+            + "PRIMARY KEY ("
+            + SERVICEID_KEY
+            + "))";
+
+    String laundryTableCreationStatement =
+        "CREATE TABLE "
+            + LAUNDRY_REQUEST_TABLE_NAME
+            + " ( "
+            + SERVICEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + ITEMS_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + QUANTITY_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + TEMPERTURE_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + "PRIMARY KEY ("
+            + SERVICEID_KEY
+            + "))";
+
+    String transportTableCreationStatement =
+        "CREATE TABLE "
+            + TRANSPORT_REQUEST_TABLE_NAME
+            + " ( "
+            + SERVICEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + TRANSPORT_TYPE_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + DESTINATION_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + TIME_COMPLETED_KEY
+            + " TIMESTAMP NOT NULL, "
+            + "PRIMARY KEY ("
+            + SERVICEID_KEY
+            + "))";
+
+    String languageTableCreationStatement =
+        "CREATE TABLE "
+            + LANGUAGE_REQUEST_TABLE_NAME
+            + " ( "
+            + SERVICEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + LANGUAGE_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + PROBLEMTYPE_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + "PRIMARY KEY ("
+            + SERVICEID_KEY
+            + "))";
+
+    String medicineDeliveryTableCreationStatement =
+        "CREATE TABLE "
+            + MEDICINE_DELIVERY_REQUEST_TABLE_NAME
+            + " ( "
+            + SERVICEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + MEDICINE_TYPE_KEY
+            + " VARCHAR(64) NOT NULL, "
+            + INSTRUCTIONS_KEY
+            + " VARCHAR(64) NOT NULL, "
             + "PRIMARY KEY ("
             + SERVICEID_KEY
             + "))";
@@ -202,7 +344,45 @@ public class DatabaseManager {
             + APPOINTMENT_ID_KEY
             + "))";
 
-    PreparedStatement preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
+    String sanitationTableCreationStatement =
+        "CREATE TABLE "
+            + SANITATION_REQUEST_TABLE_NAME
+            + " ( "
+            + SERVICEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + SANITATION_TYPE_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + "PRIMARY KEY ("
+            + SERVICEID_KEY
+            + "))";
+    String flowerTableCreationStatement =
+        "CREATE TABLE "
+            + FLOWER_REQUEST_TABLE_NAME
+            + " ( "
+            + SERVICEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + RECIPIENT_NAME_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + ROOM_NUMBER_KEY
+            + " INTEGER, "
+            + BOUQUET_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + MESSAGE_KEY
+            + " VARCHAR(128), "
+            + BUYER_NAME_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + PHONE_NUMBER_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + GIFT_WRAP_KEY
+            + " BOOLEAN NOT NULL, "
+            + "PRIMARY KEY ("
+            + SERVICEID_KEY
+            + "))";
+
+    PreparedStatement preparedStatement =
+        connection.prepareStatement(computerTableCreationStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(edgeTableCreationStatement);
     preparedStatement.execute();
@@ -212,11 +392,21 @@ public class DatabaseManager {
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(securityTableCreationStatement);
     preparedStatement.execute();
-    preparedStatement = connection.prepareStatement(computerTableCreationStatement);
+    preparedStatement = connection.prepareStatement(medicineDeliveryTableCreationStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(languageTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(accountTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(appointmentTableCreationStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(transportTableCreationStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(sanitationTableCreationStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(flowerTableCreationStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(laundryTableCreationStatement);
     preparedStatement.execute();
     System.out.println("Created Tables Successfully");
   }
@@ -248,9 +438,16 @@ public class DatabaseManager {
     String serviceRequestTableDropStatement = "DROP TABLE " + SERVICE_REQUEST_TABLE;
     String maintenanceTableDropStatement = "DROP TABLE " + MAINTENANCE_REQUEST_TABLE_NAME;
     String securityTableDropStatement = "DROP TABLE " + SECURITY_REQUEST_TABLE_NAME;
+    String medicineDeliveryTableDropStatement =
+        "DROP TABLE " + MEDICINE_DELIVERY_REQUEST_TABLE_NAME;
     String accountDropStatement = "DROP TABLE " + ACCOUNT_TABLE_NAME;
     String appointmentDropStatement = "DROP TABLE " + APPOINTMENTS_TABLE_NAME;
     String computerDropStatement = "DROP TABLE " + COMPUTER_REQUEST_TABLE_NAME;
+    String transportDropStatement = "DROP TABLE " + TRANSPORT_REQUEST_TABLE_NAME;
+    String sanitationDropStatement = "DROP TABLE " + SANITATION_REQUEST_TABLE_NAME;
+    String languageDropStatement = "DROP TABLE " + LANGUAGE_REQUEST_TABLE_NAME;
+    String flowerDropStatement = "DROP TABLE " + FLOWER_REQUEST_TABLE_NAME;
+    String laundryDropStatement = "DROP TABLE " + LAUNDRY_REQUEST_TABLE_NAME;
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeDropStatement);
     preparedStatement.execute();
@@ -262,16 +459,391 @@ public class DatabaseManager {
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(computerDropStatement);
     preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(languageDropStatement);
+    preparedStatement.execute();
     preparedStatement = connection.prepareStatement(securityTableDropStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(medicineDeliveryTableDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(accountDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(appointmentDropStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(transportDropStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(sanitationDropStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(flowerDropStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(laundryDropStatement);
     preparedStatement.execute();
     createTables();
   }
 
   public static Connection getConnection() {
     return connection;
+  }
+
+  /*
+   * Node Factory methods
+   */
+  public void manipulateNode(Node node) throws Exception {
+    if (nodeFactory.read(node.getId()) == null) {
+      nodeFactory.create(node);
+    } else {
+      nodeFactory.update(node);
+    }
+  }
+
+  public Node readNode(String nodeId) throws Exception {
+    return nodeFactory.read(nodeId);
+  }
+
+  public void deleteNode(String nodeId) throws Exception {
+    nodeFactory.delete(nodeId);
+  }
+
+  public List<Node> getAllNodes() throws Exception {
+    return nodeFactory.getAllNodes();
+  }
+
+  public List<Node> getNodesByType(Node.NodeType type) throws Exception {
+    return nodeFactory.getNodesByType(type);
+  }
+
+  /*
+   * Edge Factory methods
+   */
+  public void manipulateEdge(Edge edge) throws Exception {
+    if (edgeFactory.read(edge.getId()) == null) {
+      edgeFactory.create(edge);
+    } else {
+      edgeFactory.update(edge);
+    }
+  }
+
+  public Edge readEdge(String edgeId) throws Exception {
+    return edgeFactory.read(edgeId);
+  }
+
+  public void deleteEdge(String edgeId) throws Exception {
+    edgeFactory.delete(edgeId);
+  }
+
+  public List<Edge> getAllEdges() throws Exception {
+    return edgeFactory.getAllEdges();
+  }
+
+  public Set<Edge> getAllEdgesConnectedToNode(String nodeId) throws Exception {
+    return edgeFactory.getAllEdgesConnectedToNode(nodeId);
+  }
+
+  public void deleteEdgesByNodeId(String nodeId) throws Exception {
+    edgeFactory.deleteByNodeID(nodeId);
+  }
+
+  /*
+   * Appointment Factory methods
+   */
+  public void manipulateAppointment(Appointment appointment) throws Exception {
+    if (appointmentFactory.read(appointment.getId()) == null) {
+      appointmentFactory.create(appointment);
+    } else {
+      appointmentFactory.update(appointment);
+    }
+  }
+
+  public Appointment readAppointment(String id) throws Exception {
+    return appointmentFactory.read(id);
+  }
+
+  public void deleteAppointment(String id) throws Exception {
+    appointmentFactory.delete(id);
+  }
+
+  /*
+   * Account Factory methods
+   */
+  public void manipulateAccount(Account account) throws Exception {
+    if (accountFactory.read(account.getUsername()) == null) {
+      accountFactory.create(account);
+    } else {
+      accountFactory.update(account);
+    }
+  }
+
+  public Account readAccount(String username) throws Exception {
+    return accountFactory.read(username);
+  }
+
+  public void deleteAccount(String username) throws Exception {
+    accountFactory.delete(username);
+  }
+
+  public boolean verifyPassword(String username, String password) throws Exception {
+    return PasswordHasher.verifyPassword(password, accountFactory.getPasswordByUsername(username));
+  }
+
+  public List<Account> getAllAccounts() throws Exception {
+    return accountFactory.getAllAccounts();
+  }
+
+  public List<UIAccount> getAllUIAccounts() throws Exception {
+    return accountFactory.getAccounts();
+  }
+
+  /*
+   * Service Request Factory Methods
+   */
+  public void manipulateServiceRequest(MaintenanceRequest serviceRequest) throws Exception {
+    if (maintenanceRequestFactory.read(serviceRequest.getId()) == null) {
+      maintenanceRequestFactory.create(serviceRequest);
+    } else {
+      maintenanceRequestFactory.update(serviceRequest);
+    }
+  }
+
+  public void manipulateServiceRequest(SecurityRequest serviceRequest) throws Exception {
+    if (securityRequestFactory.read(serviceRequest.getId()) == null) {
+      securityRequestFactory.create(serviceRequest);
+    } else {
+      serviceRequestFactory.update(serviceRequest);
+    }
+  }
+
+  public void manipulateServiceRequest(ComputerServiceRequest serviceRequest) throws Exception {
+    if (ComputerServiceRequestFactory.read(serviceRequest.getId()) == null) {
+      computerServiceRequestFactory.create(serviceRequest);
+    } else {
+      computerServiceRequestFactory.update(serviceRequest);
+    }
+  }
+
+  public void manipulateServiceRequest(LanguageServiceRequest langRequest)
+      throws ValidationException {
+    if (LanguageServiceRequestFactory.read(langRequest.getId()) == null) {
+      languageServiceRequestFactory.create(langRequest);
+    } else {
+      languageServiceRequestFactory.update(langRequest);
+    }
+  }
+
+  public void manipulateServiceRequest(SanitationServiceRequest sanitationRequest)
+      throws ValidationException {
+    if (sanitationServiceRequestFactory.read(sanitationRequest.getId()) == null) {
+      sanitationServiceRequestFactory.create(sanitationRequest);
+    } else {
+      sanitationServiceRequestFactory.update(sanitationRequest);
+    }
+  }
+
+  public void manipulateServiceRequest(MariachiRequest mariachiRequest) throws ValidationException {
+    if (mariachiRequestFactory.read(mariachiRequest.getId()) == null) {
+      mariachiRequestFactory.create(mariachiRequest);
+    } else {
+      mariachiRequestFactory.update(mariachiRequest);
+    }
+  }
+
+  public void manipulateServiceRequest(MedicineDeliveryRequest mdRequest)
+      throws ValidationException {
+    if (medicineDeliveryRequestFactory.read(mdRequest.getId()) == null) {
+      medicineDeliveryRequestFactory.create(mdRequest);
+    } else {
+      medicineDeliveryRequestFactory.update(mdRequest);
+    }
+  }
+
+  public void manipulateServiceRequest(LaundryServiceRequest lsRequest) throws ValidationException {
+    Validators.launduaryServiceValidation(lsRequest);
+    if (laundryServiceRequestFactory.read(lsRequest.getId()) == null) {
+      laundryServiceRequestFactory.create(lsRequest);
+    } else {
+      laundryServiceRequestFactory.update(lsRequest);
+    }
+  }
+
+  public MaintenanceRequest readMaintenanceRequest(String serviceId) throws Exception {
+    return maintenanceRequestFactory.read(serviceId);
+  }
+
+  public SecurityRequest readSecurityRequest(String serviceId) throws Exception {
+    return securityRequestFactory.read(serviceId);
+  }
+
+  public ComputerServiceRequest readComputerServiceRequest(String serviceId) throws Exception {
+    return ComputerServiceRequestFactory.read(serviceId);
+  }
+
+  public LanguageServiceRequest readLanguageServiceRequest(String serviceId) throws Exception {
+    return LanguageServiceRequestFactory.read(serviceId);
+  }
+
+  public void deleteComputerServiceRequest(String serviceId) throws Exception {
+    computerServiceRequestFactory.delete(serviceId);
+  }
+
+  public void deleteMaintenanceRequest(String serviceId) throws Exception {
+    maintenanceRequestFactory.delete(serviceId);
+  }
+
+  public void deleteSecurityRequest(String serviceId) throws Exception {
+    securityRequestFactory.delete(serviceId);
+  }
+
+  public void deleteLanguageServiceRequest(String serviceId) throws Exception {
+    languageServiceRequestFactory.delete(serviceId);
+  }
+
+  public List<MaintenanceRequest> getMaintenanceRequestsByLocation(Node node) throws Exception {
+    return maintenanceRequestFactory.getMaintenanceRequestsByLocation(node);
+  }
+
+  public List<SecurityRequest> getSecurityRequestsByLocation(Node node) throws Exception {
+    return securityRequestFactory.getSecurityRequestsByLocation(node);
+  }
+
+  public List<ComputerServiceRequest> getComputerServiceRequestsByLocation(Node node)
+      throws Exception {
+    return computerServiceRequestFactory.getComputerRequestsByLocation(node);
+  }
+
+  public List<MaintenanceRequest> getAllMaintenanceRequests() throws Exception {
+    return maintenanceRequestFactory.getAllMaintenanceRequests();
+  }
+
+  public List<SecurityRequest> getAllSecurityRequests() throws Exception {
+    return securityRequestFactory.getAllSecurityRequest();
+  }
+
+  public List<ComputerServiceRequest> getAllComputerServiceRequests() throws Exception {
+    return computerServiceRequestFactory.getAllComputerRequests();
+  }
+
+  public List<LanguageServiceRequest> getAllLanguageServiceRequests() throws Exception {
+    return languageServiceRequestFactory.getAllLanguageRequests();
+  }
+
+  public List<LaundryServiceRequest> getLaundryRequestsByLocation(Node location) throws Exception {
+    return laundryServiceRequestFactory.getLaundaryRequestsByLocation(location);
+  }
+
+  public List<LanguageServiceRequest> getLanguageRequestsByLocation(Node location)
+      throws Exception {
+    return languageServiceRequestFactory.getLanguageRequestsByLocation(location);
+  }
+
+  /*
+   * CSV Manipulator Methods
+   */
+  public void backup(Path path) throws Exception {
+    CSVManipulator csvManipulator = new CSVManipulator();
+    csvManipulator.writeCSVFileAccount(path);
+    csvManipulator.writeCSVFileEdge(path);
+    csvManipulator.writeCSVFileMaintenanceService(path);
+    csvManipulator.writeCSVFileNode(path);
+    csvManipulator.writeCSVFileSecurityService(path);
+  }
+
+  public void readNodes(InputStream stream) {
+    CSVManipulator csvManipulator = new CSVManipulator();
+    csvManipulator.readCSVFileNode(stream);
+  }
+
+  public void readEdges(InputStream stream) {
+    CSVManipulator csvManipulator = new CSVManipulator();
+    csvManipulator.readCSVFileEdge(stream);
+  }
+
+  public void readMaintenanceRequests(InputStream stream) {
+    CSVManipulator csvManipulator = new CSVManipulator();
+    csvManipulator.readCSVFileMaintenanceService(stream);
+  }
+
+  public void readSecurityRequests(InputStream stream) {
+    CSVManipulator csvManipulator = new CSVManipulator();
+    csvManipulator.readCSVFileSecurityService(stream);
+  }
+
+  public void readAccounts(InputStream stream) {
+    CSVManipulator csvManipulator = new CSVManipulator();
+    csvManipulator.readCSVFileAccount(stream);
+  }
+
+  public List<SanitationServiceRequest> getAllSanitationRequests() {
+    return sanitationServiceRequestFactory.getAllSanitationRequests();
+  }
+
+  public SanitationServiceRequest readSanitationServiceRequest(String s) {
+    return sanitationServiceRequestFactory.read(s);
+  }
+
+  public void deleteSanitationService(String toDelete) {
+    sanitationServiceRequestFactory.delete(toDelete);
+  }
+
+  public List<MariachiRequest> getAllMariachiServiceRequests() {
+    return mariachiRequestFactory.getAllMariachiRequest();
+  }
+
+  public MariachiRequest readMariachiServiceRequest(String s) {
+    return mariachiRequestFactory.read(s);
+  }
+
+  public void deleteMariachiServiceRequest(String toDelete) {
+    mariachiRequestFactory.delete(toDelete);
+  }
+
+  public List<MariachiRequest> getMariachiRequestByLocation(Node node) {
+    return mariachiRequestFactory.getSecurityRequestsByLocation(node);
+  }
+
+  public List<MedicineDeliveryRequest> getAllMedicineDeliveryRequests() {
+    return medicineDeliveryRequestFactory.getAllMedicineDeliveryRequests();
+  }
+
+  public MedicineDeliveryRequest readMedicineDeliveryService(String s) {
+    return medicineDeliveryRequestFactory.read(s);
+  }
+
+  public void deleteMedicineDeliveryRequest(String toDelete) {
+    medicineDeliveryRequestFactory.delete(toDelete);
+  }
+
+  public List<LaundryServiceRequest> getAllLaunduaryRequests() {
+    return laundryServiceRequestFactory.getAllLaundryRequests();
+  }
+
+  public LaundryServiceRequest readLaundryServiceRequest(String s) {
+    return laundryServiceRequestFactory.read(s);
+  }
+
+  public void deleteLaundryServiceRequest(String toDelte) {
+    laundryServiceRequestFactory.delete(toDelte);
+  }
+
+  public void manipulateServiceRequest(FlowerRequest flowerRequest) throws ValidationException {
+    Validators.FlowerValidation(flowerRequest);
+    if (flowerServiceRequestFactory.read(flowerRequest.getId()) == null) {
+      flowerServiceRequestFactory.create(flowerRequest);
+    } else {
+      flowerServiceRequestFactory.update(flowerRequest);
+    }
+  }
+
+  public FlowerRequest readFlowerRequest(String id) {
+    return flowerServiceRequestFactory.read(id);
+  }
+
+  public void deleteFlowerRequest(String id) {
+    flowerServiceRequestFactory.delete(id);
+  }
+
+  public List<FlowerRequest> getFlowerRequestsByLocation(Node node) {
+    return flowerServiceRequestFactory.getFlowerRequestsByLocation(node);
+  }
+
+  public List<FlowerRequest> getAllFlowerRequests() {
+    return flowerServiceRequestFactory.getAllFlowerRequests();
   }
 }

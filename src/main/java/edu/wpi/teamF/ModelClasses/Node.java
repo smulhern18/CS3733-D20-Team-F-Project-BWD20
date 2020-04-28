@@ -1,13 +1,13 @@
 package edu.wpi.teamF.ModelClasses;
 
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import java.util.HashSet;
 import java.util.Set;
 import javax.management.InstanceNotFoundException;
 
 public class Node {
 
-  private static NodeFactory nodeFactory = NodeFactory.getFactory();
+  DatabaseManager databaseManager = DatabaseManager.getManager();
 
   public enum NodeType {
     // Values
@@ -132,12 +132,12 @@ public class Node {
    *
    * @param edge the edges to add
    */
-  public void addEdge(Edge edge) throws InstanceNotFoundException {
+  public void addEdge(Edge edge) throws Exception {
     this.edges.add(edge);
     if (edge.getNode1().equals(this.id)) {
-      neighborNodes.add(nodeFactory.read(edge.getNode2()));
+      neighborNodes.add(databaseManager.readNode(edge.getNode2()));
     } else {
-      neighborNodes.add(nodeFactory.read(edge.getNode1()));
+      neighborNodes.add(databaseManager.readNode(edge.getNode1()));
     }
   }
 

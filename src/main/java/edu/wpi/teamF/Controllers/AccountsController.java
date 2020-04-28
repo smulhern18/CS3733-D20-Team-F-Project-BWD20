@@ -1,12 +1,9 @@
 package edu.wpi.teamF.Controllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
+import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.App;
-import edu.wpi.teamF.DatabaseManipulators.AccountFactory;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Account.Admin;
 import edu.wpi.teamF.ModelClasses.Account.Staff;
@@ -14,7 +11,7 @@ import edu.wpi.teamF.ModelClasses.Account.User;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -30,13 +27,15 @@ import lombok.SneakyThrows;
 public class AccountsController implements Initializable {
   public JFXTreeTableView<UIAccount> accountsView;
   public JFXButton updateStaff;
+  public JFXComboBox<String> algoChoiceBox;
   SceneController sceneController = App.getSceneController();
-  AccountFactory accounts = AccountFactory.getFactory();
+  DatabaseManager databaseManager = DatabaseManager.getManager();
   ObservableList<UIAccount> uiAccount = FXCollections.observableArrayList();
 
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+
     // ID column
     JFXTreeTableColumn<UIAccount, String> firstName = new JFXTreeTableColumn<>("First Name");
     firstName.setPrefWidth(100);
@@ -103,7 +102,7 @@ public class AccountsController implements Initializable {
         });
 
     // get all the accounts and set them into a list
-    ArrayList<UIAccount> UIAccounts = accounts.getAccounts();
+    List<UIAccount> UIAccounts = databaseManager.getAllUIAccounts();
     uiAccount.addAll(UIAccounts);
 
     final TreeItem<UIAccount> root =
@@ -130,23 +129,23 @@ public class AccountsController implements Initializable {
       "Areally$tr0ngPassw@rd", "aWeakerPassw0rd", "weakPassword", "password"
     };
 
-    accounts.create(
+    databaseManager.manipulateAccount(
         new Admin(
             validNames[0], validNames[0], validEmails[0], validUsernames[0], validPasswords[0]));
-    accounts.create(
+    databaseManager.manipulateAccount(
         new Staff(
             validNames[1], validNames[1], validEmails[1], validUsernames[1], validPasswords[1]));
-    accounts.create(
+    databaseManager.manipulateAccount(
         new User(
             validNames[2], validNames[2], validEmails[2], validUsernames[2], validPasswords[2]));
-    accounts.create(
+    databaseManager.manipulateAccount(
         new User(
             validNames[3], validNames[3], validEmails[3], validUsernames[3], validPasswords[3]));
   }
 
   public void updateAccounts(ActionEvent actionEvent) throws Exception {
     for (UIAccount uiAccount : uiAccount) {
-      Account account = accounts.read(uiAccount.getUserName().get());
+      Account account = databaseManager.readAccount(uiAccount.getUserName().get());
       boolean isSame = uiAccount.equalsAccount(account);
       if (!isSame) {
         // update that edge in the db to the new values of that nodeUI
@@ -165,7 +164,7 @@ public class AccountsController implements Initializable {
             account.setType(Account.Type.USER);
             break;
         }
-        accounts.update(account);
+        databaseManager.manipulateAccount(account);
       }
     }
     accountsView.refresh();

@@ -15,6 +15,8 @@ public class App extends Application {
 
   private static SceneController sceneController;
 
+  public App() throws Exception {}
+
   public static SceneController getSceneController() {
     return sceneController;
   }
@@ -26,9 +28,11 @@ public class App extends Application {
   private MenuBarController menuBarController = new MenuBarController();
   private PathfinderController pathfinderController = new PathfinderController();
   private RegisterController registerController = new RegisterController();
-  private ServiceRequestController serviceRequestController = new ServiceRequestController();
+  private ServiceRequestMainController serviceRequestController =
+      new ServiceRequestMainController();
   private AccountsController accountsController = new AccountsController();
   private ComputerServiceController computerController = new ComputerServiceController();
+  private MedicineDeliveryController medicineController = new MedicineDeliveryController();
 
   @Override
   public void init() {}
@@ -54,12 +58,14 @@ public class App extends Application {
             return pathfinderController;
           } else if (controllerClass.equals(RegisterController.class)) {
             return registerController;
-          } else if (controllerClass.equals(ServiceRequestController.class)) {
+          } else if (controllerClass.equals(ServiceRequestMainController.class)) {
             return serviceRequestController;
           } else if (controllerClass.equals(AccountsController.class)) {
             return accountsController;
           } else if (controllerClass.equals(ComputerServiceController.class)) {
             return computerController;
+          } else if (controllerClass.equals(MedicineDeliveryController.class)) {
+            return medicineController;
           }
           return null;
         });

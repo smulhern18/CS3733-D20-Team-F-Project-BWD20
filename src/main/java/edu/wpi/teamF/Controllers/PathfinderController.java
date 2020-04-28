@@ -1,7 +1,6 @@
 package edu.wpi.teamF.Controllers;
 
-import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.PathfindAlgorithm;
@@ -38,13 +37,11 @@ public class PathfinderController implements Initializable {
   public ChoiceBox<String> endNodeChoice;
   public Button pathButton;
 
-  private NodeFactory nodeFactory = NodeFactory.getFactory();
-  private static EdgeFactory edgeFactory = EdgeFactory.getFactory();
-
   Node startNode = null;
   Node endNode = null;
   PathfindAlgorithm pathFindAlgorithm;
   EuclideanScorer euclideanScorer = new EuclideanScorer();
+  DatabaseManager databaseManager = DatabaseManager.getManager();
 
   public PathfinderController() {
 
@@ -169,10 +166,10 @@ public class PathfinderController implements Initializable {
   public void initialize(URL url, ResourceBundle resourceBundle) {
     nodeList = new ArrayList<>();
 
-    for (Node node : nodeFactory.getAllNodes()) {
+    for (Node node : databaseManager.getAllNodes()) {
       if (node.getId().charAt(node.getId().length() - 1) == '5') {
         nodeList.add(node);
-        node.setEdges(edgeFactory.getAllEdgesConnectedToNode(node.getId()));
+        node.setEdges(databaseManager.getAllEdgesConnectedToNode(node.getId()));
         // System.out.println(node.getId() + " - " + node.getNeighborNodes());
       }
     }

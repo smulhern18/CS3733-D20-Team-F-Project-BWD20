@@ -2,11 +2,10 @@ package edu.wpi.teamF.Controllers;
 
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.*;
-import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
-import edu.wpi.teamF.TestData;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -17,23 +16,16 @@ public class ComputerServiceControllerTest extends ApplicationTest {
 
   // Initialize the databases needed. Need database manager, nodes (for locations) and obv. the
   // computerservicerequest
-  private static DatabaseManager db = new DatabaseManager();
-  private static NodeFactory nodes = NodeFactory.getFactory();
-  private static ComputerServiceRequestFactory computerServiceRequestFactory =
-      ComputerServiceRequestFactory.getFactory();
+  DatabaseManager databaseManager = DatabaseManager.getManager();
+  List<ComputerServiceRequest> computerServiceRequest =
+      databaseManager.getAllComputerServiceRequests();
+
+  public ComputerServiceControllerTest() throws Exception {}
 
   // populate the factories with the needed data
 
   @BeforeAll
   public static void setUp() throws Exception {
-    db.initialize();
-    TestData testData = new TestData();
-    for (ComputerServiceRequest csr : testData.validComputerServiceRequests) {
-      computerServiceRequestFactory.create(csr);
-    }
-    for (Node node : testData.validNodes) {
-      nodes.create(node);
-    }
     ApplicationTest.launch(App.class);
   }
 
@@ -48,7 +40,7 @@ public class ComputerServiceControllerTest extends ApplicationTest {
 
   @AfterAll
   static void tearDown() throws SQLException {
-    db.reset();
+    //
   }
 
   // test making nodes

@@ -4,9 +4,7 @@ import edu.wpi.teamF.ModelClasses.Account.*;
 import edu.wpi.teamF.ModelClasses.Appointment;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
 import java.util.Date;
 
 public class TestData {
@@ -197,10 +195,11 @@ public class TestData {
     new User(validNames[3], validNames[3], validEmails[3], validUsernames[3], validPasswords[3])
   };
 
-  public Date[] validDates = {new Date(0), new Date(10), new Date(110), new Date(1110)};
+  public Date[] validDates = {new Date(0), new Date(25), new Date(110), new Date(1110)};
   public String[] validIDs = {"12312442", "123124134", "124134123412", "213124124"};
   public String[] validDescriptions = {"12312442", "123124134", "124134123412", "213124124"};
   public String[] validAssignees = {"Roman", "Sully", "Denver", "Charles"};
+  public String[] validSongs = {"AAA", "BBB", "CCC", "DDD"};
 
   public SecurityRequest[] validSecurityRequests = {
     new SecurityRequest(
@@ -210,7 +209,8 @@ public class TestData {
         validDescriptions[0],
         validDates[0],
         2,
-        false),
+        false,
+        1),
     new SecurityRequest(
         validIDs[1],
         validNodes[1],
@@ -218,7 +218,8 @@ public class TestData {
         validDescriptions[1],
         validDates[1],
         2,
-        true),
+        true,
+        2),
     new SecurityRequest(
         validIDs[2],
         validNodes[2],
@@ -226,7 +227,8 @@ public class TestData {
         validDescriptions[2],
         validDates[2],
         2,
-        false),
+        false,
+        3),
     new SecurityRequest(
         validIDs[3],
         validNodes[3],
@@ -234,8 +236,49 @@ public class TestData {
         validDescriptions[3],
         validDates[3],
         2,
-        true),
+        true,
+        10),
   };
+
+  public MariachiRequest[] validMariachiRequests = {
+    new MariachiRequest(
+        validIDs[0],
+        validNodes[0],
+        validAssignees[0],
+        validDescriptions[0],
+        validDates[0],
+        2,
+        false,
+        validSongs[0]),
+    new MariachiRequest(
+        validIDs[1],
+        validNodes[1],
+        validAssignees[1],
+        validDescriptions[1],
+        validDates[1],
+        2,
+        true,
+        validSongs[1]),
+    new MariachiRequest(
+        validIDs[2],
+        validNodes[2],
+        validAssignees[2],
+        validDescriptions[2],
+        validDates[2],
+        2,
+        false,
+        validSongs[2]),
+    new MariachiRequest(
+        validIDs[3],
+        validNodes[3],
+        validAssignees[3],
+        validDescriptions[3],
+        validDates[3],
+        2,
+        true,
+        validSongs[3]),
+  };
+
   public MaintenanceRequest[] validMaintenanceRequests = {
     new MaintenanceRequest(
         validIDs[0],
@@ -319,6 +362,155 @@ public class TestData {
         validMake[3],
         validHardwareSoftware[3],
         validOS[3]),
+  };
+
+  public LanguageServiceRequest[] validLanguageServiceRequests = {
+    new LanguageServiceRequest(
+        validNodes[0],
+        validDescriptions[0],
+        validAssignees[0],
+        validDates[0],
+        1,
+        "Spanish",
+        "Require Interpreter"),
+    new LanguageServiceRequest(
+        validNodes[1],
+        validDescriptions[1],
+        validAssignees[1],
+        validDates[1],
+        1,
+        "Sign Language",
+        "Require Interpreter"),
+  };
+
+  public String[] validMedicineTypes = {"Advil", "Penicillin", "Potassium", "Dopamine"};
+  public String[] validInstructions = {
+    "Take 2 twice a day",
+    "Take with food",
+    "Don't operate heavy machinery after taking",
+    "Take 1 once a day"
+  };
+
+  public MedicineDeliveryRequest[] validMedicineDeliveryRequests = {
+    new MedicineDeliveryRequest(
+        validIDs[0],
+        validNodes[0],
+        validAssignees[0],
+        validDescriptions[0],
+        validDates[0],
+        2,
+        false,
+        validMedicineTypes[0],
+        validInstructions[0]),
+    new MedicineDeliveryRequest(
+        validIDs[1],
+        validNodes[1],
+        validAssignees[1],
+        validDescriptions[1],
+        validDates[1],
+        1,
+        true,
+        validMedicineTypes[1],
+        validInstructions[1]),
+    new MedicineDeliveryRequest(
+        validIDs[2],
+        validNodes[2],
+        validAssignees[2],
+        validDescriptions[2],
+        validDates[2],
+        2,
+        false,
+        validMedicineTypes[2],
+        validInstructions[2]),
+    new MedicineDeliveryRequest(
+        validIDs[3],
+        validNodes[3],
+        validAssignees[3],
+        validDescriptions[3],
+        validDates[3],
+        2,
+        false,
+        validMedicineTypes[3],
+        validInstructions[3]),
+  };
+
+  public String[] validRecipientNames = {"Reilly Norum", "Matt Olson", "Adi Oliver", "Brady Norum"};
+  public Integer[] validRoomNumbers = {5678, 78, 5, 943};
+  public String[] validMessages = {
+    "Hope you feel better soon!",
+    "Hope these flowers make your day a little brighter!",
+    "Congratulations on the new baby! Can't wait to meet her! Best wishes.",
+    "Don't die."
+  };
+  public String[] validBuyerNames = {"Ollie Norum", "Reilly Norum", "Bob Johnson", "Griffin Norum"};
+  public String[] validPhoneNumber = {"7743121480", "5088297547", "7745768349", "8679045674"};
+  //  public Boolean[] validGiftWrap = {true, false};
+  public String[] validBouquetType = {
+    "All Occasion Classic", "Classic Dozen", "Contemporary Orchids", "Dish Garden"
+  };
+  // complete boolean
+
+  public FlowerRequest[] validFlowerRequests = {
+    new FlowerRequest(
+        validIDs[0],
+        validNodes[0],
+        validAssignees[0],
+        validDescriptions[0],
+        new Date(),
+        1,
+        validRecipientNames[0],
+        validRoomNumbers[0] + "",
+        validBouquetType[0],
+        validMessages[0],
+        validBuyerNames[0],
+        validPhoneNumber[0],
+        true,
+        false),
+    new FlowerRequest(
+        validIDs[1],
+        validNodes[1],
+        validAssignees[1],
+        validDescriptions[1],
+        new Date(),
+        2,
+        validRecipientNames[1],
+        validRoomNumbers[1] + "",
+        validBouquetType[1],
+        validMessages[1],
+        validBuyerNames[1],
+        validPhoneNumber[1],
+        false,
+        false),
+    new FlowerRequest(
+        validIDs[2],
+        validNodes[2],
+        validAssignees[2],
+        validDescriptions[2],
+        new Date(),
+        3,
+        validRecipientNames[2],
+        validRoomNumbers[2] + "",
+        validBouquetType[2],
+        validMessages[2],
+        validBuyerNames[2],
+        validPhoneNumber[2],
+        true,
+        false),
+    new FlowerRequest(
+        validIDs[3],
+        validNodes[3],
+        validAssignees[3],
+        validDescriptions[3],
+        new Date(),
+        3,
+        validRecipientNames[3],
+        validRoomNumbers[3] + "",
+        validBouquetType[3],
+        validMessages[3],
+        validBuyerNames[3],
+        validPhoneNumber[3],
+        false,
+        false),
   };
 
   public TestData() throws Exception {}

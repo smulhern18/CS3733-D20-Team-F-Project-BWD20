@@ -84,7 +84,7 @@
                 </HBox>
                 <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                     <children>
-                        <Label fx:id="guardsRequestedLabel" alignment="BOTTOM_CENTER" text="Guards Requested: " />
+                        <Label fx:id="guardsRequestedLabel" alignment="BOTTOM_CENTER" prefHeight="17.0" prefWidth="139.0" text="Guards Requested: " />
                         <JFXComboBox fx:id="guardsRequestedComboBox" prefHeight="27.0" prefWidth="182.0" />
                     </children>
                 </HBox>

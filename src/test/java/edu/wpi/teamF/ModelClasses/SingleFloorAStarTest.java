@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import edu.wpi.teamF.DatabaseManipulators.CSVManipulator;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
-import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.Main;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.SingleFloorAStar;
 import java.util.ArrayList;
@@ -18,9 +16,7 @@ import org.junit.jupiter.api.Test;
 public class SingleFloorAStarTest {
 
   static SingleFloorAStar pathfinder;
-  static NodeFactory nodeFactory = NodeFactory.getFactory();
-  static EdgeFactory edgeFactory = EdgeFactory.getFactory();
-  static DatabaseManager dbm = new DatabaseManager();
+  static DatabaseManager dbm = DatabaseManager.getManager();
   static CSVManipulator csvm = new CSVManipulator();
   static List<Node> nodeList;
   static Map<String, Node> nodeMap = new HashMap<>();
@@ -34,10 +30,10 @@ public class SingleFloorAStarTest {
 
     nodeList = new ArrayList<>();
 
-    for (Node node : nodeFactory.getAllNodes()) {
+    for (Node node : dbm.getAllNodes()) {
       if (node.getId().charAt(node.getId().length() - 1) == '5') {
         nodeList.add(node);
-        node.setEdges(edgeFactory.getAllEdgesConnectedToNode(node.getId()));
+        node.setEdges(dbm.getAllEdgesConnectedToNode(node.getId()));
         // System.out.println(node.getId() + " - " + node.getNeighborNodes());
       }
     }

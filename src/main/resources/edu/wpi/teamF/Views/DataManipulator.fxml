@@ -15,15 +15,13 @@
 <AnchorPane fx:id="rootPane" prefHeight="800.0" prefWidth="1191.0" style="-fx-border-color: #bf3389; -fx-border-width: 5;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.DataManipulatorController">
    <children>
       <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <AnchorPane fx:id="nodesPane" layoutX="191.0" prefHeight="800.0" prefWidth="1198.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+      <AnchorPane fx:id="nodesPane" layoutX="191.0" prefHeight="800.0" prefWidth="1198.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <children>
             <JFXButton fx:id="updateNodesButton" buttonType="RAISED" layoutX="558.0" layoutY="121.0" onAction="#updateNodes" prefHeight="31.0" prefWidth="123.0" ripplerFill="#179e41" text="Update Nodes" />
             <JFXButton fx:id="addNodePaneButton" layoutX="150.0" layoutY="541.0" onAction="#addNodePane" style="-fx-background-color: #B53389;" text="Add Node" textFill="WHITE" />
-            <JFXTreeTableView fx:id="treeViewNodes" layoutX="28.0" layoutY="121.0" prefHeight="400.0" prefWidth="1000.0" stylesheets="@../CSS/treeview.css" />
+            <JFXTreeTableView fx:id="treeViewNodes" layoutX="28.0" layoutY="121.0" prefHeight="400.0" prefWidth="1000.0" stylesheets="@../CSS/treeview.css" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
             <JFXButton buttonType="RAISED" layoutX="28.0" layoutY="525.0" onAction="#uploadNodes" prefHeight="59.0" prefWidth="131.0" ripplerFill="#ffe100" text="Upload Nodes" />
             <JFXTextField fx:id="filterTextFieldNodes" layoutX="28.0" layoutY="86.0" onMouseClicked="#clearText" prefHeight="25.0" prefWidth="157.0" text="Enter NodeID or NodeType" />
-            <JFXButton fx:id="deleteNodeButton" buttonType="RAISED" layoutX="780.0" layoutY="525.0" onAction="#deleteNode" prefHeight="31.0" prefWidth="123.0" ripplerFill="#179e41" text="Delete Node" />
-            <JFXTextField fx:id="nodeToDelete" layoutX="893.0" layoutY="528.0" />
             <StackPane layoutX="266.0" layoutY="523.0" prefHeight="188.0" prefWidth="1090.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
                   <StackPane fx:id="modifyNodePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="211.0" prefWidth="518.0" style="-fx-background-color: #00000050;" visible="false">
@@ -83,6 +81,19 @@
                   </StackPane>
                </children>
             </StackPane>
+            <GridPane layoutX="843.0" layoutY="529.0" prefHeight="30.0" prefWidth="276.0" AnchorPane.rightAnchor="30.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <JFXButton fx:id="deleteNodeButton" buttonType="RAISED" onAction="#deleteNode" prefHeight="31.0" prefWidth="123.0" ripplerFill="#179e41" text="Delete Node" />
+                  <JFXTextField fx:id="nodeToDelete" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="mapPane" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
@@ -111,15 +122,13 @@
             <Font size="27.0" />
          </font>
       </JFXButton>
-      <AnchorPane fx:id="edgePane" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+      <AnchorPane fx:id="edgePane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <children>
             <JFXTextField fx:id="filterTextFieldEdges" layoutX="48.0" layoutY="73.0" onMouseClicked="#clearEdge" prefHeight="25.0" prefWidth="157.0" text="Enter Edge ID" />
-            <JFXButton fx:id="deleteEdgeButton" buttonType="RAISED" layoutX="943.0" layoutY="518.0" onAction="#deleteEdge" prefHeight="31.0" prefWidth="123.0" ripplerFill="#179e41" text="Delete Edge" />
             <JFXButton fx:id="addEdgePaneButton" layoutX="177.0" layoutY="534.0" onAction="#addEdgePane" style="-fx-background-color: #B53389;" text="Add Edge" textFill="WHITE" />
-            <JFXTextField fx:id="edgeToDelete" layoutX="815.0" layoutY="521.0" />
             <JFXButton fx:id="updateEdgesButton" buttonType="RAISED" layoutX="925.0" layoutY="70.0" onAction="#updateEdges" prefHeight="31.0" prefWidth="123.0" ripplerFill="#15a138" text="Update Edges" />
             <JFXButton buttonType="RAISED" layoutX="32.0" layoutY="517.0" onAction="#uploadEdges" prefHeight="59.0" prefWidth="131.0" ripplerFill="#ffe100" text="Upload Edges" />
-            <JFXTreeTableView fx:id="treeViewEdges" layoutX="48.0" layoutY="109.0" prefHeight="400.0" prefWidth="1000.0" stylesheets="@../CSS/treeview.css" />
+            <JFXTreeTableView fx:id="treeViewEdges" layoutX="48.0" layoutY="109.0" prefHeight="400.0" prefWidth="1000.0" stylesheets="@../CSS/treeview.css" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" />
             <StackPane prefHeight="239.0" prefWidth="1090.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                <children>
                   <StackPane fx:id="addEdgePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="239.0" prefWidth="531.0" style="-fx-background-color: #00000050;" visible="false">
@@ -164,6 +173,19 @@
                   </StackPane>
                </children>
             </StackPane>
+            <GridPane layoutX="808.0" layoutY="517.0" prefHeight="30.0" prefWidth="252.0" AnchorPane.rightAnchor="30.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <JFXButton fx:id="deleteEdgeButton" buttonType="RAISED" onAction="#deleteEdge" prefHeight="31.0" prefWidth="123.0" ripplerFill="#179e41" text="Delete Edge" />
+                  <JFXTextField fx:id="edgeToDelete" GridPane.columnIndex="1" />
+               </children>
+            </GridPane>
          </children>
       </AnchorPane>
    </children>

@@ -3,12 +3,12 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.App;
-import edu.wpi.teamF.DatabaseManipulators.ComputerServiceRequestFactory;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
+import edu.wpi.teamF.Controllers.UISettings.UISetting;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
-import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -17,20 +17,23 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.CheckBoxTreeTableCell;
+import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.util.Callback;
-import javax.management.InstanceNotFoundException;
+import lombok.SneakyThrows;
 
 public class ComputerServiceController implements Initializable {
   public JFXTreeTableView<UIComputerServiceRequest> treeTableComputer;
@@ -63,29 +66,29 @@ public class ComputerServiceController implements Initializable {
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UIComputerServiceRequest> csrUI = FXCollections.observableArrayList();
-  NodeFactory nodeFactory = NodeFactory.getFactory();
-  ComputerServiceRequestFactory computerServiceRequest = ComputerServiceRequestFactory.getFactory();
+  DatabaseManager databaseManager = DatabaseManager.getManager();
   List<ComputerServiceRequest> computerServiceRequests =
-      computerServiceRequest.getAllComputerRequests();
+      databaseManager.getAllComputerServiceRequests();
 
+  public ComputerServiceController() throws Exception {}
+
+  @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-
-    anchorPane
-        .widthProperty()
-        .addListener(
-            (observable, oldWidth, newWidth) -> {
-              if (newWidth.doubleValue() != oldWidth.doubleValue()) {
-                resize(newWidth.doubleValue());
-              }
-            });
-
     // add the different choices to the choicebox
     // Replace this with long names, linked to IDs
-    List<Node> nodes = nodeFactory.getAllNodes();
+    List<Node> nodes = null;
+    try {
+      nodes = databaseManager.getAllNodes();
+    } catch (Exception e) {
+      System.out.println(e.getMessage() + e.getClass());
+    }
     for (Node node : nodes) {
       locationChoice.getItems().add(node.getId());
     }
+
+    UISetting uiSetting = new UISetting();
+    uiSetting.setAsLocationComboBox(locationChoice);
 
     makeChoice.getItems().add("Apple");
     makeChoice.getItems().add("DELL");
@@ -204,6 +207,7 @@ public class ComputerServiceController implements Initializable {
             return param.getValue().getValue().getPriority();
           }
         });
+    /*
     // assignee column
     JFXTreeTableColumn<UIComputerServiceRequest, String> assignee =
         new JFXTreeTableColumn<>("Assignee");
@@ -219,6 +223,9 @@ public class ComputerServiceController implements Initializable {
           }
         });
 
+     */
+
+    /*
     JFXTreeTableColumn<UIComputerServiceRequest, String> completed =
         new JFXTreeTableColumn<>("Completed");
     completed.setPrefWidth(80);
@@ -230,6 +237,58 @@ public class ComputerServiceController implements Initializable {
           public ObservableValue<String> call(
               TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String> param) {
             return param.getValue().getValue().getCompleted();
+          }
+        });
+
+     */
+
+    // Combobox completed
+    JFXTreeTableColumn<UIComputerServiceRequest, Boolean> completed =
+        new JFXTreeTableColumn<>("Completed");
+    completed.setCellFactory(CheckBoxTreeTableCell.forTreeTableColumn(completed));
+    completed.setCellValueFactory(
+        param -> {
+          if (param.getValue().getValue().getCompleted().get()) {
+            System.out.println(param.getValue().getValue().getCompleted().get());
+            return new SimpleBooleanProperty(true);
+          } else {
+            System.out.println(param.getValue().getValue().getCompleted().get());
+            return new SimpleBooleanProperty(false);
+          }
+        });
+
+    // Assignee choicebox
+
+    List<Account> employeeNames = databaseManager.getAllAccounts();
+    ObservableList<String> employees = FXCollections.observableArrayList();
+    for (Account account : employeeNames) {
+      employees.add(account.getFirstName());
+    }
+    JFXTreeTableColumn<UIComputerServiceRequest, String> column =
+        new JFXTreeTableColumn<>("Assignee");
+    column.setCellValueFactory(
+        (JFXTreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String> param) ->
+            param.getValue().getValue().getAssignee());
+    column.setCellFactory(
+        new Callback<
+            TreeTableColumn<UIComputerServiceRequest, String>,
+            TreeTableCell<UIComputerServiceRequest, String>>() {
+          @Override
+          public TreeTableCell<UIComputerServiceRequest, String> call(
+              TreeTableColumn<UIComputerServiceRequest, String> param) {
+            return new TextFieldTreeTableCell<>();
+          }
+        });
+    column.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    column.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(employees));
+    column.setOnEditCommit(
+        new EventHandler<TreeTableColumn.CellEditEvent<UIComputerServiceRequest, String>>() {
+          @Override
+          public void handle(
+              TreeTableColumn.CellEditEvent<UIComputerServiceRequest, String> event) {
+            TreeItem<UIComputerServiceRequest> current =
+                treeTableComputer.getTreeItem(event.getTreeTablePosition().getRow());
+            current.getValue().setAssignee(new SimpleStringProperty(event.getNewValue()));
           }
         });
 
@@ -246,12 +305,12 @@ public class ComputerServiceController implements Initializable {
 
     treeTableComputer
         .getColumns()
-        .setAll(ID, loc, make, OS, type, desc, priority, assignee, completed);
+        .setAll(ID, loc, make, OS, type, desc, priority, completed, column);
 
     // set as editable
 
-    assignee.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-    completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    // assignee.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    // completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     priority.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
     treeTableComputer.setRoot(root);
@@ -259,11 +318,11 @@ public class ComputerServiceController implements Initializable {
     treeTableComputer.setShowRoot(false);
   }
 
-  public void submit(ActionEvent actionEvent)
-      throws ValidationException, InstanceNotFoundException {
+  public void submit(ActionEvent actionEvent) throws Exception {
     // Get the values
     String location = locationChoice.getValue();
-    Node node = nodeFactory.read(location);
+    String nodeID = location.substring(location.length() - 10);
+    Node node = databaseManager.readNode(nodeID);
     String make = makeChoice.getValue();
     String issueType = issueChoice.getValue();
     String OS = OSChoice.getValue();
@@ -284,7 +343,7 @@ public class ComputerServiceController implements Initializable {
     ComputerServiceRequest csRequest =
         new ComputerServiceRequest(
             node, desc, "Not Assigned", date, priorityDB, make, issueType, OS);
-    computerServiceRequest.create(csRequest);
+    databaseManager.manipulateServiceRequest(csRequest);
     csrUI.add(new UIComputerServiceRequest(csRequest));
     treeTableComputer.refresh();
     descText.setText("");
@@ -304,29 +363,29 @@ public class ComputerServiceController implements Initializable {
     issueChoice.setValue(null);
   }
 
-  public void update(ActionEvent actionEvent)
-      throws ValidationException, InstanceNotFoundException {
+  public void update(ActionEvent actionEvent) throws Exception {
     for (UIComputerServiceRequest csrui : csrUI) {
-      ComputerServiceRequest toUpdate = computerServiceRequest.read(csrui.getID().get());
+      ComputerServiceRequest toUpdate =
+          databaseManager.readComputerServiceRequest(csrui.getID().get());
       boolean isSame = csrui.equalsCSR(toUpdate);
       if (!isSame) {
         toUpdate.setAssignee(csrui.getAssignee().get());
-        String completed = csrui.getCompleted().get();
-        if (completed.equals("Incomplete")) {
-          toUpdate.setComplete(false);
-
-        } else if (completed.equals("Complete")) {
+        boolean completed = csrui.getCompleted().get();
+        if (completed) {
           toUpdate.setComplete(true);
+
+        } else {
+          toUpdate.setComplete(false);
         }
-        computerServiceRequest.update(toUpdate);
+        databaseManager.manipulateServiceRequest(toUpdate);
       }
     }
     treeTableComputer.refresh();
   }
 
-  public void delete(ActionEvent actionEvent) {
+  public void delete(ActionEvent actionEvent) throws Exception {
     String toDelte = deleteText.getText();
-    computerServiceRequest.delete(toDelte);
+    databaseManager.deleteComputerServiceRequest(toDelte);
     csrUI.removeIf(computerServiceRequest -> computerServiceRequest.getID().get().equals(toDelte));
     deleteText.setText("");
     treeTableComputer.refresh();

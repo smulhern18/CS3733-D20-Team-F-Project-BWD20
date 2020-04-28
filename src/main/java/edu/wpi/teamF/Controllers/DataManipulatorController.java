@@ -3,9 +3,8 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.App;
-import edu.wpi.teamF.DatabaseManipulators.CSVManipulator;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.DatabaseManipulators.EdgeFactory;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.*;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIEdge;
 import edu.wpi.teamF.ModelClasses.UIClasses.UINode;
@@ -36,7 +35,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.util.Callback;
-import javax.management.InstanceNotFoundException;
 
 public class DataManipulatorController implements Initializable {
 
@@ -59,15 +57,13 @@ public class DataManipulatorController implements Initializable {
   public AnchorPane mapPane;
   public AnchorPane edgePane;
   public AnchorPane nodesPane;
-  NodeFactory nodes = NodeFactory.getFactory();
-  EdgeFactory edges = EdgeFactory.getFactory();
   FileChooser nodesChooser = new FileChooser();
   FileChooser edgesChooser = new FileChooser();
   DirectoryChooser backup = new DirectoryChooser();
-  CSVManipulator csvM = new CSVManipulator();
   ObservableList<UINode> UINodes = FXCollections.observableArrayList();
   ObservableList<UIEdge> UIEdges = FXCollections.observableArrayList();
   SceneController sceneController = App.getSceneController();
+  DatabaseManager databaseManager = DatabaseManager.getManager();
 
   @FXML private StackPane modifyNodePane;
 
@@ -213,8 +209,13 @@ public class DataManipulatorController implements Initializable {
         });
 
     // Add UINodes to the table, by creating new UINodes
-    List<Node> Nodes = nodes.getAllNodes();
-    for (Node node : Nodes) {
+    List<Node> nodes = null;
+    try {
+      nodes = databaseManager.getAllNodes();
+    } catch (Exception e) {
+      System.out.println(e.getMessage() + ", " + e.getClass());
+    }
+    for (Node node : nodes) {
       UINodes.add(new UINode(node));
     }
 
@@ -297,8 +298,13 @@ public class DataManipulatorController implements Initializable {
           }
         });
 
-    List<Edge> Edges = edges.getAllEdges();
-    for (Edge edge : Edges) {
+    List<Edge> edges = null;
+    try {
+      edges = databaseManager.getAllEdges();
+    } catch (Exception e) {
+      System.out.println(e.getMessage() + ", " + e.getClass());
+    }
+    for (Edge edge : edges) {
       UIEdges.add(new UIEdge(edge));
     }
 
@@ -341,23 +347,22 @@ public class DataManipulatorController implements Initializable {
   public void uploadNodes(ActionEvent actionEvent) throws FileNotFoundException {
     nodesChooser.setTitle("Select CSV File Nodes");
     File file = nodesChooser.showOpenDialog(rootPane.getScene().getWindow());
-    csvM.readCSVFileNode(new FileInputStream(file));
+    databaseManager.readNodes(new FileInputStream(file));
   }
 
   public void uploadEdges(ActionEvent actionEvent) throws FileNotFoundException {
     edgesChooser.setTitle("Select CSV File Edges");
     File file = edgesChooser.showOpenDialog(rootPane.getScene().getWindow());
-    csvM.readCSVFileNode(new FileInputStream(file));
+    databaseManager.readEdges(new FileInputStream(file));
   }
 
-  public void updateNodes(ActionEvent actionEvent)
-      throws InstanceNotFoundException, ValidationException {
+  public void updateNodes(ActionEvent actionEvent) throws Exception {
     for (UINode nodeUI : UINodes) {
       Node node = nodeUI.UItoNode();
       node.setEdges(edgeFactory.getAllEdgesConnectedToNode(node.getId()));
-      if (!node.equals(nodes.read(node.getId()))) {
+      if (!node.equals(databaseManager.readNode(node.getId()))) {
         // update that node in the db to the new values of that nodeUI
-        nodes.update(node);
+        databaseManager.manipulateNode(node);
       }
     }
     treeViewNodes.refresh();
@@ -365,25 +370,25 @@ public class DataManipulatorController implements Initializable {
 
   public void updateEdges(ActionEvent actionEvent) throws Exception {
     for (UIEdge edgeUI : UIEdges) {
-      boolean isSame = edgeUI.equalsEdge(edges.read(edgeUI.getID().toString()));
+      boolean isSame = edgeUI.equalsEdge(databaseManager.readEdge(edgeUI.getID().toString()));
       if (!isSame) {
         // update that edge in the db to the new values of that nodeUI
-        edges.update(edgeUI.UItoEdge());
+        databaseManager.manipulateEdge(edgeUI.UItoEdge());
       }
     }
     treeViewEdges.refresh();
   }
 
-  public void deleteNode(ActionEvent actionEvent) {
+  public void deleteNode(ActionEvent actionEvent) throws Exception {
     String nodeID = nodeToDelete.getText();
-    nodes.delete(nodeID);
+    databaseManager.deleteNode(nodeID);
     UINodes.removeIf(node -> node.getID().get().equals(nodeID));
     treeViewNodes.refresh();
   }
 
-  public void deleteEdge(ActionEvent actionEvent) {
+  public void deleteEdge(ActionEvent actionEvent) throws Exception {
     String edgeID = edgeToDelete.getText();
-    edges.delete(edgeID);
+    databaseManager.deleteEdge(edgeID);
     UIEdges.removeIf(node -> node.getID().get().equals(edgeID));
     treeViewNodes.refresh();
   }
@@ -392,16 +397,12 @@ public class DataManipulatorController implements Initializable {
     sceneController.switchScene("Accounts");
   }
 
-  public void backupDB(ActionEvent actionEvent) {
+  public void backupDB(ActionEvent actionEvent) throws Exception {
     backup.setTitle("Select Where to Backup Database");
     File selDir = backup.showDialog(rootPane.getScene().getWindow());
 
     // backup
-    csvM.writeCSVFileNode(selDir.toPath());
-    csvM.writeCSVFileEdge(selDir.toPath());
-    csvM.writeCSVFileMaintenanceService(selDir.toPath());
-    csvM.writeCSVFileSecurityService(selDir.toPath());
-    csvM.writeCSVFileAccount(selDir.toPath());
+    databaseManager.backup(selDir.toPath());
   }
 
   @FXML
@@ -428,7 +429,7 @@ public class DataManipulatorController implements Initializable {
     Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getText());
     short floorNumber = Short.parseShort(floorInput.getText()); // stores the inputs into
 
-    Node testNode = nodes.read(ID); // does the ID exist?
+    Node testNode = databaseManager.readNode(ID); // does the ID exist?
 
     try { // is the input valid?
       if (testNode == null) { // is the ID available?
@@ -442,7 +443,7 @@ public class DataManipulatorController implements Initializable {
                 shortName,
                 nodeType,
                 floorNumber); // creates a new node
-        nodes.create(newNode); // creates the node in the db
+        databaseManager.manipulateNode(newNode); // creates the node in the db
         resetNodePane();
         modifyNodePane.setVisible(false);
       } else { // fails the if statement if the ID already exists

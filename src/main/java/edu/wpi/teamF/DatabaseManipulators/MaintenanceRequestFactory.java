@@ -17,7 +17,7 @@ public class MaintenanceRequestFactory {
   private static final ServiceRequestFactory serviceRequestFactory =
       ServiceRequestFactory.getFactory();
 
-  public static MaintenanceRequestFactory getFactory() {
+  static MaintenanceRequestFactory getFactory() {
     return factory;
   }
 
