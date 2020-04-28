@@ -98,23 +98,23 @@ public class DatabaseManager {
   static final String TEMPERTURE_KEY = "Temperature";
   static final String ITEMS_KEY = "Items";
 
-    // SanitationService requests
-    static final String SANITATION_TYPE_KEY = "SanitationType";
+  // SanitationService requests
+  static final String SANITATION_TYPE_KEY = "SanitationType";
 
-    // Language service requests
-    static final String LANGUAGE_KEY = "Language";
-    static final String PROBLEMTYPE_KEY = "ProblemType";
-    // MedicineDelivery Requests
-    static final String MEDICINE_TYPE_KEY = "medicineType";
-    static final String INSTRUCTIONS_KEY = "instructions";
-    // Flower request
-    static final String RECIPIENT_NAME_KEY = "recipientInput";
-    static final String ROOM_NUMBER_KEY = "roomInput";
-    static final String BOUQUET_KEY = "choice";
-    static final String MESSAGE_KEY = "messageInput";
-    static final String BUYER_NAME_KEY = "buyerName";
-    static final String PHONE_NUMBER_KEY = "phoneNumber";
-    static final String GIFT_WRAP_KEY = "giftWrap";
+  // Language service requests
+  static final String LANGUAGE_KEY = "Language";
+  static final String PROBLEMTYPE_KEY = "ProblemType";
+  // MedicineDelivery Requests
+  static final String MEDICINE_TYPE_KEY = "medicineType";
+  static final String INSTRUCTIONS_KEY = "instructions";
+  // Flower request
+  static final String RECIPIENT_NAME_KEY = "recipientInput";
+  static final String ROOM_NUMBER_KEY = "roomInput";
+  static final String BOUQUET_KEY = "choice";
+  static final String MESSAGE_KEY = "messageInput";
+  static final String BUYER_NAME_KEY = "buyerName";
+  static final String PHONE_NUMBER_KEY = "phoneNumber";
+  static final String GIFT_WRAP_KEY = "giftWrap";
 
   // Factories
   private NodeFactory nodeFactory = NodeFactory.getFactory();
