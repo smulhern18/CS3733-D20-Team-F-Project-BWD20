@@ -56,6 +56,12 @@ public class Validators {
   public static final int MEDICINE_TYPE_MAX_LENGTH = 64;
   public static final int INSTRUCTIONS_MIN_LENGTH = 0;
   public static final int INSTRUCTIONS_MAX_LENGTH = 64;
+  public static final int TEMPERTURE_MIN_LENGTH = 1;
+  public static final int TEMPERTURE_MAX_LENGTH = 8;
+  public static final int ITEMS_MIN_LENGTH = 1;
+  public static final int ITEMS_MAX_LENGTH = 32;
+  public static final int QUANTITY_MIN_LENGTH = 1;
+  public static final int QUANTITY_MAX_LENGTH = 32;
 
   public static <T extends SecurityRequest> void securityRequestValidation(T t, int... constraints)
       throws ValidationException {
@@ -513,6 +519,52 @@ public class Validators {
     priorityValidation(mariachiRequest.getPriority());
     songRequestValidation(mariachiRequest.getSongRequest());
   }
+
+  /**
+   * Validation for Laundry Requests
+   *
+   * @param t an instance of Laundry Request to validate
+   * @param constraints the optional constraints for validation
+   * @throws ValidationException should the validation fail
+   */
+  public static <T extends LaundryServiceRequest> void launduaryServiceValidation(
+          T t, int... constraints) throws ValidationException {
+    nullCheckValidation(t, constraints);
+    LaundryServiceRequest launduaryRequestObject = (LaundryServiceRequest) t;
+
+    idValidation(launduaryRequestObject.getId());
+    nodeValidation(launduaryRequestObject.getLocation());
+    descriptionValidation(launduaryRequestObject.getDescription());
+    dateValidation(launduaryRequestObject.getDateTimeSubmitted());
+    priorityValidation(launduaryRequestObject.getPriority());
+    temperatureValidation(launduaryRequestObject.getTemperature());
+    itemsValidation(launduaryRequestObject.getItems());
+    quantityValidation(launduaryRequestObject.getQuantity());
+  }
+  public static void temperatureValidation(String temperature, int... constraints)
+          throws ValidationException {
+    nullCheckValidation(temperature, constraints);
+    if (temperature.length() < TEMPERTURE_MIN_LENGTH
+            || temperature.length() > TEMPERTURE_MAX_LENGTH) {
+      throw new ValidationException("Invalid temperature size");
+    }
+  }
+  public static void itemsValidation(String items, int... constraints) throws ValidationException {
+    nullCheckValidation(items, constraints);
+    if (items.length() < ITEMS_MIN_LENGTH || items.length() > ITEMS_MAX_LENGTH) {
+      throw new ValidationException("Invalid items length");
+    }
+  }
+
+  public static void quantityValidation(String quantity, int... constraints)
+          throws ValidationException {
+    nullCheckValidation(quantity, constraints);
+    if (quantity.length() < QUANTITY_MIN_LENGTH || quantity.length() > QUANTITY_MAX_LENGTH) {
+      throw new ValidationException("Invalid quantity length");
+    }
+  }
+
+
 
   /**
    * Validation for descriptions

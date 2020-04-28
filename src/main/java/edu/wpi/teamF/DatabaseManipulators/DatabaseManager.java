@@ -8,6 +8,8 @@ import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
 import edu.wpi.teamF.ModelClasses.ValidationException;
+import org.w3c.dom.ls.LSResourceResolver;
+
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.sql.Connection;
@@ -33,6 +35,7 @@ public class DatabaseManager {
   static final String SANITATION_REQUEST_TABLE_NAME = "SanitationRequestsTable";
   static final String LANGUAGE_REQUEST_TABLE_NAME = "LanguageRequestsTable";
   static final String MEDICINE_DELIVERY_REQUEST_TABLE_NAME = "medicineDeliveryRequestsTable";
+  static final String LAUNDRY_REQUEST_TABLE_NAME = "LaundryRequestsTable";
   /** Column Names */
   // node
   static final String X_COORDINATE_KEY = "xCoord";
@@ -91,6 +94,11 @@ public class DatabaseManager {
   static final String DESTINATION_KEY = "destination";
   static final String TIME_COMPLETED_KEY = "dateCompleted";
 
+  // Laundry
+  static final String QUANTITY_KEY = "Quantity";
+  static final String TEMPERTURE_KEY = "Temperature";
+  static final String ITEMS_KEY = "Items";
+
   // Factories
   private NodeFactory nodeFactory = NodeFactory.getFactory();
   private EdgeFactory edgeFactory = EdgeFactory.getFactory();
@@ -109,6 +117,7 @@ public class DatabaseManager {
   private MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
   private MedicineDeliveryRequestFactory medicineDeliveryRequestFactory =
       MedicineDeliveryRequestFactory.getFactory();
+  private LaundryServiceRequestFactory laundryServiceRequestFactory = LaundryServiceRequestFactory.getFactory();
 
   // SanitationService requests
   static final String SANITATION_TYPE_KEY = "SanitationType";
@@ -228,6 +237,22 @@ public class DatabaseManager {
             + "PRIMARY KEY ("
             + SERVICEID_KEY
             + "))";
+
+    String laundryTableCreationStatement =
+            "CREATE TABLE "
+                    + LAUNDRY_REQUEST_TABLE_NAME
+                    + " ( "
+                    + SERVICEID_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + ITEMS_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + QUANTITY_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + TEMPERTURE_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + "PRIMARY KEY ("
+                    + SERVICEID_KEY
+                    + "))";
 
     String transportTableCreationStatement =
         "CREATE TABLE "
@@ -587,6 +612,14 @@ public class DatabaseManager {
     }
   }
 
+  public void manipulateServiceRequest(LaundryServiceRequest lsRequest) throws ValidationException{
+    if (laundryServiceRequestFactory.read(lsRequest.getId()) == null) {
+      laundryServiceRequestFactory.create(lsRequest);
+    } else {
+      laundryServiceRequestFactory.update(lsRequest);
+    }
+  }
+
   public MaintenanceRequest readMaintenanceRequest(String serviceId) throws Exception {
     return maintenanceRequestFactory.read(serviceId);
   }
@@ -719,5 +752,17 @@ public class DatabaseManager {
 
   public void deleteMedicineDeliveryRequest(String toDelete) {
     medicineDeliveryRequestFactory.delete(toDelete);
+  }
+
+  public List<LaundryServiceRequest> getAllLaunduaryRequests() {
+    return laundryServiceRequestFactory.getAllLaundryRequests();
+  }
+
+  public LaundryServiceRequest readLaundryServiceRequest(String s) {
+    return laundryServiceRequestFactory.read(s);
+  }
+
+  public void deleteLaundryServiceRequest(String toDelte) {
+    laundryServiceRequestFactory.delete(toDelte);
   }
 }
