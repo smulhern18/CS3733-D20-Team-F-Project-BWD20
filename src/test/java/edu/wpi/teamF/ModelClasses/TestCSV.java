@@ -1,24 +1,25 @@
- package edu.wpi.teamF.ModelClasses;
+package edu.wpi.teamF.ModelClasses;
 
- import static org.junit.jupiter.api.Assertions.assertTrue;
- import static org.junit.jupiter.api.Assertions.fail;
- import edu.wpi.teamF.DatabaseManipulators.CSVManipulator;
- import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
- import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
- import edu.wpi.teamF.ModelClasses.Account.Account;
- import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
- import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
- import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
- import edu.wpi.teamF.TestData;
- import java.io.File;
- import java.nio.file.Files;
- import java.sql.SQLException;
- import java.util.Arrays;
- import java.util.HashSet;
- import java.util.List;
- import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
- public class TestCSV {
+import edu.wpi.teamF.DatabaseManipulators.CSVManipulator;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
+import edu.wpi.teamF.ModelClasses.Account.Account;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.TestData;
+import java.io.File;
+import java.nio.file.Files;
+import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import org.junit.jupiter.api.*;
+
+public class TestCSV {
 
   /** Utility classes instantiation */
   static DatabaseManager databaseManager = DatabaseManager.getManager();
@@ -26,7 +27,6 @@
   static CSVManipulator csvManipulator = new CSVManipulator();
   static NodeFactory nodeFactory = NodeFactory.getFactory();
   static TestData testData = null;
-
 
   Node[] validNodes = null;
   Edge[] validEdge = null;
@@ -46,7 +46,7 @@
       validMaintenance = testData.validMaintenanceRequests;
       validMariachiRequest = testData.validMariachiRequests;
       validAccounts = testData.validAccounts;
-      validSecurityRequest =  testData.validSecurityRequests;
+      validSecurityRequest = testData.validSecurityRequests;
 
     } catch (Exception e) {
       fail(e.getMessage());
@@ -88,8 +88,7 @@
       byte[] f1 = Files.readAllBytes(file.toPath());
       byte[] f2 =
           Files.readAllBytes(
-              new
- File(getClass().getResource("/edu/wpi/teamF/CSVNodeTest.csv").toURI()).toPath());
+              new File(getClass().getResource("/edu/wpi/teamF/CSVNodeTest.csv").toURI()).toPath());
       assertTrue(Arrays.equals(f1, f2));
     } catch (Exception e) {
       System.out.println(e.getMessage());
@@ -120,8 +119,7 @@
       byte[] f1 = Files.readAllBytes(file.toPath());
       byte[] f2 =
           Files.readAllBytes(
-              new
- File(getClass().getResource("/edu/wpi/teamF/CSVEdgeTest.csv").toURI()).toPath());
+              new File(getClass().getResource("/edu/wpi/teamF/CSVEdgeTest.csv").toURI()).toPath());
       assertTrue(Arrays.equals(f1, f2));
     } catch (Exception e) {
       fail(e.getMessage());
@@ -184,14 +182,12 @@
     csvManipulator.readCSVFileSecurityService(
         getClass().getResourceAsStream("/edu/wpi/teamF/CSVSecurityTest.csv"));
 
-
     List<SecurityRequest> list = databaseManager.getAllSecurityRequests();
     int j = 0;
     Assertions.assertTrue(list.get(0).equals(validSecurityRequest[1]));
     Assertions.assertTrue(list.get(1).equals(validSecurityRequest[0]));
     Assertions.assertTrue(list.get(2).equals(validSecurityRequest[2]));
     Assertions.assertTrue(list.get(3).equals(validSecurityRequest[3]));
-
 
     /** Valid data */
     File wfile = new File("src/test/java/edu/wpi/teamF/Test/");
@@ -240,4 +236,4 @@
       fail(e.getMessage());
     }
   }
- }
+}

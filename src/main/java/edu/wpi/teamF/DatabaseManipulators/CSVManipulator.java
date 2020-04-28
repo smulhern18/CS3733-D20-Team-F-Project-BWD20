@@ -885,8 +885,8 @@ public class CSVManipulator {
     return Main;
   }
   /**
-   * reads a csv file that contains Medicine Delivery Requests and inserts the data in the file into the
-   * correct place in the database
+   * reads a csv file that contains Medicine Delivery Requests and inserts the data in the file into
+   * the correct place in the database
    */
   public void readCSVFileMedicineDeliveryService(InputStream stream) {
     String row = "";
@@ -1011,13 +1011,13 @@ public class CSVManipulator {
   /** Writes to the CSV file so that it can become persistant */
   public void writeCSVFileSanitationService(Path path) throws Exception {
     // writing to the file
-    List<SanitationServiceRequest> sanitationServiceRequests = sanitationServiceRequestFactory.getAllSanitationRequests();
+    List<SanitationServiceRequest> sanitationServiceRequests =
+        sanitationServiceRequestFactory.getAllSanitationRequests();
 
     try (FileWriter fw = new FileWriter(path.toString() + "/SanitationBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
-      bw.write(
-          "id,location,assignee,description,dateTimeSubmitted,priority,complete,type");
+      bw.write("id,location,assignee,description,dateTimeSubmitted,priority,complete,type");
 
       for (SanitationServiceRequest s : sanitationServiceRequests) {
         bw.newLine();
@@ -1093,8 +1093,7 @@ public class CSVManipulator {
   /** Writes to the CSV file so that it can become persistant */
   public void writeCSVFileTransportService(Path path) throws Exception {
     // writing to the file
-    List<TransportRequest> transportRequests =
-        transportRequestFactory.getAllTransportRequests();
+    List<TransportRequest> transportRequests = transportRequestFactory.getAllTransportRequests();
 
     try (FileWriter fw = new FileWriter(path.toString() + "/TransportBackup.csv");
         BufferedWriter bw = new BufferedWriter(fw); ) {
@@ -1136,5 +1135,4 @@ public class CSVManipulator {
             + m.getDateTimeCompleted().getTime();
     return Main;
   }
-
 }
