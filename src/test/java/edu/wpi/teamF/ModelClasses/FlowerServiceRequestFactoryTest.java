@@ -1,11 +1,8 @@
 package edu.wpi.teamF.ModelClasses;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
-import edu.wpi.teamF.DatabaseManipulators.FlowerServiceRequestFactory;
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.FlowerRequest;
 import edu.wpi.teamF.TestData;
 import java.sql.SQLException;
@@ -19,9 +16,7 @@ public class FlowerServiceRequestFactoryTest {
 
   static TestData testData = null;
   static FlowerRequest[] validFlowerRequest = null;
-  FlowerServiceRequestFactory flowerRequestFactory = FlowerServiceRequestFactory.getFactory();
-  NodeFactory nodeFactory = NodeFactory.getFactory();
-  static DatabaseManager databaseManager = new DatabaseManager();
+  static DatabaseManager databaseManager = DatabaseManager.getManager();
   static Node[] validNodes = null;
 
   @BeforeAll
@@ -44,31 +39,31 @@ public class FlowerServiceRequestFactoryTest {
   @Test
   public void testCreateReadDelete() {
     try {
-      flowerRequestFactory.create(null);
+      databaseManager.manipulateServiceRequest((FlowerRequest) null);
       fail("Creating a null value is unacceptable");
     } catch (ValidationException e) {
       // ignore as expected
     }
     try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
 
     } catch (Exception e) {
 
     }
     try {
       for (FlowerRequest flowerRequest : validFlowerRequest) {
-        flowerRequestFactory.create(flowerRequest);
+        databaseManager.manipulateServiceRequest(flowerRequest);
 
-        FlowerRequest readFlower = flowerRequestFactory.read(flowerRequest.getId());
+        FlowerRequest readFlower = databaseManager.readFlowerRequest(flowerRequest.getId());
         assertTrue(readFlower.equals(flowerRequest));
 
-        flowerRequestFactory.delete(flowerRequest.getId());
+        databaseManager.deleteFlowerRequest(flowerRequest.getId());
 
         try {
-          readFlower = flowerRequestFactory.read(flowerRequest.getId());
+          readFlower = databaseManager.readFlowerRequest(flowerRequest.getId());
         } // catch (InstanceNotFoundException e) {
         // ignore
         // }
@@ -85,10 +80,10 @@ public class FlowerServiceRequestFactoryTest {
   public void testCreateReadUpdateDelete() {
 
     try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
 
     } catch (Exception e) {
 
@@ -96,16 +91,16 @@ public class FlowerServiceRequestFactoryTest {
     try {
 
       for (FlowerRequest flowerRequest : validFlowerRequest) {
-        flowerRequestFactory.create(flowerRequest);
+        databaseManager.manipulateServiceRequest(flowerRequest);
 
         flowerRequest.setDescription("Hello");
-        flowerRequestFactory.update(flowerRequest);
+        databaseManager.manipulateServiceRequest(flowerRequest);
 
-        FlowerRequest readMain = flowerRequestFactory.read(flowerRequest.getId());
+        FlowerRequest readMain = databaseManager.readFlowerRequest(flowerRequest.getId());
 
         assertTrue(flowerRequest.equals(readMain));
 
-        flowerRequestFactory.delete(flowerRequest.getId());
+        databaseManager.deleteFlowerRequest(flowerRequest.getId());
       }
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
@@ -115,10 +110,10 @@ public class FlowerServiceRequestFactoryTest {
   @Test
   public void testGetFlowersByLocation() {
     try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
 
     } catch (Exception e) {
 
@@ -128,31 +123,29 @@ public class FlowerServiceRequestFactoryTest {
     FlowerRequest main3 = validFlowerRequest[2];
     FlowerRequest main4 = validFlowerRequest[3];
 
-    NodeFactory nodeFactory = NodeFactory.getFactory();
-
     try {
-      flowerRequestFactory.create(main1);
-      flowerRequestFactory.create(main2);
-      flowerRequestFactory.create(main3);
-      flowerRequestFactory.create(main4);
+      databaseManager.manipulateServiceRequest(main1);
+      databaseManager.manipulateServiceRequest(main2);
+      databaseManager.manipulateServiceRequest(main3);
+      databaseManager.manipulateServiceRequest(main4);
 
       List<FlowerRequest> flowersAtBathroom =
-          flowerRequestFactory.getFlowerRequestsByLocation(testData.validNodes[0]);
+          databaseManager.getFlowerRequestsByLocation(testData.validNodes[0]);
 
       assertTrue(flowersAtBathroom.contains(main1));
 
       assertTrue(flowersAtBathroom.size() == 1);
 
       List<FlowerRequest> flowersAtnode2 =
-          flowerRequestFactory.getFlowerRequestsByLocation(testData.validNodes[1]);
+          databaseManager.getFlowerRequestsByLocation(testData.validNodes[1]);
 
       assertTrue(flowersAtnode2.contains(main2));
       assertTrue(flowersAtnode2.size() == 1);
 
-      flowerRequestFactory.delete(main1.getId());
-      flowerRequestFactory.delete(main2.getId());
-      flowerRequestFactory.delete(main3.getId());
-      flowerRequestFactory.delete(main4.getId());
+      databaseManager.deleteFlowerRequest(main1.getId());
+      databaseManager.deleteFlowerRequest(main2.getId());
+      databaseManager.deleteFlowerRequest(main3.getId());
+      databaseManager.deleteFlowerRequest(main4.getId());
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
     }
@@ -161,10 +154,10 @@ public class FlowerServiceRequestFactoryTest {
   @Test
   public void testGetAllFlowerRequests() {
     try {
-      nodeFactory.create(validNodes[0]);
-      nodeFactory.create(validNodes[1]);
-      nodeFactory.create(validNodes[2]);
-      nodeFactory.create(validNodes[3]);
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
 
     } catch (Exception e) {
 
@@ -175,12 +168,12 @@ public class FlowerServiceRequestFactoryTest {
     FlowerRequest main4 = validFlowerRequest[3];
 
     try {
-      flowerRequestFactory.create(main1);
-      flowerRequestFactory.create(main2);
-      flowerRequestFactory.create(main3);
-      flowerRequestFactory.create(main4);
+      databaseManager.manipulateServiceRequest(main1);
+      databaseManager.manipulateServiceRequest(main2);
+      databaseManager.manipulateServiceRequest(main3);
+      databaseManager.manipulateServiceRequest(main4);
 
-      List<FlowerRequest> flowersAll = flowerRequestFactory.getAllFlowerRequests();
+      List<FlowerRequest> flowersAll = databaseManager.getAllFlowerRequests();
 
       assertTrue(flowersAll.contains(main1));
       assertTrue(flowersAll.contains(main2));
@@ -188,10 +181,14 @@ public class FlowerServiceRequestFactoryTest {
       assertTrue(flowersAll.contains(main4));
       assertTrue(flowersAll.size() == 4);
 
-      nodeFactory.delete(main1.getId());
-      nodeFactory.delete(main2.getId());
-      nodeFactory.delete(main3.getId());
-      nodeFactory.delete(main4.getId());
+      databaseManager.deleteNode(main1.getId());
+      databaseManager.deleteNode(main2.getId());
+      databaseManager.deleteNode(main3.getId());
+      databaseManager.deleteNode(main4.getId());
+      databaseManager.deleteFlowerRequest(main1.getId());
+      databaseManager.deleteFlowerRequest(main2.getId());
+      databaseManager.deleteFlowerRequest(main3.getId());
+      databaseManager.deleteFlowerRequest(main4.getId());
     } catch (Exception e) {
       fail(e.getMessage() + ", " + e.getClass());
     }

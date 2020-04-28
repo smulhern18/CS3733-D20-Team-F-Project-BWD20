@@ -13,6 +13,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.sql.SQLException;
 import java.util.Arrays;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -54,6 +55,11 @@ public class ReportsTest {
     } catch (Exception e) {
       fail(e.getMessage());
     }
+  }
+
+  @AfterAll
+  public static void cleanup() throws Exception {
+    databaseManager.reset();
   }
 
   @Test

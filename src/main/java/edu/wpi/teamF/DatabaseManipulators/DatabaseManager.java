@@ -1,10 +1,8 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
+import edu.wpi.teamF.ModelClasses.*;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Account.PasswordHasher;
-import edu.wpi.teamF.ModelClasses.Appointment;
-import edu.wpi.teamF.ModelClasses.Edge;
-import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
 import edu.wpi.teamF.ModelClasses.ValidationException;
@@ -28,12 +26,12 @@ public class DatabaseManager {
   static final String MAINTENANCE_REQUEST_TABLE_NAME = "maintenanceRequestsTable";
   static final String ACCOUNT_TABLE_NAME = "accountsTable";
   static final String APPOINTMENTS_TABLE_NAME = "appointmentsTable";
-  static final String COMPUTER_REQUEST_TABLE_NAME = "ComputerRequestsTable";
-  static final String TRANSPORT_REQUEST_TABLE_NAME = "TransportRequestsTable";
-  static final String SANITATION_REQUEST_TABLE_NAME = "SanitationRequestsTable";
-  static final String LANGUAGE_REQUEST_TABLE_NAME = "LanguageRequestsTable";
+  static final String COMPUTER_REQUEST_TABLE_NAME = "computerRequestsTable";
+  static final String TRANSPORT_REQUEST_TABLE_NAME = "transportRequestsTable";
+  static final String SANITATION_REQUEST_TABLE_NAME = "sanitationRequestsTable";
+  static final String LANGUAGE_REQUEST_TABLE_NAME = "languageRequestsTable";
   static final String MEDICINE_DELIVERY_REQUEST_TABLE_NAME = "medicineDeliveryRequestsTable";
-  static final String LAUNDRY_REQUEST_TABLE_NAME = "LaundryRequestsTable";
+  static final String LAUNDRY_REQUEST_TABLE_NAME = "laundryRequestsTable";
   static final String FLOWER_REQUEST_TABLE_NAME = "flowerRequestsTable";
   /** Column Names */
   // node
@@ -136,6 +134,8 @@ public class DatabaseManager {
       MedicineDeliveryRequestFactory.getFactory();
   private LaundryServiceRequestFactory laundryServiceRequestFactory =
       LaundryServiceRequestFactory.getFactory();
+  private FlowerServiceRequestFactory flowerServiceRequestFactory =
+      FlowerServiceRequestFactory.getFactory();
 
   static Connection connection = null;
 
@@ -379,7 +379,10 @@ public class DatabaseManager {
             + SERVICEID_KEY
             + "))";
 
-    PreparedStatement preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
+    PreparedStatement preparedStatement =
+        connection.prepareStatement(computerTableCreationStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(edgeTableCreationStatement);
     preparedStatement.execute();
@@ -390,8 +393,6 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(securityTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(medicineDeliveryTableCreationStatement);
-    preparedStatement.execute();
-    preparedStatement = connection.prepareStatement(computerTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(languageTableCreationStatement);
     preparedStatement.execute();
@@ -404,6 +405,8 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(sanitationTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(flowerTableCreationStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(laundryTableCreationStatement);
     preparedStatement.execute();
     System.out.println("Created Tables Successfully");
   }
@@ -444,6 +447,7 @@ public class DatabaseManager {
     String sanitationDropStatement = "DROP TABLE " + SANITATION_REQUEST_TABLE_NAME;
     String languageDropStatement = "DROP TABLE " + LANGUAGE_REQUEST_TABLE_NAME;
     String flowerDropStatement = "DROP TABLE " + FLOWER_REQUEST_TABLE_NAME;
+    String laundryDropStatement = "DROP TABLE " + LAUNDRY_REQUEST_TABLE_NAME;
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeDropStatement);
     preparedStatement.execute();
@@ -456,8 +460,6 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(computerDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(languageDropStatement);
-    preparedStatement.execute();
-    preparedStatement = connection.prepareStatement(computerDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(securityTableDropStatement);
     preparedStatement.execute();
@@ -472,6 +474,8 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(sanitationDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(flowerDropStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(laundryDropStatement);
     preparedStatement.execute();
     createTables();
   }
@@ -802,5 +806,30 @@ public class DatabaseManager {
 
   public void deleteLaundryServiceRequest(String toDelte) {
     laundryServiceRequestFactory.delete(toDelte);
+  }
+
+  public void manipulateServiceRequest(FlowerRequest flowerRequest) throws ValidationException {
+    Validators.FlowerValidation(flowerRequest);
+    if (flowerServiceRequestFactory.read(flowerRequest.getId()) == null) {
+      flowerServiceRequestFactory.create(flowerRequest);
+    } else {
+      flowerServiceRequestFactory.update(flowerRequest);
+    }
+  }
+
+  public FlowerRequest readFlowerRequest(String id) {
+    return flowerServiceRequestFactory.read(id);
+  }
+
+  public void deleteFlowerRequest(String id) {
+    flowerServiceRequestFactory.delete(id);
+  }
+
+  public List<FlowerRequest> getFlowerRequestsByLocation(Node node) {
+    return flowerServiceRequestFactory.getFlowerRequestsByLocation(node);
+  }
+
+  public List<FlowerRequest> getAllFlowerRequests() {
+    return flowerServiceRequestFactory.getAllFlowerRequests();
   }
 }

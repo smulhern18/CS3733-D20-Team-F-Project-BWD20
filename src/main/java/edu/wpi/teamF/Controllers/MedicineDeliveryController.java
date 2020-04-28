@@ -3,6 +3,7 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.App;
+import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MedicineDeliveryRequest;
@@ -30,6 +31,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.util.Callback;
 import javax.management.InstanceNotFoundException;
+import lombok.SneakyThrows;
 
 public class MedicineDeliveryController implements Initializable {
   public JFXTreeTableView<UIMedicineDeliveryRequest> treeTableMedicine;
@@ -38,7 +40,7 @@ public class MedicineDeliveryController implements Initializable {
   public JFXButton requestServiceButton;
   public GridPane servicePane;
   public Label locationLabel;
-  public JFXComboBox<String> locationChoice;
+  public JFXComboBox<String> locationComboBox;
   public Label medicineLabel;
   public JFXTextField medicineText;
   public JFXButton submitButton;
@@ -64,8 +66,12 @@ public class MedicineDeliveryController implements Initializable {
   List<MedicineDeliveryRequest> medicineDeliveryRequests =
       databaseManager.getAllMedicineDeliveryRequests();
 
+  @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+
+    UISetting uiSetting = new UISetting();
+    uiSetting.setAsLocationComboBox(locationComboBox);
 
     anchorPane
         .widthProperty()
@@ -85,7 +91,7 @@ public class MedicineDeliveryController implements Initializable {
       System.out.println(e.getMessage() + e.getClass());
     }
     for (Node node : nodes) {
-      locationChoice.getItems().add(node.getId());
+      locationComboBox.getItems().add(node.getId());
     }
 
     priorityChoice.getItems().add("Low");
@@ -234,7 +240,7 @@ public class MedicineDeliveryController implements Initializable {
 
   public void submit(ActionEvent actionEvent) throws Exception {
     // Get the values
-    String location = locationChoice.getValue();
+    String location = locationComboBox.getValue();
     Node node = databaseManager.readNode(location);
     String medicine = medicineText.getText();
     String instructions = instructionsText.getText();
@@ -260,7 +266,7 @@ public class MedicineDeliveryController implements Initializable {
     treeTableMedicine.refresh();
     descText.setText("");
     medicineText.setText("");
-    locationChoice.setValue(null);
+    locationComboBox.setValue(null);
     priorityChoice.setValue(null);
     instructionsText.setText("");
   }
@@ -268,7 +274,7 @@ public class MedicineDeliveryController implements Initializable {
   public void cancel(ActionEvent actionEvent) {
     descText.setText("");
     medicineText.setText("");
-    locationChoice.setValue(null);
+    locationComboBox.setValue(null);
     priorityChoice.setValue(null);
     instructionsText.setText("");
   }

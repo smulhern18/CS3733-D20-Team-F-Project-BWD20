@@ -92,7 +92,7 @@ public class ServiceRequestFactory {
                   new Date(resultSet.getTimestamp(DatabaseManager.TIME_CREATED_KEY).getTime()),
                   resultSet.getInt(DatabaseManager.PRIORITY_KEY),
                   resultSet.getBoolean(DatabaseManager.COMPLETED_KEY),
-                  0);
+                  resultSet.getInt(DatabaseManager.PRIORITY_KEY));
         }
       } catch (ValidationException e) {
         throw e;
