@@ -612,7 +612,7 @@ public class DatabaseManager {
   }
 
   public void manipulateServiceRequest(ComputerServiceRequest serviceRequest) throws Exception {
-    if (computerServiceRequestFactory.read(serviceRequest.getId()) == null) {
+    if (ComputerServiceRequestFactory.read(serviceRequest.getId()) == null) {
       computerServiceRequestFactory.create(serviceRequest);
     } else {
       computerServiceRequestFactory.update(serviceRequest);
@@ -655,6 +655,7 @@ public class DatabaseManager {
   }
 
   public void manipulateServiceRequest(LaundryServiceRequest lsRequest) throws ValidationException {
+    Validators.launduaryServiceValidation(lsRequest);
     if (laundryServiceRequestFactory.read(lsRequest.getId()) == null) {
       laundryServiceRequestFactory.create(lsRequest);
     } else {
@@ -721,6 +722,15 @@ public class DatabaseManager {
 
   public List<LanguageServiceRequest> getAllLanguageServiceRequests() throws Exception {
     return languageServiceRequestFactory.getAllLanguageRequests();
+  }
+
+  public List<LaundryServiceRequest> getLaundryRequestsByLocation(Node location) throws Exception {
+    return laundryServiceRequestFactory.getLaundaryRequestsByLocation(location);
+  }
+
+  public List<LanguageServiceRequest> getLanguageRequestsByLocation(Node location)
+      throws Exception {
+    return languageServiceRequestFactory.getLanguageRequestsByLocation(location);
   }
 
   /*

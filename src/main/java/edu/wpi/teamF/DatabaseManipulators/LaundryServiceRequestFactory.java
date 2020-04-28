@@ -154,7 +154,7 @@ public class LaundryServiceRequestFactory {
     }
   }
 
-  public List<LaundryServiceRequest> getLaunduaryRequestsByLocation(Node location) {
+  public List<LaundryServiceRequest> getLaundaryRequestsByLocation(Node location) {
     List<LaundryServiceRequest> launduaryRequests = new ArrayList<>();
     for (ServiceRequest serviceRequest :
         serviceRequestFactory.getServiceRequestsByLocation(location)) {
