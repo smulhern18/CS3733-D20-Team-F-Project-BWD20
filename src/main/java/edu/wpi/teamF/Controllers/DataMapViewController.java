@@ -301,6 +301,7 @@ public class DataMapViewController implements Initializable {
     selectNode2Button.setText("Select Node 2"); // resets the text in the two buttons
     modifyEdgeButton.setVisible(true);
     modifyEdgeButton.setDisable(true);
+    modifyEdgeButton.setOpacity(.4);
     deleteEdgeButton.setVisible(true);
     deleteEdgeButton.setDisable(true);
     deleteEdgeButton.setOpacity(.4);
@@ -396,6 +397,8 @@ public class DataMapViewController implements Initializable {
               && !selectNode2Button.getText().equals("Select Node 2")) {
             addEdgeButton.setDisable(false);
             addEdgeButton.setOpacity(1);
+            modifyEdgeButton.setDisable(false);
+            modifyEdgeButton.setOpacity(1);
           }
         });
     switch (node.getFloor()) {
@@ -632,7 +635,8 @@ public class DataMapViewController implements Initializable {
     selectNode1 = true;
     node1 = null;
     //    if (!selectNode2Button.getText().equals("Select Node 2")) {
-    //      addEdgeButton.setDisable(false);
+    //      modifyEdgeButton.setDisable(false);
+    //      modifyEdgeButton.setOpacity(1);
     //    }
   }
 
@@ -641,7 +645,8 @@ public class DataMapViewController implements Initializable {
     selectNode2 = true;
     node2 = null;
     //    if (!selectNode1Button.getText().equals("Select Node 1")) {
-    //      addEdgeButton.setDisable(false);
+    //      modifyEdgeButton.setDisable(false);
+    //      modifyEdgeButton.setOpacity(1);
     //    }
   }
 
