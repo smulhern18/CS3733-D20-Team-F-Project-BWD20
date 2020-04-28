@@ -31,7 +31,7 @@
       <JFXTextField fx:id="nodeToDelete" layoutX="376.0" layoutY="623.0" />
       <JFXButton fx:id="deleteEdgeButton" buttonType="RAISED" layoutX="827.0" layoutY="617.0" onAction="#deleteEdge" prefHeight="31.0" prefWidth="123.0" ripplerFill="#179e41" text="Delete Edge" />
       <JFXTextField fx:id="edgeToDelete" layoutX="950.0" layoutY="620.0" />
-      <fx:include fx:id="mapView" layoutX="160.0" layoutY="120.0" source="DataMapView.fxml" />
+      <fx:include fx:id="mapView" layoutX="160.0" layoutY="120.0" source="DataMapView.fxml" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="120.0" />
       <JFXButton layoutX="933.0" layoutY="715.0" onAction="#switchToUserAccounts" text="User Accounts" />
       <StackPane fx:id="modifyNodePane" layoutX="380.0" layoutY="289.0" prefHeight="239.0" prefWidth="531.0" style="-fx-background-color: #00000050;" visible="false">
          <children>

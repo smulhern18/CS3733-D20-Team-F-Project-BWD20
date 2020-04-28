@@ -24,8 +24,8 @@ public class Main {
   public static void initDB() throws Exception {
     dbm.initialize();
     AccountFactory accounts = AccountFactory.getFactory();
-    csvm.readCSVFileNode(Main.class.getResourceAsStream("CSVFiles/TeamFAllNodes2.csv"));
-    csvm.readCSVFileEdge(Main.class.getResourceAsStream("CSVFiles/TeamFAllEdges.csv"));
+    csvm.readCSVFileNode(Main.class.getResourceAsStream("CSVFiles/MapFAllnodes.csv"));
+    csvm.readCSVFileEdge(Main.class.getResourceAsStream("CSVFiles/MapFAlledges.csv"));
     if (accounts.read("admin") == null) {
       accounts.create(new Admin("admin", "admin", "admin@gmail.com", "admin", "password"));
     }
