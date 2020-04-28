@@ -138,6 +138,8 @@ public class DatabaseManager {
       LaundryServiceRequestFactory.getFactory();
   private FlowerServiceRequestFactory flowerServiceRequestFactory =
       FlowerServiceRequestFactory.getFactory();
+  private TransportRequestFactory transportRequestFactory =
+      TransportRequestFactory.getFactory();
 
   static Connection connection = null;
 
@@ -395,10 +397,9 @@ public class DatabaseManager {
             + SERVICEID_KEY
             + "))";
 
-    PreparedStatement preparedStatement =
-        connection.prepareStatement(computerTableCreationStatement);
+    PreparedStatement preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
     preparedStatement.execute();
-    preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
+    preparedStatement = connection.prepareStatement(computerTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(edgeTableCreationStatement);
     preparedStatement.execute();
@@ -866,5 +867,22 @@ public class DatabaseManager {
 
   public List<FlowerRequest> getAllFlowerRequests() {
     return flowerServiceRequestFactory.getAllFlowerRequests();
+  }
+
+  public List<TransportRequest> getAllTransportRequests() {
+    return transportRequestFactory.getAllTransportRequests();
+  }
+
+  public void manipulateServiceRequest(TransportRequest transportRequest) throws ValidationException {
+    Validators.transportRequestValidation(transportRequest);
+    if (transportRequestFactory.read(transportRequest.getId()) == null) {
+      transportRequestFactory.create(transportRequest);
+    } else {
+      transportRequestFactory.update(transportRequest);
+    }
+  }
+
+  public TransportRequest readTransportRequest(String id) throws ValidationException {
+    return transportRequestFactory.read(id);
   }
 }

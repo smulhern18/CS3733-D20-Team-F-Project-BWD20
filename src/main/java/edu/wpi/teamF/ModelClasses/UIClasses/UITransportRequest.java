@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class UITransportRequest  extends RecursiveTreeObject<UIComputerServiceRequest> {
+public class UITransportRequest  extends RecursiveTreeObject<UITransportRequest> {
   public SimpleStringProperty ID;
   public SimpleStringProperty location;
   public SimpleStringProperty destination;
