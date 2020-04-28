@@ -117,7 +117,7 @@ public class PathfinderController implements Initializable {
     System.out.println(directions.getFullDirectionsString());
     directionsDisplay.setText(directions.getFullDirectionsString());
     pathSwitchFloorPane.setVisible(true);
-    pathSwitchFloor.setText("Next: Go to floor " + Integer.toString(startNode.getFloor()));
+    pathSwitchFloor.setText("Next: Go to floor " + Integer.toString(endNode.getFloor()));
   }
 
   public void placeButton(Node node) {
@@ -678,11 +678,10 @@ public class PathfinderController implements Initializable {
     if (currentFloor == startNode.getFloor()) {
       // Currently on the start floor, want to go to the end floor
       switchToFloor(endNode.getFloor());
-      pathSwitchFloor.setText(
-          "Previous: Go back to floor " + Integer.toString(startNode.getFloor()));
+      pathSwitchFloor.setText("Previous: Go to floor " + Integer.toString(startNode.getFloor()));
     } else {
       switchToFloor(startNode.getFloor());
-      pathSwitchFloor.setText("Previous: Go back to floor " + Integer.toString(endNode.getFloor()));
+      pathSwitchFloor.setText("Next: Go to floor " + Integer.toString(endNode.getFloor()));
     }
   }
 }

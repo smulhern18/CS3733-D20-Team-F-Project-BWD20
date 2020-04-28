@@ -94,21 +94,47 @@
       </AnchorPane>
       <AnchorPane fx:id="directionsPane" prefHeight="200.0" prefWidth="270.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label text="Directions:" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="140.0">
-               <font>
-                  <Font name="Arial Bold" size="20.0" />
-               </font>
-            </Label>
-            <VBox maxWidth="210.0" minWidth="210.0" prefHeight="350.0" prefWidth="210.0" style="-fx-border-color: #001a3c; -fx-border-width: 4px;" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="180.0">
+            <VBox prefHeight="350.0" prefWidth="300.0" style="-fx-background-color: rgba(255, 255, 255, 0.8);" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
                <children>
-                  <Label fx:id="directionsDisplay" text="" wrapText="true">
+                  <Label text="Directions:">
                      <font>
-                        <Font size="14.0" />
+                        <Font size="20.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                        <Insets left="10.0" top="8.0" />
                      </VBox.margin>
                   </Label>
+                  <VBox prefHeight="250.0" style="-fx-border-color: #001a3c; -fx-border-width: 3px; -fx-background-color: #ffffff;">
+                     <children>
+                        <Label fx:id="directionsDisplay" text="" wrapText="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <JFXButton fx:id="pathSwitchFloor" alignment="CENTER" maxHeight="150.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" onAction="#pathSwitchFloor" prefHeight="50.0" style="-fx-background-color: #0067B1; -fx-background-radius: 10px;" text="Next: Go to Floor 5" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="15.0" left="25.0" right="25.0" top="10.0" />
+                     </VBox.margin>
+                  </JFXButton>
+                  <JFXButton minHeight="50.0" minWidth="150.0" mnemonicParsing="false" onAction="#resetPane" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Reset" textFill="WHITE">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="15.0" left="75.0" right="75.0" />
+                     </VBox.margin>
+                  </JFXButton>
                </children>
             </VBox>
          </children>
@@ -194,12 +220,20 @@
                         <Insets top="15.0" />
                      </VBox.margin>
                   </HBox>
-                  <JFXButton fx:id="pathButton" buttonType="RAISED" maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" style="-fx-background-color: #001a3c; -fx-background-radius: 10px;" text="Find Path" textFill="WHITE">
+                  <JFXButton fx:id="pathButton" buttonType="RAISED" maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" style="-fx-background-color: #0067B1; -fx-background-radius: 10px;" text="Find Path" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
                      <VBox.margin>
                         <Insets bottom="10.0" left="75.0" right="75.0" top="20.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               <JFXButton minHeight="50.0" minWidth="150.0" mnemonicParsing="false" onAction="#resetPane" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Reset" textFill="WHITE">
+                  <font>
+                     <Font size="20.0" />
+                  </font>
+                     <VBox.margin>
+                        <Insets bottom="15.0" left="75.0" right="75.0" />
                      </VBox.margin>
                   </JFXButton>
                </children>
@@ -208,19 +242,8 @@
       </AnchorPane>
       <AnchorPane fx:id="pathSwitchFloorPane" maxHeight="80.0" prefHeight="80.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="80.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="270.0">
-               <children>
-                  <JFXButton fx:id="pathSwitchFloor" alignment="CENTER" maxHeight="150.0" minHeight="50.0" onAction="#pathSwitchFloor" prefHeight="50.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Next: Go to Floor 5" textFill="WHITE">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </JFXButton>
-               </children></VBox>
+            <VBox alignment="CENTER" prefHeight="80.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="270.0" />
          </children>
       </AnchorPane>
-   <JFXButton layoutX="1025.0" layoutY="448.0" minHeight="50.0" minWidth="150.0" mnemonicParsing="false" onAction="#resetPane" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Reset" textFill="WHITE" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="60.0">
-      <font>
-         <Font size="20.0" />
-      </font></JFXButton>
 </children>
 </AnchorPane>
