@@ -35,6 +35,7 @@ public class PathfinderController implements Initializable {
   public static int MAP_WIDTH = 2475;
   public int currentFloor;
   public AnchorPane currentPane;
+  public AnchorPane mainMapPane;
   public AnchorPane mapPaneFaulkner5;
   public AnchorPane mapPaneFaulkner4;
   public AnchorPane mapPaneFaulkner3;
@@ -87,8 +88,8 @@ public class PathfinderController implements Initializable {
       endNode = pathNodes.get(pathNodes.size() - 1);
     }
 
-    double heightRatio = currentPane.getHeight() / MAP_HEIGHT;
-    double widthRatio = currentPane.getWidth() / MAP_WIDTH;
+    double heightRatio = mainMapPane.getHeight() / MAP_HEIGHT;
+    double widthRatio = mainMapPane.getWidth() / MAP_WIDTH;
 
     for (int i = 0; i < pathNodes.size() - 1; i++) {
       int startX = (int) (pathNodes.get(i).getXCoord() * widthRatio);
@@ -122,8 +123,8 @@ public class PathfinderController implements Initializable {
 
   public void placeButton(Node node) {
 
-    double heightRatioFaulkner5 = (double) currentPane.getPrefHeight() / MAP_HEIGHT;
-    double widthRatioFaulkner5 = (double) currentPane.getPrefWidth() / MAP_WIDTH;
+    double heightRatioFaulkner5 = (double) mainMapPane.getHeight() / MAP_HEIGHT;
+    double widthRatioFaulkner5 = (double) mainMapPane.getWidth() / MAP_WIDTH;
 
     JFXButton button = new JFXButton();
     button.setId(node.getId());
@@ -133,11 +134,14 @@ public class PathfinderController implements Initializable {
     button.setStyle(
         "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #0067b1; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
 
-    int xPos = (int) ((node.getXCoord() * widthRatioFaulkner5) - 6);
-    int yPos = (int) ((node.getYCoord() * heightRatioFaulkner5) - 6);
+    //    int xPos = (int) ((node.getXCoord() * widthRatioFaulkner5) - 6);
+    //    int yPos = (int) ((node.getYCoord() * heightRatioFaulkner5) - 6);
+    //
+    //    button.setLayoutX(xPos);
+    //    button.setLayoutY(yPos);
 
-    button.setLayoutX(xPos);
-    button.setLayoutY(yPos);
+    button.layoutYProperty().bind(mapPaneFaulkner1.heightProperty().divide(MAP_HEIGHT));
+    button.layoutXProperty().bind(mapPaneFaulkner1.widthProperty().divide(MAP_WIDTH));
 
     button.setOnAction(
         actionEvent -> {
@@ -309,6 +313,17 @@ public class PathfinderController implements Initializable {
     //    String endID = endLocation.substring(endLocation.length() - 10);
 
     uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1);
+    imageViewFaulkner1.fitWidthProperty().bind(scrollPaneFaulkner1.widthProperty());
+    imageViewFaulkner1.fitHeightProperty().bind(scrollPaneFaulkner1.heightProperty());
+    imageViewFaulkner2.fitWidthProperty().bind(scrollPaneFaulkner1.widthProperty());
+    imageViewFaulkner2.fitHeightProperty().bind(scrollPaneFaulkner1.heightProperty());
+    imageViewFaulkner3.fitWidthProperty().bind(scrollPaneFaulkner1.widthProperty());
+    imageViewFaulkner3.fitHeightProperty().bind(scrollPaneFaulkner1.heightProperty());
+    imageViewFaulkner4.fitWidthProperty().bind(scrollPaneFaulkner1.widthProperty());
+    imageViewFaulkner4.fitHeightProperty().bind(scrollPaneFaulkner1.heightProperty());
+    imageViewFaulkner5.fitWidthProperty().bind(scrollPaneFaulkner1.widthProperty());
+    imageViewFaulkner5.fitHeightProperty().bind(scrollPaneFaulkner1.heightProperty());
+    // mapPaneFaulkner1.wid
 
     for (Node node : nodeFactory.getAllNodes()) {
       node.setEdges(edgeFactory.getAllEdgesConnectedToNode(node.getId()));
