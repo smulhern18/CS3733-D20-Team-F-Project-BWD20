@@ -31,6 +31,8 @@ public class ZoomController implements Initializable {
 
   UISetting uiSetting = new UISetting();
 
+  public ZoomController() throws Exception {}
+
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     // zoomPane = new ZoomableScrollPane(scrollPane);

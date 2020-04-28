@@ -18,6 +18,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -43,7 +44,7 @@ public class PathfinderController implements Initializable {
   public StackPane masterPaneFaulkner3;
   public StackPane masterPaneFaulkner4;
   public StackPane masterPaneFaulkner5;
-  public AnchorPane scrollPaneFaulkner1;
+  public ScrollPane scrollPaneFaulkner1;
   public AnchorPane scrollPaneFaulkner2;
   public AnchorPane scrollPaneFaulkner3;
   public AnchorPane scrollPaneFaulkner4;
@@ -305,9 +306,9 @@ public class PathfinderController implements Initializable {
     String endLocation = endCombo.getValue();
     //    String endID = endLocation.substring(endLocation.length() - 10);
 
-    //    uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1);
-    //    uiSetting.makeZoomable(scrollPaneFaulkner2, masterPaneFaulkner2);
+    uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1);
     //    uiSetting.makeZoomable(scrollPaneFaulkner3, masterPaneFaulkner3);
+    //    uiSetting.makeZoomable(scrollPaneFaulkner2, masterPaneFaulkner2);
     //    uiSetting.makeZoomable(scrollPaneFaulkner4, masterPaneFaulkner4);
     //    uiSetting.makeZoomable(scrollPaneFaulkner5, masterPaneFaulkner5);
 
@@ -669,20 +670,6 @@ public class PathfinderController implements Initializable {
     } else {
       switchToFloor(startNode.getFloor());
       pathSwitchFloor.setText("Previous: Go back to floor " + Integer.toString(endNode.getFloor()));
-    }
-  }
-
-  public AnchorPane getPaneForFloor(int floorNum) {
-    if (floorNum == 1) {
-      return scrollPaneFaulkner1;
-    } else if (floorNum == 2) {
-      return scrollPaneFaulkner2;
-    } else if (floorNum == 3) {
-      return scrollPaneFaulkner3;
-    } else if (floorNum == 4) {
-      return scrollPaneFaulkner4;
-    } else {
-      return scrollPaneFaulkner5;
     }
   }
 }
