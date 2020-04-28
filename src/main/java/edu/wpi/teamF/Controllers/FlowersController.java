@@ -8,14 +8,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.input.MouseEvent;
-import lombok.Data;
-
 import javax.swing.text.html.ImageView;
+import lombok.Data;
 
 @Data
 public class FlowersController implements Initializable {
-
-
 
   public FlowersController flowersController;
 
@@ -32,7 +29,8 @@ public class FlowersController implements Initializable {
   private ImageView flowerImage;
 
   public String flowerPicked;
-  public FlowersController(String flowerPicked){
+
+  public FlowersController(String flowerPicked) {
     this.flowerPicked = flowerPicked;
   }
 
@@ -43,6 +41,4 @@ public class FlowersController implements Initializable {
     flowerPicked = "All Occasion";
     FlowersController flowersController = new FlowersController(flowerPicked);
   }
-
-
 }

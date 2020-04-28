@@ -8,8 +8,6 @@ import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
 import edu.wpi.teamF.ModelClasses.ValidationException;
-import org.w3c.dom.ls.LSResourceResolver;
-
 import java.io.InputStream;
 import java.nio.file.Path;
 import java.sql.Connection;
@@ -100,23 +98,23 @@ public class DatabaseManager {
   static final String TEMPERTURE_KEY = "Temperature";
   static final String ITEMS_KEY = "Items";
 
-    // SanitationService requests
-    static final String SANITATION_TYPE_KEY = "SanitationType";
+  // SanitationService requests
+  static final String SANITATION_TYPE_KEY = "SanitationType";
 
-    // Language service requests
-    static final String LANGUAGE_KEY = "Language";
-    static final String PROBLEMTYPE_KEY = "ProblemType";
-    // MedicineDelivery Requests
-    static final String MEDICINE_TYPE_KEY = "medicineType";
-    static final String INSTRUCTIONS_KEY = "instructions";
-    // Flower request
-    static final String RECIPIENT_NAME_KEY = "recipientInput";
-    static final String ROOM_NUMBER_KEY = "roomInput";
-    static final String BOUQUET_KEY = "choice";
-    static final String MESSAGE_KEY = "messageInput";
-    static final String BUYER_NAME_KEY = "buyerName";
-    static final String PHONE_NUMBER_KEY = "phoneNumber";
-    static final String GIFT_WRAP_KEY = "giftWrap";
+  // Language service requests
+  static final String LANGUAGE_KEY = "Language";
+  static final String PROBLEMTYPE_KEY = "ProblemType";
+  // MedicineDelivery Requests
+  static final String MEDICINE_TYPE_KEY = "medicineType";
+  static final String INSTRUCTIONS_KEY = "instructions";
+  // Flower request
+  static final String RECIPIENT_NAME_KEY = "recipientInput";
+  static final String ROOM_NUMBER_KEY = "roomInput";
+  static final String BOUQUET_KEY = "choice";
+  static final String MESSAGE_KEY = "messageInput";
+  static final String BUYER_NAME_KEY = "buyerName";
+  static final String PHONE_NUMBER_KEY = "phoneNumber";
+  static final String GIFT_WRAP_KEY = "giftWrap";
 
   // Factories
   private NodeFactory nodeFactory = NodeFactory.getFactory();
@@ -136,7 +134,8 @@ public class DatabaseManager {
   private MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
   private MedicineDeliveryRequestFactory medicineDeliveryRequestFactory =
       MedicineDeliveryRequestFactory.getFactory();
-  private LaundryServiceRequestFactory laundryServiceRequestFactory = LaundryServiceRequestFactory.getFactory();
+  private LaundryServiceRequestFactory laundryServiceRequestFactory =
+      LaundryServiceRequestFactory.getFactory();
 
   static Connection connection = null;
 
@@ -248,20 +247,20 @@ public class DatabaseManager {
             + "))";
 
     String laundryTableCreationStatement =
-            "CREATE TABLE "
-                    + LAUNDRY_REQUEST_TABLE_NAME
-                    + " ( "
-                    + SERVICEID_KEY
-                    + " VARCHAR(32) NOT NULL, "
-                    + ITEMS_KEY
-                    + " VARCHAR(32) NOT NULL, "
-                    + QUANTITY_KEY
-                    + " VARCHAR(32) NOT NULL, "
-                    + TEMPERTURE_KEY
-                    + " VARCHAR(32) NOT NULL, "
-                    + "PRIMARY KEY ("
-                    + SERVICEID_KEY
-                    + "))";
+        "CREATE TABLE "
+            + LAUNDRY_REQUEST_TABLE_NAME
+            + " ( "
+            + SERVICEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + ITEMS_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + QUANTITY_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + TEMPERTURE_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + "PRIMARY KEY ("
+            + SERVICEID_KEY
+            + "))";
 
     String transportTableCreationStatement =
         "CREATE TABLE "
@@ -651,7 +650,7 @@ public class DatabaseManager {
     }
   }
 
-  public void manipulateServiceRequest(LaundryServiceRequest lsRequest) throws ValidationException{
+  public void manipulateServiceRequest(LaundryServiceRequest lsRequest) throws ValidationException {
     if (laundryServiceRequestFactory.read(lsRequest.getId()) == null) {
       laundryServiceRequestFactory.create(lsRequest);
     } else {
