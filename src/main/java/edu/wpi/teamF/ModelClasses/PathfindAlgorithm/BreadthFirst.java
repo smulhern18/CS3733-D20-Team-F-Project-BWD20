@@ -67,12 +67,15 @@ public class BreadthFirst implements PathfindAlgorithm {
     return new Path();
   }
 
+  @Override
   public Path pathfind(Node start, Node.NodeType nodeType) throws InstanceNotFoundException {
     List<Path> paths = new ArrayList<>();
     for (Node node : nodeMap.values()) {
-      if (node.getType().getTypeString().equals(nodeType.getTypeString())
-          && isAccessible(start, start, node)) {
-        paths.add(pathfind(start, node));
+      if (node.getFloor() == start.getFloor()) {
+        if (node.getType().getTypeString().equals(nodeType.getTypeString())
+            && isAccessible(start, start, node)) {
+          paths.add(pathfind(start, node));
+        }
       }
     }
     double shortestLength = Double.MAX_VALUE;

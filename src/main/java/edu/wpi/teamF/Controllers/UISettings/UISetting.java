@@ -11,7 +11,7 @@ public class UISetting {
   private ButtonFormatter buttonFormatter = new ButtonFormatter();
   private LocationComboBox locationComboBox = new LocationComboBox();
 
-  public UISetting() throws Exception {}
+  public UISetting() {}
 
   public void makeZoomable(ScrollPane scrollPane, StackPane stackPane, double maxScaleFactor) {
     zoom.makeZoomable(scrollPane, stackPane, maxScaleFactor);
