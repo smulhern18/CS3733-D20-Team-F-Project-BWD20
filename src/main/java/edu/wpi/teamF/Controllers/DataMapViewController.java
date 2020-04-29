@@ -603,7 +603,7 @@ public class DataMapViewController implements Initializable {
     } else {
       newInstance = 1;
     }
-
+    newInstance += 20;
     String strInstance = "" + newInstance;
     String strFloor = "0" + floorNumber;
 
