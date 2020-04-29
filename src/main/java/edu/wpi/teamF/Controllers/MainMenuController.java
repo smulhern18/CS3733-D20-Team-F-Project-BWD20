@@ -47,7 +47,7 @@ public class MainMenuController implements Initializable {
   }
 
   public void help(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("Help");
+    sceneController.switchScene("HelpMain");
   }
 
   public void login1(MouseEvent mouseEvent) throws IOException {
