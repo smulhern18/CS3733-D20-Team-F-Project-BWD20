@@ -243,6 +243,6 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="pathSwitchFloorPane" maxHeight="80.0" prefHeight="80.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="800.0" />
+      <AnchorPane fx:id="pathSwitchFloorPane" maxHeight="80.0" maxWidth="1.0" prefHeight="80.0" prefWidth="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="220.0" />
    </children>
 </AnchorPane>
