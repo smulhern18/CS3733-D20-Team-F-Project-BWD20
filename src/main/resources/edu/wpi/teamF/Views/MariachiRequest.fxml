@@ -53,9 +53,9 @@
             <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
                <children>
                   <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="          Location:  " />
-                <JFXComboBox fx:id="locationComboBox" prefHeight="27.0" prefWidth="183.0">
+                <JFXComboBox fx:id="locationComboBox" prefHeight="27.0" prefWidth="183.0" style="-fx-border-color: black;">
                      <HBox.margin>
-                        <Insets right="10.0" />
+                        <Insets bottom="5.0" right="10.0" />
                      </HBox.margin></JFXComboBox>
                </children>
             </HBox>
