@@ -67,7 +67,9 @@ public class TransportRequest extends ServiceRequest {
   }
 
   public void setDateTimeCompleted(Date dateTimeCompleted) throws ValidationException {
-    Validators.dateValidation(dateTimeCompleted);
+    if (dateTimeCompleted != null) {
+      Validators.dateValidation(dateTimeCompleted);
+    }
     this.dateTimeCompleted = dateTimeCompleted;
   }
 }

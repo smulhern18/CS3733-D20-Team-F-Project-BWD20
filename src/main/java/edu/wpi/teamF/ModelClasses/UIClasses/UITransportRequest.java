@@ -29,7 +29,11 @@ public class UITransportRequest extends RecursiveTreeObject<UITransportRequest> 
     this.ID = new SimpleStringProperty(csr.getId());
     this.location = new SimpleStringProperty(csr.getLocation().getId());
     this.destination = new SimpleStringProperty(csr.getDestination().getId());
-    this.dateCompleted = new SimpleStringProperty(date.format(csr.getDateTimeCompleted()));
+    if (csr.getDateTimeCompleted() == null) {
+      this.dateCompleted = new SimpleStringProperty("Not Complete");
+    } else {
+      this.dateCompleted = new SimpleStringProperty(date.format(csr.getDateTimeCompleted()));
+    }
     this.priority = new SimpleStringProperty("" + csr.getPriority());
     this.assignee = new SimpleStringProperty(csr.getAssignee());
     this.dateSubmitted = new SimpleStringProperty(date.format(csr.getDateTimeSubmitted()));

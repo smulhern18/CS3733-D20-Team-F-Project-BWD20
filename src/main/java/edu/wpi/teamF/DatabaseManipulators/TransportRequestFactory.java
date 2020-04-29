@@ -45,8 +45,12 @@ public class TransportRequestFactory {
       prepareStatement.setString(param++, transportRequest.getId());
       prepareStatement.setString(param++, transportRequest.getType());
       prepareStatement.setString(param++, transportRequest.getDestination().getId());
-      prepareStatement.setTimestamp(
-          param++, new Timestamp(transportRequest.getDateTimeCompleted().getTime()));
+      if (transportRequest.getDateTimeCompleted() == null) {
+        prepareStatement.setTimestamp(param++, null);
+      } else {
+        prepareStatement.setTimestamp(
+            param++, new Timestamp(transportRequest.getDateTimeCompleted().getTime()));
+      }
       try {
         int numRows = prepareStatement.executeUpdate();
         if (numRows < 1) {
@@ -76,6 +80,11 @@ public class TransportRequestFactory {
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
           ServiceRequest serviceRequest = serviceRequestFactory.read(id);
+          Timestamp timestamp = resultSet.getTimestamp(DatabaseManager.TIME_COMPLETED_KEY);
+          Date complete = null;
+          if (timestamp != null) {
+            complete = new Date(timestamp.getTime());
+          }
           transportRequest =
               new TransportRequest(
                   serviceRequest.getId(),
@@ -87,7 +96,7 @@ public class TransportRequestFactory {
                   serviceRequest.getComplete(),
                   resultSet.getString(DatabaseManager.TRANSPORT_TYPE_KEY),
                   nodeFactory.read(resultSet.getString(DatabaseManager.DESTINATION_KEY)),
-                  new Date(resultSet.getTimestamp(DatabaseManager.TIME_COMPLETED_KEY).getTime()));
+                  complete);
         }
       } catch (ValidationException e) {
         throw e;
