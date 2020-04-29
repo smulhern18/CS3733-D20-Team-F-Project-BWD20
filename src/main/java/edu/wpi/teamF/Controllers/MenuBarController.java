@@ -32,7 +32,7 @@ public class MenuBarController {
   }
 
   public void help(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("Help");
+    sceneController.switchScene("HelpMain");
   }
 
   public void settings(ActionEvent actionEvent) throws IOException {
