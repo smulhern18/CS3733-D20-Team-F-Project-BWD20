@@ -290,7 +290,7 @@ public class DatabaseManager {
             + DESTINATION_KEY
             + " VARCHAR(32) NOT NULL, "
             + TIME_COMPLETED_KEY
-            + " TIMESTAMP NOT NULL, "
+            + " TIMESTAMP, "
             + "PRIMARY KEY ("
             + SERVICEID_KEY
             + "))";
