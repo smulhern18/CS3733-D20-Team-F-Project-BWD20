@@ -2,6 +2,9 @@ package edu.wpi.teamF.DatabaseManipulators;
 
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Account.Admin;
+import edu.wpi.teamF.ModelClasses.Account.Janitor;
+import edu.wpi.teamF.ModelClasses.Account.Nurse;
+import edu.wpi.teamF.ModelClasses.Account.Patient;
 import edu.wpi.teamF.ModelClasses.Account.Staff;
 import edu.wpi.teamF.ModelClasses.Account.User;
 import edu.wpi.teamF.ModelClasses.Edge;
@@ -389,6 +392,33 @@ public class CSVManipulator {
             case (2):
               accountFactory.create(
                   new User(
+                      data.get(i + 2),
+                      data.get(i + 3),
+                      data.get(i + 4),
+                      data.get(i),
+                      data.get(i + 1)));
+              break;
+            case (3):
+              accountFactory.create(
+                  new Patient(
+                      data.get(i + 2),
+                      data.get(i + 3),
+                      data.get(i + 4),
+                      data.get(i),
+                      data.get(i + 1)));
+              break;
+            case (4):
+              accountFactory.create(
+                  new Janitor(
+                      data.get(i + 2),
+                      data.get(i + 3),
+                      data.get(i + 4),
+                      data.get(i),
+                      data.get(i + 1)));
+              break;
+            case (5):
+              accountFactory.create(
+                  new Nurse(
                       data.get(i + 2),
                       data.get(i + 3),
                       data.get(i + 4),

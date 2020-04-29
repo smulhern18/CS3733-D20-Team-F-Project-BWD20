@@ -6,6 +6,7 @@ import edu.wpi.teamF.App;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
+import edu.wpi.teamF.ModelClasses.Account.Account.Type;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.TransportRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UITransportRequest;
@@ -149,7 +150,9 @@ public class TransportServiceController implements Initializable {
     List<Account> employeeNames = databaseManager.getAllAccounts();
     ObservableList<String> employees = FXCollections.observableArrayList();
     for (Account account : employeeNames) {
-      employees.add(account.getFirstName());
+      if(account.getType() == Type.NURSE) {
+        employees.add(account.getFirstName());
+      }
     }
     JFXTreeTableColumn<UITransportRequest, String> column = new JFXTreeTableColumn<>("Assignee");
     column.setCellValueFactory(
