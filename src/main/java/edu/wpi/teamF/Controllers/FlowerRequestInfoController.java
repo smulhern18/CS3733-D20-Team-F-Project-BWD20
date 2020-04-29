@@ -5,6 +5,7 @@ import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.FlowerRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UiFlowerServiceRequest;
@@ -17,14 +18,18 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TreeItem;
+import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -151,17 +156,35 @@ public class FlowerRequestInfoController implements Initializable {
           }
         });
     // assignee column
+    List<Account> employeeNames = databaseManager.getAllAccounts();
+    ObservableList<String> employees = FXCollections.observableArrayList();
+    for (Account account : employeeNames) {
+      employees.add(account.getFirstName());
+    }
     JFXTreeTableColumn<UiFlowerServiceRequest, String> assignee =
         new JFXTreeTableColumn<>("Assignee");
-    assignee.setPrefWidth(100);
     assignee.setCellValueFactory(
+        (JFXTreeTableColumn.CellDataFeatures<UiFlowerServiceRequest, String> param) ->
+            param.getValue().getValue().getAssignee());
+    assignee.setCellFactory(
         new Callback<
-            TreeTableColumn.CellDataFeatures<UiFlowerServiceRequest, String>,
-            ObservableValue<String>>() {
+            TreeTableColumn<UiFlowerServiceRequest, String>,
+            TreeTableCell<UiFlowerServiceRequest, String>>() {
           @Override
-          public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<UiFlowerServiceRequest, String> param) {
-            return param.getValue().getValue().getAssignee();
+          public TreeTableCell<UiFlowerServiceRequest, String> call(
+              TreeTableColumn<UiFlowerServiceRequest, String> param) {
+            return new TextFieldTreeTableCell<>();
+          }
+        });
+    assignee.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    assignee.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(employees));
+    assignee.setOnEditCommit(
+        new EventHandler<TreeTableColumn.CellEditEvent<UiFlowerServiceRequest, String>>() {
+          @Override
+          public void handle(TreeTableColumn.CellEditEvent<UiFlowerServiceRequest, String> event) {
+            TreeItem<UiFlowerServiceRequest> current =
+                treeTableFlower.getTreeItem(event.getTreeTablePosition().getRow());
+            current.getValue().setAssignee(new SimpleStringProperty(event.getNewValue()));
           }
         });
     // priority column
@@ -276,17 +299,35 @@ public class FlowerRequestInfoController implements Initializable {
           }
         });
     // completed column
+    ObservableList<String> completedList = FXCollections.observableArrayList();
+    completedList.add("Complete");
+    completedList.add("Incomplete");
+
     JFXTreeTableColumn<UiFlowerServiceRequest, String> completed =
         new JFXTreeTableColumn<>("Completed");
-    completed.setPrefWidth(80);
+    completed.setPrefWidth(200);
     completed.setCellValueFactory(
+        (JFXTreeTableColumn.CellDataFeatures<UiFlowerServiceRequest, String> param) ->
+            param.getValue().getValue().getCompleted());
+    completed.setCellFactory(
         new Callback<
-            TreeTableColumn.CellDataFeatures<UiFlowerServiceRequest, String>,
-            ObservableValue<String>>() {
+            TreeTableColumn<UiFlowerServiceRequest, String>,
+            TreeTableCell<UiFlowerServiceRequest, String>>() {
           @Override
-          public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<UiFlowerServiceRequest, String> param) {
-            return param.getValue().getValue().getCompleted();
+          public TreeTableCell<UiFlowerServiceRequest, String> call(
+              TreeTableColumn<UiFlowerServiceRequest, String> param) {
+            return new TextFieldTreeTableCell<>();
+          }
+        });
+    completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    completed.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(completedList));
+    completed.setOnEditCommit(
+        new EventHandler<TreeTableColumn.CellEditEvent<UiFlowerServiceRequest, String>>() {
+          @Override
+          public void handle(TreeTableColumn.CellEditEvent<UiFlowerServiceRequest, String> event) {
+            TreeItem<UiFlowerServiceRequest> current =
+                treeTableFlower.getTreeItem(event.getTreeTablePosition().getRow());
+            current.getValue().setCompleted(new SimpleStringProperty(event.getNewValue()));
           }
         });
     // Load the database into the tableview
@@ -317,8 +358,8 @@ public class FlowerRequestInfoController implements Initializable {
 
     // set as editable
 
-    assignee.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-    completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    // assignee.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    // completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     priority.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
     treeTableFlower.setRoot(root);
