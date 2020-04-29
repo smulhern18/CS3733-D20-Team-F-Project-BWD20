@@ -6,6 +6,7 @@ import edu.wpi.teamF.App;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
+import edu.wpi.teamF.ModelClasses.Account.Account.Type;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIMaintenenceRequest;
@@ -104,7 +105,9 @@ public class MaintenanceRequestController implements Initializable {
 
     List<Account> accounts = databaseManager.getAllAccounts();
     for (Account acc : accounts) {
-      assigneeChoice.getItems().add(acc.getFirstName());
+      if (acc.getType() == Type.JANITOR) {
+        assigneeChoice.getItems().add(acc.getFirstName());
+      }
     }
 
     // ID

@@ -4,6 +4,7 @@ import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SanitationServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UISanitationServiceRequest;
@@ -11,15 +12,19 @@ import java.net.URL;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
+import javafx.util.Callback;
 import lombok.SneakyThrows;
 
 public class SanitationRequestController implements Initializable {
@@ -44,8 +49,11 @@ public class SanitationRequestController implements Initializable {
   public GridPane servicePane;
   public AnchorPane checkStatusPane;
   public AnchorPane anchorPane;
+  public TextField descriptionTextField;
+
   DatabaseManager databaseManager = DatabaseManager.getManager();
   List<SanitationServiceRequest> sanitationRequestList = databaseManager.getAllSanitationRequests();
+
   ObservableList<UISanitationServiceRequest> uiSanitationRequests =
       FXCollections.observableArrayList();
 
@@ -89,15 +97,73 @@ public class SanitationRequestController implements Initializable {
     description.setPrefWidth(100);
     description.setCellValueFactory(param -> param.getValue().getValue().getAssignee());
 
-    JFXTreeTableColumn<UISanitationServiceRequest, String> assignee =
-        new JFXTreeTableColumn<>("Assignee");
-    assignee.setPrefWidth(100);
-    assignee.setCellValueFactory(param -> param.getValue().getValue().getAssignee());
+    ObservableList<String> completedList = FXCollections.observableArrayList();
+    completedList.add("Complete");
+    completedList.add("Incomplete");
 
     JFXTreeTableColumn<UISanitationServiceRequest, String> completed =
-        new JFXTreeTableColumn<>("Compeleted");
-    completed.setPrefWidth(100);
-    completed.setCellValueFactory(param -> param.getValue().getValue().getCompleted());
+        new JFXTreeTableColumn<>("Completed");
+    completed.setPrefWidth(200);
+    completed.setCellValueFactory(
+        (JFXTreeTableColumn.CellDataFeatures<UISanitationServiceRequest, String> param) ->
+            param.getValue().getValue().getCompleted());
+    completed.setCellFactory(
+        new Callback<
+            TreeTableColumn<UISanitationServiceRequest, String>,
+            TreeTableCell<UISanitationServiceRequest, String>>() {
+          @Override
+          public TreeTableCell<UISanitationServiceRequest, String> call(
+              TreeTableColumn<UISanitationServiceRequest, String> param) {
+            return new TextFieldTreeTableCell<>();
+          }
+        });
+    completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    completed.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(completedList));
+    completed.setOnEditCommit(
+        new EventHandler<TreeTableColumn.CellEditEvent<UISanitationServiceRequest, String>>() {
+          @Override
+          public void handle(
+              TreeTableColumn.CellEditEvent<UISanitationServiceRequest, String> event) {
+            TreeItem<UISanitationServiceRequest> current =
+                table.getTreeItem(event.getTreeTablePosition().getRow());
+            current.getValue().setCompleted(new SimpleStringProperty(event.getNewValue()));
+          }
+        });
+
+    // Assignee choicebox
+
+    List<Account> employeeNames = databaseManager.getAllAccounts();
+    ObservableList<String> employees = FXCollections.observableArrayList();
+    for (Account account : employeeNames) {
+      employees.add(account.getFirstName());
+    }
+    JFXTreeTableColumn<UISanitationServiceRequest, String> column =
+        new JFXTreeTableColumn<>("Assignee");
+    column.setCellValueFactory(
+        (JFXTreeTableColumn.CellDataFeatures<UISanitationServiceRequest, String> param) ->
+            param.getValue().getValue().getAssignee());
+    column.setCellFactory(
+        new Callback<
+            TreeTableColumn<UISanitationServiceRequest, String>,
+            TreeTableCell<UISanitationServiceRequest, String>>() {
+          @Override
+          public TreeTableCell<UISanitationServiceRequest, String> call(
+              TreeTableColumn<UISanitationServiceRequest, String> param) {
+            return new TextFieldTreeTableCell<>();
+          }
+        });
+    column.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    column.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(employees));
+    column.setOnEditCommit(
+        new EventHandler<TreeTableColumn.CellEditEvent<UISanitationServiceRequest, String>>() {
+          @Override
+          public void handle(
+              TreeTableColumn.CellEditEvent<UISanitationServiceRequest, String> event) {
+            TreeItem<UISanitationServiceRequest> current =
+                table.getTreeItem(event.getTreeTablePosition().getRow());
+            current.getValue().setAssignee(new SimpleStringProperty(event.getNewValue()));
+          }
+        });
 
     for (SanitationServiceRequest sr : sanitationRequestList) {
       uiSanitationRequests.add(new UISanitationServiceRequest(sr));
@@ -107,10 +173,10 @@ public class SanitationRequestController implements Initializable {
 
     table
         .getColumns()
-        .setAll(ID, date, loc, priority, sanitationType, description, assignee, completed);
+        .setAll(ID, date, loc, priority, sanitationType, description, column, completed);
 
-    assignee.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-    completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    //    column.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    //    completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
     table.setRoot(root);
     table.setEditable(true);
@@ -171,6 +237,7 @@ public class SanitationRequestController implements Initializable {
     locationComboBox.setValue(null);
     priorityComboBox.setValue(null);
     sanitationTypeComboBox.setValue(null);
+    descriptionTextField.setText(null);
   }
 
   public void cancel(ActionEvent actionEvent) {

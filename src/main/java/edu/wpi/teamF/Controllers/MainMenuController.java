@@ -12,21 +12,23 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 
 public class MainMenuController implements Initializable {
 
   public AnchorPane root;
-  public Label textMenu;
   public ImageView background;
   public AnchorPane anchorPane;
   public Label welcomeLabel;
   public JFXButton loginButton;
   public JFXButton pathfinderButton;
   public JFXButton helpButton;
-  public ImageView loginImage;
-  public ImageView pathImage;
-  public ImageView helpImage;
   public GridPane gridPane;
+  public Pane rectanglePane;
+  public JFXButton serviceRequestButton;
+  public Rectangle blueRectangle;
 
   SceneController sceneController = App.getSceneController();
 
@@ -74,26 +76,26 @@ public class MainMenuController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     background.fitWidthProperty().bind(anchorPane.widthProperty());
     background.fitHeightProperty().bind(anchorPane.heightProperty());
-    //    resize(anchorPane.getWidth());
+
+    resize(anchorPane.getWidth());
     anchorPane
         .widthProperty()
         .addListener(
             (observable, oldWidth, newWidth) -> {
               if (newWidth.doubleValue() != oldWidth.doubleValue()) {
-                //                resize(newWidth.doubleValue());
+                resize(newWidth.doubleValue());
               }
             });
   }
 
-  //    private void resize(double width) {
-  //      System.out.println(width);
-  //      Font newFont = new Font(width / 50);
-  //      loginImage.setFitWidth(gridPane.getCellBounds(0, 1).getWidth());
-  //      loginImage.setFitHeight(gridPane.getCellBounds(0, 1).getHeight());
-  //      pathImage.setFitWidth(gridPane.getCellBounds(0, 2).getWidth());
-  //      pathImage.setFitHeight(gridPane.getCellBounds(0, 2).getHeight());
-  //      helpImage.setFitHeight(gridPane.getCellBounds(0, 3).getWidth());
-  //      helpImage.setFitWidth(gridPane.getCellBounds(0, 3).getHeight());
-  //      welcomeLabel.setFont(newFont);
-  //    }
+  private void resize(double width) {
+    System.out.println(width);
+    Font newFont = new Font(width / 15);
+    Font buttonFont = new Font(width / 50);
+    welcomeLabel.setFont(newFont);
+    loginButton.setFont(buttonFont);
+    helpButton.setFont(buttonFont);
+    pathfinderButton.setFont(buttonFont);
+    serviceRequestButton.setFont(buttonFont);
+  }
 }
