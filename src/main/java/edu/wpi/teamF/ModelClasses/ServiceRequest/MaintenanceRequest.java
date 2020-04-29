@@ -50,7 +50,9 @@ public class MaintenanceRequest extends ServiceRequest {
   }
 
   public void setCompleted(Date completed) throws ValidationException {
-    Validators.dateValidation(completed);
+    if (completed != null) {
+      Validators.dateValidation(completed);
+    }
     this.completed = completed;
   }
 }

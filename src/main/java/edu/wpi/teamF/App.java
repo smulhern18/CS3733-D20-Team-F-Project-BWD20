@@ -33,6 +33,8 @@ public class App extends Application {
   private AccountsController accountsController = new AccountsController();
   private ComputerServiceController computerController = new ComputerServiceController();
   private MedicineDeliveryController medicineController = new MedicineDeliveryController();
+  private MaintenanceRequestController maintenanceRequestController =
+      new MaintenanceRequestController();
 
   @Override
   public void init() {}
@@ -66,6 +68,8 @@ public class App extends Application {
             return computerController;
           } else if (controllerClass.equals(MedicineDeliveryController.class)) {
             return medicineController;
+          } else if (controllerClass.equals(MaintenanceRequestController.class)) {
+            return maintenanceRequestController;
           }
           return null;
         });

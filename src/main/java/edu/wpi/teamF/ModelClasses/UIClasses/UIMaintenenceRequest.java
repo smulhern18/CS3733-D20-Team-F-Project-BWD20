@@ -26,7 +26,11 @@ public class UIMaintenenceRequest extends RecursiveTreeObject<UIMaintenenceReque
 
     this.ID = new SimpleStringProperty(csr.getId());
     this.location = new SimpleStringProperty(csr.getLocation().getId());
-    this.dateCompleted = new SimpleStringProperty(date.format(csr.getTimeCompleted()));
+    if (csr.getTimeCompleted() == null) {
+      this.dateCompleted = new SimpleStringProperty("Not Complete");
+    } else {
+      this.dateCompleted = new SimpleStringProperty(date.format(csr.getTimeCompleted()));
+    }
     this.priority = new SimpleStringProperty("" + csr.getPriority());
     this.assignee = new SimpleStringProperty(csr.getAssignee());
     this.dateSubmitted = new SimpleStringProperty(date.format(csr.getDateTimeSubmitted()));
