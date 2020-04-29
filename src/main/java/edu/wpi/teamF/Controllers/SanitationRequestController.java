@@ -49,6 +49,8 @@ public class SanitationRequestController implements Initializable {
   public GridPane servicePane;
   public AnchorPane checkStatusPane;
   public AnchorPane anchorPane;
+  // public TextField descriptionTextField;
+  public JFXTextArea descText;
 
   DatabaseManager databaseManager = DatabaseManager.getManager();
   List<SanitationServiceRequest> sanitationRequestList = databaseManager.getAllSanitationRequests();
@@ -94,7 +96,7 @@ public class SanitationRequestController implements Initializable {
     JFXTreeTableColumn<UISanitationServiceRequest, String> description =
         new JFXTreeTableColumn<>("Description");
     description.setPrefWidth(100);
-    description.setCellValueFactory(param -> param.getValue().getValue().getAssignee());
+    description.setCellValueFactory(param -> param.getValue().getValue().getDescription());
 
     ObservableList<String> completedList = FXCollections.observableArrayList();
     completedList.add("Complete");
@@ -212,6 +214,7 @@ public class SanitationRequestController implements Initializable {
     System.out.println(nodeID);
     Node node = databaseManager.readNode(nodeID);
     String priorityString = priorityComboBox.getValue();
+    String desc = descText.getText();
     int priority = 0;
     if (priorityString.equals("Low")) {
       priority = 1;
@@ -224,8 +227,7 @@ public class SanitationRequestController implements Initializable {
 
     Date date = new Date(System.currentTimeMillis());
     SanitationServiceRequest sanitationRequest =
-        new SanitationServiceRequest(
-            node, "Not Assigned", "No Description", date, priority, sanitationType);
+        new SanitationServiceRequest(node, desc, "Not Assigned", date, priority, sanitationType);
     databaseManager.manipulateServiceRequest(sanitationRequest);
     uiSanitationRequests.add(new UISanitationServiceRequest(sanitationRequest));
     table.refresh();
@@ -236,6 +238,7 @@ public class SanitationRequestController implements Initializable {
     locationComboBox.setValue(null);
     priorityComboBox.setValue(null);
     sanitationTypeComboBox.setValue(null);
+    descText.setText(null);
   }
 
   public void cancel(ActionEvent actionEvent) {
