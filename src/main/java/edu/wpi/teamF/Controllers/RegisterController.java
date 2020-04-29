@@ -88,6 +88,10 @@ public class RegisterController {
     sceneController.switchScene("Login");
   }
 
+  public void switchToLogin(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("Login");
+  }
+
   public void cancel(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("Login");
   }
