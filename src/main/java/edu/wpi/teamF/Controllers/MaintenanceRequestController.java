@@ -264,7 +264,7 @@ public class MaintenanceRequestController implements Initializable {
                     new MaintenanceRequest(
                            node, desc, "Not Assigned", date, priorityDB,  );
             databaseManager.manipulateServiceRequest(csRequest);
-            csrUI.add(new UITransportRequest(csRequest));
+            csrUI.add(new UIMaintenenceRequest(csRequest));
     treeTableComputer.refresh();
     descText.setText("");
     OSChoice.setValue(null);
@@ -344,3 +344,4 @@ public class MaintenanceRequestController implements Initializable {
     sceneController.switchScene("ServiceRequestMain");
   }
 }
+

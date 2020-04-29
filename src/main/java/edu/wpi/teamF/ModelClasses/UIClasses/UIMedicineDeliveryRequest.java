@@ -26,7 +26,7 @@ public class UIMedicineDeliveryRequest extends RecursiveTreeObject<UIMedicineDel
     boolean isCompleted = mdr.getComplete();
     String complete;
     if (isCompleted) {
-      complete = "Complete";
+      complete = "Completed";
     } else {
       complete = "Incomplete";
     }
