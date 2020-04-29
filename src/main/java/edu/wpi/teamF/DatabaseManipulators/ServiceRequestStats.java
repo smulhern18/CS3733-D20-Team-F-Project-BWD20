@@ -24,28 +24,30 @@ public class ServiceRequestStats {
   public void MaintenanceRequestStats(Path path) {
     List<MaintenanceRequest> maintenanceRequestList =
         maintenanceRequestFactory.getAllMaintenanceRequests();
-    try (FileWriter fw = new FileWriter(path.toString() + "/ServiceRequestReport.csv");
-        BufferedWriter bw = new BufferedWriter(fw); ) {
-      bw.write("EmployeeName,NumberOfRequestsAssigned");
-      ArrayList<String> stats = new ArrayList<String>();
-      stats = getMaintenanceEmployeeNumbers(maintenanceRequestList);
-      for (String s : stats) {
+    if (maintenanceRequestList.size() != 0) {
+      try (FileWriter fw = new FileWriter(path.toString() + "/ServiceRequestReport.csv");
+          BufferedWriter bw = new BufferedWriter(fw); ) {
+        bw.write("EmployeeName,NumberOfRequestsAssigned");
+        ArrayList<String> stats = new ArrayList<String>();
+        stats = getMaintenanceEmployeeNumbers(maintenanceRequestList);
+        for (String s : stats) {
+          bw.newLine();
+          bw.write(s);
+        }
         bw.newLine();
-        bw.write(s);
-      }
-      bw.newLine();
-      bw.write("NodeID,NumberOfRequestsAtLocation");
-      stats = getMaintenanceLocationNumbers(maintenanceRequestList);
-      for (String s : stats) {
+        bw.write("NodeID,NumberOfRequestsAtLocation");
+        stats = getMaintenanceLocationNumbers(maintenanceRequestList);
+        for (String s : stats) {
+          bw.newLine();
+          bw.write(s);
+        }
         bw.newLine();
-        bw.write(s);
-      }
-      bw.newLine();
-      bw.write("Average time to complete request,");
-      bw.write(CalculateAverageMaintenanceTime(maintenanceRequestList));
+        bw.write("Average time to complete request,");
+        bw.write(CalculateAverageMaintenanceTime(maintenanceRequestList));
 
-    } catch (IOException e) {
-      System.out.println(e.getMessage() + "" + e.getClass());
+      } catch (IOException e) {
+        System.out.println(e.getMessage() + "" + e.getClass());
+      }
     }
   }
 
@@ -99,39 +101,43 @@ public class ServiceRequestStats {
         numOfRequests++;
       }
     }
-    timeDifference = timeDifference / (long) numOfRequests / 1000;
-
-    total = timeDifference / 3600 + " hours";
-    timeDifference = timeDifference % 3600;
-
-    total = total + " " + timeDifference / 60 + " Minutes";
+    if (timeDifference == 0) {
+      total = "Your average time was 0";
+    } else {
+      timeDifference = timeDifference / (long) numOfRequests / 1000;
+      total = timeDifference / 3600 + " hours";
+      timeDifference = timeDifference % 3600;
+      total = total + " " + timeDifference / 60 + " Minutes";
+    }
     return total;
   }
 
   public void TransportRequestStats(Path path) {
     List<TransportRequest> transportRequests = transportRequestFactory.getAllTransportRequests();
-    try (FileWriter fw = new FileWriter(path.toString() + "/ServiceRequestReport.csv", true);
-        BufferedWriter bw = new BufferedWriter(fw); ) {
-      bw.write("EmployeeName,NumberOfRequestsAssigned");
-      ArrayList<String> stats = new ArrayList<String>();
-      stats = getEmployeeNumbers(transportRequests);
-      for (String s : stats) {
+    if (transportRequests.size() != 0) {
+      try (FileWriter fw = new FileWriter(path.toString() + "/ServiceRequestReport.csv", true);
+          BufferedWriter bw = new BufferedWriter(fw); ) {
+        bw.write("EmployeeName,NumberOfRequestsAssigned");
+        ArrayList<String> stats = new ArrayList<String>();
+        stats = getEmployeeNumbers(transportRequests);
+        for (String s : stats) {
+          bw.newLine();
+          bw.write(s);
+        }
         bw.newLine();
-        bw.write(s);
-      }
-      bw.newLine();
-      bw.write("NodeID,NumberOfRequestsAtLocation");
-      stats = getLocationNumbers(transportRequests);
-      for (String s : stats) {
+        bw.write("NodeID,NumberOfRequestsAtLocation");
+        stats = getLocationNumbers(transportRequests);
+        for (String s : stats) {
+          bw.newLine();
+          bw.write(s);
+        }
         bw.newLine();
-        bw.write(s);
-      }
-      bw.newLine();
-      bw.write("Average time to complete request,");
-      bw.write(CalculateAverageTime(transportRequests));
+        bw.write("Average time to complete request,");
+        bw.write(CalculateAverageTime(transportRequests));
 
-    } catch (IOException e) {
-      System.out.println(e.getMessage() + "" + e.getClass());
+      } catch (IOException e) {
+        System.out.println(e.getMessage() + "" + e.getClass());
+      }
     }
   }
 
@@ -201,12 +207,14 @@ public class ServiceRequestStats {
         numOfRequests++;
       }
     }
-    timeDifference = timeDifference / (long) numOfRequests / 1000;
-
-    total = timeDifference / 3600 + " hours";
-    timeDifference = timeDifference % 3600;
-
-    total = total + " " + timeDifference / 60 + " Minutes";
+    if (timeDifference == 0) {
+      total = "Your average time was 0";
+    } else {
+      timeDifference = timeDifference / (long) numOfRequests / 1000;
+      total = timeDifference / 3600 + " hours";
+      timeDifference = timeDifference % 3600;
+      total = total + " " + timeDifference / 60 + " Minutes";
+    }
     return total;
   }
 }
