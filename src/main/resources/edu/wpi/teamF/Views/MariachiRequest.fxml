@@ -52,19 +52,22 @@
          <children>
             <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
                <children>
-                  <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="Location:  " />
-                <JFXComboBox fx:id="locationComboBox" prefHeight="27.0" prefWidth="183.0" />
+                  <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="          Location:  " />
+                <JFXComboBox fx:id="locationComboBox" prefHeight="27.0" prefWidth="183.0">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin></JFXComboBox>
                </children>
             </HBox>
             <HBox alignment="BOTTOM_CENTER" GridPane.rowIndex="2">
                <children>
-                  <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="Priority:  " textAlignment="RIGHT" />
+                  <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="          Priority:  " textAlignment="RIGHT" />
                 <JFXComboBox fx:id="priorityComboBox" prefHeight="27.0" prefWidth="182.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
                <children>
-                <JFXButton fx:id="submitButton" onAction="#submit" style="-fx-background-color: #FFD3DF#FFD3DF;" text="Submit" textFill="#000000cc">
+                <JFXButton fx:id="submitButton" buttonType="RAISED" onAction="#submit" style="-fx-background-color: #012D5A;" text="Submit" textFill="WHITE">
                     <font>
                         <Font name="STFangsong" size="18.0" />
                     </font>
@@ -72,9 +75,9 @@
                         <Insets right="30.0" />
                      </HBox.margin>
                 </JFXButton>
-                <JFXButton fx:id="cancelButton" onAction="#cancel" style="-fx-background-color: #FFD3DF#FFD3DF;" text="Cancel" textFill="#000000cc">
+                <JFXButton fx:id="cancelButton" buttonType="RAISED" onAction="#cancel" style="-fx-background-color: #012D5A;" text="Cancel" textFill="WHITE">
                     <font>
-                        <Font name="STFangsong" size="18.0" />
+                        <Font size="18.0" />
                     </font>
                      <HBox.margin>
                         <Insets left="30.0" />
@@ -94,6 +97,9 @@
                      <font>
                         <Font size="36.0" />
                      </font>
+                     <StackPane.margin>
+                        <Insets top="20.0" />
+                     </StackPane.margin>
                   </Label>
                </children>
             </StackPane>
