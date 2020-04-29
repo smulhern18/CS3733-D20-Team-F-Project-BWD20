@@ -129,54 +129,54 @@
                   <Font name="STIXGeneral-Regular" size="13.0" />
                </font>
             </JFXButton>
-            <Label text="Roman" GridPane.rowIndex="2">
+            <Label text="Roman" textFill="#5b5959" GridPane.rowIndex="2">
                <font>
-                  <Font size="6.0" />
+                  <Font size="9.0" />
                </font>
             </Label>
-            <Label text="Nicholas" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <Label text="Nicholas" textFill="#5b5959" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <font>
-                  <Font size="6.0" />
+                  <Font size="9.0" />
                </font>
             </Label>
-            <Label text="Ryan" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <Label text="Ryan" textFill="#5b5959" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <font>
-                  <Font size="6.0" />
+                  <Font size="9.0" />
                </font>
             </Label>
-            <Label text="Tyler" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <Label text="Tyler" textFill="#5b5959" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <font>
-                  <Font size="6.0" />
+                  <Font size="9.0" />
                </font>
             </Label>
-            <Label text="Nick" GridPane.columnIndex="4" GridPane.rowIndex="2">
+            <Label text="Nick" textFill="#5b5959" GridPane.columnIndex="4" GridPane.rowIndex="2">
                <font>
-                  <Font size="6.0" />
+                  <Font size="9.0" />
                </font>
             </Label>
-            <Label text="Denver" GridPane.rowIndex="5">
+            <Label text="Denver" textFill="#5b5959" GridPane.rowIndex="5">
                <font>
-                  <Font size="6.0" />
+                  <Font size="9.0" />
                </font>
             </Label>
-            <Label text="Muyun" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <Label text="Muyun" textFill="#5b5959" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <font>
-                  <Font size="6.0" />
+                  <Font size="9.0" />
                </font>
             </Label>
-            <Label text="Reilly" GridPane.columnIndex="2" GridPane.rowIndex="5">
+            <Label text="Reilly" textFill="#5b5959" GridPane.columnIndex="2" GridPane.rowIndex="5">
                <font>
-                  <Font size="6.0" />
+                  <Font size="9.0" />
                </font>
             </Label>
-            <Label text="Theo" GridPane.columnIndex="3" GridPane.rowIndex="5">
+            <Label text="Theo" textFill="#5b5959" GridPane.columnIndex="3" GridPane.rowIndex="5">
                <font>
-                  <Font size="6.0" />
+                  <Font size="9.0" />
                </font>
             </Label>
-            <Label text="Sullivan" GridPane.columnIndex="4" GridPane.rowIndex="5">
+            <Label text="Sullivan" textFill="#5b5959" GridPane.columnIndex="4" GridPane.rowIndex="5">
                <font>
-                  <Font size="6.0" />
+                  <Font size="9.0" />
                </font>
             </Label>
          </children>

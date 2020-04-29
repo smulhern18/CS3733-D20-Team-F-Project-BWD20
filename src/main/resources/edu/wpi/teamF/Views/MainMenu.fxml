@@ -53,7 +53,7 @@
                   <Font name="Microsoft YaHei Light" size="14.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="loginButton" alignment="CENTER" contentDisplay="CENTER" text="Login" textFill="WHITE">
+            <JFXButton fx:id="loginButton" alignment="CENTER" contentDisplay="CENTER" onAction="#login" text="Login" textFill="WHITE">
                <font>
                   <Font name="Microsoft YaHei Light" size="14.0" />
                </font>
