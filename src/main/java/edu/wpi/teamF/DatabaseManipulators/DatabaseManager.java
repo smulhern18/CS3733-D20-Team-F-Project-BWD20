@@ -772,6 +772,14 @@ public class DatabaseManager {
     csvManipulator.writeCSVFileMaintenanceService(path);
     csvManipulator.writeCSVFileNode(path);
     csvManipulator.writeCSVFileSecurityService(path);
+    csvManipulator.writeCSVFileComputerService(path);
+    csvManipulator.writeCSVFileFlowerService(path);
+    csvManipulator.writeCSVFileLanguageService(path);
+    csvManipulator.writeCSVFileLaundryService(path);
+    csvManipulator.writeCSVFileMariachiService(path);
+    csvManipulator.writeCSVFileMedicineDeliveryService(path);
+    csvManipulator.writeCSVFileSanitationService(path);
+    csvManipulator.writeCSVFileTransportService(path);
   }
 
   public void readNodes(InputStream stream) {
