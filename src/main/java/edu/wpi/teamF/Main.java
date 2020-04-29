@@ -23,8 +23,8 @@ public class Main {
 
   public static void initDB() throws Exception {
     dbm.initialize();
-    //csvm.readCSVFileNode(Main.class.getResourceAsStream("CSVFiles/MapFAllnodes.csv"));
-    //csvm.readCSVFileEdge(Main.class.getResourceAsStream("CSVFiles/MapFAlledges.csv"));
+    // csvm.readCSVFileNode(Main.class.getResourceAsStream("CSVFiles/MapFAllnodes.csv"));
+    // csvm.readCSVFileEdge(Main.class.getResourceAsStream("CSVFiles/MapFAlledges.csv"));
     dbm.manipulateAccount(new Admin("admin", "admin", "admin@gmail.com", "admin", "password"));
     List<Account> accounts = dbm.getAllAccounts();
     if (dbm.readAccount("admin") == null) {
