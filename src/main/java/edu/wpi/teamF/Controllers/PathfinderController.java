@@ -2,6 +2,7 @@ package edu.wpi.teamF.Controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextArea;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Directions.Directions;
@@ -18,7 +19,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -66,7 +66,7 @@ public class PathfinderController implements Initializable {
   public JFXComboBox<String> startCombo;
   public JFXComboBox<String> endCombo;
   public JFXButton pathButton;
-  public Label directionsDisplay;
+  public JFXTextArea directionsDisplay;
   public AnchorPane pathSwitchFloorPane;
   public JFXButton pathSwitchFloor;
   public int state;
