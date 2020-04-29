@@ -4,159 +4,146 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="412.0" prefWidth="864.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.RegisterController">
+<AnchorPane fx:id="anchorPane" prefHeight="415.0" prefWidth="679.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.RegisterController">
     <children>
-      <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="0.0">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="427.20001220703125" minWidth="10.0" prefWidth="190.4" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="674.3999633789062" minWidth="10.0" prefWidth="648.8" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" percentHeight="50.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" percentHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <GridPane prefHeight="111.0" prefWidth="674.0" GridPane.columnIndex="1">
-              <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints percentHeight="100.0" valignment="CENTER" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label text="Register">
-                     <font>
-                        <Font size="36.0" />
-                     </font>
-                  </Label>
-               </children>
-            </GridPane>
-            <GridPane prefHeight="227.0" prefWidth="572.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-              <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" percentWidth="25.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
-                <ColumnConstraints hgrow="SOMETIMES" percentWidth="20.0" />
-                <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints percentHeight="33.0" vgrow="SOMETIMES" />
-                <RowConstraints percentHeight="33.0" vgrow="SOMETIMES" />
-                <RowConstraints percentHeight="34.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <StackPane prefHeight="150.0" prefWidth="200.0">
-                     <children>
-                        <Label prefHeight="31.0" prefWidth="102.0" text="First Name">
-                           <font>
-                              <Font name="STIXGeneral-Bold" size="18.0" />
-                           </font>
+        <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+
+        <StackPane fx:id="stackPane" layoutX="266.0" style="-fx-background-color: #012D5A;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <ImageView fx:id="background" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
+                    <image>
+                        <Image url="@../../../../Images/BWH.jpg" />
+                    </image></ImageView>
+                <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="342.0" style="-fx-background-color: white; -fx-background-radius: 10px;">
+
+                    <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+
+                        <RowConstraints maxHeight="184.0" minHeight="180.79998779296875" percentHeight="30.0" prefHeight="184.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="92.60001220703123" minHeight="89.39999999999998" percentHeight="7.0" prefHeight="89.39999999999998" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="92.60001220703123" minHeight="89.39999999999998" percentHeight="7.0" prefHeight="89.39999999999998" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="92.60001220703123" minHeight="89.39999999999998" percentHeight="7.0" prefHeight="89.39999999999998" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="92.60001220703123" minHeight="89.39999999999998" percentHeight="3.0" prefHeight="89.39999999999998" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="92.60001220703123" minHeight="89.39999999999998" percentHeight="7.0" prefHeight="89.39999999999998" vgrow="SOMETIMES" />
+                        <RowConstraints percentHeight="7.0" vgrow="SOMETIMES" />
+                        <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints percentHeight="4.0" vgrow="SOMETIMES" />
+                        <RowConstraints percentHeight="3.0" vgrow="SOMETIMES" />
+                        <RowConstraints percentHeight="3.0" vgrow="SOMETIMES" />
+                        <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" percentHeight="3.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <StackPane prefHeight="153.0" prefWidth="353.0">
+                            <children>
+                                <GridPane prefHeight="166.0" prefWidth="476.0">
+                                    <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" />
+                                    </columnConstraints>
+                                    <rowConstraints>
+                                        <RowConstraints percentHeight="60.0" vgrow="SOMETIMES" />
+                                        <RowConstraints percentHeight="25.0" vgrow="SOMETIMES" />
+                                        <RowConstraints percentHeight="15.0" vgrow="SOMETIMES" />
+                                    </rowConstraints>
+                                    <children>
+                                        <StackPane prefHeight="141.0" prefWidth="481.0">
+                                            <children>
+                                                <Circle fill="WHITE" radius="37.0" stroke="BLACK" strokeType="INSIDE" />
+                                                <ImageView fitHeight="70.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                                                    <image>
+                                                        <Image url="@../../../../Images/icons8-flamingo-100.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </children>
+                                        </StackPane>
+                                        <StackPane prefHeight="45.0" prefWidth="343.0" GridPane.rowIndex="1">
+                                            <children>
+                                                <Label fx:id="loginText" text="Register" textFill="#012d5a">
+                                                    <font>
+                                                        <Font size="28.0" />
+                                                    </font>
+                                                </Label>
+                                                <Line startX="-100.0" stroke="#012d5a" strokeWidth="2.0" StackPane.alignment="BOTTOM_CENTER" />
+                                            </children>
+                                        </StackPane>
+                                        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                            <children>
+                                                <Label fx:id="incorrectLabel" text="The username or password is incorrect" textFill="RED" visible="false" />
+                                            </children>
+                                        </StackPane>
+                                    </children>
+                                </GridPane>
+                            </children>
+                        </StackPane>
+                        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="5">
+                            <children>
+                                <JFXTextField fx:id="usernameInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableRegister" prefHeight="26.0" prefWidth="306.0" promptText="Username..." />
+                            </children>
+                        </StackPane>
+                        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="6">
+                            <children>
+                                <JFXPasswordField fx:id="passwordInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableRegister" prefHeight="27.0" prefWidth="306.0" promptText="Password...">
+                                    <font>
+                                        <Font name="STIXGeneral-Regular" size="13.0" />
+                                    </font>
+                                </JFXPasswordField>
+                            </children>
+                        </StackPane>
+                        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="9">
+                            <children>
+                                <Line endX="342.0" startY="0.3496379852294922" />
+                            </children>
+                        </StackPane>
+                        <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="10">
+                            <children>
+                                <StackPane prefHeight="150.0" prefWidth="200.0">
+                                    <children>
+                                        <Label fx:id="orText" alignment="TOP_CENTER" text="or" StackPane.alignment="TOP_CENTER">
+                                            <font>
+                                                <Font name="STIXGeneral-Regular" size="13.0" />
+
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </StackPane>
+
+                            </children>
+                        </StackPane>
+                        <Label fx:id="forgotText" text="Forgot Password?" GridPane.rowIndex="8">
+                            <font>
+                                <Font name="STIXGeneral-Regular" size="13.0" />
+                            </font>
                         </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
-                     <children>
-                        <Label prefHeight="31.0" prefWidth="102.0" text="Last Name">
-                           <font>
-                              <Font name="STIXGeneral-Bold" size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2">
-                     <children>
-                        <Label prefHeight="27.0" prefWidth="125.0" text="Email Address">
-                           <font>
-                              <Font name="STIXGeneral-Bold" size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
-                     <children>
-                        <JFXTextField fx:id="firstNameInput" onKeyReleased="#enableRegister" prefHeight="27.0" prefWidth="140.0" />
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <children>
-                        <JFXTextField fx:id="lastNameInput" onKeyReleased="#enableRegister" />
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                     <children>
-                        <JFXTextField fx:id="emailInput" onKeyReleased="#enableRegister" />
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2">
-                     <children>
-                        <Label prefHeight="28.0" prefWidth="81.0" text="Username">
-                           <font>
-                              <Font name="STIXGeneral-Bold" size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                     <children>
-                        <Label prefHeight="28.0" prefWidth="76.0" text="Password">
-                           <font>
-                              <Font name="STIXGeneral-Bold" size="18.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3">
-                     <children>
-                        <JFXTextField fx:id="usernameInput" onKeyReleased="#enableRegister" />
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                     <children>
-                        <JFXPasswordField fx:id="passwordInput" onKeyReleased="#enableRegister" />
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-               </children>
-            </GridPane>
-            <GridPane prefHeight="95.0" prefWidth="575.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
-                <ColumnConstraints hgrow="SOMETIMES" percentWidth="50.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints percentHeight="100.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <StackPane prefHeight="150.0" prefWidth="200.0">
-                     <children>
-                        <JFXButton fx:id="registerButton" disable="true" onAction="#attemptRegister" prefHeight="44.0" prefWidth="125.0" style="-fx-background-color: #EB3E79;" text="Register">
-                           <font>
-                              <Font name="STIXGeneral-Bold" size="18.0" />
-                           </font>
+                        <JFXButton fx:id="loginButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#switchToLogin" prefHeight="30.0" prefWidth="306.0" style="-fx-background-color: grey;" text="Login" GridPane.rowIndex="11">
+                            <font>
+                                <Font name="STIXGeneral-Regular" size="13.0" />
+                            </font>
                         </JFXButton>
-                     </children>
-                  </StackPane>
-                  <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
-                     <children>
-                        <JFXButton onAction="#cancel" prefHeight="44.0" prefWidth="125.0" style="-fx-background-color: grey;" text="Cancel">
-                           <font>
-                              <Font name="STIXGeneral-Bold" size="18.0" />
-                           </font>
+                        <JFXButton fx:id="registerButton" disable="true" onAction="#attemptRegister" prefHeight="30.0" prefWidth="306.0" style="-fx-background-color: #EB3E79#EB3E79;" text="Register" GridPane.rowIndex="7">
+                            <font>
+                                <Font name="STIXGeneral-Regular" size="13.0" />
+                            </font>
                         </JFXButton>
-                     </children>
-                  </StackPane>
-               </children>
-            </GridPane>
-         </children>
-      </GridPane>
+                  <JFXTextField fx:id="firstNameInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableRegister" prefHeight="26.0" prefWidth="306.0" promptText="First Name..." GridPane.rowIndex="1" />
+                  <JFXTextField fx:id="lastNameInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableRegister" prefHeight="26.0" prefWidth="306.0" promptText="Last Name..." GridPane.rowIndex="2" />
+                  <JFXTextField fx:id="emailInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableRegister" prefHeight="26.0" prefWidth="306.0" promptText="Email..." GridPane.rowIndex="3" />
+
+                    </children>
+                </GridPane>
+            </children>
+        </StackPane>
     </children>
 </AnchorPane>

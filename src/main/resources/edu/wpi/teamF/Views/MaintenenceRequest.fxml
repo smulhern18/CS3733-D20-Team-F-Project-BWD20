@@ -30,14 +30,14 @@
                         <Font name="STFangsong" size="18.0" />
                     </font>
                 </JFXButton>
-                <JFXButton fx:id="checkStatusButton" onAction="#checkStatus" text="Check Status" textFill="#000000cc" GridPane.columnIndex="1">
+                <JFXButton fx:id="checkStatusButton" text="Check Status" textFill="#000000cc" GridPane.columnIndex="1">
                     <font>
                         <Font name="STFangsong" size="18.0" />
                     </font>
                 </JFXButton>
             </children>
         </GridPane>
-        <GridPane fx:id="servicePane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+        <GridPane fx:id="servicePane" layoutX="190.0" layoutY="40.0" AnchorPane.bottomAnchor="-8.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
             <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
@@ -48,6 +48,8 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
@@ -58,11 +60,11 @@
                 </HBox>
                 <HBox alignment="BOTTOM_CENTER" GridPane.rowIndex="2">
                     <children>
-                        <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="          Priority:         " />
+                        <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="          Priority:      " />
                         <JFXComboBox fx:id="priorityComboBox" prefHeight="27.0" prefWidth="182.0" />
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
                     <children>
                         <JFXButton fx:id="submitButton" onAction="#submit" style="-fx-background-color: #FFD3DF#FFD3DF;" text="Submit" textFill="#000000cc">
                             <font>
@@ -82,10 +84,10 @@
                         </JFXButton>
                     </children>
                 </HBox>
-                <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
                     <children>
-                        <Label fx:id="guardsRequestedLabel" alignment="BOTTOM_CENTER" prefHeight="17.0" prefWidth="139.0" text="Guards Requested: " />
-                        <JFXComboBox fx:id="guardsRequestedComboBox" prefHeight="27.0" prefWidth="182.0" />
+                        <Label fx:id="guardsRequestedLabel" alignment="BOTTOM_CENTER" prefHeight="17.0" prefWidth="139.0" text="Completed:" />
+                        <JFXComboBox fx:id="completedComboBox" prefHeight="27.0" prefWidth="182.0" />
                     </children>
                 </HBox>
                 <StackPane prefHeight="86.0" prefWidth="410.0">
@@ -97,6 +99,18 @@
                         </Label>
                     </children>
                 </StackPane>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+               <children>
+                  <Label text="Description" />
+                  <JFXTextField fx:id="desText" />
+               </children>
+            </HBox>
+            <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+               <children>
+                  <Label text="Assignee:   " />
+                  <JFXComboBox fx:id="assignee" prefHeight="27.0" prefWidth="200.0" />
+               </children>
+            </HBox>
             </children>
         </GridPane>
         <fx:include fx:id="mainMenu" source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />

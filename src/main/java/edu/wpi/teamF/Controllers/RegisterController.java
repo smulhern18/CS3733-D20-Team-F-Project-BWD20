@@ -8,13 +8,22 @@ import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Account.User;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
-public class RegisterController {
+public class RegisterController implements Initializable {
+
+  @FXML private ImageView background;
+
+  @FXML private StackPane stackPane;
 
   @FXML private Label incorrectLabel; // used to display errors
 
@@ -83,8 +92,18 @@ public class RegisterController {
     }
   }
 
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    background.fitHeightProperty().bind(stackPane.heightProperty());
+    background.fitWidthProperty().bind(stackPane.widthProperty());
+  }
+
   @FXML
   void switchToLogin2() throws IOException {
+    sceneController.switchScene("Login");
+  }
+
+  public void switchToLogin(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("Login");
   }
 

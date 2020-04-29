@@ -61,6 +61,7 @@ public class MaintenanceRequestController implements Initializable {
   public JFXTextField deleteText;
   public JFXButton delete;
   public JFXButton backButton;
+  public JFXComboBox<String> assignee;
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UIMaintenenceRequest> csrUI = FXCollections.observableArrayList();
@@ -246,6 +247,7 @@ public class MaintenanceRequestController implements Initializable {
     Node node = databaseManager.readNode(nodeID);
     String desc = descText.getText();
     String priority = priorityChoice.getValue();
+    String assignee = assignee.get
     System.out.println(priority);
     int priorityDB = 1;
     if (priority.equals("Low")) {
@@ -258,11 +260,11 @@ public class MaintenanceRequestController implements Initializable {
     LocalDateTime now = LocalDateTime.now();
     DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
     Date date = new Date(System.currentTimeMillis());
-    //        MaintenanceRequest csRequest =
-    //                new TransportRequest(
-    //                        node, desc, "Not Assigned", date, priorityDB,  );
-    //        databaseManager.manipulateServiceRequest(csRequest);
-    //        csrUI.add(new UITransportRequest(csRequest));
+           MaintenanceRequest csRequest =
+                    new MaintenanceRequest(
+                           node, desc, "Not Assigned", date, priorityDB,  );
+            databaseManager.manipulateServiceRequest(csRequest);
+            csrUI.add(new UITransportRequest(csRequest));
     treeTableComputer.refresh();
     descText.setText("");
     OSChoice.setValue(null);
