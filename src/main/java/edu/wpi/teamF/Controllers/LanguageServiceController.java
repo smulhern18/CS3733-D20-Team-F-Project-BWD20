@@ -2,12 +2,14 @@ package edu.wpi.teamF.Controllers;
 
 import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
+import edu.wpi.teamF.App;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.LanguageServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UILanguageServiceRequest;
+import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -54,6 +56,7 @@ public class LanguageServiceController implements Initializable {
   public JFXComboBox<String> problemTypeCombobox;
   public JFXTextArea descriptionText;
   public JFXComboBox<String> priorityCombobox;
+  SceneController sceneController = App.getSceneController();
 
   DatabaseManager databaseManager = DatabaseManager.getManager();
   List<LanguageServiceRequest> languageServiceRequests =
@@ -311,7 +314,7 @@ public class LanguageServiceController implements Initializable {
     //        });
 
     ObservableList<String> completedList = FXCollections.observableArrayList();
-    completedList.add("Completed");
+    completedList.add("Complete");
     completedList.add("Incomplete");
 
     JFXTreeTableColumn<UILanguageServiceRequest, String> completed =
@@ -410,5 +413,9 @@ public class LanguageServiceController implements Initializable {
   public void checkStatus(ActionEvent actionEvent) {
     servicePane.setVisible(false);
     checkStatusPane.setVisible(true);
+  }
+
+  public void backToServiceRequestMain(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("ServiceRequestMain");
   }
 }

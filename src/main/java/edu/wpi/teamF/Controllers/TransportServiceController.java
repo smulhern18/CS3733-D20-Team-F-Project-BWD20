@@ -6,14 +6,12 @@ import edu.wpi.teamF.App;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
+import edu.wpi.teamF.ModelClasses.Account.Account.Type;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.TransportRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UITransportRequest;
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -90,9 +88,10 @@ public class TransportServiceController implements Initializable {
     priorityChoice.getItems().add("High");
 
     // Add the types here
-    issueChoice.getItems().add("");
-    issueChoice.getItems().add("");
-    issueChoice.getItems().add("");
+    issueChoice.getItems().add("Patient");
+    issueChoice.getItems().add("Equipment");
+    issueChoice.getItems().add("Hazards");
+    issueChoice.getItems().add("Other");
 
     // ID
     JFXTreeTableColumn<UITransportRequest, String> ID = new JFXTreeTableColumn<>("ID");
@@ -151,7 +150,9 @@ public class TransportServiceController implements Initializable {
     List<Account> employeeNames = databaseManager.getAllAccounts();
     ObservableList<String> employees = FXCollections.observableArrayList();
     for (Account account : employeeNames) {
-      employees.add(account.getFirstName());
+      if(account.getType() == Type.NURSE) {
+        employees.add(account.getFirstName());
+      }
     }
     JFXTreeTableColumn<UITransportRequest, String> column = new JFXTreeTableColumn<>("Assignee");
     column.setCellValueFactory(
@@ -243,7 +244,7 @@ public class TransportServiceController implements Initializable {
     String nodeID = location.substring(location.length() - 10);
     Node nodeL = databaseManager.readNode(nodeID);
     String dest = destChoice.getValue();
-    String destID = dest.substring(location.length() - 10);
+    String destID = dest.substring(dest.length() - 10);
     Node nodeD = databaseManager.readNode(destID);
     String issueType = issueChoice.getValue();
     String desc = descText.getText();
@@ -257,8 +258,6 @@ public class TransportServiceController implements Initializable {
     } else if (priority.equals("High")) {
       priorityDB = 3;
     }
-    LocalDateTime now = LocalDateTime.now();
-    DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
     Date date = new Date(System.currentTimeMillis());
     TransportRequest tsRequest =
         new TransportRequest(nodeL, "Not Assigned", desc, date, priorityDB, issueType, nodeD, null);

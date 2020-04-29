@@ -40,6 +40,6 @@ public class MenuBarController {
   }
 
   public void mainMenu(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("MainMenuVersion2");
+    sceneController.switchScene("MainMenu");
   }
 }

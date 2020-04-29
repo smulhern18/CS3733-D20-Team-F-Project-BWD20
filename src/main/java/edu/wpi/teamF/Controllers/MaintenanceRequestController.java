@@ -6,6 +6,7 @@ import edu.wpi.teamF.App;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
+import edu.wpi.teamF.ModelClasses.Account.Account.Type;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIMaintenenceRequest;
@@ -34,13 +35,11 @@ import javafx.util.Callback;
 import lombok.SneakyThrows;
 
 public class MaintenanceRequestController implements Initializable {
-  public JFXTreeTableView<UIMaintenenceRequest> treeTableComputer;
   public AnchorPane anchorPane;
   public GridPane optionBar;
   public JFXButton requestServiceButton;
   public GridPane servicePane;
   public Label locationLabel;
-  public JFXComboBox<String> locationChoice;
   public Label makeLabel;
   public JFXComboBox<String> makeChoice;
   public JFXButton submitButton;
@@ -53,7 +52,6 @@ public class MaintenanceRequestController implements Initializable {
   public Label descLabel;
   public JFXTextField descText;
   public Label prioLabel;
-  public JFXComboBox<String> priorityChoice;
   public AnchorPane mainMenu;
   public AnchorPane checkStatusPane;
   public JFXButton update;
@@ -61,6 +59,14 @@ public class MaintenanceRequestController implements Initializable {
   public JFXTextField deleteText;
   public JFXButton delete;
   public JFXButton backButton;
+  public JFXButton checkStatusButton;
+  public JFXComboBox<String> locationComboBox;
+  public Label priorityLabel;
+  public JFXComboBox<String> priorityComboBox;
+  public JFXComboBox<String> completedComboBox;
+  public JFXTextField desText;
+  public JFXComboBox<String> assigneeChoice;
+  public JFXTreeTableView<UIMaintenenceRequest> treeTableMaintenance;
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UIMaintenenceRequest> csrUI = FXCollections.observableArrayList();
@@ -87,15 +93,22 @@ public class MaintenanceRequestController implements Initializable {
       System.out.println(e.getMessage() + e.getClass());
     }
     for (Node node : nodes) {
-      locationChoice.getItems().add(node.getId());
+      locationComboBox.getItems().add(node.getId());
     }
 
     UISetting uiSetting = new UISetting();
-    uiSetting.setAsLocationComboBox(locationChoice);
+    uiSetting.setAsLocationComboBox(locationComboBox);
 
-    priorityChoice.getItems().add("Low");
-    priorityChoice.getItems().add("Medium");
-    priorityChoice.getItems().add("High");
+    priorityComboBox.getItems().add("Low");
+    priorityComboBox.getItems().add("Medium");
+    priorityComboBox.getItems().add("High");
+
+    List<Account> accounts = databaseManager.getAllAccounts();
+    for (Account acc : accounts) {
+      if (acc.getType() == Type.JANITOR) {
+        assigneeChoice.getItems().add(acc.getFirstName());
+      }
+    }
 
     // ID
     JFXTreeTableColumn<UIMaintenenceRequest, String> ID = new JFXTreeTableColumn<>("ID");
@@ -178,12 +191,12 @@ public class MaintenanceRequestController implements Initializable {
           @Override
           public void handle(TreeTableColumn.CellEditEvent<UIMaintenenceRequest, String> event) {
             TreeItem<UIMaintenenceRequest> current =
-                treeTableComputer.getTreeItem(event.getTreeTablePosition().getRow());
+                treeTableMaintenance.getTreeItem(event.getTreeTablePosition().getRow());
             current.getValue().setAssignee(new SimpleStringProperty(event.getNewValue()));
           }
         });
     ObservableList<String> completedList = FXCollections.observableArrayList();
-    completedList.add("Completed");
+    completedList.add("Complete");
     completedList.add("Incomplete");
 
     JFXTreeTableColumn<UIMaintenenceRequest, String> completed =
@@ -209,7 +222,7 @@ public class MaintenanceRequestController implements Initializable {
           @Override
           public void handle(TreeTableColumn.CellEditEvent<UIMaintenenceRequest, String> event) {
             TreeItem<UIMaintenenceRequest> current =
-                treeTableComputer.getTreeItem(event.getTreeTablePosition().getRow());
+                treeTableMaintenance.getTreeItem(event.getTreeTablePosition().getRow());
             current.getValue().setCompleted(new SimpleStringProperty(event.getNewValue()));
           }
         });
@@ -224,28 +237,26 @@ public class MaintenanceRequestController implements Initializable {
 
     // set the columns for the tableview
 
-    //     treeTableComputer
-    //             .getColumns()
-    //             .setAll(ID, loc, make, OS, type, desc, priority, completed, column);
-
-    // set as editable
+    // treeTableMaintenance.getColumns().setAll(ID, loc, desc, priority, completed, column);
+    treeTableMaintenance.getColumns().setAll(ID, loc, desc, priority, completed, column);
 
     // assignee.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     // completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     priority.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
-    treeTableComputer.setRoot(root);
-    treeTableComputer.setEditable(true);
-    treeTableComputer.setShowRoot(false);
+    treeTableMaintenance.setRoot(root);
+    treeTableMaintenance.setEditable(true);
+    treeTableMaintenance.setShowRoot(false);
   }
 
   public void submit(ActionEvent actionEvent) throws Exception {
     // Get the values
-    String location = locationChoice.getValue();
+    String location = locationComboBox.getValue();
     String nodeID = location.substring(location.length() - 10);
     Node node = databaseManager.readNode(nodeID);
-    String desc = descText.getText();
-    String priority = priorityChoice.getValue();
+    String desc = desText.getText();
+    String priority = priorityComboBox.getValue();
+    String assignee = assigneeChoice.getValue();
     System.out.println(priority);
     int priorityDB = 1;
     if (priority.equals("Low")) {
@@ -258,26 +269,22 @@ public class MaintenanceRequestController implements Initializable {
     LocalDateTime now = LocalDateTime.now();
     DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
     Date date = new Date(System.currentTimeMillis());
-    //        MaintenanceRequest csRequest =
-    //                new TransportRequest(
-    //                        node, desc, "Not Assigned", date, priorityDB,  );
-    //        databaseManager.manipulateServiceRequest(csRequest);
-    //        csrUI.add(new UITransportRequest(csRequest));
-    treeTableComputer.refresh();
-    descText.setText("");
-    OSChoice.setValue(null);
-    locationChoice.setValue(null);
-    priorityChoice.setValue(null);
-    makeChoice.setValue(null);
-    issueChoice.setValue(null);
+    MaintenanceRequest csRequest =
+        new MaintenanceRequest(node, desc, assignee, date, priorityDB, null);
+    databaseManager.manipulateServiceRequest(csRequest);
+    csrUI.add(new UIMaintenenceRequest(csRequest));
+    treeTableMaintenance.refresh();
+    locationComboBox.setValue(null);
+    priorityComboBox.setValue(null);
+    locationComboBox.setValue(null);
+    assigneeChoice.setValue(null);
+    desText.setText("");
   }
 
   public void cancel(ActionEvent actionEvent) {
     descText.setText("");
-    OSChoice.setValue(null);
-    locationChoice.setValue(null);
-    priorityChoice.setValue(null);
-    makeChoice.setValue(null);
+    locationComboBox.setValue(null);
+    priorityComboBox.setValue(null);
     issueChoice.setValue(null);
   }
 
@@ -290,6 +297,8 @@ public class MaintenanceRequestController implements Initializable {
         toUpdate.setCompleted(new Date());
         String completed = csrui.getCompleted().get();
         if (completed.equals("Complete")) {
+          Date date = new Date();
+          toUpdate.setDateTimeSubmitted(date);
           toUpdate.setComplete(true);
         } else if (completed.equals("Incomplete")) {
           toUpdate.setComplete(false);
@@ -300,7 +309,7 @@ public class MaintenanceRequestController implements Initializable {
         databaseManager.manipulateServiceRequest(toUpdate);
       }
     }
-    treeTableComputer.refresh();
+    treeTableMaintenance.refresh();
   }
 
   public void delete(ActionEvent actionEvent) throws Exception {
@@ -308,7 +317,7 @@ public class MaintenanceRequestController implements Initializable {
     databaseManager.deleteComputerServiceRequest(toDelte);
     csrUI.removeIf(transportRequest -> transportRequest.getID().get().equals(toDelte));
     deleteText.setText("");
-    treeTableComputer.refresh();
+    treeTableMaintenance.refresh();
   }
 
   public void request(ActionEvent actionEvent) {

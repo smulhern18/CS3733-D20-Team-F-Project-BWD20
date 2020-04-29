@@ -96,7 +96,7 @@
             </GridPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="mapPane" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+      <AnchorPane fx:id="mapPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <children>
             <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -107,26 +107,19 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXButton buttonType="RAISED" layoutX="847.0" layoutY="714.0" onAction="#backupDB" prefHeight="59.0" prefWidth="131.0" ripplerFill="#ffe100" text="Backup" />
             <JFXButton layoutX="978.0" layoutY="731.0" onAction="#switchToUserAccounts" text="User Accounts" />
          </children>
       </AnchorPane>
-      <JFXButton layoutX="319.0" onAction="#switchToNodes" prefHeight="57.0" prefWidth="123.0" text="Nodes">
-         <font>
-            <Font size="27.0" />
-         </font>
-      </JFXButton>
-      <JFXButton layoutX="599.0" onAction="#switchToEdges" prefHeight="57.0" prefWidth="123.0" text="Edges">
-         <font>
-            <Font size="27.0" />
-         </font>
-      </JFXButton>
-      <JFXButton layoutX="897.0" onAction="#switchToMap" prefHeight="57.0" prefWidth="157.0" text="Map View">
-         <font>
-            <Font size="27.0" />
-         </font>
-      </JFXButton>
-      <AnchorPane fx:id="edgePane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
+      <StackPane layoutX="897.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXButton onAction="#switchToMap" prefHeight="57.0" prefWidth="157.0" text="Map View">
+               <font>
+                  <Font size="27.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </StackPane>
+      <AnchorPane fx:id="edgePane" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
          <children>
             <JFXTextField fx:id="filterTextFieldEdges" layoutX="48.0" layoutY="73.0" onMouseClicked="#clearEdge" prefHeight="25.0" prefWidth="157.0" text="Enter Edge ID" />
             <JFXButton fx:id="addEdgePaneButton" layoutX="177.0" layoutY="534.0" onAction="#addEdgePane" style="-fx-background-color: #B53389;" text="Add Edge" textFill="WHITE" />
@@ -192,5 +185,10 @@
             </GridPane>
          </children>
       </AnchorPane>
+      <JFXButton buttonType="RAISED" onAction="#backupDB" prefHeight="58.0" prefWidth="118.0" text="Backup" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

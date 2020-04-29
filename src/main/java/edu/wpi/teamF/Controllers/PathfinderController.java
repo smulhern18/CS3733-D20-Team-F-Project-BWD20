@@ -118,23 +118,25 @@ public class PathfinderController implements Initializable {
     double widthRatio = currentPane.getPrefWidth() / MAP_WIDTH;
 
     for (int i = 0; i < pathNodes.size() - 1; i++) {
-      int startX = (int) (pathNodes.get(i).getXCoord() * widthRatio);
-      int startY = (int) (pathNodes.get(i).getYCoord() * heightRatio);
-      int endX = (int) (pathNodes.get(i + 1).getXCoord() * widthRatio);
-      int endY = (int) (pathNodes.get(i + 1).getYCoord() * heightRatio);
-      Line line = new Line(startX, startY, endX, endY);
-      line.setStroke(Color.RED);
-      line.setStrokeWidth(2);
-      if (pathNodes.get(i).getFloor() == 1) {
-        mapPaneFaulkner1.getChildren().add(line);
-      } else if (pathNodes.get(i).getFloor() == 2) {
-        mapPaneFaulkner2.getChildren().add(line);
-      } else if (pathNodes.get(i).getFloor() == 3) {
-        mapPaneFaulkner3.getChildren().add(line);
-      } else if (pathNodes.get(i).getFloor() == 4) {
-        mapPaneFaulkner4.getChildren().add(line);
-      } else if (pathNodes.get(i).getFloor() == 5) {
-        mapPaneFaulkner5.getChildren().add(line);
+      if (pathNodes.get(i).getFloor() == pathNodes.get(i + 1).getFloor()) {
+        int startX = (int) (pathNodes.get(i).getXCoord() * widthRatio);
+        int startY = (int) (pathNodes.get(i).getYCoord() * heightRatio);
+        int endX = (int) (pathNodes.get(i + 1).getXCoord() * widthRatio);
+        int endY = (int) (pathNodes.get(i + 1).getYCoord() * heightRatio);
+        Line line = new Line(startX, startY, endX, endY);
+        line.setStroke(Color.RED);
+        line.setStrokeWidth(2);
+        if (pathNodes.get(i).getFloor() == 1) {
+          mapPaneFaulkner1.getChildren().add(line);
+        } else if (pathNodes.get(i).getFloor() == 2) {
+          mapPaneFaulkner2.getChildren().add(line);
+        } else if (pathNodes.get(i).getFloor() == 3) {
+          mapPaneFaulkner3.getChildren().add(line);
+        } else if (pathNodes.get(i).getFloor() == 4) {
+          mapPaneFaulkner4.getChildren().add(line);
+        } else if (pathNodes.get(i).getFloor() == 5) {
+          mapPaneFaulkner5.getChildren().add(line);
+        }
       }
     }
 
