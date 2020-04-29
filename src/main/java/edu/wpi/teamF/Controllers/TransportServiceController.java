@@ -223,11 +223,7 @@ public class TransportServiceController implements Initializable {
 
     // set the columns for the tableview
 
-    //     treeTableComputer
-    //             .getColumns()
-    //             .setAll(ID, loc, make, OS, type, desc, priority, completed, column);
-
-    // set as editable
+    treeTableTransport.getColumns().setAll(ID, loc, desc, priority, completed, column);
 
     // assignee.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     // completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
