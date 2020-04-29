@@ -43,8 +43,6 @@ public class HelpMainController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    background.fitWidthProperty().bind(anchorPane.widthProperty());
-    background.fitHeightProperty().bind(anchorPane.heightProperty());
     //    resize(anchorPane.getWidth());
     anchorPane
         .widthProperty()

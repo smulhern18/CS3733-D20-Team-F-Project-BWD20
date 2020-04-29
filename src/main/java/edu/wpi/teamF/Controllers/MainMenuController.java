@@ -9,7 +9,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -50,26 +49,6 @@ public class MainMenuController implements Initializable {
 
   public void help(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("HelpMain");
-  }
-
-  public void login1(MouseEvent mouseEvent) throws IOException {
-    sceneController.switchScene("Login");
-  }
-
-  public void serviceRequest1(MouseEvent mouseEvent) throws IOException {
-    sceneController.switchScene("ServiceRequestMain");
-  }
-
-  public void pathfinder1(MouseEvent mouseEvent) throws IOException {
-    sceneController.switchScene("Pathfinder");
-  }
-
-  public void admin1(MouseEvent mouseEvent) throws IOException {
-    sceneController.switchScene("DataManipulator");
-  }
-
-  public void help1(MouseEvent mouseEvent) throws IOException {
-    sceneController.switchScene("Help");
   }
 
   @Override
