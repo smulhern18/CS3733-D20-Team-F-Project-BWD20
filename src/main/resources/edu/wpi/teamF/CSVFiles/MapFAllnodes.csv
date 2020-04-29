@@ -32,12 +32,10 @@ FHALL00201,1750,1113,1,Faulkner,HALL,Operation Rooms Hall,HALL00201,dataWritten
 FHALL00401,940,830,1,Faulkner,HALL,Emergency Department Hall,HALL00401,dataWritten
 FHALL00601,1400,950,1,Faulkner,HALL,Linens Hall,HALL00601,dataWritten
 FHALL00801,1510,524,1,Faulkner,HALL,Radiology Hall,HALL00801,dataWritten
-FHALL00901,1400,524,1,Faulkner,HALL,MRI/CT Hall,HALL00901,dataWritten
 FHALL01101,2180,1115,1,Faulkner,HALL,Operation Room Hall,HALL01101,dataWritten
 FHALL01201,2075,742,1,Faulkner,HALL,Recovery Hall,HALL01201,dataWritten
 FHALL01301,1254,777,1,Faulkner,HALL,Special Testing Hall,HALL01301,dataWritten
 FHALL01401,1254,555,1,Faulkner,HALL,Pre-Admittance Screening Hall,HALL01401,dataWritten
-FHALL01501,1190,515,1,Faulkner,HALL,Cardiac Rehab Hall,HALL01501,dataWritten
 FHALL01601,1040,515,1,Faulkner,HALL,Admitting Hall,HALL01601,dataWritten
 FHALL01701,1115,515,1,Faulkner,HALL,Restroom 1 Level 1 Hall,HALL01701,dataWritten
 FHALL01801,1190,515,1,Faulkner,HALL,Restroom 2 Level 1 Hall,HALL01801,dataWritten
@@ -50,7 +48,7 @@ FHALL02401,1254,870,1,Faulkner,HALL,PULM Lab Hall,HALL02401,dataWritten
 FHALL02501,1254,927,1,Faulkner,HALL,VASC Lab Hall,HALL02501,dataWritten
 FHALL02901,1254,250,1,Faulkner,HALL,Intersection 1,HALL02901,dataWritten
 FHALL03001,1254,515,1,Faulkner,HALL,Intersection 2,HALL03001,dataWritten
-FHALL03301,1400,524,1,Faulkner,HALL,Intersection 5,HALL03301,dataWritten
+FHALL03301,1402,520,1,Faulkner,HALL,Intersection 5,HALL03301,dataWritten
 FHALL03401,1400,742,1,Faulkner,HALL,Intersection 6,HALL03401,dataWritten
 FHALL03501,1400,830,1,Faulkner,HALL,Intersection 7,HALL03501,dataWritten
 FHALL03601,1254,830,1,Faulkner,HALL,Intersection 8,HALL03601,dataWritten
@@ -170,7 +168,6 @@ FDEPT01204,1200,700,4,Faulkner,DEPT,BD Cardiology,DEPT01204,dataWritten
 FDEPT01304,1325,570,4,Faulkner,DEPT,Suites,DEPT01304,dataWritten
 FELEV00X04,1185,415,4,Faulkner,ELEV,Elevator X,ELEV00X04,dataWritten
 FSTAI00204,1320,415,4,Faulkner,STAI,TopStairs,TopStairs,dataWritten
-FSTAI01104,152,1222,4,Faulkner,STAI,LeftStairs,LeftStairs,dataWritten
 FSTAI01204,2342,1219,4,Faulkner,STAI,RightStairs,RightStairs,dataWritten
 FREST00104,1210,310,4,Faulkner,REST,Restroom,REST00104,dataWritten
 FREST00204,1290,310,4,Faulkner,REST,Restroom,REST00204,dataWritten
