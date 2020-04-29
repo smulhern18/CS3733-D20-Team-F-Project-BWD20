@@ -16,7 +16,10 @@ public class ServiceRequestStats {
   MaintenanceRequestFactory maintenanceRequestFactory = MaintenanceRequestFactory.getFactory();
   TransportRequestFactory transportRequestFactory = TransportRequestFactory.getFactory();
   // outputs all of the statistics of a maintenance request
-
+ public void downloadStatistics(Path path){
+   MaintenanceRequestStats(path);
+   TransportRequestStats(path);
+ }
   public void MaintenanceRequestStats(Path path) {
     List<MaintenanceRequest> maintenanceRequestList =
         maintenanceRequestFactory.getAllMaintenanceRequests();
