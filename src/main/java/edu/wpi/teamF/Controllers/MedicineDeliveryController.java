@@ -88,14 +88,6 @@ public class MedicineDeliveryController implements Initializable {
             });
 
     List<Node> nodes = null;
-    try {
-      nodes = databaseManager.getAllNodes();
-    } catch (Exception e) {
-      System.out.println(e.getMessage() + e.getClass());
-    }
-    for (Node node : nodes) {
-      locationComboBox.getItems().add(node.getId());
-    }
 
     priorityChoice.getItems().add("Low");
     priorityChoice.getItems().add("Medium");
@@ -216,7 +208,7 @@ public class MedicineDeliveryController implements Initializable {
         });
 
     ObservableList<String> completedList = FXCollections.observableArrayList();
-    completedList.add("Completed");
+    completedList.add("Complete");
     completedList.add("Incomplete");
 
     JFXTreeTableColumn<UIMedicineDeliveryRequest, String> completed =
@@ -248,6 +240,19 @@ public class MedicineDeliveryController implements Initializable {
           }
         });
 
+    completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    completed.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(completedList));
+    completed.setOnEditCommit(
+        new EventHandler<TreeTableColumn.CellEditEvent<UIMedicineDeliveryRequest, String>>() {
+          @Override
+          public void handle(
+              TreeTableColumn.CellEditEvent<UIMedicineDeliveryRequest, String> event) {
+            TreeItem<UIMedicineDeliveryRequest> current =
+                treeTableMedicine.getTreeItem(event.getTreeTablePosition().getRow());
+            current.getValue().setCompleted(new SimpleStringProperty(event.getNewValue()));
+          }
+        });
+
     for (MedicineDeliveryRequest mdr : medicineDeliveryRequests) {
       mdrUI.add(new UIMedicineDeliveryRequest(mdr));
     }
@@ -259,7 +264,6 @@ public class MedicineDeliveryController implements Initializable {
         .getColumns()
         .setAll(ID, loc, medicine, instructions, desc, priority, column, completed);
 
-    completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     priority.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
     treeTableMedicine.setRoot(root);
@@ -269,7 +273,8 @@ public class MedicineDeliveryController implements Initializable {
 
   public void submit(ActionEvent actionEvent) throws Exception {
     String location = locationComboBox.getValue();
-    Node node = databaseManager.readNode(location);
+    String nodeID = location.substring(location.length() - 10);
+    Node node = databaseManager.readNode(nodeID);
     String medicine = medicineText.getText();
     String instructions = instructionsText.getText();
     String desc = descText.getText();
