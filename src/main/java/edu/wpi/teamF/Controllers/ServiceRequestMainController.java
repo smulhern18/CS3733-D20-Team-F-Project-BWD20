@@ -2,9 +2,12 @@ package edu.wpi.teamF.Controllers;
 
 import edu.wpi.teamF.App;
 import java.io.IOException;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Font;
 
 public class ServiceRequestMainController {
+  public Label serviceRequestLabel;
   SceneController sceneController = App.getSceneController();
 
   public void switchToComputerService(MouseEvent mouseEvent) throws IOException {
@@ -45,5 +48,11 @@ public class ServiceRequestMainController {
 
   public void transportRequest(MouseEvent mouseEvent) throws IOException {
     sceneController.switchScene("TransportRequest");
+  }
+
+  private void resize(double width) {
+    System.out.println(width);
+    Font newFont = new Font(width / 50);
+    serviceRequestLabel.setFont(newFont);
   }
 }

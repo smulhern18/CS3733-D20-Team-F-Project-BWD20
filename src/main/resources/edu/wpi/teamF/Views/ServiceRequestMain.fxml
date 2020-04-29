@@ -129,7 +129,7 @@
             </JFXButton>
          </children>
       </GridPane>
-      <Label layoutX="398.0" layoutY="49.0" prefHeight="61.0" prefWidth="200.0" text="Service Request">
+      <Label fx:id="serviceRequestLabel" layoutX="398.0" layoutY="49.0" prefHeight="61.0" prefWidth="200.0" text="Service Request">
          <font>
             <Font name="Microsoft YaHei Light" size="24.0" />
          </font>
