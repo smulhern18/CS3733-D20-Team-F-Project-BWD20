@@ -26,13 +26,13 @@ public class SanitationServiceRequestFactory {
   public void create(SanitationServiceRequest sanitationServiceRequest) throws ValidationException {
     String insertStatement =
         "INSERT INTO "
-            + DatabaseManager.COMPUTER_REQUEST_TABLE_NAME
+            + DatabaseManager.SANITATION_REQUEST_TABLE_NAME
             + " ( "
             + DatabaseManager.SERVICEID_KEY
             + ", "
             + DatabaseManager.SANITATION_TYPE_KEY
             + " ) "
-            + "VALUES (?, ?, ?, ?)";
+            + "VALUES (?, ?)";
     Validators.sanitationServiceValidation(sanitationServiceRequest);
     serviceRequestFactory.create(sanitationServiceRequest);
     try (PreparedStatement prepareStatement =

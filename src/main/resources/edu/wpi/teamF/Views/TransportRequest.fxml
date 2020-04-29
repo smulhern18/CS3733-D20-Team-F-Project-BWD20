@@ -102,7 +102,7 @@
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <children>
                   <Label fx:id="destLabel" alignment="BOTTOM_CENTER" text="Destination:" />
-                  <JFXComboBox fx:id="destChoice" />
+                  <JFXComboBox fx:id="destChoice" prefWidth="200.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">

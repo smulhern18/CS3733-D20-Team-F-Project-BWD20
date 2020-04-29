@@ -4,11 +4,13 @@ import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+import edu.wpi.teamF.DatabaseManipulators.ServiceRequestStats;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Account.Admin;
 import edu.wpi.teamF.ModelClasses.Account.Staff;
 import edu.wpi.teamF.ModelClasses.Account.User;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -21,6 +23,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.DirectoryChooser;
 import javafx.util.Callback;
 import lombok.SneakyThrows;
 
@@ -28,9 +32,12 @@ public class AccountsController implements Initializable {
   public JFXTreeTableView<UIAccount> accountsView;
   public JFXButton updateStaff;
   public JFXComboBox<String> algoChoiceBox;
+  public AnchorPane rootPane;
   SceneController sceneController = App.getSceneController();
   DatabaseManager databaseManager = DatabaseManager.getManager();
   ObservableList<UIAccount> uiAccount = FXCollections.observableArrayList();
+  ServiceRequestStats serviceRequestStats = new ServiceRequestStats();
+  DirectoryChooser backup = new DirectoryChooser();
 
   @SneakyThrows
   @Override
@@ -180,5 +187,11 @@ public class AccountsController implements Initializable {
     if (algoChoiceBox.getValue() != null) {
       PathfinderController.setPathFindAlgorithm(algoChoiceBox.getValue());
     }
+  }
+
+  public void downloadReports(ActionEvent actionEvent) {
+    backup.setTitle("Select Where to Backup Database");
+    File selDir = backup.showDialog(rootPane.getScene().getWindow());
+    serviceRequestStats.downloadStatistics(selDir.toPath());
   }
 }
