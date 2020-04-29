@@ -290,7 +290,7 @@ public class LaundryServiceRequestController implements Initializable {
 
     treeTableLaunduary
         .getColumns()
-        .setAll(ID, loc, items, temperature, quantity, desc, priority, column);
+        .setAll(ID, loc, items, temperature, quantity, desc, priority, column, completed);
 
     // set as editable
 
