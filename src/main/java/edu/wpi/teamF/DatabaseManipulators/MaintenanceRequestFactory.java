@@ -39,9 +39,12 @@ public class MaintenanceRequestFactory {
         DatabaseManager.getConnection().prepareStatement(insertStatement)) {
       int param = 1;
       prepareStatement.setString(param++, maintenanceRequest.getId());
-      prepareStatement.setTimestamp(
-          param++, new Timestamp(maintenanceRequest.getTimeCompleted().getTime()));
-
+      if (maintenanceRequest.getTimeCompleted() == null) {
+        prepareStatement.setTimestamp(param++, null);
+      } else {
+        prepareStatement.setTimestamp(
+            param++, new Timestamp(maintenanceRequest.getTimeCompleted().getTime()));
+      }
       try {
         int numRows = prepareStatement.executeUpdate();
         if (numRows < 1) {
@@ -72,6 +75,11 @@ public class MaintenanceRequestFactory {
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
           ServiceRequest serviceRequest = serviceRequestFactory.read(id);
+          Timestamp timestamp = resultSet.getTimestamp(DatabaseManager.TIME_COMPLETED_KEY);
+          Date complete = null;
+          if (timestamp != null) {
+            complete = new Date(timestamp.getTime());
+          }
           maintenanceRequest =
               new MaintenanceRequest(
                   serviceRequest.getId(),
@@ -81,7 +89,7 @@ public class MaintenanceRequestFactory {
                   serviceRequest.getDateTimeSubmitted(),
                   serviceRequest.getPriority(),
                   serviceRequest.getComplete(),
-                  new Date(resultSet.getDate(DatabaseManager.DATECOMPLETED_KEY).getTime()));
+                  complete);
         }
       } catch (ValidationException e) {
         throw e;
@@ -111,8 +119,12 @@ public class MaintenanceRequestFactory {
       int param = 1;
       serviceRequestFactory.update(maintenanceRequest);
       preparedStatement.setString(param++, maintenanceRequest.getId());
-      preparedStatement.setTimestamp(
-          param++, new Timestamp(maintenanceRequest.getTimeCompleted().getTime()));
+      if (maintenanceRequest.getTimeCompleted() == null) {
+        preparedStatement.setTimestamp(param++, null);
+      } else {
+        preparedStatement.setTimestamp(
+            param++, new Timestamp(maintenanceRequest.getTimeCompleted().getTime()));
+      }
       preparedStatement.setString(param++, maintenanceRequest.getId());
       int numRows = preparedStatement.executeUpdate();
       if (numRows != 1) {

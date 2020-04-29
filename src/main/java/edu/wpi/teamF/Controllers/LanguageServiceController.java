@@ -314,7 +314,7 @@ public class LanguageServiceController implements Initializable {
     //        });
 
     ObservableList<String> completedList = FXCollections.observableArrayList();
-    completedList.add("Completed");
+    completedList.add("Complete");
     completedList.add("Incomplete");
 
     JFXTreeTableColumn<UILanguageServiceRequest, String> completed =

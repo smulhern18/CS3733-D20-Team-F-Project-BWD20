@@ -132,8 +132,12 @@ public class TransportRequestFactory {
       preparedStatement.setString(param++, transportRequest.getId());
       preparedStatement.setString(param++, transportRequest.getType());
       preparedStatement.setString(param++, transportRequest.getDestination().getId());
-      preparedStatement.setTimestamp(
-          param++, new Timestamp(transportRequest.getDateTimeCompleted().getTime()));
+      if (transportRequest.getDateTimeCompleted() == null) {
+        preparedStatement.setTimestamp(param++, null);
+      } else {
+        preparedStatement.setTimestamp(
+            param++, new Timestamp(transportRequest.getDateTimeCompleted().getTime()));
+      }
       preparedStatement.setString(param++, transportRequest.getId());
       int numRows = preparedStatement.executeUpdate();
       if (numRows != 1) {

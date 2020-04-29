@@ -40,7 +40,7 @@ public class ServiceRequestMainController {
   }
 
   public void maintenanceRequest(MouseEvent mouseEvent) throws IOException {
-    sceneController.switchScene("MaintenanceRequest");
+    sceneController.switchScene("MaintenenceRequest");
   }
 
   public void transportRequest(MouseEvent mouseEvent) throws IOException {
