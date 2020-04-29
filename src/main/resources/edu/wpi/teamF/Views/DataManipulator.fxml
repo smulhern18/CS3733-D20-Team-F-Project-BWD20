@@ -107,7 +107,6 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXButton buttonType="RAISED" layoutX="847.0" layoutY="714.0" onAction="#backupDB" prefHeight="59.0" prefWidth="131.0" ripplerFill="#ffe100" text="Backup" />
             <JFXButton layoutX="978.0" layoutY="731.0" onAction="#switchToUserAccounts" text="User Accounts" />
          </children>
       </AnchorPane>
@@ -186,7 +185,7 @@
             </GridPane>
          </children>
       </AnchorPane>
-      <JFXButton fx:id="backupDB" buttonType="RAISED" prefHeight="58.0" prefWidth="118.0" text="Backup" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+      <JFXButton buttonType="RAISED" onAction="#backupDB" prefHeight="58.0" prefWidth="118.0" text="Backup" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <font>
             <Font size="24.0" />
          </font>
