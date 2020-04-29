@@ -19,27 +19,28 @@
    <children>
       <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
 
-      <StackPane fx:id="stackPane" layoutX="266.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <StackPane fx:id="stackPane" layoutX="266.0" style="-fx-background-color: #012D5A;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fx:id="background" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true">
                <image>
                   <Image url="@../../../../Images/BWH.jpg" />
                </image></ImageView>
-            <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="342.0" style="-fx-background-color: white;">
+            <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="342.0" style="-fx-background-color: white; -fx-background-radius: 10px;">
 
               <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
 
-                <RowConstraints vgrow="SOMETIMES" />
-                  <RowConstraints vgrow="SOMETIMES" />
-                  <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="184.0" minHeight="180.79998779296875" prefHeight="184.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="92.60001220703123" minHeight="89.39999999999998" percentHeight="15.0" prefHeight="89.39999999999998" vgrow="SOMETIMES" />
+                  <RowConstraints percentHeight="15.0" vgrow="SOMETIMES" />
                   <RowConstraints vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="5.0" vgrow="SOMETIMES" />
                   <RowConstraints percentHeight="5.0" vgrow="SOMETIMES" />
                   <RowConstraints percentHeight="5.0" vgrow="SOMETIMES" />
                   <RowConstraints vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <StackPane prefHeight="153.0" prefWidth="353.0">
@@ -50,22 +51,28 @@
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints percentHeight="70.0" vgrow="SOMETIMES" />
-                            <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
+                            <RowConstraints percentHeight="25.0" vgrow="SOMETIMES" />
                               <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
                               <StackPane prefHeight="141.0" prefWidth="481.0">
                                  <children>
                                     <Circle fill="WHITE" radius="37.0" stroke="BLACK" strokeType="INSIDE" />
+                                    <ImageView fitHeight="70.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../Images/icons8-flamingo-100.png" />
+                                       </image>
+                                    </ImageView>
                                  </children>
                               </StackPane>
-                              <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
+                              <StackPane prefHeight="45.0" prefWidth="343.0" GridPane.rowIndex="1">
                                  <children>
-                                    <Label fx:id="loginText" text="Login">
+                                    <Label fx:id="loginText" text="Login" textFill="#012d5a">
                                        <font>
-                                          <Font name="STIXGeneral-Regular" size="20.0" />
+                                          <Font size="28.0" />
                                        </font>
                                     </Label>
+                                    <Line startX="-100.0" stroke="#012d5a" strokeWidth="2.0" StackPane.alignment="BOTTOM_CENTER" />
                                  </children>
                               </StackPane>
                               <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2">
@@ -79,12 +86,12 @@
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
                      <children>
-                        <JFXTextField fx:id="usernameInput" onKeyReleased="#enableLogin" prefHeight="25.0" prefWidth="449.0" promptText="Username..." />
+                        <JFXTextField fx:id="usernameInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableLogin" prefHeight="26.0" prefWidth="306.0" promptText="Username..." />
                      </children>
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2">
                      <children>
-                        <JFXPasswordField fx:id="passwordInput" onKeyReleased="#enableLogin" prefHeight="27.0" prefWidth="327.0" promptText="Password...">
+                        <JFXPasswordField fx:id="passwordInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableLogin" prefHeight="27.0" prefWidth="306.0" promptText="Password...">
                            <font>
                               <Font name="STIXGeneral-Regular" size="13.0" />
                            </font>
@@ -93,14 +100,14 @@
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="5">
                      <children>
-                        <Line endX="218.0" startX="-137.0" />
+                        <Line endX="342.0" startY="0.3496379852294922" />
                      </children>
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="6">
                      <children>
                         <StackPane prefHeight="150.0" prefWidth="200.0">
                            <children>
-                              <Label fx:id="orText" text="or">
+                              <Label fx:id="orText" alignment="TOP_CENTER" text="or" StackPane.alignment="TOP_CENTER">
                                  <font>
                                     <Font name="STIXGeneral-Regular" size="13.0" />
 
@@ -116,12 +123,12 @@
                         <Font name="STIXGeneral-Regular" size="13.0" />
                      </font>
                   </Label>
-                  <JFXButton fx:id="registerButton" onAction="#switchToRegister" prefHeight="39.0" prefWidth="365.0" style="-fx-background-color: grey;" text="Register" GridPane.rowIndex="7">
+                  <JFXButton fx:id="registerButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#switchToRegister" prefHeight="30.0" prefWidth="306.0" style="-fx-background-color: grey;" text="Register" GridPane.rowIndex="7">
                      <font>
                         <Font name="STIXGeneral-Regular" size="13.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="loginButton" disable="true" onAction="#attemptLogin" prefHeight="36.0" prefWidth="359.0" style="-fx-background-color: #EB3E79#EB3E79;" text="Login" GridPane.rowIndex="3">
+                  <JFXButton fx:id="loginButton" disable="true" onAction="#attemptLogin" prefHeight="30.0" prefWidth="306.0" style="-fx-background-color: #EB3E79#EB3E79;" text="Login" GridPane.rowIndex="3">
                      <font>
                         <Font name="STIXGeneral-Regular" size="13.0" />
                      </font>

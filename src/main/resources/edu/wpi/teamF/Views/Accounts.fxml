@@ -17,7 +17,7 @@
    <children>
       <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <JFXTreeTableView fx:id="accountsView" layoutX="307.0" layoutY="256.0" prefHeight="400.0" prefWidth="717.0" AnchorPane.bottomAnchor="144.0" AnchorPane.leftAnchor="307.0" AnchorPane.rightAnchor="175.39999999999998" AnchorPane.topAnchor="256.0" />
-      <JFXButton fx:id="updateStaff" buttonType="RAISED" layoutX="307.0" layoutY="205.0" onAction="#updateAccounts" prefHeight="44.0" prefWidth="170.0" style="-fx-background-color: white;" text="Update Staff" AnchorPane.leftAnchor="307.0" AnchorPane.topAnchor="205.0">
+      <JFXButton fx:id="updateStaff" buttonType="RAISED" layoutX="307.0" layoutY="205.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#updateAccounts" prefHeight="44.0" prefWidth="170.0" style="-fx-background-color: white;" text="Update Staff" AnchorPane.leftAnchor="307.0" AnchorPane.topAnchor="205.0">
          <font>
             <Font size="20.0" />
          </font></JFXButton>

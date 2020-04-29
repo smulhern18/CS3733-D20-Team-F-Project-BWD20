@@ -95,8 +95,8 @@ public class LoginController implements Initializable {
                 resize(newWidth.doubleValue());
               }
             });
-    background.fitHeightProperty().bind(stackPane.widthProperty());
-    background.fitWidthProperty().bind(stackPane.heightProperty());
+    background.fitHeightProperty().bind(stackPane.heightProperty());
+    background.fitWidthProperty().bind(stackPane.widthProperty());
   }
 
   private void resize(double width) {

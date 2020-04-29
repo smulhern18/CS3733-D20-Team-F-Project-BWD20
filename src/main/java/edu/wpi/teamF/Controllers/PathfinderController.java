@@ -74,6 +74,7 @@ public class PathfinderController implements Initializable {
 
   Node startNode = null;
   Node endNode = null;
+  public Directions directions;
 
   EuclideanScorer euclideanScorer = new EuclideanScorer();
   DatabaseManager databaseManager = DatabaseManager.getManager();
@@ -117,35 +118,41 @@ public class PathfinderController implements Initializable {
     double widthRatio = currentPane.getPrefWidth() / MAP_WIDTH;
 
     for (int i = 0; i < pathNodes.size() - 1; i++) {
-      int startX = (int) (pathNodes.get(i).getXCoord() * widthRatio);
-      int startY = (int) (pathNodes.get(i).getYCoord() * heightRatio);
-      int endX = (int) (pathNodes.get(i + 1).getXCoord() * widthRatio);
-      int endY = (int) (pathNodes.get(i + 1).getYCoord() * heightRatio);
-      Line line = new Line(startX, startY, endX, endY);
-      line.setStroke(Color.RED);
-      line.setStrokeWidth(2);
-      if (pathNodes.get(i).getFloor() == 1) {
-        mapPaneFaulkner1.getChildren().add(line);
-      } else if (pathNodes.get(i).getFloor() == 2) {
-        mapPaneFaulkner2.getChildren().add(line);
-      } else if (pathNodes.get(i).getFloor() == 3) {
-        mapPaneFaulkner3.getChildren().add(line);
-      } else if (pathNodes.get(i).getFloor() == 4) {
-        mapPaneFaulkner4.getChildren().add(line);
-      } else if (pathNodes.get(i).getFloor() == 5) {
-        mapPaneFaulkner5.getChildren().add(line);
+      if (pathNodes.get(i).getFloor() == pathNodes.get(i + 1).getFloor()) {
+        int startX = (int) (pathNodes.get(i).getXCoord() * widthRatio);
+        int startY = (int) (pathNodes.get(i).getYCoord() * heightRatio);
+        int endX = (int) (pathNodes.get(i + 1).getXCoord() * widthRatio);
+        int endY = (int) (pathNodes.get(i + 1).getYCoord() * heightRatio);
+        Line line = new Line(startX, startY, endX, endY);
+        line.setStroke(Color.RED);
+        line.setStrokeWidth(2);
+        if (pathNodes.get(i).getFloor() == 1) {
+          mapPaneFaulkner1.getChildren().add(line);
+        } else if (pathNodes.get(i).getFloor() == 2) {
+          mapPaneFaulkner2.getChildren().add(line);
+        } else if (pathNodes.get(i).getFloor() == 3) {
+          mapPaneFaulkner3.getChildren().add(line);
+        } else if (pathNodes.get(i).getFloor() == 4) {
+          mapPaneFaulkner4.getChildren().add(line);
+        } else if (pathNodes.get(i).getFloor() == 5) {
+          mapPaneFaulkner5.getChildren().add(line);
+        }
       }
     }
 
     selectButtonsPane.setVisible(false);
     directionsPane.setVisible(true);
-    Directions directions = new Directions(fullNodeList, path, startNode, endNode);
+    this.directions = new Directions(fullNodeList, path, startNode, endNode);
     System.out.println(directions.getFullDirectionsString());
-    directionsDisplay.setText(directions.getFullDirectionsString());
     pathSwitchFloorPane.setVisible(true);
     if (startNode.getFloor() != endNode.getFloor()) {
+      // Spans multiple floors
       pathSwitchFloor.setVisible(true);
       pathSwitchFloor.setText("Next: Go to floor " + Integer.toString(endNode.getFloor()));
+      directionsDisplay.setText(directions.getFullDirectionsStringForFloor(startNode.getFloor()));
+    } else {
+      pathSwitchFloor.setVisible(false);
+      directionsDisplay.setText(directions.getFullDirectionsString());
     }
   }
 
@@ -747,9 +754,11 @@ public class PathfinderController implements Initializable {
       // Currently on the start floor, want to go to the end floor
       switchToFloor(endNode.getFloor());
       pathSwitchFloor.setText("Previous: Go to floor " + Integer.toString(startNode.getFloor()));
+      directionsDisplay.setText(directions.getFullDirectionsStringForFloor(endNode.getFloor()));
     } else {
       switchToFloor(startNode.getFloor());
       pathSwitchFloor.setText("Next: Go to floor " + Integer.toString(endNode.getFloor()));
+      directionsDisplay.setText(directions.getFullDirectionsStringForFloor(startNode.getFloor()));
     }
   }
 
