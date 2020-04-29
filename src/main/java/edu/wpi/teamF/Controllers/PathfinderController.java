@@ -198,7 +198,7 @@ public class PathfinderController implements Initializable {
             elevBtn.setDisable(false);
             bathBtn.setDisable(false);
             button.setStyle(
-                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px"); // 800000
+                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00cc00; -fx-border-color: #000000; -fx-border-width: 1px"); // 800000
             commandText.setText("Select End Location or Building Feature");
             state = 1;
             // startCombo.setDisable(true);
@@ -207,7 +207,7 @@ public class PathfinderController implements Initializable {
           } else if (state == 1) { // select end if not set
             endNode = node;
             button.setStyle(
-                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00cc00; -fx-border-color: #000000; -fx-border-width: 1px"); // 00cc00
+                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px"); // 00cc00
             commandText.setText("Select Find Path or Reset");
             state = 2;
             // endCombo.setDisable(true);
@@ -453,7 +453,7 @@ public class PathfinderController implements Initializable {
           for (javafx.scene.Node component : getFloorPane(node.getFloor()).getChildren()) {
             if (component.getId().equals(node.getId())) {
               component.setStyle(
-                  "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; "
+                  "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00cc00; "
                       + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
             }
           }
@@ -487,7 +487,7 @@ public class PathfinderController implements Initializable {
           for (javafx.scene.Node component : getFloorPane(node.getFloor()).getChildren()) {
             if (component.getId().equals(node.getId())) {
               component.setStyle(
-                  "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00cc00; "
+                  "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; "
                       + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
             }
           }
