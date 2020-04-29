@@ -55,26 +55,26 @@
                 <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
                     <children>
                         <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="         Location:         " />
-                        <JFXComboBox fx:id="locationCombobox" prefHeight="27.0" prefWidth="183.0" />
+                        <JFXComboBox fx:id="locationCombobox" prefHeight="27.0" prefWidth="180.0" />
                     </children>
                 </HBox>
                 <HBox alignment="BOTTOM_CENTER" GridPane.rowIndex="2">
                     <children>
                         <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="          Priority:         " />
-                        <JFXComboBox fx:id="priorityCombobox" prefHeight="27.0" prefWidth="182.0" />
+                        <JFXComboBox fx:id="priorityCombobox" prefHeight="27.0" prefWidth="180.0" />
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
                     <children>
-                        <JFXButton fx:id="submitButton" onAction="#submit" style="-fx-background-color: #FFD3DF#FFD3DF;" text="Submit" textFill="#000000cc">
+                        <JFXButton fx:id="backButton" onAction="#backToServiceRequestMain" style="-fx-background-color: #FFD3DF#FFD3DF;" text="Back" textFill="#000000cc">
                             <font>
                                 <Font name="STFangsong" size="18.0" />
                             </font>
                             <HBox.margin>
-                                <Insets right="30.0" />
+                                <Insets right="20.0" />
                             </HBox.margin>
                         </JFXButton>
-                        <JFXButton fx:id="cancelButton" onAction="#cancel" style="-fx-background-color: #FFD3DF#FFD3DF;" text="Cancel" textFill="#000000cc">
+                        <JFXButton fx:id="submitButton" onAction="#submit" style="-fx-background-color: #FFD3DF#FFD3DF;" text="Submit" textFill="#000000cc">
                             <font>
                                 <Font name="STFangsong" size="18.0" />
                             </font>
@@ -82,18 +82,29 @@
                                 <Insets left="30.0" />
                             </HBox.margin>
                         </JFXButton>
+                        <JFXButton fx:id="cancelButton" onAction="#cancel" style="-fx-background-color: #FFD3DF#FFD3DF;" text="Cancel" textFill="#000000cc">
+                            <font>
+                                <Font name="STFangsong" size="18.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets left="20.0" />
+                            </HBox.margin>
+                        </JFXButton>
                     </children>
                 </HBox>
                 <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                     <children>
-                        <Label fx:id="languageLabel" alignment="BOTTOM_CENTER" prefHeight="18.0" prefWidth="112.0" text="Language:" />
-                        <JFXComboBox fx:id="languageCombobox" prefHeight="27.0" prefWidth="182.0" />
+                        <Label fx:id="languageLabel" alignment="BOTTOM_CENTER" prefHeight="18.0" prefWidth="100.0" text="Language:" />
+                        <JFXComboBox fx:id="languageCombobox" prefHeight="27.0" prefWidth="180.0" />
                     </children>
                 </HBox>
             <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="4">
                <children>
-                  <Label fx:id="problemTypeLabel" alignment="BOTTOM_CENTER" text="         Problem Type:         " />
-                  <JFXComboBox fx:id="problemTypeCombobox" prefHeight="27.0" prefWidth="183.0" />
+                  <Label fx:id="problemTypeLabel" alignment="BOTTOM_CENTER" text="Problem Type:  ">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin></Label>
+                  <JFXComboBox fx:id="problemTypeCombobox" prefHeight="27.0" prefWidth="180.0" />
                </children>
             </HBox>
                 <StackPane prefHeight="86.0" prefWidth="410.0">
@@ -107,8 +118,11 @@
                 </StackPane>
             <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="5">
                <children>
-                  <Label fx:id="descriptionLabel" alignment="BOTTOM_CENTER" text="         Description:         " />
-                  <JFXTextArea fx:id="descriptionText" prefHeight="54.0" prefWidth="182.0" />
+                  <Label fx:id="descriptionLabel" alignment="BOTTOM_CENTER" text="      Description:  ">
+                     <padding>
+                        <Insets right="12.0" />
+                     </padding></Label>
+                  <JFXTextArea fx:id="descriptionText" prefHeight="50.0" prefWidth="182.0" />
                </children>
             </HBox>
             </children>
