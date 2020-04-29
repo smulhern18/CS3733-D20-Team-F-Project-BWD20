@@ -53,14 +53,14 @@
          <children>
             <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
                <children>
-                  <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="     Location:       " />
-                  <JFXComboBox fx:id="locationComboBox" prefHeight="27.0" prefWidth="182.0" />
+                  <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="Location:" />
+                  <JFXComboBox fx:id="locationComboBox" prefHeight="27.0" prefWidth="172.0" />
                </children>
             </HBox>
             <HBox alignment="BOTTOM_CENTER" GridPane.rowIndex="2">
                <children>
-                  <Label fx:id="medicineLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="Medicine:      " />
-                  <JFXTextField fx:id="medicineText" prefHeight="25.0" prefWidth="173.0" />
+                  <Label fx:id="medicineLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="Medicine: " />
+                  <JFXTextField fx:id="medicineText" prefHeight="25.0" prefWidth="172.0" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
@@ -93,8 +93,8 @@
             </HBox>
             <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                <children>
-                  <Label fx:id="instructionsLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="Instructions:                " />
-                  <JFXTextField fx:id="instructionsText" prefHeight="25.0" prefWidth="154.0" />
+                  <Label fx:id="instructionsLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="Instructions: " />
+                  <JFXTextField fx:id="instructionsText" prefHeight="25.0" prefWidth="172.0" />
                </children>
             </HBox>
             <StackPane prefHeight="86.0" prefWidth="410.0">
@@ -108,14 +108,14 @@
             </StackPane>
             <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                <children>
-                  <Label fx:id="descLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="     Description:           " />
-                  <JFXTextField fx:id="descText" prefHeight="25.0" prefWidth="184.0" />
+                  <Label fx:id="descLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text=" Description: " />
+                  <JFXTextField fx:id="descText" prefHeight="25.0" prefWidth="172.0" />
                </children>
             </HBox>
             <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
                <children>
-                  <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="          Priority:           " />
-                  <JFXComboBox fx:id="priorityChoice" prefHeight="25.0" prefWidth="186.0" />
+                  <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text=" Priority: " />
+                  <JFXComboBox fx:id="priorityChoice" prefHeight="25.0" prefWidth="172.0" />
                </children>
             </HBox>
          </children>
