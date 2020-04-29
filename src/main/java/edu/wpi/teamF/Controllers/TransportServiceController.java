@@ -150,7 +150,7 @@ public class TransportServiceController implements Initializable {
     List<Account> employeeNames = databaseManager.getAllAccounts();
     ObservableList<String> employees = FXCollections.observableArrayList();
     for (Account account : employeeNames) {
-      if(account.getType() == Type.NURSE) {
+      if (account.getType() == Type.NURSE) {
         employees.add(account.getFirstName());
       }
     }
