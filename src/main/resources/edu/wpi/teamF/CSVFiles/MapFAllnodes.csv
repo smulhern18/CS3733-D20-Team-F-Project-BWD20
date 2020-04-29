@@ -28,18 +28,13 @@ FRETL00101,1038,250,1,Faulkner,RETL,Starbucks,RETL00101,dataWritten
 FEXIT00101,1254,165,1,Faulkner,EXIT,Atrium Main Entrance,EXIT00101,dataWritten
 FINFO00101,1300,250,1,Faulkner,INFO,Path Finding Kiosk,INFO00101,dataWritten
 FELEV00Z01,1350,1160,1,Faulkner,ELEV,Elevator Z Level 1,ELEV00Z01,dataWritten
-FHALL00101,1254,415,1,Faulkner,HALL,Floor 1 Stair 1 Hall,HALL00101,dataWritten
 FHALL00201,1750,1113,1,Faulkner,HALL,Operation Rooms Hall,HALL00201,dataWritten
-FHALL00301,1110,580,1,Faulkner,HALL,Blood Draw Lab Hall,HALL00301,dataWritten
 FHALL00401,940,830,1,Faulkner,HALL,Emergency Department Hall,HALL00401,dataWritten
-FHALL00501,940,865,1,Faulkner,HALL,Endoscopy Hall,HALL00501,dataWritten
 FHALL00601,1400,950,1,Faulkner,HALL,Linens Hall,HALL00601,dataWritten
-FHALL00701,1254,1111,1,Faulkner,HALL,QR MAT Management Hall,HALL00701,dataWritten
 FHALL00801,1510,524,1,Faulkner,HALL,Radiology Hall,HALL00801,dataWritten
 FHALL00901,1400,524,1,Faulkner,HALL,MRI/CT Hall,HALL00901,dataWritten
-FHALL01001,1435,1175,1,Faulkner,HALL,Labs Hall,HALL01001,dataWritten
 FHALL01101,2180,1115,1,Faulkner,HALL,Operation Room Hall,HALL01101,dataWritten
-FHALL01201,1800,742,1,Faulkner,HALL,Recovery Hall,HALL01201,dataWritten
+FHALL01201,2075,742,1,Faulkner,HALL,Recovery Hall,HALL01201,dataWritten
 FHALL01301,1254,777,1,Faulkner,HALL,Special Testing Hall,HALL01301,dataWritten
 FHALL01401,1254,555,1,Faulkner,HALL,Pre-Admittance Screening Hall,HALL01401,dataWritten
 FHALL01501,1190,515,1,Faulkner,HALL,Cardiac Rehab Hall,HALL01501,dataWritten
@@ -47,19 +42,14 @@ FHALL01601,1040,515,1,Faulkner,HALL,Admitting Hall,HALL01601,dataWritten
 FHALL01701,1115,515,1,Faulkner,HALL,Restroom 1 Level 1 Hall,HALL01701,dataWritten
 FHALL01801,1190,515,1,Faulkner,HALL,Restroom 2 Level 1 Hall,HALL01801,dataWritten
 FHALL01901,1254,1080,1,Faulkner,HALL,Staircase Intersection 3 Level 1 Hall,HALL01901,dataWritten
-FHALL02001,1254,270,1,Faulkner,HALL,Waiting area Hall,HALL02001,dataWritten
-FHALL02101,1280,524,1,Faulkner,HALL,Restroom 3 Level 1 Hall,HALL02101,dataWritten
+FHALL02001,1254,380,1,Faulkner,HALL,Waiting area Hall,HALL02001,dataWritten
+FHALL02101,1323,521,1,Faulkner,HALL,Restroom 3 Level 1 Hall,HALL02101,dataWritten
 FHALL02201,1254,410,1,Faulkner,HALL,Elevator X Level 1 Hall,HALL02201,dataWritten
 FHALL02301,1254,1160,1,Faulkner,HALL,Elevator YZ Level 1 Hall,HALL02301,dataWritten
 FHALL02401,1254,870,1,Faulkner,HALL,PULM Lab Hall,HALL02401,dataWritten
 FHALL02501,1254,927,1,Faulkner,HALL,VASC Lab Hall,HALL02501,dataWritten
-FHALL02601,1080,250,1,Faulkner,HALL,Starbucks Hall,HALL02601,dataWritten
-FHALL02701,1254,180,1,Faulkner,HALL,Atrium Main Entrance Hall,HALL02701,dataWritten
-FHALL02801,1260,250,1,Faulkner,HALL,Path Finding Kiosk Hall,HALL02801,dataWritten
 FHALL02901,1254,250,1,Faulkner,HALL,Intersection 1,HALL02901,dataWritten
 FHALL03001,1254,515,1,Faulkner,HALL,Intersection 2,HALL03001,dataWritten
-FHALL03101,1254,524,1,Faulkner,HALL,Intersection 3,HALL03101,dataWritten
-FHALL03201,1110,515,1,Faulkner,HALL,Intersection 4,HALL03201,dataWritten
 FHALL03301,1400,524,1,Faulkner,HALL,Intersection 5,HALL03301,dataWritten
 FHALL03401,1400,742,1,Faulkner,HALL,Intersection 6,HALL03401,dataWritten
 FHALL03501,1400,830,1,Faulkner,HALL,Intersection 7,HALL03501,dataWritten
@@ -90,7 +80,8 @@ FDEPT00702,1548,743,2,Faulkner,DEPT,Physical Therapy,DEPT00702,dataWritten
 FDEPT00402,1488,1081,2,Faulkner,DEPT,Occupational Therapy,DEPT00402,dataWritten
 FREST00102,1480,1132,2,Faulkner,REST,Restroom 1 Level 2,REST00102,dataWritten
 FSERV00102,1130,740,2,Faulkner,SERV,Laundry,SERV00102,dataWritten
-FHALL00102,680,1204,2,Faulkner,HALL,Floor 2 Mechanical Space Hall,HALL00102,dataWritten
+FHALL00102,1594,1206,2,Faulkner,HALL,Hall,Hall,dataWritten
+FHALL09102,680,1204,2,Faulkner,HALL,Hall,Hall,dataWritten
 FHALL00202,745,711,2,Faulkner,HALL,Floor 2 Facilities 1 Hall,HALL00202,dataWritten
 FHALL00302,745,795,2,Faulkner,HALL,Morgue/Pharmacy Hall,HALL00302,dataWritten
 FHALL00402,745,990,2,Faulkner,HALL,Facilities 2/Central Sterile Supply 1 Hall,HALL00402,dataWritten
@@ -105,7 +96,7 @@ FHALL01202,1432,560,2,Faulkner,HALL,Food Service Hall,HALL01202,dataWritten
 FHALL01302,1352,285,2,Faulkner,HALL,Plastic Surgery Hall,HALL01302,dataWritten
 FHALL01402,1432,936,2,Faulkner,HALL,Central Sterile Supply 2 Hall,HALL01402,dataWritten
 FHALL01502,1432,725,2,Faulkner,HALL,Physical Therapy Hall,HALL01502,dataWritten
-FHALL01602,1432,1055,2,Faulkner,HALL,Occupational Therapy Hall,HALL01602,dataWritten
+FHALL01602,1432,1081,2,Faulkner,HALL,Occupational Therapy Hall,HALL01602,dataWritten
 FHALL01702,1200,1204,2,Faulkner,HALL,Psychiatric Inpatient Care Hall,HALL01702,dataWritten
 FHALL01802,673,656,2,Faulkner,HALL,Floor 2 Extra Hall 1,HALL01802,dataWritten
 FHALL01902,745,1204,2,Faulkner,HALL,Floor 2 Intersection 1,HALL01902,dataWritten
@@ -143,8 +134,7 @@ FHALL00303,1255,1165,3,Faulkner,HALL,Hall,HALL00303,dataWritten
 FHALL00403,1255,1063,3,Faulkner,HALL,Hall,HALL00403,dataWritten
 FHALL00503,1255,975,3,Faulkner,HALL,Hall,HALL00503,dataWritten
 FHALL00603,1255,803,3,Faulkner,HALL,Hall,HALL00603,dataWritten
-FHALL00703,1255,685,3,Faulkner,HALL,Hall,HALL00703,dataWritten
-FHALL00803,1122,685,3,Faulkner,HALL,Hall,HALL00803,dataWritten
+FHALL00703,1225,695,3,Faulkner,HALL,Hall,HALL00703,dataWritten
 FHALL00903,1210,634,3,Faulkner,HALL,Hall,HALL00903,dataWritten
 FHALL01003,1210,564,3,Faulkner,HALL,Hall,HALL01003,dataWritten
 FHALL01103,1210,492,3,Faulkner,HALL,Hall,HALL01103,dataWritten
@@ -179,7 +169,9 @@ FDEPT01104,1325,700,4,Faulkner,DEPT,Neurology,DEPT01104,dataWritten
 FDEPT01204,1200,700,4,Faulkner,DEPT,BD Cardiology,DEPT01204,dataWritten
 FDEPT01304,1325,570,4,Faulkner,DEPT,Suites,DEPT01304,dataWritten
 FELEV00X04,1185,415,4,Faulkner,ELEV,Elevator X,ELEV00X04,dataWritten
-FSTAI00204,1320,415,4,Faulkner,STAI,Stairs,STAI00204,dataWritten
+FSTAI00204,1320,415,4,Faulkner,STAI,TopStairs,TopStairs,dataWritten
+FSTAI01104,152,1222,4,Faulkner,STAI,LeftStairs,LeftStairs,dataWritten
+FSTAI01204,2342,1219,4,Faulkner,STAI,RightStairs,RightStairs,dataWritten
 FREST00104,1210,310,4,Faulkner,REST,Restroom,REST00104,dataWritten
 FREST00204,1290,310,4,Faulkner,REST,Restroom,REST00204,dataWritten
 FDEPT01404,255,1270,4,Faulkner,DEPT,Medical Records,DEPT01404,dataWritten
@@ -192,7 +184,7 @@ FDEPT01804,985,1270,4,Faulkner,DEPT,Medical Library,DEPT01804,dataWritten
 FDEPT01904,1010,1180,4,Faulkner,DEPT,Admin,DEPT01904,dataWritten
 FDEPT02004,1120,1270,4,Faulkner,DEPT,Social Work,DEPT02004,dataWritten
 FDEPT02104,1120,1270,4,Faulkner,DEPT,Sadpwsky Conference Room,DEPT02104,dataWritten
-FDEPT02204,1250,1180,4,Faulkner,DEPT,Administration,DEPT02204,dataWritten
+FDEPT02204,1253,1317,4,Faulkner,DEPT,Administration,DEPT02204,dataWritten
 FDEPT02304,1465,1180,4,Faulkner,DEPT,PATSAFE,DEPT02304,dataWritten
 FDEPT02404,1580,1270,4,Faulkner,DEPT,Primary Care Physicians,DEPT02404,dataWritten
 FDEPT02504,1580,1180,4,Faulkner,DEPT,Surgery Department,DEPT02504,dataWritten
