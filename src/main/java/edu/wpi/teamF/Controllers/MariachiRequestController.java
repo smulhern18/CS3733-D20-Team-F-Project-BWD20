@@ -4,6 +4,7 @@ import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIMariachiRequest;
@@ -12,15 +13,19 @@ import java.net.URL;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
+import javafx.util.Callback;
 import lombok.SneakyThrows;
 
 public class MariachiRequestController implements Initializable {
@@ -78,13 +83,69 @@ public class MariachiRequestController implements Initializable {
         new JFXTreeTableColumn<>("Song Request");
     guardsRequested.setPrefWidth(100);
     guardsRequested.setCellValueFactory(param -> param.getValue().getValue().getSongRequest());
-    JFXTreeTableColumn<UIMariachiRequest, String> assignee = new JFXTreeTableColumn<>("Assignee");
-    assignee.setPrefWidth(100);
-    assignee.setCellValueFactory(param -> param.getValue().getValue().getAssignee());
-    JFXTreeTableColumn<UIMariachiRequest, String> completed =
-        new JFXTreeTableColumn<>("Compeleted");
-    completed.setPrefWidth(100);
-    completed.setCellValueFactory(param -> param.getValue().getValue().getCompleted());
+    ObservableList<String> completedList = FXCollections.observableArrayList();
+    completedList.add("Complete");
+    completedList.add("Incomplete");
+
+    JFXTreeTableColumn<UIMariachiRequest, String> completed = new JFXTreeTableColumn<>("Completed");
+    completed.setPrefWidth(200);
+    completed.setCellValueFactory(
+        (JFXTreeTableColumn.CellDataFeatures<UIMariachiRequest, String> param) ->
+            param.getValue().getValue().getCompleted());
+    completed.setCellFactory(
+        new Callback<
+            TreeTableColumn<UIMariachiRequest, String>,
+            TreeTableCell<UIMariachiRequest, String>>() {
+          @Override
+          public TreeTableCell<UIMariachiRequest, String> call(
+              TreeTableColumn<UIMariachiRequest, String> param) {
+            return new TextFieldTreeTableCell<>();
+          }
+        });
+    completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    completed.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(completedList));
+    completed.setOnEditCommit(
+        new EventHandler<TreeTableColumn.CellEditEvent<UIMariachiRequest, String>>() {
+          @Override
+          public void handle(TreeTableColumn.CellEditEvent<UIMariachiRequest, String> event) {
+            TreeItem<UIMariachiRequest> current =
+                table.getTreeItem(event.getTreeTablePosition().getRow());
+            current.getValue().setCompleted(new SimpleStringProperty(event.getNewValue()));
+          }
+        });
+
+    // Assignee choicebox
+
+    List<Account> employeeNames = databaseManager.getAllAccounts();
+    ObservableList<String> employees = FXCollections.observableArrayList();
+    for (Account account : employeeNames) {
+      employees.add(account.getFirstName());
+    }
+    JFXTreeTableColumn<UIMariachiRequest, String> column = new JFXTreeTableColumn<>("Assignee");
+    column.setCellValueFactory(
+        (JFXTreeTableColumn.CellDataFeatures<UIMariachiRequest, String> param) ->
+            param.getValue().getValue().getAssignee());
+    column.setCellFactory(
+        new Callback<
+            TreeTableColumn<UIMariachiRequest, String>,
+            TreeTableCell<UIMariachiRequest, String>>() {
+          @Override
+          public TreeTableCell<UIMariachiRequest, String> call(
+              TreeTableColumn<UIMariachiRequest, String> param) {
+            return new TextFieldTreeTableCell<>();
+          }
+        });
+    column.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    column.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(employees));
+    column.setOnEditCommit(
+        new EventHandler<TreeTableColumn.CellEditEvent<UIMariachiRequest, String>>() {
+          @Override
+          public void handle(TreeTableColumn.CellEditEvent<UIMariachiRequest, String> event) {
+            TreeItem<UIMariachiRequest> current =
+                table.getTreeItem(event.getTreeTablePosition().getRow());
+            current.getValue().setAssignee(new SimpleStringProperty(event.getNewValue()));
+          }
+        });
 
     for (MariachiRequest sr : mariachiRequestList) {
       uiMariachiRequests.add(new UIMariachiRequest(sr));
@@ -92,10 +153,10 @@ public class MariachiRequestController implements Initializable {
     final TreeItem<UIMariachiRequest> root =
         new RecursiveTreeItem<>(uiMariachiRequests, RecursiveTreeObject::getChildren);
 
-    table.getColumns().setAll(ID, date, loc, priority, guardsRequested, assignee, completed);
+    table.getColumns().setAll(ID, date, loc, priority, guardsRequested, column, completed);
 
-    assignee.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-    completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    // assignee.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    // completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
     table.setRoot(root);
     table.setEditable(true);
