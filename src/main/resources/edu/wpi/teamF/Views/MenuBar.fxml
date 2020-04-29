@@ -25,8 +25,8 @@
          <children>
             <StackPane>
                <children>
-                  <Circle fill="WHITE" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
-                  <ImageView fitHeight="36.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                  <Circle fill="WHITE" radius="40.0" stroke="BLACK" strokeType="INSIDE" />
+                  <ImageView fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../Images/icons8-flamingo-100.png" />
                      </image>

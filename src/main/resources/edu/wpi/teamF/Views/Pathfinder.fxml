@@ -68,7 +68,7 @@
             </ScrollPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="selectFloorPane" prefHeight="60.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="220.0">
+      <AnchorPane fx:id="selectFloorPane" prefHeight="60.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="220.0">
          <children>
             <JFXButton fx:id="floor1Button" buttonType="RAISED" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" prefHeight="60.0" prefWidth="60.0" ripplerFill="BLACK" style="-fx-background-radius: 10px; -fx-background-color: #4d6c8b; -fx-max-width: 60px; -fx-min-width: 60px; -fx-pref-width: 60px; -fx-max-height: 60px; -fx-min-height: 60px; -fx-pref-height: 60px;" text="1" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                <font>
@@ -111,7 +111,7 @@
                   </Label>
                   <VBox minHeight="230.0" prefHeight="250.0" style="-fx-border-color: #012D5A; -fx-border-width: 3px; -fx-background-color: #ffffff;">
                      <children>
-                        <Label fx:id="directionsDisplay" text="" wrapText="true">
+                        <Label fx:id="directionsDisplay" graphicTextGap="0.0" text="" wrapText="true">
                            <font>
                               <Font size="14.0" />
                            </font>
