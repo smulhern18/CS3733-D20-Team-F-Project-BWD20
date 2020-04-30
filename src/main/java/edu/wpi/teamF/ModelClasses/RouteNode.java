@@ -1,6 +1,10 @@
 package edu.wpi.teamF.ModelClasses;
 
+import lombok.Data;
+
+@Data
 public class RouteNode implements Comparable<RouteNode> {
+
   private Node node;
   private RouteNode previous;
   private double routeScore;

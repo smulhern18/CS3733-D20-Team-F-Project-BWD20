@@ -15,6 +15,7 @@ derby.log
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+.java-version
 
 # Generated files
 .idea/**/contentModel.xml
@@ -144,7 +145,7 @@ Temporary Items
 /build/
 
 # Database
-teamF/
+database/
 
 # Ignore Gradle GUI config
 gradle-app.setting

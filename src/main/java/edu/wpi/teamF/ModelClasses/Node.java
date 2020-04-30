@@ -1,9 +1,13 @@
 package edu.wpi.teamF.ModelClasses;
 
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import java.util.HashSet;
 import java.util.Set;
+import javax.management.InstanceNotFoundException;
 
 public class Node {
+
+  DatabaseManager databaseManager = DatabaseManager.getManager();
 
   public enum NodeType {
     // Values
@@ -20,15 +24,15 @@ public class Node {
     SERV("SERV"),
     STAF("STAF");
 
+    // Constructor
     private String typeString;
     // Constructor
-    NodeType(String type) {
-      this.typeString = type;
+    NodeType(String string) {
+      this.typeString = string;
     }
 
-    // Get the string value from enum type
-    public final String getTypeString() {
-      return typeString;
+    public String getTypeString() {
+      return this.typeString;
     }
 
     // Get enum type from string
@@ -48,10 +52,11 @@ public class Node {
   private String building;
   private String longName;
   private String shortName;
-  private String name;
+  private String id;
   private NodeType type;
   private short floor;
-  private Set<String> neighbors = new HashSet<>();
+  private Set<Edge> edges = new HashSet<>();
+  private Set<Node> neighborNodes = new HashSet<>();
 
   /**
    * Constructor for Nodes
@@ -61,13 +66,13 @@ public class Node {
    * @param building the building of the node
    * @param longName the long name of the node
    * @param shortName the short name of the node
-   * @param name the name of the node
+   * @param id the name of the node
    * @param nodeType the type of the node
    * @param floor the floor the node is on
    * @throws ValidationException should anything go wrong
    */
   public Node(
-      String name,
+      String id,
       short xCoord,
       short yCoord,
       String building,
@@ -81,13 +86,13 @@ public class Node {
     setBuilding(building);
     setLongName(longName);
     setShortName(shortName);
-    setName(name);
+    setId(id);
     setType(nodeType);
     setFloor(floor);
   }
 
   public Node(
-      String name,
+      String id,
       short xCoord,
       short yCoord,
       String building,
@@ -95,38 +100,44 @@ public class Node {
       String shortName,
       NodeType nodeType,
       short floor,
-      Set<String> neighbors)
-      throws ValidationException {
-    this(name, xCoord, yCoord, building, longName, shortName, nodeType, floor);
-    addNeighbor(neighbors);
+      Set<Edge> edge)
+      throws Exception {
+    this(id, xCoord, yCoord, building, longName, shortName, nodeType, floor);
+    setEdges(edge);
+  }
+
+  /** @return all of the edges related to this node */
+  public Set<Edge> getEdges() {
+    return edges;
   }
 
   /**
-   * returns the neighbors set
+   * Sets the edges array
    *
-   * @return the set of neighbor nodes
+   * @param edge the edge to add
    */
-  public Set<String> getNeighbors() {
-    return neighbors;
+  public void setEdges(Set<Edge> edge) throws InstanceNotFoundException {
+    this.edges = edge;
+    //    for (Edge anEdge : edge) {
+    //      if (anEdge.getNode1().equals(this.id)) {
+    //        neighborNodes.add(nodeFactory.read(anEdge.getNode2()));
+    //      } else {
+    //        neighborNodes.add(nodeFactory.read(anEdge.getNode1()));
+    //      }
+    //    }
   }
 
   /**
-   * adds a neighbor to the neighbor set
+   * adds a edge to the edges array
    *
-   * @param neighbor the neighbor to add
+   * @param edge the edges to add
    */
-  public void addNeighbor(String neighbor) {
-    neighbors.add(neighbor);
-  }
-
-  /**
-   * adds a set of neighbors to the neighbor set
-   *
-   * @param neighbors the neighbors to add
-   */
-  public void addNeighbor(Set<String> neighbors) {
-    for (String nodeName : neighbors) {
-      addNeighbor(nodeName);
+  public void addEdge(Edge edge) throws Exception {
+    this.edges.add(edge);
+    if (edge.getNode1().equals(this.id)) {
+      neighborNodes.add(databaseManager.readNode(edge.getNode2()));
+    } else {
+      neighborNodes.add(databaseManager.readNode(edge.getNode1()));
     }
   }
 
@@ -140,21 +151,14 @@ public class Node {
     boolean isEqual = false;
     if (other instanceof Node) {
       Node otherNode = (Node) other;
-      boolean neighborsEquals = true;
-      if (otherNode.getNeighbors().size() == neighbors.size()) {
-        for (String neighborNode : neighbors) {
-          neighborsEquals = otherNode.getNeighbors().contains(neighborNode) && neighborsEquals;
-        }
-      } else {
-        neighborsEquals = false;
-      }
+
       isEqual =
-          this.name.equals(otherNode.getName())
+          this.id.equals(otherNode.getId())
               && this.getXCoord() == otherNode.getXCoord()
               && this.getYCoord() == otherNode.getYCoord()
               && this.getFloor() == otherNode.getFloor()
               && this.getType() == otherNode.getType()
-              && neighborsEquals
+              && this.edges.equals((otherNode).edges)
               && this.getBuilding().equals(otherNode.getBuilding())
               && this.getLongName().equals(otherNode.getLongName())
               && this.getShortName().equals(otherNode.getShortName());
@@ -263,23 +267,23 @@ public class Node {
   }
 
   /**
-   * Returns the name of the node
+   * Returns the id of the node
    *
-   * @return the name
+   * @return the id
    */
-  public String getName() {
-    return name;
+  public String getId() {
+    return id;
   }
 
   /**
    * sets the name of the node
    *
-   * @param name the name to set
+   * @param id the id to set
    * @throws ValidationException should the validation fail
    */
-  public void setName(String name) throws ValidationException {
-    Validators.nameValidation(name);
-    this.name = name;
+  public void setId(String id) throws ValidationException {
+    Validators.idValidation(id);
+    this.id = id;
   }
 
   /**
@@ -318,5 +322,10 @@ public class Node {
   public void setFloor(short floor) throws ValidationException {
     Validators.floorValidation(floor);
     this.floor = floor;
+  }
+
+  public Set<Node> getNeighborNodes() {
+
+    return neighborNodes;
   }
 }

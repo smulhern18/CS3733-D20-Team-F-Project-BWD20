@@ -1,34 +1,45 @@
 package edu.wpi.teamF.Controllers;
 
+import com.jfoenix.controls.JFXButton;
+import edu.wpi.teamF.App;
 import java.io.IOException;
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
 
 public class MenuBarController {
-  public Button mainMenuButton;
-  public Button downloadButton;
-  public Button pathFinderButton;
-  public Button displayButton;
-  public Button modifyDataButton;
-  SceneController sceneController = new SceneController();
+  public JFXButton mainMenuButton;
+  public JFXButton loginButton;
+  public JFXButton serviceButton;
+  public JFXButton pathfindButton;
+  public JFXButton adminButton;
+  public JFXButton helpButton;
+  public JFXButton settingsButton;
+  SceneController sceneController = App.getSceneController();
 
-  public void mainMenuSwitch(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("MainMenu");
+  public void login(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("Login");
   }
 
-  public void downloadSwitch(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("DownloadData");
-  }
-
-  public void pathfinderSwitch(ActionEvent actionEvent) throws IOException {
+  public void pathfinder(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("Pathfinder");
   }
 
-  public void displaySwitch(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("DisplayData");
+  public void serviceRequest(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("ServiceRequestMain");
   }
 
-  public void modifyDataSwitch(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("ModifyData");
+  public void admin(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("DataManipulator");
+  }
+
+  public void help(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("HelpMain");
+  }
+
+  public void settings(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("Accounts");
+  }
+
+  public void mainMenu(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("MainMenu");
   }
 }

@@ -1,0 +1,315 @@
+nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName,teamAssigned
+FSTAI00101,1315,380,1,Faulkner,STAI,Staircase Intersection 1 Level 1,STAI00101,dataWritten
+FDEPT00201,1750,940,1,Faulkner,DEPT,Operation Rooms,DEPT00201,dataWritten
+FLABS00101,1080,620,1,Faulkner,LABS,Blood Draw Lab,LABS00101,dataWritten
+FDEPT00101,700,680,1,Faulkner,DEPT,Emergency Department,DEPT00101,dataWritten
+FLABS00201,1070,900,1,Faulkner,LABS,Endoscopy,LABS00201,dataWritten
+FSERV00101,1350,950,1,Faulkner,SERV,Linens,SERV00101,dataWritten
+FSERV00201,1282,1077,1,Faulkner,SERV,QR MAT Management,SERV00201,dataWritten
+FLABS00501,1780,550,1,Faulkner,LABS,Radiology,LABS00501,dataWritten
+FLABS00601,1430,400,1,Faulkner,LABS,MRI/CT,LABS00601,dataWritten
+FLABS00701,1690,1160,1,Faulkner,LABS,Labs,LABS00701,dataWritten
+FDEPT00301,2180,1145,1,Faulkner,DEPT,Operation Room,DEPT00301,dataWritten
+FDEPT00401,2075,775,1,Faulkner,DEPT,Recovery,DEPT00401,dataWritten
+FDEPT00501,1190,785,1,Faulkner,DEPT,Special Testing,DEPT00501,dataWritten
+FDEPT00601,1340,565,1,Faulkner,DEPT,Pre-Admittance Screening,DEPT00601,dataWritten
+FLABS00801,1190,540,1,Faulkner,LABS,Cardiac Rehab,LABS00801,dataWritten
+FSERV00301,1040,430,1,Faulkner,SERV,Admitting,SERV00301,dataWritten
+FREST00101,1115,480,1,Faulkner,REST,Restroom 1 Level 1,REST00101,dataWritten
+FREST00201,1190,480,1,Faulkner,REST,Restroom 2 Level 1,REST00201,dataWritten
+FSTAI00301,1200,1060,1,Faulkner,STAI,Staircase Intersection 3 Level 1,STAI00301,dataWritten
+FDEPT00701,1254,220,1,Faulkner,DEPT,Waiting area,DEPT00701,dataWritten
+FREST00301,1325,480,1,Faulkner,REST,Restroom 3 Level 1,REST00301,dataWritten
+FELEV00X01,1190,410,1,Faulkner,ELEV,Elevator X Level 1,ELEV00X01,dataWritten
+FELEV00Y01,1155,1160,1,Faulkner,ELEV,Elevator Y Level 1,ELEV00Y01,dataWritten
+FLABS00401,1270,870,1,Faulkner,LABS,PULM Lab,LABS00401,dataWritten
+FLABS00301,1270,927,1,Faulkner,LABS,VASC Lab,LABS00301,dataWritten
+FRETL00101,1038,250,1,Faulkner,RETL,Starbucks,RETL00101,dataWritten
+FEXIT00101,1254,165,1,Faulkner,EXIT,Atrium Main Entrance,EXIT00101,dataWritten
+FINFO00101,1300,250,1,Faulkner,INFO,Path Finding Kiosk,INFO00101,dataWritten
+FELEV00Z01,1350,1160,1,Faulkner,ELEV,Elevator Z Level 1,ELEV00Z01,dataWritten
+FHALL00201,1750,1113,1,Faulkner,HALL,Operation Rooms Hall,HALL00201,dataWritten
+FHALL00401,940,830,1,Faulkner,HALL,Emergency Department Hall,HALL00401,dataWritten
+FHALL00601,1400,950,1,Faulkner,HALL,Linens Hall,HALL00601,dataWritten
+FHALL00801,1510,524,1,Faulkner,HALL,Radiology Hall,HALL00801,dataWritten
+FHALL01101,2180,1115,1,Faulkner,HALL,Operation Room Hall,HALL01101,dataWritten
+FHALL01201,2075,742,1,Faulkner,HALL,Recovery Hall,HALL01201,dataWritten
+FHALL01301,1254,777,1,Faulkner,HALL,Special Testing Hall,HALL01301,dataWritten
+FHALL01401,1254,555,1,Faulkner,HALL,Pre-Admittance Screening Hall,HALL01401,dataWritten
+FHALL01601,1040,515,1,Faulkner,HALL,Admitting Hall,HALL01601,dataWritten
+FHALL01701,1115,515,1,Faulkner,HALL,Restroom 1 Level 1 Hall,HALL01701,dataWritten
+FHALL01801,1190,515,1,Faulkner,HALL,Restroom 2 Level 1 Hall,HALL01801,dataWritten
+FHALL01901,1254,1080,1,Faulkner,HALL,Staircase Intersection 3 Level 1 Hall,HALL01901,dataWritten
+FHALL02001,1254,380,1,Faulkner,HALL,Waiting area Hall,HALL02001,dataWritten
+FHALL02101,1323,521,1,Faulkner,HALL,Restroom 3 Level 1 Hall,HALL02101,dataWritten
+FHALL02201,1254,410,1,Faulkner,HALL,Elevator X Level 1 Hall,HALL02201,dataWritten
+FHALL02301,1254,1160,1,Faulkner,HALL,Elevator YZ Level 1 Hall,HALL02301,dataWritten
+FHALL02401,1254,870,1,Faulkner,HALL,PULM Lab Hall,HALL02401,dataWritten
+FHALL02501,1254,927,1,Faulkner,HALL,VASC Lab Hall,HALL02501,dataWritten
+FHALL02901,1254,250,1,Faulkner,HALL,Intersection 1,HALL02901,dataWritten
+FHALL03001,1254,515,1,Faulkner,HALL,Intersection 2,HALL03001,dataWritten
+FHALL03301,1402,520,1,Faulkner,HALL,Intersection 5,HALL03301,dataWritten
+FHALL03401,1400,742,1,Faulkner,HALL,Intersection 6,HALL03401,dataWritten
+FHALL03501,1400,830,1,Faulkner,HALL,Intersection 7,HALL03501,dataWritten
+FHALL03601,1254,830,1,Faulkner,HALL,Intersection 8,HALL03601,dataWritten
+FHALL03701,1400,1115,1,Faulkner,HALL,Intersection 9,HALL03701,dataWritten
+FHALL03801,2125,742,1,Faulkner,HALL,Extra Hall 1,HALL03801,dataWritten
+FHALL03901,880,515,1,Faulkner,HALL,Extra Hall 2,HALL03901,dataWritten
+FHALL04001,956,515,1,Faulkner,HALL,Extra Hall 3,HALL04001,dataWritten
+FSTAF00402,370,1177,2,Faulkner,STAF,Floor 2 Mechanical Space,STAF00402,dataWritten
+FSTAF00102,717,711,2,Faulkner,STAF,Floor 2 Facilities 1,STAF00102,dataWritten
+FDEPT00302,675,795,2,Faulkner,DEPT,Morgue,DEPT00302,dataWritten
+FSTAF00202,675,990,2,Faulkner,STAF,Floor 2 Facilities 2,STAF00202,dataWritten
+FSTAF00302,745,545,2,Faulkner,STAF,Material Management,STAF00302,dataWritten
+FDEPT00602,871,763,2,Faulkner,DEPT,Pharmacy,DEPT00602,dataWritten
+FSTAF00502,821,946,2,Faulkner,STAF,Central Sterile Supply 1,STAF00502,dataWritten
+FDEPT00102,800,1118,2,Faulkner,DEPT,Biomedical Engineering,DEPT00102,dataWritten
+FELEV00Y02,1150,1150,2,Faulkner,ELEV,Elevator Y Level 2,ELEV00Y02,dataWritten
+FDEPT00502,1060,320,2,Faulkner,DEPT,Otolaryngology,DEPT00502,dataWritten
+FDEPT00902,1200,1270,2,Faulkner,DEPT,Psych/Addiction Care,DEPT00902,dataWritten
+FELEV00Z02,1347,1132,2,Faulkner,ELEV,Elevator Z Level 2,ELEV00Z02,dataWritten
+FSTAI00102,1195,1050,2,Faulkner,STAI,Staircase 1 Level 2,STAI00102,dataWritten
+FSTAI00202,1320,384,2,Faulkner,STAI,Staircase 2 Level 2,STAI00202,dataWritten
+FRETL00102,1284,585,2,Faulkner,RETL,Food Service,RETL00102,dataWritten
+FDEPT00802,1473,313,2,Faulkner,DEPT,Plastic Surgery,DEPT00802,dataWritten
+FELEV00X02,1182,413,2,Faulkner,ELEV,Elevator X Level 2,ELEV00X02,dataWritten
+FSTAF00602,1300,936,2,Faulkner,STAF,Central Sterile Supply 2,STAF00602,dataWritten
+FDEPT00702,1548,743,2,Faulkner,DEPT,Physical Therapy,DEPT00702,dataWritten
+FDEPT00402,1488,1081,2,Faulkner,DEPT,Occupational Therapy,DEPT00402,dataWritten
+FREST00102,1480,1132,2,Faulkner,REST,Restroom 1 Level 2,REST00102,dataWritten
+FSERV00102,1130,740,2,Faulkner,SERV,Laundry,SERV00102,dataWritten
+FHALL00102,1594,1206,2,Faulkner,HALL,Hall,Hall,dataWritten
+FHALL09102,680,1204,2,Faulkner,HALL,Hall,Hall,dataWritten
+FHALL00202,745,711,2,Faulkner,HALL,Floor 2 Facilities 1 Hall,HALL00202,dataWritten
+FHALL00302,745,795,2,Faulkner,HALL,Morgue/Pharmacy Hall,HALL00302,dataWritten
+FHALL00402,745,990,2,Faulkner,HALL,Facilities 2/Central Sterile Supply 1 Hall,HALL00402,dataWritten
+FHALL00502,745,656,2,Faulkner,HALL,Material Management Hall,HALL00502,dataWritten
+FHALL00602,745,1118,2,Faulkner,HALL,Biomedical Engineering Hall,HALL00602,dataWritten
+FHALL00702,1150,1204,2,Faulkner,HALL,Elevator Y/Restroom Hall,HALL00702,dataWritten
+FHALL00802,1180,285,2,Faulkner,HALL,Otolaryngology Hall,HALL00802,dataWritten
+FHALL00902,1200,1204,2,Faulkner,HALL,Psych/Addiction Care Hall,HALL00902,dataWritten
+FHALL01002,1432,1132,2,Faulkner,HALL,Elevator X Level 2 Hall,HALL01002,dataWritten
+FHALL01102,1248,413,2,Faulkner,HALL,Staircase 2/Elev Z Hall,HALL01102,dataWritten
+FHALL01202,1432,560,2,Faulkner,HALL,Food Service Hall,HALL01202,dataWritten
+FHALL01302,1352,285,2,Faulkner,HALL,Plastic Surgery Hall,HALL01302,dataWritten
+FHALL01402,1432,936,2,Faulkner,HALL,Central Sterile Supply 2 Hall,HALL01402,dataWritten
+FHALL01502,1432,725,2,Faulkner,HALL,Physical Therapy Hall,HALL01502,dataWritten
+FHALL01602,1432,1081,2,Faulkner,HALL,Occupational Therapy Hall,HALL01602,dataWritten
+FHALL01702,1200,1204,2,Faulkner,HALL,Psychiatric Inpatient Care Hall,HALL01702,dataWritten
+FHALL01802,673,656,2,Faulkner,HALL,Floor 2 Extra Hall 1,HALL01802,dataWritten
+FHALL01902,745,1204,2,Faulkner,HALL,Floor 2 Intersection 1,HALL01902,dataWritten
+FHALL02002,1432,1204,2,Faulkner,HALL,Floor 2 Intersection 2,HALL02002,dataWritten
+FHALL02102,1432,500,2,Faulkner,HALL,Floor 2 Intersection 3,HALL02102,dataWritten
+FHALL02202,1352,500,2,Faulkner,HALL,Floor 2 Intersection 4,HALL02202,dataWritten
+FHALL02302,1352,475,2,Faulkner,HALL,Floor 2 Intersection 5,HALL02302,dataWritten
+FHALL02402,1248,475,2,Faulkner,HALL,Floor 2 Intersection 6,HALL02402,dataWritten
+FHALL02502,1248,285,2,Faulkner,HALL,Floor 2 Intersection 7,HALL02502,dataWritten
+FSERV00103,1255,1455,3,Faulkner,SERV,Shuttle Pickup,SERV00103,dataWritten
+FSERV00203,1070,1360,3,Faulkner,SERV,Chapel,SERV00203,dataWritten
+FSERV00303,1435,1360,3,Faulkner,SERV,Volunteer,SERV00303,dataWritten
+FSERV00403,900,1240,3,Faulkner,SERV,Mechanical Space,SERV00403,dataWritten
+FSERV00503,1600,1240,3,Faulkner,SERV,Mechanical Space,SERV00503,dataWritten
+FELEV00Y03,1150,1165,3,Faulkner,ELEV,Elevator Y,ELEV00Y03,dataWritten
+FELEV00Z03,1350,1165,3,Faulkner,ELEV,Elevator Z,ELEV00Z03,dataWritten
+FSTAI00103,1200,1063,3,Faulkner,STAI,Stairs,STAI00103,dataWritten
+FRETL00103,1210,975,3,Faulkner,RETL,Gift Shop,RETL00103,dataWritten
+FSERV00603,1200,803,3,Faulkner,SERV,Huvos Auditorium,SERV00603,dataWritten
+FRETL00203,1350,803,3,Faulkner,RETL,Cafeteria,RETL00203,dataWritten
+FREST00103,1122,640,3,Faulkner,REST,Restroom,REST00103,dataWritten
+FDEPT00103,1130,492,3,Faulkner,DEPT,Family Patient Resources,DEPT00103,dataWritten
+FDEPT00203,1400,442,3,Faulkner,DEPT,Med Staff Lounge,DEPT00203,dataWritten
+FDEPT00303,1400,334,3,Faulkner,DEPT,Division of GYN,DEPT00303,dataWritten
+FDEPT00403,1450,270,3,Faulkner,DEPT,OB/GYN Association,DEPT00403,dataWritten
+FDEPT00503,1350,170,3,Faulkner,DEPT,Gynocolgy/Oncology,DEPT00503,dataWritten
+FDEPT00603,1050,343,3,Faulkner,DEPT,Roslindale Pediatric Association,DEPT00603,dataWritten
+FREST00203,1215,290,3,Faulkner,REST,Restroom,REST00203,dataWritten
+FREST00303,1290,290,3,Faulkner,REST,Restroom,REST00303,dataWritten
+FELEV00X03,1185,390,3,Faulkner,ELEV,Elevator X,ELEV00X03,dataWritten
+FSTAI00203,1330,390,3,Faulkner,STAI,Stairs,STAI00203,dataWritten
+FHALL00103,1255,1360,3,Faulkner,HALL,Hall,HALL00103,dataWritten
+FHALL00203,1255,1240,3,Faulkner,HALL,Hall,HALL00203,dataWritten
+FHALL00303,1255,1165,3,Faulkner,HALL,Hall,HALL00303,dataWritten
+FHALL00403,1255,1063,3,Faulkner,HALL,Hall,HALL00403,dataWritten
+FHALL00503,1255,975,3,Faulkner,HALL,Hall,HALL00503,dataWritten
+FHALL00603,1255,803,3,Faulkner,HALL,Hall,HALL00603,dataWritten
+FHALL00703,1225,695,3,Faulkner,HALL,Hall,HALL00703,dataWritten
+FHALL00903,1210,634,3,Faulkner,HALL,Hall,HALL00903,dataWritten
+FHALL01003,1210,564,3,Faulkner,HALL,Hall,HALL01003,dataWritten
+FHALL01103,1210,492,3,Faulkner,HALL,Hall,HALL01103,dataWritten
+FHALL01203,1210,465,3,Faulkner,HALL,Hall,HALL01203,dataWritten
+FHALL01303,1365,465,3,Faulkner,HALL,Hall,HALL01303,dataWritten
+FHALL01403,1365,442,3,Faulkner,HALL,Hall,HALL01403,dataWritten
+FHALL01503,1365,334,3,Faulkner,HALL,Hall,HALL01503,dataWritten
+FHALL01603,1365,290,3,Faulkner,HALL,Hall,HALL01603,dataWritten
+FHALL01703,1312,268,3,Faulkner,HALL,Hall,HALL01703,dataWritten
+FHALL01803,1255,300,3,Faulkner,HALL,Hall,HALL01803,dataWritten
+FHALL01903,1255,390,3,Faulkner,HALL,Hall,HALL01903,dataWritten
+FHALL02003,1255,465,3,Faulkner,HALL,Hall,HALL02003,dataWritten
+FHALL02103,1200,268,3,Faulkner,HALL,Hall,HALL02103,dataWritten
+FHALL02203,1145,465,3,Faulkner,HALL,Hall,HALL02203,dataWritten
+FHALL02303,1145,343,3,Faulkner,HALL,Hall,HALL02303,dataWritten
+FHALL02403,1145,290,3,Faulkner,HALL,Hall,HALL02403,dataWritten
+FHALL02503,1255,268,3,Faulkner,HALL,Hall,HALL02503,dataWritten
+FDEPT00104,1065,445,4,Faulkner,DEPT,Cardiology,DEPT00104,dataWritten
+FDEPT00204,1455,445,4,Faulkner,DEPT,Rheumatology Center,DEPT00204,dataWritten
+FDEPT00304,1065,340,4,Faulkner,DEPT,HVMA Internal Medicine,DEPT00304,dataWritten
+FDEPT00404,1455,340,4,Faulkner,DEPT,HVMA Neurology,DEPT00404,dataWritten
+FDEPT00504,1325,255,4,Faulkner,DEPT,Gastroentology Associates,DEPT00504,dataWritten
+FELEV00Y04,1150,1160,4,Faulkner,ELEV,Elevator Y,ELEV00Y04,dataWritten
+FELEV00Z04,1350,1160,4,Faulkner,ELEV,Elevator Z,ELEV00Z04,dataWritten
+FSTAI00104,1200,1035,4,Faulkner,STAI,Stairs,STAI00104,dataWritten
+FDEPT00604,1325,1035,4,Faulkner,DEPT,Lung Research,DEPT00604,dataWritten
+FDEPT00704,1325,975,4,Faulkner,DEPT,House Keeping,DEPT00704,dataWritten
+FDEPT00804,1325,910,4,Faulkner,DEPT,Nurse's Suite,DEPT00804,dataWritten
+FDEPT00904,1200,910,4,Faulkner,DEPT,MOHS Clinic,DEPT00904,dataWritten
+FDEPT01004,1325,820,4,Faulkner,DEPT,Pulmonary Services,DEPT01004,dataWritten
+FDEPT01104,1325,700,4,Faulkner,DEPT,Neurology,DEPT01104,dataWritten
+FDEPT01204,1200,700,4,Faulkner,DEPT,BD Cardiology,DEPT01204,dataWritten
+FDEPT01304,1325,570,4,Faulkner,DEPT,Suites,DEPT01304,dataWritten
+FELEV00X04,1185,415,4,Faulkner,ELEV,Elevator X,ELEV00X04,dataWritten
+FSTAI00204,1320,415,4,Faulkner,STAI,TopStairs,TopStairs,dataWritten
+FSTAI01204,2342,1219,4,Faulkner,STAI,RightStairs,RightStairs,dataWritten
+FREST00104,1210,310,4,Faulkner,REST,Restroom,REST00104,dataWritten
+FREST00204,1290,310,4,Faulkner,REST,Restroom,REST00204,dataWritten
+FDEPT01404,255,1270,4,Faulkner,DEPT,Medical Records,DEPT01404,dataWritten
+FDEPT01504,450,1180,4,Faulkner,DEPT,Urology,DEPT01504,dataWritten
+FDEPT01604,450,1270,4,Faulkner,DEPT,Tynan Conference Room,DEPT01604,dataWritten
+FSTAI00304,720,1270,4,Faulkner,STAI,Stairs,STAI00304,dataWritten
+FDEPT01704,910,1180,4,Faulkner,DEPT,Department Office,DEPT01704,dataWritten
+FREST00304,910,1270,4,Faulkner,REST,Restroom,REST00304,dataWritten
+FDEPT01804,985,1270,4,Faulkner,DEPT,Medical Library,DEPT01804,dataWritten
+FDEPT01904,1010,1180,4,Faulkner,DEPT,Admin,DEPT01904,dataWritten
+FDEPT02004,1120,1270,4,Faulkner,DEPT,Social Work,DEPT02004,dataWritten
+FDEPT02104,1120,1270,4,Faulkner,DEPT,Sadpwsky Conference Room,DEPT02104,dataWritten
+FDEPT02204,1253,1317,4,Faulkner,DEPT,Administration,DEPT02204,dataWritten
+FDEPT02304,1465,1180,4,Faulkner,DEPT,PATSAFE,DEPT02304,dataWritten
+FDEPT02404,1580,1270,4,Faulkner,DEPT,Primary Care Physicians,DEPT02404,dataWritten
+FDEPT02504,1580,1180,4,Faulkner,DEPT,Surgery Department,DEPT02504,dataWritten
+FDEPT02604,1695,1180,4,Faulkner,DEPT,QUALIMP,DEPT02604,dataWritten
+FDEPT02704,1780,1180,4,Faulkner,DEPT,SURGSPEC,DEPT02704,dataWritten
+FSTAI00404,1780,1270,4,Faulkner,STAI,Stairs,STAI00404,dataWritten
+FDEPT02804,1860,1180,4,Faulkner,DEPT,HR,DEPT02804,dataWritten
+FDEPT02904,1860,1270,4,Faulkner,DEPT,Compliance/Patient Relations,DEPT02904,dataWritten
+FSERV00104,1920,1180,4,Faulkner,SERV,Finance,SERV00104,dataWritten
+FSERV00204,1920,1270,4,Faulkner,SERV,Finance,SERV00204,dataWritten
+FDEPT03004,1965,1270,4,Faulkner,DEPT,VP Clinical Service,DEPT03004,dataWritten
+FSERV00304,2025,1180,4,Faulkner,SERV,Lockers,SERV00304,dataWritten
+FDEPT03104,2025,1270,4,Faulkner,DEPT,Compliance/Patient Relations,DEPT03104,dataWritten
+FDEPT03204,2115,1270,4,Faulkner,DEPT,BWH Plastics,DEPT03204,dataWritten
+FDEPT03304,2115,1180,4,Faulkner,DEPT,Foot and Ankle Center,DEPT03304,dataWritten
+FDEPT03404,2235,1180,4,Faulkner,DEPT,Spine FAC,DEPT03404,dataWritten
+FSERV00404,2180,1270,4,Faulkner,SERV,Finance Office,SERV00404,dataWritten
+FDEPT03504,2290,1270,4,Faulkner,DEPT,IS,DEPT03504,dataWritten
+FHALL00104,255,1220,4,Faulkner,HALL,Hall,HALL00104,dataWritten
+FHALL00204,450,1220,4,Faulkner,HALL,Hall,HALL00204,dataWritten
+FHALL00304,720,1220,4,Faulkner,HALL,Hall,HALL00304,dataWritten
+FHALL00404,910,1220,4,Faulkner,HALL,Hall,HALL00404,dataWritten
+FHALL00504,985,1220,4,Faulkner,HALL,Hall,HALL00504,dataWritten
+FHALL00604,1010,1220,4,Faulkner,HALL,Hall,HALL00604,dataWritten
+FHALL00704,1120,1220,4,Faulkner,HALL,Hall,HALL00704,dataWritten
+FHALL00804,1250,1220,4,Faulkner,HALL,Hall,HALL00804,dataWritten
+FHALL00904,1465,1220,4,Faulkner,HALL,Hall,HALL00904,dataWritten
+FHALL01004,1580,1220,4,Faulkner,HALL,Hall,HALL01004,dataWritten
+FHALL01104,1695,1220,4,Faulkner,HALL,Hall,HALL01104,dataWritten
+FHALL01204,1780,1220,4,Faulkner,HALL,Hall,HALL01204,dataWritten
+FHALL01304,1860,1220,4,Faulkner,HALL,Hall,HALL01304,dataWritten
+FHALL01404,1920,1220,4,Faulkner,HALL,Hall,HALL01404,dataWritten
+FHALL01504,1965,1220,4,Faulkner,HALL,Hall,HALL01504,dataWritten
+FHALL01604,2025,1220,4,Faulkner,HALL,Hall,HALL01604,dataWritten
+FHALL01704,2115,1220,4,Faulkner,HALL,Hall,HALL01704,dataWritten
+FHALL01804,2180,1220,4,Faulkner,HALL,Hall,HALL01804,dataWritten
+FHALL01904,2235,1220,4,Faulkner,HALL,Hall,HALL01904,dataWritten
+FHALL02004,2290,1220,4,Faulkner,HALL,Hall,HALL02004,dataWritten
+FHALL02104,1250,1160,4,Faulkner,HALL,Hall,HALL02104,dataWritten
+FHALL02204,1250,1035,4,Faulkner,HALL,Hall,HALL02204,dataWritten
+FHALL02304,1250,975,4,Faulkner,HALL,Hall,HALL02304,dataWritten
+FHALL02404,1250,910,4,Faulkner,HALL,Hall,HALL02404,dataWritten
+FHALL02504,1250,820,4,Faulkner,HALL,Hall,HALL02504,dataWritten
+FHALL02604,1250,700,4,Faulkner,HALL,Hall,HALL02604,dataWritten
+FHALL02704,1250,570,4,Faulkner,HALL,Hall,HALL02704,dataWritten
+FHALL02804,1250,480,4,Faulkner,HALL,Hall,HALL02804,dataWritten
+FHALL02904,1250,415,4,Faulkner,HALL,Hall,HALL02904,dataWritten
+FHALL03004,1250,310,4,Faulkner,HALL,Hall,HALL03004,dataWritten
+FHALL03104,1250,285,4,Faulkner,HALL,Hall,HALL03104,dataWritten
+FHALL03204,1145,480,4,Faulkner,HALL,Hall,HALL03204,dataWritten
+FHALL03304,1355,480,4,Faulkner,HALL,Hall,HALL03304,dataWritten
+FHALL03404,1145,445,4,Faulkner,HALL,Hall,HALL03404,dataWritten
+FHALL03504,1355,445,4,Faulkner,HALL,Hall,HALL03504,dataWritten
+FHALL03604,1145,340,4,Faulkner,HALL,Hall,HALL03604,dataWritten
+FHALL03704,1355,340,4,Faulkner,HALL,Hall,HALL03704,dataWritten
+FHALL03804,1145,305,4,Faulkner,HALL,Hall,HALL03804,dataWritten
+FHALL03904,1355,305,4,Faulkner,HALL,Hall,HALL03904,dataWritten
+FHALL04004,1190,285,4,Faulkner,HALL,Hall,HALL04004,dataWritten
+FHALL04104,1310,285,4,Faulkner,HALL,Hall,HALL04104,dataWritten
+FHALL04204,1250,285,4,Faulkner,HALL,Hall,HALL04204,dataWritten
+FDEPT00105,550,1190,5,Faulkner,DEPT,Intensive Care Unit / Critical Care Unit,DEPT00105,dataWritten
+FDEPT00205,807,1164,5,Faulkner,DEPT,Hemo Dialysis,DEPT00205,dataWritten
+FDEPT00305,950,1322,5,Faulkner,DEPT,Outpatient Infusion Center,DEPT00305,dataWritten
+FDEPT00405,985,1148,5,Faulkner,DEPT,Residents,DEPT00405,dataWritten
+FDEPT00505,1560,1250,5,Faulkner,DEPT,Oncology Clinic,DEPT00505,dataWritten
+FDEPT00605,1185,970,5,Faulkner,DEPT,X-Ray/Nursing Staff Development,DEPT00605,dataWritten
+FDEPT00705,1350,872,5,Faulkner,DEPT,Abulatory Care 1,DEPT00705,dataWritten
+FDEPT00805,1147,818,5,Faulkner,DEPT,BWH Primary Care Physicians,DEPT00805,dataWritten
+FDEPT00905,1287,786,5,Faulkner,DEPT,Abulatory Care 2,DEPT00905,dataWritten
+FDEPT01105,1283,748,5,Faulkner,DEPT,Abulatory Care 4,DEPT01105,dataWritten
+FDEPT01205,1350,700,5,Faulkner,DEPT,Abulatory Care 5,DEPT01205,dataWritten
+FDEPT01305,1313,612,5,Faulkner,DEPT,Ambulatory Clinic,DEPT01305,dataWritten
+FDEPT01405,1207,622,5,Faulkner,DEPT,Internal Medicine / Headache,DEPT01405,dataWritten
+FDEPT01505,1343,516,5,Faulkner,DEPT,Endocrinology/ Diabetes/ Hem-Onc,DEPT01505,dataWritten
+FDEPT01605,1127,257,5,Faulkner,DEPT,ENT / Eye Physical / Dermatologist,DEPT01605,dataWritten
+FDEPT01705,1269,207,5,Faulkner,DEPT,Othopedic Association,DEPT01705,dataWritten
+FDEPT01905,1280,1060,5,Faulkner,DEPT,X-Ray Waiting Room,DEPT01905,dataWritten
+FDEPT01805,1450,320,5,Faulkner,DEPT,BWH Surgical Specialties,DEPT01805,dataWritten
+FELEV00Y05,1150,1158,5,Faulkner,ELEV,Elevator Y,ELEV00Y05,dataWritten
+FELEV00Z05,1345,1145,5,Faulkner,ELEV,Elevator Z,ELEV00Z05,dataWritten
+FELEV00X05,1180,404,5,Faulkner,ELEV,Elevator X,ELEV00X05,dataWritten
+FREST00105,1215,1172,5,Faulkner,REST,South restrooms,REST00105,dataWritten
+FREST00205,1250,300,5,Faulkner,REST,Upper Restrooms,REST00205,dataWritten
+FSERV00105,1250,1324,5,Faulkner,SERV,Vacant,SERV00105,dataWritten
+FSERV00205,1215,513,5,Faulkner,SERV,Suite 5945,SERV00205,dataWritten
+FSERV00305,1215,550,5,Faulkner,SERV,Suite 5940,SERV00305,dataWritten
+FSERV00405,1050,395,5,Faulkner,SERV,Suite 51,SERV00405,dataWritten
+FSERV00505,1453,459,5,Faulkner,SERV,Suite 58,SERV00505,dataWritten
+FSTAI00105,695,1276,5,Faulkner,STAI,Stairwell outside HemoDia,STAI00105,dataWritten
+FSTAI00205,150,1224,5,Faulkner,STAI,Stairwell inside ICU,STAI00205,dataWritten
+FSTAI00305,2347,1240,5,Faulkner,STAI,Stairwell in Oncology Clinic,STAI00305,dataWritten
+FSTAI00405,1205,1053,5,Faulkner,STAI,X-Ray Stairwell,STAI00405,dataWritten
+FSTAI00505,1315,390,5,Faulkner,STAI,Upper Stair,STAI00505,dataWritten
+FHALL00105,700,1210,5,Faulkner,HALL,FHALL00105,HALL00105,dataWritten
+FHALL00205,807,1210,5,Faulkner,HALL,FHALL00205,HALL00205,dataWritten
+FHALL00305,950,1210,5,Faulkner,HALL,FHALL00305,HALL00305,dataWritten
+FHALL00405,985,1210,5,Faulkner,HALL,FHALL00405,HALL00405,dataWritten
+FHALL01905,1150,1210,5,Faulkner,HALL,FHALL01905,HALL01905,dataWritten
+FHALL03705,1145,307,5,Faulkner,HALL,FHALL03705,HALL03705,dataWritten
+FHALL02705,1145,395,5,Faulkner,HALL,FHALL02705,HALL02705,dataWritten
+FHALL03505,1145,483,5,Faulkner,HALL,FHALL03505,HALL03505,dataWritten
+FHALL01505,1163,299,5,Faulkner,HALL,FHALL01505,HALL01505,dataWritten
+FHALL03905,1205,280,5,Faulkner,HALL,FHALL03905,HALL03905,dataWritten
+FHALL02405,1250,284,5,Faulkner,HALL,FHALL02405,HALL02405,dataWritten
+FHALL02305,1250,330,5,Faulkner,HALL,FHALL02305,HALL02305,dataWritten
+FHALL02105,1250,404,5,Faulkner,HALL,FHALL02105,HALL02105,dataWritten
+FHALL03405,1250,483,5,Faulkner,HALL,FHALL03405,HALL03405,dataWritten
+FHALL02505,1250,513,5,Faulkner,HALL,FHALL02505,HALL02505,dataWritten
+FHALL01405,1250,516,5,Faulkner,HALL,FHALL01405,HALL01405,dataWritten
+FHALL02605,1250,550,5,Faulkner,HALL,FHALL02605,HALL02605,dataWritten
+FHALL01205,1250,612,5,Faulkner,HALL,FHALL01205,HALL01205,dataWritten
+FHALL01305,1250,622,5,Faulkner,HALL,FHALL01305,HALL01305,dataWritten
+FHALL01105,1250,700,5,Faulkner,HALL,FHALL01105,HALL01105,dataWritten
+FHALL01005,1250,748,5,Faulkner,HALL,FHALL01005,HALL01005,dataWritten
+FHALL00905,1250,786,5,Faulkner,HALL,FHALL00905,HALL00905,dataWritten
+FHALL00805,1250,818,5,Faulkner,HALL,FHALL00805,HALL00805,dataWritten
+FHALL00705,1250,872,5,Faulkner,HALL,FHALL00705,HALL00705,dataWritten
+FHALL00605,1250,970,5,Faulkner,HALL,FHALL00605,HALL00605,dataWritten
+FHALL03205,1250,1053,5,Faulkner,HALL,FHALL03205,HALL03205,dataWritten
+FHALL01705,1250,1060,5,Faulkner,HALL,FHALL01705,HALL01705,dataWritten
+FHALL02205,1250,1120,5,Faulkner,HALL,FHALL02205,HALL02205,dataWritten
+FHALL02005,1250,1145,5,Faulkner,HALL,FHALL02005,HALL02005,dataWritten
+FHALL00505,1250,1210,5,Faulkner,HALL,FHALL00505,HALL00505,dataWritten
+FHALL01605,1269,285,5,Faulkner,HALL,FHALL01605,HALL01605,dataWritten
+FHALL04005,1285,285,5,Faulkner,HALL,FHALL04005,HALL04005,dataWritten
+FHALL03805,1355,307,5,Faulkner,HALL,FHALL03805,HALL03805,dataWritten
+FHALL01805,1355,320,5,Faulkner,HALL,FHALL01805,HALL01805,dataWritten
+FHALL03305,1355,390,5,Faulkner,HALL,FHALL03305,HALL03305,dataWritten
+FHALL02805,1355,459,5,Faulkner,HALL,FHALL02805,HALL02805,dataWritten
+FHALL03605,1355,483,5,Faulkner,HALL,FHALL03605,HALL03605,dataWritten
+FDEPT01002,1872,1204,2,Faulkner,DEPT,Pyschiatric Inpatient Care,PIC,dataWritten
