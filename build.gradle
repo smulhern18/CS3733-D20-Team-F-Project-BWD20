@@ -41,6 +41,10 @@ dependencies {
     implementation 'org.testng:testng:6.9.6'
     implementation 'junit:junit:4.12'
     implementation 'junit:junit:4.12'
+
+    compile 'org.slf4j:slf4j-simple:1.6.+'
+    compile 'com.sparkjava:spark-core:2.5.+'
+    compile 'com.twilio.sdk:twilio:7.+'
 }
 
 javafx {

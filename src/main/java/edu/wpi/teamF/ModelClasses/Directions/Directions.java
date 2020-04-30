@@ -1,5 +1,6 @@
 package edu.wpi.teamF.ModelClasses.Directions;
 
+import edu.wpi.teamF.Controllers.com.twilio.SendSms;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
@@ -12,6 +13,7 @@ public class Directions {
   private final Map<String, Node> nodeMap = new HashMap<>();
   private Node startNode;
   private Node endNode;
+  private SendSms sendSms = new SendSms();
 
   public Directions(List<Node> fullNodeList, Path path, Node startNode, Node endNode) {
     for (Node node : fullNodeList) {
@@ -201,5 +203,18 @@ public class Directions {
       }
     }
     return "";
+  }
+
+  public Boolean smsDirections(String toPhone) {
+    String sendMsg =
+        ("-\n\nDirections from "
+            + startNode.getLongName()
+            + " to "
+            + endNode.getLongName()
+            + " at Brigham & Women's Hospital:\n\n");
+    for (Direction direction : directionList) {
+      sendMsg = sendMsg + "- " + direction.getDirectionText() + "\n";
+    }
+    return sendSms.sendMsg(toPhone, sendMsg);
   }
 }
