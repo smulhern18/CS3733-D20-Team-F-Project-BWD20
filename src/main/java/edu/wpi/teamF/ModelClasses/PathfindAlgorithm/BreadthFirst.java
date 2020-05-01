@@ -10,6 +10,7 @@ import javax.management.InstanceNotFoundException;
 public class BreadthFirst implements PathfindAlgorithm {
 
   private final Map<String, Node> nodeMap = new HashMap<>();
+  private String liftType = "ELEV";
 
   public BreadthFirst(List<Node> nodeList) {
     for (Node node : nodeList) {
@@ -108,5 +109,9 @@ public class BreadthFirst implements PathfindAlgorithm {
       }
     }
     return false;
+  }
+
+  public void setLiftType(String liftType) {
+    this.liftType = liftType;
   }
 }

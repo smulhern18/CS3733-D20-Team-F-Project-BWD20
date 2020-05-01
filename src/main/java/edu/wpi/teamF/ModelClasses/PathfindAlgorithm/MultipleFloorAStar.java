@@ -13,7 +13,7 @@ import javax.management.InstanceNotFoundException;
 public class MultipleFloorAStar implements PathfindAlgorithm {
 
   private final Map<String, Node> nodeMap = new HashMap<>();
-  private String liftType;
+  private String liftType = "ELEV";
 
   public MultipleFloorAStar(List<Node> nodeList) {
     for (Node node : nodeList) {
@@ -28,8 +28,19 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
     PriorityQueue<RouteNode> priorityQueue = new PriorityQueue<RouteNode>();
     HashSet<Node> visited = new HashSet<>();
     EuclideanScorer scorer = new EuclideanScorer();
-    TypeScorer typeScorer =
-        new TypeScorer(nodeFactory.getNodesByType(Node.NodeType.ELEV), startNode.getFloor());
+
+    TypeScorer typeScorer;
+    if("ELEV".equals(liftType)) {
+      typeScorer =
+              new TypeScorer(nodeFactory.getNodesByType(Node.NodeType.ELEV), startNode.getFloor());
+    }else if("STAI".equals(liftType)) {
+      typeScorer =
+              new TypeScorer(nodeFactory.getNodesByType(Node.NodeType.STAI), startNode.getFloor());
+    }else{
+      typeScorer =
+              new TypeScorer(nodeFactory.getNodesByType(Node.NodeType.ELEV), startNode.getFloor());
+    }
+
     // Create the first node and add it to the Priority Queue
     RouteNode start;
     if (startNode.getFloor() != endNode.getFloor()) {
