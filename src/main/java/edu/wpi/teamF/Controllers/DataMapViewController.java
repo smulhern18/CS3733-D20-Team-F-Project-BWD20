@@ -421,19 +421,19 @@ public class DataMapViewController implements Initializable {
             });
 
         switch (node1.getFloor()) {
-          case 1:
+          case "1":
             mapPane1.getChildren().add(line);
             break;
-          case 2:
+          case "2":
             mapPane2.getChildren().add(line);
             break;
-          case 3:
+          case "3":
             mapPane3.getChildren().add(line);
             break;
-          case 4:
+          case "4":
             mapPane4.getChildren().add(line);
             break;
-          case 5:
+          case "5":
             mapPane5.getChildren().add(line);
             break;
         }
@@ -483,19 +483,19 @@ public class DataMapViewController implements Initializable {
           }
         });
     switch (node.getFloor()) {
-      case 1:
+      case "1":
         mapPane1.getChildren().add(button);
         break;
-      case 2:
+      case "2":
         mapPane2.getChildren().add(button);
         break;
-      case 3:
+      case "3":
         mapPane3.getChildren().add(button);
         break;
-      case 4:
+      case "4":
         mapPane4.getChildren().add(button);
         break;
-      case 5:
+      case "5":
         mapPane5.getChildren().add(button);
         break;
     }

@@ -176,33 +176,33 @@ public class Directions {
     return returnString;
   }
 
-  public String getFullDirectionsStringForFloor(int floor) {
+  public String getFullDirectionsStringForFloor(String floor) {
     String returnString = "";
     for (Direction direction : directionList) {
-      if (direction.getFloor() == floor) {
+      if (direction.getFloor().equals(floor)) {
         returnString = returnString + direction.getDirectionText() + "\n";
       }
     }
     return returnString;
   }
 
-  public String getKeyDirectionForFloor(int floor) {
+  public String getKeyDirectionForFloor(String floor) {
     String returnString = "";
     for (Direction direction : directionList) {
-      if (direction.getFloor() == floor) {
+      if (direction.getFloor().equals(floor)) {
         if (direction instanceof GoalDirection) {
           return ("Directions to: " + endNode.getLongName() + ".");
         } else if (direction instanceof ElevatorDirection) {
           return ("Take the elevator from floor "
-              + Integer.toString(startNode.getFloor())
+              + startNode.getFloor()
               + " to floor "
-              + Integer.toString(endNode.getFloor())
+              + endNode.getFloor()
               + ".");
         } else if (direction instanceof StairsDirection) {
           return ("Take the stairs from floor "
-              + Integer.toString(startNode.getFloor())
+              + startNode.getFloor()
               + " to floor "
-              + Integer.toString(endNode.getFloor())
+              + endNode.getFloor()
               + ".");
         }
       }

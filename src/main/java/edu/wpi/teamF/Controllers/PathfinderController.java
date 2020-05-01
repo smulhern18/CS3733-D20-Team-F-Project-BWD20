@@ -74,7 +74,7 @@ public class PathfinderController implements Initializable {
   public int state;
   public UISetting uiSetting = new UISetting();
   private String currentBuilding;
-  private int currentFloor;
+  private String currentFloor;
   Node startNode = null;
   Node endNode = null;
   public Directions directions;
@@ -121,7 +121,7 @@ public class PathfinderController implements Initializable {
     double widthRatio = currentPane.getPrefWidth() / FAULKNER_MAP_WIDTH;
 
     for (int i = 0; i < pathNodes.size() - 1; i++) {
-      if (pathNodes.get(i).getFloor() == pathNodes.get(i + 1).getFloor()) {
+      if (pathNodes.get(i).getFloor().equals(pathNodes.get(i + 1).getFloor())) {
         int startX = (int) (pathNodes.get(i).getXCoord() * widthRatio);
         int startY = (int) (pathNodes.get(i).getYCoord() * heightRatio);
         int endX = (int) (pathNodes.get(i + 1).getXCoord() * widthRatio);
@@ -129,17 +129,7 @@ public class PathfinderController implements Initializable {
         Line line = new Line(startX, startY, endX, endY);
         line.setStroke(Color.RED);
         line.setStrokeWidth(2);
-        if (pathNodes.get(i).getFloor() == 1) {
-          mapPaneFaulkner1.getChildren().add(line);
-        } else if (pathNodes.get(i).getFloor() == 2) {
-          mapPaneFaulkner2.getChildren().add(line);
-        } else if (pathNodes.get(i).getFloor() == 3) {
-          mapPaneFaulkner3.getChildren().add(line);
-        } else if (pathNodes.get(i).getFloor() == 4) {
-          mapPaneFaulkner4.getChildren().add(line);
-        } else if (pathNodes.get(i).getFloor() == 5) {
-          mapPaneFaulkner5.getChildren().add(line);
-        }
+        getFloorPane(pathNodes.get(i).getFloor()).getChildren().add(line);
       }
     }
 
@@ -151,7 +141,7 @@ public class PathfinderController implements Initializable {
     if (startNode.getFloor() != endNode.getFloor()) {
       // Spans multiple floors
       pathSwitchFloor.setVisible(true);
-      pathSwitchFloor.setText("Next: Go to floor " + Integer.toString(endNode.getFloor()));
+      pathSwitchFloor.setText("Next: Go to floor " + endNode.getFloor());
       directionsDisplay.setText(directions.getFullDirectionsStringForFloor(startNode.getFloor()));
     } else {
       pathSwitchFloor.setVisible(false);
@@ -219,17 +209,7 @@ public class PathfinderController implements Initializable {
             pathButton.setDisable(false);
           }
         });
-    if (node.getFloor() == 1) {
-      mapPaneFaulkner1.getChildren().add(button);
-    } else if (node.getFloor() == 2) {
-      mapPaneFaulkner2.getChildren().add(button);
-    } else if (node.getFloor() == 3) {
-      mapPaneFaulkner3.getChildren().add(button);
-    } else if (node.getFloor() == 4) {
-      mapPaneFaulkner4.getChildren().add(button);
-    } else if (node.getFloor() == 5) {
-      mapPaneFaulkner5.getChildren().add(button);
-    }
+    getFloorPane(node.getFloor()).getChildren().add(button);
   }
 
   public void reset() {
@@ -237,11 +217,11 @@ public class PathfinderController implements Initializable {
   }
 
   public void resetPane() {
-    resetButtonLine(1);
-    resetButtonLine(2);
-    resetButtonLine(3);
-    resetButtonLine(4);
-    resetButtonLine(5);
+    resetButtonLine("1");
+    resetButtonLine("2");
+    resetButtonLine("3");
+    resetButtonLine("4");
+    resetButtonLine("5");
 
     if (startNode != null) {
       for (javafx.scene.Node component : currentPane.getChildren()) {
@@ -284,7 +264,7 @@ public class PathfinderController implements Initializable {
     setComboBehavior();
   }
 
-  private void resetButtonLine(int floor) {
+  private void resetButtonLine(String floor) {
     List<javafx.scene.Node> nodesToRemove = new ArrayList<>();
     for (javafx.scene.Node node : getFloorPane(floor).getChildren()) {
       if (node instanceof Line) {
@@ -316,7 +296,7 @@ public class PathfinderController implements Initializable {
   public void initialize(URL url, ResourceBundle resourceBundle) {
     fullNodeList = new ArrayList<>();
     currentPane = mapPaneFaulkner1;
-    currentFloor = 1;
+    currentFloor = "1";
     setAllInvisible();
     scrollPaneFaulkner1.setVisible(true);
     mapPaneFaulkner1.setVisible(true);
@@ -454,7 +434,7 @@ public class PathfinderController implements Initializable {
             state = 1;
             commandText.setText("Select End Location or Building Feature");
             endCombo.setDisable(false);
-            if (findComboLocation(startCombo).getFloor() != currentFloor) {
+            if (findComboLocation(startCombo).getFloor().equals(currentFloor)) {
               String nameHolder = startCombo.getValue();
               Node nodeHolder = findComboLocation(startCombo);
               switchToFloor(findComboLocation(startCombo).getFloor());
@@ -504,23 +484,23 @@ public class PathfinderController implements Initializable {
   public void floorButtonsSet() {
     floor1Button.setOnAction(
         actionEvent -> {
-          switchToFloor(1);
+          switchToFloor("1");
         });
     floor2Button.setOnAction(
         actionEvent -> {
-          switchToFloor(2);
+          switchToFloor("2");
         });
     floor3Button.setOnAction(
         actionEvent -> {
-          switchToFloor(3);
+          switchToFloor("3");
         });
     floor4Button.setOnAction(
         actionEvent -> {
-          switchToFloor(4);
+          switchToFloor("4");
         });
     floor5Button.setOnAction(
         actionEvent -> {
-          switchToFloor(5);
+          switchToFloor("5");
         });
   }
 
@@ -543,7 +523,7 @@ public class PathfinderController implements Initializable {
     imageViewFaulkner5.setVisible(false);
   }
 
-  public void switchToFloor(int floorNum) {
+  public void switchToFloor(String floorNum) {
     currentPane = getFloorPane(floorNum);
     currentFloor = floorNum;
     setAllInvisible();
@@ -554,57 +534,57 @@ public class PathfinderController implements Initializable {
   }
 
   public void pathSwitchFloor(ActionEvent actionEvent) {
-    if (currentFloor == startNode.getFloor()) {
+    if (currentFloor.equals(startNode.getFloor())) {
       // Currently on the start floor, want to go to the end floor
       switchToFloor(endNode.getFloor());
-      pathSwitchFloor.setText("Previous: Go to floor " + Integer.toString(startNode.getFloor()));
+      pathSwitchFloor.setText("Previous: Go to floor " + startNode.getFloor());
       directionsDisplay.setText(directions.getFullDirectionsStringForFloor(endNode.getFloor()));
     } else {
       switchToFloor(startNode.getFloor());
-      pathSwitchFloor.setText("Next: Go to floor " + Integer.toString(endNode.getFloor()));
+      pathSwitchFloor.setText("Next: Go to floor " + endNode.getFloor());
       directionsDisplay.setText(directions.getFullDirectionsStringForFloor(startNode.getFloor()));
     }
   }
 
-  public AnchorPane getFloorPane(int floor) {
+  public AnchorPane getFloorPane(String floor) {
     switch (floor) {
-      case 1:
+      case "1":
         return mapPaneFaulkner1;
-      case 2:
+      case "2":
         return mapPaneFaulkner2;
-      case 3:
+      case "3":
         return mapPaneFaulkner3;
-      case 4:
+      case "4":
         return mapPaneFaulkner4;
       default:
         return mapPaneFaulkner5;
     }
   }
 
-  public ImageView getFloorImage(int floor) {
+  public ImageView getFloorImage(String floor) {
     switch (floor) {
-      case 1:
+      case "1":
         return imageViewFaulkner1;
-      case 2:
+      case "2":
         return imageViewFaulkner2;
-      case 3:
+      case "3":
         return imageViewFaulkner3;
-      case 4:
+      case "4":
         return imageViewFaulkner4;
       default:
         return imageViewFaulkner5;
     }
   }
 
-  public JFXButton getFloorButton(int floor) {
+  public JFXButton getFloorButton(String floor) {
     switch (floor) {
-      case 1:
+      case "1":
         return floor1Button;
-      case 2:
+      case "2":
         return floor2Button;
-      case 3:
+      case "3":
         return floor3Button;
-      case 4:
+      case "4":
         return floor4Button;
       default:
         return floor5Button;
