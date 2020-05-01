@@ -62,7 +62,7 @@ public class NodeFactory {
       prepareStatement.setString(param++, node.getLongName());
       prepareStatement.setString(param++, node.getShortName());
       prepareStatement.setString(param++, node.getType().getTypeString());
-      prepareStatement.setInt(param++, node.getFloor());
+      prepareStatement.setString(param++, node.getFloor());
       try {
         int numRows = prepareStatement.executeUpdate();
         if (numRows < 1) {
@@ -110,7 +110,7 @@ public class NodeFactory {
                   resultSet.getString(DatabaseManager.LONG_NAME_KEY),
                   resultSet.getString(DatabaseManager.SHORT_NAME_KEY),
                   Node.NodeType.getEnum(resultSet.getString(DatabaseManager.TYPE_KEY)),
-                  resultSet.getShort(DatabaseManager.FLOOR_KEY));
+                  resultSet.getString(DatabaseManager.FLOOR_KEY));
           Set<Edge> edges = edgeFactory.getAllEdgesConnectedToNode(node.getId());
           node.setEdges(edges);
         }
@@ -164,7 +164,7 @@ public class NodeFactory {
       preparedStatement.setString(param++, node.getLongName());
       preparedStatement.setString(param++, node.getShortName());
       preparedStatement.setString(param++, node.getType().getTypeString());
-      preparedStatement.setShort(param++, node.getFloor());
+      preparedStatement.setString(param++, node.getFloor());
       preparedStatement.setString(param++, node.getId());
       int numRows = preparedStatement.executeUpdate();
       if (numRows != 1) {
@@ -233,7 +233,7 @@ public class NodeFactory {
                   resultSet.getString(DatabaseManager.LONG_NAME_KEY),
                   resultSet.getString(DatabaseManager.SHORT_NAME_KEY),
                   Node.NodeType.getEnum(resultSet.getString(DatabaseManager.TYPE_KEY)),
-                  resultSet.getShort(DatabaseManager.FLOOR_KEY)));
+                  resultSet.getString(DatabaseManager.FLOOR_KEY)));
         }
       } catch (ValidationException e) {
         throw e;
@@ -268,7 +268,7 @@ public class NodeFactory {
                 resultSet.getString(DatabaseManager.LONG_NAME_KEY),
                 resultSet.getString(DatabaseManager.SHORT_NAME_KEY),
                 Node.NodeType.getEnum(resultSet.getString(DatabaseManager.TYPE_KEY)),
-                resultSet.getShort(DatabaseManager.FLOOR_KEY)));
+                resultSet.getString(DatabaseManager.FLOOR_KEY)));
       }
     } catch (Exception e) {
       System.out.println(

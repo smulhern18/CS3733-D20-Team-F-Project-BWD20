@@ -8,8 +8,8 @@ public class Validators {
 
   public static final int COORDINATE_MIN_VALUE = 0;
   public static final int COORDINATE_MAX_VALUE = 3840;
-  public static final int FLOOR_MIN_VALUE = 1;
-  public static final int FLOOR_MAX_VALUE = 10;
+  public static final int FLOOR_MIN_LENGTH = 1;
+  public static final int FLOOR_MAX_LENGTH = 10;
   public static final int NAME_MIN_LENGTH = 1;
   public static final int NAME_MAX_LENGTH = 32;
   public static final int BUILDING_MIN_LENGTH = 1;
@@ -304,9 +304,9 @@ public class Validators {
    * @param constraints the optional constraints for validation
    * @throws ValidationException should the validation fail
    */
-  public static void floorValidation(short floor, int... constraints) throws ValidationException {
+  public static void floorValidation(String floor, int... constraints) throws ValidationException {
     nullCheckValidation(floor, constraints);
-    if (!(floor >= FLOOR_MIN_VALUE && floor <= FLOOR_MAX_VALUE)) {
+    if (!(floor.length() >= FLOOR_MIN_LENGTH && floor.length() <= FLOOR_MAX_LENGTH)) {
       throw new ValidationException("Floor outside of accepted values");
     }
   }
