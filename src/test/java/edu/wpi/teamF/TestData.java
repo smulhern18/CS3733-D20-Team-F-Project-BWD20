@@ -54,7 +54,7 @@ public class TestData {
     "", null, "this string is waaaaaaaaay toooooooo loooooooong to be valid"
   };
 
-  public Short[] validFloors = {1, 5, 10, 3};
+  public String[] validFloors = {"L1", "1", "4", "G"};
 
   public Short[] invalidFloors = {null, -3, 0};
 
