@@ -121,15 +121,9 @@
                         <Insets left="10.0" top="8.0" />
                      </VBox.margin>
                   </Label>
-<<<<<<< HEAD
-
 
                   <VBox minHeight="250.0" prefHeight="250.0" style="-fx-border-color: #001a3c; -fx-border-width: 3px; -fx-background-color: #ffffff;">
 
-
-=======
-                  <VBox minHeight="250.0" prefHeight="250.0" style="-fx-border-color: #001a3c; -fx-border-width: 3px; -fx-background-color: #ffffff;">
->>>>>>> 79d93568072c41329a2089c36cb1b9a4a3b5da57
                      <children>
                         <JFXTextArea fx:id="directionsDisplay">
                            <font>
