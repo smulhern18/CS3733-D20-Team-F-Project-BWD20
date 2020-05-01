@@ -32,9 +32,12 @@ import lombok.SneakyThrows;
 
 public class PathfinderController implements Initializable {
 
-  public static int MAP_HEIGHT = 1485;
-  public static int MAP_WIDTH = 2475;
-  public int currentFloor;
+  private static int FAULKNER_MAP_HEIGHT = 1485;
+  private static int FAULKNER_MAP_WIDTH = 2475;
+  private static int MAIN_MAP_HEIGHT = 3400;
+  private static int MAIN_MAP_WIDTH = 5000;
+
+
   public AnchorPane currentPane;
   public AnchorPane mainMapPane;
   public AnchorPane mapPaneFaulkner5;
@@ -49,8 +52,6 @@ public class PathfinderController implements Initializable {
   public ImageView imageViewFaulkner4;
   public ImageView imageViewFaulkner5;
   public ScrollPane scrollPaneFaulkner1;
-  public List<Node> nodeList;
-  public List<Node> fullNodeList;
   public AnchorPane selectButtonsPane;
   public AnchorPane directionsPane;
   public JFXButton stairsBtn;
@@ -69,9 +70,13 @@ public class PathfinderController implements Initializable {
   public JFXTextArea directionsDisplay;
   public AnchorPane pathSwitchFloorPane;
   public JFXButton pathSwitchFloor;
+
+
+  public List<Node> fullNodeList;
   public int state;
   public UISetting uiSetting = new UISetting();
-
+  private String currentBuilding;
+  private int currentFloor;
   Node startNode = null;
   Node endNode = null;
   public Directions directions;
@@ -114,8 +119,8 @@ public class PathfinderController implements Initializable {
       endNode = pathNodes.get(pathNodes.size() - 1);
     }
 
-    double heightRatio = currentPane.getPrefHeight() / MAP_HEIGHT;
-    double widthRatio = currentPane.getPrefWidth() / MAP_WIDTH;
+    double heightRatio = currentPane.getPrefHeight() / FAULKNER_MAP_HEIGHT;
+    double widthRatio = currentPane.getPrefWidth() / FAULKNER_MAP_WIDTH;
 
     for (int i = 0; i < pathNodes.size() - 1; i++) {
       if (pathNodes.get(i).getFloor() == pathNodes.get(i + 1).getFloor()) {
@@ -159,8 +164,8 @@ public class PathfinderController implements Initializable {
 
   public void placeButton(Node node) {
 
-    double heightRatioFaulkner5 = (double) currentPane.getPrefHeight() / MAP_HEIGHT;
-    double widthRatioFaulkner5 = (double) currentPane.getPrefWidth() / MAP_WIDTH;
+    double heightRatioFaulkner5 = (double) currentPane.getPrefHeight() / FAULKNER_MAP_HEIGHT;
+    double widthRatioFaulkner5 = (double) currentPane.getPrefWidth() / FAULKNER_MAP_WIDTH;
 
     JFXButton button = new JFXButton();
     button.setId(node.getId());
@@ -351,7 +356,6 @@ public class PathfinderController implements Initializable {
   @SneakyThrows
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
-    nodeList = new ArrayList<>();
     fullNodeList = new ArrayList<>();
     currentPane = mapPaneFaulkner1;
     currentFloor = 1;
@@ -387,7 +391,7 @@ public class PathfinderController implements Initializable {
       fullNodeList.add(node);
     }
 
-    setNodeList(1);
+
     //    for (Node node : fullNodeList) {
     //      if (!node.getType().equals(Node.NodeType.getEnum("HALL"))) {
     //        startCombo.getItems().add(node.getLongName());
@@ -591,7 +595,7 @@ public class PathfinderController implements Initializable {
         actionEvent -> {
           currentPane = mapPaneFaulkner1;
           currentFloor = 1;
-          setNodeList(1);
+
           // resetPane();
           setAllInvisible();
           mapPaneFaulkner1.setVisible(true);
@@ -603,7 +607,7 @@ public class PathfinderController implements Initializable {
         actionEvent -> {
           currentPane = mapPaneFaulkner2;
           currentFloor = 2;
-          setNodeList(2);
+
           // resetPane();
           setAllInvisible();
           mapPaneFaulkner2.setVisible(true);
@@ -615,7 +619,7 @@ public class PathfinderController implements Initializable {
         actionEvent -> {
           currentPane = mapPaneFaulkner3;
           currentFloor = 3;
-          setNodeList(3);
+
           // resetPane();
           setAllInvisible();
           mapPaneFaulkner3.setVisible(true);
@@ -627,7 +631,7 @@ public class PathfinderController implements Initializable {
         actionEvent -> {
           currentPane = mapPaneFaulkner4;
           currentFloor = 4;
-          setNodeList(4);
+
           // resetPane();
           setAllInvisible();
           mapPaneFaulkner4.setVisible(true);
@@ -639,7 +643,7 @@ public class PathfinderController implements Initializable {
         actionEvent -> {
           currentPane = mapPaneFaulkner5;
           currentFloor = 5;
-          setNodeList(5);
+
           // resetPane();
           setAllInvisible();
           mapPaneFaulkner5.setVisible(true);
@@ -655,14 +659,7 @@ public class PathfinderController implements Initializable {
     }
   }
 
-  public void setNodeList(int floorNum) {
-    nodeList = new ArrayList<>();
-    for (Node node : fullNodeList) {
-      if (node.getFloor() == floorNum) { // change for floors
-        nodeList.add(node);
-      }
-    }
-  }
+
 
   public void setAllInvisible() {
     mapPaneFaulkner1.setVisible(false);
@@ -682,7 +679,7 @@ public class PathfinderController implements Initializable {
       Node holdNode = startNode;
       currentPane = mapPaneFaulkner1;
       currentFloor = 1;
-      setNodeList(1);
+
       // resetPane();
       setAllInvisible();
       mapPaneFaulkner1.setVisible(true);
@@ -696,7 +693,7 @@ public class PathfinderController implements Initializable {
       Node holdNode = startNode;
       currentPane = mapPaneFaulkner2;
       currentFloor = 2;
-      setNodeList(2);
+
       // resetPane();
       setAllInvisible();
       mapPaneFaulkner2.setVisible(true);
@@ -710,7 +707,7 @@ public class PathfinderController implements Initializable {
       Node holdNode = startNode;
       currentPane = mapPaneFaulkner3;
       currentFloor = 3;
-      setNodeList(3);
+
       // resetPane();
       setAllInvisible();
       mapPaneFaulkner3.setVisible(true);
@@ -724,7 +721,7 @@ public class PathfinderController implements Initializable {
       Node holdNode = startNode;
       currentPane = mapPaneFaulkner4;
       currentFloor = 4;
-      setNodeList(4);
+
       // resetPane();
       setAllInvisible();
       mapPaneFaulkner4.setVisible(true);
@@ -738,7 +735,7 @@ public class PathfinderController implements Initializable {
       Node holdNode = startNode;
       currentPane = mapPaneFaulkner5;
       currentFloor = 5;
-      setNodeList(5);
+
       // resetPane();
       setAllInvisible();
       mapPaneFaulkner5.setVisible(true);
