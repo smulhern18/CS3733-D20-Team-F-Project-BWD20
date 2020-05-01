@@ -579,7 +579,7 @@ public class DataMapViewController implements Initializable {
     String longName = longNameInput.getText();
     String shortName = shortNameInput.getText();
     Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getValue().toString());
-    short floorNumber = Short.parseShort(floorInput.getText());
+    String floorNumber = floorInput.getText();
     List<Node> typeNodes = databaseManager.getNodesByType(nodeType);
     List<Integer> typeInstances = new ArrayList<>();
     for (int i = 0; i < typeNodes.size(); i++) { // collects all of the instances for the given type
@@ -646,7 +646,7 @@ public class DataMapViewController implements Initializable {
     String oldLongName = node.getLongName();
     String oldShortName = (node.getShortName());
     Node.NodeType oldNodeType = node.getType();
-    short oldFloorNumber = node.getFloor(); // stores the input in variables
+    String oldFloorNumber = node.getFloor(); // stores the input in variables
 
     try { // is the input correct?
       short xCoordinate = Short.parseShort(xCoorInput.getText());
@@ -655,7 +655,7 @@ public class DataMapViewController implements Initializable {
       String longName = longNameInput.getText();
       String shortName = shortNameInput.getText();
       Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getValue().toString());
-      short floorNumber = Short.parseShort(floorInput.getText()); // stores the input in variables
+      String floorNumber = floorInput.getText(); // stores the input in variables
 
       node.setXCoord(xCoordinate);
       node.setYCoord(yCoordinate);
@@ -680,19 +680,19 @@ public class DataMapViewController implements Initializable {
         }
         mapPane.getChildren().remove(nodeButton);
         switch (floorNumber) {
-          case 1:
+          case "1":
             mapPane1.getChildren().add(nodeButton);
             break;
-          case 2:
+          case "2":
             mapPane2.getChildren().add(nodeButton);
             break;
-          case 3:
+          case "3":
             mapPane3.getChildren().add(nodeButton);
             break;
-          case 4:
+          case "4":
             mapPane4.getChildren().add(nodeButton);
             break;
-          case 5:
+          case "5":
             mapPane5.getChildren().add(nodeButton);
             break;
         }
