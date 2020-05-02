@@ -1,226 +1,156 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="dataMap" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="1181.0" style="-fx-background-color: #00008B;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.DataMapViewController">
-   <children>
-      <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.0" minWidth="1.0" prefWidth="1.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-            <RowConstraints maxHeight="1.0" minHeight="1.0" prefHeight="1.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="1.0" minHeight="1.0" prefHeight="1.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <AnchorPane GridPane.rowIndex="1">
-               <children>
-                  <GridPane AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.0">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.0" minWidth="1.0" prefWidth="1.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" percentHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" percentHeight="0.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="2.0" minHeight="2.0" prefHeight="2.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" percentHeight="70.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                        <GridPane fx:id="edgeGridPane" alignment="CENTER_LEFT" prefHeight="231.0" prefWidth="295.0" style="-fx-background-color: #E0DED7;" GridPane.columnIndex="1">
-                           <columnConstraints>
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <rowConstraints>
-                              <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="67.4" minHeight="10.0" prefHeight="50.0" valignment="CENTER" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="41.39999999999999" minHeight="10.0" prefHeight="34.39999999999999" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="5.0" minHeight="5.0" prefHeight="5.0" vgrow="SOMETIMES" />
-                           </rowConstraints>
+<AnchorPane prefHeight="700.0" prefWidth="1400.0" style="-fx-background-color: #a2a2a2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.DataMapViewController">
+    <children>
+        <StackPane layoutX="580.0" layoutY="18.1015625" prefHeight="120.0" prefWidth="975.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <Text fx:id="commandText" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Starting Location" textAlignment="CENTER">
+                    <font>
+                        <Font size="36.0" />
+                    </font>
+                </Text>
+            </children>
+        </StackPane>
+        <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <AnchorPane fx:id="mainMapPane" layoutX="19.399999618530273" layoutY="194.39999389648438" style="-fx-background-color: #a2a2a2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <ScrollPane fx:id="scrollPaneFaulkner1" style="-fx-background: #a2a2a2; -fx-background-color: #a2a2a2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <content>
+                        <StackPane fx:id="masterPaneFaulkner1" style="-fx-background-color: #a2a2a2;">
+                            <children>
+                                <ImageView fx:id="imageViewFaulkner1" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Maps/Faulkner/Floor1LM.png" />
+                           </image></ImageView>
+                                <AnchorPane fx:id="mapPaneFaulkner1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                                <ImageView fx:id="imageViewFaulkner2" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Maps/Faulkner/Floor2LM.png" />
+                           </image></ImageView>
+                                <AnchorPane fx:id="mapPaneFaulkner2" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                                <ImageView fx:id="imageViewFaulkner3" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Maps/Faulkner/Floor3LM.png" />
+                           </image></ImageView>
+                                <AnchorPane fx:id="mapPaneFaulkner3" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                                <ImageView fx:id="imageViewFaulkner4" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Maps/Faulkner/Floor4LM.png" />
+                           </image></ImageView>
+                                <AnchorPane fx:id="mapPaneFaulkner4" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                                <ImageView fx:id="imageViewFaulkner5" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../Maps/Faulkner/Floor5LM.png" />
+                           </image></ImageView>
+                                <AnchorPane fx:id="mapPaneFaulkner5" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                        <StackPane>
                            <children>
-                              <Label text="Node 2 ID:" GridPane.rowIndex="1" />
-                              <Label text="Node 1 ID:" />
-                              <JFXButton fx:id="selectNode1Button" disable="true" onAction="#selectNode1" text="Select Node 1" textFill="#000000c5" GridPane.columnIndex="1" />
-                              <JFXButton fx:id="selectNode2Button" disable="true" onAction="#selectNode2" text="Select Node 2" textFill="#000000c5" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <JFXButton fx:id="deleteEdgeButton" disable="true" onAction="#deleteEdge" style="-fx-background-color: #00008B;" text="Delete" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                              <JFXButton fx:id="modifyEdgeButton" disable="true" onAction="#modifyEdge" style="-fx-background-color: #00008B;" text="Modify" textFill="WHITE" GridPane.rowIndex="2" />
-                              <JFXButton fx:id="addEdgeButton" onAction="#addEdge" style="-fx-background-color: #00008B;" text="Add" textFill="WHITE" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                           </children>
-                        </GridPane>
-                        <GridPane fx:id="nodeGridPane" alignment="CENTER_LEFT" prefHeight="382.0" prefWidth="292.0" style="-fx-background-color: #E0DED7;" GridPane.columnIndex="1" GridPane.rowIndex="3">
-                          <columnConstraints>
-                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                              <RowConstraints minHeight="10.0" percentHeight="5.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <Label text="Short Name:" GridPane.rowIndex="1" />
-                              <Label text="Long Name:" GridPane.rowIndex="2" />
-                              <Label text="Building:" GridPane.rowIndex="6" />
-                              <Label text="Type:" GridPane.rowIndex="3" />
-                              <Label text="Floor:" GridPane.rowIndex="7" />
-                              <JFXButton fx:id="deleteNodeButton" disable="true" onAction="#deleteNode" style="-fx-background-color: #00008B;" text="Delete" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                              <JFXButton fx:id="modifyNodeButton" disable="true" onAction="#modifyNode" style="-fx-background-color: #00008B;" text="Modify" textFill="WHITE" GridPane.rowIndex="8" />
-                              <JFXTextField fx:id="shortNameInput" focusColor="DARKBLUE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateNodeText" prefHeight="26.0" prefWidth="100.0" promptText="Ex. &quot;Admin Office&quot;" unFocusColor="DARKBLUE" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <JFXTextField fx:id="longNameInput" focusColor="DARKBLUE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateNodeText" prefHeight="26.0" prefWidth="100.0" promptText="Ex. &quot;Administrative Office&quot;" unFocusColor="DARKBLUE" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                              <JFXTextField fx:id="buildingInput" focusColor="DARKBLUE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateNodeText" prefHeight="26.0" prefWidth="100.0" promptText="Ex: &quot;Faulkner&quot;" unFocusColor="DARKBLUE" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                              <JFXTextField fx:id="floorInput" focusColor="DARKBLUE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateNodeText" prefHeight="26.0" prefWidth="101.0" promptText="Ex: &quot;5&quot;" unFocusColor="DARKBLUE" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                              <Label text="X-Coordinate:" GridPane.rowIndex="4" />
-                              <Label text="Y-Coordinate" GridPane.rowIndex="5" />
-                              <JFXTextField focusColor="DARKBLUE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateNodeText" prefHeight="26.0" prefWidth="100.0" promptText="Ex. &quot;1&quot;" unFocusColor="DARKBLUE" GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="xCoorInput" />
-                              <JFXTextField fx:id="yCoorInput" focusColor="DARKBLUE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#validateNodeText" prefHeight="26.0" prefWidth="100.0" promptText="Ex. &quot;1&quot;" unFocusColor="DARKBLUE" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                              <JFXButton fx:id="addNodeButton" disable="true" onAction="#addNode" style="-fx-background-color: #00008B;" text="Add" textFill="WHITE" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                              <ChoiceBox fx:id="typeInput" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: #E0DED7; -fx-border-color: #00008B; -fx-border-radius: 3;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                              <Label fx:id="nodeErrorLabel" textAlignment="RIGHT" textFill="RED" />
-                           </children>
-                        </GridPane>
-                     </children>
-                  </GridPane>
-               </children>
-            </AnchorPane>
-            <GridPane GridPane.columnIndex="2" GridPane.rowIndex="1">
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" percentHeight="90.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="1.0" minHeight="1.0" prefHeight="1.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <ScrollPane fx:id="imageScrollPane" prefHeight="550.0" prefWidth="914.4">
-                     <content>
-                        <StackPane fx:id="imageStackPane" prefHeight="551.0" prefWidth="912.0" style="-fx-background-color: #FFFFFF;">
-                           <children>
-                              <ImageView fx:id="imageView5" fitHeight="550.0" fitWidth="914.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                              <ImageView fx:id="imageViewMainF1" fitHeight="585.0" fitWidth="860.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Maps/Floor5LM.png" />
-                                 </image>
-                                 <StackPane.margin>
-                                    <Insets />
-                                 </StackPane.margin>
-                              </ImageView>
-                              <ImageView fx:id="imageView1" fitHeight="550.0" fitWidth="914.0" pickOnBounds="true" preserveRatio="true" visible="false">
-                                 <image>
-                                    <Image url="@../Maps/Floor1LM.png" />
+                                    <Image url="@../Maps/MainCampus/F1.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="imageView2" fitHeight="550.0" fitWidth="914.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                              <AnchorPane fx:id="mapPaneMainF1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                              <ImageView fx:id="imageViewMainF2" fitHeight="585.0" fitWidth="860.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Maps/Floor2LM.png" />
+                                    <Image url="@../Maps/MainCampus/F2.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="imageView3" fitHeight="550.0" fitWidth="914.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                              <AnchorPane fx:id="mapPaneMainF2" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                              <ImageView fx:id="imageViewMainF3" fitHeight="585.0" fitWidth="860.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Maps/Floor3LM.png" />
+                                    <Image url="@../Maps/MainCampus/F3.png" />
                                  </image>
                               </ImageView>
-                              <ImageView fx:id="imageView4" fitHeight="550.0" fitWidth="914.0" pickOnBounds="true" preserveRatio="true" visible="false">
+                              <AnchorPane fx:id="mapPaneMainF3" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                              <ImageView fx:id="imageViewMainGround" fitHeight="585.0" fitWidth="860.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../Maps/Floor4LM.png" />
+                                    <Image url="@../Maps/MainCampus/ground.png" />
                                  </image>
                               </ImageView>
-                              <AnchorPane fx:id="mapPane4" prefHeight="550.0" prefWidth="914.0" />
-                              <AnchorPane fx:id="mapPane5" prefHeight="550.0" prefWidth="914.0" />
-                              <AnchorPane fx:id="mapPane3" prefHeight="550.0" prefWidth="914.0" />
-                              <AnchorPane fx:id="mapPane2" prefHeight="550.0" prefWidth="914.0" />
-                              <AnchorPane fx:id="mapPane1" prefHeight="550.0" prefWidth="914.0" />
+                              <AnchorPane fx:id="mapPaneMainGround" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                              <ImageView fx:id="imageViewMainL1" fitHeight="585.0" fitWidth="860.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Maps/MainCampus/L1.png" />
+                                 </image>
+                              </ImageView>
+                              <AnchorPane fx:id="mapPaneMainL1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                              <ImageView fx:id="imageViewMainL2" fitHeight="585.0" fitWidth="860.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Maps/MainCampus/L2.png" />
+                                 </image>
+                              </ImageView>
+                              <AnchorPane fx:id="mapPaneMainL2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="860.0" />
                            </children>
                         </StackPane>
-                     </content>
-                  </ScrollPane>
-                  <AnchorPane GridPane.rowIndex="2">
-                     <children>
-                        <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <columnConstraints>
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.0" minWidth="1.0" prefWidth="1.0" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.0" minWidth="1.0" prefWidth="1.0" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.0" minWidth="1.0" prefWidth="1.0" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.0" minWidth="1.0" prefWidth="1.0" />
-                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.0" minWidth="1.0" prefWidth="1.0" />
-                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.0" minWidth="1.0" prefWidth="1.0" />
-                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="1.0" minWidth="1.0" prefWidth="1.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                              <RowConstraints maxHeight="1.0" minHeight="1.0" prefHeight="1.0" valignment="CENTER" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="1.0" minHeight="1.0" prefHeight="1.0" valignment="CENTER" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <JFXButton fx:id="floor1Button" onAction="#changeToFloor1" prefHeight="53.0" prefWidth="191.0" style="-fx-background-color: #E0DED7;" text="Floor 1" textAlignment="CENTER" textFill="DARKBLUE" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="24.0" />
-                                 </font>
-                              </JFXButton>
-                              <JFXButton fx:id="floor2Button" onAction="#changeToFloor2" prefHeight="150.0" prefWidth="250.0" style="-fx-background-color: #E0DED7;" text="Floor 2" textAlignment="CENTER" textFill="DARKBLUE" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="24.0" />
-                                 </font>
-                              </JFXButton>
-                              <JFXButton fx:id="floor3Button" onAction="#changeToFloor3" prefHeight="150.0" prefWidth="250.0" style="-fx-background-color: #E0DED7;" text="Floor 3" textAlignment="CENTER" textFill="DARKBLUE" GridPane.columnIndex="5" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="24.0" />
-                                 </font>
-                              </JFXButton>
-                              <JFXButton fx:id="floor4Button" onAction="#changeToFloor4" prefHeight="150.0" prefWidth="250.0" style="-fx-background-color: #E0DED7;" text="Floor 4" textAlignment="CENTER" textFill="DARKBLUE" GridPane.columnIndex="7" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="24.0" />
-                                 </font>
-                              </JFXButton>
-                              <JFXButton fx:id="floor5Button" onAction="#changeToFloor5" prefHeight="150.0" prefWidth="250.0" style="-fx-background-color: #E0DED7;" text="Floor 5" textAlignment="CENTER" textFill="DARKBLUE" GridPane.columnIndex="9" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="System Bold" size="24.0" />
-                                 </font>
-                              </JFXButton>
-                           </children>
-                        </GridPane>
-                     </children>
-                  </AnchorPane>
-                  <JFXButton fx:id="clearNodeButton" onAction="#addNodeLocation" style="-fx-background-color: #00008B;" text="Add Node" textFill="WHITE" GridPane.halignment="LEFT" GridPane.valignment="TOP">
-                     <GridPane.margin>
-                        <Insets left="25.0" top="15.0" />
-                     </GridPane.margin>
-                  </JFXButton>
-                  <JFXButton fx:id="clearEdgeButton" onAction="#outlineEdge" style="-fx-background-color: #00008B;" text="Add Edge" textFill="WHITE" GridPane.halignment="LEFT" GridPane.valignment="TOP">
-                     <GridPane.margin>
-                        <Insets left="125.0" top="15.0" />
-                     </GridPane.margin>
-                  </JFXButton>
-               </children>
-               <columnConstraints>
-                  <ColumnConstraints />
-               </columnConstraints>
-            </GridPane>
-         </children>
-      </GridPane>
-   </children>
+                            </children>
+                        </StackPane>
+                    </content>
+                </ScrollPane>
+            </children>
+        </AnchorPane>
+        <AnchorPane id="ffff" fx:id="selectButtonsPane" layoutX="1183.0" layoutY="15.0" minHeight="1.0" minWidth="1.0" prefHeight="1.0" prefWidth="1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <VBox prefHeight="300.0" prefWidth="301.0" style="-fx-background-color: rgba(255, 255, 255, 0.9);" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+                    <children>
+                        <Label text="Hospital:">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                            <padding>
+                                <Insets left="10.0" right="10.0" top="8.0" />
+                            </padding>
+                        </Label>
+                        <JFXComboBox fx:id="hospitalCombo" prefWidth="280.0" style="-fx-border-color: #000000; -fx-border-width: 1px; -fx-background-color: #dddddd;">
+                            <VBox.margin>
+                                <Insets left="10.0" right="10.0" />
+                            </VBox.margin></JFXComboBox>
+                        <Label text="Floor:">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets left="8.0" top="15.0" />
+                            </VBox.margin>
+                        </Label>
+                        <JFXComboBox fx:id="floorCombo" minWidth="280.0" style="-fx-border-color: #000000; -fx-border-width: 1px; -fx-background-color: #dddddd;">
+                            <VBox.margin>
+                                <Insets left="10.0" right="10.0" />
+                            </VBox.margin>
+                        </JFXComboBox>
+                        <JFXButton fx:id="nodePopupButton" buttonType="RAISED" maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" onAction="#nodePopup" prefHeight="50.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Add Node" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets bottom="10.0" left="75.0" right="75.0" top="20.0" />
+                            </VBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="edgePopupButton" buttonType="RAISED" minHeight="50.0" minWidth="150.0" mnemonicParsing="false" onAction="#edgePopup" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Add Edge" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="24.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets bottom="15.0" left="75.0" right="75.0" />
+                            </VBox.margin>
+                        </JFXButton>
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="pathSwitchFloorPane" maxHeight="80.0" maxWidth="1.0" prefHeight="80.0" prefWidth="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="220.0" />
+    </children>
 </AnchorPane>

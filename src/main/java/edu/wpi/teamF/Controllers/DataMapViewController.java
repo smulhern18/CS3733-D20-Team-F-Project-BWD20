@@ -2,19 +2,21 @@ package edu.wpi.teamF.Controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import edu.wpi.teamF.App;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
+import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -26,6 +28,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import javax.management.InstanceNotFoundException;
 import lombok.SneakyThrows;
 
@@ -105,22 +109,26 @@ public class DataMapViewController implements Initializable {
 
   @FXML private StackPane imageStackPane;
 
+  @FXML private JFXButton nodePopupButton;
+
+  @FXML private JFXButton edgePopupButton;
+
   private AnchorPane mapPane;
 
-  JFXButton nodeButton = null;
-  Line edgeLine = null;
+  private JFXButton nodeButton = null;
+  private Line edgeLine = null;
 
-  Node node = null;
-  Edge edge = null;
-  boolean selectNode1 = false;
-  boolean selectNode2 = false;
-  Node node1 = null;
-  Node node2 = null;
+  private Node node = null;
+  private Edge edge = null;
+  private boolean selectNode1 = false;
+  private boolean selectNode2 = false;
+  private Node node1 = null;
+  private Node node2 = null;
 
-  double deltaX = 0;
-  double deltaY = 0;
+  private double deltaX = 0;
+  private double deltaY = 0;
 
-  UISetting uiSetting = new UISetting();
+  private UISetting uiSetting = new UISetting();
 
   private static final int MAP_HEIGHT = 1485;
   private static final int MAP_WIDTH = 2475; // height and width of the map
@@ -166,7 +174,7 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  public void changeToFloor1() {
+  private void changeToFloor1() {
     resetImages();
     mapPane1.setVisible(true);
     imageView1.setVisible(true);
@@ -179,7 +187,7 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  public void changeToFloor2() {
+  private void changeToFloor2() {
     resetImages();
     mapPane2.setVisible(true);
     imageView2.setVisible(true);
@@ -192,7 +200,7 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  public void changeToFloor3() {
+  private void changeToFloor3() {
     resetImages();
     mapPane3.setVisible(true);
     imageView3.setVisible(true);
@@ -205,7 +213,7 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  public void changeToFloor4() {
+  private void changeToFloor4() {
     resetImages();
     mapPane4.setVisible(true);
     imageView4.setVisible(true);
@@ -218,7 +226,7 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  public void changeToFloor5() {
+  private void changeToFloor5() {
     resetImages();
     mapPane5.setVisible(true);
     imageView5.setVisible(true);
@@ -231,7 +239,7 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  public void resetImages() {
+  private void resetImages() {
     mapPane1.setVisible(false);
     imageView1.setVisible(false);
     mapPane2.setVisible(false);
@@ -247,7 +255,7 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  public void addNodeLocation() {
+  private void addNodeLocation() throws IOException {
     double nodeDeltaX = dataMap.getLayoutX() - mapPane.getLayoutX();
     double nodeDeltaY = dataMap.getLayoutY() - mapPane.getLayoutY();
     outlineNode();
@@ -255,7 +263,7 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  public void locationSelector() {
+  private void locationSelector() {
     mapPane.setOnMouseClicked(
         new EventHandler<MouseEvent>() {
           public void handle(MouseEvent mouseEvent) {
@@ -301,35 +309,39 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  public void outlineNode() {
-    clearNode();
-    clearEdge();
-    edgeGridPane.setStyle("-fx-background-color: #e0ded7");
-    nodeGridPane.setStyle("-fx-background-color: #ffffff");
-    typeInput.setStyle(
-        "-fx-background-color: #ffffff; -fx-border-radius: 3; -fx-border-color: #00008b");
-    modifyNodeButton.setVisible(false);
-    deleteNodeButton.setVisible(false);
-    addNodeButton.setVisible(true);
+  private void outlineNode() throws IOException {
+
+    Stage stage = new Stage();
+    FXMLLoader fxmlLoader = new FXMLLoader();
+    fxmlLoader.setControllerFactory(
+        controllerClass -> {
+          System.out.println("here 2");
+          if (controllerClass.equals(MapViewNodePopup.class)) {
+            System.out.println("initialize with correct constructor");
+            return new MapViewNodePopup(this);
+          }
+          return null;
+        });
+    System.out.println("Here");
+    Parent root = fxmlLoader.load(App.class.getResource("Views/MapViewNodePopup.fxml"));
+    stage.setScene(new Scene(root));
+    stage.initModality(Modality.APPLICATION_MODAL);
+    stage.initOwner(nodePopupButton.getScene().getWindow());
+    stage.showAndWait();
   }
 
   @FXML
-  public void outlineEdge() {
-    clearEdge();
-    clearNode();
-    edgeGridPane.setStyle("-fx-background-color: #ffffff");
-    nodeGridPane.setStyle("-fx-background-color: #e0ded7");
-    modifyEdgeButton.setVisible(false);
-    deleteEdgeButton.setVisible(false);
-    addEdgeButton.setVisible(true);
-    selectNode1Button.setDisable(false);
-    selectNode1Button.setOpacity(1);
-    selectNode2Button.setDisable(false);
-    selectNode2Button.setOpacity(1);
+  private void outlineEdge() throws IOException {
+    Stage stage = new Stage();
+    Parent root = FXMLLoader.load(App.class.getResource("Views/MapViewEdgePopup.fxml"));
+    stage.setScene(new Scene(root));
+    stage.initModality(Modality.APPLICATION_MODAL);
+    stage.initOwner(edgePopupButton.getScene().getWindow());
+    stage.showAndWait();
   }
 
   @FXML
-  public void clearNode() {
+  private void clearNode() {
     JFXButton deletedNode = null;
     for (javafx.scene.Node node : mapPane.getChildren()) {
       if (node instanceof JFXButton) {
@@ -447,7 +459,7 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  private void drawNode(Node node) { // draws the given node on the map
+  void drawNode(Node node) { // draws the given node on the map
 
     double heightRatio = (double) PANE_HEIGHT / MAP_HEIGHT;
     double widthRatio = (double) PANE_WIDTH / MAP_WIDTH;
@@ -484,6 +496,7 @@ public class DataMapViewController implements Initializable {
             modifyEdgeButton.setOpacity(1);
           }
         });
+    System.out.println("Floor: " + node.getFloor());
     switch (node.getFloor()) {
       case 1:
         mapPane1.getChildren().add(button);
@@ -536,6 +549,7 @@ public class DataMapViewController implements Initializable {
     deleteEdgeButton.setOpacity(1);
   }
 
+  @FXML
   private void setNodeDraggable(JFXButton button) {
     button.setOnMousePressed(
         mouseEvent -> {
@@ -762,13 +776,13 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  void selectNode1(ActionEvent event) {
+  private void selectNode1(ActionEvent event) {
     selectNode1 = true;
     node1 = null;
   }
 
   @FXML
-  void selectNode2(ActionEvent event) {
+  private void selectNode2(ActionEvent event) {
     selectNode2 = true;
     node2 = null;
   }
@@ -785,7 +799,7 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  public void modifyEdge() throws Exception {
+  private void modifyEdge() throws Exception {
     String node1ID = selectNode1Button.getText();
     String node2ID = selectNode2Button.getText();
     String ID = node1ID + "_" + node2ID; // The edge ID is the two node IDs combined with a "_"
@@ -799,14 +813,14 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  public void deleteEdge() throws Exception {
+  private void deleteEdge() throws Exception {
     databaseManager.deleteEdge(edge.getId()); // deletes the edge in the db
     mapPane.getChildren().remove(edgeLine); // deletes the edge on the map
     clearEdge();
   }
 
   @FXML
-  public void validateNodeText(KeyEvent keyEvent) {
+  private void validateNodeText(KeyEvent keyEvent) {
     if (!xCoorInput.getText().isEmpty()
         && !yCoorInput.getText().isEmpty()
         && !buildingInput.getText().isEmpty()
