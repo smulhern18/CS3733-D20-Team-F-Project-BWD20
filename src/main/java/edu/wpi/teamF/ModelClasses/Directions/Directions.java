@@ -349,7 +349,7 @@ public class Directions {
 
   public Boolean callDirections(String toPhone) {
     String callText =
-        ("<Say><Response>This is an automated call from the Brigham and Women's Hospital Information Kiosk with your directions from "
+        ("<Response><Say>This is an automated call from the Brigham and Women's Hospital Information Kiosk with your directions from "
             + startNode.getLongName()
             + " to "
             + endNode.getLongName()

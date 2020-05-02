@@ -15,7 +15,7 @@ public class HospitalScorer implements Scorer {
 
   private boolean sameHospital(String building1, String building2) {
     return ("Faulkner".equals(building1) && "Faulkner".equals(building2))
-            || (!"Faulkner".equals(building1) && !"Faulkner".equals(building2));
+        || (!"Faulkner".equals(building1) && !"Faulkner".equals(building2));
   }
 
   public HospitalScorer(Map<String, Node> nodeMap, String liftType) {
@@ -29,7 +29,7 @@ public class HospitalScorer implements Scorer {
         Set<Edge> edges = node.getEdges();
         for (Edge edge : edges) {
           if (!sameHospital("Faulkner", nodeMap.get(edge.getNode1()).getBuilding())
-                  || !sameHospital("Faulkner", nodeMap.get(edge.getNode1()).getBuilding())) {
+              || !sameHospital("Faulkner", nodeMap.get(edge.getNode1()).getBuilding())) {
             this.nodes.add(node);
           }
         }
@@ -37,7 +37,7 @@ public class HospitalScorer implements Scorer {
         Set<Edge> edges = node.getEdges();
         for (Edge edge : edges) {
           if (sameHospital("Faulkner", nodeMap.get(edge.getNode1()).getBuilding())
-                  || sameHospital("Faulkner", nodeMap.get(edge.getNode1()).getBuilding())) {
+              || sameHospital("Faulkner", nodeMap.get(edge.getNode1()).getBuilding())) {
             this.nodes.add(node);
           }
         }
@@ -63,7 +63,7 @@ public class HospitalScorer implements Scorer {
           }
           if (!sameHospital(startNode.getBuilding(), endNode.getBuilding())) {
             double cost =
-                    typeScorer.computeCost(from, startNode) + typeScorer.computeCost(endNode, to);
+                typeScorer.computeCost(from, startNode) + typeScorer.computeCost(endNode, to);
             if (cost < bestCost) {
               bestCost = cost;
             }
