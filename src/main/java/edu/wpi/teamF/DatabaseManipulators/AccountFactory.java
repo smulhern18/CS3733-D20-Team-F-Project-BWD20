@@ -1,7 +1,7 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
 import edu.wpi.teamF.ModelClasses.Account.*;
-import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
+import edu.wpi.teamF.ModelClasses.UIAccount;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
 import java.sql.PreparedStatement;

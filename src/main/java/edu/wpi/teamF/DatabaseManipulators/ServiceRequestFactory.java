@@ -40,7 +40,7 @@ public class ServiceRequestFactory {
             + DatabaseManager.DATECOMPLETED_KEY
             + " ) "
             + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    Validators.maintenanceRequestValidation(serviceRequest);
+    Validators.serviceRequestValidation(serviceRequest);
     try (PreparedStatement prepareStatement =
         DatabaseManager.getConnection().prepareStatement(insertStatement)) {
       int param = 1;

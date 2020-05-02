@@ -12,6 +12,7 @@ public class DatabaseManager {
 
   /** Table names */
   static final String SERVICE_REQUEST_TABLE = "serviceRequestsTable";
+  static final String ACCOUNT_TABLE_NAME = "accountsTable";
   /** Column Names */
   // service Request
   static final String SERVICEID_KEY = "serviceId";
@@ -22,6 +23,14 @@ public class DatabaseManager {
   static final String PRIORITY_KEY = "priority";
   static final String COMPLETED_KEY = "completed";
   static final String DATECOMPLETED_KEY = "DateCompleted";
+
+  // accounts
+  static final String USER_NAME_KEY = "userName";
+  static final String PASSWORD_KEY = "password";
+  static final String FIRST_NAME_KEY = "firstName";
+  static final String LAST_NAME_KEY = "lastName";
+  static final String EMAIL_ADDRESS_KEY = "email";
+  static final String USER_TYPE_KEY = "userType";
 
   // Factories
   private ServiceRequestFactory serviceRequestFactory = ServiceRequestFactory.getFactory();
