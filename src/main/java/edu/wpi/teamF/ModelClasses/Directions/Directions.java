@@ -289,9 +289,15 @@ public class Directions {
   }
 
   public String getFullDirectionsString() {
-    String returnString = "";
-    for (Direction direction : directionList) {
-      returnString = returnString + direction.getDirectionText() + "\n";
+    String returnString = (directionList.get(0) + "\n");
+    for (int i = 1; i < directionList.size(); i++) {
+      if (!directionList
+          .get(i)
+          .getDirectionText()
+          .equals(directionList.get(i - 1).getDirectionText())) {
+        // If the text is not a duplicate of the previous (i.e. stairs and elevators)
+        returnString = returnString + directionList.get(i).getDirectionText() + "\n";
+      }
     }
     return returnString;
   }

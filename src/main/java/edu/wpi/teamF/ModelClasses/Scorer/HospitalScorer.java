@@ -7,6 +7,7 @@ import java.util.*;
 public class HospitalScorer implements Scorer {
 
   private static final double HOSPITAL_COST = 10000;
+
   private final Set<Node> nodes;
   private final EuclideanScorer euclideanScorer = new EuclideanScorer();
   private final Map<String, Node> nodeMap;
@@ -19,6 +20,7 @@ public class HospitalScorer implements Scorer {
 
   public HospitalScorer(Map<String, Node> nodeMap, String liftType) {
     typeScorer = new TypeScorer(nodeMap, liftType);
+
     this.nodeMap = nodeMap;
 
     this.nodes = new HashSet<>();
