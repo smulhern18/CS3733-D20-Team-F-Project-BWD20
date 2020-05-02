@@ -289,7 +289,7 @@ public class Directions {
   }
 
   public String getFullDirectionsString() {
-    String returnString = (directionList.get(0) + "\n");
+    String returnString = (directionList.get(0).getDirectionText() + "\n");
     for (int i = 1; i < directionList.size(); i++) {
       if (!directionList
           .get(i)
