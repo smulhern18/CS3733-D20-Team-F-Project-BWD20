@@ -210,39 +210,6 @@ public class ComputerServiceController implements Initializable {
             return param.getValue().getValue().getPriority();
           }
         });
-    /*
-    // assignee column
-    JFXTreeTableColumn<UIComputerServiceRequest, String> assignee =
-        new JFXTreeTableColumn<>("Assignee");
-    assignee.setPrefWidth(80);
-    assignee.setCellValueFactory(
-        new Callback<
-            TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String>,
-            ObservableValue<String>>() {
-          @Override
-          public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String> param) {
-            return param.getValue().getValue().getAssignee();
-          }
-        });
-
-     */
-    /*
-    JFXTreeTableColumn<UIComputerServiceRequest, String> completed =
-        new JFXTreeTableColumn<>("Completed");
-    completed.setPrefWidth(80);
-    completed.setCellValueFactory(
-        new Callback<
-            TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String>,
-            ObservableValue<String>>() {
-          @Override
-          public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String> param) {
-            return param.getValue().getValue().getCompleted();
-          }
-        });
-
-     */
 
     ObservableList<String> completedList = FXCollections.observableArrayList();
     completedList.add("Complete");
