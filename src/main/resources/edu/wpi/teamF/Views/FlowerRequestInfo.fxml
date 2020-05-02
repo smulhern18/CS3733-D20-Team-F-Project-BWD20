@@ -60,14 +60,44 @@
             <children>
                 <HBox alignment="CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="2">
                     <children>
-                        <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="Location:       " />
-                        <JFXComboBox fx:id="locationComboBox" prefHeight="27.0" prefWidth="227.0" />
+                  <GridPane prefHeight="38.0" prefWidth="447.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                              <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="Location:   ">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                              <JFXComboBox fx:id="locationComboBox" prefHeight="27.0" prefWidth="150.0" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" GridPane.rowIndex="5">
                     <children>
-                        <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="Priority:   " />
-                        <JFXComboBox fx:id="priorityComboBox" prefHeight="27.0" prefWidth="248.0" />
+                  <GridPane prefHeight="39.0" prefWidth="446.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                              <JFXComboBox fx:id="priorityComboBox" prefHeight="27.0" prefWidth="150.0" GridPane.columnIndex="1" />
+                              <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="Priority:   ">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="9">
@@ -92,32 +122,114 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
                     <children>
-                        <Label fx:id="buyerNameLabel" alignment="BOTTOM_LEFT" text="Buyer Name:      " />
-                  <JFXTextField fx:id="buyerNameInput" alignment="BOTTOM_LEFT" prefHeight="26.0" prefWidth="211.0" />
+                  <GridPane prefHeight="43.0" prefWidth="302.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                              <Label fx:id="buyerNameLabel" alignment="BOTTOM_LEFT" text="Buyer Name:   ">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="buyerNameInput" alignment="BOTTOM_LEFT" prefHeight="26.0" prefWidth="211.0" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
                     </children>
                 </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
-                  <Label fx:id="nameLabel" alignment="BOTTOM_LEFT" contentDisplay="CENTER" text="Recipient Name:   " />
-                  <JFXTextField fx:id="recipientInput" prefHeight="26.0" prefWidth="202.0" />
+                  <GridPane prefHeight="37.0" prefWidth="300.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label fx:id="nameLabel" alignment="BOTTOM_LEFT" contentDisplay="CENTER" text="Recipient Name:   ">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="recipientInput" prefHeight="26.0" prefWidth="160.0" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                <children>
-                  <Label fx:id="roomNumberLabel" text="Room Number (if known):   " />
-                  <JFXTextField fx:id="roomInput" prefHeight="26.0" prefWidth="153.0" />
+                  <GridPane prefHeight="42.0" prefWidth="334.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label fx:id="roomNumberLabel" text="Room Number (if known):   ">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <GridPane GridPane.columnIndex="1">
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <JFXTextField fx:id="roomInput" prefHeight="27.0" prefWidth="152.0" />
+                           </children>
+                        </GridPane>
+                     </children>
+                  </GridPane>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                <children>
-                  <Label fx:id="messageLabel" text="Message: " />
-                  <JFXTextArea fx:id="messsageInput" prefHeight="42.0" prefWidth="247.0" />
+                  <GridPane prefHeight="43.0" prefWidth="300.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <JFXTextArea fx:id="messsageInput" prefHeight="43.0" prefWidth="145.0" GridPane.columnIndex="1" />
+                        <Label fx:id="messageLabel" text="Message:   ">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </GridPane>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
                <children>
-                  <Label fx:id="phoneNumberLabel" text="Phone Number:   " />
-                  <JFXTextField fx:id="phoneNumberInput" prefHeight="26.0" prefWidth="206.0" />
+                  <GridPane prefHeight="39.0" prefWidth="301.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label fx:id="phoneNumberLabel" text="Phone Number:   ">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="phoneNumberInput" prefHeight="26.0" prefWidth="206.0" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="8">
@@ -127,7 +239,7 @@
             </HBox>
                   <Label fx:id="flowerRequestLabel" contentDisplay="CENTER" text="Flower Delivery Request">
                       <font>
-                          <Font name="HP Simplified" size="23.0" />
+                          <Font size="24.0" />
                       </font>
                   </Label>
             </children>
