@@ -2,7 +2,7 @@ package edu.wpi.teamF.Controllers;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import edu.wpi.teamF.App;
+import com.jfoenix.controls.JFXTextField;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Edge;
@@ -14,23 +14,20 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
 
 public class DataMapViewController implements Initializable {
 
-  @FXML private AnchorPane mainMapPane;
+  @FXML private AnchorPane mainFloorPane;
 
   @FXML private AnchorPane faulknerFloorPane;
 
@@ -44,16 +41,6 @@ public class DataMapViewController implements Initializable {
 
   @FXML private JFXButton faulknerFloor5Button;
 
-  @FXML private AnchorPane pathSwitchFloorPane;
-
-  @FXML private JFXButton edgePopupButton;
-
-  @FXML private JFXButton nodePopupButton;
-
-  @FXML private JFXComboBox<String> hospitalCombo;
-
-  @FXML private AnchorPane mainFloorPane;
-
   @FXML private JFXButton groundButton;
 
   @FXML private JFXButton lower1Button;
@@ -66,7 +53,7 @@ public class DataMapViewController implements Initializable {
 
   @FXML private JFXButton floor3Button;
 
-  @FXML private JFXButton addNodeButton; // Adds the given node
+  @FXML private JFXComboBox<String> hospitalCombo;
 
   @FXML private ScrollPane imageScrollPane;
 
@@ -116,6 +103,48 @@ public class DataMapViewController implements Initializable {
 
   @FXML private AnchorPane mapPaneMainL2;
 
+  @FXML private JFXButton nodeDisplayButton;
+
+  @FXML private JFXButton edgeDisplayButton;
+
+  @FXML private JFXButton cancelButton;
+
+  @FXML private AnchorPane nodeAnchor;
+
+  @FXML private AnchorPane edgeAnchor;
+
+  @FXML private JFXTextField shortNameInput;
+
+  @FXML private JFXTextField longNameInput;
+
+  @FXML private JFXComboBox<String> typeInput;
+
+  @FXML private JFXButton locationButton;
+
+  @FXML private JFXTextField xCoorInput;
+
+  @FXML private JFXTextField yCoorInput;
+
+  @FXML private JFXComboBox<String> hospitalInput;
+
+  @FXML private JFXComboBox<String> floorInput;
+
+  @FXML private JFXButton addNodeButton;
+
+  @FXML private JFXButton deleteNodeButton;
+
+  @FXML private JFXButton modifyNodeButton;
+
+  @FXML private JFXButton node1Button;
+
+  @FXML private JFXButton node2Button;
+
+  @FXML private JFXButton addEdgeButton;
+
+  @FXML private JFXButton deleteEdgeButton;
+
+  @FXML private JFXButton modifyEdgeButton;
+
   private AnchorPane mapPane;
   private ImageView imageView;
 
@@ -129,8 +158,11 @@ public class DataMapViewController implements Initializable {
   private Node node1 = null;
   private Node node2 = null;
 
-  private double deltaX = 0;
-  private double deltaY = 0;
+  double deltaX = 0;
+  double deltaY = 0;
+
+  boolean edgeSelection = false;
+  int numSelected = 0;
 
   private UISetting uiSetting = new UISetting();
 
@@ -142,10 +174,6 @@ public class DataMapViewController implements Initializable {
   private static final int PANE_WIDTH = 974; // height and width of the pane/image
   double heightRatio;
   double widthRatio;
-  private double faulkHeightRatio = (double) PANE_HEIGHT / MAP_HEIGHT_FAULK;
-  private double faulkWidthRatio = (double) PANE_WIDTH / MAP_WIDTH_FAULK; // ratio of pane to map
-  private double mainHeightRatio = (double) PANE_HEIGHT / MAP_HEIGHT_MAIN;
-  private double mainWidthRatio = (double) PANE_WIDTH / MAP_WIDTH_MAIN; // ratio of pane to map
   private DatabaseManager databaseManager = DatabaseManager.getManager();
 
   private enum Hospital {
@@ -154,13 +182,6 @@ public class DataMapViewController implements Initializable {
   };
 
   private Hospital hospital;
-
-  private enum State {
-    ADD,
-    MODIFY
-  };
-
-  private State state;
 
   public DataMapViewController() throws Exception {}
 
@@ -179,6 +200,17 @@ public class DataMapViewController implements Initializable {
     for (Node node : databaseManager.getAllNodes()) {
       drawNode(node);
     }
+
+    typeInput
+        .getItems()
+        .addAll(
+            "CONF", "DEPT", "EXIT", "HALL", "INFO", "LABS", "REST", "RETL", "SERV", "STAF", "STAI");
+    typeInput.setValue("CONF");
+
+    hospitalInput.getItems().addAll("Main", "Faulkner");
+    typeInput.setValue("Main");
+
+    floorInput.getItems().addAll("L2", "L1", "Ground", "F1", "F2", "F3");
 
     ObservableList<String> hospitals = FXCollections.observableArrayList("Faulkner", "Main Campus");
 
@@ -202,7 +234,7 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  void setFloorButtons(ActionEvent event) {
+  private void setFloorButtons(ActionEvent event) {
     if (hospitalCombo.getValue() == "Main Campus") {
       faulknerFloorPane.setVisible(false);
       mainFloorPane.setVisible(true);
@@ -213,7 +245,7 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  void selectFloor(ActionEvent event) {
+  private void selectFloor(ActionEvent event) {
     JFXButton btn = (JFXButton) event.getSource();
 
     switch (btn.getId()) {
@@ -316,34 +348,22 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  private void nodePopup() throws IOException {
-
-    Stage stage = new Stage();
-    FXMLLoader fxmlLoader = new FXMLLoader();
-    fxmlLoader.setControllerFactory(
-        controllerClass -> {
-          if (controllerClass.equals(MapViewNodePopup.class)) {
-            System.out.println("initialize with correct constructor");
-            return new MapViewNodePopup(this);
-          } else {
-            return null;
-          }
-        });
-    Parent root = fxmlLoader.load(App.class.getResource("Views/MapViewNodePopup.fxml"));
-    stage.setScene(new Scene(root));
-    stage.initModality(Modality.APPLICATION_MODAL);
-    stage.initOwner(nodePopupButton.getScene().getWindow());
-    stage.showAndWait();
+  private void displayAddNode() throws IOException {
+    nodeDisplayButton.setVisible(false);
+    edgeDisplayButton.setVisible(false);
+    cancelButton.setVisible(true);
+    edgeAnchor.setVisible(false);
+    nodeAnchor.setVisible(true);
   }
 
   @FXML
-  private void edgePopup() throws IOException {
-    Stage stage = new Stage();
-    Parent root = FXMLLoader.load(App.class.getResource("Views/MapViewEdgePopup.fxml"));
-    stage.setScene(new Scene(root));
-    stage.initModality(Modality.APPLICATION_MODAL);
-    stage.initOwner(edgePopupButton.getScene().getWindow());
-    stage.showAndWait();
+  private void displayAddEdge() throws IOException {
+    nodeDisplayButton.setVisible(false);
+    edgeDisplayButton.setVisible(false);
+    cancelButton.setVisible(true);
+    nodeAnchor.setVisible(false);
+    edgeAnchor.setVisible(true);
+    edgeSelection = true;
   }
 
   @FXML
@@ -351,11 +371,8 @@ public class DataMapViewController implements Initializable {
 
     Node node1 = databaseManager.readNode(edge.getNode1());
     Node node2 = databaseManager.readNode(edge.getNode2());
-    // System.out.println("Here 1");
     setRatios(node1);
-    // System.out.println("Here 2");
     if (node1.getFloor().equals(node2.getFloor())) {
-      // System.out.println("Here 3");
       int startX = (int) ((node1.getXCoord() * widthRatio) + 0.75);
       int startY = (int) ((node1.getYCoord() * heightRatio) + 0.75);
       int endX = (int) ((node2.getXCoord() * widthRatio) + 0.75);
@@ -365,20 +382,18 @@ public class DataMapViewController implements Initializable {
       line.setStroke(Color.BLACK);
       line.setStrokeWidth(1.5);
       line.setOpacity(0.7);
-      // System.out.println("Here 4");
       line.setOnMouseClicked(
           mouseEvent -> { // when a user clicks on a line:
             edgeLine = line;
             this.edge = edge;
+            displayEdge();
           });
-      // System.out.println("Here 5");
       addToPane(node1, line);
-      // System.out.println("Here 6");
     }
   }
 
   @FXML
-  void drawNode(Node node) { // draws the given node on the map
+  private void drawNode(Node node) { // draws the given node on the map
 
     setRatios(node);
 
@@ -398,13 +413,31 @@ public class DataMapViewController implements Initializable {
           nodeButton = button; // sets classes button variable to the selected button
           this.node = node;
           System.out.println(node.getId());
-          if (selectNode1 || selectNode2) {
-            // addEdgeButton.setDisable(false);
+          if (!edgeSelection) {
+            displayNode();
           } else {
-            nodeButton.setOpacity(1);
+            System.out.println("In edge selection");
+            if (numSelected == 0) {
+              System.out.println("First node");
+              node1Button.setText(node.getId());
+            } else if (numSelected == 1 && !node.getId().equals(node1Button.getText())) {
+              System.out.println("Second node");
+              node2Button.setText(node.getId());
+              numSelected = 0;
+              addEdgeButton.setDisable(false);
+            }
           }
         });
     addToPane(node, button);
+  };
+
+  @FXML
+  private void displayNode() {}
+
+  @FXML
+  private void displayEdge() {
+    node1Button.setText(edge.getNode1());
+    node2Button.setText(edge.getNode2());
   }
 
   private void setRatios(Node node) {
@@ -421,7 +454,7 @@ public class DataMapViewController implements Initializable {
       heightRatio = (double) PANE_HEIGHT / MAP_HEIGHT_MAIN;
       widthRatio = (double) PANE_WIDTH / MAP_WIDTH_MAIN;
     }
-  }
+  } // helper for the draw statements
 
   @FXML
   private void addToPane(Node node, javafx.scene.Node child) {
@@ -465,52 +498,261 @@ public class DataMapViewController implements Initializable {
           break;
       }
     }
+  } // helper for the draw functions
+
+  @FXML
+  private void addNode(ActionEvent event) throws Exception {
+
+    Stage stage;
+
+    int tracker = 0;
+    int instance = 0;
+    int newInstance = 0;
+    int instanceNum = 0;
+
+    // try { // is the input valid?
+    short xCoordinate = Short.parseShort(xCoorInput.getText());
+    short yCoordinate = Short.parseShort(yCoorInput.getText());
+    String building = hospitalInput.getValue().toString();
+    String longName = longNameInput.getText();
+    String shortName = shortNameInput.getText();
+    Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getValue().toString());
+    String floorNumber = floorInput.getValue().toString();
+    List<Node> typeNodes = databaseManager.getNodesByType(nodeType);
+
+    List<Integer> typeInstances = new ArrayList<>();
+
+    for (int i = 0; i < typeNodes.size(); i++) { // collects all of the instances for the given type
+      if (typeNodes.get(i).getFloor() == floorNumber) {
+        instanceNum = Integer.parseInt(typeNodes.get(i).getId().substring(5, 8));
+        typeInstances.add(instanceNum);
+      }
+    }
+
+    Collections.sort(typeInstances); // sorts the list
+
+    if (typeNodes.size() > 0) {
+      for (int i = 0; i < typeInstances.size(); i++) {
+        System.out.println(typeInstances.get(i));
+        instance = typeInstances.get(i); // 1
+        if (instance - tracker > 1) { // 1-0 = 1
+          newInstance = tracker + 1;
+          break;
+        } else if (instance == typeInstances.size()) {
+          newInstance = typeInstances.size() + 1;
+          break;
+        } else {
+          tracker++;
+        }
+      }
+    } else {
+      newInstance = 1;
+    }
+    String strInstance = "" + newInstance;
+    String strFloor = "0" + floorNumber;
+
+    switch (strInstance.length()) {
+      case 1:
+        strInstance = "00" + strInstance;
+        break;
+      case 2:
+        strInstance = "0" + strInstance;
+        break;
+    }
+
+    String ID = "F" + typeInput.getValue() + strInstance + strFloor;
+
+    Node newNode =
+        new Node(
+            ID,
+            xCoordinate,
+            yCoordinate,
+            building,
+            longName,
+            shortName,
+            nodeType,
+            floorNumber); // creates a new node
+
+    databaseManager.manipulateNode(newNode); // creates the node in the db
+    drawNode(newNode);
+    stage = (Stage) addNodeButton.getScene().getWindow();
+    stage.close();
+
+    //    } catch (Exception e) { // throws an error if the input provided by the user is invalid
+    //      errorLabel.setText("The input is not valid");
+    //    }
   }
 
-  //  @FXML
-  //  AnchorPane findPane(Node node) {
-  //    AnchorPane thePane;
-  //    if (node.getBuilding().equals("Faulkner")) {
-  //      switch (node.getFloor()) {
-  //        case "1":
-  //          thePane = mapPaneFaulkner1;
-  //          break;
-  //        case "2":
-  //          thePane = mapPaneFaulkner2;
-  //          break;
-  //        case "3":
-  //          thePane = mapPaneFaulkner3;
-  //          break;
-  //        case "4":
-  //          thePane = mapPaneFaulkner4;
-  //          break;
-  //        case "5":
-  //          thePane = mapPaneFaulkner5;
-  //          break;
-  //      }
-  //    } else {
-  //      switch (node.getFloor()) {
-  //        case "Ground":
-  //          thePane = mapPaneMainG;
-  //          break;
-  //        case "L2":
-  //          thePane = mapPaneMainL2;
-  //          break;
-  //        case "L1":
-  //          thePane = mapPaneMainL1;
-  //          break;
-  //        case "F1":
-  //          thePane = mapPaneMain1;
-  //          break;
-  //        case "F2":
-  //          thePane = mapPaneMain2;
-  //          break;
-  //        case "F3":
-  //          thePane = mapPaneMain3;
-  //          break;
-  //      }
-  //    }
-  //  }
+  @FXML
+  private void modifyNode(ActionEvent event) {
+
+    short oldXCoordinate = node.getXCoord();
+    short oldYCoordinate = node.getYCoord();
+    String oldBuilding = node.getBuilding();
+    String oldLongName = node.getLongName();
+    String oldShortName = node.getShortName();
+    Node.NodeType oldNodeType = node.getType();
+    String oldFloorNumber = node.getFloor(); // stores the input in variables
+
+    try { // is the input correct?
+      short xCoordinate = Short.parseShort(xCoorInput.getText());
+      short yCoordinate = Short.parseShort(yCoorInput.getText());
+      String building = hospitalInput.getValue();
+      String longName = longNameInput.getText();
+      String shortName = shortNameInput.getText();
+      Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getValue().toString());
+      String floorNumber = floorInput.getValue(); // stores the input in variables
+
+      node.setXCoord(xCoordinate);
+      node.setYCoord(yCoordinate);
+      node.setBuilding(building);
+      node.setLongName(longName);
+      node.setShortName(shortName);
+      node.setType(nodeType);
+      node.setFloor(floorNumber); // sets the node to the provided values
+
+      databaseManager.manipulateNode(node); // adds node in db
+
+      if (oldFloorNumber != floorNumber) { // removes edges
+        for (Edge edge : databaseManager.getAllEdgesConnectedToNode(node.getId())) {
+          for (int i = 0; i < mapPane.getChildren().size(); i++) {
+            javafx.scene.Node children = mapPane.getChildren().get(i);
+            if (children instanceof Line && children.getId().equals(edge.getId())) {
+              mapPane.getChildren().remove(children);
+            }
+          }
+        }
+
+        mapPane.getChildren().remove(nodeButton); // removes node
+
+        addToPane(node, nodeButton); // adds new node
+
+      } else { // on the same floor
+        for (Edge edge : databaseManager.getAllEdgesConnectedToNode(node.getId())) {
+          for (int i = 0; i < mapPane.getChildren().size(); i++) {
+            javafx.scene.Node children = mapPane.getChildren().get(i);
+            if (children instanceof Line && children.getId().equals(edge.getId())) {
+              Line line = (Line) children;
+              if (edge.getNode1().equals(node.getId())) {
+                line.setStartX(xCoordinate * widthRatio);
+                line.setStartY(yCoordinate * heightRatio);
+              } else { // if node two then it is an ending coordinate
+                line.setEndX(xCoordinate * widthRatio);
+                line.setEndY(yCoordinate * heightRatio);
+              }
+              break;
+            }
+          }
+        }
+      }
+
+      nodeButton.setLayoutX(xCoordinate * widthRatio - 3);
+      nodeButton.setLayoutY(yCoordinate * heightRatio - 3);
+
+      clearNode();
+
+    } catch (Exception e) { // throws an error if the input is not valid
+      if (oldXCoordinate == node.getXCoord()
+          && oldYCoordinate == node.getYCoord()
+          && oldBuilding == node.getBuilding()
+          && oldLongName.equals(node.getLongName())
+          && oldShortName.equals(node.getShortName())
+          && oldNodeType.equals(node.getType())
+          && oldFloorNumber == node.getFloor()) {
+        System.out.println("The input is invalid");
+        // nodeErrorLabel.setText("The input is invalid");
+      }
+    }
+  }
+
+  @FXML
+  private void deleteNode(ActionEvent event) throws Exception {
+    mapPane.getChildren().remove(nodeButton); // removes the node on the map
+    clearNode();
+    for (Edge edge : databaseManager.getAllEdgesConnectedToNode(node.getId())) {
+      for (int i = 0; i < mapPane.getChildren().size(); i++) { // for child in the pane
+        javafx.scene.Node children = mapPane.getChildren().get(i);
+        if (children instanceof Line && children.getId().equals(edge.getId())) {
+          mapPane.getChildren().remove(children); // remove the edge from the map
+          databaseManager.deleteEdge(children.getId()); // remove the edge from the database
+          break;
+        }
+      }
+    }
+    databaseManager.deleteNode(node.getId()); // removes the node in the database
+  }
+
+  @FXML
+  private void addEdge(ActionEvent event) throws Exception {
+    String node1ID = node1Button.getText();
+    String node2ID = node2Button.getText();
+    edge.setNode1(node1ID);
+    edge.setNode2(node2ID);
+    edge.setId(node1ID + "_" + node2ID); // The edge ID is the two node IDs combined with a "_");
+    databaseManager.manipulateEdge(edge);
+    drawEdge(edge);
+    edgeSelection = false;
+    clearViews();
+  }
+
+  @FXML
+  private void modifyEdge(ActionEvent event) {}
+
+  @FXML
+  private void deleteEdge(ActionEvent event) throws Exception {}
+
+  @FXML
+  private void cancelViews(ActionEvent event) throws Exception {
+    nodeAnchor.setVisible(false);
+    edgeAnchor.setVisible(false);
+    cancelButton.setVisible(false);
+    nodeDisplayButton.setVisible(true);
+    edgeDisplayButton.setVisible(true);
+  }
+
+  @FXML
+  private void updateFloor(ActionEvent event) {
+    if (hospitalInput.getValue().equals("Faulkner")) {
+      floorInput.getItems().removeAll("L2", "L1", "Ground", "F1", "F2", "F3");
+      floorInput.getItems().addAll("1", "2", "3", "4", "5");
+    } else {
+      floorInput.getItems().removeAll("1", "2", "3", "4", "5");
+      floorInput.getItems().addAll("L2", "L1", "Ground", "F1", "F2", "F3");
+    }
+  }
+
+  @FXML
+  private void validateNodeText(KeyEvent keyEvent) {
+    if (!shortNameInput.getText().isEmpty()
+        && !longNameInput.getText().isEmpty()
+        && !xCoorInput.getText().isEmpty()
+        && !yCoorInput.getText().isEmpty()) {
+      modifyNodeButton.setDisable(false);
+      modifyNodeButton.setOpacity(1);
+      addNodeButton.setDisable(false);
+      addNodeButton.setOpacity(1);
+    } else {
+      modifyNodeButton.setDisable(true);
+      modifyNodeButton.setOpacity(.4);
+      addNodeButton.setDisable(true);
+      addNodeButton.setOpacity(.4);
+    }
+  }
+
+  @FXML
+  private void clearNode() {}
+
+  @FXML
+  private void clearEdge() {}
+
+  @FXML
+  private void clearViews() {
+    nodeAnchor.setVisible(false);
+    edgeAnchor.setVisible(false);
+    cancelButton.setVisible(false);
+    nodeDisplayButton.setVisible(true);
+    edgeDisplayButton.setVisible(true);
+  }
 
   @FXML
   private void setNodeDraggable(JFXButton button) {

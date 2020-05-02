@@ -2,11 +2,13 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
@@ -25,74 +27,74 @@
 
 
                         <StackPane fx:id="imageStackPane" style="-fx-background-color: #a2a2a2;">
-                            <children>
-                                <ImageView fx:id="imageViewFaulkner1" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true" visible="false">
-                                    <image>
-                                        <Image url="@../Maps/Faulkner/Floor1LM.png" />
-                                    </image>
-                                </ImageView>
-                                <AnchorPane fx:id="mapPaneFaulkner1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
-                                <ImageView fx:id="imageViewFaulkner2" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../Maps/Faulkner/Floor2LM.png" />
-                                    </image>
-                                </ImageView>
-                                <AnchorPane fx:id="mapPaneFaulkner2" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
-                                <ImageView fx:id="imageViewFaulkner3" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../Maps/Faulkner/Floor3LM.png" />
-                                    </image>
-                                </ImageView>
-                                <AnchorPane fx:id="mapPaneFaulkner3" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
-                                <ImageView fx:id="imageViewFaulkner4" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../Maps/Faulkner/Floor4LM.png" />
-                                    </image>
-                                </ImageView>
-                                <AnchorPane fx:id="mapPaneFaulkner4" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
-                                <ImageView fx:id="imageViewFaulkner5" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@../Maps/Faulkner/Floor5LM.png" />
-                                    </image>
-                                </ImageView>
-                                <AnchorPane fx:id="mapPaneFaulkner5" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
-                                <ImageView fx:id="imageViewMain1" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true">
-                                    <image>
-                                        <Image url="@../Maps/MainCampus/F1.png" />
-                                    </image>
-                                </ImageView>
-                                <ImageView fx:id="imageViewMain2" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">
-                                    <image>
-                                        <Image url="@../Maps/MainCampus/F2.png" />
-                                    </image>
-                                </ImageView>
-                                <ImageView fx:id="imageViewMain3" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">
-                                    <image>
-                                        <Image url="@../Maps/MainCampus/F3.png" />
-                                    </image>
-                                </ImageView>
-                                <ImageView fx:id="imageViewMainG" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">
-                                    <image>
-                                        <Image url="@../Maps/MainCampus/ground.png" />
-                                    </image>
-                                </ImageView>
-                                <ImageView fx:id="imageViewMainL1" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">
-                                    <image>
-                                        <Image url="@../Maps/MainCampus/L1.png" />
-                                    </image>
-                                </ImageView>
-                                <ImageView fx:id="imageViewMainL2" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">
-                                    <image>
-                                        <Image url="@../Maps/MainCampus/L2.png" />
-                                    </image>
-                                </ImageView>
-                                <AnchorPane fx:id="mapPaneMain1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
-                                <AnchorPane fx:id="mapPaneMain2" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
-                                <AnchorPane fx:id="mapPaneMain3" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
-                                <AnchorPane fx:id="mapPaneMainG" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
-                                <AnchorPane fx:id="mapPaneMainL1" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
-                                <AnchorPane fx:id="mapPaneMainL2" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
-                            </children>
+<!--                            <children>-->
+<!--                                <ImageView fx:id="imageViewFaulkner1" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true" visible="false">-->
+<!--                                    <image>-->
+<!--                                        <Image url="@../Maps/Faulkner/Floor1LM.png" />-->
+<!--                                    </image>-->
+<!--                                </ImageView>-->
+<!--                                <AnchorPane fx:id="mapPaneFaulkner1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />-->
+<!--                                <ImageView fx:id="imageViewFaulkner2" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">-->
+<!--                                    <image>-->
+<!--                                        <Image url="@../Maps/Faulkner/Floor2LM.png" />-->
+<!--                                    </image>-->
+<!--                                </ImageView>-->
+<!--                                <AnchorPane fx:id="mapPaneFaulkner2" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />-->
+<!--                                <ImageView fx:id="imageViewFaulkner3" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">-->
+<!--                                    <image>-->
+<!--                                        <Image url="@../Maps/Faulkner/Floor3LM.png" />-->
+<!--                                    </image>-->
+<!--                                </ImageView>-->
+<!--                                <AnchorPane fx:id="mapPaneFaulkner3" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />-->
+<!--                                <ImageView fx:id="imageViewFaulkner4" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">-->
+<!--                                    <image>-->
+<!--                                        <Image url="@../Maps/Faulkner/Floor4LM.png" />-->
+<!--                                    </image>-->
+<!--                                </ImageView>-->
+<!--                                <AnchorPane fx:id="mapPaneFaulkner4" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />-->
+<!--                                <ImageView fx:id="imageViewFaulkner5" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">-->
+<!--                                    <image>-->
+<!--                                        <Image url="@../Maps/Faulkner/Floor5LM.png" />-->
+<!--                                    </image>-->
+<!--                                </ImageView>-->
+<!--                                <AnchorPane fx:id="mapPaneFaulkner5" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />-->
+<!--                                <ImageView fx:id="imageViewMain1" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true">-->
+<!--                                    <image>-->
+<!--                                        <Image url="@../Maps/MainCampus/F1.png" />-->
+<!--                                    </image>-->
+<!--                                </ImageView>-->
+<!--                                <ImageView fx:id="imageViewMain2" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">-->
+<!--                                    <image>-->
+<!--                                        <Image url="@../Maps/MainCampus/F2.png" />-->
+<!--                                    </image>-->
+<!--                                </ImageView>-->
+<!--                                <ImageView fx:id="imageViewMain3" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">-->
+<!--                                    <image>-->
+<!--                                        <Image url="@../Maps/MainCampus/F3.png" />-->
+<!--                                    </image>-->
+<!--                                </ImageView>-->
+<!--                                <ImageView fx:id="imageViewMainG" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">-->
+<!--                                    <image>-->
+<!--                                        <Image url="@../Maps/MainCampus/ground.png" />-->
+<!--                                    </image>-->
+<!--                                </ImageView>-->
+<!--                                <ImageView fx:id="imageViewMainL1" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">-->
+<!--                                    <image>-->
+<!--                                        <Image url="@../Maps/MainCampus/L1.png" />-->
+<!--                                    </image>-->
+<!--                                </ImageView>-->
+<!--                                <ImageView fx:id="imageViewMainL2" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">-->
+<!--                                    <image>-->
+<!--                                        <Image url="@../Maps/MainCampus/L2.png" />-->
+<!--                                    </image>-->
+<!--                                </ImageView>-->
+<!--                                <AnchorPane fx:id="mapPaneMain1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />-->
+<!--                                <AnchorPane fx:id="mapPaneMain2" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />-->
+<!--                                <AnchorPane fx:id="mapPaneMain3" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />-->
+<!--                                <AnchorPane fx:id="mapPaneMainG" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />-->
+<!--                                <AnchorPane fx:id="mapPaneMainL1" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />-->
+<!--                                <AnchorPane fx:id="mapPaneMainL2" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />-->
+<!--                            </children>-->
                         </StackPane>
 
 
@@ -132,17 +134,17 @@
         </AnchorPane>
         <AnchorPane fx:id="pathSwitchFloorPane" maxHeight="80.0" maxWidth="1.0" prefHeight="80.0" prefWidth="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="220.0" />
 
-            <JFXButton fx:id="edgePopupButton" buttonType="RAISED" minHeight="50.0" minWidth="150.0" mnemonicParsing="false" onAction="#edgePopup" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Add Edge" textFill="WHITE" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="120.0">
+            <JFXButton fx:id="edgeDisplayButton" buttonType="RAISED" minHeight="50.0" minWidth="150.0" mnemonicParsing="false" onAction="#displayAddEdge" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Add Edge" textFill="WHITE" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="110.0">
                 <font>
                     <Font name="System Bold" size="24.0" />
                 </font>
             </JFXButton>
-            <JFXButton fx:id="nodePopupButton" buttonType="RAISED" maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" onAction="#nodePopup" prefHeight="50.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Add Node" textFill="WHITE" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+            <JFXButton fx:id="nodeDisplayButton" buttonType="RAISED" maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" onAction="#displayAddNode" prefHeight="50.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Add Node" textFill="WHITE" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="30.0">
                 <font>
                     <Font name="System Bold" size="24.0" />
                 </font>
             </JFXButton>
-      <AnchorPane maxHeight="60.0" minHeight="60.0" prefHeight="60.0" prefWidth="510.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-radius: 2;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="220.0">
+      <AnchorPane maxHeight="60.0" minHeight="60.0" prefHeight="60.0" prefWidth="510.0" style="-fx-background-color: rgba(255,255,255,0.9);" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="220.0">
          <children>
             <Label prefHeight="60.0" prefWidth="139.0" text="Hospital:" textFill="#012d5a" AnchorPane.leftAnchor="20.0">
                <font>
@@ -186,5 +188,122 @@
             </JFXButton>
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="nodeAnchor" maxHeight="400.0" maxWidth="325.0" minHeight="400.0" minWidth="325.0" prefHeight="400.0" prefWidth="325.0" style="-fx-background-color: rgba(255,255,255,0.9);" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <GridPane prefHeight="350.0" prefWidth="282.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="35.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="5.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="55.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="8.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="3.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Short Name:" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Long Name:" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Type:" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Select Location:" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="X-Coordinate:" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Y-Coordinate:" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Hospital:" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Floor:" GridPane.rowIndex="8">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <JFXTextField fx:id="shortNameInput" focusColor="#012d5a" onKeyReleased="#validateNodeText" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <JFXComboBox fx:id="typeInput" focusColor="#012d5a" prefHeight="26.0" prefWidth="180.0" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <JFXTextField fx:id="longNameInput" focusColor="#012d5a" onKeyReleased="#validateNodeText" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <JFXTextField focusColor="#012d5a" onKeyReleased="#validateNodeText" prefWidth="180.0" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="5" fx:id="xCoorInput" />
+                  <JFXTextField fx:id="yCoorInput" focusColor="#012d5a" onKeyReleased="#validateNodeText" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                  <JFXComboBox fx:id="hospitalInput" focusColor="#012d5a" onAction="#updateFloor" prefHeight="26.0" prefWidth="180.0" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                  <JFXComboBox fx:id="floorInput" focusColor="#012d5a" prefHeight="26.0" prefWidth="180.0" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                  <JFXButton fx:id="locationButton" prefHeight="32.0" prefWidth="174.0" style="-fx-border-color: #012d5a; -fx-border-radius: 3;" text="Click Here" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                  <JFXButton fx:id="addNodeButton" disable="true" maxHeight="25.0" maxWidth="40.0" minHeight="25.0" minWidth="40.0" onAction="#addNode" prefHeight="25.0" prefWidth="40.0" style="-fx-background-color: #012d5a;" text="Add" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
+                  <JFXButton fx:id="deleteNodeButton" maxHeight="26.0" maxWidth="50.0" minHeight="25.0" minWidth="50.0" onAction="#deleteNode" prefHeight="26.0" prefWidth="50.0" style="-fx-background-color: #012d5a;" text="Delete" textAlignment="CENTER" textFill="WHITE" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                  <JFXButton fx:id="modifyNodeButton" disable="true" maxHeight="26.0" maxWidth="53.0" minHeight="25.0" minWidth="53.0" onAction="#modifyNode" prefHeight="26.0" prefWidth="53.0" style="-fx-background-color: #012d5a;" text="Modify" textAlignment="CENTER" textFill="WHITE" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="9" />
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="edgeAnchor" layoutX="10.0" layoutY="10.0" maxHeight="275.0" maxWidth="325.0" minHeight="275.0" minWidth="325.0" prefHeight="275.0" prefWidth="325.0" style="-fx-background-color: rgba(255,255,255,0.9);" visible="false" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <GridPane fx:id="nodeGrid1" prefHeight="400.0" prefWidth="325.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <columnConstraints>
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="35.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="5.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="55.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="8.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="3.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label text="Select Node 1:" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Select Node 2:" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="node1Button" prefHeight="32.0" prefWidth="174.0" style="-fx-border-color: #012d5a; -fx-border-radius: 3;" text="Click Here" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <JFXButton fx:id="addEdgeButton" disable="true" maxHeight="25.0" maxWidth="40.0" minHeight="25.0" minWidth="40.0" onAction="#addEdge" prefHeight="25.0" prefWidth="40.0" style="-fx-background-color: #012d5a;" text="Add" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                  <JFXButton fx:id="deleteEdgeButton" maxHeight="26.0" maxWidth="50.0" minHeight="25.0" minWidth="50.0" onAction="#deleteEdge" prefHeight="26.0" prefWidth="50.0" style="-fx-background-color: #012d5a;" text="Delete" textAlignment="CENTER" textFill="WHITE" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <JFXButton fx:id="modifyEdgeButton" disable="true" maxHeight="26.0" maxWidth="53.0" minHeight="25.0" minWidth="53.0" onAction="#modifyEdge" prefHeight="26.0" prefWidth="53.0" style="-fx-background-color: #012d5a;" text="Modify" textAlignment="CENTER" textFill="WHITE" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                  <JFXButton fx:id="node2Button" prefHeight="32.0" prefWidth="174.0" style="-fx-border-color: #012d5a; -fx-border-radius: 3;" text="Click Here" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+      <JFXButton fx:id="cancelButton" buttonType="RAISED" layoutX="10.0" layoutY="10.0" maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" onAction="#cancelViews" prefHeight="50.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Cancel" textFill="WHITE" visible="false" AnchorPane.leftAnchor="200.0" AnchorPane.topAnchor="30.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </JFXButton>
     </children>
 </AnchorPane>
