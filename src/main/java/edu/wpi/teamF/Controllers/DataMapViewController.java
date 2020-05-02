@@ -10,6 +10,8 @@ import edu.wpi.teamF.ModelClasses.Node;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+
+import edu.wpi.teamF.ModelClasses.ValidationException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -420,6 +422,7 @@ public class DataMapViewController implements Initializable {
             if (numSelected == 0) {
               System.out.println("First node");
               node1Button.setText(node.getId());
+              numSelected++;
             } else if (numSelected == 1 && !node.getId().equals(node1Button.getText())) {
               System.out.println("Second node");
               node2Button.setText(node.getId());
@@ -686,20 +689,31 @@ public class DataMapViewController implements Initializable {
   private void addEdge(ActionEvent event) throws Exception {
     String node1ID = node1Button.getText();
     String node2ID = node2Button.getText();
-    edge.setNode1(node1ID);
-    edge.setNode2(node2ID);
-    edge.setId(node1ID + "_" + node2ID); // The edge ID is the two node IDs combined with a "_");
-    databaseManager.manipulateEdge(edge);
-    drawEdge(edge);
+    String edgeID = node1ID + "_" + node2ID;
+    Edge newEdge = new Edge(edgeID, node1ID, node2ID);
+    databaseManager.manipulateEdge(newEdge);
+    drawEdge(newEdge);
     edgeSelection = false;
     clearViews();
   }
 
   @FXML
-  private void modifyEdge(ActionEvent event) {}
+  private void modifyEdge(ActionEvent event) throws Exception {
+    String node1ID = node1Button.getText();
+    String node2ID = node2Button.getText();
+    String ID = node1ID + "_" + node2ID;
+    Edge newEdge = new Edge(ID, node1ID, node2ID);
+    databaseManager.deleteEdge(edge.getId());
+    mapPane.getChildren().remove(edgeLine);
+    databaseManager.manipulateEdge(newEdge);
+    drawEdge(newEdge);
+  }
 
   @FXML
-  private void deleteEdge(ActionEvent event) throws Exception {}
+  private void deleteEdge(ActionEvent event) throws Exception {
+    databaseManager.deleteEdge(edge.getId());
+    mapPane.getChildren().remove(edgeLine); // deletes the edge on the map
+  }
 
   @FXML
   private void cancelViews(ActionEvent event) throws Exception {
