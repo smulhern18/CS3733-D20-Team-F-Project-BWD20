@@ -69,6 +69,18 @@ public class PathfinderController implements Initializable {
   public JFXTextArea directionsDisplay;
   public AnchorPane pathSwitchFloorPane;
   public JFXButton pathSwitchFloor;
+  public AnchorPane mapPaneMainL2 = new AnchorPane();
+  public AnchorPane mapPaneMainL1 = new AnchorPane();
+  public AnchorPane mapPaneMainG = new AnchorPane();
+  public AnchorPane mapPaneMain1 = new AnchorPane();
+  public AnchorPane mapPaneMain2 = new AnchorPane();
+  public AnchorPane mapPaneMain3 = new AnchorPane();
+  public ImageView imageViewMainL2 = new ImageView();
+  public ImageView imageViewMainL1 = new ImageView();
+  public ImageView imageViewMainG = new ImageView();
+  public ImageView imageViewMain1 = new ImageView();
+  public ImageView imageViewMain2 = new ImageView();
+  public ImageView imageViewMain3 = new ImageView();
 
   public List<Node> fullNodeList;
   public int state;
@@ -325,6 +337,48 @@ public class PathfinderController implements Initializable {
     directionsPane.setVisible(false);
   }
 
+  //  private void initializeMainCampusPanes() {
+  //    mapPaneMain1.setPrefSize(974.4, 585.6);
+  //    mapPaneMain2.setPrefSize(974.4, 585.6);
+  //    mapPaneMain3.setPrefSize(974.4, 585.6);
+  //    mapPaneMainG.setPrefSize(974.4, 585.6);
+  //    mapPaneMainL1.setPrefSize(974.4, 585.6);
+  //    mapPaneMainL2.setPrefSize(974.4, 585.6);
+  //    imageViewMain1.setPreserveRatio(false);
+  //    imageViewMain1.setFitWidth(974.4);
+  //    imageViewMain1.setFitHeight(585.6);
+  //    imageViewMain2.setPreserveRatio(false);
+  //    imageViewMain2.setFitWidth(974.4);
+  //    imageViewMain2.setFitHeight(585.6);
+  //    imageViewMain3.setPreserveRatio(false);
+  //    imageViewMain3.setFitWidth(974.4);
+  //    imageViewMain3.setFitHeight(585.6);
+  //    imageViewMainG.setPreserveRatio(false);
+  //    imageViewMainG.setFitWidth(974.4);
+  //    imageViewMainG.setFitHeight(585.6);
+  //    imageViewMainL1.setPreserveRatio(false);
+  //    imageViewMainL1.setFitWidth(974.4);
+  //    imageViewMainL1.setFitHeight(585.6);
+  //    imageViewMainL2.setPreserveRatio(false);
+  //    imageViewMainL2.setFitWidth(974.4);
+  //    imageViewMainL2.setFitHeight(585.6);
+  //    masterPaneFaulkner1
+  //        .getChildren()
+  //        .addAll(
+  //            mapPaneMain1,
+  //            mapPaneMain2,
+  //            mapPaneMain3,
+  //            mapPaneMainG,
+  //            mapPaneMainL1,
+  //            mapPaneMainL2,
+  //            imageViewMain1,
+  //            imageViewMain2,
+  //            imageViewMain3,
+  //            imageViewMainG,
+  //            imageViewMainL1,
+  //            imageViewMainL2);
+  //  }
+
   public void findType(String type) throws InstanceNotFoundException {
     switchToFloor(startNode.getFloor());
     startCombo.setDisable(true);
@@ -521,6 +575,18 @@ public class PathfinderController implements Initializable {
     imageViewFaulkner4.setVisible(false);
     mapPaneFaulkner5.setVisible(false);
     imageViewFaulkner5.setVisible(false);
+    mapPaneMain1.setVisible(false);
+    mapPaneMain2.setVisible(false);
+    mapPaneMain3.setVisible(false);
+    mapPaneMainG.setVisible(false);
+    mapPaneMainL1.setVisible(false);
+    mapPaneMainL2.setVisible(false);
+    imageViewMain1.setVisible(false);
+    imageViewMain2.setVisible(false);
+    imageViewMain3.setVisible(false);
+    imageViewMainG.setVisible(false);
+    imageViewMainL1.setVisible(false);
+    imageViewMainL2.setVisible(false);
   }
 
   public void switchToFloor(String floorNum) {

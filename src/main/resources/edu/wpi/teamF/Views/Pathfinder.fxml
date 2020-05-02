@@ -41,7 +41,7 @@
 
                   <StackPane fx:id="masterPaneFaulkner1" style="-fx-background-color: #a2a2a2;">
                      <children>
-                        <ImageView fx:id="imageViewFaulkner1" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imageViewFaulkner1" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
                               <Image url="@../Maps/Floor1LM_editedIt2.png" />
                            </image>
@@ -71,6 +71,42 @@
                            </image>
                         </ImageView>
                         <AnchorPane fx:id="mapPaneFaulkner5" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                        <ImageView fx:id="imageViewMain1" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true">
+                           <image>
+                              <Image url="@../Maps/F1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="imageViewMain2" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../Maps/F2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="imageViewMain3" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../Maps/F3.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="imageViewMainG" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../Maps/ground.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="imageViewMainL1" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../Maps/L1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="imageViewMainL2" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../Maps/L2.png" />
+                           </image>
+                        </ImageView>
+                        <AnchorPane fx:id="mapPaneMain1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                        <AnchorPane fx:id="mapPaneMain2" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                        <AnchorPane fx:id="mapPaneMain3" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                        <AnchorPane fx:id="mapPaneMainG" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                        <AnchorPane fx:id="mapPaneMainL1" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                        <AnchorPane fx:id="mapPaneMainL2" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
                      </children>
                   </StackPane>
 
