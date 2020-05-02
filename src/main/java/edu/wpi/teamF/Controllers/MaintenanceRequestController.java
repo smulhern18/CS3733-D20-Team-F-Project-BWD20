@@ -83,15 +83,6 @@ public class MaintenanceRequestController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     // add the different choices to the choicebox
     // Replace this with long names, linked to IDs
-    List<Node> nodes = null;
-    try {
-      nodes = databaseManager.getAllNodes();
-    } catch (Exception e) {
-      System.out.println(e.getMessage() + e.getClass());
-    }
-    for (Node node : nodes) {
-      locationComboBox.getItems().add(node.getId());
-    }
 
     UISetting uiSetting = new UISetting();
     uiSetting.setAsLocationComboBox(locationComboBox);
@@ -99,13 +90,6 @@ public class MaintenanceRequestController implements Initializable {
     priorityComboBox.getItems().add("Low");
     priorityComboBox.getItems().add("Medium");
     priorityComboBox.getItems().add("High");
-
-    List<Account> accounts = databaseManager.getAllAccounts();
-    for (Account acc : accounts) {
-      if (acc.getType() == Type.JANITOR) {
-        assigneeChoice.getItems().add(acc.getFirstName());
-      }
-    }
 
     // ID
     JFXTreeTableColumn<UIMaintenenceRequest, String> ID = new JFXTreeTableColumn<>("ID");
@@ -159,14 +143,6 @@ public class MaintenanceRequestController implements Initializable {
         });
 
     // Assignee choicebox
-
-    List<Account> employeeNames = databaseManager.getAllAccounts();
-    ObservableList<String> employees = FXCollections.observableArrayList();
-    for (Account account : employeeNames) {
-      if (account.getType() == Account.Type.JANITOR) {
-        employees.add(account.getFirstName());
-      }
-    }
     JFXTreeTableColumn<UIMaintenenceRequest, String> column = new JFXTreeTableColumn<>("Assignee");
     column.setCellValueFactory(
         (JFXTreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) ->
@@ -182,7 +158,6 @@ public class MaintenanceRequestController implements Initializable {
           }
         });
     column.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-    column.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(employees));
     column.setOnEditCommit(
         new EventHandler<TreeTableColumn.CellEditEvent<UIMaintenenceRequest, String>>() {
           @Override
@@ -250,7 +225,6 @@ public class MaintenanceRequestController implements Initializable {
     // Get the values
     String location = locationComboBox.getValue();
     String nodeID = location.substring(location.length() - 10);
-    Node node = databaseManager.readNode(nodeID);
     String desc = desText.getText();
     String priority = priorityComboBox.getValue();
     String assignee = assigneeChoice.getValue();
@@ -267,7 +241,7 @@ public class MaintenanceRequestController implements Initializable {
     DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
     Date date = new Date(System.currentTimeMillis());
     MaintenanceRequest csRequest =
-        new MaintenanceRequest(node, desc, assignee, date, priorityDB, null);
+        new MaintenanceRequest(nodeID, desc, assignee, date, priorityDB, null);
     databaseManager.manipulateServiceRequest(csRequest);
     csrUI.add(new UIMaintenenceRequest(csRequest));
     treeTableMaintenance.refresh();

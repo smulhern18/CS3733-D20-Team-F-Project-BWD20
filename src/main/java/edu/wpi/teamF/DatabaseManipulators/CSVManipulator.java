@@ -7,16 +7,8 @@ import edu.wpi.teamF.ModelClasses.Account.Nurse;
 import edu.wpi.teamF.ModelClasses.Account.Patient;
 import edu.wpi.teamF.ModelClasses.Account.Staff;
 import edu.wpi.teamF.ModelClasses.Account.User;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.FlowerRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.LanguageServiceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.LaundryServiceRequest;
 import edu.wpi.teamF.ModelClasses.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MedicineDeliveryRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SanitationServiceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.TransportRequest;
+
 import java.io.*;
 import java.nio.file.Path;
 import java.sql.SQLException;
@@ -98,7 +90,7 @@ public class CSVManipulator {
     // writing to the file
     List<Node> nodes = nodeFactory.getAllNodes();
     try (FileWriter fw = new FileWriter(path.toString() + "/MapFAllnodes.csv");
-        BufferedWriter bw = new BufferedWriter(fw); ) {
+        BufferedWriter bw = new BufferedWriter(fw)) {
 
       bw.write("nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName,teamAssigned");
 
@@ -168,7 +160,7 @@ public class CSVManipulator {
     // csvString = csvString + formatNode(n);
 
     try (FileWriter fw = new FileWriter(path.toString() + "/MapFAlledges.csv");
-        BufferedWriter bw = new BufferedWriter(fw); ) {
+        BufferedWriter bw = new BufferedWriter(fw)) {
 
       bw.write("edgeID,startNode,endNode");
 
@@ -206,7 +198,7 @@ public class CSVManipulator {
         databaseManager.manipulateServiceRequest(
             new MaintenanceRequest(
                 data.get(i),
-                nodeFactory.read(data.get(i + 1)),
+                data.get(i + 1),
                 data.get(i + 2),
                 data.get(i + 3),
                 new Date(Integer.parseInt(data.get(i + 4))),
@@ -233,7 +225,7 @@ public class CSVManipulator {
         maintenanceRequestFactory.getAllMaintenanceRequests();
 
     try (FileWriter fw = new FileWriter(path.toString() + "/MaintenanceBackup.csv");
-        BufferedWriter bw = new BufferedWriter(fw); ) {
+        BufferedWriter bw = new BufferedWriter(fw)) {
 
       bw.write(
           "id,location,assignee,description,dateTimeSubmitted,priority,complete,timeCompleted");
@@ -254,7 +246,7 @@ public class CSVManipulator {
     Main =
         m.getId()
             + ","
-            + m.getLocation().getId()
+            + m.getLocation()
             + ","
             + m.getAssignee()
             + ","

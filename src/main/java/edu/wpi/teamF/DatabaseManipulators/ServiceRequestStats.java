@@ -1,7 +1,7 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
 import edu.wpi.teamF.ModelClasses.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.TransportRequest;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -26,7 +26,7 @@ public class ServiceRequestStats {
         maintenanceRequestFactory.getAllMaintenanceRequests();
     if (maintenanceRequestList.size() != 0) {
       try (FileWriter fw = new FileWriter(path.toString() + "/ServiceRequestReport.csv");
-          BufferedWriter bw = new BufferedWriter(fw); ) {
+          BufferedWriter bw = new BufferedWriter(fw)) {
         bw.write("EmployeeName,NumberOfRequestsAssigned");
         ArrayList<String> stats = new ArrayList<String>();
         stats = getMaintenanceEmployeeNumbers(maintenanceRequestList);
@@ -116,7 +116,7 @@ public class ServiceRequestStats {
     List<TransportRequest> transportRequests = transportRequestFactory.getAllTransportRequests();
     if (transportRequests.size() != 0) {
       try (FileWriter fw = new FileWriter(path.toString() + "/ServiceRequestReport.csv", true);
-          BufferedWriter bw = new BufferedWriter(fw); ) {
+          BufferedWriter bw = new BufferedWriter(fw)) {
         bw.write("EmployeeName,NumberOfRequestsAssigned");
         ArrayList<String> stats = new ArrayList<String>();
         stats = getEmployeeNumbers(transportRequests);

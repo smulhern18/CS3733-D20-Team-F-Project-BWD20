@@ -1,7 +1,7 @@
 package edu.wpi.teamF.ModelClasses;
 
 import edu.wpi.teamF.ModelClasses.Account.Account;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
+
 import java.util.Date;
 
 public class Validators {
@@ -397,7 +397,7 @@ public class Validators {
   public static <T extends MaintenanceRequest> void maintenanceRequestValidation(
       T t, int... constraints) throws ValidationException {
     nullCheckValidation(t, constraints);
-    MaintenanceRequest maintenanceRequestObject = (MaintenanceRequest) t;
+    MaintenanceRequest maintenanceRequestObject = t;
 
     idValidation(maintenanceRequestObject.getId());
     nodeValidation(maintenanceRequestObject.getLocation());

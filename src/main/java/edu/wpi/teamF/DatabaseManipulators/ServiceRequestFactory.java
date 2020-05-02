@@ -1,7 +1,5 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
 import java.sql.PreparedStatement;
@@ -10,10 +8,8 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class ServiceRequestFactory {
-  NodeFactory nodeFactory = NodeFactory.getFactory();
   private static final ServiceRequestFactory factory = new ServiceRequestFactory();
 
   static ServiceRequestFactory getFactory() {

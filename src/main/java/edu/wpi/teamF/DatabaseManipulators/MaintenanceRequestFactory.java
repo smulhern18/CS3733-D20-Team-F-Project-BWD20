@@ -1,7 +1,6 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
 import edu.wpi.teamF.ModelClasses.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
 import java.sql.PreparedStatement;
@@ -13,7 +12,6 @@ import java.util.Date;
 import java.util.List;
 
 public class MaintenanceRequestFactory {
-  NodeFactory nodeFactory = NodeFactory.getFactory();
   private static final MaintenanceRequestFactory factory = new MaintenanceRequestFactory();
   private static final ServiceRequestFactory serviceRequestFactory =
       ServiceRequestFactory.getFactory();
@@ -25,7 +23,7 @@ public class MaintenanceRequestFactory {
   public void create(MaintenanceRequest maintenanceRequest) throws ValidationException {
     String insertStatement =
         "INSERT INTO "
-            + DatabaseManager.MAINTENANCE_REQUEST_TABLE_NAME
+            + DatabaseManager.SERVICE_REQUEST_TABLE
             + " ( "
             + DatabaseManager.SERVICEID_KEY
             + ","
@@ -180,7 +178,6 @@ public class MaintenanceRequestFactory {
             DatabaseManager.getConnection().prepareStatement(selectStatement);
         ResultSet resultSet = preparedStatement.executeQuery()) {
       maintenanceRequests = new ArrayList<>();
-      ;
       while (resultSet.next()) {
         ServiceRequest serviceRequest =
             serviceRequestFactory.read(resultSet.getString(DatabaseManager.SERVICEID_KEY));
