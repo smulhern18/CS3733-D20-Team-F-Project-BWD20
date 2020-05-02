@@ -285,7 +285,6 @@ public class MaintenanceRequestController implements Initializable {
 
   public void delete(ActionEvent actionEvent) throws Exception {
     String toDelte = deleteText.getText();
-    databaseManager.deleteComputerServiceRequest(toDelte);
     csrUI.removeIf(transportRequest -> transportRequest.getID().get().equals(toDelte));
     deleteText.setText("");
     treeTableMaintenance.refresh();

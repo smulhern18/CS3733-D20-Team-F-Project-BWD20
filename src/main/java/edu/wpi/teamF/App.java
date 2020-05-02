@@ -33,35 +33,6 @@ public class App extends Application {
 
     Scene primaryScene = new Scene(new AnchorPane());
     FXMLLoader fxmlLoader = new FXMLLoader();
-    fxmlLoader.setControllerFactory(
-        controllerClass -> {
-          if (controllerClass.equals(LoginController.class)) {
-            return loginController;
-          } else if (controllerClass.equals(DataManipulatorController.class)) {
-            return dataManipulatorController;
-          } else if (controllerClass.equals(HelpController.class)) {
-            return helpController;
-          } else if (controllerClass.equals(MainMenuController.class)) {
-            return mainMenuController;
-          } else if (controllerClass.equals(MenuBarController.class)) {
-            return menuBarController;
-          } else if (controllerClass.equals(PathfinderController.class)) {
-            return pathfinderController;
-          } else if (controllerClass.equals(RegisterController.class)) {
-            return registerController;
-          } else if (controllerClass.equals(ServiceRequestMainController.class)) {
-            return serviceRequestController;
-          } else if (controllerClass.equals(AccountsController.class)) {
-            return accountsController;
-          } else if (controllerClass.equals(ComputerServiceController.class)) {
-            return computerController;
-          } else if (controllerClass.equals(MedicineDeliveryController.class)) {
-            return medicineController;
-          } else if (controllerClass.equals(MaintenanceRequestController.class)) {
-            return maintenanceRequestController;
-          }
-          return null;
-        });
     sceneController = new SceneController(fxmlLoader, primaryStage, primaryScene);
     Parent root = FXMLLoader.load(getClass().getResource("Views/MainMenu.fxml"));
     primaryScene.setRoot(root);
