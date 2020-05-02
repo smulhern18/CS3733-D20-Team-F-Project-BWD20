@@ -1,10 +1,16 @@
 package edu.wpi.teamF.ModelClasses.Directions;
 
+import edu.wpi.teamF.Controllers.com.twilio.SendSms;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
 import edu.wpi.teamF.ModelClasses.Scorer.EuclideanScorer;
 import java.util.*;
+import javafx.print.PrinterJob;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
+import javax.print.*;
 
 public class Directions {
   private List<Direction> directionList = new ArrayList<>();
@@ -12,6 +18,7 @@ public class Directions {
   private final Map<String, Node> nodeMap = new HashMap<>();
   private Node startNode;
   private Node endNode;
+  private SendSms sendSms = new SendSms();
 
   public Directions(List<Node> fullNodeList, Path path, Node startNode, Node endNode) {
     for (Node node : fullNodeList) {
@@ -201,5 +208,47 @@ public class Directions {
       }
     }
     return "";
+  }
+
+  public Boolean smsDirections(String toPhone) {
+    String sendMsg =
+        ("-\n\nDirections from "
+            + startNode.getLongName()
+            + " to "
+            + endNode.getLongName()
+            + " at Brigham & Women's Hospital:\n\n");
+    sendMsg += getFullDirectionsString();
+    return sendSms.sendMsg(toPhone, sendMsg);
+  }
+
+  public void printDirections() {
+    System.out.println("Creating a printer job...");
+
+    String printMsg =
+        ("Directions from "
+            + startNode.getLongName()
+            + " to "
+            + endNode.getLongName()
+            + " at Brigham & Women's Hospital:\n\n");
+    printMsg += getFullDirectionsString();
+
+    Text printText = new Text(printMsg);
+    printText.setFont(new Font(11));
+    TextFlow printArea = new TextFlow(printText);
+    printArea.setMaxWidth(155);
+
+    PrinterJob job = PrinterJob.createPrinterJob();
+    if (job != null) {
+      System.out.println(job.jobStatusProperty().asString());
+
+      boolean printed = job.printPage(printArea);
+      if (printed) {
+        job.endJob();
+      } else {
+        System.out.println("Printing failed.");
+      }
+    } else {
+      System.out.println("Could not create a printer job.");
+    }
   }
 }

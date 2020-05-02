@@ -154,6 +154,7 @@ public class PathfinderController implements Initializable {
       pathSwitchFloor.setVisible(false);
       directionsDisplay.setText(directions.getFullDirectionsString());
     }
+    directionsDisplay.setText(directions.getFullDirectionsString());
   }
 
   public void placeButton(Node node) {

@@ -170,7 +170,7 @@ public class DatabaseManager {
             + TYPE_KEY
             + " VARCHAR(4) NOT NULL, "
             + FLOOR_KEY
-            + " SMALLINT NOT NULL, "
+            + " VARCHAR(5) NOT NULL, "
             + "PRIMARY KEY ("
             + NODEID_KEY
             + "))";

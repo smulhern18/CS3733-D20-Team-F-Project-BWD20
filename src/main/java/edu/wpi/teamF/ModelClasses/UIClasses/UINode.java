@@ -42,7 +42,7 @@ public class UINode extends RecursiveTreeObject<UINode> {
           longName.get(),
           shortName.get(),
           Node.NodeType.getEnum(nodeType.get()),
-          Short.parseShort(floor.get()));
+          floor.get());
     } catch (Exception e) {
       System.out.println(e.getClass() + "" + e.getMessage());
       System.out.println(xCoord.get());

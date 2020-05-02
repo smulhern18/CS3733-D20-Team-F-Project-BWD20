@@ -428,7 +428,7 @@ public class DataManipulatorController implements Initializable {
     String longName = longNameInput.getText();
     String shortName = shortNameInput.getText();
     Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getText());
-    short floorNumber = Short.parseShort(floorInput.getText()); // stores the inputs into
+    String floorNumber = floorInput.getText(); // stores the inputs into
 
     Node testNode = databaseManager.readNode(ID); // does the ID exist?
 

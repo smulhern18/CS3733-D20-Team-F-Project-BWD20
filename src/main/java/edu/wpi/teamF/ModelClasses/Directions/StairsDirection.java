@@ -33,11 +33,11 @@ public class StairsDirection extends Direction {
             + Integer.toString(endFloor)
             + ".");
     if (this.turn == Turn.LEFT) {
-      returnString += " Upon exiting, turning left.";
+      returnString += " Upon exiting, turn left.";
     } else if (this.turn == Turn.STRAIGHT) {
       returnString += " Upon exiting, proceed straight.";
     } else {
-      returnString += " Upon exiting, turning right.";
+      returnString += " Upon exiting, turn right.";
     }
     return returnString;
   }
