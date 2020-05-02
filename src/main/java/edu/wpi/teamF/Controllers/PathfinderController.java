@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -88,6 +89,9 @@ public class PathfinderController implements Initializable {
   public JFXButton mainFloorL2Button;
   public JFXButton mainFloorL1Button;
   public AnchorPane selectFloorPaneMain;
+  public Label startLabel;
+  public Label endLabel;
+
 
   // stairs v elev stuff
   String liftType = "ELEV";
@@ -300,6 +304,9 @@ public class PathfinderController implements Initializable {
     endCombo.setValue(null);
 
     setComboBehavior();
+
+    startLabel.setVisible(false);
+    endLabel.setVisible(false);
   }
 
   private void resetButtonLine(String floor, String building) {
@@ -701,5 +708,28 @@ public class PathfinderController implements Initializable {
           liftType = "STAI";
           pathFindAlgorithm.setLiftType(liftType);
         });
+  }
+
+  public void labelNode(Node node, String location){
+    if("start".equals(location)) {
+      for (javafx.scene.Node component : currentPane.getChildren()) {
+        if (component.getId().equals(node.getId())) {
+          startLabel.setLayoutX(component.getLayoutX());
+          startLabel.setLayoutY(component.getLayoutY() + 10);
+          startLabel.setText(node.getLongName());
+          startLabel.setVisible(true);
+        }
+      }
+    }
+    if("end".equals(location)) {
+      for (javafx.scene.Node component : currentPane.getChildren()) {
+        if (component.getId().equals(node.getId())) {
+          endLabel.setLayoutX(component.getLayoutX());
+          endLabel.setLayoutY(component.getLayoutY() + 10);
+          endLabel.setText(node.getLongName());
+          endLabel.setVisible(true);
+        }
+      }
+    }
   }
 }
