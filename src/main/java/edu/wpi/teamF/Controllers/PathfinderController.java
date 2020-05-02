@@ -88,8 +88,6 @@ public class PathfinderController implements Initializable {
   public JFXButton mainFloorL2Button;
   public JFXButton mainFloorL1Button;
 
-
-
   public List<Node> fullNodeList;
   public int state;
   public UISetting uiSetting = new UISetting();
@@ -149,7 +147,9 @@ public class PathfinderController implements Initializable {
         Line line = new Line(startX, startY, endX, endY);
         line.setStroke(Color.RED);
         line.setStrokeWidth(2);
-        getFloorPane(pathNodes.get(i).getFloor(),pathNodes.get(i).getBuilding()).getChildren().add(line);
+        getFloorPane(pathNodes.get(i).getFloor(), pathNodes.get(i).getBuilding())
+            .getChildren()
+            .add(line);
       }
     }
 
@@ -229,7 +229,7 @@ public class PathfinderController implements Initializable {
             pathButton.setDisable(false);
           }
         });
-    getFloorPane(node.getFloor(),node.getBuilding()).getChildren().add(button);
+    getFloorPane(node.getFloor(), node.getBuilding()).getChildren().add(button);
   }
 
   public void reset() {
@@ -237,17 +237,17 @@ public class PathfinderController implements Initializable {
   }
 
   public void resetPane() {
-    resetButtonLine("1","Faulkner");
-    resetButtonLine("2","Faulkner");
-    resetButtonLine("3","Faulkner");
-    resetButtonLine("4","Faulkner");
-    resetButtonLine("5","Faulkner");
-    resetButtonLine("1","Main");
-    resetButtonLine("2","Main");
-    resetButtonLine("3","Main");
-    resetButtonLine("G","Main");
-    resetButtonLine("L1","Main");
-    resetButtonLine("L2","Main");
+    resetButtonLine("1", "Faulkner");
+    resetButtonLine("2", "Faulkner");
+    resetButtonLine("3", "Faulkner");
+    resetButtonLine("4", "Faulkner");
+    resetButtonLine("5", "Faulkner");
+    resetButtonLine("1", "Main");
+    resetButtonLine("2", "Main");
+    resetButtonLine("3", "Main");
+    resetButtonLine("G", "Main");
+    resetButtonLine("L1", "Main");
+    resetButtonLine("L2", "Main");
 
     if (startNode != null) {
       for (javafx.scene.Node component : currentPane.getChildren()) {
@@ -290,9 +290,9 @@ public class PathfinderController implements Initializable {
     setComboBehavior();
   }
 
-  private void resetButtonLine(String floor,String building) {
+  private void resetButtonLine(String floor, String building) {
     List<javafx.scene.Node> nodesToRemove = new ArrayList<>();
-    for (javafx.scene.Node node : getFloorPane(floor,building).getChildren()) {
+    for (javafx.scene.Node node : getFloorPane(floor, building).getChildren()) {
       if (node instanceof Line) {
         nodesToRemove.add(node);
       } else if (node instanceof JFXButton) {
@@ -302,7 +302,7 @@ public class PathfinderController implements Initializable {
                 + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
       }
     }
-    getFloorPane(floor,building).getChildren().removeAll(nodesToRemove);
+    getFloorPane(floor, building).getChildren().removeAll(nodesToRemove);
   }
 
   public void drawNodes() {
@@ -352,7 +352,7 @@ public class PathfinderController implements Initializable {
   }
 
   public void findType(String type) throws InstanceNotFoundException {
-    switchToFloor(startNode.getFloor(),startNode.getBuilding());
+    switchToFloor(startNode.getFloor(), startNode.getBuilding());
     startCombo.setDisable(true);
     endCombo.setDisable(true);
     Path newPath = pathFindAlgorithm.pathfind(startNode, Node.NodeType.getEnum(type));
@@ -391,7 +391,8 @@ public class PathfinderController implements Initializable {
           stairsBtn.setDisable(false);
           elevBtn.setDisable(false);
           bathBtn.setDisable(false);
-          for (javafx.scene.Node component : getFloorPane(node.getFloor(),node.getBuilding()).getChildren()) {
+          for (javafx.scene.Node component :
+              getFloorPane(node.getFloor(), node.getBuilding()).getChildren()) {
             if (component.getId().equals(node.getId())) {
               component.setStyle(
                   "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00cc00; "
@@ -423,7 +424,8 @@ public class PathfinderController implements Initializable {
           stairsBtn.setDisable(true);
           elevBtn.setDisable(true);
           bathBtn.setDisable(true);
-          for (javafx.scene.Node component : getFloorPane(node.getFloor(),node.getBuilding()).getChildren()) {
+          for (javafx.scene.Node component :
+              getFloorPane(node.getFloor(), node.getBuilding()).getChildren()) {
             if (component.getId().equals(node.getId())) {
               component.setStyle(
                   "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; "
@@ -458,10 +460,11 @@ public class PathfinderController implements Initializable {
             state = 1;
             commandText.setText("Select End Location or Building Feature");
             endCombo.setDisable(false);
-            if (findComboLocation(startCombo).getFloor().equals(currentFloor) && findComboLocation(startCombo).getBuilding().equals(currentBuilding) ) {
+            if (findComboLocation(startCombo).getFloor().equals(currentFloor)
+                && findComboLocation(startCombo).getBuilding().equals(currentBuilding)) {
               String nameHolder = startCombo.getValue();
               Node nodeHolder = findComboLocation(startCombo);
-              switchToFloor(nodeHolder.getFloor(),nodeHolder.getBuilding());
+              switchToFloor(nodeHolder.getFloor(), nodeHolder.getBuilding());
               startCombo.setValue(nameHolder);
               endNode = nodeHolder;
             }
@@ -490,7 +493,7 @@ public class PathfinderController implements Initializable {
           System.out.println("start" + startNode);
           System.out.println("end" + endNode);
           Path path = null;
-          switchToFloor(startNode.getFloor(),startNode.getBuilding());
+          switchToFloor(startNode.getFloor(), startNode.getBuilding());
           try {
             path = pathFindAlgorithm.pathfind(startNode, endNode);
           } catch (InstanceNotFoundException e) {
@@ -506,17 +509,17 @@ public class PathfinderController implements Initializable {
   }
 
   public void floorButtonsSet() {
-    floor1Button.setOnAction(actionEvent -> switchToFloor("1","Faulkner"));
-    floor2Button.setOnAction(actionEvent -> switchToFloor("2","Faulkner"));
-    floor3Button.setOnAction(actionEvent -> switchToFloor("3","Faulkner"));
-    floor4Button.setOnAction(actionEvent -> switchToFloor("4","Faulkner"));
-    floor5Button.setOnAction(actionEvent -> switchToFloor("5","Faulkner"));
-    mainFloor1Button.setOnAction(actionEvent -> switchToFloor("1","Main"));
-    mainFloor2Button.setOnAction(actionEvent -> switchToFloor("2","Main"));
-    mainFloor3Button.setOnAction(actionEvent -> switchToFloor("3","Main"));
-    mainFloorGButton.setOnAction(actionEvent -> switchToFloor("G","Main"));
-    mainFloorL1Button.setOnAction(actionEvent -> switchToFloor("L1","Main"));
-    mainFloorL1Button.setOnAction(actionEvent -> switchToFloor("L2","Main"));
+    floor1Button.setOnAction(actionEvent -> switchToFloor("1", "Faulkner"));
+    floor2Button.setOnAction(actionEvent -> switchToFloor("2", "Faulkner"));
+    floor3Button.setOnAction(actionEvent -> switchToFloor("3", "Faulkner"));
+    floor4Button.setOnAction(actionEvent -> switchToFloor("4", "Faulkner"));
+    floor5Button.setOnAction(actionEvent -> switchToFloor("5", "Faulkner"));
+    mainFloor1Button.setOnAction(actionEvent -> switchToFloor("1", "Main"));
+    mainFloor2Button.setOnAction(actionEvent -> switchToFloor("2", "Main"));
+    mainFloor3Button.setOnAction(actionEvent -> switchToFloor("3", "Main"));
+    mainFloorGButton.setOnAction(actionEvent -> switchToFloor("G", "Main"));
+    mainFloorL1Button.setOnAction(actionEvent -> switchToFloor("L1", "Main"));
+    mainFloorL1Button.setOnAction(actionEvent -> switchToFloor("L2", "Main"));
   }
 
   public void deselectFloorButtons() {
@@ -550,32 +553,33 @@ public class PathfinderController implements Initializable {
     imageViewMainL2.setVisible(false);
   }
 
-  public void switchToFloor(String floorNum,String building) {
-    currentPane = getFloorPane(floorNum,building);
+  public void switchToFloor(String floorNum, String building) {
+    currentPane = getFloorPane(floorNum, building);
     currentFloor = floorNum;
     currentBuilding = building;
     setAllInvisible();
     currentPane.setVisible(true);
-    getFloorImage(floorNum,building).setVisible(true);
+    getFloorImage(floorNum, building).setVisible(true);
     deselectFloorButtons();
-    getFloorButton(floorNum,building).setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
+    getFloorButton(floorNum, building)
+        .setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
   }
 
   public void pathSwitchFloor(ActionEvent actionEvent) {
     if (currentFloor.equals(startNode.getFloor())) {
       // Currently on the start floor, want to go to the end floor
-      switchToFloor(endNode.getFloor(),endNode.getBuilding());
+      switchToFloor(endNode.getFloor(), endNode.getBuilding());
       pathSwitchFloor.setText("Previous: Go to floor " + startNode.getFloor());
       directionsDisplay.setText(directions.getFullDirectionsStringForFloor(endNode.getFloor()));
     } else {
-      switchToFloor(startNode.getFloor(),startNode.getFloor());
+      switchToFloor(startNode.getFloor(), startNode.getFloor());
       pathSwitchFloor.setText("Next: Go to floor " + endNode.getFloor());
       directionsDisplay.setText(directions.getFullDirectionsStringForFloor(startNode.getFloor()));
     }
   }
 
-  public AnchorPane getFloorPane(String floor,String building) {
-    if  ("Faulkner".equals(building)) {
+  public AnchorPane getFloorPane(String floor, String building) {
+    if ("Faulkner".equals(building)) {
       switch (floor) {
         case "1":
           return mapPaneFaulkner1;
@@ -606,7 +610,7 @@ public class PathfinderController implements Initializable {
     }
   }
 
-  public ImageView getFloorImage(String floor,String building) {
+  public ImageView getFloorImage(String floor, String building) {
     if ("Faulkner".equals(building)) {
       switch (floor) {
         case "1":
@@ -621,24 +625,24 @@ public class PathfinderController implements Initializable {
           return imageViewFaulkner5;
       }
     } else {
-    switch (floor) {
-      case "1":
-        return imageViewMain1;
-      case "2":
-        return imageViewMain2;
-      case "3":
-        return imageViewMain3;
-      case "G":
-        return imageViewMainG;
-      case "L1":
-        return imageViewMainL1;
-      default:
-        return imageViewMainL2;
+      switch (floor) {
+        case "1":
+          return imageViewMain1;
+        case "2":
+          return imageViewMain2;
+        case "3":
+          return imageViewMain3;
+        case "G":
+          return imageViewMainG;
+        case "L1":
+          return imageViewMainL1;
+        default:
+          return imageViewMainL2;
+      }
     }
   }
-  }
 
-  public JFXButton getFloorButton(String floor,String building) {
+  public JFXButton getFloorButton(String floor, String building) {
     if ("Faulkner".equals(building)) {
       switch (floor) {
         case "1":
@@ -653,20 +657,20 @@ public class PathfinderController implements Initializable {
           return floor5Button;
       }
     } else {
-    switch (floor) {
-      case "1":
-        return mainFloor1Button;
-      case "2":
-        return mainFloor2Button;
-      case "3":
-        return mainFloor3Button;
-      case "G":
-        return mainFloorGButton;
-      case "L1":
-        return mainFloorL1Button;
-      default:
-        return mainFloorL2Button;
+      switch (floor) {
+        case "1":
+          return mainFloor1Button;
+        case "2":
+          return mainFloor2Button;
+        case "3":
+          return mainFloor3Button;
+        case "G":
+          return mainFloorGButton;
+        case "L1":
+          return mainFloorL1Button;
+        default:
+          return mainFloorL2Button;
+      }
     }
-  }
   }
 }

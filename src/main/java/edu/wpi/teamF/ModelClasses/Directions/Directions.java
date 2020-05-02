@@ -29,7 +29,8 @@ public class Directions {
     List<Node> pathNodeList = path.getPath();
 
     // Create the starting directions
-    //TODO Add handling if the start node is not connected directly to a hallway (need an in-transit room to get to the hallway)
+    // TODO Add handling if the start node is not connected directly to a hallway (need an
+    // in-transit room to get to the hallway)
     if (pathNodeList.get(2).getId().equals(endNode.getId())) {
       // Check if there's only a single node between start and goal
       directionList.add(new StartDirection(0, pathNodeList.get(0).getFloor()));
@@ -104,7 +105,7 @@ public class Directions {
         directionList.add(new GoalDirection(goalTurnAngle, pathNodeList.get(i).getFloor()));
         break;
 
-      // Check if this node is an elevator
+        // Check if this node is an elevator
       } else if (pathNodeList.get(i).getType().equals(Node.NodeType.getEnum("ELEV"))) {
         // This node is an elevator
         // Only add the hallway instruction if it actually went some distance
@@ -144,7 +145,7 @@ public class Directions {
           }
         }
 
-      // Check if this node is a stairwell
+        // Check if this node is a stairwell
       } else if (pathNodeList.get(i).getType().equals(Node.NodeType.getEnum("STAI"))) {
         // This node is a stairwell
         // Only add the hallway instruction if it actually went some distance
@@ -162,66 +163,77 @@ public class Directions {
             if (!Node.NodeType.getEnum("STAI").equals(pathNodeList.get(j + 1).getType())) {
               // If the next node is not a stair, this is the last stair in the sequence
               exitAngle =
-                      getAngle(pathNodeList.get(j), pathNodeList.get(j + 1), pathNodeList.get(j + 2));
+                  getAngle(pathNodeList.get(j), pathNodeList.get(j + 1), pathNodeList.get(j + 2));
               endFloor = pathNodeList.get(j).getFloor();
               break;
             }
           }
           directionList.add(
-                  new StairsDirection(
-                          pathNodeList.get(i).getFloor(),
-                          endFloor,
-                          exitAngle,
-                          pathNodeList.get(i).getFloor()));
+              new StairsDirection(
+                  pathNodeList.get(i).getFloor(),
+                  endFloor,
+                  exitAngle,
+                  pathNodeList.get(i).getFloor()));
         } else if (!Node.NodeType.getEnum("STAI").equals(pathNodeList.get(i + 1).getType())) {
           // The next node is a not a stair, this is the last stair in a sequence
           // Use the previous element in the path, but change the floor
           if (directionList.get(directionList.size() - 1) instanceof StairsDirection) {
             StairsDirection tempStaiDir =
-                    (StairsDirection) directionList.get(directionList.size() - 1);
+                (StairsDirection) directionList.get(directionList.size() - 1);
             tempStaiDir.setFloor(pathNodeList.get(i).getFloor());
             directionList.add(tempStaiDir);
           }
         }
       }
 
-      //Building exit
-      else if (Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(i).getType())){
-        //This is a building exit or entrance
+      // Building exit
+      else if (Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(i).getType())) {
+        // This is a building exit or entrance
         if (currHall.getDistance() > 0) {
           directionList.add(currHall);
         }
         currHall = new StraightDirection(0, 0, pathNodeList.get(i).getFloor());
 
         if (!Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(i - 1).getType())) {
-          //If the previous node was not an exit, this is the first exit in the exit sequence
-          directionList.add(new ExitDirection(pathNodeList.get(i).getBuilding(), pathNodeList.get(i).getFloor()));
-          if (Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(i + 1).getType())){
-            //If the next node is also an exit, we are transiting between buildings
-            directionList.add(new TravelDirection(pathNodeList.get(i).getBuilding(), pathNodeList.get(i+1).getBuilding(), pathNodeList.get(i).getFloor()));
+          // If the previous node was not an exit, this is the first exit in the exit sequence
+          directionList.add(
+              new ExitDirection(pathNodeList.get(i).getBuilding(), pathNodeList.get(i).getFloor()));
+          if (Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(i + 1).getType())) {
+            // If the next node is also an exit, we are transiting between buildings
+            directionList.add(
+                new TravelDirection(
+                    pathNodeList.get(i).getBuilding(),
+                    pathNodeList.get(i + 1).getBuilding(),
+                    pathNodeList.get(i).getFloor()));
           }
+        } else if (!Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(i + 1).getType())) {
+          // This is NOT an initial exit, but it IS the final exit, meaning you're entering a
+          // building
+          directionList.add(
+              new EnterDirection(
+                  pathNodeList.get(i).getBuilding(), pathNodeList.get(i).getFloor()));
         }
-        else if (!Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(i + 1).getType())){
-          //This is NOT an initial exit, but it IS the final exit, meaning you're entering a building
-          directionList.add(new EnterDirection(pathNodeList.get(i).getBuilding(), pathNodeList.get(i).getFloor()));
-        }
-        //Ignore intermediate exit nodes
+        // Ignore intermediate exit nodes
       }
 
-      //If the given node is not a hall, the goal, exit, travel, elevator, or stairs, it must be an in-transit node
-      else{
-        if (Node.NodeType.getEnum("HALL").equals(pathNodeList.get(i - 1).getType())){
-          //Previous node was a hallway, so we are entering a room
+      // If the given node is not a hall, the goal, exit, travel, elevator, or stairs, it must be an
+      // in-transit node
+      else {
+        if (Node.NodeType.getEnum("HALL").equals(pathNodeList.get(i - 1).getType())) {
+          // Previous node was a hallway, so we are entering a room
           if (currHall.getDistance() > 0) {
             directionList.add(currHall);
           }
           currHall = new StraightDirection(0, 0, pathNodeList.get(i + 2).getFloor());
 
-          directionList.add(new EnterDirection(pathNodeList.get(i).getLongName(), pathNodeList.get(i).getFloor()));
-        }
-        else{
-          //The previous node was a room
-          directionList.add(new ProceedDirection(pathNodeList.get(i).getLongName(), pathNodeList.get(i).getFloor()));
+          directionList.add(
+              new EnterDirection(
+                  pathNodeList.get(i).getLongName(), pathNodeList.get(i).getFloor()));
+        } else {
+          // The previous node was a room
+          directionList.add(
+              new ProceedDirection(
+                  pathNodeList.get(i).getLongName(), pathNodeList.get(i).getFloor()));
         }
       }
     }
