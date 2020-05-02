@@ -8,10 +8,7 @@ import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Directions.Directions;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
-import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.BreadthFirst;
-import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.DepthFirstSearch;
-import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.MultipleFloorAStar;
-import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.PathfindAlgorithm;
+import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.*;
 import edu.wpi.teamF.ModelClasses.Scorer.EuclideanScorer;
 import java.net.URL;
 import java.util.ArrayList;
@@ -123,7 +120,7 @@ public class PathfinderController implements Initializable {
   private void updatePathFindAlgorithm() {
     switch (newPathfind) {
       case "A Star":
-        MultipleFloorAStar currentAlgorithm1 = new MultipleFloorAStar(fullNodeList);
+        MultipleHospitalAStar currentAlgorithm1 = new MultipleHospitalAStar(fullNodeList);
         currentAlgorithm1.setLiftType(liftType);
         this.pathFindAlgorithm = currentAlgorithm1;
         System.out.println("successful astar");
@@ -364,7 +361,7 @@ public class PathfinderController implements Initializable {
       fullNodeList.add(node);
     }
 
-    pathFindAlgorithm = new MultipleFloorAStar(fullNodeList);
+    pathFindAlgorithm = new MultipleHospitalAStar(fullNodeList);
     System.out.println("NEW PATHFIND:  " + newPathfind);
     updatePathFindAlgorithm();
     resetPane();
