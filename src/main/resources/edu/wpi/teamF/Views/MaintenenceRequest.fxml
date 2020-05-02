@@ -53,14 +53,44 @@
             <children>
                 <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
                     <children>
-                        <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="         Location:         " />
-                        <JFXComboBox fx:id="locationComboBox" prefHeight="27.0" prefWidth="183.0" />
+                  <GridPane prefHeight="73.0" prefWidth="406.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                              <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="         Location:   ">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                              <JFXComboBox fx:id="locationComboBox" prefHeight="27.0" prefWidth="160.0" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
                     </children>
                 </HBox>
                 <HBox alignment="BOTTOM_CENTER" GridPane.rowIndex="2">
                     <children>
-                        <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="          Priority:      " />
-                        <JFXComboBox fx:id="priorityComboBox" prefHeight="27.0" prefWidth="182.0" />
+                  <GridPane prefHeight="68.0" prefWidth="407.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                              <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="          Priority:   ">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                              <JFXComboBox fx:id="priorityComboBox" prefHeight="27.0" prefWidth="160.0" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
@@ -85,23 +115,53 @@
                 </HBox>
                 <StackPane prefHeight="86.0" prefWidth="410.0">
                     <children>
-                        <Label fx:id="securityRequestLabel" text="Maintenance Request" StackPane.alignment="TOP_CENTER">
+                        <Label fx:id="securityRequestLabel" prefHeight="84.0" prefWidth="219.0" text="Maintenance Request" StackPane.alignment="TOP_CENTER">
                             <font>
-                                <Font size="36.0" />
+                                <Font size="24.0" />
                             </font>
                         </Label>
                     </children>
                 </StackPane>
             <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                <children>
-                  <Label text="Description" />
-                  <JFXTextField fx:id="desText" />
+                  <GridPane prefHeight="70.0" prefWidth="319.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Description:   ">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="desText" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
                </children>
             </HBox>
             <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                <children>
-                  <Label text="Assignee:   " />
-                  <JFXComboBox fx:id="assigneeChoice" prefHeight="27.0" prefWidth="200.0" />
+                  <GridPane prefHeight="65.0" prefWidth="408.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="Assignee:   ">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXComboBox fx:id="assigneeChoice" prefHeight="27.0" prefWidth="160.0" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
                </children>
             </HBox>
             </children>
