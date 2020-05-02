@@ -1,6 +1,6 @@
 package edu.wpi.teamF.ModelClasses.Directions;
 
-import edu.wpi.teamF.Controllers.com.twilio.SendSms;
+import edu.wpi.teamF.Controllers.com.twilio.phoneComms;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
@@ -10,7 +10,6 @@ import javafx.print.PrinterJob;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
-import javax.print.*;
 
 public class Directions {
   private List<Direction> directionList = new ArrayList<>();
@@ -18,7 +17,7 @@ public class Directions {
   private final Map<String, Node> nodeMap = new HashMap<>();
   private Node startNode;
   private Node endNode;
-  private SendSms sendSms = new SendSms();
+  private phoneComms phoneComms = new phoneComms();
 
   public Directions(List<Node> fullNodeList, Path path, Node startNode, Node endNode) {
     for (Node node : fullNodeList) {
@@ -218,7 +217,18 @@ public class Directions {
             + endNode.getLongName()
             + " at Brigham & Women's Hospital:\n\n");
     sendMsg += getFullDirectionsString();
-    return sendSms.sendMsg(toPhone, sendMsg);
+    return phoneComms.sendMsg(toPhone, sendMsg);
+  }
+
+  public Boolean callDirections(String toPhone) {
+    String callText =
+        ("This is an automated call from the Brigham and Women's Hospital Information Kiosk with you directions from "
+            + startNode.getLongName()
+            + " to "
+            + endNode.getLongName()
+            + ". ");
+    callText += getFullDirectionsString();
+    return phoneComms.callPhone(toPhone, callText);
   }
 
   public void printDirections() {

@@ -5,8 +5,8 @@ import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
 import edu.wpi.teamF.ModelClasses.RouteNode;
-import edu.wpi.teamF.ModelClasses.Scorer.TypeScorer;
 import edu.wpi.teamF.ModelClasses.Scorer.EuclideanScorer;
+import edu.wpi.teamF.ModelClasses.Scorer.TypeScorer;
 import java.util.*;
 import javax.management.InstanceNotFoundException;
 
@@ -30,15 +30,15 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
     EuclideanScorer scorer = new EuclideanScorer();
 
     TypeScorer typeScorer;
-    if("ELEV".equals(liftType)) {
+    if ("ELEV".equals(liftType)) {
       typeScorer =
-              new TypeScorer(nodeFactory.getNodesByType(Node.NodeType.ELEV), startNode.getFloor());
-    }else if("STAI".equals(liftType)) {
+          new TypeScorer(nodeFactory.getNodesByType(Node.NodeType.ELEV), startNode.getFloor());
+    } else if ("STAI".equals(liftType)) {
       typeScorer =
-              new TypeScorer(nodeFactory.getNodesByType(Node.NodeType.STAI), startNode.getFloor());
-    }else{
+          new TypeScorer(nodeFactory.getNodesByType(Node.NodeType.STAI), startNode.getFloor());
+    } else {
       typeScorer =
-              new TypeScorer(nodeFactory.getNodesByType(Node.NodeType.ELEV), startNode.getFloor());
+          new TypeScorer(nodeFactory.getNodesByType(Node.NodeType.ELEV), startNode.getFloor());
     }
 
     // Create the first node and add it to the Priority Queue
