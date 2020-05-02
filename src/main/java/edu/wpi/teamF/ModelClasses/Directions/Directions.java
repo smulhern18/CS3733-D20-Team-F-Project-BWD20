@@ -222,12 +222,13 @@ public class Directions {
 
   public Boolean callDirections(String toPhone) {
     String callText =
-        ("This is an automated call from the Brigham and Women's Hospital Information Kiosk with you directions from "
+        ("<Say><Response>This is an automated call from the Brigham and Women's Hospital Information Kiosk with your directions from "
             + startNode.getLongName()
             + " to "
             + endNode.getLongName()
             + ". ");
     callText += getFullDirectionsString();
+    callText += "</Say></Response>";
     return phoneComms.callPhone(toPhone, callText);
   }
 
