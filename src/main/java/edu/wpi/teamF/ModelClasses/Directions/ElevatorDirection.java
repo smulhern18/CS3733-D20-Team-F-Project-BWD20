@@ -3,6 +3,7 @@ package edu.wpi.teamF.ModelClasses.Directions;
 public class ElevatorDirection extends Direction {
   private String startFloor;
   private String endFloor;
+  private String dirFloor;
 
   enum Turn {
     LEFT,
@@ -12,9 +13,10 @@ public class ElevatorDirection extends Direction {
 
   private Turn turn;
 
-  public ElevatorDirection(String startFloor, String endFloor, float exitAngle) {
+  public ElevatorDirection(String startFloor, String endFloor, float exitAngle, String dirFloor) {
     this.startFloor = startFloor;
     this.endFloor = endFloor;
+    this.dirFloor = dirFloor;
     if (exitAngle > 20.0) {
       this.turn = Turn.LEFT;
     } else if (exitAngle > -20.0) {
@@ -40,6 +42,10 @@ public class ElevatorDirection extends Direction {
 
   @Override
   public String getFloor() {
-    return startFloor;
+    return dirFloor;
+  }
+
+  public void setFloor(String floor) {
+    dirFloor = floor;
   }
 }
