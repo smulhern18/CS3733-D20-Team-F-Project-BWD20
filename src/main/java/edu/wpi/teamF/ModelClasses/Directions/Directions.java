@@ -28,6 +28,9 @@ public class Directions {
 
     List<Node> pathNodeList = path.getPath();
 
+    System.out.println("Last in list: " + pathNodeList.get(pathNodeList.size() - 1).getId());
+    System.out.println("Size of lsit: " + pathNodeList.size());
+
     // Create the starting directions
     // TODO Add handling if the start node is not connected directly to a hallway (need an
     // in-transit room to get to the hallway)
@@ -44,15 +47,17 @@ public class Directions {
     StraightDirection currHall = new StraightDirection(0, 0, pathNodeList.get(0).getFloor());
 
     for (int i = 1;
-        i < (pathNodeList.size() - 1);
+        i < (pathNodeList.size());
         i++) { // Iterate through the nodes of the path, starting at the second one
+      System.out.println("Now investigating node: " + pathNodeList.get(i).getId());
 
       if (pathNodeList.get(i).getType().equals(Node.NodeType.getEnum("HALL"))) {
         // Current node is a hallway
-
+        System.out.println("Hallway");
         if (pathNodeList.get(i - 1).getType().equals(Node.NodeType.getEnum("HALL"))) {
           // Previous node was also a hallway, add distance from previous hallway to this one.
           currHall.addDistance(scorer.computeCost(pathNodeList.get(i - 1), pathNodeList.get(i)));
+          System.out.println("Incrementing Distance");
         }
 
         // If the current hall node is an intersection, could be a turn or a continue straight
@@ -74,11 +79,13 @@ public class Directions {
         // Now check if it's an intersection
         if (numHallNeighbors > 2) {
           // This can be a turn or a passed intersection
+          System.out.println("Intersection");
           float thisTurnAngle =
               getAngle(pathNodeList.get(i - 1), pathNodeList.get(i), pathNodeList.get(i + 1));
           if (Math.abs(thisTurnAngle) > 20.0) {
             // More than 20deg deviation from straight makes it a turn
             // This is a turn
+            System.out.println("This is a turn");
             directionList.add(currHall); // Terminate the hall direction
             directionList.add( // TODO: Add a description of the intersection (name)
                 new TurnDirection(
@@ -87,6 +94,7 @@ public class Directions {
                     pathNodeList.get(i).getFloor()));
             currHall = new StraightDirection(0, 0, pathNodeList.get(i).getFloor());
           } else {
+            System.out.println("Passed intersection");
             // This is a passed intersection
             currHall.addIntersection();
           }
@@ -95,6 +103,7 @@ public class Directions {
 
       // Check if this node is the destination
       else if (pathNodeList.get(i).getId().equals(endNode.getId())) {
+        System.out.println("Destination");
         // This node is the destination
         // Only add the hallway instruction if it actually went some distance
         if (currHall.getDistance() > 0) {
@@ -105,8 +114,12 @@ public class Directions {
         directionList.add(new GoalDirection(goalTurnAngle, pathNodeList.get(i).getFloor()));
         break;
 
+        // TODO: What if your goal is an elevator and DFS takes you through multiple elevators to
+        // get there?
+
         // Check if this node is an elevator
       } else if (pathNodeList.get(i).getType().equals(Node.NodeType.getEnum("ELEV"))) {
+        System.out.println("Elevator");
         // This node is an elevator
         // Only add the hallway instruction if it actually went some distance
         if (currHall.getDistance() > 0) {
@@ -115,11 +128,12 @@ public class Directions {
         currHall = new StraightDirection(0, 0, pathNodeList.get(i).getFloor());
 
         if (!Node.NodeType.getEnum("ELEV").equals(pathNodeList.get(i - 1).getType())) {
+          System.out.println("A starting elevator");
           // The previous node was a not an elevator, this is the first elevator in a sequence
           // Cycle through the next nodes to find the end of the elevator sequence
           float exitAngle = 0;
           String endFloor = pathNodeList.get(i).getFloor();
-          for (int j = i; i < (pathNodeList.size() - 2); i++) {
+          for (int j = i; j < (pathNodeList.size() - 1); j++) {
             if (!Node.NodeType.getEnum("ELEV").equals(pathNodeList.get(j + 1).getType())) {
               // If the next node is not an elevator, this is the last elevator in the sequence
               exitAngle =
@@ -135,6 +149,7 @@ public class Directions {
                   exitAngle,
                   pathNodeList.get(i).getFloor()));
         } else if (!Node.NodeType.getEnum("ELEV").equals(pathNodeList.get(i + 1).getType())) {
+          System.out.println("A final elevator");
           // The next node is a not an elevator, this is the last elevator in a sequence
           // Use the previous element in the path, but change the floor
           if (directionList.get(directionList.size() - 1) instanceof ElevatorDirection) {
@@ -147,6 +162,7 @@ public class Directions {
 
         // Check if this node is a stairwell
       } else if (pathNodeList.get(i).getType().equals(Node.NodeType.getEnum("STAI"))) {
+        System.out.println("Stairs");
         // This node is a stairwell
         // Only add the hallway instruction if it actually went some distance
         if (currHall.getDistance() > 0) {
@@ -159,7 +175,7 @@ public class Directions {
           // Cycle through the next nodes to find the end of the elevator sequence
           float exitAngle = 0;
           String endFloor = pathNodeList.get(i).getFloor();
-          for (int j = i; i < (pathNodeList.size() - 2); i++) {
+          for (int j = i; j < (pathNodeList.size() - 1); j++) {
             if (!Node.NodeType.getEnum("STAI").equals(pathNodeList.get(j + 1).getType())) {
               // If the next node is not a stair, this is the last stair in the sequence
               exitAngle =
@@ -236,6 +252,7 @@ public class Directions {
                   pathNodeList.get(i).getLongName(), pathNodeList.get(i).getFloor()));
         }
       }
+      System.out.println("Loop bottom, i: " + i);
     }
   }
 
