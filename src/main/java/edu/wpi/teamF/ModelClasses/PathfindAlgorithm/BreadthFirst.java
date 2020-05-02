@@ -27,6 +27,13 @@ public class BreadthFirst implements PathfindAlgorithm {
     RouteNode startRoute = new RouteNode(start, null, 0, 0);
     nodeQueue.add(startRoute);
 
+    String typeToAvoid;
+    if ("STAI".equals(liftType)) {
+      typeToAvoid = "ELEV";
+    } else {
+      typeToAvoid = "STAI";
+    }
+
     while (!nodeQueue.isEmpty()) {
       RouteNode currentNode = nodeQueue.poll();
       if (!visited.contains(currentNode.getNode())) {
@@ -57,7 +64,8 @@ public class BreadthFirst implements PathfindAlgorithm {
           }
         }
         for (Node neighbor : neighbors) {
-          if (!visited.contains(neighbor)) {
+          // if (!visited.contains(neighbor)) {
+          if (!visited.contains(neighbor) && !neighbor.getType().toString().equals(typeToAvoid)) {
             RouteNode neighborOnRoute = new RouteNode(neighbor, currentNode, 0, 0);
             nodeQueue.add(neighborOnRoute);
           }

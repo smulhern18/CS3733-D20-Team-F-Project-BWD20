@@ -30,10 +30,7 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
     EuclideanScorer scorer = new EuclideanScorer();
 
     TypeScorer typeScorer;
-    if ("ELEV".equals(liftType)) {
-      typeScorer =
-          new TypeScorer(nodeFactory.getNodesByType(Node.NodeType.ELEV), startNode.getFloor());
-    } else if ("STAI".equals(liftType)) {
+    if ("STAI".equals(liftType)) {
       typeScorer =
           new TypeScorer(nodeFactory.getNodesByType(Node.NodeType.STAI), startNode.getFloor());
     } else {
@@ -78,9 +75,18 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
           } else {
             neighbor = nodeMap.get(edge.getNode1());
           }
+
+          String typeToAvoid;
+          if ("STAI".equals(liftType)) {
+            typeToAvoid = "ELEV";
+          } else {
+            typeToAvoid = "STAI";
+          }
+
           if (neighbor.getFloor().equals(startNode.getFloor())
               || neighbor.getFloor().equals(endNode.getFloor())) {
-            if (isAccessible(startNode, endNode, neighbor)) {
+            if (isAccessible(startNode, endNode, neighbor)
+                && !nodeMap.get(edge.getNode2()).getType().toString().equals(typeToAvoid)) {
               neighbors.add(neighbor);
             }
           }

@@ -88,6 +88,11 @@ public class PathfinderController implements Initializable {
   public JFXButton mainFloorL2Button;
   public JFXButton mainFloorL1Button;
 
+  // stairs v elev stuff
+  String liftType = "ELEV";
+  public JFXButton chooseLiftStairs;
+  public JFXButton chooseLiftElevator;
+
   public List<Node> fullNodeList;
   public int state;
   public UISetting uiSetting = new UISetting();
@@ -112,15 +117,21 @@ public class PathfinderController implements Initializable {
   private void updatePathFindAlgorithm() {
     switch (newPathfind) {
       case "A Star":
-        this.pathFindAlgorithm = new MultipleFloorAStar(fullNodeList);
+        MultipleFloorAStar currentAlgorithm1 = new MultipleFloorAStar(fullNodeList);
+        currentAlgorithm1.setLiftType(liftType);
+        this.pathFindAlgorithm = currentAlgorithm1;
         System.out.println("successful astar");
         break;
       case "Breadth First":
-        this.pathFindAlgorithm = new BreadthFirst(fullNodeList);
+        BreadthFirst currentAlgorithm2 = new BreadthFirst(fullNodeList);
+        currentAlgorithm2.setLiftType(liftType);
+        this.pathFindAlgorithm = currentAlgorithm2;
         System.out.println("successful breath");
         break;
       case "Depth First":
-        this.pathFindAlgorithm = new DepthFirstSearch(fullNodeList);
+        DepthFirstSearch currentAlgorithm3 = new DepthFirstSearch(fullNodeList);
+        currentAlgorithm3.setLiftType(liftType);
+        this.pathFindAlgorithm = currentAlgorithm3;
         System.out.println("successful Depth first");
         break;
       default:
@@ -308,9 +319,10 @@ public class PathfinderController implements Initializable {
   public void drawNodes() {
     for (Node node : fullNodeList) {
       if (!node.getType().equals(Node.NodeType.getEnum("HALL"))
-          && !node.getType().equals(Node.NodeType.getEnum("STAI"))
-          && !node.getType().equals(Node.NodeType.getEnum("ELEV"))
-          && !node.getType().equals(Node.NodeType.getEnum("REST"))) {
+      //          && !node.getType().equals(Node.NodeType.getEnum("STAI"))
+      //          && !node.getType().equals(Node.NodeType.getEnum("ELEV"))
+      //          && !node.getType().equals(Node.NodeType.getEnum("REST"))
+      ) {
         placeButton(node);
         pathButtonGo();
       }
@@ -349,6 +361,7 @@ public class PathfinderController implements Initializable {
     deselectFloorButtons();
     floor1Button.setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
     directionsPane.setVisible(false);
+    setChooseLiftBehavior();
   }
 
   public void findType(String type) throws InstanceNotFoundException {
@@ -494,6 +507,7 @@ public class PathfinderController implements Initializable {
           System.out.println("end" + endNode);
           Path path = null;
           switchToFloor(startNode.getFloor(), startNode.getBuilding());
+
           try {
             path = pathFindAlgorithm.pathfind(startNode, endNode);
           } catch (InstanceNotFoundException e) {
@@ -672,5 +686,18 @@ public class PathfinderController implements Initializable {
           return mainFloorL2Button;
       }
     }
+  }
+
+  private void setChooseLiftBehavior(){
+    chooseLiftElevator.setOnAction(
+        actionEvent -> {
+          liftType = "ELEV";
+          pathFindAlgorithm.setLiftType(liftType);
+        });
+    chooseLiftStairs.setOnAction(
+        actionEvent -> {
+          liftType = "STAI";
+          pathFindAlgorithm.setLiftType(liftType);
+        });
   }
 }
