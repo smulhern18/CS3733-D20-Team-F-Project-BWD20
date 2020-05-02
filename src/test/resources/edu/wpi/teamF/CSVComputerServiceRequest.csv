@@ -1,5 +1,5 @@
 id,location,assignee,description,dateTimeSubmitted,priority,complete,make,hardwareOrSoftware,OS
 12312442,nodeA,Roman,12312442,0,2,false,Mac 10,Soft,Mac
-123124134,nodeB,Sully,123124134,10,2,true,Linux 11,Hard,Linux
+123124134,nodeB,Sully,123124134,10,1,true,Linux 11,Hard,Linux
 124134123412,nodeC,Denver,124134123412,110,2,false,Windows 12,Soft,Windows
-213124124,nodeD,Charles,213124124,1110,2,true,Newton 23,Hard,Newton
+213124124,nodeD,Charles,213124124,1110,2,false,Newton 23,Hard,Newton

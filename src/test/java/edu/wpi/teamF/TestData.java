@@ -333,7 +333,7 @@ public class TestData {
         2,
         false,
         validTypes[0],
-        validNodes[7],
+        validNodes[3],
         validCompletedDates[0]),
     new TransportRequest(
         validIDs[1],
@@ -344,7 +344,7 @@ public class TestData {
         2,
         false,
         validTypes[1],
-        validNodes[6],
+        validNodes[2],
         validCompletedDates[1]),
     new TransportRequest(
         validIDs[2],
@@ -355,7 +355,7 @@ public class TestData {
         2,
         true,
         validTypes[2],
-        validNodes[5],
+        validNodes[1],
         validCompletedDates[2]),
     new TransportRequest(
         validIDs[3],
@@ -366,7 +366,7 @@ public class TestData {
         2,
         false,
         validTypes[3],
-        validNodes[4],
+        validNodes[0],
         validCompletedDates[3]),
   };
 
