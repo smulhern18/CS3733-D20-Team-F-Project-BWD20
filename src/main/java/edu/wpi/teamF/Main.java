@@ -25,8 +25,8 @@ public class Main {
     dbm.initialize();
     csvm.readCSVFileNode(Main.class.getResourceAsStream("CSVFiles/MapFAllnodes.csv"));
     csvm.readCSVFileEdge(Main.class.getResourceAsStream("CSVFiles/MapFAlledges.csv"));
-    csvm.readCSVFileNode(Main.class.getResourceAsStream("CSVFiles/nodes.csv"));
-    csvm.readCSVFileEdge(Main.class.getResourceAsStream("CSVFiles/edges.csv"));
+    //    csvm.readCSVFileNode(Main.class.getResourceAsStream("CSVFiles/nodes.csv"));
+    //    csvm.readCSVFileEdge(Main.class.getResourceAsStream("CSVFiles/edges.csv"));
     csvm.readCSVFileAccount(Main.class.getResourceAsStream("CSVFiles/Accounts.csv"));
     dbm.manipulateAccount(new Admin("admin", "admin", "admin@gmail.com", "admin", "password"));
     List<Account> accounts = dbm.getAllAccounts();

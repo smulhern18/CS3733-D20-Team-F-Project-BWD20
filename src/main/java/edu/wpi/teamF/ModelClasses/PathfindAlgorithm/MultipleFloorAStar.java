@@ -67,8 +67,10 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
 
         // Make a list of all of the neighbors of this node
         Set<Edge> neighborEdges = currentNode.getNode().getEdges();
+        System.out.println("Neighbor Edges size " + neighborEdges.size());
         Set<Node> neighbors = new HashSet<>();
         for (Edge edge : neighborEdges) {
+          System.out.println(edge.getId());
           final Node neighbor;
           if (edge.getNode1().equals(currentNode.getNode().getId())) {
             neighbor = nodeMap.get(edge.getNode2());
@@ -76,8 +78,8 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
           } else {
             neighbor = nodeMap.get(edge.getNode1());
           }
-          if (neighbor.getFloor() == startNode.getFloor()
-              || neighbor.getFloor() == endNode.getFloor()) {
+          if (neighbor.getFloor().equals(startNode.getFloor())
+              || neighbor.getFloor().equals(endNode.getFloor())) {
             if (isAccessible(startNode, endNode, neighbor)) {
               neighbors.add(neighbor);
             }
@@ -86,7 +88,7 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
         for (Node neighbor : neighbors) {
           if (!visited.contains(neighbor)) {
             double distanceToEnd = 0;
-            if (neighbor.getFloor() != endNode.getFloor()) {
+            if (!neighbor.getFloor().equals(endNode.getFloor())) {
               // If its not on the same floor, use elevator scorer
               distanceToEnd = typeScorer.computeCost(neighbor, endNode);
             } else {
