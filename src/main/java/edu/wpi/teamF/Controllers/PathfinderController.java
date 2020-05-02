@@ -337,7 +337,6 @@ public class PathfinderController implements Initializable {
     directionsPane.setVisible(false);
   }
 
-
   public void findType(String type) throws InstanceNotFoundException {
     switchToFloor(startNode.getFloor());
     startCombo.setDisable(true);

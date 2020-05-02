@@ -26,16 +26,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javax.management.InstanceNotFoundException;
 import lombok.SneakyThrows;
 
 public class DataMapViewController implements Initializable {
 
   @FXML private AnchorPane mainMapPane;
-
-  @FXML private ScrollPane scrollPaneFaulkner1;
-
-  @FXML private StackPane masterPaneFaulkner1;
 
   @FXML private AnchorPane faulknerFloorPane;
 
@@ -70,8 +65,6 @@ public class DataMapViewController implements Initializable {
   @FXML private JFXButton floor2Button;
 
   @FXML private JFXButton floor3Button;
-
-  @FXML private AnchorPane dataMap;
 
   @FXML private JFXButton addNodeButton; // Adds the given node
 
@@ -145,8 +138,10 @@ public class DataMapViewController implements Initializable {
   private static final int MAP_WIDTH_FAULK = 2475; // height and width of the faulkner hospital map
   private static final int MAP_HEIGHT_MAIN = 3400;
   private static final int MAP_WIDTH_MAIN = 5000; // height and width of the main hospital map
-  private static final int PANE_HEIGHT = 550;
-  private static final int PANE_WIDTH = 914; // height and width of the pane/image
+  private static final int PANE_HEIGHT = 585;
+  private static final int PANE_WIDTH = 974; // height and width of the pane/image
+  double heightRatio;
+  double widthRatio;
   private double faulkHeightRatio = (double) PANE_HEIGHT / MAP_HEIGHT_FAULK;
   private double faulkWidthRatio = (double) PANE_WIDTH / MAP_WIDTH_FAULK; // ratio of pane to map
   private double mainHeightRatio = (double) PANE_HEIGHT / MAP_HEIGHT_MAIN;
@@ -159,6 +154,13 @@ public class DataMapViewController implements Initializable {
   };
 
   private Hospital hospital;
+
+  private enum State {
+    ADD,
+    MODIFY
+  };
+
+  private State state;
 
   public DataMapViewController() throws Exception {}
 
@@ -195,6 +197,8 @@ public class DataMapViewController implements Initializable {
     floor1Button.setId("f1");
     floor2Button.setId("f2");
     floor3Button.setId("f3");
+
+    uiSetting.makeZoomable(imageScrollPane, imageStackPane, 1);
   }
 
   @FXML
@@ -305,18 +309,10 @@ public class DataMapViewController implements Initializable {
         mapPanes.get(i).setVisible(false);
         imageViews.get(i).setVisible(false);
       } else {
-        System.out.println("Equal to here");
         mapPanes.get(i).setVisible(true);
         imageViews.get(i).setVisible(true);
       }
     }
-  }
-
-  @FXML
-  private void addNodeLocation() throws IOException {
-    double nodeDeltaX = dataMap.getLayoutX() - mapPane.getLayoutX();
-    double nodeDeltaY = dataMap.getLayoutY() - mapPane.getLayoutY();
-    nodePopup();
   }
 
   @FXML
@@ -329,8 +325,9 @@ public class DataMapViewController implements Initializable {
           if (controllerClass.equals(MapViewNodePopup.class)) {
             System.out.println("initialize with correct constructor");
             return new MapViewNodePopup(this);
+          } else {
+            return null;
           }
-          return null;
         });
     Parent root = fxmlLoader.load(App.class.getResource("Views/MapViewNodePopup.fxml"));
     stage.setScene(new Scene(root));
@@ -350,68 +347,40 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  private void drawEdge(Edge edge) {
-    try {
-      double heightRatio = (double) PANE_HEIGHT / MAP_HEIGHT_FAULK;
-      double widthRatio = (double) PANE_WIDTH / MAP_WIDTH_FAULK;
-      Node node1 = databaseManager.readNode(edge.getNode1());
-      Node node2 = databaseManager.readNode(edge.getNode2());
-      if (node1.getFloor()
-          == node2.getFloor()) { // if the edge connects two nodes on the same floor
-        int startX = (int) ((node1.getXCoord() * widthRatio) + 0.75);
-        int startY =
-            (int) ((node1.getYCoord() * heightRatio) + 0.75); // start values correspond to node 1
-        int endX = (int) ((node2.getXCoord() * widthRatio) + 0.75);
-        int endY =
-            (int) ((node2.getYCoord() * heightRatio) + 0.75); // end values correspond to node 2
-        Line line = new Line(startX, startY, endX, endY);
-        line.setId(edge.getId()); // allows us to keep track of what line is what edge
-        line.setStroke(Color.BLACK);
-        line.setStrokeWidth(1.5);
-        line.setOpacity(0.7);
-        line.setOnMouseClicked(
-            mouseEvent -> { // when a user clicks on a line:
-              edgeLine = line;
-              this.edge = edge;
-            });
+  private void drawEdge(Edge edge) throws Exception {
 
-        //        switch (node1.getFloor()) {
-        //          case 1:
-        //            mapPane1.getChildren().add(line);
-        //            break;
-        //          case 2:
-        //            mapPane2.getChildren().add(line);
-        //            break;
-        //          case 3:
-        //            mapPane3.getChildren().add(line);
-        //            break;
-        //          case 4:
-        //            mapPane4.getChildren().add(line);
-        //            break;
-        //          case 5:
-        //            mapPane5.getChildren().add(line);
-        //            break;
-        //        }
-      }
-    } catch (InstanceNotFoundException e) {
-      e.printStackTrace();
-    } catch (Exception e) {
-      e.printStackTrace();
+    Node node1 = databaseManager.readNode(edge.getNode1());
+    Node node2 = databaseManager.readNode(edge.getNode2());
+    // System.out.println("Here 1");
+    setRatios(node1);
+    // System.out.println("Here 2");
+    if (node1.getFloor().equals(node2.getFloor())) {
+      // System.out.println("Here 3");
+      int startX = (int) ((node1.getXCoord() * widthRatio) + 0.75);
+      int startY = (int) ((node1.getYCoord() * heightRatio) + 0.75);
+      int endX = (int) ((node2.getXCoord() * widthRatio) + 0.75);
+      int endY = (int) ((node2.getYCoord() * heightRatio) + 0.75);
+      Line line = new Line(startX, startY, endX, endY);
+      line.setId(edge.getId()); // allows us to keep track of what line is what edge
+      line.setStroke(Color.BLACK);
+      line.setStrokeWidth(1.5);
+      line.setOpacity(0.7);
+      // System.out.println("Here 4");
+      line.setOnMouseClicked(
+          mouseEvent -> { // when a user clicks on a line:
+            edgeLine = line;
+            this.edge = edge;
+          });
+      // System.out.println("Here 5");
+      addToPane(node1, line);
+      // System.out.println("Here 6");
     }
   }
 
   @FXML
   void drawNode(Node node) { // draws the given node on the map
 
-    double heightRatio;
-    double widthRatio;
-    if(hospital == Hospital.FAULK){
-      heightRatio = (double) PANE_HEIGHT / MAP_HEIGHT_FAULK;
-      widthRatio = (double) PANE_WIDTH / MAP_WIDTH_FAULK;
-    } else{
-      heightRatio = (double) PANE_HEIGHT / MAP_HEIGHT_MAIN;
-      widthRatio = (double) PANE_WIDTH / MAP_WIDTH_MAIN;
-    }
+    setRatios(node);
 
     JFXButton button = new JFXButton();
     int buttonSize = 6; // this can be adjusted if we feel like the size is too small or large
@@ -435,49 +404,113 @@ public class DataMapViewController implements Initializable {
             nodeButton.setOpacity(1);
           }
         });
+    addToPane(node, button);
+  }
 
-    if(node.getBuilding().equals("Faulkner")){
+  private void setRatios(Node node) {
+    if (node.getBuilding().equals("Faulkner")) {
+      hospital = Hospital.FAULK;
+    } else {
+      hospital = Hospital.MAIN;
+    }
+
+    if (hospital == Hospital.FAULK) {
+      heightRatio = (double) PANE_HEIGHT / MAP_HEIGHT_FAULK;
+      widthRatio = (double) PANE_WIDTH / MAP_WIDTH_FAULK;
+    } else {
+      heightRatio = (double) PANE_HEIGHT / MAP_HEIGHT_MAIN;
+      widthRatio = (double) PANE_WIDTH / MAP_WIDTH_MAIN;
+    }
+  }
+
+  @FXML
+  private void addToPane(Node node, javafx.scene.Node child) {
+    if (node.getBuilding().equals("Faulkner")) {
       switch (node.getFloor()) {
         case "1":
-          mapPaneFaulkner1.getChildren().add(button);
+          mapPaneFaulkner1.getChildren().add(child);
           break;
         case "2":
-          mapPaneFaulkner2.getChildren().add(button);
+          mapPaneFaulkner2.getChildren().add(child);
           break;
         case "3":
-          mapPaneFaulkner3.getChildren().add(button);
+          mapPaneFaulkner3.getChildren().add(child);
           break;
         case "4":
-          mapPaneFaulkner4.getChildren().add(button);
+          mapPaneFaulkner4.getChildren().add(child);
           break;
         case "5":
-          mapPaneFaulkner5.getChildren().add(button);
+          mapPaneFaulkner5.getChildren().add(child);
           break;
       }
-    } else{
-      switch (node.getFloor()){
+    } else {
+      switch (node.getFloor()) {
         case "Ground":
-          mapPaneMainG.getChildren().add(button);
+          mapPaneMainG.getChildren().add(child);
           break;
         case "L2":
-          mapPaneMainL2.getChildren().add(button);
+          mapPaneMainL2.getChildren().add(child);
           break;
         case "L1":
-          mapPaneMainL1.getChildren().add(button);
+          mapPaneMainL1.getChildren().add(child);
           break;
         case "F1":
-          mapPaneMain1.getChildren().add(button);
+          mapPaneMain1.getChildren().add(child);
           break;
         case "F2":
-          mapPaneMain2.getChildren().add(button);
+          mapPaneMain2.getChildren().add(child);
           break;
         case "F3":
-          mapPaneMain3.getChildren().add(button);
+          mapPaneMain3.getChildren().add(child);
           break;
       }
     }
-
   }
+
+  //  @FXML
+  //  AnchorPane findPane(Node node) {
+  //    AnchorPane thePane;
+  //    if (node.getBuilding().equals("Faulkner")) {
+  //      switch (node.getFloor()) {
+  //        case "1":
+  //          thePane = mapPaneFaulkner1;
+  //          break;
+  //        case "2":
+  //          thePane = mapPaneFaulkner2;
+  //          break;
+  //        case "3":
+  //          thePane = mapPaneFaulkner3;
+  //          break;
+  //        case "4":
+  //          thePane = mapPaneFaulkner4;
+  //          break;
+  //        case "5":
+  //          thePane = mapPaneFaulkner5;
+  //          break;
+  //      }
+  //    } else {
+  //      switch (node.getFloor()) {
+  //        case "Ground":
+  //          thePane = mapPaneMainG;
+  //          break;
+  //        case "L2":
+  //          thePane = mapPaneMainL2;
+  //          break;
+  //        case "L1":
+  //          thePane = mapPaneMainL1;
+  //          break;
+  //        case "F1":
+  //          thePane = mapPaneMain1;
+  //          break;
+  //        case "F2":
+  //          thePane = mapPaneMain2;
+  //          break;
+  //        case "F3":
+  //          thePane = mapPaneMain3;
+  //          break;
+  //      }
+  //    }
+  //  }
 
   @FXML
   private void setNodeDraggable(JFXButton button) {
