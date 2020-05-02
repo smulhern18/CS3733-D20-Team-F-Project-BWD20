@@ -212,6 +212,7 @@ public class PathfinderController implements Initializable {
             startNode = null;
             button.setStyle(
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+            // startLabel.setVisible(false);
             state = 0;
             startCombo.setValue(null);
             startCombo.setDisable(false);
@@ -219,6 +220,7 @@ public class PathfinderController implements Initializable {
             endNode = null;
             button.setStyle(
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+            // endLabel.setVisible(false);
             state = 1;
             endCombo.setValue(null);
             pathButton.setDisable(true);
@@ -231,6 +233,7 @@ public class PathfinderController implements Initializable {
             button.setStyle(
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00cc00; -fx-border-color: #000000; -fx-border-width: 1px"); // 800000
             commandText.setText("Select End Location or Building Feature");
+            labelNode("start");
             state = 1;
             // startCombo.setDisable(true);
             startCombo.setValue(node.getLongName() + " " + node.getId());
@@ -240,6 +243,7 @@ public class PathfinderController implements Initializable {
             button.setStyle(
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px"); // 00cc00
             commandText.setText("Select Find Path or Reset");
+            // labelNode("end");
             state = 2;
             // endCombo.setDisable(true);
             endCombo.setValue(node.getLongName() + " " + node.getId());
@@ -328,10 +332,9 @@ public class PathfinderController implements Initializable {
   public void drawNodes() {
     for (Node node : fullNodeList) {
       if (!node.getType().equals(Node.NodeType.getEnum("HALL"))
-      //          && !node.getType().equals(Node.NodeType.getEnum("STAI"))
-      //          && !node.getType().equals(Node.NodeType.getEnum("ELEV"))
-      //          && !node.getType().equals(Node.NodeType.getEnum("REST"))
-      ) {
+          && !node.getType().equals(Node.NodeType.getEnum("STAI"))
+          && !node.getType().equals(Node.NodeType.getEnum("ELEV"))
+          && !node.getType().equals(Node.NodeType.getEnum("REST"))) {
         placeButton(node);
         pathButtonGo();
       }
@@ -742,24 +745,36 @@ public class PathfinderController implements Initializable {
         });
   }
 
-  public void labelNode(Node node, String location) {
+  public void labelNode(String location) {
     if ("start".equals(location)) {
+      startLabel = new Label();
       for (javafx.scene.Node component : currentPane.getChildren()) {
-        if (component.getId().equals(node.getId())) {
+        if (component.getId().equals(startNode.getId())) {
+          System.out.println(component.getLayoutX());
+          System.out.println(component.getLayoutY());
+          System.out.println(component.getId());
+
+          startLabel.setStyle("-fx-font-size: 12");
           startLabel.setLayoutX(component.getLayoutX());
           startLabel.setLayoutY(component.getLayoutY() + 10);
-          startLabel.setText(node.getLongName());
+          startLabel.setText(startNode.getLongName());
           startLabel.setVisible(true);
+          System.out.println(startLabel.getText());
+          System.out.println(startLabel.getLayoutX());
+          System.out.println(startLabel.getLayoutY());
+          return;
         }
       }
     }
     if ("end".equals(location)) {
+      endLabel = new Label();
       for (javafx.scene.Node component : currentPane.getChildren()) {
-        if (component.getId().equals(node.getId())) {
+        if (component.getId().equals(endNode.getId())) {
           endLabel.setLayoutX(component.getLayoutX());
           endLabel.setLayoutY(component.getLayoutY() + 10);
-          endLabel.setText(node.getLongName());
+          endLabel.setText(endNode.getLongName());
           endLabel.setVisible(true);
+          return;
         }
       }
     }
