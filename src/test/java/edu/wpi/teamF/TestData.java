@@ -423,22 +423,44 @@ public class TestData {
 
   public LanguageServiceRequest[] validLanguageServiceRequests = {
     new LanguageServiceRequest(
+        validIDs[0],
         validNodes[0],
-        validDescriptions[0],
         validAssignees[0],
+        validDescriptions[0],
         validDates[0],
         1,
+        false,
         "Spanish",
         "Require Interpreter"),
     new LanguageServiceRequest(
-        new Date(1000).getTime() + "",
+        validIDs[1],
         validNodes[1],
-        validDescriptions[1],
         validAssignees[1],
-        new Date(1000),
+        validDescriptions[1],
+        validDates[1],
         1,
         false,
         "Sign Language",
+        "Require Interpreter"),
+    new LanguageServiceRequest(
+        validIDs[2],
+        validNodes[2],
+        validAssignees[2],
+        validDescriptions[2],
+        validDates[2],
+        2,
+        true,
+        "Japanese",
+        "Require Interpreter"),
+    new LanguageServiceRequest(
+        validIDs[3],
+        validNodes[3],
+        validAssignees[3],
+        validDescriptions[3],
+        validDates[3],
+        3,
+        false,
+        "French",
         "Require Interpreter"),
   };
 
@@ -515,7 +537,7 @@ public class TestData {
         validNodes[0],
         validAssignees[0],
         validDescriptions[0],
-        new Date(),
+        validDates[0],
         1,
         validRecipientNames[0],
         validRoomNumbers[0] + "",
@@ -530,7 +552,7 @@ public class TestData {
         validNodes[1],
         validAssignees[1],
         validDescriptions[1],
-        new Date(),
+        validDates[1],
         2,
         validRecipientNames[1],
         validRoomNumbers[1] + "",
@@ -545,7 +567,7 @@ public class TestData {
         validNodes[2],
         validAssignees[2],
         validDescriptions[2],
-        new Date(),
+        validDates[2],
         3,
         validRecipientNames[2],
         validRoomNumbers[2] + "",
@@ -560,7 +582,7 @@ public class TestData {
         validNodes[3],
         validAssignees[3],
         validDescriptions[3],
-        new Date(),
+        validDates[3],
         3,
         validRecipientNames[3],
         validRoomNumbers[3] + "",
@@ -570,6 +592,98 @@ public class TestData {
         validPhoneNumber[3],
         false,
         false),
+  };
+
+  public String[] validSanitationTypes = {"spill", "dirt", "puddle", "mess"};
+
+  public SanitationServiceRequest[] validSanitationRequests = {
+    new SanitationServiceRequest(
+        validIDs[0],
+        validNodes[0],
+        validAssignees[0],
+        validDescriptions[0],
+        validDates[0],
+        1,
+        false,
+        validSanitationTypes[0]),
+    new SanitationServiceRequest(
+        validIDs[1],
+        validNodes[1],
+        validAssignees[1],
+        validDescriptions[1],
+        validDates[1],
+        1,
+        false,
+        validSanitationTypes[1]),
+    new SanitationServiceRequest(
+        validIDs[2],
+        validNodes[2],
+        validAssignees[2],
+        validDescriptions[2],
+        validDates[2],
+        2,
+        true,
+        validSanitationTypes[2]),
+    new SanitationServiceRequest(
+        validIDs[3],
+        validNodes[3],
+        validAssignees[3],
+        validDescriptions[3],
+        validDates[3],
+        3,
+        false,
+        validSanitationTypes[3]),
+  };
+
+  public String[] validItems = {"hat", "shirt", "coat shirt pants", "pants"};
+  public String[] validQuantities = {"2", "3", "5", "74"};
+  public String[] validTemps = {"40F", "80F", "40C", "25C"};
+
+  public LaundryServiceRequest[] validLaundryRequests = {
+    new LaundryServiceRequest(
+        validIDs[0],
+        validNodes[0],
+        validAssignees[0],
+        validDescriptions[0],
+        validDates[0],
+        1,
+        false,
+        validItems[0],
+        validQuantities[0],
+        validTemps[0]),
+    new LaundryServiceRequest(
+        validIDs[1],
+        validNodes[1],
+        validAssignees[1],
+        validDescriptions[1],
+        validDates[1],
+        1,
+        false,
+        validItems[1],
+        validQuantities[1],
+        validTemps[1]),
+    new LaundryServiceRequest(
+        validIDs[2],
+        validNodes[2],
+        validAssignees[2],
+        validDescriptions[2],
+        validDates[2],
+        2,
+        true,
+        validItems[2],
+        validQuantities[2],
+        validTemps[2]),
+    new LaundryServiceRequest(
+        validIDs[3],
+        validNodes[3],
+        validAssignees[3],
+        validDescriptions[3],
+        validDates[3],
+        3,
+        false,
+        validItems[3],
+        validQuantities[3],
+        validTemps[3]),
   };
 
   public TestData() throws Exception {}

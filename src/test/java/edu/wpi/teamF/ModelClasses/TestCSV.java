@@ -7,9 +7,7 @@ import edu.wpi.teamF.DatabaseManipulators.CSVManipulator;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Account.Account;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
 import edu.wpi.teamF.TestData;
 import java.io.File;
 import java.nio.file.Files;
@@ -33,6 +31,13 @@ public class TestCSV {
   MaintenanceRequest[] validMaintenance = null;
   MariachiRequest[] validMariachiRequest = null;
   SecurityRequest[] validSecurityRequest = null;
+  MedicineDeliveryRequest[] validMedicineDeliveryRquest = null;
+  ComputerServiceRequest[] validComputerServiceRequest = null;
+  LanguageServiceRequest[] validLanguageServiceRequest = null;
+  LaundryServiceRequest[] validLaundryRequest = null;
+  SanitationServiceRequest[] validSanitationRequest = null;
+  TransportRequest[] validTransportRequest = null;
+  FlowerRequest[] validFlowerRequest = null;
   Account[] validAccounts = null;
   HashSet<String> validNeighbors1 = null;
 
@@ -47,6 +52,13 @@ public class TestCSV {
       validMariachiRequest = testData.validMariachiRequests;
       validAccounts = testData.validAccounts;
       validSecurityRequest = testData.validSecurityRequests;
+      validMedicineDeliveryRquest = testData.validMedicineDeliveryRequests;
+      validComputerServiceRequest = testData.validComputerServiceRequests;
+      validFlowerRequest = testData.validFlowerRequests;
+      validLanguageServiceRequest = testData.validLanguageServiceRequests;
+      validLaundryRequest = testData.validLaundryRequests;
+      validSanitationRequest = testData.validSanitationRequests;
+      validTransportRequest = testData.validTransportRequests;
 
     } catch (Exception e) {
       fail(e.getMessage());
@@ -233,6 +245,329 @@ public class TestCSV {
               new File(getClass().getResource("/edu/wpi/teamF/CSVAccountTest.csv").toURI())
                   .toPath());
       // assertTrue(Arrays.equals(f1, f2));
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      fail(e.getMessage());
+    }
+  }
+
+  @Test
+  public void testReadAndWriteCSVMariachi() throws Exception {
+    int i = 0;
+    try {
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      fail(e.getMessage());
+    }
+    csvManipulator.readCSVFileMariachiService(
+        getClass().getResourceAsStream("/edu/wpi/teamF/CSVMariachiTest.csv"));
+
+    List<MariachiRequest> list = databaseManager.getAllMariachiServiceRequests();
+    int j = 0;
+    Assertions.assertTrue(list.size() == 4);
+    Assertions.assertTrue(list.contains(validMariachiRequest[0]));
+    Assertions.assertTrue(list.contains(validMariachiRequest[1]));
+    Assertions.assertTrue(list.contains(validMariachiRequest[2]));
+    Assertions.assertTrue(list.contains(validMariachiRequest[3]));
+
+    /** Valid data */
+    File wfile = new File("src/test/java/edu/wpi/teamF/Test/");
+    File file = new File("src/test/java/edu/wpi/teamF/Test/MariachiBackup.csv");
+    csvManipulator.writeCSVFileMariachiService(wfile.toPath());
+    try {
+      byte[] f1 = Files.readAllBytes(file.toPath());
+      byte[] f2 =
+          Files.readAllBytes(
+              new File(getClass().getResource("/edu/wpi/teamF/CSVMariachiTest.csv").toURI())
+                  .toPath());
+      assertTrue(Arrays.equals(f1, f2));
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      fail(e.getMessage());
+    }
+  }
+
+  @Test
+  public void testReadAndWriteCSVMedicine() throws Exception {
+    int i = 0;
+    try {
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      fail(e.getMessage());
+    }
+    csvManipulator.readCSVFileMedicineDeliveryService(
+        getClass().getResourceAsStream("/edu/wpi/teamF/CSVMedicineTest.csv"));
+
+    List<MedicineDeliveryRequest> list = databaseManager.getAllMedicineDeliveryRequests();
+    int j = 0;
+    Assertions.assertTrue(list.size() == 4);
+    Assertions.assertTrue(list.contains(validMedicineDeliveryRquest[0]));
+    Assertions.assertTrue(list.contains(validMedicineDeliveryRquest[1]));
+    Assertions.assertTrue(list.contains(validMedicineDeliveryRquest[2]));
+    Assertions.assertTrue(list.contains(validMedicineDeliveryRquest[3]));
+
+    /** Valid data */
+    File wfile = new File("src/test/java/edu/wpi/teamF/Test/");
+    File file = new File("src/test/java/edu/wpi/teamF/Test/MedicineBackup.csv");
+    csvManipulator.writeCSVFileMedicineDeliveryService(wfile.toPath());
+    try {
+      byte[] f1 = Files.readAllBytes(file.toPath());
+      byte[] f2 =
+          Files.readAllBytes(
+              new File(getClass().getResource("/edu/wpi/teamF/CSVMedicineTest.csv").toURI())
+                  .toPath());
+      assertTrue(Arrays.equals(f1, f2));
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      fail(e.getMessage());
+    }
+  }
+
+  @Test
+  public void testReadAndWriteCSVComputerService() throws Exception {
+    int i = 0;
+    try {
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      fail(e.getMessage());
+    }
+    csvManipulator.readCSVFileComputerService(
+        getClass().getResourceAsStream("/edu/wpi/teamF/CSVComputerServiceRequest.csv"));
+
+    List<ComputerServiceRequest> list = databaseManager.getAllComputerServiceRequests();
+    int j = 0;
+    Assertions.assertTrue(list.size() == 4);
+    Assertions.assertTrue(list.contains(validComputerServiceRequest[0]));
+    Assertions.assertTrue(list.contains(validComputerServiceRequest[1]));
+    Assertions.assertTrue(list.contains(validComputerServiceRequest[2]));
+    Assertions.assertTrue(list.contains(validComputerServiceRequest[3]));
+
+    /** Valid data */
+    File wfile = new File("src/test/java/edu/wpi/teamF/Test/");
+    File file = new File("src/test/java/edu/wpi/teamF/Test/ComputerServiceBackup.csv");
+    csvManipulator.writeCSVFileComputerService(wfile.toPath());
+    try {
+      byte[] f1 = Files.readAllBytes(file.toPath());
+      byte[] f2 =
+          Files.readAllBytes(
+              new File(
+                      getClass()
+                          .getResource("/edu/wpi/teamF/CSVComputerServiceRequest.csv")
+                          .toURI())
+                  .toPath());
+      assertTrue(Arrays.equals(f1, f2));
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      fail(e.getMessage());
+    }
+  }
+
+  @Test
+  public void testReadAndWriteCSVFlower() throws Exception {
+    int i = 0;
+    try {
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      fail(e.getMessage());
+    }
+    csvManipulator.readCSVFileFlowerService(
+        getClass().getResourceAsStream("/edu/wpi/teamF/CSVFlowerTest.csv"));
+
+    List<FlowerRequest> list = databaseManager.getAllFlowerRequests();
+    int j = 0;
+    Assertions.assertTrue(list.size() == 4);
+    Assertions.assertTrue(list.contains(validFlowerRequest[0]));
+    Assertions.assertTrue(list.contains(validFlowerRequest[1]));
+    Assertions.assertTrue(list.contains(validFlowerRequest[2]));
+    Assertions.assertTrue(list.contains(validFlowerRequest[3]));
+
+    /** Valid data */
+    File wfile = new File("src/test/java/edu/wpi/teamF/Test/");
+    File file = new File("src/test/java/edu/wpi/teamF/Test/FlowerBackup.csv");
+    csvManipulator.writeCSVFileFlowerService(wfile.toPath());
+    try {
+      byte[] f1 = Files.readAllBytes(file.toPath());
+      byte[] f2 =
+          Files.readAllBytes(
+              new File(getClass().getResource("/edu/wpi/teamF/CSVFlowerTest.csv").toURI())
+                  .toPath());
+      assertTrue(Arrays.equals(f1, f2));
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      fail(e.getMessage());
+    }
+  }
+
+  @Test
+  public void testReadAndWriteCSVLanguage() throws Exception {
+    int i = 0;
+    try {
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      fail(e.getMessage());
+    }
+    csvManipulator.readCSVFileLanguageService(
+        getClass().getResourceAsStream("/edu/wpi/teamF/CSVLanguageRequest.csv"));
+
+    List<LanguageServiceRequest> list = databaseManager.getAllLanguageServiceRequests();
+    int j = 0;
+    Assertions.assertTrue(list.size() == 4);
+    Assertions.assertTrue(list.contains(validLanguageServiceRequest[0]));
+    Assertions.assertTrue(list.contains(validLanguageServiceRequest[1]));
+    Assertions.assertTrue(list.contains(validLanguageServiceRequest[2]));
+    Assertions.assertTrue(list.contains(validLanguageServiceRequest[3]));
+
+    /** Valid data */
+    File wfile = new File("src/test/java/edu/wpi/teamF/Test/");
+    File file = new File("src/test/java/edu/wpi/teamF/Test/LanguageBackup.csv");
+    csvManipulator.writeCSVFileLanguageService(wfile.toPath());
+    try {
+      byte[] f1 = Files.readAllBytes(file.toPath());
+      byte[] f2 =
+          Files.readAllBytes(
+              new File(getClass().getResource("/edu/wpi/teamF/CSVLanguageRequest.csv").toURI())
+                  .toPath());
+      assertTrue(Arrays.equals(f1, f2));
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      fail(e.getMessage());
+    }
+  }
+
+  @Test
+  public void testReadAndWriteCSVSanitation() throws Exception {
+    int i = 0;
+    try {
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      fail(e.getMessage());
+    }
+    csvManipulator.readCSVFileSanitationService(
+        getClass().getResourceAsStream("/edu/wpi/teamF/CSVSanitationTest.csv"));
+
+    List<SanitationServiceRequest> list = databaseManager.getAllSanitationRequests();
+    int j = 0;
+    Assertions.assertTrue(list.size() == 4);
+    Assertions.assertTrue(list.contains(validSanitationRequest[0]));
+    Assertions.assertTrue(list.contains(validSanitationRequest[1]));
+    Assertions.assertTrue(list.contains(validSanitationRequest[2]));
+    Assertions.assertTrue(list.contains(validSanitationRequest[3]));
+
+    /** Valid data */
+    File wfile = new File("src/test/java/edu/wpi/teamF/Test/");
+    File file = new File("src/test/java/edu/wpi/teamF/Test/SanitationBackup.csv");
+    csvManipulator.writeCSVFileSanitationService(wfile.toPath());
+    try {
+      byte[] f1 = Files.readAllBytes(file.toPath());
+      byte[] f2 =
+          Files.readAllBytes(
+              new File(getClass().getResource("/edu/wpi/teamF/CSVSanitationTest.csv").toURI())
+                  .toPath());
+      assertTrue(Arrays.equals(f1, f2));
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      fail(e.getMessage());
+    }
+  }
+
+  @Test
+  public void testReadAndWriteCSVLaundry() throws Exception {
+    int i = 0;
+    try {
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      fail(e.getMessage());
+    }
+    csvManipulator.readCSVFileLaundryService(
+        getClass().getResourceAsStream("/edu/wpi/teamF/CSVLaundryTest.csv"));
+
+    List<LaundryServiceRequest> list = databaseManager.getAllLaunduaryRequests();
+    int j = 0;
+    Assertions.assertTrue(list.size() == 4);
+    Assertions.assertTrue(list.contains(validLaundryRequest[0]));
+    Assertions.assertTrue(list.contains(validLaundryRequest[1]));
+    Assertions.assertTrue(list.contains(validLaundryRequest[2]));
+    Assertions.assertTrue(list.contains(validLaundryRequest[3]));
+
+    /** Valid data */
+    File wfile = new File("src/test/java/edu/wpi/teamF/Test/");
+    File file = new File("src/test/java/edu/wpi/teamF/Test/LaundryBackup.csv");
+    csvManipulator.writeCSVFileLaundryService(wfile.toPath());
+    try {
+      byte[] f1 = Files.readAllBytes(file.toPath());
+      byte[] f2 =
+          Files.readAllBytes(
+              new File(getClass().getResource("/edu/wpi/teamF/CSVLaundryTest.csv").toURI())
+                  .toPath());
+      assertTrue(Arrays.equals(f1, f2));
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      fail(e.getMessage());
+    }
+  }
+
+  @Test
+  public void testReadAndWriteCSVTransport() throws Exception {
+    int i = 0;
+    try {
+      databaseManager.manipulateNode(validNodes[0]);
+      databaseManager.manipulateNode(validNodes[1]);
+      databaseManager.manipulateNode(validNodes[2]);
+      databaseManager.manipulateNode(validNodes[3]);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+      fail(e.getMessage());
+    }
+    csvManipulator.readCSVFileTransportService(
+        getClass().getResourceAsStream("/edu/wpi/teamF/CSVTransportTest.csv"));
+
+    List<TransportRequest> list = databaseManager.getAllTransportRequests();
+    int j = 0;
+    Assertions.assertTrue(list.size() == 4);
+    Assertions.assertTrue(list.contains(validTransportRequest[0]));
+    Assertions.assertTrue(list.contains(validTransportRequest[1]));
+    Assertions.assertTrue(list.contains(validTransportRequest[2]));
+    Assertions.assertTrue(list.contains(validTransportRequest[3]));
+
+    /** Valid data */
+    File wfile = new File("src/test/java/edu/wpi/teamF/Test/");
+    File file = new File("src/test/java/edu/wpi/teamF/Test/TransportBackup.csv");
+    csvManipulator.writeCSVFileTransportService(wfile.toPath());
+    try {
+      byte[] f1 = Files.readAllBytes(file.toPath());
+      byte[] f2 =
+          Files.readAllBytes(
+              new File(getClass().getResource("/edu/wpi/teamF/CSVTransportTest.csv").toURI())
+                  .toPath());
+      assertTrue(Arrays.equals(f1, f2));
     } catch (Exception e) {
       System.out.println(e.getMessage());
       fail(e.getMessage());
