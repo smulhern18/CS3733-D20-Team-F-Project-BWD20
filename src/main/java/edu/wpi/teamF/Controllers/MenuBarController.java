@@ -28,7 +28,7 @@ public class MenuBarController {
   }
 
   public void admin(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("DataManipulator");
+    sceneController.switchScene("DataMapView");
   }
 
   public void help(ActionEvent actionEvent) throws IOException {
