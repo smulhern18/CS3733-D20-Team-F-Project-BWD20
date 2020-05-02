@@ -17,6 +17,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -91,6 +92,7 @@ public class PathfinderController implements Initializable {
   public AnchorPane selectFloorPaneMain;
   public Label startLabel;
   public Label endLabel;
+  public JFXComboBox<String> hospitalComboBox;
 
   // stairs v elev stuff
   String liftType = "ELEV";
@@ -349,6 +351,7 @@ public class PathfinderController implements Initializable {
     imageViewFaulkner1.setVisible(true);
     floorButtonsSet();
     pathSwitchFloor.setVisible(false);
+    initializehospitalComboBox();
 
     UISetting uiSetting = new UISetting();
     uiSetting.setAsLocationComboBox(startCombo);
@@ -370,6 +373,24 @@ public class PathfinderController implements Initializable {
     floor1Button.setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
     directionsPane.setVisible(false);
     setChooseLiftBehavior();
+  }
+
+  private void initializehospitalComboBox() {
+    hospitalComboBox.setItems(FXCollections.observableArrayList("Faulkner", "Main Campus"));
+    hospitalComboBox.setValue("Faulkner");
+    hospitalComboBox
+        .valueProperty()
+        .addListener(
+            ((observable, oldValue, newValue) -> {
+              if (oldValue != null && !oldValue.equals(newValue)) {
+                if ("Faulkner".equals(newValue)) {
+                  switchToFloor("1", "Faulkner");
+
+                } else if ("Main Campus".equals(newValue)) {
+                  switchToFloor("G", "Main Campus");
+                }
+              }
+            }));
   }
 
   public void findType(String type) throws InstanceNotFoundException {
@@ -541,11 +562,14 @@ public class PathfinderController implements Initializable {
     mainFloor3Button.setOnAction(actionEvent -> switchToFloor("3", "Main"));
     mainFloorGButton.setOnAction(actionEvent -> switchToFloor("G", "Main"));
     mainFloorL1Button.setOnAction(actionEvent -> switchToFloor("L1", "Main"));
-    mainFloorL1Button.setOnAction(actionEvent -> switchToFloor("L2", "Main"));
+    mainFloorL2Button.setOnAction(actionEvent -> switchToFloor("L2", "Main"));
   }
 
   public void deselectFloorButtons() {
     for (javafx.scene.Node btn : selectFloorPane.getChildren()) {
+      btn.setStyle("-fx-background-color: #4d6c8b; -fx-background-radius: 10px");
+    }
+    for (javafx.scene.Node btn : selectFloorPaneMain.getChildren()) {
       btn.setStyle("-fx-background-color: #4d6c8b; -fx-background-radius: 10px");
     }
   }
@@ -576,6 +600,15 @@ public class PathfinderController implements Initializable {
   }
 
   public void switchToFloor(String floorNum, String building) {
+    if ("Faulkner".equals(building)) {
+      hospitalComboBox.setValue("Faulkner");
+      selectFloorPane.setVisible(true);
+      selectFloorPaneMain.setVisible(false);
+    } else {
+      hospitalComboBox.setValue("Main Campus");
+      selectFloorPane.setVisible(false);
+      selectFloorPaneMain.setVisible(true);
+    }
     currentPane = getFloorPane(floorNum, building);
     currentFloor = floorNum;
     currentBuilding = building;
@@ -594,7 +627,7 @@ public class PathfinderController implements Initializable {
       pathSwitchFloor.setText("Previous: Go to floor " + startNode.getFloor());
       directionsDisplay.setText(directions.getFullDirectionsStringForFloor(endNode.getFloor()));
     } else {
-      switchToFloor(startNode.getFloor(), startNode.getFloor());
+      switchToFloor(startNode.getFloor(), startNode.getBuilding());
       pathSwitchFloor.setText("Next: Go to floor " + endNode.getFloor());
       directionsDisplay.setText(directions.getFullDirectionsStringForFloor(startNode.getFloor()));
     }
