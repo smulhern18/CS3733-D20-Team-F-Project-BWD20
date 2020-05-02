@@ -10,9 +10,9 @@ public class TurnDirection extends Direction {
 
   private Turn turn;
   private int atIntersectionNumber;
-  private int floor;
+  private String floor;
 
-  public TurnDirection(float angle, int atIntersectionNumber, int floor) {
+  public TurnDirection(float angle, int atIntersectionNumber, String floor) {
     if (angle > 45.0) {
       this.turn = Turn.LEFT;
     } else if (angle > 0.0) {
@@ -26,7 +26,7 @@ public class TurnDirection extends Direction {
     this.floor = floor;
   }
 
-  public int getFloor() {
+  public String getFloor() {
     return floor;
   }
 

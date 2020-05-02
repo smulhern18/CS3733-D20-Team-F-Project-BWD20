@@ -4,42 +4,39 @@ import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
 import edu.wpi.teamF.ModelClasses.RouteNode;
+import edu.wpi.teamF.ModelClasses.Scorer.HospitalScorer;
+import edu.wpi.teamF.ModelClasses.Scorer.Scorer;
 import java.util.*;
 import javax.management.InstanceNotFoundException;
 
-public class BreadthFirst implements PathfindAlgorithm {
+public class MultipleHospitalAStar implements PathfindAlgorithm {
 
   private final Map<String, Node> nodeMap = new HashMap<>();
   private String liftType = "ELEV";
 
-  public BreadthFirst(List<Node> nodeList) {
+  public MultipleHospitalAStar(List<Node> nodeList) {
     for (Node node : nodeList) {
       nodeMap.put(node.getId(), node);
     }
   }
 
-  @Override
-  public Path pathfind(Node start, Node end) throws InstanceNotFoundException {
-    Queue<RouteNode> nodeQueue = new LinkedList<>();
-
+  public Path pathfind(Node startNode, Node endNode) {
+    // Check if the destination is on a different floor
+    PriorityQueue<RouteNode> priorityQueue = new PriorityQueue<RouteNode>();
     HashSet<Node> visited = new HashSet<>();
+    Scorer scorer = new HospitalScorer(nodeMap, liftType);
 
-    RouteNode startRoute = new RouteNode(start, null, 0, 0);
-    nodeQueue.add(startRoute);
+    // Create the first node and add it to the Priority Queue
+    RouteNode start;
+    start = new RouteNode(startNode, null, 0, scorer.computeCost(startNode, endNode));
 
-    String typeToAvoid;
-    if ("STAI".equals(liftType)) {
-      typeToAvoid = "ELEV";
-    } else {
-      typeToAvoid = "STAI";
-    }
-
-    while (!nodeQueue.isEmpty()) {
-      RouteNode currentNode = nodeQueue.poll();
+    priorityQueue.add(start);
+    while (!priorityQueue.isEmpty()) {
+      RouteNode currentNode = priorityQueue.poll();
       if (!visited.contains(currentNode.getNode())) {
         visited.add(currentNode.getNode());
-
-        if (currentNode.getNode().equals(end)) {
+        if (currentNode.getNode().equals(endNode)) {
+          // Has reached the goal node
           List<Node> path = new LinkedList<>();
           do {
             path.add(0, currentNode.getNode());
@@ -48,41 +45,55 @@ public class BreadthFirst implements PathfindAlgorithm {
           Path finalPath = new Path(path);
           return finalPath;
         }
+
+        // Make a list of all of the neighbors of this node
         Set<Edge> neighborEdges = currentNode.getNode().getEdges();
+        System.out.println("Neighbor Edges size " + neighborEdges.size());
         Set<Node> neighbors = new HashSet<>();
         for (Edge edge : neighborEdges) {
+          System.out.println(edge.getId());
           final Node neighbor;
           if (edge.getNode1().equals(currentNode.getNode().getId())) {
             neighbor = nodeMap.get(edge.getNode2());
+
           } else {
             neighbor = nodeMap.get(edge.getNode1());
           }
-          if (neighbor.getFloor() == start.getFloor() || neighbor.getFloor() == start.getFloor()) {
-            if (isAccessible(start, end, neighbor)) {
-              neighbors.add(neighbor);
-            }
+          String typeToAvoid;
+          if ("STAI".equals(liftType)) {
+            typeToAvoid = "ELEV";
+          } else {
+            typeToAvoid = "STAI";
+          }
+          if (!nodeMap.get(edge.getNode2()).getType().toString().equals(typeToAvoid)) {
+            neighbors.add(neighbor);
           }
         }
         for (Node neighbor : neighbors) {
-          // if (!visited.contains(neighbor)) {
-          if (!visited.contains(neighbor) && !neighbor.getType().toString().equals(typeToAvoid)) {
-            RouteNode neighborOnRoute = new RouteNode(neighbor, currentNode, 0, 0);
-            nodeQueue.add(neighborOnRoute);
+          if (!visited.contains(neighbor)) {
+            double distanceToEnd = scorer.computeCost(neighbor, endNode);
+
+            double distanceFromStart =
+                currentNode.getRouteScore()
+                    + scorer.computeCost(currentNode.getNode(), neighbor); // Actual path distance
+            double estimatedCostOfNeighbor = distanceToEnd + distanceFromStart;
+            RouteNode neighborOnRoute =
+                new RouteNode(neighbor, currentNode, distanceFromStart, estimatedCostOfNeighbor);
+            priorityQueue.add(neighborOnRoute);
           }
         }
       }
     }
+    // If it exits the while loop without returning a path
     System.out.println("No Route Found");
     return new Path();
   }
 
-  @Override
   public Path pathfind(Node start, Node.NodeType nodeType) throws InstanceNotFoundException {
     List<Path> paths = new ArrayList<>();
     for (Node node : nodeMap.values()) {
-      if (node.getFloor() == start.getFloor()) {
-        if (node.getType().getTypeString().equals(nodeType.getTypeString())
-            && isAccessible(start, start, node)) {
+      if (node.getFloor().equals(start.getFloor())) {
+        if (node.getType().getTypeString().equals(nodeType.getTypeString())) {
           paths.add(pathfind(start, node));
         }
       }
@@ -97,26 +108,6 @@ public class BreadthFirst implements PathfindAlgorithm {
       }
     }
     return shortestPath;
-  }
-
-  public Boolean isAccessible(Node startNode, Node endNode, Node neighbor) {
-    Set<Edge> neighborEdges2 = neighbor.getEdges();
-    for (Edge edge2 : neighborEdges2) {
-      if (edge2.getNode1().equals(neighbor.getId())) {
-        if (nodeMap.get(edge2.getNode2()).getType().equals(Node.NodeType.getEnum("HALL"))
-            || edge2.getNode2().equals(startNode.getId())
-            || edge2.getNode2().equals(endNode.getId())) {
-          return true;
-        }
-      } else {
-        if (nodeMap.get(edge2.getNode1()).getType().equals(Node.NodeType.getEnum("HALL"))
-            || edge2.getNode1().equals(startNode.getId())
-            || edge2.getNode1().equals(endNode.getId())) {
-          return true;
-        }
-      }
-    }
-    return false;
   }
 
   public void setLiftType(String liftType) {

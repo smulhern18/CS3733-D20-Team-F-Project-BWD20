@@ -45,6 +45,8 @@ dependencies {
     compile 'org.slf4j:slf4j-simple:1.6.+'
     compile 'com.sparkjava:spark-core:2.5.+'
     compile 'com.twilio.sdk:twilio:7.+'
+
+    compile 'com.google.cloud:google-cloud-translate:1.94.5'
 }
 
 javafx {
