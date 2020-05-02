@@ -1,6 +1,6 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
+import edu.wpi.teamF.ModelClasses.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.TransportRequest;
 import java.io.BufferedWriter;
 import java.io.FileWriter;

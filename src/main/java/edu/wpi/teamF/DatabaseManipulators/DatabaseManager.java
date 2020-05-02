@@ -4,7 +4,6 @@ import edu.wpi.teamF.ModelClasses.*;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Account.PasswordHasher;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
-import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.io.InputStream;
 import java.nio.file.Path;

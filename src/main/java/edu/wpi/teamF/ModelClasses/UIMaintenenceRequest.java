@@ -1,8 +1,8 @@
-package edu.wpi.teamF.ModelClasses.UIClasses;
+package edu.wpi.teamF.ModelClasses;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javafx.beans.property.SimpleStringProperty;

@@ -1,8 +1,7 @@
-package edu.wpi.teamF.ModelClasses.ServiceRequest;
+package edu.wpi.teamF.ModelClasses;
 
-import edu.wpi.teamF.ModelClasses.Node;
-import edu.wpi.teamF.ModelClasses.ValidationException;
-import edu.wpi.teamF.ModelClasses.Validators;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
+
 import java.util.Date;
 
 public class MaintenanceRequest extends ServiceRequest {

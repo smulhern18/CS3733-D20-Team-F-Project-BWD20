@@ -20,19 +20,8 @@ public class App extends Application {
   public static SceneController getSceneController() {
     return sceneController;
   }
-
-  private LoginController loginController = new LoginController();
-  private DataManipulatorController dataManipulatorController = new DataManipulatorController();
-  private HelpController helpController = new HelpController();
   private MainMenuController mainMenuController = new MainMenuController();
   private MenuBarController menuBarController = new MenuBarController();
-  private PathfinderController pathfinderController = new PathfinderController();
-  private RegisterController registerController = new RegisterController();
-  private ServiceRequestMainController serviceRequestController =
-      new ServiceRequestMainController();
-  private AccountsController accountsController = new AccountsController();
-  private ComputerServiceController computerController = new ComputerServiceController();
-  private MedicineDeliveryController medicineController = new MedicineDeliveryController();
   private MaintenanceRequestController maintenanceRequestController =
       new MaintenanceRequestController();
 

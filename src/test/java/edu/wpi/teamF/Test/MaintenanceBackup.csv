@@ -1,5 +1,0 @@
-id,location,assignee,description,dateTimeSubmitted,priority,complete,timeCompleted
-123124134,nodeB,Sully,123124134,10,2,false,10
-12312442,nodeA,Roman,12312442,0,2,true,100
-124134123412,nodeC,Denver,124134123412,110,2,true,300
-213124124,nodeD,Charles,213124124,1110,2,false,2000

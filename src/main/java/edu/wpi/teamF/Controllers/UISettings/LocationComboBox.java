@@ -2,7 +2,6 @@ package edu.wpi.teamF.Controllers.UISettings;
 
 import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
-import edu.wpi.teamF.ModelClasses.Node;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
