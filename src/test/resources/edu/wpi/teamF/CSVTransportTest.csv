@@ -1,5 +1,5 @@
 id,location,assignee,description,dateTimeSubmitted,priority,complete,type,destination,dateTimeCompleted
-12312442,nodeA,Roman,12312442,0,2,false,nodeH,10
-123124134,nodeB,Sully,123124134,10,2,true,nodeG,100
-124134123412,nodeC,Denver,124134123412,110,2,false,nodeF,300
-213124124,nodeD,Charles,213124124,1110,2,true,nodeE,2000
+12312442,nodeA,Roman,12312442,0,2,false,MRI machine,nodeD,10
+123124134,nodeB,Sully,123124134,10,2,false,patient on stretcher,nodeC,100
+124134123412,nodeC,Denver,124134123412,110,2,true,patient in wheelchair,nodeB,300
+213124124,nodeD,Charles,213124124,1110,2,false,patient in bed,nodeA,2000
