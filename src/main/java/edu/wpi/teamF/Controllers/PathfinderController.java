@@ -92,7 +92,6 @@ public class PathfinderController implements Initializable {
   public Label startLabel;
   public Label endLabel;
 
-
   // stairs v elev stuff
   String liftType = "ELEV";
   public JFXButton chooseLiftStairs;
@@ -305,8 +304,8 @@ public class PathfinderController implements Initializable {
 
     setComboBehavior();
 
-    startLabel.setVisible(false);
-    endLabel.setVisible(false);
+    //    startLabel.setVisible(false);
+    //    endLabel.setVisible(false);
   }
 
   private void resetButtonLine(String floor, String building) {
@@ -710,8 +709,8 @@ public class PathfinderController implements Initializable {
         });
   }
 
-  public void labelNode(Node node, String location){
-    if("start".equals(location)) {
+  public void labelNode(Node node, String location) {
+    if ("start".equals(location)) {
       for (javafx.scene.Node component : currentPane.getChildren()) {
         if (component.getId().equals(node.getId())) {
           startLabel.setLayoutX(component.getLayoutX());
@@ -721,7 +720,7 @@ public class PathfinderController implements Initializable {
         }
       }
     }
-    if("end".equals(location)) {
+    if ("end".equals(location)) {
       for (javafx.scene.Node component : currentPane.getChildren()) {
         if (component.getId().equals(node.getId())) {
           endLabel.setLayoutX(component.getLayoutX());
