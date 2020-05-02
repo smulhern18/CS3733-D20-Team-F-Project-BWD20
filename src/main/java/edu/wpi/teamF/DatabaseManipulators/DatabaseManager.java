@@ -25,8 +25,6 @@ public class DatabaseManager {
 
   // Factories
   private ServiceRequestFactory serviceRequestFactory = ServiceRequestFactory.getFactory();
-  private MaintenanceRequestFactory maintenanceRequestFactory =
-      MaintenanceRequestFactory.getFactory();
 
   static Connection connection = null;
 
@@ -105,23 +103,23 @@ public class DatabaseManager {
    * Service Request Factory Methods
    */
   public void manipulateServiceRequest(MaintenanceRequest serviceRequest) throws Exception {
-    if (maintenanceRequestFactory.read(serviceRequest.getId()) == null) {
-      maintenanceRequestFactory.create(serviceRequest);
+    if (serviceRequestFactory.read(serviceRequest.getId()) == null) {
+      serviceRequestFactory.create(serviceRequest);
     } else {
-      maintenanceRequestFactory.update(serviceRequest);
+      serviceRequestFactory.update(serviceRequest);
     }
   }
 
   public MaintenanceRequest readMaintenanceRequest(String serviceId) throws Exception {
-    return maintenanceRequestFactory.read(serviceId);
+    return serviceRequestFactory.read(serviceId);
   }
 
   public void deleteMaintenanceRequest(String serviceId) throws Exception {
-    maintenanceRequestFactory.delete(serviceId);
+    serviceRequestFactory.delete(serviceId);
   }
 
   public List<MaintenanceRequest> getAllMaintenanceRequests() throws Exception {
-    return maintenanceRequestFactory.getAllMaintenanceRequests();
+    return serviceRequestFactory.getAllMaintenanceRequests();
   }
 
 

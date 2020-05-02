@@ -24,7 +24,7 @@ public class UIMaintenenceRequest extends RecursiveTreeObject<UIMaintenenceReque
     DateFormat date = new SimpleDateFormat("yyyy-mm-dd");
 
     this.ID = new SimpleStringProperty(csr.getId());
-    this.location = new SimpleStringProperty(csr.getLocation().getId());
+    this.location = new SimpleStringProperty(csr.getLocation());
     if (csr.getTimeCompleted() == null) {
       this.dateCompleted = new SimpleStringProperty("Not Complete");
     } else {
@@ -43,8 +43,8 @@ public class UIMaintenenceRequest extends RecursiveTreeObject<UIMaintenenceReque
 
   public boolean equalsCSR(Object other) {
     boolean isEqual = false;
-    if (other instanceof ComputerServiceRequest) {
-      ComputerServiceRequest otherCS = (ComputerServiceRequest) other;
+    if (other instanceof MaintenanceRequest) {
+      MaintenanceRequest otherCS = (MaintenanceRequest) other;
       isEqual =
           this.description.equals(otherCS.getDescription())
               && this.location.equals(otherCS.getLocation())

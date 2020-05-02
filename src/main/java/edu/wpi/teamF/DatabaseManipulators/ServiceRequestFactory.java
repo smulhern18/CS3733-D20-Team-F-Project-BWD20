@@ -1,5 +1,6 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
+import edu.wpi.teamF.ModelClasses.MaintenanceRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
 import java.sql.PreparedStatement;
@@ -8,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class ServiceRequestFactory {
   private static final ServiceRequestFactory factory = new ServiceRequestFactory();
@@ -16,7 +18,7 @@ public class ServiceRequestFactory {
     return factory;
   }
 
-  public void create(ServiceRequest serviceRequest) throws ValidationException {
+  public void create(MaintenanceRequest serviceRequest) throws ValidationException {
     String insertStatement =
         "INSERT INTO "
             + DatabaseManager.SERVICE_REQUEST_TABLE
@@ -34,20 +36,28 @@ public class ServiceRequestFactory {
             + DatabaseManager.PRIORITY_KEY
             + ", "
             + DatabaseManager.COMPLETED_KEY
+            + ", "
+            + DatabaseManager.DATECOMPLETED_KEY
             + " ) "
-            + "VALUES (?, ?, ?, ?, ?, ?, ?)";
-    Validators.serviceRequestValidation(serviceRequest);
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    Validators.maintenanceRequestValidation(serviceRequest);
     try (PreparedStatement prepareStatement =
         DatabaseManager.getConnection().prepareStatement(insertStatement)) {
       int param = 1;
       prepareStatement.setString(param++, serviceRequest.getId());
-      prepareStatement.setString(param++, serviceRequest.getLocation().getId());
+      prepareStatement.setString(param++, serviceRequest.getLocation());
       prepareStatement.setTimestamp(
           param++, new Timestamp(serviceRequest.getDateTimeSubmitted().getTime()));
       prepareStatement.setString(param++, serviceRequest.getDescription());
       prepareStatement.setString(param++, serviceRequest.getAssignee());
       prepareStatement.setInt(param++, serviceRequest.getPriority());
       prepareStatement.setBoolean(param++, serviceRequest.getComplete());
+      Date dateComplete = serviceRequest.getTimeCompleted();
+      if (dateComplete ==  null) {
+        prepareStatement.setTimestamp(param++, null);
+      } else {
+        prepareStatement.setTimestamp(param++, new Timestamp(dateComplete.getTime()));
+      }
 
       try {
         int numRows = prepareStatement.executeUpdate();
@@ -62,8 +72,8 @@ public class ServiceRequestFactory {
     }
   }
 
-  public ServiceRequest read(String id) {
-    ServiceRequest serviceRequest = null;
+  public MaintenanceRequest read(String id) {
+    MaintenanceRequest serviceRequest = null;
     String selectStatement =
         "SELECT * FROM "
             + DatabaseManager.SERVICE_REQUEST_TABLE
@@ -78,16 +88,21 @@ public class ServiceRequestFactory {
       try {
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
+          Timestamp timestamp = resultSet.getTimestamp(DatabaseManager.DATECOMPLETED_KEY);
+          Date complete = null;
+          if (timestamp != null) {
+            complete = new Date(timestamp.getTime());
+          }
           serviceRequest =
-              new SecurityRequest(
+              new MaintenanceRequest(
                   resultSet.getString(DatabaseManager.SERVICEID_KEY),
-                  nodeFactory.read(resultSet.getString(DatabaseManager.NODEID_KEY)),
+                  resultSet.getString(DatabaseManager.NODEID_KEY),
                   resultSet.getString(DatabaseManager.ASSIGNED_KEY),
                   resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
                   new Date(resultSet.getTimestamp(DatabaseManager.TIME_CREATED_KEY).getTime()),
                   resultSet.getInt(DatabaseManager.PRIORITY_KEY),
                   resultSet.getBoolean(DatabaseManager.COMPLETED_KEY),
-                  10);
+                  complete);
         }
       } catch (ValidationException e) {
         throw e;
@@ -100,7 +115,7 @@ public class ServiceRequestFactory {
     return serviceRequest;
   }
 
-  public void update(ServiceRequest serviceRequest) {
+  public void update(MaintenanceRequest serviceRequest) {
 
     String updateStatement =
         "UPDATE "
@@ -127,7 +142,7 @@ public class ServiceRequestFactory {
         DatabaseManager.getConnection().prepareStatement(updateStatement)) {
       int param = 1;
       preparedStatement.setString(param++, serviceRequest.getId());
-      preparedStatement.setString(param++, serviceRequest.getLocation().getId());
+      preparedStatement.setString(param++, serviceRequest.getLocation());
       preparedStatement.setTimestamp(
           param++, new Timestamp(serviceRequest.getDateTimeSubmitted().getTime()));
       preparedStatement.setString(param++, serviceRequest.getDescription());
@@ -165,42 +180,37 @@ public class ServiceRequestFactory {
     }
   }
 
-  public List<ServiceRequest> getServiceRequestsByLocation(Node location) {
-    ArrayList<ServiceRequest> serviceRequests = new ArrayList<>();
-    String selectStatement =
-        "SELECT * FROM "
-            + DatabaseManager.SERVICE_REQUEST_TABLE
-            + " WHERE "
-            + DatabaseManager.NODEID_KEY
-            + " = ?";
+  public List<MaintenanceRequest> getAllMaintenanceRequests() {
+    List<MaintenanceRequest> allMain = null;
+    String selectAllStatement = "SELECT * FROM " + DatabaseManager.SERVICE_REQUEST_TABLE;
 
-    try (PreparedStatement preparedStatement =
-        DatabaseManager.getConnection().prepareStatement(selectStatement)) {
-      preparedStatement.setString(1, location.getId());
-
-      try {
-        serviceRequests = new ArrayList<>();
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-          serviceRequests.add(
-              new ServiceRequest(
-                  resultSet.getString(DatabaseManager.SERVICEID_KEY),
-                  location,
-                  resultSet.getString(DatabaseManager.ASSIGNED_KEY),
-                  resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
-                  new Date(resultSet.getTimestamp(DatabaseManager.TIME_CREATED_KEY).getTime()),
-                  resultSet.getInt(DatabaseManager.PRIORITY_KEY),
-                  resultSet.getBoolean(DatabaseManager.COMPLETED_KEY)) {});
+    try (PreparedStatement preparedStatement = DatabaseManager.getConnection().prepareStatement(selectAllStatement); ResultSet resultSet = preparedStatement.executeQuery()){
+      allMain = new ArrayList<>();
+      while (resultSet.next()){
+        Timestamp timestamp = resultSet.getTimestamp(DatabaseManager.DATECOMPLETED_KEY);
+        Date complete = null;
+        if (timestamp != null) {
+          complete = new Date(timestamp.getTime());
         }
-      } catch (ValidationException e) {
-        throw e;
+        MaintenanceRequest serviceRequest =
+                new MaintenanceRequest(
+                        resultSet.getString(DatabaseManager.SERVICEID_KEY),
+                        resultSet.getString(DatabaseManager.NODEID_KEY),
+                        resultSet.getString(DatabaseManager.ASSIGNED_KEY),
+                        resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
+                        new Date(resultSet.getTimestamp(DatabaseManager.TIME_CREATED_KEY).getTime()),
+                        resultSet.getInt(DatabaseManager.PRIORITY_KEY),
+                        resultSet.getBoolean(DatabaseManager.COMPLETED_KEY),
+                        complete);
+        allMain.add(serviceRequest);
       }
-    } catch (IllegalArgumentException e) {
-      throw e;
     } catch (Exception e) {
-      System.out.println(
-          "Exception in SecurityFactory read: " + e.getMessage() + ", " + e.getClass());
+      System.out.println(e.getMessage() + ", " + e.getClass());
     }
-    return serviceRequests;
+    if (allMain.size() == 0){
+      return null;
+    } else {
+      return allMain;
+    }
   }
 }

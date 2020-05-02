@@ -1,7 +1,5 @@
 package edu.wpi.teamF.ModelClasses;
 
-import edu.wpi.teamF.ModelClasses.Account.Account;
-
 import java.util.Date;
 
 public class Validators {
@@ -40,12 +38,8 @@ public class Validators {
   public static final int MAKE_MAX_LENGTH = 32;
   public static final int HARDWARESOFTWARE_MIN_LENGTH = 1;
   public static final int HARDWARESOFTWARE_MAX_LENGTH = 32;
-  public static final int OS_MIN_LENGTH = 1;
-  public static final int OS_MAX_LENGTH = 32;
   public static final int TRANSPORT_TYPE_MIN_LENGTH = 1;
   public static final int TRANSPORT_TYPE_MAX_LENGTH = 32;
-  public static final int PROBLEMTYPE_MIN_LENGTH = 1;
-  public static final int PROBLEMTYPE_MAX_LENGTH = 32;
   public static final int LANGUAGE_MIN_LENGTH = 1;
   public static final int LANGUAGE_MAX_LENGTH = 32;
   private static final int GUARDS_MIN_VALUE = 1;
@@ -65,28 +59,6 @@ public class Validators {
   public static final int MESSAGE_MIN_LENGTH = 1;
   public static final int MESSAGE_MAX_LENGTH = 128;
 
-  public static <T extends SecurityRequest> void securityRequestValidation(T t, int... constraints)
-      throws ValidationException {
-    serviceRequestValidation(t, constraints);
-    SecurityRequest securityRequest = (SecurityRequest) t;
-
-    guardsRequestedValidation(securityRequest.getGuardsRequested(), constraints);
-  }
-
-  public static <T extends ServiceRequest> void serviceRequestValidation(T t, int... constraints)
-      throws ValidationException {
-    nullCheckValidation(t, constraints);
-    ServiceRequest serviceRequest = (ServiceRequest) t;
-
-    idValidation(serviceRequest.getId());
-    nodeValidation(serviceRequest.getLocation());
-    descriptionValidation(serviceRequest.getDescription());
-    dateValidation(serviceRequest.getDateTimeSubmitted());
-    priorityValidation(serviceRequest.getPriority());
-    booleanValidation(serviceRequest.getComplete());
-    nameValidation(serviceRequest.getAssignee());
-  }
-
   /** Validation for Security */
   public static void guardsRequestedValidation(int guardsRequested, int... constraints)
       throws ValidationException {
@@ -96,17 +68,6 @@ public class Validators {
 
       throw new ValidationException(" Guards requested outside of accepted values");
     }
-  }
-
-  public static <T extends Account> void accountValidation(T t, int... constraints)
-      throws ValidationException {
-    nullCheckValidation(t, constraints);
-    Account accountObject = (Account) t;
-
-    emailAddressValidation(accountObject.getEmailAddress());
-    nameValidation(accountObject.getFirstName());
-    nameValidation(accountObject.getLastName());
-    userIDValidation(accountObject.getUsername());
   }
 
   public static void emailAddressValidation(String address, int... constraints)
@@ -164,48 +125,9 @@ public class Validators {
       throws ValidationException {
     nullCheckValidation(sanitationType, constraints);
     if (sanitationType.length() < SANITATION_TYPE_MIN_LENGTH
-        || sanitationType.length() > SANITATION_TYPE_MAX_LENGTH) {
+            || sanitationType.length() > SANITATION_TYPE_MAX_LENGTH) {
       throw new ValidationException("Invalid sanitation type length");
     }
-  }
-
-  /**
-   * Validation for Node
-   *
-   * @param t an instance of node or subclass to validate
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the validation fail
-   */
-  public static <T extends Node> void nodeValidation(T t, int... constraints)
-      throws ValidationException {
-    nullCheckValidation(t, constraints);
-    Node nodeObject = (Node) t;
-
-    coordValidation(nodeObject.getXCoord());
-    coordValidation(nodeObject.getYCoord());
-    nameValidation(nodeObject.getId());
-    longNameValidation(nodeObject.getLongName());
-    shortNameValidation(nodeObject.getShortName());
-    buildingValidation(nodeObject.getBuilding());
-    if (nodeObject.getEdges() != null) {
-      for (Edge edgeName : nodeObject.getEdges()) {
-        edgeValidation(edgeName);
-      }
-    }
-    floorValidation(nodeObject.getFloor());
-  }
-  /**
-   * Validation for Edge
-   *
-   * @param t an instance of node or subclass to validate
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the validation fail
-   */
-  public static <T extends Edge> void edgeValidation(T t, int... constraints)
-      throws ValidationException {
-    nullCheckValidation(t, constraints);
-    Edge edgeObject = (Edge) t;
-    idValidation(edgeObject.getId());
   }
 
   /**
@@ -327,24 +249,6 @@ public class Validators {
   }
 
   /**
-   * Validation for Appointment
-   *
-   * @param t an instance of appointment
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the validation fail
-   */
-  public static <T extends Appointment> void appointmentValidation(T t, int... constraints)
-      throws ValidationException {
-    nullCheckValidation(t, constraints);
-    Appointment appointmentObject = (Appointment) t;
-    idValidation(appointmentObject.getId());
-    nodeValidation(appointmentObject.getLocation());
-    roomValidation(appointmentObject.getRoom());
-    userIDValidation(appointmentObject.getUserID());
-    PCPValidation(appointmentObject.getPCP());
-  }
-
-  /**
    * Validation for rooms
    *
    * @param room the room to validate
@@ -387,68 +291,6 @@ public class Validators {
     }
   }
 
-  /**
-   * Validation for Maintenance Requests
-   *
-   * @param t an instance of Maintenance Request to validate
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the validation fail
-   */
-  public static <T extends MaintenanceRequest> void maintenanceRequestValidation(
-      T t, int... constraints) throws ValidationException {
-    nullCheckValidation(t, constraints);
-    MaintenanceRequest maintenanceRequestObject = t;
-
-    idValidation(maintenanceRequestObject.getId());
-    nodeValidation(maintenanceRequestObject.getLocation());
-    descriptionValidation(maintenanceRequestObject.getDescription());
-    dateValidation(maintenanceRequestObject.getDateTimeSubmitted());
-    priorityValidation(maintenanceRequestObject.getPriority());
-  }
-
-  /**
-   * Validation for Computer Requests
-   *
-   * @param t an instance of Computer Request to validate
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the validation fail
-   */
-  public static <T extends ComputerServiceRequest> void computerServiceValidation(
-      T t, int... constraints) throws ValidationException {
-    nullCheckValidation(t, constraints);
-    ComputerServiceRequest computerRequestObject = (ComputerServiceRequest) t;
-
-    idValidation(computerRequestObject.getId());
-    nodeValidation(computerRequestObject.getLocation());
-    descriptionValidation(computerRequestObject.getDescription());
-    dateValidation(computerRequestObject.getDateTimeSubmitted());
-    priorityValidation(computerRequestObject.getPriority());
-    osValidation(computerRequestObject.getOS());
-    makeValidation(computerRequestObject.getMake());
-    hardwareSoftwareValidation(computerRequestObject.getHardwareSoftware());
-  }
-
-  /**
-   * Validation for Language Requests
-   *
-   * @param t an instance of Language Request to validate
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the validation fail
-   */
-  public static <T extends LanguageServiceRequest> void languageServiceValidation(
-      T t, int... constraints) throws ValidationException {
-    nullCheckValidation(t, constraints);
-    LanguageServiceRequest languageRequestObject = (LanguageServiceRequest) t;
-
-    idValidation(languageRequestObject.getId());
-    nodeValidation(languageRequestObject.getLocation());
-    descriptionValidation(languageRequestObject.getDescription());
-    dateValidation(languageRequestObject.getDateTimeSubmitted());
-    priorityValidation(languageRequestObject.getPriority());
-    makeValidation(languageRequestObject.getLanguage());
-    hardwareSoftwareValidation(languageRequestObject.getProblemType());
-  }
-
   /*
    * Validation for medicine types
    *
@@ -479,69 +321,6 @@ public class Validators {
         || instructions.length() > INSTRUCTIONS_MAX_LENGTH) {
       throw new ValidationException("Instructions length is out of bounds");
     }
-  }
-
-  /**
-   * Validation for Medicine Delivery Requests
-   *
-   * @param t an instance of a Medicine Delivery Request to validate
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the validation fail
-   */
-  public static <T extends MedicineDeliveryRequest> void medicineDeliveryRequestValidation(
-      T t, int... constraints) throws ValidationException {
-    nullCheckValidation(t, constraints);
-    MedicineDeliveryRequest medicineDeliveryRequestObject = (MedicineDeliveryRequest) t;
-
-    idValidation(medicineDeliveryRequestObject.getId());
-    nodeValidation(medicineDeliveryRequestObject.getLocation());
-    descriptionValidation(medicineDeliveryRequestObject.getDescription());
-    dateValidation(medicineDeliveryRequestObject.getDateTimeSubmitted());
-    priorityValidation(medicineDeliveryRequestObject.getPriority());
-    medicineTypeValidation(medicineDeliveryRequestObject.getMedicineType());
-    instructionsValidation(medicineDeliveryRequestObject.getInstructions());
-  }
-
-  /**
-   * Validation for Security Requests
-   *
-   * @param t an instance of Security Request to validate
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the validation fail
-   */
-  public static <T extends MariachiRequest> void mariachiRequestValidation(T t, int... constraints)
-      throws ValidationException {
-    nullCheckValidation(t, constraints);
-    MariachiRequest mariachiRequest = (MariachiRequest) t;
-
-    idValidation(mariachiRequest.getId());
-    nodeValidation(mariachiRequest.getLocation());
-    descriptionValidation(mariachiRequest.getDescription());
-    dateValidation(mariachiRequest.getDateTimeSubmitted());
-    priorityValidation(mariachiRequest.getPriority());
-    songRequestValidation(mariachiRequest.getSongRequest());
-  }
-
-  /**
-   * Validation for Laundry Requests
-   *
-   * @param t an instance of Laundry Request to validate
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the validation fail
-   */
-  public static <T extends LaundryServiceRequest> void launduaryServiceValidation(
-      T t, int... constraints) throws ValidationException {
-    nullCheckValidation(t, constraints);
-    LaundryServiceRequest launduaryRequestObject = (LaundryServiceRequest) t;
-
-    idValidation(launduaryRequestObject.getId());
-    nodeValidation(launduaryRequestObject.getLocation());
-    descriptionValidation(launduaryRequestObject.getDescription());
-    dateValidation(launduaryRequestObject.getDateTimeSubmitted());
-    priorityValidation(launduaryRequestObject.getPriority());
-    temperatureValidation(launduaryRequestObject.getTemperature());
-    itemsValidation(launduaryRequestObject.getItems());
-    quantityValidation(launduaryRequestObject.getQuantity());
   }
 
   public static void temperatureValidation(String temperature, int... constraints)
@@ -628,50 +407,11 @@ public class Validators {
     }
   }
 
-  /**
-   * Validation for Transport Requests
-   *
-   * @param t a transport request to validate
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the validation fail
-   */
-  public static <T extends TransportRequest> void transportRequestValidation(
-      T t, int... constraints) throws ValidationException {
-    nullCheckValidation(t, constraints);
-    TransportRequest transportRequestObject = (TransportRequest) t;
-    idValidation(transportRequestObject.getId());
-    nodeValidation(transportRequestObject.getLocation());
-    descriptionValidation(transportRequestObject.getDescription());
-    dateValidation(transportRequestObject.getDateTimeSubmitted());
-    priorityValidation(transportRequestObject.getPriority());
-    transportTypeValidation(transportRequestObject.getType());
-    nodeValidation(transportRequestObject.getDestination());
-  }
-
-  public static <T extends SanitationServiceRequest> void sanitationServiceValidation(
-      T t, int... constraints) throws ValidationException {
-    nullCheckValidation(t, constraints);
-    SanitationServiceRequest sanitationServiceRequest = (SanitationServiceRequest) t;
-    idValidation(sanitationServiceRequest.getId());
-    nodeValidation(sanitationServiceRequest.getLocation());
-    descriptionValidation(sanitationServiceRequest.getDescription());
-    dateValidation(sanitationServiceRequest.getDateTimeSubmitted());
-    priorityValidation(sanitationServiceRequest.getPriority());
-    transportTypeValidation(sanitationServiceRequest.getType());
-  }
-
   public static void languageValidation(String type, int... constraints)
       throws ValidationException {
     nullCheckValidation(type, constraints);
     if (type.length() < LANGUAGE_MIN_LENGTH || type.length() > LANGUAGE_MAX_LENGTH) {
       throw new ValidationException("Language is outside values.");
-    }
-  }
-
-  public static void problemValidation(String type, int... constraints) throws ValidationException {
-    nullCheckValidation(type, constraints);
-    if (type.length() < PROBLEMTYPE_MIN_LENGTH || type.length() > LANGUAGE_MAX_LENGTH) {
-      throw new ValidationException("Problem Type outside values.");
     }
   }
 
@@ -723,28 +463,5 @@ public class Validators {
     //    if (!phoneNumber.matches("^[+]*[(]?[0-9]{1,4}[)]?[-\\s./0-9]*$")) {
     //      throw new ValidationException("this is not a phone number");
     //    }
-  }
-  /**
-   * Validation for Flower Requests
-   *
-   * @param t an instance of Flower Request to validate
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the validation fail
-   */
-  public static <T extends FlowerRequest> void FlowerValidation(T t, int... constraints)
-      throws ValidationException {
-    nullCheckValidation(t, constraints);
-    FlowerRequest flowerRequestObject = (FlowerRequest) t;
-
-    idValidation(flowerRequestObject.getId());
-    nodeValidation(flowerRequestObject.getLocation());
-    descriptionValidation(flowerRequestObject.getDescription());
-    dateValidation(flowerRequestObject.getDateTimeSubmitted());
-    priorityValidation(flowerRequestObject.getPriority());
-    nameValidation(flowerRequestObject.getRecipientInput());
-    nameValidation(flowerRequestObject.getChoice());
-    messageValidation(flowerRequestObject.getMessageInput());
-    nameValidation(flowerRequestObject.getBuyerName());
-    booleanValidation(flowerRequestObject.getGiftWrap());
   }
 }
