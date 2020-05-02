@@ -12,17 +12,15 @@ import java.net.URL;
 import java.util.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -41,15 +39,15 @@ public class DataMapViewController implements Initializable {
 
   @FXML private AnchorPane faulknerFloorPane;
 
-  @FXML private JFXButton floor1Button;
+  @FXML private JFXButton faulknerFloor1Button;
 
-  @FXML private JFXButton floor2Button;
+  @FXML private JFXButton faulknerFloor2Button;
 
-  @FXML private JFXButton floor3Button;
+  @FXML private JFXButton faulknerFloor3Button;
 
-  @FXML private JFXButton floor4Button;
+  @FXML private JFXButton faulknerFloor4Button;
 
-  @FXML private JFXButton floor5Button;
+  @FXML private JFXButton faulknerFloor5Button;
 
   @FXML private AnchorPane pathSwitchFloorPane;
 
@@ -67,45 +65,66 @@ public class DataMapViewController implements Initializable {
 
   @FXML private JFXButton lower2Button;
 
+  @FXML private JFXButton floor1Button;
+
+  @FXML private JFXButton floor2Button;
+
+  @FXML private JFXButton floor3Button;
+
   @FXML private AnchorPane dataMap;
 
   @FXML private JFXButton addNodeButton; // Adds the given node
-
-  @FXML private GridPane nodeGridPane;
-
-  @FXML private GridPane edgeGridPane;
-
-  @FXML private AnchorPane mapPane1;
-
-  @FXML private ImageView imageView1;
-
-  @FXML private AnchorPane mapPane2;
-
-  @FXML private ImageView imageView2;
-
-  @FXML private AnchorPane mapPane3;
-
-  @FXML private ImageView imageView3;
-
-  @FXML private AnchorPane mapPane4;
-
-  @FXML private ImageView imageView4;
-
-  @FXML private AnchorPane mapPane5;
-
-  @FXML private ImageView imageView5;
-
-  @FXML private ChoiceBox typeInput;
-
-  @FXML private Label nodeErrorLabel;
-
-  @FXML private Label edgeErrorLabel;
 
   @FXML private ScrollPane imageScrollPane;
 
   @FXML private StackPane imageStackPane;
 
+  @FXML private ImageView imageViewFaulkner1;
+
+  @FXML private AnchorPane mapPaneFaulkner1;
+
+  @FXML private ImageView imageViewFaulkner2;
+
+  @FXML private AnchorPane mapPaneFaulkner2;
+
+  @FXML private ImageView imageViewFaulkner3;
+
+  @FXML private AnchorPane mapPaneFaulkner3;
+
+  @FXML private ImageView imageViewFaulkner4;
+
+  @FXML private AnchorPane mapPaneFaulkner4;
+
+  @FXML private ImageView imageViewFaulkner5;
+
+  @FXML private AnchorPane mapPaneFaulkner5;
+
+  @FXML private ImageView imageViewMain1;
+
+  @FXML private ImageView imageViewMain2;
+
+  @FXML private ImageView imageViewMain3;
+
+  @FXML private ImageView imageViewMainG;
+
+  @FXML private ImageView imageViewMainL1;
+
+  @FXML private ImageView imageViewMainL2;
+
+  @FXML private AnchorPane mapPaneMain1;
+
+  @FXML private AnchorPane mapPaneMain2;
+
+  @FXML private AnchorPane mapPaneMain3;
+
+  @FXML private AnchorPane mapPaneMainG;
+
+  @FXML private AnchorPane mapPaneMainL1;
+
+  @FXML private AnchorPane mapPaneMainL2;
+
   private AnchorPane mapPane;
+  private ImageView imageView;
 
   private JFXButton nodeButton = null;
   private Line edgeLine = null;
@@ -122,29 +141,34 @@ public class DataMapViewController implements Initializable {
 
   private UISetting uiSetting = new UISetting();
 
-  private static final int MAP_HEIGHT = 1485;
-  private static final int MAP_WIDTH = 2475; // height and width of the map
+  private static final int MAP_HEIGHT_FAULK = 1485;
+  private static final int MAP_WIDTH_FAULK = 2475; // height and width of the faulkner hospital map
+  private static final int MAP_HEIGHT_MAIN = 3400;
+  private static final int MAP_WIDTH_MAIN = 5000; // height and width of the main hospital map
   private static final int PANE_HEIGHT = 550;
   private static final int PANE_WIDTH = 914; // height and width of the pane/image
-  private double heightRatio = (double) PANE_HEIGHT / MAP_HEIGHT;
-  private double widthRatio = (double) PANE_WIDTH / MAP_WIDTH; // ratio of pane to map
+  private double faulkHeightRatio = (double) PANE_HEIGHT / MAP_HEIGHT_FAULK;
+  private double faulkWidthRatio = (double) PANE_WIDTH / MAP_WIDTH_FAULK; // ratio of pane to map
+  private double mainHeightRatio = (double) PANE_HEIGHT / MAP_HEIGHT_MAIN;
+  private double mainWidthRatio = (double) PANE_WIDTH / MAP_WIDTH_MAIN; // ratio of pane to map
   private DatabaseManager databaseManager = DatabaseManager.getManager();
 
-  public DataMapViewController() throws Exception {}
-
-  private enum ModifyType {
-    DELETE,
-    ADD,
-    EDIT
+  private enum Hospital {
+    MAIN,
+    FAULK
   };
 
-  private ModifyType modifyType;
+  private Hospital hospital;
+
+  public DataMapViewController() throws Exception {}
 
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
-    mapPane = mapPane1;
+    mapPane = mapPaneMain1;
+    imageView = imageViewMain1;
+    hospital = Hospital.MAIN;
 
     for (Edge edge : databaseManager.getAllEdges()) {
       drawEdge(edge);
@@ -159,47 +183,155 @@ public class DataMapViewController implements Initializable {
     hospitalCombo.setItems(hospitals);
     hospitalCombo.setValue("Main Campus");
 
-    // uiSetting.makeZoomable(imageScrollPane, imageStackPane, 1);
+    faulknerFloor1Button.setId("ff1");
+    faulknerFloor2Button.setId("ff2");
+    faulknerFloor3Button.setId("ff3");
+    faulknerFloor4Button.setId("ff4");
+    faulknerFloor5Button.setId("ff5");
+
+    groundButton.setId("ground");
+    lower1Button.setId("l1");
+    lower2Button.setId("l2");
+    floor1Button.setId("f1");
+    floor2Button.setId("f2");
+    floor3Button.setId("f3");
   }
 
   @FXML
-  private void resetImages() {
-    mapPane1.setVisible(false);
-    imageView1.setVisible(false);
-    mapPane2.setVisible(false);
-    imageView2.setVisible(false);
-    mapPane3.setVisible(false);
-    imageView3.setVisible(false);
-    mapPane3.setVisible(false);
-    imageView3.setVisible(false);
-    mapPane4.setVisible(false);
-    imageView4.setVisible(false);
-    mapPane5.setVisible(false);
-    imageView4.setVisible(false);
+  void setFloorButtons(ActionEvent event) {
+    if (hospitalCombo.getValue() == "Main Campus") {
+      faulknerFloorPane.setVisible(false);
+      mainFloorPane.setVisible(true);
+    } else {
+      mainFloorPane.setVisible(false);
+      faulknerFloorPane.setVisible(true);
+    }
+  }
+
+  @FXML
+  void selectFloor(ActionEvent event) {
+    JFXButton btn = (JFXButton) event.getSource();
+
+    switch (btn.getId()) {
+      case "ff1":
+        mapPane = mapPaneFaulkner1;
+        imageView = imageViewFaulkner1;
+        hospital = Hospital.FAULK;
+        break;
+      case "ff2":
+        mapPane = mapPaneFaulkner2;
+        imageView = imageViewFaulkner2;
+        hospital = Hospital.FAULK;
+        break;
+      case "ff3":
+        mapPane = mapPaneFaulkner3;
+        imageView = imageViewFaulkner3;
+        hospital = Hospital.FAULK;
+        break;
+      case "ff4":
+        mapPane = mapPaneFaulkner4;
+        imageView = imageViewFaulkner4;
+        hospital = Hospital.FAULK;
+        break;
+      case "ff5":
+        mapPane = mapPaneFaulkner5;
+        imageView = imageViewFaulkner5;
+        hospital = Hospital.FAULK;
+        break;
+      case "ground":
+        mapPane = mapPaneMainG;
+        imageView = imageViewMainG;
+        hospital = Hospital.MAIN;
+        break;
+      case "l1":
+        mapPane = mapPaneMainL1;
+        imageView = imageViewMainL1;
+        hospital = Hospital.MAIN;
+        break;
+      case "l2":
+        mapPane = mapPaneMainL2;
+        imageView = imageViewMainL2;
+        hospital = Hospital.MAIN;
+        break;
+      case "f1":
+        mapPane = mapPaneMain1;
+        imageView = imageViewMain1;
+        hospital = Hospital.MAIN;
+        break;
+      case "f2":
+        mapPane = mapPaneMain2;
+        imageView = imageViewMain2;
+        hospital = Hospital.MAIN;
+        break;
+      case "f3":
+        mapPane = mapPaneMain3;
+        imageView = imageViewMain3;
+        hospital = Hospital.MAIN;
+        break;
+    }
+
+    List<AnchorPane> mapPanes = new ArrayList<AnchorPane>();
+    mapPanes.addAll(
+        Arrays.asList(
+            mapPaneFaulkner1,
+            mapPaneFaulkner2,
+            mapPaneFaulkner3,
+            mapPaneFaulkner4,
+            mapPaneFaulkner5,
+            mapPaneMainG,
+            mapPaneMainL1,
+            mapPaneMainL2,
+            mapPaneMain1,
+            mapPaneMain2,
+            mapPaneMain3));
+
+    List<ImageView> imageViews = new ArrayList<ImageView>();
+    imageViews.addAll(
+        Arrays.asList(
+            imageViewFaulkner1,
+            imageViewFaulkner2,
+            imageViewFaulkner3,
+            imageViewFaulkner4,
+            imageViewFaulkner5,
+            imageViewMainG,
+            imageViewMainL1,
+            imageViewMainL2,
+            imageViewMain1,
+            imageViewMain2,
+            imageViewMain3));
+
+    for (int i = 0; i < mapPanes.size(); i++) {
+      if (!mapPanes.get(i).equals(mapPane)) {
+        mapPanes.get(i).setVisible(false);
+        imageViews.get(i).setVisible(false);
+      } else {
+        System.out.println("Equal to here");
+        mapPanes.get(i).setVisible(true);
+        imageViews.get(i).setVisible(true);
+      }
+    }
   }
 
   @FXML
   private void addNodeLocation() throws IOException {
     double nodeDeltaX = dataMap.getLayoutX() - mapPane.getLayoutX();
     double nodeDeltaY = dataMap.getLayoutY() - mapPane.getLayoutY();
-    outlineNode();
+    nodePopup();
   }
 
   @FXML
-  private void outlineNode() throws IOException {
+  private void nodePopup() throws IOException {
 
     Stage stage = new Stage();
     FXMLLoader fxmlLoader = new FXMLLoader();
     fxmlLoader.setControllerFactory(
         controllerClass -> {
-          System.out.println("here 2");
           if (controllerClass.equals(MapViewNodePopup.class)) {
             System.out.println("initialize with correct constructor");
             return new MapViewNodePopup(this);
           }
           return null;
         });
-    System.out.println("Here");
     Parent root = fxmlLoader.load(App.class.getResource("Views/MapViewNodePopup.fxml"));
     stage.setScene(new Scene(root));
     stage.initModality(Modality.APPLICATION_MODAL);
@@ -208,7 +340,7 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  private void outlineEdge() throws IOException {
+  private void edgePopup() throws IOException {
     Stage stage = new Stage();
     Parent root = FXMLLoader.load(App.class.getResource("Views/MapViewEdgePopup.fxml"));
     stage.setScene(new Scene(root));
@@ -220,8 +352,8 @@ public class DataMapViewController implements Initializable {
   @FXML
   private void drawEdge(Edge edge) {
     try {
-      double heightRatio = (double) PANE_HEIGHT / MAP_HEIGHT;
-      double widthRatio = (double) PANE_WIDTH / MAP_WIDTH;
+      double heightRatio = (double) PANE_HEIGHT / MAP_HEIGHT_FAULK;
+      double widthRatio = (double) PANE_WIDTH / MAP_WIDTH_FAULK;
       Node node1 = databaseManager.readNode(edge.getNode1());
       Node node2 = databaseManager.readNode(edge.getNode2());
       if (node1.getFloor()
@@ -243,23 +375,23 @@ public class DataMapViewController implements Initializable {
               this.edge = edge;
             });
 
-        switch (node1.getFloor()) {
-          case 1:
-            mapPane1.getChildren().add(line);
-            break;
-          case 2:
-            mapPane2.getChildren().add(line);
-            break;
-          case 3:
-            mapPane3.getChildren().add(line);
-            break;
-          case 4:
-            mapPane4.getChildren().add(line);
-            break;
-          case 5:
-            mapPane5.getChildren().add(line);
-            break;
-        }
+        //        switch (node1.getFloor()) {
+        //          case 1:
+        //            mapPane1.getChildren().add(line);
+        //            break;
+        //          case 2:
+        //            mapPane2.getChildren().add(line);
+        //            break;
+        //          case 3:
+        //            mapPane3.getChildren().add(line);
+        //            break;
+        //          case 4:
+        //            mapPane4.getChildren().add(line);
+        //            break;
+        //          case 5:
+        //            mapPane5.getChildren().add(line);
+        //            break;
+        //        }
       }
     } catch (InstanceNotFoundException e) {
       e.printStackTrace();
@@ -271,8 +403,15 @@ public class DataMapViewController implements Initializable {
   @FXML
   void drawNode(Node node) { // draws the given node on the map
 
-    double heightRatio = (double) PANE_HEIGHT / MAP_HEIGHT;
-    double widthRatio = (double) PANE_WIDTH / MAP_WIDTH;
+    double heightRatio;
+    double widthRatio;
+    if(hospital == Hospital.FAULK){
+      heightRatio = (double) PANE_HEIGHT / MAP_HEIGHT_FAULK;
+      widthRatio = (double) PANE_WIDTH / MAP_WIDTH_FAULK;
+    } else{
+      heightRatio = (double) PANE_HEIGHT / MAP_HEIGHT_MAIN;
+      widthRatio = (double) PANE_WIDTH / MAP_WIDTH_MAIN;
+    }
 
     JFXButton button = new JFXButton();
     int buttonSize = 6; // this can be adjusted if we feel like the size is too small or large
@@ -296,24 +435,48 @@ public class DataMapViewController implements Initializable {
             nodeButton.setOpacity(1);
           }
         });
-    System.out.println("Floor: " + node.getFloor());
-    //    switch (node.getFloor()) {
-    //      case 1:
-    //        mapPane1.getChildren().add(button);
-    //        break;
-    //      case 2:
-    //        mapPane2.getChildren().add(button);
-    //        break;
-    //      case 3:
-    //        mapPane3.getChildren().add(button);
-    //        break;
-    //      case 4:
-    //        mapPane4.getChildren().add(button);
-    //        break;
-    //      case 5:
-    //        mapPane5.getChildren().add(button);
-    //        break;
-    //    }
+
+    if(node.getBuilding().equals("Faulkner")){
+      switch (node.getFloor()) {
+        case "1":
+          mapPaneFaulkner1.getChildren().add(button);
+          break;
+        case "2":
+          mapPaneFaulkner2.getChildren().add(button);
+          break;
+        case "3":
+          mapPaneFaulkner3.getChildren().add(button);
+          break;
+        case "4":
+          mapPaneFaulkner4.getChildren().add(button);
+          break;
+        case "5":
+          mapPaneFaulkner5.getChildren().add(button);
+          break;
+      }
+    } else{
+      switch (node.getFloor()){
+        case "Ground":
+          mapPaneMainG.getChildren().add(button);
+          break;
+        case "L2":
+          mapPaneMainL2.getChildren().add(button);
+          break;
+        case "L1":
+          mapPaneMainL1.getChildren().add(button);
+          break;
+        case "F1":
+          mapPaneMain1.getChildren().add(button);
+          break;
+        case "F2":
+          mapPaneMain2.getChildren().add(button);
+          break;
+        case "F3":
+          mapPaneMain3.getChildren().add(button);
+          break;
+      }
+    }
+
   }
 
   @FXML
