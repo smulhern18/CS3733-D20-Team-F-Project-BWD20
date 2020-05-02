@@ -69,6 +69,18 @@ public class PathfinderController implements Initializable {
   public JFXTextArea directionsDisplay;
   public AnchorPane pathSwitchFloorPane;
   public JFXButton pathSwitchFloor;
+  public AnchorPane mapPaneMainL2 = new AnchorPane();
+  public AnchorPane mapPaneMainL1 = new AnchorPane();
+  public AnchorPane mapPaneMainG = new AnchorPane();
+  public AnchorPane mapPaneMain1 = new AnchorPane();
+  public AnchorPane mapPaneMain2 = new AnchorPane();
+  public AnchorPane mapPaneMain3 = new AnchorPane();
+  public ImageView imageViewMainL2 = new ImageView();
+  public ImageView imageViewMainL1 = new ImageView();
+  public ImageView imageViewMainG = new ImageView();
+  public ImageView imageViewMain1 = new ImageView();
+  public ImageView imageViewMain2 = new ImageView();
+  public ImageView imageViewMain3 = new ImageView();
 
   // stairs v elev stuff
   String liftType = "ELEV";
@@ -479,6 +491,7 @@ public class PathfinderController implements Initializable {
           System.out.println("end" + endNode);
           Path path = null;
           switchToFloor(startNode.getFloor());
+          System.out.println(liftType);
           try {
             path = pathFindAlgorithm.pathfind(startNode, endNode);
           } catch (InstanceNotFoundException e) {
@@ -533,6 +546,18 @@ public class PathfinderController implements Initializable {
     imageViewFaulkner4.setVisible(false);
     mapPaneFaulkner5.setVisible(false);
     imageViewFaulkner5.setVisible(false);
+    mapPaneMain1.setVisible(false);
+    mapPaneMain2.setVisible(false);
+    mapPaneMain3.setVisible(false);
+    mapPaneMainG.setVisible(false);
+    mapPaneMainL1.setVisible(false);
+    mapPaneMainL2.setVisible(false);
+    imageViewMain1.setVisible(false);
+    imageViewMain2.setVisible(false);
+    imageViewMain3.setVisible(false);
+    imageViewMainG.setVisible(false);
+    imageViewMainL1.setVisible(false);
+    imageViewMainL2.setVisible(false);
   }
 
   public void switchToFloor(String floorNum) {
@@ -606,13 +631,13 @@ public class PathfinderController implements Initializable {
   private void setChooseLiftBehavior() {
     chooseLiftElevator.setOnAction(
         actionEvent -> {
-          liftType = "STAI";
-          updatePathFindAlgorithm();
+          liftType = "ELEV";
+          pathFindAlgorithm.setLiftType(liftType);
         });
     chooseLiftStairs.setOnAction(
         actionEvent -> {
-          liftType = "ELEV";
-          updatePathFindAlgorithm();
+          liftType = "STAI";
+          pathFindAlgorithm.setLiftType(liftType);
         });
   }
 }

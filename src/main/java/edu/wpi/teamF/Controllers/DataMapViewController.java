@@ -583,7 +583,7 @@ public class DataMapViewController implements Initializable {
     List<Node> typeNodes = databaseManager.getNodesByType(nodeType);
     List<Integer> typeInstances = new ArrayList<>();
     for (int i = 0; i < typeNodes.size(); i++) { // collects all of the instances for the given type
-      if (typeNodes.get(i).getFloor() == floorNumber) {
+      if (typeNodes.get(i).getFloor().equals(floorNumber)) {
         instanceNum = Integer.parseInt(typeNodes.get(i).getId().substring(5, 8));
         typeInstances.add(instanceNum);
       }
@@ -667,7 +667,7 @@ public class DataMapViewController implements Initializable {
 
       databaseManager.manipulateNode(node);
 
-      if (oldFloorNumber != floorNumber) { // not on the same floor
+      if (!oldFloorNumber.equals(floorNumber)) { // not on the same floor
         for (Edge edge :
             databaseManager.getAllEdgesConnectedToNode(
                 node.getId())) { // for all the edges connected to the node
