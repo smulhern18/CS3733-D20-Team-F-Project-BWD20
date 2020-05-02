@@ -337,47 +337,6 @@ public class PathfinderController implements Initializable {
     directionsPane.setVisible(false);
   }
 
-  //  private void initializeMainCampusPanes() {
-  //    mapPaneMain1.setPrefSize(974.4, 585.6);
-  //    mapPaneMain2.setPrefSize(974.4, 585.6);
-  //    mapPaneMain3.setPrefSize(974.4, 585.6);
-  //    mapPaneMainG.setPrefSize(974.4, 585.6);
-  //    mapPaneMainL1.setPrefSize(974.4, 585.6);
-  //    mapPaneMainL2.setPrefSize(974.4, 585.6);
-  //    imageViewMain1.setPreserveRatio(false);
-  //    imageViewMain1.setFitWidth(974.4);
-  //    imageViewMain1.setFitHeight(585.6);
-  //    imageViewMain2.setPreserveRatio(false);
-  //    imageViewMain2.setFitWidth(974.4);
-  //    imageViewMain2.setFitHeight(585.6);
-  //    imageViewMain3.setPreserveRatio(false);
-  //    imageViewMain3.setFitWidth(974.4);
-  //    imageViewMain3.setFitHeight(585.6);
-  //    imageViewMainG.setPreserveRatio(false);
-  //    imageViewMainG.setFitWidth(974.4);
-  //    imageViewMainG.setFitHeight(585.6);
-  //    imageViewMainL1.setPreserveRatio(false);
-  //    imageViewMainL1.setFitWidth(974.4);
-  //    imageViewMainL1.setFitHeight(585.6);
-  //    imageViewMainL2.setPreserveRatio(false);
-  //    imageViewMainL2.setFitWidth(974.4);
-  //    imageViewMainL2.setFitHeight(585.6);
-  //    masterPaneFaulkner1
-  //        .getChildren()
-  //        .addAll(
-  //            mapPaneMain1,
-  //            mapPaneMain2,
-  //            mapPaneMain3,
-  //            mapPaneMainG,
-  //            mapPaneMainL1,
-  //            mapPaneMainL2,
-  //            imageViewMain1,
-  //            imageViewMain2,
-  //            imageViewMain3,
-  //            imageViewMainG,
-  //            imageViewMainL1,
-  //            imageViewMainL2);
-  //  }
 
   public void findType(String type) throws InstanceNotFoundException {
     switchToFloor(startNode.getFloor());
