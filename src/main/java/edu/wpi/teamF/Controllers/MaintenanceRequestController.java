@@ -84,7 +84,6 @@ public class MaintenanceRequestController implements Initializable {
     // Replace this with long names, linked to IDs
 
     UISetting uiSetting = new UISetting();
-    uiSetting.setAsLocationComboBox(locationComboBox);
 
     priorityComboBox.getItems().add("Low");
     priorityComboBox.getItems().add("Medium");
