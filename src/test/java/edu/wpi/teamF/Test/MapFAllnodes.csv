@@ -1,0 +1,3 @@
+nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName,teamAssigned
+nodeA,10,10,1,Building A,HALL,Intensive Care Unit,ICU,dataWritten
+nodeB,20,20,5,Building B,ELEV,Administrative offices,Admin Offices,dataWritten

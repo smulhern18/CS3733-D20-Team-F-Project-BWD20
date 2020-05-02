@@ -1,8 +1,8 @@
 package edu.wpi.teamF.ModelClasses.Directions;
 
 public class StairsDirection extends Direction {
-  private int startFloor;
-  private int endFloor;
+  private String startFloor;
+  private String endFloor;
 
   enum Turn {
     LEFT,
@@ -12,7 +12,7 @@ public class StairsDirection extends Direction {
 
   private Turn turn;
 
-  public StairsDirection(int startFloor, int endFloor, float exitAngle) {
+  public StairsDirection(String startFloor, String endFloor, float exitAngle) {
     this.startFloor = startFloor;
     this.endFloor = endFloor;
     if (exitAngle > 20.0) {
@@ -27,11 +27,7 @@ public class StairsDirection extends Direction {
   @Override
   public String getDirectionText() {
     String returnString =
-        ("Take the stairs from floor "
-            + Integer.toString(startFloor)
-            + " to floor "
-            + Integer.toString(endFloor)
-            + ".");
+        ("Take the stairs from floor " + startFloor + " to floor " + endFloor + ".");
     if (this.turn == Turn.LEFT) {
       returnString += " Upon exiting, turn left.";
     } else if (this.turn == Turn.STRAIGHT) {
@@ -43,7 +39,7 @@ public class StairsDirection extends Direction {
   }
 
   @Override
-  public int getFloor() {
+  public String getFloor() {
     return startFloor;
   }
 }

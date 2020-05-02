@@ -5,14 +5,15 @@ import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
 import edu.wpi.teamF.ModelClasses.RouteNode;
-import edu.wpi.teamF.ModelClasses.Scorer.ElevatorScorer;
 import edu.wpi.teamF.ModelClasses.Scorer.EuclideanScorer;
+import edu.wpi.teamF.ModelClasses.Scorer.TypeScorer;
 import java.util.*;
 import javax.management.InstanceNotFoundException;
 
 public class MultipleFloorAStar implements PathfindAlgorithm {
 
   private final Map<String, Node> nodeMap = new HashMap<>();
+  private String liftType = "ELEV";
 
   public MultipleFloorAStar(List<Node> nodeList) {
     for (Node node : nodeList) {
@@ -27,13 +28,24 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
     PriorityQueue<RouteNode> priorityQueue = new PriorityQueue<RouteNode>();
     HashSet<Node> visited = new HashSet<>();
     EuclideanScorer scorer = new EuclideanScorer();
-    ElevatorScorer elevScorer =
-        new ElevatorScorer(nodeFactory.getNodesByType(Node.NodeType.ELEV), startNode.getFloor());
+
+    TypeScorer typeScorer;
+    if ("ELEV".equals(liftType)) {
+      typeScorer =
+          new TypeScorer(nodeFactory.getNodesByType(Node.NodeType.ELEV), startNode.getFloor());
+    } else if ("STAI".equals(liftType)) {
+      typeScorer =
+          new TypeScorer(nodeFactory.getNodesByType(Node.NodeType.STAI), startNode.getFloor());
+    } else {
+      typeScorer =
+          new TypeScorer(nodeFactory.getNodesByType(Node.NodeType.ELEV), startNode.getFloor());
+    }
+
     // Create the first node and add it to the Priority Queue
     RouteNode start;
     if (startNode.getFloor() != endNode.getFloor()) {
       // If it is, navigate to the most practical elevator instead
-      start = new RouteNode(startNode, null, 0, elevScorer.computeCost(startNode, endNode));
+      start = new RouteNode(startNode, null, 0, typeScorer.computeCost(startNode, endNode));
     } else {
       start = new RouteNode(startNode, null, 0, scorer.computeCost(startNode, endNode));
     }
@@ -76,7 +88,7 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
             double distanceToEnd = 0;
             if (neighbor.getFloor() != endNode.getFloor()) {
               // If its not on the same floor, use elevator scorer
-              distanceToEnd = elevScorer.computeCost(neighbor, endNode);
+              distanceToEnd = typeScorer.computeCost(neighbor, endNode);
             } else {
               distanceToEnd = scorer.computeCost(neighbor, endNode);
             }
@@ -138,5 +150,9 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
       }
     }
     return false;
+  }
+
+  public void setLiftType(String liftType) {
+    this.liftType = liftType;
   }
 }
