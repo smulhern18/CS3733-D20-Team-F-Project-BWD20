@@ -45,7 +45,7 @@ public class StairsDirection extends Direction {
     return dirFloor;
   }
 
-  public void setFloor(String floor){
+  public void setFloor(String floor) {
     dirFloor = floor;
   }
 }
