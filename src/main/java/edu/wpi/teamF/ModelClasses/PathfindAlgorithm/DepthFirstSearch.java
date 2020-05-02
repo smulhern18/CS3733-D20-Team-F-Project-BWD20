@@ -10,7 +10,7 @@ import javax.management.InstanceNotFoundException;
 
 public class DepthFirstSearch implements PathfindAlgorithm {
   private final Map<String, Node> nodeMap = new HashMap<>();
-  private String liftType = "ELEV";
+  private String liftType;
 
   public DepthFirstSearch(List<Node> nodeList) {
     for (Node node : nodeList) {
@@ -55,13 +55,27 @@ public class DepthFirstSearch implements PathfindAlgorithm {
       // Make a list of all of the neighbors of this node
       Set<Edge> neighborEdges = node.getNode().getEdges();
       Set<Node> neighbors = new HashSet<>();
+
+      String typeToAvoid;
+      if ("STAI".equals(liftType)) {
+        typeToAvoid = "ELEV";
+      } else {
+        typeToAvoid = "STAI";
+      }
+
       for (Edge edge : neighborEdges) {
         if (edge.getNode1().equals(node.getNode().getId())) {
-          if (!visited.contains(nodeMap.get(edge.getNode2()))) {
+          System.out.println(liftType);
+          System.out.println(typeToAvoid);
+          // if (!visited.contains(nodeMap.get(edge.getNode2()))) {
+          if (!visited.contains(nodeMap.get(edge.getNode2()))
+              && !nodeMap.get(edge.getNode2()).getType().toString().equals(typeToAvoid)) {
             neighbors.add(nodeMap.get(edge.getNode2()));
           }
         } else {
-          if (!visited.contains(nodeMap.get(edge.getNode1()))) {
+          // if (!visited.contains(nodeMap.get(edge.getNode1()))) {
+          if (!visited.contains(nodeMap.get(edge.getNode1()))
+              && !nodeMap.get(edge.getNode1()).getType().toString().equals(typeToAvoid)) {
             neighbors.add(nodeMap.get(edge.getNode1()));
           }
         }

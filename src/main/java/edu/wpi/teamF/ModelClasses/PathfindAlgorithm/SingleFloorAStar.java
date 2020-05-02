@@ -13,6 +13,7 @@ import javax.management.InstanceNotFoundException;
 public class SingleFloorAStar implements PathfindAlgorithm {
 
   private final Map<String, Node> nodeMap = new HashMap<>();
+  private String liftType;
 
   public SingleFloorAStar(List<Node> nodeList) {
     for (Node node : nodeList) {
@@ -90,5 +91,10 @@ public class SingleFloorAStar implements PathfindAlgorithm {
       }
     }
     return shortestPath;
+  }
+
+  @Override
+  public void setLiftType(String liftType) {
+    this.liftType = liftType;
   }
 }
