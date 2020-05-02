@@ -31,6 +31,7 @@ public class DatabaseManager {
   static final String LAST_NAME_KEY = "lastName";
   static final String EMAIL_ADDRESS_KEY = "email";
   static final String USER_TYPE_KEY = "userType";
+  static final String SPECIALTY_KEY = "specialty";
 
   // Factories
   private ServiceRequestFactory serviceRequestFactory = ServiceRequestFactory.getFactory();
@@ -69,6 +70,28 @@ public class DatabaseManager {
             + "PRIMARY KEY ("
             + SERVICEID_KEY
             + "))";
+
+    String accountTableCreationStatement =
+            "CREATE TABLE "
+                    + ACCOUNT_TABLE_NAME
+                    + " ( "
+                    + USER_NAME_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + PASSWORD_KEY
+                    + " VARCHAR(128) NOT NULL, "
+                    + FIRST_NAME_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + LAST_NAME_KEY
+                    + " VARCHAR(32) NOT NULL, "
+                    + EMAIL_ADDRESS_KEY
+                    + " VARCHAR(64) NOT NULL, "
+                    + USER_TYPE_KEY
+                    + " SMALLINT NOT NULL, "
+                    + SPECIALTY_KEY
+                    + " SMALLINT, "
+                    + "PRIMARY KEY ("
+                    + USER_NAME_KEY
+                    + "))";
 
     PreparedStatement preparedStatement = connection.prepareStatement(serviceRequestTableCreationStatement);
     preparedStatement.execute();

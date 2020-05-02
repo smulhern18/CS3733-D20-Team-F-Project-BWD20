@@ -119,7 +119,7 @@ public class MaintenanceRequest {
    * @param other the other service request to check against
    * @return if the service requests are equal or not
    */
-  public boolean equals(Object other) {
+  public boolean equals(Object other)
     boolean isEqual = false;
     if (other instanceof MaintenanceRequest) {
       MaintenanceRequest otherServiceRequest = (MaintenanceRequest) other;
