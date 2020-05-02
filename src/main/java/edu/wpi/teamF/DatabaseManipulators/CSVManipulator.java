@@ -622,7 +622,7 @@ public class CSVManipulator {
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
       bw.write(
-          "iid,location,assignee,description,dateTimeSubmitted,priority,recipientInput,roomInput,choice,messageInput,buyerName,phoneNumber,iftWrap,complete");
+          "id,location,assignee,description,dateTimeSubmitted,priority,recipientInput,roomInput,choice,messageInput,buyerName,phoneNumber,giftWrap,complete");
 
       for (FlowerRequest s : flowerRequests) {
         bw.newLine();
@@ -883,7 +883,7 @@ public class CSVManipulator {
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
       bw.write(
-          "id,location,assignee,description,dateTimeSubmitted,priority,complete,language,problemType");
+          "id,location,assignee,description,dateTimeSubmitted,priority,complete,items,quantity,temperature");
 
       for (LaundryServiceRequest s : laundryServiceRequests) {
         bw.newLine();
