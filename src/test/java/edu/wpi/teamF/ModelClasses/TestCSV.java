@@ -573,4 +573,115 @@ public class TestCSV {
       fail(e.getMessage());
     }
   }
+
+  @Test
+  public void testReadAllDataIn() throws Exception {
+
+    File file = new File("src/test/java/edu/wpi/teamF/Test/");
+    csvManipulator.uploadDatabase(file.toPath());
+    int i = 0;
+    List<Node> list = databaseManager.getAllNodes();
+    for (Node n : list) {
+
+      Assertions.assertTrue(n.equals(validNodes[i]));
+      i++;
+    }
+    i = 0;
+    try {
+      List<Edge> list1 = databaseManager.getAllEdges();
+      for (Edge e : list1) {
+        Assertions.assertTrue(e.equals(validEdge[i]));
+        i++;
+      }
+    } catch (Exception e) {
+      fail(e.getMessage());
+    }
+    List<TransportRequest> list2 = databaseManager.getAllTransportRequests();
+
+    Assertions.assertTrue(list2.size() == 4);
+    Assertions.assertTrue(list2.contains(validTransportRequest[0]));
+    Assertions.assertTrue(list2.contains(validTransportRequest[1]));
+    Assertions.assertTrue(list2.contains(validTransportRequest[2]));
+    Assertions.assertTrue(list2.contains(validTransportRequest[3]));
+
+    List<LaundryServiceRequest> list3 = databaseManager.getAllLaunduaryRequests();
+
+    Assertions.assertTrue(list3.size() == 4);
+    Assertions.assertTrue(list3.contains(validLaundryRequest[0]));
+    Assertions.assertTrue(list3.contains(validLaundryRequest[1]));
+    Assertions.assertTrue(list3.contains(validLaundryRequest[2]));
+    Assertions.assertTrue(list3.contains(validLaundryRequest[3]));
+
+    List<SanitationServiceRequest> list4 = databaseManager.getAllSanitationRequests();
+
+    Assertions.assertTrue(list4.size() == 4);
+    Assertions.assertTrue(list4.contains(validSanitationRequest[0]));
+    Assertions.assertTrue(list4.contains(validSanitationRequest[1]));
+    Assertions.assertTrue(list4.contains(validSanitationRequest[2]));
+    Assertions.assertTrue(list4.contains(validSanitationRequest[3]));
+
+    List<LanguageServiceRequest> list5 = databaseManager.getAllLanguageServiceRequests();
+
+    Assertions.assertTrue(list5.size() == 4);
+    Assertions.assertTrue(list5.contains(validLanguageServiceRequest[0]));
+    Assertions.assertTrue(list5.contains(validLanguageServiceRequest[1]));
+    Assertions.assertTrue(list5.contains(validLanguageServiceRequest[2]));
+    Assertions.assertTrue(list5.contains(validLanguageServiceRequest[3]));
+
+    List<LanguageServiceRequest> list6 = databaseManager.getAllLanguageServiceRequests();
+
+    Assertions.assertTrue(list6.size() == 4);
+    Assertions.assertTrue(list6.contains(validLanguageServiceRequest[0]));
+    Assertions.assertTrue(list6.contains(validLanguageServiceRequest[1]));
+    Assertions.assertTrue(list6.contains(validLanguageServiceRequest[2]));
+    Assertions.assertTrue(list6.contains(validLanguageServiceRequest[3]));
+
+    List<FlowerRequest> list7 = databaseManager.getAllFlowerRequests();
+
+    Assertions.assertTrue(list7.size() == 4);
+    Assertions.assertTrue(list7.contains(validFlowerRequest[0]));
+    Assertions.assertTrue(list7.contains(validFlowerRequest[1]));
+    Assertions.assertTrue(list7.contains(validFlowerRequest[2]));
+    Assertions.assertTrue(list7.contains(validFlowerRequest[3]));
+
+    List<ComputerServiceRequest> list8 = databaseManager.getAllComputerServiceRequests();
+
+    Assertions.assertTrue(list8.size() == 4);
+    Assertions.assertTrue(list8.contains(validComputerServiceRequest[0]));
+    Assertions.assertTrue(list8.contains(validComputerServiceRequest[1]));
+    Assertions.assertTrue(list8.contains(validComputerServiceRequest[2]));
+    Assertions.assertTrue(list8.contains(validComputerServiceRequest[3]));
+
+    List<MedicineDeliveryRequest> list9 = databaseManager.getAllMedicineDeliveryRequests();
+
+    Assertions.assertTrue(list9.size() == 4);
+    Assertions.assertTrue(list9.contains(validMedicineDeliveryRquest[0]));
+    Assertions.assertTrue(list9.contains(validMedicineDeliveryRquest[1]));
+    Assertions.assertTrue(list9.contains(validMedicineDeliveryRquest[2]));
+    Assertions.assertTrue(list9.contains(validMedicineDeliveryRquest[3]));
+
+    List<MariachiRequest> list10 = databaseManager.getAllMariachiServiceRequests();
+
+    Assertions.assertTrue(list10.size() == 4);
+    Assertions.assertTrue(list10.contains(validMariachiRequest[0]));
+    Assertions.assertTrue(list10.contains(validMariachiRequest[1]));
+    Assertions.assertTrue(list10.contains(validMariachiRequest[2]));
+    Assertions.assertTrue(list10.contains(validMariachiRequest[3]));
+
+    List<SecurityRequest> list11 = databaseManager.getAllSecurityRequests();
+    int j = 0;
+    Assertions.assertTrue(list11.size() == 4);
+    Assertions.assertTrue(list11.contains(validSecurityRequest[0]));
+    Assertions.assertTrue(list11.contains(validSecurityRequest[1]));
+    Assertions.assertTrue(list11.contains(validSecurityRequest[2]));
+    Assertions.assertTrue(list11.contains(validSecurityRequest[3]));
+
+    List<MaintenanceRequest> list12 = databaseManager.getAllMaintenanceRequests();
+
+    Assertions.assertTrue(list12.size() == 4);
+    Assertions.assertTrue(list12.contains(validMaintenance[0]));
+    Assertions.assertTrue(list12.contains(validMaintenance[1]));
+    Assertions.assertTrue(list12.contains(validMaintenance[2]));
+    Assertions.assertTrue(list12.contains(validMaintenance[3]));
+  }
 }
