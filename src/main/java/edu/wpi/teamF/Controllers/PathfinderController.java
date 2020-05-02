@@ -87,6 +87,7 @@ public class PathfinderController implements Initializable {
   public JFXButton mainFloorGButton;
   public JFXButton mainFloorL2Button;
   public JFXButton mainFloorL1Button;
+  public AnchorPane selectFloorPaneMain;
 
   // stairs v elev stuff
   String liftType = "ELEV";
@@ -336,6 +337,7 @@ public class PathfinderController implements Initializable {
     currentPane = mapPaneFaulkner1;
     currentFloor = "1";
     setAllInvisible();
+    selectFloorPaneMain.setVisible(false);
     scrollPaneFaulkner1.setVisible(true);
     mapPaneFaulkner1.setVisible(true);
     imageViewFaulkner1.setVisible(true);
@@ -688,7 +690,7 @@ public class PathfinderController implements Initializable {
     }
   }
 
-  private void setChooseLiftBehavior(){
+  private void setChooseLiftBehavior() {
     chooseLiftElevator.setOnAction(
         actionEvent -> {
           liftType = "ELEV";
