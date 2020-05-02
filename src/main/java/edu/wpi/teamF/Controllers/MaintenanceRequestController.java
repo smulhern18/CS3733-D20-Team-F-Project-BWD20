@@ -64,7 +64,6 @@ public class MaintenanceRequestController implements Initializable {
   public JFXTextField desText;
   public JFXComboBox<String> assigneeChoice;
   public JFXTreeTableView<UIMaintenenceRequest> treeTableMaintenance;
-  SceneController sceneController = App.getSceneController();
 
   ObservableList<UIMaintenenceRequest> csrUI = FXCollections.observableArrayList();
   DatabaseManager databaseManager = DatabaseManager.getManager();
@@ -315,9 +314,5 @@ public class MaintenanceRequestController implements Initializable {
     // deleteButton.setFont(new Font(width / 50));
     update.setFont(newFont);
     backButton.setFont(newFont);
-  }
-
-  public void backToServiceRequestMain(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("ServiceRequestMain");
   }
 }

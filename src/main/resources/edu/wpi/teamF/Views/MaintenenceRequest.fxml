@@ -16,7 +16,7 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MaintenanceRequestController">
     <children>
-        <GridPane fx:id="optionBar" layoutX="190.0" style="-fx-border-color: pink;" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <GridPane fx:id="optionBar" prefHeight="32.0" prefWidth="600.0" style="-fx-border-color: pink;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -37,7 +37,7 @@
                 </JFXButton>
             </children>
         </GridPane>
-        <GridPane fx:id="servicePane" layoutX="190.0" layoutY="40.0" AnchorPane.bottomAnchor="-8.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+        <GridPane fx:id="servicePane" layoutX="95.0" layoutY="32.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="95.0" AnchorPane.rightAnchor="95.0" AnchorPane.topAnchor="32.0">
             <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
@@ -115,7 +115,7 @@
                 </HBox>
                 <StackPane prefHeight="86.0" prefWidth="410.0">
                     <children>
-                        <Label fx:id="securityRequestLabel" prefHeight="84.0" prefWidth="219.0" text="Maintenance Request" StackPane.alignment="TOP_CENTER">
+                        <Label fx:id="securityRequestLabel" prefHeight="53.0" prefWidth="267.0" text="Maintenance Request" StackPane.alignment="TOP_CENTER">
                             <font>
                                 <Font size="24.0" />
                             </font>
@@ -166,7 +166,6 @@
             </HBox>
             </children>
         </GridPane>
-        <fx:include fx:id="mainMenu" source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
         <AnchorPane fx:id="checkStatusPane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
             <children>
                 <StackPane layoutX="44.0" layoutY="274.0" prefHeight="99.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">

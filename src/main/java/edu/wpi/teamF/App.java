@@ -13,15 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class App extends Application {
 
-  private static SceneController sceneController;
-
-  public App() throws Exception {}
-
-  public static SceneController getSceneController() {
-    return sceneController;
-  }
-  private MainMenuController mainMenuController = new MainMenuController();
-  private MenuBarController menuBarController = new MenuBarController();
   private MaintenanceRequestController maintenanceRequestController =
       new MaintenanceRequestController();
 
@@ -33,8 +24,7 @@ public class App extends Application {
 
     Scene primaryScene = new Scene(new AnchorPane());
     FXMLLoader fxmlLoader = new FXMLLoader();
-    sceneController = new SceneController(fxmlLoader, primaryStage, primaryScene);
-    Parent root = FXMLLoader.load(getClass().getResource("Views/MainMenu.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("Views/MaintenanceRequest.fxml"));
     primaryScene.setRoot(root);
     primaryStage.setScene(primaryScene);
     primaryStage.setAlwaysOnTop(true);
