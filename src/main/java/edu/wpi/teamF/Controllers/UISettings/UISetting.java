@@ -9,19 +9,12 @@ public class UISetting {
 
   private Zoom zoom = new Zoom();
   private ButtonFormatter buttonFormatter = new ButtonFormatter();
-  private LocationComboBox locationComboBox = new LocationComboBox();
 
   public UISetting() {}
 
   public void makeZoomable(ScrollPane scrollPane, StackPane stackPane, double maxScaleFactor) {
     zoom.makeZoomable(scrollPane, stackPane, maxScaleFactor);
   }
-
-  public void setAsLocationComboBox(JFXComboBox<String> comboBox) throws Exception {
-
-    locationComboBox.setAsLocationComboBox(comboBox);
-  }
-
   public void setLightModeButton(JFXButton button) {
     buttonFormatter.setLightFormat(button);
   }

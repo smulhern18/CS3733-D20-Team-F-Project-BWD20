@@ -13,9 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class App extends Application {
 
-  private MaintenanceRequestController maintenanceRequestController =
-      new MaintenanceRequestController();
-
   @Override
   public void init() {}
 
@@ -23,7 +20,6 @@ public class App extends Application {
   public void start(Stage primaryStage) throws IOException {
 
     Scene primaryScene = new Scene(new AnchorPane());
-    FXMLLoader fxmlLoader = new FXMLLoader();
     Parent root = FXMLLoader.load(getClass().getResource("Views/MaintenanceRequest.fxml"));
     primaryScene.setRoot(root);
     primaryStage.setScene(primaryScene);
