@@ -305,9 +305,10 @@ public class PathfinderController implements Initializable {
   public void drawNodes() {
     for (Node node : fullNodeList) {
       if (!node.getType().equals(Node.NodeType.getEnum("HALL"))
-          && !node.getType().equals(Node.NodeType.getEnum("STAI"))
-          && !node.getType().equals(Node.NodeType.getEnum("ELEV"))
-          && !node.getType().equals(Node.NodeType.getEnum("REST"))) {
+      //          && !node.getType().equals(Node.NodeType.getEnum("STAI"))
+      //          && !node.getType().equals(Node.NodeType.getEnum("ELEV"))
+      //          && !node.getType().equals(Node.NodeType.getEnum("REST"))
+      ) {
         placeButton(node);
         pathButtonGo();
       }

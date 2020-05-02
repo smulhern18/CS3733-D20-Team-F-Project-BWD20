@@ -10,7 +10,7 @@ import javax.management.InstanceNotFoundException;
 
 public class DepthFirstSearch implements PathfindAlgorithm {
   private final Map<String, Node> nodeMap = new HashMap<>();
-  private String liftType = "ELEV";
+  private String liftType;
 
   public DepthFirstSearch(List<Node> nodeList) {
     for (Node node : nodeList) {
@@ -65,6 +65,8 @@ public class DepthFirstSearch implements PathfindAlgorithm {
 
       for (Edge edge : neighborEdges) {
         if (edge.getNode1().equals(node.getNode().getId())) {
+          System.out.println(liftType);
+          System.out.println(typeToAvoid);
           // if (!visited.contains(nodeMap.get(edge.getNode2()))) {
           if (!visited.contains(nodeMap.get(edge.getNode2()))
               && !nodeMap.get(edge.getNode2()).getType().toString().equals(typeToAvoid)) {

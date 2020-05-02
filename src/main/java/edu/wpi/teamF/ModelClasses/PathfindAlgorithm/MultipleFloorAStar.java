@@ -30,10 +30,7 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
     EuclideanScorer scorer = new EuclideanScorer();
 
     TypeScorer typeScorer;
-    if ("ELEV".equals(liftType)) {
-      typeScorer =
-          new TypeScorer(nodeFactory.getNodesByType(Node.NodeType.ELEV), startNode.getFloor());
-    } else if ("STAI".equals(liftType)) {
+    if ("STAI".equals(liftType)) {
       typeScorer =
           new TypeScorer(nodeFactory.getNodesByType(Node.NodeType.STAI), startNode.getFloor());
     } else {

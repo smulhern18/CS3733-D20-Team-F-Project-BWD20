@@ -97,5 +97,4 @@ public class SingleFloorAStar implements PathfindAlgorithm {
   public void setLiftType(String liftType) {
     this.liftType = liftType;
   }
-
 }
