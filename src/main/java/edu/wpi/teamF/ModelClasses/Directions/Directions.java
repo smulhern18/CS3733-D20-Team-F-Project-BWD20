@@ -251,7 +251,7 @@ public class Directions {
             if (currHall.getDistance() > 0) {
               directionList.add(currHall);
             }
-            currHall = new StraightDirection(0, 0, pathNodeList.get(i+1).getFloor());
+            currHall = new StraightDirection(0, 0, pathNodeList.get(i + 1).getFloor());
 
             directionList.add(
                 new EnterDirection(

@@ -3,8 +3,8 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXToggleButton;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXToggleButton;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Directions.Directions;
@@ -377,7 +377,6 @@ public class PathfinderController implements Initializable {
       endLabel.setVisible(false);
     }
     phoneNumber.setText("");
-
   }
 
   private void resetButtonLine(String floor, String building) {
@@ -987,7 +986,6 @@ public class PathfinderController implements Initializable {
     directions.callDirections(phoneNumber.getText());
   }
 
-<<<<<<< HEAD
   public void printDirections(ActionEvent actionEvent) {}
 
   private void setToggleBehavior() {
@@ -1001,9 +999,5 @@ public class PathfinderController implements Initializable {
             pathFindAlgorithm.setLiftType(liftType);
           }
         });
-=======
-  public void printDirections(ActionEvent actionEvent) {
-    directions.printDirections();
->>>>>>> fb36754d6956ec804315bbcd5a56327e3eab8f28
   }
 }
