@@ -97,8 +97,7 @@ public class DepthFirstSearch implements PathfindAlgorithm {
     List<Path> paths = new ArrayList<>();
     for (Node node : nodeMap.values()) {
       if (node.getFloor() == start.getFloor()) {
-        if (node.getType().getTypeString().equals(nodeType.getTypeString())
-            && isAccessible(start, start, node)) {
+        if (node.getType().getTypeString().equals(nodeType.getTypeString())) {
           paths.add(pathfind(start, node));
         }
       }
@@ -113,27 +112,6 @@ public class DepthFirstSearch implements PathfindAlgorithm {
       }
     }
     return shortestPath;
-  }
-
-  public Boolean isAccessible(Node startNode, Node endNode, Node neighbor) {
-    // TODO solve issue when an edge has a node that doesn't exist
-    Set<Edge> neighborEdges2 = neighbor.getEdges();
-    for (Edge edge2 : neighborEdges2) {
-      if (edge2.getNode1().equals(neighbor.getId())) {
-        if (nodeMap.get(edge2.getNode2()).getType().equals(Node.NodeType.getEnum("HALL"))
-            || edge2.getNode2().equals(startNode.getId())
-            || edge2.getNode2().equals(endNode.getId())) {
-          return true;
-        }
-      } else {
-        if (nodeMap.get(edge2.getNode1()).getType().equals(Node.NodeType.getEnum("HALL"))
-            || edge2.getNode1().equals(startNode.getId())
-            || edge2.getNode1().equals(endNode.getId())) {
-          return true;
-        }
-      }
-    }
-    return false;
   }
 
   public void setLiftType(String liftType) {

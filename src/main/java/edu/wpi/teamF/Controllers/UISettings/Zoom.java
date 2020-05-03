@@ -64,15 +64,15 @@ public class Zoom {
 
     Bounds innerBounds = zoomNode.getLayoutBounds();
     Bounds viewportBounds = scrollPane.getViewportBounds();
-    System.out.println(
-        innerBounds.getWidth() + " " + viewportBounds.getWidth() + " " + scrollPane.getHvalue());
+    // System.out.println(
+    //    innerBounds.getWidth() + " " + viewportBounds.getWidth() + " " + scrollPane.getHvalue());
 
     // calculate pixel offsets from [0, 1] range
     double valX = scrollPane.getHvalue() * (innerBounds.getWidth() - viewportBounds.getWidth());
     double valY = scrollPane.getVvalue() * (innerBounds.getHeight() - viewportBounds.getHeight());
 
     scaleValue = Math.max(maxScaleFactor, scaleValue * zoomFactor);
-    System.out.println("Scale factor: " + scaleValue);
+    // System.out.println("Scale factor: " + scaleValue);
     updateScale();
     scrollPane.layout(); // refresh ScrollPane scroll positions & target bounds
 
