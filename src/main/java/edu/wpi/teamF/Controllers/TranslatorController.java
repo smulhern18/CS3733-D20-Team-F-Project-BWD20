@@ -17,6 +17,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 
 public class TranslatorController implements Initializable {
   public JFXComboBox<String> fromLanguage;
@@ -29,6 +31,8 @@ public class TranslatorController implements Initializable {
   public JFXButton callPhone;
   public Map<String, String> langCodeMap;
   public Map<String, String> langVoicesMap;
+  public AnchorPane frame;
+  public ImageView backgroundImage;
 
   private phoneComms phoneComms = new phoneComms();
 
@@ -76,6 +80,9 @@ public class TranslatorController implements Initializable {
     toLanguage.getItems().addAll(langCodeMap.keySet());
 
     resetTranslator();
+    backgroundImage.setPreserveRatio(false);
+    backgroundImage.fitHeightProperty().bind(frame.heightProperty());
+    backgroundImage.fitWidthProperty().bind(frame.widthProperty());
 
     callPhone.setDisable(true);
     sendSMS.setDisable(true);

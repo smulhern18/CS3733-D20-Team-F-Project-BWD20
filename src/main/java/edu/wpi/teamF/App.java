@@ -79,6 +79,8 @@ public class App extends Application {
     primaryStage.setScene(primaryScene);
     primaryStage.setAlwaysOnTop(true);
     primaryStage.show();
+    primaryStage.setMaximized(true);
+    primaryStage.setFullScreen(true);
   }
 
   @Override

@@ -879,7 +879,7 @@ public class PathfinderController implements Initializable {
         getFloorPane(startNode.getFloor(), startNode.getBuilding()).getChildren().add(startLabel);
         startLabel.setVisible(true);
 
-        startLabel.setLayoutX(component.getLayoutX() - 20); //(startLabel.getHeight()));
+        startLabel.setLayoutX(component.getLayoutX() - 20); // (startLabel.getHeight()));
         startLabel.setLayoutY(component.getLayoutY() - 20);
         return;
       }
