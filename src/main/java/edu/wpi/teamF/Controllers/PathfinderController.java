@@ -897,7 +897,6 @@ public class PathfinderController implements Initializable {
     }
   }
 
-
   private boolean sameHospital(String building1, String building2) {
     return ("Faulkner".equals(building1) && "Faulkner".equals(building2))
         || (!"Faulkner".equals(building1) && !"Faulkner".equals(building2));
@@ -908,5 +907,4 @@ public class PathfinderController implements Initializable {
   public void callDirections(ActionEvent actionEvent) {}
 
   public void printDirections(ActionEvent actionEvent) {}
-
 }
