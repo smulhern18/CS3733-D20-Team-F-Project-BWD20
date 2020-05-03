@@ -34,8 +34,8 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXComboBox fx:id="fromLanguage" minWidth="250.0" style="-fx-border-color: black; -fx-border-width: 1px;" />
-                        <JFXTextArea fx:id="textInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" style="-fx-border-color: black; -fx-border-width: 1px;">
+                        <JFXComboBox fx:id="fromLanguage" minWidth="250.0" onAction="#fromLanguage" style="-fx-border-color: black; -fx-border-width: 1px;" />
+                        <JFXTextArea fx:id="textInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" promptText="Enter text to translate here" style="-fx-border-color: black; -fx-border-width: 1px;">
                            <VBox.margin>
                               <Insets top="20.0" />
                            </VBox.margin>
@@ -67,7 +67,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXComboBox fx:id="toLanguage" minWidth="250.0" style="-fx-border-color: black; -fx-border-width: 1px;" />
+                        <JFXComboBox fx:id="toLanguage" minWidth="250.0" onAction="#toLanguage" style="-fx-border-color: black; -fx-border-width: 1px;" />
                         <JFXTextArea fx:id="textOutput" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" style="-fx-border-color: black; -fx-border-width: 1px;">
                            <VBox.margin>
                               <Insets top="20.0" />
