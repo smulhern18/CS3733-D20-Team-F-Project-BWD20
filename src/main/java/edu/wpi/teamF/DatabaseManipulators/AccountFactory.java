@@ -6,9 +6,11 @@ import edu.wpi.teamF.ModelClasses.ValidationException;
 import edu.wpi.teamF.ModelClasses.Validators;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.imageio.plugins.jpeg.JPEGImageReadParam;
 import javax.management.InstanceNotFoundException;
 
 public class AccountFactory {
@@ -36,8 +38,10 @@ public class AccountFactory {
             + DatabaseManager.EMAIL_ADDRESS_KEY
             + ", "
             + DatabaseManager.USER_TYPE_KEY
+            + ", "
+            + DatabaseManager.SPECIALTY_KEY
             + " ) "
-            + "VALUES (?, ?, ?, ?, ?, ?)";
+            + "VALUES (?, ?, ?, ?, ?, ?, ?)";
     try (PreparedStatement preparedStatement =
         DatabaseManager.getConnection().prepareStatement(createStatement)) {
       int param = 1;
@@ -47,7 +51,7 @@ public class AccountFactory {
       preparedStatement.setString(param++, account.getFirstName());
       preparedStatement.setString(param++, account.getEmailAddress());
       preparedStatement.setInt(param++, account.getType().getTypeOrdinal());
-
+      preparedStatement.setInt(param++, account.getSpecialty().getTypeOrdinal());
       preparedStatement.execute();
     } catch (SQLException e) {
       System.out.println(e.getMessage() + ", " + e.getClass());
@@ -118,6 +122,8 @@ public class AccountFactory {
             + DatabaseManager.EMAIL_ADDRESS_KEY
             + " = ?, "
             + DatabaseManager.USER_TYPE_KEY
+            + " = ?, "
+            + DatabaseManager.SPECIALTY_KEY
             + " = ?"
             + " WHERE "
             + DatabaseManager.USER_NAME_KEY
@@ -131,6 +137,7 @@ public class AccountFactory {
       preparedStatement.setString(param++, account.getLastName());
       preparedStatement.setString(param++, account.getEmailAddress());
       preparedStatement.setInt(param++, account.getType().getTypeOrdinal());
+      preparedStatement.setInt(param++, account.getSpecialty().getTypeOrdinal());
       preparedStatement.setString(param++, account.getUsername());
 
       int numRows = preparedStatement.executeUpdate();
@@ -243,7 +250,8 @@ public class AccountFactory {
                 resultSet.getString(DatabaseManager.LAST_NAME_KEY),
                 resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
                 resultSet.getString(DatabaseManager.USER_NAME_KEY),
-                Account.Type.getEnum(resultSet.getInt(DatabaseManager.USER_TYPE_KEY))));
+                Account.Type.getEnum(resultSet.getInt(DatabaseManager.USER_TYPE_KEY)),
+                Account.Specialty.getEnum(resultSet.getInt(DatabaseManager.SPECIALTY_KEY))));
       }
     } catch (Exception e) {
       System.out.println(e.getMessage() + ", " + e.getClass());
