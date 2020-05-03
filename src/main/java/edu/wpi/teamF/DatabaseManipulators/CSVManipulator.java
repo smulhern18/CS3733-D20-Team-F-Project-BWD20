@@ -153,7 +153,7 @@ public class CSVManipulator {
       while (i < (data.size() - 1)) {
         try {
           edgeFactory.create(new Edge(data.get(i), data.get(i + 1), data.get(i + 2)));
-        } catch(Exception e) {
+        } catch (Exception e) {
           System.out.println(e.getMessage() + ", " + e.getClass());
         }
         System.out.println("Created edge on line " + i / 3 + ", " + data.get(i));

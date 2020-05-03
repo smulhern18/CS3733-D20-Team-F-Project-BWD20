@@ -152,9 +152,9 @@ public class PathfinderController implements Initializable {
     this.path = path;
 
     List<Node> pathNodes = path.getPath();
-    if (endNode == null) {
-      endNode = pathNodes.get(pathNodes.size() - 1);
-    }
+    //    if (endNode == null) {
+    //      endNode = pathNodes.get(pathNodes.size() - 1);
+    //    }
 
     double heightRatioFaulkner = currentPane.getPrefHeight() / FAULKNER_MAP_HEIGHT;
     double widthRatioFaulkner = currentPane.getPrefWidth() / FAULKNER_MAP_WIDTH;
@@ -897,7 +897,6 @@ public class PathfinderController implements Initializable {
     }
   }
 
-
   private boolean sameHospital(String building1, String building2) {
     return ("Faulkner".equals(building1) && "Faulkner".equals(building2))
         || (!"Faulkner".equals(building1) && !"Faulkner".equals(building2));
@@ -908,5 +907,4 @@ public class PathfinderController implements Initializable {
   public void callDirections(ActionEvent actionEvent) {}
 
   public void printDirections(ActionEvent actionEvent) {}
-
 }
