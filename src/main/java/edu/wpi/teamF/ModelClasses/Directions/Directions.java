@@ -6,7 +6,7 @@ import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
 import edu.wpi.teamF.ModelClasses.Scorer.EuclideanScorer;
 import java.util.*;
-import javafx.print.PrinterJob;
+import javafx.print.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
@@ -251,7 +251,7 @@ public class Directions {
             if (currHall.getDistance() > 0) {
               directionList.add(currHall);
             }
-            currHall = new StraightDirection(0, 0, pathNodeList.get(i + 2).getFloor());
+            currHall = new StraightDirection(0, 0, pathNodeList.get(i+1).getFloor());
 
             directionList.add(
                 new EnterDirection(
@@ -394,33 +394,73 @@ public class Directions {
 
   public void printDirections() {
     System.out.println("Creating a printer job...");
-
     String printMsg =
         ("Directions from "
             + startNode.getLongName()
             + " to "
             + endNode.getLongName()
             + " at Brigham & Women's Hospital:\n\n");
-    printMsg += getFullDirectionsString();
-    System.out.println(printMsg);
+    printMsg += (directionList.get(0).getDirectionText() + "\n");
 
-    Text printText = new Text(printMsg);
-    printText.setFont(new Font(11));
-    TextFlow printArea = new TextFlow(printText);
-    printArea.setMaxWidth(155);
-
-    PrinterJob job = PrinterJob.createPrinterJob();
-    if (job != null) {
-      System.out.println(job.jobStatusProperty().asString());
-
-      boolean printed = job.printPage(printArea);
-      if (printed) {
-        job.endJob();
-      } else {
-        System.out.println("Printing failed.");
+    int linesCounter = 3;
+    for (int i = 1; i < directionList.size(); i++) {
+      if (!directionList
+          .get(i)
+          .getDirectionText()
+          .equals(directionList.get(i - 1).getDirectionText())) {
+        // If the text is not a duplicate of the previous (i.e. stairs and elevators)
+        printMsg = printMsg + directionList.get(i).getDirectionText() + "\n";
       }
-    } else {
-      System.out.println("Could not create a printer job.");
+      linesCounter++;
+
+      if (linesCounter > 30) {
+        // Need to print a label
+        System.out.println("Now printing: \n" + printMsg);
+        Text printText = new Text(printMsg);
+        printText.setFont(new Font(10.5));
+        TextFlow printArea = new TextFlow(printText);
+        printArea.setMaxWidth(140);
+
+        Printer printer = Printer.getDefaultPrinter();
+        PrinterJob job = PrinterJob.createPrinterJob(printer);
+        if (job != null) {
+          System.out.println(job.jobStatusProperty().asString());
+
+          boolean printed = job.printPage(printArea);
+          if (printed) {
+            job.endJob();
+          } else {
+            System.out.println("Printing failed.");
+          }
+        } else {
+          System.out.println("Could not create a printer job.");
+        }
+        linesCounter = 0;
+        printMsg = "";
+      }
+    }
+
+    if (linesCounter > 0) {
+      System.out.println("Now printing: \n" + printMsg);
+      Text printText = new Text(printMsg);
+      printText.setFont(new Font(10.5));
+      TextFlow printArea = new TextFlow(printText);
+      printArea.setMaxWidth(140);
+
+      Printer printer = Printer.getDefaultPrinter();
+      PrinterJob job = PrinterJob.createPrinterJob(printer);
+      if (job != null) {
+        System.out.println(job.jobStatusProperty().asString());
+
+        boolean printed = job.printPage(printArea);
+        if (printed) {
+          job.endJob();
+        } else {
+          System.out.println("Printing failed.");
+        }
+      } else {
+        System.out.println("Could not create a printer job.");
+      }
     }
   }
 }
