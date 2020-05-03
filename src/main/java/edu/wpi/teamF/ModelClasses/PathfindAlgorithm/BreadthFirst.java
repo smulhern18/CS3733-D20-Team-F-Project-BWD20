@@ -99,4 +99,8 @@ public class BreadthFirst implements PathfindAlgorithm {
   public void setLiftType(String liftType) {
     this.liftType = liftType;
   }
+
+  public String getLiftType() {
+    return liftType;
+  }
 }

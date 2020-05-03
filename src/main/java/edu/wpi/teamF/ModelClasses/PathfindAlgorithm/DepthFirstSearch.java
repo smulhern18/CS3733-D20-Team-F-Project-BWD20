@@ -117,4 +117,8 @@ public class DepthFirstSearch implements PathfindAlgorithm {
   public void setLiftType(String liftType) {
     this.liftType = liftType;
   }
+
+  public String getLiftType() {
+    return liftType;
+  }
 }

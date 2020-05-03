@@ -512,11 +512,17 @@ public class PathfinderController implements Initializable {
   }
 
   public void findElevator(MouseEvent mouseEvent) throws InstanceNotFoundException {
+    String holdLiftType = pathFindAlgorithm.getLiftType();
+    pathFindAlgorithm.setLiftType("ELEV");
     findType("ELEV");
+    pathFindAlgorithm.setLiftType(holdLiftType);
   }
 
   public void findStairs(MouseEvent mouseEvent) throws InstanceNotFoundException {
+    String holdLiftType = pathFindAlgorithm.getLiftType();
+    pathFindAlgorithm.setLiftType("STAI");
     findType("STAI");
+    pathFindAlgorithm.setLiftType(holdLiftType);
   }
 
   public void findBathroom(MouseEvent mouseEvent) throws InstanceNotFoundException {

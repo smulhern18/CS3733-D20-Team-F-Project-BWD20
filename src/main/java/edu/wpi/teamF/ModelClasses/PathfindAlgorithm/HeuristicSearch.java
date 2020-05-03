@@ -23,6 +23,10 @@ public abstract class HeuristicSearch implements PathfindAlgorithm {
     this.liftType = liftType;
   }
 
+  public String getLiftType() {
+    return liftType;
+  }
+
   public double calcEstimatedCostOfNeighbor(
       RouteNode currentNode, Node neighbor, Node endNode, Scorer scorer) {
     return 0;

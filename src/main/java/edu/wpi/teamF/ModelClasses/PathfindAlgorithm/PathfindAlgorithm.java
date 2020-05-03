@@ -11,4 +11,6 @@ public interface PathfindAlgorithm {
   Path pathfind(Node start, Node.NodeType nodeType) throws InstanceNotFoundException;
 
   void setLiftType(String type);
+
+  String getLiftType();
 }
