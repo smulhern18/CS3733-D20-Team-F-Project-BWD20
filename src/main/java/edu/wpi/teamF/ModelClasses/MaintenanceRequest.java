@@ -30,6 +30,7 @@ public class MaintenanceRequest {
     setAssignee(assignee);
     setDescription(description);
     setDateTimeSubmitted(dateTimeSubmitted);
+    setType(type);
     setEstimatedCompletionDate(estimatedCompletionDate);
     setEstimatedCost(estimatedCost);
     setPriority(priority);
@@ -51,6 +52,7 @@ public class MaintenanceRequest {
     setDescription(description);
     setDateTimeSubmitted(dateTimeSubmitted);
     setPriority(priority);
+    setType(type);
     setEstimatedCompletionDate(estimatedCompletionDate);
     setEstimatedCost(estimatedCost);
     setComplete(complete);

@@ -80,6 +80,9 @@ public class Validators {
     descriptionValidation(serviceRequest.getDescription());
     dateValidation(serviceRequest.getDateTimeSubmitted());
     priorityValidation(serviceRequest.getPriority());
+    maintenanceTypeValidation(serviceRequest.getType());
+    dateValidation(serviceRequest.getEstimatedCompletionDate());
+    estimatedCostValidation(serviceRequest.getEstimatedCost());
     booleanValidation(serviceRequest.getComplete());
     nameValidation(serviceRequest.getAssignee());
   }
