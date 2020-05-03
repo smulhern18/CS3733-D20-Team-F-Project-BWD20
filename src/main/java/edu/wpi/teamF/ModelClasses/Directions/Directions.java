@@ -27,232 +27,244 @@ public class Directions {
     this.endNode = endNode;
 
     List<Node> pathNodeList = path.getPath();
+    endNode = pathNodeList.get(pathNodeList.size() - 1);
 
     System.out.println("Last in list: " + pathNodeList.get(pathNodeList.size() - 1).getId());
     System.out.println("Size of lsit: " + pathNodeList.size());
 
-    // Create the starting directions
-    // TODO Add handling if the start node is not connected directly to a hallway (need an
-    // in-transit room to get to the hallway)
-    if (pathNodeList.get(2).getId().equals(endNode.getId())) {
-      // Check if there's only a single node between start and goal
-      directionList.add(new StartDirection(0, pathNodeList.get(0).getFloor()));
+    System.out.println("Start Node: " + startNode.getId());
+    System.out.println("End Node: " + endNode.getId());
+
+    if (pathNodeList.size() < 3) {
+      // Very short route
+      directionList.add(
+          new ProceedDirection(endNode.getLongName(), pathNodeList.get(0).getFloor()));
     } else {
-      // There are enough intermediate nodes to logically state a room exit angle
-      float startTurnAngle =
-          getAngle(pathNodeList.get(0), pathNodeList.get(1), pathNodeList.get(2));
-      directionList.add(new StartDirection(startTurnAngle, pathNodeList.get(0).getFloor()));
-    }
-    // Make a new hallway walking direction, we will always keep an object of this type active
-    StraightDirection currHall = new StraightDirection(0, 0, pathNodeList.get(0).getFloor());
-
-    for (int i = 1;
-        i < (pathNodeList.size());
-        i++) { // Iterate through the nodes of the path, starting at the second one
-      System.out.println("Now investigating node: " + pathNodeList.get(i).getId());
-
-      if (pathNodeList.get(i).getType().equals(Node.NodeType.getEnum("HALL"))) {
-        // Current node is a hallway
-        System.out.println("Hallway");
-        if (pathNodeList.get(i - 1).getType().equals(Node.NodeType.getEnum("HALL"))) {
-          // Previous node was also a hallway, add distance from previous hallway to this one.
-          currHall.addDistance(scorer.computeCost(pathNodeList.get(i - 1), pathNodeList.get(i)));
-          System.out.println("Incrementing Distance");
-        }
-
-        // If the current hall node is an intersection, could be a turn or a continue straight
-        // past intersection
-        // First, calculate how many neighboring nodes are hallways
-        int numHallNeighbors = 0;
-        Set<Edge> neighborEdges = pathNodeList.get(i).getEdges();
-        for (Edge edge : neighborEdges) {
-          if (edge.getNode1().equals(pathNodeList.get(i).getId())) {
-            if (nodeMap.get(edge.getNode2()).getType().equals(Node.NodeType.getEnum("HALL"))) {
-              numHallNeighbors += 1;
-            }
-          } else {
-            if (nodeMap.get(edge.getNode1()).getType().equals(Node.NodeType.getEnum("HALL"))) {
-              numHallNeighbors += 1;
-            }
-          }
-        }
-        // Now check if it's an intersection
-        if (numHallNeighbors > 2) {
-          // This can be a turn or a passed intersection
-          System.out.println("Intersection");
-          float thisTurnAngle =
-              getAngle(pathNodeList.get(i - 1), pathNodeList.get(i), pathNodeList.get(i + 1));
-          if (Math.abs(thisTurnAngle) > 20.0) {
-            // More than 20deg deviation from straight makes it a turn
-            // This is a turn
-            System.out.println("This is a turn");
-            directionList.add(currHall); // Terminate the hall direction
-            directionList.add( // TODO: Add a description of the intersection (name)
-                new TurnDirection(
-                    thisTurnAngle,
-                    (currHall.getIntersectionsPassed() + 1),
-                    pathNodeList.get(i).getFloor()));
-            currHall = new StraightDirection(0, 0, pathNodeList.get(i).getFloor());
-          } else {
-            System.out.println("Passed intersection");
-            // This is a passed intersection
-            currHall.addIntersection();
-          }
-        }
+      // Create the starting directions
+      // TODO Add handling if the start node is not connected directly to a hallway (need an
+      // in-transit room to get to the hallway)
+      if (pathNodeList.get(2).getId().equals(endNode.getId())) {
+        // Check if there's only a single node between start and goal
+        directionList.add(new StartDirection(0, pathNodeList.get(0).getFloor()));
+      } else {
+        // There are enough intermediate nodes to logically state a room exit angle
+        float startTurnAngle =
+            getAngle(pathNodeList.get(0), pathNodeList.get(1), pathNodeList.get(2));
+        directionList.add(new StartDirection(startTurnAngle, pathNodeList.get(0).getFloor()));
       }
+      // Make a new hallway walking direction, we will always keep an object of this type active
+      StraightDirection currHall = new StraightDirection(0, 0, pathNodeList.get(0).getFloor());
 
-      // Check if this node is the destination
-      else if (pathNodeList.get(i).getId().equals(endNode.getId())) {
-        System.out.println("Destination");
-        // This node is the destination
-        // Only add the hallway instruction if it actually went some distance
-        if (currHall.getDistance() > 0) {
-          directionList.add(currHall);
-        }
-        float goalTurnAngle =
-            getAngle(pathNodeList.get(i - 2), pathNodeList.get(i - 1), pathNodeList.get(i));
-        directionList.add(new GoalDirection(goalTurnAngle, pathNodeList.get(i).getFloor()));
-        break;
+      for (int i = 1;
+          i < (pathNodeList.size());
+          i++) { // Iterate through the nodes of the path, starting at the second one
+        System.out.println("Now investigating node: " + pathNodeList.get(i).getId());
 
-        // TODO: What if your goal is an elevator and DFS takes you through multiple elevators to
-        // get there?
+        if (pathNodeList.get(i).getType().equals(Node.NodeType.getEnum("HALL"))) {
+          // Current node is a hallway
+          System.out.println("Hallway");
+          if (pathNodeList.get(i - 1).getType().equals(Node.NodeType.getEnum("HALL"))) {
+            // Previous node was also a hallway, add distance from previous hallway to this one.
+            currHall.addDistance(scorer.computeCost(pathNodeList.get(i - 1), pathNodeList.get(i)));
+            System.out.println("Incrementing Distance");
+          }
 
-        // Check if this node is an elevator
-      } else if (pathNodeList.get(i).getType().equals(Node.NodeType.getEnum("ELEV"))) {
-        System.out.println("Elevator");
-        // This node is an elevator
-        // Only add the hallway instruction if it actually went some distance
-        if (currHall.getDistance() > 0) {
-          directionList.add(currHall);
-        }
-        currHall = new StraightDirection(0, 0, pathNodeList.get(i).getFloor());
-
-        if (!Node.NodeType.getEnum("ELEV").equals(pathNodeList.get(i - 1).getType())) {
-          System.out.println("A starting elevator");
-          // The previous node was a not an elevator, this is the first elevator in a sequence
-          // Cycle through the next nodes to find the end of the elevator sequence
-          float exitAngle = 0;
-          String endFloor = pathNodeList.get(i).getFloor();
-          for (int j = i; j < (pathNodeList.size() - 1); j++) {
-            if (!Node.NodeType.getEnum("ELEV").equals(pathNodeList.get(j + 1).getType())) {
-              // If the next node is not an elevator, this is the last elevator in the sequence
-              exitAngle =
-                  getAngle(pathNodeList.get(j), pathNodeList.get(j + 1), pathNodeList.get(j + 2));
-              endFloor = pathNodeList.get(j).getFloor();
-              break;
+          // If the current hall node is an intersection, could be a turn or a continue straight
+          // past intersection
+          // First, calculate how many neighboring nodes are hallways
+          int numHallNeighbors = 0;
+          Set<Edge> neighborEdges = pathNodeList.get(i).getEdges();
+          for (Edge edge : neighborEdges) {
+            if (edge.getNode1().equals(pathNodeList.get(i).getId())) {
+              if (nodeMap.get(edge.getNode2()).getType().equals(Node.NodeType.getEnum("HALL"))) {
+                numHallNeighbors += 1;
+              }
+            } else {
+              if (nodeMap.get(edge.getNode1()).getType().equals(Node.NodeType.getEnum("HALL"))) {
+                numHallNeighbors += 1;
+              }
             }
           }
-          directionList.add(
-              new ElevatorDirection(
-                  pathNodeList.get(i).getFloor(),
-                  endFloor,
-                  exitAngle,
-                  pathNodeList.get(i).getFloor()));
-        } else if (!Node.NodeType.getEnum("ELEV").equals(pathNodeList.get(i + 1).getType())) {
-          System.out.println("A final elevator");
-          // The next node is a not an elevator, this is the last elevator in a sequence
-          // Use the previous element in the path, but change the floor
-          if (directionList.get(directionList.size() - 1) instanceof ElevatorDirection) {
-            ElevatorDirection tempElevDir =
-                (ElevatorDirection) directionList.get(directionList.size() - 1);
-            tempElevDir.setFloor(pathNodeList.get(i).getFloor());
-            directionList.add(tempElevDir);
-          }
-        }
-
-        // Check if this node is a stairwell
-      } else if (pathNodeList.get(i).getType().equals(Node.NodeType.getEnum("STAI"))) {
-        System.out.println("Stairs");
-        // This node is a stairwell
-        // Only add the hallway instruction if it actually went some distance
-        if (currHall.getDistance() > 0) {
-          directionList.add(currHall);
-        }
-        currHall = new StraightDirection(0, 0, pathNodeList.get(i).getFloor());
-
-        if (!Node.NodeType.getEnum("STAI").equals(pathNodeList.get(i - 1).getType())) {
-          // The previous node was a not an stair, this is the first stair in a sequence
-          // Cycle through the next nodes to find the end of the elevator sequence
-          float exitAngle = 0;
-          String endFloor = pathNodeList.get(i).getFloor();
-          for (int j = i; j < (pathNodeList.size() - 1); j++) {
-            if (!Node.NodeType.getEnum("STAI").equals(pathNodeList.get(j + 1).getType())) {
-              // If the next node is not a stair, this is the last stair in the sequence
-              exitAngle =
-                  getAngle(pathNodeList.get(j), pathNodeList.get(j + 1), pathNodeList.get(j + 2));
-              endFloor = pathNodeList.get(j).getFloor();
-              break;
+          // Now check if it's an intersection
+          if (numHallNeighbors > 2) {
+            // This can be a turn or a passed intersection
+            System.out.println("Intersection");
+            float thisTurnAngle =
+                getAngle(pathNodeList.get(i - 1), pathNodeList.get(i), pathNodeList.get(i + 1));
+            if (Math.abs(thisTurnAngle) > 20.0) {
+              // More than 20deg deviation from straight makes it a turn
+              // This is a turn
+              System.out.println("This is a turn");
+              directionList.add(currHall); // Terminate the hall direction
+              directionList.add( // TODO: Add a description of the intersection (name)
+                  new TurnDirection(
+                      thisTurnAngle,
+                      (currHall.getIntersectionsPassed() + 1),
+                      pathNodeList.get(i).getFloor()));
+              currHall = new StraightDirection(0, 0, pathNodeList.get(i).getFloor());
+            } else {
+              System.out.println("Passed intersection");
+              // This is a passed intersection
+              currHall.addIntersection();
             }
           }
-          directionList.add(
-              new StairsDirection(
-                  pathNodeList.get(i).getFloor(),
-                  endFloor,
-                  exitAngle,
-                  pathNodeList.get(i).getFloor()));
-        } else if (!Node.NodeType.getEnum("STAI").equals(pathNodeList.get(i + 1).getType())) {
-          // The next node is a not a stair, this is the last stair in a sequence
-          // Use the previous element in the path, but change the floor
-          if (directionList.get(directionList.size() - 1) instanceof StairsDirection) {
-            StairsDirection tempStaiDir =
-                (StairsDirection) directionList.get(directionList.size() - 1);
-            tempStaiDir.setFloor(pathNodeList.get(i).getFloor());
-            directionList.add(tempStaiDir);
-          }
         }
-      }
 
-      // Building exit
-      else if (Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(i).getType())) {
-        // This is a building exit or entrance
-        if (currHall.getDistance() > 0) {
-          directionList.add(currHall);
-        }
-        currHall = new StraightDirection(0, 0, pathNodeList.get(i).getFloor());
-
-        if (!Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(i - 1).getType())) {
-          // If the previous node was not an exit, this is the first exit in the exit sequence
-          directionList.add(
-              new ExitDirection(pathNodeList.get(i).getBuilding(), pathNodeList.get(i).getFloor()));
-          if (Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(i + 1).getType())) {
-            // If the next node is also an exit, we are transiting between buildings
-            directionList.add(
-                new TravelDirection(
-                    pathNodeList.get(i).getBuilding(),
-                    pathNodeList.get(i + 1).getBuilding(),
-                    pathNodeList.get(i).getFloor()));
-          }
-        } else if (!Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(i + 1).getType())) {
-          // This is NOT an initial exit, but it IS the final exit, meaning you're entering a
-          // building
-          directionList.add(
-              new EnterDirection(
-                  pathNodeList.get(i).getBuilding(), pathNodeList.get(i).getFloor()));
-        }
-        // Ignore intermediate exit nodes
-      }
-
-      // If the given node is not a hall, the goal, exit, travel, elevator, or stairs, it must be an
-      // in-transit node
-      else {
-        if (Node.NodeType.getEnum("HALL").equals(pathNodeList.get(i - 1).getType())) {
-          // Previous node was a hallway, so we are entering a room
+        // Check if this node is the destination
+        else if (pathNodeList.get(i).getId().equals(endNode.getId())) {
+          System.out.println("Destination");
+          // This node is the destination
+          // Only add the hallway instruction if it actually went some distance
           if (currHall.getDistance() > 0) {
             directionList.add(currHall);
           }
-          currHall = new StraightDirection(0, 0, pathNodeList.get(i + 2).getFloor());
+          float goalTurnAngle =
+              getAngle(pathNodeList.get(i - 2), pathNodeList.get(i - 1), pathNodeList.get(i));
+          directionList.add(new GoalDirection(goalTurnAngle, pathNodeList.get(i).getFloor()));
+          break;
 
-          directionList.add(
-              new EnterDirection(
-                  pathNodeList.get(i).getLongName(), pathNodeList.get(i).getFloor()));
-        } else {
-          // The previous node was a room
-          directionList.add(
-              new ProceedDirection(
-                  pathNodeList.get(i).getLongName(), pathNodeList.get(i).getFloor()));
+          // TODO: What if your goal is an elevator and DFS takes you through multiple elevators to
+          // get there?
+
+          // Check if this node is an elevator
+        } else if (pathNodeList.get(i).getType().equals(Node.NodeType.getEnum("ELEV"))) {
+          System.out.println("Elevator");
+          // This node is an elevator
+          // Only add the hallway instruction if it actually went some distance
+          if (currHall.getDistance() > 0) {
+            directionList.add(currHall);
+          }
+          currHall = new StraightDirection(0, 0, pathNodeList.get(i).getFloor());
+
+          if (!Node.NodeType.getEnum("ELEV").equals(pathNodeList.get(i - 1).getType())) {
+            System.out.println("A starting elevator");
+            // The previous node was a not an elevator, this is the first elevator in a sequence
+            // Cycle through the next nodes to find the end of the elevator sequence
+            float exitAngle = 0;
+            String endFloor = pathNodeList.get(i).getFloor();
+            for (int j = i; j < (pathNodeList.size() - 1); j++) {
+              if (!Node.NodeType.getEnum("ELEV").equals(pathNodeList.get(j + 1).getType())) {
+                // If the next node is not an elevator, this is the last elevator in the sequence
+                exitAngle =
+                    getAngle(pathNodeList.get(j), pathNodeList.get(j + 1), pathNodeList.get(j + 2));
+                endFloor = pathNodeList.get(j).getFloor();
+                break;
+              }
+            }
+            directionList.add(
+                new ElevatorDirection(
+                    pathNodeList.get(i).getFloor(),
+                    endFloor,
+                    exitAngle,
+                    pathNodeList.get(i).getFloor()));
+          } else if (!Node.NodeType.getEnum("ELEV").equals(pathNodeList.get(i + 1).getType())) {
+            System.out.println("A final elevator");
+            // The next node is a not an elevator, this is the last elevator in a sequence
+            // Use the previous element in the path, but change the floor
+            if (directionList.get(directionList.size() - 1) instanceof ElevatorDirection) {
+              ElevatorDirection tempElevDir =
+                  (ElevatorDirection) directionList.get(directionList.size() - 1);
+              tempElevDir.setFloor(pathNodeList.get(i).getFloor());
+              directionList.add(tempElevDir);
+            }
+          }
+
+          // Check if this node is a stairwell
+        } else if (pathNodeList.get(i).getType().equals(Node.NodeType.getEnum("STAI"))) {
+          System.out.println("Stairs");
+          // This node is a stairwell
+          // Only add the hallway instruction if it actually went some distance
+          if (currHall.getDistance() > 0) {
+            directionList.add(currHall);
+          }
+          currHall = new StraightDirection(0, 0, pathNodeList.get(i).getFloor());
+
+          if (!Node.NodeType.getEnum("STAI").equals(pathNodeList.get(i - 1).getType())) {
+            // The previous node was a not an stair, this is the first stair in a sequence
+            // Cycle through the next nodes to find the end of the elevator sequence
+            float exitAngle = 0;
+            String endFloor = pathNodeList.get(i).getFloor();
+            for (int j = i; j < (pathNodeList.size() - 1); j++) {
+              if (!Node.NodeType.getEnum("STAI").equals(pathNodeList.get(j + 1).getType())) {
+                // If the next node is not a stair, this is the last stair in the sequence
+                exitAngle =
+                    getAngle(pathNodeList.get(j), pathNodeList.get(j + 1), pathNodeList.get(j + 2));
+                endFloor = pathNodeList.get(j).getFloor();
+                break;
+              }
+            }
+            directionList.add(
+                new StairsDirection(
+                    pathNodeList.get(i).getFloor(),
+                    endFloor,
+                    exitAngle,
+                    pathNodeList.get(i).getFloor()));
+          } else if (!Node.NodeType.getEnum("STAI").equals(pathNodeList.get(i + 1).getType())) {
+            // The next node is a not a stair, this is the last stair in a sequence
+            // Use the previous element in the path, but change the floor
+            if (directionList.get(directionList.size() - 1) instanceof StairsDirection) {
+              StairsDirection tempStaiDir =
+                  (StairsDirection) directionList.get(directionList.size() - 1);
+              tempStaiDir.setFloor(pathNodeList.get(i).getFloor());
+              directionList.add(tempStaiDir);
+            }
+          }
         }
+
+        // Building exit
+        else if (Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(i).getType())) {
+          // This is a building exit or entrance
+          if (currHall.getDistance() > 0) {
+            directionList.add(currHall);
+          }
+          currHall = new StraightDirection(0, 0, pathNodeList.get(i).getFloor());
+
+          if (!Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(i - 1).getType())) {
+            // If the previous node was not an exit, this is the first exit in the exit sequence
+            directionList.add(
+                new ExitDirection(
+                    pathNodeList.get(i).getBuilding(), pathNodeList.get(i).getFloor()));
+            if (Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(i + 1).getType())) {
+              // If the next node is also an exit, we are transiting between buildings
+              directionList.add(
+                  new TravelDirection(
+                      pathNodeList.get(i).getBuilding(),
+                      pathNodeList.get(i + 1).getBuilding(),
+                      pathNodeList.get(i).getFloor()));
+            }
+          } else if (!Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(i + 1).getType())) {
+            // This is NOT an initial exit, but it IS the final exit, meaning you're entering a
+            // building
+            directionList.add(
+                new EnterDirection(
+                    pathNodeList.get(i).getBuilding(), pathNodeList.get(i).getFloor()));
+          }
+          // Ignore intermediate exit nodes
+        }
+
+        // If the given node is not a hall, the goal, exit, travel, elevator, or stairs, it must be
+        // an
+        // in-transit node
+        else {
+          if (Node.NodeType.getEnum("HALL").equals(pathNodeList.get(i - 1).getType())) {
+            // Previous node was a hallway, so we are entering a room
+            if (currHall.getDistance() > 0) {
+              directionList.add(currHall);
+            }
+            currHall = new StraightDirection(0, 0, pathNodeList.get(i + 2).getFloor());
+
+            directionList.add(
+                new EnterDirection(
+                    pathNodeList.get(i).getLongName(), pathNodeList.get(i).getFloor()));
+          } else {
+            // The previous node was a room
+            directionList.add(
+                new ProceedDirection(
+                    pathNodeList.get(i).getLongName(), pathNodeList.get(i).getFloor()));
+          }
+        }
+        System.out.println("Loop bottom, i: " + i);
       }
-      System.out.println("Loop bottom, i: " + i);
     }
   }
 
