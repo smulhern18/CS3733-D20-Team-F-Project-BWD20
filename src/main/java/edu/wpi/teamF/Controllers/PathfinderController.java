@@ -3,6 +3,7 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXToggleButton;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Directions.Directions;
@@ -99,6 +100,9 @@ public class PathfinderController implements Initializable {
   String liftType = "ELEV";
   public JFXButton chooseLiftStairs;
   public JFXButton chooseLiftElevator;
+  public JFXToggleButton liftToggle;
+  public Label elevatorLabel;
+  public Label stairsLabel;
 
   public List<Node> fullNodeList;
   public int state;
@@ -356,8 +360,12 @@ public class PathfinderController implements Initializable {
 
     setComboBehavior();
 
-    //    startLabel.setVisible(false);
-    //    endLabel.setVisible(false);
+    if (startLabel != null) {
+      startLabel.setVisible(false);
+    }
+    if (endLabel != null) {
+      endLabel.setVisible(false);
+    }
   }
 
   private void resetButtonLine(String floor, String building) {
@@ -400,6 +408,7 @@ public class PathfinderController implements Initializable {
     imageViewFaulkner1.setVisible(true);
     floorButtonsSet();
     initializehospitalComboBox();
+    setToggleBehavior();
 
     UISetting uiSetting = new UISetting();
     uiSetting.setAsLocationComboBox(startCombo);
@@ -585,6 +594,9 @@ public class PathfinderController implements Initializable {
           Path path = null;
           switchToFloor(startNode.getFloor(), startNode.getBuilding());
           labelNode();
+          labelNodeEnd();
+
+          System.out.println(liftType);
 
           try {
             path = pathFindAlgorithm.pathfind(startNode, endNode);
@@ -877,22 +889,28 @@ public class PathfinderController implements Initializable {
         System.out.println(startLabel.getMinWidth());
         System.out.println(startLabel.getMaxWidth());
         getFloorPane(startNode.getFloor(), startNode.getBuilding()).getChildren().add(startLabel);
-        startLabel.setVisible(true);
 
-        startLabel.setLayoutX(component.getLayoutX() - 20); //(startLabel.getHeight()));
+        startLabel.setLayoutX(component.getLayoutX() - 20); // (startLabel.getHeight()));
         startLabel.setLayoutY(component.getLayoutY() - 20);
+        startLabel.setId("startLabel");
+        startLabel.setVisible(true);
         return;
       }
     }
+  }
+
+  private void labelNodeEnd() {
     endLabel = new Label();
     for (javafx.scene.Node component :
         getFloorPane(endNode.getFloor(), endNode.getBuilding()).getChildren()) {
       if (component.getId().equals(endNode.getId())) {
+        endLabel.setStyle("-fx-font-size: 12");
         endLabel.setText(endNode.getLongName());
+        getFloorPane(endNode.getFloor(), endNode.getBuilding()).getChildren().add(endLabel);
         endLabel.setLayoutX(component.getLayoutX() - (endLabel.getHeight()));
         endLabel.setLayoutY(component.getLayoutY() - 20);
+        endLabel.setId("endLabel");
         endLabel.setVisible(true);
-        getFloorPane(endNode.getFloor(), endNode.getBuilding()).getChildren().add(endLabel);
         return;
       }
     }
@@ -908,4 +926,17 @@ public class PathfinderController implements Initializable {
   public void callDirections(ActionEvent actionEvent) {}
 
   public void printDirections(ActionEvent actionEvent) {}
+
+  private void setToggleBehavior() {
+    liftToggle.setOnAction(
+        actionEvent -> {
+          if (liftToggle.isSelected()) {
+            liftType = "STAI";
+            pathFindAlgorithm.setLiftType(liftType);
+          } else {
+            liftType = "ELEV";
+            pathFindAlgorithm.setLiftType(liftType);
+          }
+        });
+  }
 }
