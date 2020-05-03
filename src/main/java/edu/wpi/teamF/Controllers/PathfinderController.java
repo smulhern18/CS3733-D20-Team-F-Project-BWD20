@@ -302,7 +302,6 @@ public class PathfinderController implements Initializable {
             button.setStyle(
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px"); // 00cc00
             commandText.setText("Select Find Path or Reset");
-            // labelNode("end");
             state = 2;
             // endCombo.setDisable(true);
             endCombo.setValue(node.getLongName() + " " + node.getId());
@@ -645,7 +644,7 @@ public class PathfinderController implements Initializable {
           System.out.println("end" + endNode);
           Path path = null;
           switchToFloor(startNode.getFloor(), startNode.getBuilding());
-          labelNode();
+          labelNodeStart();
           labelNodeEnd();
 
           System.out.println(liftType);
@@ -934,7 +933,7 @@ public class PathfinderController implements Initializable {
         });
   }
 
-  public void labelNode() {
+  public void labelNodeStart() {
 
     startLabel = new Label();
     for (javafx.scene.Node component :
