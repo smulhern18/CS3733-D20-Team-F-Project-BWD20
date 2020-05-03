@@ -66,8 +66,6 @@ public class Validators {
   public static final int MESSAGE_MAX_LENGTH = 128;
   public static final int MAINTENANCE_TYPE_MIN_LENGTH = 1;
   public static final int MAINTENANCE_TYPE_MAX_LENGTH = 64;
-  public static final int TIME_TO_COMPLETION_MIN_LENGTH = 1;
-  public static final int TIME_TO_COMPLETION_MAX_LENGTH = 128;
   public static final double ESTIMATED_COST_MIN_LENGTH = 0.0;
   public static final double ESTIMATED_COST_MAX_LENGTH = 1000000.0;
 
@@ -86,16 +84,6 @@ public class Validators {
     nameValidation(serviceRequest.getAssignee());
   }
 
-  /** Validation for Security */
-  public static void guardsRequestedValidation(int guardsRequested, int... constraints)
-          throws ValidationException {
-    nullCheckValidation(guardsRequested, constraints);
-
-    if (!(guardsRequested >= GUARDS_MIN_VALUE && guardsRequested <= GUARDS_MAX_VALUE)) {
-
-      throw new ValidationException(" Guards requested outside of accepted values");
-    }
-  }
 
   public static <T extends Account> void accountValidation(T t, int... constraints)
           throws ValidationException {
@@ -126,48 +114,6 @@ public class Validators {
     }
   }
 
-  public static void makeValidation(String make, int... constraints) throws ValidationException {
-    nullCheckValidation(make, constraints);
-    if (make.length() < MAKE_MIN_LENGTH || make.length() > MAKE_MAX_LENGTH) {
-      throw new ValidationException("Invalid make length");
-    }
-  }
-
-  public static void hardwareSoftwareValidation(String hardwareSoftware, int... constraints)
-          throws ValidationException {
-    nullCheckValidation(hardwareSoftware, constraints);
-    if (hardwareSoftware.length() < HARDWARESOFTWARE_MIN_LENGTH
-            || hardwareSoftware.length() > HARDWARESOFTWARE_MAX_LENGTH) {
-      throw new ValidationException("Invalid hardwareSoftware length");
-    }
-  }
-
-  public static void osValidation(String OS, int... constraints) throws ValidationException {
-    nullCheckValidation(OS, constraints);
-    if (OS.length() < HARDWARESOFTWARE_MIN_LENGTH || OS.length() > HARDWARESOFTWARE_MAX_LENGTH) {
-      throw new ValidationException("Invalid hardwareSoftware length");
-    }
-  }
-  /** Validation for Security */
-  public static void songRequestValidation(String songRequest, int... constraints)
-          throws ValidationException {
-    nullCheckValidation(songRequest, constraints);
-
-    if (songRequest.length() == 0) {
-
-      throw new ValidationException("Must enter a song request");
-    }
-  }
-
-  public static void sanitationTypeValidation(String sanitationType, int... constraints)
-          throws ValidationException {
-    nullCheckValidation(sanitationType, constraints);
-    if (sanitationType.length() < SANITATION_TYPE_MIN_LENGTH
-            || sanitationType.length() > SANITATION_TYPE_MAX_LENGTH) {
-      throw new ValidationException("Invalid sanitation type length");
-    }
-  }
-
   /**
    * Validation for IDs
    *
@@ -179,95 +125,6 @@ public class Validators {
     nullCheckValidation(id, constraints);
     if (!(id.length() < ID_MAX_LENGTH && id.length() > ID_MIN_LENGTH)) {
       throw new ValidationException("ID is invalid: " + id);
-    }
-  }
-
-  /**
-   * Validation for edge ids
-   *
-   * @param edgeId the edgeId to validate
-   * @param constraints the optional Constraints for validation
-   * @throws ValidationException should anything go wrong
-   */
-  public static void edgeIdValidation(String edgeId, int... constraints)
-          throws ValidationException {
-    nullCheckValidation(edgeId, constraints);
-    if (!(edgeId.length() < EDGE_ID_MAX_LENGTH && edgeId.length() > EDGE_ID_MIN_LENGTH)) {
-      throw new ValidationException("edge ID is invalid: " + edgeId);
-    } else if (!edgeId.contains("_")) {
-      throw new ValidationException("edge ID is invalid: " + edgeId);
-    }
-  }
-  /**
-   * Validation for coords
-   *
-   * @param coord the coord to validate
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the validation fail
-   */
-  public static void coordValidation(short coord, int... constraints) throws ValidationException {
-    nullCheckValidation(coord, constraints);
-    if (!(coord > COORDINATE_MIN_VALUE && coord < COORDINATE_MAX_VALUE)) {
-      throw new ValidationException("Coordinate outside of accepted values");
-    }
-  }
-
-  /**
-   * Validation for Buildings
-   *
-   * @param building the building to validate
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the building be invalid
-   */
-  public static void buildingValidation(String building, int... constraints)
-          throws ValidationException {
-    nullCheckValidation(building, constraints);
-    if (building.length() > BUILDING_MAX_LENGTH || building.length() < BUILDING_MIN_LENGTH) {
-      throw new ValidationException("Building string is out of bounds");
-    }
-  }
-
-  /**
-   * Validation for longNames
-   *
-   * @param longName the long name to validate
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the longName be invalid
-   */
-  public static void longNameValidation(String longName, int... constraints)
-          throws ValidationException {
-    nullCheckValidation(longName, constraints);
-    if (longName.length() < LONG_NAME_MIN_LENGTH || longName.length() > LONG_NAME_MAX_LENGTH) {
-      throw new ValidationException("Long Name string is out of bounds");
-    }
-  }
-
-  /**
-   * Validation for shortNames
-   *
-   * @param shortName the shortName to validate
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the shortName be invalid
-   */
-  public static void shortNameValidation(String shortName, int... constraints)
-          throws ValidationException {
-    nullCheckValidation(shortName, constraints);
-    if (shortName.length() < SHORT_NAME_MIN_LENGTH || shortName.length() > SHORT_NAME_MAX_LENGTH) {
-      throw new ValidationException("Short Name string is out of bounds");
-    }
-  }
-
-  /**
-   * Validation for the floor variable
-   *
-   * @param floor the floor to validate
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the validation fail
-   */
-  public static void floorValidation(String floor, int... constraints) throws ValidationException {
-    nullCheckValidation(floor, constraints);
-    if (!(floor.length() >= FLOOR_MIN_LENGTH && floor.length() <= FLOOR_MAX_LENGTH)) {
-      throw new ValidationException("Floor outside of accepted values");
     }
   }
 
@@ -287,20 +144,6 @@ public class Validators {
   }
 
   /**
-   * Validation for rooms
-   *
-   * @param room the room to validate
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the validation fail
-   */
-  public static void roomValidation(String room, int... constraints) throws ValidationException {
-    nullCheckValidation(room, constraints);
-    if (room.length() < ROOM_MIN_LENGTH || room.length() > ROOM_MAX_LENGTH) {
-      throw new ValidationException("Room is outside of accepted values");
-    }
-  }
-
-  /**
    * Validation for userIDs
    *
    * @param userID the userID to validate
@@ -312,95 +155,6 @@ public class Validators {
     nullCheckValidation(userID, constraints);
     if (userID.length() < USERID_MIN_LENGTH || userID.length() > USERID_MAX_LENGTH) {
       throw new ValidationException("UserID is invalid");
-    }
-  }
-
-  /**
-   * Validation for PCPs
-   *
-   * @param PCP the PCP to validate
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the validation fail
-   */
-  public static void PCPValidation(String PCP, int... constraints) throws ValidationException {
-    nullCheckValidation(PCP, constraints);
-    if (PCP.length() < PCP_MIN_LENGTH || PCP.length() > PCP_MAX_LENGTH) {
-      throw new ValidationException("PCP is outside the accepted values");
-    }
-  }
-
-  /**
-   * Validation for Maintenance Requests
-   *
-   * @param t an instance of Maintenance Request to validate
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the validation fail
-   */
-  public static <T extends MaintenanceRequest> void maintenanceRequestValidation(
-          T t, int... constraints) throws ValidationException {
-    nullCheckValidation(t, constraints);
-    MaintenanceRequest maintenanceRequestObject = (MaintenanceRequest) t;
-
-    idValidation(maintenanceRequestObject.getId());
-    nameValidation(maintenanceRequestObject.getLocation());
-    descriptionValidation(maintenanceRequestObject.getDescription());
-    dateValidation(maintenanceRequestObject.getDateTimeSubmitted());
-    priorityValidation(maintenanceRequestObject.getPriority());
-  }
-
-  /*
-   * Validation for medicine types
-   *
-   * @param medicineType the medicine type to validate
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the validation fail
-   */
-  public static void medicineTypeValidation(String medicineType, int... constraints)
-          throws ValidationException {
-    nullCheckValidation(medicineType, constraints);
-    if (medicineType.length() < MEDICINE_TYPE_MIN_LENGTH
-            || medicineType.length() > MEDICINE_TYPE_MAX_LENGTH) {
-      throw new ValidationException("Medicine type length is out of bounds");
-    }
-  }
-
-  /**
-   * Validation for medicine delivery instructions
-   *
-   * @param instructions the instructions to validate
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the validation fail
-   */
-  public static void instructionsValidation(String instructions, int... constraints)
-          throws ValidationException {
-    nullCheckValidation(instructions, constraints);
-    if (instructions.length() < INSTRUCTIONS_MIN_LENGTH
-            || instructions.length() > INSTRUCTIONS_MAX_LENGTH) {
-      throw new ValidationException("Instructions length is out of bounds");
-    }
-  }
-
-  public static void temperatureValidation(String temperature, int... constraints)
-          throws ValidationException {
-    nullCheckValidation(temperature, constraints);
-    if (temperature.length() < TEMPERTURE_MIN_LENGTH
-            || temperature.length() > TEMPERTURE_MAX_LENGTH) {
-      throw new ValidationException("Invalid temperature size");
-    }
-  }
-
-  public static void itemsValidation(String items, int... constraints) throws ValidationException {
-    nullCheckValidation(items, constraints);
-    if (items.length() < ITEMS_MIN_LENGTH || items.length() > ITEMS_MAX_LENGTH) {
-      throw new ValidationException("Invalid items length");
-    }
-  }
-
-  public static void quantityValidation(String quantity, int... constraints)
-          throws ValidationException {
-    nullCheckValidation(quantity, constraints);
-    if (quantity.length() < QUANTITY_MIN_LENGTH || quantity.length() > QUANTITY_MAX_LENGTH) {
-      throw new ValidationException("Invalid quantity length");
     }
   }
 
@@ -449,21 +203,6 @@ public class Validators {
     }
   }
 
-  /**
-   * Validation for transport types
-   *
-   * @param type the type to validate
-   * @param constraints the optional constraints for validation
-   * @throws ValidationException should the validation fail
-   */
-  public static void transportTypeValidation(String type, int... constraints)
-          throws ValidationException {
-    nullCheckValidation(type, constraints);
-    if (type.length() < TRANSPORT_TYPE_MIN_LENGTH || type.length() > TRANSPORT_TYPE_MAX_LENGTH) {
-      throw new ValidationException("Transport type is outside accepted values");
-    }
-  }
-
   public static void maintenanceTypeValidation(String type, int... constraints)
           throws ValidationException {
     nullCheckValidation(type, constraints);
@@ -479,8 +218,6 @@ public class Validators {
       throw new ValidationException("Estimated cost is outside accepted values");
     }
   }
-
-
 
 
   public static void booleanValidation(boolean bool, int... constraints)
