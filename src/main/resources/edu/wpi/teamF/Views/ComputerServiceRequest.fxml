@@ -6,6 +6,8 @@
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -16,27 +18,11 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ComputerServiceController">
     <children>
-        <GridPane fx:id="optionBar" layoutX="190.0" style="-fx-border-color: pink;" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <children>
-                <JFXButton fx:id="requestServiceButton" onAction="#request" prefHeight="31.0" prefWidth="149.0" text="Request Service" textFill="#000000cc">
-                    <font>
-                        <Font name="STFangsong" size="18.0" />
-                    </font>
-                </JFXButton>
-                <JFXButton onAction="#statusView" text="Check Status" textFill="#000000cc" GridPane.columnIndex="1">
-                    <font>
-                        <Font name="STFangsong" size="18.0" />
-                    </font>
-                </JFXButton>
-            </children>
-        </GridPane>
+      <ImageView fitHeight="525.0" fitWidth="600.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../../../../Images/BWH%20Shapiro%202.jpg" />
+         </image>
+      </ImageView>
         <GridPane fx:id="servicePane" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
             <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -66,7 +52,7 @@
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
                     <children>
-                  <JFXButton fx:id="backButton" onAction="#backToServiceRequestMain" style="-fx-background-color: #FFD3DF#FFD3DF;" text="Back" textFill="#000000cc">
+                  <JFXButton fx:id="requestServiceButton" onAction="#request" style="-fx-background-color: #FFD3DF#FFD3DF;" text="Status" textFill="#000000cc">
                      <font>
                         <Font name="STFangsong" size="18.0" />
                      </font>
@@ -99,13 +85,13 @@
                     </children>
                 </HBox>
                 <StackPane prefHeight="86.0" prefWidth="410.0">
-                    <children>
-                        <Label fx:id="securityRequestLabel" text="Computer Service Request" StackPane.alignment="TOP_CENTER">
+               <children>
+                        <Label fx:id="securityRequestLabel" alignment="CENTER" prefHeight="46.0" prefWidth="412.0" text="Computer Service Request" textAlignment="CENTER">
                             <font>
                                 <Font size="31.0" />
                             </font>
                         </Label>
-                    </children>
+               </children>
                 </StackPane>
             <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                <children>
