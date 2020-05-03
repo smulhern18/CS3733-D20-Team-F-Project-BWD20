@@ -149,15 +149,31 @@ public class PathfinderController implements Initializable {
       endNode = pathNodes.get(pathNodes.size() - 1);
     }
 
-    double heightRatio = currentPane.getPrefHeight() / FAULKNER_MAP_HEIGHT;
-    double widthRatio = currentPane.getPrefWidth() / FAULKNER_MAP_WIDTH;
+    double heightRatioFaulkner = currentPane.getPrefHeight() / FAULKNER_MAP_HEIGHT;
+    double widthRatioFaulkner = currentPane.getPrefWidth() / FAULKNER_MAP_WIDTH;
+    double heightRatioMain = currentPane.getPrefHeight() / MAIN_MAP_HEIGHT;
+    double widthRatioMain = currentPane.getPrefWidth() / MAIN_MAP_WIDTH;
 
     for (int i = 0; i < pathNodes.size() - 1; i++) {
-      if (pathNodes.get(i).getFloor().equals(pathNodes.get(i + 1).getFloor())) {
-        int startX = (int) (pathNodes.get(i).getXCoord() * widthRatio);
-        int startY = (int) (pathNodes.get(i).getYCoord() * heightRatio);
-        int endX = (int) (pathNodes.get(i + 1).getXCoord() * widthRatio);
-        int endY = (int) (pathNodes.get(i + 1).getYCoord() * heightRatio);
+      Node start = pathNodes.get(i);
+      Node end = pathNodes.get(i + 1);
+      if (start.getFloor().equals(end.getFloor())
+          && sameHospital(start.getBuilding(), end.getBuilding())) {
+        double startX;
+        double startY;
+        double endX;
+        double endY;
+        if ("Faulkner".equals(start.getBuilding())) {
+          startX = (start.getXCoord() * widthRatioFaulkner);
+          startY = (start.getYCoord() * heightRatioFaulkner);
+          endX = (end.getXCoord() * widthRatioFaulkner);
+          endY = (end.getYCoord() * heightRatioFaulkner);
+        } else {
+          startX = (start.getXCoord() * widthRatioMain);
+          startY = (start.getYCoord() * heightRatioMain);
+          endX = (end.getXCoord() * widthRatioMain);
+          endY = (end.getYCoord() * heightRatioMain);
+        }
         Line line = new Line(startX, startY, endX, endY);
         line.setStroke(Color.RED);
         line.setStrokeWidth(2);
@@ -186,20 +202,27 @@ public class PathfinderController implements Initializable {
 
   public void placeButton(Node node) {
 
-    double heightRatioFaulkner5 = (double) currentPane.getPrefHeight() / FAULKNER_MAP_HEIGHT;
-    double widthRatioFaulkner5 = (double) currentPane.getPrefWidth() / FAULKNER_MAP_WIDTH;
+    double heightRatioFaulkner = (double) currentPane.getPrefHeight() / FAULKNER_MAP_HEIGHT;
+    double widthRatioFaulkner = (double) currentPane.getPrefWidth() / FAULKNER_MAP_WIDTH;
+    double heightRatioMain = (double) currentPane.getPrefHeight() / MAIN_MAP_HEIGHT;
+    double widthRatioMain = (double) currentPane.getPrefWidth() / MAIN_MAP_WIDTH;
 
     JFXButton button = new JFXButton();
     button.setId(node.getId());
-    button.setMinSize(12, 12);
-    button.setMaxSize(12, 12);
-    button.setPrefSize(12, 12);
+    button.setMinSize(6, 6);
+    button.setMaxSize(6, 6);
+    button.setPrefSize(6, 6);
     button.setStyle(
         "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
-
-    int xPos = (int) ((node.getXCoord() * widthRatioFaulkner5) - 6);
-    int yPos = (int) ((node.getYCoord() * heightRatioFaulkner5) - 6);
-
+    double xPos;
+    double yPos;
+    if ("Faulkner".equals(node.getBuilding())) {
+      xPos = ((node.getXCoord() * widthRatioFaulkner) - 3);
+      yPos = ((node.getYCoord() * heightRatioFaulkner) - 3);
+    } else {
+      xPos = ((node.getXCoord() * widthRatioMain) - 3);
+      yPos = ((node.getYCoord() * heightRatioMain) - 3);
+    }
     button.setLayoutX(xPos);
     button.setLayoutY(yPos);
 
@@ -760,5 +783,10 @@ public class PathfinderController implements Initializable {
         }
       }
     }
+  }
+
+  private boolean sameHospital(String building1, String building2) {
+    return ("Faulkner".equals(building1) && "Faulkner".equals(building2))
+        || (!"Faulkner".equals(building1) && !"Faulkner".equals(building2));
   }
 }

@@ -47,6 +47,7 @@ public class MultipleHospitalAStar implements PathfindAlgorithm {
         }
 
         // Make a list of all of the neighbors of this node
+        System.out.println("Current node: " + currentNode.getNode().getId());
         Set<Edge> neighborEdges = currentNode.getNode().getEdges();
         System.out.println("Neighbor Edges size " + neighborEdges.size());
         Set<Node> neighbors = new HashSet<>();
