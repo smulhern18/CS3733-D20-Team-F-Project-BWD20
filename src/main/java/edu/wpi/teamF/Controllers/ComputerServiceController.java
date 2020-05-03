@@ -9,6 +9,7 @@ import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -75,6 +76,8 @@ public class ComputerServiceController implements Initializable {
       System.out.println(e.getMessage());
     }
   }
+
+  public void handle(MouseEvent mouseEvent) {}
 
   @SneakyThrows
   @Override

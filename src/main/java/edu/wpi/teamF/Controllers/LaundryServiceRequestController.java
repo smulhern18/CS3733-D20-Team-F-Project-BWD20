@@ -66,8 +66,8 @@ public class LaundryServiceRequestController implements Initializable {
   public JFXTextField deleteText;
   public JFXButton delete;
   public JFXButton backButton;
-    public JFXButton checkStatButton;
-    SceneController sceneController = App.getSceneController();
+  public JFXButton checkStatButton;
+  SceneController sceneController = App.getSceneController();
   DatabaseManager databaseManager = DatabaseManager.getManager();
 
   ObservableList<UILaundryServiceRequest> isrUI = FXCollections.observableArrayList();

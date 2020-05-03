@@ -50,8 +50,8 @@ public class LanguageServiceController implements Initializable {
   public JFXButton update;
   public JFXTextField deleteText;
   public JFXButton delete;
-    public JFXButton checkStatusButton;
-    ObservableList<UILanguageServiceRequest> langUI = FXCollections.observableArrayList();
+  public JFXButton checkStatusButton;
+  ObservableList<UILanguageServiceRequest> langUI = FXCollections.observableArrayList();
   public JFXComboBox<String> locationCombobox;
   public JFXComboBox<String> languageCombobox;
   public JFXComboBox<String> problemTypeCombobox;
