@@ -34,6 +34,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import javax.management.InstanceNotFoundException;
@@ -934,24 +935,19 @@ public class PathfinderController implements Initializable {
   }
 
   public void labelNodeStart() {
-
     startLabel = new Label();
     for (javafx.scene.Node component :
         getFloorPane(startNode.getFloor(), startNode.getBuilding()).getChildren()) {
       if (component.getId().equals(startNode.getId())) {
+        String msg = startNode.getLongName();
+        Text text = new Text(msg);
+        Font font = Font.font("Arial", 12);
+        text.setFont(font);
+        double width = text.getLayoutBounds().getWidth();
         startLabel.setStyle("-fx-font-size: 12");
         startLabel.setText(startNode.getLongName());
-        //        startLabel
-        //            .layoutXProperty()
-        //            .bind(startLabel.widthProperty().divide(2.0).add(component.getLayoutX()));
-
-        System.out.println(startLabel.getPrefWidth());
-        System.out.println(startLabel.getWidth());
-        System.out.println(startLabel.getMinWidth());
-        System.out.println(startLabel.getMaxWidth());
         getFloorPane(startNode.getFloor(), startNode.getBuilding()).getChildren().add(startLabel);
-
-        startLabel.setLayoutX(component.getLayoutX() - 20); // (startLabel.getHeight()));
+        startLabel.setLayoutX(component.getLayoutX() - (width / 2) + 3);
         startLabel.setLayoutY(component.getLayoutY() - 20);
         startLabel.setId("startLabel");
         startLabel.setVisible(true);
@@ -965,10 +961,15 @@ public class PathfinderController implements Initializable {
     for (javafx.scene.Node component :
         getFloorPane(endNode.getFloor(), endNode.getBuilding()).getChildren()) {
       if (component.getId().equals(endNode.getId())) {
+        String msg = endNode.getLongName();
+        Text text = new Text(msg);
+        Font font = Font.font("Arial", 12);
+        text.setFont(font);
+        double width = text.getLayoutBounds().getWidth();
         endLabel.setStyle("-fx-font-size: 12");
         endLabel.setText(endNode.getLongName());
         getFloorPane(endNode.getFloor(), endNode.getBuilding()).getChildren().add(endLabel);
-        endLabel.setLayoutX(component.getLayoutX() - (endLabel.getHeight()));
+        endLabel.setLayoutX(component.getLayoutX() - (width / 2) + 3);
         endLabel.setLayoutY(component.getLayoutY() - 20);
         endLabel.setId("endLabel");
         endLabel.setVisible(true);
