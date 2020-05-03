@@ -101,6 +101,9 @@
                                              <font>
                                                 <Font size="14.0" />
                                              </font>
+                                             <VBox.margin>
+                                                <Insets bottom="4.0" />
+                                             </VBox.margin>
                                           </Label>
                                           <JFXTextField fx:id="phoneNumber" promptText="(10 digits, numbers only)" style="-fx-background-color: white; -fx-border-width: 1px; -fx-border-color: black;" />
                                           <JFXButton fx:id="sendSMS" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#sendSMS" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Send Text Message" textFill="WHITE">
@@ -128,7 +131,7 @@
                                     <Font size="36.0" />
                                  </font>
                                  <GridPane.margin>
-                                    <Insets top="2.0" />
+                                    <Insets />
                                  </GridPane.margin>
                               </Label>
                            </children>
