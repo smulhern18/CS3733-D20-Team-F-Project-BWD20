@@ -743,6 +743,7 @@ public class PathfinderController implements Initializable {
     switchToFloor(
         path.getLocationAtIndex(locationIndex).getFloor(),
         path.getLocationAtIndex(locationIndex).getBuilding());
+
     directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
 
     if (locationIndex == 0) {

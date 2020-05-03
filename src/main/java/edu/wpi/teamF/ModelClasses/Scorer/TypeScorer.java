@@ -24,17 +24,21 @@ public class TypeScorer implements Scorer {
   @Override
   public double computeCost(Node from, Node to) {
 
-    double bestCost = Double.MAX_VALUE;
-    for (Node node : nodes) {
-      if (sameHospital(from.getBuilding(), node.getBuilding())) {
-        double cost =
-            euclideanScorer.computeCost(from, node) + euclideanScorer.computeCost(node, to);
-        if (cost < bestCost) {
-          bestCost = cost;
+    if (!from.getFloor().equals(to.getFloor())) {
+      double bestCost = Double.MAX_VALUE;
+      for (Node node : nodes) {
+        if (sameHospital(from.getBuilding(), node.getBuilding())) {
+          double cost =
+              euclideanScorer.computeCost(from, node) + euclideanScorer.computeCost(node, to);
+          if (cost < bestCost) {
+            bestCost = cost;
+          }
         }
       }
+      return bestCost + LIFT_COST;
+    } else {
+      return euclideanScorer.computeCost(from, to);
     }
-    return bestCost + LIFT_COST;
   }
 
   private boolean sameHospital(String building1, String building2) {

@@ -13,8 +13,10 @@ public class MultipleHospitalAStar extends HeuristicSearch {
   @Override
   public double calcEstimatedCostOfNeighbor(
       RouteNode currentNode, Node neighbor, Node endNode, Scorer scorer) {
+    System.out.println("Distance to end");
     double distanceToEnd = scorer.computeCost(neighbor, endNode);
 
+    System.out.println("Distance from start");
     double distanceFromStart =
         currentNode.getRouteScore()
             + scorer.computeCost(currentNode.getNode(), neighbor); // Actual path distance
