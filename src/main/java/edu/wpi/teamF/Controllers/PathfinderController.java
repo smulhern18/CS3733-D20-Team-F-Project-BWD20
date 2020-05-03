@@ -261,7 +261,6 @@ public class PathfinderController implements Initializable {
             startNode = null;
             button.setStyle(
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
-            // startLabel.setVisible(false);
             state = 0;
             startCombo.setValue(null);
             startCombo.setDisable(false);
@@ -269,7 +268,6 @@ public class PathfinderController implements Initializable {
             endNode = null;
             button.setStyle(
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
-            // endLabel.setVisible(false);
             state = 1;
             endCombo.setValue(null);
             pathButton.setDisable(true);
@@ -282,7 +280,6 @@ public class PathfinderController implements Initializable {
             button.setStyle(
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00cc00; -fx-border-color: #000000; -fx-border-width: 1px"); // 800000
             commandText.setText("Select End Location or Building Feature");
-            labelNode("start");
             state = 1;
             // startCombo.setDisable(true);
             startCombo.setValue(node.getLongName() + " " + node.getId());
@@ -587,6 +584,7 @@ public class PathfinderController implements Initializable {
           System.out.println("end" + endNode);
           Path path = null;
           switchToFloor(startNode.getFloor(), startNode.getBuilding());
+          labelNode();
 
           try {
             path = pathFindAlgorithm.pathfind(startNode, endNode);
@@ -862,41 +860,43 @@ public class PathfinderController implements Initializable {
         });
   }
 
-  public void labelNode(String location) {
-    if ("start".equals(location)) {
-      startLabel = new Label();
-      for (javafx.scene.Node component : currentPane.getChildren()) {
-        if (component.getId().equals(startNode.getId())) {
-          System.out.println(component.getLayoutX());
-          System.out.println(component.getLayoutY());
-          System.out.println(component.getId());
+  public void labelNode() {
 
-          startLabel.setStyle("-fx-font-size: 12");
-          startLabel.setLayoutX(component.getLayoutX());
-          startLabel.setLayoutY(component.getLayoutY() + 10);
-          startLabel.setText(startNode.getLongName());
-          startLabel.setVisible(true);
-          System.out.println(startLabel.getText());
-          System.out.println(startLabel.getLayoutX());
-          System.out.println(startLabel.getLayoutY());
-          return;
-        }
+    startLabel = new Label();
+    for (javafx.scene.Node component :
+        getFloorPane(startNode.getFloor(), startNode.getBuilding()).getChildren()) {
+      if (component.getId().equals(startNode.getId())) {
+        startLabel.setStyle("-fx-font-size: 12");
+        startLabel.setText(startNode.getLongName());
+        //        startLabel
+        //            .layoutXProperty()
+        //            .bind(startLabel.widthProperty().divide(2.0).add(component.getLayoutX()));
+
+        System.out.println(startLabel.getPrefWidth());
+        System.out.println(startLabel.getWidth());
+        System.out.println(startLabel.getMinWidth());
+        System.out.println(startLabel.getMaxWidth());
+        getFloorPane(startNode.getFloor(), startNode.getBuilding()).getChildren().add(startLabel);
+        startLabel.setVisible(true);
+
+        startLabel.setLayoutX(component.getLayoutX() - 20); //(startLabel.getHeight()));
+        startLabel.setLayoutY(component.getLayoutY() - 20);
+        return;
       }
     }
-    if ("end".equals(location)) {
-      endLabel = new Label();
-      for (javafx.scene.Node component : currentPane.getChildren()) {
-        if (component.getId().equals(endNode.getId())) {
-          endLabel.setLayoutX(component.getLayoutX());
-          endLabel.setLayoutY(component.getLayoutY() + 10);
-          endLabel.setText(endNode.getLongName());
-          endLabel.setVisible(true);
-          return;
-        }
+    endLabel = new Label();
+    for (javafx.scene.Node component :
+        getFloorPane(endNode.getFloor(), endNode.getBuilding()).getChildren()) {
+      if (component.getId().equals(endNode.getId())) {
+        endLabel.setText(endNode.getLongName());
+        endLabel.setLayoutX(component.getLayoutX() - (endLabel.getHeight()));
+        endLabel.setLayoutY(component.getLayoutY() - 20);
+        endLabel.setVisible(true);
+        getFloorPane(endNode.getFloor(), endNode.getBuilding()).getChildren().add(endLabel);
+        return;
       }
     }
   }
-
 
   private boolean sameHospital(String building1, String building2) {
     return ("Faulkner".equals(building1) && "Faulkner".equals(building2))
@@ -908,5 +908,4 @@ public class PathfinderController implements Initializable {
   public void callDirections(ActionEvent actionEvent) {}
 
   public void printDirections(ActionEvent actionEvent) {}
-
 }
