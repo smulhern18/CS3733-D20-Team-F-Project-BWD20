@@ -161,8 +161,6 @@ public class CSVManipulator {
       }
     } catch (FileNotFoundException e) {
       throw new IllegalArgumentException("File Not found!");
-    } catch (SQLException e) {
-      // ignore
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }

@@ -67,7 +67,11 @@ public class PathfinderController implements Initializable {
   public JFXButton pathButton;
   public JFXTextArea directionsDisplay;
   public AnchorPane pathSwitchFloorPane;
-  public JFXButton pathSwitchFloor;
+  public JFXButton pathSwitchNext;
+  public JFXButton pathSwitchPrevious;
+  public JFXButton textDirections;
+  public JFXButton callDirections;
+  public JFXButton printDirections;
   public AnchorPane mapPaneMainL2;
   public AnchorPane mapPaneMainL1;
   public AnchorPane mapPaneMainG;
@@ -103,7 +107,9 @@ public class PathfinderController implements Initializable {
   private String currentFloor;
   Node startNode = null;
   Node endNode = null;
+  public Path path;
   public Directions directions;
+  public int locationIndex;
 
   EuclideanScorer euclideanScorer = new EuclideanScorer();
   DatabaseManager databaseManager = DatabaseManager.getManager();
@@ -143,6 +149,7 @@ public class PathfinderController implements Initializable {
   }
 
   public void draw(Path path) throws InstanceNotFoundException {
+    this.path = path;
 
     List<Node> pathNodes = path.getPath();
     if (endNode == null) {
@@ -188,16 +195,38 @@ public class PathfinderController implements Initializable {
     this.directions = new Directions(fullNodeList, path, startNode, endNode);
     System.out.println(directions.getFullDirectionsString());
     pathSwitchFloorPane.setVisible(true);
-    if (!startNode.getFloor().equals(endNode.getFloor())) {
+
+    if (path.getUniqueLocations() > 1) {
       // Spans multiple floors
-      pathSwitchFloor.setVisible(true);
-      pathSwitchFloor.setText("Next: Go to floor " + endNode.getFloor());
-      directionsDisplay.setText(directions.getFullDirectionsStringForFloor(startNode.getFloor()));
+      pathSwitchPrevious.setVisible(false);
+      pathSwitchPrevious.setPrefHeight(0);
+      pathSwitchNext.setVisible(true);
+      pathSwitchNext.setPrefHeight(50);
+
+      if (!(path.getLocationAtIndex(0)
+          .getBuilding()
+          .equals(path.getLocationAtIndex(1).getBuilding()))) {
+        // Next stop is at a different hospital
+        pathSwitchNext.setText("Next: Go to " + path.getLocationAtIndex(1).getBuilding());
+      } else {
+        pathSwitchNext.setText("Next: Go to floor " + path.getLocationAtIndex(1).getFloor());
+      }
+      locationIndex = 0;
+      System.out.println("Changed to Index: " + locationIndex);
+      System.out.println("Floor: " + path.getLocationAtIndex(locationIndex).getFloor());
+      System.out.println("Building: " + path.getLocationAtIndex(locationIndex).getBuilding());
+
+      // TODO Update directions to understand Locations
+      directionsDisplay.setText(directions.getFullDirectionsString());
     } else {
-      pathSwitchFloor.setVisible(false);
+      // Single floor navigation
+      pathSwitchPrevious.setVisible(false);
+      pathSwitchPrevious.setPrefHeight(0);
+      pathSwitchNext.setVisible(false);
+      pathSwitchNext.setPrefHeight(0);
+
       directionsDisplay.setText(directions.getFullDirectionsString());
     }
-    directionsDisplay.setText(directions.getFullDirectionsString());
   }
 
   public void placeButton(Node node) {
@@ -232,6 +261,7 @@ public class PathfinderController implements Initializable {
             startNode = null;
             button.setStyle(
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+            // startLabel.setVisible(false);
             state = 0;
             startCombo.setValue(null);
             startCombo.setDisable(false);
@@ -239,6 +269,7 @@ public class PathfinderController implements Initializable {
             endNode = null;
             button.setStyle(
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+            // endLabel.setVisible(false);
             state = 1;
             endCombo.setValue(null);
             pathButton.setDisable(true);
@@ -251,6 +282,7 @@ public class PathfinderController implements Initializable {
             button.setStyle(
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00cc00; -fx-border-color: #000000; -fx-border-width: 1px"); // 800000
             commandText.setText("Select End Location or Building Feature");
+            labelNode("start");
             state = 1;
             // startCombo.setDisable(true);
             startCombo.setValue(node.getLongName() + " " + node.getId());
@@ -260,6 +292,7 @@ public class PathfinderController implements Initializable {
             button.setStyle(
                 "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px"); // 00cc00
             commandText.setText("Select Find Path or Reset");
+            // labelNode("end");
             state = 2;
             // endCombo.setDisable(true);
             endCombo.setValue(node.getLongName() + " " + node.getId());
@@ -348,10 +381,9 @@ public class PathfinderController implements Initializable {
   public void drawNodes() {
     for (Node node : fullNodeList) {
       if (!node.getType().equals(Node.NodeType.getEnum("HALL"))
-      //          && !node.getType().equals(Node.NodeType.getEnum("STAI"))
-      //          && !node.getType().equals(Node.NodeType.getEnum("ELEV"))
-      //          && !node.getType().equals(Node.NodeType.getEnum("REST"))
-      ) {
+          && !node.getType().equals(Node.NodeType.getEnum("STAI"))
+          && !node.getType().equals(Node.NodeType.getEnum("ELEV"))
+          && !node.getType().equals(Node.NodeType.getEnum("REST"))) {
         placeButton(node);
         pathButtonGo();
       }
@@ -370,7 +402,6 @@ public class PathfinderController implements Initializable {
     mapPaneFaulkner1.setVisible(true);
     imageViewFaulkner1.setVisible(true);
     floorButtonsSet();
-    pathSwitchFloor.setVisible(false);
     initializehospitalComboBox();
 
     UISetting uiSetting = new UISetting();
@@ -640,16 +671,85 @@ public class PathfinderController implements Initializable {
         .setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
   }
 
-  public void pathSwitchFloor(ActionEvent actionEvent) {
-    if (currentFloor.equals(startNode.getFloor())) {
-      // Currently on the start floor, want to go to the end floor
-      switchToFloor(endNode.getFloor(), endNode.getBuilding());
-      pathSwitchFloor.setText("Previous: Go to floor " + startNode.getFloor());
-      directionsDisplay.setText(directions.getFullDirectionsStringForFloor(endNode.getFloor()));
+  public void pathSwitchPrevious(ActionEvent actionEvent) {
+    locationIndex--;
+    pathSwitchNext.setVisible(true);
+    pathSwitchNext.setPrefHeight(50);
+    System.out.println("Changed to Index: " + locationIndex);
+    System.out.println("Floor: " + path.getLocationAtIndex(locationIndex).getFloor());
+    System.out.println("Building: " + path.getLocationAtIndex(locationIndex).getBuilding());
+    switchToFloor(
+        path.getLocationAtIndex(locationIndex).getFloor(),
+        path.getLocationAtIndex(locationIndex).getBuilding());
+
+    if (locationIndex == 0) {
+      // If we have gotten back to the first floor, disable and hide the previous button
+      pathSwitchPrevious.setVisible(false);
+      pathSwitchPrevious.setPrefHeight(0);
     } else {
-      switchToFloor(startNode.getFloor(), startNode.getBuilding());
-      pathSwitchFloor.setText("Next: Go to floor " + endNode.getFloor());
-      directionsDisplay.setText(directions.getFullDirectionsStringForFloor(startNode.getFloor()));
+      // Need to update the text for previous button
+      if (!(path.getLocationAtIndex(locationIndex)
+          .getBuilding()
+          .equals(path.getLocationAtIndex(locationIndex - 1).getBuilding()))) {
+        // previous stop is at a different hospital
+        pathSwitchPrevious.setText(
+            "Previous: Go to " + path.getLocationAtIndex(locationIndex - 1).getBuilding());
+      } else {
+        pathSwitchPrevious.setText(
+            "Previous: Go to floor " + path.getLocationAtIndex(locationIndex - 1).getFloor());
+      }
+    }
+    // Need to update the text for next button
+    if (!(path.getLocationAtIndex(locationIndex)
+        .getBuilding()
+        .equals(path.getLocationAtIndex(locationIndex + 1).getBuilding()))) {
+      // Next stop is at a different hospital
+      pathSwitchNext.setText(
+          "Next: Go to " + path.getLocationAtIndex(locationIndex + 1).getBuilding());
+    } else {
+      pathSwitchNext.setText(
+          "Next: Go to floor " + path.getLocationAtIndex(locationIndex + 1).getFloor());
+    }
+  }
+
+  public void pathSwitchNext(ActionEvent actionEvent) {
+    locationIndex++;
+    pathSwitchPrevious.setVisible(true);
+    pathSwitchPrevious.setPrefHeight(50);
+    System.out.println("Changed to Index: " + locationIndex);
+    System.out.println("Floor: " + path.getLocationAtIndex(locationIndex).getFloor());
+    System.out.println("Building: " + path.getLocationAtIndex(locationIndex).getBuilding());
+    switchToFloor(
+        path.getLocationAtIndex(locationIndex).getFloor(),
+        path.getLocationAtIndex(locationIndex).getBuilding());
+
+    if (locationIndex == (path.getUniqueLocations() - 1)) {
+      // If we have gotten to the final location, disable and hide the next button
+      pathSwitchNext.setVisible(false);
+      pathSwitchNext.setPrefHeight(0);
+    } else {
+      // Need to update the text for next button
+      if (!(path.getLocationAtIndex(locationIndex)
+          .getBuilding()
+          .equals(path.getLocationAtIndex(locationIndex + 1).getBuilding()))) {
+        // Next stop is at a different hospital
+        pathSwitchNext.setText(
+            "Next: Go to " + path.getLocationAtIndex(locationIndex + 1).getBuilding());
+      } else {
+        pathSwitchNext.setText(
+            "Next: Go to floor " + path.getLocationAtIndex(locationIndex + 1).getFloor());
+      }
+    }
+    // Need to update the text for previous button
+    if (!(path.getLocationAtIndex(locationIndex)
+        .getBuilding()
+        .equals(path.getLocationAtIndex(locationIndex - 1).getBuilding()))) {
+      // Next stop is at a different hospital
+      pathSwitchPrevious.setText(
+          "Previous: Go to " + path.getLocationAtIndex(locationIndex - 1).getBuilding());
+    } else {
+      pathSwitchPrevious.setText(
+          "Previous: Go to floor " + path.getLocationAtIndex(locationIndex - 1).getFloor());
     }
   }
 
@@ -762,31 +862,51 @@ public class PathfinderController implements Initializable {
         });
   }
 
-  public void labelNode(Node node, String location) {
+  public void labelNode(String location) {
     if ("start".equals(location)) {
+      startLabel = new Label();
       for (javafx.scene.Node component : currentPane.getChildren()) {
-        if (component.getId().equals(node.getId())) {
+        if (component.getId().equals(startNode.getId())) {
+          System.out.println(component.getLayoutX());
+          System.out.println(component.getLayoutY());
+          System.out.println(component.getId());
+
+          startLabel.setStyle("-fx-font-size: 12");
           startLabel.setLayoutX(component.getLayoutX());
           startLabel.setLayoutY(component.getLayoutY() + 10);
-          startLabel.setText(node.getLongName());
+          startLabel.setText(startNode.getLongName());
           startLabel.setVisible(true);
+          System.out.println(startLabel.getText());
+          System.out.println(startLabel.getLayoutX());
+          System.out.println(startLabel.getLayoutY());
+          return;
         }
       }
     }
     if ("end".equals(location)) {
+      endLabel = new Label();
       for (javafx.scene.Node component : currentPane.getChildren()) {
-        if (component.getId().equals(node.getId())) {
+        if (component.getId().equals(endNode.getId())) {
           endLabel.setLayoutX(component.getLayoutX());
           endLabel.setLayoutY(component.getLayoutY() + 10);
-          endLabel.setText(node.getLongName());
+          endLabel.setText(endNode.getLongName());
           endLabel.setVisible(true);
+          return;
         }
       }
     }
   }
 
+
   private boolean sameHospital(String building1, String building2) {
     return ("Faulkner".equals(building1) && "Faulkner".equals(building2))
         || (!"Faulkner".equals(building1) && !"Faulkner".equals(building2));
   }
+
+  public void textDirections(ActionEvent actionEvent) {}
+
+  public void callDirections(ActionEvent actionEvent) {}
+
+  public void printDirections(ActionEvent actionEvent) {}
+
 }

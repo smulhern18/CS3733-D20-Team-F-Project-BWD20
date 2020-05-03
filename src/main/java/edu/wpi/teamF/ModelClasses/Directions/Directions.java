@@ -289,7 +289,7 @@ public class Directions {
   }
 
   public String getFullDirectionsString() {
-    String returnString = (directionList.get(0) + "\n");
+    String returnString = (directionList.get(0).getDirectionText() + "\n");
     for (int i = 1; i < directionList.size(); i++) {
       if (!directionList
           .get(i)
@@ -349,7 +349,7 @@ public class Directions {
 
   public Boolean callDirections(String toPhone) {
     String callText =
-        ("<Say><Response>This is an automated call from the Brigham and Women's Hospital Information Kiosk with your directions from "
+        ("<Response><Say>This is an automated call from the Brigham and Women's Hospital Information Kiosk with your directions from "
             + startNode.getLongName()
             + " to "
             + endNode.getLongName()
