@@ -60,6 +60,11 @@ public class Directions {
           i++) { // Iterate through the nodes of the path, starting at the second one
         System.out.println("Now investigating node: " + pathNodeList.get(i).getId());
 
+        if (!pathNodeList.get(i).getFloor().equals(pathNodeList.get(i - 1).getFloor())) {
+          // This node is now on a new floor, need to index it
+          directionList.add(new IndexDirection(pathNodeList.get(i - 1).getFloor()));
+        }
+
         if (pathNodeList.get(i).getType().equals(Node.NodeType.getEnum("HALL"))) {
           // Current node is a hallway
           System.out.println("Hallway");
@@ -271,39 +276,53 @@ public class Directions {
     return returnString;
   }
 
-  public String getFullDirectionsStringForFloor(String floor) {
+  public String getDirectionsStringForIndex(int index) {
+    int indexCounter = 0;
     String returnString = "";
-    for (Direction direction : directionList) {
-      if (direction.getFloor().equals(floor)) {
-        returnString = returnString + direction.getDirectionText() + "\n";
+    for (int i = 0; i < directionList.size(); i++) {
+      if (directionList.get(i) instanceof IndexDirection) {
+        indexCounter++;
+      } else if (indexCounter == index) {
+        // Only add objects that aren't IndexDirections to the text
+        returnString += directionList.get(i).getDirectionText() + "\n";
       }
     }
     return returnString;
   }
 
-  public String getKeyDirectionForFloor(String floor) {
-    String returnString = "";
-    for (Direction direction : directionList) {
-      if (direction.getFloor().equals(floor)) {
-        if (direction instanceof GoalDirection) {
-          return ("Directions to: " + endNode.getLongName() + ".");
-        } else if (direction instanceof ElevatorDirection) {
-          return ("Take the elevator from floor "
-              + startNode.getFloor()
-              + " to floor "
-              + endNode.getFloor()
-              + ".");
-        } else if (direction instanceof StairsDirection) {
-          return ("Take the stairs from floor "
-              + startNode.getFloor()
-              + " to floor "
-              + endNode.getFloor()
-              + ".");
-        }
-      }
-    }
-    return "";
-  }
+  //  public String getFullDirectionsStringForFloor(String floor) {
+  //    String returnString = "";
+  //    for (Direction direction : directionList) {
+  //      if (direction.getFloor().equals(floor)) {
+  //        returnString = returnString + direction.getDirectionText() + "\n";
+  //      }
+  //    }
+  //    return returnString;
+  //  }
+
+  //  public String getKeyDirectionForFloor(String floor) {
+  //    String returnString = "";
+  //    for (Direction direction : directionList) {
+  //      if (direction.getFloor().equals(floor)) {
+  //        if (direction instanceof GoalDirection) {
+  //          return ("Directions to: " + endNode.getLongName() + ".");
+  //        } else if (direction instanceof ElevatorDirection) {
+  //          return ("Take the elevator from floor "
+  //              + startNode.getFloor()
+  //              + " to floor "
+  //              + endNode.getFloor()
+  //              + ".");
+  //        } else if (direction instanceof StairsDirection) {
+  //          return ("Take the stairs from floor "
+  //              + startNode.getFloor()
+  //              + " to floor "
+  //              + endNode.getFloor()
+  //              + ".");
+  //        }
+  //      }
+  //    }
+  //    return "";
+  //  }
 
   public Boolean smsDirections(String toPhone) {
     String sendMsg =

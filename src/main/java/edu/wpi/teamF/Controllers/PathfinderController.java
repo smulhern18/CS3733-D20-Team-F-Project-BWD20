@@ -229,8 +229,7 @@ public class PathfinderController implements Initializable {
       System.out.println("Floor: " + path.getLocationAtIndex(locationIndex).getFloor());
       System.out.println("Building: " + path.getLocationAtIndex(locationIndex).getBuilding());
 
-      // TODO Update directions to understand Locations
-      directionsDisplay.setText(directions.getFullDirectionsString());
+      directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
     } else {
       // Single floor navigation
       pathSwitchPrevious.setVisible(false);
@@ -745,6 +744,7 @@ public class PathfinderController implements Initializable {
     switchToFloor(
         path.getLocationAtIndex(locationIndex).getFloor(),
         path.getLocationAtIndex(locationIndex).getBuilding());
+    directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
 
     if (locationIndex == 0) {
       // If we have gotten back to the first floor, disable and hide the previous button
@@ -753,10 +753,11 @@ public class PathfinderController implements Initializable {
       btnSpacer.setPrefHeight(0);
     } else {
       // Need to update the text for previous button
-      if (!(path.getLocationAtIndex(locationIndex)
-          .getBuilding()
-          .equals(path.getLocationAtIndex(locationIndex - 1).getBuilding()))) {
-        // previous stop is at a different hospital
+      if (("Faulkner".equals(path.getLocationAtIndex(locationIndex - 1).getBuilding())
+              && !"Faulkner".equals(path.getLocationAtIndex(locationIndex).getBuilding()))
+          || ("Faulkner".equals(path.getLocationAtIndex(locationIndex).getBuilding())
+              && !"Faulkner".equals(path.getLocationAtIndex(locationIndex - 1).getBuilding()))) {
+        // Previous stop changes between Faulkner and main
         pathSwitchPrevious.setText(
             "Previous: Go to " + path.getLocationAtIndex(locationIndex - 1).getBuilding());
       } else {
@@ -765,10 +766,11 @@ public class PathfinderController implements Initializable {
       }
     }
     // Need to update the text for next button
-    if (!(path.getLocationAtIndex(locationIndex)
-        .getBuilding()
-        .equals(path.getLocationAtIndex(locationIndex + 1).getBuilding()))) {
-      // Next stop is at a different hospital
+    if (("Faulkner".equals(path.getLocationAtIndex(locationIndex + 1).getBuilding())
+            && !"Faulkner".equals(path.getLocationAtIndex(locationIndex).getBuilding()))
+        || ("Faulkner".equals(path.getLocationAtIndex(locationIndex).getBuilding())
+            && !"Faulkner".equals(path.getLocationAtIndex(locationIndex + 1).getBuilding()))) {
+      // Next stop changes between Faulkner and main
       pathSwitchNext.setText(
           "Next: Go to " + path.getLocationAtIndex(locationIndex + 1).getBuilding());
     } else {
@@ -788,6 +790,7 @@ public class PathfinderController implements Initializable {
     switchToFloor(
         path.getLocationAtIndex(locationIndex).getFloor(),
         path.getLocationAtIndex(locationIndex).getBuilding());
+    directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
 
     if (locationIndex == (path.getUniqueLocations() - 1)) {
       // If we have gotten to the final location, disable and hide the next button
@@ -796,10 +799,11 @@ public class PathfinderController implements Initializable {
       btnSpacer.setPrefHeight(0);
     } else {
       // Need to update the text for next button
-      if (!(path.getLocationAtIndex(locationIndex)
-          .getBuilding()
-          .equals(path.getLocationAtIndex(locationIndex + 1).getBuilding()))) {
-        // Next stop is at a different hospital
+      if (("Faulkner".equals(path.getLocationAtIndex(locationIndex + 1).getBuilding())
+              && !"Faulkner".equals(path.getLocationAtIndex(locationIndex).getBuilding()))
+          || ("Faulkner".equals(path.getLocationAtIndex(locationIndex).getBuilding())
+              && !"Faulkner".equals(path.getLocationAtIndex(locationIndex + 1).getBuilding()))) {
+        // Next stop changes between Faulkner and main
         pathSwitchNext.setText(
             "Next: Go to " + path.getLocationAtIndex(locationIndex + 1).getBuilding());
       } else {
@@ -808,10 +812,11 @@ public class PathfinderController implements Initializable {
       }
     }
     // Need to update the text for previous button
-    if (!(path.getLocationAtIndex(locationIndex)
-        .getBuilding()
-        .equals(path.getLocationAtIndex(locationIndex - 1).getBuilding()))) {
-      // Next stop is at a different hospital
+    if (("Faulkner".equals(path.getLocationAtIndex(locationIndex - 1).getBuilding())
+            && !"Faulkner".equals(path.getLocationAtIndex(locationIndex).getBuilding()))
+        || ("Faulkner".equals(path.getLocationAtIndex(locationIndex).getBuilding())
+            && !"Faulkner".equals(path.getLocationAtIndex(locationIndex - 1).getBuilding()))) {
+      // Previous stop changes between Faulkner and main
       pathSwitchPrevious.setText(
           "Previous: Go to " + path.getLocationAtIndex(locationIndex - 1).getBuilding());
     } else {
