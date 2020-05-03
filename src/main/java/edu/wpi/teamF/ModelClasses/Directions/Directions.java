@@ -361,13 +361,34 @@ public class Directions {
 
   public Boolean callDirections(String toPhone) {
     String callText =
-        ("<Response><Say>This is an automated call from the Brigham and Women's Hospital Information Kiosk with your directions from "
+        ("<Response><Pause/><Say>This is an automated call from the Brigham and Women's Hospital Information Kiosk. Here are your directions from "
             + startNode.getLongName()
             + " to "
             + endNode.getLongName()
-            + ". ");
-    callText += getFullDirectionsString();
-    callText += "</Say></Response>";
+            + ". After each instruction, stay on the line and press any key when you are ready for the next instruction. "
+            + "</Say><Pause/><Say>");
+    callText +=
+        directionList.get(0).getDirectionText()
+            + "</Say><Gather input=\"dtmf\" timeout=\"60\" numDigits=\"1\" action=\"http://twimlets.com/message?\"></Gather><Say>";
+    for (int i = 1; i < directionList.size() - 1; i++) {
+      if (!directionList
+          .get(i)
+          .getDirectionText()
+          .equals(directionList.get(i - 1).getDirectionText())) {
+        // If the text is not a duplicate of the previous (i.e. stairs and elevators)
+        callText =
+            callText
+                + directionList.get(i).getDirectionText()
+                + "</Say><Gather input=\"dtmf\" timeout=\"60\" numDigits=\"1\" action=\"http://twimlets.com/message?\"></Gather><Say>";
+      }
+    }
+    callText += directionList.get(directionList.size() - 1).getDirectionText() + "</Say>";
+    //    for (int j = 0; j < directionList.size() - 1; j++) {
+    //      callText += "</Gather>";
+    //    }
+    callText +=
+        "<Pause/><Say>Thank you for using the telephone directions service at Brigham and Women's Hospital. Goodbye. </Say></Response>";
+    System.out.println(callText);
     return phoneComms.callPhone(toPhone, callText);
   }
 
@@ -381,6 +402,7 @@ public class Directions {
             + endNode.getLongName()
             + " at Brigham & Women's Hospital:\n\n");
     printMsg += getFullDirectionsString();
+    System.out.println(printMsg);
 
     Text printText = new Text(printMsg);
     printText.setFont(new Font(11));

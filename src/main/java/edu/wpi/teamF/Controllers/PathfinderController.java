@@ -3,6 +3,7 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Directions.Directions;
@@ -14,6 +15,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -96,6 +99,7 @@ public class PathfinderController implements Initializable {
   public Label endLabel;
   public JFXComboBox<String> hospitalComboBox;
   public HBox btnSpacer;
+  public JFXTextField phoneNumber;
 
   // stairs v elev stuff
   String liftType = "ELEV";
@@ -356,6 +360,8 @@ public class PathfinderController implements Initializable {
 
     setComboBehavior();
 
+    phoneNumber.setText("");
+
     //    startLabel.setVisible(false);
     //    endLabel.setVisible(false);
   }
@@ -421,6 +427,28 @@ public class PathfinderController implements Initializable {
     floor1Button.setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
     directionsPane.setVisible(false);
     setChooseLiftBehavior();
+
+    // Set up the enable/disable of phone comms btns
+    callDirections.setDisable(true);
+    textDirections.setDisable(true);
+    phoneNumber
+        .textProperty()
+        .addListener(
+            new ChangeListener<String>() {
+              @Override
+              public void changed(
+                  ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (newValue.length() == 10
+                    && newValue.matches("[0-9]+")
+                    && directionsDisplay.getText().length() > 0) {
+                  callDirections.setDisable(false);
+                  textDirections.setDisable(false);
+                } else {
+                  callDirections.setDisable(true);
+                  textDirections.setDisable(true);
+                }
+              }
+            });
   }
 
   private void initializehospitalComboBox() {
@@ -907,9 +935,15 @@ public class PathfinderController implements Initializable {
         || (!"Faulkner".equals(building1) && !"Faulkner".equals(building2));
   }
 
-  public void textDirections(ActionEvent actionEvent) {}
+  public void textDirections(ActionEvent actionEvent) {
+    directions.smsDirections(phoneNumber.getText());
+  }
 
-  public void callDirections(ActionEvent actionEvent) {}
+  public void callDirections(ActionEvent actionEvent) {
+    directions.callDirections(phoneNumber.getText());
+  }
 
-  public void printDirections(ActionEvent actionEvent) {}
+  public void printDirections(ActionEvent actionEvent) {
+    directions.printDirections();
+  }
 }
