@@ -312,9 +312,9 @@ public class PathfinderController implements Initializable {
     resetButtonLine("3", "Faulkner");
     resetButtonLine("4", "Faulkner");
     resetButtonLine("5", "Faulkner");
-    resetButtonLine("1", "Main");
-    resetButtonLine("2", "Main");
-    resetButtonLine("3", "Main");
+    resetButtonLine("F1", "Main");
+    resetButtonLine("F2", "Main");
+    resetButtonLine("F3", "Main");
     resetButtonLine("G", "Main");
     resetButtonLine("L1", "Main");
     resetButtonLine("L2", "Main");
@@ -608,9 +608,9 @@ public class PathfinderController implements Initializable {
     floor3Button.setOnAction(actionEvent -> switchToFloor("3", "Faulkner"));
     floor4Button.setOnAction(actionEvent -> switchToFloor("4", "Faulkner"));
     floor5Button.setOnAction(actionEvent -> switchToFloor("5", "Faulkner"));
-    mainFloor1Button.setOnAction(actionEvent -> switchToFloor("1", "Main"));
-    mainFloor2Button.setOnAction(actionEvent -> switchToFloor("2", "Main"));
-    mainFloor3Button.setOnAction(actionEvent -> switchToFloor("3", "Main"));
+    mainFloor1Button.setOnAction(actionEvent -> switchToFloor("F1", "Main"));
+    mainFloor2Button.setOnAction(actionEvent -> switchToFloor("F2", "Main"));
+    mainFloor3Button.setOnAction(actionEvent -> switchToFloor("F3", "Main"));
     mainFloorGButton.setOnAction(actionEvent -> switchToFloor("G", "Main"));
     mainFloorL1Button.setOnAction(actionEvent -> switchToFloor("L1", "Main"));
     mainFloorL2Button.setOnAction(actionEvent -> switchToFloor("L2", "Main"));
@@ -769,11 +769,11 @@ public class PathfinderController implements Initializable {
       }
     } else {
       switch (floor) {
-        case "1":
+        case "F1":
           return mapPaneMain1;
-        case "2":
+        case "F2":
           return mapPaneMain2;
-        case "3":
+        case "F3":
           return mapPaneMain3;
         case "G":
           return mapPaneMainG;
@@ -801,11 +801,11 @@ public class PathfinderController implements Initializable {
       }
     } else {
       switch (floor) {
-        case "1":
+        case "F1":
           return imageViewMain1;
-        case "2":
+        case "F2":
           return imageViewMain2;
-        case "3":
+        case "F3":
           return imageViewMain3;
         case "G":
           return imageViewMainG;
@@ -833,11 +833,11 @@ public class PathfinderController implements Initializable {
       }
     } else {
       switch (floor) {
-        case "1":
+        case "F1":
           return mainFloor1Button;
-        case "2":
+        case "F2":
           return mainFloor2Button;
-        case "3":
+        case "F3":
           return mainFloor3Button;
         case "G":
           return mainFloorGButton;
