@@ -345,7 +345,7 @@ public class Directions {
 
   public Boolean callDirections(String toPhone) {
     String callText =
-        ("<Response><Pause/><Say>This is an automated call from the Brigham and Women's Hospital Information Kiosk. Here are your directions from "
+        ("<Response><Pause/><Pause/><Say>This is an automated call from the Brigham and Women's Hospital Information Kiosk. Here are your directions from "
             + startNode.getLongName()
             + " to "
             + endNode.getLongName()
@@ -356,9 +356,10 @@ public class Directions {
             + "</Say><Gather input=\"dtmf\" timeout=\"60\" numDigits=\"1\" action=\"http://twimlets.com/message?\"></Gather><Say>";
     for (int i = 1; i < directionList.size() - 1; i++) {
       if (!directionList
-          .get(i)
-          .getDirectionText()
-          .equals(directionList.get(i - 1).getDirectionText())) {
+              .get(i)
+              .getDirectionText()
+              .equals(directionList.get(i - 1).getDirectionText())
+          && !(directionList.get(i) instanceof IndexDirection)) {
         // If the text is not a duplicate of the previous (i.e. stairs and elevators)
         callText =
             callText
@@ -371,7 +372,7 @@ public class Directions {
     //      callText += "</Gather>";
     //    }
     callText +=
-        "<Pause/><Say>Thank you for using the telephone directions service at Brigham and Women's Hospital. Goodbye. </Say></Response>";
+        "<Pause/><Say>Thank you for using the telephone directions service at Brigham and Women's Hospital. Goodbye! </Say></Response>";
     System.out.println(callText);
     return phoneComms.callPhone(toPhone, callText);
   }

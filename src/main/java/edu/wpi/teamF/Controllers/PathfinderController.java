@@ -990,7 +990,9 @@ public class PathfinderController implements Initializable {
     directions.callDirections(phoneNumber.getText());
   }
 
-  public void printDirections(ActionEvent actionEvent) {}
+  public void printDirections(ActionEvent actionEvent) {
+    directions.printDirections();
+  }
 
   private void setToggleBehavior() {
     liftToggle.setOnAction(
