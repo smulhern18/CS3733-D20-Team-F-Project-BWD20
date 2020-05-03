@@ -43,7 +43,8 @@ public class AccountsController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     algoChoiceBox.setItems(
-        FXCollections.observableArrayList("A Star", "Breadth First", "Depth First"));
+        FXCollections.observableArrayList(
+            "A Star", "Breadth First", "Depth First", "Dijkstra's Algorithm"));
 
     // ID column
     JFXTreeTableColumn<UIAccount, String> firstName = new JFXTreeTableColumn<>("First Name");
