@@ -1,6 +1,9 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
 import edu.wpi.teamF.ModelClasses.*;
+import edu.wpi.teamF.ModelClasses.Account.Account;
+import edu.wpi.teamF.ModelClasses.Account.PasswordHasher;
+
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -35,6 +38,7 @@ public class DatabaseManager {
 
   // Factories
   private ServiceRequestFactory serviceRequestFactory = ServiceRequestFactory.getFactory();
+  private AccountFactory accountFactory = AccountFactory.getFactory();
 
   static Connection connection = null;
 
@@ -163,5 +167,33 @@ public class DatabaseManager {
   public void readMaintenanceRequests(InputStream stream) {
     CSVManipulator csvManipulator = new CSVManipulator();
     csvManipulator.readCSVFileMaintenanceService(stream);
+  }
+
+  public void manipulateAccount(Account account) throws Exception {
+    if (accountFactory.read(account.getUsername()) == null) {
+      accountFactory.create(account);
+    } else {
+      accountFactory.update(account);
+    }
+  }
+
+  public Account readAccount(String username) throws Exception {
+    return accountFactory.read(username);
+  }
+
+  public void deleteAccount(String username) throws Exception {
+    accountFactory.delete(username);
+  }
+
+  public boolean verifyPassword(String username, String password) throws Exception {
+    return PasswordHasher.verifyPassword(password, accountFactory.getPasswordByUsername(username));
+  }
+
+  public List<Account> getAllAccounts() throws Exception {
+    return accountFactory.getAllAccounts();
+  }
+
+  public List<UIAccount> getAllUIAccounts() throws Exception {
+    return accountFactory.getAccounts();
   }
 }
