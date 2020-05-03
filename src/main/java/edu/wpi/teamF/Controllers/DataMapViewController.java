@@ -13,11 +13,13 @@ import java.util.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -348,6 +350,52 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
+  private void selectLocation(ActionEvent event) {
+    mapPane.setOnMouseClicked(
+        new EventHandler<MouseEvent>() {
+          public void handle(MouseEvent mouseEvent) {
+
+            JFXButton oldButton = null;
+            for (javafx.scene.Node node : mapPane.getChildren()) {
+              if (node instanceof JFXButton) {
+                JFXButton oldNode = (JFXButton) node;
+                if (oldNode.getId() != null) {
+                  oldButton = (JFXButton) node;
+                }
+              }
+            }
+
+            if (oldButton != null) {
+              mapPane.getChildren().remove(oldButton);
+            }
+
+            double xValDouble = mouseEvent.getX();
+            double yValDouble = mouseEvent.getY();
+            short xVal = (short) (xValDouble / widthRatio);
+            short yVal = (short) (yValDouble / heightRatio);
+
+            xCoorInput.setText("" + xVal);
+            yCoorInput.setText("" + yVal);
+
+            JFXButton locationNode = new JFXButton();
+            int buttonSize =
+                6; // this can be adjusted if we feel like the size is too small or large
+            locationNode.setMinSize(buttonSize, buttonSize);
+            locationNode.setMaxSize(buttonSize, buttonSize);
+            locationNode.setPrefSize(buttonSize, buttonSize); // the button size will not vary
+            locationNode.setStyle(
+                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ADD8E6; -fx-border-color: #000000; -fx-border-width: 1px; -fx-opacity: 0.7");
+            locationNode.setId("locationNode");
+            mapPane.getChildren().add(locationNode);
+            locationNode.setLayoutX(xValDouble - buttonSize / 2.0);
+            locationNode.setLayoutY(yValDouble - buttonSize / 2.0);
+            modifyNodeButton.setDisable(false);
+            modifyNodeButton.setOpacity(1);
+          }
+        });
+  }
+
+  @FXML
   private void displayAddNode() throws IOException {
     nodeDisplayButton.setVisible(false);
     edgeDisplayButton.setVisible(false);
@@ -459,6 +507,7 @@ public class DataMapViewController implements Initializable {
     addEdgeButton.setVisible(false);
     deleteEdgeButton.setVisible(true);
     modifyEdgeButton.setVisible(true);
+    edgeSelection = true;
     node1Button.setText(edge.getNode1());
     node2Button.setText(edge.getNode2());
   }
@@ -598,8 +647,6 @@ public class DataMapViewController implements Initializable {
 
     databaseManager.manipulateNode(newNode); // creates the node in the db
     drawNode(newNode);
-    stage = (Stage) addNodeButton.getScene().getWindow();
-    stage.close();
 
     clearViews();
 
@@ -718,6 +765,7 @@ public class DataMapViewController implements Initializable {
     databaseManager.manipulateEdge(newEdge);
     drawEdge(newEdge);
     edgeSelection = false;
+    numSelected = 0;
     clearViews();
   }
 
@@ -750,6 +798,23 @@ public class DataMapViewController implements Initializable {
     edgeDisplayButton.setVisible(true);
     clearEdge();
     clearNode();
+    JFXButton oldButton = null;
+    for (javafx.scene.Node node : mapPane.getChildren()) {
+      if (node instanceof JFXButton) {
+        JFXButton oldNode = (JFXButton) node;
+        if (oldNode.getId() != null) {
+          oldButton = (JFXButton) node;
+        }
+      }
+    }
+    if (oldButton != null) {
+      mapPane.getChildren().remove(oldButton);
+    }
+
+    mapPane.setOnMouseClicked(
+        new EventHandler<MouseEvent>() {
+          public void handle(MouseEvent mouseEvent) {}
+        });
   }
 
   @FXML
@@ -787,6 +852,9 @@ public class DataMapViewController implements Initializable {
     longNameInput.setText("");
     xCoorInput.setText("");
     yCoorInput.setText("");
+    addNodeButton.setVisible(true);
+    modifyNodeButton.setVisible(false);
+    deleteNodeButton.setVisible(false);
   }
 
   @FXML
@@ -802,6 +870,8 @@ public class DataMapViewController implements Initializable {
     cancelButton.setVisible(false);
     nodeDisplayButton.setVisible(true);
     edgeDisplayButton.setVisible(true);
+    edgeSelection = false;
+    numSelected = 0;
     clearEdge();
     clearNode();
   }
