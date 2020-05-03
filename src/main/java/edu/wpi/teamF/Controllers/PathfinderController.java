@@ -22,6 +22,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
@@ -94,6 +95,7 @@ public class PathfinderController implements Initializable {
   public Label startLabel;
   public Label endLabel;
   public JFXComboBox<String> hospitalComboBox;
+  public HBox btnSpacer;
 
   // stairs v elev stuff
   String liftType = "ELEV";
@@ -150,11 +152,7 @@ public class PathfinderController implements Initializable {
 
   public void draw(Path path) throws InstanceNotFoundException {
     this.path = path;
-
     List<Node> pathNodes = path.getPath();
-    //    if (endNode == null) {
-    //      endNode = pathNodes.get(pathNodes.size() - 1);
-    //    }
 
     double heightRatioFaulkner = currentPane.getPrefHeight() / FAULKNER_MAP_HEIGHT;
     double widthRatioFaulkner = currentPane.getPrefWidth() / FAULKNER_MAP_WIDTH;
@@ -202,6 +200,7 @@ public class PathfinderController implements Initializable {
       pathSwitchPrevious.setPrefHeight(0);
       pathSwitchNext.setVisible(true);
       pathSwitchNext.setPrefHeight(50);
+      btnSpacer.setPrefHeight(0);
 
       if (!(path.getLocationAtIndex(0)
           .getBuilding()
@@ -224,6 +223,7 @@ public class PathfinderController implements Initializable {
       pathSwitchPrevious.setPrefHeight(0);
       pathSwitchNext.setVisible(false);
       pathSwitchNext.setPrefHeight(0);
+      btnSpacer.setPrefHeight(0);
 
       directionsDisplay.setText(directions.getFullDirectionsString());
     }
@@ -673,6 +673,7 @@ public class PathfinderController implements Initializable {
     locationIndex--;
     pathSwitchNext.setVisible(true);
     pathSwitchNext.setPrefHeight(50);
+    btnSpacer.setPrefHeight(10);
     System.out.println("Changed to Index: " + locationIndex);
     System.out.println("Floor: " + path.getLocationAtIndex(locationIndex).getFloor());
     System.out.println("Building: " + path.getLocationAtIndex(locationIndex).getBuilding());
@@ -684,6 +685,7 @@ public class PathfinderController implements Initializable {
       // If we have gotten back to the first floor, disable and hide the previous button
       pathSwitchPrevious.setVisible(false);
       pathSwitchPrevious.setPrefHeight(0);
+      btnSpacer.setPrefHeight(0);
     } else {
       // Need to update the text for previous button
       if (!(path.getLocationAtIndex(locationIndex)
@@ -714,6 +716,7 @@ public class PathfinderController implements Initializable {
     locationIndex++;
     pathSwitchPrevious.setVisible(true);
     pathSwitchPrevious.setPrefHeight(50);
+    btnSpacer.setPrefHeight(10);
     System.out.println("Changed to Index: " + locationIndex);
     System.out.println("Floor: " + path.getLocationAtIndex(locationIndex).getFloor());
     System.out.println("Building: " + path.getLocationAtIndex(locationIndex).getBuilding());
@@ -725,6 +728,7 @@ public class PathfinderController implements Initializable {
       // If we have gotten to the final location, disable and hide the next button
       pathSwitchNext.setVisible(false);
       pathSwitchNext.setPrefHeight(0);
+      btnSpacer.setPrefHeight(0);
     } else {
       // Need to update the text for next button
       if (!(path.getLocationAtIndex(locationIndex)

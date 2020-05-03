@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -268,55 +269,79 @@
                            <font>
                               <Font size="14.0" />
                            </font>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
                         </JFXTextArea>
                      </children>
                      <VBox.margin>
-                        <Insets left="10.0" right="10.0" />
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
                      </VBox.margin>
                   </VBox>
-                  <JFXButton fx:id="pathSwitchPrevious" alignment="CENTER" buttonType="RAISED" maxHeight="-Infinity" maxWidth="250.0" minHeight="-Infinity" minWidth="250.0" onAction="#pathSwitchPrevious" prefHeight="50.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Previous: Go to Floor 5" textFill="WHITE">
+                  <JFXButton fx:id="pathSwitchNext" alignment="CENTER" buttonType="RAISED" maxHeight="-Infinity" maxWidth="250.0" minHeight="-Infinity" minWidth="250.0" onAction="#pathSwitchNext" prefHeight="45.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Next: Go to Floor 5" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="20.0" />
+                        <Font name="System Bold" size="18.0" />
                      </font>
                      <VBox.margin>
-                        <Insets left="25.0" right="25.0" top="10.0" />
+                        <Insets left="25.0" right="25.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton fx:id="pathSwitchNext" alignment="CENTER" buttonType="RAISED" maxHeight="-Infinity" maxWidth="250.0" minHeight="-Infinity" minWidth="250.0" onAction="#pathSwitchNext" prefHeight="50.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Next: Go to Floor 5" textFill="WHITE">
+                  <HBox fx:id="btnSpacer" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="10.0" prefWidth="200.0" />
+                  <JFXButton fx:id="pathSwitchPrevious" alignment="CENTER" buttonType="RAISED" maxHeight="-Infinity" maxWidth="250.0" minHeight="-Infinity" minWidth="250.0" onAction="#pathSwitchPrevious" prefHeight="45.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Previous: Go to Floor 5" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="20.0" />
+                        <Font name="System Bold" size="18.0" />
                      </font>
                      <VBox.margin>
-                        <Insets left="25.0" right="25.0" top="10.0" />
+                        <Insets left="25.0" right="25.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton fx:id="textDirections" alignment="CENTER" buttonType="RAISED" maxHeight="150.0" maxWidth="200.0" minHeight="50.0" minWidth="200.0" onAction="#textDirections" prefHeight="50.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Text Directions" textFill="WHITE">
+                  <Label text="Send Directions to Phone Number:">
                      <font>
-                        <Font name="System Bold" size="20.0" />
+                        <Font size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets left="50.0" right="50.0" top="20.0" />
+                        <Insets left="25.0" right="25.0" top="15.0" />
                      </VBox.margin>
-                  </JFXButton>
-                  <JFXButton fx:id="callDirections" alignment="CENTER" buttonType="RAISED" maxHeight="150.0" maxWidth="200.0" minHeight="50.0" minWidth="200.0" onAction="#callDirections" prefHeight="50.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Call w/ Directions" textFill="WHITE">
+                  </Label>
+                  <JFXTextField fx:id="phoneNumber" promptText="(10 digits, numbers only)" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1px;">
+                     <VBox.margin>
+                        <Insets bottom="5.0" left="25.0" right="25.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </JFXTextField>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <JFXButton fx:id="textDirections" alignment="CENTER" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#textDirections" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Text" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="25.0" right="10.0" top="5.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="callDirections" alignment="CENTER" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#callDirections" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Call" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="25.0" top="5.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+                  <JFXButton fx:id="printDirections" alignment="CENTER" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#printDirections" prefHeight="45.0" prefWidth="250.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Print Directions" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="20.0" />
+                        <Font name="System Bold" size="18.0" />
                      </font>
                      <VBox.margin>
-                        <Insets left="50.0" right="50.0" top="10.0" />
+                        <Insets left="25.0" right="25.0" top="20.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton fx:id="printDirections" alignment="CENTER" buttonType="RAISED" maxHeight="150.0" maxWidth="200.0" minHeight="50.0" minWidth="200.0" onAction="#printDirections" prefHeight="50.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Print Directions" textFill="WHITE">
+                  <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#resetPane" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Reset" textFill="WHITE">
                      <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="50.0" right="50.0" top="10.0" />
-                     </VBox.margin>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" minHeight="50.0" minWidth="150.0" mnemonicParsing="false" onAction="#resetPane" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Reset" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
+                        <Font name="System Bold" size="22.0" />
                      </font>
                      <VBox.margin>
                         <Insets bottom="15.0" left="75.0" right="75.0" top="20.0" />
