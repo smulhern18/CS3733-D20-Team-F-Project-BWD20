@@ -55,7 +55,6 @@ public class HospitalScorer implements Scorer {
         }
       }
 
-
       double bestCost = Double.MAX_VALUE;
       for (Node startNode : exitNodes) {
 
@@ -72,7 +71,6 @@ public class HospitalScorer implements Scorer {
             if (cost < bestCost) {
               bestCost = cost;
             }
-
           }
         }
       }
