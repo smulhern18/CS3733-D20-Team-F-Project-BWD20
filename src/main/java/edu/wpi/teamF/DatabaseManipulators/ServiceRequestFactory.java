@@ -35,11 +35,17 @@ public class ServiceRequestFactory {
             + ", "
             + DatabaseManager.PRIORITY_KEY
             + ", "
+            + DatabaseManager.MAINTENANCE_TYPE_KEY
+            + ", "
+            + DatabaseManager.ESTIMATEDCOMPLETION_KEY
+            + ", "
+            + DatabaseManager.ESTIMATEDCOST_KEY
+            + ", "
             + DatabaseManager.COMPLETED_KEY
             + ", "
             + DatabaseManager.DATECOMPLETED_KEY
             + " ) "
-            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     Validators.serviceRequestValidation(serviceRequest);
     try (PreparedStatement prepareStatement =
         DatabaseManager.getConnection().prepareStatement(insertStatement)) {
@@ -51,6 +57,10 @@ public class ServiceRequestFactory {
       prepareStatement.setString(param++, serviceRequest.getDescription());
       prepareStatement.setString(param++, serviceRequest.getAssignee());
       prepareStatement.setInt(param++, serviceRequest.getPriority());
+      prepareStatement.setString(param++, serviceRequest.getType());
+      prepareStatement.setTimestamp(
+              param++, new Timestamp(serviceRequest.getEstimatedCompletionDate().getTime()));
+      prepareStatement.setDouble(param++, serviceRequest.getEstimatedCost());
       prepareStatement.setBoolean(param++, serviceRequest.getComplete());
       Date dateComplete = serviceRequest.getTimeCompleted();
       if (dateComplete ==  null) {
@@ -101,6 +111,9 @@ public class ServiceRequestFactory {
                   resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
                   new Date(resultSet.getTimestamp(DatabaseManager.TIME_CREATED_KEY).getTime()),
                   resultSet.getInt(DatabaseManager.PRIORITY_KEY),
+                  resultSet.getString(DatabaseManager.MAINTENANCE_TYPE_KEY),
+                  new Date(resultSet.getTimestamp(DatabaseManager.ESTIMATEDCOMPLETION_KEY).getTime()),
+                  resultSet.getDouble(DatabaseManager.ESTIMATEDCOST_KEY),
                   resultSet.getBoolean(DatabaseManager.COMPLETED_KEY),
                   complete);
         }
@@ -133,6 +146,12 @@ public class ServiceRequestFactory {
             + " = ?, "
             + DatabaseManager.PRIORITY_KEY
             + " = ?, "
+            + DatabaseManager.MAINTENANCE_TYPE_KEY
+            + " = ?, "
+            + DatabaseManager.ESTIMATEDCOMPLETION_KEY
+            + " = ?, "
+            + DatabaseManager.ESTIMATEDCOST_KEY
+            + " = ?, "
             + DatabaseManager.COMPLETED_KEY
             + " = ? "
             + "WHERE "
@@ -148,6 +167,9 @@ public class ServiceRequestFactory {
       preparedStatement.setString(param++, serviceRequest.getDescription());
       preparedStatement.setString(param++, serviceRequest.getAssignee());
       preparedStatement.setInt(param++, serviceRequest.getPriority());
+      preparedStatement.setString(param++, serviceRequest.getType());
+      preparedStatement.setTimestamp(param++, new Timestamp(serviceRequest.getEstimatedCompletionDate().getTime()));
+      preparedStatement.setDouble(param++, serviceRequest.getEstimatedCost());
       preparedStatement.setBoolean(param++, serviceRequest.getComplete());
       preparedStatement.setString(param++, serviceRequest.getId());
       int numRows = preparedStatement.executeUpdate();
@@ -200,6 +222,9 @@ public class ServiceRequestFactory {
                         resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
                         new Date(resultSet.getTimestamp(DatabaseManager.TIME_CREATED_KEY).getTime()),
                         resultSet.getInt(DatabaseManager.PRIORITY_KEY),
+                        resultSet.getString(DatabaseManager.MAINTENANCE_TYPE_KEY),
+                        new Date(resultSet.getTimestamp(DatabaseManager.ESTIMATEDCOMPLETION_KEY).getTime()),
+                        resultSet.getDouble(DatabaseManager.ESTIMATEDCOST_KEY),
                         resultSet.getBoolean(DatabaseManager.COMPLETED_KEY),
                         complete);
         allMain.add(serviceRequest);
