@@ -120,8 +120,6 @@ public class TranslatorController implements Initializable {
                 }
               }
             });
-
-    // TODO Disable translate button if text is empty
   }
 
   public static String translateTextWithModel(
