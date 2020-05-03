@@ -95,6 +95,8 @@ public class DatabaseManager {
 
     PreparedStatement preparedStatement = connection.prepareStatement(serviceRequestTableCreationStatement);
     preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(accountTableCreationStatement);
+    preparedStatement.execute();
     System.out.println("Created Table Successfully");
   }
 
@@ -121,8 +123,11 @@ public class DatabaseManager {
 
   public void reset() throws SQLException {
     String serviceRequestTableDropStatement = "DROP TABLE " + SERVICE_REQUEST_TABLE;
+    String accountTableDropStatement = "DROP TABLE " + ACCOUNT_TABLE_NAME;
 
     PreparedStatement preparedStatement = connection.prepareStatement(serviceRequestTableDropStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(accountTableDropStatement);
     preparedStatement.execute();
     createTable();
   }

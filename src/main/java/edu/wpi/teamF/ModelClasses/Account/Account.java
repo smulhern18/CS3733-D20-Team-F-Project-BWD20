@@ -35,12 +35,41 @@ public abstract class Account extends RecursiveTreeObject<Account> {
     }
   }
 
+  public static enum Specialty {
+    NONE(-1),
+    ELEVATOR(0),
+    ELECTRICIAN(1),
+    PLUMBER(2),
+    GROUNDSKEEPER(3),
+    HVAC(4);
+
+    private Integer typeOrdinal;
+
+    Specialty(Integer typeOrdinal) {
+      this.typeOrdinal = typeOrdinal;
+    }
+
+    public Integer getTypeOrdinal() {
+      return typeOrdinal;
+    }
+
+    public static Staff.Specialty getEnum(Integer type) {
+      for (Staff.Specialty v : values()) {
+        if (v.getTypeOrdinal().equals(type)) {
+          return v;
+        }
+      }
+      return NONE;
+    }
+  }
+
   private String firstName;
   private String lastName;
   private String emailAddress;
   private String Username;
   private String password;
   private Type type;
+  private Specialty specialty = null;
 
   public Account(
       String firstName,
@@ -117,6 +146,14 @@ public abstract class Account extends RecursiveTreeObject<Account> {
     this.type = type;
   }
 
+  public Specialty getSpecialty() {
+    return specialty;
+  }
+
+  public void setSpecialty(Specialty specialty) {
+    this.specialty = specialty;
+  }
+
   public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof Account)) return false;
@@ -127,7 +164,8 @@ public abstract class Account extends RecursiveTreeObject<Account> {
           && Objects.equals(account.getEmailAddress(), this.emailAddress)
           && Objects.equals(account.getUsername(), this.Username)
           && Objects.equals(account.getPassword(), this.password)
-          && account.getType() == this.type;
+          && account.getType() == this.type
+          && account.getSpecialty() == this.specialty;
     } catch (Exception e) {
       return false;
     }
