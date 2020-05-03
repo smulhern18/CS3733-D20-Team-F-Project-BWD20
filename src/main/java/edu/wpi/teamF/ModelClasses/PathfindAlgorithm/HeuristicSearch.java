@@ -1,42 +1,43 @@
 package edu.wpi.teamF.ModelClasses.PathfindAlgorithm;
 
-import edu.wpi.teamF.DatabaseManipulators.NodeFactory;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
 import edu.wpi.teamF.ModelClasses.RouteNode;
-import edu.wpi.teamF.ModelClasses.Scorer.ElevatorScorer;
-import edu.wpi.teamF.ModelClasses.Scorer.EuclideanScorer;
+import edu.wpi.teamF.ModelClasses.Scorer.HospitalScorer;
+import edu.wpi.teamF.ModelClasses.Scorer.Scorer;
 import java.util.*;
 import javax.management.InstanceNotFoundException;
 
-public class MultipleFloorAStar implements PathfindAlgorithm {
-
+public abstract class HeuristicSearch implements PathfindAlgorithm {
   private final Map<String, Node> nodeMap = new HashMap<>();
+  private String liftType = "ELEV";
 
-  public MultipleFloorAStar(List<Node> nodeList) {
+  public HeuristicSearch(List<Node> nodeList) {
     for (Node node : nodeList) {
       nodeMap.put(node.getId(), node);
     }
   }
 
-  NodeFactory nodeFactory = NodeFactory.getFactory();
+  public void setLiftType(String liftType) {
+    this.liftType = liftType;
+  }
+
+  public double calcEstimatedCostOfNeighbor(
+      RouteNode currentNode, Node neighbor, Node endNode, Scorer scorer) {
+    return 0;
+  }
 
   public Path pathfind(Node startNode, Node endNode) {
     // Check if the destination is on a different floor
     PriorityQueue<RouteNode> priorityQueue = new PriorityQueue<RouteNode>();
     HashSet<Node> visited = new HashSet<>();
-    EuclideanScorer scorer = new EuclideanScorer();
-    ElevatorScorer elevScorer =
-        new ElevatorScorer(nodeFactory.getNodesByType(Node.NodeType.ELEV), startNode.getFloor());
+    Scorer scorer = new HospitalScorer(nodeMap, liftType);
+
     // Create the first node and add it to the Priority Queue
     RouteNode start;
-    if (startNode.getFloor() != endNode.getFloor()) {
-      // If it is, navigate to the most practical elevator instead
-      start = new RouteNode(startNode, null, 0, elevScorer.computeCost(startNode, endNode));
-    } else {
-      start = new RouteNode(startNode, null, 0, scorer.computeCost(startNode, endNode));
-    }
+    start = new RouteNode(startNode, null, 0, scorer.computeCost(startNode, endNode));
+
     priorityQueue.add(start);
     while (!priorityQueue.isEmpty()) {
       RouteNode currentNode = priorityQueue.poll();
@@ -54,9 +55,12 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
         }
 
         // Make a list of all of the neighbors of this node
+        System.out.println("Current node: " + currentNode.getNode().getId());
         Set<Edge> neighborEdges = currentNode.getNode().getEdges();
+        System.out.println("Neighbor Edges size " + neighborEdges.size());
         Set<Node> neighbors = new HashSet<>();
         for (Edge edge : neighborEdges) {
+          System.out.println(edge.getId());
           final Node neighbor;
           if (edge.getNode1().equals(currentNode.getNode().getId())) {
             neighbor = nodeMap.get(edge.getNode2());
@@ -64,26 +68,28 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
           } else {
             neighbor = nodeMap.get(edge.getNode1());
           }
-          if (neighbor.getFloor() == startNode.getFloor()
-              || neighbor.getFloor() == endNode.getFloor()) {
-            if (isAccessible(startNode, endNode, neighbor)) {
-              neighbors.add(neighbor);
-            }
+          String typeToAvoid;
+          if ("STAI".equals(liftType)) {
+            typeToAvoid = "ELEV";
+          } else {
+            typeToAvoid = "STAI";
+          }
+          if (!nodeMap.get(edge.getNode2()).getType().toString().equals(typeToAvoid)) {
+            neighbors.add(neighbor);
           }
         }
         for (Node neighbor : neighbors) {
           if (!visited.contains(neighbor)) {
-            double distanceToEnd = 0;
-            if (neighbor.getFloor() != endNode.getFloor()) {
-              // If its not on the same floor, use elevator scorer
-              distanceToEnd = elevScorer.computeCost(neighbor, endNode);
-            } else {
-              distanceToEnd = scorer.computeCost(neighbor, endNode);
-            }
+            //                        double distanceToEnd = scorer.computeCost(neighbor, endNode);
+            //
             double distanceFromStart =
                 currentNode.getRouteScore()
                     + scorer.computeCost(currentNode.getNode(), neighbor); // Actual path distance
-            double estimatedCostOfNeighbor = distanceToEnd + distanceFromStart;
+            //                        double estimatedCostOfNeighbor = distanceToEnd +
+            // distanceFromStart;
+
+            double estimatedCostOfNeighbor =
+                calcEstimatedCostOfNeighbor(currentNode, neighbor, endNode, scorer);
             RouteNode neighborOnRoute =
                 new RouteNode(neighbor, currentNode, distanceFromStart, estimatedCostOfNeighbor);
             priorityQueue.add(neighborOnRoute);
@@ -96,13 +102,11 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
     return new Path();
   }
 
-  @Override
   public Path pathfind(Node start, Node.NodeType nodeType) throws InstanceNotFoundException {
     List<Path> paths = new ArrayList<>();
     for (Node node : nodeMap.values()) {
-      if (node.getFloor() == start.getFloor()) {
-        if (node.getType().getTypeString().equals(nodeType.getTypeString())
-            && isAccessible(start, start, node)) {
+      if (node.getFloor().equals(start.getFloor())) {
+        if (node.getType().getTypeString().equals(nodeType.getTypeString())) {
           paths.add(pathfind(start, node));
         }
       }
@@ -117,26 +121,5 @@ public class MultipleFloorAStar implements PathfindAlgorithm {
       }
     }
     return shortestPath;
-  }
-
-  public Boolean isAccessible(Node startNode, Node endNode, Node neighbor) {
-    // TODO solve issue when an edge has a node that doesn't exist
-    Set<Edge> neighborEdges2 = neighbor.getEdges();
-    for (Edge edge2 : neighborEdges2) {
-      if (edge2.getNode1().equals(neighbor.getId())) {
-        if (nodeMap.get(edge2.getNode2()).getType().equals(Node.NodeType.getEnum("HALL"))
-            || edge2.getNode2().equals(startNode.getId())
-            || edge2.getNode2().equals(endNode.getId())) {
-          return true;
-        }
-      } else {
-        if (nodeMap.get(edge2.getNode1()).getType().equals(Node.NodeType.getEnum("HALL"))
-            || edge2.getNode1().equals(startNode.getId())
-            || edge2.getNode1().equals(endNode.getId())) {
-          return true;
-        }
-      }
-    }
-    return false;
   }
 }

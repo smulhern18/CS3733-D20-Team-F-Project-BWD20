@@ -3,10 +3,10 @@ package edu.wpi.teamF.ModelClasses.Directions;
 public class StraightDirection extends Direction {
   private double distance;
   private int intersectionsPassed;
-  private int floor;
+  private String floor;
   private static double distanceConversion = 0.254; // Conversion multiplier from pixels to ft
 
-  public StraightDirection(double distance, int intersectionsPassed, int floor) {
+  public StraightDirection(double distance, int intersectionsPassed, String floor) {
     this.distance = distance;
     this.intersectionsPassed = intersectionsPassed;
     this.floor = floor;
@@ -20,7 +20,7 @@ public class StraightDirection extends Direction {
     intersectionsPassed += 1;
   }
 
-  public int getFloor() {
+  public String getFloor() {
     return floor;
   }
 

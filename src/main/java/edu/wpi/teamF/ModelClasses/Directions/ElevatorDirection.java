@@ -1,49 +1,27 @@
 package edu.wpi.teamF.ModelClasses.Directions;
 
 public class ElevatorDirection extends Direction {
-  private int startFloor;
-  private int endFloor;
+  private String startFloor;
+  private String endFloor;
 
-  enum Turn {
-    LEFT,
-    STRAIGHT,
-    RIGHT
-  }
-
-  private Turn turn;
-
-  public ElevatorDirection(int startFloor, int endFloor, float exitAngle) {
+  public ElevatorDirection(String startFloor, String endFloor) {
     this.startFloor = startFloor;
     this.endFloor = endFloor;
-    if (exitAngle > 20.0) {
-      this.turn = Turn.LEFT;
-    } else if (exitAngle > -20.0) {
-      this.turn = Turn.STRAIGHT;
-    } else {
-      this.turn = Turn.RIGHT;
-    }
   }
 
   @Override
   public String getDirectionText() {
     String returnString =
-        ("Take the elevator from floor "
-            + Integer.toString(startFloor)
-            + " to floor "
-            + Integer.toString(endFloor)
-            + ".");
-    if (this.turn == Turn.LEFT) {
-      returnString += " Upon exiting, turn left.";
-    } else if (this.turn == Turn.STRAIGHT) {
-      returnString += " Upon exiting, proceed straight.";
-    } else {
-      returnString += " Upon exiting, turn right.";
-    }
+        ("Take the elevator from floor " + startFloor + " to floor " + endFloor + ".");
     return returnString;
   }
 
   @Override
-  public int getFloor() {
+  public String getFloor() {
     return startFloor;
+  }
+
+  public void setFloor(String floor) {
+    startFloor = floor;
   }
 }

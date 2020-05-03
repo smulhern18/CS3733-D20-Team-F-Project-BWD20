@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorPane" prefHeight="572.0" prefWidth="1075.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.TranslatorController">
+<children>
+    <fx:include fx:id="mainMenu" source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="frame" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fx:id="backgroundImage" fitHeight="150.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/boston_skyline.jpg" />
+                     </image>
+                  </ImageView>
+                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="975.0" style="-fx-background-color: rgba(255,255,255,0.9);">
+                     <children>
+                        <GridPane fx:id="servicePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="75.0" valignment="TOP" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <HBox alignment="TOP_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
+                                 <children>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="Translate From:">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <JFXComboBox fx:id="fromLanguage" minWidth="250.0" onAction="#fromLanguage" style="-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;" />
+                                          <JFXTextArea fx:id="textInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="350.0" promptText="Enter text to translate here" style="-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;">
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </JFXTextArea>
+                                          <JFXButton fx:id="translate" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#translate" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Translate" textFill="WHITE">
+                                             <VBox.margin>
+                                                <Insets left="100.0" right="100.0" top="30.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </JFXButton>
+                                          <JFXButton fx:id="reset" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#reset" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Reset" textFill="WHITE">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets left="100.0" right="100.0" top="20.0" />
+                                             </VBox.margin>
+                                          </JFXButton>
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets right="100.0" />
+                                       </HBox.margin>
+                                    </VBox>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="Translate To:">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <JFXComboBox fx:id="toLanguage" minWidth="250.0" onAction="#toLanguage" style="-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;" />
+                                          <JFXTextArea fx:id="textOutput" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="350.0" style="-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;">
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding>
+                                          </JFXTextArea>
+                                          <Label text="Send Translation">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <Label text="Enter Phone Number:">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="4.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <JFXTextField fx:id="phoneNumber" promptText="(10 digits, numbers only)" style="-fx-background-color: white; -fx-border-width: 1px; -fx-border-color: black;">
+                                             <padding>
+                                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                             </padding></JFXTextField>
+                                          <JFXButton fx:id="sendSMS" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#sendSMS" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Send Text Message" textFill="WHITE">
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets left="50.0" right="50.0" top="25.0" />
+                                             </VBox.margin>
+                                          </JFXButton>
+                                          <JFXButton fx:id="callPhone" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#callPhone" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Call Phone" textFill="WHITE">
+                                             <VBox.margin>
+                                                <Insets left="50.0" right="50.0" top="20.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font size="24.0" />
+                                             </font>
+                                          </JFXButton>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <Label text="Translation">
+                                 <font>
+                                    <Font size="36.0" />
+                                 </font>
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin>
+                              </Label>
+                           </children>
+                        </GridPane>
+                     </children>
+                  </HBox>
+               </children>
+            </StackPane>
+         </children>
+      </AnchorPane>
+</children>
+</AnchorPane>
