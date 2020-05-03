@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXToggleButton;
+import com.jfoenix.controls.JFXTextField;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Directions.Directions;
@@ -15,6 +16,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -23,10 +30,12 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import javax.management.InstanceNotFoundException;
 import lombok.SneakyThrows;
 
@@ -95,6 +104,8 @@ public class PathfinderController implements Initializable {
   public Label startLabel;
   public Label endLabel;
   public JFXComboBox<String> hospitalComboBox;
+  public HBox btnSpacer;
+  public JFXTextField phoneNumber;
 
   // stairs v elev stuff
   String liftType = "ELEV";
@@ -154,11 +165,7 @@ public class PathfinderController implements Initializable {
 
   public void draw(Path path) throws InstanceNotFoundException {
     this.path = path;
-
     List<Node> pathNodes = path.getPath();
-    //    if (endNode == null) {
-    //      endNode = pathNodes.get(pathNodes.size() - 1);
-    //    }
 
     double heightRatioFaulkner = currentPane.getPrefHeight() / FAULKNER_MAP_HEIGHT;
     double widthRatioFaulkner = currentPane.getPrefWidth() / FAULKNER_MAP_WIDTH;
@@ -188,6 +195,7 @@ public class PathfinderController implements Initializable {
         Line line = new Line(startX, startY, endX, endY);
         line.setStroke(Color.RED);
         line.setStrokeWidth(2);
+        animateLine(line);
         getFloorPane(pathNodes.get(i).getFloor(), pathNodes.get(i).getBuilding())
             .getChildren()
             .add(line);
@@ -206,6 +214,7 @@ public class PathfinderController implements Initializable {
       pathSwitchPrevious.setPrefHeight(0);
       pathSwitchNext.setVisible(true);
       pathSwitchNext.setPrefHeight(50);
+      btnSpacer.setPrefHeight(0);
 
       if (!(path.getLocationAtIndex(0)
           .getBuilding()
@@ -228,6 +237,7 @@ public class PathfinderController implements Initializable {
       pathSwitchPrevious.setPrefHeight(0);
       pathSwitchNext.setVisible(false);
       pathSwitchNext.setPrefHeight(0);
+      btnSpacer.setPrefHeight(0);
 
       directionsDisplay.setText(directions.getFullDirectionsString());
     }
@@ -366,6 +376,8 @@ public class PathfinderController implements Initializable {
     if (endLabel != null) {
       endLabel.setVisible(false);
     }
+    phoneNumber.setText("");
+
   }
 
   private void resetButtonLine(String floor, String building) {
@@ -430,6 +442,48 @@ public class PathfinderController implements Initializable {
     floor1Button.setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
     directionsPane.setVisible(false);
     setChooseLiftBehavior();
+
+    // Set up the enable/disable of phone comms btns
+    callDirections.setDisable(true);
+    textDirections.setDisable(true);
+    phoneNumber
+        .textProperty()
+        .addListener(
+            new ChangeListener<String>() {
+              @Override
+              public void changed(
+                  ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (newValue.length() == 10
+                    && newValue.matches("[0-9]+")
+                    && directionsDisplay.getText().length() > 0) {
+                  callDirections.setDisable(false);
+                  textDirections.setDisable(false);
+                } else {
+                  callDirections.setDisable(true);
+                  textDirections.setDisable(true);
+                }
+              }
+            });
+  }
+
+  public void animateLine(Line line) {
+
+    line.getStrokeDashArray().setAll(5d, 5d, 5d, 5d);
+    line.setStrokeWidth(2);
+
+    final double maxOffset = line.getStrokeDashArray().stream().reduce(0d, (a, b) -> a + b);
+
+    Timeline timeline =
+        new Timeline(
+            new KeyFrame(
+                Duration.ZERO,
+                new KeyValue(line.strokeDashOffsetProperty(), maxOffset, Interpolator.LINEAR)),
+            new KeyFrame(
+                Duration.seconds(1),
+                new KeyValue(line.strokeDashOffsetProperty(), 0, Interpolator.LINEAR)));
+
+    timeline.setCycleCount(Timeline.INDEFINITE);
+    timeline.play();
   }
 
   private void initializehospitalComboBox() {
@@ -685,6 +739,7 @@ public class PathfinderController implements Initializable {
     locationIndex--;
     pathSwitchNext.setVisible(true);
     pathSwitchNext.setPrefHeight(50);
+    btnSpacer.setPrefHeight(10);
     System.out.println("Changed to Index: " + locationIndex);
     System.out.println("Floor: " + path.getLocationAtIndex(locationIndex).getFloor());
     System.out.println("Building: " + path.getLocationAtIndex(locationIndex).getBuilding());
@@ -696,6 +751,7 @@ public class PathfinderController implements Initializable {
       // If we have gotten back to the first floor, disable and hide the previous button
       pathSwitchPrevious.setVisible(false);
       pathSwitchPrevious.setPrefHeight(0);
+      btnSpacer.setPrefHeight(0);
     } else {
       // Need to update the text for previous button
       if (!(path.getLocationAtIndex(locationIndex)
@@ -726,6 +782,7 @@ public class PathfinderController implements Initializable {
     locationIndex++;
     pathSwitchPrevious.setVisible(true);
     pathSwitchPrevious.setPrefHeight(50);
+    btnSpacer.setPrefHeight(10);
     System.out.println("Changed to Index: " + locationIndex);
     System.out.println("Floor: " + path.getLocationAtIndex(locationIndex).getFloor());
     System.out.println("Building: " + path.getLocationAtIndex(locationIndex).getBuilding());
@@ -737,6 +794,7 @@ public class PathfinderController implements Initializable {
       // If we have gotten to the final location, disable and hide the next button
       pathSwitchNext.setVisible(false);
       pathSwitchNext.setPrefHeight(0);
+      btnSpacer.setPrefHeight(0);
     } else {
       // Need to update the text for next button
       if (!(path.getLocationAtIndex(locationIndex)
@@ -921,10 +979,15 @@ public class PathfinderController implements Initializable {
         || (!"Faulkner".equals(building1) && !"Faulkner".equals(building2));
   }
 
-  public void textDirections(ActionEvent actionEvent) {}
+  public void textDirections(ActionEvent actionEvent) {
+    directions.smsDirections(phoneNumber.getText());
+  }
 
-  public void callDirections(ActionEvent actionEvent) {}
+  public void callDirections(ActionEvent actionEvent) {
+    directions.callDirections(phoneNumber.getText());
+  }
 
+<<<<<<< HEAD
   public void printDirections(ActionEvent actionEvent) {}
 
   private void setToggleBehavior() {
@@ -938,5 +1001,9 @@ public class PathfinderController implements Initializable {
             pathFindAlgorithm.setLiftType(liftType);
           }
         });
+=======
+  public void printDirections(ActionEvent actionEvent) {
+    directions.printDirections();
+>>>>>>> fb36754d6956ec804315bbcd5a56327e3eab8f28
   }
 }
