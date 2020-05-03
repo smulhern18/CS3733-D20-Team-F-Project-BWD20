@@ -10,8 +10,6 @@ import edu.wpi.teamF.ModelClasses.Node;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-
-import edu.wpi.teamF.ModelClasses.ValidationException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -435,10 +433,32 @@ public class DataMapViewController implements Initializable {
   };
 
   @FXML
-  private void displayNode() {}
+  private void displayNode() {
+    nodeAnchor.setVisible(true);
+    nodeDisplayButton.setVisible(false);
+    edgeDisplayButton.setVisible(false);
+    cancelButton.setVisible(true);
+    addNodeButton.setVisible(false);
+    modifyNodeButton.setVisible(true);
+    deleteNodeButton.setVisible(true);
+    shortNameInput.setText(node.getShortName());
+    longNameInput.setText(node.getLongName());
+    typeInput.setValue(node.getType().getTypeString());
+    xCoorInput.setText("" + node.getXCoord());
+    yCoorInput.setText("" + node.getYCoord());
+    hospitalInput.setValue(node.getBuilding());
+    floorInput.setValue(node.getFloor());
+  }
 
   @FXML
   private void displayEdge() {
+    edgeAnchor.setVisible(true);
+    nodeDisplayButton.setVisible(false);
+    edgeDisplayButton.setVisible(false);
+    cancelButton.setVisible(true);
+    addEdgeButton.setVisible(false);
+    deleteEdgeButton.setVisible(true);
+    modifyEdgeButton.setVisible(true);
     node1Button.setText(edge.getNode1());
     node2Button.setText(edge.getNode2());
   }
@@ -581,6 +601,8 @@ public class DataMapViewController implements Initializable {
     stage = (Stage) addNodeButton.getScene().getWindow();
     stage.close();
 
+    clearViews();
+
     //    } catch (Exception e) { // throws an error if the input provided by the user is invalid
     //      errorLabel.setText("The input is not valid");
     //    }
@@ -666,6 +688,7 @@ public class DataMapViewController implements Initializable {
         // nodeErrorLabel.setText("The input is invalid");
       }
     }
+    clearViews();
   }
 
   @FXML
@@ -683,6 +706,7 @@ public class DataMapViewController implements Initializable {
       }
     }
     databaseManager.deleteNode(node.getId()); // removes the node in the database
+    clearViews();
   }
 
   @FXML
@@ -707,12 +731,14 @@ public class DataMapViewController implements Initializable {
     mapPane.getChildren().remove(edgeLine);
     databaseManager.manipulateEdge(newEdge);
     drawEdge(newEdge);
+    clearViews();
   }
 
   @FXML
   private void deleteEdge(ActionEvent event) throws Exception {
     databaseManager.deleteEdge(edge.getId());
     mapPane.getChildren().remove(edgeLine); // deletes the edge on the map
+    clearViews();
   }
 
   @FXML
@@ -722,6 +748,8 @@ public class DataMapViewController implements Initializable {
     cancelButton.setVisible(false);
     nodeDisplayButton.setVisible(true);
     edgeDisplayButton.setVisible(true);
+    clearEdge();
+    clearNode();
   }
 
   @FXML
@@ -754,10 +782,18 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  private void clearNode() {}
+  private void clearNode() {
+    shortNameInput.setText("");
+    longNameInput.setText("");
+    xCoorInput.setText("");
+    yCoorInput.setText("");
+  }
 
   @FXML
-  private void clearEdge() {}
+  private void clearEdge() {
+    node1Button.setText("Click Here");
+    node2Button.setText("Click Here");
+  }
 
   @FXML
   private void clearViews() {
@@ -766,6 +802,8 @@ public class DataMapViewController implements Initializable {
     cancelButton.setVisible(false);
     nodeDisplayButton.setVisible(true);
     edgeDisplayButton.setVisible(true);
+    clearEdge();
+    clearNode();
   }
 
   @FXML
