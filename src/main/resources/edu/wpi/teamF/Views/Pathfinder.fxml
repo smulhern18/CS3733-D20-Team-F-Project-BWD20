@@ -3,8 +3,8 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextArea?>
-<?import com.jfoenix.controls.JFXToggleButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -344,7 +344,7 @@
                   </Label>
                   <JFXTextField fx:id="phoneNumber" promptText="(10 digits, numbers only)" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1px;">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="25.0" right="25.0" />
+                        <Insets bottom="2.0" left="25.0" right="25.0" />
                      </VBox.margin>
                      <padding>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

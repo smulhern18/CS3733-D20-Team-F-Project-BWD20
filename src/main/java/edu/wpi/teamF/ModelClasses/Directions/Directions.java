@@ -334,7 +334,7 @@ public class Directions {
 
   public Boolean smsDirections(String toPhone) {
     String sendMsg =
-        ("-\n\nDirections from "
+        ("Directions from "
             + startNode.getLongName()
             + " to "
             + endNode.getLongName()
@@ -349,7 +349,7 @@ public class Directions {
             + startNode.getLongName()
             + " to "
             + endNode.getLongName()
-            + ". After each instruction, stay on the line and press any key when you are ready for the next instruction. "
+            + ". After each instruction, stay on the line and press the pound key when you are ready for the next instruction. "
             + "</Say><Pause/><Say>");
     callText +=
         directionList.get(0).getDirectionText()
