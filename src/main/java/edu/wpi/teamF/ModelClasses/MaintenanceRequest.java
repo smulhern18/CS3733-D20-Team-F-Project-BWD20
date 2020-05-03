@@ -9,6 +9,9 @@ public class MaintenanceRequest {
   private String description;
   private Date dateTimeSubmitted;
   private int priority;
+  private String type;
+  private Date estimatedCompletionDate;
+  private double estimatedCost;
   private boolean complete;
   private Date completed;
 
@@ -18,7 +21,7 @@ public class MaintenanceRequest {
       String assignee,
       String description,
       Date dateTimeSubmitted,
-      int priority,
+      int priority, String type, Date estimatedCompletionDate, double estimatedCost,
       boolean complete,
       Date completed)
       throws ValidationException {
@@ -27,6 +30,8 @@ public class MaintenanceRequest {
     setAssignee(assignee);
     setDescription(description);
     setDateTimeSubmitted(dateTimeSubmitted);
+    setEstimatedCompletionDate(estimatedCompletionDate);
+    setEstimatedCost(estimatedCost);
     setPriority(priority);
     setComplete(complete);
     setCompleted(completed);
@@ -37,7 +42,7 @@ public class MaintenanceRequest {
       String description,
       String assignee,
       Date dateTimeSubmitted,
-      int priority,
+      int priority, String type, Date estimatedCompletionDate, double estimatedCost,
       Date completed)
       throws ValidationException {
     setId(new Date().getTime() + "");
@@ -46,6 +51,8 @@ public class MaintenanceRequest {
     setDescription(description);
     setDateTimeSubmitted(dateTimeSubmitted);
     setPriority(priority);
+    setEstimatedCompletionDate(estimatedCompletionDate);
+    setEstimatedCost(estimatedCost);
     setComplete(complete);
     setCompleted(null);
   }
@@ -95,6 +102,33 @@ public class MaintenanceRequest {
     this.dateTimeSubmitted = dateTimeSubmitted;
   }
 
+  public String getType(){
+    return type;
+  }
+
+  public void setType(String type) throws ValidationException{
+    Validators.maintenanceTypeValidation(type);
+    this.type = type;
+  }
+
+  public Date getEstimatedCompletionDate(){
+    return estimatedCompletionDate;
+  }
+
+  public void setEstimatedCompletionDate(Date estimatedCompletionDate) throws ValidationException{
+    Validators.dateValidation(estimatedCompletionDate);
+    this.estimatedCompletionDate = estimatedCompletionDate;
+  }
+
+  public double getEstimatedCost(){
+    return estimatedCost;
+  }
+
+  public void setEstimatedCost(double estimatedCost) throws ValidationException{
+    Validators.estimatedCostValidation(estimatedCost);
+    this.estimatedCost = estimatedCost;
+  }
+
   public int getPriority() {
     return priority;
   }
@@ -130,6 +164,9 @@ public class MaintenanceRequest {
                       && this.getDescription().equals(otherServiceRequest.getDescription())
                       && this.getDateTimeSubmitted().equals(otherServiceRequest.getDateTimeSubmitted())
                       && this.getPriority() == otherServiceRequest.getPriority()
+                      && this.getType().equals(otherServiceRequest.getType())
+                      && this.getEstimatedCompletionDate().equals(otherServiceRequest.getEstimatedCompletionDate())
+                      && this.getEstimatedCost() == otherServiceRequest.getEstimatedCost()
                       && this.getComplete() == otherServiceRequest.getComplete()
                       && this.getAssignee().equals(otherServiceRequest.getAssignee());
     }

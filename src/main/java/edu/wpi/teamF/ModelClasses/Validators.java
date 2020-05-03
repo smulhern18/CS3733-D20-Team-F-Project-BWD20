@@ -64,6 +64,13 @@ public class Validators {
   public static final int QUANTITY_MAX_LENGTH = 32;
   public static final int MESSAGE_MIN_LENGTH = 1;
   public static final int MESSAGE_MAX_LENGTH = 128;
+  public static final int MAINTENANCE_TYPE_MIN_LENGTH = 1;
+  public static final int MAINTENANCE_TYPE_MAX_LENGTH = 64;
+  public static final int TIME_TO_COMPLETION_MIN_LENGTH = 1;
+  public static final int TIME_TO_COMPLETION_MAX_LENGTH = 128;
+  public static final double ESTIMATED_COST_MIN_LENGTH = 0.0;
+  public static final double ESTIMATED_COST_MAX_LENGTH = 1000000.0;
+
 
   public static <T extends MaintenanceRequest> void serviceRequestValidation(T t, int... constraints)
           throws ValidationException {
@@ -456,6 +463,25 @@ public class Validators {
       throw new ValidationException("Transport type is outside accepted values");
     }
   }
+
+  public static void maintenanceTypeValidation(String type, int... constraints)
+          throws ValidationException {
+    nullCheckValidation(type, constraints);
+    if (type.length() < MAINTENANCE_TYPE_MIN_LENGTH || type.length() >MAINTENANCE_TYPE_MAX_LENGTH) {
+      throw new ValidationException("Maintenance type is outside accepted values");
+    }
+  }
+
+  public static void estimatedCostValidation(double estimatedCost, int... constraints)
+          throws ValidationException {
+    nullCheckValidation(estimatedCost, constraints);
+    if (estimatedCost < ESTIMATED_COST_MIN_LENGTH ||estimatedCost >ESTIMATED_COST_MAX_LENGTH) {
+      throw new ValidationException("Estimated cost is outside accepted values");
+    }
+  }
+
+
+
 
   public static void booleanValidation(boolean bool, int... constraints)
           throws ValidationException {
