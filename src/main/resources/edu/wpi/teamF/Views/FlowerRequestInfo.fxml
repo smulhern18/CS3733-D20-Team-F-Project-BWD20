@@ -41,7 +41,7 @@
                 </JFXButton>
             </children>
         </GridPane>
-        <GridPane fx:id="servicePane" alignment="CENTER" layoutX="197.0" layoutY="34.0" prefHeight="367.0" prefWidth="396.0" visible="false" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="197.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="34.0">
+        <GridPane fx:id="servicePane" alignment="CENTER" layoutX="197.0" layoutY="34.0" prefHeight="367.0" prefWidth="396.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="197.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="34.0">
             <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
@@ -185,6 +185,9 @@
                            <children>
                               <JFXTextField fx:id="roomInput" prefHeight="27.0" prefWidth="152.0" />
                            </children>
+                           <columnConstraints>
+                              <ColumnConstraints />
+                           </columnConstraints>
                         </GridPane>
                      </children>
                   </GridPane>
@@ -280,7 +283,7 @@
                 </GridPane>
             </children>
         </AnchorPane>
-      <GridPane fx:id="flowerPane" alignment="CENTER" layoutX="230.0" layoutY="42.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+      <GridPane fx:id="flowerPane" alignment="CENTER" layoutX="230.0" layoutY="42.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
          <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

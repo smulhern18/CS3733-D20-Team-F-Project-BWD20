@@ -61,6 +61,7 @@ public class ComputerServiceController implements Initializable {
   public JFXTextField deleteText;
   public JFXButton delete;
   public JFXButton backButton;
+  public JFXButton checkStatButton;
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UIComputerServiceRequest> csrUI = FXCollections.observableArrayList();
@@ -78,6 +79,16 @@ public class ComputerServiceController implements Initializable {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    Account.Type userLevel = databaseManager.getPermissions();
+    if (userLevel == Account.Type.USER) {
+      checkStatButton.setDisable(true);
+
+      // set to user
+    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+      checkStatButton.setDisable(false);
+    }
+    // set to staff
+
     // add the different choices to the choicebox
     // Replace this with long names, linked to IDs
     List<Node> nodes = null;

@@ -30,7 +30,7 @@
                   <Font name="STFangsong" size="18.0" />
                </font>
             </JFXButton>
-            <JFXButton onAction="#statusView" text="Check Status" textFill="#000000cc" GridPane.columnIndex="1">
+            <JFXButton fx:id="checkButtonButton" onAction="#statusView" text="Check Status" textFill="#000000cc" GridPane.columnIndex="1">
                <font>
                   <Font name="STFangsong" size="18.0" />
                </font>

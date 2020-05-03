@@ -50,7 +50,8 @@ public class LanguageServiceController implements Initializable {
   public JFXButton update;
   public JFXTextField deleteText;
   public JFXButton delete;
-  ObservableList<UILanguageServiceRequest> langUI = FXCollections.observableArrayList();
+    public JFXButton checkStatusButton;
+    ObservableList<UILanguageServiceRequest> langUI = FXCollections.observableArrayList();
   public JFXComboBox<String> locationCombobox;
   public JFXComboBox<String> languageCombobox;
   public JFXComboBox<String> problemTypeCombobox;
@@ -177,6 +178,15 @@ public class LanguageServiceController implements Initializable {
   @SneakyThrows
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    Account.Type userLevel = databaseManager.getPermissions();
+    if (userLevel == Account.Type.USER) {
+      checkStatusButton.setDisable(true);
+
+      // set to user
+    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+      checkStatusButton.setDisable(false);
+    }
 
     List<Node> nodes = null;
     try {
