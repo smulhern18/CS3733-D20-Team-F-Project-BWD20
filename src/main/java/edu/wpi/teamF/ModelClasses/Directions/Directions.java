@@ -41,21 +41,29 @@ public class Directions {
           new ProceedDirection(endNode.getLongName(), pathNodeList.get(0).getFloor()));
     } else {
       // Create the starting directions
-      // TODO Add handling if the start node is not connected directly to a hallway (need an
-      // in-transit room to get to the hallway)
+      int j = 1;
       if (pathNodeList.get(2).getId().equals(endNode.getId())) {
         // Check if there's only a single node between start and goal
         directionList.add(new StartDirection(0, pathNodeList.get(0).getFloor()));
       } else {
-        // There are enough intermediate nodes to logically state a room exit angle
-        float startTurnAngle =
-            getAngle(pathNodeList.get(0), pathNodeList.get(1), pathNodeList.get(2));
-        directionList.add(new StartDirection(startTurnAngle, pathNodeList.get(0).getFloor()));
+        for (j = 1; j < (pathNodeList.size()); j++) {
+          if (pathNodeList.get(j).getType().equals(Node.NodeType.getEnum("HALL"))) {
+            // Have reached the hallway, can give an angle to exit into the hallway
+            float startTurnAngle =
+                getAngle(pathNodeList.get(0), pathNodeList.get(1), pathNodeList.get(2));
+            directionList.add(new StartDirection(startTurnAngle, pathNodeList.get(0).getFloor()));
+            break;
+          } else {
+            directionList.add(
+                new ProceedDirection(
+                    pathNodeList.get(j).getLongName(), pathNodeList.get(j - 1).getFloor()));
+          }
+        }
       }
       // Make a new hallway walking direction, we will always keep an object of this type active
-      StraightDirection currHall = new StraightDirection(0, 0, pathNodeList.get(0).getFloor());
+      StraightDirection currHall = new StraightDirection(0, 0, pathNodeList.get(j).getFloor());
 
-      for (int i = 1;
+      for (int i = j;
           i < (pathNodeList.size());
           i++) { // Iterate through the nodes of the path, starting at the second one
         System.out.println("Now investigating node: " + pathNodeList.get(i).getId());
