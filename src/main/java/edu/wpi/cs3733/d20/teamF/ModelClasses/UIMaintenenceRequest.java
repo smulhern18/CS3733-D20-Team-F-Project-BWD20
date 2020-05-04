@@ -1,7 +1,6 @@
 package edu.wpi.cs3733.d20.teamF.ModelClasses;
 
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import javafx.beans.property.SimpleStringProperty;

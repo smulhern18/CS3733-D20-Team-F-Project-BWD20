@@ -14,6 +14,7 @@ public class UISetting {
   public void makeZoomable(ScrollPane scrollPane, StackPane stackPane, double maxScaleFactor) {
     zoom.makeZoomable(scrollPane, stackPane, maxScaleFactor);
   }
+
   public void setLightModeButton(JFXButton button) {
     buttonFormatter.setLightFormat(button);
   }

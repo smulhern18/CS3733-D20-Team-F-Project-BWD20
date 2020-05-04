@@ -1,6 +1,5 @@
 package edu.wpi.cs3733.d20.teamF;
 
-import edu.wpi.teamF.Controllers.*;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

@@ -2,6 +2,7 @@ package edu.wpi.cs3733.d20.teamF.ModelClasses;
 
 import edu.wpi.cs3733.d20.teamF.ModelClasses.Account.Account;
 
+import edu.wpi.cs3733.d20.teamF.ModelClasses.Account.Account;
 import java.util.Date;
 
 public class Validators {
@@ -69,9 +70,8 @@ public class Validators {
   public static final double ESTIMATED_COST_MIN_LENGTH = 0.0;
   public static final double ESTIMATED_COST_MAX_LENGTH = 1000000.0;
 
-
-  public static <T extends MaintenanceRequest> void serviceRequestValidation(T t, int... constraints)
-          throws ValidationException {
+  public static <T extends MaintenanceRequest> void serviceRequestValidation(
+      T t, int... constraints) throws ValidationException {
     nullCheckValidation(t, constraints);
     MaintenanceRequest serviceRequest = (MaintenanceRequest) t;
 
@@ -87,9 +87,8 @@ public class Validators {
     nameValidation(serviceRequest.getAssignee());
   }
 
-
   public static <T extends Account> void accountValidation(T t, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(t, constraints);
     Account accountObject = (Account) t;
 
@@ -100,17 +99,17 @@ public class Validators {
   }
 
   public static void emailAddressValidation(String address, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(address, constraints);
     if (address.matches(
             "^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
-            && !(address.length() > ADDRESS_MIN_LENGTH || address.length() < ADDRESS_MAX_LENGTH)) {
+        && !(address.length() > ADDRESS_MIN_LENGTH || address.length() < ADDRESS_MAX_LENGTH)) {
       throw new ValidationException("Invalid Email Address: " + address);
     }
   }
 
   public static void passwordValidation(String password, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(password, constraints);
     if (password.length() < PASSWORD_MIN_LENGTH || password.length() > PASSWORD_MAX_LENGTH) {
       throw new ValidationException("Invalid password length");
@@ -154,7 +153,7 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static void userIDValidation(String userID, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(userID, constraints);
     if (userID.length() < USERID_MIN_LENGTH || userID.length() > USERID_MAX_LENGTH) {
       throw new ValidationException("UserID is invalid");
@@ -169,10 +168,10 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static void descriptionValidation(String description, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(description, constraints);
     if (description.length() < DESCRIPTION_MIN_LENGTH
-            || description.length() > DESCRIPTION_MAX_LENGTH) {
+        || description.length() > DESCRIPTION_MAX_LENGTH) {
       throw new ValidationException("Description is out of bounds");
     }
   }
@@ -199,7 +198,7 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static void priorityValidation(int priority, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(priority, constraints);
     if (priority < PRIORITY_MIN_LENGTH || priority > PRIORITY_MAX_LENGTH) {
       throw new ValidationException("Priority is outside accepted values");
@@ -207,24 +206,24 @@ public class Validators {
   }
 
   public static void maintenanceTypeValidation(String type, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(type, constraints);
-    if (type.length() < MAINTENANCE_TYPE_MIN_LENGTH || type.length() >MAINTENANCE_TYPE_MAX_LENGTH) {
+    if (type.length() < MAINTENANCE_TYPE_MIN_LENGTH
+        || type.length() > MAINTENANCE_TYPE_MAX_LENGTH) {
       throw new ValidationException("Maintenance type is outside accepted values");
     }
   }
 
   public static void estimatedCostValidation(double estimatedCost, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(estimatedCost, constraints);
-    if (estimatedCost < ESTIMATED_COST_MIN_LENGTH ||estimatedCost >ESTIMATED_COST_MAX_LENGTH) {
+    if (estimatedCost < ESTIMATED_COST_MIN_LENGTH || estimatedCost > ESTIMATED_COST_MAX_LENGTH) {
       throw new ValidationException("Estimated cost is outside accepted values");
     }
   }
 
-
   public static void booleanValidation(boolean bool, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     nullCheckValidation(bool, constraints);
     if (bool || !bool) {
       // ignore
@@ -241,7 +240,7 @@ public class Validators {
    * @throws ValidationException should the validation fail
    */
   public static void nullCheckValidation(Object object, int... constraints)
-          throws ValidationException {
+      throws ValidationException {
     baseValidation(object, constraints);
     if (object == null) {
       throw new ValidationException("object cannot be null");

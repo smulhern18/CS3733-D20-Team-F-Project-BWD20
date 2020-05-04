@@ -1,7 +1,12 @@
 package edu.wpi.cs3733.d20.teamF.DatabaseManipulators;
 
+<<<<<<< HEAD:src/main/java/edu/wpi/cs3733/d20/teamF/DatabaseManipulators/ServiceRequestFactory.java
 import edu.wpi.cs3733.d20.teamF.ModelClasses.ValidationException;
 import edu.wpi.cs3733.d20.teamF.ModelClasses.MaintenanceRequest;
+=======
+import edu.wpi.cs3733.d20.teamF.ModelClasses.MaintenanceRequest;
+import edu.wpi.cs3733.d20.teamF.ModelClasses.ValidationException;
+>>>>>>> 8fa2e494a687483df95e4e676e255de962391745:src/main/java/edu/wpi/teamF/DatabaseManipulators/ServiceRequestFactory.java
 import edu.wpi.cs3733.d20.teamF.ModelClasses.Validators;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -59,11 +64,11 @@ public class ServiceRequestFactory {
       prepareStatement.setInt(param++, serviceRequest.getPriority());
       prepareStatement.setString(param++, serviceRequest.getType());
       prepareStatement.setTimestamp(
-              param++, new Timestamp(serviceRequest.getEstimatedCompletionDate().getTime()));
+          param++, new Timestamp(serviceRequest.getEstimatedCompletionDate().getTime()));
       prepareStatement.setDouble(param++, serviceRequest.getEstimatedCost());
       prepareStatement.setBoolean(param++, serviceRequest.getComplete());
       Date dateComplete = serviceRequest.getTimeCompleted();
-      if (dateComplete ==  null) {
+      if (dateComplete == null) {
         prepareStatement.setTimestamp(param++, null);
       } else {
         prepareStatement.setTimestamp(param++, new Timestamp(dateComplete.getTime()));
@@ -112,7 +117,8 @@ public class ServiceRequestFactory {
                   new Date(resultSet.getTimestamp(DatabaseManager.TIME_CREATED_KEY).getTime()),
                   resultSet.getInt(DatabaseManager.PRIORITY_KEY),
                   resultSet.getString(DatabaseManager.MAINTENANCE_TYPE_KEY),
-                  new Date(resultSet.getTimestamp(DatabaseManager.ESTIMATEDCOMPLETION_KEY).getTime()),
+                  new Date(
+                      resultSet.getTimestamp(DatabaseManager.ESTIMATEDCOMPLETION_KEY).getTime()),
                   resultSet.getDouble(DatabaseManager.ESTIMATEDCOST_KEY),
                   resultSet.getBoolean(DatabaseManager.COMPLETED_KEY),
                   complete);
@@ -168,7 +174,8 @@ public class ServiceRequestFactory {
       preparedStatement.setString(param++, serviceRequest.getAssignee());
       preparedStatement.setInt(param++, serviceRequest.getPriority());
       preparedStatement.setString(param++, serviceRequest.getType());
-      preparedStatement.setTimestamp(param++, new Timestamp(serviceRequest.getEstimatedCompletionDate().getTime()));
+      preparedStatement.setTimestamp(
+          param++, new Timestamp(serviceRequest.getEstimatedCompletionDate().getTime()));
       preparedStatement.setDouble(param++, serviceRequest.getEstimatedCost());
       preparedStatement.setBoolean(param++, serviceRequest.getComplete());
       preparedStatement.setString(param++, serviceRequest.getId());
@@ -206,33 +213,35 @@ public class ServiceRequestFactory {
     List<MaintenanceRequest> allMain = null;
     String selectAllStatement = "SELECT * FROM " + DatabaseManager.SERVICE_REQUEST_TABLE;
 
-    try (PreparedStatement preparedStatement = DatabaseManager.getConnection().prepareStatement(selectAllStatement); ResultSet resultSet = preparedStatement.executeQuery()){
+    try (PreparedStatement preparedStatement =
+            DatabaseManager.getConnection().prepareStatement(selectAllStatement);
+        ResultSet resultSet = preparedStatement.executeQuery()) {
       allMain = new ArrayList<>();
-      while (resultSet.next()){
+      while (resultSet.next()) {
         Timestamp timestamp = resultSet.getTimestamp(DatabaseManager.DATECOMPLETED_KEY);
         Date complete = null;
         if (timestamp != null) {
           complete = new Date(timestamp.getTime());
         }
         MaintenanceRequest serviceRequest =
-                new MaintenanceRequest(
-                        resultSet.getString(DatabaseManager.SERVICEID_KEY),
-                        resultSet.getString(DatabaseManager.NODEID_KEY),
-                        resultSet.getString(DatabaseManager.ASSIGNED_KEY),
-                        resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
-                        new Date(resultSet.getTimestamp(DatabaseManager.TIME_CREATED_KEY).getTime()),
-                        resultSet.getInt(DatabaseManager.PRIORITY_KEY),
-                        resultSet.getString(DatabaseManager.MAINTENANCE_TYPE_KEY),
-                        new Date(resultSet.getTimestamp(DatabaseManager.ESTIMATEDCOMPLETION_KEY).getTime()),
-                        resultSet.getDouble(DatabaseManager.ESTIMATEDCOST_KEY),
-                        resultSet.getBoolean(DatabaseManager.COMPLETED_KEY),
-                        complete);
+            new MaintenanceRequest(
+                resultSet.getString(DatabaseManager.SERVICEID_KEY),
+                resultSet.getString(DatabaseManager.NODEID_KEY),
+                resultSet.getString(DatabaseManager.ASSIGNED_KEY),
+                resultSet.getString(DatabaseManager.DESCRIPTION_KEY),
+                new Date(resultSet.getTimestamp(DatabaseManager.TIME_CREATED_KEY).getTime()),
+                resultSet.getInt(DatabaseManager.PRIORITY_KEY),
+                resultSet.getString(DatabaseManager.MAINTENANCE_TYPE_KEY),
+                new Date(resultSet.getTimestamp(DatabaseManager.ESTIMATEDCOMPLETION_KEY).getTime()),
+                resultSet.getDouble(DatabaseManager.ESTIMATEDCOST_KEY),
+                resultSet.getBoolean(DatabaseManager.COMPLETED_KEY),
+                complete);
         allMain.add(serviceRequest);
       }
     } catch (Exception e) {
       System.out.println(e.getMessage() + ", " + e.getClass());
     }
-    if (allMain.size() == 0){
+    if (allMain.size() == 0) {
       return null;
     } else {
       return allMain;

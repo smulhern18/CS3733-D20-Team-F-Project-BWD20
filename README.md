@@ -12,7 +12,11 @@ This is the gradle configuration file. Modify this file to add dependencies to y
   modification you will need to make when you begin the project
   
   - `mainClassName`
+<<<<<<< HEAD
     - Modifiy this variable to point to your main class. By default it is `Main
+=======
+    - Modifiy this variable to point to your main class. By default it is `edu.wpi.cs3733.d20.teamF.Main
+>>>>>>> 8fa2e494a687483df95e4e676e255de962391745
     `, but once you update your teamname package to your team letter you will need to update this
      path.
      

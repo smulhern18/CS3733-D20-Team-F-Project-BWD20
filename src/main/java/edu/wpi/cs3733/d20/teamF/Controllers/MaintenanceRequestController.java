@@ -6,7 +6,6 @@ import edu.wpi.cs3733.d20.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.cs3733.d20.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.cs3733.d20.teamF.ModelClasses.MaintenanceRequest;
 import edu.wpi.cs3733.d20.teamF.ModelClasses.UIMaintenenceRequest;
-
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

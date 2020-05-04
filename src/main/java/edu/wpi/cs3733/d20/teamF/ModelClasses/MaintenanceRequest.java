@@ -21,7 +21,10 @@ public class MaintenanceRequest {
       String assignee,
       String description,
       Date dateTimeSubmitted,
-      int priority, String type, Date estimatedCompletionDate, double estimatedCost,
+      int priority,
+      String type,
+      Date estimatedCompletionDate,
+      double estimatedCost,
       boolean complete,
       Date completed)
       throws ValidationException {
@@ -43,7 +46,10 @@ public class MaintenanceRequest {
       String description,
       String assignee,
       Date dateTimeSubmitted,
-      int priority, String type, Date estimatedCompletionDate, double estimatedCost,
+      int priority,
+      String type,
+      Date estimatedCompletionDate,
+      double estimatedCost,
       Date completed)
       throws ValidationException {
     setId(new Date().getTime() + "");
@@ -104,29 +110,29 @@ public class MaintenanceRequest {
     this.dateTimeSubmitted = dateTimeSubmitted;
   }
 
-  public String getType(){
+  public String getType() {
     return type;
   }
 
-  public void setType(String type) throws ValidationException{
+  public void setType(String type) throws ValidationException {
     Validators.maintenanceTypeValidation(type);
     this.type = type;
   }
 
-  public Date getEstimatedCompletionDate(){
+  public Date getEstimatedCompletionDate() {
     return estimatedCompletionDate;
   }
 
-  public void setEstimatedCompletionDate(Date estimatedCompletionDate) throws ValidationException{
+  public void setEstimatedCompletionDate(Date estimatedCompletionDate) throws ValidationException {
     Validators.dateValidation(estimatedCompletionDate);
     this.estimatedCompletionDate = estimatedCompletionDate;
   }
 
-  public double getEstimatedCost(){
+  public double getEstimatedCost() {
     return estimatedCost;
   }
 
-  public void setEstimatedCost(double estimatedCost) throws ValidationException{
+  public void setEstimatedCost(double estimatedCost) throws ValidationException {
     Validators.estimatedCostValidation(estimatedCost);
     this.estimatedCost = estimatedCost;
   }
@@ -155,22 +161,23 @@ public class MaintenanceRequest {
    * @param other the other service request to check against
    * @return if the service requests are equal or not
    */
-  public boolean equals(Object other){
+  public boolean equals(Object other) {
     boolean isEqual = false;
     if (other instanceof MaintenanceRequest) {
       MaintenanceRequest otherServiceRequest = (MaintenanceRequest) other;
 
       isEqual =
-              this.getId().equals(otherServiceRequest.getId())
-                      && this.getLocation().equals(otherServiceRequest.getLocation())
-                      && this.getDescription().equals(otherServiceRequest.getDescription())
-                      && this.getDateTimeSubmitted().equals(otherServiceRequest.getDateTimeSubmitted())
-                      && this.getPriority() == otherServiceRequest.getPriority()
-                      && this.getType().equals(otherServiceRequest.getType())
-                      && this.getEstimatedCompletionDate().equals(otherServiceRequest.getEstimatedCompletionDate())
-                      && this.getEstimatedCost() == otherServiceRequest.getEstimatedCost()
-                      && this.getComplete() == otherServiceRequest.getComplete()
-                      && this.getAssignee().equals(otherServiceRequest.getAssignee());
+          this.getId().equals(otherServiceRequest.getId())
+              && this.getLocation().equals(otherServiceRequest.getLocation())
+              && this.getDescription().equals(otherServiceRequest.getDescription())
+              && this.getDateTimeSubmitted().equals(otherServiceRequest.getDateTimeSubmitted())
+              && this.getPriority() == otherServiceRequest.getPriority()
+              && this.getType().equals(otherServiceRequest.getType())
+              && this.getEstimatedCompletionDate()
+                  .equals(otherServiceRequest.getEstimatedCompletionDate())
+              && this.getEstimatedCost() == otherServiceRequest.getEstimatedCost()
+              && this.getComplete() == otherServiceRequest.getComplete()
+              && this.getAssignee().equals(otherServiceRequest.getAssignee());
     }
     return isEqual;
   }
