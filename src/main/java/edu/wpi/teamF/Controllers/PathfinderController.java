@@ -439,7 +439,7 @@ public class PathfinderController implements Initializable {
     deselectFloorButtons();
     floor1Button.setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
     directionsPane.setVisible(false);
-    setChooseLiftBehavior();
+    //    setChooseLiftBehavior();
 
     // Set up the enable/disable of phone comms btns
     callDirections.setDisable(true);
@@ -928,18 +928,18 @@ public class PathfinderController implements Initializable {
     }
   }
 
-  private void setChooseLiftBehavior() {
-    chooseLiftElevator.setOnAction(
-        actionEvent -> {
-          liftType = "ELEV";
-          pathFindAlgorithm.setLiftType(liftType);
-        });
-    chooseLiftStairs.setOnAction(
-        actionEvent -> {
-          liftType = "STAI";
-          pathFindAlgorithm.setLiftType(liftType);
-        });
-  }
+  //  private void setChooseLiftBehavior() {
+  //    chooseLiftElevator.setOnAction(
+  //        actionEvent -> {
+  //          liftType = "ELEV";
+  //          pathFindAlgorithm.setLiftType(liftType);
+  //        });
+  //    chooseLiftStairs.setOnAction(
+  //        actionEvent -> {
+  //          liftType = "STAI";
+  //          pathFindAlgorithm.setLiftType(liftType);
+  //        });
+  //  }
 
   public void labelNodeStart() {
     startLabel = new Label();
