@@ -350,11 +350,11 @@ public class Directions {
             + startNode.getLongName()
             + " to "
             + endNode.getLongName()
-            + ". After each instruction, stay on the line and press the pound key when you are ready for the next instruction. "
+            + ". After each instruction, stay on the line and press the pound key when you are ready for the next instruction. Press any other key to end the call. "
             + "</Say><Pause/><Say>");
     callText +=
         directionList.get(0).getDirectionText()
-            + "</Say><Gather input=\"dtmf\" timeout=\"60\" numDigits=\"1\" action=\"http://twimlets.com/message?\"></Gather><Say>";
+            + "</Say><Gather timeout=\"60\" numDigits=\"1\" action=\"http://twimlets.com/message?\"/><Say>";
     for (int i = 1; i < directionList.size() - 1; i++) {
       if (!directionList
               .get(i)
@@ -365,7 +365,7 @@ public class Directions {
         callText =
             callText
                 + directionList.get(i).getDirectionText()
-                + "</Say><Gather input=\"dtmf\" timeout=\"60\" numDigits=\"1\" action=\"http://twimlets.com/message?\"></Gather><Say>";
+                + "</Say><Gather timeout=\"60\" numDigits=\"1\" action=\"http://twimlets.com/message?\"/><Say>";
       }
     }
     callText += directionList.get(directionList.size() - 1).getDirectionText() + "</Say>";

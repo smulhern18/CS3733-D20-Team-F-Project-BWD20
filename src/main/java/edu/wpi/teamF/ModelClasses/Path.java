@@ -16,7 +16,7 @@ public class Path {
 
   public Path(List<Node> path) {
     List<Node> newPath = new ArrayList<>();
-    for (int i = 0; i < path.size(); i++) {
+    for (int i = 0; i < path.size() - 1; i++) {
       newPath.add(path.get(i));
       if (Node.NodeType.getEnum("EXIT").equals(path.get(i).getType())
           && Node.NodeType.getEnum("EXIT").equals(path.get(i + 1).getType())) {
@@ -38,6 +38,7 @@ public class Path {
         }
       }
     }
+    newPath.add(path.get(path.size() - 1));
     setPath(newPath);
     locationsList = new ArrayList<>();
     locationsList.add(new Location(newPath.get(0).getBuilding(), newPath.get(0).getFloor()));
