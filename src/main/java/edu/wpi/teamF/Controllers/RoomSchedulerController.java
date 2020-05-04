@@ -1,5 +1,8 @@
 package edu.wpi.teamF.Controllers;
 
+import com.calendarfx.model.Calendar;
+import com.calendarfx.model.CalendarSource;
+import com.calendarfx.view.CalendarView;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
@@ -11,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
@@ -26,6 +30,7 @@ public class RoomSchedulerController implements Initializable {
   public JFXDatePicker endDateSelector;
   public JFXButton submitButton;
   public JFXButton cancelButton;
+  public AnchorPane scheduleAnchorPane;
 
   private List<ScheduleEntry> entryList;
 
@@ -42,6 +47,71 @@ public class RoomSchedulerController implements Initializable {
             "On-Call Bed 5",
             "On-Call bed 6",
             "On-Call Bed 7"));
+    initializeCalendarView();
+  }
+
+  private void initializeCalendarView() {
+
+    CalendarView calendarView = new CalendarView();
+
+    calendarView.setShowAddCalendarButton(false);
+    calendarView.setShowPrintButton(false);
+    calendarView.setShowSearchField(false);
+
+    calendarView.showDayPage();
+    Calendar birthdays = new Calendar("Birthdays");
+    Calendar holidays = new Calendar("Holidays");
+
+    birthdays.setStyle(Calendar.Style.STYLE1);
+    holidays.setStyle(Calendar.Style.STYLE2);
+
+    CalendarSource myCalendarSource = new CalendarSource("Reflection Rooms");
+
+    myCalendarSource.getCalendars().addAll(birthdays, holidays);
+    calendarView.getCalendarSources().clear();
+    calendarView.getCalendarSources().addAll(myCalendarSource);
+
+    calendarView.setRequestedTime(LocalTime.now());
+
+    Thread updateTimeThread =
+        new Thread("Calendar: Update Time Thread") {
+          @Override
+          public void run() {
+            while (true) {
+              Platform.runLater(
+                  () -> {
+                    calendarView.setToday(LocalDate.now());
+                    calendarView.setTime(LocalTime.now());
+                  });
+
+              try {
+                // update every 10 seconds
+                sleep(10000);
+              } catch (InterruptedException e) {
+                e.printStackTrace();
+              }
+            }
+          };
+        };
+
+    updateTimeThread.setPriority(Thread.MIN_PRIORITY);
+    updateTimeThread.setDaemon(true);
+    updateTimeThread.start();
+
+    scheduleAnchorPane.getChildren().add(calendarView);
+    scheduleAnchorPane
+        .heightProperty()
+        .addListener(
+            ((observable, oldValue, newValue) -> {
+              calendarView.setPrefHeight(newValue.doubleValue());
+            }));
+    scheduleAnchorPane
+        .widthProperty()
+        .addListener(
+            ((observable, oldValue, newValue) -> {
+              calendarView.setPrefWidth(newValue.doubleValue());
+              System.out.println("Width: " + newValue + " " + calendarView.getWidth());
+            }));
   }
 
   public void submit(ActionEvent actionEvent) {

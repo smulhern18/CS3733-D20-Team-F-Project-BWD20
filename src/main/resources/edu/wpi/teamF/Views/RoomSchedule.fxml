@@ -6,14 +6,20 @@
 <?import com.jfoenix.controls.JFXTimePicker?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.RoomSchedulerController">
+<AnchorPane fx:id="anchorPane" prefHeight="525.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.RoomSchedulerController">
    <children>
-      <JFXTimePicker fx:id="startTimeSelector" layoutX="162.0" layoutY="125.0" prefWidth="171.0" />
-      <JFXDatePicker fx:id="startDateSelector" layoutX="162.0" layoutY="79.0" />
-      <JFXComboBox fx:id="roomComboBox" layoutX="162.0" layoutY="31.0" prefHeight="25.0" prefWidth="153.0" />
-      <JFXTimePicker fx:id="endTimeSelector" layoutX="162.0" layoutY="226.0" />
-      <JFXDatePicker fx:id="endDateSelector" layoutX="162.0" layoutY="172.0" />
-      <JFXButton fx:id="submitButton" layoutX="147.0" layoutY="305.0" onAction="#submit" text="Submit" />
-      <JFXButton fx:id="cancelButton" layoutX="248.0" layoutY="305.0" onAction="#cancel" text="Cancel" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXButton fx:id="submitButton" layoutX="85.0" layoutY="296.0" onAction="#submit" text="Submit" />
+            <JFXDatePicker fx:id="endDateSelector" layoutX="42.0" layoutY="224.0" />
+            <JFXTimePicker fx:id="endTimeSelector" layoutX="42.0" layoutY="54.0" />
+            <JFXDatePicker fx:id="startDateSelector" layoutX="180.0" layoutY="47.0" />
+            <JFXTimePicker fx:id="startTimeSelector" layoutX="17.0" layoutY="94.0" prefWidth="171.0" />
+            <JFXComboBox fx:id="roomComboBox" layoutX="128.0" layoutY="82.0" prefHeight="25.0" prefWidth="153.0" />
+            <JFXButton fx:id="cancelButton" layoutX="33.0" layoutY="174.0" onAction="#cancel" text="Cancel" />
+         </children>
+      </AnchorPane>
+      <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="scheduleAnchorPane" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>
