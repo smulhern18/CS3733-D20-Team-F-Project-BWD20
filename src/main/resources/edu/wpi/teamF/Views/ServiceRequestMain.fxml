@@ -36,7 +36,7 @@
             </ImageView>
             <JFXButton prefWidth="120.0" text="Computer Service" GridPane.rowIndex="1">
                <font>
-                  <Font name="Microsoft YaHei Light" size="12.0" />
+                  <Font name="STFangsong" size="12.0" />
                </font>
             </JFXButton>
             <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#medicineService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
@@ -46,7 +46,7 @@
             </ImageView>
             <JFXButton text="Medicine Delivery" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
-                  <Font name="Microsoft YaHei Light" size="12.0" />
+                  <Font name="STFangsong" size="12.0" />
                </font>
             </JFXButton>
             <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#languageService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
@@ -56,7 +56,7 @@
             </ImageView>
             <JFXButton prefHeight="38.0" prefWidth="115.0" text="Language Interpretor" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
-                  <Font name="Microsoft YaHei Light" size="11.0" />
+                  <Font name="STFangsong" size="11.0" />
                </font>
             </JFXButton>
             <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#sanitationRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
@@ -66,7 +66,7 @@
             </ImageView>
             <JFXButton contentDisplay="CENTER" text="Sanitation" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <font>
-                  <Font name="Microsoft YaHei Light" size="12.0" />
+                  <Font name="STFangsong" size="12.0" />
                </font>
             </JFXButton>
             <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#mariachiService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
@@ -76,7 +76,7 @@
             </ImageView>
             <JFXButton text="Mariachi" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <font>
-                  <Font name="Microsoft YaHei Light" size="12.0" />
+                  <Font name="STFangsong" size="12.0" />
                </font>
             </JFXButton>
             <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#securityRequest" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
@@ -86,7 +86,7 @@
             </ImageView>
             <JFXButton text="Security" GridPane.rowIndex="4">
                <font>
-                  <Font name="Microsoft YaHei Light" size="12.0" />
+                  <Font name="STFangsong" size="12.0" />
                </font>
             </JFXButton>
             <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#switchToLaundryService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
@@ -96,7 +96,7 @@
             </ImageView>
             <JFXButton text="Laundry" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <font>
-                  <Font name="Microsoft YaHei Light" size="12.0" />
+                  <Font name="STFangsong" size="12.0" />
                </font>
             </JFXButton>
             <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#flowerRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
@@ -106,7 +106,7 @@
             </ImageView>
             <JFXButton text="Flower" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <font>
-                  <Font name="Microsoft YaHei Light" size="12.0" />
+                  <Font name="STFangsong" size="12.0" />
                </font>
             </JFXButton>
             <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#transportRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
@@ -116,7 +116,7 @@
             </ImageView>
             <JFXButton text="Transport" GridPane.columnIndex="3" GridPane.rowIndex="4">
                <font>
-                  <Font name="STIXGeneral-Regular" size="13.0" />
+                  <Font name="STFangsong" size="13.0" />
                </font>
             </JFXButton>
             <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#maintenanceRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
@@ -192,7 +192,7 @@
       </GridPane>
       <Label fx:id="serviceRequestLabel" layoutX="224.0" layoutY="59.0" prefHeight="38.0" prefWidth="206.0" text="Service Request">
          <font>
-            <Font name="Microsoft YaHei Light" size="24.0" />
+            <Font name="STFangsong" size="24.0" />
          </font>
       </Label>
    </children>
