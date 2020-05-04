@@ -265,7 +265,7 @@ public class SanitationRequestController implements Initializable {
           toUpdate.setComplete(true);
           try {
             ReportsClass oldReport = databaseManager.readReport(uiSR.location.getName());
-            if(oldReport != null) {
+            if (oldReport != null) {
               ReportsClass report =
                   new ReportsClass(
                       uiSR.location.getName(),
@@ -274,13 +274,9 @@ public class SanitationRequestController implements Initializable {
                       uiSR.getAssignee().toString());
               databaseManager.manipulateReport(report);
             }
-          } catch (InstanceNotFoundException e){
+          } catch (InstanceNotFoundException e) {
             ReportsClass report =
-                new ReportsClass(
-                    uiSR.location.getName(),
-                    0,
-                    1,
-                    uiSR.getAssignee().toString());
+                new ReportsClass(uiSR.location.getName(), 0, 1, uiSR.getAssignee().toString());
             databaseManager.manipulateReport(report);
           } catch (Exception e) {
             System.out.println(e.getMessage());

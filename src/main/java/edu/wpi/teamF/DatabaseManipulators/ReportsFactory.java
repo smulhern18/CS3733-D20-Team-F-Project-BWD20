@@ -86,7 +86,7 @@ public class ReportsFactory {
                 resultSet.getInt(DatabaseManager.TIMESSANITIZED_KEY),
                 resultSet.getInt(DatabaseManager.TIMESVISITED_KEY),
                 resultSet.getString(DatabaseManager.LASTSANITIZER_KEY));
-      } else{
+      } else {
         throw new InstanceNotFoundException();
       }
 

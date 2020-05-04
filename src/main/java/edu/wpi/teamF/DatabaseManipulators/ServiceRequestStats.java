@@ -3,9 +3,6 @@ package edu.wpi.teamF.DatabaseManipulators;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.FlowerRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.MedicineDeliveryRequest;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.SanitationServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ServiceRequest;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.TransportRequest;
 import java.io.BufferedWriter;
@@ -21,13 +18,19 @@ import java.util.stream.Collectors;
 public class ServiceRequestStats {
   MaintenanceRequestFactory maintenanceRequestFactory = MaintenanceRequestFactory.getFactory();
   TransportRequestFactory transportRequestFactory = TransportRequestFactory.getFactory();
-  ComputerServiceRequestFactory computerServiceRequestFactory = ComputerServiceRequestFactory.getFactory();
-  FlowerServiceRequestFactory flowerServiceRequestFactory = FlowerServiceRequestFactory.getFactory();
-  LanguageServiceRequestFactory languageServiceRequestFactory = LanguageServiceRequestFactory.getFactory();
-  LaundryServiceRequestFactory laundryServiceRequestFactory = LaundryServiceRequestFactory.getFactory();
+  ComputerServiceRequestFactory computerServiceRequestFactory =
+      ComputerServiceRequestFactory.getFactory();
+  FlowerServiceRequestFactory flowerServiceRequestFactory =
+      FlowerServiceRequestFactory.getFactory();
+  LanguageServiceRequestFactory languageServiceRequestFactory =
+      LanguageServiceRequestFactory.getFactory();
+  LaundryServiceRequestFactory laundryServiceRequestFactory =
+      LaundryServiceRequestFactory.getFactory();
   MariachiRequestFactory mariachiRequestFactory = MariachiRequestFactory.getFactory();
-  MedicineDeliveryRequestFactory medicineDeliveryRequestFactory = MedicineDeliveryRequestFactory.getFactory();
-  SanitationServiceRequestFactory sanitationServiceRequestFactory = SanitationServiceRequestFactory.getFactory();
+  MedicineDeliveryRequestFactory medicineDeliveryRequestFactory =
+      MedicineDeliveryRequestFactory.getFactory();
+  SanitationServiceRequestFactory sanitationServiceRequestFactory =
+      SanitationServiceRequestFactory.getFactory();
   SecurityRequestFactory securityRequestFactory = SecurityRequestFactory.getFactory();
   // outputs all of the statistics of a maintenance request
   public void downloadStatistics(Path path) {
@@ -127,6 +130,7 @@ public class ServiceRequestStats {
     }
     return total;
   }
+
   public ArrayList<String> getMaintenanceEmployeeNumbersGraphs(
       List<MaintenanceRequest> maintenanceRequests) {
     ArrayList<String> employeeNum = new ArrayList<String>();
@@ -141,7 +145,7 @@ public class ServiceRequestStats {
     for (Map.Entry<String, Long> entry : frequency.entrySet()) {
       if (entry.getValue() > 0) {
         csvStyled.add(entry.getKey());
-        csvStyled.add(""+entry.getValue());
+        csvStyled.add("" + entry.getValue());
       }
     }
 
@@ -162,14 +166,15 @@ public class ServiceRequestStats {
     for (Map.Entry<String, Long> entry : frequency.entrySet()) {
       if (entry.getValue() > 0) {
         csvStyled.add(entry.getKey());
-        csvStyled.add(""+entry.getValue());
+        csvStyled.add("" + entry.getValue());
       }
     }
 
     return csvStyled;
   }
 
-  private String CalculateAverageMaintenanceTimeGraphs(List<MaintenanceRequest> maintenanceRequest) {
+  private String CalculateAverageMaintenanceTimeGraphs(
+      List<MaintenanceRequest> maintenanceRequest) {
     String total = "";
     Long timeDifference = (long) 0;
     int numOfRequests = 0;
@@ -182,10 +187,11 @@ public class ServiceRequestStats {
     if (timeDifference == 0) {
       total = "Your average time was 0";
     } else {
-      total =  ""+timeDifference/60;
+      total = "" + timeDifference / 60;
     }
     return total;
   }
+
   public void TransportRequestStats(Path path) {
     List<TransportRequest> transportRequests = transportRequestFactory.getAllTransportRequests();
     if (transportRequests.size() != 0) {
@@ -304,7 +310,9 @@ public class ServiceRequestStats {
     }
     return total;
   }
-  public ArrayList<String> getTransportEmployeeNumbersGraphs(List<TransportRequest> transportRequests) {
+
+  public ArrayList<String> getTransportEmployeeNumbersGraphs(
+      List<TransportRequest> transportRequests) {
     ArrayList<String> employeeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (TransportRequest m : transportRequests) {
@@ -317,14 +325,15 @@ public class ServiceRequestStats {
     for (Map.Entry<String, Long> entry : frequency.entrySet()) {
       if (entry.getValue() > 0) {
         csvStyled.add(entry.getKey());
-        csvStyled.add(""+entry.getValue());
+        csvStyled.add("" + entry.getValue());
       }
     }
 
     return csvStyled;
   }
 
-  public ArrayList<String> getTransportLocationNumbersGraph(List<TransportRequest> transportRequests) {
+  public ArrayList<String> getTransportLocationNumbersGraph(
+      List<TransportRequest> transportRequests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -337,7 +346,7 @@ public class ServiceRequestStats {
     for (Map.Entry<String, Long> entry : frequency.entrySet()) {
       if (entry.getValue() > 0) {
         csvStyled.add(entry.getKey());
-        csvStyled.add(""+entry.getValue());
+        csvStyled.add("" + entry.getValue());
       }
     }
 
@@ -357,7 +366,7 @@ public class ServiceRequestStats {
     for (Map.Entry<String, Long> entry : frequency.entrySet()) {
       if (entry.getValue() > 0) {
         csvStyled.add(entry.getKey());
-        csvStyled.add(""+entry.getValue());
+        csvStyled.add("" + entry.getValue());
       }
     }
     return csvStyled;
@@ -376,17 +385,16 @@ public class ServiceRequestStats {
     if (timeDifference == 0) {
       total = "Your average time was 0";
     } else {
-      total =  ""+timeDifference/60;
+      total = "" + timeDifference / 60;
     }
     return total;
   }
-
 
   public void ComputerRequestStats(Path path) {
     List<ComputerServiceRequest> computerServiceRequestList =
         computerServiceRequestFactory.getAllComputerRequests();
     if (computerServiceRequestList.size() != 0) {
-      try (FileWriter fw = new FileWriter(path.toString() + "/ServiceRequestReport.csv",true);
+      try (FileWriter fw = new FileWriter(path.toString() + "/ServiceRequestReport.csv", true);
           BufferedWriter bw = new BufferedWriter(fw); ) {
         bw.write("ComputerStats");
         bw.newLine();
@@ -464,7 +472,7 @@ public class ServiceRequestStats {
     for (Map.Entry<String, Long> entry : frequency.entrySet()) {
       if (entry.getValue() > 0) {
         csvStyled.add(entry.getKey());
-        csvStyled.add(""+entry.getValue());
+        csvStyled.add("" + entry.getValue());
       }
     }
 
@@ -485,17 +493,17 @@ public class ServiceRequestStats {
     for (Map.Entry<String, Long> entry : frequency.entrySet()) {
       if (entry.getValue() > 0) {
         csvStyled.add(entry.getKey());
-        csvStyled.add(""+entry.getValue());
+        csvStyled.add("" + entry.getValue());
       }
     }
 
     return csvStyled;
   }
+
   public void FlowerRequestStats(Path path) {
-    List<FlowerRequest> flowerRequests =
-        flowerServiceRequestFactory.getAllFlowerRequests();
+    List<FlowerRequest> flowerRequests = flowerServiceRequestFactory.getAllFlowerRequests();
     if (flowerRequests.size() != 0) {
-      try (FileWriter fw = new FileWriter(path.toString() + "/ServiceRequestReport.csv",true);
+      try (FileWriter fw = new FileWriter(path.toString() + "/ServiceRequestReport.csv", true);
           BufferedWriter bw = new BufferedWriter(fw); ) {
         bw.write("FlowerStats");
         bw.newLine();
@@ -519,8 +527,7 @@ public class ServiceRequestStats {
     }
   }
 
-  private ArrayList<String> getFlowerEmployeeNumbersCSV(
-      List<FlowerRequest> flowerRequests) {
+  private ArrayList<String> getFlowerEmployeeNumbersCSV(List<FlowerRequest> flowerRequests) {
     ArrayList<String> employeeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ServiceRequest m : flowerRequests) {
@@ -539,8 +546,7 @@ public class ServiceRequestStats {
     return csvStyled;
   }
 
-  private ArrayList<String> getFlowerLocationNumbersCSV(
-      List<FlowerRequest> flowerRequests) {
+  private ArrayList<String> getFlowerLocationNumbersCSV(List<FlowerRequest> flowerRequests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -559,8 +565,7 @@ public class ServiceRequestStats {
     return csvStyled;
   }
 
-  public ArrayList<String> getFlowerEmployeeNumbersGraphs(
-      List<FlowerRequest> serviceRequests) {
+  public ArrayList<String> getFlowerEmployeeNumbersGraphs(List<FlowerRequest> serviceRequests) {
     ArrayList<String> employeeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ServiceRequest m : serviceRequests) {
@@ -573,15 +578,14 @@ public class ServiceRequestStats {
     for (Map.Entry<String, Long> entry : frequency.entrySet()) {
       if (entry.getValue() > 0) {
         csvStyled.add(entry.getKey());
-        csvStyled.add(""+entry.getValue());
+        csvStyled.add("" + entry.getValue());
       }
     }
 
     return csvStyled;
   }
 
-  public ArrayList<String> getFlowerLocationNumbersGraphs(
-      List<FlowerRequest> serviceRequests) {
+  public ArrayList<String> getFlowerLocationNumbersGraphs(List<FlowerRequest> serviceRequests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -594,7 +598,7 @@ public class ServiceRequestStats {
     for (Map.Entry<String, Long> entry : frequency.entrySet()) {
       if (entry.getValue() > 0) {
         csvStyled.add(entry.getKey());
-        csvStyled.add(""+entry.getValue());
+        csvStyled.add("" + entry.getValue());
       }
     }
 
