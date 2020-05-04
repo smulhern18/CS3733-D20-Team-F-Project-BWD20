@@ -59,8 +59,8 @@ public class BreadthFirst implements PathfindAlgorithm {
           }
           neighbors.add(neighbor);
         }
-//        System.out.println("Current Node: " + currentNode.getNode().getId());
-//        System.out.println("Neighbors" + neighbors.size());
+        //        System.out.println("Current Node: " + currentNode.getNode().getId());
+        //        System.out.println("Neighbors" + neighbors.size());
         for (Node neighbor : neighbors) {
           // if (!visited.contains(neighbor)) {
           if (!visited.contains(neighbor) && !neighbor.getType().toString().equals(typeToAvoid)) {
@@ -95,8 +95,6 @@ public class BreadthFirst implements PathfindAlgorithm {
     }
     return shortestPath;
   }
-
-
 
   public void setLiftType(String liftType) {
     this.liftType = liftType;

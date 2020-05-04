@@ -42,26 +42,27 @@ public class RoomSchedulerController implements Initializable {
             "On-Call Bed 5",
             "On-Call bed 6",
             "On-Call Bed 7"));
-
   }
 
   public void submit(ActionEvent actionEvent) {
 
-
-    if (roomComboBox.getValue() != null && startDateSelector.getValue() != null && startTimeSelector != null && endTimeSelector != null && endDateSelector != null) {
+    if (roomComboBox.getValue() != null
+        && startDateSelector.getValue() != null
+        && startTimeSelector != null
+        && endTimeSelector != null
+        && endDateSelector != null) {
       String accountID = "3465346e4356345";
       String room = roomComboBox.getValue();
       String startDate = startDateSelector.getValue().format(ScheduleEntry.dateFormatter);
       String startTime = startTimeSelector.getValue().format(ScheduleEntry.timeFormatter);
       String endDate = endDateSelector.getValue().format(ScheduleEntry.dateFormatter);
       String endTime = endTimeSelector.getValue().format(ScheduleEntry.timeFormatter);
-      ScheduleEntry newEntry = new ScheduleEntry(startDate,startTime,endDate,endTime,room,accountID);
+      ScheduleEntry newEntry =
+          new ScheduleEntry(startDate, startTime, endDate, endTime, room, accountID);
       if (!isScheduleEntryOverlapping(newEntry)) {
         entryList.add(newEntry);
       }
     }
-
-
   }
 
   public void cancel(ActionEvent actionEvent) {
@@ -71,7 +72,6 @@ public class RoomSchedulerController implements Initializable {
     endTimeSelector.setValue(null);
     endDateSelector.setValue(null);
   }
-
 
   private boolean isScheduleEntryOverlapping(ScheduleEntry newEntry) {
     for (ScheduleEntry entry : entryList) {

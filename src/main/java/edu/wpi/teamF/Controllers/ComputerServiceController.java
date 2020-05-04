@@ -9,6 +9,7 @@ import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -27,6 +28,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
@@ -61,6 +63,8 @@ public class ComputerServiceController implements Initializable {
   public JFXTextField deleteText;
   public JFXButton delete;
   public JFXButton backButton;
+  public ImageView background;
+  public JFXButton checkStatusButton;
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UIComputerServiceRequest> csrUI = FXCollections.observableArrayList();
@@ -75,9 +79,23 @@ public class ComputerServiceController implements Initializable {
     }
   }
 
+  public void handle(MouseEvent mouseEvent) {}
+
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    background.fitWidthProperty().bind(anchorPane.widthProperty());
+    background.fitHeightProperty().bind(anchorPane.heightProperty());
+    Account.Type userLevel = databaseManager.getPermissions();
+    if (userLevel == Account.Type.USER) {
+      checkStatusButton.setDisable(true);
+
+      // set to user
+    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+      checkStatusButton.setDisable(false);
+    }
+    // set to staff
+
     // add the different choices to the choicebox
     // Replace this with long names, linked to IDs
     List<Node> nodes = null;
@@ -210,39 +228,6 @@ public class ComputerServiceController implements Initializable {
             return param.getValue().getValue().getPriority();
           }
         });
-    /*
-    // assignee column
-    JFXTreeTableColumn<UIComputerServiceRequest, String> assignee =
-        new JFXTreeTableColumn<>("Assignee");
-    assignee.setPrefWidth(80);
-    assignee.setCellValueFactory(
-        new Callback<
-            TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String>,
-            ObservableValue<String>>() {
-          @Override
-          public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String> param) {
-            return param.getValue().getValue().getAssignee();
-          }
-        });
-
-     */
-    /*
-    JFXTreeTableColumn<UIComputerServiceRequest, String> completed =
-        new JFXTreeTableColumn<>("Completed");
-    completed.setPrefWidth(80);
-    completed.setCellValueFactory(
-        new Callback<
-            TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String>,
-            ObservableValue<String>>() {
-          @Override
-          public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<UIComputerServiceRequest, String> param) {
-            return param.getValue().getValue().getCompleted();
-          }
-        });
-
-     */
 
     ObservableList<String> completedList = FXCollections.observableArrayList();
     completedList.add("Complete");

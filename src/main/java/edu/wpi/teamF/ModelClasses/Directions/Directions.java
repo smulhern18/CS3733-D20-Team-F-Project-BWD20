@@ -41,24 +41,37 @@ public class Directions {
           new ProceedDirection(endNode.getLongName(), pathNodeList.get(0).getFloor()));
     } else {
       // Create the starting directions
-      // TODO Add handling if the start node is not connected directly to a hallway (need an
-      // in-transit room to get to the hallway)
+      int j = 1;
       if (pathNodeList.get(2).getId().equals(endNode.getId())) {
         // Check if there's only a single node between start and goal
         directionList.add(new StartDirection(0, pathNodeList.get(0).getFloor()));
       } else {
-        // There are enough intermediate nodes to logically state a room exit angle
-        float startTurnAngle =
-            getAngle(pathNodeList.get(0), pathNodeList.get(1), pathNodeList.get(2));
-        directionList.add(new StartDirection(startTurnAngle, pathNodeList.get(0).getFloor()));
+        for (j = 1; j < (pathNodeList.size()); j++) {
+          if (pathNodeList.get(j).getType().equals(Node.NodeType.getEnum("HALL"))) {
+            // Have reached the hallway, can give an angle to exit into the hallway
+            float startTurnAngle =
+                getAngle(pathNodeList.get(0), pathNodeList.get(1), pathNodeList.get(2));
+            directionList.add(new StartDirection(startTurnAngle, pathNodeList.get(0).getFloor()));
+            break;
+          } else {
+            directionList.add(
+                new ProceedDirection(
+                    pathNodeList.get(j).getLongName(), pathNodeList.get(j - 1).getFloor()));
+          }
+        }
       }
       // Make a new hallway walking direction, we will always keep an object of this type active
-      StraightDirection currHall = new StraightDirection(0, 0, pathNodeList.get(0).getFloor());
+      StraightDirection currHall = new StraightDirection(0, 0, pathNodeList.get(j).getFloor());
 
-      for (int i = 1;
+      for (int i = j;
           i < (pathNodeList.size());
           i++) { // Iterate through the nodes of the path, starting at the second one
         System.out.println("Now investigating node: " + pathNodeList.get(i).getId());
+
+        if (!pathNodeList.get(i).getFloor().equals(pathNodeList.get(i - 1).getFloor())) {
+          // This node is now on a new floor, need to index it
+          directionList.add(new IndexDirection(pathNodeList.get(i - 1).getFloor()));
+        }
 
         if (pathNodeList.get(i).getType().equals(Node.NodeType.getEnum("HALL"))) {
           // Current node is a hallway
@@ -123,9 +136,6 @@ public class Directions {
           directionList.add(new GoalDirection(goalTurnAngle, pathNodeList.get(i).getFloor()));
           break;
 
-          // TODO: What if your goal is an elevator and DFS takes you through multiple elevators to
-          // get there?
-
           // Check if this node is an elevator
         } else if (pathNodeList.get(i).getType().equals(Node.NodeType.getEnum("ELEV"))) {
           System.out.println("Elevator");
@@ -136,37 +146,16 @@ public class Directions {
           }
           currHall = new StraightDirection(0, 0, pathNodeList.get(i).getFloor());
 
-          if (!Node.NodeType.getEnum("ELEV").equals(pathNodeList.get(i - 1).getType())) {
-            System.out.println("A starting elevator");
-            // The previous node was a not an elevator, this is the first elevator in a sequence
-            // Cycle through the next nodes to find the end of the elevator sequence
-            float exitAngle = 0;
-            String endFloor = pathNodeList.get(i).getFloor();
-            for (int j = i; j < (pathNodeList.size() - 1); j++) {
-              if (!Node.NodeType.getEnum("ELEV").equals(pathNodeList.get(j + 1).getType())) {
-                // If the next node is not an elevator, this is the last elevator in the sequence
-                exitAngle =
-                    getAngle(pathNodeList.get(j), pathNodeList.get(j + 1), pathNodeList.get(j + 2));
-                endFloor = pathNodeList.get(j).getFloor();
-                break;
-              }
-            }
+          if (Node.NodeType.getEnum("ELEV").equals(pathNodeList.get(i + 1).getType())) {
+            // If the next node is an elevator, tell the user to take the elevator
             directionList.add(
                 new ElevatorDirection(
-                    pathNodeList.get(i).getFloor(),
-                    endFloor,
-                    exitAngle,
-                    pathNodeList.get(i).getFloor()));
-          } else if (!Node.NodeType.getEnum("ELEV").equals(pathNodeList.get(i + 1).getType())) {
-            System.out.println("A final elevator");
-            // The next node is a not an elevator, this is the last elevator in a sequence
-            // Use the previous element in the path, but change the floor
-            if (directionList.get(directionList.size() - 1) instanceof ElevatorDirection) {
-              ElevatorDirection tempElevDir =
-                  (ElevatorDirection) directionList.get(directionList.size() - 1);
-              tempElevDir.setFloor(pathNodeList.get(i).getFloor());
-              directionList.add(tempElevDir);
-            }
+                    pathNodeList.get(i).getFloor(), pathNodeList.get(i + 1).getFloor()));
+          } else {
+            // Final elevator node in a sequence
+            float exitAngle =
+                getAngle(pathNodeList.get(i), pathNodeList.get(i + 1), pathNodeList.get(i + 2));
+            directionList.add(new StartDirection(exitAngle, pathNodeList.get(i).getFloor()));
           }
 
           // Check if this node is a stairwell
@@ -179,35 +168,16 @@ public class Directions {
           }
           currHall = new StraightDirection(0, 0, pathNodeList.get(i).getFloor());
 
-          if (!Node.NodeType.getEnum("STAI").equals(pathNodeList.get(i - 1).getType())) {
-            // The previous node was a not an stair, this is the first stair in a sequence
-            // Cycle through the next nodes to find the end of the elevator sequence
-            float exitAngle = 0;
-            String endFloor = pathNodeList.get(i).getFloor();
-            for (int j = i; j < (pathNodeList.size() - 1); j++) {
-              if (!Node.NodeType.getEnum("STAI").equals(pathNodeList.get(j + 1).getType())) {
-                // If the next node is not a stair, this is the last stair in the sequence
-                exitAngle =
-                    getAngle(pathNodeList.get(j), pathNodeList.get(j + 1), pathNodeList.get(j + 2));
-                endFloor = pathNodeList.get(j).getFloor();
-                break;
-              }
-            }
+          if (Node.NodeType.getEnum("STAI").equals(pathNodeList.get(i + 1).getType())) {
+            // If the next node is a stair, tell the user to take the elevator
             directionList.add(
                 new StairsDirection(
-                    pathNodeList.get(i).getFloor(),
-                    endFloor,
-                    exitAngle,
-                    pathNodeList.get(i).getFloor()));
-          } else if (!Node.NodeType.getEnum("STAI").equals(pathNodeList.get(i + 1).getType())) {
-            // The next node is a not a stair, this is the last stair in a sequence
-            // Use the previous element in the path, but change the floor
-            if (directionList.get(directionList.size() - 1) instanceof StairsDirection) {
-              StairsDirection tempStaiDir =
-                  (StairsDirection) directionList.get(directionList.size() - 1);
-              tempStaiDir.setFloor(pathNodeList.get(i).getFloor());
-              directionList.add(tempStaiDir);
-            }
+                    pathNodeList.get(i).getFloor(), pathNodeList.get(i + 1).getFloor()));
+          } else {
+            // Final stair node in a sequence
+            float exitAngle =
+                getAngle(pathNodeList.get(i), pathNodeList.get(i + 1), pathNodeList.get(i + 2));
+            directionList.add(new StartDirection(exitAngle, pathNodeList.get(i).getFloor()));
           }
         }
 
@@ -314,39 +284,53 @@ public class Directions {
     return returnString;
   }
 
-  public String getFullDirectionsStringForFloor(String floor) {
+  public String getDirectionsStringForIndex(int index) {
+    int indexCounter = 0;
     String returnString = "";
-    for (Direction direction : directionList) {
-      if (direction.getFloor().equals(floor)) {
-        returnString = returnString + direction.getDirectionText() + "\n";
+    for (int i = 0; i < directionList.size(); i++) {
+      if (directionList.get(i) instanceof IndexDirection) {
+        indexCounter++;
+      } else if (indexCounter == index) {
+        // Only add objects that aren't IndexDirections to the text
+        returnString += directionList.get(i).getDirectionText() + "\n";
       }
     }
     return returnString;
   }
 
-  public String getKeyDirectionForFloor(String floor) {
-    String returnString = "";
-    for (Direction direction : directionList) {
-      if (direction.getFloor().equals(floor)) {
-        if (direction instanceof GoalDirection) {
-          return ("Directions to: " + endNode.getLongName() + ".");
-        } else if (direction instanceof ElevatorDirection) {
-          return ("Take the elevator from floor "
-              + startNode.getFloor()
-              + " to floor "
-              + endNode.getFloor()
-              + ".");
-        } else if (direction instanceof StairsDirection) {
-          return ("Take the stairs from floor "
-              + startNode.getFloor()
-              + " to floor "
-              + endNode.getFloor()
-              + ".");
-        }
-      }
-    }
-    return "";
-  }
+  //  public String getFullDirectionsStringForFloor(String floor) {
+  //    String returnString = "";
+  //    for (Direction direction : directionList) {
+  //      if (direction.getFloor().equals(floor)) {
+  //        returnString = returnString + direction.getDirectionText() + "\n";
+  //      }
+  //    }
+  //    return returnString;
+  //  }
+
+  //  public String getKeyDirectionForFloor(String floor) {
+  //    String returnString = "";
+  //    for (Direction direction : directionList) {
+  //      if (direction.getFloor().equals(floor)) {
+  //        if (direction instanceof GoalDirection) {
+  //          return ("Directions to: " + endNode.getLongName() + ".");
+  //        } else if (direction instanceof ElevatorDirection) {
+  //          return ("Take the elevator from floor "
+  //              + startNode.getFloor()
+  //              + " to floor "
+  //              + endNode.getFloor()
+  //              + ".");
+  //        } else if (direction instanceof StairsDirection) {
+  //          return ("Take the stairs from floor "
+  //              + startNode.getFloor()
+  //              + " to floor "
+  //              + endNode.getFloor()
+  //              + ".");
+  //        }
+  //      }
+  //    }
+  //    return "";
+  //  }
 
   public Boolean smsDirections(String toPhone) {
     String sendMsg =
