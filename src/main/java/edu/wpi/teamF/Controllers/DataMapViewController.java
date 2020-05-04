@@ -892,7 +892,7 @@ public class DataMapViewController implements Initializable {
     nodeAnchor.setVisible(false);
     edgeAnchor.setVisible(false);
     cancelButton.setVisible(false);
-    nodeDisplayButton.setVisible(true);
+    nodeButton.setVisible(true);
     edgeDisplayButton.setVisible(true);
     edgeSelection = false;
     numSelected = 0;
