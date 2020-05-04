@@ -26,7 +26,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <BarChart fx:id="completedChart" prefHeight="328.0" prefWidth="607.0" style="-fx-background-color: white;" title="Completed Maintenance Requests">
+            <BarChart fx:id="completedChart" prefHeight="328.0" prefWidth="607.0" style="-fx-background-color: white;" title="Completede Requests">
               <xAxis>
                 <CategoryAxis label="Employees" side="BOTTOM" fx:id="xAxis" />
               </xAxis>
@@ -34,15 +34,28 @@
                 <NumberAxis fx:id="yAxis" label="Number of Times Completed Service" side="LEFT" tickLabelGap="10.0" upperBound="10.0" />
               </yAxis>
             </BarChart>
-            <PieChart fx:id="pieChartTotal" style="-fx-background-color: white;" title="Pie Chart View Maintenance" GridPane.columnIndex="1" />
-            <BarChart style="-fx-background-color: white;" title="Areas In Need of Sanitation" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <PieChart fx:id="pieChartTotal" style="-fx-background-color: white;" title="Pie Chart View" GridPane.columnIndex="1" />
+            <BarChart fx:id="serviceLocationBar" style="-fx-background-color: white;" title="Request Locations" GridPane.rowIndex="1">
               <xAxis>
-                <CategoryAxis label="Location" side="BOTTOM" />
+                <CategoryAxis fx:id="yAxisLoc" label="Locations" side="BOTTOM" />
               </xAxis>
               <yAxis>
-                <NumberAxis label="Times Visited" side="LEFT" />
+                <NumberAxis label="Number of Time Location Chosen" side="LEFT" fx:id="xAxisLoc" />
               </yAxis>
             </BarChart>
+            <GridPane style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="timeAvgMaint" prefHeight="53.0" prefWidth="188.0" style="-fx-border-color: black;" GridPane.columnIndex="1" />
+                  <Label text="Avg Time:" />
+               </children>
+            </GridPane>
          </children>
       </GridPane>
       <GridPane layoutX="190.0" layoutY="14.0" prefHeight="69.0" prefWidth="414.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0">
@@ -77,8 +90,8 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Select Service Request:" />
-            <JFXComboBox prefHeight="25.0" prefWidth="142.0" GridPane.columnIndex="1" />
+            <JFXComboBox fx:id="serviceChoice" prefHeight="25.0" prefWidth="142.0" GridPane.columnIndex="1" />
+            <JFXButton onAction="#loadGraphs" style="-fx-background-color: #012d5a;" text="Select Service Request" textFill="WHITE" />
          </children>
       </GridPane>
    </children>

@@ -166,7 +166,7 @@ public class ServiceRequestStats {
     return csvStyled;
   }
 
-  private ArrayList<String> getMaintenanceLocationNumbersGraphs(
+  public ArrayList<String> getMaintenanceLocationNumbersGraphs(
       List<MaintenanceRequest> maintenanceRequests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
@@ -187,14 +187,13 @@ public class ServiceRequestStats {
     return csvStyled;
   }
 
-  private String CalculateAverageMaintenanceTimeGraphs(
-      List<MaintenanceRequest> maintenanceRequest) {
+  public String CalculateAverageMaintenanceTimeGraphs(List<MaintenanceRequest> maintenanceRequest) {
     String total = "";
     Long timeDifference = (long) 0;
     int numOfRequests = 0;
     for (MaintenanceRequest m : maintenanceRequest) {
       if (m.getTimeCompleted() != null) {
-        timeDifference = m.getTimeCompleted().getTime() - m.getDateTimeSubmitted().getTime();
+        timeDifference += m.getTimeCompleted().getTime() - m.getDateTimeSubmitted().getTime();
         numOfRequests++;
       }
     }
