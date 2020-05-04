@@ -124,7 +124,6 @@ public class PathfinderController implements Initializable {
   public Label errorPaneLabel2;
   public JFXButton errorPaneButton;
 
-
   public List<Node> fullNodeList;
   public int state;
   public UISetting uiSetting = new UISetting();
@@ -425,11 +424,11 @@ public class PathfinderController implements Initializable {
     scrollPaneFaulkner1.setVisible(true);
     mapPaneFaulkner1.setVisible(true);
     imageViewFaulkner1.setVisible(true);
-    //    errorPane.setVisible(false);
+    errorPane.setVisible(false);
     floorButtonsSet();
     initializehospitalComboBox();
     setToggleBehavior();
-    // setErrorPaneButtonBehavior();
+    setErrorPaneButtonBehavior();
     externalDirections.setVisible(false);
     externalDirections.setPrefWidth(0);
     externalDirections.setPrefHeight(0);
