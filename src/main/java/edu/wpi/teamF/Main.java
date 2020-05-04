@@ -1,11 +1,9 @@
 package edu.wpi.teamF;
 
-import edu.wpi.cs3733.c20.teamR.AppointmentRequest;
 import edu.wpi.teamF.DatabaseManipulators.*;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Account.Admin;
 import java.util.List;
-
 
 public class Main {
   private static CSVManipulator csvm = new CSVManipulator();
@@ -19,8 +17,6 @@ public class Main {
     } catch (ClassNotFoundException e) {
       System.out.println("Driver Not found");
     }
-
-
 
     App.launch(App.class, args);
   }

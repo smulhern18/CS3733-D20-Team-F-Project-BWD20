@@ -35,7 +35,17 @@ public class DatabaseManager {
   static final String LAUNDRY_REQUEST_TABLE_NAME = "laundryRequestsTable";
   static final String FLOWER_REQUEST_TABLE_NAME = "flowerRequestsTable";
   static final String MARIACHI_REQUEST_TABLE_NAME = "mariachiRequestsTable";
+  static final String SCHEDULER_TABLE_NAME = "schedulerTable";
   /** Column Names */
+  // scheduler
+  static final String SCHEDULER_ID_KEY = "schedulerID";
+
+  static final String START_DATE_KEY = "startDate";
+  static final String END_DATE_KEY = "endDate";
+  static final String START_TIME_KEY = "startTime";
+  static final String END_TIME_KEY = "endTime";
+  static final String ACCOUNT_ID_KEY = "accountID";
+
   // node
   static final String X_COORDINATE_KEY = "xCoord";
 
@@ -140,6 +150,7 @@ public class DatabaseManager {
   private FlowerServiceRequestFactory flowerServiceRequestFactory =
       FlowerServiceRequestFactory.getFactory();
   private TransportRequestFactory transportRequestFactory = TransportRequestFactory.getFactory();
+  private SchedulerFactory schedulerFactory = SchedulerFactory.getFactory();
 
   static Connection connection = null;
   public static Account accountLogged = null;
@@ -398,6 +409,28 @@ public class DatabaseManager {
             + SERVICEID_KEY
             + "))";
 
+    String scheduleTableCreationStatement =
+        "CREATE TABLE "
+            + SCHEDULER_TABLE_NAME
+            + " ( "
+            + SCHEDULER_ID_KEY
+            + " VARCHAR(48) NOT NULL, "
+            + START_DATE_KEY
+            + " VARCHAR(16) NOT NULL, "
+            + START_TIME_KEY
+            + " VARCHAR(16) NOT NULL, "
+            + END_DATE_KEY
+            + " VARCHAR(16) NOT NULL, "
+            + END_TIME_KEY
+            + " VARCHAR(16) NOT NULL, "
+            + ROOM_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + ACCOUNT_ID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + "PRIMARY KEY ("
+            + SCHEDULER_ID_KEY
+            + "))";
+
     PreparedStatement preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(computerTableCreationStatement);
@@ -427,6 +460,8 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(laundryTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(mariachiTableCreationStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(scheduleTableCreationStatement);
     preparedStatement.execute();
     System.out.println("Created Tables Successfully");
   }
@@ -469,6 +504,7 @@ public class DatabaseManager {
     String flowerDropStatement = "DROP TABLE " + FLOWER_REQUEST_TABLE_NAME;
     String laundryDropStatement = "DROP TABLE " + LAUNDRY_REQUEST_TABLE_NAME;
     String mariachiDropStatement = "DROP TABLE " + MARIACHI_REQUEST_TABLE_NAME;
+    String schedulerDropStatement = "DROP TABLE " + SCHEDULER_TABLE_NAME;
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeDropStatement);
     preparedStatement.execute();
@@ -499,6 +535,8 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(laundryDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(mariachiDropStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(schedulerDropStatement);
     preparedStatement.execute();
     createTables();
   }
@@ -918,5 +956,22 @@ public class DatabaseManager {
 
   public Account getAccount() {
     return accountLogged;
+  }
+
+  public void mainpulateScheduleEntry(ScheduleEntry scheduleEntry) throws Exception {
+    Validators.nullCheckValidation(scheduleEntry);
+    if (schedulerFactory.read(scheduleEntry.getID()) == null) {
+      schedulerFactory.create(scheduleEntry);
+    } else {
+      schedulerFactory.update(scheduleEntry);
+    }
+  }
+
+  public ScheduleEntry readScheduleEntry(String id) throws Exception {
+    return schedulerFactory.read(id);
+  }
+
+  public List<ScheduleEntry> getAllScheduleEntries() {
+    return schedulerFactory.getAllScheduleEntries();
   }
 }
