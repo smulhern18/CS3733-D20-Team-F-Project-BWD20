@@ -20,7 +20,7 @@
     <children>
       <ImageView fx:id="background" fitHeight="525.0" fitWidth="600.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../../../../Images/BWH%20Shapiro%202.jpg" />
+            <Image url="@../../../../Images/BWH Shapiro 2.jpg" />
          </image>
       </ImageView>
         <GridPane fx:id="servicePane" style="-fx-background-color: rgba(255,255,255,0.9);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
