@@ -18,35 +18,18 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.FlowerRequestInfoController">
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.FlowerRequestInfoController">
     <children>
-        <GridPane fx:id="optionBar" layoutX="190.0" style="-fx-border-color: pink;" AnchorPane.leftAnchor="188.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <children>
-                <JFXButton fx:id="requestServiceButton" onAction="#request" text="Request Service" textFill="#000000cc">
-                    <font>
-                        <Font name="STFangsong" size="18.0" />
-                    </font>
-                </JFXButton>
-                <JFXButton fx:id="checkStatusButton" onAction="#checkStatus" text="Check Status" textFill="#000000cc" GridPane.columnIndex="1">
-                    <font>
-                        <Font name="STFangsong" size="18.0" />
-                    </font>
-                </JFXButton>
-            </children>
-        </GridPane>
-        <GridPane fx:id="servicePane" alignment="CENTER" layoutX="197.0" layoutY="34.0" prefHeight="367.0" prefWidth="396.0" visible="false" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="197.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="34.0">
+      <ImageView fitHeight="531.0" fitWidth="600.0" pickOnBounds="true" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../../../../Images/boston_skyline.jpg" />
+         </image>
+      </ImageView>
+        <GridPane fx:id="servicePane" alignment="CENTER" layoutX="191.0" layoutY="34.0" prefHeight="484.0" prefWidth="402.0" style="-fx-background-color: rgba(255,255,255,0.9);" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
             <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
-            <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
@@ -58,21 +41,29 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <HBox alignment="CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="2">
+                <HBox alignment="CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
                     <children>
                         <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="Location:       " />
-                        <JFXComboBox fx:id="locationComboBox" prefHeight="27.0" prefWidth="227.0" />
+                        <JFXComboBox fx:id="locationComboBox" prefHeight="27.0" prefWidth="227.0" style="-fx-background-color: white; -fx-border-color: black;" />
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" GridPane.rowIndex="5">
+                <HBox alignment="CENTER" GridPane.rowIndex="4">
                     <children>
                         <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="Priority:   " />
-                        <JFXComboBox fx:id="priorityComboBox" prefHeight="27.0" prefWidth="248.0" />
+                        <JFXComboBox fx:id="priorityComboBox" prefHeight="27.0" prefWidth="248.0" style="-fx-background-color: white; -fx-border-color: black;" />
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="9">
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="8">
                     <children>
-                        <JFXButton fx:id="submitButton" onAction="#submit" style="-fx-background-color: #FFD3DF#FFD3DF;" text="Submit" textFill="#000000cc">
+                  <JFXButton fx:id="checkStatusButton" onAction="#checkStatus" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Status" textFill="#ffffffcc">
+                     <font>
+                        <Font name="STFangsong" size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                        <JFXButton fx:id="submitButton" onAction="#submit" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Submit" textFill="#ffffffcc">
                             <font>
                                 <Font name="STFangsong" size="18.0" />
                             </font>
@@ -80,7 +71,7 @@
                                 <Insets right="30.0" />
                             </HBox.margin>
                         </JFXButton>
-                        <JFXButton fx:id="cancelButton" onAction="#cancel" style="-fx-background-color: #FFD3DF#FFD3DF;" text="Cancel" textFill="#000000cc">
+                        <JFXButton fx:id="cancelButton" onAction="#cancel" style="-fx-background-color: #a40000; -fx-background-radius: 10;" text="Cancel" textFill="#ffffffcc">
                             <font>
                                 <Font name="STFangsong" size="18.0" />
                             </font>
@@ -90,61 +81,72 @@
                         </JFXButton>
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
                     <children>
                         <Label fx:id="buyerNameLabel" alignment="BOTTOM_LEFT" text="Buyer Name:      " />
-                  <JFXTextField fx:id="buyerNameInput" alignment="BOTTOM_LEFT" prefHeight="26.0" prefWidth="211.0" />
+                  <JFXTextField fx:id="buyerNameInput" alignment="BOTTOM_LEFT" prefHeight="26.0" prefWidth="211.0" style="-fx-background-color: white; -fx-border-color: black;" />
                     </children>
                 </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <Label fx:id="nameLabel" alignment="BOTTOM_LEFT" contentDisplay="CENTER" text="Recipient Name:   " />
-                  <JFXTextField fx:id="recipientInput" prefHeight="26.0" prefWidth="202.0" />
+                  <JFXTextField fx:id="recipientInput" prefHeight="26.0" prefWidth="202.0" style="-fx-background-color: white; -fx-border-color: black;" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+               <children>
+                  <Label fx:id="roomNumberLabel" text="Room Number (if known):   " />
+                  <JFXTextField fx:id="roomInput" prefHeight="26.0" prefWidth="153.0" style="-fx-background-color: white; -fx-border-color: black;" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                <children>
-                  <Label fx:id="roomNumberLabel" text="Room Number (if known):   " />
-                  <JFXTextField fx:id="roomInput" prefHeight="26.0" prefWidth="153.0" />
+                  <Label fx:id="messageLabel" text="Message: " />
+                  <JFXTextArea fx:id="messsageInput" prefHeight="42.0" prefWidth="247.0" style="-fx-background-color: white; -fx-border-color: black;" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
                <children>
-                  <Label fx:id="messageLabel" text="Message: " />
-                  <JFXTextArea fx:id="messsageInput" prefHeight="42.0" prefWidth="247.0" />
+                  <Label fx:id="phoneNumberLabel" text="Phone Number:   " />
+                  <JFXTextField fx:id="phoneNumberInput" prefHeight="26.0" prefWidth="206.0" style="-fx-background-color: white; -fx-border-color: black;" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
                <children>
-                  <Label fx:id="phoneNumberLabel" text="Phone Number:   " />
-                  <JFXTextField fx:id="phoneNumberInput" prefHeight="26.0" prefWidth="206.0" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="8">
-               <children>
                   <JFXCheckBox fx:id="giftWrapCheckBox" text="Gift Wrap (free)" />
                </children>
             </HBox>
-                  <Label fx:id="flowerRequestLabel" contentDisplay="CENTER" text="Flower Delivery Request">
-                      <font>
-                          <Font name="HP Simplified" size="23.0" />
-                      </font>
-                  </Label>
             </children>
         </GridPane>
         <fx:include fx:id="mainMenu" source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-        <AnchorPane fx:id="checkStatusPane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+        <AnchorPane fx:id="checkStatusPane" style="-fx-background-color: rgba(255,255,255,0.9);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
             <children>
                 <StackPane layoutX="44.0" layoutY="274.0" prefHeight="99.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                     <children>
-                        <JFXButton fx:id="updateButton" onAction="#update" style="-fx-background-color: #FFD3DF#FFD3DF;" text="Update" textFill="#000000cc">
-                            <font>
-                                <Font name="STFangsong" size="18.0" />
-                            </font>
+                  <GridPane>
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                              <JFXButton fx:id="updateButton" onAction="#update" style="-fx-background-color: #012D5A; -fx-background-radius: 10;" text="Update" textFill="#ffffffcc" GridPane.columnIndex="1">
+                                  <font>
+                                      <Font name="STFangsong" size="18.0" />
+                                  </font>
+                              </JFXButton>
+                        <JFXButton fx:id="requestServiceButton" onAction="#request" style="-fx-background-color: #012D5A; -fx-background-radius: 10;" text="Back" textFill="#ffffffcc">
+                           <font>
+                              <Font name="STFangsong" size="18.0" />
+                           </font>
                         </JFXButton>
+                     </children>
+                  </GridPane>
                     </children>
                 </StackPane>
-                <JFXTreeTableView fx:id="treeTableFlower" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="99.0" />
+                <JFXTreeTableView fx:id="treeTableFlower" style="-fx-background-color: white; -fx-border-color: black;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="99.0" />
                 <GridPane fx:id="deletePane" layoutX="217.0" layoutY="70.0" AnchorPane.rightAnchor="10.0">
                     <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
@@ -154,12 +156,12 @@
                         <RowConstraints vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <JFXTextField fx:id="deleteText" alignment="BOTTOM_LEFT" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
+                        <JFXTextField fx:id="deleteText" alignment="BOTTOM_LEFT" style="-fx-background-color: white; -fx-border-color: black;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
                             <GridPane.margin>
                                 <Insets />
                             </GridPane.margin>
                         </JFXTextField>
-                        <JFXButton fx:id="deleteButton" alignment="CENTER" onAction="#delete" style="-fx-background-color: #FFD3DF#FFD3DF;" text="Delete" textFill="#000000cc">
+                        <JFXButton fx:id="deleteButton" alignment="CENTER" onAction="#delete" style="-fx-background-color: #a40000; -fx-background-radius: 10;" text="Delete" textFill="#ffffffcc">
                             <GridPane.margin>
                                 <Insets right="5.0" />
                             </GridPane.margin>
@@ -168,7 +170,7 @@
                 </GridPane>
             </children>
         </AnchorPane>
-      <GridPane fx:id="flowerPane" alignment="CENTER" layoutX="230.0" layoutY="42.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+      <GridPane fx:id="flowerPane" alignment="CENTER" layoutX="230.0" layoutY="42.0" style="-fx-background-color: rgba(255,255,255,0.9);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
          <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -282,6 +284,20 @@
             <Label fx:id="tropicalSplashLabel" text="Tropical Splash" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <Label fx:id="babyBoyLabel" text="Welcome Baby Boy" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="7" />
             <Label fx:id="babyGirlLabel" text="Welcome Baby Girl" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="188.0" layoutY="4.0" prefHeight="47.0" prefWidth="410.0" style="-fx-background-color: rgba(255,255,255,0.9);" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label prefHeight="35.0" prefWidth="201.0" text="Flower Delivery Request">
+               <font>
+                  <Font size="19.0" />
+               </font></Label>
          </children>
       </GridPane>
     </children>
