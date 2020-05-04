@@ -8,14 +8,17 @@ import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ValidationException;
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -144,6 +147,8 @@ public class DataMapViewController implements Initializable {
 
   @FXML private JFXButton modifyEdgeButton;
 
+  @FXML private Label nodeErrorLabel;
+
   private AnchorPane mapPane;
   private ImageView imageView;
 
@@ -221,7 +226,9 @@ public class DataMapViewController implements Initializable {
             "CONF", "DEPT", "EXIT", "HALL", "INFO", "LABS", "REST", "RETL", "SERV", "STAF", "STAI");
     typeInput.setValue("CONF");
 
-    hospitalInput.getItems().addAll("Main", "Faulkner");
+    hospitalInput
+        .getItems()
+        .addAll("Faulkner", "Tower", "BTM", "45 Francis", "15 Francis", "Shapiro");
     typeInput.setValue("Main");
 
     floorInput.getItems().addAll("L2", "L1", "G", "F1", "F2", "F3");
@@ -459,7 +466,7 @@ public class DataMapViewController implements Initializable {
     button.setMaxSize(buttonSize, buttonSize);
     button.setPrefSize(buttonSize, buttonSize); // the button size will not vary
     button.setStyle(
-        "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00008B; -fx-border-color: #000000; -fx-border-width: 1px; -fx-opacity: 0.7");
+        "-fx-background-radius: 9px; -fx-border-radius: 6px; -fx-background-color: #99D9EA; -fx-border-color: #000000; -fx-border-width: 1px; -fx-opacity: 0.7");
     double xPos = (node.getXCoord() * widthRatio - buttonSize / 2.0);
     double yPos = (node.getYCoord() * heightRatio - buttonSize / 2.0);
     button.setLayoutX(xPos);
@@ -471,7 +478,7 @@ public class DataMapViewController implements Initializable {
           this.node = node;
 
           System.out.println(node.getId());
-          if (!edgeSelection && !isDragged) {
+          if (!edgeSelection) {
             displayNode();
           } else {
             System.out.println("In edge selection");
@@ -517,6 +524,10 @@ public class DataMapViewController implements Initializable {
     }
     hospitalInput.setValue(node.getBuilding());
     floorInput.setValue(node.getFloor());
+    if (isDragged) {
+      validateNodeText();
+      isDragged = false;
+    }
   }
 
   @FXML
@@ -608,81 +619,85 @@ public class DataMapViewController implements Initializable {
     int newInstance = 0;
     int instanceNum = 0;
 
-    // try { // is the input valid?
-    short xCoordinate = Short.parseShort(xCoorInput.getText());
-    short yCoordinate = Short.parseShort(yCoorInput.getText());
-    String building = hospitalInput.getValue().toString();
-    String longName = longNameInput.getText();
-    String shortName = shortNameInput.getText();
-    Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getValue().toString());
-    String floorNumber = floorInput.getValue().toString();
-    List<Node> typeNodes = databaseManager.getNodesByType(nodeType);
+    try { // is the input valid?
+      short xCoordinate = Short.parseShort(xCoorInput.getText());
+      short yCoordinate = Short.parseShort(yCoorInput.getText());
+      String building = hospitalInput.getValue();
+      String longName = longNameInput.getText();
+      String shortName = shortNameInput.getText();
+      Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getValue());
+      String floorNumber = floorInput.getValue();
+      List<Node> typeNodes = databaseManager.getNodesByType(nodeType);
 
-    List<Integer> typeInstances = new ArrayList<>();
+      List<Integer> typeInstances = new ArrayList<>();
 
-    for (int i = 0; i < typeNodes.size(); i++) { // collects all of the instances for the given type
-      if (typeNodes.get(i).getFloor() == floorNumber) {
-        instanceNum = Integer.parseInt(typeNodes.get(i).getId().substring(5, 8));
-        typeInstances.add(instanceNum);
-      }
-    }
-
-    Collections.sort(typeInstances); // sorts the list
-
-    if (typeNodes.size() > 0) {
-      for (int i = 0; i < typeInstances.size(); i++) {
-        instance = typeInstances.get(i); // 1
-        if (instance - tracker > 1) { // 1-0 = 1
-          newInstance = tracker + 1;
-          break;
-        } else if (instance == typeInstances.size()) {
-          newInstance = typeInstances.size() + 1;
-          break;
-        } else {
-          tracker++;
+      for (int i = 0;
+          i < typeNodes.size();
+          i++) { // collects all of the instances for the given type
+        if (typeNodes.get(i).getFloor().equals(floorNumber)) {
+          instanceNum = Integer.parseInt(typeNodes.get(i).getId().substring(5, 8));
+          typeInstances.add(instanceNum);
         }
       }
-    } else {
-      newInstance = 1;
+
+      Collections.sort(typeInstances); // sorts the list
+
+      if (typeNodes.size() > 0) {
+        for (int i = 0; i < typeInstances.size(); i++) {
+          instance = typeInstances.get(i); // 1
+          if (instance - tracker > 1) { // 1-0 = 1
+            newInstance = tracker + 1;
+            break;
+          } else if (instance == typeInstances.size()) {
+            newInstance = typeInstances.size() + 1;
+            break;
+          } else {
+            tracker++;
+          }
+        }
+      } else {
+        newInstance = 1;
+      }
+      String strInstance = "" + newInstance;
+
+      switch (strInstance.length()) {
+        case 1:
+          strInstance = "00" + strInstance;
+          break;
+        case 2:
+          strInstance = "0" + strInstance;
+          break;
+      }
+
+      if (floorNumber.length() == 1) {
+        floorNumber = "0" + floorNumber;
+      }
+
+      String ID = "Z" + typeInput.getValue() + strInstance + floorNumber;
+
+      Node newNode =
+          new Node(
+              ID,
+              xCoordinate,
+              yCoordinate,
+              building,
+              longName,
+              shortName,
+              nodeType,
+              floorNumber); // creates a new node
+
+      databaseManager.manipulateNode(newNode); // creates the node in the db
+      drawNode(newNode);
+
+      clearViews();
+
+    } catch (Exception e) { // throws an error if the input provided by the user is invalid
+      nodeErrorLabel.setText("The input is not valid");
     }
-    String strInstance = "" + newInstance;
-    String strFloor = "0" + floorNumber;
-
-    switch (strInstance.length()) {
-      case 1:
-        strInstance = "00" + strInstance;
-        break;
-      case 2:
-        strInstance = "0" + strInstance;
-        break;
-    }
-
-    String ID = "F" + typeInput.getValue() + strInstance + strFloor;
-
-    Node newNode =
-        new Node(
-            ID,
-            xCoordinate,
-            yCoordinate,
-            building,
-            longName,
-            shortName,
-            nodeType,
-            floorNumber); // creates a new node
-
-    databaseManager.manipulateNode(newNode); // creates the node in the db
-    drawNode(newNode);
-
-    clearViews();
-
-    //    } catch (Exception e) { // throws an error if the input provided by the user is invalid
-    //      errorLabel.setText("The input is not valid");
-    //    }
   }
 
   @FXML
-  private void modifyNode(ActionEvent event) {
-
+  void modifyNode(ActionEvent event) {
     short oldXCoordinate = node.getXCoord();
     short oldYCoordinate = node.getYCoord();
     String oldBuilding = node.getBuilding();
@@ -735,15 +750,15 @@ public class DataMapViewController implements Initializable {
     } catch (Exception e) { // throws an error if the input is not valid
       if (oldXCoordinate == node.getXCoord()
           && oldYCoordinate == node.getYCoord()
-          && oldBuilding == node.getBuilding()
+          && oldBuilding.equals(node.getBuilding())
           && oldLongName.equals(node.getLongName())
           && oldShortName.equals(node.getShortName())
           && oldNodeType.equals(node.getType())
-          && oldFloorNumber == node.getFloor()) {
-        System.out.println("The input is invalid");
-        // nodeErrorLabel.setText("The input is invalid");
+          && oldFloorNumber.equals(node.getFloor())) {
+        nodeErrorLabel.setText("The input is invalid");
       }
     }
+
     clearViews();
   }
 
@@ -812,7 +827,7 @@ public class DataMapViewController implements Initializable {
       floorInput.getItems().removeAll("1", "2", "3", "4", "5");
       floorInput.getItems().addAll("L2", "L1", "G", "F1", "F2", "F3");
     }
-    validateNodeText();
+    // validateNodeText();
   }
 
   @FXML
@@ -822,7 +837,7 @@ public class DataMapViewController implements Initializable {
 
   @FXML
   private void validateNodeTextAction(ActionEvent event) {
-    validateNodeText();
+    // validateNodeText();
   }
 
   @FXML
@@ -839,6 +854,7 @@ public class DataMapViewController implements Initializable {
       addNodeButton.setDisable(false);
       addNodeButton.setOpacity(1);
     } else {
+      System.out.println("Here");
       modifyNodeButton.setDisable(true);
       modifyNodeButton.setOpacity(.4);
       addNodeButton.setDisable(true);
@@ -848,6 +864,7 @@ public class DataMapViewController implements Initializable {
 
   @FXML
   private void clearNode() {
+    nodeErrorLabel.setText("");
     shortNameInput.setText("");
     longNameInput.setText("");
     xCoorInput.setText("");
@@ -855,7 +872,7 @@ public class DataMapViewController implements Initializable {
     addNodeButton.setVisible(true);
     addNodeButton.setDisable(true);
     modifyNodeButton.setVisible(false);
-    modifyNodeButton.setDisable(true);
+    validateNodeText();
     deleteNodeButton.setVisible(false);
   }
 
@@ -892,8 +909,8 @@ public class DataMapViewController implements Initializable {
         });
     button.setOnMouseDragged(
         mouseEvent -> {
+          isDragged = true;
           setRatios(node);
-          modifyNodeButton.setDisable(false);
           button.setLayoutX(mouseEvent.getSceneX() / imageStackPane.getScaleX() + deltaX);
           button.setLayoutY(mouseEvent.getSceneY() / imageStackPane.getScaleY() + deltaY);
           double nodeWidth = (button.getLayoutX() + 3) / widthRatio;
@@ -930,10 +947,16 @@ public class DataMapViewController implements Initializable {
             e.printStackTrace();
           }
         });
-    button.setOnMouseReleased(
-        mouseEvent -> {
+    //    button.setOnMouseReleased(
+    //        mouseEvent -> {
+    //          xCoorInput.textProperty().unbind();
+    //          yCoorInput.textProperty().unbind();
+    //        });
+    button.setOnMouseDragReleased(
+        mouseDragEvent -> {
           xCoorInput.textProperty().unbind();
           yCoorInput.textProperty().unbind();
+          modifyNodeButton.setDisable(false);
         });
   }
 }
