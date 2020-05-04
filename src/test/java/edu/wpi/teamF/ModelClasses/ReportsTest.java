@@ -78,6 +78,7 @@ public class ReportsTest {
       databaseManager.manipulateServiceRequest(validMaintenance[1]);
       databaseManager.manipulateServiceRequest(validMaintenance[2]);
       databaseManager.manipulateServiceRequest(validMaintenance[3]);
+      databaseManager.manipulateServiceRequest(testData.validComputerServiceRequests[0]);
     } catch (Exception e) {
       System.out.println(e.getMessage());
       fail(e.getMessage());
@@ -86,8 +87,7 @@ public class ReportsTest {
     File wfile = new File("src/test/java/edu/wpi/teamF/Test/");
     File file = new File("src/test/java/edu/wpi/teamF/Test/ServiceRequestReport.csv");
     ServiceRequestStats serviceRequestStats = new ServiceRequestStats();
-    serviceRequestStats.MaintenanceRequestStats(wfile.toPath());
-    serviceRequestStats.TransportRequestStats(wfile.toPath());
+    serviceRequestStats.downloadStatistics(wfile.toPath());
     try {
       byte[] f1 = Files.readAllBytes(file.toPath());
       byte[] f2 =
