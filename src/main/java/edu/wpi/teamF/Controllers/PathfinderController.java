@@ -119,10 +119,10 @@ public class PathfinderController implements Initializable {
   public Label stairsLabel;
 
   // error box stuff
-  AnchorPane errorPane;
-  Label errorPaneLabel1;
-  Label errorPaneLabel2;
-  JFXButton errorPaneButton;
+  public AnchorPane errorPane;
+  public Label errorPaneLabel1;
+  public Label errorPaneLabel2;
+  public JFXButton errorPaneButton;
 
   public List<Node> fullNodeList;
   public int state;
@@ -422,11 +422,11 @@ public class PathfinderController implements Initializable {
     scrollPaneFaulkner1.setVisible(true);
     mapPaneFaulkner1.setVisible(true);
     imageViewFaulkner1.setVisible(true);
-    //    errorPane.setVisible(false);
+    errorPane.setVisible(false);
     floorButtonsSet();
     initializehospitalComboBox();
     setToggleBehavior();
-    // setErrorPaneButtonBehavior();
+    setErrorPaneButtonBehavior();
     externalDirections.setVisible(false);
     externalDirections.setPrefWidth(0);
     externalDirections.setPrefHeight(0);
@@ -672,16 +672,9 @@ public class PathfinderController implements Initializable {
           } catch (InstanceNotFoundException e) {
             e.printStackTrace();
           }
-          if (path.getPath().isEmpty()) {
-            errorPane.setVisible(true);
-            String lifter;
-            if ("ELEV".equals(liftType)) {
-              lifter = "stairs";
-            } else {
-              lifter = "elevator";
-            }
-            errorPaneLabel1.setText("Sorry, we couldn't find a path. Please try again.");
-            errorPaneLabel2.setText("Maybe try taking the " + lifter + ".");
+
+          if (null == path.getPath()) {
+            showErrorPane();
           } else {
             try {
               commandText.setText("See Path Below for Directions");
@@ -1060,14 +1053,33 @@ public class PathfinderController implements Initializable {
         });
   }
 
-  //  private void setErrorPaneButtonBehavior() {
-  //    errorPaneButton.setOnAction(
-  //        actionEvent -> {
-  //          errorPane.setVisible(false);
-  //        });
-  //  }
-
   public void setExternalDirections(String fromFloor, String toFloor) {
     // TODO implement this code
+
+  private void setErrorPaneButtonBehavior() {
+    errorPaneButton.setOnAction(
+        actionEvent -> {
+          startLabel.setVisible(false);
+          endLabel.setVisible(false);
+          errorPane.setVisible(false);
+        });
+  }
+
+  private void showErrorPane() {
+    System.out.println("I'm here.");
+    errorPane.setVisible(true);
+    String lifter;
+    if ("ELEV".equals(liftType)) {
+      lifter = "stairs";
+    } else {
+      lifter = "elevator";
+    }
+    String msg2 = "Maybe try taking the " + lifter + ".";
+    Text text2 = new Text(msg2);
+    Font font2 = Font.font("System", 12);
+    text2.setFont(font2);
+    double width2 = text2.getLayoutBounds().getWidth();
+    errorPaneLabel2.setLayoutX(errorPaneLabel2.getLayoutX() - (width2 / 2));
+    errorPaneLabel2.setText(msg2);
   }
 }
