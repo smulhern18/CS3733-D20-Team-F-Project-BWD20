@@ -40,12 +40,12 @@ public class Path {
     }
     setPath(newPath);
     locationsList = new ArrayList<>();
-    locationsList.add(new Location(path.get(0).getBuilding(), path.get(0).getFloor()));
+    locationsList.add(new Location(newPath.get(0).getBuilding(), newPath.get(0).getFloor()));
     uniqueLocations = 1;
-    for (int i = 1; i < path.size(); i++) {
-      if (!path.get(i).getFloor().equals(path.get(i - 1).getFloor())) {
+    for (int i = 1; i < newPath.size(); i++) {
+      if (!newPath.get(i).getFloor().equals(newPath.get(i - 1).getFloor())) {
         // This is a unique element in the path list because floors aren't the same
-        locationsList.add(new Location(path.get(i).getBuilding(), path.get(i).getFloor()));
+        locationsList.add(new Location(newPath.get(i).getBuilding(), newPath.get(i).getFloor()));
         uniqueLocations++;
       }
     }

@@ -73,7 +73,8 @@ public class Directions {
           directionList.add(new IndexDirection(pathNodeList.get(i - 1).getFloor()));
         }
 
-        if (pathNodeList.get(i).getType().equals(Node.NodeType.getEnum("HALL"))) {
+        if (pathNodeList.get(i).getType().equals(Node.NodeType.getEnum("HALL"))
+            && !"OUT".equals(pathNodeList.get(i).getBuilding())) {
           // Current node is a hallway
           System.out.println("Hallway");
           if (pathNodeList.get(i - 1).getType().equals(Node.NodeType.getEnum("HALL"))) {
@@ -189,19 +190,12 @@ public class Directions {
           }
           currHall = new StraightDirection(0, 0, pathNodeList.get(i).getFloor());
 
-          if (!Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(i - 1).getType())) {
+          if (!Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(i - 1).getType())
+              && !"OUT".equals(pathNodeList.get(i - 1).getBuilding())) {
             // If the previous node was not an exit, this is the first exit in the exit sequence
             directionList.add(
                 new ExitDirection(
                     pathNodeList.get(i).getBuilding(), pathNodeList.get(i).getFloor()));
-            if (Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(i + 1).getType())) {
-              // If the next node is also an exit, we are transiting between buildings
-              directionList.add(
-                  new TravelDirection(
-                      pathNodeList.get(i).getBuilding(),
-                      pathNodeList.get(i + 1).getBuilding(),
-                      pathNodeList.get(i).getFloor()));
-            }
           } else if (!Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(i + 1).getType())) {
             // This is NOT an initial exit, but it IS the final exit, meaning you're entering a
             // building
@@ -210,11 +204,17 @@ public class Directions {
                     pathNodeList.get(i).getBuilding(), pathNodeList.get(i).getFloor()));
           }
           // Ignore intermediate exit nodes
+        } else if ("OUT".equals(pathNodeList.get(i).getBuilding())) {
+          // This is the in-transit outdoor node
+          directionList.add(
+              new TravelDirection(
+                  pathNodeList.get(i - 1).getBuilding(),
+                  pathNodeList.get(i + 1).getBuilding(),
+                  pathNodeList.get(i).getFloor()));
         }
 
         // If the given node is not a hall, the goal, exit, travel, elevator, or stairs, it must be
-        // an
-        // in-transit node
+        // an in-transit node
         else {
           if (Node.NodeType.getEnum("HALL").equals(pathNodeList.get(i - 1).getType())) {
             // Previous node was a hallway, so we are entering a room

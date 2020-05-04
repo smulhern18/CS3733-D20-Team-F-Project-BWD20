@@ -225,11 +225,9 @@ public class PathfinderController implements Initializable {
       pathSwitchNext.setPrefHeight(50);
       btnSpacer.setPrefHeight(0);
 
-      if (!(path.getLocationAtIndex(0)
-          .getBuilding()
-          .equals(path.getLocationAtIndex(1).getBuilding()))) {
+      if ((path.getLocationAtIndex(1).getBuilding().equals("OUT"))) {
         // Next stop is at a different hospital
-        pathSwitchNext.setText("Next: Go to " + path.getLocationAtIndex(1).getBuilding());
+        pathSwitchNext.setText("Next: Go to " + path.getLocationAtIndex(2).getBuilding());
       } else {
         pathSwitchNext.setText("Next: Go to floor " + path.getLocationAtIndex(1).getFloor());
       }
@@ -769,6 +767,10 @@ public class PathfinderController implements Initializable {
     pathSwitchNext.setVisible(true);
     pathSwitchNext.setPrefHeight(50);
     btnSpacer.setPrefHeight(10);
+    // Disable the external directions pane
+    externalDirections.setVisible(false);
+    externalDirections.setPrefHeight(0);
+    externalDirections.setPrefWidth(0);
     System.out.println("Changed to Index: " + locationIndex);
     System.out.println("Floor: " + path.getLocationAtIndex(locationIndex).getFloor());
     System.out.println("Building: " + path.getLocationAtIndex(locationIndex).getBuilding());
@@ -783,31 +785,37 @@ public class PathfinderController implements Initializable {
       pathSwitchPrevious.setVisible(false);
       pathSwitchPrevious.setPrefHeight(0);
       btnSpacer.setPrefHeight(0);
+    } else if ("OUT".equals(path.getLocationAtIndex(locationIndex).getBuilding())) {
+      // This is the outdoor node, show the external directions
+      externalDirections.setPrefHeight(720);
+      externalDirections.setPrefWidth(1070);
+      externalDirections.setVisible(true);
+      setExternalDirections(
+          path.getLocationAtIndex(locationIndex - 1).getBuilding(),
+          path.getLocationAtIndex(locationIndex + 1).getBuilding());
+      pathSwitchNext.setText(
+          "Arrive at " + path.getLocationAtIndex(locationIndex + 1).getBuilding());
+      pathSwitchPrevious.setText(
+          "Return to " + path.getLocationAtIndex(locationIndex - 1).getBuilding());
+    } else if ("OUT".equals(path.getLocationAtIndex(locationIndex - 1).getBuilding())) {
+      // Exiting a building to go somewhere
+      pathSwitchPrevious.setText(
+          "Previous: Go to " + path.getLocationAtIndex(locationIndex - 2).getBuilding());
     } else {
-      // Need to update the text for previous button
-      if (("Faulkner".equals(path.getLocationAtIndex(locationIndex - 1).getBuilding())
-              && !"Faulkner".equals(path.getLocationAtIndex(locationIndex).getBuilding()))
-          || ("Faulkner".equals(path.getLocationAtIndex(locationIndex).getBuilding())
-              && !"Faulkner".equals(path.getLocationAtIndex(locationIndex - 1).getBuilding()))) {
-        // Previous stop changes between Faulkner and main
-        pathSwitchPrevious.setText(
-            "Previous: Go to " + path.getLocationAtIndex(locationIndex - 1).getBuilding());
-      } else {
-        pathSwitchPrevious.setText(
-            "Previous: Go to floor " + path.getLocationAtIndex(locationIndex - 1).getFloor());
-      }
+      pathSwitchPrevious.setText(
+          "Previous: Go to floor " + path.getLocationAtIndex(locationIndex - 1).getFloor());
     }
-    // Need to update the text for next button
-    if (("Faulkner".equals(path.getLocationAtIndex(locationIndex + 1).getBuilding())
-            && !"Faulkner".equals(path.getLocationAtIndex(locationIndex).getBuilding()))
-        || ("Faulkner".equals(path.getLocationAtIndex(locationIndex).getBuilding())
-            && !"Faulkner".equals(path.getLocationAtIndex(locationIndex + 1).getBuilding()))) {
-      // Next stop changes between Faulkner and main
-      pathSwitchNext.setText(
-          "Next: Go to " + path.getLocationAtIndex(locationIndex + 1).getBuilding());
-    } else {
-      pathSwitchNext.setText(
-          "Next: Go to floor " + path.getLocationAtIndex(locationIndex + 1).getFloor());
+
+    // Need to update the text for previous button
+    if (!"OUT".equals(path.getLocationAtIndex(locationIndex).getBuilding())) {
+      if ("OUT".equals(path.getLocationAtIndex(locationIndex + 1).getBuilding())) {
+        // next node was the outdoor node
+        pathSwitchNext.setText(
+            "Next: Go to " + path.getLocationAtIndex(locationIndex + 2).getBuilding());
+      } else {
+        pathSwitchNext.setText(
+            "Next: Go to floor " + path.getLocationAtIndex(locationIndex + 1).getFloor());
+      }
     }
   }
 
@@ -816,12 +824,18 @@ public class PathfinderController implements Initializable {
     pathSwitchPrevious.setVisible(true);
     pathSwitchPrevious.setPrefHeight(50);
     btnSpacer.setPrefHeight(10);
+    // Disable the external directions pane
+    externalDirections.setVisible(false);
+    externalDirections.setPrefHeight(0);
+    externalDirections.setPrefWidth(0);
     System.out.println("Changed to Index: " + locationIndex);
     System.out.println("Floor: " + path.getLocationAtIndex(locationIndex).getFloor());
     System.out.println("Building: " + path.getLocationAtIndex(locationIndex).getBuilding());
-    switchToFloor(
-        path.getLocationAtIndex(locationIndex).getFloor(),
-        path.getLocationAtIndex(locationIndex).getBuilding());
+    if (!"OUT".equals(path.getLocationAtIndex(locationIndex).getBuilding())) {
+      switchToFloor(
+          path.getLocationAtIndex(locationIndex).getFloor(),
+          path.getLocationAtIndex(locationIndex).getBuilding());
+    }
     directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
 
     if (locationIndex == (path.getUniqueLocations() - 1)) {
@@ -829,31 +843,37 @@ public class PathfinderController implements Initializable {
       pathSwitchNext.setVisible(false);
       pathSwitchNext.setPrefHeight(0);
       btnSpacer.setPrefHeight(0);
+    } else if ("OUT".equals(path.getLocationAtIndex(locationIndex).getBuilding())) {
+      // This is the outdoor node, show the external directions
+      externalDirections.setPrefHeight(720);
+      externalDirections.setPrefWidth(1070);
+      externalDirections.setVisible(true);
+      setExternalDirections(
+          path.getLocationAtIndex(locationIndex - 1).getBuilding(),
+          path.getLocationAtIndex(locationIndex + 1).getBuilding());
+      pathSwitchNext.setText(
+          "Arrive at " + path.getLocationAtIndex(locationIndex + 1).getBuilding());
+      pathSwitchPrevious.setText(
+          "Return to " + path.getLocationAtIndex(locationIndex - 1).getBuilding());
+    } else if ("OUT".equals(path.getLocationAtIndex(locationIndex + 1).getBuilding())) {
+      // Exiting a building to go somewhere
+      pathSwitchNext.setText(
+          "Next: Go to " + path.getLocationAtIndex(locationIndex + 2).getBuilding());
     } else {
-      // Need to update the text for next button
-      if (("Faulkner".equals(path.getLocationAtIndex(locationIndex + 1).getBuilding())
-              && !"Faulkner".equals(path.getLocationAtIndex(locationIndex).getBuilding()))
-          || ("Faulkner".equals(path.getLocationAtIndex(locationIndex).getBuilding())
-              && !"Faulkner".equals(path.getLocationAtIndex(locationIndex + 1).getBuilding()))) {
-        // Next stop changes between Faulkner and main
-        pathSwitchNext.setText(
-            "Next: Go to " + path.getLocationAtIndex(locationIndex + 1).getBuilding());
-      } else {
-        pathSwitchNext.setText(
-            "Next: Go to floor " + path.getLocationAtIndex(locationIndex + 1).getFloor());
-      }
+      pathSwitchNext.setText(
+          "Next: Go to floor " + path.getLocationAtIndex(locationIndex + 1).getFloor());
     }
+
     // Need to update the text for previous button
-    if (("Faulkner".equals(path.getLocationAtIndex(locationIndex - 1).getBuilding())
-            && !"Faulkner".equals(path.getLocationAtIndex(locationIndex).getBuilding()))
-        || ("Faulkner".equals(path.getLocationAtIndex(locationIndex).getBuilding())
-            && !"Faulkner".equals(path.getLocationAtIndex(locationIndex - 1).getBuilding()))) {
-      // Previous stop changes between Faulkner and main
-      pathSwitchPrevious.setText(
-          "Previous: Go to " + path.getLocationAtIndex(locationIndex - 1).getBuilding());
-    } else {
-      pathSwitchPrevious.setText(
-          "Previous: Go to floor " + path.getLocationAtIndex(locationIndex - 1).getFloor());
+    if (!"OUT".equals(path.getLocationAtIndex(locationIndex).getBuilding())) {
+      if ("OUT".equals(path.getLocationAtIndex(locationIndex - 1).getBuilding())) {
+        // Previous node was the outdoor node
+        pathSwitchPrevious.setText(
+            "Previous: Go to " + path.getLocationAtIndex(locationIndex - 2).getBuilding());
+      } else {
+        pathSwitchPrevious.setText(
+            "Previous: Go to floor " + path.getLocationAtIndex(locationIndex - 1).getFloor());
+      }
     }
   }
 
@@ -1046,4 +1066,8 @@ public class PathfinderController implements Initializable {
   //          errorPane.setVisible(false);
   //        });
   //  }
+
+  public void setExternalDirections(String fromFloor, String toFloor) {
+    // TODO implement this code
+  }
 }
