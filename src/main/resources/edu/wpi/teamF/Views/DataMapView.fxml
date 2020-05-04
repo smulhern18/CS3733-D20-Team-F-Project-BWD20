@@ -286,11 +286,11 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <JFXButton fx:id="node1Button" prefHeight="32.0" prefWidth="174.0" style="-fx-border-color: #012d5a; -fx-border-radius: 3;" text="Click Here" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <JFXButton fx:id="node1Button" onAction="#selectNode1" prefHeight="32.0" prefWidth="174.0" style="-fx-border-color: #012d5a; -fx-border-radius: 3;" text="Click Here" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <JFXButton fx:id="addEdgeButton" disable="true" maxHeight="25.0" maxWidth="40.0" minHeight="25.0" minWidth="40.0" onAction="#addEdge" prefHeight="25.0" prefWidth="40.0" style="-fx-background-color: #012d5a;" text="Add" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
                   <JFXButton fx:id="deleteEdgeButton" maxHeight="26.0" maxWidth="50.0" minHeight="25.0" minWidth="50.0" onAction="#deleteEdge" prefHeight="26.0" prefWidth="50.0" style="-fx-background-color: #012d5a;" text="Delete" textAlignment="CENTER" textFill="WHITE" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                   <JFXButton fx:id="modifyEdgeButton" disable="true" maxHeight="26.0" maxWidth="53.0" minHeight="25.0" minWidth="53.0" onAction="#modifyEdge" prefHeight="26.0" prefWidth="53.0" style="-fx-background-color: #012d5a;" text="Modify" textAlignment="CENTER" textFill="WHITE" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-                  <JFXButton fx:id="node2Button" prefHeight="32.0" prefWidth="174.0" style="-fx-border-color: #012d5a; -fx-border-radius: 3;" text="Click Here" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <JFXButton fx:id="node2Button" onAction="#selectNode2" prefHeight="32.0" prefWidth="174.0" style="-fx-border-color: #012d5a; -fx-border-radius: 3;" text="Click Here" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children>

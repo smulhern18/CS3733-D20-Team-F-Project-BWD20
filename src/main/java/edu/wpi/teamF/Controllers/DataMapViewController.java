@@ -178,6 +178,16 @@ public class DataMapViewController implements Initializable {
 
   List<JFXButton> buttons = new ArrayList<JFXButton>();
 
+  public void selectNode2(ActionEvent event) {
+    edgeSelection = true;
+    numSelected = 1;
+  }
+
+  public void selectNode1(ActionEvent event) {
+    edgeSelection = true;
+    numSelected = 0;
+  }
+
   private enum Hospital {
     MAIN,
     FAULK
@@ -472,6 +482,10 @@ public class DataMapViewController implements Initializable {
               node2Button.setText(node.getId());
               numSelected = 0;
               addEdgeButton.setDisable(false);
+            }
+            if (!node1Button.getText().equals("Click Here")
+                && !node2Button.getText().equals("Click Here")) {
+              modifyEdgeButton.setDisable(false);
             }
           }
         });
@@ -839,7 +853,9 @@ public class DataMapViewController implements Initializable {
     xCoorInput.setText("");
     yCoorInput.setText("");
     addNodeButton.setVisible(true);
+    addNodeButton.setDisable(true);
     modifyNodeButton.setVisible(false);
+    modifyNodeButton.setDisable(true);
     deleteNodeButton.setVisible(false);
   }
 
@@ -848,7 +864,9 @@ public class DataMapViewController implements Initializable {
     node1Button.setText("Click Here");
     node2Button.setText("Click Here");
     addEdgeButton.setVisible(true);
+    addEdgeButton.setDisable(true);
     modifyEdgeButton.setVisible(false);
+    modifyEdgeButton.setDisable(true);
     deleteEdgeButton.setVisible(false);
   }
 
