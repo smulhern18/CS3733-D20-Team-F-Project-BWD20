@@ -64,6 +64,7 @@ public class ComputerServiceController implements Initializable {
   public JFXButton delete;
   public JFXButton backButton;
   public ImageView background;
+  public JFXButton checkStatusButton;
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UIComputerServiceRequest> csrUI = FXCollections.observableArrayList();
@@ -87,11 +88,11 @@ public class ComputerServiceController implements Initializable {
     background.fitHeightProperty().bind(anchorPane.heightProperty());
     Account.Type userLevel = databaseManager.getPermissions();
     if (userLevel == Account.Type.USER) {
-      checkStatButton.setDisable(true);
+      checkStatusButton.setDisable(true);
 
       // set to user
     } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
-      checkStatButton.setDisable(false);
+      checkStatusButton.setDisable(false);
     }
     // set to staff
 

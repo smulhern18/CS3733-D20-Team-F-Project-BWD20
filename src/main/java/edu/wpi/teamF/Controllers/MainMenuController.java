@@ -54,11 +54,9 @@ public class MainMenuController implements Initializable {
     sceneController.switchScene("HelpMain");
   }
 
-  public void about(ActionEvent actionEvent) {
-  }
+  public void about(ActionEvent actionEvent) {}
 
-  public void credits(ActionEvent actionEvent) {
-  }
+  public void credits(ActionEvent actionEvent) {}
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -94,5 +92,4 @@ public class MainMenuController implements Initializable {
     pathfinderButton.setFont(buttonFont);
     serviceRequestButton.setFont(buttonFont);
   }
-
 }
