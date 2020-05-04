@@ -129,10 +129,12 @@ public class PathfinderController implements Initializable {
   public ImageView faulknerTo75FrancisImage;
   public ImageView faulknerToBTMImage;
   public ImageView faulknerToShapiroImage;
+  public ImageView faulknerTo15FrancisImage;
   public ImageView Francis45ToFaulknerImage;
   public ImageView Francis75ToFaulknerImage;
   public ImageView BTMToFaulknerImage;
   public ImageView shapiroToFaulknerImage;
+  public ImageView francis15ToFaulknerImage;
 
   public List<Node> fullNodeList;
   public int state;
@@ -1067,6 +1069,8 @@ public class PathfinderController implements Initializable {
 
   public void setExternalDirections(String fromBuilding, String toBuilding) {
     // TODO implement this code
+    System.out.println(fromBuilding);
+    System.out.println(toBuilding);
     if ("Faulkner".equals(fromBuilding) && "45 Francis".equals(toBuilding)) {
       setIntermediateMapsInvisible();
       faulknerTo45FrancisImage.setVisible(true);
@@ -1080,6 +1084,10 @@ public class PathfinderController implements Initializable {
     } else if ("Faulkner".equals(fromBuilding) && "Shapiro".equals(toBuilding)) {
       setIntermediateMapsInvisible();
       faulknerToShapiroImage.setVisible(true);
+    } else if ("Faulkner".equals(fromBuilding)
+        && ("15 Francis".equals(toBuilding) || ("FLEX".equals(toBuilding)))) {
+      setIntermediateMapsInvisible();
+      faulknerTo15FrancisImage.setVisible(true);
     } else if ("45 Francis".equals(fromBuilding) && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
       Francis45ToFaulknerImage.setVisible(true);
@@ -1093,6 +1101,10 @@ public class PathfinderController implements Initializable {
     } else if ("Shapiro".equals(fromBuilding) && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
       shapiroToFaulknerImage.setVisible(true);
+    } else if (("15 Francis".equals(fromBuilding) || ("FLEX".equals(fromBuilding)))
+        && "Faulkner".equals(toBuilding)) {
+      setIntermediateMapsInvisible();
+      francis15ToFaulknerImage.setVisible(true);
     }
   }
 
@@ -1128,9 +1140,11 @@ public class PathfinderController implements Initializable {
     faulknerTo75FrancisImage.setVisible(false);
     faulknerToBTMImage.setVisible(false);
     faulknerToShapiroImage.setVisible(false);
+    faulknerTo15FrancisImage.setVisible(false);
     Francis45ToFaulknerImage.setVisible(false);
     Francis75ToFaulknerImage.setVisible(false);
     BTMToFaulknerImage.setVisible(false);
     shapiroToFaulknerImage.setVisible(false);
+    francis15ToFaulknerImage.setVisible(false);
   }
 }
