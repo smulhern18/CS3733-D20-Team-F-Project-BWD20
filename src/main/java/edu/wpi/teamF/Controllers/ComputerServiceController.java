@@ -9,6 +9,7 @@ import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -77,11 +78,23 @@ public class ComputerServiceController implements Initializable {
     }
   }
 
+  public void handle(MouseEvent mouseEvent) {}
+
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     background.fitWidthProperty().bind(anchorPane.widthProperty());
     background.fitHeightProperty().bind(anchorPane.heightProperty());
+    Account.Type userLevel = databaseManager.getPermissions();
+    if (userLevel == Account.Type.USER) {
+      checkStatButton.setDisable(true);
+
+      // set to user
+    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+      checkStatButton.setDisable(false);
+    }
+    // set to staff
+
     // add the different choices to the choicebox
     // Replace this with long names, linked to IDs
     List<Node> nodes = null;

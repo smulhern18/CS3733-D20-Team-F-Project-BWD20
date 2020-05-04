@@ -2,6 +2,8 @@ package edu.wpi.teamF.Controllers;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.teamF.App;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+import edu.wpi.teamF.ModelClasses.Account.Account;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,6 +30,7 @@ public class MainMenuController implements Initializable {
   public Pane rectanglePane;
   public JFXButton serviceRequestButton;
   public Rectangle blueRectangle;
+  public DatabaseManager dbm = DatabaseManager.getManager();
 
   SceneController sceneController = App.getSceneController();
 
@@ -59,6 +62,14 @@ public class MainMenuController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    Account.Type userLevel = dbm.getPermissions();
+    if (userLevel == Account.Type.USER) {
+      // set to user
+    } else if (userLevel == Account.Type.STAFF) {
+      // set to staff
+    } else if (userLevel == Account.Type.ADMIN) {
+      // set to admin perms
+    }
     background.fitWidthProperty().bind(anchorPane.widthProperty());
     background.fitHeightProperty().bind(anchorPane.heightProperty());
 

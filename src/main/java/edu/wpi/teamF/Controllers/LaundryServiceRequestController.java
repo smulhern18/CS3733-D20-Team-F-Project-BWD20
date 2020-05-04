@@ -66,6 +66,7 @@ public class LaundryServiceRequestController implements Initializable {
   public JFXTextField deleteText;
   public JFXButton delete;
   public JFXButton backButton;
+  public JFXButton checkStatButton;
   SceneController sceneController = App.getSceneController();
   DatabaseManager databaseManager = DatabaseManager.getManager();
 
@@ -75,6 +76,14 @@ public class LaundryServiceRequestController implements Initializable {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    Account.Type userLevel = databaseManager.getPermissions();
+    if (userLevel == Account.Type.USER) {
+      checkStatButton.setDisable(true);
+
+      // set to user
+    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+      checkStatButton.setDisable(false);
+    }
 
     UISetting uiSetting = new UISetting();
     uiSetting.setAsLocationComboBox(locationChoice);

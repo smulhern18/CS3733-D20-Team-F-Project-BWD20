@@ -59,8 +59,7 @@ public class LoginController implements Initializable {
     try {
       if (databaseManager.verifyPassword(username, password)) { // does the password match
         System.out.println("The account is valid");
-        // set account in db to be the logged in one
-
+        databaseManager.setLogin(username);
         switchToMainMenu2();
         // code that logs the user into the application
       } else {

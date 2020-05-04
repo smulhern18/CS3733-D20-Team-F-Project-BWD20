@@ -106,6 +106,7 @@ public class FlowerRequestInfoController implements Initializable {
   public Label tropicalSplashLabel;
   public Label babyBoyLabel;
   public Label babyGirlLabel;
+  public JFXButton checkStatusButton;
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UiFlowerServiceRequest> frUI = FXCollections.observableArrayList();
@@ -115,6 +116,14 @@ public class FlowerRequestInfoController implements Initializable {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    Account.Type userLevel = databaseManager.getPermissions();
+    if (userLevel == Account.Type.USER) {
+      checkStatusButton.setDisable(true);
+
+      // set to user
+    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+      checkStatusButton.setDisable(false);
+    }
 
     UISetting uiSetting = new UISetting();
     uiSetting.setAsLocationComboBox(locationComboBox);
