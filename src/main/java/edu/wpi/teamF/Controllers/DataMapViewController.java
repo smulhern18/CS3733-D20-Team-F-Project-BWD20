@@ -821,6 +821,26 @@ public class DataMapViewController implements Initializable {
   @FXML
   private void cancelViews(ActionEvent event) throws Exception {
     clearViews();
+
+    for (Edge edge : databaseManager.getAllEdgesConnectedToNode(node.getId())) {
+      for (int i = 0; i < mapPane.getChildren().size(); i++) {
+        javafx.scene.Node children = mapPane.getChildren().get(i);
+        if (children instanceof Line && children.getId().equals(edge.getId())) {
+          mapPane.getChildren().remove(children);
+        }
+      }
+    }
+
+    mapPane.getChildren().remove(nodeButton); // removes node
+
+    addToPane(node, nodeButton); // adds new node
+
+    for (Edge edge : databaseManager.getAllEdgesConnectedToNode(node.getId())) {
+      drawEdge(edge);
+    }
+
+    nodeButton.setLayoutX(node.getXCoord() * widthRatio - 3);
+    nodeButton.setLayoutY(node.getYCoord() * heightRatio - 3);
   }
 
   @FXML
@@ -899,7 +919,7 @@ public class DataMapViewController implements Initializable {
     nodeAnchor.setVisible(false);
     edgeAnchor.setVisible(false);
     cancelButton.setVisible(false);
-    nodeButton.setVisible(true);
+    nodeDisplayButton.setVisible(true);
     edgeDisplayButton.setVisible(true);
     edgeSelection = false;
     numSelected = 0;
