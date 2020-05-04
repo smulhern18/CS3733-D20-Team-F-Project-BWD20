@@ -2,7 +2,9 @@ package edu.wpi.teamF.ModelClasses;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import lombok.Data;
 
+@Data
 public class ScheduleEntry {
   public static DateTimeFormatter dateFormatter =
       DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
@@ -14,7 +16,6 @@ public class ScheduleEntry {
   String endTime;
   String room;
   String accountID;
-  String accountName;
 
   public ScheduleEntry(
       String startDate,
@@ -22,15 +23,13 @@ public class ScheduleEntry {
       String endDate,
       String endTime,
       String room,
-      String accountID,
-      String accountName) {
+      String accountID) {
     this.ID = startDate + "," + startTime + "," + room;
     this.startDate = startDate;
     this.startTime = startTime;
     this.endDate = endDate;
     this.endTime = endTime;
     this.room = room;
-    this.accountName = accountName;
     this.accountID = accountID;
   }
 }

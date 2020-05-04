@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTimePicker?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.RoomSchedulerController">
    <children>
-      <JFXTimePicker fx:id="startTimeSelector" layoutX="170.0" layoutY="64.0" />
-      <JFXDatePicker fx:id="startDateSelector" layoutX="386.0" layoutY="57.0" />
-      <JFXComboBox fx:id="roomComboBox" layoutY="85.0" prefHeight="25.0" prefWidth="153.0" />
-      <JFXTimePicker fx:id="endTimeSelector" layoutX="170.0" layoutY="172.0" />
-      <JFXDatePicker fx:id="endDateSelector" layoutX="386.0" layoutY="172.0" />
+      <JFXTimePicker fx:id="startTimeSelector" layoutX="162.0" layoutY="125.0" prefWidth="171.0" />
+      <JFXDatePicker fx:id="startDateSelector" layoutX="162.0" layoutY="79.0" />
+      <JFXComboBox fx:id="roomComboBox" layoutX="162.0" layoutY="31.0" prefHeight="25.0" prefWidth="153.0" />
+      <JFXTimePicker fx:id="endTimeSelector" layoutX="162.0" layoutY="226.0" />
+      <JFXDatePicker fx:id="endDateSelector" layoutX="162.0" layoutY="172.0" />
+      <JFXButton fx:id="submitButton" layoutX="147.0" layoutY="305.0" onAction="#submit" text="Submit" />
+      <JFXButton fx:id="cancelButton" layoutX="248.0" layoutY="305.0" onAction="#cancel" text="Cancel" />
    </children>
 </AnchorPane>
