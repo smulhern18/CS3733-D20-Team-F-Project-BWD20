@@ -223,7 +223,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <JFXButton fx:id="accountsButton" alignment="CENTER_RIGHT" buttonType="RAISED" contentDisplay="RIGHT" style="-fx-background-color: #DC6F55;" text="Accounts" textAlignment="RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                              <JFXButton fx:id="accountsButton" alignment="CENTER_RIGHT" buttonType="RAISED" contentDisplay="RIGHT" onMouseClicked="#accountView" style="-fx-background-color: #DC6F55;" text="Accounts" textAlignment="RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="1">
                                  <font>
                                     <Font name="Microsoft YaHei Light" size="18.0" />
                                  </font>
