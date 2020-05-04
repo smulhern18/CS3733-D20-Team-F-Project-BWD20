@@ -114,23 +114,23 @@ public class PathfinderController implements Initializable {
     if (endNode == null) {
       endNode = pathNodes.get(pathNodes.size() - 1);
     }
-    try{
+    try {
       ReportsClass newNode = databaseManager.readReport(startNode.getId());
       ReportsClass oldNode = databaseManager.readReport(endNode.getId());
-      if(newNode != null) {
-        newNode.setTimesVisited(newNode.getTimesVisited() +1);
+      if (newNode != null) {
+        newNode.setTimesVisited(newNode.getTimesVisited() + 1);
       } else {
-        newNode = new ReportsClass(startNode.getId(),1,0,"NA");
+        newNode = new ReportsClass(startNode.getId(), 1, 0, "NA");
       }
-      if(oldNode != null) {
-        oldNode.setTimesVisited(oldNode.getTimesVisited() +1);
+      if (oldNode != null) {
+        oldNode.setTimesVisited(oldNode.getTimesVisited() + 1);
       } else {
-        oldNode = new ReportsClass(endNode.getId(),1,0,"NA");
+        oldNode = new ReportsClass(endNode.getId(), 1, 0, "NA");
       }
       databaseManager.manipulateReport(newNode);
       databaseManager.manipulateReport(oldNode);
-      } catch (Exception e){
-          System.out.println(e.getMessage());
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
     }
     double heightRatio = currentPane.getPrefHeight() / MAP_HEIGHT;
     double widthRatio = currentPane.getPrefWidth() / MAP_WIDTH;

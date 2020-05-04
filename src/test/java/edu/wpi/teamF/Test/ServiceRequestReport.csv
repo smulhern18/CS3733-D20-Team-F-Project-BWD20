@@ -1,3 +1,4 @@
+MaintenanceStats
 EmployeeName,NumberOfRequestsAssigned
 Charles,1
 Denver,1
@@ -8,6 +9,9 @@ nodeD,1
 nodeB,1
 nodeC,1
 nodeA,1
-Average time to complete request,0 hours 0 MinutesEmployeeName,NumberOfRequestsAssigned
+Average time to complete request,0 hours 0 Minutes
+ComputerStats
+EmployeeName,NumberOfRequestsAssigned
+Roman,1
 NodeID,NumberOfRequestsAtLocation
-Average time to complete request,
+nodeA,1
