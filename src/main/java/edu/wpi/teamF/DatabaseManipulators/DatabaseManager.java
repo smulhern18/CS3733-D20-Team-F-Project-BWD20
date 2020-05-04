@@ -34,6 +34,7 @@ public class DatabaseManager {
   static final String LAUNDRY_REQUEST_TABLE_NAME = "laundryRequestsTable";
   static final String FLOWER_REQUEST_TABLE_NAME = "flowerRequestsTable";
   static final String MARIACHI_REQUEST_TABLE_NAME = "mariachiRequestsTable";
+  static final String REPORTS_TABLE_NAME = "reportsTable";
   /** Column Names */
   // node
   static final String X_COORDINATE_KEY = "xCoord";
@@ -116,6 +117,11 @@ public class DatabaseManager {
   static final String PHONE_NUMBER_KEY = "phoneNumber";
   static final String GIFT_WRAP_KEY = "giftWrap";
 
+  // reports
+  static final String TIMESVISITED_KEY = "timesVisited";
+  static final String TIMESSANITIZED_KEY = "timesSanitized";
+  static final String LASTSANITIZER_KEY = "lastSanitizer";
+
   // Factories
   private NodeFactory nodeFactory = NodeFactory.getFactory();
   private EdgeFactory edgeFactory = EdgeFactory.getFactory();
@@ -139,6 +145,7 @@ public class DatabaseManager {
   private FlowerServiceRequestFactory flowerServiceRequestFactory =
       FlowerServiceRequestFactory.getFactory();
   private TransportRequestFactory transportRequestFactory = TransportRequestFactory.getFactory();
+  private ReportsFactory reportsFactory = ReportsFactory.getFactory();
 
   static Connection connection = null;
 
@@ -396,6 +403,23 @@ public class DatabaseManager {
             + SERVICEID_KEY
             + "))";
 
+    String reportTableCreationStatement =
+        "CREATE TABLE "
+            + REPORTS_TABLE_NAME
+            + " ( "
+            + NODEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + TIMESSANITIZED_KEY
+            + " INTEGER, "
+            + LASTSANITIZER_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + TIMESVISITED_KEY
+            + " INTEGER, "
+            + "PRIMARY KEY ("
+            + NODEID_KEY
+            + "))";
+    ;
+
     PreparedStatement preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(computerTableCreationStatement);
@@ -426,6 +450,9 @@ public class DatabaseManager {
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(mariachiTableCreationStatement);
     preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(reportTableCreationStatement);
+    preparedStatement.execute();
+
     System.out.println("Created Tables Successfully");
   }
 
@@ -467,6 +494,7 @@ public class DatabaseManager {
     String flowerDropStatement = "DROP TABLE " + FLOWER_REQUEST_TABLE_NAME;
     String laundryDropStatement = "DROP TABLE " + LAUNDRY_REQUEST_TABLE_NAME;
     String mariachiDropStatement = "DROP TABLE " + MARIACHI_REQUEST_TABLE_NAME;
+    String reportsDropStatement = "DROP TABLE " + REPORTS_TABLE_NAME;
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeDropStatement);
     preparedStatement.execute();
@@ -497,6 +525,8 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(laundryDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(mariachiDropStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(reportsDropStatement);
     preparedStatement.execute();
     createTables();
   }
@@ -900,5 +930,18 @@ public class DatabaseManager {
 
   public TransportRequest readTransportRequest(String id) throws ValidationException {
     return transportRequestFactory.read(id);
+  }
+
+  public void manipulateReport(ReportsClass report) throws Exception {
+
+    if (reportsFactory.read(report.getNodeID()) == null) {
+      reportsFactory.create(report);
+    } else {
+      reportsFactory.update(report);
+    }
+  }
+
+  public ReportsClass readReport(String id) throws Exception {
+    return reportsFactory.read(id);
   }
 }
