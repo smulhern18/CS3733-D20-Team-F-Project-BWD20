@@ -107,6 +107,8 @@ public class PathfinderController implements Initializable {
   public JFXComboBox<String> hospitalComboBox;
   public HBox btnSpacer;
   public JFXTextField phoneNumber;
+  public AnchorPane externalDirections;
+  public Boolean awaitingExternalDirections = false;
 
   // stairs v elev stuff
   String liftType = "ELEV";
@@ -121,6 +123,7 @@ public class PathfinderController implements Initializable {
   public Label errorPaneLabel1;
   public Label errorPaneLabel2;
   public JFXButton errorPaneButton;
+
 
   public List<Node> fullNodeList;
   public int state;
@@ -422,11 +425,14 @@ public class PathfinderController implements Initializable {
     scrollPaneFaulkner1.setVisible(true);
     mapPaneFaulkner1.setVisible(true);
     imageViewFaulkner1.setVisible(true);
-    errorPane.setVisible(false);
+    //    errorPane.setVisible(false);
     floorButtonsSet();
     initializehospitalComboBox();
     setToggleBehavior();
-    setErrorPaneButtonBehavior();
+    // setErrorPaneButtonBehavior();
+    externalDirections.setVisible(false);
+    externalDirections.setPrefWidth(0);
+    externalDirections.setPrefHeight(0);
 
     UISetting uiSetting = new UISetting();
     uiSetting.setAsLocationComboBox(startCombo);
@@ -669,8 +675,6 @@ public class PathfinderController implements Initializable {
           } catch (InstanceNotFoundException e) {
             e.printStackTrace();
           }
-          System.out.println("the path is:");
-          System.out.println(path.getPath());
 
           if (null == path.getPath()) {
             showErrorPane();

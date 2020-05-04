@@ -15,7 +15,30 @@ public class Path {
   public Path() {}
 
   public Path(List<Node> path) {
-    setPath(path);
+    List<Node> newPath = new ArrayList<>();
+    for (int i = 0; i < path.size(); i++) {
+      newPath.add(path.get(i));
+      if (Node.NodeType.getEnum("EXIT").equals(path.get(i).getType())
+          && Node.NodeType.getEnum("EXIT").equals(path.get(i + 1).getType())) {
+        try {
+          Node outdoorNode =
+              new Node(
+                  "FHALL001XX",
+                  (short) 10,
+                  (short) 10,
+                  "OUT",
+                  "Outdoor Travel",
+                  "Travel",
+                  Node.NodeType.HALL,
+                  "XX");
+          newPath.add(outdoorNode);
+          System.out.println("Added an outdoor node");
+        } catch (Exception ValidationException) {
+          System.out.println("Validation error outdoor");
+        }
+      }
+    }
+    setPath(newPath);
     locationsList = new ArrayList<>();
     locationsList.add(new Location(path.get(0).getBuilding(), path.get(0).getFloor()));
     uniqueLocations = 1;
