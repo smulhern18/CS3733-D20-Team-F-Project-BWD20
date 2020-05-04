@@ -68,7 +68,7 @@ public class ServiceRequestMainController implements Initializable {
 
   public void appointmentRequest(MouseEvent mouseEvent) {
     try {
-      AppointmentRequest.run(100, 100, 1000, 1000, null, null, null);
+      AppointmentRequest.run(500, 50, 1000, 1000, null, null, null);
     } catch (Exception e) {
       e.printStackTrace();
     }

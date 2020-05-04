@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,21 +13,23 @@
 
 <AnchorPane prefHeight="407.0" prefWidth="784.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ServiceRequestMainController">
    <children>
-      <GridPane fx:id="gridPaneAll" layoutX="244.0" layoutY="119.0" prefHeight="254.0" prefWidth="500.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="210.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
+      <GridPane fx:id="gridPaneAll" layoutX="209.0" layoutY="106.0" prefHeight="378.0" prefWidth="576.0" AnchorPane.bottomAnchor="41.0" AnchorPane.leftAnchor="209.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="106.0">
         <columnConstraints>
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="114.0" minWidth="10.0" percentWidth="25.0" prefWidth="114.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="123.0" minWidth="10.0" percentWidth="25.0" prefWidth="118.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="5.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="42.0" minHeight="10.0" percentHeight="5.0" prefHeight="37.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="57.0" minHeight="10.0" prefHeight="57.0" valignment="TOP" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="5.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#switchToComputerService" pickOnBounds="true" preserveRatio="true">
@@ -69,22 +72,22 @@
                   <Font name="Microsoft YaHei Light" size="12.0" />
                </font>
             </JFXButton>
-            <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#mariachiService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+            <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#mariachiService" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="6">
                <image>
                   <Image url="@../../../../Images/baseline_audiotrack_black_48dp.png" />
                </image>
             </ImageView>
-            <JFXButton text="Mariachi" GridPane.columnIndex="4" GridPane.rowIndex="1">
+            <JFXButton text="Mariachi" GridPane.rowIndex="7">
                <font>
                   <Font name="Microsoft YaHei Light" size="12.0" />
                </font>
             </JFXButton>
-            <ImageView fx:id="secHEad" fitHeight="72.0" fitWidth="72.0" onMouseClicked="#securityRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
+            <ImageView fx:id="secHEad" fitHeight="66.0" fitWidth="74.0" onMouseClicked="#securityRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <image>
                   <Image url="@../../../../Images/baseline_face_black_48dp.png" />
                </image>
             </ImageView>
-            <JFXButton fx:id="secText" text="Security" GridPane.columnIndex="4" GridPane.rowIndex="4">
+            <JFXButton fx:id="secText" text="Security" GridPane.columnIndex="1" GridPane.rowIndex="7">
                <font>
                   <Font name="Microsoft YaHei Light" size="12.0" />
                </font>
@@ -149,7 +152,7 @@
                   <Font size="9.0" />
                </font>
             </Label>
-            <Label text="Nick" textFill="#5b5959" GridPane.columnIndex="4" GridPane.rowIndex="2">
+            <Label text="Kevin" textFill="#5b5959" GridPane.rowIndex="8">
                <font>
                   <Font size="9.0" />
                </font>
@@ -174,11 +177,37 @@
                   <Font size="9.0" />
                </font>
             </Label>
-            <Label text="Sullivan" textFill="#5b5959" GridPane.columnIndex="4" GridPane.rowIndex="5">
+            <Label text="Sullivan" textFill="#5b5959" GridPane.columnIndex="1" GridPane.rowIndex="8">
                <font>
                   <Font size="9.0" />
                </font>
             </Label>
+            <Label text="Appointments" GridPane.columnIndex="2" GridPane.rowIndex="7">
+               <font>
+                  <Font name="Microsoft YaHei Light" size="12.0" />
+               </font>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+            </Label>
+            <Label text="Room Scheduler" GridPane.columnIndex="3" GridPane.rowIndex="7">
+               <font>
+                  <Font name="Microsoft YaHei Light" size="12.0" />
+               </font>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+            </Label>
+            <ImageView fx:id="appointmentButton" fitHeight="63.0" fitWidth="68.0" onMouseClicked="#appointmentRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="6">
+               <image>
+                  <Image url="@../../../../Images/baseline_event_black_18dp.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="roomButton" fitHeight="63.0" fitWidth="66.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="6">
+               <image>
+                  <Image url="@../../../../Images/baseline_meeting_room_black_18dp.png" />
+               </image>
+            </ImageView>
          </children>
       </GridPane>
       <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
