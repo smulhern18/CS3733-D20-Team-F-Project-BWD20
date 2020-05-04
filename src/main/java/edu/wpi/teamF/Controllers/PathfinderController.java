@@ -217,6 +217,7 @@ public class PathfinderController implements Initializable {
     System.out.println(directions.getFullDirectionsString());
     pathSwitchFloorPane.setVisible(true);
 
+    System.out.println("Number of Uniques: " + path.getUniqueLocations());
     if (path.getUniqueLocations() > 1) {
       // Spans multiple floors
       pathSwitchPrevious.setVisible(false);
