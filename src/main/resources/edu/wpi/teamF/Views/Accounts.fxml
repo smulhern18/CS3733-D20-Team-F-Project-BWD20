@@ -56,6 +56,6 @@
             <Font size="20.0" />
          </font>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="307.0" layoutY="683.0" onAction="#dataView" prefHeight="58.0" prefWidth="122.0" style="-fx-background-color: white;" text="Data View" />
+      <JFXButton buttonType="RAISED" layoutX="307.0" layoutY="683.0" onAction="#dataView" prefHeight="58.0" prefWidth="122.0" style="-fx-background-color: white;" text="Reports View" />
    </children>
 </AnchorPane>

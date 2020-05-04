@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.DataViewController">
    <children>
@@ -23,7 +26,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <BarChart fx:id="completedChart" prefHeight="328.0" prefWidth="607.0" style="-fx-background-color: white;" title="Completed Service Requests Per Employee">
+            <BarChart fx:id="completedChart" prefHeight="328.0" prefWidth="607.0" style="-fx-background-color: white;" title="Completed Maintenance Requests">
               <xAxis>
                 <CategoryAxis label="Employees" side="BOTTOM" fx:id="xAxis" />
               </xAxis>
@@ -31,7 +34,7 @@
                 <NumberAxis fx:id="yAxis" label="Number of Times Completed Service" side="LEFT" tickLabelGap="10.0" upperBound="10.0" />
               </yAxis>
             </BarChart>
-            <PieChart fx:id="pieChartTotal" style="-fx-background-color: white;" title="Employee Service Request Comparison" GridPane.columnIndex="1" />
+            <PieChart fx:id="pieChartTotal" style="-fx-background-color: white;" title="Pie Chart View Maintenance" GridPane.columnIndex="1" />
             <BarChart style="-fx-background-color: white;" title="Areas In Need of Sanitation" GridPane.columnIndex="1" GridPane.rowIndex="1">
               <xAxis>
                 <CategoryAxis label="Location" side="BOTTOM" />
@@ -42,7 +45,7 @@
             </BarChart>
          </children>
       </GridPane>
-      <GridPane layoutX="190.0" layoutY="14.0" prefHeight="69.0" prefWidth="414.0">
+      <GridPane layoutX="190.0" layoutY="14.0" prefHeight="69.0" prefWidth="414.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0">
         <columnConstraints>
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -52,9 +55,30 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <JFXButton prefHeight="40.0" prefWidth="101.0" style="-fx-background-color: #012d5a;" text="Back" textFill="WHITE" />
-            <JFXButton prefHeight="42.0" prefWidth="102.0" style="-fx-background-color: #012d5a;" text="Export To PDF" textFill="WHITE" GridPane.columnIndex="1" />
+            <JFXButton prefHeight="40.0" prefWidth="101.0" style="-fx-background-color: #A40000;" text="Back" textFill="WHITE">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </JFXButton>
+            <JFXButton prefHeight="42.0" prefWidth="102.0" style="-fx-background-color: #012d5a;" text="Export To PDF" textFill="WHITE" GridPane.columnIndex="1">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </JFXButton>
             <JFXButton prefHeight="42.0" prefWidth="95.0" style="-fx-background-color: #012d5a;" text="Export to CSV" textFill="WHITE" GridPane.columnIndex="2" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="190.0" layoutY="111.0" prefHeight="30.0" prefWidth="410.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Select Service Request:" />
+            <JFXComboBox prefHeight="25.0" prefWidth="142.0" GridPane.columnIndex="1" />
          </children>
       </GridPane>
    </children>

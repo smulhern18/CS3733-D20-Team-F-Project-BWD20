@@ -25,7 +25,7 @@ public class DataViewController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    // completed Graph
+    // completed Graph to show number of completed maintenance  requests per employee
     List<String> data = serviceRequestStats.getMaintenanceEmployeeNumbersGraphs(mR);
 
     XYChart.Series dataSeries1 = new XYChart.Series<>();
@@ -37,7 +37,7 @@ public class DataViewController implements Initializable {
 
     completedChart.getData().add(dataSeries1);
 
-    // Pie Chart
+    // Pie Chart to compared visually which employee did the most service requests
     ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
     for (int i = 0; i < data.size(); i += 2) {
       pieChartData.add(new PieChart.Data(data.get(i), Integer.parseInt(data.get(i + 1))));

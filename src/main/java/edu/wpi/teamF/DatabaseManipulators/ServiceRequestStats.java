@@ -582,8 +582,6 @@ public class ServiceRequestStats {
   }
 
   public ArrayList<String> getFlowerEmployeeNumbersGraphs(List<FlowerRequest> serviceRequests) {
-<<<<<<< HEAD
-=======
     ArrayList<String> employeeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ServiceRequest m : serviceRequests) {
@@ -1240,7 +1238,6 @@ public class ServiceRequestStats {
   }
 
   public ArrayList<String> getSecurityEmployeeNumbersGraphs(List<SecurityRequest> serviceRequests) {
->>>>>>> ad8157b18487e26493307fc9e07330e5a627ddec
     ArrayList<String> employeeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ServiceRequest m : serviceRequests) {
@@ -1259,6 +1256,7 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
+
   public ArrayList<String> getSecurityLocationNumbersGraphs(List<SecurityRequest> serviceRequests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
