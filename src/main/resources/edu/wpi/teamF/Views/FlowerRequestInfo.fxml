@@ -25,11 +25,12 @@
             <Image url="@../../../../Images/boston_skyline.jpg" />
          </image>
       </ImageView>
-        <GridPane fx:id="servicePane" alignment="CENTER" layoutX="191.0" layoutY="34.0" prefHeight="484.0" prefWidth="402.0" style="-fx-background-color: rgba(255,255,255,0.9);" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
+        <GridPane fx:id="servicePane" alignment="CENTER" layoutX="190.0" layoutY="24.0" prefHeight="484.0" prefWidth="402.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 2;" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
             <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
@@ -41,19 +42,19 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <HBox alignment="CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
+                <HBox alignment="CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="2">
                     <children>
                         <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="Location:       " />
                         <JFXComboBox fx:id="locationComboBox" prefHeight="27.0" prefWidth="227.0" style="-fx-background-color: white; -fx-border-color: black;" />
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" GridPane.rowIndex="4">
+                <HBox alignment="CENTER" GridPane.rowIndex="5">
                     <children>
                         <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="Priority:   " />
                         <JFXComboBox fx:id="priorityComboBox" prefHeight="27.0" prefWidth="248.0" style="-fx-background-color: white; -fx-border-color: black;" />
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="8">
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="9">
                     <children>
                   <JFXButton fx:id="checkStatusButton" onAction="#checkStatus" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Status" textFill="#ffffffcc">
                      <font>
@@ -81,45 +82,49 @@
                         </JFXButton>
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
                     <children>
                         <Label fx:id="buyerNameLabel" alignment="BOTTOM_LEFT" text="Buyer Name:      " />
                   <JFXTextField fx:id="buyerNameInput" alignment="BOTTOM_LEFT" prefHeight="26.0" prefWidth="211.0" style="-fx-background-color: white; -fx-border-color: black;" />
                     </children>
                 </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
                   <Label fx:id="nameLabel" alignment="BOTTOM_LEFT" contentDisplay="CENTER" text="Recipient Name:   " />
                   <JFXTextField fx:id="recipientInput" prefHeight="26.0" prefWidth="202.0" style="-fx-background-color: white; -fx-border-color: black;" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                <children>
                   <Label fx:id="roomNumberLabel" text="Room Number (if known):   " />
                   <JFXTextField fx:id="roomInput" prefHeight="26.0" prefWidth="153.0" style="-fx-background-color: white; -fx-border-color: black;" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                <children>
                   <Label fx:id="messageLabel" text="Message: " />
                   <JFXTextArea fx:id="messsageInput" prefHeight="42.0" prefWidth="247.0" style="-fx-background-color: white; -fx-border-color: black;" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
                <children>
                   <Label fx:id="phoneNumberLabel" text="Phone Number:   " />
                   <JFXTextField fx:id="phoneNumberInput" prefHeight="26.0" prefWidth="206.0" style="-fx-background-color: white; -fx-border-color: black;" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="8">
                <children>
                   <JFXCheckBox fx:id="giftWrapCheckBox" text="Gift Wrap (free)" />
                </children>
             </HBox>
+            <Label prefHeight="35.0" prefWidth="201.0" text="Flower Delivery Request">
+               <font>
+                  <Font size="19.0" />
+               </font></Label>
             </children>
         </GridPane>
         <fx:include fx:id="mainMenu" source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-        <AnchorPane fx:id="checkStatusPane" style="-fx-background-color: rgba(255,255,255,0.9);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+        <AnchorPane fx:id="checkStatusPane" layoutX="190.0" layoutY="16.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 5;" visible="false" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="16.0">
             <children>
                 <StackPane layoutX="44.0" layoutY="274.0" prefHeight="99.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                     <children>
@@ -146,7 +151,7 @@
                   </GridPane>
                     </children>
                 </StackPane>
-                <JFXTreeTableView fx:id="treeTableFlower" style="-fx-background-color: white; -fx-border-color: black;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="99.0" />
+                <JFXTreeTableView fx:id="treeTableFlower" layoutX="12.0" layoutY="100.0" style="-fx-background-color: white; -fx-border-color: black;" AnchorPane.bottomAnchor="99.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="100.0" />
                 <GridPane fx:id="deletePane" layoutX="217.0" layoutY="70.0" AnchorPane.rightAnchor="10.0">
                     <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
@@ -170,7 +175,7 @@
                 </GridPane>
             </children>
         </AnchorPane>
-      <GridPane fx:id="flowerPane" alignment="CENTER" layoutX="230.0" layoutY="42.0" style="-fx-background-color: rgba(255,255,255,0.9);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+      <GridPane fx:id="flowerPane" alignment="CENTER" layoutX="230.0" layoutY="42.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 9;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
          <columnConstraints>
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -284,20 +289,6 @@
             <Label fx:id="tropicalSplashLabel" text="Tropical Splash" GridPane.columnIndex="1" GridPane.rowIndex="7" />
             <Label fx:id="babyBoyLabel" text="Welcome Baby Boy" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="7" />
             <Label fx:id="babyGirlLabel" text="Welcome Baby Girl" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-         </children>
-      </GridPane>
-      <GridPane layoutX="188.0" layoutY="4.0" prefHeight="47.0" prefWidth="410.0" style="-fx-background-color: rgba(255,255,255,0.9);" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <columnConstraints>
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Label prefHeight="35.0" prefWidth="201.0" text="Flower Delivery Request">
-               <font>
-                  <Font size="19.0" />
-               </font></Label>
          </children>
       </GridPane>
     </children>

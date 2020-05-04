@@ -23,11 +23,12 @@
             <Image url="@../../../../Images/hale-btm-location-700x400.jpg" />
          </image>
       </ImageView>
-        <GridPane fx:id="servicePane" style="-fx-background-color: rgba(255,255,255,0.9);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+        <GridPane fx:id="servicePane" layoutX="190.0" layoutY="16.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 10;" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="16.0">
             <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
@@ -35,16 +36,15 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0">
+                <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
                     <children>
                         <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="     Location:              " />
                         <JFXComboBox fx:id="locationChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;" />
                     </children>
                 </HBox>
-                <HBox alignment="BOTTOM_CENTER" GridPane.rowIndex="1">
+                <HBox alignment="BOTTOM_CENTER" GridPane.rowIndex="2">
                     <children>
                         <Label fx:id="itemsLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="Items:          " />
                         <JFXComboBox fx:id="itemsChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;">
@@ -53,7 +53,7 @@
                      </HBox.margin></JFXComboBox>
                     </children>
                 </HBox>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
                     <children>
                   <GridPane>
                     <columnConstraints>
@@ -84,34 +84,39 @@
                   </GridPane>
                     </children>
                 </HBox>
-                <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                     <children>
                         <Label fx:id="quantityLabel" alignment="BOTTOM_CENTER" text="Quantity:    " />
                         <JFXComboBox fx:id="quantityChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;" />
                     </children>
                 </HBox>
-                <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                     <children>
                         <Label fx:id="temperatureLabel" alignment="BOTTOM_CENTER" text="Temperature:" />
                         <JFXComboBox fx:id="temperatureSChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;" />
                     </children>
                 </HBox>
-                <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+                <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
                     <children>
                         <Label fx:id="descLabel" alignment="BOTTOM_CENTER" text="     Description:         " />
                         <JFXTextField fx:id="descText" prefHeight="25.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;" />
                     </children>
                 </HBox>
-                <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
+                <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
                     <children>
                         <Label fx:id="prioLabel" alignment="BOTTOM_CENTER" text="          Priority:           " />
                         <JFXComboBox fx:id="priorityChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;" />
                     </children>
                 </HBox>
+                  <Label fx:id="securityRequestLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="334.0" text="Laundry Service Request" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                      <font>
+                          <Font size="23.0" />
+                      </font>
+                  </Label>
             </children>
         </GridPane>
         <fx:include fx:id="mainMenu" source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-        <AnchorPane fx:id="checkStatusPane" style="-fx-background-color: rgba(255,255,255,0.9);" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+        <AnchorPane fx:id="checkStatusPane" layoutX="190.0" layoutY="16.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 5;" visible="false" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="16.0">
             <children>
                 <StackPane layoutX="44.0" layoutY="274.0" prefHeight="99.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                     <children>
@@ -162,20 +167,5 @@
                 </GridPane>
             </children>
         </AnchorPane>
-        <GridPane fx:id="optionBar" layoutX="190.0" prefHeight="51.0" prefWidth="410.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            </rowConstraints>
-         <children>
-                  <Label fx:id="securityRequestLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="334.0" text="Laundry Service Request" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                      <font>
-                          <Font size="23.0" />
-                      </font>
-                  </Label>
-         </children>
-        </GridPane>
     </children>
 </AnchorPane>
