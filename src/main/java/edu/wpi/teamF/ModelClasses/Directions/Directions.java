@@ -24,10 +24,10 @@ public class Directions {
       nodeMap.put(node.getId(), node);
     }
     this.startNode = startNode;
-    this.endNode = endNode;
 
     List<Node> pathNodeList = path.getPath();
     endNode = pathNodeList.get(pathNodeList.size() - 1);
+    this.endNode = endNode;
 
     System.out.println("Last in list: " + pathNodeList.get(pathNodeList.size() - 1).getId());
     System.out.println("Size of lsit: " + pathNodeList.size());
@@ -73,7 +73,22 @@ public class Directions {
           directionList.add(new IndexDirection(pathNodeList.get(i - 1).getFloor()));
         }
 
-        if (pathNodeList.get(i).getType().equals(Node.NodeType.getEnum("HALL"))
+        // Check if this node is the destination
+        if (pathNodeList.get(i).getId().equals(endNode.getId())) {
+          System.out.println("Destination");
+          // This node is the destination
+          // Only add the hallway instruction if it actually went some distance
+          if (currHall.getDistance() > 0) {
+            directionList.add(currHall);
+          }
+          float goalTurnAngle =
+              getAngle(pathNodeList.get(i - 2), pathNodeList.get(i - 1), pathNodeList.get(i));
+          directionList.add(new GoalDirection(goalTurnAngle, pathNodeList.get(i).getFloor()));
+          break;
+        }
+
+        // Check if this is a hallway node
+        else if (pathNodeList.get(i).getType().equals(Node.NodeType.getEnum("HALL"))
             && !"OUT".equals(pathNodeList.get(i).getBuilding())) {
           // Current node is a hallway
           System.out.println("Hallway");
@@ -122,20 +137,6 @@ public class Directions {
               currHall.addIntersection();
             }
           }
-        }
-
-        // Check if this node is the destination
-        else if (pathNodeList.get(i).getId().equals(endNode.getId())) {
-          System.out.println("Destination");
-          // This node is the destination
-          // Only add the hallway instruction if it actually went some distance
-          if (currHall.getDistance() > 0) {
-            directionList.add(currHall);
-          }
-          float goalTurnAngle =
-              getAngle(pathNodeList.get(i - 2), pathNodeList.get(i - 1), pathNodeList.get(i));
-          directionList.add(new GoalDirection(goalTurnAngle, pathNodeList.get(i).getFloor()));
-          break;
 
           // Check if this node is an elevator
         } else if (pathNodeList.get(i).getType().equals(Node.NodeType.getEnum("ELEV"))) {
