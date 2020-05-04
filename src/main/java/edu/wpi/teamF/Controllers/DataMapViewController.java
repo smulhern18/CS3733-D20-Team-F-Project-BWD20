@@ -472,6 +472,7 @@ public class DataMapViewController implements Initializable {
     button.setLayoutX(xPos);
     button.setLayoutY(yPos);
     setNodeDraggable(button);
+    button.setId(node.getId());
     button.setOnAction(
         action -> {
           nodeButton = button; // sets classes button variable to the selected button
@@ -479,6 +480,7 @@ public class DataMapViewController implements Initializable {
 
           System.out.println(node.getId());
           if (!edgeSelection) {
+
             displayNode();
           } else {
             System.out.println("In edge selection");
@@ -501,6 +503,7 @@ public class DataMapViewController implements Initializable {
 
   @FXML
   private void displayNode() {
+
     clearEdge();
     clearNode();
     edgeSelection = false;
@@ -516,10 +519,10 @@ public class DataMapViewController implements Initializable {
     shortNameInput.setText(node.getShortName());
     longNameInput.setText(node.getLongName());
     typeInput.setValue(node.getType().getTypeString());
-    if (!xCoorInput.textProperty().isBound()) {
+    if (!isDragged) {
       xCoorInput.setText("" + node.getXCoord());
     }
-    if (!yCoorInput.textProperty().isBound()) {
+    if (!isDragged) {
       yCoorInput.setText("" + node.getYCoord());
     }
     hospitalInput.setValue(node.getBuilding());
@@ -707,14 +710,16 @@ public class DataMapViewController implements Initializable {
     String oldFloorNumber = node.getFloor(); // stores the input in variables
 
     try { // is the input correct?
-      short xCoordinate = Short.parseShort(xCoorInput.getText());
-      short yCoordinate = Short.parseShort(yCoorInput.getText());
+
+      short xCoordinate = (short) Double.parseDouble(xCoorInput.getText());
+      short yCoordinate = (short) Double.parseDouble(yCoorInput.getText());
       String building = hospitalInput.getValue();
       String longName = longNameInput.getText();
       String shortName = shortNameInput.getText();
-      Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getValue().toString());
+      Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getValue());
       String floorNumber = floorInput.getValue(); // stores the input in variables
-
+      System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+      System.out.println(xCoordinate + " " + oldXCoordinate);
       node.setXCoord(xCoordinate);
       node.setYCoord(yCoordinate);
       node.setBuilding(building);
@@ -867,8 +872,10 @@ public class DataMapViewController implements Initializable {
     nodeErrorLabel.setText("");
     shortNameInput.setText("");
     longNameInput.setText("");
-    xCoorInput.setText("");
-    yCoorInput.setText("");
+    if (!isDragged) {
+      xCoorInput.setText("");
+      yCoorInput.setText("");
+    }
     addNodeButton.setVisible(true);
     addNodeButton.setDisable(true);
     modifyNodeButton.setVisible(false);
@@ -910,7 +917,12 @@ public class DataMapViewController implements Initializable {
     button.setOnMouseDragged(
         mouseEvent -> {
           isDragged = true;
-          setRatios(node);
+          try {
+            node = databaseManager.readNode(button.getId());
+            nodeButton = button;
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
           button.setLayoutX(mouseEvent.getSceneX() / imageStackPane.getScaleX() + deltaX);
           button.setLayoutY(mouseEvent.getSceneY() / imageStackPane.getScaleY() + deltaY);
           double nodeWidth = (button.getLayoutX() + 3) / widthRatio;
@@ -954,8 +966,6 @@ public class DataMapViewController implements Initializable {
     //        });
     button.setOnMouseDragReleased(
         mouseDragEvent -> {
-          xCoorInput.textProperty().unbind();
-          yCoorInput.textProperty().unbind();
           modifyNodeButton.setDisable(false);
         });
   }
