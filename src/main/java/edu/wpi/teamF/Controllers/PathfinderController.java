@@ -107,6 +107,8 @@ public class PathfinderController implements Initializable {
   public JFXComboBox<String> hospitalComboBox;
   public HBox btnSpacer;
   public JFXTextField phoneNumber;
+  public AnchorPane externalDirections;
+  public Boolean awaitingExternalDirections = false;
 
   // stairs v elev stuff
   String liftType = "ELEV";
@@ -116,7 +118,7 @@ public class PathfinderController implements Initializable {
   public Label elevatorLabel;
   public Label stairsLabel;
 
-  //error box stuff
+  // error box stuff
   AnchorPane errorPane;
   Label errorPaneLabel1;
   Label errorPaneLabel2;
@@ -422,11 +424,14 @@ public class PathfinderController implements Initializable {
     scrollPaneFaulkner1.setVisible(true);
     mapPaneFaulkner1.setVisible(true);
     imageViewFaulkner1.setVisible(true);
-    errorPane.setVisible(false);
+    //    errorPane.setVisible(false);
     floorButtonsSet();
     initializehospitalComboBox();
     setToggleBehavior();
-    setErrorPaneButtonBehavior();
+    // setErrorPaneButtonBehavior();
+    externalDirections.setVisible(false);
+    externalDirections.setPrefWidth(0);
+    externalDirections.setPrefHeight(0);
 
     UISetting uiSetting = new UISetting();
     uiSetting.setAsLocationComboBox(startCombo);
@@ -669,17 +674,17 @@ public class PathfinderController implements Initializable {
           } catch (InstanceNotFoundException e) {
             e.printStackTrace();
           }
-          if(path.getPath().isEmpty()){
+          if (path.getPath().isEmpty()) {
             errorPane.setVisible(true);
             String lifter;
-            if("ELEV".equals(liftType)){
+            if ("ELEV".equals(liftType)) {
               lifter = "stairs";
-            }else{
+            } else {
               lifter = "elevator";
             }
             errorPaneLabel1.setText("Sorry, we couldn't find a path. Please try again.");
             errorPaneLabel2.setText("Maybe try taking the " + lifter + ".");
-          }else {
+          } else {
             try {
               commandText.setText("See Path Below for Directions");
               draw(path);
@@ -688,7 +693,6 @@ public class PathfinderController implements Initializable {
             }
           }
         });
-
   }
 
   public void floorButtonsSet() {
@@ -1036,11 +1040,10 @@ public class PathfinderController implements Initializable {
         });
   }
 
-  private void setErrorPaneButtonBehavior(){
-    errorPaneButton.setOnAction(
-            actionEvent -> {
-              errorPane.setVisible(false);
-            }
-    );
-  }
+  //  private void setErrorPaneButtonBehavior() {
+  //    errorPaneButton.setOnAction(
+  //        actionEvent -> {
+  //          errorPane.setVisible(false);
+  //        });
+  //  }
 }
