@@ -124,6 +124,16 @@ public class PathfinderController implements Initializable {
   public Label errorPaneLabel2;
   public JFXButton errorPaneButton;
 
+  // intermediate maps stuff
+  public ImageView faulknerTo45FrancisImage;
+  public ImageView faulknerTo75FrancisImage;
+  public ImageView faulknerToBTMImage;
+  public ImageView faulknerToShapiroImage;
+  public ImageView Francis45ToFaulknerImage;
+  public ImageView Francis75ToFaulknerImage;
+  public ImageView BTMToFaulknerImage;
+  public ImageView shapiroToFaulknerImage;
+
   public List<Node> fullNodeList;
   public int state;
   public UISetting uiSetting = new UISetting();
@@ -431,6 +441,7 @@ public class PathfinderController implements Initializable {
     externalDirections.setVisible(false);
     externalDirections.setPrefWidth(0);
     externalDirections.setPrefHeight(0);
+    setIntermediateMapsInvisible();
 
     UISetting uiSetting = new UISetting();
     uiSetting.setAsLocationComboBox(startCombo);
@@ -1054,8 +1065,35 @@ public class PathfinderController implements Initializable {
         });
   }
 
-  public void setExternalDirections(String fromFloor, String toFloor) {
+  public void setExternalDirections(String fromBuilding, String toBuilding) {
     // TODO implement this code
+    if ("Faulkner".equals(fromBuilding) && "45 Francis".equals(toBuilding)) {
+      setIntermediateMapsInvisible();
+      faulknerTo45FrancisImage.setVisible(true);
+    } else if ("Faulkner".equals(fromBuilding)
+        && ("75 Francis".equals(toBuilding) || ("Tower".equals(toBuilding)))) {
+      setIntermediateMapsInvisible();
+      faulknerTo75FrancisImage.setVisible(true);
+    } else if ("Faulkner".equals(fromBuilding) && "BTM".equals(toBuilding)) {
+      setIntermediateMapsInvisible();
+      faulknerToBTMImage.setVisible(true);
+    } else if ("Faulkner".equals(fromBuilding) && "Shapiro".equals(toBuilding)) {
+      setIntermediateMapsInvisible();
+      faulknerToShapiroImage.setVisible(true);
+    } else if ("45 Francis".equals(fromBuilding) && "Faulkner".equals(toBuilding)) {
+      setIntermediateMapsInvisible();
+      Francis45ToFaulknerImage.setVisible(true);
+    } else if (("75 Francis".equals(fromBuilding) || ("Tower".equals(fromBuilding)))
+        && "Faulkner".equals(toBuilding)) {
+      setIntermediateMapsInvisible();
+      faulknerTo75FrancisImage.setVisible(true);
+    } else if ("BTM".equals(fromBuilding) && "Faulkner".equals(toBuilding)) {
+      setIntermediateMapsInvisible();
+      BTMToFaulknerImage.setVisible(true);
+    } else if ("Shapiro".equals(fromBuilding) && "Faulkner".equals(toBuilding)) {
+      setIntermediateMapsInvisible();
+      shapiroToFaulknerImage.setVisible(true);
+    }
   }
 
   private void setErrorPaneButtonBehavior() {
@@ -1083,5 +1121,16 @@ public class PathfinderController implements Initializable {
     double width2 = text2.getLayoutBounds().getWidth();
     errorPaneLabel2.setLayoutX(errorPaneLabel2.getLayoutX() - (width2 / 2));
     errorPaneLabel2.setText(msg2);
+  }
+
+  public void setIntermediateMapsInvisible() {
+    faulknerTo45FrancisImage.setVisible(false);
+    faulknerTo75FrancisImage.setVisible(false);
+    faulknerToBTMImage.setVisible(false);
+    faulknerToShapiroImage.setVisible(false);
+    Francis45ToFaulknerImage.setVisible(false);
+    Francis75ToFaulknerImage.setVisible(false);
+    BTMToFaulknerImage.setVisible(false);
+    shapiroToFaulknerImage.setVisible(false);
   }
 }
