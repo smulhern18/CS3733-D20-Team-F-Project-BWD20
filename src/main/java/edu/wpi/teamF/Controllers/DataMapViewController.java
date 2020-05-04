@@ -18,7 +18,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -196,6 +195,8 @@ public class DataMapViewController implements Initializable {
     imageView = imageViewMain1;
     hospital = Hospital.MAIN;
 
+    selectFloor("ground");
+
     for (Edge edge : databaseManager.getAllEdges()) {
       drawEdge(edge);
     } // for every edge that connects two nodes on the fifth floor, draw the edge on the map
@@ -213,7 +214,7 @@ public class DataMapViewController implements Initializable {
     hospitalInput.getItems().addAll("Main", "Faulkner");
     typeInput.setValue("Main");
 
-    floorInput.getItems().addAll("L2", "L1", "Ground", "F1", "F2", "F3");
+    floorInput.getItems().addAll("L2", "L1", "G", "F1", "F2", "F3");
 
     ObservableList<String> hospitals = FXCollections.observableArrayList("Faulkner", "Main Campus");
 
@@ -252,7 +253,7 @@ public class DataMapViewController implements Initializable {
 
   @FXML
   private void setFloorButtons(ActionEvent event) {
-    if (hospitalCombo.getValue() == "Main Campus") {
+    if (hospitalCombo.getValue().equals("Main Campus")) {
       faulknerFloorPane.setVisible(false);
       mainFloorPane.setVisible(true);
     } else {
@@ -276,8 +277,13 @@ public class DataMapViewController implements Initializable {
   @FXML
   private void selectFloor(ActionEvent event) {
     JFXButton btn = (JFXButton) event.getSource();
+    selectFloor(btn.getId());
+  }
 
-    switch (btn.getId()) {
+  @FXML
+  private void selectFloor(String btnID) {
+
+    switch (btnID) {
       case "ff1":
         mapPane = mapPaneFaulkner1;
         imageView = imageViewFaulkner1;
@@ -460,11 +466,9 @@ public class DataMapViewController implements Initializable {
           } else {
             System.out.println("In edge selection");
             if (numSelected == 0) {
-              System.out.println("First node");
               node1Button.setText(node.getId());
               numSelected++;
             } else if (numSelected == 1 && !node.getId().equals(node1Button.getText())) {
-              System.out.println("Second node");
               node2Button.setText(node.getId());
               numSelected = 0;
               addEdgeButton.setDisable(false);
@@ -558,7 +562,7 @@ public class DataMapViewController implements Initializable {
       }
     } else {
       switch (node.getFloor()) {
-        case "Ground":
+        case "G":
           mapPaneMainG.getChildren().add(child);
           break;
         case "L2":
@@ -613,7 +617,6 @@ public class DataMapViewController implements Initializable {
 
     if (typeNodes.size() > 0) {
       for (int i = 0; i < typeInstances.size(); i++) {
-        System.out.println(typeInstances.get(i));
         instance = typeInstances.get(i); // 1
         if (instance - tracker > 1) { // 1-0 = 1
           newInstance = tracker + 1;
@@ -789,23 +792,34 @@ public class DataMapViewController implements Initializable {
   @FXML
   private void updateFloor(ActionEvent event) {
     if (hospitalInput.getValue().equals("Faulkner")) {
-      floorInput.getItems().removeAll("L2", "L1", "Ground", "F1", "F2", "F3");
+      floorInput.getItems().removeAll("L2", "L1", "G", "F1", "F2", "F3");
       floorInput.getItems().addAll("1", "2", "3", "4", "5");
     } else {
       floorInput.getItems().removeAll("1", "2", "3", "4", "5");
-      floorInput.getItems().addAll("L2", "L1", "Ground", "F1", "F2", "F3");
+      floorInput.getItems().addAll("L2", "L1", "G", "F1", "F2", "F3");
     }
+    validateNodeText();
   }
 
   @FXML
-  private void validateNodeText(KeyEvent keyEvent) {
+  private void validateNodeTextKey(KeyEvent keyEvent) {
+    validateNodeText();
+  }
+
+  @FXML
+  private void validateNodeTextAction(ActionEvent event) {
+    validateNodeText();
+  }
+
+  @FXML
+  private void validateNodeText() {
     if (!shortNameInput.getText().isEmpty()
         && !longNameInput.getText().isEmpty()
         && !xCoorInput.getText().isEmpty()
-        && !yCoorInput.getText().isEmpty()
-        && !typeInput.getValue().isEmpty()
-        && !hospitalInput.getValue().isEmpty()
-        && !floorInput.getValue().isEmpty()) {
+        && !yCoorInput.getText().isEmpty()) {
+      //        && !typeInput.getValue().isEmpty()
+      //        && !hospitalInput.getValue().isEmpty()
+      //        && !floorInput.getValue().isEmpty()
       modifyNodeButton.setDisable(false);
       modifyNodeButton.setOpacity(1);
       addNodeButton.setDisable(false);

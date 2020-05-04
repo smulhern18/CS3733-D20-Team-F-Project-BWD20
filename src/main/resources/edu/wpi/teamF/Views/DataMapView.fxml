@@ -14,7 +14,7 @@
 
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
-<AnchorPane prefHeight="700.0" prefWidth="1400.0" style="-fx-background-color: #a2a2a2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.DataMapViewController">
+<AnchorPane prefHeight="700.0" prefWidth="1400.0" style="-fx-background-color: #DCDDDA;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.DataMapViewController">
 
     <children>
 
@@ -22,41 +22,41 @@
 
 
 
-        <AnchorPane fx:id="mainMapPane" layoutX="19.399999618530273" layoutY="194.39999389648438" style="-fx-background-color: #a2a2a2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane fx:id="mainMapPane" layoutX="19.399999618530273" layoutY="194.39999389648438" style="-fx-background-color: #DCDDDA;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <ScrollPane fx:id="imageScrollPane" style="-fx-background: #a2a2a2; -fx-background-color: #a2a2a2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <ScrollPane fx:id="imageScrollPane" style="-fx-background: #dcddda; -fx-background-color: #dcddda;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <content>
 
 
-                        <StackPane fx:id="imageStackPane" style="-fx-background-color: #a2a2a2;">
+                        <StackPane fx:id="imageStackPane" style="-fx-background-color: #dcddda;">
                             <children>
                                 <ImageView fx:id="imageViewFaulkner1" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true" visible="false">
                                     <image>
-                                        <Image url="@../Maps/Faulkner/Floor1LM.png" />
+                                        <Image url="@../Maps/Faulkner/floor1LM.png" />
                                     </image>
                                 </ImageView>
                                 <AnchorPane fx:id="mapPaneFaulkner1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
                                 <ImageView fx:id="imageViewFaulkner2" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Maps/Faulkner/Floor2LM.png" />
+                                        <Image url="@../Maps/Faulkner/floor2LM.png" />
                                     </image>
                                 </ImageView>
                                 <AnchorPane fx:id="mapPaneFaulkner2" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
                                 <ImageView fx:id="imageViewFaulkner3" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Maps/Faulkner/Floor3LM.png" />
+                                        <Image url="@../Maps/Faulkner/floor3LM.png" />
                                     </image>
                                 </ImageView>
                                 <AnchorPane fx:id="mapPaneFaulkner3" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
                                 <ImageView fx:id="imageViewFaulkner4" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Maps/Faulkner/Floor4LM.png" />
+                                        <Image url="@../Maps/Faulkner/floor4LM.png" />
                                     </image>
                                 </ImageView>
                                 <AnchorPane fx:id="mapPaneFaulkner4" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
                                 <ImageView fx:id="imageViewFaulkner5" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
-                                        <Image url="@../Maps/Faulkner/Floor5LM.png" />
+                                        <Image url="@../Maps/Faulkner/floor5LM.png" />
                                     </image>
                                 </ImageView>
                                 <AnchorPane fx:id="mapPaneFaulkner5" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
@@ -246,13 +246,13 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="shortNameInput" focusColor="#012d5a" onKeyReleased="#validateNodeText" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <JFXComboBox fx:id="typeInput" focusColor="#012d5a" prefHeight="26.0" prefWidth="180.0" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                  <JFXTextField fx:id="longNameInput" focusColor="#012d5a" onKeyReleased="#validateNodeText" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <JFXTextField focusColor="#012d5a" onKeyReleased="#validateNodeText" prefWidth="180.0" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="4" fx:id="xCoorInput" />
-                  <JFXTextField fx:id="yCoorInput" focusColor="#012d5a" onKeyReleased="#validateNodeText" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <JFXTextField fx:id="shortNameInput" focusColor="#012d5a" onKeyReleased="#validateNodeTextKey" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <JFXComboBox fx:id="typeInput" focusColor="#012d5a" onAction="#validateNodeTextAction" prefHeight="26.0" prefWidth="180.0" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <JFXTextField fx:id="longNameInput" focusColor="#012d5a" onKeyReleased="#validateNodeTextKey" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <JFXTextField focusColor="#012d5a" onKeyReleased="#validateNodeTextKey" prefWidth="180.0" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="4" fx:id="xCoorInput" />
+                  <JFXTextField fx:id="yCoorInput" focusColor="#012d5a" onKeyReleased="#validateNodeTextKey" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                   <JFXComboBox fx:id="hospitalInput" focusColor="#012d5a" onAction="#updateFloor" prefHeight="26.0" prefWidth="180.0" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                  <JFXComboBox fx:id="floorInput" focusColor="#012d5a" prefHeight="26.0" prefWidth="180.0" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                  <JFXComboBox fx:id="floorInput" focusColor="#012d5a" onAction="#validateNodeTextAction" prefHeight="26.0" prefWidth="180.0" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="7" />
                   <JFXButton fx:id="addNodeButton" disable="true" maxHeight="25.0" maxWidth="40.0" minHeight="25.0" minWidth="40.0" onAction="#addNode" prefHeight="25.0" prefWidth="40.0" style="-fx-background-color: #012d5a;" text="Add" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
                   <JFXButton fx:id="deleteNodeButton" maxHeight="26.0" maxWidth="50.0" minHeight="25.0" minWidth="50.0" onAction="#deleteNode" prefHeight="26.0" prefWidth="50.0" style="-fx-background-color: #012d5a;" text="Delete" textAlignment="CENTER" textFill="WHITE" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="8" />
                   <JFXButton fx:id="modifyNodeButton" disable="true" maxHeight="26.0" maxWidth="53.0" minHeight="25.0" minWidth="53.0" onAction="#modifyNode" prefHeight="26.0" prefWidth="53.0" style="-fx-background-color: #012d5a;" text="Modify" textAlignment="CENTER" textFill="WHITE" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
