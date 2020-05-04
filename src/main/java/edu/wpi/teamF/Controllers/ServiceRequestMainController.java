@@ -1,6 +1,7 @@
 package edu.wpi.teamF.Controllers;
 
 import com.jfoenix.controls.JFXButton;
+import edu.wpi.cs3733.c20.teamR.AppointmentRequest;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
@@ -63,6 +64,14 @@ public class ServiceRequestMainController implements Initializable {
 
   public void transportRequest(MouseEvent mouseEvent) throws IOException {
     sceneController.switchScene("TransportRequest");
+  }
+
+  public void appointmentRequest(MouseEvent mouseEvent) {
+    try {
+      AppointmentRequest.run(100, 100, 1000, 1000, null, null, null);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   private void resize(double width) {
