@@ -107,6 +107,7 @@ public class PathfinderController implements Initializable {
   public JFXComboBox<String> hospitalComboBox;
   public HBox btnSpacer;
   public JFXTextField phoneNumber;
+  public Label commsResult;
   public AnchorPane externalDirections;
   public Boolean awaitingExternalDirections = false;
 
@@ -383,6 +384,7 @@ public class PathfinderController implements Initializable {
     directionsPane.setVisible(false);
     selectButtonsPane.setVisible(true);
     pathSwitchFloorPane.setVisible(false);
+    commsResult.setText("");
 
     uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1, 1.33);
 
@@ -1048,11 +1050,21 @@ public class PathfinderController implements Initializable {
   }
 
   public void textDirections(ActionEvent actionEvent) {
-    directions.smsDirections(phoneNumber.getText());
+    Boolean success = directions.smsDirections(phoneNumber.getText());
+    if (success) {
+      commsResult.setText("Success! You will get a text momentarily.");
+    } else {
+      commsResult.setText("Couldn't send text. Check the number & try again.");
+    }
   }
 
   public void callDirections(ActionEvent actionEvent) {
-    directions.callDirections(phoneNumber.getText());
+    Boolean success = directions.callDirections(phoneNumber.getText());
+    if (success) {
+      commsResult.setText("Success! You will get a call momentarily.");
+    } else {
+      commsResult.setText("Unable to call. Check the number and try again.");
+    }
   }
 
   public void printDirections(ActionEvent actionEvent) {

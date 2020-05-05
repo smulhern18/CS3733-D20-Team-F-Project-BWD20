@@ -46,19 +46,19 @@ public class phoneComms {
   }
 
   public static Boolean callPhone(String toPhone, String twiml) {
-    //    try {
-    Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-    Call call =
-        Call.creator(
-                new com.twilio.type.PhoneNumber("+1" + toPhone), // to
-                new com.twilio.type.PhoneNumber("+15085937151"), // from
-                new com.twilio.type.Twiml(twiml))
-            .create();
-    System.out.println("Completed call, SID: " + call.getSid());
-    return true;
-    //    } catch (Exception e) {
-    //      System.out.println("Error executing phone call");
-    //      return false;
-    //    }
+    try {
+      Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
+      Call call =
+          Call.creator(
+                  new com.twilio.type.PhoneNumber("+1" + toPhone), // to
+                  new com.twilio.type.PhoneNumber("+15085937151"), // from
+                  new com.twilio.type.Twiml(twiml))
+              .create();
+      System.out.println("Completed call, SID: " + call.getSid());
+      return true;
+    } catch (Exception e) {
+      System.out.println("Error executing phone call");
+      return false;
+    }
   }
 }
