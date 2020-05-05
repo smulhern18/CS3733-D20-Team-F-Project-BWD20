@@ -138,7 +138,7 @@ public class ServiceRequestStats {
       }
     }
     if (timeDifference == 0) {
-      total = "Your average time was 0";
+      total = "No data present";
     } else {
       timeDifference = timeDifference / (long) numOfRequests / 1000;
       total = timeDifference / 3600 + " hours";
@@ -201,9 +201,9 @@ public class ServiceRequestStats {
       }
     }
     if (timeDifference == 0) {
-      total = "Your average time was 0";
+      total = "No data present";
     } else {
-      total = "" + timeDifference / 60 / 1000;
+      total = "" + timeDifference / 60 / 1000 + "Minutes";
     }
     return total;
   }
@@ -317,7 +317,7 @@ public class ServiceRequestStats {
       }
     }
     if (timeDifference == 0) {
-      total = "Your average time was 0";
+      total = "No data present";
     } else {
       timeDifference = timeDifference / (long) numOfRequests / 1000;
       total = timeDifference / 3600 + " hours";
@@ -399,9 +399,9 @@ public class ServiceRequestStats {
       }
     }
     if (timeDifference == 0) {
-      total = "Your average time was 0";
+      total = "No data present";
     } else {
-      total = "" + timeDifference / 60 / 1000;
+      total = "" + timeDifference / 60 / 1000 + "Minutes";
     }
     return total;
   }
