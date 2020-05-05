@@ -9,9 +9,6 @@ import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.awt.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -475,7 +472,7 @@ public class DataMapViewController implements Initializable {
     button.setMaxSize(buttonSize, buttonSize);
     button.setPrefSize(buttonSize, buttonSize); // the button size will not vary
     button.setStyle(
-        "-fx-background-radius: 9px; -fx-border-radius: 6px; -fx-background-color: #99D9EA; -fx-border-color: #000000; -fx-border-width: 1px; -fx-opacity: 0.7");
+        "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99D9EA; -fx-border-color: #000000; -fx-border-width: 1px; -fx-opacity: 0.7");
     double xPos = (node.getXCoord() * widthRatio - buttonSize / 2.0);
     double yPos = (node.getYCoord() * heightRatio - buttonSize / 2.0);
     button.setLayoutX(xPos);
@@ -999,18 +996,18 @@ public class DataMapViewController implements Initializable {
         });
   }
 
-//  @FXML
-//  private void uploadNodes(ActionEvent actionEvent) throws FileNotFoundException {
-//    nodesChooser.setTitle("Select CSV File Nodes");
-//    File file = nodesChooser.showOpenDialog(mapPane.getScene().getWindow());
-//    databaseManager.readNodes(new FileInputStream(file));
-//  }
-//
-//  @FXML
-//  private void uploadEdges(ActionEvent actionEvent) throws FileNotFoundException {
-//    edgesChooser.setTitle("Select CSV File Edges");
-//    File file = edgesChooser.showOpenDialog(mapPane.getScene().getWindow());
-//
-//    databaseManager.readEdges(new FileInputStream(file));
-//  }
+  //  @FXML
+  //  private void uploadNodes(ActionEvent actionEvent) throws FileNotFoundException {
+  //    nodesChooser.setTitle("Select CSV File Nodes");
+  //    File file = nodesChooser.showOpenDialog(mapPane.getScene().getWindow());
+  //    databaseManager.readNodes(new FileInputStream(file));
+  //  }
+  //
+  //  @FXML
+  //  private void uploadEdges(ActionEvent actionEvent) throws FileNotFoundException {
+  //    edgesChooser.setTitle("Select CSV File Edges");
+  //    File file = edgesChooser.showOpenDialog(mapPane.getScene().getWindow());
+  //
+  //    databaseManager.readEdges(new FileInputStream(file));
+  //  }
 }
