@@ -71,7 +71,7 @@ public class ComputerServiceController implements Initializable {
   DatabaseManager databaseManager = DatabaseManager.getManager();
   List<ComputerServiceRequest> computerServiceRequests;
 
-  public ComputerServiceController() throws Exception{
+  public ComputerServiceController() throws Exception {
     try {
       computerServiceRequests = databaseManager.getAllComputerServiceRequests();
     } catch (Exception e) {

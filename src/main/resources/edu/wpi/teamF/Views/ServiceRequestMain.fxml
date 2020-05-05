@@ -186,7 +186,7 @@
                         <Font size="9.0" />
                     </font>
                 </Label>
-            <ImageView fx:id="appointmentsImage" fitHeight="61.0" fitWidth="61.0" onMouseClicked="#switchToAppointments" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="8">
+            <ImageView fx:id="appointmentsImage" fitHeight="61.0" fitWidth="61.0" onMouseClicked="#appointmentRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="8">
                <image>
                   <Image url="@../../../../Images/icons8-calendar-100.png" />
                </image>
