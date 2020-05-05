@@ -214,13 +214,13 @@ public class DataMapViewController implements Initializable {
     imageView = imageViewMain1;
     hospital = Hospital.MAIN;
 
-    for (Edge edge : databaseManager.getAllEdges()) {
-      drawEdge(edge);
-    } // for every edge that connects two nodes on the fifth floor, draw the edge on the map
-
     for (Node node : databaseManager.getAllNodes()) {
       drawNode(node);
     }
+
+    for (Edge edge : databaseManager.getAllEdges()) {
+      drawEdge(edge);
+    } // for every edge that connects two nodes on the fifth floor, draw the edge on the map
 
     typeInput
         .getItems()

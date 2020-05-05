@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Set;
+import javax.management.InstanceNotFoundException;
 
 public class DatabaseManager {
 
@@ -141,6 +142,7 @@ public class DatabaseManager {
   private TransportRequestFactory transportRequestFactory = TransportRequestFactory.getFactory();
 
   static Connection connection = null;
+  public static Account accountLogged = null;
 
   private static DatabaseManager manager = new DatabaseManager();
 
@@ -900,5 +902,17 @@ public class DatabaseManager {
 
   public TransportRequest readTransportRequest(String id) throws ValidationException {
     return transportRequestFactory.read(id);
+  }
+
+  public void setLogin(String username) throws InstanceNotFoundException {
+    accountLogged = accountFactory.read(username);
+  }
+
+  public Account.Type getPermissions() {
+    if (accountLogged == null) {
+      return null;
+    } else {
+      return accountLogged.getType();
+    }
   }
 }
