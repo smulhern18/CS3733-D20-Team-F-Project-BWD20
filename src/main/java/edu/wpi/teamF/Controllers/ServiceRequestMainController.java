@@ -65,6 +65,14 @@ public class ServiceRequestMainController implements Initializable {
     sceneController.switchScene("TransportRequest");
   }
 
+  public void switchToRoomScheduler(MouseEvent mouseEvent) throws IOException {
+    sceneController.switchScene("RoomSceduler");
+  }
+
+  public void switchToAppointments(MouseEvent mouseEvent) throws IOException {
+    sceneController.switchScene("TransportRequest");
+  }
+
   public void appointmentRequest(MouseEvent mouseEvent) {
     try {
       // AppointmentRequest.run(500, 50, 1000, 1000, null, null, null);
