@@ -18,7 +18,7 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.d20.teamF.Controllers.MaintenanceRequestController">
     <children>
-      <AnchorPane fx:id="maintenancePane" layoutY="-7.0" prefHeight="411.0" prefWidth="600.0" visible="false">
+      <AnchorPane fx:id="maintenancePane" layoutY="-7.0" prefHeight="411.0" prefWidth="600.0">
          <children>
                   <Label fx:id="securityRequestLabel" layoutX="176.0" layoutY="46.0" prefHeight="53.0" prefWidth="247.0" text="Maintenance Request">
                       <font>
@@ -242,7 +242,7 @@
             <Label fx:id="passwordError" layoutX="235.0" layoutY="95.0" text="passwords do not match" textFill="RED" visible="false" />
          </children>
       </AnchorPane>
-        <AnchorPane fx:id="accountTablePane" prefHeight="405.0" prefWidth="600.0">
+        <AnchorPane fx:id="accountTablePane" prefHeight="405.0" prefWidth="600.0" visible="false">
             <children>
                 <JFXTreeTableView fx:id="treeTableAccounts" layoutX="50.0" layoutY="90.0" prefHeight="236.0" prefWidth="517.0" />
                 <GridPane layoutY="346.0" prefHeight="59.0" prefWidth="600.0">
