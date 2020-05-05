@@ -39,12 +39,13 @@ public class RoomSchedulerController implements Initializable {
 
   private CalendarView calendarView;
   private DatabaseManager databaseManager = DatabaseManager.getManager();
-  private String loggedInAccountName = "Me";
+  private String loggedInAccountName = "AAAAAA";
 
   private boolean reset = false;
 
   @SneakyThrows
   public void initialize(URL location, ResourceBundle resources) {
+
     roomComboBox.setItems(
         FXCollections.observableArrayList(
             "Reflection Room 1",
@@ -162,7 +163,22 @@ public class RoomSchedulerController implements Initializable {
             ((observableValue, calendar, t1) -> {
               if (t1 == null) {
                 try {
+                  ScheduleEntry deletedScheduleEntry =
+                      databaseManager.readScheduleEntry(entry.getId());
+                  deletedScheduleEntry.setID("" + System.currentTimeMillis());
+
                   databaseManager.deleteScheduleEntry(entry.getId());
+                  if (!entry.getTitle().equals(loggedInAccountName)) {
+                    System.out.println("NOT MINEEEEEEEEEEEEEEEEEE");
+
+                    databaseManager.mainpulateScheduleEntry(deletedScheduleEntry);
+                    Entry<String> deletedEntry = createEntry(deletedScheduleEntry);
+                    deletedEntry.setCalendar(getCalendar(deletedScheduleEntry.getRoom()));
+                    calendarView.refreshData();
+
+                  } else {
+                    System.out.println("MINEMINEMINEMINEMINE");
+                  }
                 } catch (Exception e) {
                   e.printStackTrace();
                 }
