@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
@@ -290,7 +291,7 @@
       </AnchorPane>
       <AnchorPane fx:id="directionsPane" minHeight="1.0" minWidth="1.0" prefHeight="1.0" prefWidth="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: rgba(255, 255, 255, 0.9);" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="20.0">
+            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="20.0">
                <children>
                   <VBox prefHeight="350.0" prefWidth="300.0">
                      <children>
@@ -397,63 +398,305 @@
                   </VBox>
                   <AnchorPane fx:id="externalDirections" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1070.0">
                      <children>
-                        <ScrollPane fx:id="scrollPaneIntermediate" style="-fx-background: rgb(220,221,218); -fx-background-color: rgb(220,221,218);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <content>
-                              <StackPane fx:id="stackPaneIntermediate" style="-fx-background-color: #a2a2a2;">
+                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1070.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <ScrollPane fx:id="scrollPaneIntermediate" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="870.0" style="-fx-background: rgb(220,221,218); -fx-background-color: rgb(220,221,218);">
+                                 <content>
+                                    <StackPane fx:id="stackPaneIntermediate" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="870.0" style="-fx-background-color: #a2a2a2;">
+                                       <children>
+                                          <ImageView fx:id="faulknerTo45FrancisImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/IntermediateMaps/Faulknerto45Francis.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="faulknerTo75FrancisImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/IntermediateMaps/Faulknerto75Francis.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="faulknerToBTMImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/IntermediateMaps/FaulknertoBTM.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="faulknerToShapiroImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/IntermediateMaps/FaulknertoShapiro.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="faulknerTo15FrancisImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/IntermediateMaps/ShapirotoFaulkner.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="Francis45ToFaulknerImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/IntermediateMaps/45FrancistoFaulkner.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="Francis75ToFaulknerImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/IntermediateMaps/75FrancistoFaulkner.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="BTMToFaulknerImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/IntermediateMaps/BTMtoFaulkner.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="shapiroToFaulknerImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/IntermediateMaps/ShapirotoFaulkner.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="francis15ToFaulknerImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/IntermediateMaps/ShapirotoFaulkner.PNG" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </StackPane>
+                                 </content>
+                              </ScrollPane>
+                              <VBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <ImageView fx:id="faulknerTo45FrancisImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Maps/IntermediateMaps/Faulknerto45Francis.PNG" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fx:id="faulknerTo75FrancisImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Maps/IntermediateMaps/Faulknerto75Francis.PNG" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fx:id="faulknerToBTMImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Maps/IntermediateMaps/FaulknertoBTM.PNG" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fx:id="faulknerToShapiroImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Maps/IntermediateMaps/FaulknertoShapiro.PNG" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fx:id="faulknerTo15FrancisImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Maps/IntermediateMaps/ShapirotoFaulkner.PNG" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fx:id="Francis45ToFaulknerImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Maps/IntermediateMaps/45FrancistoFaulkner.PNG" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fx:id="Francis75ToFaulknerImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Maps/IntermediateMaps/75FrancistoFaulkner.PNG" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fx:id="BTMToFaulknerImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Maps/IntermediateMaps/BTMtoFaulkner.PNG" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fx:id="shapiroToFaulknerImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Maps/IntermediateMaps/ShapirotoFaulkner.PNG" />
-                                       </image>
-                                    </ImageView>
-                                    <ImageView fx:id="francis15ToFaulknerImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../Maps/IntermediateMaps/ShapirotoFaulkner.PNG" />
-                                       </image>
-                                    </ImageView>
-                                 </children></StackPane>
-                           </content>
-                        </ScrollPane>
+                                    <Label text="Live Travel" textAlignment="CENTER" wrapText="true">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="-28.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="Times" textAlignment="CENTER" wrapText="true">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="-20.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <HBox prefWidth="200.0">
+                                       <children>
+                                          <Label text="Powered by">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="2.0" top="7.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <ImageView fitHeight="150.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../Images/google_maps.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </ImageView>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../Images/driving.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="20.0" top="5.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="115.0">
+                                             <children>
+                                                <Label fx:id="driveTime" text="1 h 10 min">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="driveDistance" text="3.5 mi">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets left="15.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="56.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../Images/transit.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="20.0" top="5.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="115.0">
+                                             <children>
+                                                <Label fx:id="transitTime" text="1 h 10 min">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="transitDistance" text="3.5 mi">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets left="12.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../Images/bicycling.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="20.0" top="5.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="115.0">
+                                             <children>
+                                                <Label fx:id="bikeTime" text="1 h 10 min">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="bikeDistance" text="3.5 mi">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets left="15.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="80.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../Images/walking.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="20.0" top="5.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="115.0">
+                                             <children>
+                                                <Label fx:id="walkTime" text="1 h 10 min">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="walkDistance" text="3.5 mi">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets left="15.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <Line endX="90.0" startX="-90.0" strokeWidth="2.0">
+                                       <VBox.margin>
+                                          <Insets left="20.0" right="20.0" top="8.0" />
+                                       </VBox.margin>
+                                    </Line>
+                                    <Label text="Directions on-the-go">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" top="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="Scan below with your phone">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fx:id="francis15ToFaulknerQR" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/QrCodes/15F_Faulkner.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="shapiroToFaulknerQR" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/QrCodes/Shapiro_Faulkner.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="BTMToFaulknerQR" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/QrCodes/BTM_Faulkner.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="Francis75ToFaulknerQR" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/QrCodes/75F_Faulkner.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="Francis45ToFaulknerQR" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/QrCodes/45F_Faulkner.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="faulknerTo15FrancisQR" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/QrCodes/Faulkner_15F.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="faulknerToShapiroQR" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/QrCodes/Faulkner_Shapiro.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="faulknerToBTMQR" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/QrCodes/Faulkner_BTM.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="faulknerTo75FrancisQR" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/QrCodes/Faulkner_75F.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="faulknerTo45FrancisQR" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/QrCodes/Faulkner_45F.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin>
+                                    </StackPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
                      </children></AnchorPane>
                </children>
             </HBox>

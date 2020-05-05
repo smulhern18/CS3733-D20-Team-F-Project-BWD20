@@ -31,9 +31,9 @@ import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
 import javafx.util.Callback;
 import javax.management.InstanceNotFoundException;
 import lombok.SneakyThrows;
@@ -64,6 +64,8 @@ public class MedicineDeliveryController implements Initializable {
   public JFXTextField deleteText;
   public JFXButton delete;
   public JFXButton backButton;
+  public JFXButton checkButtonButton;
+  public ImageView backgroundImage;
   SceneController sceneController = App.getSceneController();
 
   DatabaseManager databaseManager = DatabaseManager.getManager();
@@ -74,18 +76,28 @@ public class MedicineDeliveryController implements Initializable {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    backgroundImage.fitWidthProperty().bind(anchorPane.widthProperty());
+    backgroundImage.fitHeightProperty().bind(anchorPane.heightProperty());
+    Account.Type userLevel = databaseManager.getPermissions();
+    if (userLevel == Account.Type.USER) {
+      // checkButtonButton.setDisable(true);
+
+      // set to user
+    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+      // checkButtonButton.setDisable(false);
+    }
 
     UISetting uiSetting = new UISetting();
     uiSetting.setAsLocationComboBox(locationComboBox);
-
-    anchorPane
-        .widthProperty()
-        .addListener(
-            (observable, oldWidth, newWidth) -> {
-              if (newWidth.doubleValue() != oldWidth.doubleValue()) {
-                resize(newWidth.doubleValue());
-              }
-            });
+    //
+    //    anchorPane
+    //        .widthProperty()
+    //        .addListener(
+    //            (observable, oldWidth, newWidth) -> {
+    //              if (newWidth.doubleValue() != oldWidth.doubleValue()) {
+    //                resize(newWidth.doubleValue());
+    //              }
+    //            });
 
     List<Node> nodes = null;
 
@@ -344,29 +356,31 @@ public class MedicineDeliveryController implements Initializable {
 
   public void request(ActionEvent actionEvent) {
     servicePane.setVisible(true);
+    servicePane.toFront();
     checkStatusPane.setVisible(false);
   }
 
   public void statusView(ActionEvent actionEvent) {
     servicePane.setVisible(false);
     checkStatusPane.setVisible(true);
+    checkStatusPane.toFront();
   }
 
-  private void resize(double width) {
-    System.out.println(width);
-    Font newFont = new Font(width / 50);
-    locationLabel.setFont(newFont);
-    medicineLabel.setFont(newFont);
-    instructionsLabel.setFont(newFont);
-    descLabel.setFont(newFont);
-    priorityLabel.setFont(newFont);
-    medicineRequestLabel.setFont(new Font(width / 20));
-    submitButton.setFont(newFont);
-    cancelButton.setFont(newFont);
-    // deleteButton.setFont(new Font(width / 50));
-    update.setFont(newFont);
-    backButton.setFont(newFont);
-  }
+  //  private void resize(double width) {
+  //    System.out.println(width);
+  //    Font newFont = new Font(width / 50);
+  //    locationLabel.setFont(newFont);
+  //    medicineLabel.setFont(newFont);
+  //    instructionsLabel.setFont(newFont);
+  //    descLabel.setFont(newFont);
+  //    priorityLabel.setFont(newFont);
+  //    medicineRequestLabel.setFont(new Font(width / 20));
+  //    submitButton.setFont(newFont);
+  //    cancelButton.setFont(newFont);
+  //    // deleteButton.setFont(new Font(width / 50));
+  //    update.setFont(newFont);
+  //    backButton.setFont(newFont);
+  //  }
 
   public void backToServiceRequestMain(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("ServiceRequestMain");
