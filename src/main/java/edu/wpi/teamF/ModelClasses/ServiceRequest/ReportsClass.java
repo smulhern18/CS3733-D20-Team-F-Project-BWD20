@@ -1,5 +1,7 @@
 package edu.wpi.teamF.ModelClasses.ServiceRequest;
 
+import java.util.Objects;
+
 public class ReportsClass {
 
   private int timesVisited;
@@ -46,14 +48,14 @@ public class ReportsClass {
     this.nodeID = nodeID;
   }
 
-  public boolean equals(ReportsClass report) {
-    boolean isequal = false;
-
-    isequal =
-        this.sanitizer.equals(report.getSanitizer())
-            && this.nodeID.equals(report.getNodeID())
-            && this.timesSanitized == report.getTimesSanitized()
-            && this.timesVisited == report.getTimesVisited();
-    return isequal;
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (!(o instanceof ReportsClass)) return false;
+    ReportsClass that = (ReportsClass) o;
+    return getTimesVisited() == that.getTimesVisited()
+        && getTimesSanitized() == that.getTimesSanitized()
+        && Objects.equals(getSanitizer(), that.getSanitizer())
+        && Objects.equals(getNodeID(), that.getNodeID());
   }
 }

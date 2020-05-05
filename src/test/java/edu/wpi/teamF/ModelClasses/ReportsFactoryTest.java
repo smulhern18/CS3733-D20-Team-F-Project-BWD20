@@ -82,7 +82,7 @@ public class ReportsFactoryTest {
       for (ReportsClass report : validReports) {
         databaseManager.manipulateReport(report);
 
-        report.setTimesVisited(5);
+        report.setTimesVisited(4);
         databaseManager.manipulateReport(report);
 
         ReportsClass readReport = databaseManager.readReport(report.getNodeID());
@@ -108,6 +108,7 @@ public class ReportsFactoryTest {
         readReports.add(e);
       }
       assertTrue(readReports.size() == 4);
+      boolean whatever = readReports.contains(validReports[0]);
       assertTrue(readReports.contains(validReports[0]));
       assertTrue(readReports.contains(validReports[1]));
       assertTrue(readReports.contains(validReports[2]));

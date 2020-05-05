@@ -126,8 +126,8 @@ public class ReportsFactory {
         DatabaseManager.getConnection().prepareStatement(updateStatement)) {
       int param = 1;
       preparedStatement.setString(param++, report.getNodeID());
-      preparedStatement.setInt(param++, report.getTimesSanitized());
       preparedStatement.setInt(param++, report.getTimesVisited());
+      preparedStatement.setInt(param++, report.getTimesSanitized());
       preparedStatement.setString(param++, report.getSanitizer());
       preparedStatement.setString(param++, report.getNodeID());
       int numRows = preparedStatement.executeUpdate();
