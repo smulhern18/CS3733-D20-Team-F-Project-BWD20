@@ -22,9 +22,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
 import javafx.util.Callback;
 import lombok.SneakyThrows;
 
@@ -50,6 +50,8 @@ public class MariachiRequestController implements Initializable {
   public GridPane servicePane;
   public AnchorPane checkStatusPane;
   public AnchorPane anchorPane;
+  public AnchorPane frame;
+  public ImageView backgroundImage;
 
   DatabaseManager databaseManager = DatabaseManager.getManager();
   List<MariachiRequest> mariachiRequestList = databaseManager.getAllMariachiServiceRequests();
@@ -58,6 +60,10 @@ public class MariachiRequestController implements Initializable {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    backgroundImage.setPreserveRatio(false);
+    backgroundImage.fitHeightProperty().bind(frame.heightProperty());
+    backgroundImage.fitWidthProperty().bind(frame.widthProperty());
+
     Account.Type userLevel = databaseManager.getPermissions();
     if (userLevel == Account.Type.USER) {
       checkStatusButton.setDisable(true);
@@ -170,30 +176,30 @@ public class MariachiRequestController implements Initializable {
     table.setEditable(true);
     table.setShowRoot(false);
 
-    resize(anchorPane.getWidth());
-    anchorPane
-        .widthProperty()
-        .addListener(
-            (observable, oldWidth, newWidth) -> {
-              if (newWidth.doubleValue() != oldWidth.doubleValue()) {
-                resize(newWidth.doubleValue());
-              }
-            });
+    //    resize(anchorPane.getWidth());
+    //    anchorPane
+    //        .widthProperty()
+    //        .addListener(
+    //            (observable, oldWidth, newWidth) -> {
+    //              if (newWidth.doubleValue() != oldWidth.doubleValue()) {
+    //                resize(newWidth.doubleValue());
+    //              }
+    //            });
   }
 
-  private void resize(double width) {
-    System.out.println(width);
-    Font newFont = new Font(width / 50);
-    locationLabel.setFont(newFont);
-    priorityLabel.setFont(newFont);
-
-    songRequestLabel.setFont(newFont);
-    mariachiRequestLabel.setFont(new Font(width / 20));
-    submitButton.setFont(newFont);
-    cancelButton.setFont(newFont);
-    // deleteButton.setFont(new Font(width / 50));
-    updateButton.setFont(newFont);
-  }
+  //  private void resize(double width) {
+  //    System.out.println(width);
+  //    Font newFont = new Font(width / 50);
+  //    locationLabel.setFont(newFont);
+  //    priorityLabel.setFont(newFont);
+  //
+  //    songRequestLabel.setFont(newFont);
+  //    mariachiRequestLabel.setFont(new Font(width / 20));
+  //    submitButton.setFont(newFont);
+  //    cancelButton.setFont(newFont);
+  //    // deleteButton.setFont(new Font(width / 50));
+  //    updateButton.setFont(newFont);
+  //  }
 
   public void submit(ActionEvent actionEvent) throws Exception {
     String location = locationComboBox.getValue();
