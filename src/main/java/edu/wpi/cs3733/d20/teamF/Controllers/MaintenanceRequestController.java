@@ -107,21 +107,11 @@ public class MaintenanceRequestController implements Initializable {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    ObservableList<String> assigneeList = FXCollections.observableArrayList();
     // add the different choices to the choicebox
     // Replace this with long names, linked to IDs
 
     UISetting uiSetting = new UISetting();
-
-    priorityComboBox.getItems().add("Low");
-    priorityComboBox.getItems().add("Medium");
-    priorityComboBox.getItems().add("High");
-
-    typeComboBox.getItems().add("Elevator");
-    typeComboBox.getItems().add("Electrical");
-    typeComboBox.getItems().add("Plumbing");
-    typeComboBox.getItems().add("Grounds Keeping");
-
-    assigneeChoice.getItems().add("Not Assigned");
 
     for (Account.Type type : Account.Type.values()) {
       userTypeInput.getItems().add(type.getTypeOrdinal());
@@ -134,6 +124,7 @@ public class MaintenanceRequestController implements Initializable {
     if (accounts != null) {
       for (Account acc : accounts) {
         assigneeChoice.getItems().add(acc.getFirstName());
+        assigneeList.add(acc.getFirstName());
       }
     }
     // ID
@@ -172,21 +163,44 @@ public class MaintenanceRequestController implements Initializable {
             return param.getValue().getValue().getDescription();
           }
         });
+
     // priority column
+    ObservableList<String> prioList = FXCollections.observableArrayList();
+    prioList.add("1");
+    prioList.add("2");
+    prioList.add("3");
+
     JFXTreeTableColumn<UIMaintenenceRequest, String> priority =
         new JFXTreeTableColumn<>("Priority");
     priority.setPrefWidth(50);
     priority.setCellValueFactory(
+        (JFXTreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) ->
+            param.getValue().getValue().getPriority());
+    priority.setCellFactory(
         new Callback<
-            TreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String>,
-            ObservableValue<String>>() {
+            TreeTableColumn<UIMaintenenceRequest, String>,
+            TreeTableCell<UIMaintenenceRequest, String>>() {
           @Override
-          public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) {
-            return param.getValue().getValue().getPriority();
+          public TreeTableCell<UIMaintenenceRequest, String> call(
+              TreeTableColumn<UIMaintenenceRequest, String> param) {
+            return new TextFieldTreeTableCell<>();
+          }
+        });
+    priority.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    priority.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(prioList));
+    priority.setOnEditCommit(
+        new EventHandler<TreeTableColumn.CellEditEvent<UIMaintenenceRequest, String>>() {
+          @Override
+          public void handle(TreeTableColumn.CellEditEvent<UIMaintenenceRequest, String> event) {
+            TreeItem<UIMaintenenceRequest> current =
+                treeTableMaintenance.getTreeItem(event.getTreeTablePosition().getRow());
+            current.getValue().setCompleted(new SimpleStringProperty(event.getNewValue()));
           }
         });
 
+    ObservableList<String> completedList = FXCollections.observableArrayList();
+    completedList.add("Complete");
+    completedList.add("Incomplete");
     // Assignee choicebox
     JFXTreeTableColumn<UIMaintenenceRequest, String> column = new JFXTreeTableColumn<>("Assignee");
     column.setCellValueFactory(
@@ -203,6 +217,7 @@ public class MaintenanceRequestController implements Initializable {
           }
         });
     column.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    column.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(assigneeList));
     column.setOnEditCommit(
         new EventHandler<TreeTableColumn.CellEditEvent<UIMaintenenceRequest, String>>() {
           @Override
@@ -212,9 +227,6 @@ public class MaintenanceRequestController implements Initializable {
             current.getValue().setAssignee(new SimpleStringProperty(event.getNewValue()));
           }
         });
-    ObservableList<String> completedList = FXCollections.observableArrayList();
-    completedList.add("Complete");
-    completedList.add("Incomplete");
 
     // estimated cost
     JFXTreeTableColumn<UIMaintenenceRequest, String> estCost =
@@ -366,15 +378,48 @@ public class MaintenanceRequestController implements Initializable {
           }
         });
 
-    // type
+    //    // type
+    //    JFXTreeTableColumn<UIMaintenenceRequest, String> type = new JFXTreeTableColumn<>("Type");
+    //    type.setPrefWidth(100);
+    //    type.setCellValueFactory(
+    //        new Callback<>() {
+    //          @Override
+    //          public ObservableValue<String> call(
+    //              TreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) {
+    //            return param.getValue().getValue().getType();
+    //          }
+    //        });
+
+    ObservableList<String> typeMain = FXCollections.observableArrayList();
+    typeMain.add("Elevator");
+    typeMain.add("Plumbing");
+    typeMain.add("Electrical");
+    typeMain.add("Groundskeeping");
+    typeMain.add("Other");
     JFXTreeTableColumn<UIMaintenenceRequest, String> type = new JFXTreeTableColumn<>("Type");
     type.setPrefWidth(100);
     type.setCellValueFactory(
-        new Callback<>() {
+        (JFXTreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) ->
+            param.getValue().getValue().getType());
+    type.setCellFactory(
+        new Callback<
+            TreeTableColumn<UIMaintenenceRequest, String>,
+            TreeTableCell<UIMaintenenceRequest, String>>() {
           @Override
-          public ObservableValue<String> call(
-              TreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) {
-            return param.getValue().getValue().getType();
+          public TreeTableCell<UIMaintenenceRequest, String> call(
+              TreeTableColumn<UIMaintenenceRequest, String> param) {
+            return new TextFieldTreeTableCell<>();
+          }
+        });
+    type.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    type.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(typeMain));
+    type.setOnEditCommit(
+        new EventHandler<TreeTableColumn.CellEditEvent<UIMaintenenceRequest, String>>() {
+          @Override
+          public void handle(TreeTableColumn.CellEditEvent<UIMaintenenceRequest, String> event) {
+            TreeItem<UIMaintenenceRequest> current =
+                treeTableMaintenance.getTreeItem(event.getTreeTablePosition().getRow());
+            current.getValue().setCompleted(new SimpleStringProperty(event.getNewValue()));
           }
         });
 
@@ -441,14 +486,6 @@ public class MaintenanceRequestController implements Initializable {
             CompleteDate,
             date);
     treeTableAccounts.getColumns().setAll(username, firstName, lastName, userType, specialty);
-
-    column.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-    completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-    priority.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-    firstName.setCellFactory((TextFieldTreeTableCell.forTreeTableColumn()));
-    lastName.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-    userType.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-    specialty.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
     treeTableMaintenance.setRoot(root);
     treeTableMaintenance.setEditable(true);
