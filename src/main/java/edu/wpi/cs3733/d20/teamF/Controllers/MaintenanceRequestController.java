@@ -12,6 +12,7 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -189,89 +190,91 @@ public class MaintenanceRequestController implements Initializable {
     completedList.add("Incomplete");
 
     // estimated cost
-    JFXTreeTableColumn<UIMaintenenceRequest, String> estCost = new JFXTreeTableColumn<>("Estimated Cost");
+    JFXTreeTableColumn<UIMaintenenceRequest, String> estCost =
+        new JFXTreeTableColumn<>("Estimated Cost");
     estCost.setPrefWidth(100);
     estCost.setCellValueFactory(
-            new Callback<>() {
-              @Override
-              public ObservableValue<String> call(
-                      TreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) {
-                return param.getValue().getValue().getEstimatedCost();
-              }
-            });
+        new Callback<>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) {
+            return param.getValue().getValue().getEstimatedCost();
+          }
+        });
 
     // completion date
-    JFXTreeTableColumn<UIMaintenenceRequest, String> CompleteDate = new JFXTreeTableColumn<>("Completion Date");
+    JFXTreeTableColumn<UIMaintenenceRequest, String> CompleteDate =
+        new JFXTreeTableColumn<>("Completion Date");
     CompleteDate.setPrefWidth(100);
     CompleteDate.setCellValueFactory(
-            new Callback<>() {
-              @Override
-              public ObservableValue<String> call(
-                      TreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) {
-                return param.getValue().getValue().getDateCompleted();
-              }
-            });
+        new Callback<>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) {
+            return param.getValue().getValue().getDateCompleted();
+          }
+        });
 
     // date submitted
-    JFXTreeTableColumn<UIMaintenenceRequest, String> date = new JFXTreeTableColumn<>("Date Submitted");
+    JFXTreeTableColumn<UIMaintenenceRequest, String> date =
+        new JFXTreeTableColumn<>("Date Submitted");
     date.setPrefWidth(100);
     date.setCellValueFactory(
-            new Callback<>() {
-              @Override
-              public ObservableValue<String> call(
-                      TreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) {
-                return param.getValue().getValue().getDateSubmitted();
-              }
-            });
+        new Callback<>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) {
+            return param.getValue().getValue().getDateSubmitted();
+          }
+        });
     ObservableList<String> typeList = FXCollections.observableArrayList();
     typeList.add("Admin");
     typeList.add("Staff");
 
-    ObservableList<String> specialList =  FXCollections.observableArrayList();
+    ObservableList<String> specialList = FXCollections.observableArrayList();
     specialList.add("Elevator");
     specialList.add("Electrical");
     specialList.add("Plumbing");
     specialList.add("Grounds Keeping");
 
-// User type
-JFXTreeTableColumn<UIAccount, String> userType = new JFXTreeTableColumn<>("User Type");
+    // User type
+    JFXTreeTableColumn<UIAccount, String> userType = new JFXTreeTableColumn<>("User Type");
     userType.setCellValueFactory(
-            (TreeTableColumn.CellDataFeatures<UIAccount, String> param) ->
-                    param.getValue().getValue().getType());
-            userType.setCellFactory(
-                    new Callback<TreeTableColumn<UIAccount, String>,
-                            TreeTableCell<UIAccount, String>>() {
-                      @Override
-                      public TreeTableCell<UIAccount, String> call(TreeTableColumn<UIAccount, String> param) {
-                        return new TextFieldTreeTableCell<>();
-                      }
-                    }
-            );
-            userType.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-            userType.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(typeList));
-            userType.setOnEditCommit(
-                    new EventHandler<TreeTableColumn.CellEditEvent<UIAccount, String>>() {
-                      @Override
-                      public void handle(TreeTableColumn.CellEditEvent<UIAccount, String> event) {
-                        TreeItem<UIAccount> current = treeTableAccounts.getTreeItem(event.getTreeTablePosition().getRow());
-                        current.getValue().setType(new SimpleStringProperty(event.getNewValue()));
-                      }
-                    }
-            );
+        (TreeTableColumn.CellDataFeatures<UIAccount, String> param) ->
+            param.getValue().getValue().getType());
+    userType.setCellFactory(
+        new Callback<TreeTableColumn<UIAccount, String>, TreeTableCell<UIAccount, String>>() {
+          @Override
+          public TreeTableCell<UIAccount, String> call(TreeTableColumn<UIAccount, String> param) {
+            return new TextFieldTreeTableCell<>();
+          }
+        });
+    userType.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    userType.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(typeList));
+    userType.setOnEditCommit(
+        new EventHandler<TreeTableColumn.CellEditEvent<UIAccount, String>>() {
+          @Override
+          public void handle(TreeTableColumn.CellEditEvent<UIAccount, String> event) {
+            TreeItem<UIAccount> current =
+                treeTableAccounts.getTreeItem(event.getTreeTablePosition().getRow());
+            current.getValue().setType(new SimpleStringProperty(event.getNewValue()));
+          }
+        });
 
     // estimated complete date
-    JFXTreeTableColumn<UIMaintenenceRequest, String> estCompleteDate = new JFXTreeTableColumn<>("Estimated Completion Date");
+    JFXTreeTableColumn<UIMaintenenceRequest, String> estCompleteDate =
+        new JFXTreeTableColumn<>("Estimated Completion Date");
     estCompleteDate.setPrefWidth(100);
     estCompleteDate.setCellValueFactory(
-            new Callback<>() {
-              @Override
-              public ObservableValue<String> call(
-                      TreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) {
-                return param.getValue().getValue().getEstimatedCompletionDate();
-              }
-            });
+        new Callback<>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) {
+            return param.getValue().getValue().getEstimatedCompletionDate();
+          }
+        });
 
-// completed
+    // completed
     JFXTreeTableColumn<UIMaintenenceRequest, String> completed =
         new JFXTreeTableColumn<>("Completed");
     completed.setPrefWidth(200);
@@ -304,93 +307,105 @@ JFXTreeTableColumn<UIAccount, String> userType = new JFXTreeTableColumn<>("User 
     JFXTreeTableColumn<UIAccount, String> username = new JFXTreeTableColumn<>("Username");
     username.setPrefWidth(100);
     username.setCellValueFactory(
-            new Callback<>() {
-              @Override
-              public ObservableValue<String> call(
-                      TreeTableColumn.CellDataFeatures<UIAccount, String> param) {
-                return param.getValue().getValue().getUserName();
-              }
-            });
+        new Callback<>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIAccount, String> param) {
+            return param.getValue().getValue().getUserName();
+          }
+        });
 
     // first name
     JFXTreeTableColumn<UIAccount, String> firstName = new JFXTreeTableColumn<>("First Name");
     firstName.setPrefWidth(100);
     firstName.setCellValueFactory(
-            new Callback<>() {
-              @Override
-              public ObservableValue<String> call(
-                      TreeTableColumn.CellDataFeatures<UIAccount, String> param) {
-                return param.getValue().getValue().getFirstName();
-              }
-            });
+        new Callback<>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIAccount, String> param) {
+            return param.getValue().getValue().getFirstName();
+          }
+        });
 
     // last name
     JFXTreeTableColumn<UIAccount, String> lastName = new JFXTreeTableColumn<>("Last Name");
     lastName.setPrefWidth(100);
     lastName.setCellValueFactory(
-            new Callback<>() {
-              @Override
-              public ObservableValue<String> call(
-                      TreeTableColumn.CellDataFeatures<UIAccount, String> param) {
-                return param.getValue().getValue().getLastName();
-              }
-            });
+        new Callback<>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIAccount, String> param) {
+            return param.getValue().getValue().getLastName();
+          }
+        });
 
     // type
     JFXTreeTableColumn<UIMaintenenceRequest, String> type = new JFXTreeTableColumn<>("Type");
     type.setPrefWidth(100);
     type.setCellValueFactory(
-            new Callback<>() {
-              @Override
-              public ObservableValue<String> call(
-                      TreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) {
-                return param.getValue().getValue().getType();
-              }
-            });
+        new Callback<>() {
+          @Override
+          public ObservableValue<String> call(
+              TreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) {
+            return param.getValue().getValue().getType();
+          }
+        });
 
     // specialty
     JFXTreeTableColumn<UIAccount, String> specialty = new JFXTreeTableColumn<>("Specialty");
     specialty.setPrefWidth(100);
     specialty.setCellValueFactory(
-            (TreeTableColumn.CellDataFeatures<UIAccount, String> param) ->
-                    param.getValue().getValue().getSpecialty());
+        (TreeTableColumn.CellDataFeatures<UIAccount, String> param) ->
+            param.getValue().getValue().getSpecialty());
     specialty.setCellFactory(
-            new Callback<TreeTableColumn<UIAccount, String>,
-                    TreeTableCell<UIAccount, String>>() {
-              @Override
-              public TreeTableCell<UIAccount, String> call(TreeTableColumn<UIAccount, String> param) {
-                return new TextFieldTreeTableCell<>();
-              }
-            }
-    );
+        new Callback<TreeTableColumn<UIAccount, String>, TreeTableCell<UIAccount, String>>() {
+          @Override
+          public TreeTableCell<UIAccount, String> call(TreeTableColumn<UIAccount, String> param) {
+            return new TextFieldTreeTableCell<>();
+          }
+        });
     specialty.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     specialty.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(typeList));
     specialty.setOnEditCommit(
-            new EventHandler<TreeTableColumn.CellEditEvent<UIAccount, String>>() {
-              @Override
-              public void handle(TreeTableColumn.CellEditEvent<UIAccount, String> event) {
-                TreeItem<UIAccount> current = treeTableAccounts.getTreeItem(event.getTreeTablePosition().getRow());
-                current.getValue().setSpecialty(new SimpleStringProperty(event.getNewValue()));
-              }
-            }
-    );
+        new EventHandler<TreeTableColumn.CellEditEvent<UIAccount, String>>() {
+          @Override
+          public void handle(TreeTableColumn.CellEditEvent<UIAccount, String> event) {
+            TreeItem<UIAccount> current =
+                treeTableAccounts.getTreeItem(event.getTreeTablePosition().getRow());
+            current.getValue().setSpecialty(new SimpleStringProperty(event.getNewValue()));
+          }
+        });
 
     // Load the database into the tableview
 
     for (MaintenanceRequest csr : maintenanceRequests) {
       mrUI.add(new UIMaintenenceRequest(csr));
     }
-    for (Account act :  accounts) {
+    for (Account act : accounts) {
       acts.add(new UIAccount(act));
     }
 
     final TreeItem<UIMaintenenceRequest> root =
         new RecursiveTreeItem<UIMaintenenceRequest>(mrUI, RecursiveTreeObject::getChildren);
 
-    final TreeItem<UIAccount> root1 = new RecursiveTreeItem<UIAccount>(acts, RecursiveTreeObject::getChildren);
+    final TreeItem<UIAccount> root1 =
+        new RecursiveTreeItem<UIAccount>(acts, RecursiveTreeObject::getChildren);
     // set the columns for the tableview
 
-    treeTableMaintenance.getColumns().setAll(ID, loc, column, priority, type, desc, estCost, estCompleteDate, completed, CompleteDate, date);
+    treeTableMaintenance
+        .getColumns()
+        .setAll(
+            ID,
+            loc,
+            column,
+            priority,
+            type,
+            desc,
+            estCost,
+            estCompleteDate,
+            completed,
+            CompleteDate,
+            date);
     treeTableAccounts.getColumns().setAll(username, firstName, lastName, userType, specialty);
 
     column.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
@@ -417,10 +432,10 @@ JFXTreeTableColumn<UIAccount, String> userType = new JFXTreeTableColumn<>("User 
     String priority = priorityComboBox.getValue();
     String assignee = assigneeChoice.getValue();
     Double estCost = Double.parseDouble(estimatedCost.getText());
-    String estDate = estCompletion.getValue().toString();
+    Date estDate =
+        Date.from(estCompletion.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
     String type = typeComboBox.getValue();
     String complete = completedComboBox.getValue();
-
 
     System.out.println(priority);
     int priorityDB = 1;
@@ -435,7 +450,8 @@ JFXTreeTableColumn<UIAccount, String> userType = new JFXTreeTableColumn<>("User 
     DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
     Date date = new Date(System.currentTimeMillis());
     MaintenanceRequest csRequest =
-        new MaintenanceRequest(nodeID, desc, assignee, date, priorityDB, type, estDate, estCost, null);
+        new MaintenanceRequest(
+            nodeID, desc, assignee, date, priorityDB, type, estDate, estCost, null);
     databaseManager.manipulateServiceRequest(csRequest);
     mrUI.add(new UIMaintenenceRequest(csRequest));
     treeTableMaintenance.refresh();
@@ -445,7 +461,6 @@ JFXTreeTableColumn<UIAccount, String> userType = new JFXTreeTableColumn<>("User 
     desText.setText("");
     estimatedCost.setText("");
     estCompletion.setValue(null);
-
   }
 
   public void cancel(ActionEvent actionEvent) {
@@ -525,19 +540,17 @@ JFXTreeTableColumn<UIAccount, String> userType = new JFXTreeTableColumn<>("User 
 
   public void updateAccount(ActionEvent actionEvent) throws Exception {
     for (UIAccount acc : acts) {
-      Account toUpdate = databaseManager.readAccount(acts.getUserName().get());
+      Account toUpdate = databaseManager.readAccount(acc.getUserName().get());
       boolean isSame = acc.equalsAccount(toUpdate);
       if (!isSame) {
         toUpdate.setFirstName(acc.getFirstName().get());
         toUpdate.setLastName(acc.getLastName().get());
-        toUpdate.setType(acc.getType().get());
-        toUpdate.setSpecialty(acc.getSpecialty().get());
-        } else {
-          throw new IllegalArgumentException(
-                  "This doesn't belong in the completed attribute: " + completed);
-        }
-        databaseManager.manipulateServiceRequest(toUpdate);
+        toUpdate.setType(Account.Type.getEnum(acc.getType().get()));
+        toUpdate.setSpecialty(Account.Specialty.getEnum(acc.getSpecialty().get()));
+      } else {
+        throw new IllegalArgumentException("This doesn't belong in the completed attribute: ");
       }
+      databaseManager.manipulateAccount(toUpdate);
     }
     treeTableAccounts.refresh();
   }
