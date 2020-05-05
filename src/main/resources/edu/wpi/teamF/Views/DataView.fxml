@@ -26,7 +26,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <BarChart fx:id="completedChart" prefHeight="328.0" prefWidth="607.0" style="-fx-background-color: white;" title="Completede Requests">
+            <BarChart fx:id="completedChart" barGap="2.0" prefHeight="328.0" prefWidth="607.0" style="-fx-background-color: white;" title="Completede Requests">
               <xAxis>
                 <CategoryAxis label="Employees" side="BOTTOM" fx:id="xAxis" />
               </xAxis>

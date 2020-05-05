@@ -47,6 +47,8 @@ public class DataViewController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    xAxis.setAnimated(false);
+    yAxis.setAnimated(false);
     serviceChoice.getItems().add("Maintenance Request");
     serviceChoice.getItems().add("Transport Request");
     serviceChoice.getItems().add("Computer Request");
@@ -64,9 +66,15 @@ public class DataViewController implements Initializable {
 
     switch (choice) {
       case "Maintenance Request":
-        completedChart.getData().clear();
-        serviceLocationBar.getData().clear();
-        pieChartTotal.getData().clear();
+        if (completedChart.getData() != null) {
+          completedChart.getData().clear();
+        }
+        if (serviceLocationBar.getData() != null) {
+          serviceLocationBar.getData().clear();
+        }
+        if (pieChartTotal.getData() != null) {
+          pieChartTotal.getData().clear();
+        }
         data = serviceRequestStats.getMaintenanceEmployeeNumbersGraphs(mR);
         data2 = serviceRequestStats.getMaintenanceLocationNumbersGraphs(mR);
         avgTime = serviceRequestStats.CalculateAverageMaintenanceTimeGraphs(mR);
@@ -79,9 +87,15 @@ public class DataViewController implements Initializable {
 
         break;
       case "Transport Request":
-        completedChart.getData().clear();
-        serviceLocationBar.getData().clear();
-        pieChartTotal.getData().clear();
+        if (completedChart.getData() != null) {
+          completedChart.getData().clear();
+        }
+        if (serviceLocationBar.getData() != null) {
+          serviceLocationBar.getData().clear();
+        }
+        if (pieChartTotal.getData() != null) {
+          pieChartTotal.getData().clear();
+        }
         data = serviceRequestStats.getTransportEmployeeNumbersGraphs(tR);
         data2 = serviceRequestStats.getTransportLocationNumbersGraph(tR);
         avgTime = serviceRequestStats.CalculateAverageTransportTimeGraph(tR);
@@ -93,9 +107,15 @@ public class DataViewController implements Initializable {
         dataSeries2.setName("Locations for Transport");
         break;
       case "Computer Request":
-        completedChart.getData().clear();
-        serviceLocationBar.getData().clear();
-        pieChartTotal.getData().clear();
+        if (completedChart.getData() != null) {
+          completedChart.getData().clear();
+        }
+        if (serviceLocationBar.getData() != null) {
+          serviceLocationBar.getData().clear();
+        }
+        if (pieChartTotal.getData() != null) {
+          pieChartTotal.getData().clear();
+        }
         data = serviceRequestStats.getComputerEmployeeNumbersGraphs(cR);
         data2 = serviceRequestStats.getComputerLocationNumbersGraphs(cR);
         avgTime = "";
@@ -107,9 +127,15 @@ public class DataViewController implements Initializable {
         dataSeries2.setName("Locations for Computer Service");
         break;
       case "Flower Request":
-        completedChart.getData().clear();
-        serviceLocationBar.getData().clear();
-        pieChartTotal.getData().clear();
+        if (completedChart.getData() != null) {
+          completedChart.getData().clear();
+        }
+        if (serviceLocationBar.getData() != null) {
+          serviceLocationBar.getData().clear();
+        }
+        if (pieChartTotal.getData() != null) {
+          pieChartTotal.getData().clear();
+        }
         data = serviceRequestStats.getFlowerEmployeeNumbersGraphs(fR);
         data2 = serviceRequestStats.getFlowerLocationNumbersGraphs(fR);
         avgTime = "";
@@ -121,9 +147,15 @@ public class DataViewController implements Initializable {
         dataSeries2.setName("Locations for Flower");
         break;
       case "Language Request":
-        completedChart.getData().clear();
-        serviceLocationBar.getData().clear();
-        pieChartTotal.getData().clear();
+        if (completedChart.getData() != null) {
+          completedChart.getData().clear();
+        }
+        if (serviceLocationBar.getData() != null) {
+          serviceLocationBar.getData().clear();
+        }
+        if (pieChartTotal.getData() != null) {
+          pieChartTotal.getData().clear();
+        }
         data = serviceRequestStats.getLanguageEmployeeNumbersGraphs(lR);
         data2 = serviceRequestStats.getLanguageLocationNumbersGraphs(lR);
         avgTime = "";
@@ -135,9 +167,15 @@ public class DataViewController implements Initializable {
         dataSeries2.setName("Locations for Language");
         break;
       case "Laundry Request":
-        completedChart.getData().clear();
-        serviceLocationBar.getData().clear();
-        pieChartTotal.getData().clear();
+        if (completedChart.getData() != null) {
+          completedChart.getData().clear();
+        }
+        if (serviceLocationBar.getData() != null) {
+          serviceLocationBar.getData().clear();
+        }
+        if (pieChartTotal.getData() != null) {
+          pieChartTotal.getData().clear();
+        }
         data = serviceRequestStats.getLaundryEmployeeNumbersGraphs(lsR);
         data2 = serviceRequestStats.getLaundryLocationNumbersGraphs(lsR);
         avgTime = "";
@@ -149,9 +187,15 @@ public class DataViewController implements Initializable {
         dataSeries2.setName("Locations for Laundry");
         break;
       case "Mariachi Request":
-        completedChart.getData().clear();
-        serviceLocationBar.getData().clear();
-        pieChartTotal.getData().clear();
+        if (completedChart.getData() != null) {
+          completedChart.getData().clear();
+        }
+        if (serviceLocationBar.getData() != null) {
+          serviceLocationBar.getData().clear();
+        }
+        if (pieChartTotal.getData() != null) {
+          pieChartTotal.getData().clear();
+        }
         data = serviceRequestStats.getMariachiEmployeeNumbersGraphs(maR);
         data2 = serviceRequestStats.getMariachiLocationNumbersGraphs(maR);
         avgTime = "";
@@ -163,9 +207,15 @@ public class DataViewController implements Initializable {
         dataSeries2.setName("Locations for Mariachi");
         break;
       case "Medicine Delivery Request":
-        completedChart.getData().clear();
-        serviceLocationBar.getData().clear();
-        pieChartTotal.getData().clear();
+        if (completedChart.getData() != null) {
+          completedChart.getData().clear();
+        }
+        if (serviceLocationBar.getData() != null) {
+          serviceLocationBar.getData().clear();
+        }
+        if (pieChartTotal.getData() != null) {
+          pieChartTotal.getData().clear();
+        }
         data = serviceRequestStats.getMedicineEmployeeNumbersGraphs(mdR);
         data2 = serviceRequestStats.getMedicineLocationNumbersGraphs(mdR);
         avgTime = "";
@@ -177,9 +227,15 @@ public class DataViewController implements Initializable {
         dataSeries2.setName("Locations for Medicine");
         break;
       case "Sanitation Request":
-        completedChart.getData().clear();
-        serviceLocationBar.getData().clear();
-        pieChartTotal.getData().clear();
+        if (completedChart.getData() != null) {
+          completedChart.getData().clear();
+        }
+        if (serviceLocationBar.getData() != null) {
+          serviceLocationBar.getData().clear();
+        }
+        if (pieChartTotal.getData() != null) {
+          pieChartTotal.getData().clear();
+        }
         data = serviceRequestStats.getSanitationEmployeeNumbersGraphs(sR);
         data2 = serviceRequestStats.getSanitationLocationNumbersGraphs(sR);
         avgTime = "";
@@ -191,9 +247,15 @@ public class DataViewController implements Initializable {
         dataSeries2.setName("Locations for Sanitation");
         break;
       case "Security Request":
-        completedChart.getData().clear();
-        serviceLocationBar.getData().clear();
-        pieChartTotal.getData().clear();
+        if (completedChart.getData() != null) {
+          completedChart.getData().clear();
+        }
+        if (serviceLocationBar.getData() != null) {
+          serviceLocationBar.getData().clear();
+        }
+        if (pieChartTotal.getData() != null) {
+          pieChartTotal.getData().clear();
+        }
         data = serviceRequestStats.getSecurityEmployeeNumbersGraphs(secR);
         data2 = serviceRequestStats.getSecurityLocationNumbersGraphs(secR);
         avgTime = "";
@@ -210,7 +272,7 @@ public class DataViewController implements Initializable {
 
   public void showGraphs() {
 
-    // completed Graph to show number of completed maintenance  requests per employee
+    // completed Graph to show number of completed requests per employee
 
     for (int i = 0; i < data.size(); i += 2) {
       dataSeries1.getData().add(new XYChart.Data<>(data.get(i), Integer.parseInt(data.get(i + 1))));
