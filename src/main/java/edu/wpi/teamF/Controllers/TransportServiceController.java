@@ -181,7 +181,7 @@ public class TransportServiceController implements Initializable {
         });
 
     ObservableList<String> completedList = FXCollections.observableArrayList();
-    completedList.add("Completed");
+    completedList.add("Complete");
     completedList.add("Incomplete");
 
     JFXTreeTableColumn<UITransportRequest, String> completed =

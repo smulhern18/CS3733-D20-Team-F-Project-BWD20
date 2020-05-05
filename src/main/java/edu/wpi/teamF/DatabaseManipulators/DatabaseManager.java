@@ -952,4 +952,5 @@ public class DatabaseManager {
   public void deleteReport(String id) {
     reportsFactory.delete(id);
   }
+
 }

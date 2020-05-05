@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.DataViewController">
+<AnchorPane fx:id="rootPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.DataViewController">
    <children>
       <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <GridPane layoutX="190.0" layoutY="14.0" prefHeight="69.0" prefWidth="414.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0">
@@ -25,7 +25,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <JFXButton prefHeight="40.0" prefWidth="101.0" style="-fx-background-color: #A40000;" text="Back" textFill="WHITE">
+            <JFXButton onAction="#back" prefHeight="40.0" prefWidth="101.0" style="-fx-background-color: #A40000;" text="Back" textFill="WHITE">
                <font>
                   <Font size="17.0" />
                </font>
@@ -35,7 +35,7 @@
                   <Font size="13.0" />
                </font>
             </JFXButton>
-            <JFXButton prefHeight="42.0" prefWidth="95.0" style="-fx-background-color: #012d5a;" text="Export to CSV" textFill="WHITE" GridPane.columnIndex="2" />
+            <JFXButton onAction="#backupServiceRequests" prefHeight="42.0" prefWidth="95.0" style="-fx-background-color: #012d5a;" text="Export to CSV" textFill="WHITE" GridPane.columnIndex="2" />
          </children>
       </GridPane>
       <GridPane layoutX="190.0" layoutY="111.0" prefHeight="30.0" prefWidth="410.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0">
@@ -183,6 +183,14 @@
                   </GridPane>
                </children>
             </GridPane>
+            <BarChart fx:id="highTrafGraph" style="-fx-border-color: black;" title="High Traffic Areas" GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <xAxis>
+                <CategoryAxis label="Locations" side="BOTTOM" fx:id="xAxisTraf" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="yAxisTraf" label="Number of Times Visited" side="LEFT" />
+              </yAxis>
+            </BarChart>
          </children>
       </GridPane>
    </children>
