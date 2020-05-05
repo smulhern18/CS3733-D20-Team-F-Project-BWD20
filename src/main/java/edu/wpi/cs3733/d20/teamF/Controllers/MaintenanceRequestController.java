@@ -88,6 +88,7 @@ public class MaintenanceRequestController implements Initializable {
   public JFXTextField passwordConfirmInput;
   public JFXTextField usernameInput;
   public Label EstCostLabel;
+  public AnchorPane newAccountPane;
 
   ObservableList<UIMaintenenceRequest> mrUI = FXCollections.observableArrayList();
   ObservableList<UIAccount> acts = FXCollections.observableArrayList();
@@ -121,6 +122,14 @@ public class MaintenanceRequestController implements Initializable {
     typeComboBox.getItems().add("Grounds Keeping");
 
     assigneeChoice.getItems().add("Not Assigned");
+
+    for (Account.Type type : Account.Type.values()) {
+      userTypeInput.getItems().add(type.getTypeOrdinal());
+    }
+
+    for (Account.Specialty specialty : Account.Specialty.values()) {
+      specialtyInput.getItems().add(specialty.getTypeOrdinal());
+    }
 
     if (accounts != null) {
       for (Account acc : accounts) {
@@ -452,7 +461,7 @@ public class MaintenanceRequestController implements Initializable {
   public void submit(ActionEvent actionEvent) throws Exception {
     // Get the values
     String location = locationTextField.getText();
-    String nodeID = location.substring(location.length());
+    String nodeID = location;
     String desc = desText.getText();
     String priority = priorityComboBox.getValue();
     String assignee = assigneeChoice.getValue();
@@ -533,6 +542,7 @@ public class MaintenanceRequestController implements Initializable {
     checkStatusPane.setVisible(false);
     accountTablePane.setVisible(false);
     maintenancePane.setVisible(true);
+    newAccountPane.setVisible(false);
   }
 
   public void statusView(ActionEvent actionEvent) {
@@ -540,12 +550,22 @@ public class MaintenanceRequestController implements Initializable {
     checkStatusPane.setVisible(true);
     accountTablePane.setVisible(false);
     maintenancePane.setVisible(false);
+    newAccountPane.setVisible(false);
   }
 
   public void accountView(MouseEvent mouseEvent) {
     servicePane.setVisible(false);
     checkStatusPane.setVisible(false);
     accountTablePane.setVisible(true);
+    maintenancePane.setVisible(false);
+    newAccountPane.setVisible(false);
+  }
+
+  public void addAccountsButtonPressed(MouseEvent mouseEvent) {
+    servicePane.setVisible(false);
+    checkStatusPane.setVisible(false);
+    newAccountPane.setVisible(true);
+    accountTablePane.setVisible(false);
     maintenancePane.setVisible(false);
   }
 
@@ -598,7 +618,8 @@ public class MaintenanceRequestController implements Initializable {
       account.setSpecialty(specialty);
       databaseManager.manipulateAccount(account);
       acts.add(new UIAccount(account));
+    } else {
+      passwordError.setVisible(true);
     }
-    passwordError.setVisible(true);
   }
 }
