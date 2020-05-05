@@ -683,8 +683,12 @@ public class PathfinderController implements Initializable {
           System.out.println("end" + endNode);
           Path path = null;
           switchToFloor(startNode.getFloor(), startNode.getBuilding());
-          labelNodeStart();
-          labelNodeEnd();
+          if (!"Faulkner".equals(startNode.getBuilding())) {
+            labelNodeStart();
+          }
+          if (!"Faulkner".equals(endNode.getBuilding())) {
+            labelNodeEnd();
+          }
 
           System.out.println(liftType);
 
