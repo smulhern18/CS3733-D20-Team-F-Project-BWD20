@@ -25,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
@@ -59,6 +60,8 @@ public class TransportServiceController implements Initializable {
   public JFXButton updateButton;
   public JFXButton deleteButton;
   public JFXComboBox<String> destChoice;
+  public JFXButton checkStatusButton;
+  public ImageView backgroundImage;
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UITransportRequest> csrUI = FXCollections.observableArrayList();
@@ -76,6 +79,16 @@ public class TransportServiceController implements Initializable {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    backgroundImage.fitWidthProperty().bind(anchorPane.widthProperty());
+    backgroundImage.fitHeightProperty().bind(anchorPane.heightProperty());
+    Account.Type userLevel = databaseManager.getPermissions();
+    if (userLevel == Account.Type.USER) {
+      checkStatusButton.setDisable(true);
+
+      // set to user
+    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+      checkStatusButton.setDisable(false);
+    }
     // add the different choices to the choicebox
     // Replace this with long names, linked to ID
 
@@ -181,7 +194,7 @@ public class TransportServiceController implements Initializable {
         });
 
     ObservableList<String> completedList = FXCollections.observableArrayList();
-    completedList.add("Completed");
+    completedList.add("Complete");
     completedList.add("Incomplete");
 
     JFXTreeTableColumn<UITransportRequest, String> completed =
@@ -309,6 +322,7 @@ public class TransportServiceController implements Initializable {
 
   public void request(ActionEvent actionEvent) {
     servicePane.setVisible(true);
+    servicePane.toFront();
     checkStatusPane.setVisible(false);
   }
 
@@ -335,5 +349,6 @@ public class TransportServiceController implements Initializable {
   public void checkStatus(ActionEvent actionEvent) {
     servicePane.setVisible(false);
     checkStatusPane.setVisible(true);
+    checkStatusPane.toFront();
   }
 }

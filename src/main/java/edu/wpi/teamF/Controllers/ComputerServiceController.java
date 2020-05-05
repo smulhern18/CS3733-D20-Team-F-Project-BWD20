@@ -9,6 +9,7 @@ import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -27,9 +28,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
 import javafx.util.Callback;
 import lombok.SneakyThrows;
 
@@ -61,13 +62,16 @@ public class ComputerServiceController implements Initializable {
   public JFXTextField deleteText;
   public JFXButton delete;
   public JFXButton backButton;
+  public ImageView background;
+  public JFXButton checkStatusButton;
+  public ImageView backgroundImage;
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UIComputerServiceRequest> csrUI = FXCollections.observableArrayList();
   DatabaseManager databaseManager = DatabaseManager.getManager();
   List<ComputerServiceRequest> computerServiceRequests;
 
-  public ComputerServiceController() {
+  public ComputerServiceController() throws Exception{
     try {
       computerServiceRequests = databaseManager.getAllComputerServiceRequests();
     } catch (Exception e) {
@@ -75,9 +79,25 @@ public class ComputerServiceController implements Initializable {
     }
   }
 
+  public void handle(MouseEvent mouseEvent) {}
+
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    backgroundImage.fitWidthProperty().bind(anchorPane.widthProperty());
+    backgroundImage.fitHeightProperty().bind(anchorPane.heightProperty());
+    Account.Type userLevel = databaseManager.getPermissions();
+    if (userLevel == Account.Type.USER || userLevel == null) {
+      checkStatusButton.setDisable(true);
+      checkStatusButton.setVisible(false);
+
+      // set to user
+    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+      checkStatusButton.setDisable(false);
+      checkStatusButton.setVisible(true);
+    }
+    // set to staff
+
     // add the different choices to the choicebox
     // Replace this with long names, linked to IDs
     List<Node> nodes = null;
@@ -380,30 +400,32 @@ public class ComputerServiceController implements Initializable {
 
   public void request(ActionEvent actionEvent) {
     servicePane.setVisible(true);
+    servicePane.toFront();
     checkStatusPane.setVisible(false);
   }
 
   public void statusView(ActionEvent actionEvent) {
     servicePane.setVisible(false);
     checkStatusPane.setVisible(true);
+    checkStatusPane.toFront();
   }
 
-  private void resize(double width) {
-    System.out.println(width);
-    Font newFont = new Font(width / 50);
-    locationLabel.setFont(newFont);
-    makeLabel.setFont(newFont);
-    typeLabel.setFont(newFont);
-    OSLabel.setFont(newFont);
-    descLabel.setFont(newFont);
-    prioLabel.setFont(newFont);
-    securityRequestLabel.setFont(new Font(width / 20));
-    submitButton.setFont(newFont);
-    cancelButton.setFont(newFont);
-    // deleteButton.setFont(new Font(width / 50));
-    update.setFont(newFont);
-    backButton.setFont(newFont);
-  }
+  //  private void resize(double width) {
+  //    System.out.println(width);
+  //    Font newFont = new Font(width / 50);
+  //    locationLabel.setFont(newFont);
+  //    makeLabel.setFont(newFont);
+  //    typeLabel.setFont(newFont);
+  //    OSLabel.setFont(newFont);
+  //    descLabel.setFont(newFont);
+  //    prioLabel.setFont(newFont);
+  //    securityRequestLabel.setFont(new Font(width / 20));
+  //    submitButton.setFont(newFont);
+  //    cancelButton.setFont(newFont);
+  //    // deleteButton.setFont(new Font(width / 50));
+  //    update.setFont(newFont);
+  //    backButton.setFont(newFont);
+  //  }
 
   public void backToServiceRequestMain(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("ServiceRequestMain");
