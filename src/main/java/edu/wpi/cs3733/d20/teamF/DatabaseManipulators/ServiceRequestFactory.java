@@ -58,8 +58,12 @@ public class ServiceRequestFactory {
       prepareStatement.setString(param++, serviceRequest.getAssignee());
       prepareStatement.setInt(param++, serviceRequest.getPriority());
       prepareStatement.setString(param++, serviceRequest.getType());
-      prepareStatement.setTimestamp(
-          param++, new Timestamp(serviceRequest.getEstimatedCompletionDate().getTime()));
+      if (serviceRequest.getEstimatedCompletionDate() != null) {
+        prepareStatement.setTimestamp(
+            param++, new Timestamp(serviceRequest.getEstimatedCompletionDate().getTime()));
+      } else {
+        prepareStatement.setTimestamp(param++, null);
+      }
       prepareStatement.setDouble(param++, serviceRequest.getEstimatedCost());
       prepareStatement.setBoolean(param++, serviceRequest.getComplete());
       Date dateComplete = serviceRequest.getTimeCompleted();
@@ -103,6 +107,11 @@ public class ServiceRequestFactory {
           if (timestamp != null) {
             complete = new Date(timestamp.getTime());
           }
+          timestamp = resultSet.getTimestamp(DatabaseManager.ESTIMATEDCOMPLETION_KEY);
+          Date estimatedCompletion = null;
+          if (timestamp != null) {
+            estimatedCompletion = new Date(timestamp.getTime());
+          }
           serviceRequest =
               new MaintenanceRequest(
                   resultSet.getString(DatabaseManager.SERVICEID_KEY),
@@ -112,8 +121,7 @@ public class ServiceRequestFactory {
                   new Date(resultSet.getTimestamp(DatabaseManager.TIME_CREATED_KEY).getTime()),
                   resultSet.getInt(DatabaseManager.PRIORITY_KEY),
                   resultSet.getString(DatabaseManager.MAINTENANCE_TYPE_KEY),
-                  new Date(
-                      resultSet.getTimestamp(DatabaseManager.ESTIMATEDCOMPLETION_KEY).getTime()),
+                  estimatedCompletion,
                   resultSet.getDouble(DatabaseManager.ESTIMATEDCOST_KEY),
                   resultSet.getBoolean(DatabaseManager.COMPLETED_KEY),
                   complete);
@@ -169,8 +177,12 @@ public class ServiceRequestFactory {
       preparedStatement.setString(param++, serviceRequest.getAssignee());
       preparedStatement.setInt(param++, serviceRequest.getPriority());
       preparedStatement.setString(param++, serviceRequest.getType());
-      preparedStatement.setTimestamp(
-          param++, new Timestamp(serviceRequest.getEstimatedCompletionDate().getTime()));
+      if (serviceRequest.getEstimatedCompletionDate() == null) {
+        preparedStatement.setTimestamp(param++, null);
+      } else {
+        preparedStatement.setTimestamp(
+            param++, new Timestamp(serviceRequest.getEstimatedCompletionDate().getTime()));
+      }
       preparedStatement.setDouble(param++, serviceRequest.getEstimatedCost());
       preparedStatement.setBoolean(param++, serviceRequest.getComplete());
       preparedStatement.setString(param++, serviceRequest.getId());
@@ -218,6 +230,11 @@ public class ServiceRequestFactory {
         if (timestamp != null) {
           complete = new Date(timestamp.getTime());
         }
+        timestamp = resultSet.getTimestamp(DatabaseManager.ESTIMATEDCOMPLETION_KEY);
+        Date estimatedCompletion = null;
+        if (timestamp != null) {
+          estimatedCompletion = new Date(timestamp.getTime());
+        }
         MaintenanceRequest serviceRequest =
             new MaintenanceRequest(
                 resultSet.getString(DatabaseManager.SERVICEID_KEY),
@@ -227,7 +244,7 @@ public class ServiceRequestFactory {
                 new Date(resultSet.getTimestamp(DatabaseManager.TIME_CREATED_KEY).getTime()),
                 resultSet.getInt(DatabaseManager.PRIORITY_KEY),
                 resultSet.getString(DatabaseManager.MAINTENANCE_TYPE_KEY),
-                new Date(resultSet.getTimestamp(DatabaseManager.ESTIMATEDCOMPLETION_KEY).getTime()),
+                estimatedCompletion,
                 resultSet.getDouble(DatabaseManager.ESTIMATEDCOST_KEY),
                 resultSet.getBoolean(DatabaseManager.COMPLETED_KEY),
                 complete);

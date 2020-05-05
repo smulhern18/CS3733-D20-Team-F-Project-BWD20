@@ -113,6 +113,17 @@ public class MaintenanceRequestController implements Initializable {
 
     UISetting uiSetting = new UISetting();
 
+    priorityComboBox.getItems().add("Low");
+    priorityComboBox.getItems().add("Medium");
+    priorityComboBox.getItems().add("High");
+
+    typeComboBox.getItems().add("Elevator");
+    typeComboBox.getItems().add("Electrical");
+    typeComboBox.getItems().add("Plumbing");
+    typeComboBox.getItems().add("Grounds Keeping");
+
+    assigneeChoice.getItems().add("Not Assigned");
+
     for (Account.Type type : Account.Type.values()) {
       userTypeInput.getItems().add(type.getTypeOrdinal());
     }
@@ -194,7 +205,7 @@ public class MaintenanceRequestController implements Initializable {
           public void handle(TreeTableColumn.CellEditEvent<UIMaintenenceRequest, String> event) {
             TreeItem<UIMaintenenceRequest> current =
                 treeTableMaintenance.getTreeItem(event.getTreeTablePosition().getRow());
-            current.getValue().setCompleted(new SimpleStringProperty(event.getNewValue()));
+            current.getValue().setPriority(new SimpleStringProperty(event.getNewValue()));
           }
         });
 
@@ -319,7 +330,7 @@ public class MaintenanceRequestController implements Initializable {
     completed.setPrefWidth(200);
     completed.setCellValueFactory(
         (JFXTreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) ->
-            param.getValue().getValue().getCompleted());
+            param.getValue().getValue().getComplete());
     completed.setCellFactory(
         new Callback<
             TreeTableColumn<UIMaintenenceRequest, String>,
@@ -338,7 +349,7 @@ public class MaintenanceRequestController implements Initializable {
           public void handle(TreeTableColumn.CellEditEvent<UIMaintenenceRequest, String> event) {
             TreeItem<UIMaintenenceRequest> current =
                 treeTableMaintenance.getTreeItem(event.getTreeTablePosition().getRow());
-            current.getValue().setCompleted(new SimpleStringProperty(event.getNewValue()));
+            current.getValue().setComplete(new SimpleStringProperty(event.getNewValue()));
           }
         });
 
@@ -419,7 +430,7 @@ public class MaintenanceRequestController implements Initializable {
           public void handle(TreeTableColumn.CellEditEvent<UIMaintenenceRequest, String> event) {
             TreeItem<UIMaintenenceRequest> current =
                 treeTableMaintenance.getTreeItem(event.getTreeTablePosition().getRow());
-            current.getValue().setCompleted(new SimpleStringProperty(event.getNewValue()));
+            current.getValue().setType(new SimpleStringProperty(event.getNewValue()));
           }
         });
 
@@ -502,9 +513,19 @@ public class MaintenanceRequestController implements Initializable {
     String desc = desText.getText();
     String priority = priorityComboBox.getValue();
     String assignee = assigneeChoice.getValue();
-    Double estCost = Double.parseDouble(estimatedCost.getText());
-    Date estDate =
-        Date.from(estCompletion.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+    Double estCost = null;
+    if (!estimatedCost.getText().isEmpty()) {
+      estCost = Double.parseDouble(estimatedCost.getText());
+    } else {
+      estCost = -1.0;
+    }
+    Date estDate = null;
+    if (estCompletion.getValue() != null) {
+      estDate =
+          Date.from(estCompletion.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
+    } else {
+      estDate = null;
+    }
     String type = typeComboBox.getValue();
     String complete = "Incomplete";
 
@@ -522,7 +543,17 @@ public class MaintenanceRequestController implements Initializable {
     Date date = new Date(System.currentTimeMillis());
     MaintenanceRequest csRequest =
         new MaintenanceRequest(
-            nodeID, desc, assignee, date, priorityDB, type, estDate, estCost, null);
+            new Date().getTime() + "",
+            nodeID,
+            assignee,
+            desc,
+            date,
+            priorityDB,
+            type,
+            estDate,
+            estCost,
+            false,
+            null);
     databaseManager.manipulateServiceRequest(csRequest);
     mrUI.add(new UIMaintenenceRequest(csRequest));
     treeTableMaintenance.refresh();
@@ -551,16 +582,20 @@ public class MaintenanceRequestController implements Initializable {
         toUpdate.setAssignee(mrui.getAssignee().get());
         toUpdate.setPriority(Integer.parseInt(mrui.getPriority().get()));
         toUpdate.setType(mrui.type.get());
-        String completed = mrui.getCompleted().get();
-        if (completed.equals("Complete")) {
-          Date date = new Date();
-          toUpdate.setCompleted(date);
-          toUpdate.setComplete(true);
-        } else if (completed.equals("Incomplete")) {
+        if (mrui.getComplete() == null) {
           toUpdate.setComplete(false);
         } else {
-          throw new IllegalArgumentException(
-              "This doesn't belong in the completed attribute: " + completed);
+          String completed = mrui.getComplete().get();
+          if (completed.equals("Complete")) {
+            Date date = new Date();
+            toUpdate.setCompleted(date);
+            toUpdate.setComplete(true);
+          } else if (completed.equals("Incomplete")) {
+            toUpdate.setComplete(false);
+          } else {
+            throw new IllegalArgumentException(
+                "This doesn't belong in the completed attribute: " + completed);
+          }
         }
         databaseManager.manipulateServiceRequest(toUpdate);
       }

@@ -16,7 +16,6 @@ public class UIMaintenenceRequest extends RecursiveTreeObject<UIMaintenenceReque
   public SimpleStringProperty priority;
   public SimpleStringProperty assignee;
   public SimpleStringProperty dateSubmitted;
-  public SimpleStringProperty completed;
   public SimpleStringProperty description;
   public SimpleStringProperty type;
   public SimpleStringProperty complete;
@@ -43,8 +42,13 @@ public class UIMaintenenceRequest extends RecursiveTreeObject<UIMaintenenceReque
     }
     this.description = new SimpleStringProperty(csr.getDescription());
     this.type = new SimpleStringProperty((csr.getType()));
-    this.estimatedCompletionDate =
-        new SimpleStringProperty(date.format((csr.getEstimatedCompletionDate())));
+    if (csr.getEstimatedCompletionDate() == null) {
+      this.estimatedCompletionDate = new SimpleStringProperty("None");
+    } else {
+      this.estimatedCompletionDate =
+          new SimpleStringProperty(date.format((csr.getEstimatedCompletionDate())));
+    }
+
     this.estimatedCost = new SimpleStringProperty("" + csr.getEstimatedCost());
   }
 

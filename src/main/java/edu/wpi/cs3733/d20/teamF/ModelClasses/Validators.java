@@ -79,7 +79,9 @@ public class Validators {
     dateValidation(serviceRequest.getDateTimeSubmitted());
     priorityValidation(serviceRequest.getPriority());
     maintenanceTypeValidation(serviceRequest.getType());
-    dateValidation(serviceRequest.getEstimatedCompletionDate());
+    if (serviceRequest.getEstimatedCompletionDate() != null) {
+      dateValidation(serviceRequest.getEstimatedCompletionDate());
+    }
     estimatedCostValidation(serviceRequest.getEstimatedCost());
     booleanValidation(serviceRequest.getComplete());
     nameValidation(serviceRequest.getAssignee());
@@ -215,7 +217,8 @@ public class Validators {
   public static void estimatedCostValidation(double estimatedCost, int... constraints)
       throws ValidationException {
     nullCheckValidation(estimatedCost, constraints);
-    if (estimatedCost < ESTIMATED_COST_MIN_LENGTH || estimatedCost > ESTIMATED_COST_MAX_LENGTH) {
+    if ((estimatedCost < ESTIMATED_COST_MIN_LENGTH || estimatedCost > ESTIMATED_COST_MAX_LENGTH)
+        && estimatedCost != -1.0) {
       throw new ValidationException("Estimated cost is outside accepted values");
     }
   }

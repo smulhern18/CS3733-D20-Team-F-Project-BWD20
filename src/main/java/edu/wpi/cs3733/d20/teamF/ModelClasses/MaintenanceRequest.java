@@ -44,13 +44,11 @@ public class MaintenanceRequest {
   public MaintenanceRequest(
       String location,
       String description,
-      String assignee,
       Date dateTimeSubmitted,
       int priority,
       String type,
       Date estimatedCompletionDate,
-      double estimatedCost,
-      Date completed)
+      double estimatedCost)
       throws ValidationException {
     setId(new Date().getTime() + "");
     setLocation(location);
@@ -124,7 +122,9 @@ public class MaintenanceRequest {
   }
 
   public void setEstimatedCompletionDate(Date estimatedCompletionDate) throws ValidationException {
-    Validators.dateValidation(estimatedCompletionDate);
+    if (estimatedCompletionDate != null) {
+      Validators.dateValidation(estimatedCompletionDate);
+    }
     this.estimatedCompletionDate = estimatedCompletionDate;
   }
 

@@ -75,7 +75,7 @@ public class DatabaseManager {
             + MAINTENANCE_TYPE_KEY
             + " VARCHAR(64) NOT NULL, "
             + ESTIMATEDCOMPLETION_KEY
-            + " TIMESTAMP NOT NULL, "
+            + " TIMESTAMP, "
             + ESTIMATEDCOST_KEY
             + " DOUBLE NOT NULL, "
             + COMPLETED_KEY
@@ -117,7 +117,7 @@ public class DatabaseManager {
   }
 
   public void initialize() {
-    String dbURL = "jdbc:derby:FServuceDB;create=true";
+    String dbURL = "jdbc:derby:FServiceDB;create=true";
     try {
       DriverManager.registerDriver(new org.apache.derby.jdbc.EmbeddedDriver());
     } catch (SQLException e) {
