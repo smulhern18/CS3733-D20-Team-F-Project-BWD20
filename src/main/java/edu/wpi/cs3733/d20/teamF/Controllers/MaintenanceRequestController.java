@@ -76,6 +76,18 @@ public class MaintenanceRequestController implements Initializable {
   public JFXButton updateButton;
   public JFXTextField estimatedCost;
   public AnchorPane maintenancePane;
+  public Button createAccountButton;
+  public Button clearButton;
+  public Label passwordError;
+  public JFXComboBox<String> userTypeInput;
+  public JFXComboBox<String> specialtyInput;
+  public JFXTextField firstName;
+  public JFXTextField lastName;
+  public JFXTextField email;
+  public JFXTextField passwordInput;
+  public JFXTextField passwordConfirmInput;
+  public JFXTextField usernameInput;
+  public Label EstCostLabel;
 
   ObservableList<UIMaintenenceRequest> mrUI = FXCollections.observableArrayList();
   ObservableList<UIAccount> acts = FXCollections.observableArrayList();
@@ -110,6 +122,11 @@ public class MaintenanceRequestController implements Initializable {
 
     assigneeChoice.getItems().add("Not Assigned");
 
+    if (accounts != null) {
+      for (Account acc : accounts) {
+        assigneeChoice.getItems().add(acc.getFirstName());
+      }
+    }
     // ID
     JFXTreeTableColumn<UIMaintenenceRequest, String> ID = new JFXTreeTableColumn<>("ID");
     ID.setPrefWidth(100);
@@ -566,9 +583,22 @@ public class MaintenanceRequestController implements Initializable {
     treeTableAccounts.refresh();
   }
 
-    public void clear(MouseEvent mouseEvent) {
-    }
+  public void clear(MouseEvent mouseEvent) {}
 
-    public void createAccount(MouseEvent mouseEvent) {
+  public void createAccount(MouseEvent mouseEvent) throws Exception {
+    passwordError.setVisible(false);
+    String first = firstName.getText();
+    String last = lastName.getText();
+    String username = usernameInput.getText();
+    Account.Type userType = Account.Type.getEnum(userTypeInput.getValue());
+    Account.Specialty specialty = Account.Specialty.getEnum(specialtyInput.getValue());
+    if (passwordInput.getText().equals(passwordConfirmInput.getText())) {
+      String password = passwordInput.getText();
+      Account account = new Account(first, last, "sjmulhern@wpi.edu", username, password, userType);
+      account.setSpecialty(specialty);
+      databaseManager.manipulateAccount(account);
+      acts.add(new UIAccount(account));
     }
+    passwordError.setVisible(true);
+  }
 }

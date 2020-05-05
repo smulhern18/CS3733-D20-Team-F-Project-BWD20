@@ -5,7 +5,7 @@ import edu.wpi.cs3733.d20.teamF.ModelClasses.ValidationException;
 import edu.wpi.cs3733.d20.teamF.ModelClasses.Validators;
 import java.util.Objects;
 
-public abstract class Account extends RecursiveTreeObject<Account> {
+public class Account extends RecursiveTreeObject<Account> {
 
   public static enum Type {
     ADMIN("ADMIN"),
