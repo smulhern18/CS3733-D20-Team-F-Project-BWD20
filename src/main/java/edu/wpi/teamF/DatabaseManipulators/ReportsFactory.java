@@ -1,6 +1,5 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
-import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ReportsClass;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -174,12 +173,13 @@ public class ReportsFactory {
     String selectStatement = "SELECT * FROM " + DatabaseManager.REPORTS_TABLE_NAME;
 
     try (PreparedStatement preparedStatement =
-        DatabaseManager.getConnection().prepareStatement(selectStatement);
+            DatabaseManager.getConnection().prepareStatement(selectStatement);
         ResultSet resultSet = preparedStatement.executeQuery()) {
       report = new ArrayList<>();
       while (resultSet.next()) {
         report.add(
-            new ReportsClass(resultSet.getString(DatabaseManager.NODEID_KEY),
+            new ReportsClass(
+                resultSet.getString(DatabaseManager.NODEID_KEY),
                 resultSet.getInt(DatabaseManager.TIMESSANITIZED_KEY),
                 resultSet.getInt(DatabaseManager.TIMESVISITED_KEY),
                 resultSet.getString(DatabaseManager.LASTSANITIZER_KEY)));

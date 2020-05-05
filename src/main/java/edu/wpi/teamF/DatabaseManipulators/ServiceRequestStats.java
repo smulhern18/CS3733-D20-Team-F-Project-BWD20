@@ -203,7 +203,7 @@ public class ServiceRequestStats {
     if (timeDifference == 0) {
       total = "Your average time was 0";
     } else {
-      total = "" + timeDifference / 60 /1000;
+      total = "" + timeDifference / 60 / 1000;
     }
     return total;
   }
@@ -401,7 +401,7 @@ public class ServiceRequestStats {
     if (timeDifference == 0) {
       total = "Your average time was 0";
     } else {
-      total = "" + timeDifference / 60/1000;
+      total = "" + timeDifference / 60 / 1000;
     }
     return total;
   }
@@ -1266,18 +1266,18 @@ public class ServiceRequestStats {
     for (ServiceRequest m : serviceRequests) {
       nodeNum.add(m.getLocation().getId());
     }
-  Map<String, Long> frequency =
-      nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    Map<String, Long> frequency =
+        nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
     for (Map.Entry<String, Long> entry : frequency.entrySet()) {
-    if (entry.getValue() > 0) {
-      csvStyled.add(entry.getKey());
-      csvStyled.add("" + entry.getValue());
+      if (entry.getValue() > 0) {
+        csvStyled.add(entry.getKey());
+        csvStyled.add("" + entry.getValue());
+      }
     }
-  }
 
     return csvStyled;
-}
+  }
 
   public void ReportsRequestStats(Path path) {
     List<ReportsClass> reportsClasses = reportsFactory.getAllReports();
@@ -1309,8 +1309,8 @@ public class ServiceRequestStats {
 
   private ArrayList<String> getNodesVisited(List<ReportsClass> reportsClasses) {
     ArrayList<String> csvStyled = new ArrayList<String>();
-    for(ReportsClass r:reportsClasses) {
-      csvStyled.add(r.getNodeID() + ","+ r.getTimesVisited());
+    for (ReportsClass r : reportsClasses) {
+      csvStyled.add(r.getNodeID() + "," + r.getTimesVisited());
     }
     return csvStyled;
   }
@@ -1319,32 +1319,27 @@ public class ServiceRequestStats {
 
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ReportsClass r : reportsClasses) {
-    csvStyled.add(r.getNodeID() +","+r.getTimesSanitized());
+      csvStyled.add(r.getNodeID() + "," + r.getTimesSanitized());
     }
     return csvStyled;
   }
 
   public ArrayList<String> getTimesVisitedGraphs(List<ReportsClass> reportsClasses) {
     ArrayList<String> csvStyled = new ArrayList<String>();
-    for(ReportsClass r:reportsClasses) {
+    for (ReportsClass r : reportsClasses) {
       csvStyled.add(r.getNodeID());
-      csvStyled.add(""+r.getTimesVisited());
+      csvStyled.add("" + r.getTimesVisited());
     }
     return csvStyled;
-
-
   }
 
   public ArrayList<String> getTimesSanitizedGraphs(List<ReportsClass> reportsClasses) {
 
     ArrayList<String> csvStyled = new ArrayList<String>();
-    for(ReportsClass r:reportsClasses) {
+    for (ReportsClass r : reportsClasses) {
       csvStyled.add(r.getNodeID());
-      csvStyled.add(""+r.getTimesSanitized());
+      csvStyled.add("" + r.getTimesSanitized());
     }
     return csvStyled;
   }
-
-
-
 }
