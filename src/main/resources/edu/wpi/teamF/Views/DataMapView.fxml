@@ -212,37 +212,37 @@
                   <RowConstraints minHeight="10.0" percentHeight="3.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label text="Short Name:" textFill="#012d5a" GridPane.rowIndex="1">
+                  <Label text="Short Name:" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label text="Long Name:" textFill="#012d5a" GridPane.rowIndex="2">
+                  <Label text="Long Name:" GridPane.rowIndex="2">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label text="Type:" textFill="#012d5a" GridPane.rowIndex="3">
+                  <Label text="Type:" GridPane.rowIndex="3">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label text="X-Coordinate:" textFill="#012d5a" GridPane.rowIndex="4">
+                  <Label text="X-Coordinate:" GridPane.rowIndex="4">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label text="Y-Coordinate:" textFill="#012d5a" GridPane.rowIndex="5">
+                  <Label text="Y-Coordinate:" GridPane.rowIndex="5">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label text="Hospital:" textFill="#012d5a" GridPane.rowIndex="6">
+                  <Label text="Hospital:" GridPane.rowIndex="6">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label text="Floor:" textFill="#012d5a" GridPane.rowIndex="7">
+                  <Label text="Floor:" GridPane.rowIndex="7">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -278,12 +278,12 @@
                   <RowConstraints minHeight="10.0" percentHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Label text="Select Node 1:" textFill="#012d5a" GridPane.rowIndex="1">
+                  <Label text="Select Node 1:" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </Label>
-                  <Label text="Select Node 2:" textFill="#012d5a" GridPane.rowIndex="2">
+                  <Label text="Select Node 2:" GridPane.rowIndex="2">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -292,7 +292,7 @@
                   <JFXButton fx:id="addEdgeButton" disable="true" maxHeight="25.0" maxWidth="40.0" minHeight="25.0" minWidth="40.0" onAction="#addEdge" prefHeight="25.0" prefWidth="40.0" style="-fx-background-color: #012d5a;" text="Add" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
                   <JFXButton fx:id="deleteEdgeButton" maxHeight="26.0" maxWidth="50.0" minHeight="25.0" minWidth="50.0" onAction="#deleteEdge" prefHeight="26.0" prefWidth="50.0" style="-fx-background-color: #012d5a;" text="Delete" textAlignment="CENTER" textFill="WHITE" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                   <JFXButton fx:id="modifyEdgeButton" disable="true" maxHeight="26.0" maxWidth="53.0" minHeight="25.0" minWidth="53.0" onAction="#modifyEdge" prefHeight="26.0" prefWidth="53.0" style="-fx-background-color: #012d5a;" text="Modify" textAlignment="CENTER" textFill="WHITE" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
-                  <JFXButton fx:id="node2Button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#selectNode2" prefHeight="32.0" prefWidth="174.0" style="-fx-background-color: #012d5a; -fx-border-radius: 3;" text="Click Here" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <JFXButton fx:id="node2Button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#selectNode2" prefHeight="32.0" prefWidth="174.0" style="-fx-background-color: #a40000; -fx-border-radius: 3;" text="Click Here" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children>
