@@ -89,9 +89,9 @@ public class MaintenanceRequestController implements Initializable {
   public JFXTextField usernameInput;
   public Label EstCostLabel;
   public AnchorPane newAccountPane;
-    public JFXTextField userToDelete;
+  public JFXTextField userToDelete;
 
-    ObservableList<UIMaintenenceRequest> mrUI = FXCollections.observableArrayList();
+  ObservableList<UIMaintenenceRequest> mrUI = FXCollections.observableArrayList();
   ObservableList<UIAccount> acts = FXCollections.observableArrayList();
   DatabaseManager databaseManager = DatabaseManager.getManager();
   List<MaintenanceRequest> maintenanceRequests = databaseManager.getAllMaintenanceRequests();
@@ -699,9 +699,11 @@ public class MaintenanceRequestController implements Initializable {
     }
   }
 
-    public void deleteAccount(ActionEvent actionEvent) {
-      String accountToDelete = userToDelete.getText();
-      //delete the user
-        treeTableAccounts.refresh();
-    }
+  public void deleteAccount(ActionEvent actionEvent) throws Exception {
+    String accountToDelete = userToDelete.getText();
+    databaseManager.deleteAccount(accountToDelete);
+    acts.removeIf(uiAccount -> uiAccount.userName.get().equals(accountToDelete));
+    deleteText.setText("");
+    treeTableAccounts.refresh();
+  }
 }
