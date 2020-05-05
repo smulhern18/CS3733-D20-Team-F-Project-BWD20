@@ -216,13 +216,6 @@
             <RowConstraints percentHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints vgrow="SOMETIMES" />
         </rowConstraints>
-         <children>
-            <JFXButton prefHeight="34.0" prefWidth="108.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10;" text="Check Status" textFill="WHITE" GridPane.rowIndex="1">
-               <font>
-                  <Font name="STIXGeneral-Regular" size="14.0" />
-               </font>
-            </JFXButton>
-         </children>
       </GridPane>
    </children>
 </AnchorPane>
