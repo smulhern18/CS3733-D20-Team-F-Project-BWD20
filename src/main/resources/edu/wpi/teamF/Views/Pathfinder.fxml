@@ -35,13 +35,13 @@
 
 
 
-      <AnchorPane fx:id="mainMapPane" layoutX="19.399999618530273" layoutY="194.39999389648438" style="-fx-background-color: #a2a2a2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="mainMapPane" layoutX="19.399999618530273" layoutY="194.39999389648438" style="-fx-background-color: rgb(220,221,218);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ScrollPane fx:id="scrollPaneFaulkner1" style="-fx-background: #a2a2a2; -fx-background-color: #a2a2a2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ScrollPane fx:id="scrollPaneFaulkner1" style="-fx-background-color: rgb(220,221,218); -fx-background: rgb(220,221,218);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <content>
 
 
-                  <StackPane fx:id="masterPaneFaulkner1" style="-fx-background-color: #a2a2a2;">
+                  <StackPane fx:id="masterPaneFaulkner1" style="-fx-background-color: rgb(220,221,218);">
                      <children>
                         <ImageView fx:id="imageViewFaulkner1" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
@@ -397,7 +397,7 @@
                   </VBox>
                   <AnchorPane fx:id="externalDirections" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1070.0">
                      <children>
-                        <ScrollPane fx:id="scrollPaneIntermediate" style="-fx-background: #a2a2a2; -fx-background-color: #a2a2a2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <ScrollPane fx:id="scrollPaneIntermediate" style="-fx-background: rgb(220,221,218); -fx-background-color: rgb(220,221,218);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <content>
                               <StackPane fx:id="stackPaneIntermediate" style="-fx-background-color: #a2a2a2;">
                                  <children>
