@@ -514,18 +514,21 @@ public class MaintenanceRequestController implements Initializable {
     servicePane.setVisible(true);
     checkStatusPane.setVisible(false);
     accountTablePane.setVisible(false);
+    anchorPane.setVisible(true);
   }
 
   public void statusView(ActionEvent actionEvent) {
     servicePane.setVisible(false);
     checkStatusPane.setVisible(true);
     accountTablePane.setVisible(false);
+    anchorPane.setVisible(false);
   }
 
   public void accountView(MouseEvent mouseEvent) {
     servicePane.setVisible(false);
     checkStatusPane.setVisible(false);
     accountTablePane.setVisible(true);
+    anchorPane.setVisible(false);
   }
 
   private void resize(double width) {
