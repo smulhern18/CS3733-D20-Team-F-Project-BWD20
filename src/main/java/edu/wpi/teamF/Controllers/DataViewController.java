@@ -1,18 +1,24 @@
 package edu.wpi.teamF.Controllers;
 
 import com.jfoenix.controls.JFXComboBox;
+import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.DatabaseManipulators.ServiceRequestStats;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.stage.DirectoryChooser;
 
 public class DataViewController implements Initializable {
 
@@ -55,6 +61,7 @@ public class DataViewController implements Initializable {
   public BarChart<?, ?> highTrafGraph;
   public CategoryAxis xAxisTraf;
   public NumberAxis yAxisTraf;
+  public AnchorPane rootPane;
 
   ServiceRequestStats serviceRequestStats = new ServiceRequestStats();
   DatabaseManager databaseManager = DatabaseManager.getManager();
@@ -62,6 +69,8 @@ public class DataViewController implements Initializable {
   public List<TransportRequest> tR = databaseManager.getAllTransportRequests();
   public List<SanitationServiceRequest> sR = databaseManager.getAllSanitationRequests();
   public List<ReportsClass> rC = databaseManager.getAllReports();
+  public SceneController sceneController = App.getSceneController();
+  DirectoryChooser backup = new DirectoryChooser();
 
   public DataViewController() throws Exception {}
 
@@ -183,5 +192,15 @@ public class DataViewController implements Initializable {
           .add(new XYChart.Data<>(trafData.get(i), Integer.parseInt(trafData.get(i + 1))));
     }
     highTrafGraph.getData().add(trafDataSer);
+  }
+
+  public void back(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("Accounts");
+  }
+
+  public void backupServiceRequests(ActionEvent actionEvent) {
+    backup.setTitle("Select Where to Backup Database");
+    File selDir = backup.showDialog(rootPane.getScene().getWindow());
+    serviceRequestStats.downloadStatistics(selDir.toPath());
   }
 }
