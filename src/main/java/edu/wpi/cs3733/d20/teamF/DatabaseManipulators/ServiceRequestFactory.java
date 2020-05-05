@@ -162,6 +162,8 @@ public class ServiceRequestFactory {
             + DatabaseManager.ESTIMATEDCOST_KEY
             + " = ?, "
             + DatabaseManager.COMPLETED_KEY
+            + " = ?, "
+            + DatabaseManager.DATECOMPLETED_KEY
             + " = ? "
             + "WHERE "
             + DatabaseManager.SERVICEID_KEY
@@ -185,6 +187,12 @@ public class ServiceRequestFactory {
       }
       preparedStatement.setDouble(param++, serviceRequest.getEstimatedCost());
       preparedStatement.setBoolean(param++, serviceRequest.getComplete());
+      if (serviceRequest.getTimeCompleted() == null) {
+        preparedStatement.setTimestamp(param++, null);
+      } else {
+        preparedStatement.setTimestamp(
+            param++, new Timestamp(serviceRequest.getTimeCompleted().getTime()));
+      }
       preparedStatement.setString(param++, serviceRequest.getId());
       int numRows = preparedStatement.executeUpdate();
       if (numRows != 1) {
