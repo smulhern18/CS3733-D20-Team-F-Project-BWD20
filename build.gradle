@@ -47,6 +47,9 @@ dependencies {
     compile 'com.twilio.sdk:twilio:7.+'
 
     compile 'com.google.cloud:google-cloud-translate:1.94.5'
+
+    implementation 'com.google.maps:google-maps-services:0.13.0'
+    implementation 'org.slf4j:slf4j-simple:1.7.25'
 }
 
 javafx {

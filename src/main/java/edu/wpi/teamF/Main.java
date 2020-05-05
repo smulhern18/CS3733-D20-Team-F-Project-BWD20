@@ -10,7 +10,6 @@ public class Main {
   private static DatabaseManager dbm = DatabaseManager.getManager();
 
   public static void main(String[] args) throws Exception {
-
     try {
       Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
       initDB();

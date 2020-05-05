@@ -138,6 +138,15 @@ public class PathfinderController implements Initializable {
   public ImageView francis15ToFaulknerImage;
   public ScrollPane scrollPaneIntermediate;
   public StackPane stackPaneIntermediate;
+  public GoogleMaps googleMaps;
+  public Label driveTime;
+  public Label driveDistance;
+  public Label transitTime;
+  public Label transitDistance;
+  public Label bikeTime;
+  public Label bikeDistance;
+  public Label walkTime;
+  public Label walkDistance;
 
   public List<Node> fullNodeList;
   public int state;
@@ -1089,44 +1098,92 @@ public class PathfinderController implements Initializable {
   }
 
   public void setExternalDirections(String fromBuilding, String toBuilding) {
-    // TODO implement this code
     System.out.println(fromBuilding);
     System.out.println(toBuilding);
     if ("Faulkner".equals(fromBuilding) && "45 Francis".equals(toBuilding)) {
       setIntermediateMapsInvisible();
       faulknerTo45FrancisImage.setVisible(true);
+      googleMaps =
+          new GoogleMaps(
+              "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA",
+              "45+Francis+Street,+Boston,+MA");
     } else if ("Faulkner".equals(fromBuilding)
         && ("75 Francis".equals(toBuilding) || ("Tower".equals(toBuilding)))) {
       setIntermediateMapsInvisible();
       faulknerTo75FrancisImage.setVisible(true);
+      googleMaps =
+          new GoogleMaps(
+              "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA",
+              "75+Francis+Street,+Boston,+MA");
     } else if ("Faulkner".equals(fromBuilding) && "BTM".equals(toBuilding)) {
       setIntermediateMapsInvisible();
       faulknerToBTMImage.setVisible(true);
+      googleMaps =
+          new GoogleMaps(
+              "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA",
+              "Building+for+Transformative+Medicine+at+Brigham+and+Women's+Hospital,+Fenwood+Road,+Boston,+MA");
     } else if ("Faulkner".equals(fromBuilding) && "Shapiro".equals(toBuilding)) {
       setIntermediateMapsInvisible();
       faulknerToShapiroImage.setVisible(true);
+      googleMaps =
+          new GoogleMaps(
+              "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA",
+              "The+Carl+J.+And+Ruth+Shapiro+Cardiovascular+Center,+Francis+Street,+Boston,+MA");
     } else if ("Faulkner".equals(fromBuilding)
         && ("15 Francis".equals(toBuilding) || ("FLEX".equals(toBuilding)))) {
       setIntermediateMapsInvisible();
       faulknerTo15FrancisImage.setVisible(true);
+      googleMaps =
+          new GoogleMaps(
+              "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA",
+              "15+Francis+Street,+Boston,+MA");
     } else if ("45 Francis".equals(fromBuilding) && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
       Francis45ToFaulknerImage.setVisible(true);
+      googleMaps =
+          new GoogleMaps(
+              "45+Francis+Street,+Boston,+MA",
+              "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA");
     } else if (("75 Francis".equals(fromBuilding) || ("Tower".equals(fromBuilding)))
         && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      faulknerTo75FrancisImage.setVisible(true);
+      Francis75ToFaulknerImage.setVisible(true);
+      googleMaps =
+          new GoogleMaps(
+              "75+Francis+Street,+Boston,+MA",
+              "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA");
     } else if ("BTM".equals(fromBuilding) && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
       BTMToFaulknerImage.setVisible(true);
+      googleMaps =
+          new GoogleMaps(
+              "Building+for+Transformative+Medicine+at+Brigham+and+Women's+Hospital,+Fenwood+Road,+Boston,+MA",
+              "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA");
     } else if ("Shapiro".equals(fromBuilding) && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
       shapiroToFaulknerImage.setVisible(true);
+      googleMaps =
+          new GoogleMaps(
+              "The+Carl+J.+And+Ruth+Shapiro+Cardiovascular+Center,+Francis+Street,+Boston,+MA",
+              "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA");
     } else if (("15 Francis".equals(fromBuilding) || ("FLEX".equals(fromBuilding)))
         && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
       francis15ToFaulknerImage.setVisible(true);
+      googleMaps =
+          new GoogleMaps(
+              "15+Francis+Street,+Boston,+MA",
+              "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA");
     }
+
+    driveTime.setText(googleMaps.driveTime());
+    driveDistance.setText(googleMaps.driveDistance());
+    transitTime.setText(googleMaps.transitTime());
+    transitDistance.setText(googleMaps.transitDistance());
+    bikeTime.setText(googleMaps.bikeTime());
+    bikeDistance.setText(googleMaps.bikeDistance());
+    walkTime.setText(googleMaps.walkTime());
+    walkDistance.setText(googleMaps.walkDistance());
   }
 
   private void setErrorPaneButtonBehavior() {
