@@ -354,7 +354,7 @@ public class Directions {
             + "</Say><Pause/><Say>");
     callText +=
         directionList.get(0).getDirectionText()
-            + "</Say><Gather timeout=\"60\" numDigits=\"1\" action=\"http://twimlets.com/message?\"/><Say>";
+            + "</Say><Gather timeout=\"999\" numDigits=\"1\" action=\"http://twimlets.com/message?\"/><Say>";
     for (int i = 1; i < directionList.size() - 1; i++) {
       if (!directionList
               .get(i)
@@ -365,7 +365,7 @@ public class Directions {
         callText =
             callText
                 + directionList.get(i).getDirectionText()
-                + "</Say><Gather timeout=\"60\" numDigits=\"1\" action=\"http://twimlets.com/message?\"/><Say>";
+                + "</Say><Gather timeout=\"999\" numDigits=\"1\" action=\"http://twimlets.com/message?\"/><Say>";
       }
     }
     callText += directionList.get(directionList.size() - 1).getDirectionText() + "</Say>";
