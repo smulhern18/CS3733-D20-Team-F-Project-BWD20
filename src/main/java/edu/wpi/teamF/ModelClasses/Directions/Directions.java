@@ -43,7 +43,7 @@ public class Directions {
       // Create the starting directions
       int j = 1;
       if (Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(0).getType())
-          && "OUT".equals(pathNodeList.get(1).getBuilding())) {
+          && !pathNodeList.get(0).getBuilding().equals(pathNodeList.get(1).getBuilding())) {
         // Check if you start by leaving the building
         directionList.add(
             new ExitDirection(pathNodeList.get(0).getBuilding(), pathNodeList.get(0).getFloor()));
