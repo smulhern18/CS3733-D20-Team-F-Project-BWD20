@@ -36,7 +36,7 @@ public class ReportsFactory {
             + ", "
             + DatabaseManager.TIMESVISITED_KEY
             + " ) "
-            + "VALUES (?, ?, ?,?)";
+            + "VALUES (?, ?, ?, ?)";
 
     try (PreparedStatement prepareStatement =
         DatabaseManager.getConnection().prepareStatement(insertStatement)) {
@@ -85,8 +85,8 @@ public class ReportsFactory {
         report =
             new ReportsClass(
                 resultSet.getString(DatabaseManager.NODEID_KEY),
-                resultSet.getInt(DatabaseManager.TIMESSANITIZED_KEY),
                 resultSet.getInt(DatabaseManager.TIMESVISITED_KEY),
+                resultSet.getInt(DatabaseManager.TIMESSANITIZED_KEY),
                 resultSet.getString(DatabaseManager.LASTSANITIZER_KEY));
       } else {
         throw new InstanceNotFoundException();
@@ -180,8 +180,8 @@ public class ReportsFactory {
         report.add(
             new ReportsClass(
                 resultSet.getString(DatabaseManager.NODEID_KEY),
-                resultSet.getInt(DatabaseManager.TIMESSANITIZED_KEY),
                 resultSet.getInt(DatabaseManager.TIMESVISITED_KEY),
+                resultSet.getInt(DatabaseManager.TIMESSANITIZED_KEY),
                 resultSet.getString(DatabaseManager.LASTSANITIZER_KEY)));
       }
     } catch (Exception e) {

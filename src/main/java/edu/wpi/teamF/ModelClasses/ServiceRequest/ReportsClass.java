@@ -45,4 +45,15 @@ public class ReportsClass {
   public void setNodeID(String nodeID) {
     this.nodeID = nodeID;
   }
+
+  public boolean equals(ReportsClass report) {
+    boolean isequal = false;
+
+    isequal =
+        this.sanitizer.equals(report.getSanitizer())
+            && this.nodeID.equals(report.getNodeID())
+            && this.timesSanitized == report.getTimesSanitized()
+            && this.timesVisited == report.getTimesVisited();
+    return isequal;
+  }
 }

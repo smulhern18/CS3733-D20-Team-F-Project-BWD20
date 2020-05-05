@@ -687,4 +687,11 @@ public class TestData {
   };
 
   public TestData() throws Exception {}
+
+  public ReportsClass[] validReports = {
+    new ReportsClass(validNodeIDs[0], 3, 1, validNames[0]),
+    new ReportsClass(validNodeIDs[1], 5, 0, validNames[1]),
+    new ReportsClass(validNodeIDs[2], 2, 1, validNames[2]),
+    new ReportsClass(validNodeIDs[3], 9, 2, validNames[3]),
+  };
 }
