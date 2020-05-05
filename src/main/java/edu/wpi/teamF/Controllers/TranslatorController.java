@@ -17,6 +17,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -33,6 +34,7 @@ public class TranslatorController implements Initializable {
   public Map<String, String> langVoicesMap;
   public AnchorPane frame;
   public ImageView backgroundImage;
+  public Label commResult;
 
   private phoneComms phoneComms = new phoneComms();
 
@@ -176,22 +178,33 @@ public class TranslatorController implements Initializable {
     textInput.setText("");
     textOutput.setText("");
     phoneNumber.setText("");
+    commResult.setText("");
   }
 
   public void sendSMS(ActionEvent actionEvent) {
-    phoneComms.sendMsg(phoneNumber.getText(), textOutput.getText());
+    Boolean success = phoneComms.sendMsg(phoneNumber.getText(), textOutput.getText());
+    if (success) {
+      commResult.setText("Success! You will get a text momentarily.");
+    } else {
+      commResult.setText("Couldn't send text. Check the number & try again.");
+    }
   }
 
   public void callPhone(ActionEvent actionEvent) {
     String callText =
-        ("<Response><Say voice=\"alice\" language=\""
+        ("<Response><Pause/><Pause/><Say voice=\"alice\" language=\""
             + langVoicesMap.get(toLanguage.getValue())
             + "\">"
             + textOutput.getText()
             + "</Say></Response>");
 
     System.out.println(callText);
-    phoneComms.callPhone(phoneNumber.getText(), callText);
+    Boolean success = phoneComms.callPhone(phoneNumber.getText(), callText);
+    if (success) {
+      commResult.setText("Success! You will get a call momentarily.");
+    } else {
+      commResult.setText("Unable to call. Check the number and try again.");
+    }
   }
 
   public void toLanguage(ActionEvent actionEvent) {
