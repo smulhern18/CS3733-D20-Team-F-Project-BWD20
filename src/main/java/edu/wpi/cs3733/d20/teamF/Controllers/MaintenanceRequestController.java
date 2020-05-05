@@ -392,7 +392,7 @@ public class MaintenanceRequestController implements Initializable {
           }
         });
     specialty.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-    specialty.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(typeList));
+    specialty.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(specialList));
     specialty.setOnEditCommit(
         new EventHandler<TreeTableColumn.CellEditEvent<UIAccount, String>>() {
           @Override
