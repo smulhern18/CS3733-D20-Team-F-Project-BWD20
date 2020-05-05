@@ -77,8 +77,10 @@ public class App extends Application {
     Parent root = fxmlLoader.load(getClass().getResource("Views/MainMenu.fxml"));
     primaryScene.setRoot(root);
     primaryStage.setScene(primaryScene);
-    primaryStage.setAlwaysOnTop(true);
+    // primaryStage.setAlwaysOnTop(true);
     primaryStage.show();
+    primaryStage.setMaximized(true);
+    //    primaryStage.setFullScreen(true);
   }
 
   @Override

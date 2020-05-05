@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "neural-vista-276017",
+  "private_key_id": "ef1ff0b0410e8c0925bb9edf65cbe559e5df9456",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCehMxtlPUuOKo3\nC5NRsZLasNgDtdz9YwDSsZ4mk9YKgjwIeuN3nYboCF7Ik+HqPxJa2iQdXlR9c2pU\nmd0GkGDZxQu30vlqy7G9pOicbrLNo9USSV8zmwNilQTQnRtGg5CelqX+RH6JOqK3\nREgNxPo3/0MH3SKZ0GRy+WPxb7DpbYtSWipXruvWHiAjkOifKObSMHFUFfkkEOuI\na9APld3L09SHCZVoyQd2cEC1dqi4kYVltuHCbZVsLr3fjJeyCY0ZIDvCT7neW4gD\nHB5qZyMY3oAga/yjaMCHFVXK5tn+GmW4KDNr8uRREqZ599aACMz/ErnysGouoVlT\ngCzkfR0fAgMBAAECggEAB8WA9DpiTtLOXYZ+wXmQNpKG9J+c5vtMlgfJNiD3VGqQ\nIOZNcpbRf1yxsOm3ILHY54VcUehHAiN/aghlEqZPaT3E1k1MlxTHcQG9ubWfpH9M\nuenI9hG6d8HQi524MZvPokbGepHHFlk+kveRBMPMdKRaF++ae6oA0rYxVSvho3/8\niy+U09sL4WadJ23zbxi0PNol2DjEc3fmS3XZS5GcCmos3JiorL4FN6pBDYgwScH/\nLzMl3mVwR95SMAFVgI3G5/u5a+V7RmMmue4vnwJxwDfOU7IwbNWxgqDRqBiEiGOu\nc4JDidul1IcFQn9Q22tf/Utnpr85F0LFJEb1GXeV4QKBgQDbEiYnjzkO28J5N2Xp\nwDY2AOlWlCpuzaNS6VcBni08mhk+YJlZLQ3HwzrMQjeOU4K+8G2Gf5EuyCMwKwRc\n5WDlYrwPsPrBlGsEBsiIZkjRzXM0j8qxZ8sMHjBvhGC1CxuBSgoM6zzRRZM+aOjb\nrL4PmT2avWUMp+9UaEpQyS1e0QKBgQC5PZBaymH3E38QVLHmAhMDPPgrX2If83Ez\nUvqcxXmNWli409ou5TotKReZRxYp75eVhW8ygNMaw7VW3KW/ycSqHzHxnZHommDu\nBz/IRrj9BiLTc+fMOhe9yTJSe5MU3KtTFdvvhDO/sITrz1v/oIUHwxogO1wcO5Jb\nC40TSd4Y7wKBgHZrLxi/QNaZUFx556sdbbBvebKFURKoMhsFazTCri1OF0syqHId\n+o77J3N2b9WNquVPzcSgfHhPU0YcWrVkgKY+Yu4QetvdQKPijs+8iqxuZFILUEPp\nmUapowEFC8mRgYK35QrqtethsqBP0V+91tdTvItCyba3qJV18oYM2WuhAoGAK6qo\nkc5tg4n0BQyCFz9b7gJ8WfUVM4T2pWulKjme6sRmb8N5Bl8A9M5gAsDwJ5iUOioH\nSXd2zDNgVwaSiABvPM83vcYwNA3YVaQd0/9f8j11DjWfadQz7og0NZ9tz5gpRt+7\nRd37OO/Kla/+9uaHFYpXaUu07e7ZFF9HtUlPcr8CgYAoKDyY98egnvD0GAjPyNmf\n2DpGEzrvZAGCZG4K7joKcO/wnSu9Ht+gNmEUMDVonanLjfwCwlVSnKGBbeAEJULZ\n/497yDoAM1pe68qvHSwRHXi2AXRT+KziRyDAgmj2RqbL4tsWa/oMOKmy8tkwZZc+\n8/gvIJ5Jg4LCJXLUaOqHTg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "testing@neural-vista-276017.iam.gserviceaccount.com",
+  "client_id": "111217029643528396407",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/testing%40neural-vista-276017.iam.gserviceaccount.com"
+}

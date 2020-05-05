@@ -7,7 +7,7 @@ import java.util.Date;
 public class Validators {
 
   public static final int COORDINATE_MIN_VALUE = 0;
-  public static final int COORDINATE_MAX_VALUE = 3840;
+  public static final int COORDINATE_MAX_VALUE = 6000;
   public static final int FLOOR_MIN_LENGTH = 1;
   public static final int FLOOR_MAX_LENGTH = 10;
   public static final int NAME_MIN_LENGTH = 1;

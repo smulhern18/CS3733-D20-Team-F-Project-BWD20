@@ -10,6 +10,7 @@ import javax.management.InstanceNotFoundException;
 
 public class DepthFirstSearch implements PathfindAlgorithm {
   private final Map<String, Node> nodeMap = new HashMap<>();
+  private String liftType;
 
   public DepthFirstSearch(List<Node> nodeList) {
     for (Node node : nodeList) {
@@ -54,13 +55,27 @@ public class DepthFirstSearch implements PathfindAlgorithm {
       // Make a list of all of the neighbors of this node
       Set<Edge> neighborEdges = node.getNode().getEdges();
       Set<Node> neighbors = new HashSet<>();
+
+      String typeToAvoid;
+      if ("STAI".equals(liftType)) {
+        typeToAvoid = "ELEV";
+      } else {
+        typeToAvoid = "STAI";
+      }
+
       for (Edge edge : neighborEdges) {
         if (edge.getNode1().equals(node.getNode().getId())) {
-          if (!visited.contains(nodeMap.get(edge.getNode2()))) {
+          System.out.println(liftType);
+          System.out.println(typeToAvoid);
+          // if (!visited.contains(nodeMap.get(edge.getNode2()))) {
+          if (!visited.contains(nodeMap.get(edge.getNode2()))
+              && !nodeMap.get(edge.getNode2()).getType().toString().equals(typeToAvoid)) {
             neighbors.add(nodeMap.get(edge.getNode2()));
           }
         } else {
-          if (!visited.contains(nodeMap.get(edge.getNode1()))) {
+          // if (!visited.contains(nodeMap.get(edge.getNode1()))) {
+          if (!visited.contains(nodeMap.get(edge.getNode1()))
+              && !nodeMap.get(edge.getNode1()).getType().toString().equals(typeToAvoid)) {
             neighbors.add(nodeMap.get(edge.getNode1()));
           }
         }
@@ -82,8 +97,7 @@ public class DepthFirstSearch implements PathfindAlgorithm {
     List<Path> paths = new ArrayList<>();
     for (Node node : nodeMap.values()) {
       if (node.getFloor() == start.getFloor()) {
-        if (node.getType().getTypeString().equals(nodeType.getTypeString())
-            && isAccessible(start, start, node)) {
+        if (node.getType().getTypeString().equals(nodeType.getTypeString())) {
           paths.add(pathfind(start, node));
         }
       }
@@ -100,24 +114,11 @@ public class DepthFirstSearch implements PathfindAlgorithm {
     return shortestPath;
   }
 
-  public Boolean isAccessible(Node startNode, Node endNode, Node neighbor) {
-    // TODO solve issue when an edge has a node that doesn't exist
-    Set<Edge> neighborEdges2 = neighbor.getEdges();
-    for (Edge edge2 : neighborEdges2) {
-      if (edge2.getNode1().equals(neighbor.getId())) {
-        if (nodeMap.get(edge2.getNode2()).getType().equals(Node.NodeType.getEnum("HALL"))
-            || edge2.getNode2().equals(startNode.getId())
-            || edge2.getNode2().equals(endNode.getId())) {
-          return true;
-        }
-      } else {
-        if (nodeMap.get(edge2.getNode1()).getType().equals(Node.NodeType.getEnum("HALL"))
-            || edge2.getNode1().equals(startNode.getId())
-            || edge2.getNode1().equals(endNode.getId())) {
-          return true;
-        }
-      }
-    }
-    return false;
+  public void setLiftType(String liftType) {
+    this.liftType = liftType;
+  }
+
+  public String getLiftType() {
+    return liftType;
   }
 }

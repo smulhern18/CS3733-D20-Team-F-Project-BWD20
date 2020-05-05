@@ -10,6 +10,7 @@ import javax.management.InstanceNotFoundException;
 public class BreadthFirst implements PathfindAlgorithm {
 
   private final Map<String, Node> nodeMap = new HashMap<>();
+  private String liftType = "ELEV";
 
   public BreadthFirst(List<Node> nodeList) {
     for (Node node : nodeList) {
@@ -25,6 +26,13 @@ public class BreadthFirst implements PathfindAlgorithm {
 
     RouteNode startRoute = new RouteNode(start, null, 0, 0);
     nodeQueue.add(startRoute);
+
+    String typeToAvoid;
+    if ("STAI".equals(liftType)) {
+      typeToAvoid = "ELEV";
+    } else {
+      typeToAvoid = "STAI";
+    }
 
     while (!nodeQueue.isEmpty()) {
       RouteNode currentNode = nodeQueue.poll();
@@ -49,14 +57,13 @@ public class BreadthFirst implements PathfindAlgorithm {
           } else {
             neighbor = nodeMap.get(edge.getNode1());
           }
-          if (neighbor.getFloor() == start.getFloor() || neighbor.getFloor() == start.getFloor()) {
-            if (isAccessible(start, end, neighbor)) {
-              neighbors.add(neighbor);
-            }
-          }
+          neighbors.add(neighbor);
         }
+        //        System.out.println("Current Node: " + currentNode.getNode().getId());
+        //        System.out.println("Neighbors" + neighbors.size());
         for (Node neighbor : neighbors) {
-          if (!visited.contains(neighbor)) {
+          // if (!visited.contains(neighbor)) {
+          if (!visited.contains(neighbor) && !neighbor.getType().toString().equals(typeToAvoid)) {
             RouteNode neighborOnRoute = new RouteNode(neighbor, currentNode, 0, 0);
             nodeQueue.add(neighborOnRoute);
           }
@@ -72,8 +79,7 @@ public class BreadthFirst implements PathfindAlgorithm {
     List<Path> paths = new ArrayList<>();
     for (Node node : nodeMap.values()) {
       if (node.getFloor() == start.getFloor()) {
-        if (node.getType().getTypeString().equals(nodeType.getTypeString())
-            && isAccessible(start, start, node)) {
+        if (node.getType().getTypeString().equals(nodeType.getTypeString())) {
           paths.add(pathfind(start, node));
         }
       }
@@ -90,23 +96,11 @@ public class BreadthFirst implements PathfindAlgorithm {
     return shortestPath;
   }
 
-  public Boolean isAccessible(Node startNode, Node endNode, Node neighbor) {
-    Set<Edge> neighborEdges2 = neighbor.getEdges();
-    for (Edge edge2 : neighborEdges2) {
-      if (edge2.getNode1().equals(neighbor.getId())) {
-        if (nodeMap.get(edge2.getNode2()).getType().equals(Node.NodeType.getEnum("HALL"))
-            || edge2.getNode2().equals(startNode.getId())
-            || edge2.getNode2().equals(endNode.getId())) {
-          return true;
-        }
-      } else {
-        if (nodeMap.get(edge2.getNode1()).getType().equals(Node.NodeType.getEnum("HALL"))
-            || edge2.getNode1().equals(startNode.getId())
-            || edge2.getNode1().equals(endNode.getId())) {
-          return true;
-        }
-      }
-    }
-    return false;
+  public void setLiftType(String liftType) {
+    this.liftType = liftType;
+  }
+
+  public String getLiftType() {
+    return liftType;
   }
 }

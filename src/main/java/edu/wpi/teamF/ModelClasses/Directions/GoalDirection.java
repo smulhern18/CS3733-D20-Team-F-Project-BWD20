@@ -8,9 +8,9 @@ public class GoalDirection extends Direction {
   }
 
   private Turn turn;
-  private int floor;
+  private String floor;
 
-  public GoalDirection(float angle, int floor) {
+  public GoalDirection(float angle, String floor) {
     if (angle > 20.0) {
       this.turn = Turn.LEFT;
     } else if (angle > -20.0) {
@@ -21,7 +21,7 @@ public class GoalDirection extends Direction {
     this.floor = floor;
   }
 
-  public int getFloor() {
+  public String getFloor() {
     return floor;
   }
 
