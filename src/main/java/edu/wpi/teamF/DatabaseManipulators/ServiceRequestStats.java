@@ -52,6 +52,7 @@ public class ServiceRequestStats {
     MedicineRequestStats(path);
     SanitationRequestStats(path);
     SecurityRequestStats(path);
+    ReportsRequestStats(path);
   }
 
   public void MaintenanceRequestStats(Path path) {
