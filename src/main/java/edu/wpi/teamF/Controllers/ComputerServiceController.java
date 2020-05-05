@@ -31,7 +31,6 @@ import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
 import javafx.util.Callback;
 import lombok.SneakyThrows;
 
@@ -65,6 +64,7 @@ public class ComputerServiceController implements Initializable {
   public JFXButton backButton;
   public ImageView background;
   public JFXButton checkStatusButton;
+  public ImageView backgroundImage;
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UIComputerServiceRequest> csrUI = FXCollections.observableArrayList();
@@ -84,8 +84,8 @@ public class ComputerServiceController implements Initializable {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    background.fitWidthProperty().bind(anchorPane.widthProperty());
-    background.fitHeightProperty().bind(anchorPane.heightProperty());
+    backgroundImage.fitWidthProperty().bind(anchorPane.widthProperty());
+    backgroundImage.fitHeightProperty().bind(anchorPane.heightProperty());
     Account.Type userLevel = databaseManager.getPermissions();
     if (userLevel == Account.Type.USER) {
       checkStatusButton.setDisable(true);
@@ -398,30 +398,32 @@ public class ComputerServiceController implements Initializable {
 
   public void request(ActionEvent actionEvent) {
     servicePane.setVisible(true);
+    servicePane.toFront();
     checkStatusPane.setVisible(false);
   }
 
   public void statusView(ActionEvent actionEvent) {
     servicePane.setVisible(false);
     checkStatusPane.setVisible(true);
+    checkStatusPane.toFront();
   }
 
-//  private void resize(double width) {
-//    System.out.println(width);
-//    Font newFont = new Font(width / 50);
-//    locationLabel.setFont(newFont);
-//    makeLabel.setFont(newFont);
-//    typeLabel.setFont(newFont);
-//    OSLabel.setFont(newFont);
-//    descLabel.setFont(newFont);
-//    prioLabel.setFont(newFont);
-//    securityRequestLabel.setFont(new Font(width / 20));
-//    submitButton.setFont(newFont);
-//    cancelButton.setFont(newFont);
-//    // deleteButton.setFont(new Font(width / 50));
-//    update.setFont(newFont);
-//    backButton.setFont(newFont);
-//  }
+  //  private void resize(double width) {
+  //    System.out.println(width);
+  //    Font newFont = new Font(width / 50);
+  //    locationLabel.setFont(newFont);
+  //    makeLabel.setFont(newFont);
+  //    typeLabel.setFont(newFont);
+  //    OSLabel.setFont(newFont);
+  //    descLabel.setFont(newFont);
+  //    prioLabel.setFont(newFont);
+  //    securityRequestLabel.setFont(new Font(width / 20));
+  //    submitButton.setFont(newFont);
+  //    cancelButton.setFont(newFont);
+  //    // deleteButton.setFont(new Font(width / 50));
+  //    update.setFont(newFont);
+  //    backButton.setFont(newFont);
+  //  }
 
   public void backToServiceRequestMain(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("ServiceRequestMain");

@@ -1,7 +1,6 @@
 package edu.wpi.teamF.Controllers;
 
 import com.jfoenix.controls.JFXButton;
-import edu.wpi.cs3733.c20.teamR.AppointmentRequest;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
@@ -68,7 +67,7 @@ public class ServiceRequestMainController implements Initializable {
 
   public void appointmentRequest(MouseEvent mouseEvent) {
     try {
-      AppointmentRequest.run(500, 50, 1000, 1000, null, null, null);
+      // AppointmentRequest.run(500, 50, 1000, 1000, null, null, null);
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -84,21 +83,7 @@ public class ServiceRequestMainController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
 
     Account.Type userLevel = dbm.getPermissions();
-    if (userLevel == null) {
-      gridUser.setVisible(true);
-      gridUser.setDisable(false);
-      gridPaneAll.setVisible(false);
-      gridPaneAll.setDisable(true);
-    } else if (userLevel == Account.Type.USER
-        || userLevel == Account.Type.STAFF
-        || userLevel == Account.Type.ADMIN) {
-      gridUser.setVisible(false);
-      gridUser.setDisable(true);
-      gridPaneAll.setVisible(true);
-      gridPaneAll.setDisable(false);
-      // set to staff
-      // enable admin page
-    }
+    // do new permissions
     // non-logged in have only access to sanitation and security requests
 
     // logged in of type USER can request everything but Transport and Maintenance
