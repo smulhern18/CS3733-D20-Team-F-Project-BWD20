@@ -467,12 +467,12 @@ public class DataMapViewController implements Initializable {
     setRatios(node);
 
     JFXButton button = new JFXButton();
-    int buttonSize = 6; // this can be adjusted if we feel like the size is too small or large
+    int buttonSize = 10; // this can be adjusted if we feel like the size is too small or large
     button.setMinSize(buttonSize, buttonSize);
     button.setMaxSize(buttonSize, buttonSize);
     button.setPrefSize(buttonSize, buttonSize); // the button size will not vary
     button.setStyle(
-        "-fx-background-radius: 9px; -fx-border-radius: 6px; -fx-background-color: #99D9EA; -fx-border-color: #000000; -fx-border-width: 1px; -fx-opacity: 0.7");
+        "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99D9EA; -fx-border-color: #000000; -fx-border-width: 1px; -fx-opacity: 0.7");
     double xPos = (node.getXCoord() * widthRatio - buttonSize / 2.0);
     double yPos = (node.getYCoord() * heightRatio - buttonSize / 2.0);
     button.setLayoutX(xPos);
@@ -753,8 +753,8 @@ public class DataMapViewController implements Initializable {
         drawEdge(edge);
       }
 
-      nodeButton.setLayoutX(xCoordinate * widthRatio - 3);
-      nodeButton.setLayoutY(yCoordinate * heightRatio - 3);
+      nodeButton.setLayoutX(xCoordinate * widthRatio - 5);
+      nodeButton.setLayoutY(yCoordinate * heightRatio - 5);
 
       clearNode();
 
@@ -845,8 +845,8 @@ public class DataMapViewController implements Initializable {
       drawEdge(edge);
     }
 
-    nodeButton.setLayoutX(node.getXCoord() * widthRatio - 3);
-    nodeButton.setLayoutY(node.getYCoord() * heightRatio - 3);
+    nodeButton.setLayoutX(node.getXCoord() * widthRatio - 5);
+    nodeButton.setLayoutY(node.getYCoord() * heightRatio - 5);
   }
 
   @FXML
@@ -951,8 +951,8 @@ public class DataMapViewController implements Initializable {
           }
           button.setLayoutX(mouseEvent.getSceneX() / imageStackPane.getScaleX() + deltaX);
           button.setLayoutY(mouseEvent.getSceneY() / imageStackPane.getScaleY() + deltaY);
-          double nodeWidth = (button.getLayoutX() + 3) / widthRatio;
-          double nodeHeight = (button.getLayoutY() + 3) / heightRatio;
+          double nodeWidth = (button.getLayoutX() + 5) / widthRatio;
+          double nodeHeight = (button.getLayoutY() + 5) / heightRatio;
           xCoorInput.setText("" + nodeWidth);
           yCoorInput.setText("" + nodeHeight);
 
@@ -970,13 +970,13 @@ public class DataMapViewController implements Initializable {
                 if (children instanceof Line && children.getId().equals(edge.getId())) {
                   Line line = (Line) children;
                   if (edge.getNode2().equals(node.getId())) {
-                    line.setEndX(mouseEvent.getSceneX() / imageStackPane.getScaleX() + 3 + deltaX);
-                    line.setEndY(mouseEvent.getSceneY() / imageStackPane.getScaleY() + 3 + deltaY);
+                    line.setEndX(mouseEvent.getSceneX() / imageStackPane.getScaleX() + 5 + deltaX);
+                    line.setEndY(mouseEvent.getSceneY() / imageStackPane.getScaleY() + 5 + deltaY);
                   } else {
                     line.setStartX(
-                        mouseEvent.getSceneX() / imageStackPane.getScaleX() + 3 + deltaX);
+                        mouseEvent.getSceneX() / imageStackPane.getScaleX() + 5 + deltaX);
                     line.setStartY(
-                        mouseEvent.getSceneY() / imageStackPane.getScaleY() + 3 + deltaY);
+                        mouseEvent.getSceneY() / imageStackPane.getScaleY() + 5 + deltaY);
                   }
                 }
               }
