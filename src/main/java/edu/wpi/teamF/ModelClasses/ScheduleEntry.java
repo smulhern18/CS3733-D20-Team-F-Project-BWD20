@@ -8,7 +8,7 @@ import lombok.Data;
 public class ScheduleEntry {
   public static DateTimeFormatter dateFormatter =
       DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT);
-  public static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mma");
+  public static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mma");
   String ID;
   String startDate;
   String endDate;
@@ -24,7 +24,7 @@ public class ScheduleEntry {
       String endTime,
       String room,
       String accountID) {
-    this.ID = startDate + "," + startTime + "," + room;
+    this.ID = "" + System.currentTimeMillis();
     this.startDate = startDate;
     this.startTime = startTime;
     this.endDate = endDate;
