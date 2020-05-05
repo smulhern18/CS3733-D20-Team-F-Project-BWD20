@@ -32,6 +32,10 @@ public class UIAccount extends RecursiveTreeObject<UIAccount> {
     this.specialty = new SimpleStringProperty(anEnum2.toString());
   }
 
+  public UIAccount(Account account){
+    this(account.getFirstName(), account.getLastName(), account.getEmailAddress(), account.getUsername(), account.getType(), account.getSpecialty());
+  }
+
   public boolean equalsAccount(Account account) {
     boolean isEqual = false;
     if (account != null) {

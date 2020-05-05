@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
@@ -192,11 +193,7 @@
                         <Font name="Microsoft YaHei Light" size="12.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="estCompletion" prefHeight="25.0" prefWidth="79.0" promptText="mm-dd-yyyy">
-                     <padding>
-                        <Insets bottom="5.0" right="5.0" />
-                     </padding>
-                  </JFXTextField>
+                  <JFXDatePicker fx:id="estCompletion" prefHeight="28.0" prefWidth="122.0" />
                </children>
                <padding>
                   <Insets top="5.0" />

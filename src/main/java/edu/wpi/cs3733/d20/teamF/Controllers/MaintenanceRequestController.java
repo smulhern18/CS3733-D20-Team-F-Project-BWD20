@@ -4,7 +4,9 @@ import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.cs3733.d20.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.cs3733.d20.teamF.DatabaseManipulators.DatabaseManager;
+import edu.wpi.cs3733.d20.teamF.ModelClasses.Account.Account;
 import edu.wpi.cs3733.d20.teamF.ModelClasses.MaintenanceRequest;
+import edu.wpi.cs3733.d20.teamF.ModelClasses.UIAccount;
 import edu.wpi.cs3733.d20.teamF.ModelClasses.UIMaintenenceRequest;
 import java.net.URL;
 import java.text.DateFormat;
@@ -60,7 +62,7 @@ public class MaintenanceRequestController implements Initializable {
   public JFXComboBox<String> assigneeChoice;
   public JFXTreeTableView<UIMaintenenceRequest> treeTableMaintenance;
   public AnchorPane accountTablePane;
-  public JFXTreeTableView treeTableAccounts;
+  public JFXTreeTableView<UIAccount> treeTableAccounts;
   public JFXButton addAccountButton;
   public JFXButton deleteAccountButton;
   public JFXButton updateAccountButton;
@@ -68,14 +70,16 @@ public class MaintenanceRequestController implements Initializable {
   public JFXComboBox<String> typeComboBox;
   public JFXButton deleteButton;
   public Label completionDateLabel;
-  public JFXTextField estCompletion;
+  public JFXDatePicker estCompletion;
   public JFXButton accountsButton;
   public JFXButton updateButton;
   public JFXTextField estimatedCost;
 
   ObservableList<UIMaintenenceRequest> mrUI = FXCollections.observableArrayList();
+  ObservableList<UIAccount> acts = FXCollections.observableArrayList();
   DatabaseManager databaseManager = DatabaseManager.getManager();
   List<MaintenanceRequest> maintenanceRequests;
+  List<Account> accounts;
 
   public MaintenanceRequestController() {
     try {
@@ -100,6 +104,7 @@ public class MaintenanceRequestController implements Initializable {
     typeComboBox.getItems().add("Elevator");
     typeComboBox.getItems().add("Electrical");
     typeComboBox.getItems().add("Plumbing");
+    typeComboBox.getItems().add("Grounds Keeping");
 
     assigneeChoice.getItems().add("");
 
@@ -218,18 +223,41 @@ public class MaintenanceRequestController implements Initializable {
                 return param.getValue().getValue().getDateSubmitted();
               }
             });
+    ObservableList<String> typeList = FXCollections.observableArrayList();
+    typeList.add("Admin");
+    typeList.add("Staff");
 
-    // type
-    JFXTreeTableColumn<UIMaintenenceRequest, String> type = new JFXTreeTableColumn<>("Type");
-    type.setPrefWidth(100);
-    type.setCellValueFactory(
-            new Callback<>() {
-              @Override
-              public ObservableValue<String> call(
-                      TreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) {
-                return param.getValue().getValue().getType();
-              }
-            });
+    ObservableList<String> specialList =  FXCollections.observableArrayList();
+    specialList.add("Elevator");
+    specialList.add("Electrical");
+    specialList.add("Plumbing");
+    specialList.add("Grounds Keeping");
+
+// User type
+JFXTreeTableColumn<UIAccount, String> userType = new JFXTreeTableColumn<>("User Type");
+    userType.setCellValueFactory(
+            (TreeTableColumn.CellDataFeatures<UIAccount, String> param) ->
+                    param.getValue().getValue().getType());
+            userType.setCellFactory(
+                    new Callback<TreeTableColumn<UIAccount, String>,
+                            TreeTableCell<UIAccount, String>>() {
+                      @Override
+                      public TreeTableCell<UIAccount, String> call(TreeTableColumn<UIAccount, String> param) {
+                        return new TextFieldTreeTableCell<>();
+                      }
+                    }
+            );
+            userType.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+            userType.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(typeList));
+            userType.setOnEditCommit(
+                    new EventHandler<TreeTableColumn.CellEditEvent<UIAccount, String>>() {
+                      @Override
+                      public void handle(TreeTableColumn.CellEditEvent<UIAccount, String> event) {
+                        TreeItem<UIAccount> current = treeTableAccounts.getTreeItem(event.getTreeTablePosition().getRow());
+                        current.getValue().setType(new SimpleStringProperty(event.getNewValue()));
+                      }
+                    }
+            );
 
     // estimated complete date
     JFXTreeTableColumn<UIMaintenenceRequest, String> estCompleteDate = new JFXTreeTableColumn<>("Estimated Completion Date");
@@ -243,7 +271,7 @@ public class MaintenanceRequestController implements Initializable {
               }
             });
 
-
+// completed
     JFXTreeTableColumn<UIMaintenenceRequest, String> completed =
         new JFXTreeTableColumn<>("Completed");
     completed.setPrefWidth(200);
@@ -271,26 +299,114 @@ public class MaintenanceRequestController implements Initializable {
             current.getValue().setCompleted(new SimpleStringProperty(event.getNewValue()));
           }
         });
+
+    // username
+    JFXTreeTableColumn<UIAccount, String> username = new JFXTreeTableColumn<>("Username");
+    username.setPrefWidth(100);
+    username.setCellValueFactory(
+            new Callback<>() {
+              @Override
+              public ObservableValue<String> call(
+                      TreeTableColumn.CellDataFeatures<UIAccount, String> param) {
+                return param.getValue().getValue().getUserName();
+              }
+            });
+
+    // first name
+    JFXTreeTableColumn<UIAccount, String> firstName = new JFXTreeTableColumn<>("First Name");
+    firstName.setPrefWidth(100);
+    firstName.setCellValueFactory(
+            new Callback<>() {
+              @Override
+              public ObservableValue<String> call(
+                      TreeTableColumn.CellDataFeatures<UIAccount, String> param) {
+                return param.getValue().getValue().getFirstName();
+              }
+            });
+
+    // last name
+    JFXTreeTableColumn<UIAccount, String> lastName = new JFXTreeTableColumn<>("Last Name");
+    lastName.setPrefWidth(100);
+    lastName.setCellValueFactory(
+            new Callback<>() {
+              @Override
+              public ObservableValue<String> call(
+                      TreeTableColumn.CellDataFeatures<UIAccount, String> param) {
+                return param.getValue().getValue().getLastName();
+              }
+            });
+
+    // type
+    JFXTreeTableColumn<UIMaintenenceRequest, String> type = new JFXTreeTableColumn<>("Type");
+    type.setPrefWidth(100);
+    type.setCellValueFactory(
+            new Callback<>() {
+              @Override
+              public ObservableValue<String> call(
+                      TreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) {
+                return param.getValue().getValue().getType();
+              }
+            });
+
+    // specialty
+    JFXTreeTableColumn<UIAccount, String> specialty = new JFXTreeTableColumn<>("Specialty");
+    specialty.setPrefWidth(100);
+    specialty.setCellValueFactory(
+            (TreeTableColumn.CellDataFeatures<UIAccount, String> param) ->
+                    param.getValue().getValue().getSpecialty());
+    specialty.setCellFactory(
+            new Callback<TreeTableColumn<UIAccount, String>,
+                    TreeTableCell<UIAccount, String>>() {
+              @Override
+              public TreeTableCell<UIAccount, String> call(TreeTableColumn<UIAccount, String> param) {
+                return new TextFieldTreeTableCell<>();
+              }
+            }
+    );
+    specialty.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    specialty.setCellFactory(ComboBoxTreeTableCell.forTreeTableColumn(typeList));
+    specialty.setOnEditCommit(
+            new EventHandler<TreeTableColumn.CellEditEvent<UIAccount, String>>() {
+              @Override
+              public void handle(TreeTableColumn.CellEditEvent<UIAccount, String> event) {
+                TreeItem<UIAccount> current = treeTableAccounts.getTreeItem(event.getTreeTablePosition().getRow());
+                current.getValue().setSpecialty(new SimpleStringProperty(event.getNewValue()));
+              }
+            }
+    );
+
     // Load the database into the tableview
 
     for (MaintenanceRequest csr : maintenanceRequests) {
       mrUI.add(new UIMaintenenceRequest(csr));
     }
+    for (Account act :  accounts) {
+      acts.add(new UIAccount(act));
+    }
 
     final TreeItem<UIMaintenenceRequest> root =
         new RecursiveTreeItem<UIMaintenenceRequest>(mrUI, RecursiveTreeObject::getChildren);
 
+    final TreeItem<UIAccount> root1 = new RecursiveTreeItem<UIAccount>(acts, RecursiveTreeObject::getChildren);
     // set the columns for the tableview
 
     treeTableMaintenance.getColumns().setAll(ID, loc, column, priority, type, desc, estCost, estCompleteDate, completed, CompleteDate, date);
+    treeTableAccounts.getColumns().setAll(username, firstName, lastName, userType, specialty);
 
     column.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     priority.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    firstName.setCellFactory((TextFieldTreeTableCell.forTreeTableColumn()));
+    lastName.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    userType.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    specialty.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
     treeTableMaintenance.setRoot(root);
     treeTableMaintenance.setEditable(true);
     treeTableMaintenance.setShowRoot(false);
+    treeTableAccounts.setRoot(root1);
+    treeTableAccounts.setEditable(true);
+    treeTableAccounts.setShowRoot(false);
   }
 
   public void submit(ActionEvent actionEvent) throws Exception {
@@ -301,7 +417,7 @@ public class MaintenanceRequestController implements Initializable {
     String priority = priorityComboBox.getValue();
     String assignee = assigneeChoice.getValue();
     Double estCost = Double.parseDouble(estimatedCost.getText());
-    String estDate = estCompletion.getText();
+    String estDate = estCompletion.getValue().toString();
     String type = typeComboBox.getValue();
     String complete = completedComboBox.getValue();
 
@@ -328,7 +444,7 @@ public class MaintenanceRequestController implements Initializable {
     assigneeChoice.setValue(null);
     desText.setText("");
     estimatedCost.setText("");
-    estCompletion.setText("");
+    estCompletion.setValue(null);
 
   }
 
@@ -338,7 +454,7 @@ public class MaintenanceRequestController implements Initializable {
     assigneeChoice.setValue(null);
     desText.setText("");
     estimatedCost.setText("");
-    estCompletion.setText("");
+    estCompletion.setValue(null);
   }
 
   public void update(ActionEvent actionEvent) throws Exception {
@@ -405,5 +521,24 @@ public class MaintenanceRequestController implements Initializable {
     // deleteButton.setFont(new Font(width / 50));
     update.setFont(newFont);
     backButton.setFont(newFont);
+  }
+
+  public void updateAccount(ActionEvent actionEvent) throws Exception {
+    for (UIAccount acc : acts) {
+      Account toUpdate = databaseManager.readAccount(acts.getUserName().get());
+      boolean isSame = acc.equalsAccount(toUpdate);
+      if (!isSame) {
+        toUpdate.setFirstName(acc.getFirstName().get());
+        toUpdate.setLastName(acc.getLastName().get());
+        toUpdate.setType(acc.getType().get());
+        toUpdate.setSpecialty(acc.getSpecialty().get());
+        } else {
+          throw new IllegalArgumentException(
+                  "This doesn't belong in the completed attribute: " + completed);
+        }
+        databaseManager.manipulateServiceRequest(toUpdate);
+      }
+    }
+    treeTableAccounts.refresh();
   }
 }
