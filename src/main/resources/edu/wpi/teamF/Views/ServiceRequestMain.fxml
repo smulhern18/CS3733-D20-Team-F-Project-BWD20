@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="407.0" prefWidth="784.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ServiceRequestMainController">
+<AnchorPane fx:id="anchorPane" prefHeight="407.0" prefWidth="784.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ServiceRequestMainController">
     <children>
-        <ImageView fitHeight="554.0" fitWidth="789.0" pickOnBounds="true" style="-fx-opacity: 12%;" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="0.0">
+        <ImageView fx:id="backgroundImage" fitHeight="554.0" fitWidth="789.0" pickOnBounds="true" style="-fx-opacity: 12%;" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="0.0">
             <image>
                 <Image url="@../../../../Images/Brigham-Social-1024x538.jpg" />
             </image>
@@ -40,7 +40,7 @@
             <RowConstraints minHeight="10.0" percentHeight="2.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <ImageView fitHeight="50.0" fitWidth="50.0" onMouseClicked="#switchToComputerService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                <ImageView fx:id="compImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#switchToComputerService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                     <image>
                         <Image url="@../../../../Images/icons8-computer-64.png" />
                     </image>
@@ -50,7 +50,7 @@
                         <Font name="STIXGeneral-Regular" size="12.0" />
                     </font>
                 </JFXButton>
-                <ImageView fitHeight="60.0" fitWidth="60.0" onMouseClicked="#medicineService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                <ImageView fx:id="medImage" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#medicineService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                     <image>
                         <Image url="@../../../../Images/icons8-doctors-bag-100.png" />
                     </image>
@@ -60,13 +60,13 @@
                         <Font name="STIXGeneral-Regular" size="12.0" />
                     </font>
                 </JFXButton>
-                <ImageView fitHeight="50.0" fitWidth="50.0" onMouseClicked="#languageService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                <ImageView fx:id="lanImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#languageService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                     <image>
                         <Image url="@../../../../Images/icons8-translation-64.png" />
                     </image>
                 </ImageView>
                 <JFXButton prefHeight="30.0" prefWidth="129.0" text="Language Interpretor" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                <ImageView fitHeight="50.0" fitWidth="50.0" onMouseClicked="#sanitationRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+                <ImageView fx:id="sanImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#sanitationRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                     <image>
                         <Image url="@../../../../Images/icons8-antiseptic-cream-80.png" />
                     </image>
@@ -76,7 +76,7 @@
                         <Font name="STIXGeneral-Regular" size="12.0" />
                     </font>
                 </JFXButton>
-                <ImageView fitHeight="60.0" fitWidth="60.0" onMouseClicked="#mariachiService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                <ImageView fx:id="marImage" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#mariachiService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="8">
                     <image>
                         <Image url="@../../../../Images/icons8-musical-notes-96.png" />
                     </image>
@@ -86,7 +86,7 @@
                         <Font name="STIXGeneral-Regular" size="12.0" />
                     </font>
                 </JFXButton>
-                <ImageView fitHeight="50.0" fitWidth="50.0" onMouseClicked="#securityRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                <ImageView fx:id="secImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#securityRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
                     <image>
                         <Image url="@../../../../Images/icons8-security-configuration-80.png" />
                     </image>
@@ -96,7 +96,7 @@
                         <Font name="STIXGeneral-Regular" size="12.0" />
                     </font>
                 </JFXButton>
-                <ImageView fitHeight="50.0" fitWidth="50.0" onMouseClicked="#switchToLaundryService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                <ImageView fx:id="laundryImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#switchToLaundryService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
                     <image>
                         <Image url="@../../../../Images/icons8-washing-machine-64.png" />
                     </image>
@@ -106,7 +106,7 @@
                         <Font name="STIXGeneral-Regular" size="12.0" />
                     </font>
                 </JFXButton>
-                <ImageView fitHeight="50.0" fitWidth="50.0" onMouseClicked="#flowerRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                <ImageView fx:id="flowImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#flowerRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
                     <image>
                         <Image url="@../../../../Images/icons8-flower-bouquet-256.png" />
                     </image>
@@ -116,7 +116,7 @@
                         <Font name="STIXGeneral-Regular" size="12.0" />
                     </font>
                 </JFXButton>
-                <ImageView fitHeight="60.0" fitWidth="60.0" onMouseClicked="#transportRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                <ImageView fx:id="transportImage" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#transportRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
                     <image>
                         <Image url="@../../../../Images/icons8-car-200.png" />
                     </image>
@@ -126,7 +126,7 @@
                         <Font name="STIXGeneral-Regular" size="12.0" />
                     </font>
                 </JFXButton>
-                <ImageView fitHeight="60.0" fitWidth="60.0" onMouseClicked="#maintenanceRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                <ImageView fx:id="mainImage" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#maintenanceRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="8">
                     <image>
                         <Image url="@../../../../Images/icons8-support-400.png" />
                     </image>

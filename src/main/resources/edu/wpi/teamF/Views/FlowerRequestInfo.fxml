@@ -20,109 +20,15 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.FlowerRequestInfoController">
     <children>
-      <ImageView fitHeight="531.0" fitWidth="600.0" pickOnBounds="true" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <image>
-            <Image url="@../../../../Images/boston_skyline.jpg" />
-         </image>
-      </ImageView>
-        <GridPane fx:id="servicePane" alignment="CENTER" layoutX="190.0" layoutY="24.0" prefHeight="484.0" prefWidth="402.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 2;" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
-            <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <children>
-                <HBox alignment="CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="2">
-                    <children>
-                        <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="Location:       " />
-                        <JFXComboBox fx:id="locationComboBox" prefHeight="27.0" prefWidth="227.0" style="-fx-background-color: white; -fx-border-color: black;" />
-                    </children>
-                </HBox>
-                <HBox alignment="CENTER" GridPane.rowIndex="5">
-                    <children>
-                        <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="Priority:   " />
-                        <JFXComboBox fx:id="priorityComboBox" prefHeight="27.0" prefWidth="248.0" style="-fx-background-color: white; -fx-border-color: black;" />
-                    </children>
-                </HBox>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="9">
-                    <children>
-                  <JFXButton fx:id="checkStatusButton" onAction="#checkStatus" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Status" textFill="#ffffffcc">
-                     <font>
-                        <Font name="STFangsong" size="18.0" />
-                     </font>
-                     <HBox.margin>
-                        <Insets right="20.0" />
-                     </HBox.margin>
-                  </JFXButton>
-                        <JFXButton fx:id="submitButton" onAction="#submit" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Submit" textFill="#ffffffcc">
-                            <font>
-                                <Font name="STFangsong" size="18.0" />
-                            </font>
-                            <HBox.margin>
-                                <Insets right="30.0" />
-                            </HBox.margin>
-                        </JFXButton>
-                        <JFXButton fx:id="cancelButton" onAction="#cancel" style="-fx-background-color: #a40000; -fx-background-radius: 10;" text="Cancel" textFill="#ffffffcc">
-                            <font>
-                                <Font name="STFangsong" size="18.0" />
-                            </font>
-                            <HBox.margin>
-                                <Insets left="30.0" />
-                            </HBox.margin>
-                        </JFXButton>
-                    </children>
-                </HBox>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
-                    <children>
-                        <Label fx:id="buyerNameLabel" alignment="BOTTOM_LEFT" text="Buyer Name:      " />
-                  <JFXTextField fx:id="buyerNameInput" alignment="BOTTOM_LEFT" prefHeight="26.0" prefWidth="211.0" style="-fx-background-color: white; -fx-border-color: black;" />
-                    </children>
-                </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-               <children>
-                  <Label fx:id="nameLabel" alignment="BOTTOM_LEFT" contentDisplay="CENTER" text="Recipient Name:   " />
-                  <JFXTextField fx:id="recipientInput" prefHeight="26.0" prefWidth="202.0" style="-fx-background-color: white; -fx-border-color: black;" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
-               <children>
-                  <Label fx:id="roomNumberLabel" text="Room Number (if known):   " />
-                  <JFXTextField fx:id="roomInput" prefHeight="26.0" prefWidth="153.0" style="-fx-background-color: white; -fx-border-color: black;" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
-               <children>
-                  <Label fx:id="messageLabel" text="Message: " />
-                  <JFXTextArea fx:id="messsageInput" prefHeight="42.0" prefWidth="247.0" style="-fx-background-color: white; -fx-border-color: black;" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
-               <children>
-                  <Label fx:id="phoneNumberLabel" text="Phone Number:   " />
-                  <JFXTextField fx:id="phoneNumberInput" prefHeight="26.0" prefWidth="206.0" style="-fx-background-color: white; -fx-border-color: black;" />
-               </children>
-            </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="8">
-               <children>
-                  <JFXCheckBox fx:id="giftWrapCheckBox" text="Gift Wrap (free)" />
-               </children>
-            </HBox>
-            <Label prefHeight="35.0" prefWidth="201.0" text="Flower Delivery Request">
-               <font>
-                  <Font size="19.0" />
-               </font></Label>
-            </children>
-        </GridPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+         <children>
+            <ImageView fx:id="bkacgroundImage" fitHeight="531.0" fitWidth="600.0" pickOnBounds="true" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <image>
+                  <Image url="@../../../../Images/boston_skyline.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
         <fx:include fx:id="mainMenu" source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
         <AnchorPane fx:id="checkStatusPane" layoutX="190.0" layoutY="16.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 5;" visible="false" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="16.0">
             <children>
@@ -175,121 +81,228 @@
                 </GridPane>
             </children>
         </AnchorPane>
-      <GridPane fx:id="flowerPane" alignment="CENTER" layoutX="230.0" layoutY="42.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 9;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
-         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints percentHeight="20.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints percentHeight="5.0" vgrow="SOMETIMES" />
-            <RowConstraints percentHeight="20.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints percentHeight="5.0" vgrow="SOMETIMES" />
-            <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
-            <RowConstraints percentHeight="5.0" vgrow="SOMETIMES" />
-            <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
-            <RowConstraints percentHeight="5.0" vgrow="SOMETIMES" />
-         </rowConstraints>
+      <AnchorPane fx:id="anchorSubmit" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fx:id="allOccasionPic" fitHeight="72.0" fitWidth="78.0" onMouseClicked="#AllOccasionClicked" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../Images/all-occasion-classic-300x300.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="classicDozenPic" fitHeight="74.0" fitWidth="73.0" onMouseClicked="#classicDozenClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
-               <image>
-                  <Image url="@../../../../Images/classic dozen.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="colorfulElegancePic" fitHeight="80.0" fitWidth="74.0" onMouseClicked="#colorfulEleganceClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-               <image>
-                  <Image url="@../../../../Images/Colorful-elegance-300x300.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="contemporaryPic" fitHeight="76.0" fitWidth="73.0" onMouseClicked="#contemporaryOrchidsClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
-               <image>
-                  <Image url="@../../../../Images/contemporary-orchids-300x300.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="dishGardenPic" fitHeight="72.0" fitWidth="71.0" onMouseClicked="#dishGardClicked" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
-               <image>
-                  <Image url="@../../../../Images/dish-garden-300x300.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="grandOrchidsPic" fitHeight="78.0" fitWidth="71.0" onMouseClicked="#grandOrchidsClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <image>
-                  <Image url="@../../../../Images/Grand-Orchids-300x300.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="hollandSpringPic" fitHeight="77.0" fitWidth="73.0" onMouseClicked="#hollandSpringClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
-               <image>
-                  <Image url="@../../../../Images/holland-spring-300x300.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="orchidFestivalPic" fitHeight="71.0" fitWidth="71.0" onMouseClicked="#orchidFestivalClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
-               <image>
-                  <Image url="@../../../../Images/orchid-festival-300x300.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="largeOrchidPic" fitHeight="77.0" fitWidth="72.0" onMouseClicked="#largeOrchidClicked" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
-               <image>
-                  <Image url="@../../../../Images/orchids-300x300.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="sweetSmallPic" fitHeight="74.0" fitWidth="72.0" onMouseClicked="#smallAndSweetClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
-               <image>
-                  <Image url="@../../../../Images/small-and-sweet-300x300.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="sweetSmall2Pic" fitHeight="77.0" fitWidth="72.0" onMouseClicked="#smallAndSweet2Clicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
-               <image>
-                  <Image url="@../../../../Images/small-and-sweet2-300x300.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="summerSunshinePic" fitHeight="78.0" fitWidth="72.0" onMouseClicked="#summerSunshineClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
-               <image>
-                  <Image url="@../../../../Images/summer-sunshine-300x300.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="sunflowerTopiaryPic" fitHeight="76.0" fitWidth="70.0" onMouseClicked="#sunflowerTopiaryClicked" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="6">
-               <image>
-                  <Image url="@../../../../Images/sunflower topiary.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="tropicalSplashPic" fitHeight="77.0" fitWidth="75.0" onMouseClicked="#tropicalSplashClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="6">
-               <image>
-                  <Image url="@../../../../Images/tropical-splash-300x300.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="babyBoyPic" fitHeight="76.0" fitWidth="72.0" onMouseClicked="#welcomeBabyBoyClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="6">
-               <image>
-                  <Image url="@../../../../Images/welcome baby boy.jpg" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="babyGirlPic" fitHeight="76.0" fitWidth="72.0" onMouseClicked="#welcomeBabyGirlClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="6">
-               <image>
-                  <Image url="@../../../../Images/welcome baby girl.jpg" />
-               </image>
-            </ImageView>
-            <Label fx:id="AllOccasionLabel" text="All Occasion" GridPane.rowIndex="1" />
-            <Label fx:id="classicDozenLabel" text="Classic Dozen" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Label fx:id="colorfulEleganceLabel" text="Colorful Elegance" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Label fx:id="contemporaryLabel" text="Contemporary Orchids" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Label fx:id="dishGardenLabel" text="Dish Garden" GridPane.rowIndex="3" />
-            <Label fx:id="grandOrchidsLabel" text="Grand Orchids" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Label fx:id="hollandSpringLabel" text="Holland Spring" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Label fx:id="orchidFestivalLabel" text="Orchid Festival" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-            <Label fx:id="largeOrchidLabel" text="Large Orchid Plant" GridPane.rowIndex="5" />
-            <Label fx:id="smallSweetLabel" text="Small &amp; Sweet" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Label fx:id="smallSweet2Label" text="Small &amp; Sweet 2" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <Label fx:id="summerSunshineLabel" text="Summer Sunshine" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-            <Label fx:id="sunflowerTopiary" text="Sunflower Topiary" GridPane.rowIndex="7" />
-            <Label fx:id="tropicalSplashLabel" text="Tropical Splash" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-            <Label fx:id="babyBoyLabel" text="Welcome Baby Boy" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-            <Label fx:id="babyGirlLabel" text="Welcome Baby Girl" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+              <GridPane fx:id="servicePane" alignment="CENTER" prefHeight="484.0" prefWidth="402.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 2;" visible="false" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
+                  <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                  <children>
+                      <HBox alignment="CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="2">
+                          <children>
+                              <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="Location:       " />
+                              <JFXComboBox fx:id="locationComboBox" prefHeight="27.0" prefWidth="227.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                          </children>
+                      </HBox>
+                      <HBox alignment="CENTER" GridPane.rowIndex="5">
+                          <children>
+                              <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="Priority:   " />
+                              <JFXComboBox fx:id="priorityComboBox" prefHeight="27.0" prefWidth="248.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                          </children>
+                      </HBox>
+                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="9">
+                          <children>
+                        <JFXButton fx:id="checkStatusButton" onAction="#checkStatus" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Status" textFill="#ffffffcc">
+                           <font>
+                              <Font name="STFangsong" size="18.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                              <JFXButton fx:id="submitButton" onAction="#submit" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Submit" textFill="#ffffffcc">
+                                  <font>
+                                      <Font name="STFangsong" size="18.0" />
+                                  </font>
+                                  <HBox.margin>
+                                      <Insets right="30.0" />
+                                  </HBox.margin>
+                              </JFXButton>
+                              <JFXButton fx:id="cancelButton" onAction="#cancel" style="-fx-background-color: #a40000; -fx-background-radius: 10;" text="Cancel" textFill="#ffffffcc">
+                                  <font>
+                                      <Font name="STFangsong" size="18.0" />
+                                  </font>
+                                  <HBox.margin>
+                                      <Insets left="30.0" />
+                                  </HBox.margin>
+                              </JFXButton>
+                          </children>
+                      </HBox>
+                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
+                          <children>
+                              <Label fx:id="buyerNameLabel" alignment="BOTTOM_LEFT" text="Buyer Name:      " />
+                        <JFXTextField fx:id="buyerNameInput" alignment="BOTTOM_LEFT" prefHeight="26.0" prefWidth="211.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                          </children>
+                      </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
+                     <children>
+                        <Label fx:id="nameLabel" alignment="BOTTOM_LEFT" contentDisplay="CENTER" text="Recipient Name:   " />
+                        <JFXTextField fx:id="recipientInput" prefHeight="26.0" prefWidth="202.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                     <children>
+                        <Label fx:id="roomNumberLabel" text="Room Number (if known):   " />
+                        <JFXTextField fx:id="roomInput" prefHeight="26.0" prefWidth="153.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+                     <children>
+                        <Label fx:id="messageLabel" text="Message: " />
+                        <JFXTextArea fx:id="messsageInput" prefHeight="42.0" prefWidth="247.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
+                     <children>
+                        <Label fx:id="phoneNumberLabel" text="Phone Number:   " />
+                        <JFXTextField fx:id="phoneNumberInput" prefHeight="26.0" prefWidth="206.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="8">
+                     <children>
+                        <JFXCheckBox fx:id="giftWrapCheckBox" text="Gift Wrap (free)" />
+                     </children>
+                  </HBox>
+                  <Label prefHeight="35.0" prefWidth="201.0" text="Flower Delivery Request">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+                  </children>
+              </GridPane>
          </children>
-      </GridPane>
+      </AnchorPane>
+      <AnchorPane fx:id="chosePane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <GridPane fx:id="flowerPane" alignment="CENTER" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 9;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
+               <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints percentHeight="20.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints percentHeight="5.0" vgrow="SOMETIMES" />
+                  <RowConstraints percentHeight="20.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints percentHeight="5.0" vgrow="SOMETIMES" />
+                  <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
+                  <RowConstraints percentHeight="5.0" vgrow="SOMETIMES" />
+                  <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
+                  <RowConstraints percentHeight="5.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <ImageView fx:id="allOccasionPic" fitHeight="72.0" fitWidth="78.0" onMouseClicked="#AllOccasionClicked" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/all-occasion-classic-300x300.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="classicDozenPic" fitHeight="74.0" fitWidth="73.0" onMouseClicked="#classicDozenClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                     <image>
+                        <Image url="@../../../../Images/classic dozen.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="colorfulElegancePic" fitHeight="80.0" fitWidth="74.0" onMouseClicked="#colorfulEleganceClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                     <image>
+                        <Image url="@../../../../Images/Colorful-elegance-300x300.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="contemporaryPic" fitHeight="76.0" fitWidth="73.0" onMouseClicked="#contemporaryOrchidsClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                     <image>
+                        <Image url="@../../../../Images/contemporary-orchids-300x300.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="dishGardenPic" fitHeight="72.0" fitWidth="71.0" onMouseClicked="#dishGardClicked" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../../../../Images/dish-garden-300x300.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="grandOrchidsPic" fitHeight="78.0" fitWidth="71.0" onMouseClicked="#grandOrchidsClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../../../../Images/Grand-Orchids-300x300.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="hollandSpringPic" fitHeight="77.0" fitWidth="73.0" onMouseClicked="#hollandSpringClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../../../../Images/holland-spring-300x300.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="orchidFestivalPic" fitHeight="71.0" fitWidth="71.0" onMouseClicked="#orchidFestivalClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@../../../../Images/orchid-festival-300x300.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="largeOrchidPic" fitHeight="77.0" fitWidth="72.0" onMouseClicked="#largeOrchidClicked" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@../../../../Images/orchids-300x300.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="sweetSmallPic" fitHeight="74.0" fitWidth="72.0" onMouseClicked="#smallAndSweetClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@../../../../Images/small-and-sweet-300x300.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="sweetSmall2Pic" fitHeight="77.0" fitWidth="72.0" onMouseClicked="#smallAndSweet2Clicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@../../../../Images/small-and-sweet2-300x300.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="summerSunshinePic" fitHeight="78.0" fitWidth="72.0" onMouseClicked="#summerSunshineClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                     <image>
+                        <Image url="@../../../../Images/summer-sunshine-300x300.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="sunflowerTopiaryPic" fitHeight="76.0" fitWidth="70.0" onMouseClicked="#sunflowerTopiaryClicked" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="6">
+                     <image>
+                        <Image url="@../../../../Images/sunflower topiary.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="tropicalSplashPic" fitHeight="77.0" fitWidth="75.0" onMouseClicked="#tropicalSplashClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                     <image>
+                        <Image url="@../../../../Images/tropical-splash-300x300.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="babyBoyPic" fitHeight="76.0" fitWidth="72.0" onMouseClicked="#welcomeBabyBoyClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                     <image>
+                        <Image url="@../../../../Images/welcome baby boy.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="babyGirlPic" fitHeight="76.0" fitWidth="72.0" onMouseClicked="#welcomeBabyGirlClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="6">
+                     <image>
+                        <Image url="@../../../../Images/welcome baby girl.jpg" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="AllOccasionLabel" text="All Occasion" GridPane.rowIndex="1" />
+                  <Label fx:id="classicDozenLabel" text="Classic Dozen" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label fx:id="colorfulEleganceLabel" text="Colorful Elegance" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label fx:id="contemporaryLabel" text="Contemporary Orchids" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <Label fx:id="dishGardenLabel" text="Dish Garden" GridPane.rowIndex="3" />
+                  <Label fx:id="grandOrchidsLabel" text="Grand Orchids" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label fx:id="hollandSpringLabel" text="Holland Spring" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Label fx:id="orchidFestivalLabel" text="Orchid Festival" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                  <Label fx:id="largeOrchidLabel" text="Large Orchid Plant" GridPane.rowIndex="5" />
+                  <Label fx:id="smallSweetLabel" text="Small &amp; Sweet" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Label fx:id="smallSweet2Label" text="Small &amp; Sweet 2" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <Label fx:id="summerSunshineLabel" text="Summer Sunshine" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                  <Label fx:id="sunflowerTopiary" text="Sunflower Topiary" GridPane.rowIndex="7" />
+                  <Label fx:id="tropicalSplashLabel" text="Tropical Splash" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                  <Label fx:id="babyBoyLabel" text="Welcome Baby Boy" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                  <Label fx:id="babyGirlLabel" text="Welcome Baby Girl" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>

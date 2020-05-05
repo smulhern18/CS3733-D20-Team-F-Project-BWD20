@@ -31,9 +31,9 @@ import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
 import javafx.util.Callback;
 import javax.management.InstanceNotFoundException;
 import lombok.SneakyThrows;
@@ -67,6 +67,7 @@ public class LaundryServiceRequestController implements Initializable {
   public JFXButton delete;
   public JFXButton backButton;
   public JFXButton checkStatButton;
+  public ImageView backgroundImage;
   SceneController sceneController = App.getSceneController();
   DatabaseManager databaseManager = DatabaseManager.getManager();
 
@@ -76,6 +77,8 @@ public class LaundryServiceRequestController implements Initializable {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    backgroundImage.fitWidthProperty().bind(anchorPane.widthProperty());
+    backgroundImage.fitHeightProperty().bind(anchorPane.heightProperty());
     Account.Type userLevel = databaseManager.getPermissions();
     if (userLevel == Account.Type.USER) {
       checkStatButton.setDisable(true);
@@ -88,14 +91,14 @@ public class LaundryServiceRequestController implements Initializable {
     UISetting uiSetting = new UISetting();
     uiSetting.setAsLocationComboBox(locationChoice);
 
-    anchorPane
-        .widthProperty()
-        .addListener(
-            (observable, oldWidth, newWidth) -> {
-              if (newWidth.doubleValue() != oldWidth.doubleValue()) {
-                resize(newWidth.doubleValue());
-              }
-            });
+    //    anchorPane
+    //        .widthProperty()
+    //        .addListener(
+    //            (observable, oldWidth, newWidth) -> {
+    //              if (newWidth.doubleValue() != oldWidth.doubleValue()) {
+    //                resize(newWidth.doubleValue());
+    //              }
+    //            });
 
     itemsChoice.getItems().add("Bath Blankets");
     itemsChoice.getItems().add("Bath Towels");
@@ -387,30 +390,32 @@ public class LaundryServiceRequestController implements Initializable {
 
   public void request(ActionEvent actionEvent) {
     servicePane.setVisible(true);
+    servicePane.toFront();
     checkStatusPane.setVisible(false);
   }
 
   public void statusView(ActionEvent actionEvent) {
     servicePane.setVisible(false);
     checkStatusPane.setVisible(true);
+    checkStatusPane.toFront();
   }
 
-  private void resize(double width) {
-    System.out.println(width);
-    Font newFont = new Font(width / 50);
-    locationLabel.setFont(newFont);
-    itemsLabel.setFont(newFont);
-    temperatureLabel.setFont(newFont);
-    quantityLabel.setFont(newFont);
-    descLabel.setFont(newFont);
-    prioLabel.setFont(newFont);
-    securityRequestLabel.setFont(new Font(width / 20));
-    submitButton.setFont(newFont);
-    cancelButton.setFont(newFont);
-    // deleteButton.setFont(new Font(width / 50));
-    update.setFont(newFont);
-    backButton.setFont(newFont);
-  }
+  //  private void resize(double width) {
+  //    System.out.println(width);
+  //    Font newFont = new Font(width / 50);
+  //    locationLabel.setFont(newFont);
+  //    itemsLabel.setFont(newFont);
+  //    temperatureLabel.setFont(newFont);
+  //    quantityLabel.setFont(newFont);
+  //    descLabel.setFont(newFont);
+  //    prioLabel.setFont(newFont);
+  //    securityRequestLabel.setFont(new Font(width / 20));
+  //    submitButton.setFont(newFont);
+  //    cancelButton.setFont(newFont);
+  //    // deleteButton.setFont(new Font(width / 50));
+  //    update.setFont(newFont);
+  //    backButton.setFont(newFont);
+  //  }
 
   public void backToServiceRequestMain(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("ServiceRequestMain");

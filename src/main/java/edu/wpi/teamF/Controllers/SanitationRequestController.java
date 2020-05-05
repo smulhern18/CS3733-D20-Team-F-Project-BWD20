@@ -21,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
@@ -51,6 +52,7 @@ public class SanitationRequestController implements Initializable {
   public AnchorPane anchorPane;
   // public TextField descriptionTextField;
   public JFXTextArea descText;
+  public ImageView backgroundImage;
 
   DatabaseManager databaseManager = DatabaseManager.getManager();
   List<SanitationServiceRequest> sanitationRequestList = databaseManager.getAllSanitationRequests();
@@ -61,6 +63,8 @@ public class SanitationRequestController implements Initializable {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    backgroundImage.fitWidthProperty().bind(anchorPane.widthProperty());
+    backgroundImage.fitHeightProperty().bind(anchorPane.heightProperty());
     Account.Type userLevel = databaseManager.getPermissions();
     if (userLevel == Account.Type.USER) {
       checkStatusButton.setDisable(true);
@@ -191,15 +195,15 @@ public class SanitationRequestController implements Initializable {
     table.setEditable(true);
     table.setShowRoot(false);
 
-    resize(anchorPane.getWidth());
-    anchorPane
-        .widthProperty()
-        .addListener(
-            (observable, oldWidth, newWidth) -> {
-              if (newWidth.doubleValue() != oldWidth.doubleValue()) {
-                resize(newWidth.doubleValue());
-              }
-            });
+    //    resize(anchorPane.getWidth());
+    //    anchorPane
+    //        .widthProperty()
+    //        .addListener(
+    //            (observable, oldWidth, newWidth) -> {
+    //              if (newWidth.doubleValue() != oldWidth.doubleValue()) {
+    //                resize(newWidth.doubleValue());
+    //              }
+    //            });
   }
 
   private void resize(double width) {
@@ -255,6 +259,7 @@ public class SanitationRequestController implements Initializable {
 
   public void request(ActionEvent actionEvent) {
     servicePane.setVisible(true);
+    servicePane.toFront();
     checkStatusPane.setVisible(false);
   }
 
@@ -286,5 +291,6 @@ public class SanitationRequestController implements Initializable {
   public void checkStatus(ActionEvent actionEvent) {
     servicePane.setVisible(false);
     checkStatusPane.setVisible(true);
+    checkStatusPane.toFront();
   }
 }

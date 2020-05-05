@@ -28,6 +28,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
@@ -67,6 +68,7 @@ public class MaintenanceRequestController implements Initializable {
   public JFXTextField desText;
   public JFXComboBox<String> assigneeChoice;
   public JFXTreeTableView<UIMaintenenceRequest> treeTableMaintenance;
+  public ImageView backgroundImage;
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UIMaintenenceRequest> csrUI = FXCollections.observableArrayList();
@@ -84,6 +86,8 @@ public class MaintenanceRequestController implements Initializable {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    backgroundImage.fitWidthProperty().bind(anchorPane.widthProperty());
+    backgroundImage.fitHeightProperty().bind(anchorPane.heightProperty());
 
     Account.Type userLevel = databaseManager.getPermissions();
     if (userLevel == Account.Type.USER) {
@@ -331,12 +335,14 @@ public class MaintenanceRequestController implements Initializable {
 
   public void request(ActionEvent actionEvent) {
     servicePane.setVisible(true);
+    servicePane.toFront();
     checkStatusPane.setVisible(false);
   }
 
   public void statusView(ActionEvent actionEvent) {
     servicePane.setVisible(false);
     checkStatusPane.setVisible(true);
+    checkStatusPane.toFront();
   }
 
   private void resize(double width) {

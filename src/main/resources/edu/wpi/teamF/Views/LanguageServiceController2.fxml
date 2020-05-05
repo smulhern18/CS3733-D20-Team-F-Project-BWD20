@@ -19,102 +19,15 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.LanguageServiceController">
     <children>
-      <ImageView fitHeight="525.0" fitWidth="600.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <image>
-            <Image url="@../../../../Images/BWH.jpg" />
-         </image>
-      </ImageView>
-        <GridPane fx:id="servicePane" layoutX="190.0" layoutY="14.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 10;" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
-            <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <children>
-                <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
-                    <children>
-                        <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="         Location:         " />
-                        <JFXComboBox fx:id="locationCombobox" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black;" />
-                    </children>
-                </HBox>
-                <HBox alignment="BOTTOM_CENTER" GridPane.rowIndex="2">
-                    <children>
-                        <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="          Priority:         " />
-                        <JFXComboBox fx:id="priorityCombobox" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black;" />
-                    </children>
-                </HBox>
-                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
-                    <children>
-                  <GridPane>
-                    <columnConstraints>
-                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                     <children>
-                              <JFXButton fx:id="cancelButton" onAction="#cancel" style="-fx-background-color: #a40000; -fx-background-radius: 10;" text="Cancel" textFill="#ffffffcc" GridPane.columnIndex="2">
-                                  <font>
-                                      <Font name="STFangsong" size="18.0" />
-                                  </font>
-                              </JFXButton>
-                              <JFXButton fx:id="submitButton" onAction="#submit" style="-fx-background-color: #012D5A; -fx-background-radius: 10;" text="Submit" textFill="#ffffffcc" GridPane.columnIndex="1">
-                                  <font>
-                                      <Font name="STFangsong" size="18.0" />
-                                  </font>
-                              </JFXButton>
-                              <JFXButton fx:id="checkStatusButton" onAction="#checkStatus" style="-fx-background-color: #012D5A; -fx-background-radius: 10;" text="Status" textFill="#ffffffcc">
-                                  <font>
-                                      <Font name="STFangsong" size="18.0" />
-                                  </font>
-                              </JFXButton>
-                     </children>
-                  </GridPane>
-                    </children>
-                </HBox>
-                <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
-                    <children>
-                        <Label fx:id="languageLabel" alignment="BOTTOM_CENTER" prefHeight="18.0" prefWidth="100.0" text="Language:" />
-                        <JFXComboBox fx:id="languageCombobox" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black;" />
-                    </children>
-                </HBox>
-            <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="4">
-               <children>
-                  <Label fx:id="problemTypeLabel" alignment="BOTTOM_CENTER" text="Problem Type:  ">
-                     <HBox.margin>
-                        <Insets right="10.0" />
-                     </HBox.margin></Label>
-                  <JFXComboBox fx:id="problemTypeCombobox" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black;" />
-               </children>
-            </HBox>
-            <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="5">
-               <children>
-                  <Label fx:id="descriptionLabel" alignment="BOTTOM_CENTER" text="      Description: ">
-                     <padding>
-                        <Insets right="12.0" />
-                     </padding></Label>
-                  <JFXTextArea fx:id="descriptionText" prefHeight="65.0" prefWidth="186.0" style="-fx-background-color: white; -fx-border-color: black;">
-                     <HBox.margin>
-                        <Insets top="5.0" />
-                     </HBox.margin></JFXTextArea>
-               </children>
-            </HBox>
-                  <Label fx:id="securityRequestLabel" prefHeight="60.0" prefWidth="347.0" text="Language Service Request">
-                      <font>
-                          <Font size="30.0" />
-                      </font>
-                  </Label>
-            </children>
-        </GridPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="backgroundImage" fitHeight="525.0" fitWidth="600.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <image>
+                  <Image url="@../../../../Images/BWH.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
         <fx:include fx:id="mainMenu" source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
         <AnchorPane fx:id="checkStatusPane" layoutX="190.0" layoutY="14.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 6;" visible="false" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
             <children>
@@ -171,5 +84,103 @@
                 </GridPane>
             </children>
         </AnchorPane>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="15.0">
+         <children>
+              <GridPane fx:id="servicePane" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 10;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
+                  <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  </columnConstraints>
+                  <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                  </rowConstraints>
+                  <children>
+                      <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
+                          <children>
+                              <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="         Location:         " />
+                              <JFXComboBox fx:id="locationCombobox" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                          </children>
+                      </HBox>
+                      <HBox alignment="BOTTOM_CENTER" GridPane.rowIndex="2">
+                          <children>
+                              <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="          Priority:         " />
+                              <JFXComboBox fx:id="priorityCombobox" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                          </children>
+                      </HBox>
+                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
+                          <children>
+                        <GridPane>
+                          <columnConstraints>
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                                    <JFXButton fx:id="cancelButton" onAction="#cancel" style="-fx-background-color: #a40000; -fx-background-radius: 10;" text="Cancel" textFill="#ffffffcc" GridPane.columnIndex="2">
+                                        <font>
+                                            <Font name="STFangsong" size="18.0" />
+                                        </font>
+                                    </JFXButton>
+                                    <JFXButton fx:id="submitButton" onAction="#submit" style="-fx-background-color: #012D5A; -fx-background-radius: 10;" text="Submit" textFill="#ffffffcc" GridPane.columnIndex="1">
+                                        <font>
+                                            <Font name="STFangsong" size="18.0" />
+                                        </font>
+                                    </JFXButton>
+                                    <JFXButton fx:id="checkStatusButton" onAction="#checkStatus" style="-fx-background-color: #012D5A; -fx-background-radius: 10;" text="Status" textFill="#ffffffcc">
+                                        <font>
+                                            <Font name="STFangsong" size="18.0" />
+                                        </font>
+                                    </JFXButton>
+                           </children>
+                        </GridPane>
+                          </children>
+                      </HBox>
+                      <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                          <children>
+                              <Label fx:id="languageLabel" alignment="BOTTOM_CENTER" prefHeight="18.0" prefWidth="100.0" text="Language:" />
+                              <JFXComboBox fx:id="languageCombobox" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                          </children>
+                      </HBox>
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="4">
+                     <children>
+                        <Label fx:id="problemTypeLabel" alignment="BOTTOM_CENTER" text="Problem Type:  ">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <JFXComboBox fx:id="problemTypeCombobox" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="5">
+                     <children>
+                        <Label fx:id="descriptionLabel" alignment="BOTTOM_CENTER" text="      Description: ">
+                           <padding>
+                              <Insets right="12.0" />
+                           </padding>
+                        </Label>
+                        <JFXTextArea fx:id="descriptionText" prefHeight="65.0" prefWidth="186.0" style="-fx-background-color: white; -fx-border-color: black;">
+                           <HBox.margin>
+                              <Insets top="5.0" />
+                           </HBox.margin>
+                        </JFXTextArea>
+                     </children>
+                  </HBox>
+                        <Label fx:id="securityRequestLabel" prefHeight="60.0" prefWidth="347.0" text="Language Service Request">
+                            <font>
+                                <Font size="30.0" />
+                            </font>
+                        </Label>
+                  </children>
+              </GridPane>
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>

@@ -35,7 +35,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
 import javafx.util.Callback;
 import javax.management.InstanceNotFoundException;
 import lombok.SneakyThrows;
@@ -46,7 +45,6 @@ public class FlowerRequestInfoController implements Initializable {
   public AnchorPane anchorPane;
   public GridPane optionBar;
   public JFXTreeTableView<UiFlowerServiceRequest> treeTableFlower;
-  public GridPane servicePane;
   public Label locationLabel;
   public Label flowerRequestLabel;
   public JFXComboBox<String> locationComboBox;
@@ -107,6 +105,10 @@ public class FlowerRequestInfoController implements Initializable {
   public Label babyBoyLabel;
   public Label babyGirlLabel;
   public JFXButton checkStatusButton;
+  public ImageView bkacgroundImage;
+  public AnchorPane chosePane;
+  public GridPane servicePane;
+  public AnchorPane anchorSubmit;
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UiFlowerServiceRequest> frUI = FXCollections.observableArrayList();
@@ -116,6 +118,8 @@ public class FlowerRequestInfoController implements Initializable {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    bkacgroundImage.fitWidthProperty().bind(anchorPane.widthProperty());
+    bkacgroundImage.fitHeightProperty().bind(anchorPane.heightProperty());
     Account.Type userLevel = databaseManager.getPermissions();
     if (userLevel == Account.Type.USER) {
       checkStatusButton.setDisable(true);
@@ -129,15 +133,15 @@ public class FlowerRequestInfoController implements Initializable {
     uiSetting.setAsLocationComboBox(locationComboBox);
 
     priorityComboBox.setItems(FXCollections.observableArrayList("Low", "Medium", "High"));
-
-    anchorPane
-        .widthProperty()
-        .addListener(
-            (observable, oldWidth, newWidth) -> {
-              if (newWidth.doubleValue() != oldWidth.doubleValue()) {
-                resize(newWidth.doubleValue());
-              }
-            });
+    //
+    //    anchorPane
+    //        .widthProperty()
+    //        .addListener(
+    //            (observable, oldWidth, newWidth) -> {
+    //              if (newWidth.doubleValue() != oldWidth.doubleValue()) {
+    //                resize(newWidth.doubleValue());
+    //              }
+    //            });
     // ID
     JFXTreeTableColumn<UiFlowerServiceRequest, String> ID = new JFXTreeTableColumn<>("ID");
     ID.setPrefWidth(100);
@@ -443,6 +447,7 @@ public class FlowerRequestInfoController implements Initializable {
     priorityComboBox.setValue(null);
     servicePane.setVisible(false);
     flowerPane.setVisible(true);
+    chosePane.toFront();
   }
 
   public void update(ActionEvent actionEvent)
@@ -476,82 +481,83 @@ public class FlowerRequestInfoController implements Initializable {
   public void request(ActionEvent actionEvent) {
     servicePane.setVisible(false);
     checkStatusPane.setVisible(false);
-    flowerRequestLabel.setVisible(false);
     flowerPane.setVisible(true);
+    flowerPane.toFront();
+    chosePane.toFront();
   }
 
   public void checkStatus(ActionEvent actionEvent) {
     servicePane.setVisible(false);
     checkStatusPane.setVisible(true);
+    checkStatusPane.toFront();
     flowerPane.setVisible(false);
-    flowerRequestLabel.setVisible(true);
   }
 
-  private void resize(double width) {
-    System.out.println(width);
-    babyBoyPic.setScaleX(width / 800);
-    babyBoyPic.setScaleY(width / 800);
-    babyGirlPic.setScaleX(width / 800);
-    babyGirlPic.setScaleY(width / 800);
-    tropicalSplashPic.setScaleX(width / 800);
-    tropicalSplashPic.setScaleY(width / 800);
-    sunflowerTopiaryPic.setScaleX(width / 800);
-    sunflowerTopiaryPic.setScaleY(width / 800);
-    summerSunshinePic.setScaleX(width / 800);
-    summerSunshinePic.setScaleY(width / 800);
-    sweetSmall2Pic.setScaleX(width / 800);
-    sweetSmall2Pic.setScaleY(width / 800);
-    sweetSmallPic.setScaleX(width / 800);
-    sweetSmallPic.setScaleY(width / 800);
-    largeOrchidPic.setScaleX(width / 800);
-    largeOrchidPic.setScaleY(width / 800);
-    orchidFestivalPic.setScaleX(width / 800);
-    orchidFestivalPic.setScaleY(width / 800);
-    hollandSpringPic.setScaleX(width / 800);
-    hollandSpringPic.setScaleY(width / 800);
-    grandOrchidsPic.setScaleX(width / 800);
-    grandOrchidsPic.setScaleY(width / 800);
-    dishGardenPic.setScaleX(width / 800);
-    dishGardenPic.setScaleY(width / 800);
-    contemporaryPic.setScaleX(width / 800);
-    contemporaryPic.setScaleY(width / 800);
-    colorfulElegancePic.setScaleX(width / 800);
-    colorfulElegancePic.setScaleY(width / 800);
-    classicDozenPic.setScaleX(width / 800);
-    classicDozenPic.setScaleY(width / 800);
-    allOccasionPic.setScaleX(width / 800);
-    allOccasionPic.setScaleY(width / 800);
-    Font newFont = new Font(width / 50);
-    locationLabel.setFont(newFont);
-    nameLabel.setFont(newFont);
-    roomNumberLabel.setFont(newFont);
-    messageLabel.setFont(newFont);
-    buyerNameLabel.setFont(newFont);
-    priorityLabel.setFont(newFont);
-    phoneNumberLabel.setFont(newFont);
-    flowerRequestLabel.setFont(new Font(width / 30));
-    submitButton.setFont(newFont);
-    giftWrapCheckBox.setFont(newFont);
-    cancelButton.setFont(newFont);
-    AllOccasionLabel.setFont(newFont);
-    classicDozenLabel.setFont(newFont);
-    colorfulEleganceLabel.setFont(newFont);
-    contemporaryLabel.setFont(newFont);
-    dishGardenLabel.setFont(newFont);
-    grandOrchidsLabel.setFont(newFont);
-    hollandSpringLabel.setFont(newFont);
-    orchidFestivalLabel.setFont(newFont);
-    largeOrchidLabel.setFont(newFont);
-    smallSweet2Label.setFont(newFont);
-    smallSweetLabel.setFont(newFont);
-    summerSunshineLabel.setFont(newFont);
-    sunflowerTopiary.setFont((newFont));
-    tropicalSplashLabel.setFont(newFont);
-    babyBoyLabel.setFont(newFont);
-    babyGirlLabel.setFont(newFont);
-    // deleteButton.setFont(new Font(width / 50));
-    updateButton.setFont(newFont);
-  }
+  //  private void resize(double width) {
+  //    System.out.println(width);
+  //    babyBoyPic.setScaleX(width / 800);
+  //    babyBoyPic.setScaleY(width / 800);
+  //    babyGirlPic.setScaleX(width / 800);
+  //    babyGirlPic.setScaleY(width / 800);
+  //    tropicalSplashPic.setScaleX(width / 800);
+  //    tropicalSplashPic.setScaleY(width / 800);
+  //    sunflowerTopiaryPic.setScaleX(width / 800);
+  //    sunflowerTopiaryPic.setScaleY(width / 800);
+  //    summerSunshinePic.setScaleX(width / 800);
+  //    summerSunshinePic.setScaleY(width / 800);
+  //    sweetSmall2Pic.setScaleX(width / 800);
+  //    sweetSmall2Pic.setScaleY(width / 800);
+  //    sweetSmallPic.setScaleX(width / 800);
+  //    sweetSmallPic.setScaleY(width / 800);
+  //    largeOrchidPic.setScaleX(width / 800);
+  //    largeOrchidPic.setScaleY(width / 800);
+  //    orchidFestivalPic.setScaleX(width / 800);
+  //    orchidFestivalPic.setScaleY(width / 800);
+  //    hollandSpringPic.setScaleX(width / 800);
+  //    hollandSpringPic.setScaleY(width / 800);
+  //    grandOrchidsPic.setScaleX(width / 800);
+  //    grandOrchidsPic.setScaleY(width / 800);
+  //    dishGardenPic.setScaleX(width / 800);
+  //    dishGardenPic.setScaleY(width / 800);
+  //    contemporaryPic.setScaleX(width / 800);
+  //    contemporaryPic.setScaleY(width / 800);
+  //    colorfulElegancePic.setScaleX(width / 800);
+  //    colorfulElegancePic.setScaleY(width / 800);
+  //    classicDozenPic.setScaleX(width / 800);
+  //    classicDozenPic.setScaleY(width / 800);
+  //    allOccasionPic.setScaleX(width / 800);
+  //    allOccasionPic.setScaleY(width / 800);
+  //    Font newFont = new Font(width / 50);
+  //    locationLabel.setFont(newFont);
+  //    nameLabel.setFont(newFont);
+  //    roomNumberLabel.setFont(newFont);
+  //    messageLabel.setFont(newFont);
+  //    buyerNameLabel.setFont(newFont);
+  //    priorityLabel.setFont(newFont);
+  //    phoneNumberLabel.setFont(newFont);
+  //    flowerRequestLabel.setFont(new Font(width / 30));
+  //    submitButton.setFont(newFont);
+  //    giftWrapCheckBox.setFont(newFont);
+  //    cancelButton.setFont(newFont);
+  //    AllOccasionLabel.setFont(newFont);
+  //    classicDozenLabel.setFont(newFont);
+  //    colorfulEleganceLabel.setFont(newFont);
+  //    contemporaryLabel.setFont(newFont);
+  //    dishGardenLabel.setFont(newFont);
+  //    grandOrchidsLabel.setFont(newFont);
+  //    hollandSpringLabel.setFont(newFont);
+  //    orchidFestivalLabel.setFont(newFont);
+  //    largeOrchidLabel.setFont(newFont);
+  //    smallSweet2Label.setFont(newFont);
+  //    smallSweetLabel.setFont(newFont);
+  //    summerSunshineLabel.setFont(newFont);
+  //    sunflowerTopiary.setFont((newFont));
+  //    tropicalSplashLabel.setFont(newFont);
+  //    babyBoyLabel.setFont(newFont);
+  //    babyGirlLabel.setFont(newFont);
+  //    // deleteButton.setFont(new Font(width / 50));
+  //    updateButton.setFont(newFont);
+  //  }
 
   public void backToServiceRequestMain(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("ServiceRequestMain");
@@ -561,111 +567,127 @@ public class FlowerRequestInfoController implements Initializable {
     this.bouquet = "All Occasion";
     flowerPane.setVisible(false);
     servicePane.setVisible(true);
-    flowerRequestLabel.setVisible(true);
+    servicePane.toFront();
+    anchorSubmit.toFront();
   }
 
   public void classicDozenClicked(MouseEvent actionEvent) {
     this.bouquet = "Classic Dozen";
     flowerPane.setVisible(false);
     servicePane.setVisible(true);
-    flowerRequestLabel.setVisible(true);
+    servicePane.toFront();
+    anchorSubmit.toFront();
   }
 
   public void colorfulEleganceClicked(MouseEvent actionEvent) {
     this.bouquet = "Colorful Elegance";
     flowerPane.setVisible(false);
     servicePane.setVisible(true);
-    flowerRequestLabel.setVisible(true);
+    servicePane.toFront();
+    anchorSubmit.toFront();
   }
 
   public void contemporaryOrchidsClicked(MouseEvent actionEvent) {
     this.bouquet = "Contemporary Orchids";
     flowerPane.setVisible(false);
     servicePane.setVisible(true);
-    flowerRequestLabel.setVisible(true);
+    servicePane.toFront();
+    anchorSubmit.toFront();
   }
 
   public void dishGardClicked(MouseEvent actionEvent) {
     this.bouquet = "Dish Garden";
     flowerPane.setVisible(false);
     servicePane.setVisible(true);
-    flowerRequestLabel.setVisible(true);
+    servicePane.toFront();
+    anchorSubmit.toFront();
   }
 
   public void grandOrchidsClicked(MouseEvent actionEvent) {
     this.bouquet = "Grand Orchids";
     flowerPane.setVisible(false);
     servicePane.setVisible(true);
-    flowerRequestLabel.setVisible(true);
+    servicePane.toFront();
+    anchorSubmit.toFront();
   }
 
   public void hollandSpringClicked(MouseEvent actionEvent) {
     this.bouquet = "Holland Spring";
     flowerPane.setVisible(false);
     servicePane.setVisible(true);
-    flowerRequestLabel.setVisible(true);
+    servicePane.toFront();
+    anchorSubmit.toFront();
   }
 
   public void orchidFestivalClicked(MouseEvent actionEvent) {
     this.bouquet = "Orchid Festival";
     flowerPane.setVisible(false);
     servicePane.setVisible(true);
-    flowerRequestLabel.setVisible(true);
+    servicePane.toFront();
+    anchorSubmit.toFront();
   }
 
   public void largeOrchidClicked(MouseEvent actionEvent) {
     this.bouquet = "Large Orchid Plant";
     flowerPane.setVisible(false);
     servicePane.setVisible(true);
-    flowerRequestLabel.setVisible(true);
+    servicePane.toFront();
+    anchorSubmit.toFront();
   }
 
   public void smallAndSweetClicked(MouseEvent actionEvent) {
     this.bouquet = "Small and Sweet";
     flowerPane.setVisible(false);
     servicePane.setVisible(true);
-    flowerRequestLabel.setVisible(true);
+    servicePane.toFront();
+    anchorSubmit.toFront();
   }
 
   public void smallAndSweet2Clicked(MouseEvent actionEvent) {
     this.bouquet = "Small and Sweet II";
     flowerPane.setVisible(false);
     servicePane.setVisible(true);
-    flowerRequestLabel.setVisible(true);
+    servicePane.toFront();
+    anchorSubmit.toFront();
   }
 
   public void summerSunshineClicked(MouseEvent actionEvent) {
     this.bouquet = "Summer Sunshine";
     flowerPane.setVisible(false);
     servicePane.setVisible(true);
-    flowerRequestLabel.setVisible(true);
+    servicePane.toFront();
+    anchorSubmit.toFront();
   }
 
   public void sunflowerTopiaryClicked(MouseEvent actionEvent) {
     this.bouquet = "Sunflower Topiary";
     flowerPane.setVisible(false);
     servicePane.setVisible(true);
-    flowerRequestLabel.setVisible(true);
+    servicePane.toFront();
+    anchorSubmit.toFront();
   }
 
   public void tropicalSplashClicked(MouseEvent actionEvent) {
     this.bouquet = "Tropical Splash";
     flowerPane.setVisible(false);
     servicePane.setVisible(true);
-    flowerRequestLabel.setVisible(true);
+    servicePane.toFront();
+    anchorSubmit.toFront();
   }
 
   public void welcomeBabyBoyClicked(MouseEvent actionEvent) {
     this.bouquet = "Welcome Baby Boy";
     flowerPane.setVisible(false);
     servicePane.setVisible(true);
-    flowerRequestLabel.setVisible(true);
+    servicePane.toFront();
+    anchorSubmit.toFront();
   }
 
   public void welcomeBabyGirlClicked(MouseEvent actionEvent) {
     this.bouquet = "Welcome Baby Girl";
     flowerPane.setVisible(false);
     servicePane.setVisible(true);
-    flowerRequestLabel.setVisible(true);
+    servicePane.toFront();
+    anchorSubmit.toFront();
   }
 }

@@ -87,12 +87,14 @@ public class ComputerServiceController implements Initializable {
     backgroundImage.fitWidthProperty().bind(anchorPane.widthProperty());
     backgroundImage.fitHeightProperty().bind(anchorPane.heightProperty());
     Account.Type userLevel = databaseManager.getPermissions();
-    if (userLevel == Account.Type.USER) {
+    if (userLevel == Account.Type.USER || userLevel == null) {
       checkStatusButton.setDisable(true);
+      checkStatusButton.setVisible(false);
 
       // set to user
     } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
       checkStatusButton.setDisable(false);
+      checkStatusButton.setVisible(true);
     }
     // set to staff
 
