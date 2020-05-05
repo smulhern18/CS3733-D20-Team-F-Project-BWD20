@@ -406,22 +406,22 @@ public class ComputerServiceController implements Initializable {
     checkStatusPane.setVisible(true);
   }
 
-  private void resize(double width) {
-    System.out.println(width);
-    Font newFont = new Font(width / 50);
-    locationLabel.setFont(newFont);
-    makeLabel.setFont(newFont);
-    typeLabel.setFont(newFont);
-    OSLabel.setFont(newFont);
-    descLabel.setFont(newFont);
-    prioLabel.setFont(newFont);
-    securityRequestLabel.setFont(new Font(width / 20));
-    submitButton.setFont(newFont);
-    cancelButton.setFont(newFont);
-    // deleteButton.setFont(new Font(width / 50));
-    update.setFont(newFont);
-    backButton.setFont(newFont);
-  }
+//  private void resize(double width) {
+//    System.out.println(width);
+//    Font newFont = new Font(width / 50);
+//    locationLabel.setFont(newFont);
+//    makeLabel.setFont(newFont);
+//    typeLabel.setFont(newFont);
+//    OSLabel.setFont(newFont);
+//    descLabel.setFont(newFont);
+//    prioLabel.setFont(newFont);
+//    securityRequestLabel.setFont(new Font(width / 20));
+//    submitButton.setFont(newFont);
+//    cancelButton.setFont(newFont);
+//    // deleteButton.setFont(new Font(width / 50));
+//    update.setFont(newFont);
+//    backButton.setFont(newFont);
+//  }
 
   public void backToServiceRequestMain(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("ServiceRequestMain");
