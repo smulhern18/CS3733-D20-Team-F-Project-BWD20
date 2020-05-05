@@ -265,7 +265,8 @@ public class PathfinderController implements Initializable {
         // Next stop is at a different hospital
         pathSwitchNext.setText("Next: Go to " + path.getLocationAtIndex(2).getBuilding());
       } else {
-        pathSwitchNext.setText("Next: Go to floor " + path.getLocationAtIndex(1).getFloor());
+        pathSwitchNext.setText(
+            "Next: Go to floor " + path.getLocationAtIndex(1).getFloor().replace("F", ""));
       }
       locationIndex = 0;
       System.out.println("Changed to Index: " + locationIndex);
@@ -843,7 +844,8 @@ public class PathfinderController implements Initializable {
           "Previous: Go to " + path.getLocationAtIndex(locationIndex - 2).getBuilding());
     } else {
       pathSwitchPrevious.setText(
-          "Previous: Go to floor " + path.getLocationAtIndex(locationIndex - 1).getFloor());
+          "Previous: Go to floor "
+              + path.getLocationAtIndex(locationIndex - 1).getFloor().replace("F", ""));
     }
 
     // Need to update the text for previous button
@@ -854,7 +856,8 @@ public class PathfinderController implements Initializable {
             "Next: Go to " + path.getLocationAtIndex(locationIndex + 2).getBuilding());
       } else {
         pathSwitchNext.setText(
-            "Next: Go to floor " + path.getLocationAtIndex(locationIndex + 1).getFloor());
+            "Next: Go to floor "
+                + path.getLocationAtIndex(locationIndex + 1).getFloor().replace("F", ""));
       }
     }
   }
@@ -901,7 +904,8 @@ public class PathfinderController implements Initializable {
           "Next: Go to " + path.getLocationAtIndex(locationIndex + 2).getBuilding());
     } else {
       pathSwitchNext.setText(
-          "Next: Go to floor " + path.getLocationAtIndex(locationIndex + 1).getFloor());
+          "Next: Go to floor "
+              + path.getLocationAtIndex(locationIndex + 1).getFloor().replace("F", ""));
     }
 
     // Need to update the text for previous button
@@ -912,7 +916,8 @@ public class PathfinderController implements Initializable {
             "Previous: Go to " + path.getLocationAtIndex(locationIndex - 2).getBuilding());
       } else {
         pathSwitchPrevious.setText(
-            "Previous: Go to floor " + path.getLocationAtIndex(locationIndex - 1).getFloor());
+            "Previous: Go to floor "
+                + path.getLocationAtIndex(locationIndex - 1).getFloor().replace("F", ""));
       }
     }
   }

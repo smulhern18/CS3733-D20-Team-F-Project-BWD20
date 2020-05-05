@@ -12,7 +12,11 @@ public class ElevatorDirection extends Direction {
   @Override
   public String getDirectionText() {
     String returnString =
-        ("Take the elevator from floor " + startFloor + " to floor " + endFloor + ".");
+        ("Take the elevator from floor "
+            + startFloor.replace("F", "")
+            + " to floor "
+            + endFloor.replace("F", "")
+            + ".");
     return returnString;
   }
 
