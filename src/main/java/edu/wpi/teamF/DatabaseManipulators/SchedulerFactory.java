@@ -73,6 +73,7 @@ public class SchedulerFactory {
         if (resultSet.next()) {
           scheduleEntry =
               new ScheduleEntry(
+                  id,
                   resultSet.getString(DatabaseManager.START_DATE_KEY),
                   resultSet.getString(DatabaseManager.START_TIME_KEY),
                   resultSet.getString(DatabaseManager.END_DATE_KEY),

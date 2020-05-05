@@ -971,6 +971,10 @@ public class DatabaseManager {
     return schedulerFactory.read(id);
   }
 
+  public void deleteScheduleEntry(String id) throws Exception {
+    schedulerFactory.delete(id);
+  }
+
   public List<ScheduleEntry> getAllScheduleEntries() {
     return schedulerFactory.getAllScheduleEntries();
   }

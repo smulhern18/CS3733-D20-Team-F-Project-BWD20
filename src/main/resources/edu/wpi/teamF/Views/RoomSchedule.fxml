@@ -10,13 +10,13 @@
    <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXButton fx:id="submitButton" layoutX="85.0" layoutY="296.0" onAction="#submit" text="Submit" />
+            <JFXButton fx:id="submitButton" layoutX="85.0" layoutY="296.0"  text="Submit" />
             <JFXDatePicker fx:id="endDateSelector" layoutX="42.0" layoutY="224.0" />
             <JFXTimePicker fx:id="endTimeSelector" layoutX="42.0" layoutY="54.0" />
             <JFXDatePicker fx:id="startDateSelector" layoutX="180.0" layoutY="47.0" />
             <JFXTimePicker fx:id="startTimeSelector" layoutX="17.0" layoutY="94.0" prefWidth="171.0" />
             <JFXComboBox fx:id="roomComboBox" layoutX="128.0" layoutY="82.0" prefHeight="25.0" prefWidth="153.0" />
-            <JFXButton fx:id="cancelButton" layoutX="33.0" layoutY="174.0" onAction="#cancel" text="Cancel" />
+            <JFXButton fx:id="cancelButton" layoutX="33.0" layoutY="174.0"  text="Cancel" />
          </children>
       </AnchorPane>
       <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />

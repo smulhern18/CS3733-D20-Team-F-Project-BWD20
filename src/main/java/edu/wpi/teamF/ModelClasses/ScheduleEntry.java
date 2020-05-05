@@ -18,13 +18,14 @@ public class ScheduleEntry {
   String accountID;
 
   public ScheduleEntry(
+      String id,
       String startDate,
       String startTime,
       String endDate,
       String endTime,
       String room,
       String accountID) {
-    this.ID = "" + System.currentTimeMillis();
+    this.ID = id;
     this.startDate = startDate;
     this.startTime = startTime;
     this.endDate = endDate;
