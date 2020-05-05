@@ -210,8 +210,6 @@ public class DataMapViewController implements Initializable {
     imageView = imageViewMain1;
     hospital = Hospital.MAIN;
 
-    selectFloor("ground");
-
     for (Edge edge : databaseManager.getAllEdges()) {
       drawEdge(edge);
     } // for every edge that connects two nodes on the fifth floor, draw the edge on the map
@@ -266,6 +264,8 @@ public class DataMapViewController implements Initializable {
             floor1Button,
             floor2Button,
             floor3Button));
+
+    selectFloor("ground");
   }
 
   @FXML
@@ -273,9 +273,11 @@ public class DataMapViewController implements Initializable {
     if (hospitalCombo.getValue().equals("Main Campus")) {
       faulknerFloorPane.setVisible(false);
       mainFloorPane.setVisible(true);
+      selectFloor("ground");
     } else {
       mainFloorPane.setVisible(false);
       faulknerFloorPane.setVisible(true);
+      selectFloor("ff1");
     }
   }
 
@@ -286,7 +288,7 @@ public class DataMapViewController implements Initializable {
         System.out.println(buttons.get(i).getId());
         button.setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
       } else {
-        button.setStyle("-fx-background-color: #4d6c8b; -fx-background-radius: 10px");
+        buttons.get(i).setStyle("-fx-background-color: #4d6c8b; -fx-background-radius: 10px");
       }
     }
   }
