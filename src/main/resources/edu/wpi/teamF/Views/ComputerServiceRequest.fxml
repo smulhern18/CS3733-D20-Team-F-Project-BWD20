@@ -40,14 +40,36 @@
             <children>
                 <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
                     <children>
-                        <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="     Location:              " />
-                        <JFXComboBox fx:id="locationChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;" />
+                  <GridPane prefHeight="53.0" prefWidth="313.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="153.0" minWidth="10.0" prefWidth="116.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.0" minWidth="10.0" prefWidth="197.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                              <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="Location:      " />
+                              <JFXComboBox fx:id="locationChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
                     </children>
                 </HBox>
                 <HBox alignment="BOTTOM_CENTER" GridPane.rowIndex="2">
                     <children>
-                        <Label fx:id="makeLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="          Make:              " />
-                        <JFXComboBox fx:id="makeChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 1px;" />
+                  <GridPane prefHeight="62.0" prefWidth="343.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="164.0" minWidth="10.0" prefWidth="132.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="214.0" minWidth="10.0" prefWidth="211.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                              <Label fx:id="makeLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="          Make:      " />
+                              <JFXComboBox fx:id="makeChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 1px;" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
                     </children>
                 </HBox>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
@@ -83,20 +105,53 @@
                 </HBox>
                 <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                     <children>
-                        <Label fx:id="typeLabel" alignment="BOTTOM_CENTER" text="      Issue Type:          " />
-                        <JFXComboBox fx:id="issueChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 1px;" />
+                  <GridPane prefHeight="61.0" prefWidth="358.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="174.0" minWidth="10.0" prefWidth="141.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="10.0" prefWidth="217.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                              <Label fx:id="typeLabel" alignment="BOTTOM_CENTER" text="      Issue Type:      " />
+                              <JFXComboBox fx:id="issueChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 1px;" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
                     </children>
                 </HBox>
             <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                <children>
-                  <Label fx:id="OSLabel" alignment="BOTTOM_CENTER" text="Operating System:    " />
-                  <JFXComboBox fx:id="OSChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 1;" />
+                  <GridPane prefHeight="59.0" prefWidth="323.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="158.0" minWidth="10.0" prefWidth="124.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.0" minWidth="10.0" prefWidth="199.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label fx:id="OSLabel" alignment="BOTTOM_CENTER" text="Operating System:      " />
+                        <JFXComboBox fx:id="OSChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 1;" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
                </children>
             </HBox>
             <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
                <children>
-                  <Label fx:id="descLabel" alignment="BOTTOM_CENTER" text="     Description:         " />
-                  <JFXTextField fx:id="descText" prefHeight="25.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 1;" />
+                  <GridPane prefHeight="62.0" prefWidth="284.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="169.0" minWidth="10.0" prefWidth="134.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="215.0" minWidth="10.0" prefWidth="212.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label fx:id="descLabel" alignment="BOTTOM_CENTER" text="     Description:         " />
+                        <JFXTextField fx:id="descText" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 1;" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
                </children>
             </HBox>
             <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
