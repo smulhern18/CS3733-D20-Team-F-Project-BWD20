@@ -18,6 +18,9 @@ public class UIMaintenenceRequest extends RecursiveTreeObject<UIMaintenenceReque
   public SimpleStringProperty dateSubmitted;
   public SimpleStringProperty completed;
   public SimpleStringProperty description;
+  public SimpleStringProperty type;
+  public SimpleStringProperty estimatedCompletionDate;
+  public SimpleStringProperty estimatedCost;
 
   public UIMaintenenceRequest(MaintenanceRequest csr) {
     DateFormat date = new SimpleDateFormat("yyyy-mm-dd");
@@ -25,7 +28,7 @@ public class UIMaintenenceRequest extends RecursiveTreeObject<UIMaintenenceReque
     this.ID = new SimpleStringProperty(csr.getId());
     this.location = new SimpleStringProperty(csr.getLocation());
     if (csr.getTimeCompleted() == null) {
-      this.dateCompleted = new SimpleStringProperty("Not Complete");
+      this.dateCompleted = new SimpleStringProperty("Incomplete");
     } else {
       this.dateCompleted = new SimpleStringProperty(date.format(csr.getTimeCompleted()));
     }
@@ -38,6 +41,9 @@ public class UIMaintenenceRequest extends RecursiveTreeObject<UIMaintenenceReque
       this.completed = new SimpleStringProperty("Incomplete");
     }
     this.description = new SimpleStringProperty(csr.getDescription());
+    this.type = new SimpleStringProperty((csr.getType()));
+    this.estimatedCompletionDate = new SimpleStringProperty(date.format((csr.getEstimatedCompletionDate())));
+    this.estimatedCost = new SimpleStringProperty("" + csr.getEstimatedCost());
   }
 
   public boolean equalsCSR(Object other) {

@@ -23,6 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
@@ -36,23 +37,19 @@ public class MaintenanceRequestController implements Initializable {
   public GridPane servicePane;
   public Label locationLabel;
   public Label makeLabel;
-  public JFXComboBox<String> makeChoice;
   public JFXButton submitButton;
   public JFXButton cancelButton;
   public Label typeLabel;
   public JFXComboBox<String> issueChoice;
   public Label securityRequestLabel;
   public Label OSLabel;
-  public JFXComboBox<String> OSChoice;
   public Label descLabel;
   public JFXTextField descText;
   public Label prioLabel;
-  public AnchorPane mainMenu;
   public AnchorPane checkStatusPane;
   public JFXButton update;
   public GridPane deletePane;
   public JFXTextField deleteText;
-  public JFXButton delete;
   public JFXButton backButton;
   public JFXButton checkStatusButton;
   public JFXComboBox<String> locationComboBox;
@@ -62,8 +59,21 @@ public class MaintenanceRequestController implements Initializable {
   public JFXTextField desText;
   public JFXComboBox<String> assigneeChoice;
   public JFXTreeTableView<UIMaintenenceRequest> treeTableMaintenance;
+  public AnchorPane accountTablePane;
+  public JFXTreeTableView treeTableAccounts;
+  public JFXButton addAccountButton;
+  public JFXButton deleteAccountButton;
+  public JFXButton updateAccountButton;
+  public Label locationLabel1;
+  public JFXComboBox<String> typeComboBox;
+  public JFXButton deleteButton;
+  public Label completionDateLabel;
+  public JFXTextField estCompletion;
+  public JFXButton accountsButton;
+  public JFXButton updateButton;
+  public JFXTextField estimatedCost;
 
-  ObservableList<UIMaintenenceRequest> csrUI = FXCollections.observableArrayList();
+  ObservableList<UIMaintenenceRequest> mrUI = FXCollections.observableArrayList();
   DatabaseManager databaseManager = DatabaseManager.getManager();
   List<MaintenanceRequest> maintenanceRequests;
 
@@ -86,6 +96,12 @@ public class MaintenanceRequestController implements Initializable {
     priorityComboBox.getItems().add("Low");
     priorityComboBox.getItems().add("Medium");
     priorityComboBox.getItems().add("High");
+
+    typeComboBox.getItems().add("Elevator");
+    typeComboBox.getItems().add("Electrical");
+    typeComboBox.getItems().add("Plumbing");
+
+    assigneeChoice.getItems().add("");
 
     // ID
     JFXTreeTableColumn<UIMaintenenceRequest, String> ID = new JFXTreeTableColumn<>("ID");
@@ -167,6 +183,67 @@ public class MaintenanceRequestController implements Initializable {
     completedList.add("Complete");
     completedList.add("Incomplete");
 
+    // estimated cost
+    JFXTreeTableColumn<UIMaintenenceRequest, String> estCost = new JFXTreeTableColumn<>("Estimated Cost");
+    estCost.setPrefWidth(100);
+    estCost.setCellValueFactory(
+            new Callback<>() {
+              @Override
+              public ObservableValue<String> call(
+                      TreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) {
+                return param.getValue().getValue().getEstimatedCost();
+              }
+            });
+
+    // completion date
+    JFXTreeTableColumn<UIMaintenenceRequest, String> CompleteDate = new JFXTreeTableColumn<>("Completion Date");
+    CompleteDate.setPrefWidth(100);
+    CompleteDate.setCellValueFactory(
+            new Callback<>() {
+              @Override
+              public ObservableValue<String> call(
+                      TreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) {
+                return param.getValue().getValue().getDateCompleted();
+              }
+            });
+
+    // date submitted
+    JFXTreeTableColumn<UIMaintenenceRequest, String> date = new JFXTreeTableColumn<>("Date Submitted");
+    date.setPrefWidth(100);
+    date.setCellValueFactory(
+            new Callback<>() {
+              @Override
+              public ObservableValue<String> call(
+                      TreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) {
+                return param.getValue().getValue().getDateSubmitted();
+              }
+            });
+
+    // type
+    JFXTreeTableColumn<UIMaintenenceRequest, String> type = new JFXTreeTableColumn<>("Type");
+    type.setPrefWidth(100);
+    type.setCellValueFactory(
+            new Callback<>() {
+              @Override
+              public ObservableValue<String> call(
+                      TreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) {
+                return param.getValue().getValue().getType();
+              }
+            });
+
+    // estimated complete date
+    JFXTreeTableColumn<UIMaintenenceRequest, String> estCompleteDate = new JFXTreeTableColumn<>("Estimated Completion Date");
+    estCompleteDate.setPrefWidth(100);
+    estCompleteDate.setCellValueFactory(
+            new Callback<>() {
+              @Override
+              public ObservableValue<String> call(
+                      TreeTableColumn.CellDataFeatures<UIMaintenenceRequest, String> param) {
+                return param.getValue().getValue().getEstimatedCompletionDate();
+              }
+            });
+
+
     JFXTreeTableColumn<UIMaintenenceRequest, String> completed =
         new JFXTreeTableColumn<>("Completed");
     completed.setPrefWidth(200);
@@ -197,19 +274,18 @@ public class MaintenanceRequestController implements Initializable {
     // Load the database into the tableview
 
     for (MaintenanceRequest csr : maintenanceRequests) {
-      csrUI.add(new UIMaintenenceRequest(csr));
+      mrUI.add(new UIMaintenenceRequest(csr));
     }
 
     final TreeItem<UIMaintenenceRequest> root =
-        new RecursiveTreeItem<UIMaintenenceRequest>(csrUI, RecursiveTreeObject::getChildren);
+        new RecursiveTreeItem<UIMaintenenceRequest>(mrUI, RecursiveTreeObject::getChildren);
 
     // set the columns for the tableview
 
-    // treeTableMaintenance.getColumns().setAll(ID, loc, desc, priority, completed, column);
-    treeTableMaintenance.getColumns().setAll(ID, loc, desc, priority, completed, column);
+    treeTableMaintenance.getColumns().setAll(ID, loc, column, priority, type, desc, estCost, estCompleteDate, completed, CompleteDate, date);
 
-    // assignee.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
-    // completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    column.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
+    completed.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
     priority.setCellFactory(TextFieldTreeTableCell.forTreeTableColumn());
 
     treeTableMaintenance.setRoot(root);
@@ -224,6 +300,12 @@ public class MaintenanceRequestController implements Initializable {
     String desc = desText.getText();
     String priority = priorityComboBox.getValue();
     String assignee = assigneeChoice.getValue();
+    Double estCost = Double.parseDouble(estimatedCost.getText());
+    String estDate = estCompletion.getText();
+    String type = typeComboBox.getValue();
+    String complete = completedComboBox.getValue();
+
+
     System.out.println(priority);
     int priorityDB = 1;
     if (priority.equals("Low")) {
@@ -237,32 +319,36 @@ public class MaintenanceRequestController implements Initializable {
     DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
     Date date = new Date(System.currentTimeMillis());
     MaintenanceRequest csRequest =
-        new MaintenanceRequest(nodeID, desc, assignee, date, priorityDB, null);
+        new MaintenanceRequest(nodeID, desc, assignee, date, priorityDB, type, estDate, estCost, null);
     databaseManager.manipulateServiceRequest(csRequest);
-    csrUI.add(new UIMaintenenceRequest(csRequest));
+    mrUI.add(new UIMaintenenceRequest(csRequest));
     treeTableMaintenance.refresh();
     locationComboBox.setValue(null);
     priorityComboBox.setValue(null);
-    locationComboBox.setValue(null);
     assigneeChoice.setValue(null);
     desText.setText("");
+    estimatedCost.setText("");
+    estCompletion.setText("");
+
   }
 
   public void cancel(ActionEvent actionEvent) {
-    descText.setText("");
     locationComboBox.setValue(null);
     priorityComboBox.setValue(null);
-    issueChoice.setValue(null);
+    assigneeChoice.setValue(null);
+    desText.setText("");
+    estimatedCost.setText("");
+    estCompletion.setText("");
   }
 
   public void update(ActionEvent actionEvent) throws Exception {
-    for (UIMaintenenceRequest csrui : csrUI) {
-      MaintenanceRequest toUpdate = databaseManager.readMaintenanceRequest(csrui.getID().get());
-      boolean isSame = csrui.equalsCSR(toUpdate);
+    for (UIMaintenenceRequest mrui : mrUI) {
+      MaintenanceRequest toUpdate = databaseManager.readMaintenanceRequest(mrui.getID().get());
+      boolean isSame = mrui.equalsCSR(toUpdate);
       if (!isSame) {
-        toUpdate.setAssignee(csrui.getAssignee().get());
+        toUpdate.setAssignee(mrui.getAssignee().get());
         toUpdate.setCompleted(new Date());
-        String completed = csrui.getCompleted().get();
+        String completed = mrui.getCompleted().get();
         if (completed.equals("Complete")) {
           Date date = new Date();
           toUpdate.setDateTimeSubmitted(date);
@@ -280,8 +366,8 @@ public class MaintenanceRequestController implements Initializable {
   }
 
   public void delete(ActionEvent actionEvent) throws Exception {
-    String toDelte = deleteText.getText();
-    csrUI.removeIf(transportRequest -> transportRequest.getID().get().equals(toDelte));
+    String toDelete = deleteText.getText();
+    mrUI.removeIf(transportRequest -> transportRequest.getID().get().equals(toDelete));
     deleteText.setText("");
     treeTableMaintenance.refresh();
   }
@@ -289,11 +375,19 @@ public class MaintenanceRequestController implements Initializable {
   public void request(ActionEvent actionEvent) {
     servicePane.setVisible(true);
     checkStatusPane.setVisible(false);
+    accountTablePane.setVisible(false);
   }
 
   public void statusView(ActionEvent actionEvent) {
     servicePane.setVisible(false);
     checkStatusPane.setVisible(true);
+    accountTablePane.setVisible(false);
+  }
+
+  public void accountView(MouseEvent mouseEvent) {
+    servicePane.setVisible(false);
+    checkStatusPane.setVisible(false);
+    accountTablePane.setVisible(true);
   }
 
   private void resize(double width) {
