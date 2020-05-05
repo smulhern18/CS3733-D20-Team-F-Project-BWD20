@@ -298,7 +298,8 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  private void selectFloor(ActionEvent event) {
+  private void selectFloor(ActionEvent event) throws Exception {
+    cancelViews(null);
     JFXButton btn = (JFXButton) event.getSource();
     selectFloor(btn.getId());
   }
