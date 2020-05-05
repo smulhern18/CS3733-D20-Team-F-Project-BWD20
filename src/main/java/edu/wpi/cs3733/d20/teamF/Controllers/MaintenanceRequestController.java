@@ -75,6 +75,7 @@ public class MaintenanceRequestController implements Initializable {
   public JFXButton accountsButton;
   public JFXButton updateButton;
   public JFXTextField estimatedCost;
+  public AnchorPane maintenancePane;
 
   ObservableList<UIMaintenenceRequest> mrUI = FXCollections.observableArrayList();
   ObservableList<UIAccount> acts = FXCollections.observableArrayList();
@@ -514,21 +515,21 @@ public class MaintenanceRequestController implements Initializable {
     servicePane.setVisible(true);
     checkStatusPane.setVisible(false);
     accountTablePane.setVisible(false);
-    anchorPane.setVisible(true);
+    maintenancePane.setVisible(true);
   }
 
   public void statusView(ActionEvent actionEvent) {
     servicePane.setVisible(false);
     checkStatusPane.setVisible(true);
     accountTablePane.setVisible(false);
-    anchorPane.setVisible(false);
+    maintenancePane.setVisible(false);
   }
 
   public void accountView(MouseEvent mouseEvent) {
     servicePane.setVisible(false);
     checkStatusPane.setVisible(false);
     accountTablePane.setVisible(true);
-    anchorPane.setVisible(false);
+    maintenancePane.setVisible(false);
   }
 
   private void resize(double width) {
