@@ -1,8 +1,10 @@
 package edu.wpi.cs3733.d20.teamF.DatabaseManipulators;
 
-import edu.wpi.cs3733.d20.teamF.ModelClasses.Account.*;
-import edu.wpi.cs3733.d20.teamF.ModelClasses.UIAccount;
+import edu.wpi.cs3733.d20.teamF.ModelClasses.Account.Account;
+import edu.wpi.cs3733.d20.teamF.ModelClasses.Account.Admin;
+import edu.wpi.cs3733.d20.teamF.ModelClasses.Account.Staff;
 import edu.wpi.cs3733.d20.teamF.ModelClasses.ValidationException;
+import edu.wpi.cs3733.d20.teamF.ModelClasses.UIAccount;
 import edu.wpi.cs3733.d20.teamF.ModelClasses.Validators;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

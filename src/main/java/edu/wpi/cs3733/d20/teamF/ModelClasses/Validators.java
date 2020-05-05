@@ -1,6 +1,8 @@
 package edu.wpi.cs3733.d20.teamF.ModelClasses;
 
 import edu.wpi.cs3733.d20.teamF.ModelClasses.Account.Account;
+
+import edu.wpi.cs3733.d20.teamF.ModelClasses.Account.Account;
 import java.util.Date;
 
 public class Validators {

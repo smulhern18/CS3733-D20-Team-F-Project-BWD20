@@ -8,24 +8,20 @@ import java.util.Objects;
 public abstract class Account extends RecursiveTreeObject<Account> {
 
   public static enum Type {
-    ADMIN(0),
-    STAFF(1),
-    USER(2),
-    PATIENT(3),
-    JANITOR(4),
-    NURSE(5);
+    ADMIN("ADMIN"),
+    STAFF("STAFF");
 
-    private Integer typeOrdinal;
+    private String typeOrdinal;
 
-    Type(Integer typeOrdinal) {
+    Type(String typeOrdinal) {
       this.typeOrdinal = typeOrdinal;
     }
 
-    public Integer getTypeOrdinal() {
+    public String getTypeOrdinal() {
       return typeOrdinal;
     }
 
-    public static Type getEnum(Integer type) {
+    public static Type getEnum(String type) {
       for (Type v : values()) {
         if (v.getTypeOrdinal().equals(type)) {
           return v;
@@ -36,26 +32,26 @@ public abstract class Account extends RecursiveTreeObject<Account> {
   }
 
   public static enum Specialty {
-    NONE(-1),
-    ELEVATOR(0),
-    ELECTRICIAN(1),
-    PLUMBER(2),
-    GROUNDSKEEPER(3),
-    HVAC(4);
+    NONE("None"),
+    ELEVATOR("ELEVATOR"),
+    ELECTRICIAN("ELECTRICIAN"),
+    PLUMBER("PLUMBER"),
+    GROUNDSKEEPER("GROUNDSKEEPER"),
+    HVAC("HVAC");
 
-    private Integer typeOrdinal;
+    private String typeOrdinal;
 
-    Specialty(Integer typeOrdinal) {
+    Specialty(String typeOrdinal) {
       this.typeOrdinal = typeOrdinal;
     }
 
-    public Integer getTypeOrdinal() {
+    public String getTypeString() {
       return typeOrdinal;
     }
 
-    public static Staff.Specialty getEnum(Integer type) {
+    public static Staff.Specialty getEnum(String type) {
       for (Staff.Specialty v : values()) {
-        if (v.getTypeOrdinal().equals(type)) {
+        if (v.getTypeString().equals(type)) {
           return v;
         }
       }
