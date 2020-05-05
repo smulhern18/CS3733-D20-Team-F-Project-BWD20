@@ -18,7 +18,7 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.d20.teamF.Controllers.MaintenanceRequestController">
     <children>
-      <AnchorPane fx:id="maintenancePane" prefHeight="411.0" prefWidth="600.0">
+      <AnchorPane fx:id="maintenancePane" layoutY="-7.0" prefHeight="411.0" prefWidth="600.0">
          <children>
                   <Label fx:id="securityRequestLabel" layoutX="176.0" layoutY="46.0" prefHeight="53.0" prefWidth="247.0" text="Maintenance Request">
                       <font>
@@ -86,7 +86,7 @@
                      </padding>
                   </Label>
                   <JFXTextField fx:id="desText" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="276.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <JFXTextField fx:id="locationTextField" alignment="CENTER_RIGHT" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="276.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <JFXTextField fx:id="locationTextField" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="276.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
               <GridPane fx:id="servicePane" prefHeight="83.0" prefWidth="430.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="303.0">
@@ -332,7 +332,7 @@
                     </children>
                 </StackPane>
                 <JFXTreeTableView fx:id="treeTableMaintenance" layoutY="67.0" prefHeight="236.0" prefWidth="580.0" AnchorPane.bottomAnchor="79.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="67.0" />
-                <GridPane fx:id="deletePane" layoutX="217.0" layoutY="70.0" AnchorPane.rightAnchor="10.0">
+                <GridPane fx:id="deletePane" layoutX="217.0" layoutY="70.0" AnchorPane.bottomAnchor="325.0" AnchorPane.rightAnchor="10.0">
                     <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
                         <ColumnConstraints hgrow="SOMETIMES" />
