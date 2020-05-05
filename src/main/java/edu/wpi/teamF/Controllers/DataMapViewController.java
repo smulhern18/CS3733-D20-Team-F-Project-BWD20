@@ -214,13 +214,13 @@ public class DataMapViewController implements Initializable {
     imageView = imageViewMain1;
     hospital = Hospital.MAIN;
 
-    for (Node node : databaseManager.getAllNodes()) {
-      drawNode(node);
-    }
-
     for (Edge edge : databaseManager.getAllEdges()) {
       drawEdge(edge);
     } // for every edge that connects two nodes on the fifth floor, draw the edge on the map
+
+    for (Node node : databaseManager.getAllNodes()) {
+      drawNode(node);
+    }
 
     typeInput
         .getItems()
@@ -479,6 +479,7 @@ public class DataMapViewController implements Initializable {
         "-fx-background-radius: 8px; -fx-border-radius: 8px; -fx-background-color: #99D9EA; -fx-border-color: #000000; -fx-border-width: 1px; -fx-opacity: 0.7");
     double xPos = (node.getXCoord() * widthRatio - buttonSize / 2.0);
     double yPos = (node.getYCoord() * heightRatio - buttonSize / 2.0);
+    button.setId(node.getId());
     button.setLayoutX(xPos);
     button.setLayoutY(yPos);
     setNodeDraggable(button);
@@ -490,7 +491,6 @@ public class DataMapViewController implements Initializable {
 
           System.out.println(node.getId());
           if (!edgeSelection) {
-
             displayNode();
           } else {
             System.out.println("In edge selection");
@@ -558,6 +558,20 @@ public class DataMapViewController implements Initializable {
     deleteEdgeButton.setVisible(true);
     modifyEdgeButton.setVisible(true);
     edgeSelection = true;
+    for (int i = 0; i < mapPane.getChildren().size(); i++) {
+      if (mapPane.getChildren().get(i) instanceof JFXButton) {
+        JFXButton currentBtn = (JFXButton) mapPane.getChildren().get(i);
+        if (currentBtn.getId().equals(edge.getNode1())) {
+          currentBtn.setStyle(
+              "-fx-background-color: #012D5A; -fx-background-radius: 10; -fx-border-color: black; -fx-border-radius: 10");
+          currentBtn.setOpacity(1);
+        } else if (currentBtn.getId().equals(edge.getNode2())) {
+          currentBtn.setStyle(
+              "-fx-background-color: #a40000; -fx-background-radius: 10px; -fx-border-color: black; -fx-border-radius: 10");
+          currentBtn.setOpacity(1);
+        }
+      }
+    }
     node1Button.setText(edge.getNode1());
     node2Button.setText(edge.getNode2());
   }
@@ -841,16 +855,17 @@ public class DataMapViewController implements Initializable {
     edgeSelection = false;
     numSelected = 0;
     clearViews();
+    resetNodeColors();
   }
 
   @FXML
   private void modifyEdge(ActionEvent event) throws Exception {
+    resetNodeColors();
     String node1ID = node1Button.getText();
     String node2ID = node2Button.getText();
     String ID = node1ID + "_" + node2ID;
     Edge newEdge = new Edge(ID, node1ID, node2ID);
     databaseManager.deleteEdge(edge.getId());
-    System.out.println("OOOOOOOOOOOOOLLLLLLLLLLLLLLLLLLLLLDDDDDDDD" + edgeLine.getId());
     AnchorPane oldPane = getMapPane(edgeLine.getId().substring(edgeLine.getId().length() - 2));
     javafx.scene.Node toRemove = null;
     for (javafx.scene.Node children : oldPane.getChildren()) {
@@ -867,6 +882,7 @@ public class DataMapViewController implements Initializable {
 
   @FXML
   private void deleteEdge(ActionEvent event) throws Exception {
+    resetNodeColors();
     databaseManager.deleteEdge(edge.getId());
     mapPane.getChildren().remove(edgeLine); // deletes the edge on the map
     clearViews();
@@ -875,6 +891,8 @@ public class DataMapViewController implements Initializable {
   @FXML
   private void cancelViews(ActionEvent event) throws Exception {
     clearViews();
+
+    resetNodeColors();
 
     for (Edge edge : databaseManager.getAllEdgesConnectedToNode(node.getId())) {
       for (int i = 0; i < mapPane.getChildren().size(); i++) {
@@ -885,7 +903,11 @@ public class DataMapViewController implements Initializable {
       }
     }
 
+    System.out.println(nodeButton.getId() + "----" + nodeButton);
+
     mapPane.getChildren().remove(nodeButton); // removes node
+
+    System.out.println(nodeButton.getId() + "    " + nodeButton);
 
     addToPane(node, nodeButton); // adds new node
 
@@ -979,6 +1001,24 @@ public class DataMapViewController implements Initializable {
     numSelected = 0;
     clearEdge();
     clearNode();
+  }
+
+  @FXML
+  private void resetNodeColors() {
+    for (int i = 0; i < mapPane.getChildren().size(); i++) {
+      if (mapPane.getChildren().get(i) instanceof JFXButton) {
+        JFXButton currentBtn = (JFXButton) mapPane.getChildren().get(i);
+        if (edge.getNode1().equals(currentBtn.getId())) {
+          currentBtn.setStyle(
+              "-fx-background-color: #4d6c8b; -fx-background-radius: 10; -fx-border-color: black; -fx-border-radius: 10");
+          currentBtn.setOpacity(0.7);
+        } else if (edge.getNode2().equals(currentBtn.getId())) {
+          currentBtn.setStyle(
+              "-fx-background-color: #4d6c8b; -fx-background-radius: 10px; -fx-border-color: black; -fx-border-radius: 10");
+          currentBtn.setOpacity(0.7);
+        }
+      }
+    }
   }
 
   @FXML
