@@ -278,7 +278,7 @@ public class PathfinderController implements Initializable {
     button.setMaxSize(6, 6);
     button.setPrefSize(6, 6);
     button.setStyle(
-        "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+        "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
     double xPos;
     double yPos;
     if ("Faulkner".equals(node.getBuilding())) {
@@ -296,14 +296,14 @@ public class PathfinderController implements Initializable {
           if (startNode == node && state == 1) { // Click again to de-select if start has been set
             startNode = null;
             button.setStyle(
-                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+                "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
             state = 0;
             startCombo.setValue(null);
             startCombo.setDisable(false);
           } else if (endNode == node) { // deselect if end has been set, return to 1
             endNode = null;
             button.setStyle(
-                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+                "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
             state = 1;
             endCombo.setValue(null);
             pathButton.setDisable(true);
@@ -314,7 +314,7 @@ public class PathfinderController implements Initializable {
             elevBtn.setDisable(false);
             bathBtn.setDisable(false);
             button.setStyle(
-                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00cc00; -fx-border-color: #000000; -fx-border-width: 1px"); // 800000
+                "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #00cc00; -fx-border-color: #000000; -fx-border-width: 1px"); // 800000
             commandText.setText("Select End Location or Building Feature");
             state = 1;
             // startCombo.setDisable(true);
@@ -323,7 +323,7 @@ public class PathfinderController implements Initializable {
           } else if (state == 1) { // select end if not set
             endNode = node;
             button.setStyle(
-                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px"); // 00cc00
+                "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px"); // 00cc00
             commandText.setText("Select Find Path or Reset");
             state = 2;
             // endCombo.setDisable(true);
@@ -355,7 +355,7 @@ public class PathfinderController implements Initializable {
       for (javafx.scene.Node component : currentPane.getChildren()) {
         if (component.getId().equals(startNode.getId())) {
           component.setStyle(
-              "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; "
+              "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; "
                   + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
         }
       }
@@ -364,7 +364,7 @@ public class PathfinderController implements Initializable {
       for (javafx.scene.Node component : currentPane.getChildren()) {
         if (component.getId().equals(endNode.getId())) {
           component.setStyle(
-              "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; "
+              "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; "
                   + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
         }
       }
@@ -408,7 +408,7 @@ public class PathfinderController implements Initializable {
       } else if (node instanceof JFXButton) {
         JFXButton button = (JFXButton) node;
         button.setStyle(
-            "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; "
+            "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; "
                 + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
       }
     }
@@ -569,7 +569,7 @@ public class PathfinderController implements Initializable {
             for (javafx.scene.Node component : currentPane.getChildren()) {
               if (component.getId().equals(startNode.getId())) {
                 component.setStyle(
-                    "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; "
+                    "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; "
                         + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
               }
             }
@@ -582,7 +582,7 @@ public class PathfinderController implements Initializable {
               getFloorPane(node.getFloor(), node.getBuilding()).getChildren()) {
             if (component.getId().equals(node.getId())) {
               component.setStyle(
-                  "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00cc00; "
+                  "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #00cc00; "
                       + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
             }
           }
@@ -602,7 +602,7 @@ public class PathfinderController implements Initializable {
             for (javafx.scene.Node component : currentPane.getChildren()) {
               if (component.getId().equals(endNode.getId())) {
                 component.setStyle(
-                    "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; "
+                    "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; "
                         + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
               }
             }
@@ -615,7 +615,7 @@ public class PathfinderController implements Initializable {
               getFloorPane(node.getFloor(), node.getBuilding()).getChildren()) {
             if (component.getId().equals(node.getId())) {
               component.setStyle(
-                  "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; "
+                  "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #ff0000; "
                       + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
             }
           }
