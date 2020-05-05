@@ -55,7 +55,7 @@ public class MaintenanceRequestController implements Initializable {
   public JFXTextField deleteText;
   public JFXButton backButton;
   public JFXButton checkStatusButton;
-  public JFXComboBox<String> locationComboBox;
+  public JFXTextField locationTextField;
   public Label priorityLabel;
   public JFXComboBox<String> priorityComboBox;
   public JFXComboBox<String> completedComboBox;
@@ -108,7 +108,7 @@ public class MaintenanceRequestController implements Initializable {
     typeComboBox.getItems().add("Plumbing");
     typeComboBox.getItems().add("Grounds Keeping");
 
-    assigneeChoice.getItems().add("");
+    assigneeChoice.getItems().add("Not Assigned");
 
     // ID
     JFXTreeTableColumn<UIMaintenenceRequest, String> ID = new JFXTreeTableColumn<>("ID");
@@ -434,8 +434,8 @@ public class MaintenanceRequestController implements Initializable {
 
   public void submit(ActionEvent actionEvent) throws Exception {
     // Get the values
-    String location = locationComboBox.getValue();
-    String nodeID = location.substring(location.length() - 10);
+    String location = locationTextField.getText();
+    String nodeID = location.substring(location.length());
     String desc = desText.getText();
     String priority = priorityComboBox.getValue();
     String assignee = assigneeChoice.getValue();
@@ -443,7 +443,7 @@ public class MaintenanceRequestController implements Initializable {
     Date estDate =
         Date.from(estCompletion.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
     String type = typeComboBox.getValue();
-    String complete = completedComboBox.getValue();
+    String complete = "Incomplete";
 
     System.out.println(priority);
     int priorityDB = 1;
@@ -463,7 +463,7 @@ public class MaintenanceRequestController implements Initializable {
     databaseManager.manipulateServiceRequest(csRequest);
     mrUI.add(new UIMaintenenceRequest(csRequest));
     treeTableMaintenance.refresh();
-    locationComboBox.setValue(null);
+    locationTextField.setText(null);
     priorityComboBox.setValue(null);
     assigneeChoice.setValue(null);
     desText.setText("");
@@ -472,7 +472,7 @@ public class MaintenanceRequestController implements Initializable {
   }
 
   public void cancel(ActionEvent actionEvent) {
-    locationComboBox.setValue(null);
+    locationTextField.setText(null);
     priorityComboBox.setValue(null);
     assigneeChoice.setValue(null);
     desText.setText("");
@@ -565,4 +565,10 @@ public class MaintenanceRequestController implements Initializable {
     }
     treeTableAccounts.refresh();
   }
+
+    public void clear(MouseEvent mouseEvent) {
+    }
+
+    public void createAccount(MouseEvent mouseEvent) {
+    }
 }

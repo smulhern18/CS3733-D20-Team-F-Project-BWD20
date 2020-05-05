@@ -18,122 +18,6 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.d20.teamF.Controllers.MaintenanceRequestController">
     <children>
-      <AnchorPane fx:id="accountTablePane" prefHeight="405.0" prefWidth="600.0" visible="false">
-         <children>
-            <JFXTreeTableView fx:id="treeTableAccounts" layoutX="50.0" layoutY="90.0" prefHeight="236.0" prefWidth="517.0" />
-            <GridPane layoutY="346.0" prefHeight="59.0" prefWidth="600.0">
-              <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <JFXButton fx:id="addAccountButton" buttonType="RAISED" style="-fx-background-color: #DC6F55;" text="Add">
-                     <font>
-                        <Font name="Microsoft YaHei Light" size="18.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="deleteAccountButton" buttonType="RAISED" style="-fx-background-color: #DC6F55;" text="Delete" GridPane.columnIndex="2">
-                     <font>
-                        <Font name="Microsoft YaHei Light" size="18.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="updateAccountButton" buttonType="RAISED" ripplerFill="#3b314a" style="-fx-background-color: #DC6F55;" text="Update" GridPane.columnIndex="1">
-                     <font>
-                        <Font name="Microsoft YaHei Light" size="18.0" />
-                     </font>
-                  </JFXButton>
-               </children>
-            </GridPane>
-         </children>
-      </AnchorPane>
-        <GridPane fx:id="optionBar" prefHeight="32.0" prefWidth="600.0" style="-fx-border-color: #F6BD38;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            </rowConstraints>
-            <children>
-                <JFXButton fx:id="requestServiceButton" onAction="#request" text="Request Service" textFill="#000000cc">
-                    <font>
-                        <Font name="STFangsong" size="18.0" />
-                    </font>
-                </JFXButton>
-                <JFXButton fx:id="checkStatusButton" onAction="#statusView" text="Check Status" textFill="#000000cc" GridPane.columnIndex="1">
-                    <font>
-                        <Font name="STFangsong" size="18.0" />
-                    </font>
-                </JFXButton>
-            </children>
-        </GridPane>
-        <AnchorPane fx:id="checkStatusPane" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
-            <children>
-                <StackPane layoutX="44.0" layoutY="274.0" prefHeight="99.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-                    <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <GridPane>
-                          <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="93.0" minWidth="10.0" prefWidth="68.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="128.0" minWidth="10.0" prefWidth="128.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                           <children>
-                              <JFXButton fx:id="accountsButton" alignment="CENTER_RIGHT" buttonType="RAISED" contentDisplay="RIGHT" onMouseClicked="#accountView" style="-fx-background-color: #DC6F55;" text="Accounts" textAlignment="RIGHT" GridPane.columnIndex="3" GridPane.rowIndex="1">
-                                 <font>
-                                    <Font name="Microsoft YaHei Light" size="18.0" />
-                                 </font>
-                              </JFXButton>
-                                    <JFXButton fx:id="updateButton" onAction="#update" style="-fx-background-color: #DC6F55;" text="Update" textFill="#000000cc" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                        <font>
-                                            <Font name="Microsoft YaHei Light" size="18.0" />
-                                        </font>
-                                    </JFXButton>
-                           </children>
-                        </GridPane>
-                     </children>
-                  </HBox>
-                    </children>
-                </StackPane>
-                <JFXTreeTableView fx:id="treeTableMaintenance" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="99.0" />
-                <GridPane fx:id="deletePane" layoutX="217.0" layoutY="70.0" AnchorPane.rightAnchor="10.0">
-                    <columnConstraints>
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                        <ColumnConstraints hgrow="SOMETIMES" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints vgrow="SOMETIMES" />
-                    </rowConstraints>
-                    <children>
-                        <JFXTextField fx:id="deleteText" alignment="BOTTOM_LEFT" unFocusColor="#f6bd38" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-                            <GridPane.margin>
-                                <Insets />
-                            </GridPane.margin>
-                        </JFXTextField>
-                        <JFXButton fx:id="deleteButton" alignment="CENTER" onAction="#delete" ripplerFill="#3b314a" style="-fx-background-color: #DC6F55;" text="Delete" textFill="#000000cc">
-                            <GridPane.margin>
-                                <Insets right="5.0" />
-                            </GridPane.margin>
-                     <font>
-                        <Font name="Microsoft YaHei Light" size="12.0" />
-                     </font>
-                        </JFXButton>
-                    </children>
-                </GridPane>
-            </children>
-        </AnchorPane>
       <AnchorPane fx:id="maintenancePane" prefHeight="411.0" prefWidth="600.0">
          <children>
                   <Label fx:id="securityRequestLabel" layoutX="176.0" layoutY="46.0" prefHeight="53.0" prefWidth="247.0" text="Maintenance Request">
@@ -172,7 +56,6 @@
                         <Insets right="10.0" />
                      </padding>
                   </Label>
-                        <JFXComboBox fx:id="locationComboBox" prefHeight="25.0" prefWidth="261.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label fx:id="priorityLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Priority:" GridPane.rowIndex="2">
                      <font>
                         <Font name="Microsoft YaHei Light" size="14.0" />
@@ -203,6 +86,7 @@
                      </padding>
                   </Label>
                   <JFXTextField fx:id="desText" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="276.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <JFXTextField fx:id="locationTextField" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="276.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
               <GridPane fx:id="servicePane" prefHeight="83.0" prefWidth="430.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="303.0">
@@ -344,6 +228,7 @@
             <GridPane layoutY="359.0" prefHeight="53.0" prefWidth="600.0">
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
