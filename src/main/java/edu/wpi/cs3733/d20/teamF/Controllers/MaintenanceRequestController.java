@@ -89,8 +89,9 @@ public class MaintenanceRequestController implements Initializable {
   public JFXTextField usernameInput;
   public Label EstCostLabel;
   public AnchorPane newAccountPane;
+    public JFXTextField userToDelete;
 
-  ObservableList<UIMaintenenceRequest> mrUI = FXCollections.observableArrayList();
+    ObservableList<UIMaintenenceRequest> mrUI = FXCollections.observableArrayList();
   ObservableList<UIAccount> acts = FXCollections.observableArrayList();
   DatabaseManager databaseManager = DatabaseManager.getManager();
   List<MaintenanceRequest> maintenanceRequests = databaseManager.getAllMaintenanceRequests();
@@ -575,6 +576,7 @@ public class MaintenanceRequestController implements Initializable {
   }
 
   public void update(ActionEvent actionEvent) throws Exception {
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
     for (UIMaintenenceRequest mrui : mrUI) {
       MaintenanceRequest toUpdate = databaseManager.readMaintenanceRequest(mrui.getID().get());
       boolean isSame = mrui.equalsCSR(toUpdate);
@@ -589,6 +591,7 @@ public class MaintenanceRequestController implements Initializable {
           if (completed.equals("Complete")) {
             Date date = new Date();
             toUpdate.setCompleted(date);
+            mrui.setDateCompleted(new SimpleStringProperty(dateFormat.format(date)));
             toUpdate.setComplete(true);
           } else if (completed.equals("Incomplete")) {
             toUpdate.setComplete(false);
@@ -695,4 +698,10 @@ public class MaintenanceRequestController implements Initializable {
       passwordError.setVisible(true);
     }
   }
+
+    public void deleteAccount(ActionEvent actionEvent) {
+      String accountToDelete = userToDelete.getText();
+      //delete the user
+        treeTableAccounts.refresh();
+    }
 }

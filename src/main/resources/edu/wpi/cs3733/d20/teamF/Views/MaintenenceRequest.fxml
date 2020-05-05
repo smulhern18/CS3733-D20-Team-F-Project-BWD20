@@ -18,7 +18,7 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.d20.teamF.Controllers.MaintenanceRequestController">
     <children>
-      <AnchorPane fx:id="maintenancePane" layoutY="-7.0" prefHeight="411.0" prefWidth="600.0">
+      <AnchorPane fx:id="maintenancePane" layoutY="-7.0" prefHeight="411.0" prefWidth="600.0" visible="false">
          <children>
                   <Label fx:id="securityRequestLabel" layoutX="176.0" layoutY="46.0" prefHeight="53.0" prefWidth="247.0" text="Maintenance Request">
                       <font>
@@ -242,7 +242,7 @@
             <Label fx:id="passwordError" layoutX="235.0" layoutY="95.0" text="passwords do not match" textFill="RED" visible="false" />
          </children>
       </AnchorPane>
-        <AnchorPane fx:id="accountTablePane" prefHeight="405.0" prefWidth="600.0" visible="false">
+        <AnchorPane fx:id="accountTablePane" prefHeight="405.0" prefWidth="600.0">
             <children>
                 <JFXTreeTableView fx:id="treeTableAccounts" layoutX="50.0" layoutY="90.0" prefHeight="236.0" prefWidth="517.0" />
                 <GridPane layoutY="346.0" prefHeight="59.0" prefWidth="600.0">
@@ -250,6 +250,7 @@
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -261,7 +262,7 @@
                                 <Font name="Microsoft YaHei Light" size="18.0" />
                             </font>
                         </JFXButton>
-                        <JFXButton fx:id="deleteAccountButton" buttonType="RAISED" style="-fx-background-color: #DC6F55;" text="Delete" GridPane.columnIndex="2">
+                        <JFXButton fx:id="deleteAccountButton" buttonType="RAISED" onAction="#deleteAccount" style="-fx-background-color: #DC6F55;" text="Delete" GridPane.columnIndex="2">
                             <font>
                                 <Font name="Microsoft YaHei Light" size="18.0" />
                             </font>
@@ -271,6 +272,7 @@
                                 <Font name="Microsoft YaHei Light" size="18.0" />
                             </font>
                         </JFXButton>
+                  <JFXTextField fx:id="userToDelete" text="Enter Username..." GridPane.columnIndex="3" />
                     </children>
                 </GridPane>
             </children>
