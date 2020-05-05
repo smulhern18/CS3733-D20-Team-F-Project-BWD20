@@ -9,6 +9,9 @@ import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.awt.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -26,6 +29,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import lombok.SneakyThrows;
 
@@ -148,6 +152,9 @@ public class DataMapViewController implements Initializable {
   @FXML private JFXButton modifyEdgeButton;
 
   @FXML private Label nodeErrorLabel;
+
+  FileChooser nodesChooser = new FileChooser();
+  FileChooser edgesChooser = new FileChooser();
 
   private AnchorPane mapPane;
   private ImageView imageView;
@@ -991,4 +998,19 @@ public class DataMapViewController implements Initializable {
           modifyNodeButton.setDisable(false);
         });
   }
+
+//  @FXML
+//  private void uploadNodes(ActionEvent actionEvent) throws FileNotFoundException {
+//    nodesChooser.setTitle("Select CSV File Nodes");
+//    File file = nodesChooser.showOpenDialog(mapPane.getScene().getWindow());
+//    databaseManager.readNodes(new FileInputStream(file));
+//  }
+//
+//  @FXML
+//  private void uploadEdges(ActionEvent actionEvent) throws FileNotFoundException {
+//    edgesChooser.setTitle("Select CSV File Edges");
+//    File file = edgesChooser.showOpenDialog(mapPane.getScene().getWindow());
+//
+//    databaseManager.readEdges(new FileInputStream(file));
+//  }
 }
