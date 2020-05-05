@@ -135,10 +135,13 @@ public class PathfinderController implements Initializable {
   public ImageView BTMToFaulknerImage;
   public ImageView shapiroToFaulknerImage;
   public ImageView francis15ToFaulknerImage;
+  public ScrollPane scrollPaneIntermediate;
+  public StackPane stackPaneIntermediate;
 
   public List<Node> fullNodeList;
   public int state;
   public UISetting uiSetting = new UISetting();
+  public UISetting intermediateSetting;
   private String currentBuilding;
   private String currentFloor;
   Node startNode = null;
@@ -446,10 +449,12 @@ public class PathfinderController implements Initializable {
     setIntermediateMapsInvisible();
 
     UISetting uiSetting = new UISetting();
+    UISetting intermediateSetting = new UISetting();
     uiSetting.setAsLocationComboBox(startCombo);
     uiSetting.setAsLocationComboBox(endCombo);
 
     uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1, 1.33);
+    intermediateSetting.makeZoomable(scrollPaneIntermediate, stackPaneIntermediate, 1.33);
 
     for (Node node : databaseManager.getAllNodes()) {
       node.setEdges(databaseManager.getAllEdgesConnectedToNode(node.getId()));

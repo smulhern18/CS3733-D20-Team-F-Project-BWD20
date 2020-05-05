@@ -392,46 +392,63 @@
                   </VBox>
                   <AnchorPane fx:id="externalDirections" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1070.0">
                      <children>
-                        <ImageView fx:id="faulknerTo45FrancisImage" layoutX="48" layoutY="67" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Maps/IntermediateMaps/Faulknerto45Francis.PNG" />
-                           </image></ImageView>
-                        <ImageView fx:id="faulknerTo75FrancisImage" layoutX="48" layoutY="67" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Maps/IntermediateMaps/Faulknerto75Francis.PNG" />
-                           </image></ImageView>
-                        <ImageView fx:id="faulknerToBTMImage" layoutX="48" layoutY="67" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Maps/IntermediateMaps/FaulknertoBTM.PNG" />
-                           </image></ImageView>
-                        <ImageView fx:id="faulknerToShapiroImage" layoutX="48" layoutY="67" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Maps/IntermediateMaps/FaulknertoShapiro.PNG" />
-                           </image></ImageView>
-                        <ImageView fx:id="faulknerTo15FrancisImage" layoutX="48" layoutY="67" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Maps/IntermediateMaps/ShapirotoFaulkner.PNG" />
-                           </image></ImageView>
-                        <ImageView fx:id="Francis45ToFaulknerImage" layoutX="48" layoutY="67" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Maps/IntermediateMaps/45FrancistoFaulkner.PNG" />
-                           </image></ImageView>
-                        <ImageView fx:id="Francis75ToFaulknerImage" layoutX="48" layoutY="67" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Maps/IntermediateMaps/75FrancistoFaulkner.PNG" />
-                           </image></ImageView>
-                        <ImageView fx:id="BTMToFaulknerImage" layoutX="48" layoutY="67" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Maps/IntermediateMaps/BTMtoFaulkner.PNG" />
-                           </image></ImageView>
-                        <ImageView fx:id="shapiroToFaulknerImage" layoutX="48" layoutY="67" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Maps/IntermediateMaps/ShapirotoFaulkner.PNG" />
-                           </image></ImageView>
-                        <ImageView fx:id="francis15ToFaulknerImage" layoutX="48" layoutY="67" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../Maps/IntermediateMaps/ShapirotoFaulkner.PNG" />
-                           </image></ImageView>
+                        <ScrollPane fx:id="scrollPaneIntermediate" style="-fx-background: #a2a2a2; -fx-background-color: #a2a2a2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <content>
+                              <StackPane fx:id="stackPaneIntermediate" style="-fx-background-color: #a2a2a2;">
+                                 <children>
+                                    <ImageView fx:id="faulknerTo45FrancisImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Maps/IntermediateMaps/Faulknerto45Francis.PNG" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="faulknerTo75FrancisImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Maps/IntermediateMaps/Faulknerto75Francis.PNG" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="faulknerToBTMImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Maps/IntermediateMaps/FaulknertoBTM.PNG" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="faulknerToShapiroImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Maps/IntermediateMaps/FaulknertoShapiro.PNG" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="faulknerTo15FrancisImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Maps/IntermediateMaps/ShapirotoFaulkner.PNG" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="Francis45ToFaulknerImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Maps/IntermediateMaps/45FrancistoFaulkner.PNG" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="Francis75ToFaulknerImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Maps/IntermediateMaps/75FrancistoFaulkner.PNG" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="BTMToFaulknerImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Maps/IntermediateMaps/BTMtoFaulkner.PNG" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="shapiroToFaulknerImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Maps/IntermediateMaps/ShapirotoFaulkner.PNG" />
+                                       </image>
+                                    </ImageView>
+                                    <ImageView fx:id="francis15ToFaulknerImage" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../Maps/IntermediateMaps/ShapirotoFaulkner.PNG" />
+                                       </image>
+                                    </ImageView>
+                                 </children></StackPane>
+                           </content>
+                        </ScrollPane>
                      </children></AnchorPane>
                </children>
             </HBox>
