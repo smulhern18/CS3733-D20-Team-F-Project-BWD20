@@ -508,6 +508,7 @@ public class DataMapViewController implements Initializable {
             }
           }
         });
+    System.out.println("ADD NODE" + node.getId());
     addToPane(node, button);
   };
 
@@ -731,12 +732,12 @@ public class DataMapViewController implements Initializable {
           break;
       }
 
+      String ID = "Z" + typeInput.getValue() + strInstance;
       if (floorNumber.length() == 1) {
-        floorNumber = "0" + floorNumber;
+        ID += "0" + floorNumber;
+      } else {
+        ID += floorNumber;
       }
-
-      String ID = "Z" + typeInput.getValue() + strInstance + floorNumber;
-
       Node newNode =
           new Node(
               ID,
@@ -748,6 +749,8 @@ public class DataMapViewController implements Initializable {
               nodeType,
               floorNumber); // creates a new node
 
+      System.out.println("NNNNNNNNNNNNNNEEEEEEEEEEEEEEEEEWWWWWWWWWWWWWWWWWWWWWWWWWWNOOOOOOOOOOOOO");
+      System.out.println(ID + " " + floorNumber);
       databaseManager.manipulateNode(newNode); // creates the node in the db
       drawNode(newNode);
 
@@ -755,6 +758,7 @@ public class DataMapViewController implements Initializable {
 
     } catch (Exception e) { // throws an error if the input provided by the user is invalid
       nodeErrorLabel.setText("The input is not valid");
+      e.printStackTrace();
     }
   }
 
@@ -922,10 +926,10 @@ public class DataMapViewController implements Initializable {
   @FXML
   private void updateFloor(ActionEvent event) {
     if (hospitalInput.getValue().equals("Faulkner")) {
-      floorInput.getItems().removeAll("L2", "L1", "G", "F1", "F2", "F3");
+      floorInput.getItems().clear();
       floorInput.getItems().addAll("1", "2", "3", "4", "5");
     } else {
-      floorInput.getItems().removeAll("1", "2", "3", "4", "5");
+      floorInput.getItems().clear();
       floorInput.getItems().addAll("L2", "L1", "G", "F1", "F2", "F3");
     }
     // validateNodeText();
