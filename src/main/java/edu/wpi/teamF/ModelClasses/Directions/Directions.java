@@ -285,6 +285,20 @@ public class Directions {
     return returnString;
   }
 
+  public String getFullDirectionsStringSMS() {
+    String returnString = (directionList.get(0).getDirectionTextSMS() + "\n");
+    for (int i = 1; i < directionList.size(); i++) {
+      if (!directionList
+          .get(i)
+          .getDirectionText()
+          .equals(directionList.get(i - 1).getDirectionTextSMS())) {
+        // If the text is not a duplicate of the previous (i.e. stairs and elevators)
+        returnString = returnString + directionList.get(i).getDirectionTextSMS() + "\n";
+      }
+    }
+    return returnString;
+  }
+
   public String getDirectionsStringForIndex(int index) {
     int indexCounter = 0;
     String returnString = "";
@@ -299,40 +313,6 @@ public class Directions {
     return returnString;
   }
 
-  //  public String getFullDirectionsStringForFloor(String floor) {
-  //    String returnString = "";
-  //    for (Direction direction : directionList) {
-  //      if (direction.getFloor().equals(floor)) {
-  //        returnString = returnString + direction.getDirectionText() + "\n";
-  //      }
-  //    }
-  //    return returnString;
-  //  }
-
-  //  public String getKeyDirectionForFloor(String floor) {
-  //    String returnString = "";
-  //    for (Direction direction : directionList) {
-  //      if (direction.getFloor().equals(floor)) {
-  //        if (direction instanceof GoalDirection) {
-  //          return ("Directions to: " + endNode.getLongName() + ".");
-  //        } else if (direction instanceof ElevatorDirection) {
-  //          return ("Take the elevator from floor "
-  //              + startNode.getFloor()
-  //              + " to floor "
-  //              + endNode.getFloor()
-  //              + ".");
-  //        } else if (direction instanceof StairsDirection) {
-  //          return ("Take the stairs from floor "
-  //              + startNode.getFloor()
-  //              + " to floor "
-  //              + endNode.getFloor()
-  //              + ".");
-  //        }
-  //      }
-  //    }
-  //    return "";
-  //  }
-
   public Boolean smsDirections(String toPhone) {
     String sendMsg =
         ("Directions from "
@@ -340,7 +320,7 @@ public class Directions {
             + " to "
             + endNode.getLongName()
             + " at Brigham & Women's Hospital:\n\n");
-    sendMsg += getFullDirectionsString();
+    sendMsg += getFullDirectionsStringSMS();
     return phoneComms.sendMsg(toPhone, sendMsg);
   }
 
@@ -353,22 +333,22 @@ public class Directions {
             + ". After each instruction, stay on the line and press the pound key when you are ready for the next instruction. Press any other key to end the call. "
             + "</Say><Pause/><Say>");
     callText +=
-        directionList.get(0).getDirectionText()
-            + "</Say><Gather timeout=\"60\" numDigits=\"1\" action=\"http://twimlets.com/message?\"/><Say>";
+        directionList.get(0).getDirectionTextCall()
+            + "</Say><Gather timeout=\"999\" numDigits=\"1\" action=\"http://twimlets.com/message?\"/><Say>";
     for (int i = 1; i < directionList.size() - 1; i++) {
       if (!directionList
               .get(i)
               .getDirectionText()
-              .equals(directionList.get(i - 1).getDirectionText())
+              .equals(directionList.get(i - 1).getDirectionTextCall())
           && !(directionList.get(i) instanceof IndexDirection)) {
         // If the text is not a duplicate of the previous (i.e. stairs and elevators)
         callText =
             callText
-                + directionList.get(i).getDirectionText()
-                + "</Say><Gather timeout=\"60\" numDigits=\"1\" action=\"http://twimlets.com/message?\"/><Say>";
+                + directionList.get(i).getDirectionTextCall()
+                + "</Say><Gather timeout=\"999\" numDigits=\"1\" action=\"http://twimlets.com/message?\"/><Say>";
       }
     }
-    callText += directionList.get(directionList.size() - 1).getDirectionText() + "</Say>";
+    callText += directionList.get(directionList.size() - 1).getDirectionTextCall() + "</Say>";
     //    for (int j = 0; j < directionList.size() - 1; j++) {
     //      callText += "</Gather>";
     //    }
@@ -386,16 +366,16 @@ public class Directions {
             + " to "
             + endNode.getLongName()
             + " at Brigham & Women's Hospital:\n\n");
-    printMsg += (directionList.get(0).getDirectionText() + "\n");
+    printMsg += (directionList.get(0).getDirectionTextPrint() + "\n");
 
     int linesCounter = 3;
     for (int i = 1; i < directionList.size(); i++) {
       if (!directionList
           .get(i)
           .getDirectionText()
-          .equals(directionList.get(i - 1).getDirectionText())) {
+          .equals(directionList.get(i - 1).getDirectionTextPrint())) {
         // If the text is not a duplicate of the previous (i.e. stairs and elevators)
-        printMsg = printMsg + directionList.get(i).getDirectionText() + "\n";
+        printMsg = printMsg + directionList.get(i).getDirectionTextPrint() + "\n";
       }
       linesCounter++;
 

@@ -131,6 +131,14 @@
                                                 <Font size="24.0" />
                                              </font>
                                           </JFXButton>
+                                          <Label fx:id="commResult" text="Place a call or send a text">
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="20.0" top="10.0" />
+                                             </VBox.margin>
+                                          </Label>
                                        </children>
                                     </VBox>
                                  </children>
