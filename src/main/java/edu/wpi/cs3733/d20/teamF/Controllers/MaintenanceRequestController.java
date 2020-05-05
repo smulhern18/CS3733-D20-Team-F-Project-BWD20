@@ -549,11 +549,12 @@ public class MaintenanceRequestController implements Initializable {
       boolean isSame = mrui.equalsCSR(toUpdate);
       if (!isSame) {
         toUpdate.setAssignee(mrui.getAssignee().get());
-        toUpdate.setCompleted(new Date());
+        toUpdate.setPriority(Integer.parseInt(mrui.getPriority().get()));
+        toUpdate.setType(mrui.type.get());
         String completed = mrui.getCompleted().get();
         if (completed.equals("Complete")) {
           Date date = new Date();
-          toUpdate.setDateTimeSubmitted(date);
+          toUpdate.setCompleted(date);
           toUpdate.setComplete(true);
         } else if (completed.equals("Incomplete")) {
           toUpdate.setComplete(false);

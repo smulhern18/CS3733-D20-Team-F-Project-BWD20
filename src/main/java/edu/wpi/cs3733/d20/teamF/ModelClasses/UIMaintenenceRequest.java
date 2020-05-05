@@ -49,13 +49,6 @@ public class UIMaintenenceRequest extends RecursiveTreeObject<UIMaintenenceReque
 
   public boolean equalsCSR(Object other) {
     boolean isEqual = false;
-    if (other instanceof MaintenanceRequest) {
-      MaintenanceRequest otherCS = (MaintenanceRequest) other;
-      isEqual =
-          this.description.equals(otherCS.getDescription())
-              && this.location.equals(otherCS.getLocation())
-              && this.ID.equals(otherCS.getId());
-    }
     return isEqual;
   }
 }
