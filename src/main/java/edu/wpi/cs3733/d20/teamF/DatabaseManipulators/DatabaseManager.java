@@ -101,9 +101,9 @@ public class DatabaseManager {
             + EMAIL_ADDRESS_KEY
             + " VARCHAR(64) NOT NULL, "
             + USER_TYPE_KEY
-            + " SMALLINT NOT NULL, "
+            + " VARCHAR(16) NOT NULL, "
             + SPECIALTY_KEY
-            + " SMALLINT, "
+            + " VARCHAR(16) NOT NULL, "
             + "PRIMARY KEY ("
             + USER_NAME_KEY
             + "))";

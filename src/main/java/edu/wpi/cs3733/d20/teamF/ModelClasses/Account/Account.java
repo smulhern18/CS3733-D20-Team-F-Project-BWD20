@@ -45,13 +45,13 @@ public abstract class Account extends RecursiveTreeObject<Account> {
       this.typeOrdinal = typeOrdinal;
     }
 
-    public String getTypeString() {
+    public String getTypeOrdinal() {
       return typeOrdinal;
     }
 
     public static Staff.Specialty getEnum(String type) {
       for (Staff.Specialty v : values()) {
-        if (v.getTypeString().equals(type)) {
+        if (v.getTypeOrdinal().equals(type)) {
           return v;
         }
       }

@@ -9,7 +9,7 @@ plugins {
 
 
 
-mainClassName = 'edu.wpi.teamF.Main'
+mainClassName = 'edu.wpi.cs3733.d20.teamF.Main'
 
 repositories {
     mavenCentral()

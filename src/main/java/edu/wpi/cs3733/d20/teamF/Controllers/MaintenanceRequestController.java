@@ -79,10 +79,10 @@ public class MaintenanceRequestController implements Initializable {
   ObservableList<UIMaintenenceRequest> mrUI = FXCollections.observableArrayList();
   ObservableList<UIAccount> acts = FXCollections.observableArrayList();
   DatabaseManager databaseManager = DatabaseManager.getManager();
-  List<MaintenanceRequest> maintenanceRequests;
-  List<Account> accounts;
+  List<MaintenanceRequest> maintenanceRequests = databaseManager.getAllMaintenanceRequests();
+  List<Account> accounts = databaseManager.getAllAccounts();
 
-  public MaintenanceRequestController() {
+  public MaintenanceRequestController() throws Exception {
     try {
       maintenanceRequests = databaseManager.getAllMaintenanceRequests();
     } catch (Exception e) {
@@ -377,12 +377,19 @@ public class MaintenanceRequestController implements Initializable {
         });
 
     // Load the database into the tableview
-
-    for (MaintenanceRequest csr : maintenanceRequests) {
-      mrUI.add(new UIMaintenenceRequest(csr));
+    if (maintenanceRequests != null) {
+      for (MaintenanceRequest csr : maintenanceRequests) {
+        mrUI.add(new UIMaintenenceRequest(csr));
+      }
+    } else {
+      System.out.println("Get all maintence Requests is returning null");
     }
-    for (Account act : accounts) {
-      acts.add(new UIAccount(act));
+    if (accounts != null) {
+      for (Account act : accounts) {
+        acts.add(new UIAccount(act));
+      }
+    } else {
+      System.out.println("Get all accounts is returning null");
     }
 
     final TreeItem<UIMaintenenceRequest> root =

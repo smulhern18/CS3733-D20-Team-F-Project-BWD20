@@ -7,7 +7,6 @@ import edu.wpi.cs3733.d20.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.cs3733.d20.teamF.ModelClasses.MaintenanceRequest;
 import java.sql.SQLException;
 import java.util.List;
-
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

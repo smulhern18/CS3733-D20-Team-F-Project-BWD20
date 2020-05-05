@@ -13,39 +13,39 @@ public class CSVManipulator {
    * correct place in the database
    */
   public void readCSVFileMaintenanceService(InputStream stream) {
-    String row = "";
-    ArrayList<String> data = new ArrayList<>();
-    try {
-      // goes to get the file
-      BufferedReader csvReader = new BufferedReader(new InputStreamReader(stream));
-      while ((row = csvReader.readLine()) != null) {
-        data.addAll(Arrays.asList(row.split(",")));
-      }
+    //    String row = "";
+    //    ArrayList<String> data = new ArrayList<>();
+    //    try {
+    //      // goes to get the file
+    //      BufferedReader csvReader = new BufferedReader(new InputStreamReader(stream));
+    //      while ((row = csvReader.readLine()) != null) {
+    //        data.addAll(Arrays.asList(row.split(",")));
+    //      }
 
-      int i = 8;
-      while (i < (data.size() - 1)) {
-        databaseManager.manipulateServiceRequest(
-            new MaintenanceRequest(
-                data.get(i),
-                data.get(i + 1),
-                data.get(i + 2),
-                data.get(i + 3),
-                new Date(Integer.parseInt(data.get(i + 4))),
-                Integer.parseInt(data.get(i + 5)),
-                Boolean.parseBoolean(data.get(i + 6)),
-                new Date(Integer.parseInt(data.get(i + 7)))));
-
-        i = i + 8;
-      }
-    } catch (FileNotFoundException e) {
-      throw new IllegalArgumentException("File Not found!");
-    } catch (EOFException e) {
-      // Expected use to end read csv
-    } catch (IOException e) {
-
-    } catch (Exception e) {
-      System.out.println(e.getMessage());
-    }
+    //      int i = 8;
+    //      while (i < (data.size() - 1)) {
+    //        databaseManager.manipulateServiceRequest(
+    //            new MaintenanceRequest(
+    //                data.get(i),
+    //                data.get(i + 1),
+    //                data.get(i + 2),
+    //                data.get(i + 3),
+    //                new Date(Integer.parseInt(data.get(i + 4))),
+    //                Integer.parseInt(data.get(i + 5)),
+    //                Boolean.parseBoolean(data.get(i + 6)),
+    //                new Date(Integer.parseInt(data.get(i + 7)))));
+    //
+    //        i = i + 8;
+    //      }
+    //    } catch (FileNotFoundException e) {
+    //      throw new IllegalArgumentException("File Not found!");
+    //    } catch (EOFException e) {
+    //      // Expected use to end read csv
+    //    } catch (IOException e) {
+    //
+    //    } catch (Exception e) {
+    //      System.out.println(e.getMessage());
+    //    }
   }
   /** Writes to the CSV file so that it can become persistant */
   public void writeCSVFileMaintenanceService(Path path) throws Exception {

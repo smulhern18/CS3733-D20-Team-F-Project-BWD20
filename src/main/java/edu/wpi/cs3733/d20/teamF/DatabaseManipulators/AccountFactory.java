@@ -50,8 +50,8 @@ public class AccountFactory {
       preparedStatement.setString(param++, account.getLastName());
       preparedStatement.setString(param++, account.getFirstName());
       preparedStatement.setString(param++, account.getEmailAddress());
-      preparedStatement.setInt(param++, account.getType().getTypeOrdinal());
-      preparedStatement.setInt(param++, account.getSpecialty().getTypeOrdinal());
+      preparedStatement.setString(param++, account.getType().getTypeOrdinal());
+      preparedStatement.setString(param++, account.getSpecialty().getTypeOrdinal());
       preparedStatement.execute();
     } catch (SQLException e) {
       System.out.println(e.getMessage() + ", " + e.getClass());
@@ -73,9 +73,9 @@ public class AccountFactory {
 
       ResultSet resultSet = preparedStatement.executeQuery();
       resultSet.next();
-      Account.Type type = Account.Type.getEnum(resultSet.getInt(DatabaseManager.USER_TYPE_KEY));
+      Account.Type type = Account.Type.getEnum(resultSet.getString(DatabaseManager.USER_TYPE_KEY));
       switch (type.getTypeOrdinal()) {
-        case (0):
+        case ("ADMIN"):
           account =
               new Admin(
                   resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
@@ -84,7 +84,7 @@ public class AccountFactory {
                   resultSet.getString(DatabaseManager.USER_NAME_KEY),
                   resultSet.getString(DatabaseManager.PASSWORD_KEY));
           break;
-        case (1):
+        case ("STAFF"):
           account =
               new Staff(
                   resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
@@ -92,7 +92,7 @@ public class AccountFactory {
                   resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
                   resultSet.getString(DatabaseManager.USER_NAME_KEY),
                   resultSet.getString(DatabaseManager.PASSWORD_KEY),
-                  Staff.Specialty.getEnum(resultSet.getInt(DatabaseManager.SPECIALTY_KEY)));
+                  Staff.Specialty.getEnum(resultSet.getString(DatabaseManager.SPECIALTY_KEY)));
           break;
         default:
           throw new ValidationException("Illegal Type of Account: " + type.getTypeOrdinal());
@@ -136,8 +136,8 @@ public class AccountFactory {
       preparedStatement.setString(param++, account.getFirstName());
       preparedStatement.setString(param++, account.getLastName());
       preparedStatement.setString(param++, account.getEmailAddress());
-      preparedStatement.setInt(param++, account.getType().getTypeOrdinal());
-      preparedStatement.setInt(param++, account.getSpecialty().getTypeOrdinal());
+      preparedStatement.setString(param++, account.getType().getTypeOrdinal());
+      preparedStatement.setString(param++, account.getSpecialty().getTypeOrdinal());
       preparedStatement.setString(param++, account.getUsername());
 
       int numRows = preparedStatement.executeUpdate();
@@ -204,9 +204,10 @@ public class AccountFactory {
       accounts = new ArrayList<>();
       while (resultSet.next()) {
         Account account = null;
-        Account.Type type = Account.Type.getEnum(resultSet.getInt(DatabaseManager.USER_TYPE_KEY));
+        Account.Type type =
+            Account.Type.getEnum(resultSet.getString(DatabaseManager.USER_TYPE_KEY));
         switch (type.getTypeOrdinal()) {
-          case (0):
+          case ("ADMIN"):
             account =
                 new Admin(
                     resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
@@ -215,7 +216,7 @@ public class AccountFactory {
                     resultSet.getString(DatabaseManager.USER_NAME_KEY),
                     resultSet.getString(DatabaseManager.PASSWORD_KEY));
             break;
-          case (1):
+          case ("STAFF"):
             account =
                 new Staff(
                     resultSet.getString(DatabaseManager.FIRST_NAME_KEY),
@@ -223,7 +224,7 @@ public class AccountFactory {
                     resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
                     resultSet.getString(DatabaseManager.USER_NAME_KEY),
                     resultSet.getString(DatabaseManager.PASSWORD_KEY),
-                    Staff.Specialty.getEnum(resultSet.getInt(DatabaseManager.SPECIALTY_KEY)));
+                    Staff.Specialty.getEnum(resultSet.getString(DatabaseManager.SPECIALTY_KEY)));
             break;
           default:
             throw new ValidationException("Illegal Type of Account: " + type.getTypeOrdinal());
@@ -250,8 +251,8 @@ public class AccountFactory {
                 resultSet.getString(DatabaseManager.LAST_NAME_KEY),
                 resultSet.getString(DatabaseManager.EMAIL_ADDRESS_KEY),
                 resultSet.getString(DatabaseManager.USER_NAME_KEY),
-                Account.Type.getEnum(resultSet.getInt(DatabaseManager.USER_TYPE_KEY)),
-                Account.Specialty.getEnum(resultSet.getInt(DatabaseManager.SPECIALTY_KEY))));
+                Account.Type.getEnum(resultSet.getString(DatabaseManager.USER_TYPE_KEY)),
+                Account.Specialty.getEnum(resultSet.getString(DatabaseManager.SPECIALTY_KEY))));
       }
     } catch (Exception e) {
       System.out.println(e.getMessage() + ", " + e.getClass());

@@ -19,7 +19,7 @@ public class App extends Application {
   public void start(Stage primaryStage) throws IOException {
 
     Scene primaryScene = new Scene(new AnchorPane());
-    Parent root = FXMLLoader.load(getClass().getResource("Views/MaintenanceRequest.fxml"));
+    Parent root = FXMLLoader.load(getClass().getResource("Views/MaintenenceRequest.fxml"));
     primaryScene.setRoot(root);
     primaryStage.setScene(primaryScene);
     primaryStage.setAlwaysOnTop(true);

@@ -42,7 +42,8 @@ public class UIMaintenenceRequest extends RecursiveTreeObject<UIMaintenenceReque
     }
     this.description = new SimpleStringProperty(csr.getDescription());
     this.type = new SimpleStringProperty((csr.getType()));
-    this.estimatedCompletionDate = new SimpleStringProperty(date.format((csr.getEstimatedCompletionDate())));
+    this.estimatedCompletionDate =
+        new SimpleStringProperty(date.format((csr.getEstimatedCompletionDate())));
     this.estimatedCost = new SimpleStringProperty("" + csr.getEstimatedCost());
   }
 
