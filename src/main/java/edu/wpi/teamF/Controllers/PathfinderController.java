@@ -404,6 +404,9 @@ public class PathfinderController implements Initializable {
     selectButtonsPane.setVisible(true);
     pathSwitchFloorPane.setVisible(false);
     commsResult.setText("");
+    externalDirections.setVisible(false);
+    externalDirections.setPrefHeight(0);
+    externalDirections.setPrefWidth(0);
 
     uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1, 1.33);
 
