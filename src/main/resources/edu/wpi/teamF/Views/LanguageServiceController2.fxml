@@ -102,14 +102,14 @@
                   <children>
                       <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
                           <children>
-                              <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="         Location:         " />
-                              <JFXComboBox fx:id="locationCombobox" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                              <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" maxWidth="100.0" minWidth="100.0" text="Location:  " textAlignment="RIGHT" />
+                              <JFXComboBox fx:id="locationCombobox" maxWidth="140.0" minWidth="140.0" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black;" />
                           </children>
                       </HBox>
-                      <HBox alignment="BOTTOM_CENTER" GridPane.rowIndex="2">
+                      <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="2">
                           <children>
-                              <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="          Priority:         " />
-                              <JFXComboBox fx:id="priorityCombobox" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                              <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" maxWidth="100.0" minWidth="100.0" text="Priority:" textAlignment="RIGHT" />
+                              <JFXComboBox fx:id="priorityCombobox" maxWidth="140.0" minWidth="140.0" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black;" />
                           </children>
                       </HBox>
                       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
@@ -143,30 +143,30 @@
                         </GridPane>
                           </children>
                       </HBox>
-                      <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                      <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="3">
                           <children>
-                              <Label fx:id="languageLabel" alignment="BOTTOM_CENTER" prefHeight="18.0" prefWidth="100.0" text="Language:" />
-                              <JFXComboBox fx:id="languageCombobox" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                              <Label fx:id="languageLabel" alignment="BOTTOM_CENTER" maxWidth="100.0" minWidth="100.0" prefHeight="18.0" prefWidth="100.0" text="Language:  " textAlignment="RIGHT" />
+                              <JFXComboBox fx:id="languageCombobox" maxWidth="140.0" minWidth="140.0" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black;" />
                           </children>
                       </HBox>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="4">
                      <children>
-                        <Label fx:id="problemTypeLabel" alignment="BOTTOM_CENTER" text="Problem Type:  ">
+                        <Label fx:id="problemTypeLabel" alignment="BOTTOM_CENTER" maxWidth="100.0" minWidth="100.0" text="Problem Type:       " textAlignment="RIGHT">
                            <HBox.margin>
-                              <Insets right="10.0" />
+                              <Insets />
                            </HBox.margin>
                         </Label>
-                        <JFXComboBox fx:id="problemTypeCombobox" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                        <JFXComboBox fx:id="problemTypeCombobox" maxWidth="140.0" minWidth="140.0" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black;" />
                      </children>
                   </HBox>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="5">
                      <children>
-                        <Label fx:id="descriptionLabel" alignment="BOTTOM_CENTER" text="      Description: ">
+                        <Label fx:id="descriptionLabel" alignment="BOTTOM_CENTER" maxWidth="100.0" minWidth="100.0" text="Description:  " textAlignment="RIGHT">
                            <padding>
                               <Insets right="12.0" />
                            </padding>
                         </Label>
-                        <JFXTextArea fx:id="descriptionText" prefHeight="65.0" prefWidth="186.0" style="-fx-background-color: white; -fx-border-color: black;">
+                        <JFXTextArea fx:id="descriptionText" maxWidth="140.0" minWidth="140.0" prefHeight="65.0" prefWidth="186.0" style="-fx-background-color: white; -fx-border-color: black;">
                            <HBox.margin>
                               <Insets top="5.0" />
                            </HBox.margin>
