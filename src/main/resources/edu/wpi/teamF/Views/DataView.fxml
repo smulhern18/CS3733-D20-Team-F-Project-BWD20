@@ -183,6 +183,14 @@
                   </GridPane>
                </children>
             </GridPane>
+            <BarChart fx:id="highTrafGraph" style="-fx-border-color: black;" title="High Traffic Areas" GridPane.columnIndex="1" GridPane.rowIndex="1">
+              <xAxis>
+                <CategoryAxis label="Locations" side="BOTTOM" fx:id="xAxisTraf" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="yAxisTraf" label="Number of Times Visited" side="LEFT" />
+              </yAxis>
+            </BarChart>
          </children>
       </GridPane>
    </children>

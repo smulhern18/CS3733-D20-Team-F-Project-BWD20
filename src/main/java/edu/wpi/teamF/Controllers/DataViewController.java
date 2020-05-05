@@ -50,11 +50,18 @@ public class DataViewController implements Initializable {
   public Label timeAvgSan;
   public GridPane sanPane;
 
+  // Traffic
+
+  public BarChart<?, ?> highTrafGraph;
+  public CategoryAxis xAxisTraf;
+  public NumberAxis yAxisTraf;
+
   ServiceRequestStats serviceRequestStats = new ServiceRequestStats();
   DatabaseManager databaseManager = DatabaseManager.getManager();
   public List<MaintenanceRequest> mR = databaseManager.getAllMaintenanceRequests();
   public List<TransportRequest> tR = databaseManager.getAllTransportRequests();
   public List<SanitationServiceRequest> sR = databaseManager.getAllSanitationRequests();
+  public List<ReportsClass> rC = databaseManager.getAllReports();
 
   public DataViewController() throws Exception {}
 
@@ -164,5 +171,17 @@ public class DataViewController implements Initializable {
       pieChartData9.add(new PieChart.Data(data17.get(i), Integer.parseInt(data17.get(i + 1))));
     }
     pieChartTotalSan.setData(pieChartData9);
+
+    // High traffic Nodes areas
+    List<String> trafData;
+    XYChart.Series trafDataSer = new XYChart.Series<>();
+    trafData = serviceRequestStats.getTimesVisitedGraphs(rC);
+
+    for (int i = 0; i < trafData.size(); i += 2) {
+      trafDataSer
+          .getData()
+          .add(new XYChart.Data<>(trafData.get(i), Integer.parseInt(trafData.get(i + 1))));
+    }
+    highTrafGraph.getData().add(trafDataSer);
   }
 }

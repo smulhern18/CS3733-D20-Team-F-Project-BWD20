@@ -945,8 +945,7 @@ public class DatabaseManager {
     return reportsFactory.read(id);
   }
 
-  public List<ReportsClass>  getAllReports() throws Exception{
+  public List<ReportsClass> getAllReports() throws Exception {
     return reportsFactory.getAllReports();
   }
-
 }
