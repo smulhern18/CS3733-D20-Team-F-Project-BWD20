@@ -1,9 +1,12 @@
 package edu.wpi.teamF.DatabaseManipulators;
 
+import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ReportsClass;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.management.InstanceNotFoundException;
 
 public class ReportsFactory {
@@ -160,5 +163,31 @@ public class ReportsFactory {
     } catch (SQLException e) {
       System.out.println("Error: " + e.getMessage() + ", " + e.getCause());
     }
+  }
+  /**
+   * Gets all the nodes from the database
+   *
+   * @return a list of all nodes in the database
+   */
+  public List<ReportsClass> getAllReports() {
+    List<ReportsClass> report = new ArrayList<>();
+    String selectStatement = "SELECT * FROM " + DatabaseManager.REPORTS_TABLE_NAME;
+
+    try (PreparedStatement preparedStatement =
+        DatabaseManager.getConnection().prepareStatement(selectStatement);
+        ResultSet resultSet = preparedStatement.executeQuery()) {
+      report = new ArrayList<>();
+      while (resultSet.next()) {
+        report.add(
+            new ReportsClass(resultSet.getString(DatabaseManager.NODEID_KEY),
+                resultSet.getInt(DatabaseManager.TIMESSANITIZED_KEY),
+                resultSet.getInt(DatabaseManager.TIMESVISITED_KEY),
+                resultSet.getString(DatabaseManager.LASTSANITIZER_KEY)));
+      }
+    } catch (Exception e) {
+      System.out.println(
+          "Exception in NodeFactory getNodesByType: " + e.getMessage() + ", " + e.getClass());
+    }
+    return report;
   }
 }
