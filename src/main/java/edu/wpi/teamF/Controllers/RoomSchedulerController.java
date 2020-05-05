@@ -5,6 +5,7 @@ import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Entry;
 import com.calendarfx.view.CalendarView;
 import com.calendarfx.view.DateControl;
+import com.calendarfx.view.VirtualGrid;
 import com.calendarfx.view.page.DayPage;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -14,6 +15,7 @@ import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.ScheduleEntry;
 import java.net.URL;
 import java.time.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -72,34 +74,62 @@ public class RoomSchedulerController implements Initializable {
     scheduleAnchorPane.getChildren().add(calendarView);
     setCalenderViewSize();
     addEntriesFromDatabase();
-    //    calendarView.setEntryFactory(param -> {
-    //      DateControl control = param.getDateControl();
-    //      VirtualGrid grid = control.getVirtualGrid();
-    //      ZonedDateTime time = param.getZonedDateTime();
-    //      DayOfWeek firstDayOfWeek = control.getFirstDayOfWeek();
-    //
-    //      ZonedDateTime lowerTime = grid.adjustTime(time, false, firstDayOfWeek);
-    //      ZonedDateTime upperTime = grid.adjustTime(time, true, firstDayOfWeek);
-    //
-    //      if (Duration.between(time, lowerTime).abs().minus(Duration.between(time,
-    // upperTime).abs()).isNegative()) {
-    //        time = lowerTime;
-    //      } else {
-    //        time = upperTime;
-    //      }
-    //
-    //      Entry<Object> entry = new Entry<>(databaseManager.getAccount().getUsername());
-    //      entry.changeStartDate(time.toLocalDate());
-    //      entry.changeStartTime(time.toLocalTime());
-    //      entry.changeEndDate(entry.getStartDate());
-    //      entry.changeEndTime(entry.getStartTime().plusHours(1));
-    //
-    //      return entry;
-    //    });
+
+    calendarView.setEntryFactory(
+        param -> {
+          DateControl control = param.getDateControl();
+          VirtualGrid grid = control.getVirtualGrid();
+          ZonedDateTime time = param.getZonedDateTime();
+          DayOfWeek firstDayOfWeek = control.getFirstDayOfWeek();
+
+          ZonedDateTime lowerTime = grid.adjustTime(time, false, firstDayOfWeek);
+          ZonedDateTime upperTime = grid.adjustTime(time, true, firstDayOfWeek);
+
+          if (Duration.between(time, lowerTime)
+              .abs()
+              .minus(Duration.between(time, upperTime).abs())
+              .isNegative()) {
+            time = lowerTime;
+          } else {
+            time = upperTime;
+          }
+          ScheduleEntry newEntry =
+              new ScheduleEntry(
+                  time.toLocalDate().format(ScheduleEntry.dateFormatter),
+                  time.toLocalTime().format(ScheduleEntry.timeFormatter),
+                  time.plusHours(1).toLocalDate().format(ScheduleEntry.dateFormatter),
+                  time.plusHours(1).toLocalTime().format(ScheduleEntry.timeFormatter),
+                  param.getDefaultCalendar().getName(),
+                  "asdasdasd");
+          if (!isScheduleEntryOverlapping(newEntry)) {
+            entryList.add(newEntry);
+            Entry<Object> entry = new Entry<>("databaseManager.getAccount().getUsername()");
+            entry.setId(newEntry.getID());
+            entry.changeStartDate(time.toLocalDate());
+            entry.changeStartTime(time.toLocalTime());
+            entry.changeEndDate(entry.getStartDate());
+            entry.changeEndTime(entry.getStartTime().plusHours(1));
+            return entry;
+          } else {
+            return null;
+          }
+        });
+    calendarView
+        .draggedEntryProperty()
+        .addListener(
+            (observableValue, draggedEntry, t1) -> {
+              System.out.println("DRAGGG");
+              if (draggedEntry != null) {
+
+                draggedEntry.changeStartTime(draggedEntry.getOriginalEntry().getStartTime());
+                draggedEntry.changeEndTime(draggedEntry.getOriginalEntry().getEndTime());
+                draggedEntry.getOriginalEntry().set
+              }
+            });
   }
 
   private void addEntriesFromDatabase() throws Exception {
-    entryList = databaseManager.getAllScheduleEntries();
+    // entryList = databaseManager.getAllScheduleEntries();
     System.out.println(LocalTime.now().format(ScheduleEntry.timeFormatter));
     //    ScheduleEntry testEntry =
     //        new ScheduleEntry(
@@ -109,7 +139,7 @@ public class RoomSchedulerController implements Initializable {
     //            "10:00PM",
     //            "Reflection Room 1",
     //            "asdasdasd");
-    //    entryList = new ArrayList<>();
+    entryList = new ArrayList<>();
     //    entryList.add(testEntry);
     for (ScheduleEntry scheduleEntry : entryList) {
       Calendar calendar = getCalendar(scheduleEntry.getRoom());
