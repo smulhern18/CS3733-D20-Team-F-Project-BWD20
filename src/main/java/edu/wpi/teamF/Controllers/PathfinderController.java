@@ -12,6 +12,7 @@ import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.*;
 import edu.wpi.teamF.ModelClasses.Scorer.EuclideanScorer;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.ReportsClass;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,10 @@ public class PathfinderController implements Initializable {
   private static int MAIN_MAP_HEIGHT = 3400;
   private static int MAIN_MAP_WIDTH = 5000;
 
+  public static int MAP_HEIGHT = 1485;
+  public static int MAP_WIDTH = 2475;
+  public static DatabaseManager databaseManager = DatabaseManager.getManager();
+  // public int currentFloor;
   public AnchorPane currentPane;
   public AnchorPane mainMapPane;
   public AnchorPane mapPaneFaulkner5;
@@ -171,7 +176,6 @@ public class PathfinderController implements Initializable {
   public int locationIndex;
 
   EuclideanScorer euclideanScorer = new EuclideanScorer();
-  DatabaseManager databaseManager = DatabaseManager.getManager();
   PathfindAlgorithm pathFindAlgorithm;
   private static String newPathfind = " ";
 
@@ -215,6 +219,32 @@ public class PathfinderController implements Initializable {
     double widthRatioFaulkner = currentPane.getPrefWidth() / FAULKNER_MAP_WIDTH;
     double heightRatioMain = currentPane.getPrefHeight() / MAIN_MAP_HEIGHT;
     double widthRatioMain = currentPane.getPrefWidth() / MAIN_MAP_WIDTH;
+
+    if (endNode == null) {
+      endNode = pathNodes.get(pathNodes.size() - 1);
+    }
+    try {
+      ReportsClass newNode = databaseManager.readReport(startNode.getId());
+      ReportsClass oldNode = databaseManager.readReport(endNode.getId());
+      if (newNode != null) {
+        newNode.setTimesVisited(newNode.getTimesVisited() + 1);
+      } else {
+        newNode = new ReportsClass(startNode.getId(), 1, 0, "NA");
+      }
+      if (oldNode != null) {
+        oldNode.setTimesVisited(oldNode.getTimesVisited() + 1);
+      } else {
+        oldNode = new ReportsClass(endNode.getId(), 1, 0, "NA");
+      }
+      databaseManager.manipulateReport(newNode);
+      databaseManager.manipulateReport(oldNode);
+      System.out.println(databaseManager.readReport(newNode.getNodeID()));
+      System.out.println(oldNode.getNodeID());
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    double heightRatio = currentPane.getPrefHeight() / MAP_HEIGHT;
+    double widthRatio = currentPane.getPrefWidth() / MAP_WIDTH;
 
     for (int i = 0; i < pathNodes.size() - 1; i++) {
       Node start = pathNodes.get(i);
@@ -1045,11 +1075,11 @@ public class PathfinderController implements Initializable {
         startLabel.setText(startNode.getLongName());
         getFloorPane(startNode.getFloor(), startNode.getBuilding()).getChildren().add(startLabel);
         startLabel.setLayoutX(component.getLayoutX() - (width / 2) + 3);
-        startLabel.setLayoutY(component.getLayoutY() - 20);
+        startLabel.setLayoutY(component.getLayoutY() - 25);
         startLabel.setId("startLabel");
         startLabel.setVisible(true);
         startLabel.setStyle(
-            "-fx-background-radius: 5px; -fx-border-radius: 5px; -fx-background-color: rgba(255,255,255,0.7); -fx-border-color: rgba(0,0,0,0.7); -fx-border-width: 1px");
+            "-fx-max-height: 18px; -fx-min-height: 16px; -fx-background-radius: 3px; -fx-border-radius: 3px; -fx-background-color: rgba(255,255,255,0.7); -fx-border-color: rgba(0,0,0,0.7); -fx-border-width: 1px");
         return;
       }
     }
@@ -1069,11 +1099,11 @@ public class PathfinderController implements Initializable {
         endLabel.setText(endNode.getLongName());
         getFloorPane(endNode.getFloor(), endNode.getBuilding()).getChildren().add(endLabel);
         endLabel.setLayoutX(component.getLayoutX() - (width / 2) + 3);
-        endLabel.setLayoutY(component.getLayoutY() - 20);
+        endLabel.setLayoutY(component.getLayoutY() - 25);
         endLabel.setId("endLabel");
         endLabel.setVisible(true);
         endLabel.setStyle(
-            "-fx-background-radius: 5px; -fx-border-radius: 5px; -fx-background-color: rgba(255,255,255,0.7); -fx-border-color: rgba(0,0,0,0.7); -fx-border-width: 1px");
+            "-fx-max-height: 18px; -fx-min-height: 16px; -fx-background-radius: 3px; -fx-border-radius: 3px; -fx-background-color: rgba(255,255,255,0.7); -fx-border-color: rgba(0,0,0,0.7); -fx-border-width: 1px");
         return;
       }
     }

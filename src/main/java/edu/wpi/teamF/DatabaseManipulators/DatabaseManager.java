@@ -36,6 +36,8 @@ public class DatabaseManager {
   static final String FLOWER_REQUEST_TABLE_NAME = "flowerRequestsTable";
   static final String MARIACHI_REQUEST_TABLE_NAME = "mariachiRequestsTable";
   static final String SCHEDULER_TABLE_NAME = "schedulerTable";
+  static final String REPORTS_TABLE_NAME = "reportsTable";
+
   /** Column Names */
   // scheduler
   static final String SCHEDULER_ID_KEY = "schedulerID";
@@ -127,6 +129,11 @@ public class DatabaseManager {
   static final String PHONE_NUMBER_KEY = "phoneNumber";
   static final String GIFT_WRAP_KEY = "giftWrap";
 
+  // reports
+  static final String TIMESVISITED_KEY = "timesVisited";
+  static final String TIMESSANITIZED_KEY = "timesSanitized";
+  static final String LASTSANITIZER_KEY = "lastSanitizer";
+
   // Factories
   private NodeFactory nodeFactory = NodeFactory.getFactory();
   private EdgeFactory edgeFactory = EdgeFactory.getFactory();
@@ -151,6 +158,7 @@ public class DatabaseManager {
       FlowerServiceRequestFactory.getFactory();
   private TransportRequestFactory transportRequestFactory = TransportRequestFactory.getFactory();
   private SchedulerFactory schedulerFactory = SchedulerFactory.getFactory();
+  private ReportsFactory reportsFactory = ReportsFactory.getFactory();
 
   static Connection connection = null;
   public static Account accountLogged = null;
@@ -431,6 +439,23 @@ public class DatabaseManager {
             + SCHEDULER_ID_KEY
             + "))";
 
+    String reportTableCreationStatement =
+        "CREATE TABLE "
+            + REPORTS_TABLE_NAME
+            + " ( "
+            + NODEID_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + TIMESSANITIZED_KEY
+            + " INTEGER, "
+            + LASTSANITIZER_KEY
+            + " VARCHAR(32) NOT NULL, "
+            + TIMESVISITED_KEY
+            + " INTEGER, "
+            + "PRIMARY KEY ("
+            + NODEID_KEY
+            + "))";
+    ;
+
     PreparedStatement preparedStatement = connection.prepareStatement(nodeTableCreationStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(computerTableCreationStatement);
@@ -463,6 +488,9 @@ public class DatabaseManager {
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(scheduleTableCreationStatement);
     preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(reportTableCreationStatement);
+    preparedStatement.execute();
+
     System.out.println("Created Tables Successfully");
   }
 
@@ -505,6 +533,7 @@ public class DatabaseManager {
     String laundryDropStatement = "DROP TABLE " + LAUNDRY_REQUEST_TABLE_NAME;
     String mariachiDropStatement = "DROP TABLE " + MARIACHI_REQUEST_TABLE_NAME;
     String schedulerDropStatement = "DROP TABLE " + SCHEDULER_TABLE_NAME;
+    String reportsDropStatement = "DROP TABLE " + REPORTS_TABLE_NAME;
 
     PreparedStatement preparedStatement = connection.prepareStatement(nodeDropStatement);
     preparedStatement.execute();
@@ -537,6 +566,8 @@ public class DatabaseManager {
     preparedStatement = connection.prepareStatement(mariachiDropStatement);
     preparedStatement.execute();
     preparedStatement = connection.prepareStatement(schedulerDropStatement);
+    preparedStatement.execute();
+    preparedStatement = connection.prepareStatement(reportsDropStatement);
     preparedStatement.execute();
     createTables();
   }
@@ -977,5 +1008,26 @@ public class DatabaseManager {
 
   public List<ScheduleEntry> getAllScheduleEntries() {
     return schedulerFactory.getAllScheduleEntries();
+  }
+
+  public void manipulateReport(ReportsClass report) throws Exception {
+
+    if (reportsFactory.read(report.getNodeID()) == null) {
+      reportsFactory.create(report);
+    } else {
+      reportsFactory.update(report);
+    }
+  }
+
+  public ReportsClass readReport(String id) throws Exception {
+    return reportsFactory.read(id);
+  }
+
+  public List<ReportsClass> getAllReports() throws Exception {
+    return reportsFactory.getAllReports();
+  }
+
+  public void deleteReport(String id) {
+    reportsFactory.delete(id);
   }
 }
