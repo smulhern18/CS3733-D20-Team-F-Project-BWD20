@@ -131,7 +131,7 @@
                         <Image url="@../../../../Images/icons8-support-400.png" />
                     </image>
                 </ImageView>
-                <JFXButton text="Maintance" GridPane.columnIndex="2" GridPane.rowIndex="9">
+                <JFXButton text="Maintenance" GridPane.columnIndex="2" GridPane.rowIndex="9">
                     <font>
                         <Font name="STIXGeneral-Regular" size="13.0" />
                     </font>
@@ -196,7 +196,16 @@
                         <Image url="@../../../../Images/icons8-door-80.png" />
                     </image>
                 </ImageView>
-                <Label onMouseClicked="#switchToRoomScheduler" text="Room Scheduler" GridPane.columnIndex="4" GridPane.rowIndex="9" />
+            <JFXButton prefWidth="120.0" text="Appointments" GridPane.columnIndex="3" GridPane.rowIndex="9">
+               <font>
+                  <Font name="STIXGeneral-Regular" size="12.0" />
+               </font>
+            </JFXButton>
+            <JFXButton prefWidth="120.0" text="Room Scheduler" GridPane.columnIndex="4" GridPane.rowIndex="9">
+               <font>
+                  <Font name="STIXGeneral-Regular" size="12.0" />
+               </font>
+            </JFXButton>
             </children>
         </GridPane>
         <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
