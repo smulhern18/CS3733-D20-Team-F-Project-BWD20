@@ -672,8 +672,6 @@ public class DataMapViewController implements Initializable {
           return mapPaneMain3;
       }
     }
-    System.out.println(
-        "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
     return null;
   }
 

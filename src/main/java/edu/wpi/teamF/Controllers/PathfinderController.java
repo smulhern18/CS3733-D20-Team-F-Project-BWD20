@@ -1075,11 +1075,11 @@ public class PathfinderController implements Initializable {
         startLabel.setText(startNode.getLongName());
         getFloorPane(startNode.getFloor(), startNode.getBuilding()).getChildren().add(startLabel);
         startLabel.setLayoutX(component.getLayoutX() - (width / 2) + 3);
-        startLabel.setLayoutY(component.getLayoutY() - 20);
+        startLabel.setLayoutY(component.getLayoutY() - 25);
         startLabel.setId("startLabel");
         startLabel.setVisible(true);
         startLabel.setStyle(
-            "-fx-background-radius: 5px; -fx-border-radius: 5px; -fx-background-color: rgba(255,255,255,0.7); -fx-border-color: rgba(0,0,0,0.7); -fx-border-width: 1px");
+            "-fx-max-height: 18px; -fx-min-height: 16px; -fx-background-radius: 3px; -fx-border-radius: 3px; -fx-background-color: rgba(255,255,255,0.7); -fx-border-color: rgba(0,0,0,0.7); -fx-border-width: 1px");
         return;
       }
     }
@@ -1099,11 +1099,11 @@ public class PathfinderController implements Initializable {
         endLabel.setText(endNode.getLongName());
         getFloorPane(endNode.getFloor(), endNode.getBuilding()).getChildren().add(endLabel);
         endLabel.setLayoutX(component.getLayoutX() - (width / 2) + 3);
-        endLabel.setLayoutY(component.getLayoutY() - 20);
+        endLabel.setLayoutY(component.getLayoutY() - 25);
         endLabel.setId("endLabel");
         endLabel.setVisible(true);
         endLabel.setStyle(
-            "-fx-background-radius: 5px; -fx-border-radius: 5px; -fx-background-color: rgba(255,255,255,0.7); -fx-border-color: rgba(0,0,0,0.7); -fx-border-width: 1px");
+            "-fx-max-height: 18px; -fx-min-height: 16px; -fx-background-radius: 3px; -fx-border-radius: 3px; -fx-background-color: rgba(255,255,255,0.7); -fx-border-color: rgba(0,0,0,0.7); -fx-border-width: 1px");
         return;
       }
     }

@@ -20,6 +20,10 @@ public class MenuBarController implements Initializable {
   public JFXButton helpButton;
   public JFXButton settingsButton;
   public Line line6;
+  public JFXButton adminButton1;
+  public JFXButton settingsButton1;
+  public JFXButton helpButton1;
+  public JFXButton pathfindButton1;
   SceneController sceneController = App.getSceneController();
   DatabaseManager dbm = DatabaseManager.getManager();
 
@@ -57,10 +61,14 @@ public class MenuBarController implements Initializable {
     if (userLevel == null || userLevel == Account.Type.USER) {
       adminButton.setVisible(false);
       adminButton.setDisable(true);
+      adminButton1.setVisible(false);
+      adminButton1.setDisable(true);
       line6.setVisible(false);
     } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
       adminButton.setDisable(false);
       adminButton.setVisible(true);
+      adminButton1.setVisible(true);
+      adminButton1.setDisable(false);
       line6.setVisible(true);
       // set to staff
       // enable admin page

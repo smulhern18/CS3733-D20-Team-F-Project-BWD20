@@ -19,18 +19,18 @@
       <JFXTreeTableView fx:id="accountsView" layoutX="307.0" layoutY="256.0" prefHeight="400.0" prefWidth="717.0" AnchorPane.bottomAnchor="144.0" AnchorPane.leftAnchor="307.0" AnchorPane.rightAnchor="175.39999999999998" AnchorPane.topAnchor="256.0" />
       <JFXButton fx:id="updateStaff" buttonType="RAISED" layoutX="307.0" layoutY="205.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#updateAccounts" prefHeight="44.0" prefWidth="170.0" style="-fx-background-color: white;" text="Update Staff" AnchorPane.leftAnchor="307.0" AnchorPane.topAnchor="205.0">
          <font>
-            <Font size="20.0" />
-         </font>
-      </JFXButton>
+            <Font name="Dubai Light" size="20.0" />
+         </font></JFXButton>
       <JFXButton buttonType="RAISED" disable="true" layoutX="307.0" layoutY="683.0" onAction="#backtoData" prefHeight="33.0" prefWidth="122.0" style="-fx-background-color: white;" text="Cancel" visible="false">
          <font>
             <Font size="19.0" />
          </font></JFXButton>
-      <Label layoutX="666.0" layoutY="56.0" prefHeight="71.0" prefWidth="279.0" text="Update Pathfinder Algorithm:" AnchorPane.rightAnchor="254.8" AnchorPane.topAnchor="56.0">
+      <Label layoutX="666.0" layoutY="56.0" prefHeight="71.0" prefWidth="240.0" text="Update Pathfinder Algorithm:" AnchorPane.rightAnchor="255.0" AnchorPane.topAnchor="56.0">
          <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
+
+            <Font name="Dubai Light" size="18.0" />
+         </font></Label>
+
       <JFXComboBox fx:id="algoChoiceBox" layoutX="931.0" layoutY="79.0" onAction="#updatePathfinderAlgorithm" prefHeight="25.0" prefWidth="131.0" AnchorPane.rightAnchor="137.8" AnchorPane.topAnchor="79.0" />
       <StackPane layoutX="536.0" layoutY="124.0" prefHeight="110.0" prefWidth="203.0" AnchorPane.leftAnchor="536.0" AnchorPane.rightAnchor="460.8" AnchorPane.topAnchor="124.0">
          <children>
@@ -45,7 +45,7 @@
                <children>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Accounts">
                      <font>
-                        <Font name="System Bold" size="25.0" />
+                        <Font name="Dubai Light" size="24.0" />
                      </font>
                   </Text>
                   <Line endX="101.22023010253906" endY="64.71912384033203" startX="-105.27267456054688" startY="64.62623596191406" GridPane.rowIndex="1" />
@@ -55,7 +55,8 @@
       </StackPane>
       <JFXButton buttonType="RAISED" layoutX="903.0" layoutY="191.0" onAction="#dataView" prefHeight="58.0" prefWidth="122.0" style="-fx-background-color: white;" text="Reports View">
          <font>
-            <Font name="System Bold" size="14.0" />
+
+            <Font name="Dubai Light" size="20.0" />
          </font>
       </JFXButton>
    </children>
