@@ -88,7 +88,7 @@
                   <Line endX="89.29289245605469" startX="-100.0" stroke="WHITE" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
                   <Line endX="89.29289245605469" startX="-100.0" stroke="WHITE" GridPane.rowIndex="3" GridPane.valignment="BOTTOM" />
                   <Line endX="89.29289245605469" startX="-100.0" stroke="WHITE" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
-                  <Line endX="89.29289245605469" startX="-100.0" stroke="WHITE" GridPane.rowIndex="5" GridPane.valignment="BOTTOM" />
+                  <Line fx:id="line5" endX="89.29289245605469" startX="-100.0" stroke="WHITE" GridPane.rowIndex="5" GridPane.valignment="BOTTOM" />
                   <Line fx:id="line6" endX="89.29289245605469" startX="-100.0" stroke="WHITE" GridPane.rowIndex="6" GridPane.valignment="BOTTOM" />
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                      <children>
