@@ -43,12 +43,12 @@
                      <children>
                         <JFXButton fx:id="update" onAction="#update" style="-fx-background-color: #012D5A; -fx-background-radius: 10;" text="Update" textFill="#ffffffcc" GridPane.columnIndex="1">
                            <font>
-                              <Font name="STFangsong" size="18.0" />
+                              <Font name="Dubai Light" size="20.0" />
                            </font>
                         </JFXButton>
                         <JFXButton fx:id="requestServiceButton" onAction="#request" style="-fx-background-color: #012D5A; -fx-background-radius: 10;" text="Back" textFill="#ffffffcc">
                            <font>
-                              <Font name="STFangsong" size="18.0" />
+                              <Font name="Dubai Light" size="20.0" />
                            </font>
                         </JFXButton>
                      </children>
@@ -74,6 +74,9 @@
                      <GridPane.margin>
                         <Insets right="5.0" />
                      </GridPane.margin>
+                     <font>
+                        <Font name="Dubai Light" size="13.0" />
+                     </font>
                   </JFXButton>
                </children>
             </GridPane>
