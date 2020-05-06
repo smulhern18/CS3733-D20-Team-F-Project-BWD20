@@ -15,7 +15,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 
 public class MainMenuController implements Initializable {
 
@@ -70,26 +69,5 @@ public class MainMenuController implements Initializable {
     }
     background.fitWidthProperty().bind(anchorPane.widthProperty());
     background.fitHeightProperty().bind(anchorPane.heightProperty());
-
-    resize(anchorPane.getWidth());
-    anchorPane
-        .widthProperty()
-        .addListener(
-            (observable, oldWidth, newWidth) -> {
-              if (newWidth.doubleValue() != oldWidth.doubleValue()) {
-                resize(newWidth.doubleValue());
-              }
-            });
-  }
-
-  private void resize(double width) {
-    System.out.println(width);
-    Font newFont = new Font(width / 15);
-    Font buttonFont = new Font(width / 50);
-    welcomeLabel.setFont(newFont);
-    loginButton.setFont(buttonFont);
-    helpButton.setFont(buttonFont);
-    pathfinderButton.setFont(buttonFont);
-    serviceRequestButton.setFont(buttonFont);
   }
 }
