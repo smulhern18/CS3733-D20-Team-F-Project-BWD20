@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.FlowerRequestInfoController">
+<AnchorPane fx:id="anchorPane" prefHeight="575.0" prefWidth="629.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.FlowerRequestInfoController">
     <children>
         <AnchorPane prefHeight="200.0" prefWidth="200.0">
             <children>
@@ -84,7 +84,7 @@
                 </GridPane>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="anchorSubmit" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane fx:id="anchorSubmit" prefHeight="531.0" prefWidth="957.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <GridPane fx:id="servicePane" alignment="CENTER" prefHeight="484.0" prefWidth="402.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 2;" visible="false" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
                     <columnConstraints>
@@ -105,17 +105,26 @@
                     <children>
                         <HBox alignment="CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="2">
                             <children>
-                                <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="Location:       " />
-                                <JFXComboBox fx:id="locationComboBox" prefHeight="27.0" prefWidth="227.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                                <Label fx:id="locationLabel" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" text="Location:">
+                           <padding>
+                              <Insets right="20.0" />
+                           </padding>
+                           <font>
+                              <Font name="Dubai Light" size="12.0" />
+                           </font></Label>
+                                <JFXComboBox fx:id="locationComboBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black;" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" GridPane.rowIndex="5">
                             <children>
-                                <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="Priority:   ">
+                                <Label fx:id="priorityLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" text="Priority:">
                            <font>
                               <Font name="Dubai Light" size="12.0" />
-                           </font></Label>
-                                <JFXComboBox fx:id="priorityComboBox" prefHeight="27.0" prefWidth="248.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                           </font>
+                           <padding>
+                              <Insets right="20.0" />
+                           </padding></Label>
+                                <JFXComboBox fx:id="priorityComboBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black;" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="9">
@@ -148,47 +157,62 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
                             <children>
-                                <Label fx:id="buyerNameLabel" alignment="BOTTOM_LEFT" text="Buyer Name:      ">
+                                <Label fx:id="buyerNameLabel" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" text="Buyer Name:">
                            <font>
                               <Font name="Dubai Light" size="12.0" />
-                           </font></Label>
-                                <JFXTextField fx:id="buyerNameInput" alignment="BOTTOM_LEFT" prefHeight="26.0" prefWidth="211.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                           </font>
+                           <padding>
+                              <Insets right="20.0" />
+                           </padding></Label>
+                                <JFXTextField fx:id="buyerNameInput" alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black;" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                             <children>
-                                <Label fx:id="nameLabel" alignment="BOTTOM_LEFT" contentDisplay="CENTER" text="Recipient Name:   ">
+                                <Label fx:id="nameLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" text="Recipient Name:">
                            <font>
                               <Font name="Dubai Light" size="12.0" />
-                           </font></Label>
-                                <JFXTextField fx:id="recipientInput" prefHeight="26.0" prefWidth="202.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                           </font>
+                           <padding>
+                              <Insets right="20.0" />
+                           </padding></Label>
+                                <JFXTextField fx:id="recipientInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black;" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                             <children>
-                                <Label fx:id="roomNumberLabel" text="Room Number (if known):   ">
+                                <Label fx:id="roomNumberLabel" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" text="Room Number (if known):">
                            <font>
                               <Font name="Dubai Light" size="12.0" />
-                           </font></Label>
-                                <JFXTextField fx:id="roomInput" prefHeight="26.0" prefWidth="153.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                           </font>
+                           <padding>
+                              <Insets right="20.0" />
+                           </padding></Label>
+                                <JFXTextField fx:id="roomInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black;" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                             <children>
-                                <Label fx:id="messageLabel" text="Message: ">
+                                <Label fx:id="messageLabel" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" text="Message:">
                            <font>
                               <Font name="Dubai Light" size="12.0" />
-                           </font></Label>
-                                <JFXTextArea fx:id="messsageInput" prefHeight="42.0" prefWidth="247.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                           </font>
+                           <padding>
+                              <Insets right="20.0" />
+                           </padding></Label>
+                                <JFXTextArea fx:id="messsageInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black;" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
                             <children>
-                                <Label fx:id="phoneNumberLabel" text="Phone Number:   ">
+                                <Label fx:id="phoneNumberLabel" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" text="Phone Number:">
                            <font>
                               <Font name="Dubai Light" size="12.0" />
-                           </font></Label>
-                                <JFXTextField fx:id="phoneNumberInput" prefHeight="26.0" prefWidth="206.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                           </font>
+                           <padding>
+                              <Insets right="20.0" />
+                           </padding></Label>
+                                <JFXTextField fx:id="phoneNumberInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black;" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="8">
@@ -205,7 +229,7 @@
                 </GridPane>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="chosePane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane fx:id="chosePane" prefHeight="200.0" prefWidth="443.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <GridPane fx:id="flowerPane" alignment="CENTER" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 9;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
                     <columnConstraints>

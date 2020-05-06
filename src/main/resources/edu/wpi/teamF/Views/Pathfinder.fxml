@@ -784,5 +784,14 @@
       </AnchorPane>
 
    <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <JFXButton fx:id="aboutButton" buttonType="RAISED" maxHeight="60.0" maxWidth="119.0" minHeight="60.0" minWidth="120.0" onAction="#switchAbout" prefHeight="60.0" prefWidth="120.0" ripplerFill="BLACK" style="-fx-background-radius: 10px; -fx-background-color: #4d6c8b; -fx-max-width: 120px; -fx-min-width: 120px; -fx-pref-width: 120px; -fx-max-height: 60px; -fx-min-height: 60px; -fx-pref-height: 60px;" text="About" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+               <font>
+                  <Font name="Arial Bold" size="23.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

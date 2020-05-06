@@ -106,7 +106,7 @@
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
-                        <JFXButton text="Contact Us">
+                        <JFXButton onAction="#contact" text="Contact Us">
                            <font>
                               <Font name="Dubai Light" size="14.0" />
                            </font>
