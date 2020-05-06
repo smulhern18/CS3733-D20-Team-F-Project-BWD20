@@ -1,14 +1,14 @@
 nodeID,xcoord,ycoord,floor,building,nodeType,longName,shortName,teamAssigned
 FSTAI00101,1315,380,1,Faulkner,STAI,Staircase Intersection 1 Level 1,STAI00101,dataWritten
-FDEPT00201,1750,940,1,Faulkner,DEPT,Operation Rooms,DEPT00201,dataWritten
+FDEPT00201,1752,985,1,Faulkner,DEPT,Operation Rooms,DEPT00201,dataWritten
 FLABS00101,1080,620,1,Faulkner,LABS,Blood Draw Lab,LABS00101,dataWritten
-FDEPT00101,700,680,1,Faulkner,DEPT,Emergency Department,DEPT00101,dataWritten
+FDEPT00101,738,798,1,Faulkner,DEPT,Emergency Department,DEPT00101,dataWritten
 FLABS00201,1070,900,1,Faulkner,LABS,Endoscopy,LABS00201,dataWritten
 FSERV00101,1350,950,1,Faulkner,SERV,Linens,SERV00101,dataWritten
 FSERV00201,1282,1077,1,Faulkner,SERV,QR MAT Management,SERV00201,dataWritten
 FLABS00501,1780,550,1,Faulkner,LABS,Radiology,LABS00501,dataWritten
 FLABS00601,1430,400,1,Faulkner,LABS,MRI/CT,LABS00601,dataWritten
-FLABS00701,1690,1160,1,Faulkner,LABS,Labs,LABS00701,dataWritten
+FLABS00701,1690,1171,1,Faulkner,LABS,Labs,LABS00701,dataWritten
 FDEPT00301,2180,1145,1,Faulkner,DEPT,Operation Room,DEPT00301,dataWritten
 FDEPT00401,2075,775,1,Faulkner,DEPT,Recovery,DEPT00401,dataWritten
 FDEPT00501,1190,785,1,Faulkner,DEPT,Special Testing,DEPT00501,dataWritten
@@ -70,7 +70,7 @@ FDEPT00902,1200,1270,2,Faulkner,DEPT,Psych/Addiction Care,DEPT00902,dataWritten
 FELEV00Z02,1347,1132,2,Faulkner,ELEV,Elevator Z Level 2,ELEV00Z02,dataWritten
 FSTAI00102,1195,1050,2,Faulkner,STAI,Staircase 1 Level 2,STAI00102,dataWritten
 FSTAI00202,1320,384,2,Faulkner,STAI,Staircase 2 Level 2,STAI00202,dataWritten
-FRETL00102,1284,585,2,Faulkner,RETL,Food Service,RETL00102,dataWritten
+FRETL00102,1231,569,2,Faulkner,RETL,Food Service,RETL00102,dataWritten
 FDEPT00802,1473,313,2,Faulkner,DEPT,Plastic Surgery,DEPT00802,dataWritten
 FELEV00X02,1182,413,2,Faulkner,ELEV,Elevator X Level 2,ELEV00X02,dataWritten
 FSTAF00602,1300,936,2,Faulkner,STAF,Central Sterile Supply 2,STAF00602,dataWritten
@@ -150,10 +150,10 @@ FHALL02203,1145,465,3,Faulkner,HALL,Hall,HALL02203,dataWritten
 FHALL02303,1145,343,3,Faulkner,HALL,Hall,HALL02303,dataWritten
 FHALL02403,1145,290,3,Faulkner,HALL,Hall,HALL02403,dataWritten
 FHALL02503,1255,268,3,Faulkner,HALL,Hall,HALL02503,dataWritten
-FDEPT00104,1065,445,4,Faulkner,DEPT,Cardiology,DEPT00104,dataWritten
-FDEPT00204,1455,445,4,Faulkner,DEPT,Rheumatology Center,DEPT00204,dataWritten
+FDEPT00104,1065,452,4,Faulkner,DEPT,Cardiology,DEPT00104,dataWritten
+FDEPT00204,1469,455,4,Faulkner,DEPT,Rheumatology Center,DEPT00204,dataWritten
 FDEPT00304,1065,340,4,Faulkner,DEPT,HVMA Internal Medicine,DEPT00304,dataWritten
-FDEPT00404,1455,340,4,Faulkner,DEPT,HVMA Neurology,DEPT00404,dataWritten
+FDEPT00404,1491,329,4,Faulkner,DEPT,HVMA Neurology,DEPT00404,dataWritten
 FDEPT00504,1325,255,4,Faulkner,DEPT,Gastroentology Associates,DEPT00504,dataWritten
 FELEV00Y04,1150,1160,4,Faulkner,ELEV,Elevator Y,ELEV00Y04,dataWritten
 FELEV00Z04,1350,1160,4,Faulkner,ELEV,Elevator Z,ELEV00Z04,dataWritten
@@ -163,7 +163,7 @@ FDEPT00704,1325,975,4,Faulkner,DEPT,House Keeping,DEPT00704,dataWritten
 FDEPT00804,1325,910,4,Faulkner,DEPT,Nurse's Suite,DEPT00804,dataWritten
 FDEPT00904,1200,910,4,Faulkner,DEPT,MOHS Clinic,DEPT00904,dataWritten
 FDEPT01004,1325,820,4,Faulkner,DEPT,Pulmonary Services,DEPT01004,dataWritten
-FDEPT01104,1325,700,4,Faulkner,DEPT,Neurology,DEPT01104,dataWritten
+FDEPT01104,1321,710,4,Faulkner,DEPT,Neurology,DEPT01104,dataWritten
 FDEPT01204,1200,700,4,Faulkner,DEPT,BD Cardiology,DEPT01204,dataWritten
 FDEPT01304,1325,570,4,Faulkner,DEPT,Suites,DEPT01304,dataWritten
 FELEV00X04,1185,415,4,Faulkner,ELEV,Elevator X,ELEV00X04,dataWritten
@@ -171,11 +171,11 @@ FSTAI00204,1320,415,4,Faulkner,STAI,TopStairs,TopStairs,dataWritten
 FSTAI01204,2342,1219,4,Faulkner,STAI,RightStairs,RightStairs,dataWritten
 FREST00104,1210,310,4,Faulkner,REST,Restroom,REST00104,dataWritten
 FREST00204,1290,310,4,Faulkner,REST,Restroom,REST00204,dataWritten
-FDEPT01404,255,1270,4,Faulkner,DEPT,Medical Records,DEPT01404,dataWritten
+FDEPT01404,261,1270,4,Faulkner,DEPT,Doctor On Call,DEPT01404,dataWritten
 FDEPT01504,450,1180,4,Faulkner,DEPT,Urology,DEPT01504,dataWritten
-FDEPT01604,450,1270,4,Faulkner,DEPT,Tynan Conference Room,DEPT01604,dataWritten
+FDEPT01604,462,1270,4,Faulkner,DEPT,Tynan Conference Room,DEPT01604,dataWritten
 FSTAI00304,720,1270,4,Faulkner,STAI,Stairs,STAI00304,dataWritten
-FDEPT01704,910,1180,4,Faulkner,DEPT,Department Office,DEPT01704,dataWritten
+FDEPT01704,910,1184,4,Faulkner,DEPT,Department Office,DEPT01704,dataWritten
 FREST00304,910,1270,4,Faulkner,REST,Restroom,REST00304,dataWritten
 FDEPT01804,985,1270,4,Faulkner,DEPT,Medical Library,DEPT01804,dataWritten
 FDEPT01904,1010,1180,4,Faulkner,DEPT,Admin,DEPT01904,dataWritten
@@ -183,7 +183,7 @@ FDEPT02004,1120,1270,4,Faulkner,DEPT,Social Work,DEPT02004,dataWritten
 FDEPT02104,1120,1270,4,Faulkner,DEPT,Sadpwsky Conference Room,DEPT02104,dataWritten
 FDEPT02204,1253,1317,4,Faulkner,DEPT,Administration,DEPT02204,dataWritten
 FDEPT02304,1465,1180,4,Faulkner,DEPT,PATSAFE,DEPT02304,dataWritten
-FDEPT02404,1580,1270,4,Faulkner,DEPT,Primary Care Physicians,DEPT02404,dataWritten
+FDEPT02404,1581,1252,4,Faulkner,DEPT,Primary Care Physicians,DEPT02404,dataWritten
 FDEPT02504,1580,1180,4,Faulkner,DEPT,Surgery Department,DEPT02504,dataWritten
 FDEPT02604,1695,1180,4,Faulkner,DEPT,QUALIMP,DEPT02604,dataWritten
 FDEPT02704,1780,1180,4,Faulkner,DEPT,SURGSPEC,DEPT02704,dataWritten
@@ -199,7 +199,7 @@ FDEPT03204,2115,1270,4,Faulkner,DEPT,BWH Plastics,DEPT03204,dataWritten
 FDEPT03304,2115,1180,4,Faulkner,DEPT,Foot and Ankle Center,DEPT03304,dataWritten
 FDEPT03404,2235,1180,4,Faulkner,DEPT,Spine FAC,DEPT03404,dataWritten
 FSERV00404,2180,1270,4,Faulkner,SERV,Finance Office,SERV00404,dataWritten
-FDEPT03504,2290,1270,4,Faulkner,DEPT,IS,DEPT03504,dataWritten
+FDEPT03504,2290,1185,4,Faulkner,DEPT,IS,DEPT03504,dataWritten
 FHALL00104,255,1220,4,Faulkner,HALL,Hall,HALL00104,dataWritten
 FHALL00204,450,1220,4,Faulkner,HALL,Hall,HALL00204,dataWritten
 FHALL00304,720,1220,4,Faulkner,HALL,Hall,HALL00304,dataWritten
@@ -242,9 +242,9 @@ FHALL03904,1355,305,4,Faulkner,HALL,Hall,HALL03904,dataWritten
 FHALL04004,1190,285,4,Faulkner,HALL,Hall,HALL04004,dataWritten
 FHALL04104,1310,285,4,Faulkner,HALL,Hall,HALL04104,dataWritten
 FHALL04204,1250,285,4,Faulkner,HALL,Hall,HALL04204,dataWritten
-FDEPT00105,550,1190,5,Faulkner,DEPT,Intensive Care Unit / Critical Care Unit,DEPT00105,dataWritten
+FDEPT00105,583,1190,5,Faulkner,DEPT,Intensive Care Unit / Critical Care Unit,DEPT00105,dataWritten
 FDEPT00205,807,1164,5,Faulkner,DEPT,Hemo Dialysis,DEPT00205,dataWritten
-FDEPT00305,950,1322,5,Faulkner,DEPT,Outpatient Infusion Center,DEPT00305,dataWritten
+FDEPT00305,953,1333,5,Faulkner,DEPT,Outpatient Infusion Center,DEPT00305,dataWritten
 FDEPT00405,985,1148,5,Faulkner,DEPT,Residents,DEPT00405,dataWritten
 FDEPT00505,1560,1250,5,Faulkner,DEPT,Oncology Clinic,DEPT00505,dataWritten
 FDEPT00605,1185,970,5,Faulkner,DEPT,X-Ray/Nursing Staff Development,DEPT00605,dataWritten
@@ -253,8 +253,8 @@ FDEPT00805,1147,818,5,Faulkner,DEPT,BWH Primary Care Physicians,DEPT00805,dataWr
 FDEPT00905,1287,786,5,Faulkner,DEPT,Abulatory Care 2,DEPT00905,dataWritten
 FDEPT01105,1283,748,5,Faulkner,DEPT,Abulatory Care 4,DEPT01105,dataWritten
 FDEPT01205,1350,700,5,Faulkner,DEPT,Abulatory Care 5,DEPT01205,dataWritten
-FDEPT01305,1313,612,5,Faulkner,DEPT,Ambulatory Clinic,DEPT01305,dataWritten
-FDEPT01405,1207,622,5,Faulkner,DEPT,Internal Medicine / Headache,DEPT01405,dataWritten
+FDEPT01305,1315,628,5,Faulkner,DEPT,Ambulatory Clinic,DEPT01305,dataWritten
+FDEPT01405,1195,598,5,Faulkner,DEPT,Internal Medicine / Headache,DEPT01405,dataWritten
 FDEPT01505,1343,516,5,Faulkner,DEPT,Endocrinology/ Diabetes/ Hem-Onc,DEPT01505,dataWritten
 FDEPT01605,1127,257,5,Faulkner,DEPT,ENT / Eye Physical / Dermatologist,DEPT01605,dataWritten
 FDEPT01705,1269,207,5,Faulkner,DEPT,Othopedic Association,DEPT01705,dataWritten
@@ -268,7 +268,7 @@ FREST00205,1250,300,5,Faulkner,REST,Upper Restrooms,REST00205,dataWritten
 FSERV00105,1250,1324,5,Faulkner,SERV,Vacant,SERV00105,dataWritten
 FSERV00205,1215,513,5,Faulkner,SERV,Suite 5945,SERV00205,dataWritten
 FSERV00305,1215,550,5,Faulkner,SERV,Suite 5940,SERV00305,dataWritten
-FSERV00405,1050,395,5,Faulkner,SERV,Suite 51,SERV00405,dataWritten
+FSERV00405,1050,406,5,Faulkner,SERV,Suite 51,SERV00405,dataWritten
 FSERV00505,1453,459,5,Faulkner,SERV,Suite 58,SERV00505,dataWritten
 FSTAI00105,695,1276,5,Faulkner,STAI,Stairwell outside HemoDia,STAI00105,dataWritten
 FSTAI00205,150,1224,5,Faulkner,STAI,Stairwell inside ICU,STAI00205,dataWritten
@@ -312,7 +312,7 @@ FHALL01805,1355,320,5,Faulkner,HALL,FHALL01805,HALL01805,dataWritten
 FHALL03305,1355,390,5,Faulkner,HALL,FHALL03305,HALL03305,dataWritten
 FHALL02805,1355,459,5,Faulkner,HALL,FHALL02805,HALL02805,dataWritten
 FHALL03605,1355,483,5,Faulkner,HALL,FHALL03605,HALL03605,dataWritten
-FDEPT01002,1872,1204,2,Faulkner,DEPT,Pyschiatric Inpatient Care,PIC,dataWritten
+FDEPT01002,1852,1213,2,Faulkner,DEPT,Pyschiatric Inpatient Care,PIC,dataWritten
 FSTAI00504,152,1235,4,Faulkner,STAI,Far Left Stairs,stairs,dataWritten
 FSTAI00605,1797,1260,5,Faulkner,STAI,Mid Right Stairs,stairs,dataWritten
 HREST001F2,1625,982,F2,Tower,REST,Restroom,HREST00102,dataWritten
@@ -322,8 +322,7 @@ ACONF001F3,1648,2968,F3,BTM,CONF,BTM Conference Center,ACONF00103,dataWritten
 ACONF0010G,1671,2648,G,BTM,CONF,Schlagler Innovation Lobby,ACONF0010G,dataWritten
 BCONF001F2,2150,1025,F2,45 Francis,CONF,Duncan Reid Conference Room,BCONF00102,dataWritten
 CCONF001L1,2255,849,L1,45 Francis,CONF,Anesthesia Conference Room,CCONF001L1,dataWritten
-CCONF002L1,2665,1043,L1,45 Francis,CONF,Medical Records Conference Room,CCONF002L1,dataWritten
-CCONF003L1,2445,1245,L1,45 Francis,CONF,Abrams Conference Room,CCONF003L1,dataWritten
+CCONF003L1,2489,1238,L1,45 Francis,CONF,Abrams Conference Room,CCONF003L1,dataWritten
 DCONF001F2,4595,550,F2,15 Francis,CONF,Carrie M. Hall Conference Center,DCONF00102,dataWritten
 GCONF020F1,1493,2117,F1,Shapiro,CONF,Shapiro Board Room,GCONF02001,dataWritten
 ADEPT001F1,1401,2628,F1,BTM,DEPT,Neuroscience Waiting Room,ADEPT00101,dataWritten
@@ -340,9 +339,9 @@ BDEPT005F2,2614,1045,F2,45 Francis,DEPT,Ear Nose & Throat,BDEPT00502,dataWritten
 BDEPT007F2,2967,776,F2,45 Francis,DEPT,Plastic Surgery,BDEPT00702,dataWritten
 BDEPT008F2,3155,811,F2,45 Francis,DEPT,Outpatient Pharmacy,BDEPT00802,dataWritten
 BDEPT009F2,3258,851,F2,45 Francis,DEPT,Weiner Center for Preoperative Evaluation,BDEPT00902,dataWritten
-CDEPT002L1,1980,844,L1,Tower,DEPT,Day Surgery Family Waiting,CDEPT002L1,dataWritten
-CDEPT003L1,1845,844,L1,Tower,DEPT,Day Surgery Family Waiting Exit,CDEPT003L1,dataWritten
-CDEPT004L1,2310,1043,L1,45 Francis,DEPT,Medical Records Film Library,CDEPT004L1,dataWritten
+CDEPT002L1,1984,813,L1,Tower,DEPT,Day Surgery Family Waiting,CDEPT002L1,dataWritten
+CDEPT003L1,1847,793,L1,Tower,DEPT,Day Surgery Family Waiting Exit,CDEPT003L1,dataWritten
+CDEPT004L1,2303,1007,L1,45 Francis,DEPT,Medical Records Film Library,CDEPT004L1,dataWritten
 DDEPT001F2,4330,700,F2,15 Francis,DEPT,Chest Diseases,DDEPT00102,dataWritten
 DDEPT002F2,4240,730,F2,15 Francis,DEPT,Thoracic Surgery Clinic,DDEPT00202,dataWritten
 DDEPT003F2,3900,640,F2,15 Francis,DEPT,Brigham Health,DDEPT00302,dataWritten
@@ -402,7 +401,7 @@ WELEV00GF2,2921,871,F2,45 Francis,ELEV,Elevator G,WELEV00G02,dataWritten
 WELEV00HF1,2735,1070,F1,45 Francis,ELEV,Elevator H,WELEV00H01,dataWritten
 WELEV00HF2,2732,1107,F2,45 Francis,ELEV,Elevator H,WELEV00H02,dataWritten
 WELEV00HF3,2716,1109,F3,45 Francis,ELEV,Elevator H,WELEV00H03,dataWritten
-WELEV00HL1,2715,1070,L1,45 Francis,ELEV,Elevator H,WELEV00HL1,dataWritten
+WELEV00HL1,2715,1097,L1,45 Francis,ELEV,Elevator H,WELEV00HL1,dataWritten
 WELEV00JF1,2385,810,F1,45 Francis,ELEV,Elevator J,WELEV00J01,dataWritten
 WELEV00JF2,2385,800,F2,45 Francis,ELEV,Elevator J,WELEV00J02,dataWritten
 WELEV00JF3,2365,800,F3,45 Francis,ELEV,Elevator J,WELEV00J03,dataWritten
@@ -411,8 +410,8 @@ WELEV00JL2,2360,804,L2,45 Francis,ELEV,Elevator J,WELEV00JL2,dataWritten
 WELEV00KF1,2240,985,F1,45 Francis,ELEV,Elevator K,WELEV00K01,dataWritten
 WELEV00KF2,2210,965,F2,45 Francis,ELEV,Elevator K,WELEV00K02,dataWritten
 WELEV00KF3,2195,989,F3,45 Francis,ELEV,Elevator K,WELEV00K03,dataWritten
-WELEV00KL1,2220,974,L1,45 Francis,ELEV,Elevator K,WELEV00KL1,dataWritten
-WELEV00KL2,2215,974,L2,45 Francis,ELEV,Elevator K,WELEV00KL2,dataWritten
+WELEV00KL1,2193,978,L1,45 Francis,ELEV,Elevator K,WELEV00KL1,dataWritten
+WELEV00KL2,2193,979,L2,45 Francis,ELEV,Elevator K,WELEV00KL2,dataWritten
 WELEV00LF1,1810,930,F1,Tower,ELEV,Elevator L,WELEV00L01,dataWritten
 WELEV00LF2,1805,925,F2,Tower,ELEV,Elevator L,WELEV00L02,dataWritten
 WELEV00LF3,1790,925,F3,Tower,ELEV,Elevator L,WELEV00L03,dataWritten
@@ -421,7 +420,7 @@ WELEV00LL2,1785,924,L2,Tower,ELEV,Elevator L,WELEV00LL2,dataWritten
 WELEV00MF1,1813,1319,F1,Tower,ELEV,Elevator M,WELEV00M01,dataWritten
 WELEV00MF2,1829,1321,F2,Tower,ELEV,Elevator M,WELEV00M02,dataWritten
 WELEV00MF3,1818,1318,F3,Tower,ELEV,Elevator M,WELEV00M03,dataWritten
-WELEV00ML1,1820,1284,L1,Tower,ELEV,Elevator M,WELEV00ML1,dataWritten
+WELEV00ML1,1821,1316,L1,Tower,ELEV,Elevator M,WELEV00ML1,dataWritten
 WELEV00ML2,1821,1317,L2,Tower,ELEV,Elevator M,WELEV00ML2,dataWritten
 AEXIT0010G,1678,2460,G,BTM,EXIT,Fenwood Road,AEXIT0010G,dataWritten
 AEXIT001L2,1696,2788,L2,BTM,EXIT,Parking Garage,AEXIT001L2,dataWritten
@@ -434,7 +433,6 @@ FEXIT003F1,2099,1357,F1,Tower,EXIT,Emergency Department Entrance,FEXIT00301,data
 GEXIT001F1,1750,1799,F1,Shapiro,EXIT,Francis Street Exit,GEXIT00101,dataWritten
 GEXIT001L1,1702,2260,L1,Shapiro,EXIT,Fenwood Road Exit,GEXIT001L1,dataWritten
 ACONF001F2,1590,2506,F2,BTM,CONF,Conference,ACONF00102,dataWritten
-AHALL001F1,1728,2529,F1,BTM,HALL,Hall,AHALL00101,dataWritten
 AHALL001F2,1591,2560,F2,BTM,HALL,Hall,AHALL00102,dataWritten
 AHALL001F3,1534,2732,F3,BTM,HALL,Hall,AHALL00103,dataWritten
 AHALL0010G,1677,2530,G,BTM,HALL,Hall,AHALL0010G,dataWritten
@@ -463,7 +461,6 @@ AHALL007F1,1017,2865,F1,BTM,HALL,Hall,AHALL00701,dataWritten
 AHALL0070G,1712,2647,G,BTM,HALL,Hall,AHALL0070G,dataWritten
 AHALL008F1,1534,2737,F1,BTM,HALL,Hall,AHALL00801,dataWritten
 AHALL0080G,1599,2651,G,BTM,HALL,Hall,AHALL0080G,dataWritten
-AHALL009F1,1466,2501,F1,BTM,HALL,Hall,AHALL00901,dataWritten
 AHALL0090G,1524,2726,G,BTM,HALL,Hall,AHALL0090G,dataWritten
 AHALL010F1,1418,2678,F1,BTM,HALL,Hall,AHALL01001,dataWritten
 AHALL0100G,1600,2853,G,BTM,HALL,Hall,AHALL0100G,dataWritten
@@ -484,8 +481,6 @@ BHALL011F2,2912,903,F2,45 Francis,HALL,Hallway Intersection 11 Level 2,BHALL0110
 BHALL012F2,2945,902,F2,45 Francis,HALL,Hallway Intersection 12 Level 2,BHALL01202,dataWritten
 BHALL013F2,3157,892,F2,45 Francis,HALL,Hallway Intersection 13 Level 2,BHALL01302,dataWritten
 BHALL014F2,3296,880,F2,45 Francis,HALL,Hallway Intersection 14 Level 2,BHALL01402,dataWritten
-BHALL015F2,2672,820,F2,45 Francis,HALL,Hallway Intersection 15 Level 2,BHALL01502,dataWritten
-BHALL016F2,2721,750,F2,45 Francis,HALL,Hallway Intersection 16 Level 2,BHALL01602,dataWritten
 BHALL017F2,2951,776,F2,45 Francis,HALL,Hallway Intersection 17 Level 2,BHALL01702,dataWritten
 BHALL018F2,2633,1006,F2,45 Francis,HALL,Hallway Intersection 18 Level 2,BHALL01802,dataWritten
 BHALL019F2,2678,1032,F2,45 Francis,HALL,Hallway Intersection 19 Level 2,BHALL01902,dataWritten
@@ -517,7 +512,7 @@ CHALL002L1,2445,1043,L1,45 Francis,HALL,Hallway 2 Floor L1,CHALL002L1,dataWritte
 CHALL002L2,2270,904,L2,45 Francis,HALL,Hallway 2 Floor L2,CHALL002L2,dataWritten
 CHALL003L1,2445,1284,L1,45 Francis,HALL,Hallway 3 Floor L1,CHALL003L1,dataWritten
 CHALL003L2,2215,904,L2,45 Francis,HALL,Hallway 3 Floor L2,CHALL003L2,dataWritten
-CHALL004L1,2770,1070,L1,45 Francis,HALL,Hallway 4 Floor L1,CHALL004L1,dataWritten
+CHALL004L1,2715,1040,L1,45 Francis,HALL,Hallway 4 Floor L1,CHALL004L1,dataWritten
 CHALL004L2,2130,904,L2,45 Francis,HALL,Hallway 4 Floor L2,CHALL004L2,dataWritten
 CHALL005L1,1750,1284,L1,Tower,HALL,Hallway 5 Floor L1,CHALL005L1,dataWritten
 CHALL005L2,1745,1280,L2,Tower,HALL,Hallway 5 Floor L2,CHALL005L2,dataWritten
@@ -527,7 +522,7 @@ CHALL007L1,2130,1045,L1,Tower,HALL,Hallway 7 Floor L1,CHALL007L1,dataWritten
 CHALL007L2,1730,1009,L2,Tower,HALL,Hallway 7 Floor L2,CHALL007L2,dataWritten
 CHALL008L1,2215,1045,L1,45 Francis,HALL,Hallway 8 Floor L1,CHALL008L1,dataWritten
 CHALL008L2,1730,924,L2,Tower,HALL,Hallway 8 Floor L2,CHALL008L2,dataWritten
-CHALL009L1,2220,904,L1,45 Francis,HALL,Hallway 9 Floor L1,CHALL009L1,dataWritten
+CHALL009L1,2208,908,L1,45 Francis,HALL,Hallway 9 Floor L1,CHALL009L1,dataWritten
 CHALL009L2,1730,849,L2,Tower,HALL,Hallway 9 Floor L2,CHALL009L2,dataWritten
 CHALL010L1,2265,904,L1,45 Francis,HALL,Hallway 10 Floor L1,CHALL010L1,dataWritten
 CHALL010L2,2130,849,L2,Tower,HALL,Hallway 10 Floor L2,CHALL010L2,dataWritten
@@ -535,7 +530,7 @@ CHALL011L1,2360,849,L1,45 Francis,HALL,Hallway 11 Floor L1,CHALL011L1,dataWritte
 CHALL012L1,2130,904,L1,45 Francis,HALL,Hallway 12 Floor L1,CHALL012L1,dataWritten
 CHALL013L1,2130,844,L1,45 Francis,HALL,Hallway 13 Floor L1,CHALL013L1,dataWritten
 CHALL014L1,1845,924,L1,Tower,HALL,Hallway 14 Floor L1,CHALL014L1,dataWritten
-CHALL015L1,2300,849,L1,45 Francis,HALL,Hallway 15 Floor L1,CHALL015L1,dataWritten
+CHALL015L1,2313,848,L1,45 Francis,HALL,Hallway 15 Floor L1,CHALL015L1,dataWritten
 DHALL001F2,4770,1140,F2,15 Francis,HALL,Hallway 1 Floor 2,DHALL00102,dataWritten
 DHALL002F2,4750,1080,F2,15 Francis,HALL,Hallway 2 Floor 2,DHALL00202,dataWritten
 DHALL003F2,4725,995,F2,15 Francis,HALL,Hallway 3 Floor 2,DHALL00302,dataWritten
@@ -591,13 +586,11 @@ EHALL006F1,2385,910,F1,45 Francis,HALL,Hallway Node 4 Floor 1,EHALL00601,dataWri
 EHALL007F1,2385,860,F1,45 Francis,HALL,Hallway Node 5 Floor 1,EHALL00701,dataWritten
 EHALL008F1,2460,910,F1,45 Francis,HALL,Hallway Node 6 Floor 1,EHALL00801,dataWritten
 EHALL009F1,2585,910,F1,45 Francis,HALL,Hallway Node 7 Floor 1,EHALL00901,dataWritten
-EHALL010F1,2589,810,F1,45 Francis,HALL,Hallway Node 8 Floor 1,EHALL01001,dataWritten
 EHALL011F1,2610,910,F1,45 Francis,HALL,Hallway Node 9 Floor 1,EHALL01101,dataWritten
 EHALL012F1,2610,954,F1,45 Francis,HALL,Hallway Node 10 Floor 1,EHALL01201,dataWritten
 EHALL013F1,2660,954,F1,45 Francis,HALL,Hallway Node 11 Floor 1,EHALL01301,dataWritten
 EHALL014F1,2660,979,F1,45 Francis,HALL,Hallway Node 12 Floor 1,EHALL01401,dataWritten
 EHALL015F1,2675,910,F1,45 Francis,HALL,Hallway Node 13 Floor 1,EHALL01501,dataWritten
-EHALL016F1,2802,841,F1,45 Francis,HALL,Hallway Node 14 Floor 1,EHALL01601,dataWritten
 EHALL017F1,3099,893,F1,45 Francis,HALL,Hallway Node 15 Floor 1,EHALL01701,dataWritten
 EHALL018F1,2925,910,F1,45 Francis,HALL,Hallway Node 16 Floor 1,EHALL01801,dataWritten
 EHALL019F1,2960,900,F1,45 Francis,HALL,Hallway Node 17 Floor 1,EHALL01901,dataWritten
@@ -609,13 +602,10 @@ EHALL024F1,2770,1010,F1,45 Francis,HALL,Hallway Node 22 Floor 1,EHALL02401,dataW
 EHALL025F1,2925,980,F1,45 Francis,HALL,Hallway Node 23 Floor 1,EHALL02501,dataWritten
 EHALL026F1,2986,983,F1,45 Francis,HALL,Hallway Node 24 Floor 1,EHALL02601,dataWritten
 EHALL027F1,3058,985,F1,45 Francis,HALL,Hallway Node 25 Floor 1,EHALL02701,dataWritten
-EHALL028F1,2925,1050,F1,45 Francis,HALL,Hallway Node 26 Floor 1,EHALL02801,dataWritten
 EHALL029F1,2787,1286,F1,45 Francis,HALL,Hallway Node 27 Floor 1,EHALL02901,dataWritten
 EHALL030F1,2780,1072,F1,45 Francis,HALL,Hallway Node 28 Floor 1,EHALL03001,dataWritten
-EHALL031F1,3076,1325,F1,45 Francis,HALL,Hallway Node 29 Floor 1,EHALL03101,dataWritten
 EHALL032F1,2787,1197,F1,45 Francis,HALL,Hallway Node 30 Floor 1,EHALL03201,dataWritten
 EHALL033F1,2605,1380,F1,45 Francis,HALL,Hallway Node 31 Floor 1,EHALL03301,dataWritten
-EHALL034F1,3079,1430,F1,45 Francis,HALL,Hallway Node 32 Floor 1,EHALL03401,dataWritten
 EHALL035F1,2788,1140,F1,45 Francis,HALL,Hallway Node 33 Floor 1,EHALL03501,dataWritten
 EHALL036F1,2786,1383,F1,45 Francis,HALL,Hallway Node 34 Floor 1,EHALL03601,dataWritten
 FHALL001F1,2055,910,F1,Tower,HALL,Lower Pike Hallway Exit Lobby,FHALL00101,dataWritten
@@ -668,9 +658,7 @@ GHALL007L2,1578,2089,L2,Shapiro,HALL,Hallway MapNode 7 Floor L2,GHALL007L2,dataW
 GHALL008F1,1707,2152,F1,Shapiro,HALL,Hallway MapNode 8 Floor 1,GHALL00801,dataWritten
 GHALL008F3,1683,2145,F3,Shapiro,HALL,Hallway Node 8 Floor 3,GHALL00803,dataWritten
 GHALL008L2,1577,2195,L2,Shapiro,HALL,Hallway MapNode 8 Floor L2,GHALL008L2,dataWritten
-GHALL009F1,1468,2272,F1,Shapiro,HALL,Hallway MapNode 9 Floor 1,GHALL00901,dataWritten
 GHALL009L2,1731,2086,L2,Shapiro,HALL,Hallway MapNode 9 Floor L2,GHALL009L2,dataWritten
-GHALL010F1,1443,2265,F1,Shapiro,HALL,Hallway MapNode 10 Floor 1,GHALL01001,dataWritten
 GHALL010F2,1687,1929,F2,Shapiro,HALL,Hall Node 10 Floor 2,GHALL01002,dataWritten
 GHALL010F3,1580,2070,F3,Shapiro,HALL,Hallway Node 10 Floor 3,GHALL01003,dataWritten
 GHALL010L2,1680,2086,L2,Shapiro,HALL,Hallway MapNode 10 Floor L2,GHALL010L2,dataWritten
@@ -679,9 +667,6 @@ GHALL011L2,1550,1966,L2,Shapiro,HALL,Hallway MapNode 11 Floor L2,GHALL011L2,data
 GHALL012L2,1512,1966,L2,Shapiro,HALL,Hallway MapNode 12 Floor L2,GHALL012L2,dataWritten
 GHALL013F3,1580,2006,F3,Shapiro,HALL,Hallway Node 13 Floor 3,GHALL01303,dataWritten
 GHALL013L2,1513,1889,L2,Shapiro,HALL,Hallway MapNode 13 Floor L2,GHALL013L2,dataWritten
-GHALL014F1,1583,2281,F1,Shapiro,HALL,Hallway MapNode 14 Floor 1,GHALL01401,dataWritten
-GHALL015F1,1552,2269,F1,Shapiro,HALL,Hallway MapNode 15 Floor 1,GHALL01501,dataWritten
-GHALL016F1,1501,2264,F1,Shapiro,HALL,Hallway MapNode 16 Floor 1,GHALL01601,dataWritten
 GHALL016F2,1502,1820,F2,Shapiro,HALL,Hall Node 16 Floor 2,GHALL01602,dataWritten
 GHALL016L2,1514,1785,L2,Shapiro,HALL,Hallway MapNode 16 Floor L2,GHALL016L2,dataWritten
 GHALL017F1,1565,2093,F1,Shapiro,HALL,Hallway MapNode 17 Floor 1,GHALL01701,dataWritten
@@ -695,15 +680,11 @@ GHALL022F2,1720,1801,F2,Shapiro,HALL,Hall Node 22 Floor 2,GHALL02202,dataWritten
 GHALL024F1,1602,1928,F1,Shapiro,HALL,Hallway MapNode 24 Floor 1,GHALL02401,dataWritten
 GHALL027F2,1726,1930,F2,Shapiro,HALL,Hall Node 27 Floor 2,GHALL02702,dataWritten
 GHALL028F1,1270,1830,F1,Shapiro,HALL,Hallway MapNode 28 Floor 1,GHALL02801,dataWritten
-GHALL029F1,1136,1701,F1,Shapiro,HALL,Hallway MapNode 29 Floor 1,GHALL02901,dataWritten
 GHALL029F2,1719,2041,F2,Shapiro,HALL,Hall Node 29 Floor 2,GHALL02902,dataWritten
 GHALL030F1,1750,1985,F1,Shapiro,HALL,Hallway MapNode 30 Floor 1,GHALL03001,dataWritten
 GHALL030F2,1580,2090,F2,Shapiro,HALL,Hall Node 30 Floor 2,GHALL03002,dataWritten
-GHALL031F1,1125,1868,F1,Shapiro,HALL,Hallway MapNode 31 Floor 1,GHALL03101,dataWritten
 GHALL032F2,1708,2093,F2,Shapiro,HALL,Hall Node 32 Floor 2,GHALL03202,dataWritten
-GHALL033F1,1112,1970,F1,Shapiro,HALL,Hallway MapNode 33 Floor 1,GHALL03301,dataWritten
 GHALL033F2,1578,1935,F2,Shapiro,HALL,Hall Node 33 Floor 2,GHALL03302,dataWritten
-GHALL034F1,1120,1789,F1,Shapiro,HALL,Hallway MapNode 34 Floor 1,GHALL03401,dataWritten
 GHALL034F2,1631,2092,F2,Shapiro,HALL,Hall Node 34 Floor 2,GHALL03402,dataWritten
 GHALL036F2,1580,2208,F2,Shapiro,HALL,Hall Node 36 Floor 2,GHALL03602,dataWritten
 GHALL037F2,1692,2211,F2,Shapiro,HALL,Hall Node 37 Floor 2,GHALL03702,dataWritten
@@ -747,7 +728,6 @@ IHALL011F3,2716,1073,F3,45 Francis,HALL,Hallway Node 11,IHALL01103,dataWritten
 IHALL012F3,2220,1034,F3,45 Francis,HALL,Hallway Node 12,IHALL01203,dataWritten
 IHALL013F3,2323,1034,F3,45 Francis,HALL,Hallway Node 13,IHALL01303,dataWritten
 IHALL014F3,2323,993,F3,45 Francis,HALL,Hallway Node 14,IHALL01403,dataWritten
-IHALL015F3,2116,753,F3,45 Francis,HALL,Hallway Node 15,IHALL01503,dataWritten
 IHALL016F3,2252,851,F3,45 Francis,HALL,Hallway Node 16,IHALL01603,dataWritten
 IHALL017F3,2323,851,F3,45 Francis,HALL,Hallway Node 17,IHALL01703,dataWritten
 IHALL018F3,2362,851,F3,45 Francis,HALL,Hallway Node 18,IHALL01803,dataWritten
@@ -786,13 +766,13 @@ ALABS001L2,1667,2682,L2,BTM,LABS,MRI CT Scan Imaging,ALABS001L2,dataWritten
 ALABS002F3,1671,2695,F3,BTM,LABS,Clinical Trials,ALABS00203,dataWritten
 BLABS001F2,2246,1350,F2,45 Francis,LABS,Vascular Diagnostic Lab,BLABS00102,dataWritten
 BLABS002F2,2972,995,F2,45 Francis,LABS,Outpatient Specimen Collection,BLABS00202,dataWritten
-CLABS001L1,1965,1284,L1,Tower,LABS,Outpatient Fluoroscopy,CLABS001L1,dataWritten
-CLABS001L2,2300,854,L2,45 Francis,LABS,Radiation Oncology TX Suite,CLABS001L2,dataWritten
+CLABS001L1,1973,1265,L1,Tower,LABS,Outpatient Fluoroscopy,CLABS001L1,dataWritten
+CLABS001L2,2292,853,L2,45 Francis,LABS,Radiation Oncology TX Suite,CLABS001L2,dataWritten
 CLABS002L1,1634,1113,L1,Tower,LABS,Pre-Op PACU,CLABS002L1,dataWritten
-CLABS002L2,2215,1280,L2,45 Francis,LABS,Radiation Oncology Lab,CLABS002L2,dataWritten
-CLABS003L1,2290,1284,L1,45 Francis,LABS,Nuclear Medicine,CLABS003L1,dataWritten
-CLABS004L1,2320,1284,L1,45 Francis,LABS,Ultrasound Lab,CLABS004L1,dataWritten
-CLABS005L1,2770,1284,L1,45 Francis,LABS,CSIR MRI Lab,CLABS005L1,dataWritten
+CLABS002L2,2256,1283,L2,45 Francis,LABS,Radiation Oncology Lab,CLABS002L2,dataWritten
+CLABS003L1,2345,1313,L1,45 Francis,LABS,Nuclear Medicine,CLABS003L1,dataWritten
+CLABS004L1,2330,1218,L1,45 Francis,LABS,Ultrasound Lab,CLABS004L1,dataWritten
+CLABS005L1,2818,1284,L1,45 Francis,LABS,CSIR MRI Lab,CLABS005L1,dataWritten
 DLABS001F2,3830,775,F2,15 Francis,LABS,MRI Associates Lab,DLABS00102,dataWritten
 ELABS001F1,3050,730,F1,45 Francis,LABS,Asthma Research Lab,ELABS00101,dataWritten
 ELABS002F1,2775,1287,F1,45 Francis,LABS,Ambulatory X-Ray,ELABS00201,dataWritten
@@ -809,11 +789,11 @@ BREST003F2,2196,1232,F2,45 Francis,REST,Restroom,BREST00302,dataWritten
 BREST004F2,2585,1385,F2,45 Francis,REST,Restroom,BREST00402,dataWritten
 BREST005F2,2750,1155,F2,45 Francis,REST,Restroom,BREST00502,dataWritten
 CREST001L1,1657,1025,L1,Tower,REST,Restroom,CREST001L1,dataWritten
-CREST001L2,2300,884,L2,45 Francis,REST,Restroom,CREST001L2,dataWritten
-CREST002L1,2065,1284,L1,Tower,REST,Restroom,CREST002L1,dataWritten
-CREST002L2,1930,1280,L2,45 Francis,REST,Restroom,CREST002L2,dataWritten
-CREST003L1,2300,879,L1,45 Francis,REST,Restroom,CREST003L1,dataWritten
-CREST004L1,2770,1160,L1,45 Francis,REST,Restroom,CREST004L1,dataWritten
+CREST001L2,2330,902,L2,45 Francis,REST,Restroom,CREST001L2,dataWritten
+CREST002L1,2069,1248,L1,Tower,REST,Restroom,CREST002L1,dataWritten
+CREST002L2,1919,1250,L2,45 Francis,REST,Restroom,CREST002L2,dataWritten
+CREST003L1,2332,909,L1,45 Francis,REST,Restroom,CREST003L1,dataWritten
+CREST004L1,2741,1162,L1,45 Francis,REST,Restroom,CREST004L1,dataWritten
 DREST001F2,4125,625,F2,15 Francis,REST,Restroom,DREST00102,dataWritten
 DREST002F2,3895,695,F2,15 Francis,REST,Restroom,DREST00202,dataWritten
 DREST003F2,3655,852,F2,15 Francis,REST,Restroom,DREST00302,dataWritten
@@ -833,7 +813,7 @@ IREST002F3,2570,1257,F3,45 Francis,REST,Restroom,IREST00203,dataWritten
 IREST003F3,2745,1147,F3,45 Francis,REST,Restroom,IREST00303,dataWritten
 IREST005F3,2277,995,F3,45 Francis,REST,Restroom,IREST00503,dataWritten
 ARETL001F1,1619,2522,F1,BTM,RETL,Cafe,ARETL00101,dataWritten
-CRETL001L1,2185,904,L1,45 Francis,RETL,Vending Machine,CRETL001L1,dataWritten
+CRETL001L1,2195,886,L1,45 Francis,RETL,Vending Machine,CRETL001L1,dataWritten
 DRETL001F2,4158,504,F2,15 Francis,RETL,Pats Place,DRETL00102,dataWritten
 FRETL001F1,1973,844,F1,Tower,RETL,Lobby Vending Machine,FRETL00101,dataWritten
 FRETL002F1,1609,1246,F1,Tower,RETL,Au Bon Pain,FRETL00201,dataWritten
@@ -841,8 +821,8 @@ HRETL001F2,1935,860,F2,Tower,RETL,Garden Cafe,HRETL00102,dataWritten
 HRETL002F2,1595,1072,F2,Tower,RETL,Vending Machine,HRETL00202,dataWritten
 HRETL003F2,1825,1080,F2,Tower,RETL,Gift Shop Tower,HRETL00302,dataWritten
 BSERV001F2,2853,1067,F2,45 Francis,SERV,Patient Financial Services,BSERV00102,dataWritten
-CSERV001L1,2490,1043,L1,45 Francis,SERV,Volunteers Floor,CSERV001L1,dataWritten
-CSERV001L2,2015,1280,L2,45 Francis,SERV,Interpreter Services,CSERV001L2,dataWritten
+CSERV001L1,2498,1118,L1,45 Francis,SERV,Volunteers Floor,CSERV001L1,dataWritten
+CSERV001L2,2013,1256,L2,45 Francis,SERV,Interpreter Services,CSERV001L2,dataWritten
 FSERV001F1,1950,871,F1,Tower,SERV,Shattuck Street Lobby ATM,FSERV00101,dataWritten
 FSERV002F1,1605,1029,F1,Tower,SERV,Tower Medical Cashier,FSERV00201,dataWritten
 FSERV003F1,1700,1158,F1,Tower,SERV,Kessler Library,FSERV00301,dataWritten
@@ -926,3 +906,25 @@ XHALL011F3,3302,1871,F3,FLEX,HALL,Flex Hall,Flex Hall,dataWritten
 XHALL012F3,2787,2106,F3,FLEX,HALL,Flex Hall,Flex Hall,dataWritten
 XCONF013F3,2785,2164,F3,FLEX,CONF,Flexible Workzone 4,Workzone 4,dataWritten
 XCONF014F3,3273,1836,F3,FLEX,CONF,Flexible Workzone 2,Workzone 2,dataWritten
+ZHALL016L1,1734,1028,L1,Tower,HALL,Hall,Hall,dataWritten
+ZHALL017L1,1744,1112,L1,Tower,HALL,Hall,Hall,dataWritten
+ZHALL018L1,1822,1290,L1,Tower,HALL,Hall,Hall,dataWritten
+ZHALL019L1,1973,1281,L1,Tower,HALL,Hall,Hall,dataWritten
+ZHALL020L1,2070,1283,L1,Tower,HALL,Hall,Hall,dataWritten
+ZHALL021L1,2336,1283,L1,45 Francis,HALL,Hall,Hall,dataWritten
+ZHALL022L1,2771,1038,L1,45 Francis,HALL,Hall,Hall,dataWritten
+ZHALL023L1,2446,1235,L1,45 Francis,HALL,Hall,Hall,dataWritten
+ZHALL024L1,2495,1042,L1,45 Francis,HALL,Hall,Hall,dataWritten
+ZHALL025L1,2774,1159,L1,45 Francis,HALL,Hall,Hall,dataWritten
+ZHALL026L1,2774,1280,L1,45 Francis,HALL,Hall,Hall,dataWritten
+ZHALL027L1,2301,1047,L1,45 Francis,HALL,Hall,Hall,dataWritten
+ZHALL028L1,2216,980,L1,45 Francis,HALL,Hall,Hall,dataWritten
+ZHALL029L1,1984,845,L1,Tower,HALL,Hall,Hall,dataWritten
+ZHALL030L1,1848,847,L1,Tower,HALL,Hall,Hall,dataWritten
+ZHALL014L2,1919,1279,L2,45 Francis,HALL,Hall,Hall,dataWritten
+ZHALL015L2,2013,1279,L2,45 Francis,HALL,Hall,Hall,dataWritten
+ZHALL000L2,2224,1279,L2,45 Francis,HALL,Hall,Hall,dataWritten
+ZHALL001L2,2215,979,L2,45 Francis,HALL,Hall,Hall,dataWritten
+ZHALL002L2,2308,867,L2,45 Francis,HALL,Hall,Hall,dataWritten
+ZHALL00001,941,883,1,Faulkner,HALL,Hall,Hall,dataWritten
+ZHALL00101,1404,1166,1,Faulkner,HALL,Hall,Hall,dataWritten
