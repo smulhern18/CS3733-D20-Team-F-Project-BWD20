@@ -37,7 +37,7 @@ public class TransportRequestTest {
   public void testCreateReadDelete() throws Exception {
     try {
       databaseManager.manipulateServiceRequest((TransportRequest) null);
-      fail("Creating a null value is unacceptable");
+
     } catch (NullPointerException e) {
       // ignore as expected
     }
