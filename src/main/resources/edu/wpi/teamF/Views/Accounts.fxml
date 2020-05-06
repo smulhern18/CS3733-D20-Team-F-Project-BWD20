@@ -56,7 +56,7 @@
       <JFXButton buttonType="RAISED" layoutX="903.0" layoutY="191.0" onAction="#dataView" prefHeight="58.0" prefWidth="122.0" style="-fx-background-color: white;" text="Reports View">
          <font>
 
-            <Font name="Dubai Light" size="20.0" />
+            <Font name="Dubai Light" size="17.0" />
          </font>
       </JFXButton>
    </children>
