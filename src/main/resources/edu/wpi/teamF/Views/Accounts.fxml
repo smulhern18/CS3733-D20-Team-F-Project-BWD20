@@ -59,5 +59,8 @@
             <Font name="Dubai Light" size="17.0" />
          </font>
       </JFXButton>
+      <JFXButton onAction="#uploadNodes" style="-fx-background-color: #012D5A;" text="Upload Nodes" textFill="WHITE" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="300.0" />
+      <JFXButton layoutX="10.0" layoutY="10.0" onAction="#uploadEdges" style="-fx-background-color: #012D5A;" text="Upload Edges" textFill="WHITE" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="300.0" />
+      <JFXButton layoutX="10.0" layoutY="10.0" onAction="#backupDB" style="-fx-background-color: #012D5A;" text="Backup" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="300.0" />
    </children>
 </AnchorPane>
