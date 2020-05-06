@@ -6,6 +6,7 @@ import edu.wpi.cs3733.d20.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.cs3733.d20.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.cs3733.d20.teamF.ModelClasses.Account.Account;
 import edu.wpi.cs3733.d20.teamF.ModelClasses.MaintenanceRequest;
+import edu.wpi.cs3733.d20.teamF.ModelClasses.ServiceException;
 import edu.wpi.cs3733.d20.teamF.ModelClasses.UIAccount;
 import edu.wpi.cs3733.d20.teamF.ModelClasses.UIMaintenenceRequest;
 import java.net.URL;
@@ -90,6 +91,12 @@ public class MaintenanceRequestController implements Initializable {
   public Label EstCostLabel;
   public AnchorPane newAccountPane;
   public JFXTextField userToDelete;
+
+  int xCoord = 0;
+  int yCoord = 0;
+  int windowWidth = 0;
+  int windowLength = 0;
+  String cssPath = "";
 
   ObservableList<UIMaintenenceRequest> mrUI = FXCollections.observableArrayList();
   ObservableList<UIAccount> acts = FXCollections.observableArrayList();
@@ -705,5 +712,29 @@ public class MaintenanceRequestController implements Initializable {
     acts.removeIf(uiAccount -> uiAccount.userName.get().equals(accountToDelete));
     deleteText.setText("");
     treeTableAccounts.refresh();
+  }
+
+  public void run(
+      int xcoord,
+      int ycoord,
+      int windowWidth,
+      int windowLength,
+      String cssPath,
+      String doNothing,
+      String withThese)
+      throws Exception {
+    if (xcoord >= 0 && ycoord >= 0 && windowWidth >= 0 && windowLength >= 0) {
+      if (xcoord > windowWidth) {
+        throw new ServiceException("xcoord is out of the bounds.");
+      } else if (ycoord > windowLength) {
+        throw new ServiceException("ycoord is out of the bounds.");
+      }
+      this.xCoord = xcoord;
+      this.yCoord = ycoord;
+      this.windowWidth = windowWidth;
+      this.windowLength = windowLength;
+    } else {
+      throw new ServiceException("There cannot be a negative value in the parameter of run().");
+    }
   }
 }
