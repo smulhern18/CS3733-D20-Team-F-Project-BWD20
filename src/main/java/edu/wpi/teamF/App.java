@@ -74,8 +74,8 @@ public class App extends Application {
             return maintenanceRequestController;
           } else if (controllerClass.equals(DataViewController.class)) {
             return dataViewController;
-          }else if(controllerClass.equals(TranslatorController.class)){
-              return translatorController;
+          } else if (controllerClass.equals(TranslatorController.class)) {
+            return translatorController;
           }
           return null;
         });
