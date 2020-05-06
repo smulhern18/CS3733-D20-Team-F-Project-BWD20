@@ -17,7 +17,6 @@ import java.net.URL;
 import java.time.*;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.AnchorPane;
@@ -45,18 +44,6 @@ public class RoomSchedulerController implements Initializable {
   @SneakyThrows
   public void initialize(URL location, ResourceBundle resources) {
     loggedInAccountName = databaseManager.getAccount().getUsername();
-    roomComboBox.setItems(
-        FXCollections.observableArrayList(
-            "Reflection Room 1",
-            "Reflection Room 2",
-            "Reflection Room 3",
-            "On-Call Bed 1",
-            "On-Call Bed 2",
-            "On-Call Bed 3",
-            "On-Call Bed 4",
-            "On-Call Bed 5",
-            "On-Call bed 6",
-            "On-Call Bed 7"));
     initializeCalendarView();
   }
 
@@ -296,13 +283,15 @@ public class RoomSchedulerController implements Initializable {
     Calendar[] reflectionRooms = new Calendar[3];
     for (int i = 0; i < reflectionRooms.length; i++) {
       reflectionRooms[i] = new Calendar("Reflection Room " + (i + 1));
-      reflectionRooms[i].setStyle("-fx-background-color: #012D5A");
+
+      reflectionRooms[i].setStyle(Calendar.Style.STYLE6);
     }
     reflectionCalenderSource.getCalendars().addAll(reflectionRooms);
     CalendarSource onCallCalenderSource = new CalendarSource("On-Call Beds");
     Calendar[] onCallRooms = new Calendar[7];
     for (int i = 0; i < onCallRooms.length; i++) {
       onCallRooms[i] = new Calendar("On-Call Bed " + (i + 1));
+      onCallRooms[i].setStyle(Calendar.Style.STYLE2);
     }
     onCallCalenderSource.getCalendars().addAll(onCallRooms);
 

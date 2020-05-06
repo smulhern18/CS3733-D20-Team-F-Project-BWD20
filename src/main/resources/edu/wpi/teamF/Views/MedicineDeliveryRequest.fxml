@@ -100,7 +100,7 @@
                <children>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
                      <children>
-                        <Label fx:id="locationLabel" alignment="BOTTOM_RIGHT" maxWidth="100.0" minWidth="100.0" text="Location: ">
+                        <Label fx:id="locationLabel" alignment="BOTTOM_RIGHT" maxWidth="100.0" minWidth="100.0" text="Location: " textAlignment="RIGHT">
                            <font>
                               <Font name="Dubai Light" size="12.0" />
                            </font></Label>
