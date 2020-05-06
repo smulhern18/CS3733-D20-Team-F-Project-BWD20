@@ -46,7 +46,7 @@
                                        <children>
                                           <Label text="Translate From:">
                                              <font>
-                                                <Font size="14.0" />
+                                                <Font name="Dubai Light" size="14.0" />
                                              </font>
                                           </Label>
                                           <JFXComboBox fx:id="fromLanguage" minWidth="250.0" onAction="#fromLanguage" style="-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;" />
@@ -63,12 +63,12 @@
                                                 <Insets left="100.0" right="100.0" top="30.0" />
                                              </VBox.margin>
                                              <font>
-                                                <Font size="24.0" />
+                                                <Font name="Dubai Light" size="20.0" />
                                              </font>
                                           </JFXButton>
                                           <JFXButton fx:id="reset" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#reset" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Reset" textFill="WHITE">
                                              <font>
-                                                <Font size="24.0" />
+                                                <Font name="Dubai Light" size="21.0" />
                                              </font>
                                              <VBox.margin>
                                                 <Insets left="100.0" right="100.0" top="20.0" />
@@ -83,7 +83,7 @@
                                        <children>
                                           <Label text="Translate To:">
                                              <font>
-                                                <Font size="14.0" />
+                                                <Font name="Dubai Light" size="14.0" />
                                              </font>
                                           </Label>
                                           <JFXComboBox fx:id="toLanguage" minWidth="250.0" onAction="#toLanguage" style="-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;" />
@@ -97,7 +97,7 @@
                                           </JFXTextArea>
                                           <Label text="Send Translation">
                                              <font>
-                                                <Font size="24.0" />
+                                                <Font name="Dubai Light" size="24.0" />
                                              </font>
                                              <VBox.margin>
                                                 <Insets top="20.0" />
@@ -105,7 +105,7 @@
                                           </Label>
                                           <Label text="Enter Phone Number:">
                                              <font>
-                                                <Font size="14.0" />
+                                                <Font name="Dubai Light" size="14.0" />
                                              </font>
                                              <VBox.margin>
                                                 <Insets bottom="4.0" />
@@ -117,7 +117,7 @@
                                              </padding></JFXTextField>
                                           <JFXButton fx:id="sendSMS" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#sendSMS" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Send Text Message" textFill="WHITE">
                                              <font>
-                                                <Font size="24.0" />
+                                                <Font name="Dubai Light" size="21.0" />
                                              </font>
                                              <VBox.margin>
                                                 <Insets left="50.0" right="50.0" top="25.0" />
@@ -128,7 +128,7 @@
                                                 <Insets left="50.0" right="50.0" top="20.0" />
                                              </VBox.margin>
                                              <font>
-                                                <Font size="24.0" />
+                                                <Font name="Dubai Light" size="23.0" />
                                              </font>
                                           </JFXButton>
                                           <Label fx:id="commResult" text="Place a call or send a text">
@@ -145,7 +145,7 @@
                               </HBox>
                               <Label text="Translation">
                                  <font>
-                                    <Font size="36.0" />
+                                    <Font name="Dubai Light" size="36.0" />
                                  </font>
                                  <GridPane.margin>
                                     <Insets />
