@@ -11,12 +11,13 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="407.0" prefWidth="784.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ServiceRequestMainController">
     <children>
-        <ImageView fx:id="backgroundImage" fitHeight="554.0" fitWidth="789.0" pickOnBounds="true" style="-fx-opacity: 12%;" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="0.0">
+        <ImageView fx:id="backgroundImage" fitHeight="554.0" fitWidth="789.0" pickOnBounds="true" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="0.0">
             <image>
                 <Image url="@../../../../Images/Brigham-Social-1024x538.jpg" />
             </image>
         </ImageView>
-        <GridPane layoutX="244.0" layoutY="115.0" prefHeight="1063.0" prefWidth="594.0" AnchorPane.bottomAnchor="-626.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="115.0">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgba(255,255,255,0.9);" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0" />
+        <GridPane layoutX="244.0" layoutY="115.0" prefHeight="1063.0" prefWidth="594.0" AnchorPane.bottomAnchor="-626.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
             <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="5.0" />
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="25.0" />
@@ -151,68 +152,68 @@
                 </ImageView>
             <Label text="Security" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
-                  <Font name="Dubai Light" size="13.0" />
+                  <Font name="Dubai Light" size="20.0" />
                </font>
             </Label>
             <Label text="Sanitation" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
-                  <Font name="Dubai Light" size="13.0" />
+                  <Font name="Dubai Light" size="20.0" />
                </font>
             </Label>
             <Label text="Language Interpreter" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <font>
-                  <Font name="Dubai Light" size="13.0" />
+                  <Font name="Dubai Light" size="20.0" />
                </font>
             </Label>
             <Label text="Laundry" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <font>
-                  <Font name="Dubai Light" size="13.0" />
+                  <Font name="Dubai Light" size="20.0" />
                </font>
             </Label>
             <Label text="Flower Delivery" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <font>
-                  <Font name="Dubai Light" size="13.0" />
+                  <Font name="Dubai Light" size="20.0" />
                </font>
             </Label>
             <Label text="Medication Delivery" GridPane.columnIndex="2" GridPane.rowIndex="5">
                <font>
-                  <Font name="Dubai Light" size="13.0" />
+                  <Font name="Dubai Light" size="20.0" />
                </font>
             </Label>
             <Label text="Computer Service" GridPane.columnIndex="3" GridPane.rowIndex="5">
                <font>
-                  <Font name="Dubai Light" size="13.0" />
+                  <Font name="Dubai Light" size="20.0" />
                </font>
             </Label>
             <Label text="Transportation" GridPane.columnIndex="4" GridPane.rowIndex="5">
                <font>
-                  <Font name="Dubai Light" size="13.0" />
+                  <Font name="Dubai Light" size="20.0" />
                </font>
             </Label>
             <Label text="Mariachi Band" GridPane.columnIndex="1" GridPane.rowIndex="9">
                <font>
-                  <Font name="Dubai Light" size="13.0" />
+                  <Font name="Dubai Light" size="20.0" />
                </font>
             </Label>
             <Label text="Maintenance" GridPane.columnIndex="2" GridPane.rowIndex="9">
                <font>
-                  <Font name="Dubai Light" size="13.0" />
+                  <Font name="Dubai Light" size="20.0" />
                </font>
             </Label>
             <Label text="Appointments" GridPane.columnIndex="3" GridPane.rowIndex="9">
                <font>
-                  <Font name="Dubai Light" size="13.0" />
+                  <Font name="Dubai Light" size="20.0" />
                </font>
             </Label>
             <Label text="Room Scheduler" GridPane.columnIndex="4" GridPane.rowIndex="9">
                <font>
-                  <Font name="Dubai Light" size="13.0" />
+                  <Font name="Dubai Light" size="20.0" />
                </font>
             </Label>
             </children>
         </GridPane>
         <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-        <GridPane alignment="CENTER" layoutX="351.0" layoutY="55.0" prefHeight="53.0" prefWidth="289.0" AnchorPane.leftAnchor="351.0" AnchorPane.rightAnchor="144.0">
+        <GridPane alignment="CENTER" layoutX="351.0" layoutY="55.0" prefHeight="53.0" prefWidth="289.0" AnchorPane.leftAnchor="351.0" AnchorPane.rightAnchor="144.0" AnchorPane.topAnchor="110.0">
             <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
