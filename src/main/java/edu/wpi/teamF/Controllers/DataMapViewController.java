@@ -290,7 +290,6 @@ public class DataMapViewController implements Initializable {
   private void highlightButton(JFXButton button) {
     for (int i = 0; i < buttons.size(); i++) {
       if (buttons.get(i).equals(button)) {
-        System.out.println(buttons.get(i).getId());
         button.setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
       } else {
         buttons.get(i).setStyle("-fx-background-color: #4d6c8b; -fx-background-radius: 10px");
@@ -490,8 +489,8 @@ public class DataMapViewController implements Initializable {
         action -> {
           nodeButton = button; // sets classes button variable to the selected button
           this.node = node;
-
           System.out.println(node.getId());
+
           if (!edgeSelection) {
             displayNode();
           } else {
@@ -510,7 +509,6 @@ public class DataMapViewController implements Initializable {
             }
           }
         });
-    System.out.println("ADD NODE" + node.getId());
     addToPane(node, button);
   };
 
@@ -708,15 +706,27 @@ public class DataMapViewController implements Initializable {
       }
 
       Collections.sort(typeInstances); // sorts the list
+      System.out.println(typeInstances.size());
+
+      for (int i = 1; i < typeInstances.size(); i++) {
+        if (typeInstances.get(i) == typeInstances.get(i - 1)) {
+          typeInstances.remove(i);
+        }
+      }
 
       if (typeNodes.size() > 0) {
         for (int i = 0; i < typeInstances.size(); i++) {
-          instance = typeInstances.get(i); // 1
-          if (instance - tracker > 1) { // 1-0 = 1
+          System.out.println("Instance: " + instance);
+          System.out.println("Tracker: " + tracker);
+          System.out.println();
+          instance = typeInstances.get(i);
+          if (instance - tracker > 1) {
             newInstance = tracker + 1;
             break;
           } else if (instance == typeInstances.size()) {
-            newInstance = typeInstances.size() + 1;
+            newInstance =
+                typeInstances.size()
+                    + 1; // The size is bigger than the max number due to duplicates
             break;
           } else {
             tracker = instance;
@@ -753,8 +763,6 @@ public class DataMapViewController implements Initializable {
               nodeType,
               floorNumber); // creates a new node
 
-      System.out.println("NNNNNNNNNNNNNNEEEEEEEEEEEEEEEEEWWWWWWWWWWWWWWWWWWWWWWWWWWNOOOOOOOOOOOOO");
-      System.out.println(ID + " " + floorNumber);
       databaseManager.manipulateNode(newNode); // creates the node in the db
       drawNode(newNode);
 
@@ -785,8 +793,6 @@ public class DataMapViewController implements Initializable {
       String shortName = shortNameInput.getText();
       Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getValue());
       String floorNumber = floorInput.getValue(); // stores the input in variables
-      System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-      System.out.println(xCoordinate + " " + oldXCoordinate);
       node.setXCoord(xCoordinate);
       node.setYCoord(yCoordinate);
       node.setBuilding(building);
@@ -964,7 +970,6 @@ public class DataMapViewController implements Initializable {
       addNodeButton.setDisable(false);
       addNodeButton.setOpacity(1);
     } else {
-      System.out.println("Here");
       modifyNodeButton.setDisable(true);
       modifyNodeButton.setOpacity(.4);
       addNodeButton.setDisable(true);
