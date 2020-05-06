@@ -19,6 +19,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.DirectoryChooser;
+import lombok.SneakyThrows;
 
 public class DataViewController implements Initializable {
 
@@ -68,14 +69,15 @@ public class DataViewController implements Initializable {
   public List<MaintenanceRequest> mR = databaseManager.getAllMaintenanceRequests();
   public List<TransportRequest> tR = databaseManager.getAllTransportRequests();
   public List<SanitationServiceRequest> sR = databaseManager.getAllSanitationRequests();
-  public List<ReportsClass> rC = databaseManager.getAllReports();
   public SceneController sceneController = App.getSceneController();
   DirectoryChooser backup = new DirectoryChooser();
 
   public DataViewController() throws Exception {}
 
+  @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    List<ReportsClass> rC = databaseManager.getAllReports();
 
     // Maintenance
 
