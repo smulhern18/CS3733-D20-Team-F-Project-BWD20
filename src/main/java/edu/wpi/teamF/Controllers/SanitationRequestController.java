@@ -279,6 +279,7 @@ public class SanitationRequestController implements Initializable {
           try {
             ReportsClass oldReport = databaseManager.readReport(uiSR.location.get());
             if (oldReport != null) {
+              oldReport.setTimesVisited(0);
               oldReport.setTimesSanitized(oldReport.getTimesSanitized() + 1);
               oldReport.setSanitizer(uiSR.getAssignee().get());
               databaseManager.manipulateReport(oldReport);
