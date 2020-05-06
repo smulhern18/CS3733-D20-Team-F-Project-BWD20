@@ -674,6 +674,42 @@ public class DataMapViewController implements Initializable {
     return null;
   }
 
+  private String generateNodeID(String floor, Node.NodeType nodeType) throws Exception {
+    List<Node> typeNodes = databaseManager.getNodesByType(nodeType);
+    String startOfID = "Z" + nodeType.getTypeString();
+    String endOfID = "";
+    if (floor.length() == 1) {
+      endOfID += "0" + floor;
+    } else {
+      endOfID += floor;
+    }
+    for (int i = 0; i <= 999; i++) {
+      String strInstance = "" + i;
+      switch (strInstance.length()) {
+        case 1:
+          strInstance = "00" + strInstance;
+          break;
+        case 2:
+          strInstance = "0" + strInstance;
+          break;
+      }
+      String newID = startOfID + strInstance + endOfID;
+      if (!containsInTypeNodes(typeNodes, newID)) {
+        return newID;
+      }
+    }
+    return null;
+  }
+
+  private boolean containsInTypeNodes(List<Node> typeNodes, String newID) {
+    for (Node typeNode : typeNodes) {
+      if (typeNode.getId().equals(newID)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   @FXML
   private void addNode(ActionEvent event) throws Exception {
 
@@ -754,7 +790,7 @@ public class DataMapViewController implements Initializable {
       }
       Node newNode =
           new Node(
-              ID,
+              generateNodeID(floorNumber, nodeType),
               xCoordinate,
               yCoordinate,
               building,
