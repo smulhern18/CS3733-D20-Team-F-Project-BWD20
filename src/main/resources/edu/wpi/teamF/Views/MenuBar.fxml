@@ -237,7 +237,7 @@
                                     <Font name="Dubai Light" size="15.0" />
                                  </font>
                                  <StackPane.margin>
-                                    <Insets left="-25.0" />
+                                    <Insets left="-24.0" />
                                  </StackPane.margin>
                               </JFXButton>
                            </children>
