@@ -129,6 +129,8 @@ public class PathfinderController implements Initializable {
       }
       databaseManager.manipulateReport(newNode);
       databaseManager.manipulateReport(oldNode);
+      System.out.println(databaseManager.readReport(newNode.getNodeID()));
+      System.out.println(oldNode.getNodeID());
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
