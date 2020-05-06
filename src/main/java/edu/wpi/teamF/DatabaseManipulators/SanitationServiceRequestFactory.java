@@ -121,7 +121,6 @@ public class SanitationServiceRequestFactory {
   }
 
   public void delete(String id) {
-
     String deleteStatement =
         "DELETE FROM "
             + DatabaseManager.SANITATION_REQUEST_TABLE_NAME

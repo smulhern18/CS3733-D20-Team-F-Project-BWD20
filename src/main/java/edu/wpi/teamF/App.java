@@ -80,6 +80,7 @@ public class App extends Application {
     // primaryStage.setAlwaysOnTop(true);
     primaryStage.show();
     primaryStage.setMaximized(true);
+
     //    primaryStage.setFullScreen(true);
   }
 
