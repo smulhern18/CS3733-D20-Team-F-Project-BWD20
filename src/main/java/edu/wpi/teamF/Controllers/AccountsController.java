@@ -10,6 +10,9 @@ import edu.wpi.teamF.ModelClasses.Account.Admin;
 import edu.wpi.teamF.ModelClasses.Account.Staff;
 import edu.wpi.teamF.ModelClasses.Account.User;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -24,6 +27,7 @@ import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import lombok.SneakyThrows;
 
@@ -37,6 +41,9 @@ public class AccountsController implements Initializable {
   ObservableList<UIAccount> uiAccount = FXCollections.observableArrayList();
   ServiceRequestStats serviceRequestStats = new ServiceRequestStats();
   DirectoryChooser backup = new DirectoryChooser();
+
+  FileChooser nodesChooser = new FileChooser();
+  FileChooser edgesChooser = new FileChooser();
 
   @SneakyThrows
   @Override
@@ -191,5 +198,26 @@ public class AccountsController implements Initializable {
 
   public void dataView(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("DataView");
+  }
+
+  public void backupDB(ActionEvent actionEvent) throws Exception {
+    backup.setTitle("Select Where to Backup Database");
+    File selDir = backup.showDialog(rootPane.getScene().getWindow());
+
+    // backup
+    databaseManager.backup(selDir.toPath());
+  }
+
+  public void uploadNodes(ActionEvent actionEvent) throws FileNotFoundException {
+    nodesChooser.setTitle("Select CSV File Nodes");
+    File file = nodesChooser.showOpenDialog(rootPane.getScene().getWindow());
+    databaseManager.readNodes(new FileInputStream(file));
+  }
+
+  public void uploadEdges(ActionEvent actionEvent) throws FileNotFoundException {
+    edgesChooser.setTitle("Select CSV File Edges");
+    File file = edgesChooser.showOpenDialog(rootPane.getScene().getWindow());
+
+    databaseManager.readEdges(new FileInputStream(file));
   }
 }

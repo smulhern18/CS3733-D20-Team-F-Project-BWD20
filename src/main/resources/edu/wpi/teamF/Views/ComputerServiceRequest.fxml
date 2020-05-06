@@ -198,7 +198,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label fx:id="OSLabel" alignment="BOTTOM_CENTER" text="Operating System:      ">
+                              <Label fx:id="OSLabel" alignment="BOTTOM_CENTER" text="Operating System:">
                                  <font>
                                     <Font name="Dubai Light" size="14.0" />
                                  </font></Label>
@@ -218,7 +218,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label fx:id="descLabel" alignment="BOTTOM_CENTER" text="     Description:         ">
+                              <Label fx:id="descLabel" alignment="BOTTOM_CENTER" text="     Description: ">
                                  <font>
                                     <Font name="Dubai Light" size="14.0" />
                                  </font></Label>
@@ -229,7 +229,7 @@
                   </HBox>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
                      <children>
-                        <Label fx:id="prioLabel" alignment="BOTTOM_CENTER" text="          Priority:           ">
+                        <Label fx:id="prioLabel" alignment="BOTTOM_CENTER" text="          Priority:       ">
                            <font>
                               <Font name="Dubai Light" size="14.0" />
                            </font></Label>

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.SettingController">
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.SettingController">
    <children>
       <fx:include source="MenuBar.fxml" />
       <Label layoutX="334.0" layoutY="40.0" text="Settings">
@@ -85,5 +85,8 @@
          </children>
       </GridPane>
       <JFXButton buttonType="RAISED" layoutX="455.0" layoutY="430.0" prefHeight="35.0" prefWidth="80.0" ripplerFill="#3b314a" style="-fx-background-color: #DC6F55;" text="Update" />
+      <JFXButton fx:id="backupButton" onAction="#backupDB" style="-fx-background-color: #012D5A;" text="Backup" textFill="WHITE" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="200.0" />
+      <JFXButton fx:id="uploadEdgesButton" layoutX="10.0" layoutY="10.0" onAction="#uploadEdges" style="-fx-background-color: #012D5A;" text="Upload Edges" textFill="WHITE" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="200.0" />
+      <JFXButton fx:id="uploadNodesButton" layoutX="10.0" layoutY="10.0" onAction="#uploadNodes" style="-fx-background-color: #012D5A;" text="Upload Nodes" textFill="WHITE" AnchorPane.bottomAnchor="95.0" AnchorPane.leftAnchor="200.0" />
    </children>
 </AnchorPane>

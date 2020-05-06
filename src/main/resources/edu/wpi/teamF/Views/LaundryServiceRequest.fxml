@@ -82,9 +82,9 @@
                 </GridPane>
             </children>
         </AnchorPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-              <GridPane fx:id="servicePane" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 10;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
+              <GridPane fx:id="servicePane" prefHeight="476.0" prefWidth="549.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 10;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
                   <columnConstraints>
                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   </columnConstraints>
@@ -101,7 +101,7 @@
                   <children>
                       <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
                           <children>
-                              <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="     Location:              ">
+                              <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" maxWidth="120.0" minWidth="120.0" text="Location:    " textAlignment="RIGHT">
                            <font>
                               <Font name="Dubai Light" size="13.0" />
                            </font></Label>
@@ -110,10 +110,13 @@
                       </HBox>
                       <HBox alignment="BOTTOM_CENTER" GridPane.rowIndex="2">
                           <children>
-                              <Label fx:id="itemsLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="Items:          ">
+                              <Label fx:id="itemsLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxWidth="120.0" minWidth="120.0" text="Items:" textAlignment="RIGHT">
                            <font>
                               <Font name="Dubai Light" size="13.0" />
-                           </font></Label>
+                           </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin></Label>
                               <JFXComboBox fx:id="itemsChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;">
                            <HBox.margin>
                               <Insets left="5.0" />
@@ -154,7 +157,7 @@
                       </HBox>
                       <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                           <children>
-                              <Label fx:id="quantityLabel" alignment="BOTTOM_CENTER" text="Quantity:    ">
+                              <Label fx:id="quantityLabel" alignment="BOTTOM_CENTER" maxWidth="120.0" minWidth="120.0" text="Quantity:      " textAlignment="RIGHT">
                            <font>
                               <Font name="Dubai Light" size="13.0" />
                            </font></Label>
@@ -163,7 +166,7 @@
                       </HBox>
                       <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                           <children>
-                              <Label fx:id="temperatureLabel" alignment="BOTTOM_CENTER" text="Temperature:">
+                              <Label fx:id="temperatureLabel" alignment="BOTTOM_CENTER" maxWidth="120.0" minWidth="120.0" text="Temperature:             " textAlignment="RIGHT">
                            <font>
                               <Font name="Dubai Light" size="13.0" />
                            </font></Label>
@@ -172,7 +175,7 @@
                       </HBox>
                       <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
                           <children>
-                              <Label fx:id="descLabel" alignment="BOTTOM_CENTER" text="     Description:         ">
+                              <Label fx:id="descLabel" alignment="BOTTOM_CENTER" maxWidth="120.0" minWidth="120.0" text="Description:          " textAlignment="RIGHT">
                            <font>
                               <Font name="Dubai Light" size="13.0" />
                            </font></Label>
@@ -181,7 +184,7 @@
                       </HBox>
                       <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
                           <children>
-                              <Label fx:id="prioLabel" alignment="BOTTOM_CENTER" text="          Priority:           ">
+                              <Label fx:id="prioLabel" alignment="BOTTOM_CENTER" maxWidth="120.0" minWidth="120.0" text="Priority:    " textAlignment="RIGHT">
                            <font>
                               <Font name="Dubai Light" size="13.0" />
                            </font></Label>
