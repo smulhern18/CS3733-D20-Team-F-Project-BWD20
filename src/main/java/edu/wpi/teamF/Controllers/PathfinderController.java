@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleButton;
+import edu.wpi.teamF.App;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Directions.Directions;
@@ -13,6 +14,7 @@ import edu.wpi.teamF.ModelClasses.Path;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.*;
 import edu.wpi.teamF.ModelClasses.Scorer.EuclideanScorer;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ReportsClass;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +53,7 @@ public class PathfinderController implements Initializable {
   public static int MAP_HEIGHT = 1485;
   public static int MAP_WIDTH = 2475;
   public static DatabaseManager databaseManager = DatabaseManager.getManager();
+  SceneController sceneController = App.getSceneController();
   // public int currentFloor;
   public AnchorPane currentPane;
   public AnchorPane mainMapPane;
@@ -1296,5 +1299,9 @@ public class PathfinderController implements Initializable {
     BTMToFaulknerQR.setVisible(false);
     shapiroToFaulknerQR.setVisible(false);
     francis15ToFaulknerQR.setVisible(false);
+  }
+
+  public void switchAbout(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("About");
   }
 }

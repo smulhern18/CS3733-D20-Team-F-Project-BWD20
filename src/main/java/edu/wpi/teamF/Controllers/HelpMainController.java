@@ -37,8 +37,8 @@ public class HelpMainController implements Initializable {
     // sceneController.switchScene("Help");
   }
 
-  public void contactus(ActionEvent actionEvent) throws IOException {
-    // sceneController.switchScene("Help");
+  public void contact(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("ContactUs");
   }
 
   @Override
