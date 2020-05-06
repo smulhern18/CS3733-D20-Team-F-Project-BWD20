@@ -296,14 +296,13 @@ public class RoomSchedulerController implements Initializable {
     Calendar[] reflectionRooms = new Calendar[3];
     for (int i = 0; i < reflectionRooms.length; i++) {
       reflectionRooms[i] = new Calendar("Reflection Room " + (i + 1));
-      // initializeCalendarDeleteEvent(reflectionRooms[i]);
+      reflectionRooms[i].setStyle("-fx-background-color: #012D5A");
     }
     reflectionCalenderSource.getCalendars().addAll(reflectionRooms);
     CalendarSource onCallCalenderSource = new CalendarSource("On-Call Beds");
     Calendar[] onCallRooms = new Calendar[7];
     for (int i = 0; i < onCallRooms.length; i++) {
       onCallRooms[i] = new Calendar("On-Call Bed " + (i + 1));
-      // initializeCalendarDeleteEvent(onCallRooms[i]);
     }
     onCallCalenderSource.getCalendars().addAll(onCallRooms);
 
