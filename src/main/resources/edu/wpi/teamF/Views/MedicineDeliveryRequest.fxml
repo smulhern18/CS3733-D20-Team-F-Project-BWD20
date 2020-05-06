@@ -81,7 +81,7 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <GridPane fx:id="servicePane" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 10;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
+            <GridPane fx:id="servicePane" prefHeight="518.0" prefWidth="600.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 10;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
                <columnConstraints>
                   <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
@@ -97,20 +97,20 @@
                <children>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
                      <children>
-                        <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="    Location: ">
+                        <Label fx:id="locationLabel" alignment="BOTTOM_RIGHT" maxWidth="100.0" minWidth="100.0" text="Location: ">
                            <font>
                               <Font name="Dubai Light" size="12.0" />
                            </font></Label>
-                        <JFXComboBox fx:id="locationComboBox" prefHeight="25.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                        <JFXComboBox fx:id="locationComboBox" maxWidth="140.0" minWidth="140.0" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black;" />
                      </children>
                   </HBox>
                   <HBox alignment="BOTTOM_CENTER" GridPane.rowIndex="2">
                      <children>
-                        <Label fx:id="medicineLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="    Medicine: ">
+                        <Label fx:id="medicineLabel" alignment="BOTTOM_RIGHT" maxWidth="100.0" minWidth="100.0" prefHeight="18.0" prefWidth="100.0" text="Medicine: " textAlignment="RIGHT">
                            <font>
                               <Font name="Dubai Light" size="12.0" />
                            </font></Label>
-                        <JFXTextField fx:id="medicineText" prefHeight="25.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;">
+                        <JFXTextField fx:id="medicineText" maxWidth="140.0" minWidth="140.0" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black;">
                            <font>
                               <Font name="Dubai Light" size="12.0" />
                            </font></JFXTextField>
@@ -149,11 +149,11 @@
                   </HBox>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                      <children>
-                        <Label fx:id="instructionsLabel" alignment="BOTTOM_CENTER" text="Instructions: ">
+                        <Label fx:id="instructionsLabel" alignment="BOTTOM_RIGHT" maxWidth="100.0" minWidth="100.0" text="Instructions: " textAlignment="RIGHT">
                            <font>
                               <Font name="Dubai Light" size="12.0" />
                            </font></Label>
-                        <JFXTextField fx:id="instructionsText" prefHeight="25.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;">
+                        <JFXTextField fx:id="instructionsText" maxWidth="140.0" minWidth="140.0" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black;">
                            <font>
                               <Font name="Dubai Light" size="12.0" />
                            </font></JFXTextField>
@@ -161,11 +161,11 @@
                   </HBox>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                      <children>
-                        <Label fx:id="descLabel" alignment="BOTTOM_CENTER" text=" Description: ">
+                        <Label fx:id="descLabel" alignment="BOTTOM_RIGHT" maxWidth="100.0" minWidth="100.0" text="Description: " textAlignment="RIGHT">
                            <font>
                               <Font name="Dubai Light" size="12.0" />
                            </font></Label>
-                        <JFXTextField fx:id="descText" prefHeight="25.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;">
+                        <JFXTextField fx:id="descText" maxWidth="140.0" minWidth="140.0" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black;">
                            <font>
                               <Font name="Dubai Light" size="12.0" />
                            </font></JFXTextField>
@@ -173,11 +173,11 @@
                   </HBox>
                   <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
                      <children>
-                        <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="       Priority: ">
+                        <Label fx:id="priorityLabel" alignment="BOTTOM_RIGHT" maxWidth="100.0" minWidth="100.0" text="Priority: " textAlignment="RIGHT">
                            <font>
                               <Font name="Dubai Light" size="12.0" />
                            </font></Label>
-                        <JFXComboBox fx:id="priorityChoice" prefHeight="25.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                        <JFXComboBox fx:id="priorityChoice" maxWidth="140.0" minWidth="140.0" prefHeight="27.0" prefWidth="180.0" style="-fx-background-color: white; -fx-border-color: black;" />
                      </children>
                   </HBox>
                   <Label fx:id="medicineRequestLabel" text="Medicine Delivery Service">
