@@ -200,10 +200,13 @@
                         </StackPane>
                         <StackPane prefHeight="49.0" prefWidth="78.0">
                            <children>
-                              <JFXButton fx:id="settingsButton1" onAction="#settings" prefHeight="49.0" prefWidth="117.0" text="Settings" textFill="#ffffffcc">
+                              <JFXButton fx:id="settingsButton1" onAction="#settings" prefHeight="49.0" prefWidth="117.0" text="Admin" textFill="#ffffffcc">
                                  <font>
                                     <Font name="Dubai Light" size="16.0" />
                                  </font>
+                                 <StackPane.margin>
+                                    <Insets left="-15.0" />
+                                 </StackPane.margin>
                               </JFXButton>
                            </children>
                         </StackPane>
@@ -229,10 +232,13 @@
                         </StackPane>
                         <StackPane prefHeight="63.0" prefWidth="66.0">
                            <children>
-                              <JFXButton fx:id="adminButton1" onAction="#admin" prefHeight="228.0" prefWidth="300.0" text="Admin" textFill="#ffffffcc">
+                              <JFXButton fx:id="adminButton1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#admin" prefHeight="49.0" prefWidth="133.0" text="Map Editor" textFill="#ffffffcc">
                                  <font>
-                                    <Font name="Dubai Light" size="16.0" />
+                                    <Font name="Dubai Light" size="15.0" />
                                  </font>
+                                 <StackPane.margin>
+                                    <Insets left="-25.0" />
+                                 </StackPane.margin>
                               </JFXButton>
                            </children>
                         </StackPane>
