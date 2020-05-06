@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,6 +15,16 @@
 <AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.HelpMainController">
    <children>
       <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="frame" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fx:id="backgroundImage" fitHeight="800.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <image>
+                  <Image url="@../../../../Images/boston2.jpg" />
+               </image>
+            </ImageView>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgba(255,255,255,0.9);" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="150.0" AnchorPane.rightAnchor="150.0" AnchorPane.topAnchor="100.0" />
+         </children>
+      </AnchorPane>
       <GridPane layoutX="189.0" prefHeight="525.0" prefWidth="427.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
@@ -40,8 +50,11 @@
                      <children>
                         <Label text="Help">
                            <font>
-                              <Font name="Dubai Light" size="24.0" />
+                              <Font name="Dubai Light" size="60.0" />
                            </font>
+                           <StackPane.margin>
+                              <Insets top="50.0" />
+                           </StackPane.margin>
                         </Label>
                      </children>
                   </StackPane>
@@ -61,7 +74,7 @@
                <children>
                   <StackPane prefHeight="150.0" prefWidth="200.0">
                      <children>
-                        <ImageView fitHeight="68.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../Images/icons8-question-mark-100.png" />
                            </image>
@@ -70,7 +83,7 @@
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <ImageView fitHeight="68.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../Images/icons8-language-100.png" />
                            </image>
@@ -79,7 +92,7 @@
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2">
                      <children>
-                        <ImageView fitHeight="68.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../../Images/icons8-email-100.png" />
                            </image>
@@ -90,7 +103,7 @@
                      <children>
                         <JFXButton onAction="#generalquestions" text="General Questions">
                            <font>
-                              <Font name="Dubai Light" size="14.0" />
+                              <Font name="Dubai Light" size="20.0" />
                            </font>
                         </JFXButton>
                      </children>
@@ -99,7 +112,7 @@
                      <children>
                         <JFXButton onAction="#language" text="Translator">
                            <font>
-                              <Font name="Dubai Light" size="14.0" />
+                              <Font name="Dubai Light" size="20.0" />
                            </font>
                         </JFXButton>
                      </children>
@@ -108,7 +121,7 @@
                      <children>
                         <JFXButton onAction="#contact" text="Contact Us">
                            <font>
-                              <Font name="Dubai Light" size="14.0" />
+                              <Font name="Dubai Light" size="20.0" />
                            </font>
                         </JFXButton>
                      </children>
@@ -124,14 +137,7 @@
                   <RowConstraints vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <StackPane prefHeight="94.0" prefWidth="337.0">
-                     <children>
-                        <JFXTextField prefHeight="28.0" prefWidth="375.0" promptText="Search ...">
-                           <font>
-                              <Font name="Dubai Light" size="12.0" />
-                           </font></JFXTextField>
-                     </children>
-                  </StackPane>
+                  <StackPane prefHeight="94.0" prefWidth="337.0" />
                </children>
             </GridPane>
          </children>

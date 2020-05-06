@@ -26,6 +26,8 @@ public class HelpMainController implements Initializable {
   public ImageView pathImage;
   public ImageView helpImage;
   public GridPane gridPane;
+  public AnchorPane frame;
+  public ImageView backgroundImage;
 
   SceneController sceneController = App.getSceneController();
 
@@ -52,5 +54,8 @@ public class HelpMainController implements Initializable {
                 //                resize(newWidth.doubleValue());
               }
             });
+    backgroundImage.setPreserveRatio(false);
+    backgroundImage.fitHeightProperty().bind(frame.heightProperty());
+    backgroundImage.fitWidthProperty().bind(frame.widthProperty());
   }
 }
