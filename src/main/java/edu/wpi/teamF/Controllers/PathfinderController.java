@@ -1036,7 +1036,7 @@ public class PathfinderController implements Initializable {
     for (javafx.scene.Node component :
         getFloorPane(startNode.getFloor(), startNode.getBuilding()).getChildren()) {
       if (component.getId().equals(startNode.getId())) {
-        String msg = startNode.getLongName();
+        String msg = " " + startNode.getLongName();
         Text text = new Text(msg);
         Font font = Font.font("Arial", 12);
         text.setFont(font);
@@ -1048,6 +1048,8 @@ public class PathfinderController implements Initializable {
         startLabel.setLayoutY(component.getLayoutY() - 20);
         startLabel.setId("startLabel");
         startLabel.setVisible(true);
+        startLabel.setStyle(
+            "-fx-background-radius: 5px; -fx-border-radius: 5px; -fx-background-color: rgba(255,255,255,0.7); -fx-border-color: rgba(0,0,0,0.7); -fx-border-width: 1px");
         return;
       }
     }
@@ -1058,7 +1060,7 @@ public class PathfinderController implements Initializable {
     for (javafx.scene.Node component :
         getFloorPane(endNode.getFloor(), endNode.getBuilding()).getChildren()) {
       if (component.getId().equals(endNode.getId())) {
-        String msg = endNode.getLongName();
+        String msg = " " + endNode.getLongName();
         Text text = new Text(msg);
         Font font = Font.font("Arial", 12);
         text.setFont(font);
@@ -1070,6 +1072,8 @@ public class PathfinderController implements Initializable {
         endLabel.setLayoutY(component.getLayoutY() - 20);
         endLabel.setId("endLabel");
         endLabel.setVisible(true);
+        endLabel.setStyle(
+            "-fx-background-radius: 5px; -fx-border-radius: 5px; -fx-background-color: rgba(255,255,255,0.7); -fx-border-color: rgba(0,0,0,0.7); -fx-border-width: 1px");
         return;
       }
     }
