@@ -18,234 +18,270 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.cs3733.d20.teamF.Controllers.MaintenanceRequestController">
     <children>
-      <AnchorPane fx:id="maintenancePane" layoutY="-7.0" prefHeight="411.0" prefWidth="600.0">
+      <AnchorPane fx:id="maintenancePane" layoutY="-7.0" prefHeight="411.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-                  <Label fx:id="securityRequestLabel" layoutX="176.0" layoutY="46.0" prefHeight="53.0" prefWidth="247.0" text="Maintenance Request">
-                      <font>
-                          <Font name="Microsoft YaHei Light" size="24.0" />
-                      </font>
-                  </Label>
-            <Label layoutX="238.0" layoutY="279.0" text="-- OPTIONAL --" />
-            <GridPane layoutX="111.0" layoutY="99.0" prefHeight="313.0" prefWidth="315.0">
-              <columnConstraints>
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="70.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="31.0" minHeight="10.0" percentHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="32.0" minHeight="10.0" percentHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            <StackPane layoutX="176.0" layoutY="46.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0">
                <children>
-                  <Label fx:id="locationLabel1" alignment="BOTTOM_CENTER" text="Type:">
-                     <font>
-                        <Font name="Microsoft YaHei Light" size="14.0" />
-                     </font>
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </Label>
-                  <JFXComboBox fx:id="typeComboBox" prefHeight="27.0" prefWidth="259.0" GridPane.columnIndex="1" />
-                        <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="Location:" GridPane.rowIndex="1">
-                     <font>
-                        <Font name="Microsoft YaHei Light" size="14.0" />
-                     </font>
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </Label>
-                        <Label fx:id="priorityLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Priority:" GridPane.rowIndex="2">
-                     <font>
-                        <Font name="Microsoft YaHei Light" size="14.0" />
-                     </font>
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </Label>
-                        <JFXComboBox fx:id="priorityComboBox" prefHeight="25.0" prefWidth="263.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label text="Assignee:" GridPane.rowIndex="3">
-                     <font>
-                        <Font name="Microsoft YaHei Light" size="14.0" />
-                     </font>
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </Label>
-                  <JFXComboBox fx:id="assigneeChoice" prefHeight="27.0" prefWidth="270.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Description:" GridPane.rowIndex="4">
-                     <font>
-                        <Font name="Microsoft YaHei Light" size="14.0" />
-                     </font>
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin>
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </Label>
-                  <JFXTextField fx:id="desText" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="276.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <JFXTextField fx:id="locationTextField" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="276.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="securityRequestLabel" alignment="CENTER" prefHeight="53.0" prefWidth="247.0" text="Maintenance Request" textAlignment="CENTER" StackPane.alignment="CENTER">
+                            <font>
+                                <Font name="Microsoft YaHei Light" size="24.0" />
+                            </font>
+                        </Label>
                </children>
-            </GridPane>
-              <GridPane fx:id="servicePane" prefHeight="83.0" prefWidth="430.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="85.0" AnchorPane.rightAnchor="85.0" AnchorPane.topAnchor="303.0">
-                  <columnConstraints>
-                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  </columnConstraints>
-                  <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-                  </rowConstraints>
-                  <children>
-                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
-                          <children>
-                              <JFXButton fx:id="submitButton" onAction="#submit" style="-fx-background-color: #DC6F55#DC6F55;" text="Submit" textFill="#000000cc">
-                                  <font>
-                                      <Font name="STFangsong" size="18.0" />
-                                  </font>
-                                  <HBox.margin>
-                                      <Insets right="30.0" />
-                                  </HBox.margin>
-                              </JFXButton>
-                              <JFXButton fx:id="cancelButton" onAction="#cancel" ripplerFill="#3b314a" style="-fx-background-color: #DC6F55#DC6F55;" text="Cancel" textFill="#000000cc">
-                                  <font>
-                                      <Font name="STFangsong" size="18.0" />
-                                  </font>
-                                  <HBox.margin>
-                                      <Insets left="30.0" />
-                                  </HBox.margin>
-                              </JFXButton>
-                          </children>
-                      </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            </StackPane>
+            <StackPane layoutX="238.0" layoutY="279.0" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <Label text="-- OPTIONAL --" />
+               </children>
+            </StackPane>
+            <StackPane layoutX="151.1999969482422" layoutY="99.0" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+               <children>
+                  <GridPane maxWidth="-Infinity" minWidth="-Infinity" prefWidth="400.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="30.0" prefWidth="100.0" />
+                      <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="70.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="31.0" minHeight="10.0" percentHeight="20.0" prefHeight="31.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="32.0" minHeight="10.0" percentHeight="20.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
                      <children>
-                        <Label fx:id="EstCostLabel" text="Est. Cost:">
-                           <padding>
-                              <Insets bottom="5.0" right="5.0" top="5.0" />
-                           </padding>
+                        <Label fx:id="locationLabel1" alignment="BOTTOM_CENTER" text="Type:">
                            <font>
-                              <Font name="Microsoft YaHei Light" size="12.0" />
+                              <Font name="Microsoft YaHei Light" size="14.0" />
                            </font>
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
                         </Label>
-                        <JFXTextField fx:id="estimatedCost" prefHeight="25.0" prefWidth="89.0" promptText="0.00">
-                           <padding>
-                              <Insets bottom="5.0" right="5.0" />
-                           </padding>
-                        </JFXTextField>
-                        <Label fx:id="completionDateLabel" text="Est. Completion Date:">
-                           <padding>
-                              <Insets bottom="5.0" right="5.0" top="5.0" />
-                           </padding>
+                        <JFXComboBox fx:id="typeComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="250.0" GridPane.columnIndex="1" />
+                              <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="Location:" GridPane.rowIndex="1">
                            <font>
-                              <Font name="Microsoft YaHei Light" size="12.0" />
+                              <Font name="Microsoft YaHei Light" size="14.0" />
                            </font>
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
                         </Label>
-                        <JFXDatePicker fx:id="estCompletion" prefHeight="28.0" prefWidth="122.0" />
+                              <Label fx:id="priorityLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" text="Priority:" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Microsoft YaHei Light" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                              <JFXComboBox fx:id="priorityComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label text="Assignee:" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="Microsoft YaHei Light" size="14.0" />
+                           </font>
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <JFXComboBox fx:id="assigneeChoice" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" text="Description:" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="Microsoft YaHei Light" size="14.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <JFXTextField fx:id="desText" maxWidth="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <JFXTextField fx:id="locationTextField" maxWidth="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
-                     <padding>
-                        <Insets top="5.0" />
-                     </padding>
-                  </HBox>
-                  </children>
-              </GridPane>
+                  </GridPane>
+               </children>
+            </StackPane>
+            <StackPane layoutX="85.0" layoutY="303.0" prefHeight="88.0" prefWidth="600.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                    <GridPane fx:id="servicePane" prefHeight="83.0" prefWidth="430.0">
+                        <columnConstraints>
+                            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        </columnConstraints>
+                        <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                        </rowConstraints>
+                        <children>
+                            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+                                <children>
+                                    <JFXButton fx:id="submitButton" onAction="#submit" style="-fx-background-color: #DC6F55#DC6F55;" text="Submit" textFill="#000000cc">
+                                        <font>
+                                            <Font name="STFangsong" size="18.0" />
+                                        </font>
+                                        <HBox.margin>
+                                            <Insets right="30.0" />
+                                        </HBox.margin>
+                                    </JFXButton>
+                                    <JFXButton fx:id="cancelButton" onAction="#cancel" ripplerFill="#3b314a" style="-fx-background-color: #DC6F55#DC6F55;" text="Cancel" textFill="#000000cc">
+                                        <font>
+                                            <Font name="STFangsong" size="18.0" />
+                                        </font>
+                                        <HBox.margin>
+                                            <Insets left="30.0" />
+                                        </HBox.margin>
+                                    </JFXButton>
+                                </children>
+                            </HBox>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label fx:id="EstCostLabel" text="Est. Cost:">
+                                 <padding>
+                                    <Insets bottom="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="Microsoft YaHei Light" size="12.0" />
+                                 </font>
+                              </Label>
+                              <JFXTextField fx:id="estimatedCost" prefHeight="25.0" prefWidth="89.0" promptText="0.00">
+                                 <padding>
+                                    <Insets bottom="5.0" right="5.0" />
+                                 </padding>
+                              </JFXTextField>
+                              <Label fx:id="completionDateLabel" text="Est. Completion Date:">
+                                 <padding>
+                                    <Insets bottom="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                                 <font>
+                                    <Font name="Microsoft YaHei Light" size="12.0" />
+                                 </font>
+                              </Label>
+                              <JFXDatePicker fx:id="estCompletion" prefHeight="28.0" prefWidth="122.0" />
+                           </children>
+                           <padding>
+                              <Insets top="5.0" />
+                           </padding>
+                        </HBox>
+                        </children>
+                    </GridPane>
+               </children>
+            </StackPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="newAccountPane" prefHeight="412.0" prefWidth="600.0" visible="false">
+      <AnchorPane fx:id="newAccountPane" prefHeight="412.0" prefWidth="600.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <GridPane layoutX="67.0" layoutY="111.0" prefHeight="236.0" prefWidth="373.0">
-              <columnConstraints>
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            <StackPane layoutX="67.0" layoutY="111.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
                <children>
-                  <Label text="First Name:">
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </Label>
-                  <Label text="Last Name:" GridPane.rowIndex="1">
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </Label>
-                  <Label text="Email:" GridPane.rowIndex="2">
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </Label>
-                  <Label text="Username:" GridPane.rowIndex="3">
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </Label>
-                  <Label text="Password:" GridPane.rowIndex="4">
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </Label>
-                  <Label text="Confirm Password:" GridPane.rowIndex="5">
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </Label>
-                  <Label text="User Type:" GridPane.rowIndex="6">
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </Label>
-                  <Label text="Specialty:" GridPane.rowIndex="7">
-                     <padding>
-                        <Insets right="10.0" />
-                     </padding>
-                  </Label>
-                  <JFXComboBox fx:id="userTypeInput" prefHeight="25.0" prefWidth="228.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <JFXComboBox fx:id="specialtyInput" prefHeight="25.0" prefWidth="248.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                  <JFXTextField fx:id="firstName" GridPane.columnIndex="1" />
-                  <JFXTextField fx:id="lastName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <JFXTextField fx:id="email" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <JFXTextField fx:id="passwordInput" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <JFXTextField fx:id="passwordConfirmInput" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                  <JFXTextField fx:id="usernameInput" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <GridPane prefHeight="236.0" prefWidth="373.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label text="First Name:">
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Last Name:" GridPane.rowIndex="1">
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Email:" GridPane.rowIndex="2">
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Username:" GridPane.rowIndex="3">
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Password:" GridPane.rowIndex="4">
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Confirm Password:" GridPane.rowIndex="5">
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <Label text="User Type:" GridPane.rowIndex="6">
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <Label text="Specialty:" GridPane.rowIndex="7">
+                           <padding>
+                              <Insets right="10.0" />
+                           </padding>
+                        </Label>
+                        <JFXComboBox fx:id="userTypeInput" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                        <JFXComboBox fx:id="specialtyInput" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <JFXTextField fx:id="firstName" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" GridPane.columnIndex="1" />
+                        <JFXTextField fx:id="lastName" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <JFXTextField fx:id="email" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <JFXTextField fx:id="passwordInput" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <JFXTextField fx:id="passwordConfirmInput" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                        <JFXTextField fx:id="usernameInput" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                     </children>
+                  </GridPane>
                </children>
-            </GridPane>
-            <Label layoutX="229.0" layoutY="60.0" text="New Account">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <GridPane layoutY="359.0" prefHeight="53.0" prefWidth="600.0">
-              <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
+            </StackPane>
+            <StackPane layoutX="229.0" layoutY="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="46.0">
                <children>
-                  <Button fx:id="createAccountButton" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#createAccount" style="-fx-background-color: #DC6F55;" text="Create Account" GridPane.columnIndex="1" />
-                  <Button fx:id="clearButton" mnemonicParsing="false" onMouseClicked="#clear" style="-fx-background-color: #DC6F55;" text="Clear" />
+                  <Label text="New Account">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
                </children>
-            </GridPane>
-            <Label fx:id="passwordError" layoutX="235.0" layoutY="95.0" text="passwords do not match" textFill="RED" visible="false" />
+            </StackPane>
+            <StackPane layoutY="359.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+               <children>
+                  <GridPane maxWidth="-Infinity" minWidth="-Infinity" prefHeight="54.0" prefWidth="395.0">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      
+                      <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button fx:id="createAccountButton" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#createAccount" style="-fx-background-color: #DC6F55;" text="Create Account" GridPane.columnIndex="1" />
+                        <Button fx:id="clearButton" mnemonicParsing="false" onMouseClicked="#clear" style="-fx-background-color: #DC6F55;" text="Clear" />
+                     </children>
+                  </GridPane>
+               </children>
+            </StackPane>
+            <StackPane layoutX="235.0" layoutY="95.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="95.0">
+               <children>
+                  <Label fx:id="passwordError" text="passwords do not match" textFill="RED" visible="false" />
+               </children>
+            </StackPane>
          </children>
       </AnchorPane>
-        <AnchorPane fx:id="accountTablePane" prefHeight="405.0" prefWidth="600.0" visible="false">
+        <AnchorPane fx:id="accountTablePane" prefHeight="405.0" prefWidth="600.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <JFXTreeTableView fx:id="treeTableAccounts" layoutX="50.0" layoutY="90.0" prefHeight="236.0" prefWidth="517.0" />
-                <GridPane layoutY="346.0" prefHeight="59.0" prefWidth="600.0">
+            <StackPane layoutX="50.0" layoutY="90.0" AnchorPane.bottomAnchor="101.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="90.0">
+               <children>
+                      <JFXTreeTableView fx:id="treeTableAccounts" prefHeight="215.0" prefWidth="500.0" />
+               </children>
+            </StackPane>
+                <GridPane layoutY="346.0" prefHeight="59.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                     <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -272,7 +308,7 @@
                                 <Font name="Microsoft YaHei Light" size="18.0" />
                             </font>
                         </JFXButton>
-                  <JFXTextField fx:id="userToDelete" text="Enter Username..." GridPane.columnIndex="3" />
+                  <JFXTextField fx:id="userToDelete" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="125.0" text="Enter Username..." GridPane.columnIndex="3" />
                     </children>
                 </GridPane>
             </children>
@@ -334,7 +370,7 @@
                     </children>
                 </StackPane>
                 <JFXTreeTableView fx:id="treeTableMaintenance" layoutY="67.0" prefHeight="236.0" prefWidth="580.0" AnchorPane.bottomAnchor="79.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="67.0" />
-                <GridPane fx:id="deletePane" layoutX="217.0" layoutY="70.0" AnchorPane.bottomAnchor="325.0" AnchorPane.rightAnchor="10.0">
+                <GridPane fx:id="deletePane" layoutX="398.0" layoutY="41.0" AnchorPane.rightAnchor="10.799999999999955" AnchorPane.topAnchor="30.0">
                     <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
                         <ColumnConstraints hgrow="SOMETIMES" />
