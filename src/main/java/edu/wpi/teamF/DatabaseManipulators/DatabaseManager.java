@@ -961,11 +961,13 @@ public class DatabaseManager {
 
   public void manipulateServiceRequest(TransportRequest transportRequest)
       throws ValidationException {
-    Validators.transportRequestValidation(transportRequest);
-    if (transportRequestFactory.read(transportRequest.getId()) == null) {
-      transportRequestFactory.create(transportRequest);
-    } else {
-      transportRequestFactory.update(transportRequest);
+    if (transportRequest != null) {
+      Validators.transportRequestValidation(transportRequest);
+      if (transportRequestFactory.read(transportRequest.getId()) == null) {
+        transportRequestFactory.create(transportRequest);
+      } else {
+        transportRequestFactory.update(transportRequest);
+      }
     }
   }
 

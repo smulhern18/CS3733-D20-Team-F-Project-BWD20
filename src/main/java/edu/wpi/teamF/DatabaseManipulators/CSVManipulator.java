@@ -125,7 +125,7 @@ public class CSVManipulator {
     string = node.getId() + ",";
     string = string + String.valueOf(node.getXCoord()) + ",";
     string = string + String.valueOf(node.getYCoord()) + ",";
-    string = string + String.valueOf(node.getFloor()) + ",";
+    string = string + node.getFloor() + ",";
     string = string + node.getBuilding() + ",";
     string = string + node.getType().getTypeString() + ",";
     string = string + node.getLongName() + ",";
