@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -28,11 +27,11 @@
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints percentHeight="6.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints percentHeight="3.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="3.0" valignment="CENTER" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="2.0" valignment="CENTER" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="2.0" valignment="CENTER" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="6.0" valignment="CENTER" vgrow="SOMETIMES" />
-                <RowConstraints percentHeight="3.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="3.0" valignment="CENTER" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="2.0" valignment="CENTER" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="2.0" valignment="TOP" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" percentHeight="6.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
@@ -45,106 +44,57 @@
                         <Image url="@../../../../Images/icons8-computer-64.png" />
                     </image>
                 </ImageView>
-                <JFXButton prefWidth="120.0" text="Computer Service" GridPane.columnIndex="3" GridPane.rowIndex="5">
-                    <font>
-                        <Font name="Dubai Light" size="13.0" />
-                    </font>
-                </JFXButton>
                 <ImageView fx:id="medImage" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#medicineService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
                     <image>
                         <Image url="@../../../../Images/icons8-doctors-bag-100.png" />
                     </image>
                 </ImageView>
-                <JFXButton text="Medicine Delivery" GridPane.columnIndex="2" GridPane.rowIndex="5">
-                    <font>
-                        <Font name="Dubai Light" size="13.0" />
-                    </font>
-                </JFXButton>
                 <ImageView fx:id="lanImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#languageService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                     <image>
                         <Image url="@../../../../Images/icons8-translation-64.png" />
                     </image>
                 </ImageView>
-                <JFXButton prefHeight="30.0" prefWidth="129.0" text="Language Interpretor" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
-               <font>
-                  <Font name="Dubai Light" size="13.0" />
-               </font></JFXButton>
                 <ImageView fx:id="sanImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#sanitationRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                     <image>
                         <Image url="@../../../../Images/icons8-antiseptic-cream-80.png" />
                     </image>
                 </ImageView>
-                <JFXButton contentDisplay="CENTER" text="Sanitation" GridPane.columnIndex="2" GridPane.rowIndex="1">
-                    <font>
-                        <Font name="Dubai Light" size="13.0" />
-                    </font>
-                </JFXButton>
                 <ImageView fx:id="marImage" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#mariachiService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="8">
                     <image>
                         <Image url="@../../../../Images/icons8-musical-notes-96.png" />
                     </image>
                 </ImageView>
-                <JFXButton prefHeight="25.0" prefWidth="76.0" text="Mariachi" GridPane.columnIndex="1" GridPane.rowIndex="9">
-                    <font>
-                        <Font name="Dubai Light" size="13.0" />
-                    </font>
-                </JFXButton>
                 <ImageView fx:id="secImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#securityRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                     <image>
                         <Image url="@../../../../Images/icons8-security-configuration-80.png" />
                     </image>
                 </ImageView>
-                <JFXButton text="Security" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <font>
-                        <Font name="Dubai Light" size="13.0" />
-                    </font>
-                </JFXButton>
                 <ImageView fx:id="laundryImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#switchToLaundryService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                     <image>
                         <Image url="@../../../../Images/icons8-washing-machine-64.png" />
                     </image>
                 </ImageView>
-                <JFXButton text="Laundry" GridPane.columnIndex="4" GridPane.rowIndex="1">
-                    <font>
-                        <Font name="Dubai Light" size="13.0" />
-                    </font>
-                </JFXButton>
                 <ImageView fx:id="flowImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#flowerRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
                     <image>
                         <Image url="@../../../../Images/icons8-flower-bouquet-256.png" />
                     </image>
                 </ImageView>
-                <JFXButton text="Flower" GridPane.columnIndex="1" GridPane.rowIndex="5">
-                    <font>
-                        <Font name="Dubai Light" size="13.0" />
-                    </font>
-                </JFXButton>
                 <ImageView fx:id="transportImage" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#transportRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
                     <image>
                         <Image url="@../../../../Images/icons8-car-200.png" />
                     </image>
                 </ImageView>
-                <JFXButton prefHeight="11.0" prefWidth="72.0" text="Transport" GridPane.columnIndex="4" GridPane.rowIndex="5">
-                    <font>
-                        <Font name="Dubai Light" size="13.0" />
-                    </font>
-                </JFXButton>
                 <ImageView fx:id="mainImage" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#maintenanceRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="8">
                     <image>
                         <Image url="@../../../../Images/icons8-support-400.png" />
                     </image>
                 </ImageView>
-                <JFXButton text="Maintenance" GridPane.columnIndex="2" GridPane.rowIndex="9">
-                    <font>
-                        <Font name="Dubai Light" size="13.0" />
-                    </font>
-                </JFXButton>
                 <Label text="Roman" textFill="#5b5959" GridPane.columnIndex="3" GridPane.rowIndex="6">
                     <font>
                         <Font size="9.0" />
                     </font>
                 </Label>
-                <Label text="Nicholas" textFill="#5b5959" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                <Label text="Nicholas" textFill="#5b5959" GridPane.columnIndex="2" GridPane.rowIndex="6">
                     <font>
                         <Font size="9.0" />
                     </font>
@@ -199,16 +149,66 @@
                         <Image url="@../../../../Images/icons8-door-80.png" />
                     </image>
                 </ImageView>
-            <JFXButton prefWidth="120.0" text="Appointments" GridPane.columnIndex="3" GridPane.rowIndex="9">
+            <Label text="Security" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font name="Dubai Light" size="13.0" />
                </font>
-            </JFXButton>
-            <JFXButton prefWidth="120.0" text="Room Scheduler" GridPane.columnIndex="4" GridPane.rowIndex="9">
+            </Label>
+            <Label text="Sanitation" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
                   <Font name="Dubai Light" size="13.0" />
                </font>
-            </JFXButton>
+            </Label>
+            <Label text="Language Interpreter" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Dubai Light" size="13.0" />
+               </font>
+            </Label>
+            <Label text="Laundry" GridPane.columnIndex="4" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Dubai Light" size="13.0" />
+               </font>
+            </Label>
+            <Label text="Flower Delivery" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Dubai Light" size="13.0" />
+               </font>
+            </Label>
+            <Label text="Medication Delivery" GridPane.columnIndex="2" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Dubai Light" size="13.0" />
+               </font>
+            </Label>
+            <Label text="Computer Service" GridPane.columnIndex="3" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Dubai Light" size="13.0" />
+               </font>
+            </Label>
+            <Label text="Transportation" GridPane.columnIndex="4" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Dubai Light" size="13.0" />
+               </font>
+            </Label>
+            <Label text="Mariachi Band" GridPane.columnIndex="1" GridPane.rowIndex="9">
+               <font>
+                  <Font name="Dubai Light" size="13.0" />
+               </font>
+            </Label>
+            <Label text="Maintenance" GridPane.columnIndex="2" GridPane.rowIndex="9">
+               <font>
+                  <Font name="Dubai Light" size="13.0" />
+               </font>
+            </Label>
+            <Label text="Appointments" GridPane.columnIndex="3" GridPane.rowIndex="9">
+               <font>
+                  <Font name="Dubai Light" size="13.0" />
+               </font>
+            </Label>
+            <Label text="Room Scheduler" GridPane.columnIndex="4" GridPane.rowIndex="9">
+               <font>
+                  <Font name="Dubai Light" size="13.0" />
+               </font>
+            </Label>
             </children>
         </GridPane>
         <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />

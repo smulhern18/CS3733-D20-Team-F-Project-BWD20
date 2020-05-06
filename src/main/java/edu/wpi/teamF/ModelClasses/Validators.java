@@ -57,7 +57,7 @@ public class Validators {
   public static final int INSTRUCTIONS_MIN_LENGTH = 0;
   public static final int INSTRUCTIONS_MAX_LENGTH = 64;
   public static final int TEMPERTURE_MIN_LENGTH = 1;
-  public static final int TEMPERTURE_MAX_LENGTH = 8;
+  public static final int TEMPERTURE_MAX_LENGTH = 20;
   public static final int ITEMS_MIN_LENGTH = 1;
   public static final int ITEMS_MAX_LENGTH = 32;
   public static final int QUANTITY_MIN_LENGTH = 1;
