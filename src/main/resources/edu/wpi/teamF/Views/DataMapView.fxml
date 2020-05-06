@@ -208,7 +208,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="8.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" percentHeight="3.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
@@ -257,7 +257,10 @@
                   <JFXButton fx:id="addNodeButton" disable="true" maxHeight="25.0" maxWidth="40.0" minHeight="25.0" minWidth="40.0" onAction="#addNode" prefHeight="25.0" prefWidth="40.0" style="-fx-background-color: #012d5a;" text="Add" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
                   <JFXButton fx:id="deleteNodeButton" maxHeight="26.0" maxWidth="50.0" minHeight="25.0" minWidth="50.0" onAction="#deleteNode" prefHeight="26.0" prefWidth="50.0" style="-fx-background-color: #012d5a;" text="Delete" textAlignment="CENTER" textFill="WHITE" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="8" />
                   <JFXButton fx:id="modifyNodeButton" disable="true" maxHeight="26.0" maxWidth="53.0" minHeight="25.0" minWidth="53.0" onAction="#modifyNode" prefHeight="26.0" prefWidth="53.0" style="-fx-background-color: #012d5a;" text="Modify" textAlignment="CENTER" textFill="WHITE" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
-                  <Label fx:id="nodeErrorLabel" prefHeight="10.0" prefWidth="20.0" textFill="RED" GridPane.columnIndex="2" />
+                  <Label fx:id="nodeErrorLabel" prefHeight="18.0" prefWidth="174.0" textFill="RED" GridPane.columnIndex="2" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font size="10.0" />
+                     </font></Label>
                </children>
             </GridPane>
          </children>
