@@ -157,7 +157,7 @@ public class Node {
           this.id.equals(otherNode.getId())
               && this.getXCoord() == otherNode.getXCoord()
               && this.getYCoord() == otherNode.getYCoord()
-              && this.getFloor() == otherNode.getFloor()
+              && this.getFloor().equals(otherNode.getFloor())
               && this.getType() == otherNode.getType()
               && this.edges.equals((otherNode).edges)
               && this.getBuilding().equals(otherNode.getBuilding())
