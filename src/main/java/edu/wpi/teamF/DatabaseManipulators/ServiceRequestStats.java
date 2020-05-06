@@ -203,7 +203,7 @@ public class ServiceRequestStats {
     if (timeDifference == 0) {
       total = "No data present";
     } else {
-      total = "" + timeDifference / 60 / 1000 + "Minutes";
+      total = "" + timeDifference / 60 / 1000 + " Minutes";
     }
     return total;
   }
@@ -401,7 +401,7 @@ public class ServiceRequestStats {
     if (timeDifference == 0) {
       total = "No data present";
     } else {
-      total = "" + timeDifference / 60 / 1000 + "Minutes";
+      total = "" + timeDifference / 60 / 1000 + " Minutes";
     }
     return total;
   }
