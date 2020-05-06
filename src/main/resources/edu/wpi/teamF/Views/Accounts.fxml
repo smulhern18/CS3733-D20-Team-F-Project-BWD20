@@ -27,8 +27,10 @@
          </font></JFXButton>
       <Label layoutX="666.0" layoutY="56.0" prefHeight="71.0" prefWidth="240.0" text="Update Pathfinder Algorithm:" AnchorPane.rightAnchor="255.0" AnchorPane.topAnchor="56.0">
          <font>
+
             <Font name="Dubai Light" size="18.0" />
          </font></Label>
+
       <JFXComboBox fx:id="algoChoiceBox" layoutX="931.0" layoutY="79.0" onAction="#updatePathfinderAlgorithm" prefHeight="25.0" prefWidth="131.0" AnchorPane.rightAnchor="137.8" AnchorPane.topAnchor="79.0" />
       <StackPane layoutX="536.0" layoutY="124.0" prefHeight="110.0" prefWidth="203.0" AnchorPane.leftAnchor="536.0" AnchorPane.rightAnchor="460.8" AnchorPane.topAnchor="124.0">
          <children>
@@ -51,8 +53,9 @@
             </GridPane>
          </children>
       </StackPane>
-      <JFXButton buttonType="RAISED" layoutX="752.0" layoutY="199.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#downloadReports" prefHeight="44.0" prefWidth="273.0" style="-fx-background-color: white;" text="Get Reports From Services" AnchorPane.leftAnchor="752.0" AnchorPane.topAnchor="199.0">
+      <JFXButton buttonType="RAISED" layoutX="903.0" layoutY="191.0" onAction="#dataView" prefHeight="58.0" prefWidth="122.0" style="-fx-background-color: white;" text="Reports View">
          <font>
+
             <Font name="Dubai Light" size="20.0" />
          </font>
       </JFXButton>

@@ -43,12 +43,12 @@
                      <children>
                               <JFXButton fx:id="back" onAction="#request" style="-fx-background-color: #012D5A; -fx-background-radius: 10;" text="Back" textFill="#ffffffcc">
                                   <font>
-                                      <Font name="STFangsong" size="18.0" />
+                                      <Font name="Dubai Light" size="18.0" />
                                   </font>
                               </JFXButton>
                         <JFXButton fx:id="update" onAction="#update" style="-fx-background-color: #012D5A; -fx-background-radius: 10;" text="Update" textFill="#ffffffcc" GridPane.columnIndex="1">
                            <font>
-                              <Font name="STFangsong" size="18.0" />
+                              <Font name="Dubai Light" size="18.0" />
                            </font>
                         </JFXButton>
                      </children>
@@ -74,6 +74,9 @@
                             <GridPane.margin>
                                 <Insets right="5.0" />
                             </GridPane.margin>
+                     <font>
+                        <Font name="Dubai Light" size="13.0" />
+                     </font>
                         </JFXButton>
                     </children>
                 </GridPane>
@@ -98,13 +101,19 @@
                   <children>
                       <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
                           <children>
-                              <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="     Location:              " />
+                              <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="     Location:              ">
+                           <font>
+                              <Font name="Dubai Light" size="13.0" />
+                           </font></Label>
                               <JFXComboBox fx:id="locationChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;" />
                           </children>
                       </HBox>
                       <HBox alignment="BOTTOM_CENTER" GridPane.rowIndex="2">
                           <children>
-                              <Label fx:id="itemsLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="Items:          " />
+                              <Label fx:id="itemsLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="Items:          ">
+                           <font>
+                              <Font name="Dubai Light" size="13.0" />
+                           </font></Label>
                               <JFXComboBox fx:id="itemsChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;">
                            <HBox.margin>
                               <Insets left="5.0" />
@@ -126,17 +135,17 @@
                            <children>
                                     <JFXButton fx:id="cancelButton" onAction="#cancel" style="-fx-background-color: #a40000; -fx-background-radius: 10;" text="Cancel" textFill="#ffffffcc" GridPane.columnIndex="2">
                                         <font>
-                                            <Font name="STFangsong" size="18.0" />
+                                            <Font name="Dubai Light" size="18.0" />
                                         </font>
                                     </JFXButton>
                                     <JFXButton fx:id="submitButton" onAction="#submit" style="-fx-background-color: #012D5A; -fx-background-radius: 10;" text="Submit" textFill="#ffffffcc" GridPane.columnIndex="1">
                                         <font>
-                                            <Font name="STFangsong" size="18.0" />
+                                            <Font name="Dubai Light" size="18.0" />
                                         </font>
                                     </JFXButton>
-                                    <JFXButton fx:id="backButton" onAction="#statusView" style="-fx-background-color: #012D5A; -fx-background-radius: 10;" text="Status" textFill="#ffffffcc">
+                                    <JFXButton fx:id="checkStatButton" onAction="#statusView" style="-fx-background-color: #012D5A; -fx-background-radius: 10;" text="Status" textFill="#ffffffcc">
                                         <font>
-                                            <Font name="STFangsong" size="18.0" />
+                                            <Font name="Dubai Light" size="18.0" />
                                         </font>
                                     </JFXButton>
                            </children>
@@ -145,31 +154,43 @@
                       </HBox>
                       <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                           <children>
-                              <Label fx:id="quantityLabel" alignment="BOTTOM_CENTER" text="Quantity:    " />
+                              <Label fx:id="quantityLabel" alignment="BOTTOM_CENTER" text="Quantity:    ">
+                           <font>
+                              <Font name="Dubai Light" size="13.0" />
+                           </font></Label>
                               <JFXComboBox fx:id="quantityChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;" />
                           </children>
                       </HBox>
                       <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                           <children>
-                              <Label fx:id="temperatureLabel" alignment="BOTTOM_CENTER" text="Temperature:" />
+                              <Label fx:id="temperatureLabel" alignment="BOTTOM_CENTER" text="Temperature:">
+                           <font>
+                              <Font name="Dubai Light" size="13.0" />
+                           </font></Label>
                               <JFXComboBox fx:id="temperatureSChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;" />
                           </children>
                       </HBox>
                       <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
                           <children>
-                              <Label fx:id="descLabel" alignment="BOTTOM_CENTER" text="     Description:         " />
+                              <Label fx:id="descLabel" alignment="BOTTOM_CENTER" text="     Description:         ">
+                           <font>
+                              <Font name="Dubai Light" size="13.0" />
+                           </font></Label>
                               <JFXTextField fx:id="descText" prefHeight="25.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;" />
                           </children>
                       </HBox>
                       <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
                           <children>
-                              <Label fx:id="prioLabel" alignment="BOTTOM_CENTER" text="          Priority:           " />
+                              <Label fx:id="prioLabel" alignment="BOTTOM_CENTER" text="          Priority:           ">
+                           <font>
+                              <Font name="Dubai Light" size="13.0" />
+                           </font></Label>
                               <JFXComboBox fx:id="priorityChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;" />
                           </children>
                       </HBox>
                         <Label fx:id="securityRequestLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="334.0" text="Laundry Service Request" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                             <font>
-                                <Font size="23.0" />
+                                <Font name="Dubai Light" size="24.0" />
                             </font>
                         </Label>
                   </children>

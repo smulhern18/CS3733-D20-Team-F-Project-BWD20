@@ -29,14 +29,14 @@
                <children>
                   <Label text="Help">
                      <font>
-                        <Font name="STIXGeneral-Regular" size="64.0" />
+                        <Font name="Dubai Light" size="64.0" />
                      </font>
                   </Label>
                </children>
             </StackPane>
             <Label fx:id="generalquestions" text="General Questions" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
-                  <Font size="36.0" />
+                  <Font name="Dubai Light" size="36.0" />
                </font>
             </Label>
             <StackPane fx:id="stackPane" prefHeight="253.0" prefWidth="426.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
@@ -45,27 +45,27 @@
                      <children>
                         <JFXButton fx:id="signup" onAction="#loadDialogsignup" text="How to sign up?" textAlignment="JUSTIFY">
                            <font>
-                              <Font name="STIXGeneral-Regular" size="24.0" />
+                              <Font name="Dubai Light" size="24.0" />
                            </font>
                         </JFXButton>
                         <JFXButton fx:id="login" onAction="#loadDialoglogin" text="How to login?">
                            <font>
-                              <Font name="STIXGeneral-Regular" size="24.0" />
+                              <Font name="Dubai Light" size="24.0" />
                            </font>
                         </JFXButton>
                         <JFXButton fx:id="findpath" onAction="#loadDialogpath" text="How to find a path?">
                            <font>
-                              <Font name="STIXGeneral-Regular" size="24.0" />
+                              <Font name="Dubai Light" size="24.0" />
                            </font>
                         </JFXButton>
                         <JFXButton fx:id="requestservice" onAction="#loadDialogservicerequest" text="How to request a service?">
                            <font>
-                              <Font name="STIXGeneral-Regular" size="24.0" />
+                              <Font name="Dubai Light" size="24.0" />
                            </font>
                         </JFXButton>
                         <JFXButton fx:id="addnodes" onAction="#loadDialogadmin" text="How to add/edit/delete nodes?">
                            <font>
-                              <Font name="STIXGeneral-Regular" size="24.0" />
+                              <Font name="Dubai Light" size="24.0" />
                            </font>
                         </JFXButton>
                      </children>

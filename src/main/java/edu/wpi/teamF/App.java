@@ -35,6 +35,7 @@ public class App extends Application {
   private MedicineDeliveryController medicineController = new MedicineDeliveryController();
   private MaintenanceRequestController maintenanceRequestController =
       new MaintenanceRequestController();
+  private DataViewController dataViewController = new DataViewController();
 
   @Override
   public void init() {}
@@ -70,6 +71,8 @@ public class App extends Application {
             return medicineController;
           } else if (controllerClass.equals(MaintenanceRequestController.class)) {
             return maintenanceRequestController;
+          } else if (controllerClass.equals(DataViewController.class)) {
+            return dataViewController;
           }
           return null;
         });

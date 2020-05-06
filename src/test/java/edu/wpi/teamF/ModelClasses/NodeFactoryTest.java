@@ -22,7 +22,7 @@ public class NodeFactoryTest {
   public void initialize() throws Exception {
     testData = new TestData();
     validNodes = testData.validNodes;
-    databaseManager.reset();
+    databaseManager.initialize();
   }
 
   @AfterAll
