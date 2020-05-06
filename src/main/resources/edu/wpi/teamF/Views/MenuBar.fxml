@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -69,10 +70,13 @@
                         </StackPane>
                         <StackPane prefHeight="79.0" prefWidth="96.0">
                            <children>
-                              <JFXButton fx:id="mainMenuButton1" alignment="CENTER" onAction="#mainMenu" prefHeight="287.0" prefWidth="234.0" text="Main Menu" textFill="#ffffffcc">
+                              <JFXButton fx:id="mainMenuButton1" alignment="CENTER" onAction="#mainMenu" prefHeight="79.0" prefWidth="108.0" text="Main Menu" textFill="#ffffffcc">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="Dubai Light" size="16.0" />
                                  </font>
+                                 <padding>
+                                    <Insets left="-4.0" />
+                                 </padding>
                               </JFXButton>
                            </children>
                         </StackPane>
@@ -90,7 +94,7 @@
                      <children>
                         <StackPane prefHeight="49.0" prefWidth="30.0">
                            <children>
-                              <JFXButton fx:id="serviceButton" onAction="#serviceRequest" prefHeight="127.0" prefWidth="163.0" text=" " textFill="#ffffffcc">
+                              <JFXButton fx:id="serviceButton" onAction="#serviceRequest" prefHeight="49.0" prefWidth="63.0" text=" " textFill="#ffffffcc">
                                  <font>
                                     <Font name="STIXGeneral-Bold" size="18.0" />
                                  </font>
@@ -104,12 +108,15 @@
                               </JFXButton>
                            </children>
                         </StackPane>
-                        <StackPane prefHeight="52.0" prefWidth="123.0">
+                        <StackPane prefHeight="49.0" prefWidth="141.0">
                            <children>
-                              <JFXButton fx:id="serviceButton1" onAction="#serviceRequest" prefHeight="208.0" prefWidth="337.0" text="Service Request" textFill="#ffffffcc">
+                              <JFXButton fx:id="serviceButton1" onAction="#serviceRequest" prefHeight="49.0" prefWidth="202.0" text="Service Request" textFill="#ffffffcc">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="Dubai Light" size="15.0" />
                                  </font>
+                                 <padding>
+                                    <Insets left="-5.0" />
+                                 </padding>
                               </JFXButton>
                            </children>
                         </StackPane>
@@ -137,7 +144,7 @@
                            <children>
                               <JFXButton fx:id="pathfindButton1" onAction="#pathfinder" prefHeight="179.0" prefWidth="189.0" text="Pathfinder" textFill="#ffffffcc">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="Dubai Light" size="16.0" />
                                  </font>
                               </JFXButton>
                            </children>
@@ -166,7 +173,7 @@
                            <children>
                               <JFXButton fx:id="helpButton1" onAction="#help" prefHeight="128.0" prefWidth="161.0" text="Help" textFill="#ffffffcc">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="Dubai Light" size="16.0" />
                                  </font>
                               </JFXButton>
                            </children>
@@ -191,11 +198,11 @@
                               </JFXButton>
                            </children>
                         </StackPane>
-                        <StackPane prefHeight="58.0" prefWidth="72.0">
+                        <StackPane prefHeight="49.0" prefWidth="78.0">
                            <children>
-                              <JFXButton fx:id="settingsButton1" onAction="#settings" prefHeight="268.0" prefWidth="246.0" text="Settings" textFill="#ffffffcc">
+                              <JFXButton fx:id="settingsButton1" onAction="#settings" prefHeight="49.0" prefWidth="117.0" text="Settings" textFill="#ffffffcc">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="Dubai Light" size="16.0" />
                                  </font>
                               </JFXButton>
                            </children>
@@ -224,7 +231,7 @@
                            <children>
                               <JFXButton fx:id="adminButton1" onAction="#admin" prefHeight="228.0" prefWidth="300.0" text="Admin" textFill="#ffffffcc">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="Dubai Light" size="16.0" />
                                  </font>
                               </JFXButton>
                            </children>
@@ -251,9 +258,9 @@
                         </StackPane>
                         <StackPane prefHeight="48.0" prefWidth="58.0">
                            <children>
-                              <JFXButton fx:id="loginButton1" onAction="#login" prefHeight="72.0" prefWidth="58.0" text="Login" textFill="#ffffffcc">
+                              <JFXButton fx:id="loginButton1" onAction="#login" prefHeight="49.0" prefWidth="90.0" text="Login" textFill="#ffffffcc">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="Dubai Light" size="16.0" />
                                  </font>
                               </JFXButton>
                            </children>

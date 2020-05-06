@@ -273,7 +273,8 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  private void setFloorButtons(ActionEvent event) {
+  private void setFloorButtons(ActionEvent event) throws Exception {
+    cancelViews(null);
     if (hospitalCombo.getValue().equals("Main Campus")) {
       faulknerFloorPane.setVisible(false);
       mainFloorPane.setVisible(true);
@@ -672,8 +673,6 @@ public class DataMapViewController implements Initializable {
           return mapPaneMain3;
       }
     }
-    System.out.println(
-        "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH");
     return null;
   }
 
@@ -900,11 +899,11 @@ public class DataMapViewController implements Initializable {
   @FXML
   private void cancelViews(ActionEvent event) throws Exception {
 
-    if (edgeAnchor.isVisible()) {
+    if (edgeAnchor.isVisible() && edge != null) {
       resetNodeColors();
     }
 
-    if (nodeAnchor.isVisible()) {
+    if (nodeAnchor.isVisible() && node != null) {
       for (Edge edge : databaseManager.getAllEdgesConnectedToNode(node.getId())) {
         for (int i = 0; i < mapPane.getChildren().size(); i++) {
           javafx.scene.Node children = mapPane.getChildren().get(i);

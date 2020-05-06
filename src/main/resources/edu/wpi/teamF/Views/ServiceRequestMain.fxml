@@ -24,7 +24,7 @@
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="25.0" />
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="25.0" />
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="25.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="5.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="5.0" prefWidth="100.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints percentHeight="6.0" valignment="CENTER" vgrow="SOMETIMES" />
@@ -35,27 +35,27 @@
                 <RowConstraints percentHeight="3.0" valignment="BOTTOM" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="2.0" valignment="CENTER" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="2.0" valignment="TOP" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" percentHeight="6.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" percentHeight="3.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" percentHeight="2.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" percentHeight="6.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" percentHeight="3.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" percentHeight="2.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <ImageView fx:id="compImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#switchToComputerService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                <ImageView fx:id="compImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#switchToComputerService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
                     <image>
                         <Image url="@../../../../Images/icons8-computer-64.png" />
                     </image>
                 </ImageView>
-                <JFXButton prefWidth="120.0" text="Computer Service" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <JFXButton prefWidth="120.0" text="Computer Service" GridPane.columnIndex="3" GridPane.rowIndex="5">
                     <font>
                         <Font name="STIXGeneral-Regular" size="12.0" />
                     </font>
                 </JFXButton>
-                <ImageView fx:id="medImage" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#medicineService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                <ImageView fx:id="medImage" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#medicineService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
                     <image>
                         <Image url="@../../../../Images/icons8-doctors-bag-100.png" />
                     </image>
                 </ImageView>
-                <JFXButton text="Medicine Delivery" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                <JFXButton text="Medicine Delivery" GridPane.columnIndex="2" GridPane.rowIndex="5">
                     <font>
                         <Font name="STIXGeneral-Regular" size="12.0" />
                     </font>
@@ -66,12 +66,12 @@
                     </image>
                 </ImageView>
                 <JFXButton prefHeight="30.0" prefWidth="129.0" text="Language Interpretor" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                <ImageView fx:id="sanImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#sanitationRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+                <ImageView fx:id="sanImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#sanitationRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                     <image>
                         <Image url="@../../../../Images/icons8-antiseptic-cream-80.png" />
                     </image>
                 </ImageView>
-                <JFXButton contentDisplay="CENTER" text="Sanitation" GridPane.columnIndex="4" GridPane.rowIndex="1">
+                <JFXButton contentDisplay="CENTER" text="Sanitation" GridPane.columnIndex="2" GridPane.rowIndex="1">
                     <font>
                         <Font name="STIXGeneral-Regular" size="12.0" />
                     </font>
@@ -86,32 +86,32 @@
                         <Font name="STIXGeneral-Regular" size="12.0" />
                     </font>
                 </JFXButton>
-                <ImageView fx:id="secImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#securityRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                <ImageView fx:id="secImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#securityRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                     <image>
                         <Image url="@../../../../Images/icons8-security-configuration-80.png" />
                     </image>
                 </ImageView>
-                <JFXButton text="Security" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                <JFXButton text="Security" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <font>
                         <Font name="STIXGeneral-Regular" size="12.0" />
                     </font>
                 </JFXButton>
-                <ImageView fx:id="laundryImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#switchToLaundryService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                <ImageView fx:id="laundryImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#switchToLaundryService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
                     <image>
                         <Image url="@../../../../Images/icons8-washing-machine-64.png" />
                     </image>
                 </ImageView>
-                <JFXButton text="Laundry" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                <JFXButton text="Laundry" GridPane.columnIndex="4" GridPane.rowIndex="1">
                     <font>
                         <Font name="STIXGeneral-Regular" size="12.0" />
                     </font>
                 </JFXButton>
-                <ImageView fx:id="flowImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#flowerRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                <ImageView fx:id="flowImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#flowerRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
                     <image>
                         <Image url="@../../../../Images/icons8-flower-bouquet-256.png" />
                     </image>
                 </ImageView>
-                <JFXButton text="Flower" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                <JFXButton text="Flower" GridPane.columnIndex="1" GridPane.rowIndex="5">
                     <font>
                         <Font name="STIXGeneral-Regular" size="12.0" />
                     </font>
@@ -131,7 +131,7 @@
                         <Image url="@../../../../Images/icons8-support-400.png" />
                     </image>
                 </ImageView>
-                <JFXButton text="Maintance" GridPane.columnIndex="2" GridPane.rowIndex="9">
+                <JFXButton text="Maintenance" GridPane.columnIndex="2" GridPane.rowIndex="9">
                     <font>
                         <Font name="STIXGeneral-Regular" size="13.0" />
                     </font>
@@ -186,18 +186,26 @@
                         <Font size="9.0" />
                     </font>
                 </Label>
-            <ImageView fx:id="appointmentsImage" fitHeight="61.0" fitWidth="61.0" onMouseClicked="#appointmentRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="8">
-               <image>
-                  <Image url="@../../../../Images/icons8-calendar-100.png" />
-               </image>
-            </ImageView>
-            <ImageView fx:id="roomSchedulerImage" fitHeight="56.0" fitWidth="52.0" onMouseClicked="#switchToRoomScheduler" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="8">
-               <image>
-                  <Image url="@../../../../Images/icons8-door-80.png" />
-               </image>
-            </ImageView>
-            <Label onMouseClicked="#appointmentRequest" text="Appointments" GridPane.columnIndex="3" GridPane.rowIndex="9" />
-            <Label onMouseClicked="#switchToRoomScheduler" text="Room Scheduler" GridPane.columnIndex="4" GridPane.rowIndex="9" />
+                <ImageView fx:id="appointmentsImage" fitHeight="61.0" fitWidth="61.0" onMouseClicked="#appointmentRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="8">
+                    <image>
+                        <Image url="@../../../../Images/icons8-calendar-100.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="roomSchedulerImage" fitHeight="56.0" fitWidth="52.0" onMouseClicked="#switchToRoomScheduler" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="8">
+                    <image>
+                        <Image url="@../../../../Images/icons8-door-80.png" />
+                    </image>
+                </ImageView>
+            <JFXButton prefWidth="120.0" text="Appointments" GridPane.columnIndex="3" GridPane.rowIndex="9">
+               <font>
+                  <Font name="STIXGeneral-Regular" size="12.0" />
+               </font>
+            </JFXButton>
+            <JFXButton prefWidth="120.0" text="Room Scheduler" GridPane.columnIndex="4" GridPane.rowIndex="9">
+               <font>
+                  <Font name="STIXGeneral-Regular" size="12.0" />
+               </font>
+            </JFXButton>
             </children>
         </GridPane>
         <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />

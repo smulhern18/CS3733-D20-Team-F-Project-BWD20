@@ -40,7 +40,7 @@
                      <children>
                         <Label text="Help">
                            <font>
-                              <Font name="STIXGeneral-Regular" size="24.0" />
+                              <Font name="Dubai Light" size="24.0" />
                            </font>
                         </Label>
                      </children>
@@ -90,7 +90,7 @@
                      <children>
                         <JFXButton onAction="#generalquestions" text="General Questions">
                            <font>
-                              <Font name="STIXGeneral-Regular" size="13.0" />
+                              <Font name="Dubai Light" size="14.0" />
                            </font>
                         </JFXButton>
                      </children>
@@ -99,7 +99,7 @@
                      <children>
                         <JFXButton text="Specific Questions">
                            <font>
-                              <Font name="STIXGeneral-Regular" size="13.0" />
+                              <Font name="Dubai Light" size="14.0" />
                            </font>
                         </JFXButton>
                      </children>
@@ -108,7 +108,7 @@
                      <children>
                         <JFXButton text="Contact Us">
                            <font>
-                              <Font name="STIXGeneral-Regular" size="13.0" />
+                              <Font name="Dubai Light" size="14.0" />
                            </font>
                         </JFXButton>
                      </children>
@@ -126,7 +126,10 @@
                <children>
                   <StackPane prefHeight="94.0" prefWidth="337.0">
                      <children>
-                        <JFXTextField prefHeight="28.0" prefWidth="375.0" promptText="Search ..." />
+                        <JFXTextField prefHeight="28.0" prefWidth="375.0" promptText="Search ...">
+                           <font>
+                              <Font name="Dubai Light" size="12.0" />
+                           </font></JFXTextField>
                      </children>
                   </StackPane>
                </children>

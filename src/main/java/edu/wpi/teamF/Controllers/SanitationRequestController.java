@@ -6,6 +6,7 @@ import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Node;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.ReportsClass;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SanitationServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UISanitationServiceRequest;
 import java.net.URL;
@@ -26,6 +27,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.util.Callback;
+import javax.management.InstanceNotFoundException;
 import lombok.SneakyThrows;
 
 public class SanitationRequestController implements Initializable {
@@ -274,6 +276,22 @@ public class SanitationRequestController implements Initializable {
           toUpdate.setComplete(false);
         } else if (completed.equals("Complete")) {
           toUpdate.setComplete(true);
+          try {
+            ReportsClass oldReport = databaseManager.readReport(uiSR.location.get());
+            if (oldReport != null) {
+              oldReport.setTimesSanitized(oldReport.getTimesSanitized() + 1);
+              oldReport.setSanitizer(uiSR.getAssignee().get());
+              databaseManager.manipulateReport(oldReport);
+            } else {
+              ReportsClass report =
+                  new ReportsClass(uiSR.location.get(), 0, 1, uiSR.getAssignee().get());
+              databaseManager.manipulateReport(report);
+            }
+          } catch (InstanceNotFoundException e) {
+
+          } catch (Exception e) {
+            System.out.println(e.getMessage());
+          }
         }
         databaseManager.manipulateServiceRequest(toUpdate);
       }

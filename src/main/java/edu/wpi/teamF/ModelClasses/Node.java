@@ -147,6 +147,7 @@ public class Node {
    * @param other the otherNode to check against
    * @return if the nodes are equal or not
    */
+  @Override
   public boolean equals(Object other) {
     boolean isEqual = false;
     if (other instanceof Node) {
@@ -156,7 +157,7 @@ public class Node {
           this.id.equals(otherNode.getId())
               && this.getXCoord() == otherNode.getXCoord()
               && this.getYCoord() == otherNode.getYCoord()
-              && this.getFloor() == otherNode.getFloor()
+              && this.getFloor().equals(otherNode.getFloor())
               && this.getType() == otherNode.getType()
               && this.edges.equals((otherNode).edges)
               && this.getBuilding().equals(otherNode.getBuilding())
