@@ -14,7 +14,7 @@
 
 <AnchorPane prefHeight="525.0" prefWidth="631.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.AboutController">
    <children>
-      <fx:include source="MenuBar.fxml" />
+      <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <ScrollPane layoutX="190.0" prefHeight="525.0" prefWidth="441.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1800.0" prefWidth="412.0">
