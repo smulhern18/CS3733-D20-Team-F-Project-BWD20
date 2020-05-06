@@ -147,6 +147,7 @@ public class Node {
    * @param other the otherNode to check against
    * @return if the nodes are equal or not
    */
+  @Override
   public boolean equals(Object other) {
     boolean isEqual = false;
     if (other instanceof Node) {

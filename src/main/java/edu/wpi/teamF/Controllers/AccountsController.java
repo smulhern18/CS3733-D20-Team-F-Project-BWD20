@@ -10,7 +10,6 @@ import edu.wpi.teamF.ModelClasses.Account.Admin;
 import edu.wpi.teamF.ModelClasses.Account.Staff;
 import edu.wpi.teamF.ModelClasses.Account.User;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -190,9 +189,7 @@ public class AccountsController implements Initializable {
     }
   }
 
-  public void downloadReports(ActionEvent actionEvent) {
-    backup.setTitle("Select Where to Backup Database");
-    File selDir = backup.showDialog(rootPane.getScene().getWindow());
-    serviceRequestStats.downloadStatistics(selDir.toPath());
+  public void dataView(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("DataView");
   }
 }

@@ -35,6 +35,7 @@ public class App extends Application {
   private MedicineDeliveryController medicineController = new MedicineDeliveryController();
   private MaintenanceRequestController maintenanceRequestController =
       new MaintenanceRequestController();
+  private DataViewController dataViewController = new DataViewController();
 
   @Override
   public void init() {}
@@ -70,11 +71,13 @@ public class App extends Application {
             return medicineController;
           } else if (controllerClass.equals(MaintenanceRequestController.class)) {
             return maintenanceRequestController;
+          } else if (controllerClass.equals(DataViewController.class)) {
+            return dataViewController;
           }
           return null;
         });
     sceneController = new SceneController(fxmlLoader, primaryStage, primaryScene);
-    Parent root = fxmlLoader.load(getClass().getResource("Views/MainMenu.fxml"));
+    Parent root = fxmlLoader.load(getClass().getResource("Views/MedicineDeliveryRequest.fxml"));
     primaryScene.setRoot(root);
     primaryStage.setScene(primaryScene);
     // primaryStage.setAlwaysOnTop(true);
