@@ -17,21 +17,21 @@
    <children>
       <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <JFXTreeTableView fx:id="accountsView" layoutX="307.0" layoutY="256.0" prefHeight="400.0" prefWidth="717.0" AnchorPane.bottomAnchor="144.0" AnchorPane.leftAnchor="307.0" AnchorPane.rightAnchor="175.39999999999998" AnchorPane.topAnchor="256.0" />
-      <JFXButton fx:id="updateStaff" buttonType="RAISED" layoutX="307.0" layoutY="205.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#updateAccounts" prefHeight="44.0" prefWidth="170.0" style="-fx-background-color: white;" text="Update Staff" AnchorPane.leftAnchor="307.0" AnchorPane.topAnchor="205.0">
+      <JFXButton fx:id="updateStaff" buttonType="RAISED" layoutX="307.0" layoutY="205.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#updateAccounts" prefHeight="50.0" prefWidth="170.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Update Staff" textFill="WHITE" AnchorPane.leftAnchor="307.0" AnchorPane.topAnchor="200.0">
          <font>
-            <Font name="Dubai Light" size="20.0" />
+            <Font name="Dubai Light" size="18.0" />
          </font></JFXButton>
       <JFXButton buttonType="RAISED" disable="true" layoutX="307.0" layoutY="683.0" onAction="#backtoData" prefHeight="33.0" prefWidth="122.0" style="-fx-background-color: white;" text="Cancel" visible="false">
          <font>
             <Font size="19.0" />
          </font></JFXButton>
-      <Label layoutX="666.0" layoutY="56.0" prefHeight="71.0" prefWidth="240.0" text="Update Pathfinder Algorithm:" AnchorPane.rightAnchor="255.0" AnchorPane.topAnchor="56.0">
+      <Label layoutX="666.0" layoutY="718.0" prefHeight="71.0" prefWidth="240.0" text="Update Pathfinder Algorithm:" AnchorPane.bottomAnchor="10.208693270764329" AnchorPane.rightAnchor="293.58260072069913">
          <font>
 
             <Font name="Dubai Light" size="18.0" />
          </font></Label>
 
-      <JFXComboBox fx:id="algoChoiceBox" layoutX="931.0" layoutY="79.0" onAction="#updatePathfinderAlgorithm" prefHeight="25.0" prefWidth="131.0" AnchorPane.rightAnchor="137.8" AnchorPane.topAnchor="79.0" />
+      <JFXComboBox fx:id="algoChoiceBox" layoutX="893.0" layoutY="741.0" onAction="#updatePathfinderAlgorithm" prefHeight="25.0" prefWidth="131.0" AnchorPane.bottomAnchor="32.28695563563324" AnchorPane.rightAnchor="175.93912608732558" />
       <StackPane layoutX="536.0" layoutY="124.0" prefHeight="110.0" prefWidth="203.0" AnchorPane.leftAnchor="536.0" AnchorPane.rightAnchor="460.8" AnchorPane.topAnchor="124.0">
          <children>
             <GridPane>
@@ -43,7 +43,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Accounts">
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Accounts &amp; Administration">
                      <font>
                         <Font name="Dubai Light" size="24.0" />
                      </font>
@@ -53,14 +53,23 @@
             </GridPane>
          </children>
       </StackPane>
-      <JFXButton buttonType="RAISED" layoutX="903.0" layoutY="191.0" onAction="#dataView" prefHeight="58.0" prefWidth="122.0" style="-fx-background-color: white;" text="Reports View">
+      <JFXButton buttonType="RAISED" layoutX="903.0" layoutY="191.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#dataView" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Reports View" textFill="WHITE" AnchorPane.rightAnchor="174.2869524511902" AnchorPane.topAnchor="200.0">
          <font>
 
-            <Font name="Dubai Light" size="17.0" />
+            <Font name="Dubai Light" size="18.0" />
          </font>
       </JFXButton>
-      <JFXButton onAction="#uploadNodes" style="-fx-background-color: #012D5A;" text="Upload Nodes" textFill="WHITE" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="300.0" />
-      <JFXButton layoutX="10.0" layoutY="10.0" onAction="#uploadEdges" style="-fx-background-color: #012D5A;" text="Upload Edges" textFill="WHITE" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="300.0" />
-      <JFXButton layoutX="10.0" layoutY="10.0" onAction="#backupDB" style="-fx-background-color: #012D5A;" text="Backup" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="300.0" />
+      <JFXButton layoutX="495.0" layoutY="729.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#uploadNodes" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Upload Nodes" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="550.0">
+         <font>
+            <Font size="18.0" />
+         </font></JFXButton>
+      <JFXButton layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#uploadEdges" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Upload Edges" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="720.0">
+         <font>
+            <Font size="18.0" />
+         </font></JFXButton>
+      <JFXButton layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#backupDB" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Backup All Data" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="300.0">
+         <font>
+            <Font size="18.0" />
+         </font></JFXButton>
    </children>
 </AnchorPane>
