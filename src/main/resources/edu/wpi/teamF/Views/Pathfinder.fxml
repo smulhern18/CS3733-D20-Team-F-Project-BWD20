@@ -337,7 +337,7 @@
                         </JFXButton>
                         <Label text="Send Directions to Phone Number:">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="Dubai Light" size="16.0" />
                            </font>
                            <VBox.margin>
                               <Insets left="25.0" right="25.0" top="15.0" />
@@ -350,6 +350,9 @@
                            <padding>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </padding>
+                           <font>
+                              <Font name="Dubai Light" size="13.0" />
+                           </font>
                         </JFXTextField>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
@@ -375,6 +378,9 @@
                            <VBox.margin>
                               <Insets left="25.0" />
                            </VBox.margin>
+                           <font>
+                              <Font name="Dubai Light" size="13.0" />
+                           </font>
                         </Label>
                         <JFXButton fx:id="printDirections" alignment="CENTER" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#printDirections" prefHeight="45.0" prefWidth="250.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Print Directions" textFill="WHITE">
                            <font>
