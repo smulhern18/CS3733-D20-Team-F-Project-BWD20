@@ -4,7 +4,6 @@ import com.calendarfx.model.Calendar;
 import com.calendarfx.model.CalendarEvent;
 import com.calendarfx.model.CalendarSource;
 import com.calendarfx.model.Entry;
-import com.calendarfx.view.CalendarView;
 import com.calendarfx.view.DateControl;
 import com.calendarfx.view.VirtualGrid;
 import com.calendarfx.view.page.DayPage;
@@ -37,7 +36,7 @@ public class RoomSchedulerController implements Initializable {
   public JFXButton cancelButton;
   public AnchorPane scheduleAnchorPane;
 
-  private CalendarView calendarView;
+  private DayPage calendarView;
   private DatabaseManager databaseManager = DatabaseManager.getManager();
   private String loggedInAccountName = "AAAAAA";
 
@@ -63,20 +62,20 @@ public class RoomSchedulerController implements Initializable {
 
   private void initializeCalendarView() throws Exception {
 
-    calendarView = new CalendarView();
-    calendarView.setShowAddCalendarButton(false);
-    calendarView.setShowPrintButton(false);
-    calendarView.setShowSearchField(false);
-    calendarView.setShowToolBar(false);
-    calendarView.showDayPage();
-    calendarView.getDayPage().setDayPageLayout(DayPage.DayPageLayout.DAY_ONLY);
+    calendarView = new DayPage();
+
+    //    calendarView.setShowAddCalendarButton(false);
+    //    calendarView.setShowPrintButton(false);
+    //    calendarView.setShowSearchField(false);
+    //    calendarView.setShowToolBar(false);
+    //    calendarView.showDayPage();
+    calendarView.setDayPageLayout(DayPage.DayPageLayout.DAY_ONLY);
     calendarView.setLayout(DateControl.Layout.SWIMLANE);
     addCalenders();
     calendarView.setRequestedTime(LocalTime.now());
     setUpdatedTime();
-    scheduleAnchorPane.getChildren().add(calendarView);
     setCalenderViewSize();
-    addEntriesFromDatabase();
+
     calendarView.setSelectionMode(SelectionMode.SINGLE);
     calendarView.setEntryFactory(
         param -> {
@@ -119,6 +118,17 @@ public class RoomSchedulerController implements Initializable {
             return null;
           }
         });
+    scheduleAnchorPane.getChildren().clear();
+    scheduleAnchorPane.getChildren().add(calendarView);
+
+    Platform.runLater(
+        () -> {
+          try {
+            addEntriesFromDatabase();
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+        });
   }
 
   private @NotNull Entry<String> createEntry(@NotNull ScheduleEntry newEntry) {
@@ -136,12 +146,14 @@ public class RoomSchedulerController implements Initializable {
               System.out.println(interval.getEndTime() + " " + t1.getEndTime());
               if (!reset) {
                 try {
+
                   ScheduleEntry scheduleEntry = databaseManager.readScheduleEntry(entry.getId());
                   scheduleEntry.setStartDate(t1.getStartDate().format(ScheduleEntry.dateFormatter));
                   scheduleEntry.setStartTime(t1.getStartTime().format(ScheduleEntry.timeFormatter));
                   scheduleEntry.setEndDate(t1.getEndDate().format(ScheduleEntry.dateFormatter));
                   scheduleEntry.setEndTime(t1.getEndTime().format(ScheduleEntry.timeFormatter));
-                  if (!isScheduleEntryOverlapping(scheduleEntry)) {
+                  if (entry.getTitle().equals(loggedInAccountName)
+                      && !isScheduleEntryOverlapping(scheduleEntry)) {
                     // System.out.println("NOT OVERLAPPED");
                     databaseManager.mainpulateScheduleEntry(scheduleEntry);
                   } else {
@@ -187,7 +199,8 @@ public class RoomSchedulerController implements Initializable {
                   try {
                     ScheduleEntry scheduleEntry = databaseManager.readScheduleEntry(entry.getId());
                     scheduleEntry.setRoom(t1.getName());
-                    if (!isScheduleEntryOverlapping(scheduleEntry)) {
+                    if (entry.getTitle().equals(loggedInAccountName)
+                        && !isScheduleEntryOverlapping(scheduleEntry)) {
                       // System.out.println("NOT OVERLAPPED");
                       databaseManager.mainpulateScheduleEntry(scheduleEntry);
                     } else {
@@ -231,42 +244,51 @@ public class RoomSchedulerController implements Initializable {
         .heightProperty()
         .addListener(
             ((observable, oldValue, newValue) -> {
-              calendarView.setPrefHeight(newValue.doubleValue());
+              if (newValue != null) {
+                calendarView.setPrefHeight(newValue.doubleValue());
+              } else if (oldValue != null) {
+                calendarView.setPrefHeight(oldValue.doubleValue());
+              }
             }));
     scheduleAnchorPane
         .widthProperty()
         .addListener(
             ((observable, oldValue, newValue) -> {
-              calendarView.setPrefWidth(newValue.doubleValue());
+              if (newValue != null) {
+                calendarView.setPrefWidth(newValue.doubleValue());
+              } else if (oldValue != null) {
+                calendarView.setPrefWidth(oldValue.doubleValue());
+              }
+
               System.out.println("Width: " + newValue + " " + calendarView.getWidth());
             }));
   }
 
   private void setUpdatedTime() {
-    Thread updateTimeThread =
-        new Thread("Calendar: Update Time Thread") {
-          @Override
-          public void run() {
-            while (true) {
-              Platform.runLater(
-                  () -> {
-                    calendarView.setToday(LocalDate.now());
-                    calendarView.setTime(LocalTime.now());
-                  });
-
-              try {
-                // update every 10 seconds
-                sleep(10000);
-              } catch (InterruptedException e) {
-                e.printStackTrace();
-              }
-            }
-          };
-        };
-
-    updateTimeThread.setPriority(Thread.MIN_PRIORITY);
-    updateTimeThread.setDaemon(true);
-    updateTimeThread.start();
+    //    Thread updateTimeThread =
+    //        new Thread("Calendar: Update Time Thread") {
+    //          @Override
+    //          public void run() {
+    //            while (true) {
+    //              Platform.runLater(
+    //                  () -> {
+    //                    calendarView.setToday(LocalDate.now());
+    //                    calendarView.setTime(LocalTime.now());
+    //                  });
+    //
+    //              try {
+    //                // update every 10 seconds
+    //                sleep(10000);
+    //              } catch (InterruptedException e) {
+    //                e.printStackTrace();
+    //              }
+    //            }
+    //          };
+    //        };
+    //
+    //    updateTimeThread.setPriority(Thread.MIN_PRIORITY);
+    //    updateTimeThread.setDaemon(true);
+    //    updateTimeThread.start();
   }
 
   private void addCalenders() {
@@ -274,14 +296,13 @@ public class RoomSchedulerController implements Initializable {
     Calendar[] reflectionRooms = new Calendar[3];
     for (int i = 0; i < reflectionRooms.length; i++) {
       reflectionRooms[i] = new Calendar("Reflection Room " + (i + 1));
-      // initializeCalendarDeleteEvent(reflectionRooms[i]);
+      reflectionRooms[i].setStyle("-fx-background-color: #012D5A");
     }
     reflectionCalenderSource.getCalendars().addAll(reflectionRooms);
     CalendarSource onCallCalenderSource = new CalendarSource("On-Call Beds");
     Calendar[] onCallRooms = new Calendar[7];
     for (int i = 0; i < onCallRooms.length; i++) {
       onCallRooms[i] = new Calendar("On-Call Bed " + (i + 1));
-      // initializeCalendarDeleteEvent(onCallRooms[i]);
     }
     onCallCalenderSource.getCalendars().addAll(onCallRooms);
 
