@@ -33,8 +33,8 @@ public class HelpMainController implements Initializable {
     sceneController.switchScene("Help");
   }
 
-  public void specificquestions(ActionEvent actionEvent) throws IOException {
-    // sceneController.switchScene("Help");
+  public void language(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("Translator");
   }
 
   public void contact(ActionEvent actionEvent) throws IOException {
