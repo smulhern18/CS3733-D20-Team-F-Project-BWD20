@@ -719,7 +719,7 @@ public class DataMapViewController implements Initializable {
             newInstance = typeInstances.size() + 1;
             break;
           } else {
-            tracker++;
+            tracker = instance;
           }
         }
       } else {

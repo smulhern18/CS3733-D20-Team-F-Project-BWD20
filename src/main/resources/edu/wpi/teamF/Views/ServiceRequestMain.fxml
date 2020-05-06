@@ -139,12 +139,12 @@
                         <Font name="Dubai Light" size="13.0" />
                     </font>
                 </JFXButton>
-                <Label text="Roman" textFill="#5b5959" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <Label text="Roman" textFill="#5b5959" GridPane.columnIndex="3" GridPane.rowIndex="6">
                     <font>
                         <Font size="9.0" />
                     </font>
                 </Label>
-                <Label text="Nicholas" textFill="#5b5959" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                <Label text="Nicholas" textFill="#5b5959" GridPane.columnIndex="2" GridPane.rowIndex="3">
                     <font>
                         <Font size="9.0" />
                     </font>
@@ -154,7 +154,7 @@
                         <Font size="9.0" />
                     </font>
                 </Label>
-                <Label text="Tyler" textFill="#5b5959" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                <Label text="Tyler" textFill="#5b5959" GridPane.columnIndex="2" GridPane.rowIndex="2">
                     <font>
                         <Font size="9.0" />
                     </font>
@@ -164,17 +164,17 @@
                         <Font size="9.0" />
                     </font>
                 </Label>
-                <Label text="Denver" textFill="#5b5959" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                <Label text="Denver" textFill="#5b5959" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <font>
                         <Font size="9.0" />
                     </font>
                 </Label>
-                <Label text="Muyun" textFill="#5b5959" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                <Label text="Muyun" textFill="#5b5959" GridPane.columnIndex="4" GridPane.rowIndex="2">
                     <font>
                         <Font size="9.0" />
                     </font>
                 </Label>
-                <Label text="Reilly" textFill="#5b5959" GridPane.columnIndex="3" GridPane.rowIndex="6">
+                <Label text="Reilly" textFill="#5b5959" GridPane.columnIndex="1" GridPane.rowIndex="6">
                     <font>
                         <Font size="9.0" />
                     </font>
