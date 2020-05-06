@@ -24,7 +24,6 @@ public class Main {
     dbm.initialize();
 
     csvm.readCSVFileNode(Main.class.getResourceAsStream("CSVFiles/MapFAllnodes.csv"));
-
     csvm.readCSVFileEdge(Main.class.getResourceAsStream("CSVFiles/MapFAlledges.csv"));
 
     csvm.readCSVFileAccount(Main.class.getResourceAsStream("CSVFiles/Accounts.csv"));
