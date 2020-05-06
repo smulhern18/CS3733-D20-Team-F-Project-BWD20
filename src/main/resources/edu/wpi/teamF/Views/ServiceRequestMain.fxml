@@ -196,7 +196,7 @@
                   <Image url="@../../../../Images/icons8-door-80.png" />
                </image>
             </ImageView>
-            <Label onMouseClicked="#switchToAppointments" text="Appointments" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+            <Label onMouseClicked="#appointmentRequest" text="Appointments" GridPane.columnIndex="3" GridPane.rowIndex="9" />
             <Label onMouseClicked="#switchToRoomScheduler" text="Room Scheduler" GridPane.columnIndex="4" GridPane.rowIndex="9" />
             </children>
         </GridPane>

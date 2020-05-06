@@ -42,7 +42,12 @@ public class Directions {
     } else {
       // Create the starting directions
       int j = 1;
-      if (pathNodeList.get(2).getId().equals(endNode.getId())) {
+      if (Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(0).getType())
+          && !pathNodeList.get(0).getBuilding().equals(pathNodeList.get(1).getBuilding())) {
+        // Check if you start by leaving the building
+        directionList.add(
+            new ExitDirection(pathNodeList.get(0).getBuilding(), pathNodeList.get(0).getFloor()));
+      } else if (pathNodeList.get(2).getId().equals(endNode.getId())) {
         // Check if there's only a single node between start and goal
         directionList.add(new StartDirection(0, pathNodeList.get(0).getFloor()));
       } else {
@@ -192,8 +197,10 @@ public class Directions {
           currHall = new StraightDirection(0, 0, pathNodeList.get(i).getFloor());
 
           if (!Node.NodeType.getEnum("EXIT").equals(pathNodeList.get(i - 1).getType())
-              && !"OUT".equals(pathNodeList.get(i - 1).getBuilding())) {
-            // If the previous node was not an exit, this is the first exit in the exit sequence
+              && !"OUT".equals(pathNodeList.get(i - 1).getBuilding())
+              && pathNodeList.get(i).getBuilding().equals(pathNodeList.get(i - 1).getBuilding())) {
+            // If the previous node was not an exit or the in-transit node, and the previous node
+            // was in the same building, this is the first exit in the exit sequence
             directionList.add(
                 new ExitDirection(
                     pathNodeList.get(i).getBuilding(), pathNodeList.get(i).getFloor()));
@@ -205,6 +212,7 @@ public class Directions {
                     pathNodeList.get(i).getBuilding(), pathNodeList.get(i).getFloor()));
           }
           // Ignore intermediate exit nodes
+
         } else if ("OUT".equals(pathNodeList.get(i).getBuilding())) {
           // This is the in-transit outdoor node
           directionList.add(

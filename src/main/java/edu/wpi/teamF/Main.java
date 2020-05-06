@@ -10,7 +10,6 @@ public class Main {
   private static DatabaseManager dbm = DatabaseManager.getManager();
 
   public static void main(String[] args) throws Exception {
-
     try {
       Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
       initDB();
@@ -24,10 +23,9 @@ public class Main {
   public static void initDB() throws Exception {
     dbm.initialize();
 
-    csvm.readCSVFileNode(Main.class.getResourceAsStream("CSVFiles/MapFAllnodes.csv"));
-    // csvm.readCSVFileNode(Main.class.getResourceAsStream("CSVFiles/nodes.csv"));
-    csvm.readCSVFileEdge(Main.class.getResourceAsStream("CSVFiles/MapFAlledges.csv"));
-    // csvm.readCSVFileEdge(Main.class.getResourceAsStream("CSVFiles/edges.csv"));
+    // csvm.readCSVFileNode(Main.class.getResourceAsStream("CSVFiles/MapFAllnodes.csv"));
+
+    // csvm.readCSVFileEdge(Main.class.getResourceAsStream("CSVFiles/MapFAlledges.csv"));
     csvm.readCSVFileAccount(Main.class.getResourceAsStream("CSVFiles/Accounts.csv"));
     dbm.manipulateAccount(new Admin("admin", "admin", "admin@gmail.com", "admin", "password"));
     List<Account> accounts = dbm.getAllAccounts();

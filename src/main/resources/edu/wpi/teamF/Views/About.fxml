@@ -15,7 +15,7 @@
 <AnchorPane prefHeight="525.0" prefWidth="631.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.AboutController">
    <children>
       <fx:include source="MenuBar.fxml" />
-      <ScrollPane layoutX="190.0" prefHeight="1401.0" prefWidth="421.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ScrollPane layoutX="190.0" prefHeight="525.0" prefWidth="441.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1800.0" prefWidth="412.0">
                <children>
@@ -37,22 +37,22 @@
                      <children>
                         <Label text="About Page" GridPane.columnIndex="1">
                            <font>
-                              <Font size="24.0" />
+                              <Font name="Dubai Light" size="24.0" />
                            </font>
                         </Label>
                         <Label alignment="CENTER" prefHeight="18.0" prefWidth="372.0" text="CS3733-D20 Software Engineering" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <font>
-                              <Font size="14.0" />
+                              <Font name="Dubai Light" size="16.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" prefHeight="18.0" prefWidth="372.0" text="Professor. Wilson Wong" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <Label alignment="CENTER" prefHeight="18.0" prefWidth="372.0" text="Professor Wilson Wong" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <font>
-                              <Font size="14.0" />
+                              <Font name="Dubai Light" size="16.0" />
                            </font>
                         </Label>
                         <Label alignment="CENTER" prefHeight="18.0" prefWidth="373.0" text="Team Coach: Achu Balasubramanian" GridPane.columnIndex="1" GridPane.rowIndex="4">
                            <font>
-                              <Font size="14.0" />
+                              <Font name="Dubai Light" size="16.0" />
                            </font>
                         </Label>
                         <Label text="Thank note" GridPane.columnIndex="1" GridPane.rowIndex="6">
@@ -64,7 +64,7 @@
                            <children>
                               <Label text="This app was created by: " wrapText="true">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="Dubai Light" size="14.0" />
                                  </font>
                               </Label>
                               <Label alignment="CENTER" prefHeight="18.0" prefWidth="369.0" wrapText="true">
@@ -74,7 +74,7 @@
                               </Label>
                               <Label alignment="CENTER" prefHeight="18.0" prefWidth="369.0" text="WPI Computer Science Department" wrapText="true">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="Dubai Light" size="16.0" />
                                  </font>
                               </Label>
                            </children>
@@ -83,12 +83,12 @@
                            <children>
                               <Label prefHeight="70.0" prefWidth="379.0" text="Team F:" wrapText="true">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="Dubai Light" size="18.0" />
                                  </font>
                               </Label>
                               <HBox prefHeight="216.0" prefWidth="377.0">
                                  <children>
-                                    <GridPane prefHeight="60.0" prefWidth="189.0">
+                                    <GridPane prefHeight="216.0" prefWidth="200.0">
                                       <columnConstraints>
                                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                       </columnConstraints>
@@ -99,19 +99,19 @@
                                        <children>
                                           <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                              <children>
-                                                <Label alignment="CENTER" prefHeight="40.0" prefWidth="185.0" text="Denver Blake" wrapText="true">
+                                                <Label alignment="CENTER" prefHeight="29.0" prefWidth="204.0" text="Denver Blake" wrapText="true">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font name="Dubai Light" size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <Label alignment="CENTER" prefHeight="33.0" prefWidth="185.0" text="Assistant Lead Software Engineer" wrapText="true">
+                                                <Label alignment="CENTER" prefHeight="27.0" prefWidth="204.0" text="Assistant Lead Software Engineer" wrapText="true">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font name="Dubai Light" size="14.0" />
                                                    </font>
                                                 </Label>
                                              </children>
                                           </VBox>
-                                          <ImageView fitHeight="150.0" fitWidth="209.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="137.0" fitWidth="124.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../../../../Images/denver.png" />
                                              </image></ImageView>
@@ -130,17 +130,17 @@
                                              <children>
                                                 <Label alignment="CENTER" prefHeight="27.0" prefWidth="192.0" text="Kevin Boenisch" wrapText="true">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font name="Dubai Light" size="14.0" />
                                                    </font>
                                                 </Label>
                                                 <Label alignment="CENTER" prefHeight="23.0" prefWidth="192.0" text="Software Engineer" wrapText="true">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font name="Dubai Light" size="14.0" />
                                                    </font>
                                                 </Label>
                                              </children>
                                           </VBox>
-                                          <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="135.0" fitWidth="124.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../../../../Images/kevin.jpg" />
                                              </image></ImageView>
@@ -148,7 +148,7 @@
                                     </GridPane>
                                  </children>
                               </HBox>
-                              <HBox prefHeight="248.0" prefWidth="377.0">
+                              <HBox prefHeight="183.0" prefWidth="377.0">
                                  <children>
                                     <GridPane prefHeight="317.0" prefWidth="186.0">
                                       <columnConstraints>
@@ -159,7 +159,7 @@
                                         <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="136.0" fitWidth="121.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../../../../Images/theo.jpg" />
                                              </image></ImageView>
@@ -167,12 +167,12 @@
                                              <children>
                                                 <Label alignment="CENTER" prefHeight="30.0" prefWidth="181.0" text="Theodore Campbell" wrapText="true">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font name="Dubai Light" size="14.0" />
                                                    </font>
                                                 </Label>
                                                 <Label alignment="CENTER" prefHeight="27.0" prefWidth="181.0" text="Software Engineer" wrapText="true">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font name="Dubai Light" size="14.0" />
                                                    </font>
                                                 </Label>
                                              </children>
@@ -188,7 +188,7 @@
                                           <RowConstraints minHeight="10.0" percentHeight="25.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                        <children>
-                                          <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="136.0" fitWidth="117.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../../../../Images/ryan.png" />
                                              </image></ImageView>
@@ -196,12 +196,12 @@
                                              <children>
                                                 <Label alignment="CENTER" prefHeight="26.0" prefWidth="181.0" text="Ryan Carnemolla" wrapText="true">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font name="Dubai Light" size="14.0" />
                                                    </font>
                                                 </Label>
                                                 <Label alignment="CENTER" prefHeight="29.0" prefWidth="181.0" text="Project Manager" wrapText="true">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font name="Dubai Light" size="14.0" />
                                                    </font>
                                                 </Label>
                                              </children>
@@ -229,12 +229,12 @@
                                              <children>
                                                 <Label alignment="CENTER" prefHeight="21.0" prefWidth="184.0" text="Muyun He" wrapText="true">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font name="Dubai Light" size="14.0" />
                                                    </font>
                                                 </Label>
                                                 <Label alignment="CENTER" prefHeight="29.0" prefWidth="184.0" text="Product Owner" wrapText="true">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font name="Dubai Light" size="14.0" />
                                                    </font>
                                                 </Label>
                                              </children>
@@ -258,12 +258,12 @@
                                              <children>
                                                 <Label alignment="CENTER" prefHeight="26.0" prefWidth="184.0" text="Tyler Jones" wrapText="true">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font name="Dubai Light" size="14.0" />
                                                    </font>
                                                 </Label>
                                                 <Label alignment="CENTER" prefHeight="21.0" prefWidth="184.0" text="Scrum Master" wrapText="true">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font name="Dubai Light" size="14.0" />
                                                    </font>
                                                 </Label>
                                              </children>
@@ -291,12 +291,12 @@
                                              <children>
                                                 <Label alignment="CENTER" prefHeight="25.0" prefWidth="189.0" text="Nicholas Jurovich" wrapText="true">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font name="Dubai Light" size="14.0" />
                                                    </font>
                                                 </Label>
                                                 <Label alignment="CENTER" prefHeight="34.0" prefWidth="189.0" text="Software Engineer" wrapText="true">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font name="Dubai Light" size="14.0" />
                                                    </font>
                                                 </Label>
                                              </children>
@@ -320,12 +320,12 @@
                                              <children>
                                                 <Label alignment="CENTER" prefHeight="29.0" prefWidth="189.0" text="Sullivan Mulhern" wrapText="true">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font name="Dubai Light" size="14.0" />
                                                    </font>
                                                 </Label>
                                                 <Label alignment="CENTER" prefHeight="31.0" prefWidth="189.0" text="Lead Software Engineer" wrapText="true">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font name="Dubai Light" size="14.0" />
                                                    </font>
                                                 </Label>
                                              </children>
@@ -353,19 +353,19 @@
                                              <children>
                                                 <Label alignment="CENTER" prefHeight="27.0" prefWidth="184.0" text="Reilly Norum" wrapText="true">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font name="Dubai Light" size="14.0" />
                                                    </font>
                                                 </Label>
                                                 <Label alignment="CENTER" prefHeight="25.0" prefWidth="184.0" text="Documentation Analyst" wrapText="true">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font name="Dubai Light" size="14.0" />
                                                    </font>
                                                 </Label>
                                              </children>
                                           </VBox>
                                        </children>
                                     </GridPane>
-                                    <GridPane prefHeight="57.0" prefWidth="184.0">
+                                    <GridPane prefHeight="185.0" prefWidth="219.0">
                                        <columnConstraints>
                                           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                        </columnConstraints>
@@ -382,12 +382,12 @@
                                              <children>
                                                 <Label alignment="CENTER" prefHeight="35.0" prefWidth="184.0" text="Roman Wicky van Doyer" wrapText="true">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font name="Dubai Light" size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <Label alignment="CENTER" prefHeight="28.0" prefWidth="184.0" text="Assistant Lead Software Engineer" wrapText="true">
+                                                <Label alignment="CENTER" prefHeight="25.0" prefWidth="210.0" text="Assistant Lead Software Engineer" wrapText="true">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font name="Dubai Light" size="14.0" />
                                                    </font>
                                                 </Label>
                                              </children>
@@ -396,6 +396,21 @@
                                     </GridPane>
                                  </children>
                               </HBox>
+                              <Label prefHeight="62.0" prefWidth="375.0" text="Andrew Shinn and Brigham and Women's Hosptial-" wrapText="true">
+                                 <font>
+                                    <Font name="Dubai Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="110.0" prefWidth="374.0" text="On behalf of everyone at Team F, I would like to sincerely thank you for being a sponsor for the kiosk system that we were able to work on in our D term of 2020. We thank you for your kind support in our learning and success. Thank you so much!" wrapText="true">
+                                 <font>
+                                    <Font name="Dubai Regular" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label prefHeight="48.0" prefWidth="68.0" text="- Team F">
+                                 <font>
+                                    <Font name="Dubai Regular" size="14.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </VBox>
                      </children>
