@@ -625,7 +625,7 @@ public class CSVManipulator {
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
       bw.write(
-          "iid,location,assignee,description,dateTimeSubmitted,priority,recipientInput,roomInput,choice,messageInput,buyerName,phoneNumber,iftWrap,complete");
+          "id,location,assignee,description,dateTimeSubmitted,priority,recipientInput,roomInput,choice,messageInput,buyerName,phoneNumber,giftWrap,complete");
 
       for (FlowerRequest s : flowerRequests) {
         bw.newLine();
@@ -886,7 +886,7 @@ public class CSVManipulator {
         BufferedWriter bw = new BufferedWriter(fw); ) {
 
       bw.write(
-          "id,location,assignee,description,dateTimeSubmitted,priority,complete,language,problemType");
+          "id,location,assignee,description,dateTimeSubmitted,priority,complete,items,quantity,temperature");
 
       for (LaundryServiceRequest s : laundryServiceRequests) {
         bw.newLine();
@@ -1172,5 +1172,41 @@ public class CSVManipulator {
             + ","
             + m.getDateTimeCompleted().getTime();
     return Main;
+  }
+
+  public void uploadDatabase(Path path) {
+
+    try {
+      InputStream node = new FileInputStream(path.toString() + "/MapFAllnodes.csv");
+      InputStream edge = new FileInputStream(path.toString() + "/MapFAlledges.csv");
+      InputStream account = new FileInputStream(path.toString() + "/AccountBackup.csv");
+      InputStream maintenanceRequest =
+          new FileInputStream(path.toString() + "/MaintenanceBackup.csv");
+      InputStream computerservice = new FileInputStream(path.toString() + "/ComputerBackup.csv");
+      InputStream flowerService = new FileInputStream(path.toString() + "/FlowerBackup.csv");
+      InputStream LanguageService = new FileInputStream(path.toString() + "/LanguageBackup.csv");
+      InputStream LaundryService = new FileInputStream(path.toString() + "/LaundryBackup.csv");
+      InputStream MariachiService = new FileInputStream(path.toString() + "/MariachiBackup.csv");
+      InputStream medicineService = new FileInputStream(path.toString() + "/MedicineBackup.csv");
+      InputStream sanitationRequest =
+          new FileInputStream(path.toString() + "/SanitationBackup.csv");
+      InputStream securityRequest = new FileInputStream(path.toString() + "/SecurityBackup.csv");
+      InputStream transportService = new FileInputStream(path.toString() + "/TransportBackup.csv");
+      readCSVFileNode(node);
+      readCSVFileEdge(edge);
+      readCSVFileAccount(account);
+      readCSVFileMaintenanceService(maintenanceRequest);
+      readCSVFileComputerService(computerservice);
+      readCSVFileFlowerService(flowerService);
+      readCSVFileLanguageService(LanguageService);
+      readCSVFileLaundryService(LaundryService);
+      readCSVFileMariachiService(MariachiService);
+      readCSVFileMedicineDeliveryService(medicineService);
+      readCSVFileSanitationService(sanitationRequest);
+      readCSVFileSecurityService(securityRequest);
+      readCSVFileTransportService(transportService);
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
   }
 }

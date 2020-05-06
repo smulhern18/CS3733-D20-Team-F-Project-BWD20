@@ -1,0 +1,5 @@
+Username,password,firstName,lastName,emailAddress,type
+This one,sha1:64000:18:SfEiimLcQEjsb/870+5yCgXbQ+gEq2KN:f4z6YhjbZuBdwCy0OP4wLoZn,Ferdinand,Ferdinand,sjmulhern@wpi.edu,0
+TheCuddleMonster,sha1:64000:18:gpC4NqsNo9D2hYgaxegDvq6To/8X8hr3:hyCVe5XjB7V2LMZC1A0XMLLn,Nikolas,Nikolas,joeBiden@usa.gov,1
+sjmulhern,sha1:64000:18:FMf2T4Oc4GZSBcgT5Iz1+1lGX97vaFKH:cUqSagLEVxVC503Jh5bPgsWe,Constantine,Constantine,putin@rus.ru,2
+Snuggles,sha1:64000:18:LrPuosZJJyHIrHQHH4Xx2sbcG6YbYGgT:fa4JGohvG4y1E5gX0//Hl7El,Nero,Nero,wack@giggle.pig,2
