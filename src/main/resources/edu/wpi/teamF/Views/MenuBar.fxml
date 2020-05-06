@@ -71,7 +71,7 @@
                            <children>
                               <JFXButton fx:id="mainMenuButton1" alignment="CENTER" onAction="#mainMenu" prefHeight="287.0" prefWidth="234.0" text="Main Menu" textFill="#ffffffcc">
                                  <font>
-                                    <Font name="STIXGeneral-Bold" size="15.0" />
+                                    <Font size="14.0" />
                                  </font>
                               </JFXButton>
                            </children>
@@ -108,7 +108,7 @@
                            <children>
                               <JFXButton fx:id="serviceButton1" onAction="#serviceRequest" prefHeight="208.0" prefWidth="337.0" text="Service Request" textFill="#ffffffcc">
                                  <font>
-                                    <Font name="STIXGeneral-Bold" size="15.0" />
+                                    <Font size="14.0" />
                                  </font>
                               </JFXButton>
                            </children>
@@ -137,7 +137,7 @@
                            <children>
                               <JFXButton fx:id="pathfindButton1" onAction="#pathfinder" prefHeight="179.0" prefWidth="189.0" text="Pathfinder" textFill="#ffffffcc">
                                  <font>
-                                    <Font name="STIXGeneral-Bold" size="15.0" />
+                                    <Font size="14.0" />
                                  </font>
                               </JFXButton>
                            </children>
@@ -166,7 +166,7 @@
                            <children>
                               <JFXButton fx:id="helpButton1" onAction="#help" prefHeight="128.0" prefWidth="161.0" text="Help" textFill="#ffffffcc">
                                  <font>
-                                    <Font name="STIXGeneral-Bold" size="15.0" />
+                                    <Font size="14.0" />
                                  </font>
                               </JFXButton>
                            </children>
@@ -195,7 +195,7 @@
                            <children>
                               <JFXButton fx:id="settingsButton1" onAction="#settings" prefHeight="268.0" prefWidth="246.0" text="Settings" textFill="#ffffffcc">
                                  <font>
-                                    <Font name="STIXGeneral-Bold" size="15.0" />
+                                    <Font size="14.0" />
                                  </font>
                               </JFXButton>
                            </children>
@@ -224,7 +224,7 @@
                            <children>
                               <JFXButton fx:id="adminButton1" onAction="#admin" prefHeight="228.0" prefWidth="300.0" text="Admin" textFill="#ffffffcc">
                                  <font>
-                                    <Font name="STIXGeneral-Bold" size="15.0" />
+                                    <Font size="14.0" />
                                  </font>
                               </JFXButton>
                            </children>
@@ -253,7 +253,7 @@
                            <children>
                               <JFXButton fx:id="loginButton1" onAction="#login" prefHeight="72.0" prefWidth="58.0" text="Login" textFill="#ffffffcc">
                                  <font>
-                                    <Font name="STIXGeneral-Bold" size="15.0" />
+                                    <Font size="14.0" />
                                  </font>
                               </JFXButton>
                            </children>

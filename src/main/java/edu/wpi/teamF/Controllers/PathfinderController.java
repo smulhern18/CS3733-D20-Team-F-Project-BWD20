@@ -479,7 +479,7 @@ public class PathfinderController implements Initializable {
     uiSetting.setAsLocationComboBox(endCombo);
 
     uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1, 1.33);
-    intermediateSetting.makeZoomable(scrollPaneIntermediate, stackPaneIntermediate, 1.33);
+    intermediateSetting.makeZoomable(scrollPaneIntermediate, stackPaneIntermediate, 1.00);
 
     for (Node node : databaseManager.getAllNodes()) {
       node.setEdges(databaseManager.getAllEdgesConnectedToNode(node.getId()));
