@@ -298,7 +298,8 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  private void selectFloor(ActionEvent event) {
+  private void selectFloor(ActionEvent event) throws Exception {
+    cancelViews(null);
     JFXButton btn = (JFXButton) event.getSource();
     selectFloor(btn.getId());
   }
@@ -635,6 +636,10 @@ public class DataMapViewController implements Initializable {
           break;
       }
     }
+    if (child instanceof Line) {
+      Line newLine = (Line) child;
+      newLine.toBack();
+    }
   } // helper for the draw functions
 
   private AnchorPane getMapPane(String floor) {
@@ -894,33 +899,34 @@ public class DataMapViewController implements Initializable {
 
   @FXML
   private void cancelViews(ActionEvent event) throws Exception {
-    clearViews();
 
-    resetNodeColors();
+    if (edgeAnchor.isVisible()) {
+      resetNodeColors();
+    }
 
-    for (Edge edge : databaseManager.getAllEdgesConnectedToNode(node.getId())) {
-      for (int i = 0; i < mapPane.getChildren().size(); i++) {
-        javafx.scene.Node children = mapPane.getChildren().get(i);
-        if (children instanceof Line && children.getId().equals(edge.getId())) {
-          mapPane.getChildren().remove(children);
+    if (nodeAnchor.isVisible()) {
+      for (Edge edge : databaseManager.getAllEdgesConnectedToNode(node.getId())) {
+        for (int i = 0; i < mapPane.getChildren().size(); i++) {
+          javafx.scene.Node children = mapPane.getChildren().get(i);
+          if (children instanceof Line && children.getId().equals(edge.getId())) {
+            mapPane.getChildren().remove(children);
+          }
         }
       }
+
+      mapPane.getChildren().remove(nodeButton); // removes node
+
+      addToPane(node, nodeButton); // adds new node
+
+      for (Edge edge : databaseManager.getAllEdgesConnectedToNode(node.getId())) {
+        drawEdge(edge);
+      }
+
+      nodeButton.setLayoutX(node.getXCoord() * widthRatio - 4);
+      nodeButton.setLayoutY(node.getYCoord() * heightRatio - 4);
     }
 
-    System.out.println(nodeButton.getId() + "----" + nodeButton);
-
-    mapPane.getChildren().remove(nodeButton); // removes node
-
-    System.out.println(nodeButton.getId() + "    " + nodeButton);
-
-    addToPane(node, nodeButton); // adds new node
-
-    for (Edge edge : databaseManager.getAllEdgesConnectedToNode(node.getId())) {
-      drawEdge(edge);
-    }
-
-    nodeButton.setLayoutX(node.getXCoord() * widthRatio - 4);
-    nodeButton.setLayoutY(node.getYCoord() * heightRatio - 4);
+    clearViews();
   }
 
   @FXML
