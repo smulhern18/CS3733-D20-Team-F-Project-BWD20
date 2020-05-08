@@ -73,7 +73,7 @@
                                             <children>
                                                 <Label fx:id="loginText" text="Register" textFill="#012d5a">
                                                     <font>
-                                                        <Font size="28.0" />
+                                                        <Font name="Dubai Light" size="28.0" />
                                                     </font>
                                                 </Label>
                                                 <Line startX="-100.0" stroke="#012d5a" strokeWidth="2.0" StackPane.alignment="BOTTOM_CENTER" />
@@ -90,14 +90,17 @@
                         </StackPane>
                         <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="5">
                             <children>
-                                <JFXTextField fx:id="usernameInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableRegister" prefHeight="26.0" prefWidth="306.0" promptText="Username..." />
+                                <JFXTextField fx:id="usernameInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableRegister" prefHeight="26.0" prefWidth="306.0" promptText="Username...">
+                           <font>
+                              <Font name="Dubai Light" size="14.0" />
+                           </font></JFXTextField>
                             </children>
                         </StackPane>
                         <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="6">
                             <children>
                                 <JFXPasswordField fx:id="passwordInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableRegister" prefHeight="27.0" prefWidth="306.0" promptText="Password...">
                                     <font>
-                                        <Font name="STIXGeneral-Regular" size="13.0" />
+                                        <Font name="Dubai Light" size="14.0" />
                                     </font>
                                 </JFXPasswordField>
                             </children>
@@ -124,22 +127,31 @@
                         </StackPane>
                         <Label fx:id="forgotText" text="Forgot Password?" GridPane.rowIndex="8">
                             <font>
-                                <Font name="STIXGeneral-Regular" size="13.0" />
+                                <Font name="Dubai Light" size="14.0" />
                             </font>
                         </Label>
                         <JFXButton fx:id="loginButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#switchToLogin" prefHeight="30.0" prefWidth="306.0" style="-fx-background-color: grey;" text="Login" GridPane.rowIndex="11">
                             <font>
-                                <Font name="STIXGeneral-Regular" size="13.0" />
+                                <Font name="Dubai Light" size="14.0" />
                             </font>
                         </JFXButton>
-                        <JFXButton fx:id="registerButton" disable="true" onAction="#attemptRegister" prefHeight="30.0" prefWidth="306.0" style="-fx-background-color: #EB3E79#EB3E79;" text="Register" GridPane.rowIndex="7">
+                        <JFXButton fx:id="registerButton" disable="true" onAction="#attemptRegister" prefHeight="30.0" prefWidth="306.0" style="-fx-background-color: #DC6F55;" text="Register" GridPane.rowIndex="7">
                             <font>
-                                <Font name="STIXGeneral-Regular" size="13.0" />
+                                <Font name="Dubai Light" size="14.0" />
                             </font>
                         </JFXButton>
-                  <JFXTextField fx:id="firstNameInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableRegister" prefHeight="26.0" prefWidth="306.0" promptText="First Name..." GridPane.rowIndex="1" />
-                  <JFXTextField fx:id="lastNameInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableRegister" prefHeight="26.0" prefWidth="306.0" promptText="Last Name..." GridPane.rowIndex="2" />
-                  <JFXTextField fx:id="emailInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableRegister" prefHeight="26.0" prefWidth="306.0" promptText="Email..." GridPane.rowIndex="3" />
+                  <JFXTextField fx:id="firstNameInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableRegister" prefHeight="26.0" prefWidth="306.0" promptText="First Name..." GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Dubai Light" size="13.0" />
+                     </font></JFXTextField>
+                  <JFXTextField fx:id="lastNameInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableRegister" prefHeight="26.0" prefWidth="306.0" promptText="Last Name..." GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Dubai Light" size="13.0" />
+                     </font></JFXTextField>
+                  <JFXTextField fx:id="emailInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableRegister" prefHeight="26.0" prefWidth="306.0" promptText="Email..." GridPane.rowIndex="3">
+                     <font>
+                        <Font name="Dubai Light" size="13.0" />
+                     </font></JFXTextField>
 
                     </children>
                 </GridPane>

@@ -6,6 +6,7 @@ import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Node;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.ReportsClass;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SanitationServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UISanitationServiceRequest;
 import java.net.URL;
@@ -21,10 +22,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.util.Callback;
+import javax.management.InstanceNotFoundException;
 import lombok.SneakyThrows;
 
 public class SanitationRequestController implements Initializable {
@@ -51,6 +54,7 @@ public class SanitationRequestController implements Initializable {
   public AnchorPane anchorPane;
   // public TextField descriptionTextField;
   public JFXTextArea descText;
+  public ImageView backgroundImage;
 
   DatabaseManager databaseManager = DatabaseManager.getManager();
   List<SanitationServiceRequest> sanitationRequestList = databaseManager.getAllSanitationRequests();
@@ -61,6 +65,16 @@ public class SanitationRequestController implements Initializable {
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    backgroundImage.fitWidthProperty().bind(anchorPane.widthProperty());
+    backgroundImage.fitHeightProperty().bind(anchorPane.heightProperty());
+    Account.Type userLevel = databaseManager.getPermissions();
+    if (userLevel == Account.Type.USER) {
+      checkStatusButton.setDisable(true);
+
+      // set to user
+    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+      checkStatusButton.setDisable(false);
+    }
     // add the different choices to the choicebox
     // Replace this with long names, linked to IDs
 
@@ -183,15 +197,15 @@ public class SanitationRequestController implements Initializable {
     table.setEditable(true);
     table.setShowRoot(false);
 
-    resize(anchorPane.getWidth());
-    anchorPane
-        .widthProperty()
-        .addListener(
-            (observable, oldWidth, newWidth) -> {
-              if (newWidth.doubleValue() != oldWidth.doubleValue()) {
-                resize(newWidth.doubleValue());
-              }
-            });
+    //    resize(anchorPane.getWidth());
+    //    anchorPane
+    //        .widthProperty()
+    //        .addListener(
+    //            (observable, oldWidth, newWidth) -> {
+    //              if (newWidth.doubleValue() != oldWidth.doubleValue()) {
+    //                resize(newWidth.doubleValue());
+    //              }
+    //            });
   }
 
   private void resize(double width) {
@@ -247,6 +261,7 @@ public class SanitationRequestController implements Initializable {
 
   public void request(ActionEvent actionEvent) {
     servicePane.setVisible(true);
+    servicePane.toFront();
     checkStatusPane.setVisible(false);
   }
 
@@ -261,6 +276,23 @@ public class SanitationRequestController implements Initializable {
           toUpdate.setComplete(false);
         } else if (completed.equals("Complete")) {
           toUpdate.setComplete(true);
+          try {
+            ReportsClass oldReport = databaseManager.readReport(uiSR.location.get());
+            if (oldReport != null) {
+              oldReport.setTimesVisited(0);
+              oldReport.setTimesSanitized(oldReport.getTimesSanitized() + 1);
+              oldReport.setSanitizer(uiSR.getAssignee().get());
+              databaseManager.manipulateReport(oldReport);
+            } else {
+              ReportsClass report =
+                  new ReportsClass(uiSR.location.get(), 0, 1, uiSR.getAssignee().get());
+              databaseManager.manipulateReport(report);
+            }
+          } catch (InstanceNotFoundException e) {
+
+          } catch (Exception e) {
+            System.out.println(e.getMessage());
+          }
         }
         databaseManager.manipulateServiceRequest(toUpdate);
       }
@@ -278,5 +310,6 @@ public class SanitationRequestController implements Initializable {
   public void checkStatus(ActionEvent actionEvent) {
     servicePane.setVisible(false);
     checkStatusPane.setVisible(true);
+    checkStatusPane.toFront();
   }
 }

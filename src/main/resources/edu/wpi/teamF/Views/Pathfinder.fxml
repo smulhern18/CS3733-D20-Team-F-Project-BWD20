@@ -3,6 +3,8 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -12,11 +14,14 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1400.0" style="-fx-background-color: #a2a2a2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.PathfinderController">
-   <children>
+<AnchorPane prefHeight="953.0" prefWidth="1607.0" style="-fx-background-color: #a2a2a2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.PathfinderController">
+
+<children>
+
       <StackPane layoutX="580.0" layoutY="18.1015625" prefHeight="120.0" prefWidth="975.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Text fx:id="commandText" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Starting Location" textAlignment="CENTER">
@@ -26,50 +31,93 @@
             </Text>
          </children>
       </StackPane>
-      <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <AnchorPane fx:id="mainMapPane" layoutX="19.399999618530273" layoutY="194.39999389648438" style="-fx-background-color: #a2a2a2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
+
+
+      <AnchorPane fx:id="mainMapPane" layoutX="19.399999618530273" layoutY="194.39999389648438" style="-fx-background-color: rgb(220,221,218);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ScrollPane fx:id="scrollPaneFaulkner1" style="-fx-background: #a2a2a2; -fx-background-color: #a2a2a2;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <ScrollPane fx:id="scrollPaneFaulkner1" style="-fx-background-color: rgb(220,221,218); -fx-background: rgb(220,221,218);" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <content>
-                  <StackPane fx:id="masterPaneFaulkner1" style="-fx-background-color: #a2a2a2;">
+
+
+                  <StackPane fx:id="masterPaneFaulkner1" style="-fx-background-color: rgb(220,221,218);">
                      <children>
-                        <ImageView fx:id="imageViewFaulkner1" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="imageViewFaulkner1" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
-                              <Image url="@../Maps/Floor1LM_editedIt2.png" />
+                              <Image url="@../Maps/Faulkner/Floor1LM.png" />
                            </image>
                         </ImageView>
                         <AnchorPane fx:id="mapPaneFaulkner1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
                         <ImageView fx:id="imageViewFaulkner2" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Maps/Floor2LMit2.png" />
+                              <Image url="@../Maps/Faulkner/Floor2LM.png" />
                            </image>
                         </ImageView>
                         <AnchorPane fx:id="mapPaneFaulkner2" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
                         <ImageView fx:id="imageViewFaulkner3" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Maps/Floor3LM_editedIT2.png" />
+                              <Image url="@../Maps/Faulkner/Floor3LM.png" />
                            </image>
                         </ImageView>
                         <AnchorPane fx:id="mapPaneFaulkner3" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
                         <ImageView fx:id="imageViewFaulkner4" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Maps/Floor4LMIt2.png" />
+                              <Image url="@../Maps/Faulkner/Floor4LM.png" />
                            </image>
                         </ImageView>
                         <AnchorPane fx:id="mapPaneFaulkner4" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
                         <ImageView fx:id="imageViewFaulkner5" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Maps/Floor5LMIT2.png" />
+                              <Image url="@../Maps/Faulkner/Floor5LM.png" />
                            </image>
                         </ImageView>
                         <AnchorPane fx:id="mapPaneFaulkner5" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                        <ImageView fx:id="imageViewMain1" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true">
+                           <image>
+                              <Image url="@../Maps/MainCampus/F1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="imageViewMain2" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../Maps/MainCampus/F2.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="imageViewMain3" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../Maps/MainCampus/F3.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="imageViewMainG" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../Maps/MainCampus/ground.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="imageViewMainL1" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../Maps/MainCampus/L1.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="imageViewMainL2" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">
+                           <image>
+                              <Image url="@../Maps/MainCampus/L2.png" />
+                           </image>
+                        </ImageView>
+                        <AnchorPane fx:id="mapPaneMain1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                        <AnchorPane fx:id="mapPaneMain2" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                        <AnchorPane fx:id="mapPaneMain3" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                        <AnchorPane fx:id="mapPaneMainG" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                        <AnchorPane fx:id="mapPaneMainL1" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                        <AnchorPane fx:id="mapPaneMainL2" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
                      </children>
                   </StackPane>
+
+
+
                </content>
             </ScrollPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="selectFloorPane" prefHeight="60.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="220.0">
+      <AnchorPane fx:id="selectFloorPane" prefHeight="60.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="550.0">
          <children>
             <JFXButton fx:id="floor1Button" buttonType="RAISED" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" prefHeight="60.0" prefWidth="60.0" ripplerFill="BLACK" style="-fx-background-radius: 10px; -fx-background-color: #4d6c8b; -fx-max-width: 60px; -fx-min-width: 60px; -fx-pref-width: 60px; -fx-max-height: 60px; -fx-min-height: 60px; -fx-pref-height: 60px;" text="1" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
                <font>
@@ -98,53 +146,9 @@
             </JFXButton>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="directionsPane" minHeight="1.0" minWidth="1.0" prefHeight="1.0" prefWidth="1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane id="ffff" fx:id="selectButtonsPane" layoutX="1183.0" layoutY="15.0" minHeight="1.0" minWidth="1.0" prefHeight="1.0" prefWidth="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox prefHeight="350.0" prefWidth="300.0" style="-fx-background-color: rgba(255, 255, 255, 0.9);" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
-               <children>
-                  <Label text="Directions:">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="10.0" top="8.0" />
-                     </VBox.margin>
-                  </Label>
-                  <VBox minHeight="230.0" prefHeight="250.0" style="-fx-border-color: #012D5A; -fx-border-width: 3px; -fx-background-color: #ffffff;">
-                     <children>
-                        <JFXTextArea fx:id="directionsDisplay">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </JFXTextArea>
-                     </children>
-                     <VBox.margin>
-                        <Insets left="10.0" right="10.0" />
-                     </VBox.margin>
-                  </VBox>
-                  <JFXButton fx:id="pathSwitchFloor" alignment="CENTER" buttonType="RAISED" maxHeight="150.0" maxWidth="250.0" minHeight="50.0" minWidth="250.0" onAction="#pathSwitchFloor" prefHeight="50.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Next: Go to Floor 5" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="15.0" left="25.0" right="25.0" top="10.0" />
-                     </VBox.margin>
-                  </JFXButton>
-                  <JFXButton buttonType="RAISED" minHeight="50.0" minWidth="150.0" mnemonicParsing="false" onAction="#resetPane" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Reset" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="15.0" left="75.0" right="75.0" />
-                     </VBox.margin>
-                  </JFXButton>
-               </children>
-            </VBox>
-         </children>
-      </AnchorPane>
-      <AnchorPane id="ffff" fx:id="selectButtonsPane" layoutX="1183.0" layoutY="15.0" minHeight="1.0" minWidth="1.0" prefHeight="1.0" prefWidth="1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <VBox prefHeight="350.0" prefWidth="300.0" style="-fx-background-color: rgba(255, 255, 255, 0.9);" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+            <VBox prefHeight="350.0" prefWidth="300.0" style="-fx-background-color: rgba(255, 255, 255, 0.9);" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="20.0">
                <children>
                   <Label text="Current Location:">
                      <font>
@@ -223,6 +227,44 @@
                         <Insets top="15.0" />
                      </VBox.margin>
                   </HBox>
+                  <Label alignment="CENTER" text="Preference:">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" right="10.0" top="8.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <Label fx:id="elevatorLabel" text="Elevators">
+                           <HBox.margin>
+                              <Insets left="70.0" right="5.0" top="20.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <JFXToggleButton fx:id="liftToggle" mnemonicParsing="false" toggleColor="#012d5a" toggleLineColor="#4d6c8b" unToggleColor="#012d5a" unToggleLineColor="#4d6c8b" />
+                        <Label fx:id="stairsLabel" text="Stairs">
+                           <HBox.margin>
+                              <Insets left="5.0" right="10.0" top="20.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <opaqueInsets>
+                        <Insets left="20.0" />
+                     </opaqueInsets>
+                  </HBox>
                   <JFXButton fx:id="pathButton" buttonType="RAISED" maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Find Path" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="24.0" />
@@ -231,10 +273,12 @@
                         <Insets bottom="10.0" left="75.0" right="75.0" top="20.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton buttonType="RAISED" minHeight="50.0" minWidth="150.0" mnemonicParsing="false" onAction="#resetPane" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Reset" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
+
+               <JFXButton buttonType="RAISED" minHeight="50.0" minWidth="150.0" mnemonicParsing="false" onAction="#resetPane" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Reset" textFill="WHITE">
+                  <font>
+                     <Font name="System Bold" size="24.0" />
+                  </font>
+
                      <VBox.margin>
                         <Insets bottom="15.0" left="75.0" right="75.0" />
                      </VBox.margin>
@@ -243,6 +287,511 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="pathSwitchFloorPane" maxHeight="80.0" maxWidth="1.0" prefHeight="80.0" prefWidth="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="220.0" />
+      <AnchorPane fx:id="directionsPane" minHeight="1.0" minWidth="1.0" prefHeight="1.0" prefWidth="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="20.0">
+               <children>
+                  <VBox prefHeight="350.0" prefWidth="300.0">
+                     <children>
+                        <Label text="Directions:">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="10.0" top="8.0" />
+                           </VBox.margin>
+                        </Label>
+
+                        <VBox minHeight="250.0" prefHeight="250.0" style="-fx-border-color: #001a3c; -fx-border-width: 3px; -fx-background-color: #ffffff;">
+
+                           <children>
+                              <JFXTextArea fx:id="directionsDisplay" editable="false" prefHeight="246.0" prefWidth="275.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="5.0" />
+                                 </padding>
+                              </JFXTextArea>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="10.0" left="10.0" right="10.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <JFXButton fx:id="pathSwitchNext" alignment="CENTER" buttonType="RAISED" maxHeight="-Infinity" maxWidth="250.0" minHeight="-Infinity" minWidth="250.0" onAction="#pathSwitchNext" prefHeight="45.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Next: Go to Floor 5" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="25.0" right="25.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                        <HBox fx:id="btnSpacer" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="10.0" prefWidth="200.0" />
+                        <JFXButton fx:id="pathSwitchPrevious" alignment="CENTER" buttonType="RAISED" maxHeight="-Infinity" maxWidth="250.0" minHeight="-Infinity" minWidth="250.0" onAction="#pathSwitchPrevious" prefHeight="45.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Previous: Go to Floor 5" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="25.0" right="25.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                        <Label text="Send Directions to Phone Number:">
+                           <font>
+                              <Font name="Dubai Light" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="25.0" right="25.0" top="15.0" />
+                           </VBox.margin>
+                        </Label>
+                        <JFXTextField fx:id="phoneNumber" promptText="(10 digits, numbers only)" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1px;">
+                           <VBox.margin>
+                              <Insets bottom="2.0" left="25.0" right="25.0" />
+                           </VBox.margin>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <font>
+                              <Font name="Dubai Light" size="13.0" />
+                           </font>
+                        </JFXTextField>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <JFXButton fx:id="textDirections" alignment="CENTER" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#textDirections" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Text" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="25.0" right="10.0" top="5.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                              <JFXButton fx:id="callDirections" alignment="CENTER" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#callDirections" prefHeight="45.0" prefWidth="120.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Call" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets right="25.0" top="5.0" />
+                                 </HBox.margin>
+                              </JFXButton>
+                           </children>
+                        </HBox>
+                        <Label fx:id="commsResult" maxWidth="-Infinity" minWidth="-Infinity" text="Unable to call. Check the number and try again." textAlignment="CENTER">
+                           <VBox.margin>
+                              <Insets left="25.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="Dubai Light" size="13.0" />
+                           </font>
+                        </Label>
+                        <JFXButton fx:id="printDirections" alignment="CENTER" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#printDirections" prefHeight="45.0" prefWidth="250.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Print Directions" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="25.0" right="25.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                        <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#resetPane" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Reset" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="22.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="75.0" right="75.0" top="20.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                     </children>
+                  </VBox>
+                  <AnchorPane fx:id="externalDirections" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1070.0">
+                     <children>
+                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1070.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <ScrollPane fx:id="scrollPaneIntermediate" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="870.0" style="-fx-background: rgb(220,221,218); -fx-background-color: rgb(220,221,218);">
+                                 <content>
+                                    <StackPane fx:id="stackPaneIntermediate" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="870.0" style="-fx-background-color: #a2a2a2;">
+                                       <children>
+                                          <ImageView fx:id="faulknerTo45FrancisImage" fitHeight="720.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/IntermediateMaps/Faulknerto45Francis2.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="faulknerTo75FrancisImage" fitHeight="720.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/IntermediateMaps/Faulknerto75Francis2.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="faulknerToBTMImage" fitHeight="720.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/IntermediateMaps/FaulknertoBTM2.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="faulknerToShapiroImage" fitHeight="720.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/IntermediateMaps/FaulknertoShapiro2.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="faulknerTo15FrancisImage" fitHeight="720.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/IntermediateMaps/ShapirotoFaulkner2.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="Francis45ToFaulknerImage" fitHeight="720.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/IntermediateMaps/45FrancistoFaulkner2.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="Francis75ToFaulknerImage" fitHeight="720.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/IntermediateMaps/75FrancistoFaulkner2.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="BTMToFaulknerImage" fitHeight="720.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/IntermediateMaps/BTMtoFaulkner2.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="shapiroToFaulknerImage" fitHeight="720.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/IntermediateMaps/ShapirotoFaulkner2.PNG" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="francis15ToFaulknerImage" fitHeight="720.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/IntermediateMaps/ShapirotoFaulkner2.PNG" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </StackPane>
+                                 </content>
+                              </ScrollPane>
+                              <VBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Live Travel" textAlignment="CENTER" wrapText="true">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="-28.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="Times" textAlignment="CENTER" wrapText="true">
+                                       <font>
+                                          <Font size="30.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="-20.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <HBox prefWidth="200.0">
+                                       <children>
+                                          <Label text="Powered by">
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="2.0" top="7.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <ImageView fitHeight="150.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../Images/google_maps.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                          </ImageView>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="15.0" top="5.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../Images/driving.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="20.0" top="5.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="115.0">
+                                             <children>
+                                                <Label fx:id="driveTime" text="1 h 10 min">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="driveDistance" text="3.5 mi">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets left="15.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="56.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../Images/transit.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="20.0" top="5.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="115.0">
+                                             <children>
+                                                <Label fx:id="transitTime" text="1 h 10 min">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="transitDistance" text="3.5 mi">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets left="12.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../Images/bicycling.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="20.0" top="5.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="115.0">
+                                             <children>
+                                                <Label fx:id="bikeTime" text="1 h 10 min">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="bikeDistance" text="3.5 mi">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets left="15.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="80.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../../Images/walking.png" />
+                                             </image>
+                                             <HBox.margin>
+                                                <Insets left="20.0" top="5.0" />
+                                             </HBox.margin>
+                                          </ImageView>
+                                          <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="115.0">
+                                             <children>
+                                                <Label fx:id="walkTime" text="1 h 10 min">
+                                                   <font>
+                                                      <Font name="System Bold" size="20.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label fx:id="walkDistance" text="3.5 mi">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                             <HBox.margin>
+                                                <Insets left="15.0" />
+                                             </HBox.margin>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <Line endX="90.0" startX="-90.0" strokeWidth="2.0">
+                                       <VBox.margin>
+                                          <Insets left="20.0" right="20.0" top="8.0" />
+                                       </VBox.margin>
+                                    </Line>
+                                    <Label text="Directions on-the-go">
+                                       <font>
+                                          <Font name="System Bold" size="18.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="5.0" top="15.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <Label text="Scan below with your phone">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <StackPane prefHeight="150.0" prefWidth="200.0">
+                                       <children>
+                                          <ImageView fx:id="francis15ToFaulknerQR" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/QrCodes/15F_Faulkner.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="shapiroToFaulknerQR" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/QrCodes/Shapiro_Faulkner.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="BTMToFaulknerQR" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/QrCodes/BTM_Faulkner.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="Francis75ToFaulknerQR" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/QrCodes/75F_Faulkner.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="Francis45ToFaulknerQR" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/QrCodes/45F_Faulkner.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="faulknerTo15FrancisQR" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/QrCodes/Faulkner_15F.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="faulknerToShapiroQR" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/QrCodes/Faulkner_Shapiro.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="faulknerToBTMQR" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/QrCodes/Faulkner_BTM.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="faulknerTo75FrancisQR" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/QrCodes/Faulkner_75F.png" />
+                                             </image>
+                                          </ImageView>
+                                          <ImageView fx:id="faulknerTo45FrancisQR" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../Maps/QrCodes/Faulkner_45F.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets bottom="20.0" />
+                                       </VBox.margin>
+                                    </StackPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
+                     </children></AnchorPane>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="pathSwitchFloorPane" maxHeight="80.0" maxWidth="1.0" prefHeight="80.0" prefWidth="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="220.0">
+         <children>
+         </children></AnchorPane>
+      <AnchorPane fx:id="selectFloorPaneMain" layoutX="230.0" layoutY="630.0" prefHeight="70.0" prefWidth="500.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="550.0">
+         <children>
+            <JFXButton fx:id="mainFloorL2Button" buttonType="RAISED" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" prefHeight="60.0" prefWidth="60.0" ripplerFill="BLACK" style="-fx-background-radius: 10px; -fx-background-color: #4d6c8b; -fx-max-width: 60px; -fx-min-width: 60px; -fx-pref-width: 60px; -fx-max-height: 60px; -fx-min-height: 60px; -fx-pref-height: 60px;" text="L2" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+               <font>
+                  <Font name="Arial Bold" size="23.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="mainFloorL1Button" buttonType="RAISED" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" prefHeight="60.0" prefWidth="60.0" ripplerFill="BLACK" style="-fx-background-radius: 10px; -fx-background-color: #4d6c8b; -fx-max-width: 60px; -fx-min-width: 60px; -fx-pref-width: 60px; -fx-max-height: 60px; -fx-min-height: 60px; -fx-pref-height: 60px;" text="L1" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="80.0">
+               <font>
+                  <Font name="Arial Bold" size="23.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="mainFloorGButton" buttonType="RAISED" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" prefHeight="60.0" prefWidth="60.0" ripplerFill="BLACK" style="-fx-background-radius: 10px; -fx-background-color: #4d6c8b; -fx-max-width: 60px; -fx-min-width: 60px; -fx-pref-width: 60px; -fx-max-height: 60px; -fx-min-height: 60px; -fx-pref-height: 60px;" text="G" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="160.0">
+               <font>
+                  <Font name="Arial Bold" size="23.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="mainFloor1Button" buttonType="RAISED" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" prefHeight="60.0" prefWidth="60.0" ripplerFill="BLACK" style="-fx-background-radius: 10px; -fx-background-color: #4d6c8b; -fx-max-width: 60px; -fx-min-width: 60px; -fx-pref-width: 60px; -fx-max-height: 60px; -fx-min-height: 60px; -fx-pref-height: 60px;" text="1" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="240.0">
+               <font>
+                  <Font name="Arial Bold" size="23.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="mainFloor2Button" buttonType="RAISED" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" prefHeight="60.0" prefWidth="60.0" ripplerFill="BLACK" style="-fx-background-radius: 10px; -fx-background-color: #4d6c8b; -fx-max-width: 60px; -fx-min-width: 60px; -fx-pref-width: 60px; -fx-max-height: 60px; -fx-min-height: 60px; -fx-pref-height: 60px;" text="2" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="320.0">
+               <font>
+                  <Font name="Arial Bold" size="23.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="mainFloor3Button" buttonType="RAISED" layoutX="413.0" layoutY="7.0" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" prefHeight="60.0" prefWidth="60.0" ripplerFill="BLACK" style="-fx-background-radius: 10px; -fx-background-color: #4d6c8b; -fx-max-width: 60px; -fx-min-width: 60px; -fx-pref-width: 60px; -fx-max-height: 60px; -fx-min-height: 60px; -fx-pref-height: 60px;" text="3" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="400.0">
+               <font>
+                  <Font name="Arial Bold" size="23.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="55.0" prefWidth="302.0" style="-fx-background-color: rgba(255,255,255,0.9);" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="220.0">
+         <children>
+            <Label layoutX="7.0" layoutY="14.0" prefHeight="35.0" prefWidth="104.0" text="Hospital:" AnchorPane.topAnchor="10.0">
+               <font>
+                  <Font name="System Bold" size="23.0" />
+               </font>
+            </Label>
+            <JFXComboBox fx:id="hospitalComboBox" layoutX="111.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="186.0" style="-fx-border-color: black; -fx-border-width: 1px;" AnchorPane.topAnchor="13.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="errorPane" layoutX="550.0" layoutY="250.0" maxHeight="300.0" maxWidth="1000.0" prefHeight="250.0" prefWidth="500.0" style="-fx-background-color: rgba(255, 255, 255, 0.9)">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label fx:id="errorPaneLabel1" text="Sorry, we couldn't find a path there. Please try again." textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="errorPaneLabel2" text="Label" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="40.0" />
+                     </VBox.margin>
+                  </Label>
+                  <JFXButton fx:id="errorPaneButton" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Back" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+
+   <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <JFXButton fx:id="aboutButton" buttonType="RAISED" maxHeight="60.0" maxWidth="119.0" minHeight="60.0" minWidth="120.0" onAction="#switchAbout" prefHeight="60.0" prefWidth="120.0" ripplerFill="BLACK" style="-fx-background-radius: 10px; -fx-background-color: #012D5A; -fx-max-width: 120px; -fx-min-width: 120px; -fx-pref-width: 120px; -fx-max-height: 60px; -fx-min-height: 60px; -fx-pref-height: 60px;" text="About" textFill="WHITE" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+               <font>
+                  <Font name="Arial Bold" size="23.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

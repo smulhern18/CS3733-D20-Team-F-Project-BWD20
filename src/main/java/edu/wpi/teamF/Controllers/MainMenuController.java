@@ -2,6 +2,8 @@ package edu.wpi.teamF.Controllers;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.teamF.App;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+import edu.wpi.teamF.ModelClasses.Account.Account;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -13,7 +15,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 
 public class MainMenuController implements Initializable {
 
@@ -28,6 +29,7 @@ public class MainMenuController implements Initializable {
   public Pane rectanglePane;
   public JFXButton serviceRequestButton;
   public Rectangle blueRectangle;
+  public DatabaseManager dbm = DatabaseManager.getManager();
 
   SceneController sceneController = App.getSceneController();
 
@@ -51,30 +53,21 @@ public class MainMenuController implements Initializable {
     sceneController.switchScene("HelpMain");
   }
 
+  public void about(ActionEvent actionEvent) {}
+
+  public void credits(ActionEvent actionEvent) {}
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    Account.Type userLevel = dbm.getPermissions();
+    if (userLevel == Account.Type.USER) {
+      // set to user
+    } else if (userLevel == Account.Type.STAFF) {
+      // set to staff
+    } else if (userLevel == Account.Type.ADMIN) {
+      // set to admin perms
+    }
     background.fitWidthProperty().bind(anchorPane.widthProperty());
     background.fitHeightProperty().bind(anchorPane.heightProperty());
-
-    resize(anchorPane.getWidth());
-    anchorPane
-        .widthProperty()
-        .addListener(
-            (observable, oldWidth, newWidth) -> {
-              if (newWidth.doubleValue() != oldWidth.doubleValue()) {
-                resize(newWidth.doubleValue());
-              }
-            });
-  }
-
-  private void resize(double width) {
-    System.out.println(width);
-    Font newFont = new Font(width / 15);
-    Font buttonFont = new Font(width / 50);
-    welcomeLabel.setFont(newFont);
-    loginButton.setFont(buttonFont);
-    helpButton.setFont(buttonFont);
-    pathfinderButton.setFont(buttonFont);
-    serviceRequestButton.setFont(buttonFont);
   }
 }

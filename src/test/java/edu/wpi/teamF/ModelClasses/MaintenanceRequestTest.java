@@ -25,7 +25,6 @@ public class MaintenanceRequestTest {
     validMaintenanceRequest = testData.validMaintenanceRequests;
     validNodes = testData.validNodes;
     databaseManager.initialize();
-    databaseManager.reset();
   }
 
   @AfterAll

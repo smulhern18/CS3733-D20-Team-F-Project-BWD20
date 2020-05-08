@@ -54,7 +54,7 @@ public class Node {
   private String shortName;
   private String id;
   private NodeType type;
-  private short floor;
+  private String floor;
   private Set<Edge> edges = new HashSet<>();
   private Set<Node> neighborNodes = new HashSet<>();
 
@@ -79,7 +79,7 @@ public class Node {
       String longName,
       String shortName,
       NodeType nodeType,
-      short floor)
+      String floor)
       throws ValidationException {
     setXCoord(xCoord);
     setYCoord(yCoord);
@@ -99,7 +99,7 @@ public class Node {
       String longName,
       String shortName,
       NodeType nodeType,
-      short floor,
+      String floor,
       Set<Edge> edge)
       throws Exception {
     this(id, xCoord, yCoord, building, longName, shortName, nodeType, floor);
@@ -147,6 +147,7 @@ public class Node {
    * @param other the otherNode to check against
    * @return if the nodes are equal or not
    */
+  @Override
   public boolean equals(Object other) {
     boolean isEqual = false;
     if (other instanceof Node) {
@@ -156,7 +157,7 @@ public class Node {
           this.id.equals(otherNode.getId())
               && this.getXCoord() == otherNode.getXCoord()
               && this.getYCoord() == otherNode.getYCoord()
-              && this.getFloor() == otherNode.getFloor()
+              && this.getFloor().equals(otherNode.getFloor())
               && this.getType() == otherNode.getType()
               && this.edges.equals((otherNode).edges)
               && this.getBuilding().equals(otherNode.getBuilding())
@@ -309,7 +310,7 @@ public class Node {
    *
    * @return the floor the node is on
    */
-  public short getFloor() {
+  public String getFloor() {
     return floor;
   }
 
@@ -319,7 +320,7 @@ public class Node {
    * @param floor the floor to set
    * @throws ValidationException should the validation fail
    */
-  public void setFloor(short floor) throws ValidationException {
+  public void setFloor(String floor) throws ValidationException {
     Validators.floorValidation(floor);
     this.floor = floor;
   }
