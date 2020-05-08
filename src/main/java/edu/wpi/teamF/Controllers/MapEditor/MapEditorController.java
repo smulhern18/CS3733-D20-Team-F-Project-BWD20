@@ -33,6 +33,7 @@ public class MapEditorController {
 
     //Edge variables
     EdgeSelection edgeSelection;
+    EdgeSelection
     EdgeLine selectedEdge;
 
     //Node variables
@@ -49,18 +50,15 @@ public class MapEditorController {
             edgeLineMap.put(edge.getId(),new EdgeLine(edge));
         }
     }
-    public void setEdgeEventHandlers(Line line) {
-        line.setOnMousePressed(mouseEvent -> {
-            lineModifyEdgeHandler(line,mouseEvent);
-        });
-        
-    }
 
-    private void lineModifyEdgeHandler(Line line,MouseEvent mouseEvent) {
-        state = State.MODIFY_EDGE;
-        selectedEdge = edgeLineMap.get(line.getId());
-        edgeSelection = EdgeSelection.NODE1;
-        mapView.highlightEdge(line.getId());
+    public void setEdgeSelectionButtonHandler(JFXButton button) {
+        button.setOnMousePressed(mouseEvent -> {
+            if ("Node1".equals(button.getId())) {
+                edgeSelection = EdgeSelection.NODE1;
+            } else if ("Node2".equals(button.getId())) {
+                edgeSelection = EdgeSelection.NODE2;
+            }
+        });
     }
 
     public void setMapEventHandlers(AnchorPane floorPane) {
@@ -71,18 +69,20 @@ public class MapEditorController {
         });
     }
 
-    private void paneAddNodeHandler(MouseEvent mouseEvent) {
-
+    public void setEdgeEventHandlers(Line line) {
+        line.setOnMousePressed(mouseEvent -> {
+            lineModifyEdgeHandler(line,mouseEvent);
+        });
+        
     }
 
+    public void setNodeEventHandlers(JFXButton button) {
 
-    public void setButtonEventHandlers(JFXButton button) {
-        
         button.setOnMousePressed(mouseEvent -> {
             if (state == State.MODIFY_EDGE)  {
-                buttonModifyEdgeHandler();
+                nodeModifyEdgeHandler(button,mouseEvent);
             } else if (state == State.ADD_EDGE) {
-                buttonAddEdgeHandler();
+                nodeAddEdgeHandler();
             }
             else {
                 modifyNodeHandler();
@@ -91,12 +91,36 @@ public class MapEditorController {
 
     }
 
-    private void buttonAddEdgeHandler() {
+    private void lineModifyEdgeHandler(Line line,MouseEvent mouseEvent) {
+        state = State.MODIFY_EDGE;
+        selectedEdge = edgeLineMap.get(line.getId());
+        edgeSelection = null;
+        mapView.highlightEdge(line.getId());
+    }
+
+
+
+
+
+    private void paneAddNodeHandler(MouseEvent mouseEvent) {
 
     }
 
-    private void buttonModifyEdgeHandler() {
 
+
+
+    private void nodeAddEdgeHandler() {
+
+    }
+
+    private void nodeModifyEdgeHandler(JFXButton button,MouseEvent mouseEvent) {
+        if (edgeSelection == EdgeSelection.NODE1) {
+            selectedEdge.setNode1(button.getId());
+
+        }
+        if (edgeSelection == EdgeSelection.NODE2) {
+            selectedEdge.setNode2(button.getId());
+        }
 
     }
 

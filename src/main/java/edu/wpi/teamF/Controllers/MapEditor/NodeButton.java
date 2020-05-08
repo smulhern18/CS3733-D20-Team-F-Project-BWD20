@@ -8,5 +8,6 @@ public class NodeButton {
 
 
     public NodeButton(Node node) {
+        this.node = node;
     }
 }

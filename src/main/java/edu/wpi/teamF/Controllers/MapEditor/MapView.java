@@ -173,6 +173,10 @@ public class MapView implements Initializable {
         UISetting uiSetting = new UISetting();
         uiSetting.makeZoomable(imageScrollPane, imageStackPane, 1);
         initializeComboBox();
+        node1Button.setId("Node1");
+        mapEditorController.setEdgeSelectionButtonHandler(node1Button);
+        node2Button.setId("Node2");
+        mapEditorController.setEdgeSelectionButtonHandler(node2Button);
 
     }
 
@@ -184,7 +188,7 @@ public class MapView implements Initializable {
                 "-fx-background-radius: " + BUTTON_SIZE +"px; -fx-border-radius: 8px; -fx-background-color: #99D9EA; -fx-border-color: #000000; -fx-border-width: 1px; -fx-opacity: 0.7");
         button.setLayoutX(calculateXCoord(node.getXCoord(),node.getBuilding()) - BUTTON_SIZE / 2.0);
         button.setLayoutY(calculateYCoord(node.getYCoord(),node.getBuilding()) - BUTTON_SIZE / 2.0);
-        mapEditorController.setButtonEventHandlers(button);
+        mapEditorController.setNodeEventHandlers(button);
         getFloorPane(node.getFloor()).getChildren().add(button);
         buttonMap.put(button.getId(),button);
     }
@@ -210,8 +214,12 @@ public class MapView implements Initializable {
         }
     }
 
-    public void highlightEdge(String edgeID) {
+    public void highlightEdge(String edgeID,String node1,String node2) {
+
+
     }
+
+
 
     private double calculateXCoord(double x,String building) {
         if ("Faulkner".equals(building)) {
