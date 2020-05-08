@@ -62,18 +62,29 @@ public class MapEditorController {
 
     public void setCancelButtonHandler(JFXButton button) {
         button.setOnMousePressed(mouseEvent -> {
-            if (state == State.ADD_EDGE) {
-                mapView.setAsDefaultView();
-                edgeSelection = null;
-                addNode1ID = null;
-                selectedEdge = null;
-                state = null;
-            } else if (state == State.MODIFY_EDGE) {
-
+            try {
+                if (state == State.ADD_EDGE) {
+                    resetEdgeStateToDefault();
+                } else if (state == State.MODIFY_EDGE) {
+                    selectedEdge.reset();
+                    mapView.redrawEdge(selectedEdge.edge);
+                    resetEdgeStateToDefault();
+                }
+            } catch(Exception e) {
+                e.printStackTrace();
             }
         });
     }
 
+    public void
+
+    private void resetEdgeStateToDefault() {
+        mapView.setAsDefaultView();
+        edgeSelection = null;
+        addNode1ID = null;
+        selectedEdge = null;
+        state = null;
+    }
 
 
     public void setEdgeSelectionButtonHandler(JFXButton button) {

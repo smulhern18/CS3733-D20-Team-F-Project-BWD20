@@ -198,11 +198,8 @@ public class MapView implements Initializable {
     public Line drawEdge(Edge edge) throws Exception {
         Node node1 = databaseManager.readNode(edge.getNode1());
         Node node2 = databaseManager.readNode(edge.getNode2());
-        double startX = calculateXCoord(node1.getXCoord(), node1.getBuilding()) + LINE_WIDTH / 2;
-        double startY = calculateYCoord(node1.getYCoord(), node1.getBuilding()) + LINE_WIDTH / 2;
-        double endX = calculateXCoord(node2.getXCoord(), node2.getBuilding()) + LINE_WIDTH / 2;
-        double endY = calculateYCoord(node2.getYCoord(), node2.getBuilding()) + LINE_WIDTH / 2;
-        Line line = new Line(startX, startY, endX, endY);
+        Line line = new Line();
+        updateLine(line,node1,node2);
         line.setId(edge.getId());
         line.setStroke(Color.BLACK);
         line.setStrokeWidth(LINE_WIDTH);
@@ -220,6 +217,35 @@ public class MapView implements Initializable {
         return line;
     }
 
+    public void redrawEdge(Edge edge) throws Exception {
+        Node node1 = databaseManager.readNode(edge.getNode1());
+        Node node2 = databaseManager.readNode(edge.getNode2());
+        Line line = lineMap.get(edge.getId());
+        updateLine(line,node1,node2);
+        if (node1.getFloor().equals(node2.getFloor())) {
+            line.setVisible(true);
+            if (!node1.getFloor().equals(line.getParent().getId())) {
+                getFloorPane(line.getParent().getId()).getChildren().remove(line);
+                getFloorPane(node1.getFloor()).getChildren().add(line);
+            }
+        } else {
+            line.setVisible(false);
+        }
+    }
+
+    private void updateLine(Line line,Node node1,Node node2) throws Exception {
+
+        double startX = calculateXCoord(node1.getXCoord(), node1.getBuilding()) + LINE_WIDTH / 2;
+        double startY = calculateYCoord(node1.getYCoord(), node1.getBuilding()) + LINE_WIDTH / 2;
+        double endX = calculateXCoord(node2.getXCoord(), node2.getBuilding()) + LINE_WIDTH / 2;
+        double endY = calculateYCoord(node2.getYCoord(), node2.getBuilding()) + LINE_WIDTH / 2;
+        line.setStartX(startX);
+        line.setStartY(startY);
+        line.setEndX(endX);
+        line.setEndY(endY);
+
+    }
+
     public void highlightEdge(String edgeID, String node1ID, String node2ID) throws Exception {
         node1Button.setId(node1ID);
         node2Button.setId(node2ID);
@@ -228,16 +254,9 @@ public class MapView implements Initializable {
         Line line = lineMap.get(edgeID);
         Node node1 = databaseManager.readNode(node1ID);
         Node node2 = databaseManager.readNode(node2ID);
+        updateLine(line,node1,node2);
         if (node1.getFloor().equals(node2.getFloor())) {
             line.setVisible(true);
-            double startX = calculateXCoord(node1.getXCoord(), node1.getBuilding()) + LINE_WIDTH / 2;
-            double startY = calculateYCoord(node1.getYCoord(), node1.getBuilding()) + LINE_WIDTH / 2;
-            double endX = calculateXCoord(node2.getXCoord(), node2.getBuilding()) + LINE_WIDTH / 2;
-            double endY = calculateYCoord(node2.getYCoord(), node2.getBuilding()) + LINE_WIDTH / 2;
-            line.setStartX(startX);
-            line.setStartY(startY);
-            line.setEndX(endX);
-            line.setEndY(endY);
             if (!node1.getFloor().equals(line.getParent().getId())) {
                 getFloorPane(line.getParent().getId()).getChildren().remove(line);
                 getFloorPane(node1.getFloor()).getChildren().add(line);
