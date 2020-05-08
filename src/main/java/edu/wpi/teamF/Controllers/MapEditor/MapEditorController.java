@@ -33,7 +33,6 @@ public class MapEditorController {
 
     //Edge variables
     EdgeSelection edgeSelection;
-    EdgeSelection
     EdgeLine selectedEdge;
 
     //Node variables
@@ -84,16 +83,30 @@ public class MapEditorController {
     public void setNodeEventHandlers(JFXButton button) {
 
         button.setOnMousePressed(mouseEvent -> {
-            if (state == State.MODIFY_EDGE)  {
-                nodeModifyEdgeHandler(button,mouseEvent);
+            if (state == State.MODIFY_EDGE) {
+                try {
+                    nodeModifyEdgeHandler(button, mouseEvent);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             } else if (state == State.ADD_EDGE) {
                 nodeAddEdgeHandler();
-            }
-            else {
+            } else if (state == State.ADD_NODE) {
+                nodeAddNodeHandler();
+            } else if (state == State.MODIFY_NODE) {
+                nodeModifyNodeHandler();
+            } else {
                 modifyNodeHandler();
             }
         });
 
+    }
+
+    private void nodeModifyNodeHandler() {
+
+    }
+
+    private void nodeAddNodeHandler() {
     }
 
     private void lineModifyEdgeHandler(Line line,MouseEvent mouseEvent) throws Exception {
