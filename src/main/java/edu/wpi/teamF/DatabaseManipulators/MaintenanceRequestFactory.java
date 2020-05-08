@@ -185,6 +185,11 @@ public class MaintenanceRequestFactory {
       while (resultSet.next()) {
         ServiceRequest serviceRequest =
             serviceRequestFactory.read(resultSet.getString(DatabaseManager.SERVICEID_KEY));
+        Timestamp timestamp = resultSet.getTimestamp(DatabaseManager.TIME_COMPLETED_KEY);
+        Date complete = null;
+        if (timestamp != null) {
+          complete = new Date(timestamp.getTime());
+        }
         maintenanceRequests.add(
             new MaintenanceRequest(
                 serviceRequest.getId(),
@@ -194,7 +199,7 @@ public class MaintenanceRequestFactory {
                 serviceRequest.getDateTimeSubmitted(),
                 serviceRequest.getPriority(),
                 serviceRequest.getComplete(),
-                new Date(resultSet.getTimestamp(DatabaseManager.DATECOMPLETED_KEY).getTime())));
+                complete));
       }
     } catch (Exception e) {
       System.out.println(

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -10,190 +9,234 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="407.0" prefWidth="784.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ServiceRequestMainController">
-   <children>
-      <GridPane layoutX="244.0" layoutY="119.0" prefHeight="254.0" prefWidth="500.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="210.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="120.0">
-        <columnConstraints>
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#switchToComputerService" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../../Images/baseline_computer_black_48dp.png" />
-               </image>
-            </ImageView>
-            <JFXButton prefWidth="120.0" text="Computer Service" GridPane.rowIndex="1">
+<AnchorPane fx:id="anchorPane" prefHeight="407.0" prefWidth="784.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ServiceRequestMainController">
+    <children>
+        <ImageView fx:id="backgroundImage" fitHeight="554.0" fitWidth="789.0" pickOnBounds="true" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="0.0">
+            <image>
+                <Image url="@../../../../Images/Brigham-Social-1024x538.jpg" />
+            </image>
+        </ImageView>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgba(255,255,255,0.9);" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="290.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="100.0" />
+        <GridPane layoutX="244.0" layoutY="115.0" prefHeight="1063.0" prefWidth="594.0" AnchorPane.bottomAnchor="-626.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="5.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="25.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="25.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="25.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="25.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="5.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="6.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="3.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="2.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="2.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="6.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="3.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="2.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="2.0" valignment="TOP" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" percentHeight="6.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" percentHeight="3.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" percentHeight="2.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <ImageView fx:id="compImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#switchToComputerService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                    <image>
+                        <Image url="@../../../../Images/icons8-computer-64.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="medImage" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#medicineService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                    <image>
+                        <Image url="@../../../../Images/icons8-doctors-bag-100.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="lanImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#languageService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                    <image>
+                        <Image url="@../../../../Images/icons8-translation-64.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="sanImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#sanitationRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                    <image>
+                        <Image url="@../../../../Images/icons8-antiseptic-cream-80.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="marImage" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#mariachiService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                    <image>
+                        <Image url="@../../../../Images/icons8-musical-notes-96.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="secImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#securityRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                    <image>
+                        <Image url="@../../../../Images/icons8-security-configuration-80.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="laundryImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#switchToLaundryService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
+                    <image>
+                        <Image url="@../../../../Images/icons8-washing-machine-64.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="flowImage" fitHeight="50.0" fitWidth="50.0" onMouseClicked="#flowerRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    <image>
+                        <Image url="@../../../../Images/icons8-flower-bouquet-256.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="transportImage" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#transportRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
+                    <image>
+                        <Image url="@../../../../Images/icons8-car-200.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="mainImage" fitHeight="60.0" fitWidth="60.0" onMouseClicked="#maintenanceRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                    <image>
+                        <Image url="@../../../../Images/icons8-support-400.png" />
+                    </image>
+                </ImageView>
+                <Label text="Roman" textFill="#5b5959" GridPane.columnIndex="3" GridPane.rowIndex="6">
+                    <font>
+                        <Font size="9.0" />
+                    </font>
+                </Label>
+                <Label text="Nicholas" textFill="#5b5959" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                    <font>
+                        <Font size="9.0" />
+                    </font>
+                </Label>
+                <Label text="Ryan" textFill="#5b5959" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="9.0" />
+                    </font>
+                </Label>
+                <Label text="Tyler" textFill="#5b5959" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="9.0" />
+                    </font>
+                </Label>
+                <Label text="Kevin" textFill="#5b5959" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                    <font>
+                        <Font size="9.0" />
+                    </font>
+                </Label>
+                <Label text="Denver" textFill="#5b5959" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="9.0" />
+                    </font>
+                </Label>
+                <Label text="Muyun" textFill="#5b5959" GridPane.columnIndex="4" GridPane.rowIndex="2">
+                    <font>
+                        <Font size="9.0" />
+                    </font>
+                </Label>
+                <Label text="Reilly" textFill="#5b5959" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                    <font>
+                        <Font size="9.0" />
+                    </font>
+                </Label>
+                <Label text="Theo" textFill="#5b5959" GridPane.columnIndex="4" GridPane.rowIndex="6">
+                    <font>
+                        <Font size="9.0" />
+                    </font>
+                </Label>
+                <Label text="Sullivan" textFill="#5b5959" GridPane.columnIndex="2" GridPane.rowIndex="10">
+                    <font>
+                        <Font size="9.0" />
+                    </font>
+                </Label>
+                <ImageView fx:id="appointmentsImage" fitHeight="61.0" fitWidth="61.0" onMouseClicked="#appointmentRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="8">
+                    <image>
+                        <Image url="@../../../../Images/icons8-calendar-100.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="roomSchedulerImage" fitHeight="56.0" fitWidth="52.0" onMouseClicked="#switchToRoomScheduler" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="8">
+                    <image>
+                        <Image url="@../../../../Images/icons8-door-80.png" />
+                    </image>
+                </ImageView>
+            <Label text="Security" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
-                  <Font name="Microsoft YaHei Light" size="12.0" />
-               </font>
-            </JFXButton>
-            <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#medicineService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
-               <image>
-                  <Image url="@../../../../Images/baseline_healing_black_48dp.png" />
-               </image>
-            </ImageView>
-            <JFXButton text="Medicine Delivery" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <font>
-                  <Font name="Microsoft YaHei Light" size="12.0" />
-               </font>
-            </JFXButton>
-            <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#languageService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
-               <image>
-                  <Image url="@../../../../Images/baseline_record_voice_over_black_48dp.png" />
-               </image>
-            </ImageView>
-            <JFXButton prefHeight="38.0" prefWidth="115.0" text="Language Interpretor" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <font>
-                  <Font name="Microsoft YaHei Light" size="11.0" />
-               </font>
-            </JFXButton>
-            <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#sanitationRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
-               <image>
-                  <Image url="@../../../../Images/baseline_pan_tool_black_48dp.png" />
-               </image>
-            </ImageView>
-            <JFXButton contentDisplay="CENTER" text="Sanitation" GridPane.columnIndex="3" GridPane.rowIndex="1">
-               <font>
-                  <Font name="Microsoft YaHei Light" size="12.0" />
-               </font>
-            </JFXButton>
-            <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#mariachiService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4">
-               <image>
-                  <Image url="@../../../../Images/baseline_audiotrack_black_48dp.png" />
-               </image>
-            </ImageView>
-            <JFXButton text="Mariachi" GridPane.columnIndex="4" GridPane.rowIndex="1">
-               <font>
-                  <Font name="Microsoft YaHei Light" size="12.0" />
-               </font>
-            </JFXButton>
-            <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#securityRequest" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
-               <image>
-                  <Image url="@../../../../Images/baseline_face_black_48dp.png" />
-               </image>
-            </ImageView>
-            <JFXButton text="Security" GridPane.rowIndex="4">
-               <font>
-                  <Font name="Microsoft YaHei Light" size="12.0" />
-               </font>
-            </JFXButton>
-            <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#switchToLaundryService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
-               <image>
-                  <Image url="@../../../../Images/baseline_local_laundry_service_black_48dp.png" />
-               </image>
-            </ImageView>
-            <JFXButton text="Laundry" GridPane.columnIndex="1" GridPane.rowIndex="4">
-               <font>
-                  <Font name="Microsoft YaHei Light" size="12.0" />
-               </font>
-            </JFXButton>
-            <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#flowerRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
-               <image>
-                  <Image url="@../../../../Images/baseline_local_florist_black_48dp.png" />
-               </image>
-            </ImageView>
-            <JFXButton text="Flower" GridPane.columnIndex="2" GridPane.rowIndex="4">
-               <font>
-                  <Font name="Microsoft YaHei Light" size="12.0" />
-               </font>
-            </JFXButton>
-            <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#transportRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
-               <image>
-                  <Image url="@../../../../Images/baseline_commute_black_48dp.png" />
-               </image>
-            </ImageView>
-            <JFXButton text="Transport" GridPane.columnIndex="3" GridPane.rowIndex="4">
-               <font>
-                  <Font name="STIXGeneral-Regular" size="13.0" />
-               </font>
-            </JFXButton>
-            <ImageView fitHeight="72.0" fitWidth="72.0" onMouseClicked="#maintenanceRequest" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
-               <image>
-                  <Image url="@../../../../Images/baseline_broken_image_black_48dp.png" />
-               </image>
-            </ImageView>
-            <JFXButton text="Maintance" GridPane.columnIndex="4" GridPane.rowIndex="4">
-               <font>
-                  <Font name="STIXGeneral-Regular" size="13.0" />
-               </font>
-            </JFXButton>
-            <Label text="Roman" textFill="#5b5959" GridPane.rowIndex="2">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Label>
-            <Label text="Nicholas" textFill="#5b5959" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Label>
-            <Label text="Ryan" textFill="#5b5959" GridPane.columnIndex="2" GridPane.rowIndex="2">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Label>
-            <Label text="Tyler" textFill="#5b5959" GridPane.columnIndex="3" GridPane.rowIndex="2">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Label>
-            <Label text="Nick" textFill="#5b5959" GridPane.columnIndex="4" GridPane.rowIndex="2">
-               <font>
-                  <Font size="9.0" />
-               </font>
-            </Label>
-            <Label text="Denver" textFill="#5b5959" GridPane.rowIndex="5">
-               <font>
-                  <Font size="9.0" />
+                  <Font name="Dubai Light" size="20.0" />
                </font>
             </Label>
-            <Label text="Muyun" textFill="#5b5959" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <Label text="Sanitation" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <font>
-                  <Font size="9.0" />
+                  <Font name="Dubai Light" size="20.0" />
                </font>
             </Label>
-            <Label text="Reilly" textFill="#5b5959" GridPane.columnIndex="2" GridPane.rowIndex="5">
+            <Label text="Language Interpreter" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <font>
-                  <Font size="9.0" />
+                  <Font name="Dubai Light" size="20.0" />
                </font>
             </Label>
-            <Label text="Theo" textFill="#5b5959" GridPane.columnIndex="3" GridPane.rowIndex="5">
+            <Label text="Laundry" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <font>
-                  <Font size="9.0" />
+                  <Font name="Dubai Light" size="20.0" />
                </font>
             </Label>
-            <Label text="Sullivan" textFill="#5b5959" GridPane.columnIndex="4" GridPane.rowIndex="5">
+            <Label text="Flower Delivery" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <font>
-                  <Font size="9.0" />
+                  <Font name="Dubai Light" size="20.0" />
                </font>
             </Label>
-         </children>
-      </GridPane>
-      <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <GridPane alignment="CENTER" layoutX="395.0" layoutY="63.0" prefHeight="30.0" prefWidth="205.0" AnchorPane.leftAnchor="395.0" AnchorPane.rightAnchor="184.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-      </GridPane>
-      <Label fx:id="serviceRequestLabel" layoutX="224.0" layoutY="59.0" prefHeight="38.0" prefWidth="206.0" text="Service Request">
-         <font>
-            <Font name="Microsoft YaHei Light" size="24.0" />
-         </font>
-      </Label>
-   </children>
+            <Label text="Medication Delivery" GridPane.columnIndex="2" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Dubai Light" size="20.0" />
+               </font>
+            </Label>
+            <Label text="Computer Service" GridPane.columnIndex="3" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Dubai Light" size="20.0" />
+               </font>
+            </Label>
+            <Label text="Transportation" GridPane.columnIndex="4" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Dubai Light" size="20.0" />
+               </font>
+            </Label>
+            <Label text="Mariachi Band" GridPane.columnIndex="1" GridPane.rowIndex="9">
+               <font>
+                  <Font name="Dubai Light" size="20.0" />
+               </font>
+            </Label>
+            <Label text="Maintenance" GridPane.columnIndex="2" GridPane.rowIndex="9">
+               <font>
+                  <Font name="Dubai Light" size="20.0" />
+               </font>
+            </Label>
+            <Label text="Appointments" GridPane.columnIndex="3" GridPane.rowIndex="9">
+               <font>
+                  <Font name="Dubai Light" size="20.0" />
+               </font>
+            </Label>
+            <Label text="Room Scheduler" GridPane.columnIndex="4" GridPane.rowIndex="9">
+               <font>
+                  <Font name="Dubai Light" size="20.0" />
+               </font>
+            </Label>
+            </children>
+        </GridPane>
+        <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <GridPane alignment="CENTER" layoutX="351.0" layoutY="55.0" prefHeight="53.0" prefWidth="289.0" AnchorPane.leftAnchor="351.0" AnchorPane.rightAnchor="144.0" AnchorPane.topAnchor="110.0">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="82.58940124511719" minHeight="10.0" prefHeight="82.58940124511719" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label fx:id="serviceRequestLabel" prefHeight="48.0" prefWidth="229.0" text="Service Request">
+                    <font>
+                        <Font name="Dubai Light" size="30.0" />
+                    </font>
+                </Label>
+            </children>
+        </GridPane>
+        <GridPane layoutX="572.0" layoutY="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="90.0" />
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+            </rowConstraints>
+        </GridPane>
+    </children>
 </AnchorPane>

@@ -3,30 +3,43 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXToggleButton;
+import edu.wpi.teamF.App;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Directions.Directions;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
-import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.BreadthFirst;
-import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.DepthFirstSearch;
-import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.MultipleFloorAStar;
-import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.PathfindAlgorithm;
+import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.*;
 import edu.wpi.teamF.ModelClasses.Scorer.EuclideanScorer;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.ReportsClass;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import javax.management.InstanceNotFoundException;
 import lombok.SneakyThrows;
 
@@ -37,6 +50,11 @@ public class PathfinderController implements Initializable {
   private static int MAIN_MAP_HEIGHT = 3400;
   private static int MAIN_MAP_WIDTH = 5000;
 
+  public static int MAP_HEIGHT = 1485;
+  public static int MAP_WIDTH = 2475;
+  public static DatabaseManager databaseManager = DatabaseManager.getManager();
+  SceneController sceneController = App.getSceneController();
+  // public int currentFloor;
   public AnchorPane currentPane;
   public AnchorPane mainMapPane;
   public AnchorPane mapPaneFaulkner5;
@@ -68,31 +86,99 @@ public class PathfinderController implements Initializable {
   public JFXButton pathButton;
   public JFXTextArea directionsDisplay;
   public AnchorPane pathSwitchFloorPane;
-  public JFXButton pathSwitchFloor;
-  public AnchorPane mapPaneMainL2 = new AnchorPane();
-  public AnchorPane mapPaneMainL1 = new AnchorPane();
-  public AnchorPane mapPaneMainG = new AnchorPane();
-  public AnchorPane mapPaneMain1 = new AnchorPane();
-  public AnchorPane mapPaneMain2 = new AnchorPane();
-  public AnchorPane mapPaneMain3 = new AnchorPane();
-  public ImageView imageViewMainL2 = new ImageView();
-  public ImageView imageViewMainL1 = new ImageView();
-  public ImageView imageViewMainG = new ImageView();
-  public ImageView imageViewMain1 = new ImageView();
-  public ImageView imageViewMain2 = new ImageView();
-  public ImageView imageViewMain3 = new ImageView();
+  public JFXButton pathSwitchNext;
+  public JFXButton pathSwitchPrevious;
+  public JFXButton textDirections;
+  public JFXButton callDirections;
+  public JFXButton printDirections;
+  public AnchorPane mapPaneMainL2;
+  public AnchorPane mapPaneMainL1;
+  public AnchorPane mapPaneMainG;
+  public AnchorPane mapPaneMain1;
+  public AnchorPane mapPaneMain2;
+  public AnchorPane mapPaneMain3;
+  public ImageView imageViewMainL2;
+  public ImageView imageViewMainL1;
+  public ImageView imageViewMainG;
+  public ImageView imageViewMain1;
+  public ImageView imageViewMain2;
+  public ImageView imageViewMain3;
+  public JFXButton mainFloor1Button;
+  public JFXButton mainFloor2Button;
+  public JFXButton mainFloor3Button;
+  public JFXButton mainFloorGButton;
+  public JFXButton mainFloorL2Button;
+  public JFXButton mainFloorL1Button;
+  public AnchorPane selectFloorPaneMain;
+  public Label startLabel;
+  public Label endLabel;
+  public JFXComboBox<String> hospitalComboBox;
+  public HBox btnSpacer;
+  public JFXTextField phoneNumber;
+  public Label commsResult;
+  public AnchorPane externalDirections;
+  public Boolean awaitingExternalDirections = false;
+
+  // stairs v elev stuff
+  String liftType = "ELEV";
+  public JFXButton chooseLiftStairs;
+  public JFXButton chooseLiftElevator;
+  public JFXToggleButton liftToggle;
+  public Label elevatorLabel;
+  public Label stairsLabel;
+
+  // error box stuff
+  public AnchorPane errorPane;
+  public Label errorPaneLabel1;
+  public Label errorPaneLabel2;
+  public JFXButton errorPaneButton;
+
+  // intermediate maps stuff
+  public ImageView faulknerTo45FrancisImage;
+  public ImageView faulknerTo75FrancisImage;
+  public ImageView faulknerToBTMImage;
+  public ImageView faulknerToShapiroImage;
+  public ImageView faulknerTo15FrancisImage;
+  public ImageView Francis45ToFaulknerImage;
+  public ImageView Francis75ToFaulknerImage;
+  public ImageView BTMToFaulknerImage;
+  public ImageView shapiroToFaulknerImage;
+  public ImageView francis15ToFaulknerImage;
+  public ScrollPane scrollPaneIntermediate;
+  public StackPane stackPaneIntermediate;
+  public GoogleMaps googleMaps;
+  public Label driveTime;
+  public Label driveDistance;
+  public Label transitTime;
+  public Label transitDistance;
+  public Label bikeTime;
+  public Label bikeDistance;
+  public Label walkTime;
+  public Label walkDistance;
+  public ImageView faulknerTo45FrancisQR;
+  public ImageView faulknerTo75FrancisQR;
+  public ImageView faulknerToBTMQR;
+  public ImageView faulknerToShapiroQR;
+  public ImageView faulknerTo15FrancisQR;
+  public ImageView Francis45ToFaulknerQR;
+  public ImageView Francis75ToFaulknerQR;
+  public ImageView BTMToFaulknerQR;
+  public ImageView shapiroToFaulknerQR;
+  public ImageView francis15ToFaulknerQR;
 
   public List<Node> fullNodeList;
   public int state;
   public UISetting uiSetting = new UISetting();
+  public UISetting intermediateSetting;
   private String currentBuilding;
   private String currentFloor;
   Node startNode = null;
   Node endNode = null;
+  public Path path;
   public Directions directions;
+  public int locationIndex;
 
   EuclideanScorer euclideanScorer = new EuclideanScorer();
-  DatabaseManager databaseManager = DatabaseManager.getManager();
   PathfindAlgorithm pathFindAlgorithm;
   private static String newPathfind = " ";
 
@@ -106,15 +192,21 @@ public class PathfinderController implements Initializable {
   private void updatePathFindAlgorithm() {
     switch (newPathfind) {
       case "A Star":
-        this.pathFindAlgorithm = new MultipleFloorAStar(fullNodeList);
+        MultipleHospitalAStar currentAlgorithm1 = new MultipleHospitalAStar(fullNodeList);
+        currentAlgorithm1.setLiftType(liftType);
+        this.pathFindAlgorithm = currentAlgorithm1;
         System.out.println("successful astar");
         break;
       case "Breadth First":
-        this.pathFindAlgorithm = new BreadthFirst(fullNodeList);
+        BreadthFirst currentAlgorithm2 = new BreadthFirst(fullNodeList);
+        currentAlgorithm2.setLiftType(liftType);
+        this.pathFindAlgorithm = currentAlgorithm2;
         System.out.println("successful breath");
         break;
       case "Depth First":
-        this.pathFindAlgorithm = new DepthFirstSearch(fullNodeList);
+        DepthFirstSearch currentAlgorithm3 = new DepthFirstSearch(fullNodeList);
+        currentAlgorithm3.setLiftType(liftType);
+        this.pathFindAlgorithm = currentAlgorithm3;
         System.out.println("successful Depth first");
         break;
       default:
@@ -123,25 +215,67 @@ public class PathfinderController implements Initializable {
   }
 
   public void draw(Path path) throws InstanceNotFoundException {
-
+    this.path = path;
     List<Node> pathNodes = path.getPath();
+
+    double heightRatioFaulkner = currentPane.getPrefHeight() / FAULKNER_MAP_HEIGHT;
+    double widthRatioFaulkner = currentPane.getPrefWidth() / FAULKNER_MAP_WIDTH;
+    double heightRatioMain = currentPane.getPrefHeight() / MAIN_MAP_HEIGHT;
+    double widthRatioMain = currentPane.getPrefWidth() / MAIN_MAP_WIDTH;
+
     if (endNode == null) {
       endNode = pathNodes.get(pathNodes.size() - 1);
     }
-
-    double heightRatio = currentPane.getPrefHeight() / FAULKNER_MAP_HEIGHT;
-    double widthRatio = currentPane.getPrefWidth() / FAULKNER_MAP_WIDTH;
+    try {
+      ReportsClass newNode = databaseManager.readReport(startNode.getId());
+      ReportsClass oldNode = databaseManager.readReport(endNode.getId());
+      if (newNode != null) {
+        newNode.setTimesVisited(newNode.getTimesVisited() + 1);
+      } else {
+        newNode = new ReportsClass(startNode.getId(), 1, 0, "NA");
+      }
+      if (oldNode != null) {
+        oldNode.setTimesVisited(oldNode.getTimesVisited() + 1);
+      } else {
+        oldNode = new ReportsClass(endNode.getId(), 1, 0, "NA");
+      }
+      databaseManager.manipulateReport(newNode);
+      databaseManager.manipulateReport(oldNode);
+      System.out.println(databaseManager.readReport(newNode.getNodeID()));
+      System.out.println(oldNode.getNodeID());
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
+    double heightRatio = currentPane.getPrefHeight() / MAP_HEIGHT;
+    double widthRatio = currentPane.getPrefWidth() / MAP_WIDTH;
 
     for (int i = 0; i < pathNodes.size() - 1; i++) {
-      if (pathNodes.get(i).getFloor().equals(pathNodes.get(i + 1).getFloor())) {
-        int startX = (int) (pathNodes.get(i).getXCoord() * widthRatio);
-        int startY = (int) (pathNodes.get(i).getYCoord() * heightRatio);
-        int endX = (int) (pathNodes.get(i + 1).getXCoord() * widthRatio);
-        int endY = (int) (pathNodes.get(i + 1).getYCoord() * heightRatio);
+      Node start = pathNodes.get(i);
+      Node end = pathNodes.get(i + 1);
+      if (start.getFloor().equals(end.getFloor())
+          && sameHospital(start.getBuilding(), end.getBuilding())) {
+        double startX;
+        double startY;
+        double endX;
+        double endY;
+        if ("Faulkner".equals(start.getBuilding())) {
+          startX = (start.getXCoord() * widthRatioFaulkner);
+          startY = (start.getYCoord() * heightRatioFaulkner);
+          endX = (end.getXCoord() * widthRatioFaulkner);
+          endY = (end.getYCoord() * heightRatioFaulkner);
+        } else {
+          startX = (start.getXCoord() * widthRatioMain);
+          startY = (start.getYCoord() * heightRatioMain);
+          endX = (end.getXCoord() * widthRatioMain);
+          endY = (end.getYCoord() * heightRatioMain);
+        }
         Line line = new Line(startX, startY, endX, endY);
         line.setStroke(Color.RED);
         line.setStrokeWidth(2);
-        getFloorPane(pathNodes.get(i).getFloor()).getChildren().add(line);
+        animateLine(line);
+        getFloorPane(pathNodes.get(i).getFloor(), pathNodes.get(i).getBuilding())
+            .getChildren()
+            .add(line);
       }
     }
 
@@ -150,34 +284,64 @@ public class PathfinderController implements Initializable {
     this.directions = new Directions(fullNodeList, path, startNode, endNode);
     System.out.println(directions.getFullDirectionsString());
     pathSwitchFloorPane.setVisible(true);
-    if (startNode.getFloor() != endNode.getFloor()) {
+
+    System.out.println("Number of Uniques: " + path.getUniqueLocations());
+    if (path.getUniqueLocations() > 1) {
       // Spans multiple floors
-      pathSwitchFloor.setVisible(true);
-      pathSwitchFloor.setText("Next: Go to floor " + endNode.getFloor());
-      directionsDisplay.setText(directions.getFullDirectionsStringForFloor(startNode.getFloor()));
+      pathSwitchPrevious.setVisible(false);
+      pathSwitchPrevious.setPrefHeight(0);
+      pathSwitchNext.setVisible(true);
+      pathSwitchNext.setPrefHeight(50);
+      btnSpacer.setPrefHeight(0);
+
+      if ((path.getLocationAtIndex(1).getBuilding().equals("OUT"))) {
+        // Next stop is at a different hospital
+        pathSwitchNext.setText("Next: Go to " + path.getLocationAtIndex(2).getBuilding());
+      } else {
+        pathSwitchNext.setText(
+            "Next: Go to floor " + path.getLocationAtIndex(1).getFloor().replace("F", ""));
+      }
+      locationIndex = 0;
+      System.out.println("Changed to Index: " + locationIndex);
+      System.out.println("Floor: " + path.getLocationAtIndex(locationIndex).getFloor());
+      System.out.println("Building: " + path.getLocationAtIndex(locationIndex).getBuilding());
+
+      directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
     } else {
-      pathSwitchFloor.setVisible(false);
+      // Single floor navigation
+      pathSwitchPrevious.setVisible(false);
+      pathSwitchPrevious.setPrefHeight(0);
+      pathSwitchNext.setVisible(false);
+      pathSwitchNext.setPrefHeight(0);
+      btnSpacer.setPrefHeight(0);
+
       directionsDisplay.setText(directions.getFullDirectionsString());
     }
-    directionsDisplay.setText(directions.getFullDirectionsString());
   }
 
   public void placeButton(Node node) {
 
-    double heightRatioFaulkner5 = (double) currentPane.getPrefHeight() / FAULKNER_MAP_HEIGHT;
-    double widthRatioFaulkner5 = (double) currentPane.getPrefWidth() / FAULKNER_MAP_WIDTH;
+    double heightRatioFaulkner = (double) currentPane.getPrefHeight() / FAULKNER_MAP_HEIGHT;
+    double widthRatioFaulkner = (double) currentPane.getPrefWidth() / FAULKNER_MAP_WIDTH;
+    double heightRatioMain = (double) currentPane.getPrefHeight() / MAIN_MAP_HEIGHT;
+    double widthRatioMain = (double) currentPane.getPrefWidth() / MAIN_MAP_WIDTH;
 
     JFXButton button = new JFXButton();
     button.setId(node.getId());
-    button.setMinSize(12, 12);
-    button.setMaxSize(12, 12);
-    button.setPrefSize(12, 12);
+    button.setMinSize(6, 6);
+    button.setMaxSize(6, 6);
+    button.setPrefSize(6, 6);
     button.setStyle(
-        "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
-
-    int xPos = (int) ((node.getXCoord() * widthRatioFaulkner5) - 6);
-    int yPos = (int) ((node.getYCoord() * heightRatioFaulkner5) - 6);
-
+        "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+    double xPos;
+    double yPos;
+    if ("Faulkner".equals(node.getBuilding())) {
+      xPos = ((node.getXCoord() * widthRatioFaulkner) - 3);
+      yPos = ((node.getYCoord() * heightRatioFaulkner) - 3);
+    } else {
+      xPos = ((node.getXCoord() * widthRatioMain) - 3);
+      yPos = ((node.getYCoord() * heightRatioMain) - 3);
+    }
     button.setLayoutX(xPos);
     button.setLayoutY(yPos);
 
@@ -186,14 +350,14 @@ public class PathfinderController implements Initializable {
           if (startNode == node && state == 1) { // Click again to de-select if start has been set
             startNode = null;
             button.setStyle(
-                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+                "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
             state = 0;
             startCombo.setValue(null);
             startCombo.setDisable(false);
           } else if (endNode == node) { // deselect if end has been set, return to 1
             endNode = null;
             button.setStyle(
-                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+                "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
             state = 1;
             endCombo.setValue(null);
             pathButton.setDisable(true);
@@ -204,7 +368,7 @@ public class PathfinderController implements Initializable {
             elevBtn.setDisable(false);
             bathBtn.setDisable(false);
             button.setStyle(
-                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00cc00; -fx-border-color: #000000; -fx-border-width: 1px"); // 800000
+                "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #00cc00; -fx-border-color: #000000; -fx-border-width: 1px"); // 800000
             commandText.setText("Select End Location or Building Feature");
             state = 1;
             // startCombo.setDisable(true);
@@ -213,7 +377,7 @@ public class PathfinderController implements Initializable {
           } else if (state == 1) { // select end if not set
             endNode = node;
             button.setStyle(
-                "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px"); // 00cc00
+                "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px"); // 00cc00
             commandText.setText("Select Find Path or Reset");
             state = 2;
             // endCombo.setDisable(true);
@@ -221,7 +385,7 @@ public class PathfinderController implements Initializable {
             pathButton.setDisable(false);
           }
         });
-    getFloorPane(node.getFloor()).getChildren().add(button);
+    getFloorPane(node.getFloor(), node.getBuilding()).getChildren().add(button);
   }
 
   public void reset() {
@@ -229,17 +393,23 @@ public class PathfinderController implements Initializable {
   }
 
   public void resetPane() {
-    resetButtonLine("1");
-    resetButtonLine("2");
-    resetButtonLine("3");
-    resetButtonLine("4");
-    resetButtonLine("5");
+    resetButtonLine("1", "Faulkner");
+    resetButtonLine("2", "Faulkner");
+    resetButtonLine("3", "Faulkner");
+    resetButtonLine("4", "Faulkner");
+    resetButtonLine("5", "Faulkner");
+    resetButtonLine("F1", "Main");
+    resetButtonLine("F2", "Main");
+    resetButtonLine("F3", "Main");
+    resetButtonLine("G", "Main");
+    resetButtonLine("L1", "Main");
+    resetButtonLine("L2", "Main");
 
     if (startNode != null) {
       for (javafx.scene.Node component : currentPane.getChildren()) {
         if (component.getId().equals(startNode.getId())) {
           component.setStyle(
-              "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; "
+              "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; "
                   + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
         }
       }
@@ -248,7 +418,7 @@ public class PathfinderController implements Initializable {
       for (javafx.scene.Node component : currentPane.getChildren()) {
         if (component.getId().equals(endNode.getId())) {
           component.setStyle(
-              "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; "
+              "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; "
                   + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
         }
       }
@@ -267,6 +437,10 @@ public class PathfinderController implements Initializable {
     directionsPane.setVisible(false);
     selectButtonsPane.setVisible(true);
     pathSwitchFloorPane.setVisible(false);
+    commsResult.setText("");
+    externalDirections.setVisible(false);
+    externalDirections.setPrefHeight(0);
+    externalDirections.setPrefWidth(0);
 
     uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1, 1.33);
 
@@ -274,21 +448,29 @@ public class PathfinderController implements Initializable {
     endCombo.setValue(null);
 
     setComboBehavior();
+
+    if (startLabel != null) {
+      startLabel.setVisible(false);
+    }
+    if (endLabel != null) {
+      endLabel.setVisible(false);
+    }
+    phoneNumber.setText("");
   }
 
-  private void resetButtonLine(String floor) {
+  private void resetButtonLine(String floor, String building) {
     List<javafx.scene.Node> nodesToRemove = new ArrayList<>();
-    for (javafx.scene.Node node : getFloorPane(floor).getChildren()) {
+    for (javafx.scene.Node node : getFloorPane(floor, building).getChildren()) {
       if (node instanceof Line) {
         nodesToRemove.add(node);
       } else if (node instanceof JFXButton) {
         JFXButton button = (JFXButton) node;
         button.setStyle(
-            "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; "
+            "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; "
                 + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
       }
     }
-    getFloorPane(floor).getChildren().removeAll(nodesToRemove);
+    getFloorPane(floor, building).getChildren().removeAll(nodesToRemove);
   }
 
   public void drawNodes() {
@@ -310,24 +492,34 @@ public class PathfinderController implements Initializable {
     currentPane = mapPaneFaulkner1;
     currentFloor = "1";
     setAllInvisible();
+    selectFloorPaneMain.setVisible(false);
     scrollPaneFaulkner1.setVisible(true);
     mapPaneFaulkner1.setVisible(true);
     imageViewFaulkner1.setVisible(true);
+    errorPane.setVisible(false);
     floorButtonsSet();
-    pathSwitchFloor.setVisible(false);
+    initializehospitalComboBox();
+    setToggleBehavior();
+    setErrorPaneButtonBehavior();
+    externalDirections.setVisible(false);
+    externalDirections.setPrefWidth(0);
+    externalDirections.setPrefHeight(0);
+    setIntermediateMapsInvisible();
 
     UISetting uiSetting = new UISetting();
+    UISetting intermediateSetting = new UISetting();
     uiSetting.setAsLocationComboBox(startCombo);
     uiSetting.setAsLocationComboBox(endCombo);
 
     uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1, 1.33);
+    intermediateSetting.makeZoomable(scrollPaneIntermediate, stackPaneIntermediate, 1.00);
 
     for (Node node : databaseManager.getAllNodes()) {
       node.setEdges(databaseManager.getAllEdgesConnectedToNode(node.getId()));
       fullNodeList.add(node);
     }
 
-    pathFindAlgorithm = new MultipleFloorAStar(fullNodeList);
+    pathFindAlgorithm = new MultipleHospitalAStar(fullNodeList);
     System.out.println("NEW PATHFIND:  " + newPathfind);
     updatePathFindAlgorithm();
     resetPane();
@@ -335,10 +527,71 @@ public class PathfinderController implements Initializable {
     deselectFloorButtons();
     floor1Button.setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
     directionsPane.setVisible(false);
+    //    setChooseLiftBehavior();
+
+    // Set up the enable/disable of phone comms btns
+    callDirections.setDisable(true);
+    textDirections.setDisable(true);
+    phoneNumber
+        .textProperty()
+        .addListener(
+            new ChangeListener<String>() {
+              @Override
+              public void changed(
+                  ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (newValue.length() == 10
+                    && newValue.matches("[0-9]+")
+                    && directionsDisplay.getText().length() > 0) {
+                  callDirections.setDisable(false);
+                  textDirections.setDisable(false);
+                } else {
+                  callDirections.setDisable(true);
+                  textDirections.setDisable(true);
+                }
+              }
+            });
+  }
+
+  public void animateLine(Line line) {
+
+    line.getStrokeDashArray().setAll(5d, 5d, 5d, 5d);
+    line.setStrokeWidth(2);
+
+    final double maxOffset = line.getStrokeDashArray().stream().reduce(0d, (a, b) -> a + b);
+
+    Timeline timeline =
+        new Timeline(
+            new KeyFrame(
+                Duration.ZERO,
+                new KeyValue(line.strokeDashOffsetProperty(), maxOffset, Interpolator.LINEAR)),
+            new KeyFrame(
+                Duration.seconds(1),
+                new KeyValue(line.strokeDashOffsetProperty(), 0, Interpolator.LINEAR)));
+
+    timeline.setCycleCount(Timeline.INDEFINITE);
+    timeline.play();
+  }
+
+  private void initializehospitalComboBox() {
+    hospitalComboBox.setItems(FXCollections.observableArrayList("Faulkner", "Main Campus"));
+    hospitalComboBox.setValue("Faulkner");
+    hospitalComboBox
+        .valueProperty()
+        .addListener(
+            ((observable, oldValue, newValue) -> {
+              if (oldValue != null && !oldValue.equals(newValue)) {
+                if ("Faulkner".equals(newValue)) {
+                  switchToFloor("1", "Faulkner");
+
+                } else if ("Main Campus".equals(newValue)) {
+                  switchToFloor("G", "Main Campus");
+                }
+              }
+            }));
   }
 
   public void findType(String type) throws InstanceNotFoundException {
-    switchToFloor(startNode.getFloor());
+    switchToFloor(startNode.getFloor(), startNode.getBuilding());
     startCombo.setDisable(true);
     endCombo.setDisable(true);
     Path newPath = pathFindAlgorithm.pathfind(startNode, Node.NodeType.getEnum(type));
@@ -347,11 +600,17 @@ public class PathfinderController implements Initializable {
   }
 
   public void findElevator(MouseEvent mouseEvent) throws InstanceNotFoundException {
+    String holdLiftType = pathFindAlgorithm.getLiftType();
+    pathFindAlgorithm.setLiftType("ELEV");
     findType("ELEV");
+    pathFindAlgorithm.setLiftType(holdLiftType);
   }
 
   public void findStairs(MouseEvent mouseEvent) throws InstanceNotFoundException {
+    String holdLiftType = pathFindAlgorithm.getLiftType();
+    pathFindAlgorithm.setLiftType("STAI");
     findType("STAI");
+    pathFindAlgorithm.setLiftType(holdLiftType);
   }
 
   public void findBathroom(MouseEvent mouseEvent) throws InstanceNotFoundException {
@@ -368,7 +627,7 @@ public class PathfinderController implements Initializable {
             for (javafx.scene.Node component : currentPane.getChildren()) {
               if (component.getId().equals(startNode.getId())) {
                 component.setStyle(
-                    "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; "
+                    "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; "
                         + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
               }
             }
@@ -377,10 +636,11 @@ public class PathfinderController implements Initializable {
           stairsBtn.setDisable(false);
           elevBtn.setDisable(false);
           bathBtn.setDisable(false);
-          for (javafx.scene.Node component : getFloorPane(node.getFloor()).getChildren()) {
+          for (javafx.scene.Node component :
+              getFloorPane(node.getFloor(), node.getBuilding()).getChildren()) {
             if (component.getId().equals(node.getId())) {
               component.setStyle(
-                  "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #00cc00; "
+                  "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #00cc00; "
                       + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
             }
           }
@@ -392,8 +652,6 @@ public class PathfinderController implements Initializable {
   public void comboSelectEnd() {
     String endLocation = endCombo.getValue();
     if (endLocation.length() > 10) {
-      //    String endLocation = endCombo.getValue();
-      //    if (endCombo.getValue() != null) {
       String endID = endLocation.substring(endLocation.length() - 10);
       for (Node node : fullNodeList) {
 
@@ -402,7 +660,7 @@ public class PathfinderController implements Initializable {
             for (javafx.scene.Node component : currentPane.getChildren()) {
               if (component.getId().equals(endNode.getId())) {
                 component.setStyle(
-                    "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #012D5A; "
+                    "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; "
                         + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
               }
             }
@@ -411,10 +669,11 @@ public class PathfinderController implements Initializable {
           stairsBtn.setDisable(true);
           elevBtn.setDisable(true);
           bathBtn.setDisable(true);
-          for (javafx.scene.Node component : getFloorPane(node.getFloor()).getChildren()) {
+          for (javafx.scene.Node component :
+              getFloorPane(node.getFloor(), node.getBuilding()).getChildren()) {
             if (component.getId().equals(node.getId())) {
               component.setStyle(
-                  "-fx-background-radius: 6px; -fx-border-radius: 6px; -fx-background-color: #ff0000; "
+                  "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #ff0000; "
                       + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
             }
           }
@@ -446,10 +705,11 @@ public class PathfinderController implements Initializable {
             state = 1;
             commandText.setText("Select End Location or Building Feature");
             endCombo.setDisable(false);
-            if (findComboLocation(startCombo).getFloor().equals(currentFloor)) {
+            if (findComboLocation(startCombo).getFloor().equals(currentFloor)
+                && findComboLocation(startCombo).getBuilding().equals(currentBuilding)) {
               String nameHolder = startCombo.getValue();
               Node nodeHolder = findComboLocation(startCombo);
-              switchToFloor(findComboLocation(startCombo).getFloor());
+              switchToFloor(nodeHolder.getFloor(), nodeHolder.getBuilding());
               startCombo.setValue(nameHolder);
               endNode = nodeHolder;
             }
@@ -478,46 +738,54 @@ public class PathfinderController implements Initializable {
           System.out.println("start" + startNode);
           System.out.println("end" + endNode);
           Path path = null;
-          switchToFloor(startNode.getFloor());
+          switchToFloor(startNode.getFloor(), startNode.getBuilding());
+          if (!"Faulkner".equals(startNode.getBuilding())) {
+            labelNodeStart();
+          }
+          if (!"Faulkner".equals(endNode.getBuilding())) {
+            labelNodeEnd();
+          }
+
+          System.out.println(liftType);
+
           try {
             path = pathFindAlgorithm.pathfind(startNode, endNode);
           } catch (InstanceNotFoundException e) {
             e.printStackTrace();
           }
-          try {
-            commandText.setText("See Path Below for Directions");
-            draw(path);
-          } catch (InstanceNotFoundException e) {
-            e.printStackTrace();
+
+          if (null == path.getPath()) {
+            showErrorPane();
+          } else {
+            try {
+              commandText.setText("See Path Below for Directions");
+              draw(path);
+            } catch (InstanceNotFoundException e) {
+              e.printStackTrace();
+            }
           }
         });
   }
 
   public void floorButtonsSet() {
-    floor1Button.setOnAction(
-        actionEvent -> {
-          switchToFloor("1");
-        });
-    floor2Button.setOnAction(
-        actionEvent -> {
-          switchToFloor("2");
-        });
-    floor3Button.setOnAction(
-        actionEvent -> {
-          switchToFloor("3");
-        });
-    floor4Button.setOnAction(
-        actionEvent -> {
-          switchToFloor("4");
-        });
-    floor5Button.setOnAction(
-        actionEvent -> {
-          switchToFloor("5");
-        });
+    floor1Button.setOnAction(actionEvent -> switchToFloor("1", "Faulkner"));
+    floor2Button.setOnAction(actionEvent -> switchToFloor("2", "Faulkner"));
+    floor3Button.setOnAction(actionEvent -> switchToFloor("3", "Faulkner"));
+    floor4Button.setOnAction(actionEvent -> switchToFloor("4", "Faulkner"));
+    floor5Button.setOnAction(actionEvent -> switchToFloor("5", "Faulkner"));
+    mainFloor1Button.setOnAction(actionEvent -> switchToFloor("F1", "Main"));
+    mainFloor2Button.setOnAction(actionEvent -> switchToFloor("F2", "Main"));
+    mainFloor3Button.setOnAction(actionEvent -> switchToFloor("F3", "Main"));
+    mainFloorGButton.setOnAction(actionEvent -> switchToFloor("G", "Main"));
+    mainFloorL1Button.setOnAction(actionEvent -> switchToFloor("L1", "Main"));
+    mainFloorL2Button.setOnAction(actionEvent -> switchToFloor("L2", "Main"));
   }
 
   public void deselectFloorButtons() {
     for (javafx.scene.Node btn : selectFloorPane.getChildren()) {
+      btn.setStyle("-fx-background-color: #4d6c8b; -fx-background-radius: 10px");
+    }
+    for (javafx.scene.Node btn : selectFloorPaneMain.getChildren()) {
       btn.setStyle("-fx-background-color: #4d6c8b; -fx-background-radius: 10px");
     }
   }
@@ -547,71 +815,493 @@ public class PathfinderController implements Initializable {
     imageViewMainL2.setVisible(false);
   }
 
-  public void switchToFloor(String floorNum) {
-    currentPane = getFloorPane(floorNum);
+  public void switchToFloor(String floorNum, String building) {
+    if ("Faulkner".equals(building)) {
+      hospitalComboBox.setValue("Faulkner");
+      selectFloorPane.setVisible(true);
+      selectFloorPaneMain.setVisible(false);
+    } else {
+      hospitalComboBox.setValue("Main Campus");
+      selectFloorPane.setVisible(false);
+      selectFloorPaneMain.setVisible(true);
+    }
+    currentPane = getFloorPane(floorNum, building);
     currentFloor = floorNum;
+    currentBuilding = building;
     setAllInvisible();
     currentPane.setVisible(true);
-    getFloorImage(floorNum).setVisible(true);
+    getFloorImage(floorNum, building).setVisible(true);
     deselectFloorButtons();
-    getFloorButton(floorNum).setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
+    getFloorButton(floorNum, building)
+        .setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
   }
 
-  public void pathSwitchFloor(ActionEvent actionEvent) {
-    if (currentFloor.equals(startNode.getFloor())) {
-      // Currently on the start floor, want to go to the end floor
-      switchToFloor(endNode.getFloor());
-      pathSwitchFloor.setText("Previous: Go to floor " + startNode.getFloor());
-      directionsDisplay.setText(directions.getFullDirectionsStringForFloor(endNode.getFloor()));
+  public void pathSwitchPrevious(ActionEvent actionEvent) {
+    locationIndex--;
+    pathSwitchNext.setVisible(true);
+    pathSwitchNext.setPrefHeight(50);
+    btnSpacer.setPrefHeight(10);
+    // Disable the external directions pane
+    externalDirections.setVisible(false);
+    externalDirections.setPrefHeight(0);
+    externalDirections.setPrefWidth(0);
+    System.out.println("Changed to Index: " + locationIndex);
+    System.out.println("Floor: " + path.getLocationAtIndex(locationIndex).getFloor());
+    System.out.println("Building: " + path.getLocationAtIndex(locationIndex).getBuilding());
+    switchToFloor(
+        path.getLocationAtIndex(locationIndex).getFloor(),
+        path.getLocationAtIndex(locationIndex).getBuilding());
+
+    directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+
+    if (locationIndex == 0) {
+      // If we have gotten back to the first floor, disable and hide the previous button
+      pathSwitchPrevious.setVisible(false);
+      pathSwitchPrevious.setPrefHeight(0);
+      btnSpacer.setPrefHeight(0);
+    } else if ("OUT".equals(path.getLocationAtIndex(locationIndex).getBuilding())) {
+      // This is the outdoor node, show the external directions
+      externalDirections.setPrefHeight(720);
+      externalDirections.setPrefWidth(1070);
+      externalDirections.setVisible(true);
+      setExternalDirections(
+          path.getLocationAtIndex(locationIndex - 1).getBuilding(),
+          path.getLocationAtIndex(locationIndex + 1).getBuilding());
+      pathSwitchNext.setText(
+          "Arrive at " + path.getLocationAtIndex(locationIndex + 1).getBuilding());
+      pathSwitchPrevious.setText(
+          "Return to " + path.getLocationAtIndex(locationIndex - 1).getBuilding());
+    } else if ("OUT".equals(path.getLocationAtIndex(locationIndex - 1).getBuilding())) {
+      // Exiting a building to go somewhere
+      pathSwitchPrevious.setText(
+          "Previous: Go to " + path.getLocationAtIndex(locationIndex - 2).getBuilding());
     } else {
-      switchToFloor(startNode.getFloor());
-      pathSwitchFloor.setText("Next: Go to floor " + endNode.getFloor());
-      directionsDisplay.setText(directions.getFullDirectionsStringForFloor(startNode.getFloor()));
+      pathSwitchPrevious.setText(
+          "Previous: Go to floor "
+              + path.getLocationAtIndex(locationIndex - 1).getFloor().replace("F", ""));
+    }
+
+    // Need to update the text for previous button
+    if (!"OUT".equals(path.getLocationAtIndex(locationIndex).getBuilding())) {
+      if ("OUT".equals(path.getLocationAtIndex(locationIndex + 1).getBuilding())) {
+        // next node was the outdoor node
+        pathSwitchNext.setText(
+            "Next: Go to " + path.getLocationAtIndex(locationIndex + 2).getBuilding());
+      } else {
+        pathSwitchNext.setText(
+            "Next: Go to floor "
+                + path.getLocationAtIndex(locationIndex + 1).getFloor().replace("F", ""));
+      }
     }
   }
 
-  public AnchorPane getFloorPane(String floor) {
-    switch (floor) {
-      case "1":
-        return mapPaneFaulkner1;
-      case "2":
-        return mapPaneFaulkner2;
-      case "3":
-        return mapPaneFaulkner3;
-      case "4":
-        return mapPaneFaulkner4;
-      default:
-        return mapPaneFaulkner5;
+  public void pathSwitchNext(ActionEvent actionEvent) {
+    locationIndex++;
+    pathSwitchPrevious.setVisible(true);
+    pathSwitchPrevious.setPrefHeight(50);
+    btnSpacer.setPrefHeight(10);
+    // Disable the external directions pane
+    externalDirections.setVisible(false);
+    externalDirections.setPrefHeight(0);
+    externalDirections.setPrefWidth(0);
+    System.out.println("Changed to Index: " + locationIndex);
+    System.out.println("Floor: " + path.getLocationAtIndex(locationIndex).getFloor());
+    System.out.println("Building: " + path.getLocationAtIndex(locationIndex).getBuilding());
+    if (!"OUT".equals(path.getLocationAtIndex(locationIndex).getBuilding())) {
+      switchToFloor(
+          path.getLocationAtIndex(locationIndex).getFloor(),
+          path.getLocationAtIndex(locationIndex).getBuilding());
+    }
+    directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+
+    if (locationIndex == (path.getUniqueLocations() - 1)) {
+      // If we have gotten to the final location, disable and hide the next button
+      pathSwitchNext.setVisible(false);
+      pathSwitchNext.setPrefHeight(0);
+      btnSpacer.setPrefHeight(0);
+    } else if ("OUT".equals(path.getLocationAtIndex(locationIndex).getBuilding())) {
+      // This is the outdoor node, show the external directions
+      externalDirections.setPrefHeight(720);
+      externalDirections.setPrefWidth(1070);
+      externalDirections.setVisible(true);
+      setExternalDirections(
+          path.getLocationAtIndex(locationIndex - 1).getBuilding(),
+          path.getLocationAtIndex(locationIndex + 1).getBuilding());
+      pathSwitchNext.setText(
+          "Arrive at " + path.getLocationAtIndex(locationIndex + 1).getBuilding());
+      pathSwitchPrevious.setText(
+          "Return to " + path.getLocationAtIndex(locationIndex - 1).getBuilding());
+    } else if ("OUT".equals(path.getLocationAtIndex(locationIndex + 1).getBuilding())) {
+      // Exiting a building to go somewhere
+      pathSwitchNext.setText(
+          "Next: Go to " + path.getLocationAtIndex(locationIndex + 2).getBuilding());
+    } else {
+      pathSwitchNext.setText(
+          "Next: Go to floor "
+              + path.getLocationAtIndex(locationIndex + 1).getFloor().replace("F", ""));
+    }
+
+    // Need to update the text for previous button
+    if (!"OUT".equals(path.getLocationAtIndex(locationIndex).getBuilding())) {
+      if ("OUT".equals(path.getLocationAtIndex(locationIndex - 1).getBuilding())) {
+        // Previous node was the outdoor node
+        pathSwitchPrevious.setText(
+            "Previous: Go to " + path.getLocationAtIndex(locationIndex - 2).getBuilding());
+      } else {
+        pathSwitchPrevious.setText(
+            "Previous: Go to floor "
+                + path.getLocationAtIndex(locationIndex - 1).getFloor().replace("F", ""));
+      }
     }
   }
 
-  public ImageView getFloorImage(String floor) {
-    switch (floor) {
-      case "1":
-        return imageViewFaulkner1;
-      case "2":
-        return imageViewFaulkner2;
-      case "3":
-        return imageViewFaulkner3;
-      case "4":
-        return imageViewFaulkner4;
-      default:
-        return imageViewFaulkner5;
+  public AnchorPane getFloorPane(String floor, String building) {
+    if ("Faulkner".equals(building)) {
+      switch (floor) {
+        case "1":
+          return mapPaneFaulkner1;
+        case "2":
+          return mapPaneFaulkner2;
+        case "3":
+          return mapPaneFaulkner3;
+        case "4":
+          return mapPaneFaulkner4;
+        default:
+          return mapPaneFaulkner5;
+      }
+    } else {
+      switch (floor) {
+        case "F1":
+          return mapPaneMain1;
+        case "F2":
+          return mapPaneMain2;
+        case "F3":
+          return mapPaneMain3;
+        case "G":
+          return mapPaneMainG;
+        case "L1":
+          return mapPaneMainL1;
+        default:
+          return mapPaneMainL2;
+      }
     }
   }
 
-  public JFXButton getFloorButton(String floor) {
-    switch (floor) {
-      case "1":
-        return floor1Button;
-      case "2":
-        return floor2Button;
-      case "3":
-        return floor3Button;
-      case "4":
-        return floor4Button;
-      default:
-        return floor5Button;
+  public ImageView getFloorImage(String floor, String building) {
+    if ("Faulkner".equals(building)) {
+      switch (floor) {
+        case "1":
+          return imageViewFaulkner1;
+        case "2":
+          return imageViewFaulkner2;
+        case "3":
+          return imageViewFaulkner3;
+        case "4":
+          return imageViewFaulkner4;
+        default:
+          return imageViewFaulkner5;
+      }
+    } else {
+      switch (floor) {
+        case "F1":
+          return imageViewMain1;
+        case "F2":
+          return imageViewMain2;
+        case "F3":
+          return imageViewMain3;
+        case "G":
+          return imageViewMainG;
+        case "L1":
+          return imageViewMainL1;
+        default:
+          return imageViewMainL2;
+      }
     }
+  }
+
+  public JFXButton getFloorButton(String floor, String building) {
+    if ("Faulkner".equals(building)) {
+      switch (floor) {
+        case "1":
+          return floor1Button;
+        case "2":
+          return floor2Button;
+        case "3":
+          return floor3Button;
+        case "4":
+          return floor4Button;
+        default:
+          return floor5Button;
+      }
+    } else {
+      switch (floor) {
+        case "F1":
+          return mainFloor1Button;
+        case "F2":
+          return mainFloor2Button;
+        case "F3":
+          return mainFloor3Button;
+        case "G":
+          return mainFloorGButton;
+        case "L1":
+          return mainFloorL1Button;
+        default:
+          return mainFloorL2Button;
+      }
+    }
+  }
+
+  //  private void setChooseLiftBehavior() {
+  //    chooseLiftElevator.setOnAction(
+  //        actionEvent -> {
+  //          liftType = "ELEV";
+  //          pathFindAlgorithm.setLiftType(liftType);
+  //        });
+  //    chooseLiftStairs.setOnAction(
+  //        actionEvent -> {
+  //          liftType = "STAI";
+  //          pathFindAlgorithm.setLiftType(liftType);
+  //        });
+  //  }
+
+  public void labelNodeStart() {
+    startLabel = new Label();
+    for (javafx.scene.Node component :
+        getFloorPane(startNode.getFloor(), startNode.getBuilding()).getChildren()) {
+      if (component.getId().equals(startNode.getId())) {
+        String msg = " " + startNode.getLongName();
+        Text text = new Text(msg);
+        Font font = Font.font("Arial", 12);
+        text.setFont(font);
+        double width = text.getLayoutBounds().getWidth();
+        startLabel.setStyle("-fx-font-size: 12");
+        startLabel.setText(startNode.getLongName());
+        getFloorPane(startNode.getFloor(), startNode.getBuilding()).getChildren().add(startLabel);
+        startLabel.setLayoutX(component.getLayoutX() - (width / 2) + 3);
+        startLabel.setLayoutY(component.getLayoutY() - 25);
+        startLabel.setId("startLabel");
+        startLabel.setVisible(true);
+        startLabel.setStyle(
+            "-fx-max-height: 18px; -fx-min-height: 16px; -fx-background-radius: 3px; -fx-border-radius: 3px; -fx-background-color: rgba(255,255,255,0.7); -fx-border-color: rgba(0,0,0,0.7); -fx-border-width: 1px");
+        return;
+      }
+    }
+  }
+
+  private void labelNodeEnd() {
+    endLabel = new Label();
+    for (javafx.scene.Node component :
+        getFloorPane(endNode.getFloor(), endNode.getBuilding()).getChildren()) {
+      if (component.getId().equals(endNode.getId())) {
+        String msg = " " + endNode.getLongName();
+        Text text = new Text(msg);
+        Font font = Font.font("Arial", 12);
+        text.setFont(font);
+        double width = text.getLayoutBounds().getWidth();
+        endLabel.setStyle("-fx-font-size: 12");
+        endLabel.setText(endNode.getLongName());
+        getFloorPane(endNode.getFloor(), endNode.getBuilding()).getChildren().add(endLabel);
+        endLabel.setLayoutX(component.getLayoutX() - (width / 2) + 3);
+        endLabel.setLayoutY(component.getLayoutY() - 25);
+        endLabel.setId("endLabel");
+        endLabel.setVisible(true);
+        endLabel.setStyle(
+            "-fx-max-height: 18px; -fx-min-height: 16px; -fx-background-radius: 3px; -fx-border-radius: 3px; -fx-background-color: rgba(255,255,255,0.7); -fx-border-color: rgba(0,0,0,0.7); -fx-border-width: 1px");
+        return;
+      }
+    }
+  }
+
+  private boolean sameHospital(String building1, String building2) {
+    return ("Faulkner".equals(building1) && "Faulkner".equals(building2))
+        || (!"Faulkner".equals(building1) && !"Faulkner".equals(building2));
+  }
+
+  public void textDirections(ActionEvent actionEvent) {
+    Boolean success = directions.smsDirections(phoneNumber.getText());
+    if (success) {
+      commsResult.setText("Success! You will get a text momentarily.");
+    } else {
+      commsResult.setText("Couldn't send text. Check the number & try again.");
+    }
+  }
+
+  public void callDirections(ActionEvent actionEvent) {
+    Boolean success = directions.callDirections(phoneNumber.getText());
+    if (success) {
+      commsResult.setText("Success! You will get a call momentarily.");
+    } else {
+      commsResult.setText("Unable to call. Check the number and try again.");
+    }
+  }
+
+  public void printDirections(ActionEvent actionEvent) {
+    directions.printDirections();
+  }
+
+  private void setToggleBehavior() {
+    liftToggle.setOnAction(
+        actionEvent -> {
+          if (liftToggle.isSelected()) {
+            liftType = "STAI";
+            pathFindAlgorithm.setLiftType(liftType);
+          } else {
+            liftType = "ELEV";
+            pathFindAlgorithm.setLiftType(liftType);
+          }
+        });
+  }
+
+  public void setExternalDirections(String fromBuilding, String toBuilding) {
+    System.out.println(fromBuilding);
+    System.out.println(toBuilding);
+    if ("Faulkner".equals(fromBuilding) && "45 Francis".equals(toBuilding)) {
+      setIntermediateMapsInvisible();
+      faulknerTo45FrancisImage.setVisible(true);
+      faulknerTo45FrancisQR.setVisible(true);
+      googleMaps =
+          new GoogleMaps(
+              "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA",
+              "45+Francis+Street,+Boston,+MA");
+    } else if ("Faulkner".equals(fromBuilding)
+        && ("75 Francis".equals(toBuilding) || ("Tower".equals(toBuilding)))) {
+      setIntermediateMapsInvisible();
+      faulknerTo75FrancisImage.setVisible(true);
+      faulknerTo75FrancisQR.setVisible(true);
+      googleMaps =
+          new GoogleMaps(
+              "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA",
+              "75+Francis+Street,+Boston,+MA");
+    } else if ("Faulkner".equals(fromBuilding) && "BTM".equals(toBuilding)) {
+      setIntermediateMapsInvisible();
+      faulknerToBTMImage.setVisible(true);
+      faulknerToBTMQR.setVisible(true);
+      googleMaps =
+          new GoogleMaps(
+              "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA",
+              "Building+for+Transformative+Medicine+at+Brigham+and+Women's+Hospital,+Fenwood+Road,+Boston,+MA");
+    } else if ("Faulkner".equals(fromBuilding) && "Shapiro".equals(toBuilding)) {
+      setIntermediateMapsInvisible();
+      faulknerToShapiroImage.setVisible(true);
+      faulknerToShapiroQR.setVisible(true);
+      googleMaps =
+          new GoogleMaps(
+              "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA",
+              "The+Carl+J.+And+Ruth+Shapiro+Cardiovascular+Center,+Francis+Street,+Boston,+MA");
+    } else if ("Faulkner".equals(fromBuilding)
+        && ("15 Francis".equals(toBuilding) || ("FLEX".equals(toBuilding)))) {
+      setIntermediateMapsInvisible();
+      faulknerTo15FrancisImage.setVisible(true);
+      faulknerTo15FrancisQR.setVisible(true);
+      googleMaps =
+          new GoogleMaps(
+              "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA",
+              "15+Francis+Street,+Boston,+MA");
+    } else if ("45 Francis".equals(fromBuilding) && "Faulkner".equals(toBuilding)) {
+      setIntermediateMapsInvisible();
+      Francis45ToFaulknerImage.setVisible(true);
+      Francis45ToFaulknerQR.setVisible(true);
+      googleMaps =
+          new GoogleMaps(
+              "45+Francis+Street,+Boston,+MA",
+              "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA");
+    } else if (("75 Francis".equals(fromBuilding) || ("Tower".equals(fromBuilding)))
+        && "Faulkner".equals(toBuilding)) {
+      setIntermediateMapsInvisible();
+      Francis75ToFaulknerImage.setVisible(true);
+      Francis75ToFaulknerQR.setVisible(true);
+      googleMaps =
+          new GoogleMaps(
+              "75+Francis+Street,+Boston,+MA",
+              "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA");
+    } else if ("BTM".equals(fromBuilding) && "Faulkner".equals(toBuilding)) {
+      setIntermediateMapsInvisible();
+      BTMToFaulknerImage.setVisible(true);
+      BTMToFaulknerQR.setVisible(true);
+      googleMaps =
+          new GoogleMaps(
+              "Building+for+Transformative+Medicine+at+Brigham+and+Women's+Hospital,+Fenwood+Road,+Boston,+MA",
+              "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA");
+    } else if ("Shapiro".equals(fromBuilding) && "Faulkner".equals(toBuilding)) {
+      setIntermediateMapsInvisible();
+      shapiroToFaulknerImage.setVisible(true);
+      shapiroToFaulknerQR.setVisible(true);
+      googleMaps =
+          new GoogleMaps(
+              "The+Carl+J.+And+Ruth+Shapiro+Cardiovascular+Center,+Francis+Street,+Boston,+MA",
+              "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA");
+    } else if (("15 Francis".equals(fromBuilding) || ("FLEX".equals(fromBuilding)))
+        && "Faulkner".equals(toBuilding)) {
+      setIntermediateMapsInvisible();
+      francis15ToFaulknerImage.setVisible(true);
+      francis15ToFaulknerQR.setVisible(true);
+      googleMaps =
+          new GoogleMaps(
+              "15+Francis+Street,+Boston,+MA",
+              "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA");
+    }
+
+    driveTime.setText(googleMaps.driveTime());
+    driveDistance.setText(googleMaps.driveDistance());
+    transitTime.setText(googleMaps.transitTime());
+    transitDistance.setText(googleMaps.transitDistance());
+    bikeTime.setText(googleMaps.bikeTime());
+    bikeDistance.setText(googleMaps.bikeDistance());
+    walkTime.setText(googleMaps.walkTime());
+    walkDistance.setText(googleMaps.walkDistance());
+  }
+
+  private void setErrorPaneButtonBehavior() {
+    errorPaneButton.setOnAction(
+        actionEvent -> {
+          startLabel.setVisible(false);
+          endLabel.setVisible(false);
+          errorPane.setVisible(false);
+        });
+  }
+
+  private void showErrorPane() {
+    System.out.println("I'm here.");
+    errorPane.setVisible(true);
+    String lifter;
+    if ("ELEV".equals(liftType)) {
+      lifter = "stairs";
+    } else {
+      lifter = "elevator";
+    }
+    String msg2 = "Maybe try taking the " + lifter + ".";
+    Text text2 = new Text(msg2);
+    Font font2 = Font.font("System", 12);
+    text2.setFont(font2);
+    double width2 = text2.getLayoutBounds().getWidth();
+    errorPaneLabel2.setLayoutX(errorPaneLabel2.getLayoutX() - (width2 / 2));
+    errorPaneLabel2.setText(msg2);
+  }
+
+  public void setIntermediateMapsInvisible() {
+    faulknerTo45FrancisImage.setVisible(false);
+    faulknerTo75FrancisImage.setVisible(false);
+    faulknerToBTMImage.setVisible(false);
+    faulknerToShapiroImage.setVisible(false);
+    faulknerTo15FrancisImage.setVisible(false);
+    Francis45ToFaulknerImage.setVisible(false);
+    Francis75ToFaulknerImage.setVisible(false);
+    BTMToFaulknerImage.setVisible(false);
+    shapiroToFaulknerImage.setVisible(false);
+    francis15ToFaulknerImage.setVisible(false);
+    faulknerTo45FrancisQR.setVisible(false);
+    faulknerTo75FrancisQR.setVisible(false);
+    faulknerToBTMQR.setVisible(false);
+    faulknerToShapiroQR.setVisible(false);
+    faulknerTo15FrancisQR.setVisible(false);
+    Francis45ToFaulknerQR.setVisible(false);
+    Francis75ToFaulknerQR.setVisible(false);
+    BTMToFaulknerQR.setVisible(false);
+    shapiroToFaulknerQR.setVisible(false);
+    francis15ToFaulknerQR.setVisible(false);
+  }
+
+  public void switchAbout(ActionEvent actionEvent) throws IOException {
+    sceneController.switchScene("About");
   }
 }

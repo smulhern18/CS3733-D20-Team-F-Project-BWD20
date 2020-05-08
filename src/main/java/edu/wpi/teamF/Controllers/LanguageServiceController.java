@@ -30,6 +30,7 @@ import javafx.scene.control.TreeTableCell;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.cell.ComboBoxTreeTableCell;
 import javafx.scene.control.cell.TextFieldTreeTableCell;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.util.Callback;
@@ -50,6 +51,9 @@ public class LanguageServiceController implements Initializable {
   public JFXButton update;
   public JFXTextField deleteText;
   public JFXButton delete;
+  public JFXButton checkStatusButton;
+  public AnchorPane anchorPane;
+  public ImageView backgroundImage;
   ObservableList<UILanguageServiceRequest> langUI = FXCollections.observableArrayList();
   public JFXComboBox<String> locationCombobox;
   public JFXComboBox<String> languageCombobox;
@@ -65,6 +69,7 @@ public class LanguageServiceController implements Initializable {
   public LanguageServiceController() throws Exception {}
 
   public void submit(ActionEvent actionEvent) throws Exception {
+
     // Get the values
     String location = locationCombobox.getValue();
     String nodeId = location.substring(location.length() - 10);
@@ -177,6 +182,17 @@ public class LanguageServiceController implements Initializable {
   @SneakyThrows
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
+    backgroundImage.fitWidthProperty().bind(anchorPane.widthProperty());
+    backgroundImage.fitHeightProperty().bind(anchorPane.heightProperty());
+
+    Account.Type userLevel = databaseManager.getPermissions();
+    if (userLevel == Account.Type.USER) {
+      checkStatusButton.setDisable(true);
+
+      // set to user
+    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+      checkStatusButton.setDisable(false);
+    }
 
     List<Node> nodes = null;
     try {
@@ -407,12 +423,14 @@ public class LanguageServiceController implements Initializable {
 
   public void request(ActionEvent actionEvent) {
     servicePane.setVisible(true);
+    servicePane.toFront();
     checkStatusPane.setVisible(false);
   }
 
   public void checkStatus(ActionEvent actionEvent) {
     servicePane.setVisible(false);
     checkStatusPane.setVisible(true);
+    checkStatusPane.toFront();
   }
 
   public void backToServiceRequestMain(ActionEvent actionEvent) throws IOException {

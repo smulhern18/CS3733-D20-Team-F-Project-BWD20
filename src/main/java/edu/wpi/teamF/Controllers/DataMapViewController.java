@@ -273,7 +273,8 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  private void setFloorButtons(ActionEvent event) {
+  private void setFloorButtons(ActionEvent event) throws Exception {
+    cancelViews(null);
     if (hospitalCombo.getValue().equals("Main Campus")) {
       faulknerFloorPane.setVisible(false);
       mainFloorPane.setVisible(true);
@@ -289,7 +290,6 @@ public class DataMapViewController implements Initializable {
   private void highlightButton(JFXButton button) {
     for (int i = 0; i < buttons.size(); i++) {
       if (buttons.get(i).equals(button)) {
-        System.out.println(buttons.get(i).getId());
         button.setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
       } else {
         buttons.get(i).setStyle("-fx-background-color: #4d6c8b; -fx-background-radius: 10px");
@@ -298,7 +298,8 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
-  private void selectFloor(ActionEvent event) {
+  private void selectFloor(ActionEvent event) throws Exception {
+    cancelViews(null);
     JFXButton btn = (JFXButton) event.getSource();
     selectFloor(btn.getId());
   }
@@ -437,7 +438,6 @@ public class DataMapViewController implements Initializable {
 
   @FXML
   private void drawEdge(Edge edge) throws Exception {
-
     Node node1 = databaseManager.readNode(edge.getNode1());
     Node node2 = databaseManager.readNode(edge.getNode2());
     setRatios(node1);
@@ -453,6 +453,11 @@ public class DataMapViewController implements Initializable {
       line.setOpacity(0.7);
       line.setOnMouseClicked(
           mouseEvent -> { // when a user clicks on a line:
+            try {
+              cancelViews(null);
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
             edgeLine = line;
             this.edge = edge;
             displayEdge();
@@ -467,7 +472,7 @@ public class DataMapViewController implements Initializable {
     setRatios(node);
 
     JFXButton button = new JFXButton();
-    int buttonSize = 6; // this can be adjusted if we feel like the size is too small or large
+    int buttonSize = 8; // this can be adjusted if we feel like the size is too small or large
     button.setMinSize(buttonSize, buttonSize);
     button.setMaxSize(buttonSize, buttonSize);
     button.setPrefSize(buttonSize, buttonSize); // the button size will not vary
@@ -475,6 +480,7 @@ public class DataMapViewController implements Initializable {
         "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99D9EA; -fx-border-color: #000000; -fx-border-width: 1px; -fx-opacity: 0.7");
     double xPos = (node.getXCoord() * widthRatio - buttonSize / 2.0);
     double yPos = (node.getYCoord() * heightRatio - buttonSize / 2.0);
+    button.setId(node.getId());
     button.setLayoutX(xPos);
     button.setLayoutY(yPos);
     setNodeDraggable(button);
@@ -483,10 +489,9 @@ public class DataMapViewController implements Initializable {
         action -> {
           nodeButton = button; // sets classes button variable to the selected button
           this.node = node;
-
           System.out.println(node.getId());
-          if (!edgeSelection) {
 
+          if (!edgeSelection) {
             displayNode();
           } else {
             System.out.println("In edge selection");
@@ -554,6 +559,20 @@ public class DataMapViewController implements Initializable {
     deleteEdgeButton.setVisible(true);
     modifyEdgeButton.setVisible(true);
     edgeSelection = true;
+    for (int i = 0; i < mapPane.getChildren().size(); i++) {
+      if (mapPane.getChildren().get(i) instanceof JFXButton) {
+        JFXButton currentBtn = (JFXButton) mapPane.getChildren().get(i);
+        if (currentBtn.getId().equals(edge.getNode1())) {
+          currentBtn.setStyle(
+              "-fx-background-color: #012D5A; -fx-background-radius: 10; -fx-border-color: black; -fx-border-radius: 10");
+          currentBtn.setOpacity(1);
+        } else if (currentBtn.getId().equals(edge.getNode2())) {
+          currentBtn.setStyle(
+              "-fx-background-color: #a40000; -fx-background-radius: 10px; -fx-border-color: black; -fx-border-radius: 10");
+          currentBtn.setOpacity(1);
+        }
+      }
+    }
     node1Button.setText(edge.getNode1());
     node2Button.setText(edge.getNode2());
   }
@@ -616,7 +635,80 @@ public class DataMapViewController implements Initializable {
           break;
       }
     }
+    if (child instanceof Line) {
+      Line newLine = (Line) child;
+      newLine.toBack();
+    }
   } // helper for the draw functions
+
+  private AnchorPane getMapPane(String floor) {
+    if (node.getBuilding().equals("Faulkner")) {
+      switch (node.getFloor()) {
+        case "1":
+          return mapPaneFaulkner1;
+        case "2":
+          return mapPaneFaulkner2;
+        case "3":
+          return mapPaneFaulkner3;
+        case "4":
+          return mapPaneFaulkner4;
+        case "5":
+          return mapPaneFaulkner5;
+      }
+    } else {
+      switch (node.getFloor()) {
+        case "G":
+          return mapPaneMainG;
+        case "L2":
+          return mapPaneMainL2;
+        case "L1":
+          return mapPaneMainL1;
+        case "F1":
+          return mapPaneMain1;
+        case "F2":
+          return mapPaneMain2;
+        case "F3":
+          return mapPaneMain3;
+      }
+    }
+    return null;
+  }
+
+  private String generateNodeID(String floor, Node.NodeType nodeType) throws Exception {
+    List<Node> typeNodes = databaseManager.getNodesByType(nodeType);
+    String startOfID = "Z" + nodeType.getTypeString();
+    String endOfID = "";
+    if (floor.length() == 1) {
+      endOfID += "0" + floor;
+    } else {
+      endOfID += floor;
+    }
+    for (int i = 0; i <= 999; i++) {
+      String strInstance = "" + i;
+      switch (strInstance.length()) {
+        case 1:
+          strInstance = "00" + strInstance;
+          break;
+        case 2:
+          strInstance = "0" + strInstance;
+          break;
+      }
+      String newID = startOfID + strInstance + endOfID;
+      if (!containsInTypeNodes(typeNodes, newID)) {
+        return newID;
+      }
+    }
+    return null;
+  }
+
+  private boolean containsInTypeNodes(List<Node> typeNodes, String newID) {
+    for (Node typeNode : typeNodes) {
+      if (typeNode.getId().equals(newID)) {
+        return true;
+      }
+    }
+    return false;
+  }
 
   @FXML
   private void addNode(ActionEvent event) throws Exception {
@@ -650,18 +742,30 @@ public class DataMapViewController implements Initializable {
       }
 
       Collections.sort(typeInstances); // sorts the list
+      System.out.println(typeInstances.size());
+
+      for (int i = 1; i < typeInstances.size(); i++) {
+        if (typeInstances.get(i) == typeInstances.get(i - 1)) {
+          typeInstances.remove(i);
+        }
+      }
 
       if (typeNodes.size() > 0) {
         for (int i = 0; i < typeInstances.size(); i++) {
-          instance = typeInstances.get(i); // 1
-          if (instance - tracker > 1) { // 1-0 = 1
+          System.out.println("Instance: " + instance);
+          System.out.println("Tracker: " + tracker);
+          System.out.println();
+          instance = typeInstances.get(i);
+          if (instance - tracker > 1) {
             newInstance = tracker + 1;
             break;
           } else if (instance == typeInstances.size()) {
-            newInstance = typeInstances.size() + 1;
+            newInstance =
+                typeInstances.size()
+                    + 1; // The size is bigger than the max number due to duplicates
             break;
           } else {
-            tracker++;
+            tracker = instance;
           }
         }
       } else {
@@ -678,15 +782,15 @@ public class DataMapViewController implements Initializable {
           break;
       }
 
+      String ID = "Z" + typeInput.getValue() + strInstance;
       if (floorNumber.length() == 1) {
-        floorNumber = "0" + floorNumber;
+        ID += "0" + floorNumber;
+      } else {
+        ID += floorNumber;
       }
-
-      String ID = "Z" + typeInput.getValue() + strInstance + floorNumber;
-
       Node newNode =
           new Node(
-              ID,
+              generateNodeID(floorNumber, nodeType),
               xCoordinate,
               yCoordinate,
               building,
@@ -702,6 +806,7 @@ public class DataMapViewController implements Initializable {
 
     } catch (Exception e) { // throws an error if the input provided by the user is invalid
       nodeErrorLabel.setText("The input is not valid");
+      e.printStackTrace();
     }
   }
 
@@ -724,8 +829,6 @@ public class DataMapViewController implements Initializable {
       String shortName = shortNameInput.getText();
       Node.NodeType nodeType = Node.NodeType.getEnum(typeInput.getValue());
       String floorNumber = floorInput.getValue(); // stores the input in variables
-      System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-      System.out.println(xCoordinate + " " + oldXCoordinate);
       node.setXCoord(xCoordinate);
       node.setYCoord(yCoordinate);
       node.setBuilding(building);
@@ -753,8 +856,8 @@ public class DataMapViewController implements Initializable {
         drawEdge(edge);
       }
 
-      nodeButton.setLayoutX(xCoordinate * widthRatio - 3);
-      nodeButton.setLayoutY(yCoordinate * heightRatio - 3);
+      nodeButton.setLayoutX(xCoordinate * widthRatio - 4);
+      nodeButton.setLayoutY(yCoordinate * heightRatio - 4);
 
       clearNode();
 
@@ -802,16 +905,26 @@ public class DataMapViewController implements Initializable {
     edgeSelection = false;
     numSelected = 0;
     clearViews();
+    resetNodeColors();
   }
 
   @FXML
   private void modifyEdge(ActionEvent event) throws Exception {
+    resetNodeColors();
     String node1ID = node1Button.getText();
     String node2ID = node2Button.getText();
     String ID = node1ID + "_" + node2ID;
     Edge newEdge = new Edge(ID, node1ID, node2ID);
     databaseManager.deleteEdge(edge.getId());
-    mapPane.getChildren().remove(edgeLine);
+    AnchorPane oldPane = getMapPane(edgeLine.getId().substring(edgeLine.getId().length() - 2));
+    javafx.scene.Node toRemove = null;
+    for (javafx.scene.Node children : oldPane.getChildren()) {
+      if (edgeLine.getId().equals(children.getId())) {
+        toRemove = children;
+        break;
+      }
+    }
+    oldPane.getChildren().remove(toRemove);
     databaseManager.manipulateEdge(newEdge);
     drawEdge(newEdge);
     clearViews();
@@ -819,6 +932,7 @@ public class DataMapViewController implements Initializable {
 
   @FXML
   private void deleteEdge(ActionEvent event) throws Exception {
+    resetNodeColors();
     databaseManager.deleteEdge(edge.getId());
     mapPane.getChildren().remove(edgeLine); // deletes the edge on the map
     clearViews();
@@ -826,36 +940,43 @@ public class DataMapViewController implements Initializable {
 
   @FXML
   private void cancelViews(ActionEvent event) throws Exception {
-    clearViews();
 
-    for (Edge edge : databaseManager.getAllEdgesConnectedToNode(node.getId())) {
-      for (int i = 0; i < mapPane.getChildren().size(); i++) {
-        javafx.scene.Node children = mapPane.getChildren().get(i);
-        if (children instanceof Line && children.getId().equals(edge.getId())) {
-          mapPane.getChildren().remove(children);
+    if (edgeAnchor.isVisible() && edge != null) {
+      resetNodeColors();
+    }
+
+    if (nodeAnchor.isVisible() && node != null) {
+      for (Edge edge : databaseManager.getAllEdgesConnectedToNode(node.getId())) {
+        for (int i = 0; i < mapPane.getChildren().size(); i++) {
+          javafx.scene.Node children = mapPane.getChildren().get(i);
+          if (children instanceof Line && children.getId().equals(edge.getId())) {
+            mapPane.getChildren().remove(children);
+          }
         }
       }
+
+      mapPane.getChildren().remove(nodeButton); // removes node
+
+      addToPane(node, nodeButton); // adds new node
+
+      for (Edge edge : databaseManager.getAllEdgesConnectedToNode(node.getId())) {
+        drawEdge(edge);
+      }
+
+      nodeButton.setLayoutX(node.getXCoord() * widthRatio - 4);
+      nodeButton.setLayoutY(node.getYCoord() * heightRatio - 4);
     }
 
-    mapPane.getChildren().remove(nodeButton); // removes node
-
-    addToPane(node, nodeButton); // adds new node
-
-    for (Edge edge : databaseManager.getAllEdgesConnectedToNode(node.getId())) {
-      drawEdge(edge);
-    }
-
-    nodeButton.setLayoutX(node.getXCoord() * widthRatio - 3);
-    nodeButton.setLayoutY(node.getYCoord() * heightRatio - 3);
+    clearViews();
   }
 
   @FXML
   private void updateFloor(ActionEvent event) {
     if (hospitalInput.getValue().equals("Faulkner")) {
-      floorInput.getItems().removeAll("L2", "L1", "G", "F1", "F2", "F3");
+      floorInput.getItems().clear();
       floorInput.getItems().addAll("1", "2", "3", "4", "5");
     } else {
-      floorInput.getItems().removeAll("1", "2", "3", "4", "5");
+      floorInput.getItems().clear();
       floorInput.getItems().addAll("L2", "L1", "G", "F1", "F2", "F3");
     }
     // validateNodeText();
@@ -885,7 +1006,6 @@ public class DataMapViewController implements Initializable {
       addNodeButton.setDisable(false);
       addNodeButton.setOpacity(1);
     } else {
-      System.out.println("Here");
       modifyNodeButton.setDisable(true);
       modifyNodeButton.setOpacity(.4);
       addNodeButton.setDisable(true);
@@ -934,55 +1054,86 @@ public class DataMapViewController implements Initializable {
   }
 
   @FXML
+  private void resetNodeColors() {
+    for (int i = 0; i < mapPane.getChildren().size(); i++) {
+      if (mapPane.getChildren().get(i) instanceof JFXButton) {
+        JFXButton currentBtn = (JFXButton) mapPane.getChildren().get(i);
+        if (edge.getNode1().equals(currentBtn.getId())) {
+          currentBtn.setStyle(
+              "-fx-background-color: #4d6c8b; -fx-background-radius: 10; -fx-border-color: black; -fx-border-radius: 10");
+          currentBtn.setOpacity(0.7);
+        } else if (edge.getNode2().equals(currentBtn.getId())) {
+          currentBtn.setStyle(
+              "-fx-background-color: #4d6c8b; -fx-background-radius: 10px; -fx-border-color: black; -fx-border-radius: 10");
+          currentBtn.setOpacity(0.7);
+        }
+      }
+    }
+  }
+
+  @FXML
   private void setNodeDraggable(JFXButton button) {
     button.setOnMousePressed(
         mouseEvent -> {
-          deltaX = button.getLayoutX() - mouseEvent.getSceneX() / imageStackPane.getScaleX();
-          deltaY = button.getLayoutY() - mouseEvent.getSceneY() / imageStackPane.getScaleY();
+          if (!edgeSelection) {
+            try {
+              if (!button.equals(nodeButton)) {
+                cancelViews(null);
+              }
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+            deltaX = button.getLayoutX() - mouseEvent.getSceneX() / imageStackPane.getScaleX();
+            deltaY = button.getLayoutY() - mouseEvent.getSceneY() / imageStackPane.getScaleY();
+          }
         });
     button.setOnMouseDragged(
         mouseEvent -> {
-          isDragged = true;
-          try {
-            node = databaseManager.readNode(button.getId());
-            nodeButton = button;
-          } catch (Exception e) {
-            e.printStackTrace();
-          }
-          button.setLayoutX(mouseEvent.getSceneX() / imageStackPane.getScaleX() + deltaX);
-          button.setLayoutY(mouseEvent.getSceneY() / imageStackPane.getScaleY() + deltaY);
-          double nodeWidth = (button.getLayoutX() + 3) / widthRatio;
-          double nodeHeight = (button.getLayoutY() + 3) / heightRatio;
-          xCoorInput.setText("" + nodeWidth);
-          yCoorInput.setText("" + nodeHeight);
+          if (!edgeSelection) {
+            isDragged = true;
+            try {
+              node = databaseManager.readNode(button.getId());
+              nodeButton = button;
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+            button.setLayoutX(mouseEvent.getSceneX() / imageStackPane.getScaleX() + deltaX);
+            button.setLayoutY(mouseEvent.getSceneY() / imageStackPane.getScaleY() + deltaY);
+            double nodeWidth = (button.getLayoutX() + 4) / widthRatio;
+            double nodeHeight = (button.getLayoutY() + 4) / heightRatio;
+            xCoorInput.setText("" + nodeWidth);
+            yCoorInput.setText("" + nodeHeight);
 
-          try {
-            node.setXCoord((short) nodeWidth);
-            node.setYCoord((short) nodeHeight);
-          } catch (ValidationException e) {
-            e.printStackTrace();
-          }
+            try {
+              node.setXCoord((short) nodeWidth);
+              node.setYCoord((short) nodeHeight);
+            } catch (ValidationException e) {
+              e.printStackTrace();
+            }
 
-          try {
-            for (Edge edge : databaseManager.getAllEdgesConnectedToNode(node.getId())) {
-              for (int i = 0; i < mapPane.getChildren().size(); i++) {
-                javafx.scene.Node children = mapPane.getChildren().get(i);
-                if (children instanceof Line && children.getId().equals(edge.getId())) {
-                  Line line = (Line) children;
-                  if (edge.getNode2().equals(node.getId())) {
-                    line.setEndX(mouseEvent.getSceneX() / imageStackPane.getScaleX() + 3 + deltaX);
-                    line.setEndY(mouseEvent.getSceneY() / imageStackPane.getScaleY() + 3 + deltaY);
-                  } else {
-                    line.setStartX(
-                        mouseEvent.getSceneX() / imageStackPane.getScaleX() + 3 + deltaX);
-                    line.setStartY(
-                        mouseEvent.getSceneY() / imageStackPane.getScaleY() + 3 + deltaY);
+            try {
+              for (Edge edge : databaseManager.getAllEdgesConnectedToNode(node.getId())) {
+                for (int i = 0; i < mapPane.getChildren().size(); i++) {
+                  javafx.scene.Node children = mapPane.getChildren().get(i);
+                  if (children instanceof Line && children.getId().equals(edge.getId())) {
+                    Line line = (Line) children;
+                    if (edge.getNode2().equals(node.getId())) {
+                      line.setEndX(
+                          mouseEvent.getSceneX() / imageStackPane.getScaleX() + 4 + deltaX);
+                      line.setEndY(
+                          mouseEvent.getSceneY() / imageStackPane.getScaleY() + 4 + deltaY);
+                    } else {
+                      line.setStartX(
+                          mouseEvent.getSceneX() / imageStackPane.getScaleX() + 4 + deltaX);
+                      line.setStartY(
+                          mouseEvent.getSceneY() / imageStackPane.getScaleY() + 4 + deltaY);
+                    }
                   }
                 }
               }
+            } catch (Exception e) {
+              e.printStackTrace();
             }
-          } catch (Exception e) {
-            e.printStackTrace();
           }
         });
     //    button.setOnMouseReleased(
@@ -992,7 +1143,9 @@ public class DataMapViewController implements Initializable {
     //        });
     button.setOnMouseDragReleased(
         mouseDragEvent -> {
-          modifyNodeButton.setDisable(false);
+          if (!edgeSelection) {
+            modifyNodeButton.setDisable(false);
+          }
         });
   }
 

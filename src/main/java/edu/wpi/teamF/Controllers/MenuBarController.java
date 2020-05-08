@@ -2,10 +2,16 @@ package edu.wpi.teamF.Controllers;
 
 import com.jfoenix.controls.JFXButton;
 import edu.wpi.teamF.App;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+import edu.wpi.teamF.ModelClasses.Account.Account;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.fxml.Initializable;
+import javafx.scene.shape.Line;
 
-public class MenuBarController {
+public class MenuBarController implements Initializable {
   public JFXButton mainMenuButton;
   public JFXButton loginButton;
   public JFXButton serviceButton;
@@ -13,7 +19,14 @@ public class MenuBarController {
   public JFXButton adminButton;
   public JFXButton helpButton;
   public JFXButton settingsButton;
+  public Line line6;
+  public JFXButton adminButton1;
+  public JFXButton settingsButton1;
+  public JFXButton helpButton1;
+  public JFXButton pathfindButton1;
+  public Line line5;
   SceneController sceneController = App.getSceneController();
+  DatabaseManager dbm = DatabaseManager.getManager();
 
   public void login(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("Login");
@@ -42,4 +55,33 @@ public class MenuBarController {
   public void mainMenu(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("MainMenu");
   }
+
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
+    Account.Type userLevel = dbm.getPermissions();
+    if (userLevel == null || userLevel == Account.Type.USER) {
+      adminButton.setVisible(false);
+      settingsButton.setVisible(false);
+      settingsButton1.setVisible(false);
+      line5.setVisible(false);
+      adminButton.setDisable(true);
+      adminButton1.setVisible(false);
+      adminButton1.setDisable(true);
+      line6.setVisible(false);
+    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+      adminButton.setDisable(false);
+      line5.setVisible(true);
+      adminButton.setVisible(true);
+      adminButton1.setVisible(true);
+      adminButton1.setDisable(false);
+      settingsButton.setVisible(true);
+      settingsButton1.setVisible(true);
+      line6.setVisible(true);
+      // set to staff
+      // enable admin page
+    }
+  }
+
+  // logout method
+
 }
