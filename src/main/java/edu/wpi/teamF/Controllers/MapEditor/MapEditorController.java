@@ -69,9 +69,14 @@ public class MapEditorController {
         });
     }
 
-    public void setEdgeEventHandlers(Line line) {
+    public void setEdgeEventHandlers(Line line){
         line.setOnMousePressed(mouseEvent -> {
-            lineModifyEdgeHandler(line,mouseEvent);
+            try {
+                lineModifyEdgeHandler(line,mouseEvent);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         });
         
     }
@@ -91,11 +96,11 @@ public class MapEditorController {
 
     }
 
-    private void lineModifyEdgeHandler(Line line,MouseEvent mouseEvent) {
+    private void lineModifyEdgeHandler(Line line,MouseEvent mouseEvent) throws Exception {
         state = State.MODIFY_EDGE;
         selectedEdge = edgeLineMap.get(line.getId());
         edgeSelection = null;
-        mapView.highlightEdge(line.getId());
+        mapView.highlightEdge(line.getId(), selectedEdge.getNode1(), selectedEdge.getNode2());
     }
 
 
@@ -113,15 +118,14 @@ public class MapEditorController {
 
     }
 
-    private void nodeModifyEdgeHandler(JFXButton button,MouseEvent mouseEvent) {
+    private void nodeModifyEdgeHandler(JFXButton button,MouseEvent mouseEvent) throws Exception {
         if (edgeSelection == EdgeSelection.NODE1) {
             selectedEdge.setNode1(button.getId());
-
         }
         if (edgeSelection == EdgeSelection.NODE2) {
             selectedEdge.setNode2(button.getId());
         }
-
+        mapView.highlightEdge(selectedEdge.getEdgeID(), selectedEdge.getTempNode1(), selectedEdge.getTempNode2());
     }
 
     private void modifyNodeHandler() {
