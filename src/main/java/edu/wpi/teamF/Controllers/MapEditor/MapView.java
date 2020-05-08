@@ -16,14 +16,17 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import lombok.SneakyThrows;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class MapView implements Initializable {
     private static final int BUTTON_SIZE = 8;
+    private static final double LINE_WIDTH = 1.5;
     private static final int MAP_HEIGHT_FAULK = 1485;
     private static final int MAP_WIDTH_FAULK = 2475; // height and width of the faulkner hospital map
     private static final int MAP_HEIGHT_MAIN = 3400;
@@ -152,25 +155,25 @@ public class MapView implements Initializable {
 
     private DatabaseManager databaseManager = DatabaseManager.getManager();
     private MapEditorController mapEditorController;
-
+    Map<String,JFXButton> buttonMap;
+    Map<String,Line> lineMap;
 
     @SneakyThrows
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
          mapEditorController = new MapEditorController(this);
+
         for (Node node: databaseManager.getAllNodes()) {
             drawNode(node);
         }
         for (Edge edge: databaseManager.getAllEdges()) {
             drawEdge(edge);
         }
-
-
-
-
         UISetting uiSetting = new UISetting();
         uiSetting.makeZoomable(imageScrollPane, imageStackPane, 1);
         initializeComboBox();
+
     }
 
     private void drawNode(Node node) throws Exception {
@@ -183,15 +186,28 @@ public class MapView implements Initializable {
         button.setLayoutY(calculateYCoord(node.getYCoord(),node.getBuilding()) - BUTTON_SIZE / 2.0);
         mapEditorController.setButtonEventHandlers(button);
         getFloorPane(node.getFloor()).getChildren().add(button);
+        buttonMap.put(button.getId(),button);
     }
 
 
 
-    private void drawEdge(Edge edge) {
-        Line line = new Line();
-        line.setId(edge.getId());
-
-
+    private void drawEdge(Edge edge) throws Exception {
+        Node node1 = databaseManager.readNode(edge.getNode1());
+        Node node2 = databaseManager.readNode(edge.getNode2());
+        if (node1.getFloor().equals(node2.getFloor())) {
+            double startX = calculateXCoord(node1.getXCoord(), node1.getBuilding()) + LINE_WIDTH / 2;
+            double startY = calculateYCoord(node1.getYCoord(), node1.getBuilding()) + LINE_WIDTH / 2;
+            double endX = calculateXCoord(node2.getXCoord(), node2.getBuilding()) + LINE_WIDTH / 2;
+            double endY = calculateYCoord(node2.getYCoord(), node2.getBuilding()) + LINE_WIDTH / 2;
+            Line line = new Line(startX, startY, endX, endY);
+            line.setId(edge.getId());
+            line.setStroke(Color.BLACK);
+            line.setStrokeWidth(LINE_WIDTH);
+            line.setOpacity(0.7);
+            getFloorPane(node1.getFloor()).getChildren().addAll(line);
+            lineMap.put(line.getId(),line);
+            mapEditorController.setEdgeEventHandlers(line);
+        }
     }
 
     public void highlightEdge(String edgeID) {

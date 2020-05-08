@@ -5,7 +5,8 @@ import edu.wpi.teamF.ModelClasses.Node;
 public class NodeButton {
     Node node;
 
-    public NodeButton(Node node) {
 
+
+    public NodeButton(Node node) {
     }
 }

@@ -1,6 +1,9 @@
 package edu.wpi.teamF.Controllers.MapEditor;
 
 import com.jfoenix.controls.JFXButton;
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+import edu.wpi.teamF.ModelClasses.Edge;
+import edu.wpi.teamF.ModelClasses.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
@@ -22,6 +25,7 @@ public class MapEditorController {
         NODE2
     }
 
+    private DatabaseManager databaseManager = DatabaseManager.getManager();
     MapView mapView;
     Map<String,NodeButton> nodeButtonMap;
     Map<String,EdgeLine> edgeLineMap;
@@ -34,10 +38,16 @@ public class MapEditorController {
     //Node variables
 
 
-    public MapEditorController(MapView mapView) {
+    public MapEditorController(MapView mapView) throws Exception {
         this.mapView = mapView;
         state = State.MODIFY_NODE;
         edgeSelection = EdgeSelection.NODE1;
+        for (Node node: databaseManager.getAllNodes()) {
+            nodeButtonMap.put(node.getId(),new NodeButton(node));
+        }
+        for (Edge edge: databaseManager.getAllEdges()) {
+            edgeLineMap.put(edge.getId(),new EdgeLine(edge));
+        }
     }
     public void setEdgeEventHandlers(Line line) {
         line.setOnMousePressed(mouseEvent -> {
