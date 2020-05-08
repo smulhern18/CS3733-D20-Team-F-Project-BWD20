@@ -13,6 +13,8 @@ public class EdgeLine {
 
     public EdgeLine(Edge edge) {
         this.edge = edge;
+        tempNode1 = edge.getNode1();
+        tempNode2 = edge.getNode2();
 
     }
 

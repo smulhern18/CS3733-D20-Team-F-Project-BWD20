@@ -182,22 +182,7 @@ public class MapView implements Initializable {
 
     }
 
-    private void initializeAnchorIDs() {
-        mapPaneFaulkner1.setId("1");
-        mapPaneFaulkner2.setId("2");
-        mapPaneFaulkner3.setId("3");
-        mapPaneFaulkner4.setId("4");
-        mapPaneFaulkner5.setId("5");
-        mapPaneMain1.setId("F1");
-        mapPaneMain2.setId("F2");
-        mapPaneMain3.setId("F3");
-        mapPaneMainG.setId("G");
-        mapPaneMainL1.setId("L1");
-        mapPaneMainL1.setId("L2");
-
-    }
-
-    private void drawNode(Node node) throws Exception {
+    public void drawNode(Node node) throws Exception {
         JFXButton button = new JFXButton();
         button.setId(node.getId());
         button.setPrefSize(BUTTON_SIZE,BUTTON_SIZE);
@@ -210,28 +195,34 @@ public class MapView implements Initializable {
         buttonMap.put(button.getId(),button);
     }
 
-
-
-    private void drawEdge(Edge edge) throws Exception {
+    public Line drawEdge(Edge edge) throws Exception {
         Node node1 = databaseManager.readNode(edge.getNode1());
         Node node2 = databaseManager.readNode(edge.getNode2());
+        double startX = calculateXCoord(node1.getXCoord(), node1.getBuilding()) + LINE_WIDTH / 2;
+        double startY = calculateYCoord(node1.getYCoord(), node1.getBuilding()) + LINE_WIDTH / 2;
+        double endX = calculateXCoord(node2.getXCoord(), node2.getBuilding()) + LINE_WIDTH / 2;
+        double endY = calculateYCoord(node2.getYCoord(), node2.getBuilding()) + LINE_WIDTH / 2;
+        Line line = new Line(startX, startY, endX, endY);
+        line.setId(edge.getId());
+        line.setStroke(Color.BLACK);
+        line.setStrokeWidth(LINE_WIDTH);
+        line.setOpacity(0.7);
+        getFloorPane(node1.getFloor()).getChildren().addAll(line);
+        lineMap.put(line.getId(),line);
+        mapEditorController.setEdgeEventHandlers(line);
+
         if (node1.getFloor().equals(node2.getFloor())) {
-            double startX = calculateXCoord(node1.getXCoord(), node1.getBuilding()) + LINE_WIDTH / 2;
-            double startY = calculateYCoord(node1.getYCoord(), node1.getBuilding()) + LINE_WIDTH / 2;
-            double endX = calculateXCoord(node2.getXCoord(), node2.getBuilding()) + LINE_WIDTH / 2;
-            double endY = calculateYCoord(node2.getYCoord(), node2.getBuilding()) + LINE_WIDTH / 2;
-            Line line = new Line(startX, startY, endX, endY);
-            line.setId(edge.getId());
-            line.setStroke(Color.BLACK);
-            line.setStrokeWidth(LINE_WIDTH);
-            line.setOpacity(0.7);
-            getFloorPane(node1.getFloor()).getChildren().addAll(line);
-            lineMap.put(line.getId(),line);
-            mapEditorController.setEdgeEventHandlers(line);
+              line.setVisible(true);
+        } else {
+            line.setVisible(false);
         }
+
+        return line;
     }
 
     public void highlightEdge(String edgeID, String node1ID, String node2ID) throws Exception {
+        node1Button.setId(node1ID);
+        node2Button.setId(node2ID);
         setButtonColor(buttonMap.get(node1ID), "#012D5A", 1);
         setButtonColor(buttonMap.get(node2ID), "#a40000", 1);
         Line line = lineMap.get(edgeID);
@@ -257,11 +248,29 @@ public class MapView implements Initializable {
 
     }
 
-    private void setButtonColor(JFXButton button, String color, double opacity){
-        button.setStyle("-fx-background-radius: " + BUTTON_SIZE +"px; -fx-border-radius: "+ BUTTON_SIZE +"px; -fx-background-color: "+ color +"; -fx-border-color: #000000; -fx-border-width: 1px; -fx-opacity: " + opacity);
+    public void setAsDefaultView() {
+
     }
 
+    public void setAsCancelView() {
 
+    }
+
+    public void setAsEdgeView() {
+
+    }
+
+    public void setAsNodeView() {
+
+    }
+
+    public void setAsMultipleNodeView() {
+
+    }
+
+    public void setButtonColor(JFXButton button, String color, double opacity){
+        button.setStyle("-fx-background-radius: " + BUTTON_SIZE +"px; -fx-border-radius: "+ BUTTON_SIZE +"px; -fx-background-color: "+ color +"; -fx-border-color: #000000; -fx-border-width: 1px; -fx-opacity: " + opacity);
+    }
 
     private double calculateXCoord(double x,String building) {
         if ("Faulkner".equals(building)) {
@@ -271,6 +280,7 @@ public class MapView implements Initializable {
 
         }
     }
+
     private double calculateYCoord(double y,String building) {
         if ("Faulkner".equals(building)) {
             return y * (double) PANE_HEIGHT / MAP_HEIGHT_FAULK;
@@ -347,6 +357,21 @@ public class MapView implements Initializable {
             default:
                 throw new Exception("NULL FLOOR IN getImageView");
         }
+    }
+
+    private void initializeAnchorIDs() {
+        mapPaneFaulkner1.setId("1");
+        mapPaneFaulkner2.setId("2");
+        mapPaneFaulkner3.setId("3");
+        mapPaneFaulkner4.setId("4");
+        mapPaneFaulkner5.setId("5");
+        mapPaneMain1.setId("F1");
+        mapPaneMain2.setId("F2");
+        mapPaneMain3.setId("F3");
+        mapPaneMainG.setId("G");
+        mapPaneMainL1.setId("L1");
+        mapPaneMainL1.setId("L2");
+
     }
 
 

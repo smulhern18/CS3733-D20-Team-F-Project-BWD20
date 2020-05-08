@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
+import edu.wpi.teamF.ModelClasses.ValidationException;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
@@ -33,8 +34,8 @@ public class MapEditorController {
 
     //Edge variables
     EdgeSelection edgeSelection;
-    EdgeSelection
     EdgeLine selectedEdge;
+    String addNode1ID;
 
     //Node variables
 
@@ -50,6 +51,30 @@ public class MapEditorController {
             edgeLineMap.put(edge.getId(),new EdgeLine(edge));
         }
     }
+
+    public void addEdgeButtonHandler(JFXButton button) {
+        button.setOnMousePressed(mouseEvent -> {
+            state = State.ADD_EDGE;
+            mapView.setAsCancelView();
+            edgeSelection = EdgeSelection.NODE1;
+        });
+    }
+
+    public void setCancelButtonHandler(JFXButton button) {
+        button.setOnMousePressed(mouseEvent -> {
+            if (state == State.ADD_EDGE) {
+                mapView.setAsDefaultView();
+                edgeSelection = null;
+                addNode1ID = null;
+                selectedEdge = null;
+                state = null;
+            } else if (state == State.MODIFY_EDGE) {
+
+            }
+        });
+    }
+
+
 
     public void setEdgeSelectionButtonHandler(JFXButton button) {
         button.setOnMousePressed(mouseEvent -> {
@@ -69,6 +94,7 @@ public class MapEditorController {
         });
     }
 
+
     public void setEdgeEventHandlers(Line line){
         line.setOnMousePressed(mouseEvent -> {
             try {
@@ -84,13 +110,16 @@ public class MapEditorController {
     public void setNodeEventHandlers(JFXButton button) {
 
         button.setOnMousePressed(mouseEvent -> {
-            if (state == State.MODIFY_EDGE)  {
-                nodeModifyEdgeHandler(button,mouseEvent);
-            } else if (state == State.ADD_EDGE) {
-                nodeAddEdgeHandler();
-            }
-            else {
-                modifyNodeHandler();
+            try {
+                if (state == State.MODIFY_EDGE) {
+                    nodeModifyEdgeHandler(button, mouseEvent);
+                } else if (state == State.ADD_EDGE) {
+                    nodeAddEdgeHandler(button,mouseEvent);
+                } else {
+                    nodeModifyNodeHandler();
+                }
+            } catch(Exception e) {
+                e.printStackTrace();
             }
         });
 
@@ -98,6 +127,7 @@ public class MapEditorController {
 
     private void lineModifyEdgeHandler(Line line,MouseEvent mouseEvent) throws Exception {
         state = State.MODIFY_EDGE;
+        mapView.setAsEdgeView();
         selectedEdge = edgeLineMap.get(line.getId());
         edgeSelection = null;
         mapView.highlightEdge(line.getId(), selectedEdge.getNode1(), selectedEdge.getNode2());
@@ -114,8 +144,20 @@ public class MapEditorController {
 
 
 
-    private void nodeAddEdgeHandler() {
-
+    private void nodeAddEdgeHandler(JFXButton button,MouseEvent mouseEvent) throws Exception {
+        if (edgeSelection == EdgeSelection.NODE1) {
+            selectedEdge.setNode1(button.getId());
+            edgeSelection = EdgeSelection.NODE2;
+            addNode1ID = button.getId();
+            mapView.setButtonColor(button,"#012D5A",1);
+        }
+        if (edgeSelection == EdgeSelection.NODE2) {
+            selectedEdge.setNode2(button.getId());
+            Edge newEdge = new Edge(addNode1ID + "_" + button.getId(),addNode1ID,button.getId());
+            Line line = mapView.drawEdge(newEdge);
+            edgeLineMap.put(newEdge.getId(),new EdgeLine(newEdge));
+            lineModifyEdgeHandler(line,mouseEvent);
+        }
     }
 
     private void nodeModifyEdgeHandler(JFXButton button,MouseEvent mouseEvent) throws Exception {
@@ -128,7 +170,7 @@ public class MapEditorController {
         mapView.highlightEdge(selectedEdge.getEdgeID(), selectedEdge.getTempNode1(), selectedEdge.getTempNode2());
     }
 
-    private void modifyNodeHandler() {
+    private void nodeModifyNodeHandler() {
     }
 
 
