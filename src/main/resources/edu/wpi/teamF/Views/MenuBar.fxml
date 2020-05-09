@@ -281,10 +281,16 @@
                                     <Font name="Dubai Light" size="16.0" />
                                  </font>
                               </JFXButton>
-                              <JFXButton fx:id="logoutbutton1" onAction="#logout" prefHeight="49.0" prefWidth="90.0" text="Logout" textFill="#ffffffcc" visible="false">
+                              <JFXButton fx:id="logoutbutton1" maxWidth="-Infinity" minWidth="-Infinity" onAction="#logout" prefHeight="49.0" prefWidth="80.0" text="Logout" textFill="#ffffffcc" visible="false">
                                  <font>
-                                    <Font name="Dubai Light" size="16.0" />
+                                    <Font name="Dubai Light" size="15.0" />
                                  </font>
+                                 <StackPane.margin>
+                                    <Insets />
+                                 </StackPane.margin>
+                                 <padding>
+                                    <Insets right="20.0" />
+                                 </padding>
                               </JFXButton>
                            </children>
                         </StackPane>
