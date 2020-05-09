@@ -59,6 +59,9 @@ dependencies {
 
     implementation 'com.google.maps:google-maps-services:0.13.0'
     implementation 'org.slf4j:slf4j-simple:1.7.25'
+
+//    compile 'se.walkercrou:google-places-api-java:2.1.2'
+//    compile 'org.apache.httpcomponents:httpclient-android:4.3.5.1'
 }
 
 javafx {
