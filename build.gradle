@@ -87,7 +87,8 @@ run {
                '--add-opens=javafx.base/com.sun.javafx.binding=ALL-UNNAMED',
                '--add-opens=javafx.base/com.sun.javafx.event=ALL-UNNAMED',
                '--add-opens=javafx.graphics/com.sun.javafx.scene=ALL-UNNAMED',
-               '--add-opens=javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED'
+               '--add-opens=javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED',
+               '--add-opens=jfoenix.skins.JFXTextFieldSkin/javafx.scene.control.skin.TextFieldSkin=ALL-UNNAMED'
     ]
 }
 //
