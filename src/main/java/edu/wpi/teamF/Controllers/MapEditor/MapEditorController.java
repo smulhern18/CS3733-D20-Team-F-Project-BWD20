@@ -197,14 +197,13 @@ public class MapEditorController {
     mapView.setAsEdgeView();
     selectedEdge = edgeLineMap.get(line.getId());
     edgeSelection = null;
-    mapView.highlightEdge(line.getId(), selectedEdge.getNode1(), selectedEdge.getNode2());
+    mapView.highlightUpdatedEdge(line.getId(), selectedEdge.getNode1(), selectedEdge.getNode2());
   }
 
   private void paneAddNodeHandler(MouseEvent mouseEvent) {}
 
   private void nodeAddEdgeHandler(JFXButton button, MouseEvent mouseEvent) throws Exception {
     if (edgeSelection == EdgeSelection.NODE1) {
-
       edgeSelection = EdgeSelection.NODE2;
       addNode1ID = button.getId();
       mapView.setButtonColor(button, "#012D5A", 1);
@@ -227,7 +226,7 @@ public class MapEditorController {
       mapView.unHighlightButton(selectedEdge.getTempNode2());
       selectedEdge.setNode2(button.getId());
     }
-    mapView.highlightEdge(
+    mapView.highlightUpdatedEdge(
         selectedEdge.getEdgeID(), selectedEdge.getTempNode1(), selectedEdge.getTempNode2());
   }
 

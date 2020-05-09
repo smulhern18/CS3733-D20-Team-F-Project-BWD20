@@ -243,8 +243,6 @@ public class MapView implements Initializable {
     lineMap.remove(edgeID);
   }
 
-  public void updateEdge(String oldEdgeID, Edge updatedEdge) {}
-
   public void redrawEdge(Edge edge) throws Exception {
     Node node1 = databaseManager.readNode(edge.getNode1());
     Node node2 = databaseManager.readNode(edge.getNode2());
@@ -273,7 +271,7 @@ public class MapView implements Initializable {
     line.setEndY(endY);
   }
 
-  public void highlightEdge(String edgeID, String node1ID, String node2ID) throws Exception {
+  public void highlightUpdatedEdge(String edgeID, String node1ID, String node2ID) throws Exception {
     node1Button.setText(node1ID);
     node2Button.setText(node2ID);
     setButtonColor(buttonMap.get(node1ID), "#012D5A", 1);
@@ -290,6 +288,27 @@ public class MapView implements Initializable {
       }
     } else {
       line.setVisible(false);
+    }
+  }
+  public void displayInitialNodeData(Node node) {
+    shortNameInput.setText(node.getShortName());
+    longNameInput.setText(node.getLongName());
+    typeInput.setValue(node.getType().getTypeString());
+    floorInput.setValue(node.getFloor());
+    hospitalInput.setValue(node.getBuilding());
+    xCoorInput.setText("" + node.getXCoord());
+    yCoorInput.setText("" + node.getYCoord());
+  }
+
+  public void highlightUpdatedNode(String nodeID,double newX,double newY,String newFloor,String newBuilding) throws Exception {
+    JFXButton button = buttonMap.get(nodeID);
+    setButtonColor(button,"#012D5A",1);
+    button.setLayoutX(calculateXCoord(newX, newBuilding) - BUTTON_SIZE / 2.0);
+    button.setLayoutY(calculateYCoord(newY, newBuilding) - BUTTON_SIZE / 2.0);
+    if (!newFloor.equals(button.getParent().getId())) {
+      getFloorPane(button.getParent().getId()).getChildren().remove(button);
+      getFloorPane(newFloor).getChildren().add(button);
+      switchToFloor(newFloor);
     }
   }
 
@@ -596,9 +615,9 @@ public class MapView implements Initializable {
     return typeInput.getValue();
   }
 
-  public void validateNodeInput(ActionEvent actionEvent) {}
-
   public void unHighlightButton(String nodeID) {
     setButtonColor(buttonMap.get(nodeID), "#99D9EA", 0.7);
   }
+
+
 }
