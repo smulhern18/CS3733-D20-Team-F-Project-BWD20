@@ -178,9 +178,22 @@ public class MapView implements Initializable {
         node2Button.setId("Node2");
         mapEditorController.setEdgeSelectionButtonHandler(node2Button);
 
+        initializeNodeButtons();
+        initializeEdgeButtons();
+
         initializeAnchorIDs();
 
     }
+
+    private void initializeNodeButtons() {
+        mapEditorController.setAddNodeButtonHandler();
+        mapEditorController.setModifyNodeButtonHandler();
+        mapEditorController.setDeleteNodeButtonHandler();
+    }
+
+    private void initializeEdgeButtons() {
+    }
+
 
     public void drawNode(Node node) throws Exception {
         JFXButton button = new JFXButton();
@@ -288,7 +301,11 @@ public class MapView implements Initializable {
 
     }
 
-    public void setAsNodeView() {
+    public void setAsModifyNodeView(Node node) {
+
+    }
+
+    public void setAsAddNodeView() {
 
     }
 
@@ -399,8 +416,34 @@ public class MapView implements Initializable {
         mapPaneMainG.setId("G");
         mapPaneMainL1.setId("L1");
         mapPaneMainL1.setId("L2");
-
     }
+
+    public String getShortName(){
+        return shortNameInput.getText();
+    }
+    public String getLongName(){
+        return longNameInput.getText();
+    }
+    public String getXCoord(){
+        return xCoorInput.getText();
+    }
+    public String getYCoord(){
+        return yCoorInput.getText();
+    }
+    public String getBuilding(){
+        return hospitalInput.getValue();
+    }
+    public String getFloor(){
+        return floorInput.getValue();
+    }
+
+    public String getType(){
+        return typeInput.getValue();
+    }
+
+
+
+
 
 
 }

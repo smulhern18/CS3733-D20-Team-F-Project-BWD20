@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
-import edu.wpi.teamF.ModelClasses.ValidationException;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
@@ -38,7 +37,7 @@ public class MapEditorController {
     String addNode1ID;
 
     //Node variables
-
+    NodeButton nodeButton;
 
     public MapEditorController(MapView mapView) throws Exception {
         this.mapView = mapView;
@@ -76,6 +75,7 @@ public class MapEditorController {
         });
     }
 
+
     public void edgeModifyButtonHandler(JFXButton button) {
         button.setOnMousePressed(mouseEvent -> {
             try {
@@ -104,7 +104,6 @@ public class MapEditorController {
             }
         });
     }
-
 
 
     private void resetEdgeStateToDefault() {
@@ -151,19 +150,28 @@ public class MapEditorController {
 
         button.setOnMousePressed(mouseEvent -> {
             try {
-                if (state == State.MODIFY_EDGE) {
+                if (state == State.MODIFY_EDGE && edgeSelection != null) {
                     nodeModifyEdgeHandler(button, mouseEvent);
                 } else if (state == State.ADD_EDGE) {
-                    nodeAddEdgeHandler(button,mouseEvent);
+                    nodeAddEdgeHandler(button, mouseEvent);
                 } else {
-                    nodeModifyNodeHandler();
+                    nodeModifyNodeHandler(button, mouseEvent);
                 }
-            } catch(Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         });
 
     }
+
+    private void nodeModifyNodeHandler(JFXButton button, MouseEvent mouseEvent) {
+        if(state == State.MODIFY_EDGE){
+            resetEdgeStateToDefault();
+        }
+        state = State.MODIFY_NODE;
+        mapView.setAsModifyNodeView(nodeButtonMap.get(button).getNode());
+    }
+
 
     private void lineModifyEdgeHandler(Line line,MouseEvent mouseEvent) throws Exception {
         state = State.MODIFY_EDGE;
@@ -210,8 +218,24 @@ public class MapEditorController {
         mapView.highlightEdge(selectedEdge.getEdgeID(), selectedEdge.getTempNode1(), selectedEdge.getTempNode2());
     }
 
-    private void nodeModifyNodeHandler() {
+    public void setAddNodeButtonHandler() throws Exception {
+        //add try catch statements for error label
+        String shortName = mapView.getShortName();
+        String longName = mapView.getLongName();
+        String xCoord = mapView.getXCoord();
+        String yCoord = mapView.getYCoord();
+        String building = mapView.getBuilding();
+        String floor = mapView.getFloor();
+        String type = mapView.getType();
+        nodeButton.modifyNode(shortName, longName, xCoord, yCoord, building, floor, type);
     }
+
+    public void setModifyNodeButtonHandler() {
+    }
+
+    public void setDeleteNodeButtonHandler() {
+    }
+
 
 
 }
