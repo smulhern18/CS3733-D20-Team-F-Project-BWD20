@@ -58,6 +58,7 @@
                         <Font name="Dubai Light" size="40.0" />
                     </font>
                 </JFXButton>
+
             </children>
         </GridPane>
     </children>
