@@ -39,7 +39,7 @@ public class MapEditorController {
     String addNode1ID;
 
     //Node variables
-
+    NodeButton nodeButton;
 
     public MapEditorController(MapView mapView) throws Exception {
         this.mapView = mapView;
@@ -189,15 +189,16 @@ public class MapEditorController {
         mapView.highlightEdge(selectedEdge.getEdgeID(), selectedEdge.getTempNode1(), selectedEdge.getTempNode2());
     }
 
-    public void setAddNodeButtonHandler() {
+    public void setAddNodeButtonHandler() throws Exception {
         //add try catch statements for error label
         String shortName = mapView.getShortName();
         String longName = mapView.getLongName();
-        short xCoord = Short.parseShort(mapView.getXCoord());
-        short yCoord = Short.parseShort(mapView.getYCoord());
+        String xCoord = mapView.getXCoord();
+        String yCoord = mapView.getYCoord();
         String building = mapView.getBuilding();
         String floor = mapView.getFloor();
-        Node.NodeType type = Node.NodeType.getEnum(mapView.getType());
+        String type = mapView.getType();
+        nodeButton.modifyNode(shortName, longName, xCoord, yCoord, building, floor, type);
     }
 
     public void setModifyNodeButtonHandler() {
