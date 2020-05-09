@@ -175,7 +175,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (MaintenanceRequest m : maintenanceRequests) {
-      nodeNum.add(m.getLocation().getShortName());
+      nodeNum.add(m.getLocation().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));

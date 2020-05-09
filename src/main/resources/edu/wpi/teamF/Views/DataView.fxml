@@ -56,7 +56,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <BarChart fx:id="serviceLocationBarMain" maxHeight="500.0" maxWidth="650.0" style="-fx-background-color: white;" title="Most Common Locations">
+                              <BarChart fx:id="serviceLocationBarMain" legendVisible="false" maxHeight="500.0" maxWidth="650.0" style="-fx-background-color: white;" stylesheets="@../CSS/bargraph.css" title="Most Common Locations">
                                 <xAxis>
                                   <CategoryAxis fx:id="yAxisLoc" label="Locations" side="BOTTOM" />
                                 </xAxis>
@@ -67,8 +67,8 @@
                                     <Insets bottom="50.0" />
                                  </padding>
                               </BarChart>
-                              <PieChart fx:id="pieChartTotalMain" maxHeight="500.0" maxWidth="650.0" style="-fx-background-color: white;" title="Chart Employees" GridPane.columnIndex="1" />
-                              <BarChart fx:id="completedChartMain" barGap="2.0" maxHeight="500.0" maxWidth="650.0" style="-fx-background-color: white;" title="Maintenance Requests Completed" GridPane.rowIndex="1">
+                              <PieChart fx:id="pieChartTotalMain" maxHeight="500.0" maxWidth="650.0" style="-fx-background-color: white;" stylesheets="@../CSS/piechart.css" title="Chart Employees" GridPane.columnIndex="1" />
+                              <BarChart fx:id="completedChartMain" barGap="2.0" legendVisible="false" maxHeight="500.0" maxWidth="650.0" style="-fx-background-color: white;" stylesheets="@../CSS/bargraph.css" title="Maintenance Requests Completed" GridPane.rowIndex="1">
                                 <xAxis>
                                   <CategoryAxis label="Employees" side="BOTTOM" fx:id="xAxisMain" />
                                 </xAxis>
@@ -76,7 +76,7 @@
                                   <NumberAxis fx:id="yAxisMain" label="Number of Times Completed Service" side="LEFT" tickLabelGap="10.0" upperBound="10.0" />
                                 </yAxis>
                               </BarChart>
-                              <PieChart fx:id="pieChartMainComp" maxHeight="500.0" maxWidth="650.0" style="-fx-background-color: white;" title="Chart Completed" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <PieChart fx:id="pieChartMainComp" maxHeight="500.0" maxWidth="650.0" style="-fx-background-color: white;" stylesheets="@../CSS/piechart.css" title="Chart Completed" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            </children>
                            <padding>
                               <Insets left="-80.0" />

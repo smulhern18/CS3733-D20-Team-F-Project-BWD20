@@ -179,6 +179,8 @@ public class AccountsController implements Initializable {
           case "USER":
             account.setType(Account.Type.USER);
             break;
+          case "JANITOR":
+            account.setType(Account.Type.JANITOR);
         }
         databaseManager.manipulateAccount(account);
       }
