@@ -11,11 +11,7 @@
 <AnchorPane fx:id="anchorPane" prefHeight="525.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.RoomSchedulerController">
    <children>
       <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <AnchorPane fx:id="scheduleAnchorPane" layoutX="175.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <JFXComboBox fx:id="roomTypeComboBox" editable="true" layoutX="279.0" layoutY="25.0" prefHeight="26.0" prefWidth="146.0" AnchorPane.leftAnchor="275.0" AnchorPane.topAnchor="25.0" />
-            <Label layoutX="201.0" layoutY="29.0" text="Room Type:" AnchorPane.leftAnchor="201.0" AnchorPane.topAnchor="25.0" />
-         </children></AnchorPane>
+      <AnchorPane fx:id="scheduleAnchorPane" layoutX="175.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="175.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="0.0" />
       <GridPane prefHeight="25.0" AnchorPane.leftAnchor="237.0" AnchorPane.rightAnchor="38.0" AnchorPane.topAnchor="97.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" percentWidth="30.0" />
@@ -95,5 +91,7 @@
             </GridPane>
          </children>
       </GridPane>
+      <Label text="Room Type:" AnchorPane.leftAnchor="325.0" AnchorPane.topAnchor="25.0" />
+      <JFXComboBox fx:id="roomTypeComboBox" editable="true" prefHeight="26.0" prefWidth="146.0" AnchorPane.leftAnchor="400.0" AnchorPane.topAnchor="25.0" />
    </children>
 </AnchorPane>
