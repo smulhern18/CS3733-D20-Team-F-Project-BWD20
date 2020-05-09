@@ -15,9 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.DirectoryChooser;
 import lombok.SneakyThrows;
 
@@ -57,16 +55,23 @@ public class DataViewController implements Initializable {
   public void initialize(URL location, ResourceBundle resources) {
     List<ReportsClass> rC = databaseManager.getAllReports();
 
-    // Maintenance
+    /*
 
-    // Transport
+    Maintenance Request Tab
+
+     */
+
+    // Data 1 = Employee Number
+    // Data 2 = Location Number
+    // Data 3 = Completed / Incomplete
     List<String> data1;
     List<String> data2;
+    List<String> data3;
     XYChart.Series dataSeries1 = new XYChart.Series<>();
     XYChart.Series dataSeries2 = new XYChart.Series<>();
     data1 = serviceRequestStats.getMaintenanceEmployeeNumbersGraphs(mR);
     data2 = serviceRequestStats.getMaintenanceLocationNumbersGraphs(mR);
-    String avgTime1 = serviceRequestStats.CalculateAverageMaintenanceTimeGraphs(mR);
+    data3 = serviceRequestStats.maintenanceCompleted(mR);
 
     // completed Graph to show number of completed requests per employee
 
@@ -92,7 +97,12 @@ public class DataViewController implements Initializable {
     }
     pieChartTotalMain.setData(pieChartData);
 
-
+    // Pie chart to show completed / incomplete maintenance requests
+    ObservableList<PieChart.Data> pieChartData2 = FXCollections.observableArrayList();
+    for (int i = 0; i < data3.size(); i += 2) {
+      pieChartData2.add(new PieChart.Data(data3.get(i), Integer.parseInt(data3.get(i + 1))));
+    }
+    pieChartMainComp.setData(pieChartData2);
   }
 
   public void back(ActionEvent actionEvent) throws IOException {
