@@ -39,6 +39,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebView;
 import javafx.util.Duration;
 import javax.management.InstanceNotFoundException;
 import lombok.SneakyThrows;
@@ -134,18 +135,7 @@ public class PathfinderController implements Initializable {
   public JFXButton errorPaneButton;
 
   // intermediate maps stuff
-  public ImageView faulknerTo45FrancisImage;
-  public ImageView faulknerTo75FrancisImage;
-  public ImageView faulknerToBTMImage;
-  public ImageView faulknerToShapiroImage;
-  public ImageView faulknerTo15FrancisImage;
-  public ImageView Francis45ToFaulknerImage;
-  public ImageView Francis75ToFaulknerImage;
-  public ImageView BTMToFaulknerImage;
-  public ImageView shapiroToFaulknerImage;
-  public ImageView francis15ToFaulknerImage;
-  public ScrollPane scrollPaneIntermediate;
-  public StackPane stackPaneIntermediate;
+  public WebView webview;
   public GoogleMaps googleMaps;
   public Label driveTime;
   public Label driveDistance;
@@ -512,7 +502,6 @@ public class PathfinderController implements Initializable {
     uiSetting.setAsLocationComboBox(endCombo);
 
     uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1, 1.33);
-    intermediateSetting.makeZoomable(scrollPaneIntermediate, stackPaneIntermediate, 1.00);
 
     for (Node node : databaseManager.getAllNodes()) {
       node.setEdges(databaseManager.getAllEdgesConnectedToNode(node.getId()));
@@ -1157,7 +1146,6 @@ public class PathfinderController implements Initializable {
     System.out.println(toBuilding);
     if ("Faulkner".equals(fromBuilding) && "45 Francis".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      faulknerTo45FrancisImage.setVisible(true);
       faulknerTo45FrancisQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1166,7 +1154,6 @@ public class PathfinderController implements Initializable {
     } else if ("Faulkner".equals(fromBuilding)
         && ("75 Francis".equals(toBuilding) || ("Tower".equals(toBuilding)))) {
       setIntermediateMapsInvisible();
-      faulknerTo75FrancisImage.setVisible(true);
       faulknerTo75FrancisQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1174,7 +1161,6 @@ public class PathfinderController implements Initializable {
               "75+Francis+Street,+Boston,+MA");
     } else if ("Faulkner".equals(fromBuilding) && "BTM".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      faulknerToBTMImage.setVisible(true);
       faulknerToBTMQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1182,7 +1168,6 @@ public class PathfinderController implements Initializable {
               "Building+for+Transformative+Medicine+at+Brigham+and+Women's+Hospital,+Fenwood+Road,+Boston,+MA");
     } else if ("Faulkner".equals(fromBuilding) && "Shapiro".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      faulknerToShapiroImage.setVisible(true);
       faulknerToShapiroQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1191,7 +1176,6 @@ public class PathfinderController implements Initializable {
     } else if ("Faulkner".equals(fromBuilding)
         && ("15 Francis".equals(toBuilding) || ("FLEX".equals(toBuilding)))) {
       setIntermediateMapsInvisible();
-      faulknerTo15FrancisImage.setVisible(true);
       faulknerTo15FrancisQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1199,7 +1183,6 @@ public class PathfinderController implements Initializable {
               "15+Francis+Street,+Boston,+MA");
     } else if ("45 Francis".equals(fromBuilding) && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      Francis45ToFaulknerImage.setVisible(true);
       Francis45ToFaulknerQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1208,7 +1191,6 @@ public class PathfinderController implements Initializable {
     } else if (("75 Francis".equals(fromBuilding) || ("Tower".equals(fromBuilding)))
         && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      Francis75ToFaulknerImage.setVisible(true);
       Francis75ToFaulknerQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1216,7 +1198,6 @@ public class PathfinderController implements Initializable {
               "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA");
     } else if ("BTM".equals(fromBuilding) && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      BTMToFaulknerImage.setVisible(true);
       BTMToFaulknerQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1224,7 +1205,6 @@ public class PathfinderController implements Initializable {
               "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA");
     } else if ("Shapiro".equals(fromBuilding) && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      shapiroToFaulknerImage.setVisible(true);
       shapiroToFaulknerQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1233,7 +1213,6 @@ public class PathfinderController implements Initializable {
     } else if (("15 Francis".equals(fromBuilding) || ("FLEX".equals(fromBuilding)))
         && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      francis15ToFaulknerImage.setVisible(true);
       francis15ToFaulknerQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1241,6 +1220,7 @@ public class PathfinderController implements Initializable {
               "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA");
     }
 
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbed870x720());
     driveTime.setText(googleMaps.driveTime());
     driveDistance.setText(googleMaps.driveDistance());
     transitTime.setText(googleMaps.transitTime());
@@ -1279,16 +1259,6 @@ public class PathfinderController implements Initializable {
   }
 
   public void setIntermediateMapsInvisible() {
-    faulknerTo45FrancisImage.setVisible(false);
-    faulknerTo75FrancisImage.setVisible(false);
-    faulknerToBTMImage.setVisible(false);
-    faulknerToShapiroImage.setVisible(false);
-    faulknerTo15FrancisImage.setVisible(false);
-    Francis45ToFaulknerImage.setVisible(false);
-    Francis75ToFaulknerImage.setVisible(false);
-    BTMToFaulknerImage.setVisible(false);
-    shapiroToFaulknerImage.setVisible(false);
-    francis15ToFaulknerImage.setVisible(false);
     faulknerTo45FrancisQR.setVisible(false);
     faulknerTo75FrancisQR.setVisible(false);
     faulknerToBTMQR.setVisible(false);

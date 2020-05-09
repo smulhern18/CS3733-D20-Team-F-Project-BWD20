@@ -177,4 +177,12 @@ public class GoogleMaps {
       return "";
     }
   }
+
+  public String getDirectionsEmbed870x720() {
+    return "<iframe width=\"858\" height=\"700\" src=\"https://www.google.com/maps/embed/v1/directions?key=AIzaSyB61pjpz4PvzIKYCsYiwHoWQctXiw9soHc&origin="
+        + this.origin.replace(' ', '+')
+        + "&destination="
+        + this.destination.replace(' ', '+')
+        + "&mode=driving\"></iframe>";
+  }
 }

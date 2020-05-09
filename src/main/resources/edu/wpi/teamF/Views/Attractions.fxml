@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
 
 <AnchorPane fx:id="anchorPane" prefHeight="572.0" prefWidth="1075.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.AttractionsController">
 <children>
@@ -56,6 +57,7 @@
                         </VBox>
                      </children>
                   </HBox>
+                  <WebView fx:id="webview" prefHeight="200.0" prefWidth="200.0" />
                </children>
             </StackPane>
          </children>

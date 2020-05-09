@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.web.WebView;
 
 public class AttractionsController implements Initializable {
   public JFXTextField searchTerm;
@@ -23,6 +24,8 @@ public class AttractionsController implements Initializable {
   public JFXTextArea resultsBox;
   public AnchorPane frame;
   public ImageView backgroundImage;
+
+  public WebView webview;
 
   private GeoApiContext context =
       new GeoApiContext.Builder().apiKey("AIzaSyB61pjpz4PvzIKYCsYiwHoWQctXiw9soHc").build();
@@ -48,6 +51,11 @@ public class AttractionsController implements Initializable {
                 }
               }
             });
+
+    webview
+        .getEngine()
+        .loadContent(
+            "<iframe width=\"600\" height=\"450\" src=\"https://www.google.com/maps/embed/v1/directions?key=AIzaSyB61pjpz4PvzIKYCsYiwHoWQctXiw9soHc&origin=Oslo+Norway&destination=Telemark+Norway&mode=driving\"></iframe>");
   }
 
   public void reset() {

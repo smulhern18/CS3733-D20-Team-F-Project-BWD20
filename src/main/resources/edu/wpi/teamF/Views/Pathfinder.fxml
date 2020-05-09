@@ -17,6 +17,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+<?import javafx.scene.web.WebView?>
 
 <AnchorPane prefHeight="953.0" prefWidth="1607.0" style="-fx-background-color: #a2a2a2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.PathfinderController">
 
@@ -404,64 +405,20 @@
                      <children>
                         <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1070.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <ScrollPane fx:id="scrollPaneIntermediate" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="870.0" style="-fx-background: rgb(220,221,218); -fx-background-color: rgb(220,221,218);">
-                                 <content>
-                                    <StackPane fx:id="stackPaneIntermediate" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="870.0" style="-fx-background-color: #a2a2a2;">
+                              <StackPane alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="870.0">
+                                 <children>
+                                    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="870.0">
                                        <children>
-                                          <ImageView fx:id="faulknerTo45FrancisImage" fitHeight="720.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../Maps/IntermediateMaps/Faulknerto45Francis2.PNG" />
-                                             </image>
-                                          </ImageView>
-                                          <ImageView fx:id="faulknerTo75FrancisImage" fitHeight="720.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../Maps/IntermediateMaps/Faulknerto75Francis2.PNG" />
-                                             </image>
-                                          </ImageView>
-                                          <ImageView fx:id="faulknerToBTMImage" fitHeight="720.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../Maps/IntermediateMaps/FaulknertoBTM2.PNG" />
-                                             </image>
-                                          </ImageView>
-                                          <ImageView fx:id="faulknerToShapiroImage" fitHeight="720.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../Maps/IntermediateMaps/FaulknertoShapiro2.PNG" />
-                                             </image>
-                                          </ImageView>
-                                          <ImageView fx:id="faulknerTo15FrancisImage" fitHeight="720.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../Maps/IntermediateMaps/ShapirotoFaulkner2.PNG" />
-                                             </image>
-                                          </ImageView>
-                                          <ImageView fx:id="Francis45ToFaulknerImage" fitHeight="720.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../Maps/IntermediateMaps/45FrancistoFaulkner2.PNG" />
-                                             </image>
-                                          </ImageView>
-                                          <ImageView fx:id="Francis75ToFaulknerImage" fitHeight="720.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../Maps/IntermediateMaps/75FrancistoFaulkner2.PNG" />
-                                             </image>
-                                          </ImageView>
-                                          <ImageView fx:id="BTMToFaulknerImage" fitHeight="720.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../Maps/IntermediateMaps/BTMtoFaulkner2.PNG" />
-                                             </image>
-                                          </ImageView>
-                                          <ImageView fx:id="shapiroToFaulknerImage" fitHeight="720.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../Maps/IntermediateMaps/ShapirotoFaulkner2.PNG" />
-                                             </image>
-                                          </ImageView>
-                                          <ImageView fx:id="francis15ToFaulknerImage" fitHeight="720.0" fitWidth="870.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@../Maps/IntermediateMaps/ShapirotoFaulkner2.PNG" />
-                                             </image>
-                                          </ImageView>
+                                          <WebView fx:id="webview" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" contextMenuEnabled="false"/>
                                        </children>
-                                    </StackPane>
-                                 </content>
-                              </ScrollPane>
+                                    </AnchorPane>
+                                    <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.69" prefHeight="130.0" prefWidth="305.0" style="-fx-background-color: transparent;">
+                                       <StackPane.margin>
+                                          <Insets left="22.0" top="22.0" />
+                                       </StackPane.margin>
+                                    </HBox>
+                                 </children>
+                              </StackPane>
                               <VBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">
                                  <children>
                                     <Label text="Live Travel" textAlignment="CENTER" wrapText="true">
@@ -469,7 +426,7 @@
                                           <Font size="30.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets bottom="-28.0" top="10.0" />
+                                          <Insets bottom="-10.0" top="10.0" />
                                        </VBox.margin>
                                     </Label>
                                     <Label text="Times" textAlignment="CENTER" wrapText="true">
@@ -477,7 +434,7 @@
                                           <Font size="30.0" />
                                        </font>
                                        <VBox.margin>
-                                          <Insets bottom="-20.0" />
+                                          <Insets bottom="-5.0" />
                                        </VBox.margin>
                                     </Label>
                                     <HBox prefWidth="200.0">
