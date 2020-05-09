@@ -17,10 +17,12 @@ import java.net.URL;
 import java.time.*;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.AnchorPane;
 import lombok.SneakyThrows;
+import net.fortuna.ical4j.model.WeekDay;
 import org.jetbrains.annotations.NotNull;
 
 public class RoomSchedulerController implements Initializable {
@@ -34,8 +36,13 @@ public class RoomSchedulerController implements Initializable {
   public JFXButton submitButton;
   public JFXButton cancelButton;
   public AnchorPane scheduleAnchorPane;
+  public JFXComboBox<String> roomTypeComboBox;
 
-  private DayPage calendarView;
+  //private DayPage calendarView;
+  private DayPage onCallCalendarView = new DayPage();
+  private DayPage reflectionCalendarView = new DayPage();
+  private DayPage conferenceCalendarView = new DayPage();
+  private DayPage computerCalendarView = new DayPage();
   private DatabaseManager databaseManager = DatabaseManager.getManager();
   private String loggedInAccountName = "AAAAAA";
 
@@ -44,30 +51,55 @@ public class RoomSchedulerController implements Initializable {
   @SneakyThrows
   public void initialize(URL location, ResourceBundle resources) {
     loggedInAccountName = databaseManager.getAccount().getUsername();
-    initializeCalendarView();
+    addCalenders();
+    setCalenderViewNames();
+    initializeCalendarView(onCallCalendarView);
+    initializeCalendarView(conferenceCalendarView);
+    initializeCalendarView(reflectionCalendarView);
+    initializeCalendarView(computerCalendarView);
+    initializeRoomTypeComboBox();
+
+    Platform.runLater(
+            () -> {
+              try {
+                addEntriesFromDatabase();
+              } catch (Exception e) {
+                e.printStackTrace();
+              }
+            });
   }
 
-  private void initializeCalendarView() throws Exception {
+  private void initializeRoomTypeComboBox() {
+    roomTypeComboBox.setItems(FXCollections.observableArrayList("On-Call Beds","Reflection Rooms","Conference Rooms","Computer Rooms"));
+    roomTypeComboBox.valueProperty().addListener((obs,oldValue,newValue) ->
+    {
 
-    calendarView = new DayPage();
+    });
+  }
 
-    //    calendarView.setShowAddCalendarButton(false);
-    //    calendarView.setShowPrintButton(false);
-    //    calendarView.setShowSearchField(false);
-    //    calendarView.setShowToolBar(false);
-    //    calendarView.showDayPage();
+  private void setCalenderViewNames() {
+    onCallCalendarView.setId("On-Call Beds");
+    reflectionCalendarView.setId("Reflection Rooms");
+    conferenceCalendarView.setId("Conference Rooms");
+    computerCalendarView.setId("Computer Rooms");
+  }
+
+
+
+  private void initializeCalendarView(DayPage calendarView) throws Exception {
+
     calendarView.setDayPageLayout(DayPage.DayPageLayout.DAY_ONLY);
     calendarView.setLayout(DateControl.Layout.SWIMLANE);
-    addCalenders();
     calendarView.setRequestedTime(LocalTime.now());
-    setUpdatedTime();
-    setCalenderViewSize();
+
+    setCalenderViewSize(calendarView);
 
     calendarView.setSelectionMode(SelectionMode.SINGLE);
     calendarView.setEntryFactory(
         param -> {
           DateControl control = param.getDateControl();
           VirtualGrid grid = control.getVirtualGrid();
+
           ZonedDateTime time = param.getZonedDateTime();
           DayOfWeek firstDayOfWeek = control.getFirstDayOfWeek();
 
@@ -108,17 +140,10 @@ public class RoomSchedulerController implements Initializable {
     scheduleAnchorPane.getChildren().clear();
     scheduleAnchorPane.getChildren().add(calendarView);
 
-    Platform.runLater(
-        () -> {
-          try {
-            addEntriesFromDatabase();
-          } catch (Exception e) {
-            e.printStackTrace();
-          }
-        });
+
   }
 
-  private @NotNull Entry<String> createEntry(@NotNull ScheduleEntry newEntry) {
+  private  Entry<String> createEntry(ScheduleEntry newEntry) {
     Entry<String> entry = new Entry<>(newEntry.getAccountID());
     entry.setId(newEntry.getID());
     entry.changeStartDate(LocalDate.parse(newEntry.getStartDate(), ScheduleEntry.dateFormatter));
@@ -173,7 +198,7 @@ public class RoomSchedulerController implements Initializable {
                     databaseManager.mainpulateScheduleEntry(deletedScheduleEntry);
                     Entry<String> deletedEntry = createEntry(deletedScheduleEntry);
                     deletedEntry.setCalendar(getCalendar(deletedScheduleEntry.getRoom()));
-                    calendarView.refreshData();
+
 
                   } else {
                     System.out.println("MINEMINEMINEMINEMINE");
@@ -204,6 +229,7 @@ public class RoomSchedulerController implements Initializable {
                   reset = false;
                 }
               }
+              refreshData();
             }));
     return entry;
   }
@@ -218,15 +244,22 @@ public class RoomSchedulerController implements Initializable {
   }
 
   private Calendar getCalendar(String room) throws Exception {
-    for (Calendar calendar : calendarView.getCalendars()) {
-      if (room.equals(calendar.getName())) {
-        return calendar;
-      }
+    for (Calendar calendar : onCallCalendarView.getCalendars()) {
+      if (room.equals(calendar.getName())) return calendar;
+    }
+    for (Calendar calendar : reflectionCalendarView.getCalendars()) {
+      if (room.equals(calendar.getName())) return calendar;
+    }
+    for (Calendar calendar : conferenceCalendarView.getCalendars()) {
+      if (room.equals(calendar.getName())) return calendar;
+    }
+    for (Calendar calendar : computerCalendarView.getCalendars()) {
+      if (room.equals(calendar.getName())) return calendar;
     }
     throw new Exception("Invalid Room Name");
   }
 
-  private void setCalenderViewSize() {
+  private void setCalenderViewSize(DayPage calendarView) {
     scheduleAnchorPane
         .heightProperty()
         .addListener(
@@ -251,69 +284,71 @@ public class RoomSchedulerController implements Initializable {
             }));
   }
 
-  private void setUpdatedTime() {
-    //    Thread updateTimeThread =
-    //        new Thread("Calendar: Update Time Thread") {
-    //          @Override
-    //          public void run() {
-    //            while (true) {
-    //              Platform.runLater(
-    //                  () -> {
-    //                    calendarView.setToday(LocalDate.now());
-    //                    calendarView.setTime(LocalTime.now());
-    //                  });
-    //
-    //              try {
-    //                // update every 10 seconds
-    //                sleep(10000);
-    //              } catch (InterruptedException e) {
-    //                e.printStackTrace();
-    //              }
-    //            }
-    //          };
-    //        };
-    //
-    //    updateTimeThread.setPriority(Thread.MIN_PRIORITY);
-    //    updateTimeThread.setDaemon(true);
-    //    updateTimeThread.start();
-  }
+ private void refreshData() {
+    onCallCalendarView.refreshData();
+    reflectionCalendarView.refreshData();
+    conferenceCalendarView.refreshData();
+    computerCalendarView.refreshData();
+ }
+
+ private DayPage getCalendarView(String calendarName) {
+    switch(calendarName) {
+      case "Reflection Rooms":
+        return reflectionCalendarView;
+      case "Computer Rooms":
+        return computerCalendarView;
+      case "On-Call Beds":
+        return onCallCalendarView;
+      case "Conference Rooms":
+        return conferenceCalendarView;
+    }
+    return null;
+ }
 
   private void addCalenders() {
-    CalendarSource reflectionCalenderSource = new CalendarSource("Reflection Rooms");
-    Calendar[] reflectionRooms = new Calendar[3];
-    for (int i = 0; i < reflectionRooms.length; i++) {
-      reflectionRooms[i] = new Calendar("Reflection Room " + (i + 1));
-
-      reflectionRooms[i].setStyle(Calendar.Style.STYLE6);
-    }
-    reflectionCalenderSource.getCalendars().addAll(reflectionRooms);
     CalendarSource onCallCalenderSource = new CalendarSource("On-Call Beds");
     Calendar[] onCallRooms = new Calendar[7];
     for (int i = 0; i < onCallRooms.length; i++) {
       onCallRooms[i] = new Calendar("On-Call Bed " + (i + 1));
-      onCallRooms[i].setStyle(Calendar.Style.STYLE2);
+      onCallRooms[i].setStyle(Calendar.Style.STYLE6);
     }
     onCallCalenderSource.getCalendars().addAll(onCallRooms);
+    onCallCalendarView.getCalendarSources().clear();
+    onCallCalendarView.getCalendarSources().add(onCallCalenderSource);
 
-    calendarView.getCalendarSources().clear();
-    calendarView.getCalendarSources().addAll(reflectionCalenderSource, onCallCalenderSource);
+    CalendarSource reflectionCalenderSource = new CalendarSource("Reflection Rooms");
+    Calendar[] reflectionRooms = new Calendar[3];
+    for (int i = 0; i < reflectionRooms.length; i++) {
+      reflectionRooms[i] = new Calendar("Reflection Room " + (i + 1));
+      reflectionRooms[i].setStyle(Calendar.Style.STYLE6);
+    }
+    reflectionCalenderSource.getCalendars().addAll(reflectionRooms);
+    reflectionCalendarView.getCalendarSources().clear();
+    reflectionCalendarView.getCalendarSources().add(reflectionCalenderSource);
+
+    CalendarSource conferenceCalenderSource = new CalendarSource("Conference Rooms");
+    Calendar[] conferenceRooms = new Calendar[3];
+    for (int i = 0; i < conferenceRooms.length; i++) {
+      conferenceRooms[i] = new Calendar("Conference Room " + (i + 1));
+      conferenceRooms[i].setStyle(Calendar.Style.STYLE4);
+    }
+    conferenceCalenderSource.getCalendars().addAll(conferenceRooms);
+    conferenceCalendarView.getCalendarSources().clear();
+    conferenceCalendarView.getCalendarSources().add(conferenceCalenderSource);
+
+    CalendarSource computerCalenderSource = new CalendarSource("Computer Rooms");
+    Calendar[] computerRooms = new Calendar[6];
+    for (int i = 0; i < computerRooms.length; i++) {
+      computerRooms[i] = new Calendar("Computer Room " + (i + 1));
+      computerRooms[i].setStyle(Calendar.Style.STYLE5);
+    }
+    computerCalenderSource.getCalendars().addAll(computerRooms);
+    computerCalendarView.getCalendarSources().clear();
+    computerCalendarView.getCalendarSources().add(computerCalenderSource);
+
   }
 
-  private void initializeCalendarDeleteEvent(Calendar calendar) {
-    calendar.addEventHandler(
-        calendarEvent -> {
-          if (calendarEvent.getEventType().equals(CalendarEvent.ENTRY_CALENDAR_CHANGED)) {
-            System.out.println("ENTRY CHANGED");
-            Entry<?> oldEntry = calendarEvent.getEntry();
-            if (calendarEvent.isEntryRemoved()
-                && !oldEntry.getTitle().equals(loggedInAccountName)) {
-              System.out.println("ENTRY IS REMOVED " + calendarEvent.getOldCalendar().getName());
-              calendarEvent.getOldCalendar().addEntry(oldEntry);
-              calendarView.refreshData();
-            }
-          }
-        });
-  }
+
 
   private boolean isScheduleEntryOverlapping(ScheduleEntry newEntry) {
     // System.out.println("NEW ENTRY ID" + newEntry.getID());
