@@ -47,6 +47,7 @@
               </rowConstraints>
                <children>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="1">
+
                      <children>
                         <Label text="Help">
                            <font>
