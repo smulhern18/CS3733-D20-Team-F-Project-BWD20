@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.chart.PieChart?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -38,160 +40,58 @@
             <JFXButton onAction="#backupServiceRequests" prefHeight="42.0" prefWidth="95.0" style="-fx-background-color: #012d5a;" text="Export to CSV" textFill="WHITE" GridPane.columnIndex="2" />
          </children>
       </GridPane>
-      <GridPane layoutX="190.0" layoutY="111.0" prefHeight="30.0" prefWidth="410.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0">
-        <columnConstraints>
-          <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-      </GridPane>
-      <GridPane layoutX="190.0" layoutY="97.0" prefHeight="487.0" prefWidth="727.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <GridPane fx:id="maintenanceGrid" prefHeight="347.0" prefWidth="410.0" style="-fx-border-color: black;">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <BarChart fx:id="completedChartMain" barGap="2.0" prefHeight="328.0" prefWidth="607.0" style="-fx-background-color: white;" title="Maintenance Requests Completed">
-                    <xAxis>
-                      <CategoryAxis label="Employees" side="BOTTOM" fx:id="xAxisMain" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis fx:id="yAxisMain" label="Number of Times Completed Service" side="LEFT" tickLabelGap="10.0" upperBound="10.0" />
-                    </yAxis>
-                  </BarChart>
-                  <PieChart fx:id="pieChartTotalMain" style="-fx-background-color: white;" title="Pie Chart View" GridPane.columnIndex="1" />
-                  <BarChart fx:id="serviceLocationBarMain" style="-fx-background-color: white;" title="Most Common Locations" GridPane.rowIndex="1">
-                    <xAxis>
-                      <CategoryAxis fx:id="yAxisLoc" label="Locations" side="BOTTOM" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis label="Number of Time Location Chosen" side="LEFT" fx:id="xAxisLoc" />
-                    </yAxis>
-                  </BarChart>
-                  <GridPane style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                    <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
+      <TabPane layoutX="200.0" layoutY="83.0" prefHeight="365.0" prefWidth="383.0" style="-fx-border-color: black;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="210.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="80.0">
+        <tabs>
+          <Tab text="Maintenance Request">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Label fx:id="timeAvgMaint" prefHeight="53.0" prefWidth="188.0" style="-fx-border-color: black;" GridPane.columnIndex="1" />
-                        <Label text="Avg Time:" />
+                        <GridPane layoutX="67.0" layoutY="106.0" vgap="10.0" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <BarChart fx:id="serviceLocationBarMain" legendVisible="false" maxHeight="500.0" maxWidth="650.0" style="-fx-background-color: white;" stylesheets="@../CSS/bargraph.css" title="Most Common Locations">
+                                <xAxis>
+                                  <CategoryAxis fx:id="yAxisLoc" label="Locations" side="BOTTOM" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis label="Number of Time Location Chosen" side="LEFT" fx:id="xAxisLoc" />
+                                </yAxis>
+                                 <padding>
+                                    <Insets bottom="50.0" />
+                                 </padding>
+                              </BarChart>
+                              <PieChart fx:id="pieChartTotalMain" maxHeight="500.0" maxWidth="650.0" style="-fx-background-color: white;" stylesheets="@../CSS/piechart.css" title="Chart Employees" GridPane.columnIndex="1" />
+                              <BarChart fx:id="completedChartMain" barGap="2.0" legendVisible="false" maxHeight="500.0" maxWidth="650.0" style="-fx-background-color: white;" stylesheets="@../CSS/bargraph.css" title="Maintenance Requests Completed" GridPane.rowIndex="1">
+                                <xAxis>
+                                  <CategoryAxis label="Employees" side="BOTTOM" fx:id="xAxisMain" />
+                                </xAxis>
+                                <yAxis>
+                                  <NumberAxis fx:id="yAxisMain" label="Number of Times Completed Service" side="LEFT" tickLabelGap="10.0" upperBound="10.0" />
+                                </yAxis>
+                              </BarChart>
+                              <PieChart fx:id="pieChartMainComp" maxHeight="500.0" maxWidth="650.0" style="-fx-background-color: white;" stylesheets="@../CSS/piechart.css" title="Chart Completed" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                           <padding>
+                              <Insets left="-80.0" />
+                           </padding>
+                        </GridPane>
                      </children>
-                  </GridPane>
-               </children>
-            </GridPane>
-            <GridPane fx:id="transportGrid" prefHeight="347.0" prefWidth="410.0" style="-fx-border-color: black;" GridPane.rowIndex="1">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <BarChart fx:id="completedChartTrans" barGap="2.0" prefHeight="328.0" prefWidth="607.0" style="-fx-background-color: white;" title="Transportation Requests Completed">
-                     <xAxis>
-                        <CategoryAxis label="Employees" side="BOTTOM" fx:id="xAxisTrans" />
-                     </xAxis>
-                     <yAxis>
-                        <NumberAxis fx:id="yAxisTrans" label="Number of Times Completed Service" side="LEFT" tickLabelGap="10.0" upperBound="10.0" />
-                     </yAxis>
-                  </BarChart>
-                  <PieChart fx:id="pieChartTotalTrans" style="-fx-background-color: white;" title="Pie Chart View" GridPane.columnIndex="1" />
-                  <BarChart fx:id="serviceLocationBarTrans" style="-fx-background-color: white;" title="Most Common Locations" GridPane.rowIndex="1">
-                     <xAxis>
-                        <CategoryAxis fx:id="yAxisLocTrans" label="Locations" side="BOTTOM" />
-                     </xAxis>
-                     <yAxis>
-                        <NumberAxis label="Number of Time Location Chosen" side="LEFT" fx:id="xAxisLocTrans" />
-                     </yAxis>
-                  </BarChart>
-                  <GridPane style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <Label fx:id="timeAvgTrans" prefHeight="53.0" prefWidth="188.0" style="-fx-border-color: black;" GridPane.columnIndex="1" />
-                        <Label text="Avg Time:" />
-                     </children>
-                  </GridPane>
-               </children>
-            </GridPane>
-            <GridPane fx:id="sanPane" prefHeight="347.0" prefWidth="410.0" style="-fx-border-color: black;" GridPane.columnIndex="1">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <BarChart fx:id="completedChartSan" barGap="2.0" prefHeight="328.0" prefWidth="607.0" style="-fx-background-color: white;" title="Sanitation Delivery Requests Completed">
-                     <xAxis>
-                        <CategoryAxis label="Employees" side="BOTTOM" fx:id="xAxisSan" />
-                     </xAxis>
-                     <yAxis>
-                        <NumberAxis fx:id="yAxisSan" label="Number of Times Completed Service" side="LEFT" tickLabelGap="10.0" upperBound="10.0" />
-                     </yAxis>
-                  </BarChart>
-                  <PieChart fx:id="pieChartTotalSan" style="-fx-background-color: white;" title="Pie Chart View" GridPane.columnIndex="1" />
-                  <BarChart fx:id="serviceLocationBarSan" style="-fx-background-color: white;" title="Most Common Locations" GridPane.rowIndex="1">
-                     <xAxis>
-                        <CategoryAxis label="Locations" side="BOTTOM" fx:id="xAxisLocSan" />
-                     </xAxis>
-                     <yAxis>
-                        <NumberAxis fx:id="yAxisLocSan" label="Number of Time Location Chosen" side="LEFT" />
-                     </yAxis>
-                  </BarChart>
-                  <GridPane style="-fx-background-color: white;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                     </rowConstraints>
-                     <children>
-                        <Label fx:id="timeAvgSan" prefHeight="53.0" prefWidth="188.0" style="-fx-border-color: black;" GridPane.columnIndex="1" />
-                        <Label text="Avg Time:" />
-                     </children>
-                  </GridPane>
-               </children>
-            </GridPane>
-            <BarChart fx:id="highTrafGraph" style="-fx-border-color: black;" title="High Traffic Areas" GridPane.columnIndex="1" GridPane.rowIndex="1">
-              <xAxis>
-                <CategoryAxis label="Locations" side="BOTTOM" fx:id="xAxisTraf" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis fx:id="yAxisTraf" label="Number of Times Visited" side="LEFT" />
-              </yAxis>
-            </BarChart>
-         </children>
-      </GridPane>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Transport Request">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </AnchorPane>

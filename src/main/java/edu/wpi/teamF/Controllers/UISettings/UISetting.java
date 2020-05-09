@@ -29,4 +29,12 @@ public class UISetting {
   public void setDarkModeButton(JFXButton button) {
     buttonFormatter.setDarkFormat(button);
   }
+
+  public void setZoomScaleValue(double val) {
+    zoom.setScaleValue(val);
+  }
+
+  public void setScrollPaneValues(double hVal, double vVal) {
+    zoom.setScrollPaneValues(hVal, vVal);
+  }
 }

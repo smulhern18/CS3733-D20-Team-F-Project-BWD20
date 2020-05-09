@@ -93,4 +93,15 @@ public class Zoom {
     scrollPane.setVvalue(
         (valY + adjustment.getY()) / (updatedInnerBounds.getHeight() - viewportBounds.getHeight()));
   }
+
+  public void setScaleValue(double scaleValue) {
+    this.scaleValue = scaleValue;
+    updateScale();
+    scrollPane.layout();
+  }
+
+  public void setScrollPaneValues(double hVal, double vVal) {
+    scrollPane.setHvalue(hVal);
+    scrollPane.setVvalue(vVal);
+  }
 }

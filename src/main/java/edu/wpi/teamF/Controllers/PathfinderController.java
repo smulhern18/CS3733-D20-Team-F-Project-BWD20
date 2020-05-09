@@ -760,6 +760,7 @@ public class PathfinderController implements Initializable {
             try {
               commandText.setText("See Path Below for Directions");
               draw(path);
+              zoomToPath(path.getPath().get(0).getFloor(), path);
             } catch (InstanceNotFoundException e) {
               e.printStackTrace();
             }
@@ -831,6 +832,7 @@ public class PathfinderController implements Initializable {
     setAllInvisible();
     currentPane.setVisible(true);
     getFloorImage(floorNum, building).setVisible(true);
+
     deselectFloorButtons();
     getFloorButton(floorNum, building)
         .setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
@@ -1303,5 +1305,78 @@ public class PathfinderController implements Initializable {
 
   public void switchAbout(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("About");
+  }
+
+  public void zoomToPath(String floorNum, Path path) {
+    System.out.println(
+        "In zoomToPath() --------------------------------------------------------------------");
+    System.out.println(floorNum);
+    List<Node> nodesOnFloor = new ArrayList<>();
+    double bigX = 0.0;
+    double bigY = 0.0;
+    double smallX = 5000.0;
+    double smallY = 5000.0;
+    double hVal = 0.0;
+    double vVal = 0.0;
+    for (Node node : path.getPath()) {
+      if (node.getFloor().equals(floorNum)) {
+        nodesOnFloor.add(node);
+        if (node.getXCoord() > bigX) {
+          bigX = node.getXCoord();
+        }
+        if (node.getYCoord() > bigY) {
+          bigY = node.getYCoord();
+        }
+        if (node.getXCoord() < smallX) {
+          smallX = node.getXCoord();
+        }
+        if (node.getYCoord() < smallY) {
+          smallY = node.getYCoord();
+        }
+      }
+    }
+    System.out.println(nodesOnFloor.size());
+    Node node1 = nodesOnFloor.get(0);
+    Node node2 = nodesOnFloor.get(nodesOnFloor.size() - 1);
+
+    double xDiff = bigX - smallX;
+    double yDiff = bigY - smallY;
+
+    double xRatio = bigX / smallX;
+    double yRatio = bigY / smallY;
+
+    System.out.println(yDiff);
+    System.out.println(xDiff);
+    if ("Faulkner".equals(nodesOnFloor.get(0).getBuilding())) {
+      if (yDiff > xDiff) {
+        uiSetting.setZoomScaleValue((FAULKNER_MAP_HEIGHT / yDiff) / 1.5);
+        System.out.println("y zoom");
+        System.out.println((FAULKNER_MAP_HEIGHT / yDiff) / 1.5);
+      } else {
+        uiSetting.setZoomScaleValue((FAULKNER_MAP_WIDTH / xDiff) / 1.5);
+        System.out.println("x zoom");
+        System.out.println((FAULKNER_MAP_HEIGHT / xDiff) / 1.5);
+      }
+      hVal = ((bigX + smallX) / 2) / FAULKNER_MAP_WIDTH;
+      vVal = ((bigY + smallY) / 2) / FAULKNER_MAP_HEIGHT;
+      double hDistance = 0.0;
+      double vDistance = 0.0;
+//      if (hVal < 0.5) {
+//        hDistance = (0.5 - hVal) / 2;
+//        hVal = (((bigX + smallX) / 2) / FAULKNER_MAP_WIDTH + hDistance) / 2;
+//      } else if (hVal > 0.5) {
+//        hDistance = (hVal - 0.5) / 2;
+//        hVal = (((bigX + smallX) / 2) / FAULKNER_MAP_WIDTH + hDistance) / 2;
+//      }
+    } else {
+      if (yDiff > xDiff) {
+        uiSetting.setZoomScaleValue(MAIN_MAP_HEIGHT / yDiff);
+      } else {
+        uiSetting.setZoomScaleValue(MAIN_MAP_WIDTH / xDiff);
+      }
+    }
+    uiSetting.setScrollPaneValues(hVal, vVal);
+    System.out.println(
+        "Out of zoomToPath() --------------------------------------------------------------------");
   }
 }
