@@ -186,9 +186,9 @@ public class MapView implements Initializable {
   }
 
   private void initializeNodeButtons() throws Exception {
-    mapEditorController.setAddNodeButtonHandler();
-    mapEditorController.setModifyNodeButtonHandler();
-    mapEditorController.setDeleteNodeButtonHandler();
+    mapEditorController.setAddNodeButtonHandler(addNodeButton);
+    mapEditorController.setModifyNodeButtonHandler(modifyNodeButton);
+    mapEditorController.setDeleteNodeButtonHandler(deleteNodeButton);
   }
 
   private void initializeEdgeAnchorButtons() {

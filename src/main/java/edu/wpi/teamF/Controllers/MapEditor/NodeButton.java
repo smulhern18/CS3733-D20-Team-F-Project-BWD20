@@ -2,21 +2,12 @@ package edu.wpi.teamF.Controllers.MapEditor;
 
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Node;
-import edu.wpi.teamF.ModelClasses.ValidationException;
 import lombok.Data;
 
 @Data
 public class NodeButton {
   Node node;
   Node tempNode;
-
-  String shortName;
-  String longName;
-  String xCoord;
-  String yCoord;
-  String building;
-  String floor;
-  String type;
 
   private DatabaseManager databaseManager = DatabaseManager.getManager();
 
@@ -32,8 +23,8 @@ public class NodeButton {
       String building,
       String floor,
       String type)
-      throws ValidationException {
-    this.node = node;
+      throws Exception {
+    createNode(shortName, longName, xCoord, yCoord, building, floor, type);
     this.tempNode =
         new Node(
             node.getId(),
@@ -44,17 +35,29 @@ public class NodeButton {
             node.getShortName(),
             node.getType(),
             node.getFloor());
-    this.shortName = shortName;
-    this.longName = longName;
-    // this.xCoord =
   }
 
   public void updateDatabase() throws Exception {
     databaseManager.manipulateNode(tempNode);
     node = tempNode;
+    tempNode = null;
   }
 
   public void modifyNode(
+      String shortName,
+      String longName,
+      String xCoord,
+      String yCoord,
+      String building,
+      String floor,
+      String type)
+      throws Exception {
+    databaseManager.deleteNode(node.getId());
+    this.tempNode = createNode(shortName, longName, xCoord, yCoord, building, floor, type);
+    databaseManager.manipulateNode(tempNode);
+  }
+
+  private Node createNode(
       String shortName,
       String longName,
       String nodeXCoord,
@@ -66,19 +69,13 @@ public class NodeButton {
     short xCoord = Short.parseShort(nodeXCoord);
     short yCoord = Short.parseShort(nodeYCoord);
     Node.NodeType type = Node.NodeType.getEnum(nodeType);
-    tempNode.setId(generateNodeID(nodeType, floor));
-    tempNode.setXCoord(xCoord);
-    tempNode.setYCoord(yCoord);
-    tempNode.setBuilding(building);
-    tempNode.setLongName(longName);
-    tempNode.setShortName(shortName);
-    tempNode.setType(type);
-    tempNode.setFloor(floor);
-    databaseManager.deleteNode(node.getId());
-    databaseManager.manipulateNode(tempNode);
+    String id = generateNodeID(nodeType, floor);
+    Node node = new Node(id, xCoord, yCoord, building, longName, shortName, type, floor);
+    databaseManager.manipulateNode(node);
+    return node;
   }
 
-  private String generateNodeID(String type, String floor) {
+  private String generateNodeID(String nodeType, String floor) {
     String id = "";
     return id;
   }
