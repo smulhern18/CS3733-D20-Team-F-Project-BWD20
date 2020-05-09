@@ -61,9 +61,6 @@ jar {
     manifest {
         attributes 'Main-Class': mainClassName
     }
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
 }
 
 run {
@@ -145,4 +142,11 @@ run {
                '--add-opens=javafx.graphics/com.sun.javafx.scene=ALL-UNNAMED',
                '--add-opens=javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED'
     ]
+}
+
+tasks.withType(CreateStartScripts).each { task ->
+    task.doLast {
+        task.windowsScript.write task.windowsScript.text.replaceFirst(/(set CLASSPATH=%APP_HOME%\\lib\\).*/, { "${it[1]}*" })
+        task.unixScript.write task.unixScript.text.replaceFirst(/(CLASSPATH=.APP_HOME\/lib\/).*/, { "CLASSPATH=\$(echo \$APP_HOME/lib/*.jar | tr ' ' ':')" })
+    }
 }
