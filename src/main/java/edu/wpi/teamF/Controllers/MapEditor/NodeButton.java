@@ -12,51 +12,42 @@ public class NodeButton {
     Node node;
     Node tempNode;
 
-    String shortName;
-    String longName;
-    String xCoord;
-    String yCoord;
-    String building;
-    String floor;
-    String type;
-
     private DatabaseManager databaseManager = DatabaseManager.getManager();
 
     public NodeButton(Node node) {
         this.node = node;
 
     }
-    public NodeButton(String shortName, String longName, String xCoord, String yCoord, String building, String floor, String type) throws ValidationException {
-        this.node = node;
+
+    public NodeButton(String shortName, String longName, String xCoord, String yCoord, String building, String floor, String type) throws Exception {
+        createNode(shortName, longName, xCoord, yCoord, building, floor, type);
         this.tempNode = new Node(node.getId(), node.getXCoord(), node.getYCoord(), node.getBuilding(), node.getLongName(), node.getShortName(), node.getType(), node.getFloor());
-        this.shortName = shortName;
-        this.longName = longName;
-        //this.xCoord =
     }
 
     public void updateDatabase() throws Exception {
         databaseManager.manipulateNode(tempNode);
         node = tempNode;
+        tempNode = null;
     }
 
-    public void modifyNode(String shortName, String longName, String nodeXCoord, String nodeYCoord, String building, String floor, String nodeType) throws Exception {
-        short xCoord = Short.parseShort(nodeXCoord);
-        short yCoord = Short.parseShort(nodeYCoord);
-        Node.NodeType type = Node.NodeType.getEnum(nodeType);
-        tempNode.setId(generateNodeID(nodeType, floor));
-        tempNode.setXCoord(xCoord);
-        tempNode.setYCoord(yCoord);
-        tempNode.setBuilding(building);
-        tempNode.setLongName(longName);
-        tempNode.setShortName(shortName);
-        tempNode.setType(type);
-        tempNode.setFloor(floor);
+    public void modifyNode(String shortName, String longName, String xCoord, String yCoord, String building, String floor, String type) throws Exception {
         databaseManager.deleteNode(node.getId());
+        this.tempNode = createNode(shortName, longName, xCoord, yCoord, building, floor, type);
         databaseManager.manipulateNode(tempNode);
 
     }
 
-    private String generateNodeID(String type, String floor){
+    private Node createNode(String shortName, String longName, String nodeXCoord, String nodeYCoord, String building, String floor, String nodeType) throws Exception {
+        short xCoord = Short.parseShort(nodeXCoord);
+        short yCoord = Short.parseShort(nodeYCoord);
+        Node.NodeType type = Node.NodeType.getEnum(nodeType);
+        String id = generateNodeID(nodeType, floor);
+        Node node = new Node(id, xCoord, yCoord, building, longName, shortName, type, floor);
+        databaseManager.manipulateNode(node);
+        return node;
+    }
+
+    private String generateNodeID(String nodeType, String floor){
         String id = "";
         return id;
     }

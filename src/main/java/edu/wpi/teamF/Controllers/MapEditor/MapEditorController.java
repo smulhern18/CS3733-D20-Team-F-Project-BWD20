@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
+import edu.wpi.teamF.ModelClasses.ValidationException;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
@@ -218,22 +219,30 @@ public class MapEditorController {
         mapView.highlightEdge(selectedEdge.getEdgeID(), selectedEdge.getTempNode1(), selectedEdge.getTempNode2());
     }
 
-    public void setAddNodeButtonHandler() throws Exception {
-        //add try catch statements for error label
-        String shortName = mapView.getShortName();
-        String longName = mapView.getLongName();
-        String xCoord = mapView.getXCoord();
-        String yCoord = mapView.getYCoord();
-        String building = mapView.getBuilding();
-        String floor = mapView.getFloor();
-        String type = mapView.getType();
-        nodeButton.modifyNode(shortName, longName, xCoord, yCoord, building, floor, type);
+    public void setAddNodeButtonHandler(JFXButton button){
+        button.setOnMousePressed(mouseEvent -> {
+            try {
+                new NodeButton(mapView.getShortName(), mapView.getLongName(), mapView.getXCoord(), mapView.getYCoord(), mapView.getBuilding(), mapView.getFloor(), mapView.getType());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
-    public void setModifyNodeButtonHandler() {
+    public void setModifyNodeButtonHandler(JFXButton button) {
+        button.setOnMousePressed(mouseEvent -> {
+            try {
+                nodeButton.modifyNode(mapView.getShortName(), mapView.getLongName(), mapView.getXCoord(), mapView.getYCoord(), mapView.getBuilding(), mapView.getFloor(), mapView.getType());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
-    public void setDeleteNodeButtonHandler() {
+    public void setDeleteNodeButtonHandler(JFXButton button) {
+        button.setOnMousePressed(mouseEvent -> {
+
+        });
     }
 
 
