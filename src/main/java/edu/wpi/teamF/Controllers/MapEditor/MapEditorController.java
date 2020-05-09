@@ -6,6 +6,8 @@ import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
 import java.util.HashMap;
 import java.util.Map;
+
+import edu.wpi.teamF.ModelClasses.ValidationException;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
@@ -35,8 +37,8 @@ public class MapEditorController {
   EdgeLine selectedEdge;
   String addNode1ID;
 
-  // Node variables
-  NodeButton nodeButton;
+  // Node Variables
+  String selectedNode;
 
   public MapEditorController(MapView mapView) throws Exception {
     this.mapView = mapView;
@@ -166,30 +168,82 @@ public class MapEditorController {
         });
   }
 
-  public void setNodeEventHandlers(JFXButton button) {
+    public void setNodeEventHandlers(JFXButton button) {
 
-    button.setOnMousePressed(
-        mouseEvent -> {
-          try {
-            if (state == State.MODIFY_EDGE && edgeSelection != null) {
-              nodeModifyEdgeHandler(button, mouseEvent);
-            } else if (state == State.ADD_EDGE) {
-              nodeAddEdgeHandler(button, mouseEvent);
-            } else {
-              nodeModifyNodeHandler(button, mouseEvent);
-            }
-          } catch (Exception e) {
-            e.printStackTrace();
-          }
+        button.setOnMousePressed(
+                mouseEvent -> {
+                    try {
+                        if (state == State.MODIFY_EDGE && edgeSelection != null) { // modifying an edge
+                            nodeModifyEdgeHandler(button, mouseEvent);
+                        } else if (state == State.ADD_EDGE) {
+                            nodeAddEdgeHandler(button, mouseEvent); // adding an edge
+                        } else {
+                            nodeModifyNodeHandler(button, mouseEvent);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                });
+
+        button.setOnMouseDragged(mouseEvent -> {
+//            if (state == State.MODIFY_NODE) {
+//                button.setLayoutX(mouseEvent.getSceneX() / imageStackPane.getScaleX() + deltaX);
+//                button.setLayoutY(mouseEvent.getSceneY() / imageStackPane.getScaleY() + deltaY);
+//                double nodeWidth = (button.getLayoutX() + 4) / widthRatio;
+//                double nodeHeight = (button.getLayoutY() + 4) / heightRatio;
+//                xCoorInput.setText("" + nodeWidth);
+//                yCoorInput.setText("" + nodeHeight);
+//
+//                try {
+//                    node.setXCoord((short) nodeWidth);
+//                    node.setYCoord((short) nodeHeight);
+//                } catch (ValidationException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                try {
+//                    for (Edge edge : databaseManager.getAllEdgesConnectedToNode(node.getId())) {
+//                        for (int i = 0; i < mapPane.getChildren().size(); i++) {
+//                            javafx.scene.Node children = mapPane.getChildren().get(i);
+//                            if (children instanceof Line && children.getId().equals(edge.getId())) {
+//                                Line line = (Line) children;
+//                                if (edge.getNode2().equals(node.getId())) {
+//                                    line.setEndX(
+//                                            mouseEvent.getSceneX() / imageStackPane.getScaleX() + 4 + deltaX);
+//                                    line.setEndY(
+//                                            mouseEvent.getSceneY() / imageStackPane.getScaleY() + 4 + deltaY);
+//                                } else {
+//                                    line.setStartX(
+//                                            mouseEvent.getSceneX() / imageStackPane.getScaleX() + 4 + deltaX);
+//                                    line.setStartY(
+//                                            mouseEvent.getSceneY() / imageStackPane.getScaleY() + 4 + deltaY);
+//                                }
+//                            }
+//                        }
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
         });
-  }
+
+    }
 
   private void nodeModifyNodeHandler(JFXButton button, MouseEvent mouseEvent) {
+    selectedNode = button.getId();
     if (state == State.MODIFY_EDGE) {
       resetEdgeStateToDefault();
     }
     state = State.MODIFY_NODE;
-    mapView.setAsModifyNodeView(); // nodeButtonMap.get(button).getNode()
+    mapView.setAsModifyNodeView();
+    mapView.displayInitialNodeData(nodeButtonMap.get(button.getId()).getNode());
+
+    // update global variable
+    // display the node pane
+    // display the node attributes
+    // add checks to the input
+    // allow edge to be draggable
+
   }
 
   private void lineModifyEdgeHandler(Line line, MouseEvent mouseEvent) throws Exception {
@@ -234,14 +288,19 @@ public class MapEditorController {
     button.setOnMousePressed(
         mouseEvent -> {
           try {
-            new NodeButton(
-                mapView.getShortName(),
-                mapView.getLongName(),
-                mapView.getXCoord(),
-                mapView.getYCoord(),
-                mapView.getBuilding(),
-                mapView.getFloor(),
-                mapView.getType());
+            NodeButton newNode =
+                new NodeButton(
+                    mapView.getShortName(),
+                    mapView.getLongName(),
+                    mapView.getXCoord(),
+                    mapView.getYCoord(),
+                    mapView.getBuilding(),
+                    mapView.getFloor(),
+                    mapView.getType());
+            mapView.drawNode(newNode.getNode());
+            nodeButtonMap.put(newNode.getNode().getId(), newNode); // add new
+            nodeButtonMap.put(newNode.getNode().getId(), newNode);
+            mapView.drawNode(newNode.getNode());
           } catch (Exception e) {
             e.printStackTrace();
           }
@@ -251,6 +310,7 @@ public class MapEditorController {
   public void setModifyNodeButtonHandler(JFXButton button) {
     button.setOnMousePressed(
         mouseEvent -> {
+          NodeButton nodeButton = nodeButtonMap.get(selectedNode);
           try {
             nodeButton.modifyNode(
                 mapView.getShortName(),
@@ -260,6 +320,10 @@ public class MapEditorController {
                 mapView.getBuilding(),
                 mapView.getFloor(),
                 mapView.getType());
+            mapView.removeNode(selectedNode);
+            mapView.drawNode(nodeButton.getNode());
+            nodeButtonMap.remove(selectedNode); // remove old
+            nodeButtonMap.put(nodeButton.getNode().getId(), nodeButton); // add new
           } catch (Exception e) {
             e.printStackTrace();
           }
@@ -267,6 +331,14 @@ public class MapEditorController {
   }
 
   public void setDeleteNodeButtonHandler(JFXButton button) {
-    button.setOnMousePressed(mouseEvent -> {});
+    button.setOnMousePressed(
+        mouseEvent -> {
+          try {
+            mapView.removeNode(selectedNode);
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+          nodeButtonMap.remove(selectedNode);
+        });
   }
 }

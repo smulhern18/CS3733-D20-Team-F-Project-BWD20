@@ -13,7 +13,6 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -243,6 +242,12 @@ public class MapView implements Initializable {
     lineMap.remove(edgeID);
   }
 
+  public void removeNode(String nodeID) throws Exception {
+    JFXButton button = buttonMap.get(nodeID);
+    getFloorPane(button.getParent().getId()).getChildren().remove(button);
+    buttonMap.remove(nodeID);
+  }
+
   public void redrawEdge(Edge edge) throws Exception {
     Node node1 = databaseManager.readNode(edge.getNode1());
     Node node2 = databaseManager.readNode(edge.getNode2());
@@ -290,6 +295,7 @@ public class MapView implements Initializable {
       line.setVisible(false);
     }
   }
+
   public void displayInitialNodeData(Node node) {
     shortNameInput.setText(node.getShortName());
     longNameInput.setText(node.getLongName());
@@ -300,15 +306,17 @@ public class MapView implements Initializable {
     yCoorInput.setText("" + node.getYCoord());
   }
 
-  public void highlightUpdatedNode(String nodeID,double newX,double newY,String newFloor,String newBuilding) throws Exception {
-    JFXButton button = buttonMap.get(nodeID);
-    setButtonColor(button,"#012D5A",1);
+  public void highlightUpdatedNode(
+      String nodeID, double newX, double newY, String newFloor, String newBuilding)
+      throws Exception {
+    JFXButton button = buttonMap.get(nodeID); //give it an already exiting node with new attributes
+    setButtonColor(button, "#012D5A", 1); //change the color of the button
     button.setLayoutX(calculateXCoord(newX, newBuilding) - BUTTON_SIZE / 2.0);
-    button.setLayoutY(calculateYCoord(newY, newBuilding) - BUTTON_SIZE / 2.0);
+    button.setLayoutY(calculateYCoord(newY, newBuilding) - BUTTON_SIZE / 2.0); //set new x and y coordinates
     if (!newFloor.equals(button.getParent().getId())) {
       getFloorPane(button.getParent().getId()).getChildren().remove(button);
       getFloorPane(newFloor).getChildren().add(button);
-      switchToFloor(newFloor);
+      switchToFloor(newFloor); //if the floor id different then you switch to it
     }
   }
 
@@ -618,6 +626,4 @@ public class MapView implements Initializable {
   public void unHighlightButton(String nodeID) {
     setButtonColor(buttonMap.get(nodeID), "#99D9EA", 0.7);
   }
-
-
 }

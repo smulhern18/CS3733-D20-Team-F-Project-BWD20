@@ -6,13 +6,16 @@ import lombok.Data;
 
 @Data
 public class NodeButton {
-  Node node;
-  Node tempNode;
+  private Node node;
 
   private DatabaseManager databaseManager = DatabaseManager.getManager();
 
   public NodeButton(Node node) {
     this.node = node;
+  }
+
+  public Node getNode() {
+    return this.node;
   }
 
   public NodeButton(
@@ -24,23 +27,11 @@ public class NodeButton {
       String floor,
       String type)
       throws Exception {
-    createNode(shortName, longName, xCoord, yCoord, building, floor, type);
-    this.tempNode =
-        new Node(
-            node.getId(),
-            node.getXCoord(),
-            node.getYCoord(),
-            node.getBuilding(),
-            node.getLongName(),
-            node.getShortName(),
-            node.getType(),
-            node.getFloor());
+    this.node = createNode(shortName, longName, xCoord, yCoord, building, floor, type);
   }
 
   public void updateDatabase() throws Exception {
-    databaseManager.manipulateNode(tempNode);
-    node = tempNode;
-    tempNode = null;
+    databaseManager.manipulateNode(node);
   }
 
   public void modifyNode(
@@ -53,8 +44,8 @@ public class NodeButton {
       String type)
       throws Exception {
     databaseManager.deleteNode(node.getId());
-    this.tempNode = createNode(shortName, longName, xCoord, yCoord, building, floor, type);
-    databaseManager.manipulateNode(tempNode);
+    this.node = createNode(shortName, longName, xCoord, yCoord, building, floor, type);
+    databaseManager.manipulateNode(node);
   }
 
   private Node createNode(
@@ -73,6 +64,10 @@ public class NodeButton {
     Node node = new Node(id, xCoord, yCoord, building, longName, shortName, type, floor);
     databaseManager.manipulateNode(node);
     return node;
+  }
+
+  private void deleteNode() throws Exception {
+    databaseManager.deleteNode(this.node.getId());
   }
 
   private String generateNodeID(String nodeType, String floor) {
