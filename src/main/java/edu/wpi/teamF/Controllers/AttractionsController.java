@@ -1,6 +1,5 @@
 package edu.wpi.teamF.Controllers;
 
-import com.google.cloud.translate.v3.*;
 import com.google.maps.GeoApiContext;
 import com.google.maps.PlacesApi;
 import com.google.maps.errors.ApiException;
@@ -25,7 +24,6 @@ public class AttractionsController implements Initializable {
   public AnchorPane frame;
   public ImageView backgroundImage;
 
-  //  GooglePlaces places = new GooglePlaces("AIzaSyB61pjpz4PvzIKYCsYiwHoWQctXiw9soHc");
   private GeoApiContext context =
       new GeoApiContext.Builder().apiKey("AIzaSyB61pjpz4PvzIKYCsYiwHoWQctXiw9soHc").build();
 
@@ -59,15 +57,6 @@ public class AttractionsController implements Initializable {
 
   public void searchBtn(ActionEvent actionEvent)
       throws InterruptedException, ApiException, IOException {
-    //      FindPlaceFromText result =
-    //          PlacesApi.findPlaceFromText(
-    //                  context,
-    //                  "Italian Food near Oakville, ON",
-    //                  FindPlaceFromTextRequest.InputType.TEXT_QUERY)
-    //                            .locationBias(
-    //                                new FindPlaceFromTextRequest.LocationBiasCircular(
-    //                                    new LatLng(42.3016451, -71.1309705), 10))
-    //              .await();
     PlacesSearchResponse response =
         PlacesApi.nearbySearchQuery(context, new LatLng(42.3016451, -71.1309705))
             .keyword(searchTerm.getText())
@@ -79,10 +68,5 @@ public class AttractionsController implements Initializable {
       resultsString += results[i].name + "\n";
     }
     resultsBox.setText(resultsString);
-
-    //    List<Place> result = places.getNearbyPlaces(42.3016451, -71.1309705, 10000, 10);
-    //    for (Place place : result) {
-    //      System.out.println(place.getName());
-    //    }
   }
 }
