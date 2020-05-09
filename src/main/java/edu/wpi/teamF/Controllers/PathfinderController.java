@@ -1338,10 +1338,6 @@ public class PathfinderController implements Initializable {
     System.out.println(nodesOnFloor.size());
     Node node1 = nodesOnFloor.get(0);
     Node node2 = nodesOnFloor.get(nodesOnFloor.size() - 1);
-    //    System.out.println(node2.getXCoord());
-    //    System.out.println(node1.getXCoord());
-    //    double xDiff = Math.abs(node2.getXCoord() - node1.getXCoord());
-    //    double yDiff = Math.abs(node2.getYCoord() - node1.getYCoord());
 
     double xDiff = bigX - smallX;
     double yDiff = bigY - smallY;
@@ -1349,22 +1345,29 @@ public class PathfinderController implements Initializable {
     double xRatio = bigX / smallX;
     double yRatio = bigY / smallY;
 
-    //    double xVal = node2.getXCoord() - (xDiff / 2);
-    //    double yVal = node2.getYCoord() - (yDiff / 2);
     System.out.println(yDiff);
     System.out.println(xDiff);
     if ("Faulkner".equals(nodesOnFloor.get(0).getBuilding())) {
       if (yDiff > xDiff) {
-        uiSetting.setZoomScaleValue((FAULKNER_MAP_HEIGHT / yDiff) / 1.12);
+        uiSetting.setZoomScaleValue((FAULKNER_MAP_HEIGHT / yDiff) / 1.5);
         System.out.println("y zoom");
-        System.out.println((FAULKNER_MAP_HEIGHT / yDiff) / 1.2);
+        System.out.println((FAULKNER_MAP_HEIGHT / yDiff) / 1.5);
       } else {
-        uiSetting.setZoomScaleValue((FAULKNER_MAP_WIDTH / xDiff) / 1.2);
+        uiSetting.setZoomScaleValue((FAULKNER_MAP_WIDTH / xDiff) / 1.5);
         System.out.println("x zoom");
-        System.out.println((FAULKNER_MAP_HEIGHT / xDiff) / 1.2);
+        System.out.println((FAULKNER_MAP_HEIGHT / xDiff) / 1.5);
       }
-      hVal = ((bigX + smallX) / 2) / FAULKNER_MAP_WIDTH - 0.05;
+      hVal = ((bigX + smallX) / 2) / FAULKNER_MAP_WIDTH;
       vVal = ((bigY + smallY) / 2) / FAULKNER_MAP_HEIGHT;
+      double hDistance = 0.0;
+      double vDistance = 0.0;
+//      if (hVal < 0.5) {
+//        hDistance = (0.5 - hVal) / 2;
+//        hVal = (((bigX + smallX) / 2) / FAULKNER_MAP_WIDTH + hDistance) / 2;
+//      } else if (hVal > 0.5) {
+//        hDistance = (hVal - 0.5) / 2;
+//        hVal = (((bigX + smallX) / 2) / FAULKNER_MAP_WIDTH + hDistance) / 2;
+//      }
     } else {
       if (yDiff > xDiff) {
         uiSetting.setZoomScaleValue(MAIN_MAP_HEIGHT / yDiff);
