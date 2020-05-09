@@ -217,6 +217,15 @@ public class MapView implements Initializable {
         return line;
     }
 
+    public void removeEdge(String edgeID) throws Exception {
+        Line line = lineMap.get(edgeID);
+        getFloorPane(line.getParent().getId()).getChildren().remove(line);
+        lineMap.remove(edgeID);
+    }
+
+    public void updateEdge(String oldEdgeID,Edge updatedEdge) {
+
+    }
     public void redrawEdge(Edge edge) throws Exception {
         Node node1 = databaseManager.readNode(edge.getNode1());
         Node node2 = databaseManager.readNode(edge.getNode2());

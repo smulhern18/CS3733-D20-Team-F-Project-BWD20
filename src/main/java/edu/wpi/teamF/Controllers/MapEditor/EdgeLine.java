@@ -53,10 +53,12 @@ public class EdgeLine {
 
         Edge updatedEdge = new Edge(tempNode1 + "_" + tempNode2,tempNode1,tempNode2);
         databaseManager.deleteEdge(edge.getId());
+        edge = updatedEdge;
+        reset();
         databaseManager.manipulateEdge(updatedEdge);
     }
 
-    public void deleteEdgeDatabase() throws Exception {
+    public void deleteEdgeFromDatabase() throws Exception {
         databaseManager.deleteEdge(edge.getId());
     }
 }

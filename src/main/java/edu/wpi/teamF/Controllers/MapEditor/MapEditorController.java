@@ -76,7 +76,36 @@ public class MapEditorController {
         });
     }
 
-    public void
+    public void edgeModifyButtonHandler(JFXButton button) {
+        button.setOnMousePressed(mouseEvent -> {
+            try {
+                mapView.removeEdge(selectedEdge.getEdgeID());
+                edgeLineMap.remove(selectedEdge.getEdgeID());
+                selectedEdge.updateDatabase();
+                edgeLineMap.put(selectedEdge.getEdgeID(),selectedEdge);
+                mapView.drawEdge(selectedEdge.getEdge());
+                resetEdgeStateToDefault();
+                mapView.setAsDefaultView();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public void edgeDeleteButtonHandler(JFXButton button) {
+        button.setOnMousePressed(mouseEvent -> {
+            try {
+                mapView.removeEdge(selectedEdge.getEdgeID());
+                selectedEdge.deleteEdgeFromDatabase();
+                edgeLineMap.remove(selectedEdge.getEdgeID());
+                resetEdgeStateToDefault();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+
 
     private void resetEdgeStateToDefault() {
         mapView.setAsDefaultView();
