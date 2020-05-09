@@ -511,7 +511,6 @@ public class PathfinderController implements Initializable {
     uiSetting.setAsLocationComboBox(startCombo);
     uiSetting.setAsLocationComboBox(endCombo);
 
-
     uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1, 1.33);
     intermediateSetting.makeZoomable(scrollPaneIntermediate, stackPaneIntermediate, 1.00);
 

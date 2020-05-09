@@ -7,8 +7,13 @@ import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Edge;
 import edu.wpi.teamF.ModelClasses.Node;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -20,430 +25,580 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import lombok.SneakyThrows;
 
-import java.net.URL;
-import java.util.Map;
-import java.util.ResourceBundle;
-
 public class MapView implements Initializable {
-    private static final int BUTTON_SIZE = 8;
-    private static final double LINE_WIDTH = 1.5;
-    private static final int MAP_HEIGHT_FAULK = 1485;
-    private static final int MAP_WIDTH_FAULK = 2475; // height and width of the faulkner hospital map
-    private static final int MAP_HEIGHT_MAIN = 3400;
-    private static final int MAP_WIDTH_MAIN = 5000; // height and width of the main hospital map
-    private static final int PANE_HEIGHT = 585;
-    private static final int PANE_WIDTH = 974; // height a
+  private static final int BUTTON_SIZE = 8;
+  private static final double LINE_WIDTH = 1.5;
+  private static final int MAP_HEIGHT_FAULK = 1485;
+  private static final int MAP_WIDTH_FAULK = 2475; // height and width of the faulkner hospital map
+  private static final int MAP_HEIGHT_MAIN = 3400;
+  private static final int MAP_WIDTH_MAIN = 5000; // height and width of the main hospital map
+  private static final int PANE_HEIGHT = 585;
+  private static final int PANE_WIDTH = 974; // height a
 
-    @FXML
-    private AnchorPane mainFloorPane;
+  @FXML private AnchorPane mainFloorPane;
 
-    @FXML private AnchorPane faulknerFloorPane;
+  @FXML private AnchorPane faulknerFloorPane;
 
-    @FXML private JFXButton faulknerFloor1Button;
+  @FXML private JFXButton faulknerFloor1Button;
 
-    @FXML private JFXButton faulknerFloor2Button;
+  @FXML private JFXButton faulknerFloor2Button;
 
-    @FXML private JFXButton faulknerFloor3Button;
+  @FXML private JFXButton faulknerFloor3Button;
 
-    @FXML private JFXButton faulknerFloor4Button;
+  @FXML private JFXButton faulknerFloor4Button;
 
-    @FXML private JFXButton faulknerFloor5Button;
+  @FXML private JFXButton faulknerFloor5Button;
 
-    @FXML private JFXButton groundButton;
+  @FXML private JFXButton groundButton;
 
-    @FXML private JFXButton lower1Button;
+  @FXML private JFXButton lower1Button;
 
-    @FXML private JFXButton lower2Button;
+  @FXML private JFXButton lower2Button;
 
-    @FXML private JFXButton floor1Button;
+  @FXML private JFXButton floor1Button;
 
-    @FXML private JFXButton floor2Button;
+  @FXML private JFXButton floor2Button;
 
-    @FXML private JFXButton floor3Button;
+  @FXML private JFXButton floor3Button;
 
-    @FXML private JFXComboBox<String> hospitalCombo;
+  @FXML private JFXComboBox<String> hospitalCombo;
 
-    @FXML private ScrollPane imageScrollPane;
+  @FXML private ScrollPane imageScrollPane;
 
-    @FXML private StackPane imageStackPane;
+  @FXML private StackPane imageStackPane;
 
-    @FXML private ImageView imageViewFaulkner1;
+  @FXML private ImageView imageViewFaulkner1;
 
-    @FXML private AnchorPane mapPaneFaulkner1;
+  @FXML private AnchorPane mapPaneFaulkner1;
 
-    @FXML private ImageView imageViewFaulkner2;
+  @FXML private ImageView imageViewFaulkner2;
 
-    @FXML private AnchorPane mapPaneFaulkner2;
+  @FXML private AnchorPane mapPaneFaulkner2;
 
-    @FXML private ImageView imageViewFaulkner3;
+  @FXML private ImageView imageViewFaulkner3;
 
-    @FXML private AnchorPane mapPaneFaulkner3;
+  @FXML private AnchorPane mapPaneFaulkner3;
 
-    @FXML private ImageView imageViewFaulkner4;
+  @FXML private ImageView imageViewFaulkner4;
 
-    @FXML private AnchorPane mapPaneFaulkner4;
+  @FXML private AnchorPane mapPaneFaulkner4;
 
-    @FXML private ImageView imageViewFaulkner5;
+  @FXML private ImageView imageViewFaulkner5;
 
-    @FXML private AnchorPane mapPaneFaulkner5;
+  @FXML private AnchorPane mapPaneFaulkner5;
 
-    @FXML private ImageView imageViewMain1;
+  @FXML private ImageView imageViewMain1;
 
-    @FXML private ImageView imageViewMain2;
+  @FXML private ImageView imageViewMain2;
 
-    @FXML private ImageView imageViewMain3;
+  @FXML private ImageView imageViewMain3;
 
-    @FXML private ImageView imageViewMainG;
+  @FXML private ImageView imageViewMainG;
 
-    @FXML private ImageView imageViewMainL1;
+  @FXML private ImageView imageViewMainL1;
 
-    @FXML private ImageView imageViewMainL2;
+  @FXML private ImageView imageViewMainL2;
 
-    @FXML private AnchorPane mapPaneMain1;
+  @FXML private AnchorPane mapPaneMain1;
 
-    @FXML private AnchorPane mapPaneMain2;
+  @FXML private AnchorPane mapPaneMain2;
 
-    @FXML private AnchorPane mapPaneMain3;
+  @FXML private AnchorPane mapPaneMain3;
 
-    @FXML private AnchorPane mapPaneMainG;
+  @FXML private AnchorPane mapPaneMainG;
 
-    @FXML private AnchorPane mapPaneMainL1;
+  @FXML private AnchorPane mapPaneMainL1;
 
-    @FXML private AnchorPane mapPaneMainL2;
+  @FXML private AnchorPane mapPaneMainL2;
 
-    @FXML private JFXButton nodeDisplayButton;
+  @FXML private JFXButton nodeDisplayButton;
 
-    @FXML private JFXButton edgeDisplayButton;
+  @FXML private JFXButton edgeDisplayButton;
 
-    @FXML private JFXButton cancelButton;
+  @FXML private JFXButton cancelButton;
 
-    @FXML private AnchorPane nodeAnchor;
+  @FXML private AnchorPane nodeAnchor;
 
-    @FXML private AnchorPane edgeAnchor;
+  @FXML private AnchorPane edgeAnchor;
 
-    @FXML private JFXTextField shortNameInput;
+  @FXML private JFXTextField shortNameInput;
 
-    @FXML private JFXTextField longNameInput;
+  @FXML private JFXTextField longNameInput;
 
-    @FXML private JFXComboBox<String> typeInput;
+  @FXML private JFXComboBox<String> typeInput;
 
-    @FXML private JFXTextField xCoorInput;
+  @FXML private JFXTextField xCoorInput;
 
-    @FXML private JFXTextField yCoorInput;
+  @FXML private JFXTextField yCoorInput;
 
-    @FXML private JFXComboBox<String> hospitalInput;
+  @FXML private JFXComboBox<String> hospitalInput;
 
-    @FXML private JFXComboBox<String> floorInput;
+  @FXML private JFXComboBox<String> floorInput;
 
-    @FXML private JFXButton addNodeButton;
+  @FXML private JFXButton addNodeButton;
 
-    @FXML private JFXButton deleteNodeButton;
+  @FXML private JFXButton deleteNodeButton;
 
-    @FXML private JFXButton modifyNodeButton;
+  @FXML private JFXButton modifyNodeButton;
 
-    @FXML private JFXButton node1Button;
+  @FXML private JFXButton node1Button;
 
-    @FXML private JFXButton node2Button;
+  @FXML private JFXButton node2Button;
 
-    @FXML private JFXButton addEdgeButton;
+  @FXML private JFXButton addEdgeButton;
 
-    @FXML private JFXButton deleteEdgeButton;
+  @FXML private JFXButton deleteEdgeButton;
 
-    @FXML private JFXButton modifyEdgeButton;
+  @FXML private JFXButton modifyEdgeButton;
 
-    @FXML private Label nodeErrorLabel;
+  @FXML private Label nodeErrorLabel;
 
-    private DatabaseManager databaseManager = DatabaseManager.getManager();
-    private MapEditorController mapEditorController;
-    Map<String,JFXButton> buttonMap;
-    Map<String,Line> lineMap;
+  private DatabaseManager databaseManager = DatabaseManager.getManager();
+  private MapEditorController mapEditorController;
+  Map<String, JFXButton> buttonMap;
+  Map<String, Line> lineMap;
 
-    @SneakyThrows
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+  @SneakyThrows
+  @Override
+  public void initialize(URL url, ResourceBundle resourceBundle) {
+    buttonMap = new HashMap<>();
+    lineMap = new HashMap<>();
+    mapEditorController = new MapEditorController(this);
 
-         mapEditorController = new MapEditorController(this);
-
-        for (Node node: databaseManager.getAllNodes()) {
-            drawNode(node);
-        }
-        for (Edge edge: databaseManager.getAllEdges()) {
-            drawEdge(edge);
-        }
-        UISetting uiSetting = new UISetting();
-        uiSetting.makeZoomable(imageScrollPane, imageStackPane, 1);
-        initializeComboBox();
-        node1Button.setId("Node1");
-        mapEditorController.setEdgeSelectionButtonHandler(node1Button);
-        node2Button.setId("Node2");
-        mapEditorController.setEdgeSelectionButtonHandler(node2Button);
-
-        initializeNodeButtons();
-        initializeEdgeButtons();
-
-        initializeAnchorIDs();
-
+    for (Node node : databaseManager.getAllNodes()) {
+      drawNode(node);
+    }
+    for (Edge edge : databaseManager.getAllEdges()) {
+      drawEdge(edge);
     }
 
-    private void initializeNodeButtons() {
-        mapEditorController.setAddNodeButtonHandler();
-        mapEditorController.setModifyNodeButtonHandler();
-        mapEditorController.setDeleteNodeButtonHandler();
+    UISetting uiSetting = new UISetting();
+    uiSetting.makeZoomable(imageScrollPane, imageStackPane, 1);
+    initializeComboBox();
+
+    // initializeNodeButtons();
+    initializeEdgeAnchorButtons();
+    mapEditorController.setCancelButtonHandler(cancelButton);
+    initializeAnchorIDs();
+    floorButtonsSet();
+    setAsDefaultView();
+    switchToFloor("G");
+  }
+
+  private void initializeNodeButtons() throws Exception {
+    mapEditorController.setAddNodeButtonHandler();
+    mapEditorController.setModifyNodeButtonHandler();
+    mapEditorController.setDeleteNodeButtonHandler();
+  }
+
+  private void initializeEdgeAnchorButtons() {
+    node1Button.setId("Node1");
+    mapEditorController.setEdgeSelectionButtonHandler(node1Button);
+    node2Button.setId("Node2");
+    mapEditorController.setEdgeSelectionButtonHandler(node2Button);
+    mapEditorController.addEdgeButtonHandler(edgeDisplayButton);
+    mapEditorController.edgeDeleteButtonHandler(deleteEdgeButton);
+    mapEditorController.edgeModifyButtonHandler(modifyEdgeButton);
+  }
+
+  public void drawNode(Node node) throws Exception {
+    JFXButton button = new JFXButton();
+    button.setId(node.getId());
+    button.setPrefSize(BUTTON_SIZE, BUTTON_SIZE);
+    button.setMaxSize(BUTTON_SIZE, BUTTON_SIZE);
+    button.setMinSize(BUTTON_SIZE, BUTTON_SIZE);
+    setButtonColor(button, "#99D9EA", 0.7);
+    button.setLayoutX(calculateXCoord(node.getXCoord(), node.getBuilding()) - BUTTON_SIZE / 2.0);
+    button.setLayoutY(calculateYCoord(node.getYCoord(), node.getBuilding()) - BUTTON_SIZE / 2.0);
+    mapEditorController.setNodeEventHandlers(button);
+    getFloorPane(node.getFloor()).getChildren().add(button);
+    buttonMap.put(button.getId(), button);
+  }
+
+  public Line drawEdge(Edge edge) throws Exception {
+    Node node1 = databaseManager.readNode(edge.getNode1());
+    Node node2 = databaseManager.readNode(edge.getNode2());
+    Line line = new Line();
+    updateLine(line, node1, node2);
+    line.setId(edge.getId());
+    line.setStroke(Color.BLACK);
+    line.setStrokeWidth(LINE_WIDTH);
+    line.setOpacity(0.7);
+    getFloorPane(node1.getFloor()).getChildren().addAll(line);
+    lineMap.put(line.getId(), line);
+    mapEditorController.setEdgeEventHandlers(line);
+
+    if (node1.getFloor().equals(node2.getFloor())) {
+      line.setVisible(true);
+    } else {
+      line.setVisible(false);
     }
 
-    private void initializeEdgeButtons() {
-    }
+    return line;
+  }
 
+  public void removeEdge(String edgeID) throws Exception {
+    Line line = lineMap.get(edgeID);
+    getFloorPane(line.getParent().getId()).getChildren().remove(line);
+    lineMap.remove(edgeID);
+  }
 
-    public void drawNode(Node node) throws Exception {
-        JFXButton button = new JFXButton();
-        button.setId(node.getId());
-        button.setPrefSize(BUTTON_SIZE,BUTTON_SIZE);
-        button.setStyle(
-                "-fx-background-radius: " + BUTTON_SIZE +"px; -fx-border-radius: 8px; -fx-background-color: #99D9EA; -fx-border-color: #000000; -fx-border-width: 1px; -fx-opacity: 0.7");
-        button.setLayoutX(calculateXCoord(node.getXCoord(),node.getBuilding()) - BUTTON_SIZE / 2.0);
-        button.setLayoutY(calculateYCoord(node.getYCoord(),node.getBuilding()) - BUTTON_SIZE / 2.0);
-        mapEditorController.setNodeEventHandlers(button);
-        getFloorPane(node.getFloor()).getChildren().add(button);
-        buttonMap.put(button.getId(),button);
-    }
+  public void updateEdge(String oldEdgeID, Edge updatedEdge) {}
 
-    public Line drawEdge(Edge edge) throws Exception {
-        Node node1 = databaseManager.readNode(edge.getNode1());
-        Node node2 = databaseManager.readNode(edge.getNode2());
-        Line line = new Line();
-        updateLine(line,node1,node2);
-        line.setId(edge.getId());
-        line.setStroke(Color.BLACK);
-        line.setStrokeWidth(LINE_WIDTH);
-        line.setOpacity(0.7);
-        getFloorPane(node1.getFloor()).getChildren().addAll(line);
-        lineMap.put(line.getId(),line);
-        mapEditorController.setEdgeEventHandlers(line);
-
-        if (node1.getFloor().equals(node2.getFloor())) {
-              line.setVisible(true);
-        } else {
-            line.setVisible(false);
-        }
-
-        return line;
-    }
-
-    public void removeEdge(String edgeID) throws Exception {
-        Line line = lineMap.get(edgeID);
+  public void redrawEdge(Edge edge) throws Exception {
+    Node node1 = databaseManager.readNode(edge.getNode1());
+    Node node2 = databaseManager.readNode(edge.getNode2());
+    Line line = lineMap.get(edge.getId());
+    updateLine(line, node1, node2);
+    if (node1.getFloor().equals(node2.getFloor())) {
+      line.setVisible(true);
+      if (!node1.getFloor().equals(line.getParent().getId())) {
         getFloorPane(line.getParent().getId()).getChildren().remove(line);
-        lineMap.remove(edgeID);
+        getFloorPane(node1.getFloor()).getChildren().add(line);
+      }
+    } else {
+      line.setVisible(false);
     }
+  }
 
-    public void updateEdge(String oldEdgeID,Edge updatedEdge) {
+  private void updateLine(Line line, Node node1, Node node2) throws Exception {
 
+    double startX = calculateXCoord(node1.getXCoord(), node1.getBuilding()) + LINE_WIDTH / 2;
+    double startY = calculateYCoord(node1.getYCoord(), node1.getBuilding()) + LINE_WIDTH / 2;
+    double endX = calculateXCoord(node2.getXCoord(), node2.getBuilding()) + LINE_WIDTH / 2;
+    double endY = calculateYCoord(node2.getYCoord(), node2.getBuilding()) + LINE_WIDTH / 2;
+    line.setStartX(startX);
+    line.setStartY(startY);
+    line.setEndX(endX);
+    line.setEndY(endY);
+  }
+
+  public void highlightEdge(String edgeID, String node1ID, String node2ID) throws Exception {
+    node1Button.setText(node1ID);
+    node2Button.setText(node2ID);
+    setButtonColor(buttonMap.get(node1ID), "#012D5A", 1);
+    setButtonColor(buttonMap.get(node2ID), "#a40000", 1);
+    Line line = lineMap.get(edgeID);
+    Node node1 = databaseManager.readNode(node1ID);
+    Node node2 = databaseManager.readNode(node2ID);
+    updateLine(line, node1, node2);
+    if (node1.getFloor().equals(node2.getFloor())) {
+      line.setVisible(true);
+      if (!node1.getFloor().equals(line.getParent().getId())) {
+        getFloorPane(line.getParent().getId()).getChildren().remove(line);
+        getFloorPane(node1.getFloor()).getChildren().add(line);
+      }
+    } else {
+      line.setVisible(false);
     }
-    public void redrawEdge(Edge edge) throws Exception {
-        Node node1 = databaseManager.readNode(edge.getNode1());
-        Node node2 = databaseManager.readNode(edge.getNode2());
-        Line line = lineMap.get(edge.getId());
-        updateLine(line,node1,node2);
-        if (node1.getFloor().equals(node2.getFloor())) {
-            line.setVisible(true);
-            if (!node1.getFloor().equals(line.getParent().getId())) {
-                getFloorPane(line.getParent().getId()).getChildren().remove(line);
-                getFloorPane(node1.getFloor()).getChildren().add(line);
-            }
-        } else {
-            line.setVisible(false);
-        }
+  }
+
+  private void clearViews() {
+    nodeDisplayButton.setVisible(false);
+    edgeDisplayButton.setVisible(false);
+    cancelButton.setVisible(false);
+    edgeAnchor.setVisible(false);
+    nodeAnchor.setVisible(false);
+  }
+
+  public void setAsDefaultView() {
+    clearViews();
+    nodeDisplayButton.setVisible(true);
+    edgeDisplayButton.setVisible(true);
+  }
+
+  public void setAsCancelView() {
+    clearViews();
+    cancelButton.setVisible(true);
+  }
+
+  public void setAsEdgeView() {
+    clearViews();
+    cancelButton.setVisible(true);
+    edgeAnchor.setVisible(true);
+  }
+
+  public void setAsModifyNodeView() {
+    clearViews();
+    cancelButton.setVisible(true);
+    nodeAnchor.setVisible(true);
+    addNodeButton.setVisible(false);
+    modifyNodeButton.setVisible(true);
+  }
+
+  public void setAsAddNodeView() {
+    clearViews();
+    cancelButton.setVisible(true);
+    nodeAnchor.setVisible(true);
+    addNodeButton.setVisible(true);
+    modifyNodeButton.setVisible(false);
+  }
+
+  public void setAsMultipleNodeView() {
+    clearViews();
+  }
+
+  public void switchToFloor(String floor) {
+    try {
+      if ("1".equals(floor)
+          || "2".equals(floor)
+          || "3".equals(floor)
+          || "4".equals(floor)
+          || "5".equals(floor)) {
+        hospitalCombo.setValue("Faulkner");
+        faulknerFloorPane.setVisible(true);
+        mainFloorPane.setVisible(false);
+      } else {
+        hospitalCombo.setValue("Main Campus");
+        faulknerFloorPane.setVisible(false);
+        mainFloorPane.setVisible(true);
+      }
+      setAllFloorPanesInvisible();
+      setAllImageViewPanesInvisible();
+      getFloorPane(floor).setVisible(true);
+      getImageView(floor).setVisible(true);
+      deselectFloorButtons();
+      getFloorButton(floor).setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
+    } catch (Exception e) {
+      e.printStackTrace();
     }
+  }
 
-    private void updateLine(Line line,Node node1,Node node2) throws Exception {
+  private void setAllImageViewPanesInvisible() {
+    imageViewFaulkner1.setVisible(false);
+    imageViewFaulkner2.setVisible(false);
+    imageViewFaulkner3.setVisible(false);
+    imageViewFaulkner4.setVisible(false);
+    imageViewFaulkner5.setVisible(false);
+    imageViewMain1.setVisible(false);
+    imageViewMain2.setVisible(false);
+    imageViewMain3.setVisible(false);
+    imageViewMainG.setVisible(false);
+    imageViewMainL1.setVisible(false);
+    imageViewMainL2.setVisible(false);
+  }
 
-        double startX = calculateXCoord(node1.getXCoord(), node1.getBuilding()) + LINE_WIDTH / 2;
-        double startY = calculateYCoord(node1.getYCoord(), node1.getBuilding()) + LINE_WIDTH / 2;
-        double endX = calculateXCoord(node2.getXCoord(), node2.getBuilding()) + LINE_WIDTH / 2;
-        double endY = calculateYCoord(node2.getYCoord(), node2.getBuilding()) + LINE_WIDTH / 2;
-        line.setStartX(startX);
-        line.setStartY(startY);
-        line.setEndX(endX);
-        line.setEndY(endY);
+  private void setAllFloorPanesInvisible() {
+    mapPaneFaulkner1.setVisible(false);
+    mapPaneFaulkner2.setVisible(false);
+    mapPaneFaulkner3.setVisible(false);
+    mapPaneFaulkner4.setVisible(false);
+    mapPaneFaulkner5.setVisible(false);
+    mapPaneMain1.setVisible(false);
+    mapPaneMain2.setVisible(false);
+    mapPaneMain3.setVisible(false);
+    mapPaneMainG.setVisible(false);
+    mapPaneMainL1.setVisible(false);
+    mapPaneMainL2.setVisible(false);
+  }
 
+  public void floorButtonsSet() {
+    faulknerFloor1Button.setOnAction(actionEvent -> switchToFloor("1"));
+    faulknerFloor2Button.setOnAction(actionEvent -> switchToFloor("2"));
+    faulknerFloor3Button.setOnAction(actionEvent -> switchToFloor("3"));
+    faulknerFloor4Button.setOnAction(actionEvent -> switchToFloor("4"));
+    faulknerFloor5Button.setOnAction(actionEvent -> switchToFloor("5"));
+    floor1Button.setOnAction(actionEvent -> switchToFloor("F1"));
+    floor2Button.setOnAction(actionEvent -> switchToFloor("F2"));
+    floor3Button.setOnAction(actionEvent -> switchToFloor("F3"));
+    groundButton.setOnAction(actionEvent -> switchToFloor("G"));
+    lower1Button.setOnAction(actionEvent -> switchToFloor("L1"));
+    lower2Button.setOnAction(actionEvent -> switchToFloor("L2"));
+    hospitalCombo
+        .valueProperty()
+        .addListener(
+            ((observable, oldValue, newValue) -> {
+              if (oldValue != null && !oldValue.equals(newValue)) {
+                if ("Faulkner".equals(newValue)) {
+                  switchToFloor("1");
+                } else if ("Main Campus".equals(newValue)) {
+                  switchToFloor("G");
+                }
+              }
+            }));
+  }
+
+  public void deselectFloorButtons() {
+    for (javafx.scene.Node btn : faulknerFloorPane.getChildren()) {
+      btn.setStyle("-fx-background-color: #4d6c8b; -fx-background-radius: 10px");
     }
-
-    public void highlightEdge(String edgeID, String node1ID, String node2ID) throws Exception {
-        node1Button.setId(node1ID);
-        node2Button.setId(node2ID);
-        setButtonColor(buttonMap.get(node1ID), "#012D5A", 1);
-        setButtonColor(buttonMap.get(node2ID), "#a40000", 1);
-        Line line = lineMap.get(edgeID);
-        Node node1 = databaseManager.readNode(node1ID);
-        Node node2 = databaseManager.readNode(node2ID);
-        updateLine(line,node1,node2);
-        if (node1.getFloor().equals(node2.getFloor())) {
-            line.setVisible(true);
-            if (!node1.getFloor().equals(line.getParent().getId())) {
-                getFloorPane(line.getParent().getId()).getChildren().remove(line);
-                getFloorPane(node1.getFloor()).getChildren().add(line);
-            }
-        } else {
-            line.setVisible(false);
-        }
-
+    for (javafx.scene.Node btn : mainFloorPane.getChildren()) {
+      btn.setStyle("-fx-background-color: #4d6c8b; -fx-background-radius: 10px");
     }
+  }
 
-    public void setAsDefaultView() {
+  public void setButtonColor(JFXButton button, String color, double opacity) {
+    button.setStyle(
+        "-fx-background-radius: "
+            + BUTTON_SIZE
+            + "px; -fx-border-radius: "
+            + BUTTON_SIZE
+            + "px; -fx-background-color: "
+            + color
+            + "; -fx-border-color: #000000; -fx-border-width: 1px; -fx-opacity: "
+            + opacity);
+  }
 
+  private double calculateXCoord(double x, String building) {
+    if ("Faulkner".equals(building)) {
+      return x * (double) PANE_WIDTH / MAP_WIDTH_FAULK;
+    } else {
+      return x * (double) PANE_WIDTH / MAP_WIDTH_MAIN;
     }
+  }
 
-    public void setAsCancelView() {
-
+  private double calculateYCoord(double y, String building) {
+    if ("Faulkner".equals(building)) {
+      return y * (double) PANE_HEIGHT / MAP_HEIGHT_FAULK;
+    } else {
+      return y * (double) PANE_HEIGHT / MAP_HEIGHT_MAIN;
     }
+  }
 
-    public void setAsEdgeView() {
+  private void initializeComboBox() {
+    typeInput
+        .getItems()
+        .addAll(
+            "CONF", "DEPT", "EXIT", "HALL", "INFO", "LABS", "REST", "RETL", "SERV", "STAF", "STAI");
+    hospitalInput
+        .getItems()
+        .addAll("Faulkner", "Tower", "BTM", "45 Francis", "15 Francis", "Shapiro");
+    ObservableList<String> hospitals = FXCollections.observableArrayList("Faulkner", "Main Campus");
+    hospitalCombo.setItems(hospitals);
+  }
 
+  private AnchorPane getFloorPane(String floor) throws Exception {
+    switch (floor) {
+      case "1":
+        return mapPaneFaulkner1;
+      case "2":
+        return mapPaneFaulkner2;
+      case "3":
+        return mapPaneFaulkner3;
+      case "4":
+        return mapPaneFaulkner4;
+      case "5":
+        return mapPaneFaulkner5;
+      case "F1":
+        return mapPaneMain1;
+      case "F2":
+        return mapPaneMain2;
+      case "F3":
+        return mapPaneMain3;
+      case "G":
+        return mapPaneMainG;
+      case "L1":
+        return mapPaneMainL1;
+      case "L2":
+        return mapPaneMainL2;
+      default:
+        throw new Exception("NULL FLOOR in getFloorPane");
     }
+  }
 
-    public void setAsModifyNodeView(Node node) {
-
+  private ImageView getImageView(String floor) throws Exception {
+    switch (floor) {
+      case "1":
+        return imageViewFaulkner1;
+      case "2":
+        return imageViewFaulkner2;
+      case "3":
+        return imageViewFaulkner3;
+      case "4":
+        return imageViewFaulkner4;
+      case "5":
+        return imageViewFaulkner5;
+      case "F1":
+        return imageViewMain1;
+      case "F2":
+        return imageViewMain2;
+      case "F3":
+        return imageViewMain3;
+      case "G":
+        return imageViewMainG;
+      case "L1":
+        return imageViewMainL1;
+      case "L2":
+        return imageViewMainL2;
+      default:
+        throw new Exception("NULL FLOOR IN getImageView");
     }
+  }
 
-    public void setAsAddNodeView() {
-
+  private JFXButton getFloorButton(String floor) throws Exception {
+    switch (floor) {
+      case "1":
+        return faulknerFloor1Button;
+      case "2":
+        return faulknerFloor2Button;
+      case "3":
+        return faulknerFloor3Button;
+      case "4":
+        return faulknerFloor4Button;
+      case "5":
+        return faulknerFloor5Button;
+      case "F1":
+        return floor1Button;
+      case "F2":
+        return floor2Button;
+      case "F3":
+        return floor3Button;
+      case "G":
+        return groundButton;
+      case "L1":
+        return lower1Button;
+      case "L2":
+        return lower2Button;
+      default:
+        throw new Exception("NULL FLOOR IN getFloorButton");
     }
+  }
 
-    public void setAsMultipleNodeView() {
+  private void initializeAnchorIDs() {
+    mapPaneFaulkner1.setId("1");
+    mapPaneFaulkner2.setId("2");
+    mapPaneFaulkner3.setId("3");
+    mapPaneFaulkner4.setId("4");
+    mapPaneFaulkner5.setId("5");
+    mapPaneMain1.setId("F1");
+    mapPaneMain2.setId("F2");
+    mapPaneMain3.setId("F3");
+    mapPaneMainG.setId("G");
+    mapPaneMainL1.setId("L1");
+    mapPaneMainL1.setId("L2");
+  }
 
-    }
+  public String getShortName() {
+    return shortNameInput.getText();
+  }
 
-    public void setButtonColor(JFXButton button, String color, double opacity){
-        button.setStyle("-fx-background-radius: " + BUTTON_SIZE +"px; -fx-border-radius: "+ BUTTON_SIZE +"px; -fx-background-color: "+ color +"; -fx-border-color: #000000; -fx-border-width: 1px; -fx-opacity: " + opacity);
-    }
+  public String getLongName() {
+    return longNameInput.getText();
+  }
 
-    private double calculateXCoord(double x,String building) {
-        if ("Faulkner".equals(building)) {
-            return x * (double) PANE_WIDTH / MAP_WIDTH_FAULK;
-        } else {
-            return x * (double) PANE_WIDTH / MAP_WIDTH_MAIN ;
+  public String getXCoord() {
+    return xCoorInput.getText();
+  }
 
-        }
-    }
+  public String getYCoord() {
+    return yCoorInput.getText();
+  }
 
-    private double calculateYCoord(double y,String building) {
-        if ("Faulkner".equals(building)) {
-            return y * (double) PANE_HEIGHT / MAP_HEIGHT_FAULK;
-        } else {
-            return y * (double) PANE_HEIGHT / MAP_HEIGHT_MAIN;
-        }
-    }
+  public String getBuilding() {
+    return hospitalInput.getValue();
+  }
 
-    private void initializeComboBox() {
-        typeInput
-                .getItems()
-                .addAll(
-                        "CONF", "DEPT", "EXIT", "HALL", "INFO", "LABS", "REST", "RETL", "SERV", "STAF", "STAI");
-        hospitalInput
-                .getItems()
-                .addAll("Faulkner", "Tower", "BTM", "45 Francis", "15 Francis", "Shapiro");
-        ObservableList<String> hospitals = FXCollections.observableArrayList("Faulkner", "Main Campus");
-        hospitalCombo.setItems(hospitals);
-    }
+  public String getFloor() {
+    return floorInput.getValue();
+  }
 
-    private AnchorPane getFloorPane(String floor) throws Exception {
-        switch(floor) {
-            case "1":
-                return mapPaneFaulkner1;
-            case "2":
-                return mapPaneFaulkner2;
-            case "3":
-                return mapPaneFaulkner3;
-            case "4":
-                return mapPaneFaulkner4;
-            case "5":
-                return mapPaneFaulkner5;
-            case "F1":
-                return mapPaneMain1;
-            case "F2":
-                return mapPaneMain2;
-            case "F3":
-                return mapPaneMain3;
-            case "G":
-                return mapPaneMainG;
-            case "L1":
-                return mapPaneMainL1;
-            case "L2":
-                return mapPaneMainL2;
-            default:
-                throw new Exception("NULL FLOOR in getFloorPane");
-        }
-    }
+  public String getType() {
+    return typeInput.getValue();
+  }
 
-    private ImageView getImageView(String floor) throws Exception {
-        switch(floor) {
-            case "1":
-                return imageViewFaulkner1;
-            case "2":
-                return imageViewFaulkner2;
-            case "3":
-                return imageViewFaulkner3;
-            case "4":
-                return imageViewFaulkner4;
-            case "5":
-                return imageViewFaulkner5;
-            case "F1":
-                return imageViewMain1;
-            case "F2":
-                return imageViewMain2;
-            case "F3":
-                return imageViewMain3;
-            case "G":
-                return imageViewMainG;
-            case "L1":
-                return imageViewMainL1;
-            case "L2":
-                return imageViewMainL2;
-            default:
-                throw new Exception("NULL FLOOR IN getImageView");
-        }
-    }
+  public void validateNodeInput(ActionEvent actionEvent) {}
 
-    private void initializeAnchorIDs() {
-        mapPaneFaulkner1.setId("1");
-        mapPaneFaulkner2.setId("2");
-        mapPaneFaulkner3.setId("3");
-        mapPaneFaulkner4.setId("4");
-        mapPaneFaulkner5.setId("5");
-        mapPaneMain1.setId("F1");
-        mapPaneMain2.setId("F2");
-        mapPaneMain3.setId("F3");
-        mapPaneMainG.setId("G");
-        mapPaneMainL1.setId("L1");
-        mapPaneMainL1.setId("L2");
-    }
-
-    public String getShortName(){
-        return shortNameInput.getText();
-    }
-    public String getLongName(){
-        return longNameInput.getText();
-    }
-    public String getXCoord(){
-        return xCoorInput.getText();
-    }
-    public String getYCoord(){
-        return yCoorInput.getText();
-    }
-    public String getBuilding(){
-        return hospitalInput.getValue();
-    }
-    public String getFloor(){
-        return floorInput.getValue();
-    }
-
-    public String getType(){
-        return typeInput.getValue();
-    }
-
-
-
-
-
-
+  public void unHighlightButton(String nodeID) {
+    setButtonColor(buttonMap.get(nodeID), "#99D9EA", 0.7);
+  }
 }

@@ -593,7 +593,6 @@ public class DataMapViewController implements Initializable {
     }
   } // helper for the draw statements
 
-
   @FXML
   private void addToPane(Node node, javafx.scene.Node child) {
     if (node.getBuilding().equals("Faulkner")) {
