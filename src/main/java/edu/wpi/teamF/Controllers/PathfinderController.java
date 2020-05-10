@@ -155,6 +155,16 @@ public class PathfinderController implements Initializable {
   List<LanguageServiceRequest> languageList = databaseManager.getAllLanguageServiceRequests();
   List<SecurityRequest> securityList = databaseManager.getAllSecurityRequests();
   List<TransportRequest> tranportList = databaseManager.getAllTransportRequests();
+  ObservableList<String> tempSanitationList = FXCollections.observableArrayList();
+  ObservableList<String> tempComputerList = FXCollections.observableArrayList();
+  ObservableList<String> tempFlowerList = FXCollections.observableArrayList();
+  ObservableList<String> tempLaundryList = FXCollections.observableArrayList();
+  ObservableList<String> tempMaintenanceList = FXCollections.observableArrayList();
+  ObservableList<String> tempMariachiList = FXCollections.observableArrayList();
+  ObservableList<String> tempMedicineList = FXCollections.observableArrayList();
+  ObservableList<String> tempLanguageList = FXCollections.observableArrayList();
+  ObservableList<String> tempSecurityList = FXCollections.observableArrayList();
+  ObservableList<String> tempTransportList = FXCollections.observableArrayList();
 
   // end of path on floor button
   public JFXButton buttonOnEnd = new JFXButton();
@@ -1596,76 +1606,104 @@ public class PathfinderController implements Initializable {
     securityList = databaseManager.getAllSecurityRequests();
     tranportList = databaseManager.getAllTransportRequests();
 
-    ObservableList<String> tempSanitationList = FXCollections.observableArrayList();
+    tempSanitationList = FXCollections.observableArrayList();
     for (SanitationServiceRequest sanitationServiceRequest : sanitationList) {
       if (sanitationServiceRequest.getLocation().getId().equals(node.getId())) {
         tempSanitationList.add("Sanitation " + sanitationServiceRequest.getId());
       }
     }
 
-    ObservableList<String> tempComputerList = FXCollections.observableArrayList();
+    tempComputerList = FXCollections.observableArrayList();
     for (ComputerServiceRequest computerServiceRequest : computerList) {
       if (computerServiceRequest.getLocation().getId().equals(node.getId())) {
         tempComputerList.add("Computer " + computerServiceRequest.getId());
       }
     }
 
-    ObservableList<String> tempFlowerList = FXCollections.observableArrayList();
+    tempFlowerList = FXCollections.observableArrayList();
     for (FlowerRequest flowerRequest : flowerList) {
       if (flowerRequest.getLocation().getId().equals(node.getId())) {
         tempFlowerList.add("Flowers " + flowerRequest.getId());
       }
     }
 
-    ObservableList<String> tempLaundryList = FXCollections.observableArrayList();
+    tempLaundryList = FXCollections.observableArrayList();
     for (LaundryServiceRequest laundryServiceRequest : laundryList) {
       if (laundryServiceRequest.getLocation().getId().equals(node.getId())) {
         tempLaundryList.add("Laundry " + laundryServiceRequest.getId());
       }
     }
 
-    ObservableList<String> tempMaintenanceList = FXCollections.observableArrayList();
+    tempMaintenanceList = FXCollections.observableArrayList();
     for (MaintenanceRequest maintenanceRequest : maintenanceList) {
       if (maintenanceRequest.getLocation().getId().equals(node.getId())) {
         tempMaintenanceList.add("Maintenance " + maintenanceRequest.getId());
       }
     }
 
-    ObservableList<String> tempMariachiList = FXCollections.observableArrayList();
+    tempMariachiList = FXCollections.observableArrayList();
     for (MariachiRequest mariachiRequest : mariachiList) {
       if (mariachiRequest.getLocation().getId().equals(node.getId())) {
         tempMariachiList.add("Mariachi " + mariachiRequest.getId());
       }
     }
 
-    ObservableList<String> tempMedicineList = FXCollections.observableArrayList();
+    tempMedicineList = FXCollections.observableArrayList();
     for (MedicineDeliveryRequest medicineDeliveryRequest : medicineList) {
       if (medicineDeliveryRequest.getLocation().getId().equals(node.getId())) {
         tempMedicineList.add("Medicine " + medicineDeliveryRequest.getId());
       }
     }
 
-    ObservableList<String> tempLanguageList = FXCollections.observableArrayList();
+    tempLanguageList = FXCollections.observableArrayList();
     for (LanguageServiceRequest languageServiceRequest : languageList) {
       if (languageServiceRequest.getLocation().getId().equals(node.getId())) {
         tempLanguageList.add("Language " + languageServiceRequest.getId());
       }
     }
 
-    ObservableList<String> tempSecurityList = FXCollections.observableArrayList();
+    tempSecurityList = FXCollections.observableArrayList();
     for (SecurityRequest securityRequest : securityList) {
       if (securityRequest.getLocation().getId().equals(node.getId())) {
         tempSecurityList.add("Security " + securityRequest.getId());
       }
     }
 
-    ObservableList<String> tempTransportList = FXCollections.observableArrayList();
+    tempTransportList = FXCollections.observableArrayList();
     for (TransportRequest transportRequest : tranportList) {
       if (transportRequest.getLocation().getId().equals(node.getId())) {
         tempTransportList.add("Transport " + transportRequest.getId());
       }
     }
+  }
 
+  public List<Node> getNodesOnFloor(String floorNum) {
+    List<Node> returnList = new ArrayList<>();
+    for (Node node : globalPath.getPath()) {
+      if (node.getFloor().equals(floorNum)) {
+        returnList.add(node);
+      }
+    }
+    return returnList;
+  }
+
+  public void setNodeInfoTypeCombo() {
+    ObservableList<String> list = FXCollections.observableArrayList();
+    list.add("Computer");
+    list.add("Flower");
+    list.add("Language");
+    list.add("Laundry");
+    list.add("Maintenance");
+    list.add("Mariachi");
+    list.add("Medicine");
+    list.add("Sanitation");
+    list.add("Security");
+    list.add("Transport");
+    nodeInfoTypeCombo.setItems(list);
+  }
+
+  public void setNodeInfoCombo() {
+    ObservableList<String> blankList = FXCollections.observableArrayList();
     switch (nodeInfoTypeCombo.getValue()) {
       case "Sanitation":
         if (tempSanitationList.isEmpty()) {
@@ -1727,32 +1765,9 @@ public class PathfinderController implements Initializable {
         }
         nodeInfoCombo.setItems(tempTransportList);
         break;
+      default:
+        nodeInfoCombo.setItems(blankList);
     }
-  }
-
-  public List<Node> getNodesOnFloor(String floorNum) {
-    List<Node> returnList = new ArrayList<>();
-    for (Node node : globalPath.getPath()) {
-      if (node.getFloor().equals(floorNum)) {
-        returnList.add(node);
-      }
-    }
-    return returnList;
-  }
-
-  public void setNodeInfoTypeCombo() {
-    ObservableList<String> list = FXCollections.observableArrayList();
-    list.add("Computer");
-    list.add("Flower");
-    list.add("Language");
-    list.add("Laundry");
-    list.add("Maintenance");
-    list.add("Mariachi");
-    list.add("Medicine");
-    list.add("Sanitation");
-    list.add("Security");
-    list.add("Transport");
-    nodeInfoTypeCombo.setItems(list);
   }
 
   //  public void placeFloorEndButton(
