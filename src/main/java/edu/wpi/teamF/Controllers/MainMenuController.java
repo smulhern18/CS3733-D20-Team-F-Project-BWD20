@@ -6,9 +6,13 @@ import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,6 +22,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 public class MainMenuController implements Initializable {
 
@@ -86,30 +91,27 @@ public class MainMenuController implements Initializable {
 
   @FXML
   public void time() {
+    Calendar calendar = new GregorianCalendar();
+    int day = calendar.get(Calendar.DAY_OF_MONTH);
+    int month = calendar.get(Calendar.MONTH);
+    int year = calendar.get(Calendar.YEAR);
 
-    Thread clock =
-        new Thread(
-            () -> {
-              try {
-                while (true) {
-
-                  Calendar calendar = new GregorianCalendar();
-                  int day = calendar.get(Calendar.DAY_OF_MONTH);
-                  int month = calendar.get(Calendar.MONTH);
-                  int year = calendar.get(Calendar.YEAR);
-
-                  int second = calendar.get(Calendar.SECOND);
-                  int minute = calendar.get(Calendar.MINUTE);
-                  int hour = calendar.get(Calendar.HOUR);
-
-                  time.setText(hour + ": " + minute + ": " + second);
+    Timeline clock =
+        new Timeline(
+            new KeyFrame(
+                Duration.ZERO,
+                e -> {
+                  LocalTime currentTime = LocalTime.now();
+                  time.setText(
+                      currentTime.getHour()
+                          + ": "
+                          + currentTime.getMinute()
+                          + ": "
+                          + currentTime.getSecond());
                   date.setText(month + "/" + day + "/" + year);
-                  Thread.sleep(1000);
-                }
-              } catch (InterruptedException e) {
-                e.printStackTrace();
-              }
-            });
-    clock.start();
+                }),
+            new KeyFrame(Duration.seconds(1)));
+    clock.setCycleCount(Animation.INDEFINITE);
+    clock.play();
   }
 }
