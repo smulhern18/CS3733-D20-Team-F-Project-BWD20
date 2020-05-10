@@ -8,6 +8,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import edu.wpi.teamF.Controllers.com.twilio.phoneComms;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -22,6 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.web.WebView;
 
 public class AttractionsController implements Initializable {
   public JFXTextField searchTerm;
@@ -90,14 +92,32 @@ public class AttractionsController implements Initializable {
   public Label stars9;
   public JFXButton btn9;
   public StackPane box9;
+  public WebView webview;
+  public GoogleMaps googleMaps;
+  public Label driveTime;
+  public Label driveDistance;
+  public Label transitTime;
+  public Label transitDistance;
+  public Label bikeTime;
+  public Label bikeDistance;
+  public Label walkTime;
+  public Label walkDistance;
+  public JFXTextField phoneNumber;
+  public JFXButton sendText;
 
   public DecimalFormat decimalFormat = new DecimalFormat("#.0");
 
   public PlacesSearchResult[] results;
   public JFXComboBox currentLocation;
+  public AnchorPane mapsPane;
+  public Label commsResult;
   private GeoApiContext context =
       new GeoApiContext.Builder().apiKey("AIzaSyB61pjpz4PvzIKYCsYiwHoWQctXiw9soHc").build();
   public LatLng latLng;
+  public String searchAppend;
+  public int index;
+
+  public phoneComms phone = new phoneComms();
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -106,6 +126,7 @@ public class AttractionsController implements Initializable {
     currentLocation.getItems().addAll("Faulkner Hospital", "Main Campus");
     currentLocation.setValue("Main Campus");
     latLng = new LatLng(42.336012, -71.107716);
+    searchAppend = " near Brigham and Women's Hospital, Francis St, Boston, MA";
 
     backgroundImage.setPreserveRatio(false);
     backgroundImage.fitHeightProperty().bind(frame.heightProperty());
@@ -122,6 +143,22 @@ public class AttractionsController implements Initializable {
                   searchBtn.setDisable(false);
                 } else {
                   searchBtn.setDisable(true);
+                }
+              }
+            });
+
+    sendText.setDisable(true);
+    phoneNumber
+        .textProperty()
+        .addListener(
+            new ChangeListener<String>() {
+              @Override
+              public void changed(
+                  ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (newValue.length() == 10 && newValue.matches("[0-9]+")) {
+                  sendText.setDisable(false);
+                } else {
+                  sendText.setDisable(true);
                 }
               }
             });
@@ -152,15 +189,15 @@ public class AttractionsController implements Initializable {
     box8.setPrefHeight(0);
     box9.setVisible(false);
     box9.setPrefHeight(0);
+    mapsPane.setVisible(false);
   }
 
   public void searchBtn(ActionEvent actionEvent)
       throws InterruptedException, ApiException, IOException {
-    // TODO Figure out what Google's ranking order is and if it can be better
     PlacesSearchResponse response =
-        PlacesApi.textSearchQuery(context, searchTerm.getText())
+        PlacesApi.textSearchQuery(context, (searchTerm.getText() + searchAppend))
             .location(latLng)
-            .radius(10000)
+            .radius(50000)
             .rankby(RankBy.PROMINENCE)
             .await();
     results = response.results;
@@ -401,7 +438,31 @@ public class AttractionsController implements Initializable {
     }
   }
 
-  public void openDirections(int index) {}
+  public void openDirections(int index) {
+    this.index = index;
+    mapsPane.setVisible(true);
+    String origin = "Brigham+And+Women's+Hospital,+Francis+Street,+Boston,+MA";
+    if ("Faulkner Hospital".equals(currentLocation.getValue())) {
+      origin = "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA";
+    }
+    String destination = results[index].name.replace(' ', '+').replace("&", "%26");
+    destination += ",+";
+    destination += results[index].formattedAddress.replace(' ', '+').replace("&", "%26");
+    googleMaps = new GoogleMaps(origin, destination);
+
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedDriving870x720());
+    driveTime.setText(googleMaps.driveTime());
+    driveDistance.setText(googleMaps.driveDistance());
+    transitTime.setText(googleMaps.transitTime());
+    transitDistance.setText(googleMaps.transitDistance());
+    bikeTime.setText(googleMaps.bikeTime());
+    bikeDistance.setText(googleMaps.bikeDistance());
+    walkTime.setText(googleMaps.walkTime());
+    walkDistance.setText(googleMaps.walkDistance());
+
+    phoneNumber.setText("");
+    commsResult.setText("");
+  }
 
   public void btn0(ActionEvent actionEvent) {
     openDirections(0);
@@ -450,8 +511,63 @@ public class AttractionsController implements Initializable {
   public void currentLocation(ActionEvent actionEvent) {
     if ("Faulkner Hospital".equals(currentLocation.getValue())) {
       latLng = new LatLng(42.301681, -71.129039);
+      searchAppend = " near Brigham and Women's Faulkner Hospital, Boston, MA";
     } else {
       latLng = new LatLng(42.336012, -71.107716);
+      searchAppend = " near Brigham and Women's Hospital, Francis St, Boston, MA";
+    }
+  }
+
+  public void backBtn(ActionEvent actionEvent) {
+    mapsPane.setVisible(false);
+  }
+
+  public void modeDriving(ActionEvent actionEvent) {
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedDriving870x720());
+    driveTime.setText(googleMaps.driveTime());
+    driveDistance.setText(googleMaps.driveDistance());
+  }
+
+  public void modeTransit(ActionEvent actionEvent) {
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedTransit870x720());
+    transitTime.setText(googleMaps.transitTime());
+    transitDistance.setText(googleMaps.transitDistance());
+  }
+
+  public void modeBicycling(ActionEvent actionEvent) {
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedBicycling870x720());
+    bikeTime.setText(googleMaps.bikeTime());
+    bikeDistance.setText(googleMaps.bikeDistance());
+  }
+
+  public void modeWalking(ActionEvent actionEvent) {
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedWalking870x720());
+    walkTime.setText(googleMaps.walkTime());
+    walkDistance.setText(googleMaps.walkDistance());
+  }
+
+  public void sendText(ActionEvent actionEvent) {
+    String origin = "Brigham+And+Women's+Hospital,+Francis+Street,+Boston,+MA";
+    if ("Faulkner Hospital".equals(currentLocation.getValue())) {
+      origin = "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA";
+    }
+    String destination = results[index].name.replace(' ', '+').replace("&", "%26");
+    destination += ",+";
+    destination += results[index].formattedAddress.replace(' ', '+').replace("&", "%26");
+    String sendString =
+        "For directions from Brigham and Women's "
+            + currentLocation.getValue()
+            + " to "
+            + results[this.index].name
+            + ", please click here: https://www.google.com/maps/dir/?api=1&origin="
+            + origin
+            + "&destination="
+            + destination;
+    Boolean success = phone.sendMsg(phoneNumber.getText(), sendString);
+    if (success) {
+      commsResult.setText("Success! You will get a text\nmessage momentarily.");
+    } else {
+      commsResult.setText("Couldn't send text. Check the\nnumber & try again.");
     }
   }
 }

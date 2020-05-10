@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.web.WebView?>
 <AnchorPane fx:id="anchorPane" prefHeight="572.0" prefWidth="1075.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.AttractionsController">
 <children>
     <fx:include fx:id="mainMenu" source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
@@ -26,7 +27,7 @@
                         <Image url="@../../../../Images/boston_skyline.jpg" />
                      </image>
                   </ImageView>
-                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="975.0" style="-fx-background-color: rgba(255,255,255,0.9);">
+                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="900.0" style="-fx-background-color: rgba(255,255,255,0.9);">
                      <children>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="800.0">
                            <children>
@@ -35,7 +36,7 @@
                                     <Font size="36.0" />
                                  </font>
                                  <VBox.margin>
-                                    <Insets bottom="20.0" />
+                                    <Insets bottom="15.0" />
                                  </VBox.margin>
                               </Label>
                               <JFXTextField fx:id="searchTerm" promptText="Search for..." style="-fx-border-color: black; -fx-border-width: 1px;">
@@ -46,7 +47,7 @@
                                     <Insets bottom="5.0" left="5.0" top="5.0" />
                                  </padding>
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font size="20.0" />
                                  </font>
                               </JFXTextField>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -56,32 +57,41 @@
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <JFXComboBox fx:id="currentLocation" maxWidth="-Infinity" minWidth="-Infinity" onAction="#currentLocation" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 1px;" />
+                                    <JFXComboBox fx:id="currentLocation" maxWidth="-Infinity" minWidth="-Infinity" onAction="#currentLocation" prefWidth="180.0" style="-fx-border-color: black; -fx-border-width: 1px;">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin></JFXComboBox>
                                  </children>
+                                 <VBox.margin>
+                                    <Insets top="-10.0" />
+                                 </VBox.margin>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <JFXButton fx:id="searchBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#searchBtn" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Search" textFill="WHITE">
+                                    <JFXButton fx:id="searchBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#searchBtn" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Search" textFill="WHITE">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
                                     </JFXButton>
-                                    <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#resetBtn" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Reset" textFill="WHITE">
+                                    <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#resetBtn" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Reset" textFill="WHITE">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
                                        <HBox.margin>
-                                          <Insets left="80.0" />
+                                          <Insets left="40.0" />
                                        </HBox.margin>
                                     </JFXButton>
                                  </children>
-                              </HBox>
-                              <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="605.0">
                                  <VBox.margin>
-                                    <Insets top="20.0" />
+                                    <Insets bottom="-20.0" top="-30.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="616.0" style="-fx-background-color: #DCDCDC;">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" top="20.0" />
                                  </VBox.margin>
                                  <content>
-                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="300.0" minWidth="-Infinity" prefWidth="600.0" style="-fx-background-color: #DCDCDC;">
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="400.0" minWidth="-Infinity" prefWidth="600.0" style="-fx-background-color: #DCDCDC;">
                                        <children>
                                           <HBox fx:id="noResults" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="600.0">
                                              <children>
@@ -657,6 +667,244 @@
                         </VBox>
                      </children>
                   </HBox>
+                  <AnchorPane fx:id="mapsPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1070.0">
+                     <children>
+                        <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                               <children>
+                                  <StackPane alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="870.0">
+                                     <children>
+                                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="870.0">
+                                           <children>
+                                              <WebView fx:id="webview" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" contextMenuEnabled="false"/>
+                                           </children>
+                                        </AnchorPane>
+                                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.69" prefHeight="130.0" prefWidth="305.0" style="-fx-background-color: transparent;">
+                                           <StackPane.margin>
+                                              <Insets left="22.0" top="22.0" />
+                                           </StackPane.margin>
+                                        </HBox>
+                                     </children>
+                                  </StackPane>
+                                  <VBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">
+                                     <children>
+                                        <Label text="Live Travel" textAlignment="CENTER" wrapText="true">
+                                           <font>
+                                              <Font size="30.0" />
+                                           </font>
+                                           <VBox.margin>
+                                              <Insets bottom="-10.0" top="10.0" />
+                                           </VBox.margin>
+                                        </Label>
+                                        <Label text="Times" textAlignment="CENTER" wrapText="true">
+                                           <font>
+                                              <Font size="30.0" />
+                                           </font>
+                                           <VBox.margin>
+                                              <Insets bottom="-5.0" />
+                                           </VBox.margin>
+                                        </Label>
+                                        <HBox prefWidth="200.0">
+                                           <children>
+                                              <Label text="Powered by">
+                                                 <font>
+                                                    <Font size="12.0" />
+                                                 </font>
+                                                 <HBox.margin>
+                                                    <Insets left="10.0" right="2.0" top="7.0" />
+                                                 </HBox.margin>
+                                              </Label>
+                                              <ImageView fitHeight="150.0" fitWidth="110.0" pickOnBounds="true" preserveRatio="true">
+                                                 <image>
+                                                    <Image url="@../../../../Images/google_maps.png" />
+                                                 </image>
+                                                 <HBox.margin>
+                                                    <Insets />
+                                                 </HBox.margin>
+                                              </ImageView>
+                                           </children>
+                                           <VBox.margin>
+                                              <Insets bottom="15.0" top="5.0" />
+                                           </VBox.margin>
+                                        </HBox>
+                                        <StackPane prefHeight="80.0" prefWidth="200.0">
+                                           <children>
+                                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                                 <children>
+                                                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                       <image>
+                                                          <Image url="@../../../../Images/driving.png" />
+                                                       </image>
+                                                       <HBox.margin>
+                                                          <Insets left="20.0" top="5.0" />
+                                                       </HBox.margin>
+                                                    </ImageView>
+                                                    <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="115.0">
+                                                       <children>
+                                                          <Label fx:id="driveTime" text="1 h 10 min">
+                                                             <font>
+                                                                <Font name="System Bold" size="20.0" />
+                                                             </font>
+                                                          </Label>
+                                                          <Label fx:id="driveDistance" text="3.5 mi">
+                                                             <font>
+                                                                <Font size="14.0" />
+                                                             </font>
+                                                          </Label>
+                                                       </children>
+                                                       <HBox.margin>
+                                                          <Insets left="15.0" />
+                                                       </HBox.margin>
+                                                    </VBox>
+                                                 </children>
+                                              </HBox>
+                                              <JFXButton fx:id="modeDriving" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#modeDriving" prefHeight="80.0" prefWidth="200.0" text=" " />
+                                           </children>
+                                        </StackPane>
+                                        <StackPane prefHeight="80.0" prefWidth="200.0">
+                                           <children>
+                                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                                 <children>
+                                                    <ImageView fitHeight="56.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                                                       <image>
+                                                          <Image url="@../../../../Images/transit.png" />
+                                                       </image>
+                                                       <HBox.margin>
+                                                          <Insets left="20.0" top="5.0" />
+                                                       </HBox.margin>
+                                                    </ImageView>
+                                                    <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="115.0">
+                                                       <children>
+                                                          <Label fx:id="transitTime" text="1 h 10 min">
+                                                             <font>
+                                                                <Font name="System Bold" size="20.0" />
+                                                             </font>
+                                                          </Label>
+                                                          <Label fx:id="transitDistance" text="3.5 mi">
+                                                             <font>
+                                                                <Font size="14.0" />
+                                                             </font>
+                                                          </Label>
+                                                       </children>
+                                                       <HBox.margin>
+                                                          <Insets left="12.0" />
+                                                       </HBox.margin>
+                                                    </VBox>
+                                                 </children>
+                                              </HBox>
+                                              <JFXButton fx:id="modeTransit" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#modeTransit" prefHeight="80.0" prefWidth="200.0" text=" " />
+                                           </children>
+                                        </StackPane>
+                                        <StackPane prefHeight="80.0" prefWidth="200.0">
+                                           <children>
+                                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                                 <children>
+                                                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                       <image>
+                                                          <Image url="@../../../../Images/bicycling.png" />
+                                                       </image>
+                                                       <HBox.margin>
+                                                          <Insets left="20.0" top="5.0" />
+                                                       </HBox.margin>
+                                                    </ImageView>
+                                                    <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="115.0">
+                                                       <children>
+                                                          <Label fx:id="bikeTime" text="1 h 10 min">
+                                                             <font>
+                                                                <Font name="System Bold" size="20.0" />
+                                                             </font>
+                                                          </Label>
+                                                          <Label fx:id="bikeDistance" text="3.5 mi">
+                                                             <font>
+                                                                <Font size="14.0" />
+                                                             </font>
+                                                          </Label>
+                                                       </children>
+                                                       <HBox.margin>
+                                                          <Insets left="15.0" />
+                                                       </HBox.margin>
+                                                    </VBox>
+                                                 </children>
+                                              </HBox>
+                                              <JFXButton fx:id="modeBicycling" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#modeBicycling" prefHeight="80.0" prefWidth="200.0" text=" " />
+                                           </children>
+                                        </StackPane>
+                                        <StackPane prefHeight="80.0" prefWidth="200.0">
+                                           <children>
+                                              <HBox prefHeight="80.0" prefWidth="200.0">
+                                                 <children>
+                                                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                       <image>
+                                                          <Image url="@../../../../Images/walking.png" />
+                                                       </image>
+                                                       <HBox.margin>
+                                                          <Insets left="20.0" top="5.0" />
+                                                       </HBox.margin>
+                                                    </ImageView>
+                                                    <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="115.0">
+                                                       <children>
+                                                          <Label fx:id="walkTime" text="1 h 10 min">
+                                                             <font>
+                                                                <Font name="System Bold" size="20.0" />
+                                                             </font>
+                                                          </Label>
+                                                          <Label fx:id="walkDistance" text="3.5 mi">
+                                                             <font>
+                                                                <Font size="14.0" />
+                                                             </font>
+                                                          </Label>
+                                                       </children>
+                                                       <HBox.margin>
+                                                          <Insets left="15.0" />
+                                                       </HBox.margin>
+                                                    </VBox>
+                                                 </children>
+                                              </HBox>
+                                              <JFXButton fx:id="modeWalking" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#modeWalking" prefHeight="80.0" prefWidth="200.0" text=" " />
+                                           </children>
+                                        </StackPane>
+                                    <Label text="Send Directions:">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets left="-50.0" top="10.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <JFXTextField fx:id="phoneNumber" promptText="(10 digits, numbers only)">
+                                       <VBox.margin>
+                                          <Insets left="10.0" right="10.0" />
+                                       </VBox.margin>
+                                    </JFXTextField>
+                                    <JFXButton fx:id="sendText" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#sendText" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Send Text" textFill="WHITE">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets top="20.0" />
+                                       </VBox.margin>
+                                    </JFXButton>
+                                    <Label fx:id="commsResult" text="The result of the sending will be here" wrapText="true">
+                                       <font>
+                                          <Font size="12.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets left="10.0" right="10.0" top="2.0" />
+                                       </VBox.margin>
+                                    </Label>
+                                    <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#backBtn" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Back" textFill="WHITE">
+                                       <font>
+                                          <Font size="24.0" />
+                                       </font>
+                                       <VBox.margin>
+                                          <Insets bottom="15.0" top="30.0" />
+                                       </VBox.margin>
+                                    </JFXButton>
+                                     </children>
+                                  </VBox>
+                               </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
                </children>
             </StackPane>
          </children>

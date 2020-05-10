@@ -180,33 +180,33 @@ public class GoogleMaps {
 
   public String getDirectionsEmbedDriving870x720() {
     return "<iframe width=\"858\" height=\"700\" src=\"https://www.google.com/maps/embed/v1/directions?key=AIzaSyB61pjpz4PvzIKYCsYiwHoWQctXiw9soHc&origin="
-        + this.origin.replace(' ', '+')
+        + this.origin.replace(' ', '+').replace("&", "%26")
         + "&destination="
-        + this.destination.replace(' ', '+')
+        + this.destination.replace(' ', '+').replace("&", "%26")
         + "&mode=driving\"></iframe>";
   }
 
   public String getDirectionsEmbedTransit870x720() {
     return "<iframe width=\"858\" height=\"700\" src=\"https://www.google.com/maps/embed/v1/directions?key=AIzaSyB61pjpz4PvzIKYCsYiwHoWQctXiw9soHc&origin="
-        + this.origin.replace(' ', '+')
+        + this.origin.replace(' ', '+').replace("&", "%26")
         + "&destination="
-        + this.destination.replace(' ', '+')
+        + this.destination.replace(' ', '+').replace("&", "%26")
         + "&mode=transit\"></iframe>";
   }
 
   public String getDirectionsEmbedBicycling870x720() {
     return "<iframe width=\"858\" height=\"700\" src=\"https://www.google.com/maps/embed/v1/directions?key=AIzaSyB61pjpz4PvzIKYCsYiwHoWQctXiw9soHc&origin="
-        + this.origin.replace(' ', '+')
+        + this.origin.replace(' ', '+').replace("&", "%26")
         + "&destination="
-        + this.destination.replace(' ', '+')
+        + this.destination.replace(' ', '+').replace("&", "%26")
         + "&mode=bicycling\"></iframe>";
   }
 
   public String getDirectionsEmbedWalking870x720() {
     return "<iframe width=\"858\" height=\"700\" src=\"https://www.google.com/maps/embed/v1/directions?key=AIzaSyB61pjpz4PvzIKYCsYiwHoWQctXiw9soHc&origin="
-        + this.origin.replace(' ', '+')
+        + this.origin.replace(' ', '+').replace("&", "%26")
         + "&destination="
-        + this.destination.replace(' ', '+')
+        + this.destination.replace(' ', '+').replace("&", "%26")
         + "&mode=walking\"></iframe>";
   }
 }
