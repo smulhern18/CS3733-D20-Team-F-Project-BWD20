@@ -70,7 +70,9 @@ public class SecurityRequestController implements Initializable {
       checkStatusButton.setVisible(false);
 
       // set to user
-    } else if (userLevel == Account.Type.USER || userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+    } else if (userLevel == Account.Type.USER
+        || userLevel == Account.Type.STAFF
+        || userLevel == Account.Type.ADMIN) {
       checkStatusButton.setDisable(false);
       checkStatusButton.setVisible(true);
     }
