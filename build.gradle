@@ -59,11 +59,15 @@ dependencies {
 
     implementation 'com.google.maps:google-maps-services:0.13.0'
     implementation 'org.slf4j:slf4j-simple:1.7.25'
+
+    // https://mvnrepository.com/artifact/com.itextpdf/itextpdf
+    compile group: 'com.itextpdf', name: 'itextpdf', version: '5.0.6'
+
 }
 
 javafx {
     version = "11"
-    modules = ['javafx.controls', 'javafx.fxml']
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.swing']
 }
 
 

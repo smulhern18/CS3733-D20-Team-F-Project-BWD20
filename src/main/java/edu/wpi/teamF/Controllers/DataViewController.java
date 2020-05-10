@@ -1,22 +1,33 @@
 package edu.wpi.teamF.Controllers;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.DatabaseManipulators.ServiceRequestStats;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.print.PrinterJob;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.chart.*;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+import javax.imageio.ImageIO;
 import lombok.SneakyThrows;
 
 public class DataViewController implements Initializable {
@@ -52,6 +63,9 @@ public class DataViewController implements Initializable {
   public NumberAxis yAxisEmpTrans;
   public PieChart pieChartEmpSan;
   public PieChart pieChartCompSan;
+  public GridPane mainGridPane;
+  public GridPane transGridPane;
+  public GridPane sanGridPane;
 
   ServiceRequestStats serviceRequestStats = new ServiceRequestStats();
   DatabaseManager databaseManager = DatabaseManager.getManager();
@@ -59,6 +73,8 @@ public class DataViewController implements Initializable {
   public List<TransportRequest> tR = databaseManager.getAllTransportRequests();
   public List<SanitationServiceRequest> sR = databaseManager.getAllSanitationRequests();
   public SceneController sceneController = App.getSceneController();
+  DirectoryChooser downloadDir = new DirectoryChooser();
+  FileChooser pdfChooser = new FileChooser();
   DirectoryChooser backup = new DirectoryChooser();
 
   public DataViewController() throws Exception {}
@@ -208,12 +224,64 @@ public class DataViewController implements Initializable {
   }
 
   public void exportToPDF(ActionEvent actionEvent) {
-    // TODO: Finish this
-    PrinterJob job = PrinterJob.createPrinterJob();
-    if (job != null) {
-      job.showPrintDialog(App.getPrimaryStage());
-      job.printPage(rootPane);
-      job.endJob();
+    Document document = new Document();
+    downloadDir.setTitle("Select where to Export PDF");
+    File selDir = downloadDir.showDialog(rootPane.getScene().getWindow());
+
+    // Maintenance Grid
+    WritableImage image = mainGridPane.snapshot(new SnapshotParameters(), null);
+    File file = new File("src/main/resources/edu/wpi/teamF/PDFExporter/MaintenanceData.png");
+    // Transport Grid
+    WritableImage image2 = transGridPane.snapshot(new SnapshotParameters(), null);
+    File file2 = new File("src/main/resources/edu/wpi/teamF/PDFExporter/TransportData.png");
+    // Sanitation Grid
+    WritableImage image3 = sanGridPane.snapshot(new SnapshotParameters(), null);
+    File file3 = new File("src/main/resources/edu/wpi/teamF/PDFExporter/SanitationData.png");
+    try {
+      // Writing out to temporary folder
+      ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
+      System.out.println("Snapshot saved: " + file.getAbsolutePath());
+      ImageIO.write(SwingFXUtils.fromFXImage(image2, null), "png", file2);
+      System.out.println("Snapshot saved: " + file2.getAbsolutePath());
+      ImageIO.write(SwingFXUtils.fromFXImage(image3, null), "png", file3);
+      System.out.println("Snapshot saved: " + file3.getAbsolutePath());
+
+      FileOutputStream fos = new FileOutputStream(selDir.getAbsolutePath() + "/pdfdata.pdf");
+      PdfWriter writer = PdfWriter.getInstance(document, fos);
+      // Scaling
+      Image image1E = Image.getInstance(file.getAbsolutePath());
+      // image1E.setAbsolutePosition(50f, 50f);
+      image1E.scaleAbsolute(650, 320);
+      Image image2E = Image.getInstance(file2.getAbsolutePath());
+      // image2E.setAbsolutePosition(50f, 50f);
+      image2E.scaleAbsolute(650, 320);
+      Image image3E = Image.getInstance(file3.getAbsolutePath());
+      // image3E.setAbsolutePosition(50f, 50f);
+      image3E.scaleAbsolute(650, 320);
+
+      Paragraph para1 = new Paragraph("Maintenance Request");
+      para1.setAlignment(Element.ALIGN_CENTER);
+      Paragraph para2 = new Paragraph("Transport Request");
+      para2.setAlignment(Element.ALIGN_CENTER);
+      Paragraph para3 = new Paragraph("Sanitation Request");
+      para3.setAlignment(Element.ALIGN_CENTER);
+
+      writer.open();
+      document.open();
+      document.add(para1);
+      document.add(image1E);
+      document.newPage();
+      document.add(para2);
+      document.add(image2E);
+      document.newPage();
+      document.add(para3);
+      document.add(image3E);
+
+      document.close();
+      writer.close();
+
+    } catch (Exception e) {
+      System.out.println("Yeah something broke, fuck.");
     }
   }
 }
