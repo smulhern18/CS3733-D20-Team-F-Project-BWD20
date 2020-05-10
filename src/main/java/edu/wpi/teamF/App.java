@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class App extends Application {
-
+    
   private static SceneController sceneController;
 
   public App() throws Exception {}
