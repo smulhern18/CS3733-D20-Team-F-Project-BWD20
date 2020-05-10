@@ -156,6 +156,7 @@ public class MapView implements Initializable {
   private MapEditorController mapEditorController;
   Map<String, JFXButton> buttonMap;
   Map<String, Line> lineMap;
+  String currentFloor;
 
   @SneakyThrows
   @Override
@@ -175,8 +176,9 @@ public class MapView implements Initializable {
     uiSetting.makeZoomable(imageScrollPane, imageStackPane, 1);
     initializeComboBox();
 
-    // initializeNodeButtons();
+    initializeNodeButtons();
     initializeEdgeAnchorButtons();
+
     mapEditorController.setCancelButtonHandler(cancelButton);
     initializeAnchorIDs();
     floorButtonsSet();
@@ -185,9 +187,13 @@ public class MapView implements Initializable {
   }
 
   private void initializeNodeButtons() throws Exception {
-    mapEditorController.setAddNodeButtonHandler(addNodeButton);
-    mapEditorController.setModifyNodeButtonHandler(modifyNodeButton);
+    mapEditorController.setFloorInputHandler(floorInput);
     mapEditorController.setDeleteNodeButtonHandler(deleteNodeButton);
+    mapEditorController.setModifyNodeButtonHandler(modifyNodeButton);
+    mapEditorController.setAddNodeButtonHandler(nodeDisplayButton);
+    //    mapEditorController.setAddNodeButtonHandler(addNodeButton);
+    //    mapEditorController.setModifyNodeButtonHandler(modifyNodeButton);
+    //    mapEditorController.setDeleteNodeButtonHandler(deleteNodeButton);
   }
 
   private void initializeEdgeAnchorButtons() {
@@ -200,7 +206,7 @@ public class MapView implements Initializable {
     mapEditorController.edgeModifyButtonHandler(modifyEdgeButton);
   }
 
-  public void drawNode(Node node) throws Exception {
+  public JFXButton drawNode(Node node) throws Exception {
     JFXButton button = new JFXButton();
     button.setId(node.getId());
     button.setPrefSize(BUTTON_SIZE, BUTTON_SIZE);
@@ -212,6 +218,7 @@ public class MapView implements Initializable {
     mapEditorController.setNodeEventHandlers(button);
     getFloorPane(node.getFloor()).getChildren().add(button);
     buttonMap.put(button.getId(), button);
+    return button;
   }
 
   public Line drawEdge(Edge edge) throws Exception {
@@ -246,6 +253,17 @@ public class MapView implements Initializable {
     JFXButton button = buttonMap.get(nodeID);
     getFloorPane(button.getParent().getId()).getChildren().remove(button);
     buttonMap.remove(nodeID);
+  }
+
+  public void redrawNode(Node node) throws Exception {
+    JFXButton button = buttonMap.get(node.getId());
+    setButtonColor(button, "#99D9EA", 0.7);
+    button.setLayoutX(calculateXCoord(node.getXCoord(), node.getBuilding()) - BUTTON_SIZE / 2.0);
+    button.setLayoutY(calculateYCoord(node.getYCoord(), node.getBuilding()) - BUTTON_SIZE / 2.0);
+    if (!node.getFloor().equals(button.getParent().getId())) {
+      getFloorPane(button.getParent().getId()).getChildren().remove(button);
+      getFloorPane(node.getFloor()).getChildren().add(button);
+    }
   }
 
   public void redrawEdge(Edge edge) throws Exception {
@@ -297,6 +315,8 @@ public class MapView implements Initializable {
   }
 
   public void displayInitialNodeData(Node node) {
+    floorInput.setOnAction(null);
+    setFloorAndBuildingInput(node.getBuilding());
     shortNameInput.setText(node.getShortName());
     longNameInput.setText(node.getLongName());
     typeInput.setValue(node.getType().getTypeString());
@@ -304,19 +324,63 @@ public class MapView implements Initializable {
     hospitalInput.setValue(node.getBuilding());
     xCoorInput.setText("" + node.getXCoord());
     yCoorInput.setText("" + node.getYCoord());
+    mapEditorController.setFloorInputHandler(floorInput);
   }
 
   public void highlightUpdatedNode(
       String nodeID, double newX, double newY, String newFloor, String newBuilding)
       throws Exception {
-    JFXButton button = buttonMap.get(nodeID); //give it an already exiting node with new attributes
-    setButtonColor(button, "#012D5A", 1); //change the color of the button
+    xCoorInput.setText("" + newX);
+    yCoorInput.setText("" + newY);
+    JFXButton button = buttonMap.get(nodeID);
+    setButtonColor(button, "#012D5A", 1);
     button.setLayoutX(calculateXCoord(newX, newBuilding) - BUTTON_SIZE / 2.0);
-    button.setLayoutY(calculateYCoord(newY, newBuilding) - BUTTON_SIZE / 2.0); //set new x and y coordinates
+    button.setLayoutY(
+        calculateYCoord(newY, newBuilding) - BUTTON_SIZE / 2.0); // set new x and y coordinates
     if (!newFloor.equals(button.getParent().getId())) {
       getFloorPane(button.getParent().getId()).getChildren().remove(button);
       getFloorPane(newFloor).getChildren().add(button);
-      switchToFloor(newFloor); //if the floor id different then you switch to it
+      switchToFloor(newFloor); // if the floor id different then you switch to it
+    }
+    for (Edge edge : databaseManager.getAllEdgesConnectedToNode(nodeID)) {
+      updateEdgeWithUpdatedNode(edge, nodeID, newX, newY, newBuilding, newFloor);
+    }
+  }
+  // Only call with highlightUpdatedNode
+  private void updateEdgeWithUpdatedNode(
+      Edge edge, String nodeID, double newX, double newY, String newBuilding, String newFloor)
+      throws Exception {
+    Line line = lineMap.get(edge.getId());
+    Node node1 = databaseManager.readNode(edge.getNode1());
+    Node node2 = databaseManager.readNode(edge.getNode2());
+    if (edge.getNode1().equals(nodeID)) {
+      double startX = calculateXCoord(newX, newBuilding) + LINE_WIDTH / 2;
+      double startY = calculateYCoord(newY, newBuilding) + LINE_WIDTH / 2;
+      line.setStartX(startX);
+      line.setStartY(startY);
+      if (node2.getFloor().equals(newFloor)) {
+        line.setVisible(true);
+        if (!node2.getFloor().equals(line.getParent().getId())) {
+          getFloorPane(line.getParent().getId()).getChildren().remove(line);
+          getFloorPane(node2.getFloor()).getChildren().add(line);
+        }
+      } else {
+        line.setVisible(false);
+      }
+    } else {
+      double endX = calculateXCoord(newX, newBuilding) + LINE_WIDTH / 2;
+      double endY = calculateYCoord(newY, newBuilding) + LINE_WIDTH / 2;
+      line.setEndX(endX);
+      line.setEndY(endY);
+      if (node1.getFloor().equals(newFloor)) {
+        line.setVisible(true);
+        if (!node1.getFloor().equals(line.getParent().getId())) {
+          getFloorPane(line.getParent().getId()).getChildren().remove(line);
+          getFloorPane(node1.getFloor()).getChildren().add(line);
+        }
+      } else {
+        line.setVisible(false);
+      }
     }
   }
 
@@ -366,6 +430,7 @@ public class MapView implements Initializable {
   }
 
   public void switchToFloor(String floor) {
+    currentFloor = floor;
     try {
       if ("1".equals(floor)
           || "2".equals(floor)
@@ -592,7 +657,7 @@ public class MapView implements Initializable {
     mapPaneMain3.setId("F3");
     mapPaneMainG.setId("G");
     mapPaneMainL1.setId("L1");
-    mapPaneMainL1.setId("L2");
+    mapPaneMainL2.setId("L2");
   }
 
   public String getShortName() {
@@ -625,5 +690,30 @@ public class MapView implements Initializable {
 
   public void unHighlightButton(String nodeID) {
     setButtonColor(buttonMap.get(nodeID), "#99D9EA", 0.7);
+  }
+
+  private void setFloorAndBuildingInput(String building) {
+
+    if ("Faulkner".equals(building)) {
+      floorInput.setItems(FXCollections.observableArrayList("1", "2", "3", "4", "5"));
+      hospitalInput.setItems(FXCollections.observableArrayList("Faulkner"));
+    } else {
+      floorInput.setItems(FXCollections.observableArrayList("L2", "L1", "G", "F1", "F2", "F3"));
+      hospitalInput.setItems(
+          FXCollections.observableArrayList(
+              "FLEX", "Tower", "BTM", "45 Francis", "15 Francis", "Shapiro"));
+    }
+  }
+
+  public double getMapScaleX() {
+    return imageStackPane.getScaleX();
+  }
+
+  public double getMapScaleY() {
+    return imageStackPane.getScaleY();
+  }
+
+  public String getCurrentFloor() {
+    return currentFloor;
   }
 }
