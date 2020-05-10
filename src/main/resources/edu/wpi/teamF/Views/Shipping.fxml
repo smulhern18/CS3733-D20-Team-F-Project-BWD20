@@ -5,6 +5,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,6 +16,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
 
 <AnchorPane fx:id="anchorPane" prefHeight="572.0" prefWidth="1075.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ShippingController">
 <children>
@@ -30,7 +32,7 @@
                   </ImageView>
                   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="975.0" style="-fx-background-color: rgba(255,255,255,0.9);">
                      <children>
-                        <GridPane fx:id="servicePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0">
+                        <GridPane fx:id="servicePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="800.0">
                           <columnConstraints>
                             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
@@ -84,7 +86,7 @@
                                                       <Font size="12.0" />
                                                    </font>
                                                 </Label>
-                                                <JFXTextField fx:id="phone" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;">
+                                                <JFXTextField fx:id="phone" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" promptText="Required" style="-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;">
                                                    <font>
                                                       <Font size="12.0" />
                                                    </font>
@@ -267,6 +269,82 @@
                                                 <Font size="12.0" />
                                              </font>
                                           </JFXTextArea>
+                                          <Label text="Shipping Options:">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets top="20.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" style="-fx-border-color: black; -fx-border-width: 1px;">
+                                             <content>
+                                                <VBox fx:id="optionsPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="300.0" />
+                                             </content>
+                                          </ScrollPane>
+                                          <Label fx:id="errorMsg" text="There was an error purchasing the label. Please check the details and try again." textFill="RED" wrapText="true">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                             <font>
+                                                <Font size="12.0" />
+                                             </font>
+                                          </Label>
+                                          <VBox fx:id="labelBtns" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                                             <VBox.margin>
+                                                <Insets top="10.0" />
+                                             </VBox.margin>
+                                             <children>
+                                                <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1.0" prefWidth="1.0" style="-fx-background-color: transparent;" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="Dubai Light" size="20.0" />
+                                                   </font>
+                                                </JFXButton>
+                                                <HBox prefHeight="50.0" prefWidth="200.0">
+                                                   <children>
+                                                      <JFXButton fx:id="printLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#printLabel" prefHeight="50.0" prefWidth="140.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Print Label" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="Dubai Light" size="20.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets right="20.0" />
+                                                         </HBox.margin>
+                                                      </JFXButton>
+                                                      <JFXButton fx:id="viewLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#viewLabel" prefHeight="50.0" prefWidth="140.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="View Label" textFill="WHITE">
+                                                         <font>
+                                                            <Font name="Dubai Light" size="20.0" />
+                                                         </font>
+                                                      </JFXButton>
+                                                   </children>
+                                                </HBox>
+                                                <Label text="Send Tracking Number:">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="2.0" right="155.0" top="12.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <JFXTextField fx:id="phoneNumber" promptText="Enter Phone (10 digits, numbers only)" style="-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;">
+                                                   <VBox.margin>
+                                                      <Insets bottom="2.0" />
+                                                   </VBox.margin>
+                                                </JFXTextField>
+                                                <Label fx:id="commsResult" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="300.0" text="Success! You will receive a text message moemtarily.">
+                                                   <font>
+                                                      <Font size="10.0" />
+                                                   </font>
+                                                </Label>
+                                                <JFXButton fx:id="sendText" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#sendText" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Send Text" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="Dubai Light" size="20.0" />
+                                                   </font>
+                                                   <VBox.margin>
+                                                      <Insets bottom="10.0" top="5.0" />
+                                                   </VBox.margin>
+                                                </JFXButton>
+                                             </children>
+                                          </VBox>
                                        </children>
                                     </VBox>
                                  </children>
@@ -283,6 +361,18 @@
                         </GridPane>
                      </children>
                   </HBox>
+                  <VBox fx:id="viewLabelPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="770.0" style="-fx-background-color: white;">
+                     <children>
+                        <WebView fx:id="webview" maxHeight="680.0" maxWidth="500.0" minHeight="680.0" minWidth="500.0" prefHeight="680.0" prefWidth="500.0" />
+                        <JFXButton fx:id="closeViewLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#closeViewLabel" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Close" textFill="WHITE">
+                           <font>
+                              <Font name="Dubai Light" size="20.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="15.0" top="15.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                     </children></VBox>
                </children>
             </StackPane>
          </children>

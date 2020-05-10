@@ -9,15 +9,22 @@ import com.easypost.model.Shipment;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import edu.wpi.teamF.Controllers.com.twilio.phoneComms;
+import java.awt.*;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.*;
+import java.util.List;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.web.WebView;
 
 class sortRates implements Comparator<Rate> {
   @Override
@@ -43,10 +50,20 @@ public class ShippingController implements Initializable {
   public AnchorPane frame;
   public ImageView backgroundImage;
   public JFXTextArea verifiedAddress;
+  public VBox optionsPane;
+  public VBox labelBtns;
+  public Label errorMsg;
+  public Label commsResult;
+  public JFXButton sendText;
+  public JFXTextField phoneNumber;
+  public VBox viewLabelPane;
+  public WebView webview;
 
   public Address fromAddress;
   public DecimalFormat decimalFormat = new DecimalFormat("#.00");
   public List<Rate> ratesList;
+  public Shipment shipment;
+  private edu.wpi.teamF.Controllers.com.twilio.phoneComms phoneComms = new phoneComms();
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -79,8 +96,6 @@ public class ShippingController implements Initializable {
 
   public void verifyAndRates(ActionEvent actionEvent) {
     try {
-      // TODO: Do we actually want to verify strict? Seems to act more tightly than in the Python
-      // app
       Map<String, Object> toAddressMap = new HashMap<String, Object>();
       toAddressMap.put("name", name.getText());
       toAddressMap.put("company", company.getText());
@@ -93,7 +108,7 @@ public class ShippingController implements Initializable {
       toAddressMap.put("country", "US");
       List<String> verificationList = new ArrayList<>();
       verificationList.add("delivery");
-      toAddressMap.put("verify_strict", verificationList);
+      toAddressMap.put("verify", verificationList);
       Address toAddress = Address.create(toAddressMap);
 
       Map<String, Object> parcelMap = new HashMap<String, Object>();
@@ -123,28 +138,61 @@ public class ShippingController implements Initializable {
               + toAddress.getCountry();
       verifiedAddress.setText(verifiedAddressString);
 
-      // Now create the shipment (verification must have succeeded if we get this far
+      // Now create the shipment (verification must have succeeded if we get this far)
       Map<String, Object> shipmentMap = new HashMap<String, Object>();
       shipmentMap.put("to_address", toAddress);
       shipmentMap.put("from_address", fromAddress);
       shipmentMap.put("parcel", parcel);
-      Shipment shipment = Shipment.create(shipmentMap);
+      shipment = Shipment.create(shipmentMap);
 
       ratesList = shipment.getRates();
       Collections.sort(ratesList, new sortRates());
-      for (Rate rate : ratesList) {
-        System.out.println(
+      optionsPane.getChildren().clear();
+      optionsPane.setDisable(false);
+
+      for (int i = 0; i < ratesList.size(); i++) {
+        Rate rate = ratesList.get(i);
+        String rateString =
             rate.getCarrier()
                 + " "
                 + rate.getService()
                 + " - $"
-                + decimalFormat.format(rate.getRate()));
+                + decimalFormat.format(rate.getRate());
+        System.out.println(rateString);
+        JFXButton rateBtn = new JFXButton();
+        rateBtn.setPrefHeight(30);
+        rateBtn.setPrefWidth(300);
+        rateBtn.setText(rateString);
+        rateBtn.setAlignment(Pos.CENTER_LEFT);
+        int finalI = i;
+        rateBtn.setOnAction(actionEvent1 -> buyShipping(finalI));
+        optionsPane.getChildren().add(rateBtn);
       }
-      // Set up all of the buttons
     } catch (EasyPostException e) {
       verifiedAddress.setText(
           "Could not verify address and fetch shipping rates. Please check your inputs and try again.");
       System.out.println("Error on Address Verification and parcel creation");
+    }
+    labelBtns.setDisable(true);
+    errorMsg.setText("");
+  }
+
+  public void buyShipping(int index) {
+    optionsPane.getChildren().get(index).setStyle("-fx-background-color: #99d9ea;");
+    optionsPane.setDisable(true);
+    try {
+      Map<String, Object> buyMap = new HashMap<String, Object>();
+      buyMap.put("rate", ratesList.get(index));
+      shipment.buy(buyMap);
+      System.out.println(shipment.getPostageLabel().getLabelUrl());
+      // Successfully bought label
+      labelBtns.setDisable(false);
+    } catch (EasyPostException e) {
+      System.out.println("Error purchasing label");
+      System.out.println(e);
+      optionsPane.setDisable(true);
+      errorMsg.setText(
+          "There was an error purchasing the label. Please check the details and try again.");
     }
   }
 
@@ -166,10 +214,26 @@ public class ShippingController implements Initializable {
     weight.setText("");
     enableVerifyAndRatesBtn();
     verifiedAddress.setText("");
+    optionsPane.getChildren().clear();
+    optionsPane.setDisable(true);
+    labelBtns.setDisable(true);
+    errorMsg.setText("");
+    commsResult.setText("");
+    viewLabelPane.setVisible(false);
   }
 
   public void setListeners() {
     name.textProperty()
+        .addListener(
+            new ChangeListener<>() {
+              @Override
+              public void changed(
+                  ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                enableVerifyAndRatesBtn();
+              }
+            });
+    phone
+        .textProperty()
         .addListener(
             new ChangeListener<>() {
               @Override
@@ -256,10 +320,27 @@ public class ShippingController implements Initializable {
                 enableVerifyAndRatesBtn();
               }
             });
+
+    sendText.setDisable(true);
+    phoneNumber
+        .textProperty()
+        .addListener(
+            new ChangeListener<String>() {
+              @Override
+              public void changed(
+                  ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (newValue.length() == 10 && newValue.matches("[0-9]+")) {
+                  sendText.setDisable(false);
+                } else {
+                  sendText.setDisable(true);
+                }
+              }
+            });
   }
 
   public void enableVerifyAndRatesBtn() {
     if (name.getText().length() > 0
+        && phone.getText().length() > 9
         && address1.getText().length() > 0
         && city.getText().length() > 0
         && state.getText().length() > 1
@@ -280,5 +361,36 @@ public class ShippingController implements Initializable {
     } else {
       verifyAndRates.setDisable(true);
     }
+  }
+
+  public void printLabel(ActionEvent actionEvent) {}
+
+  public void viewLabel(ActionEvent actionEvent) {
+    viewLabelPane.setVisible(true);
+    webview
+        .getEngine()
+        .loadContent(
+            "<img src=\"" + shipment.getPostageLabel().getLabelUrl() + "\" width=\"480\">");
+  }
+
+  public void sendText(ActionEvent actionEvent) {
+    String msgString =
+        "The tracking number for your shipment to " + shipment.getToAddress().getName();
+    if (shipment.getToAddress().getCompany() != null) {
+      msgString += " at " + shipment.getToAddress().getCompany();
+    }
+    msgString += " is " + shipment.getTrackingCode() + ". ";
+    msgString += "To track your shipment, go to: " + shipment.getTracker().getPublicUrl();
+
+    Boolean success = phoneComms.sendMsg(phoneNumber.getText(), msgString);
+    if (success) {
+      commsResult.setText("Success! You will get a text message momentarily.");
+    } else {
+      commsResult.setText("Couldn't send text. Please check the number & try again.");
+    }
+  }
+
+  public void closeViewLabel(ActionEvent actionEvent) {
+    viewLabelPane.setVisible(false);
   }
 }
