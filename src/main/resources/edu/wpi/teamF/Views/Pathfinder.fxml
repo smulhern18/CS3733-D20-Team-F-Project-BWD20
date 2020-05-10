@@ -17,8 +17,8 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<?import javafx.scene.web.WebView?>
 
+<?import javafx.scene.web.WebView?>
 <AnchorPane prefHeight="953.0" prefWidth="1607.0" style="-fx-background-color: #a2a2a2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.PathfinderController">
 
 <children>
@@ -294,14 +294,26 @@
                <children>
                   <VBox prefHeight="350.0" prefWidth="300.0">
                      <children>
-                        <Label text="Directions:">
-                           <font>
-                              <Font name="System Bold" size="24.0" />
-                           </font>
-                           <VBox.margin>
-                              <Insets left="10.0" top="8.0" />
-                           </VBox.margin>
-                        </Label>
+                        <HBox prefHeight="40.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Directions:">
+                                 <font>
+                                    <Font name="System Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="elevatorLabel1" text="By Floor">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <JFXToggleButton fx:id="directionsToggle" mnemonicParsing="false" toggleColor="#012d5a" toggleLineColor="#4d6c8b" unToggleColor="#012d5a" unToggleLineColor="#4d6c8b" />
+                              <Label fx:id="stairsLabel1" text="Full">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
 
                         <VBox minHeight="250.0" prefHeight="250.0" style="-fx-border-color: #001a3c; -fx-border-width: 3px; -fx-background-color: #ffffff;">
 

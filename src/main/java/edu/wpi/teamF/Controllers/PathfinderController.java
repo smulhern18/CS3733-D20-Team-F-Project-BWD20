@@ -156,6 +156,9 @@ public class PathfinderController implements Initializable {
   public ImageView shapiroToFaulknerQR;
   public ImageView francis15ToFaulknerQR;
 
+  public JFXToggleButton directionsToggle;
+  public Boolean fullDirections = false;
+
   public List<Node> fullNodeList;
   public int state;
   public UISetting uiSetting = new UISetting();
@@ -296,7 +299,11 @@ public class PathfinderController implements Initializable {
       System.out.println("Floor: " + path.getLocationAtIndex(locationIndex).getFloor());
       System.out.println("Building: " + path.getLocationAtIndex(locationIndex).getBuilding());
 
-      directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+      if (fullDirections) {
+        directionsDisplay.setText(directions.getFullDirectionsString());
+      } else {
+        directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+      }
     } else {
       // Single floor navigation
       pathSwitchPrevious.setVisible(false);
@@ -305,6 +312,7 @@ public class PathfinderController implements Initializable {
       pathSwitchNext.setPrefHeight(0);
       btnSpacer.setPrefHeight(0);
 
+      locationIndex = 0;
       directionsDisplay.setText(directions.getFullDirectionsString());
     }
   }
@@ -490,6 +498,7 @@ public class PathfinderController implements Initializable {
     floorButtonsSet();
     initializehospitalComboBox();
     setToggleBehavior();
+    setDirectionsToggleBehavior();
     setErrorPaneButtonBehavior();
     externalDirections.setVisible(false);
     externalDirections.setPrefWidth(0);
@@ -841,7 +850,11 @@ public class PathfinderController implements Initializable {
         path.getLocationAtIndex(locationIndex).getFloor(),
         path.getLocationAtIndex(locationIndex).getBuilding());
 
-    directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+    if (fullDirections) {
+      directionsDisplay.setText(directions.getFullDirectionsString());
+    } else {
+      directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+    }
 
     if (locationIndex == 0) {
       // If we have gotten back to the first floor, disable and hide the previous button
@@ -901,7 +914,11 @@ public class PathfinderController implements Initializable {
           path.getLocationAtIndex(locationIndex).getFloor(),
           path.getLocationAtIndex(locationIndex).getBuilding());
     }
-    directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+    if (fullDirections) {
+      directionsDisplay.setText(directions.getFullDirectionsString());
+    } else {
+      directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+    }
 
     if (locationIndex == (path.getUniqueLocations() - 1)) {
       // If we have gotten to the final location, disable and hide the next button
@@ -1137,6 +1154,21 @@ public class PathfinderController implements Initializable {
           } else {
             liftType = "ELEV";
             pathFindAlgorithm.setLiftType(liftType);
+          }
+        });
+  }
+
+  private void setDirectionsToggleBehavior() {
+    directionsToggle.setDisableAnimation(true);
+    directionsToggle.setDisableVisualFocus(true);
+    directionsToggle.setOnAction(
+        actionEvent -> {
+          if (!directionsToggle.isSelected()) {
+            fullDirections = false;
+            directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+          } else {
+            fullDirections = true;
+            directionsDisplay.setText(directions.getFullDirectionsString());
           }
         });
   }
