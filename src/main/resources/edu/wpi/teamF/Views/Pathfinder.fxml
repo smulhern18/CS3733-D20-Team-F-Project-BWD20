@@ -294,23 +294,35 @@
                <children>
                   <VBox prefHeight="350.0" prefWidth="300.0">
                      <children>
-                        <HBox prefHeight="40.0" prefWidth="200.0">
+                        <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="40.0" prefWidth="200.0">
                            <children>
                               <Label text="Directions:">
                                  <font>
                                     <Font name="System Bold" size="24.0" />
                                  </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" top="5.0" />
+                                 </HBox.margin>
                               </Label>
                               <Label fx:id="elevatorLabel1" text="By Floor">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
+                                 <HBox.margin>
+                                    <Insets left="30.0" top="14.0" />
+                                 </HBox.margin>
                               </Label>
-                              <JFXToggleButton fx:id="directionsToggle" mnemonicParsing="false" toggleColor="#012d5a" toggleLineColor="#4d6c8b" unToggleColor="#012d5a" unToggleLineColor="#4d6c8b" />
+                              <JFXToggleButton fx:id="directionsToggle" mnemonicParsing="false" text=" " toggleColor="#012d5a" toggleLineColor="#4d6c8b" unToggleColor="#012d5a" unToggleLineColor="#4d6c8b">
+                                 <HBox.margin>
+                                    <Insets left="-4.0" right="-12.0" top="-5.0" />
+                                 </HBox.margin></JFXToggleButton>
                               <Label fx:id="stairsLabel1" text="Full">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
+                                 <HBox.margin>
+                                    <Insets top="15.0" />
+                                 </HBox.margin>
                               </Label>
                            </children>
                         </HBox>
