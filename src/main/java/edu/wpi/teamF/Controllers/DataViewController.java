@@ -168,6 +168,32 @@ public class DataViewController implements Initializable {
     data7 = serviceRequestStats.getSanitationEmployeeNumbersGraphs(sR);
     data8 = serviceRequestStats.getSanitationLocationNumbersGraphs(sR);
     data9 = serviceRequestStats.sanitationCompleted(sR);
+
+    for (int i = 0; i < data7.size(); i += 2) {
+      dataSeries5
+          .getData()
+          .add(new XYChart.Data<>(data7.get(i), Integer.parseInt(data7.get(i + 1))));
+    }
+    for (int i = 0; i < data8.size(); i += 2) {
+      dataSeries6
+          .getData()
+          .add(new XYChart.Data<>(data8.get(i), Integer.parseInt(data8.get(i + 1))));
+    }
+
+    barSaniLoc.getData().add(dataSeries5);
+    barSanCom.getData().add(dataSeries6);
+
+    ObservableList<PieChart.Data> pieChartData4 = FXCollections.observableArrayList();
+    for (int i = 0; i < data7.size(); i += 2) {
+      pieChartData4.add(new PieChart.Data(data7.get(i), Integer.parseInt(data7.get(i + 1))));
+    }
+    pieChartEmpSan.setData(pieChartData4);
+
+    ObservableList<PieChart.Data> pieChartData7 = FXCollections.observableArrayList();
+    for (int i = 0; i < data9.size(); i += 2) {
+      pieChartData7.add(new PieChart.Data(data9.get(i), Integer.parseInt(data9.get(i + 1))));
+    }
+    pieChartCompSan.setData(pieChartData7);
   }
 
   public void back(ActionEvent actionEvent) throws IOException {
