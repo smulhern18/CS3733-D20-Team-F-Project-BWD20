@@ -1,9 +1,6 @@
 package edu.wpi.teamF.Controllers;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
@@ -269,12 +266,24 @@ public class DataViewController implements Initializable {
       writer.open();
       document.open();
       document.add(para1);
+      document.add(Chunk.NEWLINE);
+      document.add(Chunk.NEWLINE);
+      document.add(Chunk.NEWLINE);
+      document.add(Chunk.NEWLINE);
       document.add(image1E);
       document.newPage();
       document.add(para2);
+      document.add(Chunk.NEWLINE);
+      document.add(Chunk.NEWLINE);
+      document.add(Chunk.NEWLINE);
+      document.add(Chunk.NEWLINE);
       document.add(image2E);
       document.newPage();
       document.add(para3);
+      document.add(Chunk.NEWLINE);
+      document.add(Chunk.NEWLINE);
+      document.add(Chunk.NEWLINE);
+      document.add(Chunk.NEWLINE);
       document.add(image3E);
 
       document.close();
