@@ -65,12 +65,14 @@ public class SecurityRequestController implements Initializable {
     backgroundImage.fitWidthProperty().bind(anchorPane.widthProperty());
     backgroundImage.fitHeightProperty().bind(anchorPane.heightProperty());
     Account.Type userLevel = databaseManager.getPermissions();
-    if (userLevel == Account.Type.USER) {
+    if (userLevel == null) {
       checkStatusButton.setDisable(true);
+      checkStatusButton.setVisible(false);
 
       // set to user
-    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+    } else if (userLevel == Account.Type.USER || userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
       checkStatusButton.setDisable(false);
+      checkStatusButton.setVisible(true);
     }
     // add the different choices to the choicebox
     // Replace this with long names, linked to IDs

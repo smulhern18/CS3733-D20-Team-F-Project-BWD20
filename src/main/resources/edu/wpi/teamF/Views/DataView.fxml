@@ -32,7 +32,7 @@
                   <Font size="17.0" />
                </font>
             </JFXButton>
-            <JFXButton disable="true" prefHeight="42.0" prefWidth="102.0" style="-fx-background-color: #012d5a;" text="Export To PDF" textFill="WHITE" visible="false" GridPane.columnIndex="1">
+            <JFXButton onAction="#exportToPDF" prefHeight="42.0" prefWidth="102.0" style="-fx-background-color: #012d5a;" text="Export To PDF" textFill="WHITE" GridPane.columnIndex="1">
                <font>
                   <Font size="13.0" />
                </font>

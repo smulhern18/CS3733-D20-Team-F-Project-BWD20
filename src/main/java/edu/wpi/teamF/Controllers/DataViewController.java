@@ -205,4 +205,8 @@ public class DataViewController implements Initializable {
     File selDir = backup.showDialog(rootPane.getScene().getWindow());
     serviceRequestStats.downloadStatistics(selDir.toPath());
   }
+
+  public void exportToPDF(ActionEvent actionEvent) {
+    // TODO: Finish this
+  }
 }
