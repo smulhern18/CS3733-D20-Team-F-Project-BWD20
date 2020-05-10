@@ -81,9 +81,9 @@ public class DataViewController implements Initializable {
     List<String> data3;
     XYChart.Series dataSeries1 = new XYChart.Series<>();
     XYChart.Series dataSeries2 = new XYChart.Series<>();
-    data1 = serviceRequestStats.getMaintenanceEmployeeNumbersGraphs(mR);
-    data2 = serviceRequestStats.getMaintenanceLocationNumbersGraphs(mR);
-    data3 = serviceRequestStats.maintenanceCompleted(mR);
+    data1 = serviceRequestStats.top5(serviceRequestStats.getMaintenanceEmployeeNumbersGraphs(mR));
+    data2 = serviceRequestStats.top5(serviceRequestStats.getMaintenanceLocationNumbersGraphs(mR));
+    data3 = serviceRequestStats.top5(serviceRequestStats.maintenanceCompleted(mR));
 
     // completed Graph to show number of completed requests per employee
 
