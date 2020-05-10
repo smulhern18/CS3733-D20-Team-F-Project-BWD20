@@ -28,6 +28,7 @@ import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -140,7 +141,9 @@ public class PathfinderController implements Initializable {
   public AnchorPane nodeInfoPane;
   public Label nodeInfoLabel1;
   public Label nodeInfoLabel2;
+  public Label nodeInfoLabel3;
   public JFXButton nodeInfoButton;
+  public JFXComboBox<String> nodeInfoCombo;
   Account.Type userLevel = databaseManager.getPermissions();
   List<SanitationServiceRequest> sanitationList = databaseManager.getAllSanitationRequests();
 
@@ -1501,5 +1504,27 @@ public class PathfinderController implements Initializable {
   public void setNodeInfoLabels(Node node) {
     nodeInfoLabel1.setText(node.getLongName());
     nodeInfoLabel2.setText(node.getId());
+
+    if (userLevel == null || userLevel == Account.Type.USER) {
+      nodeInfoLabel3.setVisible(false);
+      nodeInfoCombo.setVisible(false);
+    } else {
+      nodeInfoLabel3.setVisible(true);
+      nodeInfoCombo.setVisible(true);
+    }
+
+    sanitationList = databaseManager.getAllSanitationRequests();
+
+    ObservableList<String> tempSanitationList = FXCollections.observableArrayList();
+    for (SanitationServiceRequest sanitationServiceRequest : sanitationList) {
+      if (sanitationServiceRequest.getLocation().getId().equals(node.getId())) {
+        tempSanitationList.add(
+            sanitationServiceRequest.getType() + " " + sanitationServiceRequest.getId());
+      }
+    }
+    if (tempSanitationList.isEmpty()) {
+      tempSanitationList.add("No service requests");
+    }
+    nodeInfoCombo.setItems(tempSanitationList);
   }
 }
