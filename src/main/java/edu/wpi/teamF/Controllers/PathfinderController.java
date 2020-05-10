@@ -8,12 +8,14 @@ import com.jfoenix.controls.JFXToggleButton;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Directions.Directions;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.*;
 import edu.wpi.teamF.ModelClasses.Scorer.EuclideanScorer;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ReportsClass;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.SanitationServiceRequest;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
@@ -53,7 +56,7 @@ public class PathfinderController implements Initializable {
   public static int MAP_HEIGHT = 1485;
   public static int MAP_WIDTH = 2475;
   public static DatabaseManager databaseManager = DatabaseManager.getManager();
-  SceneController sceneController = App.getSceneController();
+  public SceneController sceneController = App.getSceneController();
   // public int currentFloor;
   public AnchorPane currentPane;
   public AnchorPane mainMapPane;
@@ -132,6 +135,14 @@ public class PathfinderController implements Initializable {
   public Label errorPaneLabel1;
   public Label errorPaneLabel2;
   public JFXButton errorPaneButton;
+
+  // node info stuff
+  public AnchorPane nodeInfoPane;
+  public Label nodeInfoLabel1;
+  public Label nodeInfoLabel2;
+  public JFXButton nodeInfoButton;
+  Account.Type userLevel = databaseManager.getPermissions();
+  List<SanitationServiceRequest> sanitationList = databaseManager.getAllSanitationRequests();
 
   // intermediate maps stuff
   public ImageView faulknerTo45FrancisImage;
@@ -346,6 +357,20 @@ public class PathfinderController implements Initializable {
     button.setLayoutX(xPos);
     button.setLayoutY(yPos);
 
+    button.setOnMouseClicked(
+        actionEvent -> {
+          if (actionEvent.getButton() == MouseButton.SECONDARY) {
+            nodeInfoPane.setVisible(true);
+            Node whichNode = null;
+            for (Node thisNode : fullNodeList) {
+              if (thisNode.getId().equals(button.getId())) {
+                whichNode = thisNode;
+              }
+            }
+            setNodeInfoLabels(whichNode);
+          }
+        });
+
     button.setOnAction(
         actionEvent -> {
           if (startNode == node && state == 1) { // Click again to de-select if start has been set
@@ -500,6 +525,7 @@ public class PathfinderController implements Initializable {
     mapPaneFaulkner1.setVisible(true);
     imageViewFaulkner1.setVisible(true);
     errorPane.setVisible(false);
+    nodeInfoPane.setVisible(false);
     floorButtonsSet();
     initializehospitalComboBox();
     setToggleBehavior();
@@ -1391,19 +1417,19 @@ public class PathfinderController implements Initializable {
       System.out.println("vVal =");
       System.out.println(vVal);
       if (vVal < 0.25) {
-        vVal = vVal - (0.55 * ((yDiff / FAULKNER_MAP_WIDTH)));
+        vVal = vVal - (0.5 * ((yDiff / FAULKNER_MAP_WIDTH)));
       } else if (vVal < 0.33) {
-        vVal = vVal - (0.45 * ((yDiff / FAULKNER_MAP_WIDTH)));
+        vVal = vVal - (0.4 * ((yDiff / FAULKNER_MAP_WIDTH)));
       } else if (vVal < 0.4) {
-        vVal = vVal - (0.33 * ((yDiff / FAULKNER_MAP_WIDTH)));
+        vVal = vVal - (0.3 * ((yDiff / FAULKNER_MAP_WIDTH)));
       } else if (vVal < 0.5) {
         vVal = vVal - (0.2 * ((yDiff / FAULKNER_MAP_WIDTH)));
       } else if (vVal > 0.75) {
-        vVal = vVal + (0.55 * ((yDiff / FAULKNER_MAP_WIDTH)));
+        vVal = vVal + (0.5 * ((yDiff / FAULKNER_MAP_WIDTH)));
       } else if (vVal > 0.67) {
-        vVal = vVal + (0.45 * ((yDiff / FAULKNER_MAP_WIDTH)));
+        vVal = vVal + (0.4 * ((yDiff / FAULKNER_MAP_WIDTH)));
       } else if (vVal > 0.6) {
-        vVal = vVal + (0.33 * ((yDiff / FAULKNER_MAP_WIDTH)));
+        vVal = vVal + (0.3 * ((yDiff / FAULKNER_MAP_WIDTH)));
       } else if (vVal > 0.5) {
         System.out.println("In here");
         vVal = vVal + (0.2 * ((yDiff / FAULKNER_MAP_WIDTH)));
@@ -1444,19 +1470,19 @@ public class PathfinderController implements Initializable {
       System.out.println("vVal =");
       System.out.println(vVal);
       if (vVal < 0.25) {
-        vVal = vVal - (0.55 * ((yDiff / MAIN_MAP_WIDTH)));
+        vVal = vVal - (0.5 * ((yDiff / MAIN_MAP_WIDTH)));
       } else if (vVal < 0.33) {
-        vVal = vVal - (0.45 * ((yDiff / MAIN_MAP_WIDTH)));
+        vVal = vVal - (0.4 * ((yDiff / MAIN_MAP_WIDTH)));
       } else if (vVal < 0.4) {
-        vVal = vVal - (0.33 * ((yDiff / MAIN_MAP_WIDTH)));
+        vVal = vVal - (0.3 * ((yDiff / MAIN_MAP_WIDTH)));
       } else if (vVal < 0.5) {
         vVal = vVal - (0.2 * ((yDiff / MAIN_MAP_WIDTH)));
       } else if (vVal > 0.75) {
-        vVal = vVal + (0.55 * ((yDiff / MAIN_MAP_WIDTH)));
+        vVal = vVal + (0.5 * ((yDiff / MAIN_MAP_WIDTH)));
       } else if (vVal > 0.67) {
-        vVal = vVal + (0.45 * ((yDiff / MAIN_MAP_WIDTH)));
+        vVal = vVal + (0.4 * ((yDiff / MAIN_MAP_WIDTH)));
       } else if (vVal > 0.6) {
-        vVal = vVal + (0.33 * ((yDiff / MAIN_MAP_WIDTH)));
+        vVal = vVal + (0.3 * ((yDiff / MAIN_MAP_WIDTH)));
       } else if (vVal > 0.5) {
         vVal = vVal + (0.2 * ((yDiff / MAIN_MAP_WIDTH)));
       }
@@ -1464,5 +1490,16 @@ public class PathfinderController implements Initializable {
     uiSetting.setScrollPaneValues(hVal, vVal);
     System.out.println(
         "Out of zoomToPath() --------------------------------------------------------------------");
+  }
+
+  public void nodeInfoButtonBehavior() {
+    nodeInfoLabel1.setText("");
+    nodeInfoLabel2.setText("");
+    nodeInfoPane.setVisible(false);
+  }
+
+  public void setNodeInfoLabels(Node node) {
+    nodeInfoLabel1.setText(node.getLongName());
+    nodeInfoLabel2.setText(node.getId());
   }
 }

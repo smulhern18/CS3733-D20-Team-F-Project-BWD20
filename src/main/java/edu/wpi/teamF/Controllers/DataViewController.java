@@ -41,13 +41,12 @@ public class DataViewController implements Initializable {
   public PieChart pieChartEmpTrans;
   public PieChart pieChartCompTrans;
 
+  // Sanitation Requests
 
-  //Sanitation Requests
-
-  public BarChart<?,?> barSaniLoc;
+  public BarChart<?, ?> barSaniLoc;
   public CategoryAxis xAxisLocSan;
   public NumberAxis yAxisLocSan;
-  public BarChart<?,?> barSanCom;
+  public BarChart<?, ?> barSanCom;
   public CategoryAxis xAxisEmpTrans;
   public NumberAxis yAxisEmpTrans;
   public PieChart pieChartEmpSan;
@@ -159,8 +158,7 @@ public class DataViewController implements Initializable {
     }
     pieChartCompTrans.setData(pieChartData5);
 
-
-    //Sanitation Request
+    // Sanitation Request
     List<String> data7;
     List<String> data8;
     List<String> data9;
@@ -170,7 +168,6 @@ public class DataViewController implements Initializable {
     data7 = serviceRequestStats.getSanitationEmployeeNumbersGraphs(sR);
     data8 = serviceRequestStats.getSanitationLocationNumbersGraphs(sR);
     data9 = serviceRequestStats.sanitationCompleted(sR);
-
   }
 
   public void back(ActionEvent actionEvent) throws IOException {
