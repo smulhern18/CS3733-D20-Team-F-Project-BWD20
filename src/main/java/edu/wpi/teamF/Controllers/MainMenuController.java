@@ -6,8 +6,11 @@ import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -30,6 +33,8 @@ public class MainMenuController implements Initializable {
   public JFXButton serviceRequestButton;
   public Rectangle blueRectangle;
   public DatabaseManager dbm = DatabaseManager.getManager();
+  public Label time;
+  public Label date;
 
   SceneController sceneController = App.getSceneController();
 
@@ -69,5 +74,43 @@ public class MainMenuController implements Initializable {
     }
     background.fitWidthProperty().bind(anchorPane.widthProperty());
     background.fitHeightProperty().bind(anchorPane.heightProperty());
+    time();
+  }
+
+  // Time
+  @FXML private Label Time;
+
+  private int minute;
+  private int hour;
+  private int second;
+
+  @FXML
+  public void time() {
+
+    Thread clock = new Thread(){
+      public void run(){
+        try {
+          for (;;){
+          Calendar calendar = new GregorianCalendar();
+          int day = calendar.get(Calendar.DAY_OF_MONTH);
+          int month = calendar.get(Calendar.MONTH);
+          int year = calendar.get(Calendar.YEAR);
+
+          int second = calendar.get(Calendar.SECOND);
+          int minute = calendar.get(Calendar.MINUTE);
+          int hour = calendar.get(Calendar.HOUR);
+
+          time.setText(hour + ": " + minute + ": " + second);
+          date.setText(month + "/" + day + "/" + year);
+          sleep(1000);
+        } }
+        catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+      }
+    };
+    clock.start();
+
+
   }
 }
