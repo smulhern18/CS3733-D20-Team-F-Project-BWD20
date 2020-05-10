@@ -175,7 +175,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (MaintenanceRequest m : maintenanceRequests) {
-      nodeNum.add(m.getLocation().getShortName());
+      nodeNum.add(m.getLocation().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -208,26 +208,30 @@ public class ServiceRequestStats {
     return total;
   }
 
+
   public ArrayList<String>  maintenanceCompleted(List<MaintenanceRequest> requests){
 
-      ArrayList<String> nodeNum = new ArrayList<String>();
-      ArrayList<String> csvStyled = new ArrayList<String>();
-      for (MaintenanceRequest m : requests) {
-        nodeNum.add(Boolean.toString(m.getComplete()));
+
+    ArrayList<String> nodeNum = new ArrayList<String>();
+    ArrayList<String> csvStyled = new ArrayList<String>();
+    for (MaintenanceRequest m : requests) {
+      if (m.getComplete()) {
+        nodeNum.add("Complete");
+      } else {
+        nodeNum.add("Incomplete");
       }
-      Map<String, Long> frequency =
-          nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    }
+    Map<String, Long> frequency =
+        nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-      for (Map.Entry<String, Long> entry : frequency.entrySet()) {
-        if (entry.getValue() > 0) {
-          csvStyled.add(entry.getKey());
-          csvStyled.add("" + entry.getValue());
-        }
+    for (Map.Entry<String, Long> entry : frequency.entrySet()) {
+      if (entry.getValue() > 0) {
+        csvStyled.add(entry.getKey());
+        csvStyled.add("" + entry.getValue());
       }
+    }
 
-      return csvStyled;
-
-
+    return csvStyled;
   }
 
   public void TransportRequestStats(Path path) {
@@ -427,7 +431,9 @@ public class ServiceRequestStats {
     }
     return total;
   }
+
   public ArrayList<String>  transportCompleted(List<TransportRequest> requests) {
+
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -447,8 +453,7 @@ public class ServiceRequestStats {
     return csvStyled;
   }
 
-
-    public void ComputerRequestStats(Path path) {
+  public void ComputerRequestStats(Path path) {
     List<ComputerServiceRequest> computerServiceRequestList =
         computerServiceRequestFactory.getAllComputerRequests();
     if (computerServiceRequestList.size() != 0) {
@@ -558,6 +563,7 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
+
   public ArrayList<String>  computerCompleted(List<ComputerServiceRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
@@ -683,6 +689,7 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
+
   public ArrayList<String>  flowerCompleted(List<FlowerRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
@@ -702,6 +709,7 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
+
   public void LanguageRequestStats(Path path) {
     List<LanguageServiceRequest> serviceRequests =
         languageServiceRequestFactory.getAllLanguageRequests();
@@ -812,7 +820,10 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
+
+
   public ArrayList<String>  languageCompleted(List<LanguageServiceRequest> requests) {
+
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -831,6 +842,7 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
+
   public void LaundryRequestStats(Path path) {
     List<LaundryServiceRequest> serviceRequests =
         laundryServiceRequestFactory.getAllLaundryRequests();
@@ -941,6 +953,7 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
+
   public ArrayList<String>  laundryCompleted(List<LaundryServiceRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
@@ -960,6 +973,7 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
+
   public void MariachiRequestStats(Path path) {
     List<MariachiRequest> serviceRequests = mariachiRequestFactory.getAllMariachiRequest();
     if (serviceRequests.size() != 0) {
@@ -1065,6 +1079,8 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
+
+
   public ArrayList<String>  mariachiCompleted(List<MariachiRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
@@ -1084,6 +1100,7 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
+
   public void MedicineRequestStats(Path path) {
     List<MedicineDeliveryRequest> serviceRequests =
         medicineDeliveryRequestFactory.getAllMedicineDeliveryRequests();
@@ -1194,6 +1211,7 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
+
   public ArrayList<String>  medicineCompleted(List<MedicineDeliveryRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
@@ -1213,6 +1231,7 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
+
   public void SanitationRequestStats(Path path) {
     List<SanitationServiceRequest> serviceRequests =
         sanitationServiceRequestFactory.getAllSanitationRequests();
@@ -1324,7 +1343,9 @@ public class ServiceRequestStats {
     return csvStyled;
   }
 
+
   public ArrayList<String>  sanitationCompleted(List<SanitationServiceRequest> requests) {
+
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -1343,6 +1364,7 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
+
   public void SecurityRequestStats(Path path) {
     List<SecurityRequest> serviceRequests = securityRequestFactory.getAllSecurityRequest();
     if (serviceRequests.size() != 0) {
@@ -1448,6 +1470,7 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
+
   public ArrayList<String>  securityCompleted(List<SecurityRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
@@ -1467,6 +1490,7 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
+
   public void ReportsRequestStats(Path path) {
     List<ReportsClass> reportsClasses = reportsFactory.getAllReports();
     if (reportsClasses.size() != 0) {
