@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXTextArea?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -12,7 +13,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.web.WebView?>
 
 <AnchorPane fx:id="anchorPane" prefHeight="572.0" prefWidth="1075.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.AttractionsController">
 <children>
@@ -30,34 +30,633 @@
                      <children>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="800.0">
                            <children>
-                              <Label text="Find Attractions">
+                              <Label text="Find Attractions &amp; Restaurants">
                                  <font>
                                     <Font size="36.0" />
                                  </font>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" />
+                                 </VBox.margin>
                               </Label>
-                              <JFXTextField fx:id="searchTerm">
+                              <JFXTextField fx:id="searchTerm" promptText="Search for..." style="-fx-border-color: black; -fx-border-width: 1px;">
                                  <VBox.margin>
                                     <Insets left="200.0" right="200.0" />
                                  </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                 </padding>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
                               </JFXTextField>
-                              <JFXButton fx:id="searchBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#searchBtn" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Search" textFill="WHITE">
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Label text="Current Location:  ">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <JFXComboBox fx:id="currentLocation" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 1px;" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXButton fx:id="searchBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#searchBtn" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Search" textFill="WHITE">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                    </JFXButton>
+                                    <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#resetBtn" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Reset" textFill="WHITE">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="80.0" />
+                                       </HBox.margin>
+                                    </JFXButton>
+                                 </children>
+                              </HBox>
+                              <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="605.0">
                                  <VBox.margin>
                                     <Insets top="20.0" />
                                  </VBox.margin>
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </JFXButton>
-                              <JFXTextArea fx:id="resultsBox">
-                                 <VBox.margin>
-                                    <Insets bottom="50.0" left="200.0" right="200.0" top="50.0" />
-                                 </VBox.margin>
-                              </JFXTextArea>
+                                 <content>
+                                    <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="300.0" minWidth="-Infinity" prefWidth="600.0" style="-fx-background-color: #DCDCDC;">
+                                       <children>
+                                          <HBox fx:id="noResults" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="600.0">
+                                             <children>
+                                                <Label text="No Results Found">
+                                                   <font>
+                                                      <Font size="18.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </HBox>
+                                          <StackPane fx:id="box0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0">
+                                             <children>
+                                                <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: white;">
+                                                   <children>
+                                                      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="450.0">
+                                                         <children>
+                                                            <Label fx:id="name0" text="Location Name this is the name of the attraction">
+                                                               <font>
+                                                                  <Font name="System Bold" size="18.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="address0" text="Address 123 Anywhere St, Worcester, MA, 01605, USA USA USA USA">
+                                                               <font>
+                                                                  <Font size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="open0" text="Currently Open" textFill="#07a31f">
+                                                               <font>
+                                                                  <Font name="System Bold" size="14.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets top="2.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                         <padding>
+                                                            <Insets left="5.0" top="3.0" />
+                                                         </padding>
+                                                      </VBox>
+                                                      <ImageView fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../../Images/star.png" />
+                                                         </image>
+                                                         <HBox.margin>
+                                                            <Insets left="5.0" top="15.0" />
+                                                         </HBox.margin>
+                                                      </ImageView>
+                                                      <Label fx:id="stars0" text="5.0">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets left="8.0" top="17.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <JFXButton fx:id="btn0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btn0" prefHeight="75.0" prefWidth="600.0" text=" " />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets bottom="2.0" />
+                                             </VBox.margin>
+                                          </StackPane>
+                                          <StackPane fx:id="box1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0">
+                                             <children>
+                                                <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: white;">
+                                                   <children>
+                                                      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="450.0">
+                                                         <children>
+                                                            <Label fx:id="name1" text="Location Name this is the name of the attraction">
+                                                               <font>
+                                                                  <Font name="System Bold" size="18.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="address1" text="Address 123 Anywhere St, Worcester, MA, 01605, USA USA USA USA">
+                                                               <font>
+                                                                  <Font size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="open1" text="Currently Open" textFill="#07a31f">
+                                                               <font>
+                                                                  <Font name="System Bold" size="14.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets top="2.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                         <padding>
+                                                            <Insets left="5.0" top="3.0" />
+                                                         </padding>
+                                                      </VBox>
+                                                      <ImageView fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../../Images/star.png" />
+                                                         </image>
+                                                         <HBox.margin>
+                                                            <Insets left="5.0" top="15.0" />
+                                                         </HBox.margin>
+                                                      </ImageView>
+                                                      <Label fx:id="stars1" text="5.0">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets left="8.0" top="17.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <JFXButton fx:id="btn1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btn1" prefHeight="75.0" prefWidth="600.0" text=" " />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets bottom="2.0" />
+                                             </VBox.margin>
+                                          </StackPane>
+                                          <StackPane fx:id="box2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0">
+                                             <children>
+                                                <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: white;">
+                                                   <children>
+                                                      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="450.0">
+                                                         <children>
+                                                            <Label fx:id="name2" text="Location Name this is the name of the attraction">
+                                                               <font>
+                                                                  <Font name="System Bold" size="18.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="address2" text="Address 123 Anywhere St, Worcester, MA, 01605, USA USA USA USA">
+                                                               <font>
+                                                                  <Font size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="open2" text="Currently Open" textFill="#07a31f">
+                                                               <font>
+                                                                  <Font name="System Bold" size="14.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets top="2.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                         <padding>
+                                                            <Insets left="5.0" top="3.0" />
+                                                         </padding>
+                                                      </VBox>
+                                                      <ImageView fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../../Images/star.png" />
+                                                         </image>
+                                                         <HBox.margin>
+                                                            <Insets left="5.0" top="15.0" />
+                                                         </HBox.margin>
+                                                      </ImageView>
+                                                      <Label fx:id="stars2" text="5.0">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets left="8.0" top="17.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <JFXButton fx:id="btn2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btn2" prefHeight="75.0" prefWidth="600.0" text=" " />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets bottom="2.0" />
+                                             </VBox.margin>
+                                          </StackPane>
+                                          <StackPane fx:id="box3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0">
+                                             <children>
+                                                <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: white;">
+                                                   <children>
+                                                      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="450.0">
+                                                         <children>
+                                                            <Label fx:id="name3" text="Location Name this is the name of the attraction">
+                                                               <font>
+                                                                  <Font name="System Bold" size="18.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="address3" text="Address 123 Anywhere St, Worcester, MA, 01605, USA USA USA USA">
+                                                               <font>
+                                                                  <Font size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="open3" text="Currently Open" textFill="#07a31f">
+                                                               <font>
+                                                                  <Font name="System Bold" size="14.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets top="2.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                         <padding>
+                                                            <Insets left="5.0" top="3.0" />
+                                                         </padding>
+                                                      </VBox>
+                                                      <ImageView fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../../Images/star.png" />
+                                                         </image>
+                                                         <HBox.margin>
+                                                            <Insets left="5.0" top="15.0" />
+                                                         </HBox.margin>
+                                                      </ImageView>
+                                                      <Label fx:id="stars3" text="5.0">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets left="8.0" top="17.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <JFXButton fx:id="btn3" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btn3" prefHeight="75.0" prefWidth="600.0" text=" " />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets bottom="2.0" />
+                                             </VBox.margin>
+                                          </StackPane>
+                                          <StackPane fx:id="box4" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0">
+                                             <children>
+                                                <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: white;">
+                                                   <children>
+                                                      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="450.0">
+                                                         <children>
+                                                            <Label fx:id="name4" text="Location Name this is the name of the attraction">
+                                                               <font>
+                                                                  <Font name="System Bold" size="18.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="address4" text="Address 123 Anywhere St, Worcester, MA, 01605, USA USA USA USA">
+                                                               <font>
+                                                                  <Font size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="open4" text="Currently Open" textFill="#07a31f">
+                                                               <font>
+                                                                  <Font name="System Bold" size="14.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets top="2.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                         <padding>
+                                                            <Insets left="5.0" top="3.0" />
+                                                         </padding>
+                                                      </VBox>
+                                                      <ImageView fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../../Images/star.png" />
+                                                         </image>
+                                                         <HBox.margin>
+                                                            <Insets left="5.0" top="15.0" />
+                                                         </HBox.margin>
+                                                      </ImageView>
+                                                      <Label fx:id="stars4" text="5.0">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets left="8.0" top="17.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <JFXButton fx:id="btn4" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btn4" prefHeight="75.0" prefWidth="600.0" text=" " />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets bottom="2.0" />
+                                             </VBox.margin>
+                                          </StackPane>
+                                          <StackPane fx:id="box5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0">
+                                             <children>
+                                                <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: white;">
+                                                   <children>
+                                                      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="450.0">
+                                                         <children>
+                                                            <Label fx:id="name5" text="Location Name this is the name of the attraction">
+                                                               <font>
+                                                                  <Font name="System Bold" size="18.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="address5" text="Address 123 Anywhere St, Worcester, MA, 01605, USA USA USA USA">
+                                                               <font>
+                                                                  <Font size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="open5" text="Currently Open" textFill="#07a31f">
+                                                               <font>
+                                                                  <Font name="System Bold" size="14.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets top="2.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                         <padding>
+                                                            <Insets left="5.0" top="3.0" />
+                                                         </padding>
+                                                      </VBox>
+                                                      <ImageView fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../../Images/star.png" />
+                                                         </image>
+                                                         <HBox.margin>
+                                                            <Insets left="5.0" top="15.0" />
+                                                         </HBox.margin>
+                                                      </ImageView>
+                                                      <Label fx:id="stars5" text="5.0">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets left="8.0" top="17.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <JFXButton fx:id="btn5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btn5" prefHeight="75.0" prefWidth="600.0" text=" " />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets bottom="2.0" />
+                                             </VBox.margin>
+                                          </StackPane>
+                                          <StackPane fx:id="box6" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0">
+                                             <children>
+                                                <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: white;">
+                                                   <children>
+                                                      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="450.0">
+                                                         <children>
+                                                            <Label fx:id="name6" text="Location Name this is the name of the attraction">
+                                                               <font>
+                                                                  <Font name="System Bold" size="18.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="address6" text="Address 123 Anywhere St, Worcester, MA, 01605, USA USA USA USA">
+                                                               <font>
+                                                                  <Font size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="open6" text="Currently Open" textFill="#07a31f">
+                                                               <font>
+                                                                  <Font name="System Bold" size="14.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets top="2.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                         <padding>
+                                                            <Insets left="5.0" top="3.0" />
+                                                         </padding>
+                                                      </VBox>
+                                                      <ImageView fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../../Images/star.png" />
+                                                         </image>
+                                                         <HBox.margin>
+                                                            <Insets left="5.0" top="15.0" />
+                                                         </HBox.margin>
+                                                      </ImageView>
+                                                      <Label fx:id="stars6" text="5.0">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets left="8.0" top="17.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <JFXButton fx:id="btn6" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btn6" prefHeight="75.0" prefWidth="600.0" text=" " />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets bottom="2.0" />
+                                             </VBox.margin>
+                                          </StackPane>
+                                          <StackPane fx:id="box7" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0">
+                                             <children>
+                                                <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: white;">
+                                                   <children>
+                                                      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="450.0">
+                                                         <children>
+                                                            <Label fx:id="name7" text="Location Name this is the name of the attraction">
+                                                               <font>
+                                                                  <Font name="System Bold" size="18.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="address7" text="Address 123 Anywhere St, Worcester, MA, 01605, USA USA USA USA">
+                                                               <font>
+                                                                  <Font size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="open7" text="Currently Open" textFill="#07a31f">
+                                                               <font>
+                                                                  <Font name="System Bold" size="14.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets top="2.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                         <padding>
+                                                            <Insets left="5.0" top="3.0" />
+                                                         </padding>
+                                                      </VBox>
+                                                      <ImageView fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../../Images/star.png" />
+                                                         </image>
+                                                         <HBox.margin>
+                                                            <Insets left="5.0" top="15.0" />
+                                                         </HBox.margin>
+                                                      </ImageView>
+                                                      <Label fx:id="stars7" text="5.0">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets left="8.0" top="17.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <JFXButton fx:id="btn7" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btn7" prefHeight="75.0" prefWidth="600.0" text=" " />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets bottom="2.0" />
+                                             </VBox.margin>
+                                          </StackPane>
+                                          <StackPane fx:id="box8" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0">
+                                             <children>
+                                                <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: white;">
+                                                   <children>
+                                                      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="450.0">
+                                                         <children>
+                                                            <Label fx:id="name8" text="Location Name this is the name of the attraction">
+                                                               <font>
+                                                                  <Font name="System Bold" size="18.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="address8" text="Address 123 Anywhere St, Worcester, MA, 01605, USA USA USA USA">
+                                                               <font>
+                                                                  <Font size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="open8" text="Currently Open" textFill="#07a31f">
+                                                               <font>
+                                                                  <Font name="System Bold" size="14.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets top="2.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                         <padding>
+                                                            <Insets left="5.0" top="3.0" />
+                                                         </padding>
+                                                      </VBox>
+                                                      <ImageView fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../../Images/star.png" />
+                                                         </image>
+                                                         <HBox.margin>
+                                                            <Insets left="5.0" top="15.0" />
+                                                         </HBox.margin>
+                                                      </ImageView>
+                                                      <Label fx:id="stars8" text="5.0">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets left="8.0" top="17.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <JFXButton fx:id="btn8" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btn8" prefHeight="75.0" prefWidth="600.0" text=" " />
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets bottom="2.0" />
+                                             </VBox.margin>
+                                          </StackPane>
+                                          <StackPane fx:id="box9" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0">
+                                             <children>
+                                                <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="600.0" style="-fx-background-color: white;">
+                                                   <children>
+                                                      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="450.0">
+                                                         <children>
+                                                            <Label fx:id="name9" text="Location Name this is the name of the attraction">
+                                                               <font>
+                                                                  <Font name="System Bold" size="18.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="address9" text="Address 123 Anywhere St, Worcester, MA, 01605, USA USA USA USA">
+                                                               <font>
+                                                                  <Font size="12.0" />
+                                                               </font>
+                                                            </Label>
+                                                            <Label fx:id="open9" text="Currently Open" textFill="#07a31f">
+                                                               <font>
+                                                                  <Font name="System Bold" size="14.0" />
+                                                               </font>
+                                                               <VBox.margin>
+                                                                  <Insets top="2.0" />
+                                                               </VBox.margin>
+                                                            </Label>
+                                                         </children>
+                                                         <HBox.margin>
+                                                            <Insets />
+                                                         </HBox.margin>
+                                                         <padding>
+                                                            <Insets left="5.0" top="3.0" />
+                                                         </padding>
+                                                      </VBox>
+                                                      <ImageView fitHeight="150.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@../../../../Images/star.png" />
+                                                         </image>
+                                                         <HBox.margin>
+                                                            <Insets left="5.0" top="15.0" />
+                                                         </HBox.margin>
+                                                      </ImageView>
+                                                      <Label fx:id="stars9" text="5.0">
+                                                         <font>
+                                                            <Font name="System Bold" size="26.0" />
+                                                         </font>
+                                                         <HBox.margin>
+                                                            <Insets left="8.0" top="17.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                   </children>
+                                                </HBox>
+                                                <JFXButton fx:id="btn9" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btn9" prefHeight="75.0" prefWidth="600.0" text=" " />
+                                             </children>
+                                          </StackPane>
+                                       </children>
+                                    </VBox>
+                                 </content>
+                              </ScrollPane>
                            </children>
                         </VBox>
                      </children>
                   </HBox>
-                  <WebView fx:id="webview" prefHeight="200.0" prefWidth="200.0" />
                </children>
             </StackPane>
          </children>
