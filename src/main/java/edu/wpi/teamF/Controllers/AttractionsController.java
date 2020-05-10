@@ -97,12 +97,15 @@ public class AttractionsController implements Initializable {
   public JFXComboBox currentLocation;
   private GeoApiContext context =
       new GeoApiContext.Builder().apiKey("AIzaSyB61pjpz4PvzIKYCsYiwHoWQctXiw9soHc").build();
+  public LatLng latLng;
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     reset();
 
     currentLocation.getItems().addAll("Faulkner Hospital", "Main Campus");
+    currentLocation.setValue("Main Campus");
+    latLng = new LatLng(42.336012, -71.107716);
 
     backgroundImage.setPreserveRatio(false);
     backgroundImage.fitHeightProperty().bind(frame.heightProperty());
@@ -156,7 +159,7 @@ public class AttractionsController implements Initializable {
     // TODO Figure out what Google's ranking order is and if it can be better
     PlacesSearchResponse response =
         PlacesApi.textSearchQuery(context, searchTerm.getText())
-            .location(new LatLng(42.301681, -71.129039))
+            .location(latLng)
             .radius(10000)
             .rankby(RankBy.PROMINENCE)
             .await();
@@ -442,5 +445,13 @@ public class AttractionsController implements Initializable {
 
   public void resetBtn(ActionEvent actionEvent) {
     reset();
+  }
+
+  public void currentLocation(ActionEvent actionEvent) {
+    if ("Faulkner Hospital".equals(currentLocation.getValue())) {
+      latLng = new LatLng(42.301681, -71.129039);
+    } else {
+      latLng = new LatLng(42.336012, -71.107716);
+    }
   }
 }
