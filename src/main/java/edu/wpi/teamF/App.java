@@ -37,6 +37,7 @@ public class App extends Application {
       new MaintenanceRequestController();
   private DataViewController dataViewController = new DataViewController();
   private TranslatorController translatorController = new TranslatorController();
+  private ContactUsController contactUsController = new ContactUsController();
 
   @Override
   public void init() {}
@@ -76,6 +77,8 @@ public class App extends Application {
             return dataViewController;
           } else if (controllerClass.equals(TranslatorController.class)) {
             return translatorController;
+          } else if (controllerClass.equals(ContactUsController.class)) {
+            return contactUsController;
           }
           return null;
         });

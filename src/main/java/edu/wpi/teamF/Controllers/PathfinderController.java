@@ -1361,13 +1361,13 @@ public class PathfinderController implements Initializable {
       vVal = ((bigY + smallY) / 2) / FAULKNER_MAP_HEIGHT;
       double hDistance = 0.0;
       double vDistance = 0.0;
-//      if (hVal < 0.5) {
-//        hDistance = (0.5 - hVal) / 2;
-//        hVal = (((bigX + smallX) / 2) / FAULKNER_MAP_WIDTH + hDistance) / 2;
-//      } else if (hVal > 0.5) {
-//        hDistance = (hVal - 0.5) / 2;
-//        hVal = (((bigX + smallX) / 2) / FAULKNER_MAP_WIDTH + hDistance) / 2;
-//      }
+      //      if (hVal < 0.5) {
+      //        hDistance = (0.5 - hVal) / 2;
+      //        hVal = (((bigX + smallX) / 2) / FAULKNER_MAP_WIDTH + hDistance) / 2;
+      //      } else if (hVal > 0.5) {
+      //        hDistance = (hVal - 0.5) / 2;
+      //        hVal = (((bigX + smallX) / 2) / FAULKNER_MAP_WIDTH + hDistance) / 2;
+      //      }
     } else {
       if (yDiff > xDiff) {
         uiSetting.setZoomScaleValue(MAIN_MAP_HEIGHT / yDiff);
