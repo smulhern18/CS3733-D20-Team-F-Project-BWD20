@@ -208,7 +208,7 @@ public class ServiceRequestStats {
     return total;
   }
 
-  public ArrayList<String>  maintenanceCompleted(ArrayList<MaintenanceRequest> requests){
+  public ArrayList<String>  maintenanceCompleted(List<MaintenanceRequest> requests){
 
       ArrayList<String> nodeNum = new ArrayList<String>();
       ArrayList<String> csvStyled = new ArrayList<String>();
@@ -427,7 +427,7 @@ public class ServiceRequestStats {
     }
     return total;
   }
-  public ArrayList<String>  transportCompleted(ArrayList<TransportRequest> requests) {
+  public ArrayList<String>  transportCompleted(List<TransportRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -558,7 +558,7 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
-  public ArrayList<String>  computerCompleted(ArrayList<ComputerServiceRequest> requests) {
+  public ArrayList<String>  computerCompleted(List<ComputerServiceRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -683,7 +683,7 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
-  public ArrayList<String>  flowerCompleted(ArrayList<FlowerRequest> requests) {
+  public ArrayList<String>  flowerCompleted(List<FlowerRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -812,7 +812,7 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
-  public ArrayList<String>  languageCompleted(ArrayList<LanguageServiceRequest> requests) {
+  public ArrayList<String>  languageCompleted(List<LanguageServiceRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -941,7 +941,7 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
-  public ArrayList<String>  laundryCompleted(ArrayList<LaundryServiceRequest> requests) {
+  public ArrayList<String>  laundryCompleted(List<LaundryServiceRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -1065,7 +1065,7 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
-  public ArrayList<String>  mariachiCompleted(ArrayList<MariachiRequest> requests) {
+  public ArrayList<String>  mariachiCompleted(List<MariachiRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -1194,7 +1194,7 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
-  public ArrayList<String>  medicineCompleted(ArrayList<MedicineDeliveryRequest> requests) {
+  public ArrayList<String>  medicineCompleted(List<MedicineDeliveryRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -1324,7 +1324,7 @@ public class ServiceRequestStats {
     return csvStyled;
   }
 
-  public ArrayList<String>  sanitationCompleted(ArrayList<SanitationServiceRequest> requests) {
+  public ArrayList<String>  sanitationCompleted(List<SanitationServiceRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -1448,7 +1448,7 @@ public class ServiceRequestStats {
 
     return csvStyled;
   }
-  public ArrayList<String>  securityCompleted(ArrayList<SecurityRequest> requests) {
+  public ArrayList<String>  securityCompleted(List<SecurityRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
