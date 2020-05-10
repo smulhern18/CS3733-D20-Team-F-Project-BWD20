@@ -5,6 +5,7 @@ import com.google.maps.PlacesApi;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.*;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
@@ -93,12 +94,16 @@ public class AttractionsController implements Initializable {
   public DecimalFormat decimalFormat = new DecimalFormat("#.0");
 
   public PlacesSearchResult[] results;
+  public JFXComboBox currentLocation;
   private GeoApiContext context =
       new GeoApiContext.Builder().apiKey("AIzaSyB61pjpz4PvzIKYCsYiwHoWQctXiw9soHc").build();
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     reset();
+
+    currentLocation.getItems().addAll("Faulkner Hospital", "Main Campus");
+
     backgroundImage.setPreserveRatio(false);
     backgroundImage.fitHeightProperty().bind(frame.heightProperty());
     backgroundImage.fitWidthProperty().bind(frame.widthProperty());
