@@ -60,6 +60,8 @@ dependencies {
     implementation 'com.google.maps:google-maps-services:0.13.0'
     implementation 'org.slf4j:slf4j-simple:1.7.25'
 
+    compile 'com.easypost:easypost-api-client:4.0.0'
+
 //    implementation ('com.lynden:GMapsFX:2.12.0'){
 //        exclude group: 'org.openjfx', module: ''
 //    }
