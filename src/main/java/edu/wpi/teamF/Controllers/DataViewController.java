@@ -8,7 +8,6 @@ import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -70,9 +69,9 @@ public class DataViewController implements Initializable {
     List<String> data3;
     XYChart.Series dataSeries1 = new XYChart.Series<>();
     XYChart.Series dataSeries2 = new XYChart.Series<>();
-    data1 = serviceRequestStats.getMaintenanceEmployeeNumbersGraphs(mR);
-    data2 = serviceRequestStats.getMaintenanceLocationNumbersGraphs(mR);
-    data3 = serviceRequestStats.maintenanceCompleted(mR);
+    data1 = serviceRequestStats.top5(serviceRequestStats.getMaintenanceEmployeeNumbersGraphs(mR));
+    data2 = serviceRequestStats.top5(serviceRequestStats.getMaintenanceLocationNumbersGraphs(mR));
+    data3 = serviceRequestStats.top5(serviceRequestStats.maintenanceCompleted(mR));
 
     // completed Graph to show number of completed requests per employee
 
@@ -116,38 +115,11 @@ public class DataViewController implements Initializable {
     serviceRequestStats.downloadStatistics(selDir.toPath());
   }
 
-  public ArrayList<String> top5(ArrayList<String> data){
-    ArrayList<String> top5data= new ArrayList<String>();
-    String temp1 ="";
-    String temp2 ="";
-    int top=0;
-    if(data.size()>10) {
-     while(top <5){
-       temp1 = data.get(0);
-       temp2 = data.get(1);
-       for(int i =2;i < data.size();i++){
-        if(Integer.parseInt(temp2) < Integer.parseInt(data.get(i+1))){
-          temp1 = data.get(i);
-          temp2 = data.get(i+1);
-        }
-       }
-       top5data.add(temp1);
-       top5data.add(temp2);
-       data.remove(temp1);
-       data.remove(temp2);
-     }
-    } else{
-      top5data = data;
-    }
-    return top5data;
-  }
-
   /*
 
   Transport Request Tab
 
 
    */
-
 
 }

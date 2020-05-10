@@ -12,8 +12,10 @@ import edu.wpi.teamF.TestData;
 import java.io.File;
 import java.nio.file.Files;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +25,7 @@ public class ReportsTest {
   static DatabaseManager databaseManager = DatabaseManager.getManager();
 
   static CSVManipulator csvManipulator = new CSVManipulator();
-
+  static ServiceRequestStats serviceRequestStats = new ServiceRequestStats();
   TestData testData = null;
   Node[] validNodes = null;
   MaintenanceRequest[] validMaintenance = null;
@@ -86,7 +88,7 @@ public class ReportsTest {
     // add transport tests
     File wfile = new File("src/test/java/edu/wpi/teamF/Test/");
     File file = new File("src/test/java/edu/wpi/teamF/Test/ServiceRequestReport.csv");
-    ServiceRequestStats serviceRequestStats = new ServiceRequestStats();
+
     serviceRequestStats.downloadStatistics(wfile.toPath());
     try {
       byte[] f1 = Files.readAllBytes(file.toPath());
@@ -100,5 +102,41 @@ public class ReportsTest {
       System.out.println(e.getMessage());
       fail(e.getMessage());
     }
+  }
+
+  @Test
+  public void testTop5LessThen5() throws Exception {
+    ArrayList<String> data = new ArrayList<String>();
+    for (int i = 0; i <= 4; i++) {
+
+      data.add("Jim");
+      data.add("6");
+    }
+    Assertions.assertTrue(data.equals(serviceRequestStats.top5(data)));
+  }
+
+  @Test
+  public void testTop5moreThen5() throws Exception {
+    ArrayList<String> data = new ArrayList<String>();
+    ArrayList<String> data1 = new ArrayList<String>();
+    ArrayList<String> data2 = new ArrayList<String>();
+    for (int i = 0; i <= 10; i++) {
+      data.add("s" + i);
+      data.add("" + i);
+    }
+
+    data1.add("s10");
+    data1.add("10");
+    data1.add("s9");
+    data1.add("9");
+    data1.add("s8");
+    data1.add("8");
+    data1.add("s7");
+    data1.add("7");
+    data1.add("s6");
+    data1.add("6");
+
+    data2 = serviceRequestStats.top5(data);
+    Assertions.assertTrue(data1.equals(data2));
   }
 }

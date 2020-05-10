@@ -208,9 +208,7 @@ public class ServiceRequestStats {
     return total;
   }
 
-
-  public ArrayList<String>  maintenanceCompleted(List<MaintenanceRequest> requests){
-
+  public ArrayList<String> maintenanceCompleted(List<MaintenanceRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -432,13 +430,16 @@ public class ServiceRequestStats {
     return total;
   }
 
-  public ArrayList<String>  transportCompleted(List<TransportRequest> requests) {
-
+  public ArrayList<String> transportCompleted(List<TransportRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (TransportRequest m : requests) {
-      nodeNum.add(Boolean.toString(m.getComplete()));
+      if (m.getComplete()) {
+        nodeNum.add("Complete");
+      } else {
+        nodeNum.add("Incomplete");
+      }
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -564,7 +565,7 @@ public class ServiceRequestStats {
     return csvStyled;
   }
 
-  public ArrayList<String>  computerCompleted(List<ComputerServiceRequest> requests) {
+  public ArrayList<String> computerCompleted(List<ComputerServiceRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -690,7 +691,7 @@ public class ServiceRequestStats {
     return csvStyled;
   }
 
-  public ArrayList<String>  flowerCompleted(List<FlowerRequest> requests) {
+  public ArrayList<String> flowerCompleted(List<FlowerRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -821,9 +822,7 @@ public class ServiceRequestStats {
     return csvStyled;
   }
 
-
-  public ArrayList<String>  languageCompleted(List<LanguageServiceRequest> requests) {
-
+  public ArrayList<String> languageCompleted(List<LanguageServiceRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -954,7 +953,7 @@ public class ServiceRequestStats {
     return csvStyled;
   }
 
-  public ArrayList<String>  laundryCompleted(List<LaundryServiceRequest> requests) {
+  public ArrayList<String> laundryCompleted(List<LaundryServiceRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -1080,8 +1079,7 @@ public class ServiceRequestStats {
     return csvStyled;
   }
 
-
-  public ArrayList<String>  mariachiCompleted(List<MariachiRequest> requests) {
+  public ArrayList<String> mariachiCompleted(List<MariachiRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -1212,7 +1210,7 @@ public class ServiceRequestStats {
     return csvStyled;
   }
 
-  public ArrayList<String>  medicineCompleted(List<MedicineDeliveryRequest> requests) {
+  public ArrayList<String> medicineCompleted(List<MedicineDeliveryRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -1343,14 +1341,16 @@ public class ServiceRequestStats {
     return csvStyled;
   }
 
-
-  public ArrayList<String>  sanitationCompleted(List<SanitationServiceRequest> requests) {
-
+  public ArrayList<String> sanitationCompleted(List<SanitationServiceRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (SanitationServiceRequest m : requests) {
-      nodeNum.add(Boolean.toString(m.getComplete()));
+      if (m.getComplete()) {
+        nodeNum.add("Complete");
+      } else {
+        nodeNum.add("Incomplete");
+      }
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -1471,7 +1471,7 @@ public class ServiceRequestStats {
     return csvStyled;
   }
 
-  public ArrayList<String>  securityCompleted(List<SecurityRequest> requests) {
+  public ArrayList<String> securityCompleted(List<SecurityRequest> requests) {
 
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
@@ -1553,5 +1553,33 @@ public class ServiceRequestStats {
       csvStyled.add("" + r.getTimesSanitized());
     }
     return csvStyled;
+  }
+
+  public ArrayList<String> top5(ArrayList<String> data) {
+    ArrayList<String> top5data = new ArrayList<String>();
+    ArrayList<String> data1 = data;
+    String temp1 = "";
+    String temp2 = "";
+    int top = 0;
+    if (data.size() > 10) {
+      while (top < 5) {
+        temp1 = data.get(0);
+        temp2 = data.get(1);
+        for (int i = 2; i < data1.size(); i += 2) {
+          if (Integer.parseInt(temp2) < Integer.parseInt(data1.get(i + 1))) {
+            temp1 = data1.get(i);
+            temp2 = data1.get(i + 1);
+          }
+        }
+        top5data.add(temp1);
+        top5data.add(temp2);
+        data1.remove(temp1);
+        data1.remove(temp2);
+        top++;
+      }
+    } else {
+      top5data = data;
+    }
+    return top5data;
   }
 }
