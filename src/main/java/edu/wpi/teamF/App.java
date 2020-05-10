@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class App extends Application {
-    
+
   private static SceneController sceneController;
 
   public App() throws Exception {}
@@ -80,7 +80,7 @@ public class App extends Application {
           return null;
         });
     sceneController = new SceneController(fxmlLoader, primaryStage, primaryScene);
-    Parent root = fxmlLoader.load(getClass().getResource("Views/MainMenu.fxml"));
+    Parent root = fxmlLoader.load(getClass().getResource("Views/ServiceRequestMain.fxml"));
     primaryScene.setRoot(root);
     primaryStage.setScene(primaryScene);
     // primaryStage.setAlwaysOnTop(true);

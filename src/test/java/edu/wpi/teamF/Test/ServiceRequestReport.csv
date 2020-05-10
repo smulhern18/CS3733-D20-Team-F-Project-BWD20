@@ -5,13 +5,13 @@ Denver,1
 Roman,1
 Sully,1
 NodeID,NumberOfRequestsAtLocation
-nodeD,1
-nodeB,1
-nodeC,1
-nodeA,1
+Dept of CS,1
+HallOutside,1
+Admin Offices,1
+ICU,1
 Average time to complete request,0 hours 0 Minutes
 ComputerStats
 EmployeeName,NumberOfRequestsAssigned
 Roman,1
 NodeID,NumberOfRequestsAtLocation
-nodeA,1
+ICU,1
