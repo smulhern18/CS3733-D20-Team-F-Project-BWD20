@@ -1342,37 +1342,111 @@ public class PathfinderController implements Initializable {
     double xDiff = bigX - smallX;
     double yDiff = bigY - smallY;
 
-    double xRatio = bigX / smallX;
-    double yRatio = bigY / smallY;
-
     System.out.println(yDiff);
     System.out.println(xDiff);
     if ("Faulkner".equals(nodesOnFloor.get(0).getBuilding())) {
       if (yDiff > xDiff) {
         uiSetting.setZoomScaleValue((FAULKNER_MAP_HEIGHT / yDiff) / 1.5);
-        System.out.println("y zoom");
-        System.out.println((FAULKNER_MAP_HEIGHT / yDiff) / 1.5);
       } else {
         uiSetting.setZoomScaleValue((FAULKNER_MAP_WIDTH / xDiff) / 1.5);
-        System.out.println("x zoom");
-        System.out.println((FAULKNER_MAP_HEIGHT / xDiff) / 1.5);
       }
-      hVal = ((bigX + smallX) / 2) / FAULKNER_MAP_WIDTH;
-      vVal = ((bigY + smallY) / 2) / FAULKNER_MAP_HEIGHT;
-      double hDistance = 0.0;
-      double vDistance = 0.0;
-//      if (hVal < 0.5) {
-//        hDistance = (0.5 - hVal) / 2;
-//        hVal = (((bigX + smallX) / 2) / FAULKNER_MAP_WIDTH + hDistance) / 2;
-//      } else if (hVal > 0.5) {
-//        hDistance = (hVal - 0.5) / 2;
-//        hVal = (((bigX + smallX) / 2) / FAULKNER_MAP_WIDTH + hDistance) / 2;
-//      }
-    } else {
+      hVal =
+          (bigX - ((bigX - smallX) / 2))
+              / FAULKNER_MAP_WIDTH; // ((bigX + smallX) / 2) / FAULKNER_MAP_WIDTH;
+      vVal =
+          (bigY - ((bigY - smallY) / 2))
+              / FAULKNER_MAP_HEIGHT; // ((bigY + smallY) / 2) / FAULKNER_MAP_HEIGHT;
+      System.out.println("hVal =");
+      System.out.println(hVal);
+      if (hVal < 0.25) {
+        hVal = hVal - (0.5 * ((xDiff / FAULKNER_MAP_HEIGHT)));
+      } else if (hVal < 0.33) {
+        hVal = hVal - (0.4 * ((xDiff / FAULKNER_MAP_HEIGHT)));
+      } else if (hVal < 0.4) {
+        hVal = hVal - (0.3 * ((xDiff / FAULKNER_MAP_HEIGHT)));
+      } else if (hVal < 0.5) {
+        hVal = hVal - (0.2 * ((xDiff / FAULKNER_MAP_HEIGHT)));
+      } else if (hVal > 0.5) {
+        hVal = hVal + (0.2 * ((xDiff / FAULKNER_MAP_HEIGHT)));
+      } else if (hVal > 0.6) {
+        hVal = hVal + (0.5 * ((xDiff / FAULKNER_MAP_HEIGHT)));
+      } else if (hVal > 0.67) {
+        hVal = hVal + (0.4 * ((xDiff / FAULKNER_MAP_HEIGHT)));
+      } else if (hVal > 0.75) {
+        hVal = hVal + (0.3 * ((xDiff / FAULKNER_MAP_HEIGHT)));
+      }
+
+      System.out.println("vVal =");
+      System.out.println(vVal);
+      if (vVal < 0.25) {
+        vVal = vVal - (0.55 * ((yDiff / FAULKNER_MAP_WIDTH)));
+      } else if (vVal < 0.33) {
+        vVal = vVal - (0.45 * ((yDiff / FAULKNER_MAP_WIDTH)));
+      } else if (vVal < 0.4) {
+        vVal = vVal - (0.33 * ((yDiff / FAULKNER_MAP_WIDTH)));
+      } else if (vVal < 0.5) {
+        vVal = vVal - (0.2 * ((yDiff / FAULKNER_MAP_WIDTH)));
+      } else if (vVal > 0.75) {
+        vVal = vVal + (0.55 * ((yDiff / FAULKNER_MAP_WIDTH)));
+      } else if (vVal > 0.67) {
+        vVal = vVal + (0.45 * ((yDiff / FAULKNER_MAP_WIDTH)));
+      } else if (vVal > 0.6) {
+        vVal = vVal + (0.33 * ((yDiff / FAULKNER_MAP_WIDTH)));
+      } else if (vVal > 0.5) {
+        System.out.println("In here");
+        vVal = vVal + (0.2 * ((yDiff / FAULKNER_MAP_WIDTH)));
+      }
+
+    } else { // main campus
       if (yDiff > xDiff) {
-        uiSetting.setZoomScaleValue(MAIN_MAP_HEIGHT / yDiff);
+        uiSetting.setZoomScaleValue((MAIN_MAP_HEIGHT / yDiff) / 1.5);
       } else {
-        uiSetting.setZoomScaleValue(MAIN_MAP_WIDTH / xDiff);
+        uiSetting.setZoomScaleValue((MAIN_MAP_WIDTH / xDiff) / 1.5);
+      }
+      hVal =
+          (bigX - ((bigX - smallX) / 2))
+              / MAIN_MAP_WIDTH; // ((bigX + smallX) / 2) / FAULKNER_MAP_WIDTH;
+      vVal =
+          (bigY - ((bigY - smallY) / 2))
+              / MAIN_MAP_HEIGHT; // ((bigY + smallY) / 2) / FAULKNER_MAP_HEIGHT;
+      System.out.println("hVal =");
+      System.out.println(hVal);
+      if (hVal < 0.25) {
+        hVal = hVal - (0.5 * ((xDiff / MAIN_MAP_HEIGHT)));
+      } else if (hVal < 0.33) {
+        hVal = hVal - (0.4 * ((xDiff / MAIN_MAP_HEIGHT)));
+      } else if (hVal < 0.4) {
+        hVal = hVal - (0.3 * ((xDiff / MAIN_MAP_HEIGHT)));
+      } else if (hVal < 0.5) {
+        hVal = hVal - (0.2 * ((xDiff / MAIN_MAP_HEIGHT)));
+      } else if (hVal > 0.5) {
+        hVal = hVal + (0.2 * ((xDiff / MAIN_MAP_HEIGHT)));
+      } else if (hVal > 0.6) {
+        hVal = hVal + (0.5 * ((xDiff / MAIN_MAP_HEIGHT)));
+      } else if (hVal > 0.67) {
+        hVal = hVal + (0.4 * ((xDiff / MAIN_MAP_HEIGHT)));
+      } else if (hVal > 0.75) {
+        hVal = hVal + (0.3 * ((xDiff / MAIN_MAP_HEIGHT)));
+      }
+
+      System.out.println("vVal =");
+      System.out.println(vVal);
+      if (vVal < 0.25) {
+        vVal = vVal - (0.55 * ((yDiff / MAIN_MAP_WIDTH)));
+      } else if (vVal < 0.33) {
+        vVal = vVal - (0.45 * ((yDiff / MAIN_MAP_WIDTH)));
+      } else if (vVal < 0.4) {
+        vVal = vVal - (0.33 * ((yDiff / MAIN_MAP_WIDTH)));
+      } else if (vVal < 0.5) {
+        vVal = vVal - (0.2 * ((yDiff / MAIN_MAP_WIDTH)));
+      } else if (vVal > 0.75) {
+        vVal = vVal + (0.55 * ((yDiff / MAIN_MAP_WIDTH)));
+      } else if (vVal > 0.67) {
+        vVal = vVal + (0.45 * ((yDiff / MAIN_MAP_WIDTH)));
+      } else if (vVal > 0.6) {
+        vVal = vVal + (0.33 * ((yDiff / MAIN_MAP_WIDTH)));
+      } else if (vVal > 0.5) {
+        vVal = vVal + (0.2 * ((yDiff / MAIN_MAP_WIDTH)));
       }
     }
     uiSetting.setScrollPaneValues(hVal, vVal);
