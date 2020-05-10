@@ -42,7 +42,9 @@ public class RoomSchedulerController implements Initializable {
   private DayPage computerCalendarView = new DayPage();
   private DatabaseManager databaseManager = DatabaseManager.getManager();
   private String loggedInAccountName = "AAAAAA";
+  private boolean creatingDatabase = true;
 
+  private ScheduleEntry rightClickDeleteBuggedEntry;
   private boolean reset = false;
 
   @SneakyThrows
@@ -60,10 +62,19 @@ public class RoomSchedulerController implements Initializable {
     Platform.runLater(
         () -> {
           try {
+
+            System.out.println("creating DATABASE2" + creatingDatabase);
             addEntriesFromDatabase();
+
+            System.out.println("creating DATABASE3" + creatingDatabase);
           } catch (Exception e) {
-            System.out.println("EEEEEEERRRRROOORRRRR  " + e.getMessage());
+            e.printStackTrace();
           }
+        });
+    Platform.runLater(
+        () -> {
+          System.out.println("creating DATABASE1" + creatingDatabase);
+          creatingDatabase = false;
         });
   }
 
@@ -100,6 +111,27 @@ public class RoomSchedulerController implements Initializable {
     setCalenderViewSize(calendarView);
 
     calendarView.setSelectionMode(SelectionMode.SINGLE);
+
+    calendarView.setEntryEditPolicy(
+        entryEditParameter -> {
+          if (creatingDatabase) return true;
+          if (entryEditParameter.getEntry().getTitle().equals(loggedInAccountName)) {
+
+            if (entryEditParameter.getEditOperation().equals(DateControl.EditOperation.DELETE)) {
+
+              try {
+                System.out.println("DELETEEEEEE: " + entryEditParameter.getEntry().getId());
+
+              } catch (Exception e) {
+                e.printStackTrace();
+              }
+            }
+            return true;
+          } else {
+            System.out.println("NO PERMISSION: " + entryEditParameter.getEntry().getId());
+            return false;
+          }
+        });
     calendarView.setEntryFactory(
         param -> {
           DateControl control = param.getDateControl();
@@ -132,8 +164,9 @@ public class RoomSchedulerController implements Initializable {
 
             try {
               databaseManager.mainpulateScheduleEntry(newEntry);
+              System.out.println("newEntryID: " + newEntry.getID());
             } catch (Exception e) {
-              System.out.println("EEEEEEERRRRROOORRRRR  " + e.getMessage());
+              e.printStackTrace();
             }
             Entry<String> entry = createEntry(newEntry);
 
@@ -147,6 +180,7 @@ public class RoomSchedulerController implements Initializable {
   }
 
   private Entry<String> createEntry(ScheduleEntry newEntry) {
+    System.out.println("Create entry");
     Entry<String> entry = new Entry<>(newEntry.getAccountID());
     entry.setId(newEntry.getID());
     entry.changeStartDate(LocalDate.parse(newEntry.getStartDate(), ScheduleEntry.dateFormatter));
@@ -159,7 +193,7 @@ public class RoomSchedulerController implements Initializable {
         .addListener(
             (observableValue, interval, t1) -> {
               System.out.println(interval.getEndTime() + " " + t1.getEndTime());
-              if (entry != null && !reset) {
+              if (!reset) {
                 try {
 
                   ScheduleEntry scheduleEntry = databaseManager.readScheduleEntry(entry.getId());
@@ -177,7 +211,7 @@ public class RoomSchedulerController implements Initializable {
                     entry.setInterval(interval);
                   }
                 } catch (Exception e) {
-                  System.out.println("EEEEEEERRRRROOORRRRR  " + e.getMessage());
+                  e.printStackTrace();
                 }
               } else {
                 // System.out.println("RESETTED");
@@ -188,61 +222,56 @@ public class RoomSchedulerController implements Initializable {
         .calendarProperty()
         .addListener(
             ((observableValue, calendar, t1) -> {
-              if (t1 == null) {
+              if (calendar != null) System.out.println("AASDASD" + calendar.getName());
+              if (t1 != null) System.out.println("JIUJIUJ" + t1.getName());
+              System.out.println("calender");
+              if (t1 != null && !reset) {
                 try {
-                  ScheduleEntry deletedScheduleEntry =
-                      databaseManager.readScheduleEntry(entry.getId());
-                  deletedScheduleEntry.setID("" + System.currentTimeMillis());
-
-                  databaseManager.deleteScheduleEntry(entry.getId());
-                  if (!entry.getTitle().equals(loggedInAccountName)) {
-                    System.out.println("NOT MINEEEEEEEEEEEEEEEEEE");
-
-                    databaseManager.mainpulateScheduleEntry(deletedScheduleEntry);
-                    Entry<String> deletedEntry = createEntry(deletedScheduleEntry);
-                    deletedEntry.setCalendar(getCalendar(deletedScheduleEntry.getRoom()));
-
-                  } else {
-                    System.out.println("MINEMINEMINEMINEMINE");
+                  System.out.println("modifying entry ID: " + entry.getId());
+                  for (ScheduleEntry scheduleEntry1 : databaseManager.getAllScheduleEntries()) {
+                    System.out.println(scheduleEntry1.getID());
                   }
+                  ScheduleEntry scheduleEntry = databaseManager.readScheduleEntry(entry.getId());
+                  //                  if (scheduleEntry == null) {
+                  //                    scheduleEntry = rightClickDeleteBuggedEntry;
+                  //                    databaseManager.mainpulateScheduleEntry(scheduleEntry);
+                  //                  }
+                  System.out.println(scheduleEntry);
+                  System.out.println("calendar name: " + t1.getName());
+                  scheduleEntry.setRoom(t1.getName());
+                  if (entry.getTitle().equals(loggedInAccountName)
+                      && !isScheduleEntryOverlapping(scheduleEntry)) {
+                    System.out.println("NOT OVERLAPPED");
+                    databaseManager.mainpulateScheduleEntry(scheduleEntry);
+                  } else {
+                    // System.out.println("OVERLAP REVERT BACK");
+                    reset = true;
+                    entry.setCalendar(calendar);
+                  }
+
                 } catch (Exception e) {
 
-                  System.out.println("EEEEEEERRRRROOORRRRR  " + e.getMessage());
+                  e.printStackTrace();
                 }
               } else {
-                if (!reset) {
-                  try {
-                    ScheduleEntry scheduleEntry = databaseManager.readScheduleEntry(entry.getId());
-                    scheduleEntry.setRoom(t1.getName());
-                    if (entry.getTitle().equals(loggedInAccountName)
-                        && !isScheduleEntryOverlapping(scheduleEntry)) {
-                      // System.out.println("NOT OVERLAPPED");
-                      databaseManager.mainpulateScheduleEntry(scheduleEntry);
-                    } else {
-                      // System.out.println("OVERLAP REVERT BACK");
-                      reset = true;
-                      entry.setCalendar(calendar);
-                    }
-
-                  } catch (Exception e) {
-                    System.out.println("EEEEEEERRRRROOORRRRR  " + e.getMessage());
-                  }
-                } else {
-                  // System.out.println("RESETTED");
-                  reset = false;
-                }
+                // System.out.println("RESETTED");
+                reset = false;
               }
             }));
     return entry;
   }
 
   private void addEntriesFromDatabase() throws Exception {
+    System.out.println("ADDING FROM DATABASE");
+    String realLoggedInName = loggedInAccountName;
 
     for (ScheduleEntry scheduleEntry : databaseManager.getAllScheduleEntries()) {
+      loggedInAccountName = scheduleEntry.getAccountID();
       Calendar calendar = getCalendar(scheduleEntry.getRoom());
       Entry<String> entry = createEntry(scheduleEntry);
       entry.setCalendar(calendar);
     }
+    loggedInAccountName = realLoggedInName;
   }
 
   private Calendar getCalendar(String room) throws Exception {
@@ -312,6 +341,7 @@ public class RoomSchedulerController implements Initializable {
     Calendar[] onCallRooms = new Calendar[7];
     for (int i = 0; i < onCallRooms.length; i++) {
       onCallRooms[i] = new Calendar("On-Call Bed " + (i + 1));
+      calenderDeleteEventHandler(onCallRooms[i]);
       onCallRooms[i].setStyle(Calendar.Style.STYLE6);
     }
     onCallCalenderSource.getCalendars().addAll(onCallRooms);
@@ -322,6 +352,7 @@ public class RoomSchedulerController implements Initializable {
     Calendar[] reflectionRooms = new Calendar[3];
     for (int i = 0; i < reflectionRooms.length; i++) {
       reflectionRooms[i] = new Calendar("Reflection Room " + (i + 1));
+      calenderDeleteEventHandler(reflectionRooms[i]);
       reflectionRooms[i].setStyle(Calendar.Style.STYLE6);
     }
     reflectionCalenderSource.getCalendars().addAll(reflectionRooms);
@@ -332,6 +363,7 @@ public class RoomSchedulerController implements Initializable {
     Calendar[] conferenceRooms = new Calendar[3];
     for (int i = 0; i < conferenceRooms.length; i++) {
       conferenceRooms[i] = new Calendar("Conference Room " + (i + 1));
+      calenderDeleteEventHandler(conferenceRooms[i]);
       conferenceRooms[i].setStyle(Calendar.Style.STYLE4);
     }
     conferenceCalenderSource.getCalendars().addAll(conferenceRooms);
@@ -342,11 +374,26 @@ public class RoomSchedulerController implements Initializable {
     Calendar[] computerRooms = new Calendar[6];
     for (int i = 0; i < computerRooms.length; i++) {
       computerRooms[i] = new Calendar("Computer Room " + (i + 1));
+      calenderDeleteEventHandler(computerRooms[i]);
       computerRooms[i].setStyle(Calendar.Style.STYLE5);
     }
     computerCalenderSource.getCalendars().addAll(computerRooms);
     computerCalendarView.getCalendarSources().clear();
     computerCalendarView.getCalendarSources().add(computerCalenderSource);
+  }
+
+  private void calenderDeleteEventHandler(Calendar calendar) {
+    calendar.addEventHandler(
+        calendarEvent -> {
+          if (calendarEvent.isEntryRemoved()) {
+            System.out.println(calendarEvent.getEntry().getId() + " REMOVED FROM CALENDER");
+            try {
+              databaseManager.deleteScheduleEntry(calendarEvent.getEntry().getId());
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+          }
+        });
   }
 
   private boolean isScheduleEntryOverlapping(ScheduleEntry newEntry) {
