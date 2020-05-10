@@ -150,8 +150,9 @@ public class AttractionsController implements Initializable {
       throws InterruptedException, ApiException, IOException {
     PlacesSearchResponse response =
         PlacesApi.textSearchQuery(context, searchTerm.getText())
-            .location(new LatLng(42.3016451, -71.1309705))
-            .radius(50000)
+            .location(new LatLng(42.301681, -71.129039))
+            .radius(10000)
+            .rankby(RankBy.PROMINENCE)
             .await();
     results = response.results;
 
@@ -162,7 +163,7 @@ public class AttractionsController implements Initializable {
     if (results.length > 0) {
       box0.setPrefHeight(75);
       name0.setText(results[0].name);
-      address0.setText(results[0].vicinity);
+      address0.setText(results[0].formattedAddress);
       if (results[0].rating > 0.0) {
         stars0.setText(decimalFormat.format(results[0].rating));
       } else {
@@ -185,7 +186,7 @@ public class AttractionsController implements Initializable {
     if (results.length > 1) {
       box1.setPrefHeight(75);
       name1.setText(results[1].name);
-      address1.setText(results[1].vicinity);
+      address1.setText(results[1].formattedAddress);
       if (results[1].rating > 0.0) {
         stars1.setText(decimalFormat.format(results[1].rating));
       } else {
@@ -208,7 +209,7 @@ public class AttractionsController implements Initializable {
     if (results.length > 2) {
       box2.setPrefHeight(75);
       name2.setText(results[2].name);
-      address2.setText(results[2].vicinity);
+      address2.setText(results[2].formattedAddress);
       if (results[2].rating > 0.0) {
         stars2.setText(decimalFormat.format(results[2].rating));
       } else {
@@ -231,7 +232,7 @@ public class AttractionsController implements Initializable {
     if (results.length > 3) {
       box3.setPrefHeight(75);
       name3.setText(results[3].name);
-      address3.setText(results[3].vicinity);
+      address3.setText(results[3].formattedAddress);
       if (results[3].rating > 0.0) {
         stars3.setText(decimalFormat.format(results[3].rating));
       } else {
@@ -254,7 +255,7 @@ public class AttractionsController implements Initializable {
     if (results.length > 4) {
       box4.setPrefHeight(75);
       name4.setText(results[4].name);
-      address4.setText(results[4].vicinity);
+      address4.setText(results[4].formattedAddress);
       if (results[4].rating > 0.0) {
         stars4.setText(decimalFormat.format(results[4].rating));
       } else {
@@ -277,7 +278,7 @@ public class AttractionsController implements Initializable {
     if (results.length > 5) {
       box5.setPrefHeight(75);
       name5.setText(results[5].name);
-      address5.setText(results[5].vicinity);
+      address5.setText(results[5].formattedAddress);
       if (results[5].rating > 0.0) {
         stars5.setText(decimalFormat.format(results[5].rating));
       } else {
@@ -300,7 +301,7 @@ public class AttractionsController implements Initializable {
     if (results.length > 6) {
       box6.setPrefHeight(75);
       name6.setText(results[6].name);
-      address6.setText(results[6].vicinity);
+      address6.setText(results[6].formattedAddress);
       if (results[6].rating > 0.0) {
         stars6.setText(decimalFormat.format(results[6].rating));
       } else {
@@ -323,7 +324,7 @@ public class AttractionsController implements Initializable {
     if (results.length > 7) {
       box7.setPrefHeight(75);
       name7.setText(results[7].name);
-      address7.setText(results[7].vicinity);
+      address7.setText(results[7].formattedAddress);
       if (results[7].rating > 0.0) {
         stars7.setText(decimalFormat.format(results[7].rating));
       } else {
@@ -346,7 +347,7 @@ public class AttractionsController implements Initializable {
     if (results.length > 8) {
       box8.setPrefHeight(75);
       name8.setText(results[8].name);
-      address8.setText(results[8].vicinity);
+      address8.setText(results[8].formattedAddress);
       if (results[8].rating > 0.0) {
         stars8.setText(decimalFormat.format(results[8].rating));
       } else {
@@ -369,7 +370,7 @@ public class AttractionsController implements Initializable {
     if (results.length > 9) {
       box9.setPrefHeight(75);
       name9.setText(results[9].name);
-      address9.setText(results[9].vicinity);
+      address9.setText(results[9].formattedAddress);
       if (results[9].rating > 0.0) {
         stars9.setText(decimalFormat.format(results[9].rating));
       } else {
