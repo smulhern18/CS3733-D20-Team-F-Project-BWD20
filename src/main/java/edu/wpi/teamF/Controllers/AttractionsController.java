@@ -148,7 +148,7 @@ public class AttractionsController implements Initializable {
 
   public void searchBtn(ActionEvent actionEvent)
       throws InterruptedException, ApiException, IOException {
-    //TODO Figure out what Google's ranking order is and if it can be better
+    // TODO Figure out what Google's ranking order is and if it can be better
     PlacesSearchResponse response =
         PlacesApi.textSearchQuery(context, searchTerm.getText())
             .location(new LatLng(42.301681, -71.129039))

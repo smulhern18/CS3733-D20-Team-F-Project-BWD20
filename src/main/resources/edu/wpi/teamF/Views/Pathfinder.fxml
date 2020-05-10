@@ -460,6 +460,8 @@
                                           <Insets bottom="15.0" top="5.0" />
                                        </VBox.margin>
                                     </HBox>
+                                    <StackPane prefHeight="80.0" prefWidth="200.0">
+                                       <children>
                                     <HBox prefHeight="100.0" prefWidth="200.0">
                                        <children>
                                           <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -489,6 +491,11 @@
                                           </VBox>
                                        </children>
                                     </HBox>
+                                       <JFXButton fx:id="modeDriving" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#modeDriving" prefHeight="80.0" prefWidth="200.0" text=" " />
+                                       </children>
+                                    </StackPane>
+                                    <StackPane prefHeight="80.0" prefWidth="200.0">
+                                       <children>
                                     <HBox prefHeight="100.0" prefWidth="200.0">
                                        <children>
                                           <ImageView fitHeight="56.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
@@ -518,6 +525,11 @@
                                           </VBox>
                                        </children>
                                     </HBox>
+                                       <JFXButton fx:id="modeTransit" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#modeTransit" prefHeight="80.0" prefWidth="200.0" text=" " />
+                                       </children>
+                                    </StackPane>
+                                    <StackPane prefHeight="80.0" prefWidth="200.0">
+                                       <children>
                                     <HBox prefHeight="100.0" prefWidth="200.0">
                                        <children>
                                           <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -547,6 +559,11 @@
                                           </VBox>
                                        </children>
                                     </HBox>
+                                          <JFXButton fx:id="modeBicycling" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#modeBicycling" prefHeight="80.0" prefWidth="200.0" text=" " />
+                                       </children>
+                                    </StackPane>
+                                    <StackPane prefHeight="80.0" prefWidth="200.0">
+                                       <children>
                                     <HBox prefHeight="80.0" prefWidth="200.0">
                                        <children>
                                           <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -576,6 +593,9 @@
                                           </VBox>
                                        </children>
                                     </HBox>
+                                          <JFXButton fx:id="modeWalking" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#modeWalking" prefHeight="80.0" prefWidth="200.0" text=" " />
+                                       </children>
+                                    </StackPane>
                                     <Line endX="90.0" startX="-90.0" strokeWidth="2.0">
                                        <VBox.margin>
                                           <Insets left="20.0" right="20.0" top="8.0" />

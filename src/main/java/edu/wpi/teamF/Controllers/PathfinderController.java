@@ -1220,7 +1220,7 @@ public class PathfinderController implements Initializable {
               "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA");
     }
 
-    webview.getEngine().loadContent(googleMaps.getDirectionsEmbed870x720());
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedDriving870x720());
     driveTime.setText(googleMaps.driveTime());
     driveDistance.setText(googleMaps.driveDistance());
     transitTime.setText(googleMaps.transitTime());
@@ -1273,5 +1273,29 @@ public class PathfinderController implements Initializable {
 
   public void switchAbout(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("About");
+  }
+
+  public void modeDriving(ActionEvent actionEvent) {
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedDriving870x720());
+    driveTime.setText(googleMaps.driveTime());
+    driveDistance.setText(googleMaps.driveDistance());
+  }
+
+  public void modeTransit(ActionEvent actionEvent) {
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedTransit870x720());
+    transitTime.setText(googleMaps.transitTime());
+    transitDistance.setText(googleMaps.transitDistance());
+  }
+
+  public void modeBicycling(ActionEvent actionEvent) {
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedBicycling870x720());
+    bikeTime.setText(googleMaps.bikeTime());
+    bikeDistance.setText(googleMaps.bikeDistance());
+  }
+
+  public void modeWalking(ActionEvent actionEvent) {
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedWalking870x720());
+    walkTime.setText(googleMaps.walkTime());
+    walkDistance.setText(googleMaps.walkDistance());
   }
 }
