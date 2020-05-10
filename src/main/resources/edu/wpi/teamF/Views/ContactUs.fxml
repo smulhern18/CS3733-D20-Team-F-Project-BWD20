@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<fx:root prefHeight="525.0" prefWidth="584.0" type="AnchorPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ContactUsController">
+<AnchorPane prefHeight="525.0" prefWidth="584.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ContactUsController">
     <children>
         <GridPane layoutX="174.0" layoutY="87.0" prefHeight="419.0" prefWidth="335.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
@@ -24,7 +25,7 @@
                 <RowConstraints percentHeight="5.0" vgrow="SOMETIMES" />
                 <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
                 <RowConstraints vgrow="SOMETIMES" />
-                <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="10.0" valignment="CENTER" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
@@ -48,6 +49,7 @@
                         <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
                         <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
                         <Label prefHeight="20.0" prefWidth="282.0" text="Brigham and Women's Hosptial">
@@ -70,6 +72,11 @@
                      <font>
                         <Font name="Dubai Light" size="13.0" />
                      </font></Label>
+                  <Label text="STAY INFORMED. CONNECT WITH US." GridPane.rowIndex="6">
+                     <font>
+                        <Font name="Dubai Bold" size="12.0" />
+                     </font>
+                  </Label>
                     </children>
                 </GridPane>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
@@ -79,15 +86,55 @@
                         <Image url="@../../../../Images/icons8-facebook-480.png" />
                      </image>
                   </ImageView>
+                  <ImageView fx:id="linked" fitHeight="40.0" fitWidth="43.0" onMouseClicked="#toLinkedIn" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/iconfinder_social_style_3_in_341103.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="instagram" fitHeight="55.0" fitWidth="42.0" onMouseClicked="#toInstagram" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/iconfinder_Instagram_1298747.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="youtube" fitHeight="42.0" fitWidth="47.0" onMouseClicked="#toYoutube" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/material+network+social+video+youtube+icon-1320184946764047044.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="twitter" fitHeight="41.0" fitWidth="43.0" onMouseClicked="#toTwitter" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/twitter.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="blog" fitHeight="54.0" fitWidth="53.0" onMouseClicked="#toBlog" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/post-outline.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" />
+                     </HBox.margin>
+                  </ImageView>
                </children>
             </HBox>
             </children>
         </GridPane>
       <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <AnchorPane fx:id="web" layoutX="190.0" prefHeight="525.0" prefWidth="394.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="web" layoutX="190.0" prefHeight="525.0" prefWidth="394.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <WebView fx:id="webView" prefHeight="525.0" prefWidth="394.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+             <WebView fx:id="webView" prefHeight="525.0" prefWidth="394.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>
       </AnchorPane>
     </children>
-</fx:root>
+</AnchorPane>

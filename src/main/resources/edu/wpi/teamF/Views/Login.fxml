@@ -141,5 +141,6 @@
             </GridPane>
          </children>
       </StackPane>
+      <AnchorPane fx:id="newsView" layoutX="737.0" layoutY="66.0" prefHeight="395.0" prefWidth="147.0" />
    </children>
 </AnchorPane>
