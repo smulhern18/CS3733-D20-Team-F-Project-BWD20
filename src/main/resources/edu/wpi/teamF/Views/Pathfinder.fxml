@@ -797,7 +797,7 @@
          </children>
       </AnchorPane>
 
-      <AnchorPane fx:id="nodeInfoPane" layoutX="550.0" layoutY="250.0" maxHeight="500.0" maxWidth="1000.0" prefHeight="250.0" prefWidth="500.0" style="-fx-background-color: rgba(255, 255, 255, 0.9)">
+      <AnchorPane fx:id="nodeInfoPane" layoutX="550.0" layoutY="250.0" maxHeight="800.0" maxWidth="1000.0" prefHeight="250.0" prefWidth="500.0" style="-fx-background-color: rgba(255, 255, 255, 0.9)">
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -822,6 +822,11 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
+                  <JFXComboBox fx:id="nodeInfoTypeCombo">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </JFXComboBox>
                   <JFXComboBox fx:id="nodeInfoCombo">
                      <VBox.margin>
                         <Insets bottom="10.0" top="10.0" />
