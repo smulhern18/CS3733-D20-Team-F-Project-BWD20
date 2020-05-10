@@ -13,6 +13,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.print.PrinterJob;
 import javafx.scene.chart.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
@@ -208,5 +209,11 @@ public class DataViewController implements Initializable {
 
   public void exportToPDF(ActionEvent actionEvent) {
     // TODO: Finish this
+    PrinterJob job = PrinterJob.createPrinterJob();
+    if (job != null) {
+      job.showPrintDialog(App.getPrimaryStage());
+      job.printPage(rootPane);
+      job.endJob();
+    }
   }
 }
