@@ -134,7 +134,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <BarChart fx:id="barSaniLoc" style="-fx-background-color: white;" title="Most Common Locations">
+                              <BarChart fx:id="barSaniLoc" legendVisible="false" style="-fx-background-color: white;" stylesheets="@../CSS/bargraph.css" title="Most Common Locations">
                                 <xAxis>
                                   <CategoryAxis label="Locations" side="BOTTOM" fx:id="xAxisLocSan" />
                                 </xAxis>
@@ -142,7 +142,7 @@
                                   <NumberAxis fx:id="yAxisLocSan" label="Number of Time Location Chosen" side="LEFT" />
                                 </yAxis>
                               </BarChart>
-                              <BarChart fx:id="barSanCom" style="-fx-background-color: white;" title="Sanitation Requests Completed" GridPane.rowIndex="1">
+                              <BarChart fx:id="barSanCom" legendVisible="false" style="-fx-background-color: white;" stylesheets="@../CSS/bargraph.css" title="Sanitation Requests Completed" GridPane.rowIndex="1">
                                 <xAxis>
                                   <CategoryAxis label="Employees" side="BOTTOM" fx:id="xAxisEmpTrans" />
                                 </xAxis>
@@ -150,8 +150,8 @@
                                   <NumberAxis fx:id="yAxisEmpTrans" label="Number of Times Completed Service" side="LEFT" />
                                 </yAxis>
                               </BarChart>
-                              <PieChart fx:id="pieChartEmpSan" style="-fx-background-color: white;" title="Chart Employees" GridPane.columnIndex="1" />
-                              <PieChart fx:id="pieChartCompSan" style="-fx-background-color: white;" title="Chart Completed" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <PieChart fx:id="pieChartEmpSan" style="-fx-background-color: white;" stylesheets="@../CSS/piechart.css" title="Chart Employees" GridPane.columnIndex="1" />
+                              <PieChart fx:id="pieChartCompSan" style="-fx-background-color: white;" stylesheets="@../CSS/piechart.css" title="Chart Completed" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
                      </children></AnchorPane>
