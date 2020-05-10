@@ -243,7 +243,7 @@ public class DataViewController implements Initializable {
       ImageIO.write(SwingFXUtils.fromFXImage(image3, null), "png", file3);
       System.out.println("Snapshot saved: " + file3.getAbsolutePath());
 
-      FileOutputStream fos = new FileOutputStream(selDir.getAbsolutePath() + "/pdfdata.pdf");
+      FileOutputStream fos = new FileOutputStream(selDir.getAbsolutePath() + "/PDFREPORTSVIEW.pdf");
       PdfWriter writer = PdfWriter.getInstance(document, fos);
       // Scaling
       Image image1E = Image.getInstance(file.getAbsolutePath());
