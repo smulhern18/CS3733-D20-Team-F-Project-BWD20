@@ -147,6 +147,9 @@ public class PathfinderController implements Initializable {
   Account.Type userLevel = databaseManager.getPermissions();
   List<SanitationServiceRequest> sanitationList = databaseManager.getAllSanitationRequests();
 
+  // end of path on floor button
+  public JFXButton buttonOnEnd = new JFXButton();
+
   // intermediate maps stuff
   public ImageView faulknerTo45FrancisImage;
   public ImageView faulknerTo75FrancisImage;
@@ -291,6 +294,61 @@ public class PathfinderController implements Initializable {
         getFloorPane(pathNodes.get(i).getFloor(), pathNodes.get(i).getBuilding())
             .getChildren()
             .add(line);
+      }
+    }
+
+    // path end button
+    for (Node node : pathNodes) {
+      List<Node> nodesOnFloor = getNodesOnFloor(node.getFloor());
+      if ((Node.NodeType.ELEV.equals(node.getType()) || Node.NodeType.STAI.equals(node.getType()))
+          && node.getId().equals(nodesOnFloor.get(nodesOnFloor.size() - 1).getId())) {
+        JFXButton endButton = new JFXButton();
+        endButton.setId(node.getId());
+        endButton.setMinSize(6, 6);
+        endButton.setMaxSize(6, 6);
+        endButton.setPrefSize(6, 6);
+        double xPos;
+        double yPos;
+        if ("Faulkner".equals(node.getBuilding())) {
+          xPos = ((node.getXCoord() * widthRatioFaulkner) - 3);
+          yPos = ((node.getYCoord() * heightRatioFaulkner) - 3);
+        } else {
+          xPos = ((node.getXCoord() * widthRatioMain) - 3);
+          yPos = ((node.getYCoord() * heightRatioMain) - 3);
+        }
+        endButton.setLayoutX(xPos);
+        endButton.setLayoutY(yPos);
+        endButton.setStyle(
+            "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px"); // 00cc00
+        endButton.setOnMouseClicked(
+            actionEvent -> {
+              pathSwitchNext.fire();
+            });
+      } else if ((Node.NodeType.ELEV.equals(node.getType())
+              || Node.NodeType.STAI.equals(node.getType()))
+          && node.getId().equals(nodesOnFloor.get(0).getId())) {
+        JFXButton endButton = new JFXButton();
+        endButton.setId(node.getId());
+        endButton.setMinSize(6, 6);
+        endButton.setMaxSize(6, 6);
+        endButton.setPrefSize(6, 6);
+        double xPos;
+        double yPos;
+        if ("Faulkner".equals(node.getBuilding())) {
+          xPos = ((node.getXCoord() * widthRatioFaulkner) - 3);
+          yPos = ((node.getYCoord() * heightRatioFaulkner) - 3);
+        } else {
+          xPos = ((node.getXCoord() * widthRatioMain) - 3);
+          yPos = ((node.getYCoord() * heightRatioMain) - 3);
+        }
+        endButton.setLayoutX(xPos);
+        endButton.setLayoutY(yPos);
+        endButton.setStyle(
+            "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #00cc00; -fx-border-color: #000000; -fx-border-width: 1px"); // 800000
+        endButton.setOnMouseClicked(
+            actionEvent -> {
+              pathSwitchPrevious.fire();
+            });
       }
     }
 
@@ -626,8 +684,8 @@ public class PathfinderController implements Initializable {
     switchToFloor(startNode.getFloor(), startNode.getBuilding());
     startCombo.setDisable(true);
     endCombo.setDisable(true);
-    Path newPath = pathFindAlgorithm.pathfind(startNode, Node.NodeType.getEnum(type));
-    draw(newPath);
+    globalPath = pathFindAlgorithm.pathfind(startNode, Node.NodeType.getEnum(type));
+    draw(globalPath);
     commandText.setText("See Details Below or Reset for New Path");
   }
 
@@ -858,18 +916,20 @@ public class PathfinderController implements Initializable {
       selectFloorPaneMain.setVisible(true);
     }
 
+    currentPane = getFloorPane(floorNum, building);
+    currentFloor = floorNum;
+    currentBuilding = building;
     System.out.println("Testing globalPath");
+
     if (null != globalPath) {
       System.out.println("globalPath not null");
+      // placeFloorEndButton(floorNum);
       if (null != globalPath.getPath()) {
         System.out.println("globalPath.getPath() not null");
         zoomToPath(floorNum, globalPath);
       }
     }
 
-    currentPane = getFloorPane(floorNum, building);
-    currentFloor = floorNum;
-    currentBuilding = building;
     setAllInvisible();
     currentPane.setVisible(true);
     getFloorImage(floorNum, building).setVisible(true);
@@ -1352,28 +1412,25 @@ public class PathfinderController implements Initializable {
     System.out.println(
         "In zoomToPath() --------------------------------------------------------------------");
     System.out.println(floorNum);
-    List<Node> nodesOnFloor = new ArrayList<>();
     double bigX = 0.0;
     double bigY = 0.0;
     double smallX = 5000.0;
     double smallY = 5000.0;
     double hVal = 0.0;
     double vVal = 0.0;
-    for (Node node : path.getPath()) {
-      if (node.getFloor().equals(floorNum)) {
-        nodesOnFloor.add(node);
-        if (node.getXCoord() > bigX) {
-          bigX = node.getXCoord();
-        }
-        if (node.getYCoord() > bigY) {
-          bigY = node.getYCoord();
-        }
-        if (node.getXCoord() < smallX) {
-          smallX = node.getXCoord();
-        }
-        if (node.getYCoord() < smallY) {
-          smallY = node.getYCoord();
-        }
+    List<Node> nodesOnFloor = getNodesOnFloor(floorNum);
+    for (Node node : nodesOnFloor) {
+      if (node.getXCoord() > bigX) {
+        bigX = node.getXCoord();
+      }
+      if (node.getYCoord() > bigY) {
+        bigY = node.getYCoord();
+      }
+      if (node.getXCoord() < smallX) {
+        smallX = node.getXCoord();
+      }
+      if (node.getYCoord() < smallY) {
+        smallY = node.getYCoord();
       }
     }
     System.out.println(nodesOnFloor.size());
@@ -1434,7 +1491,6 @@ public class PathfinderController implements Initializable {
       } else if (vVal > 0.6) {
         vVal = vVal + (0.3 * ((yDiff / FAULKNER_MAP_WIDTH)));
       } else if (vVal > 0.5) {
-        System.out.println("In here");
         vVal = vVal + (0.2 * ((yDiff / FAULKNER_MAP_WIDTH)));
       }
 
@@ -1527,4 +1583,51 @@ public class PathfinderController implements Initializable {
     }
     nodeInfoCombo.setItems(tempSanitationList);
   }
+
+  public List<Node> getNodesOnFloor(String floorNum) {
+    List<Node> returnList = new ArrayList<>();
+    for (Node node : globalPath.getPath()) {
+      if (node.getFloor().equals(floorNum)) {
+        returnList.add(node);
+      }
+    }
+    return returnList;
+  }
+
+  //  public void placeFloorEndButton(
+  //      String floorNum) { // look into button being created on multiple floors
+  //    buttonOnEnd.setVisible(false);
+  //    buttonOnEnd = null;
+  //    buttonOnEnd = new JFXButton();
+  //    List<Node> nodesOnFloor = getNodesOnFloor(floorNum);
+  //    Node lastNode = nodesOnFloor.get(nodesOnFloor.size() - 1);
+  //
+  //    double currentRatioX;
+  //    double currentRatioY;
+  //    if ("Faulkner".equals(lastNode.getBuilding())) {
+  //      currentRatioY = currentPane.getPrefHeight() / FAULKNER_MAP_HEIGHT;
+  //      currentRatioX = currentPane.getPrefWidth() / FAULKNER_MAP_WIDTH;
+  //    } else {
+  //      currentRatioY = currentPane.getPrefHeight() / MAIN_MAP_HEIGHT;
+  //      currentRatioX = currentPane.getPrefWidth() / MAIN_MAP_WIDTH;
+  //    }
+  //
+  //    String msg = "Next Floor";
+  //    Text text = new Text(msg);
+  //    Font font = Font.font("Arial", 12);
+  //    text.setFont(font);
+  //    double width = text.getLayoutBounds().getWidth();
+  //
+  //    buttonOnEnd.setStyle("-fx-font-size: 12");
+  //    buttonOnEnd.setText("Next Floor");
+  //    getFloorPane(floorNum, lastNode.getBuilding()).getChildren().add(buttonOnEnd);
+  //    buttonOnEnd.setLayoutX((lastNode.getXCoord() / currentRatioX) - (width / 2) + 3);
+  //    buttonOnEnd.setLayoutY((lastNode.getYCoord() / currentRatioY) + 25);
+  //    buttonOnEnd.setId("nextFloor");
+  //    buttonOnEnd.setStyle(
+  //        "-fx-max-height: 18px; -fx-min-height: 16px; -fx-background-radius: 3px;
+  // -fx-border-radius: 3px; -fx-background-color: rgba(255,255,255,0.7); -fx-border-color:
+  // rgba(0,0,0,0.7); -fx-border-width: 1px");
+  //    buttonOnEnd.setVisible(true);
+  //  }
 }
