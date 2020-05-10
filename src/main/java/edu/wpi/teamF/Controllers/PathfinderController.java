@@ -175,6 +175,7 @@ public class PathfinderController implements Initializable {
   Node startNode = null;
   Node endNode = null;
   public Path path;
+  public Path globalPath;
   public Directions directions;
   public int locationIndex;
 
@@ -446,6 +447,8 @@ public class PathfinderController implements Initializable {
 
     startCombo.setValue(null);
     endCombo.setValue(null);
+
+    globalPath = null;
 
     setComboBehavior();
 
@@ -737,33 +740,32 @@ public class PathfinderController implements Initializable {
           endNode = findComboLocation(endCombo);
           System.out.println("start" + startNode);
           System.out.println("end" + endNode);
-          Path path = null;
+          globalPath = null;
+
+          try {
+            globalPath = pathFindAlgorithm.pathfind(startNode, endNode);
+          } catch (InstanceNotFoundException e) {
+            e.printStackTrace();
+          }
+
+          if (null == globalPath.getPath()) {
+            showErrorPane();
+          } else {
+            try {
+              commandText.setText("See Path Below for Directions");
+              draw(globalPath);
+              zoomToPath(globalPath.getPath().get(0).getFloor(), globalPath);
+            } catch (InstanceNotFoundException e) {
+              e.printStackTrace();
+            }
+          }
+
           switchToFloor(startNode.getFloor(), startNode.getBuilding());
           if (!"Faulkner".equals(startNode.getBuilding())) {
             labelNodeStart();
           }
           if (!"Faulkner".equals(endNode.getBuilding())) {
             labelNodeEnd();
-          }
-
-          System.out.println(liftType);
-
-          try {
-            path = pathFindAlgorithm.pathfind(startNode, endNode);
-          } catch (InstanceNotFoundException e) {
-            e.printStackTrace();
-          }
-
-          if (null == path.getPath()) {
-            showErrorPane();
-          } else {
-            try {
-              commandText.setText("See Path Below for Directions");
-              draw(path);
-              zoomToPath(path.getPath().get(0).getFloor(), path);
-            } catch (InstanceNotFoundException e) {
-              e.printStackTrace();
-            }
           }
         });
   }
@@ -826,6 +828,16 @@ public class PathfinderController implements Initializable {
       selectFloorPane.setVisible(false);
       selectFloorPaneMain.setVisible(true);
     }
+
+    System.out.println("Testing globalPath");
+    if (null != globalPath) {
+      System.out.println("globalPath not null");
+      if (null != globalPath.getPath()) {
+        System.out.println("globalPath.getPath() not null");
+        zoomToPath(floorNum, globalPath);
+      }
+    }
+
     currentPane = getFloorPane(floorNum, building);
     currentFloor = floorNum;
     currentBuilding = building;
