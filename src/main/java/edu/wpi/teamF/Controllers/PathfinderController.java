@@ -141,6 +141,7 @@ public class PathfinderController implements Initializable {
   public Label nodeInfoLabel1;
   public Label nodeInfoLabel2;
   public Label nodeInfoLabel3;
+  public JFXButton goToButton;
   public JFXButton nodeInfoButton;
   public JFXComboBox<String> nodeInfoTypeCombo;
   public JFXComboBox<String> nodeInfoCombo;
@@ -1770,40 +1771,40 @@ public class PathfinderController implements Initializable {
     }
   }
 
-  //  public void placeFloorEndButton(
-  //      String floorNum) { // look into button being created on multiple floors
-  //    buttonOnEnd.setVisible(false);
-  //    buttonOnEnd = null;
-  //    buttonOnEnd = new JFXButton();
-  //    List<Node> nodesOnFloor = getNodesOnFloor(floorNum);
-  //    Node lastNode = nodesOnFloor.get(nodesOnFloor.size() - 1);
-  //
-  //    double currentRatioX;
-  //    double currentRatioY;
-  //    if ("Faulkner".equals(lastNode.getBuilding())) {
-  //      currentRatioY = currentPane.getPrefHeight() / FAULKNER_MAP_HEIGHT;
-  //      currentRatioX = currentPane.getPrefWidth() / FAULKNER_MAP_WIDTH;
-  //    } else {
-  //      currentRatioY = currentPane.getPrefHeight() / MAIN_MAP_HEIGHT;
-  //      currentRatioX = currentPane.getPrefWidth() / MAIN_MAP_WIDTH;
-  //    }
-  //
-  //    String msg = "Next Floor";
-  //    Text text = new Text(msg);
-  //    Font font = Font.font("Arial", 12);
-  //    text.setFont(font);
-  //    double width = text.getLayoutBounds().getWidth();
-  //
-  //    buttonOnEnd.setStyle("-fx-font-size: 12");
-  //    buttonOnEnd.setText("Next Floor");
-  //    getFloorPane(floorNum, lastNode.getBuilding()).getChildren().add(buttonOnEnd);
-  //    buttonOnEnd.setLayoutX((lastNode.getXCoord() / currentRatioX) - (width / 2) + 3);
-  //    buttonOnEnd.setLayoutY((lastNode.getYCoord() / currentRatioY) + 25);
-  //    buttonOnEnd.setId("nextFloor");
-  //    buttonOnEnd.setStyle(
-  //        "-fx-max-height: 18px; -fx-min-height: 16px; -fx-background-radius: 3px;
-  // -fx-border-radius: 3px; -fx-background-color: rgba(255,255,255,0.7); -fx-border-color:
-  // rgba(0,0,0,0.7); -fx-border-width: 1px");
-  //    buttonOnEnd.setVisible(true);
-  //  }
+  public void goToServiceRequest(ActionEvent actionEvent) throws IOException {
+    switch (nodeInfoTypeCombo.getValue()) {
+      case ("Computer"):
+        sceneController.switchScene("ComputerServiceRequest");
+        break;
+      case ("Medicine"):
+        sceneController.switchScene("MedicineDeliveryRequest");
+        break;
+      case ("Language"):
+        sceneController.switchScene("LanguageServiceController2");
+        break;
+      case ("Sanitation"):
+        sceneController.switchScene("SanitationServiceRequest");
+        break;
+      case ("Mariachi"):
+        sceneController.switchScene("MariachiRequest");
+        break;
+      case ("Security"):
+        sceneController.switchScene("SecurityRequest");
+        break;
+      case ("Laundry"):
+        sceneController.switchScene("LaundryServiceRequest");
+        break;
+      case ("Flower"):
+        sceneController.switchScene("FlowerRequestInfo");
+        break;
+      case ("Maintenance"):
+        sceneController.switchScene("MaintenenceRequest");
+        break;
+      case ("Transport"):
+        sceneController.switchScene("TransportRequest");
+        break;
+      default:
+        break;
+    }
+  }
 }
