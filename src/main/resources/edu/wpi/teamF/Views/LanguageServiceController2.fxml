@@ -61,7 +61,7 @@
                         <JFXTreeTableView fx:id="table" style="-fx-background-color: white; -fx-border-color: black;" />
                     </children>
                 </StackPane>
-                <GridPane fx:id="deletePane" layoutX="217.0" layoutY="70.0" AnchorPane.rightAnchor="10.0">
+                <GridPane fx:id="deletePane" layoutX="294.0" layoutY="63.0" AnchorPane.rightAnchor="10.0">
                     <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
                         <ColumnConstraints hgrow="SOMETIMES" />

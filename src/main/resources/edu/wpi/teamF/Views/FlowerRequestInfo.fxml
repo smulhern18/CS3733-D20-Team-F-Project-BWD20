@@ -58,7 +58,7 @@
                     </children>
                 </StackPane>
                 <JFXTreeTableView fx:id="treeTableFlower" layoutX="12.0" layoutY="100.0" style="-fx-background-color: white; -fx-border-color: black;" AnchorPane.bottomAnchor="99.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="100.0" />
-                <GridPane fx:id="deletePane" layoutX="217.0" layoutY="70.0" AnchorPane.rightAnchor="10.0">
+                <GridPane fx:id="deletePane" layoutX="201.0" layoutY="59.0" AnchorPane.rightAnchor="11.0">
                     <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
                         <ColumnConstraints hgrow="SOMETIMES" />
@@ -111,7 +111,8 @@
                            </padding>
                            <font>
                               <Font name="Dubai Light" size="12.0" />
-                           </font></Label>
+                           </font>
+                        </Label>
                                 <JFXComboBox fx:id="locationComboBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black;" />
                             </children>
                         </HBox>
@@ -123,7 +124,8 @@
                            </font>
                            <padding>
                               <Insets right="20.0" />
-                           </padding></Label>
+                           </padding>
+                        </Label>
                                 <JFXComboBox fx:id="priorityComboBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black;" />
                             </children>
                         </HBox>
@@ -163,7 +165,8 @@
                            </font>
                            <padding>
                               <Insets right="20.0" />
-                           </padding></Label>
+                           </padding>
+                        </Label>
                                 <JFXTextField fx:id="buyerNameInput" alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black;" />
                             </children>
                         </HBox>
@@ -175,7 +178,8 @@
                            </font>
                            <padding>
                               <Insets right="20.0" />
-                           </padding></Label>
+                           </padding>
+                        </Label>
                                 <JFXTextField fx:id="recipientInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black;" />
                             </children>
                         </HBox>
@@ -187,7 +191,8 @@
                            </font>
                            <padding>
                               <Insets right="20.0" />
-                           </padding></Label>
+                           </padding>
+                        </Label>
                                 <JFXTextField fx:id="roomInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black;" />
                             </children>
                         </HBox>
@@ -199,7 +204,8 @@
                            </font>
                            <padding>
                               <Insets right="20.0" />
-                           </padding></Label>
+                           </padding>
+                        </Label>
                                 <JFXTextArea fx:id="messsageInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black;" />
                             </children>
                         </HBox>
@@ -211,7 +217,8 @@
                            </font>
                            <padding>
                               <Insets right="20.0" />
-                           </padding></Label>
+                           </padding>
+                        </Label>
                                 <JFXTextField fx:id="phoneNumberInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black;" />
                             </children>
                         </HBox>
