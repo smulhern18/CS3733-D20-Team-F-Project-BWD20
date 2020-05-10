@@ -87,30 +87,29 @@ public class MainMenuController implements Initializable {
   @FXML
   public void time() {
 
-    Thread clock = new Thread(){
-      public void run(){
-        try {
-          for (;;){
-          Calendar calendar = new GregorianCalendar();
-          int day = calendar.get(Calendar.DAY_OF_MONTH);
-          int month = calendar.get(Calendar.MONTH);
-          int year = calendar.get(Calendar.YEAR);
+    Thread clock =
+        new Thread(
+            () -> {
+              try {
+                while (true) {
 
-          int second = calendar.get(Calendar.SECOND);
-          int minute = calendar.get(Calendar.MINUTE);
-          int hour = calendar.get(Calendar.HOUR);
+                  Calendar calendar = new GregorianCalendar();
+                  int day = calendar.get(Calendar.DAY_OF_MONTH);
+                  int month = calendar.get(Calendar.MONTH);
+                  int year = calendar.get(Calendar.YEAR);
 
-          time.setText(hour + ": " + minute + ": " + second);
-          date.setText(month + "/" + day + "/" + year);
-          sleep(1000);
-        } }
-        catch (InterruptedException e) {
-          e.printStackTrace();
-        }
-      }
-    };
+                  int second = calendar.get(Calendar.SECOND);
+                  int minute = calendar.get(Calendar.MINUTE);
+                  int hour = calendar.get(Calendar.HOUR);
+
+                  time.setText(hour + ": " + minute + ": " + second);
+                  date.setText(month + "/" + day + "/" + year);
+                  Thread.sleep(1000);
+                }
+              } catch (InterruptedException e) {
+                e.printStackTrace();
+              }
+            });
     clock.start();
-
-
   }
 }
