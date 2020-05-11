@@ -203,6 +203,7 @@ public class ShippingController implements Initializable {
   public void resetPane() {
     name.setText("");
     company.setText("");
+    phone.setText("");
     address1.setText("");
     address2.setText("");
     city.setText("");
