@@ -822,12 +822,12 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <JFXComboBox fx:id="nodeInfoTypeCombo" onAction="#setNodeInfoCombo" prefWidth="100.0">
+                  <JFXComboBox fx:id="nodeInfoTypeCombo" onAction="#setNodeInfoCombo" prefWidth="150.0">
                      <VBox.margin>
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
                   </JFXComboBox>
-                  <JFXComboBox fx:id="nodeInfoCombo" prefWidth="100.0">
+                  <JFXComboBox fx:id="nodeInfoCombo" prefWidth="150.0">
                      <VBox.margin>
                         <Insets bottom="20.0" />
                      </VBox.margin>

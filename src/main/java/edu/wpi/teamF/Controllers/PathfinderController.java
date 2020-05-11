@@ -673,9 +673,12 @@ public class PathfinderController implements Initializable {
     scrollPaneFaulkner1.setVisible(true);
     mapPaneFaulkner1.setVisible(true);
     imageViewFaulkner1.setVisible(true);
+
     errorPane.setVisible(false);
     nodeInfoPane.setVisible(false);
     nodeInfoPaneUser.setVisible(false);
+    setNodeInfoComboPrompt();
+
     floorButtonsSet();
     initializehospitalComboBox();
     setToggleBehavior();
@@ -2023,5 +2026,10 @@ public class PathfinderController implements Initializable {
       }
     }
     return bool;
+  }
+
+  public void setNodeInfoComboPrompt() {
+    nodeInfoTypeCombo.setPromptText("Type:");
+    nodeInfoCombo.setPromptText("Request:");
   }
 }
