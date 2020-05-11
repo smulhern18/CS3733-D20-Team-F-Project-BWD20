@@ -236,6 +236,7 @@ public class MapView implements Initializable {
     line.setStrokeWidth(LINE_WIDTH);
     line.setOpacity(0.7);
     getFloorPane(node1.getFloor()).getChildren().addAll(line);
+    line.toBack();
     lineMap.put(line.getId(), line);
     mapEditorController.setEdgeEventHandlers(line);
 

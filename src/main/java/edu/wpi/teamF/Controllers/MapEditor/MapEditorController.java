@@ -27,6 +27,8 @@ public class MapEditorController {
       JFXButton modifyEdgeFromNodeButton, JFXComboBox<String> edgeCombo) {
     modifyEdgeFromNodeButton.setOnMousePressed(
         mouseEvent -> {
+          edgeCombo.valueProperty().addListener((observable, oldValue, newValue) -> {});
+
           if (state == State.MODIFY_NODE) {
             try {
               modifyEdgeFromNodeHandler(edgeCombo);
@@ -40,6 +42,7 @@ public class MapEditorController {
   private void modifyEdgeFromNodeHandler(JFXComboBox<String> edgeCombo) throws Exception {
     if (!edgeCombo.getValue().isEmpty()) {
       System.out.println("Value not empty");
+      cancelNodeHandler();
       state = State.MODIFY_EDGE;
       mapView.setAsEdgeView();
       selectedEdge = edgeLineMap.get(edgeCombo.getValue());

@@ -190,7 +190,7 @@
             </JFXButton>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="nodeAnchor" maxHeight="400.0" maxWidth="325.0" minHeight="400.0" minWidth="325.0" prefHeight="400.0" prefWidth="325.0" style="-fx-background-color: rgba(255,255,255,0.9);" visible="false" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+      <AnchorPane fx:id="nodeAnchor" maxHeight="400.0" maxWidth="325.0" minHeight="400.0" minWidth="325.0" prefHeight="400.0" prefWidth="325.0" style="-fx-background-color: rgba(255,255,255,0.9);" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
             <GridPane prefHeight="350.0" prefWidth="282.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columnConstraints>
@@ -270,7 +270,7 @@
                   </Label>
                   <Label text="Or select an edge to modify:" GridPane.columnIndex="2" GridPane.rowIndex="9" />
                   <JFXComboBox fx:id="edgeCombo" focusColor="#012d5a" prefHeight="27.0" prefWidth="110.0" style="-fx-border-color: #012D5A;" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="10" />
-                  <JFXButton fx:id="modifyEdgeFromNodeButton" maxHeight="26.0" maxWidth="54.0" minHeight="25.0" minWidth="50.0" prefHeight="26.0" prefWidth="54.0" style="-fx-background-color: #012d5a;" text="Modify" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+                  <JFXButton fx:id="modifyEdgeFromNodeButton" maxHeight="26.0" maxWidth="54.0" minHeight="25.0" minWidth="50.0" prefHeight="26.0" prefWidth="54.0" style="-fx-background-color: #012d5a;" text="Select" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
                </children>
             </GridPane>
          </children>
