@@ -23,6 +23,40 @@ public class MapEditorController {
   private static final int MAP_HEIGHT_MAIN = 3400;
   private static final int MAP_WIDTH_MAIN = 5000;
 
+  public void setModifyEdgeFromNodeButton(
+      JFXButton modifyEdgeFromNodeButton, JFXComboBox<String> edgeCombo) {
+    modifyEdgeFromNodeButton.setOnMousePressed(
+        mouseEvent -> {
+          edgeCombo.valueProperty().addListener((observable, oldValue, newValue) -> {});
+
+          if (state == State.MODIFY_NODE) {
+            try {
+              modifyEdgeFromNodeHandler(edgeCombo);
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+          }
+        });
+  }
+
+  private void modifyEdgeFromNodeHandler(JFXComboBox<String> edgeCombo) throws Exception {
+    if (!edgeCombo.getValue().isEmpty()) {
+      System.out.println("Value not empty");
+      cancelNodeHandler();
+      state = State.MODIFY_EDGE;
+      mapView.setAsEdgeView();
+      selectedEdge = edgeLineMap.get(edgeCombo.getValue());
+      edgeSelection = null;
+      EdgeLine edgeLine = edgeLineMap.get(edgeCombo.getValue());
+      NodeButton nodeButton1 = nodeButtonMap.get(edgeLine.getNode1());
+      NodeButton nodeButton2 = nodeButtonMap.get(edgeLine.getNode2());
+      if (nodeButton1.node.getFloor().equals(nodeButton2.node.getFloor())) {
+        mapView.highlightUpdatedEdge(
+            edgeCombo.getValue(), selectedEdge.getNode1(), selectedEdge.getNode2());
+      }
+    }
+  }
+
   private enum State {
     ADD_NODE,
     MODIFY_NODE,
@@ -233,7 +267,7 @@ public class MapEditorController {
         });
   }
 
-  public void setNodeEventHandlers(JFXButton button) {
+  public void setNodeEventHandlers(JFXButton button, JFXComboBox<String> edgeCombo) {
 
     button.setOnMousePressed(
         mouseEvent -> {
@@ -243,7 +277,7 @@ public class MapEditorController {
             } else if (state == State.ADD_EDGE) {
               nodeAddEdgeHandler(button, mouseEvent);
             } else {
-              nodeModifyNodeHandler(button, mouseEvent);
+              nodeModifyNodeHandler(button, mouseEvent, edgeCombo);
             }
           } catch (Exception e) {
             e.printStackTrace();
@@ -294,7 +328,8 @@ public class MapEditorController {
         });
   }
 
-  private void nodeModifyNodeHandler(JFXButton button, MouseEvent mouseEvent) throws Exception {
+  private void nodeModifyNodeHandler(
+      JFXButton button, MouseEvent mouseEvent, JFXComboBox<String> edgeCombo) throws Exception {
     if (state == State.MODIFY_EDGE || state == State.ADD_EDGE) {
       cancelEdgeHandler();
     }
@@ -318,6 +353,12 @@ public class MapEditorController {
           selectedNode.getTempFloor(),
           selectedNode.getTempBuilding());
     }
+
+    edgeCombo.getItems().clear();
+
+    for (Edge edge : databaseManager.getAllEdgesConnectedToNode(selectedNode.getID())) {
+      edgeCombo.getItems().add(edge.getId());
+    }
   }
 
   public void setFloorInputHandler(JFXComboBox<String> floorInput) {
@@ -338,7 +379,7 @@ public class MapEditorController {
         });
   }
 
-  public void setAddNodeButtonHandler(JFXButton button) {
+  public void setAddNodeButtonHandler(JFXButton button, JFXComboBox<String> edgeCombo) {
     button.setOnMousePressed(
         mouseEvent -> {
           try {
@@ -348,8 +389,7 @@ public class MapEditorController {
             selectedNode = new NodeButton(newX, newY, mapView.getCurrentFloor());
             JFXButton newButton = mapView.drawNode(selectedNode.getNode());
             nodeButtonMap.put(selectedNode.getID(), selectedNode);
-            nodeModifyNodeHandler(newButton, mouseEvent);
-
+            nodeModifyNodeHandler(newButton, mouseEvent, edgeCombo);
           } catch (Exception e) {
             e.printStackTrace();
           }
@@ -359,6 +399,7 @@ public class MapEditorController {
   public void setModifyNodeButtonHandler(JFXButton button) {
     button.setOnMousePressed(
         mouseEvent -> {
+          NodeButton nodeButton = nodeButtonMap.get(selectedNode);
           try {
             mapView.removeNode(selectedNode.getID());
             nodeButtonMap.remove(selectedNode.getID());
@@ -376,7 +417,6 @@ public class MapEditorController {
               mapView.redrawEdge(edge);
             }
             resetNodeStateToDefault();
-
           } catch (Exception e) {
             e.printStackTrace();
           }
@@ -393,7 +433,6 @@ public class MapEditorController {
   }
 
   public void setDeleteNodeButtonHandler(JFXButton button) {
-
     button.setOnMousePressed(
         mouseEvent -> {
           try {

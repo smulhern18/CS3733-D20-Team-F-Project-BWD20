@@ -152,6 +152,10 @@ public class MapView implements Initializable {
 
   @FXML private Label nodeErrorLabel;
 
+  @FXML private JFXComboBox<String> edgeCombo;
+
+  @FXML private JFXButton modifyEdgeFromNodeButton;
+
   private DatabaseManager databaseManager = DatabaseManager.getManager();
   private MapEditorController mapEditorController;
   Map<String, JFXButton> buttonMap;
@@ -190,7 +194,8 @@ public class MapView implements Initializable {
     mapEditorController.setFloorInputHandler(floorInput);
     mapEditorController.setDeleteNodeButtonHandler(deleteNodeButton);
     mapEditorController.setModifyNodeButtonHandler(modifyNodeButton);
-    mapEditorController.setAddNodeButtonHandler(nodeDisplayButton);
+    mapEditorController.setAddNodeButtonHandler(nodeDisplayButton, edgeCombo);
+    mapEditorController.setModifyEdgeFromNodeButton(modifyEdgeFromNodeButton, edgeCombo);
     //    mapEditorController.setAddNodeButtonHandler(addNodeButton);
     //    mapEditorController.setModifyNodeButtonHandler(modifyNodeButton);
     //    mapEditorController.setDeleteNodeButtonHandler(deleteNodeButton);
@@ -215,7 +220,7 @@ public class MapView implements Initializable {
     setButtonColor(button, "#99D9EA", 0.7);
     button.setLayoutX(calculateXCoord(node.getXCoord(), node.getBuilding()) - BUTTON_SIZE / 2.0);
     button.setLayoutY(calculateYCoord(node.getYCoord(), node.getBuilding()) - BUTTON_SIZE / 2.0);
-    mapEditorController.setNodeEventHandlers(button);
+    mapEditorController.setNodeEventHandlers(button, edgeCombo);
     getFloorPane(node.getFloor()).getChildren().add(button);
     buttonMap.put(button.getId(), button);
     return button;
@@ -231,6 +236,7 @@ public class MapView implements Initializable {
     line.setStrokeWidth(LINE_WIDTH);
     line.setOpacity(0.7);
     getFloorPane(node1.getFloor()).getChildren().addAll(line);
+    line.toBack();
     lineMap.put(line.getId(), line);
     mapEditorController.setEdgeEventHandlers(line);
 
@@ -335,11 +341,12 @@ public class MapView implements Initializable {
     JFXButton button = buttonMap.get(nodeID);
     setButtonColor(button, "#012D5A", 1);
     button.setLayoutX(calculateXCoord(newX, newBuilding) - BUTTON_SIZE / 2.0);
-    button.setLayoutY(calculateYCoord(newY, newBuilding) - BUTTON_SIZE / 2.0);
+    button.setLayoutY(
+        calculateYCoord(newY, newBuilding) - BUTTON_SIZE / 2.0); // set new x and y coordinates
     if (!newFloor.equals(button.getParent().getId())) {
       getFloorPane(button.getParent().getId()).getChildren().remove(button);
       getFloorPane(newFloor).getChildren().add(button);
-      switchToFloor(newFloor);
+      switchToFloor(newFloor); // if the floor id different then you switch to it
     }
     for (Edge edge : databaseManager.getAllEdgesConnectedToNode(nodeID)) {
       updateEdgeWithUpdatedNode(edge, nodeID, newX, newY, newBuilding, newFloor);
