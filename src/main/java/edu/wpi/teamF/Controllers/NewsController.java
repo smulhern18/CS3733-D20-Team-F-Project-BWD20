@@ -24,6 +24,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.web.WebView;
 import javax.swing.*;
 
 public class NewsController implements Initializable {
@@ -40,6 +41,8 @@ public class NewsController implements Initializable {
   public JFXButton viewArticle;
   public JFXButton sendText;
   public Label commsResult;
+  public VBox viewPane;
+  public WebView webview;
 
   public NewsApiClient newsApiClient;
   public Boolean success;
@@ -68,6 +71,7 @@ public class NewsController implements Initializable {
     sendText.setDisable(true);
     phoneNumber.setText("");
     commsResult.setText("");
+    viewPane.setVisible(false);
   }
 
   public void setListeners() {
@@ -145,10 +149,10 @@ public class NewsController implements Initializable {
     } else {
       success = true;
       for (Article a : articles.getArticles()) {
-        System.out.println(a.getTitle());
-        System.out.println(a.getSource().getName());
-        System.out.println(a.getDescription());
-        System.out.println(a.getUrl());
+        //        System.out.println(a.getTitle());
+        //        System.out.println(a.getSource().getName());
+        //        System.out.println(a.getDescription());
+        //        System.out.println(a.getUrl());
         articlesPane
             .getChildren()
             .add(
@@ -171,7 +175,7 @@ public class NewsController implements Initializable {
     vbox.setBorder(
         new Border(
             new BorderStroke(
-                Color.web("rgba(255,255,255,0.9)"), // TODO Transparent
+                Color.web("rgba(255,255,255,0.9)"),
                 BorderStrokeStyle.SOLID,
                 null,
                 new BorderWidths(2))));
@@ -180,7 +184,7 @@ public class NewsController implements Initializable {
 
     Label label1 = new Label();
     label1.setMinHeight(24);
-    label1.setMaxWidth(570);
+    label1.setMaxWidth(720);
     label1.setFont(new Font("Arial", 16));
     label1.setStyle("-fx-font-weight: bold");
     label1.setText(title);
@@ -188,7 +192,7 @@ public class NewsController implements Initializable {
 
     Label label2 = new Label();
     label2.setMinHeight(16);
-    label2.setMaxWidth(570);
+    label2.setMaxWidth(720);
     label2.setFont(new Font("Arial", 12));
     label2.setStyle("-fx-font-weight: bold");
     label2.setText(source);
@@ -196,8 +200,8 @@ public class NewsController implements Initializable {
 
     Label label3 = new Label();
     label3.setMinHeight(18);
-    label3.setMaxHeight(18); // Cut of multiple lines
-    label3.setMaxWidth(570);
+    label3.setMaxHeight(18); // Cut off multiple lines
+    label3.setMaxWidth(720);
     label3.setFont(new Font("Arial", 12));
     label3.setText("Select this story to read more...");
     if (description != null) {
@@ -281,6 +285,11 @@ public class NewsController implements Initializable {
   }
 
   public void viewArticle(ActionEvent actionEvent) {
-    // TODO Implement
+    webview.getEngine().load(currUrl);
+    viewPane.setVisible(true);
+  }
+
+  public void closeBtn(ActionEvent actionEvent) {
+    viewPane.setVisible(false);
   }
 }
