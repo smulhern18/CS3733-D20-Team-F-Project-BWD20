@@ -1698,21 +1698,23 @@ public class PathfinderController implements Initializable {
       tempSanitationList = FXCollections.observableArrayList();
       for (SanitationServiceRequest sanitationServiceRequest : sanitationList) {
         if (sanitationServiceRequest.getLocation().getId().equals(node.getId())) {
-          tempSanitationList.add("Sanitation " + sanitationServiceRequest.getId());
+          tempSanitationList.add(
+              sanitationServiceRequest.getType() + " " + sanitationServiceRequest.getId());
         }
       }
 
       tempComputerList = FXCollections.observableArrayList();
       for (ComputerServiceRequest computerServiceRequest : computerList) {
         if (computerServiceRequest.getLocation().getId().equals(node.getId())) {
-          tempComputerList.add("Computer " + computerServiceRequest.getId());
+          tempComputerList.add(
+              computerServiceRequest.getHardwareSoftware() + " " + computerServiceRequest.getId());
         }
       }
 
       tempFlowerList = FXCollections.observableArrayList();
       for (FlowerRequest flowerRequest : flowerList) {
         if (flowerRequest.getLocation().getId().equals(node.getId())) {
-          tempFlowerList.add("Flowers " + flowerRequest.getId());
+          tempFlowerList.add(flowerRequest.getChoice() + " " + flowerRequest.getId());
         }
       }
 
@@ -1740,14 +1742,16 @@ public class PathfinderController implements Initializable {
       tempMedicineList = FXCollections.observableArrayList();
       for (MedicineDeliveryRequest medicineDeliveryRequest : medicineList) {
         if (medicineDeliveryRequest.getLocation().getId().equals(node.getId())) {
-          tempMedicineList.add("Medicine " + medicineDeliveryRequest.getId());
+          tempMedicineList.add(
+              medicineDeliveryRequest.getMedicineType() + " " + medicineDeliveryRequest.getId());
         }
       }
 
       tempLanguageList = FXCollections.observableArrayList();
       for (LanguageServiceRequest languageServiceRequest : languageList) {
         if (languageServiceRequest.getLocation().getId().equals(node.getId())) {
-          tempLanguageList.add("Language " + languageServiceRequest.getId());
+          tempLanguageList.add(
+              languageServiceRequest.getProblemType() + " " + languageServiceRequest.getId());
         }
       }
 
@@ -1761,7 +1765,7 @@ public class PathfinderController implements Initializable {
       tempTransportList = FXCollections.observableArrayList();
       for (TransportRequest transportRequest : tranportList) {
         if (transportRequest.getLocation().getId().equals(node.getId())) {
-          tempTransportList.add("Transport " + transportRequest.getId());
+          tempTransportList.add(transportRequest.getType() + " " + transportRequest.getId());
         }
       }
     }
