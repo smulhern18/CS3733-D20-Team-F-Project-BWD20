@@ -18,6 +18,10 @@ public class MapEditorController {
   private static final double MAIN_HEIGHT_RATIO = 585.0 / 3400;
   private static final double MAIN_WIDTH_RATIO =
       974.0 / 5000; // height and width of the main hospital map
+  private static final int MAP_HEIGHT_FAULK = 1485;
+  private static final int MAP_WIDTH_FAULK = 2475; // height and width of the faulkner hospital map
+  private static final int MAP_HEIGHT_MAIN = 3400;
+  private static final int MAP_WIDTH_MAIN = 5000;
 
   private enum State {
     ADD_NODE,
@@ -250,15 +254,30 @@ public class MapEditorController {
           try {
             double widthRatio = MAIN_WIDTH_RATIO;
             double heightRatio = MAIN_HEIGHT_RATIO;
+            double maxWidth = MAP_WIDTH_MAIN;
+            double maxHeight = MAP_HEIGHT_MAIN;
             if (state == State.MODIFY_NODE) {
               if ("Faulkner".equals(selectedNode.getTempBuilding())) {
                 widthRatio = FAULKNER_WIDTH_RATIO;
                 heightRatio = FAULKNER_HEIGHT_RATIO;
+                maxWidth = MAP_WIDTH_FAULK;
+                maxHeight = MAP_HEIGHT_FAULK;
               }
               double newX =
                   (mouseEvent.getSceneX() / mapView.getMapScaleX() + deltaX + 4) / widthRatio;
               double newY =
                   (mouseEvent.getSceneY() / mapView.getMapScaleY() + deltaY + 4) / heightRatio;
+              if (newX > maxWidth) {
+                newX = maxWidth;
+              } else if (newX < 0) {
+                newX = 0;
+              }
+              if (newY > maxHeight) {
+                newY = maxHeight;
+              } else if (newY < 0) {
+                newY = 0;
+              }
+
               selectedNode.setTempX(newX);
               selectedNode.setTempY(newY);
 
