@@ -1647,7 +1647,7 @@ public class PathfinderController implements Initializable {
   public void setNodeInfoLabels(Node node) throws Exception {
     nodeInfoLabel1.setText(node.getLongName());
     nodeInfoLabel2.setText(node.getId());
-    setNodeInfoTypeCombo();
+    setNodeInfoTypeCombo(node);
 
     if (userLevel == null || userLevel == Account.Type.USER) {
       nodeInfoLabel3.setVisible(true);
@@ -1751,18 +1751,67 @@ public class PathfinderController implements Initializable {
     return returnList;
   }
 
-  public void setNodeInfoTypeCombo() {
+  public void setNodeInfoTypeCombo(Node node) {
     ObservableList<String> list = FXCollections.observableArrayList();
-    list.add("Computer");
-    list.add("Flower");
-    list.add("Language");
-    list.add("Laundry");
-    list.add("Maintenance");
-    list.add("Mariachi");
-    list.add("Medicine");
-    list.add("Sanitation");
-    list.add("Security");
-    list.add("Transport");
+    for (SanitationServiceRequest sanitationServiceRequest : sanitationList) {
+      if (node.getId().equals(sanitationServiceRequest.getLocation().getId())) {
+        list.add("Sanitation");
+      }
+    }
+
+    for (ComputerServiceRequest computerServiceRequest : computerList) {
+      if (node.getId().equals(computerServiceRequest.getLocation().getId())) {
+        list.add("Computer");
+      }
+    }
+
+    for (FlowerRequest flowerRequest : flowerList) {
+      if (node.getId().equals(flowerRequest.getLocation().getId())) {
+        list.add("Flower");
+      }
+    }
+
+    for (LanguageServiceRequest languageServiceRequest : languageList) {
+      if (node.getId().equals(languageServiceRequest.getLocation().getId())) {
+        list.add("Language");
+      }
+    }
+
+    for (LaundryServiceRequest laundryServiceRequest : laundryList) {
+      if (node.getId().equals(laundryServiceRequest.getLocation().getId())) {
+        list.add("Laundry");
+      }
+    }
+
+    for (MaintenanceRequest maintenanceRequest : maintenanceList) {
+      if (node.getId().equals(maintenanceRequest.getLocation().getId())) {
+        list.add("Maintenance");
+      }
+    }
+
+    for (MariachiRequest mariachiRequest : mariachiList) {
+      if (node.getId().equals(mariachiRequest.getLocation().getId())) {
+        list.add("Mariachi");
+      }
+    }
+
+    for (MedicineDeliveryRequest medicineDeliveryRequest : medicineList) {
+      if (node.getId().equals(medicineDeliveryRequest.getLocation().getId())) {
+        list.add("Medicine");
+      }
+    }
+
+    for (SecurityRequest securityRequest : securityList) {
+      if (node.getId().equals(securityRequest.getLocation().getId())) {
+        list.add("Security");
+      }
+    }
+
+    for (TransportRequest transportRequest : tranportList) {
+      if (node.getId().equals(transportRequest.getLocation().getId())) {
+        list.add("Transport");
+      }
+    }
     nodeInfoTypeCombo.setItems(list);
   }
 
