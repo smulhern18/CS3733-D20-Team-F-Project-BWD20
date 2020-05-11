@@ -54,6 +54,7 @@ public class LanguageServiceController implements Initializable {
   public JFXButton checkStatusButton;
   public AnchorPane anchorPane;
   public ImageView backgroundImage;
+  public JFXComboBox<String> toDelete;
   ObservableList<UILanguageServiceRequest> langUI = FXCollections.observableArrayList();
   public JFXComboBox<String> locationCombobox;
   public JFXComboBox<String> languageCombobox;
@@ -101,6 +102,7 @@ public class LanguageServiceController implements Initializable {
     priorityCombobox.setValue(null);
     languageCombobox.setValue(null);
     problemTypeCombobox.setValue(null);
+    toDelete.getItems().add(langRequest.getId());
   }
 
   public void cancel(ActionEvent actionEvent) {
@@ -172,11 +174,11 @@ public class LanguageServiceController implements Initializable {
   }
 
   public void delete(ActionEvent actionEvent) throws Exception {
-    String toDelte = deleteText.getText();
+    String toDelte = toDelete.getValue();
     databaseManager.deleteLanguageServiceRequest(toDelte);
     langUI.removeIf(languageServiceRequest -> languageServiceRequest.getID().get().equals(toDelte));
-    deleteText.setText("");
     table.refresh();
+    toDelete.getItems().remove(toDelete.getValue());
   }
 
   @SneakyThrows

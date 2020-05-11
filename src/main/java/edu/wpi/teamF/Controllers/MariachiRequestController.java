@@ -52,6 +52,7 @@ public class MariachiRequestController implements Initializable {
   public AnchorPane anchorPane;
   public AnchorPane frame;
   public ImageView backgroundImage;
+  public JFXComboBox<String> toDelete;
 
   DatabaseManager databaseManager = DatabaseManager.getManager();
   List<MariachiRequest> mariachiRequestList = databaseManager.getAllMariachiServiceRequests();
@@ -226,6 +227,7 @@ public class MariachiRequestController implements Initializable {
     uiMariachiRequests.add(new UIMariachiRequest(mariachiRequest));
     table.refresh();
     resetRequest();
+    toDelete.getItems().add(mariachiRequest.getId());
   }
 
   private void resetRequest() {
@@ -262,9 +264,10 @@ public class MariachiRequestController implements Initializable {
   }
 
   public void delete(ActionEvent actionEvent) {
-    String toDelete = deleteText.getText();
-    databaseManager.deleteMariachiServiceRequest(toDelete);
-    uiMariachiRequests.removeIf(mariachiRequest -> mariachiRequest.getID().get().equals(toDelete));
+    String toDel = toDelete.getValue();
+    databaseManager.deleteMariachiServiceRequest(toDel);
+    uiMariachiRequests.removeIf(mariachiRequest -> mariachiRequest.getID().get().equals(toDel));
+    toDelete.getItems().remove(toDelete.getValue());
   }
 
   public void checkStatus(ActionEvent actionEvent) {

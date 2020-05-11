@@ -55,6 +55,7 @@ public class SanitationRequestController implements Initializable {
   // public TextField descriptionTextField;
   public JFXTextArea descText;
   public ImageView backgroundImage;
+  public JFXComboBox<String> toDelete;
 
   DatabaseManager databaseManager = DatabaseManager.getManager();
   List<SanitationServiceRequest> sanitationRequestList = databaseManager.getAllSanitationRequests();
@@ -250,6 +251,7 @@ public class SanitationRequestController implements Initializable {
     uiSanitationRequests.add(new UISanitationServiceRequest(sanitationRequest));
     table.refresh();
     resetRequest();
+    toDelete.getItems().add(sanitationRequest.getId());
   }
 
   private void resetRequest() {
@@ -305,10 +307,12 @@ public class SanitationRequestController implements Initializable {
   }
 
   public void delete(ActionEvent actionEvent) {
-    String toDelete = deleteText.getText();
-    databaseManager.deleteSanitationService(toDelete);
+    String toDel = toDelete.getValue();
+    databaseManager.deleteSanitationService(toDel);
     uiSanitationRequests.removeIf(
-        sanitationRequest -> sanitationRequest.getID().get().equals(toDelete));
+        sanitationRequest -> sanitationRequest.getID().get().equals(toDel));
+    toDelete.getItems().remove( toDelete.getValue());
+    table.refresh();
   }
 
   public void checkStatus(ActionEvent actionEvent) {

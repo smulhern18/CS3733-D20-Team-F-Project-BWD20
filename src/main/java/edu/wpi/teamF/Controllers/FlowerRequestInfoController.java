@@ -433,7 +433,8 @@ public class FlowerRequestInfoController implements Initializable {
     servicePane.setVisible(false);
     checkStatusPane.setVisible(false);
     flowerPane.setVisible(true);
-    flowerRequestLabel.setVisible(false);
+    // flowerRequestLabel.setVisible(false);
+    chosePane.toFront();
   }
 
   public void cancel(ActionEvent actionEvent) {

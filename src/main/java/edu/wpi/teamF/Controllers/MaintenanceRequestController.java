@@ -69,6 +69,7 @@ public class MaintenanceRequestController implements Initializable {
   public JFXComboBox<String> assigneeChoice;
   public JFXTreeTableView<UIMaintenenceRequest> treeTableMaintenance;
   public ImageView backgroundImage;
+  public JFXComboBox<String> toDelete;
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UIMaintenenceRequest> csrUI = FXCollections.observableArrayList();
@@ -292,6 +293,7 @@ public class MaintenanceRequestController implements Initializable {
     locationComboBox.setValue(null);
     assigneeChoice.setValue(null);
     desText.setText("");
+    toDelete.getItems().add(csRequest.getId());
   }
 
   public void cancel(ActionEvent actionEvent) {
@@ -326,11 +328,11 @@ public class MaintenanceRequestController implements Initializable {
   }
 
   public void delete(ActionEvent actionEvent) throws Exception {
-    String toDelte = deleteText.getText();
+    String toDelte = toDelete.getValue();
     databaseManager.deleteComputerServiceRequest(toDelte);
     csrUI.removeIf(transportRequest -> transportRequest.getID().get().equals(toDelte));
-    deleteText.setText("");
     treeTableMaintenance.refresh();
+    toDelete.getItems().remove(toDelete.getValue());
   }
 
   public void request(ActionEvent actionEvent) {
