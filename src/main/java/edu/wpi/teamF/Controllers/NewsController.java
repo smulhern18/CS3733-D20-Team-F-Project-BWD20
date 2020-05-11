@@ -112,7 +112,7 @@ public class NewsController implements Initializable {
             .q(searchTerm.getText())
             .language("en")
             .sortBy("relevance")
-            .pageSize(10)
+            .pageSize(50)
             .build(),
         new NewsApiClient.ArticlesResponseCallback() {
           public ArticleResponse articles;
