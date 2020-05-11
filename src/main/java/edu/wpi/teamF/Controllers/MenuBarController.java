@@ -6,10 +6,19 @@ import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalTime;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.shape.Line;
+import javafx.util.Duration;
 
 public class MenuBarController implements Initializable {
   public JFXButton mainMenuButton;
@@ -79,6 +88,34 @@ public class MenuBarController implements Initializable {
     sceneController.switchScene("MainMenu");
   }
 
+  // time
+  @FXML private Label timelabel;
+
+  @FXML
+  public void time() {
+    Calendar calendar = new GregorianCalendar();
+    int day = calendar.get(Calendar.DAY_OF_MONTH);
+    int month = calendar.get(Calendar.MONTH);
+    int year = calendar.get(Calendar.YEAR);
+
+    Timeline clock =
+        new Timeline(
+            new KeyFrame(
+                Duration.ZERO,
+                e -> {
+                  LocalTime currentTime = LocalTime.now();
+                  timelabel.setText(
+                      currentTime.getHour()
+                          + ": "
+                          + currentTime.getMinute()
+                          + ": "
+                          + currentTime.getSecond());
+                }),
+            new KeyFrame(Duration.seconds(1)));
+    clock.setCycleCount(Animation.INDEFINITE);
+    clock.play();
+  }
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     Account.Type userLevel = dbm.getPermissions();
@@ -117,8 +154,6 @@ public class MenuBarController implements Initializable {
       loginButton1.setDisable(true);
       loginButton1.setVisible(false);
     }
+    time();
   }
-
-  // logout method
-
 }

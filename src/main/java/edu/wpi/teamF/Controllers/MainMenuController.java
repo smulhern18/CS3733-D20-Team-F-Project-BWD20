@@ -85,10 +85,6 @@ public class MainMenuController implements Initializable {
   // Time
   @FXML private Label Time;
 
-  private int minute;
-  private int hour;
-  private int second;
-
   @FXML
   public void time() {
     Calendar calendar = new GregorianCalendar();
