@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="402.0" prefWidth="784.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MainMenuController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MainMenuController">
     <children>
         <ImageView fx:id="background" fitHeight="402.0" fitWidth="784.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <image>
@@ -20,9 +20,9 @@
         </ImageView>
         <Pane layoutY="13.0" prefHeight="90.0" prefWidth="339.0">
             <children>
-                <Label fx:id="welcomeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="23.0" text="Welcome" textFill="WHITE">
+                <Label fx:id="welcomeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="23.0" prefHeight="196.0" prefWidth="382.0" text="Welcome" textFill="WHITE">
                     <font>
-                        <Font name="Dubai Light" size="60.0" />
+                        <Font name="Dubai Light" size="72.0" />
                     </font>
                 </Label>
             </children>
