@@ -48,12 +48,9 @@ public class MapEditorController {
       selectedEdge = edgeLineMap.get(edgeCombo.getValue());
       edgeSelection = null;
       EdgeLine edgeLine = edgeLineMap.get(edgeCombo.getValue());
-      NodeButton nodeButton1 = nodeButtonMap.get(edgeLine.getNode1());
-      NodeButton nodeButton2 = nodeButtonMap.get(edgeLine.getNode2());
-      if (nodeButton1.node.getFloor().equals(nodeButton2.node.getFloor())) {
-        mapView.highlightUpdatedEdge(
-            edgeCombo.getValue(), selectedEdge.getNode1(), selectedEdge.getNode2());
-      }
+
+      mapView.highlightUpdatedEdge(
+              edgeCombo.getValue(), selectedEdge.getNode1(), selectedEdge.getNode2());
     }
   }
 
