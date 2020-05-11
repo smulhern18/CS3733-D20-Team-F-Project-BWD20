@@ -11,6 +11,8 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import edu.wpi.teamF.Controllers.com.twilio.phoneComms;
 import java.awt.*;
+import java.io.BufferedInputStream;
+import java.io.FileOutputStream;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.*;
@@ -364,7 +366,32 @@ public class ShippingController implements Initializable {
     }
   }
 
-  public void printLabel(ActionEvent actionEvent) {}
+  public void printLabel(ActionEvent actionEvent) {
+    try {
+      Map<String, Object> params = new HashMap<String, Object>();
+      params.put("file_format", "EPL2");
+      shipment.label(params);
+    } catch (Exception e) {
+      errorMsg.setText("Error converting to label format.");
+    }
+
+    System.out.println("EPL2 Label: " + shipment.getPostageLabel().getLabelEpl2Url());
+    try (BufferedInputStream in =
+            new BufferedInputStream(
+                new URL(shipment.getPostageLabel().getLabelEpl2Url()).openStream());
+        FileOutputStream fileOutputStream = new FileOutputStream("lpt1")) {
+      byte dataBuffer[] = new byte[1024];
+      int bytesRead;
+      while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
+        fileOutputStream.write(dataBuffer, 0, bytesRead);
+      }
+      errorMsg.setText("");
+    } catch (Exception e) {
+      System.out.println("Error Printing");
+      System.out.println(e);
+      errorMsg.setText("Error printing label.");
+    }
+  }
 
   public void viewLabel(ActionEvent actionEvent) {
     viewLabelPane.setVisible(true);
