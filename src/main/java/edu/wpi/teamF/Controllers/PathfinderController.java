@@ -1777,69 +1777,87 @@ public class PathfinderController implements Initializable {
   public void setNodeInfoTypeCombo(Node node) {
     ObservableList<String> list = FXCollections.observableArrayList();
     for (SanitationServiceRequest sanitationServiceRequest : sanitationList) {
-      if (node.getId().equals(sanitationServiceRequest.getLocation().getId())) {
+      if (node.getId().equals(sanitationServiceRequest.getLocation().getId())
+          && !list.contains("Sanitation")) {
         list.add("Sanitation");
       }
     }
 
     for (ComputerServiceRequest computerServiceRequest : computerList) {
-      if (node.getId().equals(computerServiceRequest.getLocation().getId())) {
+      if (node.getId().equals(computerServiceRequest.getLocation().getId())
+          && !list.contains("Computer")) {
         list.add("Computer");
       }
     }
 
     for (FlowerRequest flowerRequest : flowerList) {
-      if (node.getId().equals(flowerRequest.getLocation().getId())) {
+      if (node.getId().equals(flowerRequest.getLocation().getId()) && !list.contains("Flower")) {
         list.add("Flower");
       }
     }
 
     for (LanguageServiceRequest languageServiceRequest : languageList) {
-      if (node.getId().equals(languageServiceRequest.getLocation().getId())) {
+      if (node.getId().equals(languageServiceRequest.getLocation().getId())
+          && !list.contains("Laguage")) {
         list.add("Language");
       }
     }
 
     for (LaundryServiceRequest laundryServiceRequest : laundryList) {
-      if (node.getId().equals(laundryServiceRequest.getLocation().getId())) {
+      if (node.getId().equals(laundryServiceRequest.getLocation().getId())
+          && !list.contains("Laundry")) {
         list.add("Laundry");
       }
     }
 
     for (MaintenanceRequest maintenanceRequest : maintenanceList) {
-      if (node.getId().equals(maintenanceRequest.getLocation().getId())) {
+      if (node.getId().equals(maintenanceRequest.getLocation().getId())
+          && !list.contains("Maintenance")) {
         list.add("Maintenance");
       }
     }
 
     for (MariachiRequest mariachiRequest : mariachiList) {
-      if (node.getId().equals(mariachiRequest.getLocation().getId())) {
+      if (node.getId().equals(mariachiRequest.getLocation().getId())
+          && !list.contains("Mariachi")) {
         list.add("Mariachi");
       }
     }
 
     for (MedicineDeliveryRequest medicineDeliveryRequest : medicineList) {
-      if (node.getId().equals(medicineDeliveryRequest.getLocation().getId())) {
+      if (node.getId().equals(medicineDeliveryRequest.getLocation().getId())
+          && !list.contains("Medicine")) {
         list.add("Medicine");
       }
     }
 
     for (SecurityRequest securityRequest : securityList) {
-      if (node.getId().equals(securityRequest.getLocation().getId())) {
+      if (node.getId().equals(securityRequest.getLocation().getId())
+          && !list.contains("Security")) {
         list.add("Security");
       }
     }
 
     for (TransportRequest transportRequest : tranportList) {
-      if (node.getId().equals(transportRequest.getLocation().getId())) {
+      if (node.getId().equals(transportRequest.getLocation().getId())
+          && !list.contains("Transport")) {
         list.add("Transport");
       }
+    }
+
+    if (list.isEmpty()) {
+      list.add("No service requests");
+      ObservableList<String> blankList = FXCollections.observableArrayList();
+      blankList.add("No service requests");
+      nodeInfoCombo.setItems(blankList);
     }
     nodeInfoTypeCombo.setItems(list);
   }
 
   public void setNodeInfoCombo() {
     ObservableList<String> blankList = FXCollections.observableArrayList();
+    blankList.add("No service requests");
+    nodeInfoCombo.setItems(blankList);
     switch (nodeInfoTypeCombo.getValue()) {
       case "Sanitation":
         if (tempSanitationList.isEmpty()) {
