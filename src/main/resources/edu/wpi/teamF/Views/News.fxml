@@ -25,16 +25,16 @@
                         <Image url="@../../../../Images/boston3.jpeg" />
                      </image>
                   </ImageView>
-                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="900.0" style="-fx-background-color: rgba(255,255,255,0.9);">
+                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="900.0" style="-fx-background-color: rgba(255,255,255,0.9);">
                      <children>
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="800.0">
                            <children>
-                              <Label text="Find Attractions &amp; Restaurants">
+                              <Label text="Find News Articles">
                                  <font>
                                     <Font size="36.0" />
                                  </font>
                                  <VBox.margin>
-                                    <Insets bottom="15.0" />
+                                    <Insets bottom="10.0" top="5.0" />
                                  </VBox.margin>
                               </Label>
                               <JFXTextField fx:id="searchTerm" promptText="Search for..." style="-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;">
@@ -66,7 +66,7 @@
                                     </JFXButton>
                                  </children>
                                  <VBox.margin>
-                                    <Insets bottom="-20.0" top="-30.0" />
+                                    <Insets bottom="-25.0" top="-10.0" />
                                  </VBox.margin>
                               </HBox>
                               <ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="616.0" style="-fx-background-color: #DCDCDC;">
@@ -81,6 +81,48 @@
                                     </VBox>
                                  </content>
                               </ScrollPane>
+                              <HBox fx:id="actionsPane" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <JFXButton fx:id="viewArticle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#viewArticle" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="View Article" textFill="WHITE">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="50.0" />
+                                       </HBox.margin>
+                                    </JFXButton>
+                                    <VBox prefHeight="200.0" prefWidth="100.0">
+                                       <children>
+                                          <Label text="Send Article:">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <JFXTextField fx:id="phoneNumber" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="250.0" promptText="Enter Phone Number (10 digits, numbers only)" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1px;">
+                                             <VBox.margin>
+                                                <Insets top="5.0" />
+                                             </VBox.margin>
+                                          </JFXTextField>
+                                          <Label fx:id="commsResult" text="Couldn't send text. Check the number &amp; try again.">
+                                             <font>
+                                                <Font size="11.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets top="1.0" />
+                                             </VBox.margin>
+                                          </Label>
+                                          <JFXButton fx:id="sendText" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#sendText" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Send Text" textFill="WHITE">
+                                             <font>
+                                                <Font size="20.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets bottom="10.0" left="35.0" top="5.0" />
+                                             </VBox.margin>
+                                          </JFXButton>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
                            </children>
                         </VBox>
                      </children>
