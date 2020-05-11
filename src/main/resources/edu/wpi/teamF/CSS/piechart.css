@@ -13,5 +13,7 @@
     -fx-font-size: 1em;
 }
 .chart-legend {
-    -fx-background-color:  #fafad2;
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-radius: .5;
 }

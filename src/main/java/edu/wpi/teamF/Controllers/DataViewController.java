@@ -1,6 +1,5 @@
 package edu.wpi.teamF.Controllers;
 
-import com.jfoenix.controls.JFXComboBox;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.DatabaseManipulators.ServiceRequestStats;
@@ -21,7 +20,6 @@ import lombok.SneakyThrows;
 
 public class DataViewController implements Initializable {
 
-  public JFXComboBox<String> serviceChoice;
   // Maintenance Request
   public BarChart<?, ?> completedChartMain;
   public PieChart pieChartTotalMain;
@@ -33,12 +31,26 @@ public class DataViewController implements Initializable {
   public PieChart pieChartMainComp;
 
   // Transport Request
-
-  // Sanitation Reques
-
-  // Traffic
-
+  public BarChart<?, ?> mostcomLocTrans;
+  public CategoryAxis xAxisLocTrans;
   public AnchorPane rootPane;
+  public NumberAxis yAxisLocTrans;
+  public BarChart<?, ?> transComp;
+  public CategoryAxis xAxisEmpComp;
+  public NumberAxis yAxisEmpComp;
+  public PieChart pieChartEmpTrans;
+  public PieChart pieChartCompTrans;
+
+  // Sanitation Requests
+
+  public BarChart<?, ?> barSaniLoc;
+  public CategoryAxis xAxisLocSan;
+  public NumberAxis yAxisLocSan;
+  public BarChart<?, ?> barSanCom;
+  public CategoryAxis xAxisEmpTrans;
+  public NumberAxis yAxisEmpTrans;
+  public PieChart pieChartEmpSan;
+  public PieChart pieChartCompSan;
 
   ServiceRequestStats serviceRequestStats = new ServiceRequestStats();
   DatabaseManager databaseManager = DatabaseManager.getManager();
@@ -69,9 +81,9 @@ public class DataViewController implements Initializable {
     List<String> data3;
     XYChart.Series dataSeries1 = new XYChart.Series<>();
     XYChart.Series dataSeries2 = new XYChart.Series<>();
-    data1 = serviceRequestStats.getMaintenanceEmployeeNumbersGraphs(mR);
-    data2 = serviceRequestStats.getMaintenanceLocationNumbersGraphs(mR);
-    data3 = serviceRequestStats.maintenanceCompleted(mR);
+    data1 = serviceRequestStats.top5(serviceRequestStats.getMaintenanceEmployeeNumbersGraphs(mR));
+    data2 = serviceRequestStats.top5(serviceRequestStats.getMaintenanceLocationNumbersGraphs(mR));
+    data3 = serviceRequestStats.top5(serviceRequestStats.maintenanceCompleted(mR));
 
     // completed Graph to show number of completed requests per employee
 
@@ -103,6 +115,85 @@ public class DataViewController implements Initializable {
       pieChartData2.add(new PieChart.Data(data3.get(i), Integer.parseInt(data3.get(i + 1))));
     }
     pieChartMainComp.setData(pieChartData2);
+
+    /*
+
+    Transport Request Tab
+
+
+     */
+    List<String> data4;
+    List<String> data5;
+    List<String> data6;
+    XYChart.Series dataSeries3 = new XYChart.Series<>();
+    XYChart.Series dataSeries4 = new XYChart.Series<>();
+
+    data4 = serviceRequestStats.getTransportEmployeeNumbersGraphs(tR);
+    data5 = serviceRequestStats.getTransportLocationNumbersGraph(tR);
+    data6 = serviceRequestStats.transportCompleted(tR);
+
+    for (int i = 0; i < data4.size(); i += 2) {
+      dataSeries3
+          .getData()
+          .add(new XYChart.Data<>(data4.get(i), Integer.parseInt(data4.get(i + 1))));
+    }
+    for (int i = 0; i < data5.size(); i += 2) {
+      dataSeries4
+          .getData()
+          .add(new XYChart.Data<>(data5.get(i), Integer.parseInt(data5.get(i + 1))));
+    }
+
+    mostcomLocTrans.getData().add(dataSeries3);
+    transComp.getData().add(dataSeries4);
+
+    ObservableList<PieChart.Data> pieChartData3 = FXCollections.observableArrayList();
+    for (int i = 0; i < data4.size(); i += 2) {
+      pieChartData3.add(new PieChart.Data(data4.get(i), Integer.parseInt(data4.get(i + 1))));
+    }
+    pieChartEmpTrans.setData(pieChartData3);
+
+    ObservableList<PieChart.Data> pieChartData5 = FXCollections.observableArrayList();
+    for (int i = 0; i < data6.size(); i += 2) {
+      pieChartData5.add(new PieChart.Data(data6.get(i), Integer.parseInt(data6.get(i + 1))));
+    }
+    pieChartCompTrans.setData(pieChartData5);
+
+    // Sanitation Request
+    List<String> data7;
+    List<String> data8;
+    List<String> data9;
+    XYChart.Series dataSeries5 = new XYChart.Series<>();
+    XYChart.Series dataSeries6 = new XYChart.Series<>();
+
+    data7 = serviceRequestStats.getSanitationEmployeeNumbersGraphs(sR);
+    data8 = serviceRequestStats.getSanitationLocationNumbersGraphs(sR);
+    data9 = serviceRequestStats.sanitationCompleted(sR);
+
+    for (int i = 0; i < data7.size(); i += 2) {
+      dataSeries5
+          .getData()
+          .add(new XYChart.Data<>(data7.get(i), Integer.parseInt(data7.get(i + 1))));
+    }
+    for (int i = 0; i < data8.size(); i += 2) {
+      dataSeries6
+          .getData()
+          .add(new XYChart.Data<>(data8.get(i), Integer.parseInt(data8.get(i + 1))));
+    }
+
+    barSaniLoc.getData().add(dataSeries5);
+    barSanCom.getData().add(dataSeries6);
+
+    ObservableList<PieChart.Data> pieChartData4 = FXCollections.observableArrayList();
+    for (int i = 0; i < data7.size(); i += 2) {
+      pieChartData4.add(new PieChart.Data(data7.get(i), Integer.parseInt(data7.get(i + 1))));
+    }
+    pieChartEmpSan.setData(pieChartData4);
+
+    ObservableList<PieChart.Data> pieChartData7 = FXCollections.observableArrayList();
+    for (int i = 0; i < data9.size(); i += 2) {
+      pieChartData7.add(new PieChart.Data(data9.get(i), Integer.parseInt(data9.get(i + 1))));
+    }
+    pieChartCompSan.setData(pieChartData7);
   }
 
   public void back(ActionEvent actionEvent) throws IOException {
@@ -114,12 +205,4 @@ public class DataViewController implements Initializable {
     File selDir = backup.showDialog(rootPane.getScene().getWindow());
     serviceRequestStats.downloadStatistics(selDir.toPath());
   }
-
-  /*
-
-  Transport Request Tab
-
-
-   */
-
 }

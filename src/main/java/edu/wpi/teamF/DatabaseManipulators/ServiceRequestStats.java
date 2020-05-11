@@ -435,7 +435,11 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (TransportRequest m : requests) {
-      nodeNum.add(Boolean.toString(m.getComplete()));
+      if (m.getComplete()) {
+        nodeNum.add("Complete");
+      } else {
+        nodeNum.add("Incomplete");
+      }
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -1342,7 +1346,11 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (SanitationServiceRequest m : requests) {
-      nodeNum.add(Boolean.toString(m.getComplete()));
+      if (m.getComplete()) {
+        nodeNum.add("Complete");
+      } else {
+        nodeNum.add("Incomplete");
+      }
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -1545,5 +1553,33 @@ public class ServiceRequestStats {
       csvStyled.add("" + r.getTimesSanitized());
     }
     return csvStyled;
+  }
+
+  public ArrayList<String> top5(ArrayList<String> data) {
+    ArrayList<String> top5data = new ArrayList<String>();
+    ArrayList<String> data1 = data;
+    String temp1 = "";
+    String temp2 = "";
+    int top = 0;
+    if (data.size() > 10) {
+      while (top < 5) {
+        temp1 = data.get(0);
+        temp2 = data.get(1);
+        for (int i = 2; i < data1.size(); i += 2) {
+          if (Integer.parseInt(temp2) < Integer.parseInt(data1.get(i + 1))) {
+            temp1 = data1.get(i);
+            temp2 = data1.get(i + 1);
+          }
+        }
+        top5data.add(temp1);
+        top5data.add(temp2);
+        data1.remove(temp1);
+        data1.remove(temp2);
+        top++;
+      }
+    } else {
+      top5data = data;
+    }
+    return top5data;
   }
 }

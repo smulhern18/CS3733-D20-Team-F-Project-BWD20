@@ -753,35 +753,38 @@
             <JFXComboBox fx:id="hospitalComboBox" layoutX="111.0" layoutY="8.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="186.0" style="-fx-border-color: black; -fx-border-width: 1px;" AnchorPane.topAnchor="13.0" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="errorPane" layoutX="550.0" layoutY="250.0" maxHeight="300.0" maxWidth="1000.0" prefHeight="250.0" prefWidth="500.0" style="-fx-background-color: rgba(255, 255, 255, 0.9)">
+
+   <AnchorPane fx:id="errorPane" layoutX="550.0" layoutY="250.0" maxHeight="300.0" maxWidth="1000.0" prefHeight="250.0" prefWidth="500.0" style="-fx-background-color: rgba(255, 255, 255, 0.9)">
+   <children>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <children>
-                  <Label fx:id="errorPaneLabel1" text="Sorry, we couldn't find a path there. Please try again." textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="10.0" />
-                     </VBox.margin>
-                  </Label>
-                  <Label fx:id="errorPaneLabel2" text="Label" textAlignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="40.0" />
-                     </VBox.margin>
-                  </Label>
-                  <JFXButton fx:id="errorPaneButton" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Back" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="22.0" />
-                     </font>
-                  </JFXButton>
-               </children>
-            </VBox>
+            <Label fx:id="errorPaneLabel1" text="Sorry, we couldn't find a path there. Please try again." textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="errorPaneLabel2" text="Label" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="40.0" />
+               </VBox.margin>
+            </Label>
+            <JFXButton fx:id="errorPaneButton" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Back" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </JFXButton>
          </children>
-      </AnchorPane>
+      </VBox>
+   </children>
+</AnchorPane>
+
+
 
    <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -791,6 +794,46 @@
                   <Font name="Arial Bold" size="23.0" />
                </font>
             </JFXButton>
+         </children>
+      </AnchorPane>
+
+      <AnchorPane fx:id="nodeInfoPane" layoutX="550.0" layoutY="250.0" maxHeight="500.0" maxWidth="1000.0" prefHeight="250.0" prefWidth="500.0" style="-fx-background-color: rgba(255, 255, 255, 0.9)">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label fx:id="nodeInfoLabel1" text="Bottom text" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="nodeInfoLabel2" text="Label" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="40.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="nodeInfoLabel3" text="Service Requests:" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <JFXComboBox fx:id="nodeInfoCombo">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </JFXComboBox>
+                  <JFXButton fx:id="nodeInfoButton" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#nodeInfoButtonBehavior" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Back" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="22.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </VBox>
          </children>
       </AnchorPane>
    </children>
