@@ -250,8 +250,8 @@
                   <JFXTextField fx:id="shortNameInput" focusColor="#012d5a"  style="-fx-border-color: #012D5A;" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                   <JFXComboBox fx:id="typeInput" focusColor="#012d5a"   prefHeight="26.0" prefWidth="180.0" style="-fx-border-color: #012D5A;" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                   <JFXTextField fx:id="longNameInput" focusColor="#012d5a"  style="-fx-border-color: #012D5A;" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <JFXTextField focusColor="#012d5a"  prefWidth="180.0" style="-fx-border-color: #012D5A;" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="4" fx:id="xCoorInput" />
-                  <JFXTextField fx:id="yCoorInput" focusColor="#012d5a"  style="-fx-border-color: #012D5A;" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <JFXTextField  editable="false" focusColor="#012d5a"  prefWidth="180.0" style="-fx-border-color: #012D5A;" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="4" fx:id="xCoorInput" />
+                  <JFXTextField editable="false" fx:id="yCoorInput" focusColor="#012d5a"  style="-fx-border-color: #012D5A;" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                   <JFXComboBox fx:id="hospitalInput" focusColor="#012d5a"   prefHeight="26.0" prefWidth="180.0" style="-fx-border-color: #012D5A;" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="6" />
                   <JFXComboBox fx:id="floorInput" focusColor="#012d5a"   prefHeight="26.0" prefWidth="180.0" style="-fx-border-color: #012D5A;" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="7" />
                   <JFXButton fx:id="addNodeButton" disable="true" maxHeight="25.0" maxWidth="40.0" minHeight="25.0" minWidth="40.0"  prefHeight="25.0" prefWidth="40.0" style="-fx-background-color: #012d5a;" text="Add" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />

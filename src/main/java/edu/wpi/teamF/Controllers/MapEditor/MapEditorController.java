@@ -369,6 +369,7 @@ public class MapEditorController {
     selectedNode = null;
     deltaX = 0;
     deltaY = 0;
+    isNewNode = false;
     mapView.setAsDefaultView();
   }
 
