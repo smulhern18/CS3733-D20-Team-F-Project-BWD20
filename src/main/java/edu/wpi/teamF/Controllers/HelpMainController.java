@@ -5,10 +5,10 @@ import edu.wpi.teamF.App;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 
@@ -28,18 +28,21 @@ public class HelpMainController implements Initializable {
   public GridPane gridPane;
   public AnchorPane frame;
   public ImageView backgroundImage;
+  public ImageView questions;
+  public ImageView translator;
+  public ImageView contactUs;
 
   SceneController sceneController = App.getSceneController();
 
-  public void generalquestions(ActionEvent actionEvent) throws IOException {
+  public void generalquestions(MouseEvent mouseEvent) throws IOException {
     sceneController.switchScene("Help");
   }
 
-  public void language(ActionEvent actionEvent) throws IOException {
+  public void language(MouseEvent mouseEvent) throws IOException {
     sceneController.switchScene("Translator");
   }
 
-  public void contact(ActionEvent actionEvent) throws IOException {
+  public void contact(MouseEvent mouseEvent) throws IOException {
     sceneController.switchScene("ContactUs");
   }
 
