@@ -432,7 +432,8 @@ public class PathfinderController implements Initializable {
     button.setMinSize(6, 6);
     button.setMaxSize(6, 6);
     button.setPrefSize(6, 6);
-    if (hasRequest) {
+
+    if (hasRequest && !(userLevel == null || userLevel == Account.Type.USER)) {
       button.setStyle(
           "-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #e8e15d; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
     } else {
@@ -478,7 +479,7 @@ public class PathfinderController implements Initializable {
         actionEvent -> {
           if (startNode == node && state == 1) { // Click again to de-select if start has been set
             startNode = null;
-            if (hasRequest) {
+            if (hasRequest && !(userLevel == null || userLevel == Account.Type.USER)) {
               button.setStyle(
                   "-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #e8e15d; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
             } else {
@@ -490,7 +491,7 @@ public class PathfinderController implements Initializable {
             startCombo.setDisable(false);
           } else if (endNode == node) { // deselect if end has been set, return to 1
             endNode = null;
-            if (hasRequest) {
+            if (hasRequest && !(userLevel == null || userLevel == Account.Type.USER)) {
               button.setStyle(
                   "-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #e8e15d; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
             } else {
@@ -558,7 +559,7 @@ public class PathfinderController implements Initializable {
       for (javafx.scene.Node component : currentPane.getChildren()) {
         if (component.getId().equals(startNode.getId())) {
           boolean hasRequest = hasRequest(startNode);
-          if (hasRequest) {
+          if (hasRequest && !(userLevel == null || userLevel == Account.Type.USER)) {
             component.setStyle(
                 "-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #e8e15d; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
           } else {
@@ -572,7 +573,7 @@ public class PathfinderController implements Initializable {
       for (javafx.scene.Node component : currentPane.getChildren()) {
         if (component.getId().equals(endNode.getId())) {
           boolean hasRequest = hasRequest(endNode);
-          if (hasRequest) {
+          if (hasRequest && !(userLevel == null || userLevel == Account.Type.USER)) {
             component.setStyle(
                 "-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #e8e15d; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
           } else {
@@ -600,6 +601,7 @@ public class PathfinderController implements Initializable {
     externalDirections.setVisible(false);
     externalDirections.setPrefHeight(0);
     externalDirections.setPrefWidth(0);
+    userLevel = databaseManager.getPermissions();
 
     uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1, 1.33);
 
@@ -634,10 +636,8 @@ public class PathfinderController implements Initializable {
           }
         }
         if (null != aNode1) {
-          boolean hasRequest =
-              hasRequest(
-                  aNode1); // fix---------------------------------------------------------------
-          if (hasRequest) {
+          boolean hasRequest = hasRequest(aNode1);
+          if (hasRequest && !(userLevel == null || userLevel == Account.Type.USER)) {
             button.setStyle(
                 "-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #e8e15d; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
           } else {
@@ -809,7 +809,7 @@ public class PathfinderController implements Initializable {
             for (javafx.scene.Node component : currentPane.getChildren()) {
               if (component.getId().equals(startNode.getId())) {
                 boolean hasRequest = hasRequest(startNode);
-                if (hasRequest) {
+                if (hasRequest && !(userLevel == null || userLevel == Account.Type.USER)) {
                   component.setStyle(
                       "-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #e8e15d; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
                 } else {
@@ -847,7 +847,7 @@ public class PathfinderController implements Initializable {
             for (javafx.scene.Node component : currentPane.getChildren()) {
               if (component.getId().equals(endNode.getId())) {
                 boolean hasRequest = hasRequest(endNode);
-                if (hasRequest) {
+                if (hasRequest && !(userLevel == null || userLevel == Account.Type.USER)) {
                   component.setStyle(
                       "-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #e8e15d; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
                 } else {
