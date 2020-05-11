@@ -20,7 +20,6 @@ public class SceneController {
   }
 
   public void switchScene(String aScene) throws IOException {
-
     Parent root = loader.load(App.class.getResource("Views/" + aScene + ".fxml"));
     primaryScene.setRoot(root);
   }
