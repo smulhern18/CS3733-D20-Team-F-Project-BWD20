@@ -31,8 +31,8 @@
                <children>
                   <VBox prefHeight="29.0" prefWidth="190.0">
                      <children>
-                        <Label fx:id="timelabel" prefHeight="102.0" prefWidth="190.0" />
-                        <Label fx:id="timelabel1" alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="212.0" text="Label" textFill="WHITE">
+                        <Label prefHeight="102.0" prefWidth="190.0" />
+                        <Label fx:id="timelabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="212.0" text="Label" textFill="WHITE">
                            <font>
                               <Font size="15.0" />
                            </font></Label>
