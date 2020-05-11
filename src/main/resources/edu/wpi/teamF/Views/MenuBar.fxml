@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
@@ -23,21 +22,14 @@
           <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints percentHeight="25.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="5.0" vgrow="SOMETIMES" />
+          <RowConstraints percentHeight="15.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="5.0" valignment="TOP" vgrow="SOMETIMES" />
           <RowConstraints percentHeight="75.0" valignment="CENTER" vgrow="ALWAYS" />
         </rowConstraints>
          <children>
-            <StackPane>
+            <StackPane GridPane.rowIndex="1">
                <children>
-                  <VBox prefHeight="29.0" prefWidth="190.0">
-                     <children>
-                        <Label prefHeight="102.0" prefWidth="190.0" />
-                        <Label fx:id="timelabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="24.0" prefWidth="212.0" text="Label" textFill="WHITE">
-                           <font>
-                              <Font size="15.0" />
-                           </font></Label>
-                     </children>
-                  </VBox>
                   <Circle fill="WHITE" radius="33.0" stroke="BLACK" strokeType="INSIDE" />
                   <ImageView fitHeight="65.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -46,7 +38,7 @@
                   </ImageView>
                </children>
             </StackPane>
-            <GridPane prefHeight="439.0" prefWidth="190.0" GridPane.rowIndex="1">
+            <GridPane prefHeight="439.0" prefWidth="190.0" GridPane.rowIndex="3">
               <columnConstraints>
                   <ColumnConstraints halignment="LEFT" />
               </columnConstraints>
@@ -309,12 +301,11 @@
                   </HBox>
                </children>
             </GridPane>
+            <Label fx:id="timelabel" alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="26.0" prefWidth="101.0" text="Label" textFill="WHITE" GridPane.rowIndex="2">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
          </children>
       </GridPane>
-      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="-105.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../../../../Downloads/logout.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

@@ -7,8 +7,6 @@ import edu.wpi.teamF.ModelClasses.Account.Account;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -37,6 +35,7 @@ public class MenuBarController implements Initializable {
   public JFXButton LogoutButton;
   public JFXButton loginButton1;
   public JFXButton logoutbutton1;
+  public Label timelabel;
 
   SceneController sceneController = App.getSceneController();
   DatabaseManager dbm = DatabaseManager.getManager();
@@ -89,15 +88,9 @@ public class MenuBarController implements Initializable {
   }
 
   // time
-  @FXML private Label timelabel;
 
   @FXML
   public void time() {
-    Calendar calendar = new GregorianCalendar();
-    int day = calendar.get(Calendar.DAY_OF_MONTH);
-    int month = calendar.get(Calendar.MONTH);
-    int year = calendar.get(Calendar.YEAR);
-
     Timeline clock =
         new Timeline(
             new KeyFrame(
@@ -118,6 +111,7 @@ public class MenuBarController implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+
     Account.Type userLevel = dbm.getPermissions();
     if (userLevel == null || userLevel == Account.Type.USER) {
       adminButton.setVisible(false);
