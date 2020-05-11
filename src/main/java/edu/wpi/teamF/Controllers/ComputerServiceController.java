@@ -65,6 +65,7 @@ public class ComputerServiceController implements Initializable {
   public ImageView background;
   public JFXButton checkStatusButton;
   public ImageView backgroundImage;
+  public JFXComboBox<String> toDelete;
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UIComputerServiceRequest> csrUI = FXCollections.observableArrayList();
@@ -359,6 +360,7 @@ public class ComputerServiceController implements Initializable {
     priorityChoice.setValue(null);
     makeChoice.setValue(null);
     issueChoice.setValue(null);
+    toDelete.getItems().add(csRequest.getId());
   }
 
   public void cancel(ActionEvent actionEvent) {
@@ -391,11 +393,11 @@ public class ComputerServiceController implements Initializable {
   }
 
   public void delete(ActionEvent actionEvent) throws Exception {
-    String toDelte = deleteText.getText();
-    databaseManager.deleteComputerServiceRequest(toDelte);
-    csrUI.removeIf(computerServiceRequest -> computerServiceRequest.getID().get().equals(toDelte));
-    deleteText.setText("");
+    String toDel = toDelete.getValue();
+    databaseManager.deleteComputerServiceRequest(toDel);
+    csrUI.removeIf(computerServiceRequest -> computerServiceRequest.getID().get().equals(toDel));
     treeTableComputer.refresh();
+    toDelete.getItems().remove(toDelete.getValue());
   }
 
   public void request(ActionEvent actionEvent) {

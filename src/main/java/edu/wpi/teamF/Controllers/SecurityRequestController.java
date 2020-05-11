@@ -51,6 +51,7 @@ public class SecurityRequestController implements Initializable {
   public AnchorPane checkStatusPane;
   public AnchorPane anchorPane;
   public ImageView backgroundImage;
+  public JFXComboBox<String> toDelete;
 
   DatabaseManager databaseManager = DatabaseManager.getManager();
   List<SecurityRequest> securityRequestList = databaseManager.getAllSecurityRequests();
@@ -243,6 +244,7 @@ public class SecurityRequestController implements Initializable {
     uiSecurityRequests.add(new UISecurityRequest(securityRequest));
     table.refresh();
     resetRequest();
+    toDelete.getItems().add(securityRequest.getId());
   }
 
   private void resetRequest() {
@@ -279,9 +281,11 @@ public class SecurityRequestController implements Initializable {
   }
 
   public void delete(ActionEvent actionEvent) throws Exception {
-    String toDelete = deleteText.getText();
-    databaseManager.deleteSecurityRequest(toDelete);
-    uiSecurityRequests.removeIf(securityRequest -> securityRequest.getID().get().equals(toDelete));
+    String toDel = toDelete.getValue();
+    databaseManager.deleteSecurityRequest(toDel);
+    uiSecurityRequests.removeIf(securityRequest -> securityRequest.getID().get().equals(toDel));
+    toDelete.getItems().remove(toDelete.getValue());
+    table.refresh();
   }
 
   public void checkStatus(ActionEvent actionEvent) {

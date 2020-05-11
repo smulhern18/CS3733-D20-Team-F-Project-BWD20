@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXTreeTableView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
@@ -69,11 +68,6 @@
                         <RowConstraints vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <JFXTextField fx:id="deleteText" alignment="BOTTOM_LEFT" style="-fx-background-color: white; -fx-border-color: black;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-                            <GridPane.margin>
-                                <Insets />
-                            </GridPane.margin>
-                        </JFXTextField>
                         <JFXButton fx:id="deleteButton" alignment="CENTER" onAction="#delete" style="-fx-background-color: #a40000; -fx-background-radius: 10;" text="Delete" textFill="#ffffffcc">
                             <GridPane.margin>
                                 <Insets right="5.0" />
@@ -82,6 +76,7 @@
                         <Font name="Dubai Light" size="12.0" />
                      </font>
                         </JFXButton>
+                  <JFXComboBox fx:id="toDelete" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="1" />
                     </children>
                 </GridPane>
             </children>

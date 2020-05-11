@@ -66,6 +66,7 @@ public class MedicineDeliveryController implements Initializable {
   public JFXButton backButton;
   public JFXButton checkButtonButton;
   public ImageView backgroundImage;
+  public JFXComboBox<String> toDelete;
   SceneController sceneController = App.getSceneController();
 
   DatabaseManager databaseManager = DatabaseManager.getManager();
@@ -314,6 +315,7 @@ public class MedicineDeliveryController implements Initializable {
     locationComboBox.setValue(null);
     priorityChoice.setValue(null);
     instructionsText.setText("");
+    toDelete.getItems().add(mdRequest.getId());
   }
 
   public void cancel(ActionEvent actionEvent) {
@@ -346,12 +348,12 @@ public class MedicineDeliveryController implements Initializable {
   }
 
   public void delete(ActionEvent actionEvent) {
-    String toDelte = deleteText.getText();
+    String toDelte = toDelete.getValue();
     databaseManager.deleteMedicineDeliveryRequest(toDelte);
     mdrUI.removeIf(
         medicineDeliveryRequest -> medicineDeliveryRequest.getID().get().equals(toDelte));
-    deleteText.setText("");
     treeTableMedicine.refresh();
+    toDelete.getItems().remove(toDelete.getValue());
   }
 
   public void request(ActionEvent actionEvent) {
