@@ -6,9 +6,7 @@ import com.easypost.model.Address;
 import com.easypost.model.Parcel;
 import com.easypost.model.Rate;
 import com.easypost.model.Shipment;
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXTextArea;
-import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.*;
 import edu.wpi.teamF.Controllers.com.twilio.phoneComms;
 import java.awt.*;
 import java.io.BufferedInputStream;
@@ -60,17 +58,20 @@ public class ShippingController implements Initializable {
   public JFXTextField phoneNumber;
   public VBox viewLabelPane;
   public WebView webview;
+  public JFXComboBox predefinedPackages;
 
   public Address fromAddress;
   public DecimalFormat decimalFormat = new DecimalFormat("#.00");
   public List<Rate> ratesList;
   public Shipment shipment;
   private edu.wpi.teamF.Controllers.com.twilio.phoneComms phoneComms = new phoneComms();
+  public Map<String, String> predefinedPackagesMap;
 
   @Override
   public void initialize(URL url, ResourceBundle resourceBundle) {
     resetPane();
     setListeners();
+    setPredefinedPackages();
 
     backgroundImage.setPreserveRatio(false);
     backgroundImage.fitHeightProperty().bind(frame.heightProperty());
@@ -114,9 +115,14 @@ public class ShippingController implements Initializable {
       Address toAddress = Address.create(toAddressMap);
 
       Map<String, Object> parcelMap = new HashMap<String, Object>();
-      parcelMap.put("height", Float.parseFloat(height.getText()));
-      parcelMap.put("width", Float.parseFloat(width.getText()));
-      parcelMap.put("length", Float.parseFloat(length.getText()));
+      if (!"Parcel".equals(predefinedPackages.getValue())) {
+        parcelMap.put(
+            "predefined_package", predefinedPackagesMap.get(predefinedPackages.getValue()));
+      } else {
+        parcelMap.put("height", Float.parseFloat(height.getText()));
+        parcelMap.put("width", Float.parseFloat(width.getText()));
+        parcelMap.put("length", Float.parseFloat(length.getText()));
+      }
       parcelMap.put("weight", Float.parseFloat(weight.getText()) * 16.0);
       Parcel parcel = Parcel.create(parcelMap);
 
@@ -223,6 +229,10 @@ public class ShippingController implements Initializable {
     errorMsg.setText("");
     commsResult.setText("");
     viewLabelPane.setVisible(false);
+    predefinedPackages.setValue("Parcel");
+    length.setDisable(false);
+    width.setDisable(false);
+    height.setDisable(false);
   }
 
   public void setListeners() {
@@ -341,6 +351,15 @@ public class ShippingController implements Initializable {
             });
   }
 
+  public void setPredefinedPackages() {
+    predefinedPackagesMap = new HashMap<>();
+    predefinedPackagesMap.put("Parcel", "Parcel");
+    predefinedPackagesMap.put("Letter", "Letter");
+    predefinedPackagesMap.put("FedEx Envelope", "FedExEnvelope");
+    predefinedPackagesMap.put("FedEx Pak", "FedExPak");
+    predefinedPackages.getItems().addAll(predefinedPackagesMap.keySet());
+  }
+
   public void enableVerifyAndRatesBtn() {
     if (name.getText().length() > 0
         && phone.getText().length() > 9
@@ -348,15 +367,18 @@ public class ShippingController implements Initializable {
         && city.getText().length() > 0
         && state.getText().length() > 1
         && zip.getText().length() > 4
-        && length.getText().length() > 0
-        && width.getText().length() > 0
-        && height.getText().length() > 0
+        && ((length.getText().length() > 0
+                && width.getText().length() > 0
+                && height.getText().length() > 0)
+            || !"Parcel".equals(predefinedPackages.getValue()))
         && weight.getText().length() > 0) {
       try {
-        Float.parseFloat(length.getText());
-        Float.parseFloat(width.getText());
-        Float.parseFloat(height.getText());
-        Float.parseFloat(weight.getText());
+        if ("Parcel".equals(predefinedPackages.getValue())) {
+          Float.parseFloat(length.getText());
+          Float.parseFloat(width.getText());
+          Float.parseFloat(height.getText());
+          Float.parseFloat(weight.getText());
+        }
         verifyAndRates.setDisable(false);
       } catch (NumberFormatException e) {
         verifyAndRates.setDisable(true);
@@ -420,5 +442,18 @@ public class ShippingController implements Initializable {
 
   public void closeViewLabel(ActionEvent actionEvent) {
     viewLabelPane.setVisible(false);
+  }
+
+  public void changePredefinedPackages(ActionEvent actionEvent) {
+    if ("Parcel".equals(predefinedPackages.getValue())) {
+      length.setDisable(false);
+      width.setDisable(false);
+      height.setDisable(false);
+    } else {
+      length.setDisable(true);
+      width.setDisable(true);
+      height.setDisable(true);
+    }
+    enableVerifyAndRatesBtn();
   }
 }

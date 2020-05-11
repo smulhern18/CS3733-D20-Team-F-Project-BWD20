@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
@@ -16,8 +17,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 <?import javafx.scene.web.WebView?>
+
 <AnchorPane fx:id="anchorPane" prefHeight="572.0" prefWidth="1075.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ShippingController">
 <children>
     <fx:include fx:id="mainMenu" source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
@@ -198,6 +199,11 @@
                                                 <Font size="12.0" />
                                              </font>
                                           </Label>
+                                          <JFXComboBox fx:id="predefinedPackages" maxWidth="-Infinity" minWidth="-Infinity" onAction="#changePredefinedPackages" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-width: 1px;">
+                                             <VBox.margin>
+                                                <Insets bottom="5.0" left="22.0" top="5.0" />
+                                             </VBox.margin>
+                                          </JFXComboBox>
                                           <HBox alignment="CENTER" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" prefWidth="200.0">
                                              <children>
                                                 <JFXTextField fx:id="length" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="50.0" promptText="Length" style="-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;">
@@ -241,12 +247,12 @@
                                                 </Label>
                                              </children>
                                              <VBox.margin>
-                                                <Insets top="2.0" />
+                                                <Insets />
                                              </VBox.margin>
                                           </HBox>
                                           <JFXButton fx:id="verifyAndRates" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#verifyAndRates" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Verify Address &amp; Get Rates" textFill="WHITE">
                                              <VBox.margin>
-                                                <Insets left="50.0" right="50.0" top="30.0" />
+                                                <Insets left="50.0" right="50.0" top="20.0" />
                                              </VBox.margin>
                                              <font>
                                                 <Font name="Dubai Light" size="20.0" />
@@ -371,7 +377,10 @@
                   </HBox>
                   <VBox fx:id="viewLabelPane" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="770.0" style="-fx-background-color: white;">
                      <children>
-                        <WebView fx:id="webview" maxHeight="680.0" maxWidth="500.0" minHeight="680.0" minWidth="500.0" prefHeight="680.0" prefWidth="500.0" />
+                        <WebView fx:id="webview" maxHeight="650.0" maxWidth="500.0" minHeight="650.0" minWidth="500.0" prefHeight="650.0" prefWidth="500.0">
+                           <VBox.margin>
+                              <Insets top="5.0" />
+                           </VBox.margin></WebView>
                         <JFXButton fx:id="closeViewLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#closeViewLabel" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Close" textFill="WHITE">
                            <font>
                               <Font name="Dubai Light" size="20.0" />
