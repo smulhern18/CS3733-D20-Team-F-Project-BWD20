@@ -161,20 +161,20 @@ public class NewsController implements Initializable {
   public StackPane createDisplayObject(
       String title, String source, String description, String url) {
     StackPane stackPane = new StackPane();
-    stackPane.setPrefWidth(600);
+    stackPane.setPrefWidth(750);
 
     VBox vbox = new VBox();
-    vbox.setPrefWidth(600);
+    vbox.setPrefWidth(750);
     vbox.setMaxHeight(80);
     vbox.setPadding(new Insets(5, 10, 5, 10));
     vbox.setAlignment(Pos.CENTER_LEFT);
     vbox.setBorder(
         new Border(
             new BorderStroke(
-                Color.web("blue"), // TODO Transparent
+                Color.web("rgba(255,255,255,0.9)"), // TODO Transparent
                 BorderStrokeStyle.SOLID,
                 null,
-                new BorderWidths(1))));
+                new BorderWidths(2))));
     vbox.setBackground(
         new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 
@@ -210,16 +210,9 @@ public class NewsController implements Initializable {
     vbox.getChildren().add(label3);
 
     JFXButton btn = new JFXButton();
-    btn.setPrefWidth(600);
+    btn.setPrefWidth(750);
     btn.setMinHeight(80);
     btn.setPrefHeight(vbox.getHeight());
-    btn.setBorder( // TODO remove
-        new Border(
-            new BorderStroke(
-                Color.web("rgba(255,0,0,0.9)"),
-                BorderStrokeStyle.SOLID,
-                null,
-                new BorderWidths(1))));
     btn.setOnAction(actionEvent1 -> onSelect(url, title, vbox));
 
     stackPane.getChildren().add(vbox);
