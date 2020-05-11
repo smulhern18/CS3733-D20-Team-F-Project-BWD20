@@ -8,7 +8,9 @@ import com.jfoenix.controls.JFXToggleButton;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+import edu.wpi.teamF.ModelClasses.Directions.Direction;
 import edu.wpi.teamF.ModelClasses.Directions.Directions;
+import edu.wpi.teamF.ModelClasses.Directions.IndexDirection;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.*;
@@ -28,13 +30,13 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
@@ -170,6 +172,8 @@ public class PathfinderController implements Initializable {
   public Path path;
   public Directions directions;
   public int locationIndex;
+  public AnchorPane progressPane;
+  public HBox progressBox;
 
   EuclideanScorer euclideanScorer = new EuclideanScorer();
   PathfindAlgorithm pathFindAlgorithm;
@@ -315,6 +319,43 @@ public class PathfinderController implements Initializable {
       locationIndex = 0;
       directionsDisplay.setText(directions.getFullDirectionsString());
     }
+
+    // Setting up the progress bar
+    for (Direction direction : directions.getDirectionList()) {
+      if (direction instanceof IndexDirection) {
+        Label label = new Label();
+        label.setMinHeight(40);
+        label.setAlignment(Pos.CENTER);
+        label.setFont(new Font("Arial", 16));
+        label.setBorder(
+            new Border(
+                new BorderStroke(
+                    Color.web("rgba(255,255,255,0.9)"),
+                    BorderStrokeStyle.SOLID,
+                    null,
+                    new BorderWidths(1))));
+        label.setText(((IndexDirection) direction).getBuildingAndFloor());
+        label.setMinWidth(100);
+
+        progressBox.getChildren().add(label);
+      }
+    }
+    Label label = new Label();
+    label.setMinHeight(40);
+    label.setAlignment(Pos.CENTER);
+    label.setFont(new Font("Arial", 16));
+    label.setText(endNode.getBuilding() + " " + endNode.getFloor().replace("F", ""));
+    label.setBorder(
+        new Border(
+            new BorderStroke(
+                Color.web("rgba(255,255,255,0.9)"),
+                BorderStrokeStyle.SOLID,
+                null,
+                new BorderWidths(1))));
+    label.setMinWidth(100);
+    progressBox.getChildren().add(label);
+    progressPane.setVisible(true);
+    setProgressColors(locationIndex);
   }
 
   public void placeButton(Node node) {
@@ -454,6 +495,9 @@ public class PathfinderController implements Initializable {
       endLabel.setVisible(false);
     }
     phoneNumber.setText("");
+
+    progressPane.setVisible(false);
+    progressBox.getChildren().clear();
   }
 
   private void resetButtonLine(String floor, String building) {
@@ -836,6 +880,7 @@ public class PathfinderController implements Initializable {
 
   public void pathSwitchPrevious(ActionEvent actionEvent) {
     locationIndex--;
+    setProgressColors(locationIndex);
     pathSwitchNext.setVisible(true);
     pathSwitchNext.setPrefHeight(50);
     btnSpacer.setPrefHeight(10);
@@ -899,6 +944,7 @@ public class PathfinderController implements Initializable {
 
   public void pathSwitchNext(ActionEvent actionEvent) {
     locationIndex++;
+    setProgressColors(locationIndex);
     pathSwitchPrevious.setVisible(true);
     pathSwitchPrevious.setPrefHeight(50);
     btnSpacer.setPrefHeight(10);
@@ -1329,5 +1375,32 @@ public class PathfinderController implements Initializable {
     webview.getEngine().loadContent(googleMaps.getDirectionsEmbedWalking870x720());
     walkTime.setText(googleMaps.walkTime());
     walkDistance.setText(googleMaps.walkDistance());
+  }
+
+  public void setProgressColors(int currIndex) {
+    for (int i = 0; i < progressBox.getChildren().size(); i++) {
+      if (i == currIndex) {
+        // Current = dark blue
+        Label label = (Label) progressBox.getChildren().get(i);
+        label.setBackground(
+            new Background(
+                new BackgroundFill(Color.web("#012D5A"), CornerRadii.EMPTY, Insets.EMPTY)));
+        label.setTextFill(Color.WHITE);
+      } else if (i < currIndex) {
+        // Previous = green
+        Label label = (Label) progressBox.getChildren().get(i);
+        label.setBackground(
+            new Background(
+                new BackgroundFill(Color.web("#90EE90"), CornerRadii.EMPTY, Insets.EMPTY)));
+        label.setTextFill(Color.BLACK);
+      } else {
+        // Upcoming = grey
+        Label label = (Label) progressBox.getChildren().get(i);
+        label.setBackground(
+            new Background(
+                new BackgroundFill(Color.web("#D3D3D3"), CornerRadii.EMPTY, Insets.EMPTY)));
+        label.setTextFill(Color.BLACK);
+      }
+    }
   }
 }

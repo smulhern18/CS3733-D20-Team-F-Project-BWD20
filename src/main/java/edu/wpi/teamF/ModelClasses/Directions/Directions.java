@@ -75,7 +75,9 @@ public class Directions {
 
         if (!pathNodeList.get(i).getFloor().equals(pathNodeList.get(i - 1).getFloor())) {
           // This node is now on a new floor, need to index it
-          directionList.add(new IndexDirection(pathNodeList.get(i - 1).getFloor()));
+          directionList.add(
+              new IndexDirection(
+                  pathNodeList.get(i - 1).getFloor(), pathNodeList.get(i - 1).getBuilding()));
         }
 
         // Check if this node is the destination
