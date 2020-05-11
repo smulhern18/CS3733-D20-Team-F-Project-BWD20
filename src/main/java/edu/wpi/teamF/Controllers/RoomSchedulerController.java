@@ -65,57 +65,57 @@ public class RoomSchedulerController implements Initializable {
 
     calendarView.setSelectionMode(SelectionMode.SINGLE);
     calendarView.setEntryFactory(
-            param -> {
-              DateControl control = param.getDateControl();
-              VirtualGrid grid = control.getVirtualGrid();
-              ZonedDateTime time = param.getZonedDateTime();
-              DayOfWeek firstDayOfWeek = control.getFirstDayOfWeek();
+        param -> {
+          DateControl control = param.getDateControl();
+          VirtualGrid grid = control.getVirtualGrid();
+          ZonedDateTime time = param.getZonedDateTime();
+          DayOfWeek firstDayOfWeek = control.getFirstDayOfWeek();
 
-              ZonedDateTime lowerTime = grid.adjustTime(time, false, firstDayOfWeek);
-              ZonedDateTime upperTime = grid.adjustTime(time, true, firstDayOfWeek);
+          ZonedDateTime lowerTime = grid.adjustTime(time, false, firstDayOfWeek);
+          ZonedDateTime upperTime = grid.adjustTime(time, true, firstDayOfWeek);
 
-              if (Duration.between(time, lowerTime)
-                      .abs()
-                      .minus(Duration.between(time, upperTime).abs())
-                      .isNegative()) {
-                time = lowerTime;
-              } else {
-                time = upperTime;
-              }
-              ScheduleEntry newEntry =
-                      new ScheduleEntry(
-                              "" + System.currentTimeMillis(),
-                              time.toLocalDate().format(ScheduleEntry.dateFormatter),
-                              time.toLocalTime().format(ScheduleEntry.timeFormatter),
-                              time.plusHours(1).toLocalDate().format(ScheduleEntry.dateFormatter),
-                              time.plusHours(1).toLocalTime().format(ScheduleEntry.timeFormatter),
-                              param.getDefaultCalendar().getName(),
-                              loggedInAccountName);
-              if (!isScheduleEntryOverlapping(newEntry)) {
+          if (Duration.between(time, lowerTime)
+              .abs()
+              .minus(Duration.between(time, upperTime).abs())
+              .isNegative()) {
+            time = lowerTime;
+          } else {
+            time = upperTime;
+          }
+          ScheduleEntry newEntry =
+              new ScheduleEntry(
+                  "" + System.currentTimeMillis(),
+                  time.toLocalDate().format(ScheduleEntry.dateFormatter),
+                  time.toLocalTime().format(ScheduleEntry.timeFormatter),
+                  time.plusHours(1).toLocalDate().format(ScheduleEntry.dateFormatter),
+                  time.plusHours(1).toLocalTime().format(ScheduleEntry.timeFormatter),
+                  param.getDefaultCalendar().getName(),
+                  loggedInAccountName);
+          if (!isScheduleEntryOverlapping(newEntry)) {
 
-                try {
-                  databaseManager.mainpulateScheduleEntry(newEntry);
-                } catch (Exception e) {
-                  e.printStackTrace();
-                }
-                Entry<String> entry = createEntry(newEntry);
+            try {
+              databaseManager.mainpulateScheduleEntry(newEntry);
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+            Entry<String> entry = createEntry(newEntry);
 
-                return entry;
-              } else {
-                return null;
-              }
-            });
+            return entry;
+          } else {
+            return null;
+          }
+        });
     scheduleAnchorPane.getChildren().clear();
     scheduleAnchorPane.getChildren().add(calendarView);
 
     Platform.runLater(
-            () -> {
-              try {
-                addEntriesFromDatabase();
-              } catch (Exception e) {
-                e.printStackTrace();
-              }
-            });
+        () -> {
+          try {
+            addEntriesFromDatabase();
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+        });
   }
 
   private @NotNull Entry<String> createEntry(@NotNull ScheduleEntry newEntry) {
@@ -127,84 +127,84 @@ public class RoomSchedulerController implements Initializable {
     entry.changeEndTime(LocalTime.parse(newEntry.getEndTime(), ScheduleEntry.timeFormatter));
 
     entry
-            .intervalProperty()
-            .addListener(
-                    (observableValue, interval, t1) -> {
-                      System.out.println(interval.getEndTime() + " " + t1.getEndTime());
-                      if (!reset) {
-                        try {
+        .intervalProperty()
+        .addListener(
+            (observableValue, interval, t1) -> {
+              System.out.println(interval.getEndTime() + " " + t1.getEndTime());
+              if (!reset) {
+                try {
 
-                          ScheduleEntry scheduleEntry = databaseManager.readScheduleEntry(entry.getId());
-                          scheduleEntry.setStartDate(t1.getStartDate().format(ScheduleEntry.dateFormatter));
-                          scheduleEntry.setStartTime(t1.getStartTime().format(ScheduleEntry.timeFormatter));
-                          scheduleEntry.setEndDate(t1.getEndDate().format(ScheduleEntry.dateFormatter));
-                          scheduleEntry.setEndTime(t1.getEndTime().format(ScheduleEntry.timeFormatter));
-                          if (entry.getTitle().equals(loggedInAccountName)
-                                  && !isScheduleEntryOverlapping(scheduleEntry)) {
-                            // System.out.println("NOT OVERLAPPED");
-                            databaseManager.mainpulateScheduleEntry(scheduleEntry);
-                          } else {
-                            // System.out.println("OVERLAP REVERT BACK");
-                            reset = true;
-                            entry.setInterval(interval);
-                          }
-                        } catch (Exception e) {
-                          e.printStackTrace();
-                        }
-                      } else {
-                        // System.out.println("RESETTED");
-                        reset = false;
-                      }
-                    });
+                  ScheduleEntry scheduleEntry = databaseManager.readScheduleEntry(entry.getId());
+                  scheduleEntry.setStartDate(t1.getStartDate().format(ScheduleEntry.dateFormatter));
+                  scheduleEntry.setStartTime(t1.getStartTime().format(ScheduleEntry.timeFormatter));
+                  scheduleEntry.setEndDate(t1.getEndDate().format(ScheduleEntry.dateFormatter));
+                  scheduleEntry.setEndTime(t1.getEndTime().format(ScheduleEntry.timeFormatter));
+                  if (entry.getTitle().equals(loggedInAccountName)
+                      && !isScheduleEntryOverlapping(scheduleEntry)) {
+                    // System.out.println("NOT OVERLAPPED");
+                    databaseManager.mainpulateScheduleEntry(scheduleEntry);
+                  } else {
+                    // System.out.println("OVERLAP REVERT BACK");
+                    reset = true;
+                    entry.setInterval(interval);
+                  }
+                } catch (Exception e) {
+                  e.printStackTrace();
+                }
+              } else {
+                // System.out.println("RESETTED");
+                reset = false;
+              }
+            });
     entry
-            .calendarProperty()
-            .addListener(
-                    ((observableValue, calendar, t1) -> {
-                      if (t1 == null) {
-                        try {
-                          ScheduleEntry deletedScheduleEntry =
-                                  databaseManager.readScheduleEntry(entry.getId());
-                          deletedScheduleEntry.setID("" + System.currentTimeMillis());
+        .calendarProperty()
+        .addListener(
+            ((observableValue, calendar, t1) -> {
+              if (t1 == null) {
+                try {
+                  ScheduleEntry deletedScheduleEntry =
+                      databaseManager.readScheduleEntry(entry.getId());
+                  deletedScheduleEntry.setID("" + System.currentTimeMillis());
 
-                          databaseManager.deleteScheduleEntry(entry.getId());
-                          if (!entry.getTitle().equals(loggedInAccountName)) {
-                            System.out.println("NOT MINEEEEEEEEEEEEEEEEEE");
+                  databaseManager.deleteScheduleEntry(entry.getId());
+                  if (!entry.getTitle().equals(loggedInAccountName)) {
+                    System.out.println("NOT MINEEEEEEEEEEEEEEEEEE");
 
-                            databaseManager.mainpulateScheduleEntry(deletedScheduleEntry);
-                            Entry<String> deletedEntry = createEntry(deletedScheduleEntry);
-                            deletedEntry.setCalendar(getCalendar(deletedScheduleEntry.getRoom()));
-                            calendarView.refreshData();
+                    databaseManager.mainpulateScheduleEntry(deletedScheduleEntry);
+                    Entry<String> deletedEntry = createEntry(deletedScheduleEntry);
+                    deletedEntry.setCalendar(getCalendar(deletedScheduleEntry.getRoom()));
+                    calendarView.refreshData();
 
-                          } else {
-                            System.out.println("MINEMINEMINEMINEMINE");
-                          }
-                        } catch (Exception e) {
-                          e.printStackTrace();
-                        }
-                      } else {
-                        if (!reset) {
-                          try {
-                            ScheduleEntry scheduleEntry = databaseManager.readScheduleEntry(entry.getId());
-                            scheduleEntry.setRoom(t1.getName());
-                            if (entry.getTitle().equals(loggedInAccountName)
-                                    && !isScheduleEntryOverlapping(scheduleEntry)) {
-                              // System.out.println("NOT OVERLAPPED");
-                              databaseManager.mainpulateScheduleEntry(scheduleEntry);
-                            } else {
-                              // System.out.println("OVERLAP REVERT BACK");
-                              reset = true;
-                              entry.setCalendar(calendar);
-                            }
+                  } else {
+                    System.out.println("MINEMINEMINEMINEMINE");
+                  }
+                } catch (Exception e) {
+                  e.printStackTrace();
+                }
+              } else {
+                if (!reset) {
+                  try {
+                    ScheduleEntry scheduleEntry = databaseManager.readScheduleEntry(entry.getId());
+                    scheduleEntry.setRoom(t1.getName());
+                    if (entry.getTitle().equals(loggedInAccountName)
+                        && !isScheduleEntryOverlapping(scheduleEntry)) {
+                      // System.out.println("NOT OVERLAPPED");
+                      databaseManager.mainpulateScheduleEntry(scheduleEntry);
+                    } else {
+                      // System.out.println("OVERLAP REVERT BACK");
+                      reset = true;
+                      entry.setCalendar(calendar);
+                    }
 
-                          } catch (Exception e) {
-                            e.printStackTrace();
-                          }
-                        } else {
-                          // System.out.println("RESETTED");
-                          reset = false;
-                        }
-                      }
-                    }));
+                  } catch (Exception e) {
+                    e.printStackTrace();
+                  }
+                } else {
+                  // System.out.println("RESETTED");
+                  reset = false;
+                }
+              }
+            }));
     return entry;
   }
 
@@ -228,27 +228,27 @@ public class RoomSchedulerController implements Initializable {
 
   private void setCalenderViewSize() {
     scheduleAnchorPane
-            .heightProperty()
-            .addListener(
-                    ((observable, oldValue, newValue) -> {
-                      if (newValue != null) {
-                        calendarView.setPrefHeight(newValue.doubleValue());
-                      } else if (oldValue != null) {
-                        calendarView.setPrefHeight(oldValue.doubleValue());
-                      }
-                    }));
+        .heightProperty()
+        .addListener(
+            ((observable, oldValue, newValue) -> {
+              if (newValue != null) {
+                calendarView.setPrefHeight(newValue.doubleValue());
+              } else if (oldValue != null) {
+                calendarView.setPrefHeight(oldValue.doubleValue());
+              }
+            }));
     scheduleAnchorPane
-            .widthProperty()
-            .addListener(
-                    ((observable, oldValue, newValue) -> {
-                      if (newValue != null) {
-                        calendarView.setPrefWidth(newValue.doubleValue());
-                      } else if (oldValue != null) {
-                        calendarView.setPrefWidth(oldValue.doubleValue());
-                      }
+        .widthProperty()
+        .addListener(
+            ((observable, oldValue, newValue) -> {
+              if (newValue != null) {
+                calendarView.setPrefWidth(newValue.doubleValue());
+              } else if (oldValue != null) {
+                calendarView.setPrefWidth(oldValue.doubleValue());
+              }
 
-                      System.out.println("Width: " + newValue + " " + calendarView.getWidth());
-                    }));
+              System.out.println("Width: " + newValue + " " + calendarView.getWidth());
+            }));
   }
 
   private void setUpdatedTime() {
@@ -301,18 +301,18 @@ public class RoomSchedulerController implements Initializable {
 
   private void initializeCalendarDeleteEvent(Calendar calendar) {
     calendar.addEventHandler(
-            calendarEvent -> {
-              if (calendarEvent.getEventType().equals(CalendarEvent.ENTRY_CALENDAR_CHANGED)) {
-                System.out.println("ENTRY CHANGED");
-                Entry<?> oldEntry = calendarEvent.getEntry();
-                if (calendarEvent.isEntryRemoved()
-                        && !oldEntry.getTitle().equals(loggedInAccountName)) {
-                  System.out.println("ENTRY IS REMOVED " + calendarEvent.getOldCalendar().getName());
-                  calendarEvent.getOldCalendar().addEntry(oldEntry);
-                  calendarView.refreshData();
-                }
-              }
-            });
+        calendarEvent -> {
+          if (calendarEvent.getEventType().equals(CalendarEvent.ENTRY_CALENDAR_CHANGED)) {
+            System.out.println("ENTRY CHANGED");
+            Entry<?> oldEntry = calendarEvent.getEntry();
+            if (calendarEvent.isEntryRemoved()
+                && !oldEntry.getTitle().equals(loggedInAccountName)) {
+              System.out.println("ENTRY IS REMOVED " + calendarEvent.getOldCalendar().getName());
+              calendarEvent.getOldCalendar().addEntry(oldEntry);
+              calendarView.refreshData();
+            }
+          }
+        });
   }
 
   private boolean isScheduleEntryOverlapping(ScheduleEntry newEntry) {
@@ -320,8 +320,8 @@ public class RoomSchedulerController implements Initializable {
     for (ScheduleEntry entry : databaseManager.getAllScheduleEntries()) {
       // System.out.println(entry.getID());
       if (!entry.getID().equals(newEntry.getID())
-              && entry.getRoom().equals(newEntry.getRoom())
-              && isOverlapping(newEntry, entry)) {
+          && entry.getRoom().equals(newEntry.getRoom())
+          && isOverlapping(newEntry, entry)) {
         return true;
       }
     }
@@ -331,21 +331,21 @@ public class RoomSchedulerController implements Initializable {
 
   public static boolean isOverlapping(ScheduleEntry newEntry, ScheduleEntry oldEntry) {
     LocalDateTime newStart =
-            LocalDateTime.of(
-                    LocalDate.parse(newEntry.getStartDate(), ScheduleEntry.dateFormatter),
-                    LocalTime.parse(newEntry.getStartTime(), ScheduleEntry.timeFormatter));
+        LocalDateTime.of(
+            LocalDate.parse(newEntry.getStartDate(), ScheduleEntry.dateFormatter),
+            LocalTime.parse(newEntry.getStartTime(), ScheduleEntry.timeFormatter));
     LocalDateTime newEnd =
-            LocalDateTime.of(
-                    LocalDate.parse(newEntry.getEndDate(), ScheduleEntry.dateFormatter),
-                    LocalTime.parse(newEntry.getEndTime(), ScheduleEntry.timeFormatter));
+        LocalDateTime.of(
+            LocalDate.parse(newEntry.getEndDate(), ScheduleEntry.dateFormatter),
+            LocalTime.parse(newEntry.getEndTime(), ScheduleEntry.timeFormatter));
     LocalDateTime oldStart =
-            LocalDateTime.of(
-                    LocalDate.parse(oldEntry.getStartDate(), ScheduleEntry.dateFormatter),
-                    LocalTime.parse(oldEntry.getStartTime(), ScheduleEntry.timeFormatter));
+        LocalDateTime.of(
+            LocalDate.parse(oldEntry.getStartDate(), ScheduleEntry.dateFormatter),
+            LocalTime.parse(oldEntry.getStartTime(), ScheduleEntry.timeFormatter));
     LocalDateTime oldEnd =
-            LocalDateTime.of(
-                    LocalDate.parse(oldEntry.getEndDate(), ScheduleEntry.dateFormatter),
-                    LocalTime.parse(oldEntry.getEndTime(), ScheduleEntry.timeFormatter));
+        LocalDateTime.of(
+            LocalDate.parse(oldEntry.getEndDate(), ScheduleEntry.dateFormatter),
+            LocalTime.parse(oldEntry.getEndTime(), ScheduleEntry.timeFormatter));
     return newStart.isBefore(oldEnd) && oldStart.isBefore(newEnd);
   }
 }

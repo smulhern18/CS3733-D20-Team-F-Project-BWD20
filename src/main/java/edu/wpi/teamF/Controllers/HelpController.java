@@ -3,9 +3,6 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
-import java.awt.*;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -13,10 +10,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.*;
 import javafx.scene.text.Text;
-import javax.swing.*;
-import javax.swing.text.*;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class HelpController implements Initializable {
 
@@ -36,9 +33,9 @@ public class HelpController implements Initializable {
     content1.setHeading(new Text("How to sign up?"));
     content1.setBody(
         new Label(
-            "Click on the 'Login' button on the main menu. Then click on the 'Register' button on Login page. After entering your information correctly, click on 'Register' button. The account will be created."));
+            "1. Click on the 'Login' button on the main menu. \n2. Click on 'Register'. \n3. Enter your information.\n4. Click on 'Register'. New account will be created."));
     content1.setStyle("-fx-pref-width: 400px;-fx-wrap-text: true;");
-    content1.setStyle("-fx-alignment: JUSTIFY;-fx-color-label-visible: black;");
+    content1.setStyle("-fx-text-color: black;");
 
     JFXDialog dialog1 = new JFXDialog(stackPane, content1, JFXDialog.DialogTransition.CENTER);
     JFXButton button1 = new JFXButton("Close");
@@ -59,10 +56,9 @@ public class HelpController implements Initializable {
     content2.setHeading(new Text("How to login?"));
     content2.setBody(
         new Text(
-            "Click on the 'Login' button on Main Menu. You will go to the Login page.\n"
-                + "If  you have an account,  enter the Username and  Password. Then click\n"
-                + "on the 'Login' button. If you don't have an account,  then click on the 'R-\n"
-                + "egister' button to sign up."));
+            "1. Click on the 'Login' button on Main Menu.\n"
+                + "2. If you have an account, then login.\n"
+                + "3. If you don't have an account, then click on 'Register' to sign up.\n"));
     JFXDialog dialog2 = new JFXDialog(stackPane, content2, JFXDialog.DialogTransition.CENTER);
     JFXButton button2 = new JFXButton("Close");
     button2.setOnAction(
