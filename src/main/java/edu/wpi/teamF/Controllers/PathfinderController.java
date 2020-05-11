@@ -615,9 +615,25 @@ public class PathfinderController implements Initializable {
         nodesToRemove.add(node);
       } else if (node instanceof JFXButton) {
         JFXButton button = (JFXButton) node;
-        button.setStyle(
-            "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; "
-                + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
+
+        Node aNode1 = null;
+        for (Node aNode2 : fullNodeList) {
+          if (aNode2.getId().equals(node.getId())) {
+            aNode1 = aNode2;
+          }
+        }
+        if (null != aNode1) {
+          boolean hasRequest =
+              hasRequest(
+                  aNode1); // fix---------------------------------------------------------------
+          if (hasRequest) {
+            button.setStyle(
+                "-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #e8e15d; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+          } else {
+            button.setStyle(
+                "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+          }
+        }
       }
     }
     getFloorPane(floor, building).getChildren().removeAll(nodesToRemove);
