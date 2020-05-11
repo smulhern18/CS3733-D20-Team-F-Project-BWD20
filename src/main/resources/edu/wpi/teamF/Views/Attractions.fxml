@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.web.WebView?>
 <AnchorPane fx:id="anchorPane" prefHeight="572.0" prefWidth="1075.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.AttractionsController">
 <children>
     <fx:include fx:id="mainMenu" source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
@@ -38,7 +39,7 @@
                                     <Insets bottom="15.0" />
                                  </VBox.margin>
                               </Label>
-                              <JFXTextField fx:id="searchTerm" promptText="Search for..." style="-fx-border-color: black; -fx-border-width: 1px;">
+                              <JFXTextField fx:id="searchTerm" promptText="Search for..." style="-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;">
                                  <VBox.margin>
                                     <Insets left="200.0" right="200.0" />
                                  </VBox.margin>
@@ -56,7 +57,7 @@
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <JFXComboBox fx:id="currentLocation" maxWidth="-Infinity" minWidth="-Infinity" onAction="#currentLocation" prefWidth="180.0" style="-fx-border-color: black; -fx-border-width: 1px;">
+                                    <JFXComboBox fx:id="currentLocation" maxWidth="-Infinity" minWidth="-Infinity" onAction="#currentLocation" prefWidth="180.0" style="-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin></JFXComboBox>
@@ -670,20 +671,20 @@
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                <children>
-<!--                                  <StackPane alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="870.0">-->
-<!--                                     <children>-->
-<!--                                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="870.0">-->
-<!--                                           <children>-->
-<!--                                              <WebView fx:id="webview" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" contextMenuEnabled="false"/>-->
-<!--                                           </children>-->
-<!--                                        </AnchorPane>-->
-<!--                                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.69" prefHeight="130.0" prefWidth="305.0" style="-fx-background-color: transparent;">-->
-<!--                                           <StackPane.margin>-->
-<!--                                              <Insets left="22.0" top="22.0" />-->
-<!--                                           </StackPane.margin>-->
-<!--                                        </HBox>-->
-<!--                                     </children>-->
-<!--                                  </StackPane>-->
+                                  <StackPane alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="870.0">
+                                     <children>
+                                        <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="870.0">
+                                           <children>
+                                              <WebView fx:id="webview" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" contextMenuEnabled="false"/>
+                                           </children>
+                                        </AnchorPane>
+                                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.69" prefHeight="130.0" prefWidth="305.0" style="-fx-background-color: transparent;">
+                                           <StackPane.margin>
+                                              <Insets left="22.0" top="22.0" />
+                                           </StackPane.margin>
+                                        </HBox>
+                                     </children>
+                                  </StackPane>
                                   <VBox alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="200.0">
                                      <children>
                                         <Label text="Live Travel" textAlignment="CENTER" wrapText="true">
