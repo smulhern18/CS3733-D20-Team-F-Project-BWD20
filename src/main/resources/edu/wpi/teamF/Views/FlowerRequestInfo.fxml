@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="575.0" prefWidth="629.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.FlowerRequestInfoController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.FlowerRequestInfoController">
     <children>
         <AnchorPane prefHeight="200.0" prefWidth="200.0">
             <children>
@@ -45,12 +45,12 @@
                             <children>
                                 <JFXButton fx:id="updateButton" onAction="#update" style="-fx-background-color: #012D5A; -fx-background-radius: 10;" text="Update" textFill="#ffffffcc" GridPane.columnIndex="1">
                                     <font>
-                                        <Font name="Dubai Light" size="18.0" />
+                                        <Font name="Dubai Light" size="24.0" />
                                     </font>
                                 </JFXButton>
                                 <JFXButton fx:id="requestServiceButton" onAction="#request" style="-fx-background-color: #012D5A; -fx-background-radius: 10;" text="Back" textFill="#ffffffcc">
                                     <font>
-                                        <Font name="Dubai Light" size="18.0" />
+                                        <Font name="Dubai Light" size="24.0" />
                                     </font>
                                 </JFXButton>
                             </children>
@@ -58,7 +58,7 @@
                     </children>
                 </StackPane>
                 <JFXTreeTableView fx:id="treeTableFlower" layoutX="12.0" layoutY="100.0" style="-fx-background-color: white; -fx-border-color: black;" AnchorPane.bottomAnchor="99.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="100.0" />
-                <GridPane fx:id="deletePane" layoutX="201.0" layoutY="59.0" AnchorPane.rightAnchor="11.0">
+                <GridPane fx:id="deletePane" layoutX="201.0" layoutY="59.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="45.0">
                     <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
                         <ColumnConstraints hgrow="SOMETIMES" />
@@ -71,13 +71,16 @@
                             <GridPane.margin>
                                 <Insets />
                             </GridPane.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
                         </JFXTextField>
                         <JFXButton fx:id="deleteButton" alignment="CENTER" onAction="#delete" style="-fx-background-color: #a40000; -fx-background-radius: 10;" text="Delete" textFill="#ffffffcc">
                             <GridPane.margin>
                                 <Insets right="5.0" />
                             </GridPane.margin>
                      <font>
-                        <Font name="Dubai Light" size="12.0" />
+                        <Font name="Dubai Light" size="18.0" />
                      </font>
                         </JFXButton>
                     </children>
@@ -105,35 +108,35 @@
                     <children>
                         <HBox alignment="CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="2">
                             <children>
-                                <Label fx:id="locationLabel" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" text="Location:">
+                                <Label fx:id="locationLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" text="Location:">
                            <padding>
                               <Insets right="20.0" />
                            </padding>
                            <font>
-                              <Font name="Dubai Light" size="12.0" />
+                              <Font name="Dubai Light" size="18.0" />
                            </font>
                         </Label>
-                                <JFXComboBox fx:id="locationComboBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                                <JFXComboBox fx:id="locationComboBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="212.0" style="-fx-background-color: white; -fx-border-color: black;" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" GridPane.rowIndex="5">
                             <children>
-                                <Label fx:id="priorityLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" text="Priority:">
+                                <Label fx:id="priorityLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" text="Priority:" textAlignment="RIGHT">
                            <font>
-                              <Font name="Dubai Light" size="12.0" />
+                              <Font name="Dubai Light" size="18.0" />
                            </font>
                            <padding>
                               <Insets right="20.0" />
                            </padding>
                         </Label>
-                                <JFXComboBox fx:id="priorityComboBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                                <JFXComboBox fx:id="priorityComboBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="212.0" style="-fx-background-color: white; -fx-border-color: black;" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="9">
                             <children>
                                 <JFXButton fx:id="checkStatusButton" onAction="#checkStatus" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Status" textFill="#ffffffcc">
                                     <font>
-                                        <Font name="Dubai Light" size="18.0" />
+                                        <Font name="Dubai Light" size="24.0" />
                                     </font>
                                     <HBox.margin>
                                         <Insets right="20.0" />
@@ -141,7 +144,7 @@
                                 </JFXButton>
                                 <JFXButton fx:id="submitButton" onAction="#submit" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Submit" textFill="#ffffffcc">
                                     <font>
-                                        <Font name="Dubai Light" size="18.0" />
+                                        <Font name="Dubai Light" size="24.0" />
                                     </font>
                                     <HBox.margin>
                                         <Insets right="30.0" />
@@ -149,7 +152,7 @@
                                 </JFXButton>
                                 <JFXButton fx:id="cancelButton" onAction="#cancel" style="-fx-background-color: #a40000; -fx-background-radius: 10;" text="Cancel" textFill="#ffffffcc">
                                     <font>
-                                        <Font name="Dubai Light" size="18.0" />
+                                        <Font name="Dubai Light" size="24.0" />
                                     </font>
                                     <HBox.margin>
                                         <Insets left="30.0" />
@@ -159,77 +162,98 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
                             <children>
-                                <Label fx:id="buyerNameLabel" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" text="Buyer Name:">
+                                <Label fx:id="buyerNameLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" text="Buyer Name:" textAlignment="RIGHT">
                            <font>
-                              <Font name="Dubai Light" size="12.0" />
+                              <Font name="Dubai Light" size="18.0" />
                            </font>
                            <padding>
                               <Insets right="20.0" />
                            </padding>
                         </Label>
-                                <JFXTextField fx:id="buyerNameInput" alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                                <JFXTextField fx:id="buyerNameInput" alignment="BOTTOM_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="212.0" style="-fx-background-color: white; -fx-border-color: black;" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                             <children>
-                                <Label fx:id="nameLabel" alignment="CENTER_RIGHT" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" text="Recipient Name:">
+                                <Label fx:id="nameLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" text="Recipient Name:">
                            <font>
-                              <Font name="Dubai Light" size="12.0" />
+                              <Font name="Dubai Light" size="18.0" />
                            </font>
                            <padding>
                               <Insets right="20.0" />
                            </padding>
                         </Label>
-                                <JFXTextField fx:id="recipientInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                                <JFXTextField fx:id="recipientInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="212.0" style="-fx-background-color: white; -fx-border-color: black;" />
                             </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                        <HBox alignment="CENTER" prefHeight="88.0" prefWidth="782.0" GridPane.rowIndex="3">
                             <children>
-                                <Label fx:id="roomNumberLabel" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" text="Room Number (if known):">
-                           <font>
-                              <Font name="Dubai Light" size="12.0" />
-                           </font>
-                           <padding>
-                              <Insets right="20.0" />
-                           </padding>
-                        </Label>
-                                <JFXTextField fx:id="roomInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                        <GridPane prefHeight="88.0" prefWidth="490.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="60.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                                      <Label fx:id="roomNumberLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="208.0" text="Room Number (if known):">
+                                 <font>
+                                    <Font name="Dubai Light" size="18.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="20.0" />
+                                 </padding>
+                              </Label>
+                                      <JFXTextField fx:id="roomInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="212.0" style="-fx-background-color: white; -fx-border-color: black;" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="5.0" />
+                                 </GridPane.margin>
+                              </JFXTextField>
+                           </children>
+                        </GridPane>
                             </children>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                             <children>
-                                <Label fx:id="messageLabel" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" text="Message:">
+                                <Label fx:id="messageLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" text="Message:">
                            <font>
-                              <Font name="Dubai Light" size="12.0" />
+                              <Font name="Dubai Light" size="18.0" />
                            </font>
                            <padding>
                               <Insets right="20.0" />
                            </padding>
                         </Label>
-                                <JFXTextArea fx:id="messsageInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                                <JFXTextArea fx:id="messsageInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="212.0" style="-fx-background-color: white; -fx-border-color: black;" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
                             <children>
-                                <Label fx:id="phoneNumberLabel" alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" text="Phone Number:">
+                                <Label fx:id="phoneNumberLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="150.0" text="Phone Number:" textAlignment="RIGHT">
                            <font>
-                              <Font name="Dubai Light" size="12.0" />
+                              <Font name="Dubai Light" size="18.0" />
                            </font>
                            <padding>
                               <Insets right="20.0" />
                            </padding>
                         </Label>
-                                <JFXTextField fx:id="phoneNumberInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                                <JFXTextField fx:id="phoneNumberInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="212.0" style="-fx-background-color: white; -fx-border-color: black;" />
                             </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="8">
                             <children>
-                                <JFXCheckBox fx:id="giftWrapCheckBox" checkedColor="#dc6f55" text="Gift Wrap (free)" />
+                                <JFXCheckBox fx:id="giftWrapCheckBox" checkedColor="#f6bd38" text="Gift Wrap (free)">
+                           <font>
+                              <Font size="18.0" />
+                           </font></JFXCheckBox>
                             </children>
                         </HBox>
-                        <Label prefHeight="35.0" prefWidth="201.0" text="Flower Delivery Request">
+                        <Label prefHeight="64.0" prefWidth="363.0" text="Flower Delivery Request">
                             <font>
-                                <Font name="Dubai Light" size="18.0" />
+                                <Font name="Dubai Regular" size="36.0" />
                             </font>
                         </Label>
                     </children>
@@ -238,7 +262,7 @@
         </AnchorPane>
         <AnchorPane fx:id="chosePane" prefHeight="200.0" prefWidth="443.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <GridPane fx:id="flowerPane" alignment="CENTER" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 9;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
+                <GridPane fx:id="flowerPane" alignment="CENTER" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 0;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
                     <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -248,110 +272,239 @@
                     <rowConstraints>
                         <RowConstraints percentHeight="20.0" valignment="CENTER" vgrow="SOMETIMES" />
                         <RowConstraints percentHeight="5.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="2.5" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints percentHeight="20.0" valignment="CENTER" vgrow="SOMETIMES" />
                         <RowConstraints percentHeight="5.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="2.5" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
                         <RowConstraints percentHeight="5.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="2.5" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
                         <RowConstraints percentHeight="5.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="2.5" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="1.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <ImageView fx:id="allOccasionPic" fitHeight="72.0" fitWidth="78.0" onMouseClicked="#AllOccasionClicked" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="allOccasionPic" fitHeight="124.0" fitWidth="125.0" onMouseClicked="#AllOccasionClicked" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@../../../../Images/all-occasion-classic-300x300.jpg" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="classicDozenPic" fitHeight="74.0" fitWidth="73.0" onMouseClicked="#classicDozenClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                        <ImageView fx:id="classicDozenPic" fitHeight="124.0" fitWidth="125.0" onMouseClicked="#classicDozenClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
                             <image>
                                 <Image url="@../../../../Images/classic dozen.jpg" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="colorfulElegancePic" fitHeight="80.0" fitWidth="74.0" onMouseClicked="#colorfulEleganceClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                        <ImageView fx:id="colorfulElegancePic" fitHeight="124.0" fitWidth="125.0" onMouseClicked="#colorfulEleganceClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                             <image>
                                 <Image url="@../../../../Images/Colorful-elegance-300x300.jpg" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="contemporaryPic" fitHeight="76.0" fitWidth="73.0" onMouseClicked="#contemporaryOrchidsClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
+                        <ImageView fx:id="contemporaryPic" fitHeight="124.0" fitWidth="125.0" onMouseClicked="#contemporaryOrchidsClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3">
                             <image>
                                 <Image url="@../../../../Images/contemporary-orchids-300x300.jpg" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="dishGardenPic" fitHeight="72.0" fitWidth="71.0" onMouseClicked="#dishGardClicked" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                        <ImageView fx:id="dishGardenPic" fitHeight="124.0" fitWidth="125.0" onMouseClicked="#dishGardClicked" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3">
                             <image>
                                 <Image url="@../../../../Images/dish-garden-300x300.jpg" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="grandOrchidsPic" fitHeight="78.0" fitWidth="71.0" onMouseClicked="#grandOrchidsClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                        <ImageView fx:id="grandOrchidsPic" fitHeight="124.0" fitWidth="125.0" onMouseClicked="#grandOrchidsClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                             <image>
                                 <Image url="@../../../../Images/Grand-Orchids-300x300.jpg" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="hollandSpringPic" fitHeight="77.0" fitWidth="73.0" onMouseClicked="#hollandSpringClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                        <ImageView fx:id="hollandSpringPic" fitHeight="124.0" fitWidth="125.0" onMouseClicked="#hollandSpringClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
                             <image>
                                 <Image url="@../../../../Images/holland-spring-300x300.jpg" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="orchidFestivalPic" fitHeight="71.0" fitWidth="71.0" onMouseClicked="#orchidFestivalClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                        <ImageView fx:id="orchidFestivalPic" fitHeight="124.0" fitWidth="125.0" onMouseClicked="#orchidFestivalClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
                             <image>
                                 <Image url="@../../../../Images/orchid-festival-300x300.jpg" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="largeOrchidPic" fitHeight="77.0" fitWidth="72.0" onMouseClicked="#largeOrchidClicked" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="4">
+                        <ImageView fx:id="largeOrchidPic" fitHeight="124.0" fitWidth="125.0" onMouseClicked="#largeOrchidClicked" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="6">
                             <image>
                                 <Image url="@../../../../Images/orchids-300x300.jpg" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="sweetSmallPic" fitHeight="74.0" fitWidth="72.0" onMouseClicked="#smallAndSweetClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <ImageView fx:id="sweetSmallPic" fitHeight="124.0" fitWidth="125.0" onMouseClicked="#smallAndSweetClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="6">
                             <image>
                                 <Image url="@../../../../Images/small-and-sweet-300x300.jpg" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="sweetSmall2Pic" fitHeight="77.0" fitWidth="72.0" onMouseClicked="#smallAndSweet2Clicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                        <ImageView fx:id="sweetSmall2Pic" fitHeight="124.0" fitWidth="125.0" onMouseClicked="#smallAndSweet2Clicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="6">
                             <image>
                                 <Image url="@../../../../Images/small-and-sweet2-300x300.jpg" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="summerSunshinePic" fitHeight="78.0" fitWidth="72.0" onMouseClicked="#summerSunshineClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                        <ImageView fx:id="summerSunshinePic" fitHeight="124.0" fitWidth="125.0" onMouseClicked="#summerSunshineClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="6">
                             <image>
                                 <Image url="@../../../../Images/summer-sunshine-300x300.jpg" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="sunflowerTopiaryPic" fitHeight="76.0" fitWidth="70.0" onMouseClicked="#sunflowerTopiaryClicked" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="6">
+                        <ImageView fx:id="sunflowerTopiaryPic" fitHeight="124.0" fitWidth="125.0" onMouseClicked="#sunflowerTopiaryClicked" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="9">
                             <image>
                                 <Image url="@../../../../Images/sunflower topiary.jpg" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="tropicalSplashPic" fitHeight="77.0" fitWidth="75.0" onMouseClicked="#tropicalSplashClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                        <ImageView fx:id="tropicalSplashPic" fitHeight="124.0" fitWidth="125.0" onMouseClicked="#tropicalSplashClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="9">
                             <image>
                                 <Image url="@../../../../Images/tropical-splash-300x300.jpg" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="babyBoyPic" fitHeight="76.0" fitWidth="72.0" onMouseClicked="#welcomeBabyBoyClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                        <ImageView fx:id="babyBoyPic" fitHeight="124.0" fitWidth="125.0" onMouseClicked="#welcomeBabyBoyClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="9">
                             <image>
                                 <Image url="@../../../../Images/welcome baby boy.jpg" />
                             </image>
                         </ImageView>
-                        <ImageView fx:id="babyGirlPic" fitHeight="76.0" fitWidth="72.0" onMouseClicked="#welcomeBabyGirlClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="6">
+                        <ImageView fx:id="babyGirlPic" fitHeight="124.0" fitWidth="125.0" onMouseClicked="#welcomeBabyGirlClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="9">
                             <image>
                                 <Image url="@../../../../Images/welcome baby girl.jpg" />
                             </image>
                         </ImageView>
-                        <Label fx:id="AllOccasionLabel" text="All Occasion" GridPane.rowIndex="1" />
-                        <Label fx:id="classicDozenLabel" text="Classic Dozen" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label fx:id="colorfulEleganceLabel" text="Colorful Elegance" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <Label fx:id="contemporaryLabel" text="Contemporary Orchids" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                        <Label fx:id="dishGardenLabel" text="Dish Garden" GridPane.rowIndex="3" />
-                        <Label fx:id="grandOrchidsLabel" text="Grand Orchids" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label fx:id="hollandSpringLabel" text="Holland Spring" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                        <Label fx:id="orchidFestivalLabel" text="Orchid Festival" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                        <Label fx:id="largeOrchidLabel" text="Large Orchid Plant" GridPane.rowIndex="5" />
-                        <Label fx:id="smallSweetLabel" text="Small &amp; Sweet" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                        <Label fx:id="smallSweet2Label" text="Small &amp; Sweet 2" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                        <Label fx:id="summerSunshineLabel" text="Summer Sunshine" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                        <Label fx:id="sunflowerTopiary" text="Sunflower Topiary" GridPane.rowIndex="7" />
-                        <Label fx:id="tropicalSplashLabel" text="Tropical Splash" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <Label fx:id="babyBoyLabel" text="Welcome Baby Boy" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                        <Label fx:id="babyGirlLabel" text="Welcome Baby Girl" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                        <Label fx:id="AllOccasionLabel" text="All Occasion" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Dubai Light" size="24.0" />
+                     </font></Label>
+                        <Label fx:id="classicDozenLabel" text="Classic Dozen" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Dubai Light" size="24.0" />
+                     </font></Label>
+                        <Label fx:id="colorfulEleganceLabel" text="Colorful Elegance" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Dubai Light" size="24.0" />
+                     </font></Label>
+                        <Label fx:id="contemporaryLabel" text="Contemporary Orchids" wrapText="true" GridPane.columnIndex="3" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Dubai Light" size="24.0" />
+                     </font></Label>
+                        <Label fx:id="dishGardenLabel" text="Dish Garden" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Dubai Light" size="24.0" />
+                     </font></Label>
+                        <Label fx:id="grandOrchidsLabel" text="Grand Orchids" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Dubai Light" size="24.0" />
+                     </font></Label>
+                        <Label fx:id="hollandSpringLabel" text="Holland Spring" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Dubai Light" size="24.0" />
+                     </font></Label>
+                        <Label fx:id="orchidFestivalLabel" text="Orchid Festival" GridPane.columnIndex="3" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Dubai Light" size="24.0" />
+                     </font></Label>
+                        <Label fx:id="largeOrchidLabel" text="Large Orchid Plant" GridPane.rowIndex="7">
+                     <font>
+                        <Font name="Dubai Light" size="24.0" />
+                     </font></Label>
+                        <Label fx:id="smallSweetLabel" text="Small &amp; Sweet" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                     <font>
+                        <Font name="Dubai Light" size="24.0" />
+                     </font></Label>
+                        <Label fx:id="smallSweet2Label" text="Small &amp; Sweet II" GridPane.columnIndex="2" GridPane.rowIndex="7">
+                     <font>
+                        <Font name="Dubai Light" size="24.0" />
+                     </font></Label>
+                        <Label fx:id="summerSunshineLabel" text="Summer Sunshine" GridPane.columnIndex="3" GridPane.rowIndex="7">
+                     <font>
+                        <Font name="Dubai Light" size="24.0" />
+                     </font></Label>
+                        <Label fx:id="sunflowerTopiary" text="Sunflower Topiary" GridPane.rowIndex="10">
+                     <font>
+                        <Font name="Dubai Light" size="24.0" />
+                     </font></Label>
+                        <Label fx:id="tropicalSplashLabel" text="Tropical Splash" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                     <font>
+                        <Font name="Dubai Light" size="24.0" />
+                     </font></Label>
+                        <Label fx:id="babyBoyLabel" text="Welcome Baby Boy" wrapText="true" GridPane.columnIndex="2" GridPane.rowIndex="10">
+                     <font>
+                        <Font name="Dubai Light" size="24.0" />
+                     </font></Label>
+                        <Label fx:id="babyGirlLabel" text="Welcome Baby Girl" GridPane.columnIndex="3" GridPane.rowIndex="10">
+                     <font>
+                        <Font name="Dubai Light" size="24.0" />
+                     </font></Label>
+                  <Label text="\$65.00 - $90.00" textFill="#012d5a" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Dubai Light" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="\$90.00" textFill="#012d5a" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Dubai Light" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="\$84.00 - $103.00" textFill="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Dubai Light" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="\$75.00-$95.00" textFill="#012d5a" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Dubai Light" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="\$55.00 - $65.00" textFill="#012d5a" GridPane.rowIndex="5">
+                     <font>
+                        <Font name="Dubai Light" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="\$68.00 - $88.00" textFill="#012d5a" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                     <font>
+                        <Font name="Dubai Light" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="\$55.00 - $74.00" textFill="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="5">
+                     <font>
+                        <Font name="Dubai Light" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="\$70.00 - $88.00" textFill="#012d5a" GridPane.columnIndex="3" GridPane.rowIndex="5">
+                     <font>
+                        <Font name="Dubai Light" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="\$90.00" textFill="#012d5a" GridPane.rowIndex="8">
+                     <font>
+                        <Font name="Dubai Light" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="\$55.00 - $65.00" textFill="#012d5a" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                     <font>
+                        <Font name="Dubai Light" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="\$55.00 - $65.00" textFill="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="8">
+                     <font>
+                        <Font name="Dubai Light" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="\$64.00 - $85.00" textFill="#012d5a" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                  <Label text="\$60.00 - $70.00" textFill="#012d5a" GridPane.rowIndex="11">
+                     <font>
+                        <Font name="Dubai Light" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="\$78.00 - $100.00" textFill="#012d5a" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                     <font>
+                        <Font name="Dubai Light" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="\$65.00 - $90.00" textFill="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="11">
+                     <font>
+                        <Font name="Dubai Light" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label text="\$65.00 - $90.00" textFill="#012d5a" GridPane.columnIndex="3" GridPane.rowIndex="11">
+                     <font>
+                        <Font name="Dubai Light" size="13.0" />
+                     </font>
+                  </Label>
                     </children>
                 </GridPane>
             </children>
