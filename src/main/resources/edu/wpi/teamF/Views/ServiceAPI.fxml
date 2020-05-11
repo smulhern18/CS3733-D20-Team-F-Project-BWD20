@@ -43,17 +43,17 @@
             <children>
                 <Label text="Team C" textFill="#5b5959" GridPane.columnIndex="3" GridPane.rowIndex="2">
                     <font>
-                        <Font size="9.0" />
+                        <Font name="Dubai Light" size="12.0" />
                     </font>
                 </Label>
                 <Label text="Team B" textFill="#5b5959" GridPane.columnIndex="2" GridPane.rowIndex="2">
                     <font>
-                        <Font size="9.0" />
+                        <Font name="Dubai Light" size="12.0" />
                     </font>
                 </Label>
-                <Label text="Team M" textFill="#5b5959" GridPane.columnIndex="2" GridPane.rowIndex="6">
+                <Label text="Team M" textFill="#5b5959" GridPane.columnIndex="2" GridPane.rowIndex="7">
                     <font>
-                        <Font size="9.0" />
+                        <Font name="Dubai Light" size="12.0" />
                     </font>
                 </Label>
                 <Label GridPane.columnIndex="4" GridPane.rowIndex="5">
@@ -61,15 +61,27 @@
                         <Font name="Dubai Light" size="20.0" />
                     </font>
                 </Label>
-            <Label text="Team P" textFill="#5b5959" GridPane.columnIndex="3" GridPane.rowIndex="6">
+            <Label text="Team P" textFill="#5b5959" GridPane.columnIndex="3" GridPane.rowIndex="7">
                <font>
-                  <Font size="9.0" />
+                  <Font name="Dubai Light" size="12.0" />
                </font>
             </Label>
-            <JFXButton onAction="#runIncidentReport" text="Incident Report" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <JFXButton onAction="#runAudioVisual" text="Audio Visual" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-            <JFXButton onAction="#runFoodRequest" text="Food Request" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-            <JFXButton onAction="#runInterpreterRequest" text="Request Interpreter" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <JFXButton onAction="#runIncidentReport" text="Incident Report" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Dubai Light" size="20.0" />
+               </font></JFXButton>
+            <JFXButton onAction="#runAudioVisual" text="Audio Visual" GridPane.columnIndex="2" GridPane.rowIndex="6">
+               <font>
+                  <Font name="Dubai Light" size="20.0" />
+               </font></JFXButton>
+            <JFXButton onAction="#runFoodRequest" text="Food Request" GridPane.columnIndex="3" GridPane.rowIndex="6">
+               <font>
+                  <Font name="Dubai Light" size="20.0" />
+               </font></JFXButton>
+            <JFXButton onAction="#runInterpreterRequest" text="Request Interpreter" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Dubai Light" size="20.0" />
+               </font></JFXButton>
             </children>
         </GridPane>
         <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
@@ -81,7 +93,7 @@
                 <RowConstraints maxHeight="82.58940124511719" minHeight="10.0" prefHeight="82.58940124511719" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label fx:id="serviceRequestLabel" alignment="CENTER" prefHeight="48.0" prefWidth="229.0" text="Request APIs">
+                <Label fx:id="serviceRequestLabel" alignment="CENTER" prefHeight="48.0" prefWidth="229.0" text="API Requests">
                     <font>
                         <Font name="Dubai Light" size="30.0" />
                     </font>

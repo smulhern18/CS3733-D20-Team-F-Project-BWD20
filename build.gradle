@@ -17,9 +17,6 @@ repositories {
     maven {
         url 'https://apisite.crmyers.dev/maven'
     }
-    maven {
-        url 'https://jitpack.io'
-    }
 }
 
 dependencies {
@@ -33,9 +30,7 @@ dependencies {
             'org.slf4j:slf4j-api:1.7.30',
             'org.slf4j:slf4j-simple:1.7.30',
 
-            'me.xdrop:fuzzywuzzy:1.1.7',
-            'com.github.SocraticPhoenix:Occurrence:21ebcd5c78',
-            'com.github.SocraticPhoenix:JamFX:b6c3770d11',
+            'io.github.typhon0:AnimateFX:1.2.1',
 
             'com.google.cloud:google-cloud-translate:1.94.5',
             'com.google.cloud:google-cloud-texttospeech:1.0.2',
@@ -58,9 +53,6 @@ dependencies {
             [group: 'edu.wpi.cs3733.d20.teamF', name: 'MaintenanceRequestAPI', version:'1.0.1']
     )
 
-    implementation('com.calendarfx:view:11.8.3') {
-        exclude group: 'org.openjfx', module: ''
-    }
 
     implementation 'com.calendarfx:calendar:11.8.3'
     implementation ('com.calendarfx:view:11.8.3'){
@@ -75,9 +67,6 @@ dependencies {
             'org.testfx:openjfx-monocle:8u76-b04',
     )
 
-    implementation('com.calendarfx:view:11.8.3') {
-        exclude group: 'org.openjfx', module: ''
-    }
 
     implementation 'org.testng:testng:6.9.6'
     implementation 'junit:junit:4.12'

@@ -240,6 +240,9 @@
                 <RowConstraints vgrow="SOMETIMES" />
             </rowConstraints>
         </GridPane>
-      <JFXButton fx:id="apiButton" onMouseClicked="#switchToAPIRequests" text="API" AnchorPane.bottomAnchor="120.0" AnchorPane.rightAnchor="120.0" />
+      <JFXButton fx:id="apiButton" onMouseClicked="#switchToAPIRequests" text="API Requests" textAlignment="CENTER" AnchorPane.bottomAnchor="120.0" AnchorPane.rightAnchor="120.0">
+         <font>
+            <Font name="Dubai Light" size="12.0" />
+         </font></JFXButton>
     </children>
 </AnchorPane>
