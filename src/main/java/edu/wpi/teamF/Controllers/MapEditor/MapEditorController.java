@@ -222,8 +222,8 @@ public class MapEditorController {
           mapView.redrawEdge(edge);
         }
       }
+      resetNodeStateToDefault();
     }
-    resetNodeStateToDefault();
   }
 
   public void setMapEventHandlers(AnchorPane floorPane) {
