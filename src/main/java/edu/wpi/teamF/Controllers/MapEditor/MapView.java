@@ -152,6 +152,10 @@ public class MapView implements Initializable {
 
   @FXML private Label nodeErrorLabel;
 
+  @FXML private JFXComboBox<String> edgeCombo;
+
+  @FXML private JFXButton modifyEdgeFromNodeButton;
+
   private DatabaseManager databaseManager = DatabaseManager.getManager();
   private MapEditorController mapEditorController;
   Map<String, JFXButton> buttonMap;
@@ -190,7 +194,8 @@ public class MapView implements Initializable {
     mapEditorController.setFloorInputHandler(floorInput);
     mapEditorController.setDeleteNodeButtonHandler(deleteNodeButton);
     mapEditorController.setModifyNodeButtonHandler(modifyNodeButton);
-    mapEditorController.setAddNodeButtonHandler(nodeDisplayButton);
+    mapEditorController.setAddNodeButtonHandler(nodeDisplayButton, edgeCombo);
+    mapEditorController.setModifyEdgeFromNodeButton(modifyEdgeFromNodeButton, edgeCombo);
     //    mapEditorController.setAddNodeButtonHandler(addNodeButton);
     //    mapEditorController.setModifyNodeButtonHandler(modifyNodeButton);
     //    mapEditorController.setDeleteNodeButtonHandler(deleteNodeButton);
@@ -215,7 +220,7 @@ public class MapView implements Initializable {
     setButtonColor(button, "#99D9EA", 0.7);
     button.setLayoutX(calculateXCoord(node.getXCoord(), node.getBuilding()) - BUTTON_SIZE / 2.0);
     button.setLayoutY(calculateYCoord(node.getYCoord(), node.getBuilding()) - BUTTON_SIZE / 2.0);
-    mapEditorController.setNodeEventHandlers(button);
+    mapEditorController.setNodeEventHandlers(button, edgeCombo);
     getFloorPane(node.getFloor()).getChildren().add(button);
     buttonMap.put(button.getId(), button);
     return button;
