@@ -23,7 +23,7 @@
                <children>
                   <ImageView fx:id="backgroundImage" fitHeight="150.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../../Images/boston3.jpeg" />
+                        <Image url="@../../../../Images/newspapers2.jpg" />
                      </image>
                   </ImageView>
                   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="900.0" style="-fx-background-color: rgba(255,255,255,0.9);">
