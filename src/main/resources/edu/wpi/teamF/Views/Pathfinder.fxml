@@ -797,7 +797,7 @@
          </children>
       </AnchorPane>
 
-      <AnchorPane fx:id="nodeInfoPane" layoutX="550.0" layoutY="250.0" maxHeight="500.0" maxWidth="1000.0" prefHeight="250.0" prefWidth="500.0" style="-fx-background-color: rgba(255, 255, 255, 0.9)">
+      <AnchorPane fx:id="nodeInfoPane" layoutX="550.0" layoutY="250.0" maxHeight="800.0" maxWidth="1000.0" prefHeight="250.0" prefWidth="500.0" style="-fx-background-color: rgba(255, 255, 255, 0.9)">
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -806,7 +806,7 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="10.0" />
+                        <Insets bottom="10.0" top="20.0" />
                      </VBox.margin>
                   </Label>
                   <Label fx:id="nodeInfoLabel2" text="Label" textAlignment="CENTER">
@@ -814,7 +814,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="40.0" />
+                        <Insets bottom="20.0" />
                      </VBox.margin>
                   </Label>
                   <Label fx:id="nodeInfoLabel3" text="Service Requests:" textAlignment="CENTER">
@@ -822,19 +822,88 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
-                  <JFXComboBox fx:id="nodeInfoCombo">
+                  <JFXComboBox fx:id="nodeInfoTypeCombo" onAction="#setNodeInfoCombo" prefWidth="150.0">
                      <VBox.margin>
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
                   </JFXComboBox>
-                  <JFXButton fx:id="nodeInfoButton" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#nodeInfoButtonBehavior" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Back" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="22.0" />
-                     </font>
-                  </JFXButton>
+                  <JFXComboBox fx:id="nodeInfoCombo" prefWidth="150.0">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </JFXComboBox>
+                  <HBox fx:id="nodeInfoHBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                     <children>
+                        <JFXButton fx:id="goToButton" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#goToServiceRequest" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Go To" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="22.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                        <JFXButton fx:id="nodeInfoButton" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#nodeInfoButtonBehavior" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Back" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="22.0" />
+                           </font>
+                           <padding>
+                              <Insets left="5.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </JFXButton>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children>
       </AnchorPane>
+
+   <AnchorPane fx:id="nodeInfoPaneUser" layoutX="550.0" layoutY="250.0" maxHeight="800.0" maxWidth="1000.0" prefHeight="250.0" prefWidth="500.0" style="-fx-background-color: rgba(255, 255, 255, 0.9)">
+      <children>
+         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+               <Label fx:id="nodeInfoLabel1User" text="Bottom text" textAlignment="CENTER">
+                  <font>
+                     <Font name="System Bold" size="18.0" />
+                  </font>
+                  <VBox.margin>
+                     <Insets bottom="10.0" top="20.0" />
+                  </VBox.margin>
+               </Label>
+               <Label fx:id="nodeInfoLabel2User" text="Label" textAlignment="CENTER">
+                  <font>
+                     <Font name="System Bold" size="12.0" />
+                  </font>
+                  <VBox.margin>
+                     <Insets bottom="20.0" />
+                  </VBox.margin>
+               </Label>
+               <HBox fx:id="nodeInfoHBoxUser" alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                  <VBox.margin>
+                     <Insets bottom="20.0" />
+                  </VBox.margin>
+                  <children>
+                     <JFXButton fx:id="nodeInfoButtonUser" buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#nodeInfoButtonBehavior" prefHeight="45.0" prefWidth="150.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Back" textFill="WHITE">
+                        <font>
+                           <Font name="System Bold" size="22.0" />
+                        </font>
+                        <padding>
+                           <Insets left="5.0" />
+                        </padding>
+                        <HBox.margin>
+                           <Insets left="5.0" />
+                        </HBox.margin>
+                     </JFXButton>
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+      </children>
+   </AnchorPane>
    </children>
 </AnchorPane>
