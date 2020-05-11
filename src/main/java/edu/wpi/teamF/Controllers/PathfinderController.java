@@ -145,6 +145,12 @@ public class PathfinderController implements Initializable {
   public JFXButton nodeInfoButton;
   public JFXComboBox<String> nodeInfoTypeCombo;
   public JFXComboBox<String> nodeInfoCombo;
+
+  public AnchorPane nodeInfoPaneUser;
+  public Label nodeInfoLabel1User;
+  public Label nodeInfoLabel2User;
+  public JFXButton nodeInfoButtonUser;
+
   Account.Type userLevel = databaseManager.getPermissions();
   List<SanitationServiceRequest> sanitationList = databaseManager.getAllSanitationRequests();
   List<ComputerServiceRequest> computerList = databaseManager.getAllComputerServiceRequests();
@@ -448,7 +454,12 @@ public class PathfinderController implements Initializable {
     button.setOnMouseClicked(
         actionEvent -> {
           if (actionEvent.getButton() == MouseButton.SECONDARY) {
-            nodeInfoPane.setVisible(true);
+
+            if (userLevel == null || userLevel == Account.Type.USER) {
+              nodeInfoPaneUser.setVisible(true);
+            } else {
+              nodeInfoPane.setVisible(true);
+            }
             Node whichNode = null;
             for (Node thisNode : fullNodeList) {
               if (thisNode.getId().equals(button.getId())) {
@@ -664,6 +675,7 @@ public class PathfinderController implements Initializable {
     imageViewFaulkner1.setVisible(true);
     errorPane.setVisible(false);
     nodeInfoPane.setVisible(false);
+    nodeInfoPaneUser.setVisible(false);
     floorButtonsSet();
     initializehospitalComboBox();
     setToggleBehavior();
@@ -1639,104 +1651,115 @@ public class PathfinderController implements Initializable {
   }
 
   public void nodeInfoButtonBehavior() {
-    nodeInfoLabel1.setText("");
-    nodeInfoLabel2.setText("");
-    nodeInfoPane.setVisible(false);
+    if (userLevel == null || userLevel == Account.Type.USER) {
+      nodeInfoLabel1User.setText("");
+      nodeInfoLabel2User.setText("");
+      nodeInfoPaneUser.setVisible(false);
+    } else {
+      nodeInfoLabel1.setText("");
+      nodeInfoLabel2.setText("");
+      nodeInfoPane.setVisible(false);
+    }
   }
 
   public void setNodeInfoLabels(Node node) throws Exception {
-    nodeInfoLabel1.setText(node.getLongName());
-    nodeInfoLabel2.setText(node.getId());
-    setNodeInfoTypeCombo(node);
-
     if (userLevel == null || userLevel == Account.Type.USER) {
-      nodeInfoLabel3.setVisible(true);
-      nodeInfoTypeCombo.setVisible(true); // deal with this later
-      nodeInfoCombo.setVisible(true);
+      nodeInfoLabel1User.setText(node.getLongName());
+      nodeInfoLabel2User.setText(node.getId());
     } else {
-      nodeInfoLabel3.setVisible(true);
-      nodeInfoTypeCombo.setVisible(true);
-      nodeInfoCombo.setVisible(true);
-    }
+      nodeInfoLabel1.setText(node.getLongName());
+      nodeInfoLabel2.setText(node.getId());
+      setNodeInfoTypeCombo(node);
 
-    sanitationList = databaseManager.getAllSanitationRequests();
-    computerList = databaseManager.getAllComputerServiceRequests();
-    flowerList = databaseManager.getAllFlowerRequests();
-    laundryList = databaseManager.getAllLaunduaryRequests();
-    maintenanceList = databaseManager.getAllMaintenanceRequests();
-    mariachiList = databaseManager.getAllMariachiServiceRequests();
-    medicineList = databaseManager.getAllMedicineDeliveryRequests();
-    languageList = databaseManager.getAllLanguageServiceRequests();
-    securityList = databaseManager.getAllSecurityRequests();
-    tranportList = databaseManager.getAllTransportRequests();
-
-    tempSanitationList = FXCollections.observableArrayList();
-    for (SanitationServiceRequest sanitationServiceRequest : sanitationList) {
-      if (sanitationServiceRequest.getLocation().getId().equals(node.getId())) {
-        tempSanitationList.add("Sanitation " + sanitationServiceRequest.getId());
+      if (userLevel == null || userLevel == Account.Type.USER) {
+        nodeInfoLabel3.setVisible(true);
+        nodeInfoTypeCombo.setVisible(true); // deal with this later
+        nodeInfoCombo.setVisible(true);
+      } else {
+        nodeInfoLabel3.setVisible(true);
+        nodeInfoTypeCombo.setVisible(true);
+        nodeInfoCombo.setVisible(true);
       }
-    }
 
-    tempComputerList = FXCollections.observableArrayList();
-    for (ComputerServiceRequest computerServiceRequest : computerList) {
-      if (computerServiceRequest.getLocation().getId().equals(node.getId())) {
-        tempComputerList.add("Computer " + computerServiceRequest.getId());
+      sanitationList = databaseManager.getAllSanitationRequests();
+      computerList = databaseManager.getAllComputerServiceRequests();
+      flowerList = databaseManager.getAllFlowerRequests();
+      laundryList = databaseManager.getAllLaunduaryRequests();
+      maintenanceList = databaseManager.getAllMaintenanceRequests();
+      mariachiList = databaseManager.getAllMariachiServiceRequests();
+      medicineList = databaseManager.getAllMedicineDeliveryRequests();
+      languageList = databaseManager.getAllLanguageServiceRequests();
+      securityList = databaseManager.getAllSecurityRequests();
+      tranportList = databaseManager.getAllTransportRequests();
+
+      tempSanitationList = FXCollections.observableArrayList();
+      for (SanitationServiceRequest sanitationServiceRequest : sanitationList) {
+        if (sanitationServiceRequest.getLocation().getId().equals(node.getId())) {
+          tempSanitationList.add("Sanitation " + sanitationServiceRequest.getId());
+        }
       }
-    }
 
-    tempFlowerList = FXCollections.observableArrayList();
-    for (FlowerRequest flowerRequest : flowerList) {
-      if (flowerRequest.getLocation().getId().equals(node.getId())) {
-        tempFlowerList.add("Flowers " + flowerRequest.getId());
+      tempComputerList = FXCollections.observableArrayList();
+      for (ComputerServiceRequest computerServiceRequest : computerList) {
+        if (computerServiceRequest.getLocation().getId().equals(node.getId())) {
+          tempComputerList.add("Computer " + computerServiceRequest.getId());
+        }
       }
-    }
 
-    tempLaundryList = FXCollections.observableArrayList();
-    for (LaundryServiceRequest laundryServiceRequest : laundryList) {
-      if (laundryServiceRequest.getLocation().getId().equals(node.getId())) {
-        tempLaundryList.add("Laundry " + laundryServiceRequest.getId());
+      tempFlowerList = FXCollections.observableArrayList();
+      for (FlowerRequest flowerRequest : flowerList) {
+        if (flowerRequest.getLocation().getId().equals(node.getId())) {
+          tempFlowerList.add("Flowers " + flowerRequest.getId());
+        }
       }
-    }
 
-    tempMaintenanceList = FXCollections.observableArrayList();
-    for (MaintenanceRequest maintenanceRequest : maintenanceList) {
-      if (maintenanceRequest.getLocation().getId().equals(node.getId())) {
-        tempMaintenanceList.add("Maintenance " + maintenanceRequest.getId());
+      tempLaundryList = FXCollections.observableArrayList();
+      for (LaundryServiceRequest laundryServiceRequest : laundryList) {
+        if (laundryServiceRequest.getLocation().getId().equals(node.getId())) {
+          tempLaundryList.add("Laundry " + laundryServiceRequest.getId());
+        }
       }
-    }
 
-    tempMariachiList = FXCollections.observableArrayList();
-    for (MariachiRequest mariachiRequest : mariachiList) {
-      if (mariachiRequest.getLocation().getId().equals(node.getId())) {
-        tempMariachiList.add("Mariachi " + mariachiRequest.getId());
+      tempMaintenanceList = FXCollections.observableArrayList();
+      for (MaintenanceRequest maintenanceRequest : maintenanceList) {
+        if (maintenanceRequest.getLocation().getId().equals(node.getId())) {
+          tempMaintenanceList.add("Maintenance " + maintenanceRequest.getId());
+        }
       }
-    }
 
-    tempMedicineList = FXCollections.observableArrayList();
-    for (MedicineDeliveryRequest medicineDeliveryRequest : medicineList) {
-      if (medicineDeliveryRequest.getLocation().getId().equals(node.getId())) {
-        tempMedicineList.add("Medicine " + medicineDeliveryRequest.getId());
+      tempMariachiList = FXCollections.observableArrayList();
+      for (MariachiRequest mariachiRequest : mariachiList) {
+        if (mariachiRequest.getLocation().getId().equals(node.getId())) {
+          tempMariachiList.add("Mariachi " + mariachiRequest.getId());
+        }
       }
-    }
 
-    tempLanguageList = FXCollections.observableArrayList();
-    for (LanguageServiceRequest languageServiceRequest : languageList) {
-      if (languageServiceRequest.getLocation().getId().equals(node.getId())) {
-        tempLanguageList.add("Language " + languageServiceRequest.getId());
+      tempMedicineList = FXCollections.observableArrayList();
+      for (MedicineDeliveryRequest medicineDeliveryRequest : medicineList) {
+        if (medicineDeliveryRequest.getLocation().getId().equals(node.getId())) {
+          tempMedicineList.add("Medicine " + medicineDeliveryRequest.getId());
+        }
       }
-    }
 
-    tempSecurityList = FXCollections.observableArrayList();
-    for (SecurityRequest securityRequest : securityList) {
-      if (securityRequest.getLocation().getId().equals(node.getId())) {
-        tempSecurityList.add("Security " + securityRequest.getId());
+      tempLanguageList = FXCollections.observableArrayList();
+      for (LanguageServiceRequest languageServiceRequest : languageList) {
+        if (languageServiceRequest.getLocation().getId().equals(node.getId())) {
+          tempLanguageList.add("Language " + languageServiceRequest.getId());
+        }
       }
-    }
 
-    tempTransportList = FXCollections.observableArrayList();
-    for (TransportRequest transportRequest : tranportList) {
-      if (transportRequest.getLocation().getId().equals(node.getId())) {
-        tempTransportList.add("Transport " + transportRequest.getId());
+      tempSecurityList = FXCollections.observableArrayList();
+      for (SecurityRequest securityRequest : securityList) {
+        if (securityRequest.getLocation().getId().equals(node.getId())) {
+          tempSecurityList.add("Security " + securityRequest.getId());
+        }
+      }
+
+      tempTransportList = FXCollections.observableArrayList();
+      for (TransportRequest transportRequest : tranportList) {
+        if (transportRequest.getLocation().getId().equals(node.getId())) {
+          tempTransportList.add("Transport " + transportRequest.getId());
+        }
       }
     }
   }
