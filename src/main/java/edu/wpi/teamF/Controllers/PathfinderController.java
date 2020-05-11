@@ -1546,9 +1546,9 @@ public class PathfinderController implements Initializable {
     System.out.println(xDiff);
     if ("Faulkner".equals(nodesOnFloor.get(0).getBuilding())) {
       if (yDiff > xDiff) {
-        uiSetting.setZoomScaleValue((FAULKNER_MAP_HEIGHT / yDiff) / 1.5);
+        uiSetting.setZoomScaleValue((FAULKNER_MAP_HEIGHT / yDiff) / 1.6);
       } else {
-        uiSetting.setZoomScaleValue((FAULKNER_MAP_WIDTH / xDiff) / 1.5);
+        uiSetting.setZoomScaleValue((FAULKNER_MAP_WIDTH / xDiff) / 1.6);
       }
       hVal =
           (bigX - ((bigX - smallX) / 2))
@@ -1566,14 +1566,14 @@ public class PathfinderController implements Initializable {
         hVal = hVal - (0.3 * ((xDiff / FAULKNER_MAP_HEIGHT)));
       } else if (hVal < 0.5) {
         hVal = hVal - (0.2 * ((xDiff / FAULKNER_MAP_HEIGHT)));
-      } else if (hVal > 0.5) {
-        hVal = hVal + (0.2 * ((xDiff / FAULKNER_MAP_HEIGHT)));
-      } else if (hVal > 0.6) {
-        hVal = hVal + (0.5 * ((xDiff / FAULKNER_MAP_HEIGHT)));
-      } else if (hVal > 0.67) {
-        hVal = hVal + (0.4 * ((xDiff / FAULKNER_MAP_HEIGHT)));
       } else if (hVal > 0.75) {
         hVal = hVal + (0.3 * ((xDiff / FAULKNER_MAP_HEIGHT)));
+      } else if (hVal > 0.67) {
+        hVal = hVal + (0.4 * ((xDiff / FAULKNER_MAP_HEIGHT)));
+      } else if (hVal > 0.6) {
+        hVal = hVal + (0.5 * ((xDiff / FAULKNER_MAP_HEIGHT)));
+      } else if (hVal > 0.5) {
+        hVal = hVal + (0.2 * ((xDiff / FAULKNER_MAP_HEIGHT)));
       }
 
       System.out.println("vVal =");
@@ -1598,9 +1598,9 @@ public class PathfinderController implements Initializable {
 
     } else { // main campus
       if (yDiff > xDiff) {
-        uiSetting.setZoomScaleValue((MAIN_MAP_HEIGHT / yDiff) / 1.5);
+        uiSetting.setZoomScaleValue((MAIN_MAP_HEIGHT / yDiff) / 1.6);
       } else {
-        uiSetting.setZoomScaleValue((MAIN_MAP_WIDTH / xDiff) / 1.5);
+        uiSetting.setZoomScaleValue((MAIN_MAP_WIDTH / xDiff) / 1.6);
       }
       hVal =
           (bigX - ((bigX - smallX) / 2))
@@ -1618,14 +1618,14 @@ public class PathfinderController implements Initializable {
         hVal = hVal - (0.3 * ((xDiff / MAIN_MAP_HEIGHT)));
       } else if (hVal < 0.5) {
         hVal = hVal - (0.2 * ((xDiff / MAIN_MAP_HEIGHT)));
-      } else if (hVal > 0.5) {
-        hVal = hVal + (0.2 * ((xDiff / MAIN_MAP_HEIGHT)));
-      } else if (hVal > 0.6) {
-        hVal = hVal + (0.5 * ((xDiff / MAIN_MAP_HEIGHT)));
-      } else if (hVal > 0.67) {
-        hVal = hVal + (0.4 * ((xDiff / MAIN_MAP_HEIGHT)));
       } else if (hVal > 0.75) {
         hVal = hVal + (0.3 * ((xDiff / MAIN_MAP_HEIGHT)));
+      } else if (hVal > 0.67) {
+        hVal = hVal + (0.4 * ((xDiff / MAIN_MAP_HEIGHT)));
+      } else if (hVal > 0.6) {
+        hVal = hVal + (0.5 * ((xDiff / MAIN_MAP_HEIGHT)));
+      } else if (hVal > 0.5) {
+        hVal = hVal + (0.2 * ((xDiff / MAIN_MAP_HEIGHT)));
       }
 
       System.out.println("vVal =");
