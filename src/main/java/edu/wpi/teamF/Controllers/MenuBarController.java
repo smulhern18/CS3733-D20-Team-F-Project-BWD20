@@ -88,27 +88,28 @@ public class MenuBarController implements Initializable {
     sceneController.switchScene("MainMenu");
   }
 
-//time
+  // time
   @FXML
   public void time() {
     Timeline clock =
-            new Timeline(
-                    new KeyFrame(
-                            Duration.ZERO,
-                            e -> {
-                              LocalTime currentTime = LocalTime.now();
-                              timelabel.setText(
-                                      currentTime.getHour()
-                                              + ": "
-                                              + currentTime.getMinute()
-                                              + ": "
-                                              + currentTime.getSecond());
-                            }),
-                    new KeyFrame(Duration.seconds(1)));
+        new Timeline(
+            new KeyFrame(
+                Duration.ZERO,
+                e -> {
+                  LocalTime currentTime = LocalTime.now();
+                  timelabel.setText(
+                      currentTime.getHour()
+                          + ": "
+                          + currentTime.getMinute()
+                          + ": "
+                          + currentTime.getSecond());
+                }),
+            new KeyFrame(Duration.seconds(1)));
     clock.setCycleCount(Animation.INDEFINITE);
     clock.play();
   }
-    public void tools(ActionEvent actionEvent) throws IOException {
+
+  public void tools(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("Tools");
   }
 
