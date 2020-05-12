@@ -92,7 +92,7 @@ public class TransportServiceController implements Initializable {
       checkStatusButton.setDisable(false);
       checkStatusButton.setVisible(true);
       deleteButton.setDisable(true);
-    }else if(userLevel == Account.Type.ADMIN){
+    } else if (userLevel == Account.Type.ADMIN) {
       checkStatusButton.setDisable(false);
       checkStatusButton.setVisible(true);
       deleteButton.setDisable(false);

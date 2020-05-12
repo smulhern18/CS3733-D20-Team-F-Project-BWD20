@@ -90,7 +90,7 @@ public class LaundryServiceRequestController implements Initializable {
       checkStatButton.setDisable(false);
       checkStatButton.setVisible(true);
       delete.setDisable(true);
-    }else if(userLevel == Account.Type.ADMIN){
+    } else if (userLevel == Account.Type.ADMIN) {
       checkStatButton.setDisable(false);
       checkStatusPane.setVisible(true);
       delete.setDisable(false);

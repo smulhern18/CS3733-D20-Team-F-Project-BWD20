@@ -225,15 +225,28 @@ public class DataViewController implements Initializable {
     downloadDir.setTitle("Select where to Export PDF");
     File selDir = downloadDir.showDialog(rootPane.getScene().getWindow());
 
+    String workingdir;
+    String OS = (System.getProperty("os.name")).toUpperCase();
+
+    if (OS.contains("WIN")) {
+      workingdir = System.getenv("Appdata");
+    } else {
+      // in either case, we would start in the user's home directory
+      workingdir = System.getProperty("user.home");
+      // if we are on a Mac, we are not done, we look for "Application Support"
+      workingdir += "/Library/Application Support/TeamFPDF";
+    }
     // Maintenance Grid
     WritableImage image = mainGridPane.snapshot(new SnapshotParameters(), null);
-    File file = new File("src/main/resources/edu/wpi/teamF/PDFExporter/MaintenanceData.png");
+    File file = new File(workingdir + "/MaintenanceData.png");
     // Transport Grid
     WritableImage image2 = transGridPane.snapshot(new SnapshotParameters(), null);
-    File file2 = new File("src/main/resources/edu/wpi/teamF/PDFExporter/TransportData.png");
+    File file2 = new File(workingdir + "/TransportData.png");
     // Sanitation Grid
     WritableImage image3 = sanGridPane.snapshot(new SnapshotParameters(), null);
-    File file3 = new File("src/main/resources/edu/wpi/teamF/PDFExporter/SanitationData.png");
+    File file3 = new File(workingdir + "/SanitationGrid.png");
+
+
     try {
       // Writing out to temporary folder
       ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);
