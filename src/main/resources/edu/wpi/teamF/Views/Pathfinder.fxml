@@ -318,7 +318,7 @@
       </AnchorPane>
       <AnchorPane fx:id="directionsPane" minHeight="1.0" minWidth="1.0" prefHeight="1.0" prefWidth="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="20.0">
+            <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: rgba(255,255,255,0.9);" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="20.0">
                <children>
                   <VBox prefHeight="350.0" prefWidth="300.0">
                      <children>
