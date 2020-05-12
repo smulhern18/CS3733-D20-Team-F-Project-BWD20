@@ -28,7 +28,7 @@ public class IndexDirection extends Direction {
 
   public String getBuildingAndFloor() {
     if ("XX".equals(floor)) {
-      return "Travel";
+      return "Road Map";
     } else {
       return building + " " + floor.replace("F", "");
     }
