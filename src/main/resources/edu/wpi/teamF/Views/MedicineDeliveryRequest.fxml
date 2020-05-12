@@ -94,7 +94,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
+                  <HBox alignment="CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
                      <children>
                         <Label fx:id="locationLabel" alignment="BOTTOM_RIGHT" maxWidth="100.0" minWidth="100.0" text="Location: " textAlignment="RIGHT" translateX="-15.0">
                            <font>
@@ -103,7 +103,7 @@
                         <JFXComboBox fx:id="locationComboBox" maxWidth="212.0" minWidth="140.0" prefHeight="35.0" prefWidth="212.0" style="-fx-background-color: white; -fx-border-color: black;" translateX="14.0" />
                      </children>
                   </HBox>
-                  <HBox alignment="BOTTOM_CENTER" GridPane.rowIndex="2">
+                  <HBox alignment="CENTER" GridPane.rowIndex="2">
                      <children>
                         <Label fx:id="medicineLabel" alignment="BOTTOM_RIGHT" maxWidth="100.0" minWidth="100.0" prefHeight="18.0" prefWidth="100.0" text="Medicine: " textAlignment="RIGHT" translateX="-15.0">
                            <font>
@@ -148,7 +148,7 @@
                         </GridPane>
                      </children>
                   </HBox>
-                  <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                      <children>
                         <Label fx:id="instructionsLabel" alignment="BOTTOM_RIGHT" maxWidth="127.0" minWidth="100.0" prefHeight="44.0" prefWidth="127.0" text="Instructions: " textAlignment="RIGHT" translateX="-25.0">
                            <font>
@@ -160,7 +160,7 @@
                            </font></JFXTextField>
                      </children>
                   </HBox>
-                  <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                      <children>
                         <Label fx:id="descLabel" alignment="BOTTOM_RIGHT" maxWidth="130.0" minWidth="100.0" prefHeight="44.0" prefWidth="130.0" text="Description: " textAlignment="RIGHT" translateX="-25.0">
                            <font>
@@ -172,7 +172,7 @@
                            </font></JFXTextField>
                      </children>
                   </HBox>
-                  <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
                      <children>
                         <Label fx:id="priorityLabel" alignment="BOTTOM_RIGHT" maxWidth="100.0" minWidth="100.0" text="Priority: " textAlignment="RIGHT" translateX="-15.0">
                            <font>

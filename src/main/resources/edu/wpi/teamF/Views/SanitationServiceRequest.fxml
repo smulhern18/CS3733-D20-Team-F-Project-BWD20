@@ -84,7 +84,7 @@
         </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-              <GridPane fx:id="servicePane" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 10;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="100.0">
+              <GridPane fx:id="servicePane" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 10;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="100.0">
                   <columnConstraints>
                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   </columnConstraints>
@@ -97,7 +97,15 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
                   </rowConstraints>
                   <children>
-                      <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
+                        <Label fx:id="sanitationRequestLabel" minWidth="400.0" text="Sanitation Request" textAlignment="CENTER">
+                            <font>
+                                <Font name="Dubai Regular" size="36.0" />
+                            </font>
+                     <GridPane.margin>
+                        <Insets left="100.0" top="40.0" />
+                     </GridPane.margin>
+                        </Label>
+                      <HBox alignment="CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
                           <children>
                               <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" text="         Location:  ">
                            <font>
@@ -106,7 +114,7 @@
                               <JFXComboBox fx:id="locationComboBox" prefHeight="35.0" prefWidth="212.0" style="-fx-background-color: white; -fx-border-color: black;" />
                           </children>
                       </HBox>
-                      <HBox alignment="BOTTOM_CENTER" GridPane.rowIndex="2">
+                      <HBox alignment="CENTER" GridPane.rowIndex="2">
                           <children>
                               <Label fx:id="priorityLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" text="            Priority:  ">
                            <font>
@@ -146,7 +154,7 @@
                         </GridPane>
                           </children>
                       </HBox>
-                      <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
+                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                           <children>
                               <Label fx:id="sanitationTypeLabel" alignment="BOTTOM_CENTER" text="Sanitation Type:  ">
                            <font>
@@ -168,14 +176,6 @@
                         </JFXTextArea>
                      </children>
                   </HBox>
-                        <Label fx:id="sanitationRequestLabel" minWidth="400.0" text="          Sanitation Request">
-                            <font>
-                                <Font name="Dubai Regular" size="36.0" />
-                            </font>
-                     <GridPane.margin>
-                        <Insets top="50.0" />
-                     </GridPane.margin>
-                        </Label>
                   </children>
               </GridPane>
          </children>

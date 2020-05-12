@@ -245,10 +245,16 @@
                                     <Font name="Dubai Light" size="18.0" />
                                  </font>
                                       </Label>
-                                      <JFXTextArea fx:id="descriptionText" maxWidth="212.0" minWidth="140.0" prefHeight="95.0" prefWidth="212.0" style="-fx-background-color: white; -fx-border-color: black;" GridPane.columnIndex="1" />
+                                      <JFXTextArea fx:id="descriptionText" maxWidth="212.0" minWidth="140.0" prefHeight="95.0" prefWidth="212.0" style="-fx-background-color: white; -fx-border-color: black;" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets />
+                                 </GridPane.margin></JFXTextArea>
                            </children>
                         </GridPane>
                             </children>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
                         </HBox>
                         <Label fx:id="securityRequestLabel" prefHeight="64.0" prefWidth="393.0" text="Language Service Request">
                             <font>
