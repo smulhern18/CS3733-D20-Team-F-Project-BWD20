@@ -69,19 +69,8 @@
                         <RowConstraints vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-<<<<<<< HEAD
-                        <JFXTextField fx:id="deleteText" alignment="BOTTOM_LEFT" style="-fx-background-color: white; -fx-border-color: black;" translateY="-5.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-                            <GridPane.margin>
-                                <Insets bottom="5.0" />
-                            </GridPane.margin>
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                        </JFXTextField>
-                        <JFXButton fx:id="deleteButton" alignment="CENTER" onAction="#delete" style="-fx-background-color: #a40000; -fx-background-radius: 10;" text="Delete" textFill="#ffffffcc" translateY="-5.0">
-=======
-                        <JFXButton fx:id="deleteButton" alignment="CENTER" onAction="#delete" style="-fx-background-color: #a40000; -fx-background-radius: 10;" text="Delete" textFill="#ffffffcc">
->>>>>>> 1e6a2284647f5fc93bca5a925b7f7b5857252d9d
+                        <JFXButton fx:id="deleteButton" alignment="CENTER" onAction="#delete" style="-fx-background-color: #a40000; -fx-background-radius: 10;" text="Delete" textFill="#ffffffcc" translateY="-10.0">
+
                             <GridPane.margin>
                                 <Insets bottom="5.0" right="5.0" />
                             </GridPane.margin>
@@ -89,7 +78,7 @@
                         <Font size="18.0" />
                      </font>
                         </JFXButton>
-                  <JFXComboBox fx:id="toDelete" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="1" />
+                  <JFXComboBox fx:id="toDelete" prefHeight="43.0" prefWidth="193.0" style="-fx-background-color: white;" translateY="-10.0" GridPane.columnIndex="1" />
                     </children>
                 </GridPane>
             </children>

@@ -1,19 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTreeTableView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-<<<<<<< HEAD
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.LaundryServiceRequestController">
-=======
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.LaundryServiceRequestController">
->>>>>>> 1e6a2284647f5fc93bca5a925b7f7b5857252d9d
     <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fx:id="backgroundImage" fitHeight="525.0" fitWidth="600.0" pickOnBounds="true">
                <image>
@@ -23,7 +28,7 @@
          </children>
       </AnchorPane>
         <fx:include fx:id="mainMenu" source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-        <AnchorPane fx:id="checkStatusPane" layoutX="190.0" layoutY="16.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 5;" visible="false" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="100.0">
+        <AnchorPane fx:id="checkStatusPane" layoutX="190.0" layoutY="16.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 5;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="100.0">
             <children>
                 <StackPane layoutX="44.0" layoutY="274.0" prefHeight="99.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                     <children>
@@ -51,7 +56,7 @@
                     </children>
                 </StackPane>
                 <JFXTreeTableView fx:id="treeTableLaunduary" style="-fx-border-color: black;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="99.0" />
-                <GridPane fx:id="deletePane" layoutX="146.0" layoutY="55.0" AnchorPane.rightAnchor="10.0">
+                <GridPane fx:id="deletePane" layoutX="146.0" layoutY="55.0" prefHeight="44.0" prefWidth="267.0" AnchorPane.rightAnchor="10.0">
                     <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
                         <ColumnConstraints hgrow="SOMETIMES" />
@@ -60,18 +65,7 @@
                         <RowConstraints vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-<<<<<<< HEAD
-                        <JFXTextField fx:id="deleteText" alignment="BOTTOM_LEFT" style="-fx-background-color: white; -fx-border-color: black;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-                            <GridPane.margin>
-                                <Insets />
-                            </GridPane.margin>
-                     <font>
-                        <Font size="18.0" />
-                     </font>
-                        </JFXTextField>
-=======
->>>>>>> 1e6a2284647f5fc93bca5a925b7f7b5857252d9d
-                        <JFXButton fx:id="delete" alignment="CENTER" onAction="#delete" style="-fx-background-color: #a40000; -fx-background-radius: 10;" text="Delete" textFill="#ffffffcc">
+                        <JFXButton fx:id="delete" alignment="CENTER" onAction="#delete" style="-fx-background-color: #a40000; -fx-background-radius: 10;" text="Delete" textFill="#ffffffcc" translateY="-5.0">
                             <GridPane.margin>
                                 <Insets right="5.0" />
                             </GridPane.margin>
@@ -79,7 +73,7 @@
                         <Font name="Dubai Light" size="18.0" />
                      </font>
                         </JFXButton>
-                  <JFXComboBox fx:id="toDelete" prefWidth="150.0" style="-fx-background-color: white;" GridPane.columnIndex="1" />
+                  <JFXComboBox fx:id="toDelete" prefHeight="42.0" prefWidth="189.0" style="-fx-background-color: white;" translateY="-5.0" GridPane.columnIndex="1" />
                     </children>
                 </GridPane>
             </children>

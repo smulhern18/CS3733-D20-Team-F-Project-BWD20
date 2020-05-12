@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="415.0" prefWidth="679.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.RegisterController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.RegisterController">
     <children>
         <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
 
@@ -25,7 +26,7 @@
                     <image>
                         <Image url="@../../../../Images/BWH.jpg" />
                     </image></ImageView>
-                <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="342.0" style="-fx-background-color: white; -fx-background-radius: 10px;">
+                <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="736.0" prefWidth="509.0" style="-fx-background-color: white; -fx-background-radius: 10px;">
 
                     <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="100.0" />
@@ -61,11 +62,17 @@
                                     <children>
                                         <StackPane prefHeight="141.0" prefWidth="481.0">
                                             <children>
-                                                <Circle fill="WHITE" radius="37.0" stroke="BLACK" strokeType="INSIDE" />
-                                                <ImageView fitHeight="70.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                                                <Circle fill="WHITE" radius="49.0" stroke="BLACK" strokeType="INSIDE">
+                                       <StackPane.margin>
+                                          <Insets top="10.0" />
+                                       </StackPane.margin></Circle>
+                                                <ImageView fitHeight="104.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true">
                                                     <image>
                                                         <Image url="@../../../../Images/icons8-flamingo-100.png" />
                                                     </image>
+                                       <StackPane.margin>
+                                          <Insets top="10.0" />
+                                       </StackPane.margin>
                                                 </ImageView>
                                             </children>
                                         </StackPane>
@@ -73,7 +80,7 @@
                                             <children>
                                                 <Label fx:id="loginText" text="Register" textFill="#012d5a">
                                                     <font>
-                                                        <Font name="Dubai Light" size="28.0" />
+                                                        <Font name="Dubai Regular" size="36.0" />
                                                     </font>
                                                 </Label>
                                                 <Line startX="-100.0" stroke="#012d5a" strokeWidth="2.0" StackPane.alignment="BOTTOM_CENTER" />
@@ -92,7 +99,7 @@
                             <children>
                                 <JFXTextField fx:id="usernameInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableRegister" prefHeight="26.0" prefWidth="306.0" promptText="Username...">
                            <font>
-                              <Font name="Dubai Light" size="14.0" />
+                              <Font name="Dubai Light" size="18.0" />
                            </font></JFXTextField>
                             </children>
                         </StackPane>
@@ -100,7 +107,7 @@
                             <children>
                                 <JFXPasswordField fx:id="passwordInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableRegister" prefHeight="27.0" prefWidth="306.0" promptText="Password...">
                                     <font>
-                                        <Font name="Dubai Light" size="14.0" />
+                                        <Font name="Dubai Light" size="18.0" />
                                     </font>
                                 </JFXPasswordField>
                             </children>
@@ -116,7 +123,7 @@
                                     <children>
                                         <Label fx:id="orText" alignment="TOP_CENTER" text="or" StackPane.alignment="TOP_CENTER">
                                             <font>
-                                                <Font name="STIXGeneral-Regular" size="13.0" />
+                                                <Font size="18.0" />
 
                                             </font>
                                         </Label>
@@ -127,30 +134,30 @@
                         </StackPane>
                         <Label fx:id="forgotText" text="Forgot Password?" GridPane.rowIndex="8">
                             <font>
-                                <Font name="Dubai Light" size="14.0" />
+                                <Font name="Dubai Light" size="18.0" />
                             </font>
                         </Label>
-                        <JFXButton fx:id="loginButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#switchToLogin" prefHeight="30.0" prefWidth="306.0" style="-fx-background-color: grey;" text="Login" GridPane.rowIndex="11">
+                        <JFXButton fx:id="loginButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#switchToLogin" prefHeight="45.0" prefWidth="306.0" style="-fx-background-color: grey;" text="Login" GridPane.rowIndex="11">
                             <font>
-                                <Font name="Dubai Light" size="14.0" />
+                                <Font name="Dubai Light" size="18.0" />
                             </font>
                         </JFXButton>
-                        <JFXButton fx:id="registerButton" disable="true" onAction="#attemptRegister" prefHeight="30.0" prefWidth="306.0" style="-fx-background-color: #DC6F55;" text="Register" GridPane.rowIndex="7">
+                        <JFXButton fx:id="registerButton" disable="true" onAction="#attemptRegister" prefHeight="30.0" prefWidth="306.0" style="-fx-background-color: #012d5a;" text="Register" textFill="WHITE" GridPane.rowIndex="7">
                             <font>
-                                <Font name="Dubai Light" size="14.0" />
+                                <Font name="Dubai Light" size="18.0" />
                             </font>
                         </JFXButton>
                   <JFXTextField fx:id="firstNameInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableRegister" prefHeight="26.0" prefWidth="306.0" promptText="First Name..." GridPane.rowIndex="1">
                      <font>
-                        <Font name="Dubai Light" size="13.0" />
+                        <Font name="Dubai Light" size="18.0" />
                      </font></JFXTextField>
                   <JFXTextField fx:id="lastNameInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableRegister" prefHeight="26.0" prefWidth="306.0" promptText="Last Name..." GridPane.rowIndex="2">
                      <font>
-                        <Font name="Dubai Light" size="13.0" />
+                        <Font name="Dubai Light" size="18.0" />
                      </font></JFXTextField>
                   <JFXTextField fx:id="emailInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyReleased="#enableRegister" prefHeight="26.0" prefWidth="306.0" promptText="Email..." GridPane.rowIndex="3">
                      <font>
-                        <Font name="Dubai Light" size="13.0" />
+                        <Font name="Dubai Light" size="18.0" />
                      </font></JFXTextField>
 
                     </children>
