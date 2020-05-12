@@ -16,7 +16,7 @@
 <AnchorPane fx:id="rootPane" prefHeight="600.0" prefWidth="1029.0" style="-fx-background-color: light blue;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.HelpController">
    <children>
       <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <ImageView fitHeight="600.0" fitWidth="931.0" layoutX="24.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 20%;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fx:id="background" fitHeight="600.0" fitWidth="931.0" layoutX="24.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 20%;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../../../../Images/BWH%20Shapiro%202.jpg" />
          </image>

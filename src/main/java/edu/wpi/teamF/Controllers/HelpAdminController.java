@@ -9,6 +9,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -17,13 +18,18 @@ public class HelpAdminController implements Initializable {
 
   @FXML public AnchorPane rootPane;
   @FXML private StackPane stackPane;
+  public ImageView background;
   // @FXML
   // private JFXButton textfield;
   // @FXML
   // private JFXButton search;
 
   @Override
-  public void initialize(URL url, ResourceBundle rb) {}
+  public void initialize(URL url, ResourceBundle rb) {
+    background.setPreserveRatio(false);
+    background.fitHeightProperty().bind(rootPane.heightProperty());
+    background.fitWidthProperty().bind(rootPane.widthProperty());
+  }
 
   @FXML
   private void signup(ActionEvent actionEvent) {
