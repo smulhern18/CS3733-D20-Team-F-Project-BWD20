@@ -3,8 +3,6 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -12,6 +10,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class HelpController implements Initializable {
 
@@ -26,7 +27,7 @@ public class HelpController implements Initializable {
   public void initialize(URL url, ResourceBundle rb) {}
 
   @FXML
-  private void loadDialogsignup(ActionEvent actionEvent) {
+  private void signup(ActionEvent actionEvent) {
     JFXDialogLayout content1 = new JFXDialogLayout();
     content1.setHeading(new Text("How to sign up?"));
     content1.setBody(
@@ -46,7 +47,7 @@ public class HelpController implements Initializable {
   }
 
   @FXML
-  private void loadDialoglogin(ActionEvent actionEvent) {
+  private void login(ActionEvent actionEvent) {
     JFXDialogLayout content2 = new JFXDialogLayout();
     content2.setHeading(new Text("How to login?"));
     content2.setBody(
@@ -68,16 +69,18 @@ public class HelpController implements Initializable {
   }
 
   @FXML
-  private void loadDialogservicerequest(ActionEvent actionEvent) {
+  private void findpath(ActionEvent actionEvent) {
     JFXDialogLayout content3 = new JFXDialogLayout();
-    content3.setHeading(new Text("How to request a service?"));
+    content3.setHeading(new Text("How to find a path?"));
     content3.setBody(
         new Text(
-            "Click on the 'Service Request' button on Main Menu. You will go to the Service\n"
-                + "Request page. You could request services for security and maintenance. Enter\n"
-                + "or select the information for location, description, priority, and type. Then click\n"
-                + "on'Submit Request'. If you want to cancel the request, click on 'Cancel’.  If you\n"
-                + "want to check service your request, click on 'Ongoing Service Request'."));
+            "1.\tGo to pathfinder page.\n" +
+                    "2.\tSelect or search current location from drop down menu.\n" +
+                    "3.\tYou can also click current location directly from the map. \n" +
+                    "4.\tSelect the destination. \n" +
+                    "5.\tSelect a preference (elevators or stairs).\n" +
+                    "6.\tClick Find path. \n" +
+                    "7.\tClick Reset to find another shortest path.\n"));
     JFXDialog dialog3 = new JFXDialog(stackPane, content3, JFXDialog.DialogTransition.CENTER);
     JFXButton button3 = new JFXButton("Close");
     button3.setOnAction(
@@ -92,7 +95,7 @@ public class HelpController implements Initializable {
   }
 
   @FXML
-  private void loadDialogadmin(ActionEvent actionEvent) {
+  private void findnear(ActionEvent actionEvent) {
     JFXDialogLayout content5 = new JFXDialogLayout();
     content5.setHeading(new Text("How to add/edit/delete nodes?"));
     content5.setBody(
@@ -118,16 +121,12 @@ public class HelpController implements Initializable {
   }
 
   @FXML
-  private void loadDialogpath(ActionEvent actionEvent) {
+  private void servicerequest(ActionEvent actionEvent) {
     JFXDialogLayout content6 = new JFXDialogLayout();
     content6.setHeading(new Text("How to find a path?"));
     content6.setBody(
         new Text(
             "Click on the 'Pathfinder' button on Main Menu.  You will go to the Pathfinder \n"
-                + "page. You could click on nodes’ circles on the map as start points.  Then s-\n"
-                + "elect the destination. The shortest path will be shown on the map. After you\n"
-                + "select start point and want to find stairs, elevators, and bathrooms, click on\n"
-                + "'Find Stairs', 'Find Elevator' or 'Find Bathroom'.   Click on 'Reset' if you want\n"
                 + "to find another path. "));
     JFXDialog dialog6 = new JFXDialog(stackPane, content6, JFXDialog.DialogTransition.CENTER);
     JFXButton button6 = new JFXButton("Close");
@@ -141,36 +140,214 @@ public class HelpController implements Initializable {
     content6.setActions(button6);
     dialog6.show();
   }
-}
-/*
-  @FXML
-  private void highlight(java.awt.event.ActionEvent event) {
-    // highlight(textfield, search.getText());
 
-  }
-
-  class MyHighlightPainter extends DefaultHighlighter.DefaultHighlightPainter {
-    public MyHighlightPainter(Color color) {
-      super(color);
+    @FXML
+    private void findatt(ActionEvent actionEvent) {
+        JFXDialogLayout content7 = new JFXDialogLayout();
+        content7.setHeading(new Text("How to find a path?"));
+        content7.setBody(
+                new Text(
+                        "Click on the 'Pathfinder' button on Main Menu.  You will go to the Pathfinder \n"
+                                + "to find another path. "));
+        JFXDialog dialog7 = new JFXDialog(stackPane, content7, JFXDialog.DialogTransition.CENTER);
+        JFXButton button7 = new JFXButton("Close");
+        button7.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        dialog7.close();
+                    }
+                });
+        content7.setActions(button7);
+        dialog7.show();
     }
 
-    Highlighter.HighlightPainter myHighlightPainter = new MyHighlightPainter(Color.PINK);
-
-    public void highlight(JTextComponent textComponent, String pattern) {
-      try {
-        Highlighter hilite = textComponent.getHighlighter();
-        Document doc = textComponent.getDocument();
-        String text = doc.getText(0, doc.getLength());
-        int pos = 0;
-
-        while ((pos = text.toUpperCase().indexOf(pattern.toUpperCase(), pos)) >= 0) {
-          hilite.addHighlight(pos, pos + pattern.length(), myHighlightPainter);
-          pos += pattern.length();
-        }
-
-      } catch (Exception e) {
-      }
+    @FXML
+    private void news(ActionEvent actionEvent) {
+        JFXDialogLayout content8 = new JFXDialogLayout();
+        content8.setHeading(new Text("How to find a path?"));
+        content8.setBody(
+                new Text(
+                        "Click on the 'Pathfinder' button on Main Menu.  You will go to the Pathfinder \n"
+                                + "to find another path. "));
+        JFXDialog dialog8 = new JFXDialog(stackPane, content8, JFXDialog.DialogTransition.CENTER);
+        JFXButton button8 = new JFXButton("Close");
+        button8.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        dialog8.close();
+                    }
+                });
+        content8.setActions(button8);
+        dialog8.show();
     }
-  }
+
+    @FXML
+    private void translate(ActionEvent actionEvent) {
+        JFXDialogLayout content9 = new JFXDialogLayout();
+        content9.setHeading(new Text("How to find a path?"));
+        content9.setBody(
+                new Text(
+                        "Click on the 'Pathfinder' button on Main Menu.  You will go to the Pathfinder \n"
+                                + "to find another path. "));
+        JFXDialog dialog9 = new JFXDialog(stackPane, content9, JFXDialog.DialogTransition.CENTER);
+        JFXButton button9 = new JFXButton("Close");
+        button9.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        dialog9.close();
+                    }
+                });
+        content9.setActions(button9);
+        dialog9.show();
+    }
+
+    @FXML
+    private void room(ActionEvent actionEvent) {
+        JFXDialogLayout content10 = new JFXDialogLayout();
+        content10.setHeading(new Text("How to find a path?"));
+        content10.setBody(
+                new Text(
+                        "Click on the 'Pathfinder' button on Main Menu.  You will go to the Pathfinder \n"
+                                + "to find another path. "));
+        JFXDialog dialog10 = new JFXDialog(stackPane, content10, JFXDialog.DialogTransition.CENTER);
+        JFXButton button10 = new JFXButton("Close");
+        button10.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        dialog10.close();
+                    }
+                });
+        content10.setActions(button10);
+        dialog10.show();
+    }
+
+    @FXML
+    private void ship(ActionEvent actionEvent) {
+        JFXDialogLayout content11 = new JFXDialogLayout();
+        content11.setHeading(new Text("How to find a path?"));
+        content11.setBody(
+                new Text(
+                        "Click on the 'Pathfinder' button on Main Menu.  You will go to the Pathfinder \n"
+                                + "to find another path. "));
+        JFXDialog dialog11 = new JFXDialog(stackPane, content11, JFXDialog.DialogTransition.CENTER);
+        JFXButton button11 = new JFXButton("Close");
+        button11.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        dialog11.close();
+                    }
+                });
+        content11.setActions(button11);
+        dialog11.show();
+    }
+
+    @FXML
+    private void map(ActionEvent actionEvent) {
+        JFXDialogLayout content12 = new JFXDialogLayout();
+        content12.setHeading(new Text("How to find a path?"));
+        content12.setBody(
+                new Text(
+                        "Click on the 'Pathfinder' button on Main Menu.  You will go to the Pathfinder \n"
+                                + "to find another path. "));
+        JFXDialog dialog12 = new JFXDialog(stackPane, content12, JFXDialog.DialogTransition.CENTER);
+        JFXButton button12 = new JFXButton("Close");
+        button12.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        dialog12.close();
+                    }
+                });
+        content12.setActions(button12);
+        dialog12.show();
+    }
+
+    @FXML
+    private void account(ActionEvent actionEvent) {
+        JFXDialogLayout content13 = new JFXDialogLayout();
+        content13.setHeading(new Text("How to find a path?"));
+        content13.setBody(
+                new Text(
+                        "Click on the 'Pathfinder' button on Main Menu.  You will go to the Pathfinder \n"
+                                + "to find another path. "));
+        JFXDialog dialog13 = new JFXDialog(stackPane, content13, JFXDialog.DialogTransition.CENTER);
+        JFXButton button13 = new JFXButton("Close");
+        button13.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        dialog13.close();
+                    }
+                });
+        content13.setActions(button13);
+        dialog13.show();
+    }
+
+    @FXML
+    private void specificsr(ActionEvent actionEvent) {
+        JFXDialogLayout content14 = new JFXDialogLayout();
+        content14.setHeading(new Text("How to find a path?"));
+        content14.setBody(
+                new Text(
+                        "Click on the 'Pathfinder' button on Main Menu.  You will go to the Pathfinder \n"
+                                + "to find another path. "));
+        JFXDialog dialog14 = new JFXDialog(stackPane, content14, JFXDialog.DialogTransition.CENTER);
+        JFXButton button14 = new JFXButton("Close");
+        button14.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        dialog14.close();
+                    }
+                });
+        content14.setActions(button14);
+        dialog14.show();
+    }
+
+    @FXML
+    private void backup(ActionEvent actionEvent) {
+        JFXDialogLayout content15 = new JFXDialogLayout();
+        content15.setHeading(new Text("How to find a path?"));
+        content15.setBody(
+                new Text(
+                        "Click on the 'Pathfinder' button on Main Menu.  You will go to the Pathfinder \n"
+                                + "to find another path. "));
+        JFXDialog dialog15 = new JFXDialog(stackPane, content15, JFXDialog.DialogTransition.CENTER);
+        JFXButton button15 = new JFXButton("Close");
+        button15.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        dialog15.close();
+                    }
+                });
+        content15.setActions(button15);
+        dialog15.show();
+    }
+
+    @FXML
+    private void updatepa(ActionEvent actionEvent) {
+        JFXDialogLayout content16 = new JFXDialogLayout();
+        content16.setHeading(new Text("How to find a path?"));
+        content16.setBody(
+                new Text(
+                        "Click on the 'Pathfinder' button on Main Menu.  You will go to the Pathfinder \n"
+                                + "to find another path. "));
+        JFXDialog dialog16 = new JFXDialog(stackPane, content16, JFXDialog.DialogTransition.CENTER);
+        JFXButton button16 = new JFXButton("Close");
+        button16.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        dialog16.close();
+                    }
+                });
+        content16.setActions(button16);
+        dialog16.show();
+    }
 }
- */
