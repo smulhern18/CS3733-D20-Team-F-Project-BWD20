@@ -3,6 +3,8 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -10,9 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
-
-import java.net.URL;
-import java.util.ResourceBundle;
 
 public class HelpController implements Initializable {
 
@@ -100,12 +99,12 @@ public class HelpController implements Initializable {
     content5.setHeading(new Text("How to find the nearest restrooms, elevators or stairs?"));
     content5.setBody(
         new Text(
-            "1.\tGo to pathfinder page. \n" +
-                    "2.\tSelect or search current location from drop down menu.\n" +
-                    "3.\tYou can also click current location directly from the map. \n" +
-                    "4.\tClick on the icon of restrooms, elevators or stairs.\n" +
-                    "5.\tClick Find Path. \n" +
-                    "6.\tClick Reset to find another shortest path.\n"));
+            "1.\tGo to pathfinder page. \n"
+                + "2.\tSelect or search current location from drop down menu.\n"
+                + "3.\tYou can also click current location directly from the map. \n"
+                + "4.\tClick on the icon of restrooms, elevators or stairs.\n"
+                + "5.\tClick Find Path. \n"
+                + "6.\tClick Reset to find another shortest path.\n"));
     JFXDialog dialog5 = new JFXDialog(stackPane, content5, JFXDialog.DialogTransition.CENTER);
     JFXButton button5 = new JFXButton("Close");
     button5.setOnAction(
@@ -125,10 +124,10 @@ public class HelpController implements Initializable {
     content6.setHeading(new Text("How to request a service?"));
     content6.setBody(
         new Text(
-            "1.\tGo to Service Request page.\n" +
-                    "2.\tSelect a service you need.\n" +
-                    "3.\tEnter relevant information.\n" +
-                    "4.\tClick Submit. The request is sent.\n"));
+            "1.\tGo to Service Request page.\n"
+                + "2.\tSelect a service you need.\n"
+                + "3.\tEnter relevant information.\n"
+                + "4.\tClick Submit. The request is sent.\n"));
     JFXDialog dialog6 = new JFXDialog(stackPane, content6, JFXDialog.DialogTransition.CENTER);
     JFXButton button6 = new JFXButton("Close");
     button6.setOnAction(
@@ -148,14 +147,14 @@ public class HelpController implements Initializable {
     content7.setHeading(new Text("How to find attractions or restaurants?"));
     content7.setBody(
         new Text(
-            "1.\tGo to Tools page.\n" +
-                    "2.\tClick on Find Attractions.\n" +
-                    "3.\tEnter attractions or restaurants you want to search.\n" +
-                    "4.\tSelect where you are (Main Campus or Faulkner Hospital).\n" +
-                    "5.\tClick Search.\n" +
-                    "6.\tClick on a search result.\n" +
-                    "7.\tGoogle map jumps out to show you the way to get there. \n" +
-                    "8.\tIf you enter your number, directions of text will be sent to mobile. \n"));
+            "1.\tGo to Tools page.\n"
+                + "2.\tClick on Find Attractions.\n"
+                + "3.\tEnter attractions or restaurants you want to search.\n"
+                + "4.\tSelect where you are (Main Campus or Faulkner Hospital).\n"
+                + "5.\tClick Search.\n"
+                + "6.\tClick on a search result.\n"
+                + "7.\tGoogle map jumps out to show you the way to get there. \n"
+                + "8.\tIf you enter your number, directions of text will be sent to mobile. \n"));
     JFXDialog dialog7 = new JFXDialog(stackPane, content7, JFXDialog.DialogTransition.CENTER);
     JFXButton button7 = new JFXButton("Close");
     button7.setOnAction(
@@ -175,11 +174,11 @@ public class HelpController implements Initializable {
     content8.setHeading(new Text("How to find news articles?"));
     content8.setBody(
         new Text(
-            "1.\tGo to Tools page.\n" +
-                    "2.\tSelect a interested news article.\n" +
-                    "3.\tClick on View Articles to read.\n" +
-                    "4.\tThe articles can be sent to mobile if you want.\n" +
-                    "5.\tNews can be searched.  \n"));
+            "1.\tGo to Tools page.\n"
+                + "2.\tSelect a interested news article.\n"
+                + "3.\tClick on View Articles to read.\n"
+                + "4.\tThe articles can be sent to mobile if you want.\n"
+                + "5.\tNews can be searched.  \n"));
     JFXDialog dialog8 = new JFXDialog(stackPane, content8, JFXDialog.DialogTransition.CENTER);
     JFXButton button8 = new JFXButton("Close");
     button8.setOnAction(
@@ -199,11 +198,11 @@ public class HelpController implements Initializable {
     content9.setHeading(new Text("How to use a translator?"));
     content9.setBody(
         new Text(
-            "1.\tGo to Tools page.\n" +
-                    "2.\tSelect languages of translate from and translate to. \n" +
-                    "3.\tEnter text to translate. Click on Translate.\n" +
-                    "4.\tTranslated text can be sent to mobile.\n" +
-                    "5.\tTranslated text can be called to mobile.\n"));
+            "1.\tGo to Tools page.\n"
+                + "2.\tSelect languages of translate from and translate to. \n"
+                + "3.\tEnter text to translate. Click on Translate.\n"
+                + "4.\tTranslated text can be sent to mobile.\n"
+                + "5.\tTranslated text can be called to mobile.\n"));
     JFXDialog dialog9 = new JFXDialog(stackPane, content9, JFXDialog.DialogTransition.CENTER);
     JFXButton button9 = new JFXButton("Close");
     button9.setOnAction(
@@ -216,5 +215,4 @@ public class HelpController implements Initializable {
     content9.setActions(button9);
     dialog9.show();
   }
-
 }
