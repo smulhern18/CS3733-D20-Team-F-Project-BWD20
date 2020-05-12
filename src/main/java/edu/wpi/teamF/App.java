@@ -3,6 +3,7 @@ package edu.wpi.teamF;
 import edu.wpi.teamF.Controllers.*;
 import java.io.IOException;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 public class App extends Application {
 
   private static SceneController sceneController;
+  public static Stage pStage;
 
   public App() throws Exception {}
 
@@ -44,6 +46,7 @@ public class App extends Application {
 
   @Override
   public void start(Stage primaryStage) throws IOException {
+    pStage = primaryStage;
 
     Scene primaryScene = new Scene(new AnchorPane());
     FXMLLoader fxmlLoader = new FXMLLoader();
@@ -91,6 +94,15 @@ public class App extends Application {
     primaryStage.setMaximized(true);
 
     //    primaryStage.setFullScreen(true);
+  }
+
+  public static Stage getPrimaryStage() {
+    return pStage;
+  }
+
+  public void reset() throws Exception {
+    pathfinderController = new PathfinderController();
+    menuBarController.logout(new ActionEvent());
   }
 
   @Override

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ToolsController">
+    <children>
+        <ImageView fx:id="backgroundImage" fitHeight="554.0" fitWidth="789.0" pickOnBounds="true" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-5.0" AnchorPane.topAnchor="0.0">
+            <image>
+                <Image url="@../../../../Images/Brigham-Social-1024x538.jpg" />
+            </image>
+        </ImageView>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: rgba(255,255,255,0.9);" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="440.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="100.0" />
+        <GridPane layoutX="244.0" layoutY="115.0" prefHeight="1063.0" prefWidth="594.0" vgap="20.0" AnchorPane.bottomAnchor="-1700.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="19.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="31.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" percentWidth="30.0" prefWidth="400.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="0.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="192.4173583984375" minHeight="92.3477783203125" percentHeight="5.0" prefHeight="192.4173583984375" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="63.6522216796875" minHeight="0.0" percentHeight="2.0" prefHeight="23.5826416015625" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="2.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="5.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="2.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="2.0" valignment="TOP" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <ImageView fx:id="shippingImage" fitHeight="120.0" fitWidth="120.0" onMouseClicked="#shippingBtn" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                    <image>
+                        <Image url="@../../../../Images/shipping.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="newsImage" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#newsBtn" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
+                    <image>
+                        <Image url="@../../../../Images/icons8-news-100.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="translatorImage" fitHeight="150.0" fitWidth="150.0" onMouseClicked="#translatorBtn" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <image>
+                        <Image url="@../../../../Images/icons8-language-100.png" />
+                    </image>
+                </ImageView>
+                <ImageView fx:id="attractionsImage" fitHeight="115.0" fitWidth="115.0" onMouseClicked="#attractionsBtn" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1">
+                    <image>
+                        <Image url="@../../../../Images/attractions.png" />
+                    </image>
+                </ImageView>
+            <Label text="Find Attractions" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Dubai Light" size="30.0" />
+               </font>
+            </Label>
+            <Label text="News" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Dubai Light" size="30.0" />
+               </font>
+            </Label>
+            <Label fx:id="shippingLabel" text="Shipping" GridPane.columnIndex="2" GridPane.rowIndex="4">
+               <font>
+                  <Font name="Dubai Light" size="30.0" />
+               </font>
+            </Label>
+            <Label text="Translator" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <font>
+                  <Font name="Dubai Light" size="30.0" />
+               </font>
+            </Label>
+            </children>
+        </GridPane>
+        <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        <GridPane alignment="CENTER" layoutX="351.0" layoutY="55.0" prefHeight="53.0" prefWidth="289.0" AnchorPane.leftAnchor="351.0" AnchorPane.rightAnchor="144.0" AnchorPane.topAnchor="110.0">
+            <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="82.58940124511719" minHeight="10.0" prefHeight="82.58940124511719" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label fx:id="serviceRequestLabel" prefHeight="64.0" prefWidth="400.0" text="Tools" textAlignment="CENTER">
+                    <font>
+                        <Font name="Dubai Regular" size="48.0" />
+                    </font>
+               <GridPane.margin>
+                  <Insets left="280.0" top="50.0" />
+               </GridPane.margin>
+                </Label>
+            </children>
+        </GridPane>
+        <GridPane layoutX="572.0" layoutY="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="90.0" />
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+            </rowConstraints>
+        </GridPane>
+    </children>
+</AnchorPane>

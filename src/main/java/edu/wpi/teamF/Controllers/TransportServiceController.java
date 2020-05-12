@@ -62,6 +62,7 @@ public class TransportServiceController implements Initializable {
   public JFXComboBox<String> destChoice;
   public JFXButton checkStatusButton;
   public ImageView backgroundImage;
+  public JFXComboBox<String> toDelete;
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UITransportRequest> csrUI = FXCollections.observableArrayList();
@@ -84,10 +85,17 @@ public class TransportServiceController implements Initializable {
     Account.Type userLevel = databaseManager.getPermissions();
     if (userLevel == Account.Type.USER) {
       checkStatusButton.setDisable(true);
+      checkStatusButton.setVisible(false);
 
       // set to user
-    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+    } else if (userLevel == Account.Type.STAFF) {
       checkStatusButton.setDisable(false);
+      checkStatusButton.setVisible(true);
+      deleteButton.setDisable(true);
+    } else if (userLevel == Account.Type.ADMIN) {
+      checkStatusButton.setDisable(false);
+      checkStatusButton.setVisible(true);
+      deleteButton.setDisable(false);
     }
     // add the different choices to the choicebox
     // Replace this with long names, linked to ID
@@ -230,6 +238,9 @@ public class TransportServiceController implements Initializable {
     for (TransportRequest csr : transportRequests) {
       csrUI.add(new UITransportRequest(csr));
     }
+    for (UITransportRequest yuh : csrUI) {
+      toDelete.getItems().add((yuh.getID().get()));
+    }
 
     final TreeItem<UITransportRequest> root =
         new RecursiveTreeItem<UITransportRequest>(csrUI, RecursiveTreeObject::getChildren);
@@ -278,6 +289,7 @@ public class TransportServiceController implements Initializable {
     locationChoice.setValue(null);
     priorityChoice.setValue(null);
     issueChoice.setValue(null);
+    toDelete.getItems().add(tsRequest.getId());
   }
 
   public void cancel(ActionEvent actionEvent) {
@@ -313,11 +325,11 @@ public class TransportServiceController implements Initializable {
   }
 
   public void delete(ActionEvent actionEvent) throws Exception {
-    String toDelte = deleteText.getText();
+    String toDelte = toDelete.getValue();
     databaseManager.deleteComputerServiceRequest(toDelte);
     csrUI.removeIf(transportRequest -> transportRequest.getID().get().equals(toDelte));
-    deleteText.setText("");
     treeTableTransport.refresh();
+    toDelete.getItems().remove(toDelete.getValue());
   }
 
   public void request(ActionEvent actionEvent) {

@@ -7,12 +7,6 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.twilio.twiml.voice.Say;
 import edu.wpi.teamF.Controllers.com.twilio.phoneComms;
-import java.awt.*;
-import java.io.IOException;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -20,6 +14,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.ResourceBundle;
 
 public class TranslatorController implements Initializable {
   public JFXComboBox<String> fromLanguage;
@@ -80,6 +80,8 @@ public class TranslatorController implements Initializable {
 
     fromLanguage.getItems().addAll(langCodeMap.keySet());
     toLanguage.getItems().addAll(langCodeMap.keySet());
+    fromLanguage.setValue("English");
+    toLanguage.setValue("Spanish");
 
     resetTranslator();
     backgroundImage.setPreserveRatio(false);
@@ -173,8 +175,6 @@ public class TranslatorController implements Initializable {
   }
 
   public void resetTranslator() {
-    fromLanguage.setValue("English");
-    toLanguage.setValue("Spanish");
     textInput.setText("");
     textOutput.setText("");
     phoneNumber.setText("");

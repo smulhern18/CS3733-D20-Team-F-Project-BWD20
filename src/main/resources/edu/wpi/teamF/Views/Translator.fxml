@@ -29,9 +29,9 @@
                         <Image url="@../../../../Images/boston_skyline.jpg" />
                      </image>
                   </ImageView>
-                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="975.0" style="-fx-background-color: rgba(255,255,255,0.9);">
+                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="975.0" style="-fx-background-color: rgba(255,255,255,0.9);">
                      <children>
-                        <GridPane fx:id="servicePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0">
+                        <GridPane fx:id="servicePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="664.0" prefWidth="800.0">
                           <columnConstraints>
                             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
@@ -46,10 +46,10 @@
                                        <children>
                                           <Label text="Translate From:">
                                              <font>
-                                                <Font name="Dubai Light" size="14.0" />
+                                                <Font name="Dubai Light" size="18.0" />
                                              </font>
                                           </Label>
-                                          <JFXComboBox fx:id="fromLanguage" minWidth="250.0" onAction="#fromLanguage" style="-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;" />
+                                          <JFXComboBox fx:id="fromLanguage" minWidth="250.0" onAction="#fromLanguage" prefHeight="27.0" prefWidth="350.0" style="-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;" />
                                           <JFXTextArea fx:id="textInput" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="350.0" promptText="Enter text to translate here" style="-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;">
                                              <VBox.margin>
                                                 <Insets top="20.0" />
@@ -58,7 +58,7 @@
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                              </padding>
                                           </JFXTextArea>
-                                          <JFXButton fx:id="translate" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#translate" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Translate" textFill="WHITE">
+                                          <JFXButton fx:id="translate" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#translate" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #012d5a; -fx-background-radius: 10px;" text="Translate" textFill="WHITE">
                                              <VBox.margin>
                                                 <Insets left="100.0" right="100.0" top="30.0" />
                                              </VBox.margin>
@@ -83,10 +83,10 @@
                                        <children>
                                           <Label text="Translate To:">
                                              <font>
-                                                <Font name="Dubai Light" size="14.0" />
+                                                <Font name="Dubai Light" size="18.0" />
                                              </font>
                                           </Label>
-                                          <JFXComboBox fx:id="toLanguage" minWidth="250.0" onAction="#toLanguage" style="-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;" />
+                                          <JFXComboBox fx:id="toLanguage" onAction="#toLanguage" prefHeight="27.0" prefWidth="350.0" style="-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;" />
                                           <JFXTextArea fx:id="textOutput" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="350.0" style="-fx-border-color: black; -fx-border-width: 1px; -fx-background-color: white;">
                                              <VBox.margin>
                                                 <Insets top="20.0" />
@@ -105,16 +105,19 @@
                                           </Label>
                                           <Label text="Enter Phone Number:">
                                              <font>
-                                                <Font name="Dubai Light" size="14.0" />
+                                                <Font name="Dubai Light" size="18.0" />
                                              </font>
                                              <VBox.margin>
                                                 <Insets bottom="4.0" />
                                              </VBox.margin>
                                           </Label>
-                                          <JFXTextField fx:id="phoneNumber" promptText="(10 digits, numbers only)" style="-fx-background-color: white; -fx-border-width: 1px; -fx-border-color: black;">
+                                          <JFXTextField fx:id="phoneNumber" minHeight="27.0" promptText="(10 digits, numbers only)" style="-fx-background-color: white; -fx-border-width: 1px; -fx-border-color: black;">
                                              <padding>
                                                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                                             </padding></JFXTextField>
+                                             </padding>
+                                             <font>
+                                                <Font size="14.0" />
+                                             </font></JFXTextField>
                                           <JFXButton fx:id="sendSMS" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#sendSMS" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Send Text Message" textFill="WHITE">
                                              <font>
                                                 <Font name="Dubai Light" size="21.0" />
@@ -133,7 +136,7 @@
                                           </JFXButton>
                                           <Label fx:id="commResult" text="Place a call or send a text">
                                              <font>
-                                                <Font size="14.0" />
+                                                <Font name="Dubai Light" size="18.0" />
                                              </font>
                                              <VBox.margin>
                                                 <Insets bottom="20.0" top="10.0" />
@@ -145,7 +148,7 @@
                               </HBox>
                               <Label text="Translation">
                                  <font>
-                                    <Font name="Dubai Light" size="36.0" />
+                                    <Font name="Dubai Regular" size="36.0" />
                                  </font>
                                  <GridPane.margin>
                                     <Insets />

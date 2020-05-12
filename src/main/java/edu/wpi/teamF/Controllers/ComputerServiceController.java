@@ -65,6 +65,7 @@ public class ComputerServiceController implements Initializable {
   public ImageView background;
   public JFXButton checkStatusButton;
   public ImageView backgroundImage;
+  public JFXComboBox<String> toDelete;
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UIComputerServiceRequest> csrUI = FXCollections.observableArrayList();
@@ -92,9 +93,14 @@ public class ComputerServiceController implements Initializable {
       checkStatusButton.setVisible(false);
 
       // set to user
-    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+    } else if (userLevel == Account.Type.STAFF) {
       checkStatusButton.setDisable(false);
       checkStatusButton.setVisible(true);
+      delete.setDisable(true);
+    } else if (userLevel == Account.Type.ADMIN) {
+      checkStatusButton.setDisable(false);
+      checkStatusButton.setVisible(true);
+      delete.setDisable(false);
     }
     // set to staff
 
@@ -304,6 +310,9 @@ public class ComputerServiceController implements Initializable {
     for (ComputerServiceRequest csr : computerServiceRequests) {
       csrUI.add(new UIComputerServiceRequest(csr));
     }
+    for (UIComputerServiceRequest yuh : csrUI) {
+      toDelete.getItems().add((yuh.getID().get()));
+    }
 
     final TreeItem<UIComputerServiceRequest> root =
         new RecursiveTreeItem<UIComputerServiceRequest>(csrUI, RecursiveTreeObject::getChildren);
@@ -359,6 +368,7 @@ public class ComputerServiceController implements Initializable {
     priorityChoice.setValue(null);
     makeChoice.setValue(null);
     issueChoice.setValue(null);
+    toDelete.getItems().add(csRequest.getId());
   }
 
   public void cancel(ActionEvent actionEvent) {
@@ -391,11 +401,11 @@ public class ComputerServiceController implements Initializable {
   }
 
   public void delete(ActionEvent actionEvent) throws Exception {
-    String toDelte = deleteText.getText();
-    databaseManager.deleteComputerServiceRequest(toDelte);
-    csrUI.removeIf(computerServiceRequest -> computerServiceRequest.getID().get().equals(toDelte));
-    deleteText.setText("");
+    String toDel = toDelete.getValue();
+    databaseManager.deleteComputerServiceRequest(toDel);
+    csrUI.removeIf(computerServiceRequest -> computerServiceRequest.getID().get().equals(toDel));
     treeTableComputer.refresh();
+    toDelete.getItems().remove(toDelete.getValue());
   }
 
   public void request(ActionEvent actionEvent) {
