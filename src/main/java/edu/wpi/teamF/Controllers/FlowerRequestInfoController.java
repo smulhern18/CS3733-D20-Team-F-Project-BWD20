@@ -109,6 +109,7 @@ public class FlowerRequestInfoController implements Initializable {
   public AnchorPane chosePane;
   public GridPane servicePane;
   public AnchorPane anchorSubmit;
+  public JFXComboBox<String> toDelete;
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UiFlowerServiceRequest> frUI = FXCollections.observableArrayList();
@@ -348,6 +349,9 @@ public class FlowerRequestInfoController implements Initializable {
     for (FlowerRequest fr : flowerServiceRequests) {
       frUI.add(new UiFlowerServiceRequest(fr));
     }
+    for (UiFlowerServiceRequest yuh : frUI) {
+      toDelete.getItems().add((yuh.getID().get()));
+    }
 
     final TreeItem<UiFlowerServiceRequest> root =
         new RecursiveTreeItem<UiFlowerServiceRequest>(frUI, RecursiveTreeObject::getChildren);
@@ -436,6 +440,7 @@ public class FlowerRequestInfoController implements Initializable {
     flowerPane.setVisible(true);
     // flowerRequestLabel.setVisible(false);
     chosePane.toFront();
+    toDelete.getItems().add(fsRequest.getId());
   }
 
   public void cancel(ActionEvent actionEvent) {
@@ -473,11 +478,11 @@ public class FlowerRequestInfoController implements Initializable {
   }
 
   public void delete(ActionEvent actionEvent) {
-    String toDelete = deleteText.getText();
-    databaseManager.deleteFlowerRequest(toDelete);
-    frUI.removeIf(flowerServiceRequest -> flowerServiceRequest.getID().get().equals(toDelete));
-    deleteText.setText("");
+    String toDel = toDelete.getValue();
+    databaseManager.deleteFlowerRequest(toDel);
+    frUI.removeIf(flowerServiceRequest -> flowerServiceRequest.getID().get().equals(toDel));
     treeTableFlower.refresh();
+    toDelete.getItems().remove(toDelete.getValue());
   }
 
   public void request(ActionEvent actionEvent) {

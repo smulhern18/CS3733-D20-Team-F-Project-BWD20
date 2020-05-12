@@ -305,6 +305,9 @@ public class ComputerServiceController implements Initializable {
     for (ComputerServiceRequest csr : computerServiceRequests) {
       csrUI.add(new UIComputerServiceRequest(csr));
     }
+    for (UIComputerServiceRequest yuh : csrUI) {
+      toDelete.getItems().add((yuh.getID().get()));
+    }
 
     final TreeItem<UIComputerServiceRequest> root =
         new RecursiveTreeItem<UIComputerServiceRequest>(csrUI, RecursiveTreeObject::getChildren);

@@ -8,6 +8,7 @@ import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.ReportsClass;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SanitationServiceRequest;
+import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UISanitationServiceRequest;
 import java.net.URL;
 import java.util.Date;
@@ -187,6 +188,9 @@ public class SanitationRequestController implements Initializable {
 
     for (SanitationServiceRequest sr : sanitationRequestList) {
       uiSanitationRequests.add(new UISanitationServiceRequest(sr));
+    }
+    for (UISanitationServiceRequest yuh : uiSanitationRequests) {
+      toDelete.getItems().add((yuh.getID().get()));
     }
     final TreeItem<UISanitationServiceRequest> root =
         new RecursiveTreeItem<>(uiSanitationRequests, RecursiveTreeObject::getChildren);

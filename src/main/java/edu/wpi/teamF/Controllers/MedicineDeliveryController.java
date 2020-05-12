@@ -8,6 +8,7 @@ import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MedicineDeliveryRequest;
+import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIMedicineDeliveryRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.io.IOException;
@@ -268,6 +269,9 @@ public class MedicineDeliveryController implements Initializable {
 
     for (MedicineDeliveryRequest mdr : medicineDeliveryRequests) {
       mdrUI.add(new UIMedicineDeliveryRequest(mdr));
+    }
+    for (UIMedicineDeliveryRequest yuh : mdrUI) {
+      toDelete.getItems().add((yuh.getID().get()));
     }
 
     final TreeItem<UIMedicineDeliveryRequest> root =

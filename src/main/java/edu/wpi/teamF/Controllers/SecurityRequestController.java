@@ -7,6 +7,7 @@ import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.SecurityRequest;
+import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UISecurityRequest;
 import java.net.URL;
 import java.util.Date;
@@ -169,6 +170,9 @@ public class SecurityRequestController implements Initializable {
 
     for (SecurityRequest sr : securityRequestList) {
       uiSecurityRequests.add(new UISecurityRequest(sr));
+    }
+    for (UISecurityRequest yuh : uiSecurityRequests) {
+      toDelete.getItems().add((yuh.getID().get()));
     }
     final TreeItem<UISecurityRequest> root =
         new RecursiveTreeItem<>(uiSecurityRequests, RecursiveTreeObject::getChildren);

@@ -9,6 +9,7 @@ import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Account.Account.Type;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MaintenanceRequest;
+import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIMaintenenceRequest;
 import java.io.IOException;
 import java.net.URL;
@@ -244,6 +245,9 @@ public class MaintenanceRequestController implements Initializable {
 
     for (MaintenanceRequest csr : maintenanceRequests) {
       csrUI.add(new UIMaintenenceRequest(csr));
+    }
+    for (UIMaintenenceRequest yuh : csrUI) {
+      toDelete.getItems().add((yuh.getID().get()));
     }
 
     final TreeItem<UIMaintenenceRequest> root =
