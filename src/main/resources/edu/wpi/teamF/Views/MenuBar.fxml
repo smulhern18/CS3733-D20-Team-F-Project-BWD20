@@ -59,6 +59,7 @@
                <children>
                   <HBox prefHeight="573.0" prefWidth="191.0">
                      <children>
+                        <JFXButton fx:id="importantDoNotRemove" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" />
                         <StackPane prefHeight="227.0" prefWidth="0.0">
                            <children>
                               <JFXButton fx:id="mainMenuButton" alignment="CENTER" onAction="#mainMenu" prefHeight="108.0" prefWidth="37.0" text=" " textFill="#ffffffcc">
@@ -163,7 +164,7 @@
                      <children>
                         <StackPane prefHeight="71.0" prefWidth="0.0">
                            <children>
-                              <JFXButton fx:id="pathfindButton1" onAction="#pathfinder" prefHeight="97.0" prefWidth="102.0" text=" " textFill="#ffffffcc">
+                              <JFXButton fx:id="toolsButton" onAction="#tools" prefHeight="97.0" prefWidth="102.0" text=" " textFill="#ffffffcc">
                                  <font>
                                     <Font name="STIXGeneral-Bold" size="18.0" />
                                  </font>
