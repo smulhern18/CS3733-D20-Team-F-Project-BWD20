@@ -92,14 +92,14 @@
       </AnchorPane>
       <AnchorPane fx:id="frame" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <GridPane fx:id="servicePane" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 10;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0" AnchorPane.topAnchor="100.0">
+            <GridPane fx:id="servicePane" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 10;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="100.0">
               <columnConstraints>
                 <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                  <RowConstraints maxHeight="181.9826288037941" minHeight="-Infinity" prefHeight="167.79130483933812" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="181.9826288037941" minHeight="-Infinity" percentHeight="15.0" prefHeight="167.79130483933812" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="194.5043573194191" minHeight="-Infinity" prefHeight="138.5739227144931" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="246.26085756355977" minHeight="-Infinity" prefHeight="148.59130623541648" valignment="TOP" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="246.26085756355977" minHeight="-Infinity" percentHeight="12.0" prefHeight="148.59130623541648" valignment="TOP" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="288.83477635518847" minHeight="-Infinity" prefHeight="163.61739626331035" valignment="TOP" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="435.01741884285656" minHeight="10.0" prefHeight="265.46087018364574" valignment="TOP" vgrow="SOMETIMES" />
               </rowConstraints>
@@ -156,6 +156,9 @@
                            </children>
                         </GridPane>
                      </children>
+                     <GridPane.margin>
+                        <Insets bottom="80.0" />
+                     </GridPane.margin>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                      <children>
@@ -169,7 +172,7 @@
                            </font></JFXTextField>
                      </children>
                   </HBox>
-                  <Label fx:id="mariachiRequestLabel" text="Mariachi Band Request">
+                  <Label fx:id="mariachiRequestLabel" text="Mariachi Band Request" GridPane.valignment="BOTTOM">
                      <font>
                         <Font name="Dubai Regular" size="36.0" />
                      </font>
