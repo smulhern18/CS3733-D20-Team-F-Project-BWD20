@@ -300,7 +300,7 @@ public class MaintenanceRequestController implements Initializable {
   }
 
   public void cancel(ActionEvent actionEvent) {
-    descText.setText("");
+    desText.setText("");
     locationComboBox.setValue(null);
     priorityComboBox.setValue(null);
     issueChoice.setValue(null);

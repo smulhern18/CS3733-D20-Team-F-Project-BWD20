@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane prefHeight="700.0" prefWidth="1400.0" style="-fx-background-color: #DCDDDA;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MapEditor.MapView">
+
+    <children>
+
+        <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+
+
+
+        <AnchorPane fx:id="mainMapPane" layoutX="19.399999618530273" layoutY="194.39999389648438" style="-fx-background-color: #DCDDDA;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <ScrollPane fx:id="imageScrollPane" style="-fx-background: #dcddda; -fx-background-color: #dcddda;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <content>
+
+
+                        <StackPane fx:id="imageStackPane" style="-fx-background-color: #dcddda;">
+                            <children>
+                                <ImageView fx:id="imageViewFaulkner1" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true" visible="false">
+                                    <image>
+                                        <Image url="@../Maps/Faulkner/floor1LM.png" />
+                                    </image>
+                                </ImageView>
+                                <AnchorPane fx:id="mapPaneFaulkner1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                                <ImageView fx:id="imageViewFaulkner2" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Maps/Faulkner/floor2LM.png" />
+                                    </image>
+                                </ImageView>
+                                <AnchorPane fx:id="mapPaneFaulkner2" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                                <ImageView fx:id="imageViewFaulkner3" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Maps/Faulkner/floor3LM.png" />
+                                    </image>
+                                </ImageView>
+                                <AnchorPane fx:id="mapPaneFaulkner3" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                                <ImageView fx:id="imageViewFaulkner4" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Maps/Faulkner/floor4LM.png" />
+                                    </image>
+                                </ImageView>
+                                <AnchorPane fx:id="mapPaneFaulkner4" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                                <ImageView fx:id="imageViewFaulkner5" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../Maps/Faulkner/floor5LM.png" />
+                                    </image>
+                                </ImageView>
+                                <AnchorPane fx:id="mapPaneFaulkner5" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                                <ImageView fx:id="imageViewMain1" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true">
+                                    <image>
+                                        <Image url="@../Maps/MainCampus/F1.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fx:id="imageViewMain2" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">
+                                    <image>
+                                        <Image url="@../Maps/MainCampus/F2.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fx:id="imageViewMain3" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">
+                                    <image>
+                                        <Image url="@../Maps/MainCampus/F3.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fx:id="imageViewMainG" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">
+                                    <image>
+                                        <Image url="@../Maps/MainCampus/ground.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fx:id="imageViewMainL1" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">
+                                    <image>
+                                        <Image url="@../Maps/MainCampus/L1.png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fx:id="imageViewMainL2" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true">
+                                    <image>
+                                        <Image url="@../Maps/MainCampus/L2.png" />
+                                    </image>
+                                </ImageView>
+                                <AnchorPane fx:id="mapPaneMain1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                                <AnchorPane fx:id="mapPaneMain2" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                                <AnchorPane fx:id="mapPaneMain3" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                                <AnchorPane fx:id="mapPaneMainG" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                                <AnchorPane fx:id="mapPaneMainL1" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                                <AnchorPane fx:id="mapPaneMainL2" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
+                            </children>
+                        </StackPane>
+
+
+
+                    </content>
+                </ScrollPane>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="faulknerFloorPane" prefHeight="60.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="800.0">
+            <children>
+                <JFXButton fx:id="faulknerFloor1Button" buttonType="RAISED" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" prefHeight="60.0" prefWidth="60.0" ripplerFill="BLACK" style="-fx-background-radius: 10px; -fx-background-color: #4d6c8b; -fx-max-width: 60px; -fx-min-width: 60px; -fx-pref-width: 60px; -fx-max-height: 60px; -fx-min-height: 60px; -fx-pref-height: 60px;" text="1" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+                    <font>
+                        <Font name="Arial Bold" size="30.0" />
+                    </font>
+                </JFXButton>
+                <JFXButton fx:id="faulknerFloor2Button" buttonType="RAISED" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" prefHeight="60.0" prefWidth="60.0" ripplerFill="BLACK" style="-fx-background-radius: 10px; -fx-background-color: #4d6c8b; -fx-max-width: 60px; -fx-min-width: 60px; -fx-pref-width: 60px; -fx-max-height: 60px; -fx-min-height: 60px; -fx-pref-height: 60px;" text="2" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="80.0">
+                    <font>
+                        <Font name="Arial Bold" size="30.0" />
+                    </font>
+                </JFXButton>
+                <JFXButton fx:id="faulknerFloor3Button" buttonType="RAISED" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" prefHeight="60.0" prefWidth="60.0" ripplerFill="BLACK" style="-fx-background-radius: 10px; -fx-background-color: #4d6c8b; -fx-max-width: 60px; -fx-min-width: 60px; -fx-pref-width: 60px; -fx-max-height: 60px; -fx-min-height: 60px; -fx-pref-height: 60px;" text="3" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="160.0">
+                    <font>
+                        <Font name="Arial Bold" size="30.0" />
+                    </font>
+                </JFXButton>
+                <JFXButton fx:id="faulknerFloor4Button" buttonType="RAISED" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" prefHeight="60.0" prefWidth="60.0" ripplerFill="BLACK" style="-fx-background-radius: 10px; -fx-background-color: #4d6c8b; -fx-max-width: 60px; -fx-min-width: 60px; -fx-pref-width: 60px; -fx-max-height: 60px; -fx-min-height: 60px; -fx-pref-height: 60px;" text="4" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="240.0">
+                    <font>
+                        <Font name="Arial Bold" size="30.0" />
+                    </font>
+                </JFXButton>
+                <JFXButton fx:id="faulknerFloor5Button" buttonType="RAISED" maxHeight="60.0" maxWidth="60.0" minHeight="60.0" minWidth="60.0" prefHeight="60.0" prefWidth="60.0" ripplerFill="BLACK" style="-fx-background-radius: 10px; -fx-background-color: #4d6c8b; -fx-max-width: 60px; -fx-min-width: 60px; -fx-pref-width: 60px; -fx-max-height: 60px; -fx-min-height: 60px; -fx-pref-height: 60px;" text="5" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="320.0">
+                    <font>
+                        <Font name="Arial Bold" size="30.0" />
+                    </font>
+                </JFXButton>
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="pathSwitchFloorPane" maxHeight="80.0" maxWidth="1.0" prefHeight="80.0" prefWidth="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="220.0" />
+
+            <JFXButton fx:id="edgeDisplayButton" buttonType="RAISED" maxWidth="150.0" minHeight="50.0" minWidth="150.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Add Edge" textFill="WHITE" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="90.0">
+                <font>
+                    <Font name="System Bold" size="24.0" />
+                </font>
+            </JFXButton>
+            <JFXButton fx:id="nodeDisplayButton" buttonType="RAISED" maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Add Node" textFill="WHITE" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="20.0">
+                <font>
+                    <Font name="System Bold" size="24.0" />
+                </font>
+            </JFXButton>
+      <AnchorPane maxHeight="60.0" minHeight="60.0" prefHeight="60.0" prefWidth="510.0" style="-fx-background-color: rgba(255,255,255,0.9);" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="220.0">
+         <children>
+            <Label prefHeight="60.0" prefWidth="139.0" text="Hospital:" textFill="#012d5a" AnchorPane.leftAnchor="20.0">
+               <font>
+                  <Font name="Dubai Light" size="36.0" />
+               </font>
+            </Label>
+            <JFXComboBox fx:id="hospitalCombo" layoutX="139.0" maxHeight="60.0" minHeight="60.0" prefHeight="60.0" prefWidth="214.0" style="-fx-border-color: #4059a9;" unFocusColor="#4059a9" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="170.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="mainFloorPane" layoutX="10.0" layoutY="10.0" prefHeight="70.0" prefWidth="550.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="800.0">
+         <children>
+            <JFXButton fx:id="groundButton" buttonType="RAISED" layoutX="10.0" layoutY="10.0" maxHeight="60.0" maxWidth="75.0" minHeight="60.0" minWidth="75.0" prefHeight="60.0" prefWidth="75.0" ripplerFill="BLACK" style="-fx-background-radius: 10px; -fx-background-color: #4d6c8b;" text="G" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0">
+               <font>
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="lower1Button" buttonType="RAISED" layoutX="168.0" layoutY="10.0" maxHeight="60.0" maxWidth="75.0" minHeight="60.0" minWidth="75.0" prefHeight="60.0" prefWidth="75.0" ripplerFill="BLACK" style="-fx-background-radius: 10px; -fx-background-color: #4d6c8b;" text="L1" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="95.0">
+               <font>
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="floor2Button" buttonType="RAISED" maxHeight="60.0" maxWidth="75.0" minHeight="60.0" minWidth="75.0" prefHeight="60.0" prefWidth="75.0" ripplerFill="BLACK" style="-fx-background-radius: 10px; -fx-background-color: #4d6c8b;" text="2" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="380.0">
+               <font>
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="floor3Button" buttonType="RAISED" maxHeight="60.0" maxWidth="75.0" minHeight="60.0" minWidth="75.0" prefHeight="60.0" prefWidth="75.0" ripplerFill="BLACK" style="-fx-background-radius: 10px; -fx-background-color: #4d6c8b;" text="3" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="475.0">
+               <font>
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="floor1Button" buttonType="RAISED" maxHeight="75.0" maxWidth="60.0" minHeight="60.0" minWidth="75.0" prefHeight="60.0" prefWidth="75.0" ripplerFill="BLACK" style="-fx-background-radius: 10px; -fx-background-color: #4d6c8b;" text="1" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="285.0">
+               <font>
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="lower2Button" buttonType="RAISED" layoutX="418.0" layoutY="10.0" maxHeight="60.0" maxWidth="75.0" minHeight="60.0" minWidth="75.0" prefHeight="60.0" prefWidth="75.0" ripplerFill="BLACK" style="-fx-background-color: #4d6c8b; -fx-background-radius: 10px;" text="L2" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+               <font>
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="nodeAnchor" maxHeight="400.0" maxWidth="325.0" minHeight="400.0" minWidth="325.0" prefHeight="400.0" prefWidth="325.0" style="-fx-background-color: rgba(255,255,255,0.9);" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <GridPane prefHeight="350.0" prefWidth="282.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="35.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="5.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="55.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="8.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="5.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="5.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="8.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="3.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Short Name:" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Long Name:" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Type:" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="X-Coordinate:" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Y-Coordinate:" GridPane.rowIndex="5">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Hospital:" GridPane.rowIndex="6">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Floor:" GridPane.rowIndex="7">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <JFXTextField fx:id="shortNameInput" focusColor="#012d5a" style="-fx-border-color: #012D5A;" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <JFXComboBox fx:id="typeInput" focusColor="#012d5a" prefHeight="26.0" prefWidth="180.0" style="-fx-border-color: #012D5A;" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <JFXTextField fx:id="longNameInput" focusColor="#012d5a" style="-fx-border-color: #012D5A;" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <JFXTextField editable="false" focusColor="#012d5a" prefWidth="180.0" style="-fx-border-color: #012D5A;" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="4" fx:id="xCoorInput" />
+                  <JFXTextField fx:id="yCoorInput" editable="false" focusColor="#012d5a" style="-fx-border-color: #012D5A;" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                  <JFXComboBox fx:id="hospitalInput" focusColor="#012d5a" prefHeight="26.0" prefWidth="180.0" style="-fx-border-color: #012D5A;" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                  <JFXComboBox fx:id="floorInput" focusColor="#012d5a" prefHeight="26.0" prefWidth="180.0" style="-fx-border-color: #012D5A;" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                  <JFXButton fx:id="addNodeButton" disable="true" maxHeight="25.0" maxWidth="40.0" minHeight="25.0" minWidth="40.0" prefHeight="25.0" prefWidth="40.0" style="-fx-background-color: #012d5a;" text="Add" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
+                  <JFXButton fx:id="deleteNodeButton" maxHeight="26.0" maxWidth="50.0" minHeight="25.0" minWidth="50.0" prefHeight="26.0" prefWidth="50.0" style="-fx-background-color: #012d5a;" text="Delete" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="8" />
+                  <JFXButton fx:id="modifyNodeButton" maxHeight="26.0" maxWidth="53.0" minHeight="25.0" minWidth="53.0" prefHeight="26.0" prefWidth="53.0" style="-fx-background-color: #012d5a;" text="Modify" textAlignment="CENTER" textFill="WHITE" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="8" />
+                  <Label fx:id="nodeErrorLabel" prefHeight="18.0" prefWidth="174.0" textFill="RED" GridPane.columnIndex="2" GridPane.valignment="BOTTOM">
+                     <font>
+                        <Font size="10.0" />
+                     </font></Label>
+                  <Label text="Edge:" GridPane.rowIndex="10">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Or select an edge to modify:" GridPane.columnIndex="2" GridPane.rowIndex="9" />
+                  <JFXComboBox fx:id="edgeCombo" focusColor="#012d5a" prefHeight="27.0" prefWidth="110.0" style="-fx-border-color: #012D5A;" unFocusColor="#012d5a" GridPane.columnIndex="2" GridPane.rowIndex="10" />
+                  <JFXButton fx:id="modifyEdgeFromNodeButton" maxHeight="26.0" maxWidth="54.0" minHeight="25.0" minWidth="50.0" prefHeight="26.0" prefWidth="54.0" style="-fx-background-color: #012d5a;" text="Select" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="10" />
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="edgeAnchor" layoutX="10.0" layoutY="10.0" maxHeight="250.0" maxWidth="325.0" minHeight="250.0" minWidth="325.0" prefHeight="250.0" prefWidth="325.0" style="-fx-background-color: rgba(255,255,255,0.9);" visible="false" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <GridPane fx:id="nodeGrid1" prefHeight="400.0" prefWidth="325.6" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <columnConstraints>
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" percentWidth="35.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="5.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="55.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="8.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" percentHeight="3.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="15.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label text="Select Node 1:" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Select Node 2:" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <JFXButton fx:id="node1Button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="174.0" style="-fx-background-color: #012d5a; -fx-border-radius: 3;" text="Click Here" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <JFXButton fx:id="addEdgeButton" disable="true" maxHeight="25.0" maxWidth="40.0" minHeight="25.0" minWidth="40.0" prefHeight="25.0" prefWidth="40.0" style="-fx-background-color: #012d5a;" text="Add" textAlignment="CENTER" textFill="WHITE" visible="false" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                  <JFXButton fx:id="deleteEdgeButton" maxHeight="26.0" maxWidth="50.0" minHeight="25.0" minWidth="50.0" prefHeight="26.0" prefWidth="50.0" style="-fx-background-color: #012d5a;" text="Delete" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <JFXButton fx:id="modifyEdgeButton" maxHeight="26.0" maxWidth="53.0" minHeight="25.0" minWidth="53.0" prefHeight="26.0" prefWidth="53.0" style="-fx-background-color: #012d5a;" text="Modify" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                  <JFXButton fx:id="node2Button" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="174.0" style="-fx-background-color: #a40000; -fx-border-radius: 3;" text="Click Here" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+               </children>
+            </GridPane>
+         </children>
+      </AnchorPane>
+      <JFXButton fx:id="cancelButton" buttonType="RAISED" layoutX="10.0" layoutY="10.0" maxHeight="50.0" maxWidth="150.0" minHeight="50.0" minWidth="150.0" prefHeight="50.0" prefWidth="150.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Cancel" textFill="WHITE" visible="false" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="20.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </JFXButton>
+    </children>
+</AnchorPane>
