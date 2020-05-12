@@ -7,7 +7,6 @@ import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.ServiceRequest.MariachiRequest;
-import edu.wpi.teamF.ModelClasses.UIClasses.UIComputerServiceRequest;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIMariachiRequest;
 import edu.wpi.teamF.ModelClasses.ValidationException;
 import java.net.URL;

@@ -9,7 +9,9 @@ import edu.wpi.teamF.App;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
+import edu.wpi.teamF.ModelClasses.Directions.Direction;
 import edu.wpi.teamF.ModelClasses.Directions.Directions;
+import edu.wpi.teamF.ModelClasses.Directions.IndexDirection;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.*;
@@ -30,18 +32,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebView;
 import javafx.util.Duration;
 import javax.management.InstanceNotFoundException;
 import lombok.SneakyThrows;
@@ -177,18 +180,7 @@ public class PathfinderController implements Initializable {
   public JFXButton buttonOnEnd = new JFXButton();
 
   // intermediate maps stuff
-  public ImageView faulknerTo45FrancisImage;
-  public ImageView faulknerTo75FrancisImage;
-  public ImageView faulknerToBTMImage;
-  public ImageView faulknerToShapiroImage;
-  public ImageView faulknerTo15FrancisImage;
-  public ImageView Francis45ToFaulknerImage;
-  public ImageView Francis75ToFaulknerImage;
-  public ImageView BTMToFaulknerImage;
-  public ImageView shapiroToFaulknerImage;
-  public ImageView francis15ToFaulknerImage;
-  public ScrollPane scrollPaneIntermediate;
-  public StackPane stackPaneIntermediate;
+  public WebView webview;
   public GoogleMaps googleMaps;
   public Label driveTime;
   public Label driveDistance;
@@ -209,6 +201,9 @@ public class PathfinderController implements Initializable {
   public ImageView shapiroToFaulknerQR;
   public ImageView francis15ToFaulknerQR;
 
+  public JFXToggleButton directionsToggle;
+  public Boolean fullDirections = false;
+
   public List<Node> fullNodeList;
   public int state;
   public UISetting uiSetting = new UISetting();
@@ -221,6 +216,8 @@ public class PathfinderController implements Initializable {
   public Path globalPath;
   public Directions directions;
   public int locationIndex;
+  public AnchorPane progressPane;
+  public HBox progressBox;
 
   EuclideanScorer euclideanScorer = new EuclideanScorer();
   PathfindAlgorithm pathFindAlgorithm;
@@ -405,7 +402,11 @@ public class PathfinderController implements Initializable {
       System.out.println("Floor: " + path.getLocationAtIndex(locationIndex).getFloor());
       System.out.println("Building: " + path.getLocationAtIndex(locationIndex).getBuilding());
 
-      directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+      if (fullDirections) {
+        directionsDisplay.setText(directions.getFullDirectionsString());
+      } else {
+        directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+      }
     } else {
       // Single floor navigation
       pathSwitchPrevious.setVisible(false);
@@ -414,8 +415,59 @@ public class PathfinderController implements Initializable {
       pathSwitchNext.setPrefHeight(0);
       btnSpacer.setPrefHeight(0);
 
+      locationIndex = 0;
       directionsDisplay.setText(directions.getFullDirectionsString());
     }
+
+    // Setting up the progress bar
+    int iii = 0;
+    for (Direction direction : directions.getDirectionList()) {
+      if (direction instanceof IndexDirection) {
+        JFXButton label = new JFXButton();
+        label.setMinHeight(40);
+        label.setAlignment(Pos.CENTER);
+        label.setFont(new Font("Arial", 16));
+        label.setBorder(
+            new Border(
+                new BorderStroke(
+                    Color.web("rgba(255,255,255,0.9)"),
+                    BorderStrokeStyle.SOLID,
+                    null,
+                    new BorderWidths(1))));
+        label.setText(((IndexDirection) direction).getBuildingAndFloor());
+        label.setMinWidth(110);
+        int finalIii = iii;
+        label.setOnAction(
+            actionEvent -> {
+              pathSwitchIndex(finalIii);
+            });
+
+        progressBox.getChildren().add(label);
+        iii++;
+      }
+    }
+    JFXButton label = new JFXButton();
+    label.setMinHeight(40);
+    label.setAlignment(Pos.CENTER);
+    label.setFont(new Font("Arial", 16));
+    label.setText(endNode.getBuilding() + " " + endNode.getFloor().replace("F", ""));
+    label.setBorder(
+        new Border(
+            new BorderStroke(
+                Color.web("rgba(255,255,255,0.9)"),
+                BorderStrokeStyle.SOLID,
+                null,
+                new BorderWidths(1))));
+    label.setMinWidth(110);
+    int finalIii1 = iii;
+    label.setOnAction(
+        actionEvent -> {
+          pathSwitchIndex(finalIii1);
+        });
+
+    progressBox.getChildren().add(label);
+    progressPane.setVisible(true);
+    setProgressColors(locationIndex);
   }
 
   public void placeButton(Node node) {
@@ -619,6 +671,9 @@ public class PathfinderController implements Initializable {
       endLabel.setVisible(false);
     }
     phoneNumber.setText("");
+
+    progressPane.setVisible(false);
+    progressBox.getChildren().clear();
   }
 
   private void resetButtonLine(String floor, String building) {
@@ -682,6 +737,7 @@ public class PathfinderController implements Initializable {
     floorButtonsSet();
     initializehospitalComboBox();
     setToggleBehavior();
+    setDirectionsToggleBehavior();
     setErrorPaneButtonBehavior();
     externalDirections.setVisible(false);
     externalDirections.setPrefWidth(0);
@@ -694,7 +750,6 @@ public class PathfinderController implements Initializable {
     uiSetting.setAsLocationComboBox(endCombo);
 
     uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1, 1.33);
-    intermediateSetting.makeZoomable(scrollPaneIntermediate, stackPaneIntermediate, 1.00);
 
     for (Node node : databaseManager.getAllNodes()) {
       node.setEdges(databaseManager.getAllEdgesConnectedToNode(node.getId()));
@@ -1043,6 +1098,7 @@ public class PathfinderController implements Initializable {
 
   public void pathSwitchPrevious(ActionEvent actionEvent) {
     locationIndex--;
+    setProgressColors(locationIndex);
     pathSwitchNext.setVisible(true);
     pathSwitchNext.setPrefHeight(50);
     btnSpacer.setPrefHeight(10);
@@ -1057,7 +1113,11 @@ public class PathfinderController implements Initializable {
         path.getLocationAtIndex(locationIndex).getFloor(),
         path.getLocationAtIndex(locationIndex).getBuilding());
 
-    directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+    if (fullDirections) {
+      directionsDisplay.setText(directions.getFullDirectionsString());
+    } else {
+      directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+    }
 
     if (locationIndex == 0) {
       // If we have gotten back to the first floor, disable and hide the previous button
@@ -1102,6 +1162,7 @@ public class PathfinderController implements Initializable {
 
   public void pathSwitchNext(ActionEvent actionEvent) {
     locationIndex++;
+    setProgressColors(locationIndex);
     pathSwitchPrevious.setVisible(true);
     pathSwitchPrevious.setPrefHeight(50);
     btnSpacer.setPrefHeight(10);
@@ -1117,7 +1178,11 @@ public class PathfinderController implements Initializable {
           path.getLocationAtIndex(locationIndex).getFloor(),
           path.getLocationAtIndex(locationIndex).getBuilding());
     }
-    directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+    if (fullDirections) {
+      directionsDisplay.setText(directions.getFullDirectionsString());
+    } else {
+      directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+    }
 
     if (locationIndex == (path.getUniqueLocations() - 1)) {
       // If we have gotten to the final location, disable and hide the next button
@@ -1158,6 +1223,100 @@ public class PathfinderController implements Initializable {
                 + path.getLocationAtIndex(locationIndex - 1).getFloor().replace("F", ""));
       }
     }
+  }
+
+  public void pathSwitchIndex(int index) {
+    locationIndex = index;
+    setProgressColors(locationIndex);
+    pathSwitchPrevious.setVisible(true);
+    pathSwitchPrevious.setPrefHeight(50);
+    pathSwitchNext.setVisible(true);
+    pathSwitchNext.setPrefHeight(50);
+    btnSpacer.setPrefHeight(10);
+    // Disable the external directions pane
+    externalDirections.setVisible(false);
+    externalDirections.setPrefHeight(0);
+    externalDirections.setPrefWidth(0);
+    System.out.println("Changed to Index: " + locationIndex);
+    System.out.println("Floor: " + path.getLocationAtIndex(locationIndex).getFloor());
+    System.out.println("Building: " + path.getLocationAtIndex(locationIndex).getBuilding());
+    if (!"OUT".equals(path.getLocationAtIndex(locationIndex).getBuilding())) {
+      switchToFloor(
+          path.getLocationAtIndex(locationIndex).getFloor(),
+          path.getLocationAtIndex(locationIndex).getBuilding());
+    }
+    if (fullDirections) {
+      directionsDisplay.setText(directions.getFullDirectionsString());
+    } else {
+      directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+    }
+
+    if (locationIndex == (path.getUniqueLocations() - 1)) {
+      // If we have gotten to the final location, disable and hide the next button
+      pathSwitchNext.setVisible(false);
+      pathSwitchNext.setPrefHeight(0);
+      btnSpacer.setPrefHeight(0);
+    } else if ("OUT".equals(path.getLocationAtIndex(locationIndex).getBuilding())) {
+      // This is the outdoor node, show the external directions
+      externalDirections.setPrefHeight(720);
+      externalDirections.setPrefWidth(1070);
+      externalDirections.setVisible(true);
+      setExternalDirections(
+          path.getLocationAtIndex(locationIndex - 1).getBuilding(),
+          path.getLocationAtIndex(locationIndex + 1).getBuilding());
+      pathSwitchNext.setText(
+          "Arrive at " + path.getLocationAtIndex(locationIndex + 1).getBuilding());
+      pathSwitchPrevious.setText(
+          "Return to " + path.getLocationAtIndex(locationIndex - 1).getBuilding());
+    } else if ("OUT".equals(path.getLocationAtIndex(locationIndex + 1).getBuilding())) {
+      // Exiting a building to go somewhere
+      pathSwitchNext.setText(
+          "Next: Go to " + path.getLocationAtIndex(locationIndex + 2).getBuilding());
+    } else {
+      pathSwitchNext.setText(
+          "Next: Go to floor "
+              + path.getLocationAtIndex(locationIndex + 1).getFloor().replace("F", ""));
+    }
+
+    if (locationIndex == 0) {
+      // If we have gotten back to the first floor, disable and hide the previous button
+      pathSwitchPrevious.setVisible(false);
+      pathSwitchPrevious.setPrefHeight(0);
+      btnSpacer.setPrefHeight(0);
+    } else if ("OUT".equals(path.getLocationAtIndex(locationIndex).getBuilding())) {
+      // This is the outdoor node, show the external directions
+      externalDirections.setPrefHeight(720);
+      externalDirections.setPrefWidth(1070);
+      externalDirections.setVisible(true);
+      setExternalDirections(
+          path.getLocationAtIndex(locationIndex - 1).getBuilding(),
+          path.getLocationAtIndex(locationIndex + 1).getBuilding());
+      pathSwitchNext.setText(
+          "Arrive at " + path.getLocationAtIndex(locationIndex + 1).getBuilding());
+      pathSwitchPrevious.setText(
+          "Return to " + path.getLocationAtIndex(locationIndex - 1).getBuilding());
+    } else if ("OUT".equals(path.getLocationAtIndex(locationIndex - 1).getBuilding())) {
+      // Exiting a building to go somewhere
+      pathSwitchPrevious.setText(
+          "Previous: Go to " + path.getLocationAtIndex(locationIndex - 2).getBuilding());
+    } else {
+      pathSwitchPrevious.setText(
+          "Previous: Go to floor "
+              + path.getLocationAtIndex(locationIndex - 1).getFloor().replace("F", ""));
+    }
+
+    // Need to update the text for previous button
+    //    if (!"OUT".equals(path.getLocationAtIndex(locationIndex).getBuilding())) {
+    //      if ("OUT".equals(path.getLocationAtIndex(locationIndex - 1).getBuilding())) {
+    //        // Previous node was the outdoor node
+    //        pathSwitchPrevious.setText(
+    //            "Previous: Go to " + path.getLocationAtIndex(locationIndex - 2).getBuilding());
+    //      } else {
+    //        pathSwitchPrevious.setText(
+    //            "Previous: Go to floor "
+    //                + path.getLocationAtIndex(locationIndex - 1).getFloor().replace("F", ""));
+    //      }
+    //    }
   }
 
   public AnchorPane getFloorPane(String floor, String building) {
@@ -1357,12 +1516,26 @@ public class PathfinderController implements Initializable {
         });
   }
 
+  private void setDirectionsToggleBehavior() {
+    directionsToggle.setDisableAnimation(true);
+    directionsToggle.setDisableVisualFocus(true);
+    directionsToggle.setOnAction(
+        actionEvent -> {
+          if (!directionsToggle.isSelected()) {
+            fullDirections = false;
+            directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+          } else {
+            fullDirections = true;
+            directionsDisplay.setText(directions.getFullDirectionsString());
+          }
+        });
+  }
+
   public void setExternalDirections(String fromBuilding, String toBuilding) {
     System.out.println(fromBuilding);
     System.out.println(toBuilding);
     if ("Faulkner".equals(fromBuilding) && "45 Francis".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      faulknerTo45FrancisImage.setVisible(true);
       faulknerTo45FrancisQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1371,7 +1544,6 @@ public class PathfinderController implements Initializable {
     } else if ("Faulkner".equals(fromBuilding)
         && ("75 Francis".equals(toBuilding) || ("Tower".equals(toBuilding)))) {
       setIntermediateMapsInvisible();
-      faulknerTo75FrancisImage.setVisible(true);
       faulknerTo75FrancisQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1379,7 +1551,6 @@ public class PathfinderController implements Initializable {
               "75+Francis+Street,+Boston,+MA");
     } else if ("Faulkner".equals(fromBuilding) && "BTM".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      faulknerToBTMImage.setVisible(true);
       faulknerToBTMQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1387,7 +1558,6 @@ public class PathfinderController implements Initializable {
               "Building+for+Transformative+Medicine+at+Brigham+and+Women's+Hospital,+Fenwood+Road,+Boston,+MA");
     } else if ("Faulkner".equals(fromBuilding) && "Shapiro".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      faulknerToShapiroImage.setVisible(true);
       faulknerToShapiroQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1396,7 +1566,6 @@ public class PathfinderController implements Initializable {
     } else if ("Faulkner".equals(fromBuilding)
         && ("15 Francis".equals(toBuilding) || ("FLEX".equals(toBuilding)))) {
       setIntermediateMapsInvisible();
-      faulknerTo15FrancisImage.setVisible(true);
       faulknerTo15FrancisQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1404,7 +1573,6 @@ public class PathfinderController implements Initializable {
               "15+Francis+Street,+Boston,+MA");
     } else if ("45 Francis".equals(fromBuilding) && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      Francis45ToFaulknerImage.setVisible(true);
       Francis45ToFaulknerQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1413,7 +1581,6 @@ public class PathfinderController implements Initializable {
     } else if (("75 Francis".equals(fromBuilding) || ("Tower".equals(fromBuilding)))
         && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      Francis75ToFaulknerImage.setVisible(true);
       Francis75ToFaulknerQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1421,7 +1588,6 @@ public class PathfinderController implements Initializable {
               "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA");
     } else if ("BTM".equals(fromBuilding) && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      BTMToFaulknerImage.setVisible(true);
       BTMToFaulknerQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1429,7 +1595,6 @@ public class PathfinderController implements Initializable {
               "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA");
     } else if ("Shapiro".equals(fromBuilding) && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      shapiroToFaulknerImage.setVisible(true);
       shapiroToFaulknerQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1438,7 +1603,6 @@ public class PathfinderController implements Initializable {
     } else if (("15 Francis".equals(fromBuilding) || ("FLEX".equals(fromBuilding)))
         && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      francis15ToFaulknerImage.setVisible(true);
       francis15ToFaulknerQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1446,6 +1610,7 @@ public class PathfinderController implements Initializable {
               "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA");
     }
 
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedDriving870x720());
     driveTime.setText(googleMaps.driveTime());
     driveDistance.setText(googleMaps.driveDistance());
     transitTime.setText(googleMaps.transitTime());
@@ -1484,16 +1649,6 @@ public class PathfinderController implements Initializable {
   }
 
   public void setIntermediateMapsInvisible() {
-    faulknerTo45FrancisImage.setVisible(false);
-    faulknerTo75FrancisImage.setVisible(false);
-    faulknerToBTMImage.setVisible(false);
-    faulknerToShapiroImage.setVisible(false);
-    faulknerTo15FrancisImage.setVisible(false);
-    Francis45ToFaulknerImage.setVisible(false);
-    Francis75ToFaulknerImage.setVisible(false);
-    BTMToFaulknerImage.setVisible(false);
-    shapiroToFaulknerImage.setVisible(false);
-    francis15ToFaulknerImage.setVisible(false);
     faulknerTo45FrancisQR.setVisible(false);
     faulknerTo75FrancisQR.setVisible(false);
     faulknerToBTMQR.setVisible(false);
@@ -2035,5 +2190,56 @@ public class PathfinderController implements Initializable {
   public void setNodeInfoComboPrompt() {
     nodeInfoTypeCombo.setPromptText("Type:");
     nodeInfoCombo.setPromptText("Request:");
+  }
+
+  public void modeDriving(ActionEvent actionEvent) {
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedDriving870x720());
+    driveTime.setText(googleMaps.driveTime());
+    driveDistance.setText(googleMaps.driveDistance());
+  }
+
+  public void modeTransit(ActionEvent actionEvent) {
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedTransit870x720());
+    transitTime.setText(googleMaps.transitTime());
+    transitDistance.setText(googleMaps.transitDistance());
+  }
+
+  public void modeBicycling(ActionEvent actionEvent) {
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedBicycling870x720());
+    bikeTime.setText(googleMaps.bikeTime());
+    bikeDistance.setText(googleMaps.bikeDistance());
+  }
+
+  public void modeWalking(ActionEvent actionEvent) {
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedWalking870x720());
+    walkTime.setText(googleMaps.walkTime());
+    walkDistance.setText(googleMaps.walkDistance());
+  }
+
+  public void setProgressColors(int currIndex) {
+    for (int i = 0; i < progressBox.getChildren().size(); i++) {
+      if (i == currIndex) {
+        // Current = dark blue
+        JFXButton label = (JFXButton) progressBox.getChildren().get(i);
+        label.setBackground(
+            new Background(
+                new BackgroundFill(Color.web("#012D5A"), CornerRadii.EMPTY, Insets.EMPTY)));
+        label.setTextFill(Color.WHITE);
+      } else if (i < currIndex) {
+        // Previous = green
+        JFXButton label = (JFXButton) progressBox.getChildren().get(i);
+        label.setBackground(
+            new Background(
+                new BackgroundFill(Color.web("#90EE90"), CornerRadii.EMPTY, Insets.EMPTY)));
+        label.setTextFill(Color.BLACK);
+      } else {
+        // Upcoming = grey
+        JFXButton label = (JFXButton) progressBox.getChildren().get(i);
+        label.setBackground(
+            new Background(
+                new BackgroundFill(Color.web("#D3D3D3"), CornerRadii.EMPTY, Insets.EMPTY)));
+        label.setTextFill(Color.BLACK);
+      }
+    }
   }
 }
