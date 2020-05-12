@@ -25,14 +25,14 @@
                         <Font name="Dubai Light" size="72.0" />
                     </font>
                 </Label>
-            <Label fx:id="time" layoutX="90.0" layoutY="160.0" prefHeight="41.0" prefWidth="216.0" text="Label">
+            <Label fx:id="time" layoutX="90.0" layoutY="160.0" prefHeight="41.0" prefWidth="216.0" text="Label" textFill="WHITE" translateX="10.0">
                <font>
-                  <Font name="STIXGeneral-Bold" size="25.0" />
+                  <Font name="Dubai Light" size="25.0" />
                </font>
             </Label>
-            <Label fx:id="date" layoutX="90.0" layoutY="195.0" prefHeight="41.0" prefWidth="196.0" text="Label">
+            <Label fx:id="date" layoutX="90.0" layoutY="195.0" prefHeight="41.0" prefWidth="196.0" text="Label" textFill="WHITE" translateX="10.0">
                <font>
-                  <Font name="STIXGeneral-Bold" size="25.0" />
+                  <Font name="Dubai Light" size="24.0" />
                </font>
             </Label>
             </children>
