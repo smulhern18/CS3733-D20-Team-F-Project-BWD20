@@ -98,7 +98,7 @@ public class MaintenanceRequestController implements Initializable {
     } else if (userLevel == Account.Type.STAFF) {
       checkStatusButton.setDisable(false);
       delete.setDisable(true);
-    }else if(userLevel == Account.Type.ADMIN){
+    } else if (userLevel == Account.Type.ADMIN) {
       checkStatusButton.setDisable(false);
       delete.setDisable(false);
     }

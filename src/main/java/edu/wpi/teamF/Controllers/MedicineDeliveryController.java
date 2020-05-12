@@ -89,11 +89,10 @@ public class MedicineDeliveryController implements Initializable {
       backButton.setDisable(false);
       backButton.setVisible(true);
       delete.setDisable(true);
-    }else if(userLevel == Account.Type.ADMIN){
+    } else if (userLevel == Account.Type.ADMIN) {
       backButton.setDisable(false);
       backButton.setVisible(true);
       backButton.setDisable(false);
-
     }
 
     UISetting uiSetting = new UISetting();
