@@ -32,7 +32,7 @@
                            <children>
                               <Label text="Find News Articles">
                                  <font>
-                                    <Font size="36.0" />
+                                    <Font name="Dubai Regular" size="36.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets bottom="10.0" top="5.0" />

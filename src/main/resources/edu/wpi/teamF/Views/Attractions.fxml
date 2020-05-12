@@ -33,7 +33,7 @@
                            <children>
                               <Label text="Find Attractions &amp; Restaurants">
                                  <font>
-                                    <Font size="36.0" />
+                                    <Font name="Dubai Regular" size="36.0" />
                                  </font>
                                  <VBox.margin>
                                     <Insets bottom="15.0" />

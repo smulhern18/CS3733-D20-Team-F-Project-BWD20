@@ -31,7 +31,7 @@
                         <Image url="@../../../../Images/ups.jpg" />
                      </image>
                   </ImageView>
-                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="975.0" style="-fx-background-color: rgba(255,255,255,0.9);">
+                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="680.0" prefWidth="975.0" style="-fx-background-color: rgba(255,255,255,0.9);">
                      <children>
                         <GridPane fx:id="servicePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="800.0">
                           <columnConstraints>
@@ -365,7 +365,7 @@
                               </HBox>
                               <Label text="Shipping">
                                  <font>
-                                    <Font name="Dubai Light" size="36.0" />
+                                    <Font name="Dubai Regular" size="36.0" />
                                  </font>
                                  <GridPane.margin>
                                     <Insets />

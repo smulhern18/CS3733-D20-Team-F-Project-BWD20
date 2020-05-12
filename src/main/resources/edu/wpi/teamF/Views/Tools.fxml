@@ -87,10 +87,10 @@
             <children>
                 <Label fx:id="serviceRequestLabel" prefHeight="64.0" prefWidth="400.0" text="Tools" textAlignment="CENTER">
                     <font>
-                        <Font name="Dubai Regular" size="54.0" />
+                        <Font name="Dubai Regular" size="48.0" />
                     </font>
                <GridPane.margin>
-                  <Insets left="250.0" top="50.0" />
+                  <Insets left="280.0" top="50.0" />
                </GridPane.margin>
                 </Label>
             </children>
