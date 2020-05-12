@@ -238,15 +238,19 @@ public class AccountsController implements Initializable {
     String choice = choiceTimeOut.getValue();
     seconds = Integer.parseInt(choice);
     int Millis = 15000;
-    switch(seconds){
-      case 15: Millis = 15000;
-      break;
-      case 30: Millis = 30000;
-      break;
-      case 45: Millis = 45000;
-      break;
-      case 60: Millis = 60000;
-      break;
+    switch (seconds) {
+      case 15:
+        Millis = 15000;
+        break;
+      case 30:
+        Millis = 30000;
+        break;
+      case 45:
+        Millis = 45000;
+        break;
+      case 60:
+        Millis = 60000;
+        break;
     }
     this.propertyChangeSupport.firePropertyChange("timeout", 0, Millis);
   }

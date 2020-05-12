@@ -70,6 +70,7 @@ public class MaintenanceRequestController implements Initializable {
   public JFXTreeTableView<UIMaintenenceRequest> treeTableMaintenance;
   public ImageView backgroundImage;
   public JFXComboBox<String> toDelete;
+  public JFXButton deleteButton;
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UIMaintenenceRequest> csrUI = FXCollections.observableArrayList();
@@ -97,10 +98,10 @@ public class MaintenanceRequestController implements Initializable {
       // set to user
     } else if (userLevel == Account.Type.STAFF) {
       checkStatusButton.setDisable(false);
-      delete.setDisable(true);
+      deleteButton.setDisable(true);
     } else if (userLevel == Account.Type.ADMIN) {
       checkStatusButton.setDisable(false);
-      delete.setDisable(false);
+      deleteButton.setDisable(false);
     }
     // add the different choices to the choicebox
     // Replace this with long names, linked to IDs
