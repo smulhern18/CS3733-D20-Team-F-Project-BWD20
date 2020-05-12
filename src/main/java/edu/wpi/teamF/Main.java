@@ -26,7 +26,10 @@ public class Main {
     //    csvm.readCSVFileNode(Main.class.getResourceAsStream("CSVFiles/MapFAllnodes.csv"));
     //    csvm.readCSVFileEdge(Main.class.getResourceAsStream("CSVFiles/MapFAlledges.csv"));
 
-    //    csvm.readCSVFileAccount(Main.class.getResourceAsStream("CSVFiles/Accounts.csv"));
+
+    csvm.readCSVFileAccount(Main.class.getResourceAsStream("CSVFiles/Accounts.csv"));
+    dbm.manipulateAccount(
+        new Admin("admin2", "admin2", "admasdin@gmail.com", "admin2", "password"));
     dbm.manipulateAccount(new Admin("admin", "admin", "admin@gmail.com", "admin", "password"));
     List<Account> accounts = dbm.getAllAccounts();
     if (dbm.readAccount("admin") == null) {
