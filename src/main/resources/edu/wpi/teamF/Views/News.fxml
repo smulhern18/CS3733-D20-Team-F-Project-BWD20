@@ -52,18 +52,18 @@
 
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <JFXButton fx:id="searchBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#searchBtn" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Search" textFill="WHITE">
-                                       <font>
-                                          <Font size="20.0" />
-                                       </font>
-                                    </JFXButton>
-                                    <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#resetBtn" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #a40000; -fx-background-radius: 10px;" text="Reset" textFill="WHITE">
+                                    <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#resetBtn" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Get Top Stories" textFill="WHITE">
                                        <font>
                                           <Font size="20.0" />
                                        </font>
                                        <HBox.margin>
-                                          <Insets left="40.0" />
+                                          <Insets right="40.0" />
                                        </HBox.margin>
+                                    </JFXButton>
+                                    <JFXButton fx:id="searchBtn" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#searchBtn" prefHeight="50.0" prefWidth="180.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Search News" textFill="WHITE">
+                                       <font>
+                                          <Font size="20.0" />
+                                       </font>
                                     </JFXButton>
                                  </children>
                                  <VBox.margin>
