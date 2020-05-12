@@ -2,7 +2,10 @@ package edu.wpi.teamF;
 
 import edu.wpi.teamF.Controllers.*;
 import java.io.IOException;
+
+import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -97,6 +100,11 @@ public class App extends Application {
 
   public static Stage getPrimaryStage() {
     return pStage;
+  }
+
+  public void reset() throws Exception {
+      pathfinderController = new PathfinderController();
+      menuBarController.logout(new ActionEvent());
   }
 
   @Override
