@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" prefHeight="548.0" prefWidth="1100.0" style="-fx-background-color: light blue;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.HelpController">
+<AnchorPane fx:id="rootPane" prefHeight="548.0" prefWidth="1100.0" style="-fx-background-color: light blue;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.HelpAdminController">
    <children>
       <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
       <ImageView fitHeight="761.0" fitWidth="927.0" layoutX="194.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 20%;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="194.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
