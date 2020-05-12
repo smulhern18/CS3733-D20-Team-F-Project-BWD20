@@ -288,34 +288,6 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="progressPane" prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="530.0" AnchorPane.topAnchor="20.0">
-         <children>
-            <HBox prefHeight="52.0" prefWidth="200.0" style="-fx-background-color: rgba(255,255,255,0.9);">
-               <children>
-                  <ImageView fitHeight="30.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../Images/start.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets left="10.0" right="10.0" top="5.0" />
-                     </HBox.margin>
-                  </ImageView>
-                  <HBox fx:id="progressBox" prefHeight="40.0" prefWidth="10.0" />
-                  <ImageView fitHeight="30.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../Images/finish.png" />
-                     </image>
-                     <HBox.margin>
-                        <Insets left="10.0" right="10.0" top="5.0" />
-                     </HBox.margin>
-                  </ImageView>
-               </children>
-               <padding>
-                  <Insets bottom="6.0" top="6.0" />
-               </padding>
-            </HBox>
-         </children>
-      </AnchorPane>
       <AnchorPane fx:id="directionsPane" minHeight="1.0" minWidth="1.0" prefHeight="1.0" prefWidth="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: rgba(255,255,255,0.9);" AnchorPane.leftAnchor="210.0" AnchorPane.topAnchor="20.0">
@@ -459,9 +431,9 @@
                            <children>
                               <StackPane alignment="TOP_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="870.0">
                                  <children>
-                                    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="870.0">
+                                    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="870.0" style="-fx-background-color: white;">
                                        <children>
-                                          <WebView fx:id="webview" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" contextMenuEnabled="false"/>
+                                          <WebView fx:id="webview" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="-1.0" prefWidth="-1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0" contextMenuEnabled="false"/>
                                        </children>
                                     </AnchorPane>
                                     <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" opacity="0.69" prefHeight="130.0" prefWidth="305.0" style="-fx-background-color: transparent;">
@@ -735,6 +707,34 @@
             </HBox>
          </children>
       </AnchorPane>
+   <AnchorPane fx:id="progressPane" prefHeight="40.0" prefWidth="200.0" AnchorPane.leftAnchor="530.0" AnchorPane.topAnchor="20.0">
+      <children>
+         <HBox prefHeight="52.0" prefWidth="200.0" style="-fx-background-color: white;">
+            <children>
+               <ImageView fitHeight="30.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../../../../Images/start.png" />
+                  </image>
+                  <HBox.margin>
+                     <Insets left="10.0" right="10.0" top="5.0" />
+                  </HBox.margin>
+               </ImageView>
+               <HBox fx:id="progressBox" prefHeight="40.0" prefWidth="10.0" />
+               <ImageView fitHeight="30.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../../../../Images/finish.png" />
+                  </image>
+                  <HBox.margin>
+                     <Insets left="10.0" right="10.0" top="5.0" />
+                  </HBox.margin>
+               </ImageView>
+            </children>
+            <padding>
+               <Insets bottom="6.0" top="6.0" />
+            </padding>
+         </HBox>
+      </children>
+   </AnchorPane>
       <AnchorPane fx:id="pathSwitchFloorPane" maxHeight="80.0" maxWidth="1.0" prefHeight="80.0" prefWidth="1.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="220.0">
          <children>
          </children></AnchorPane>
