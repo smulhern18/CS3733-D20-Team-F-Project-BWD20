@@ -1752,10 +1752,27 @@ public class PathfinderController implements Initializable {
       }
 
     } else { // main campus
+      double xFactor = MAIN_MAP_WIDTH / xDiff;
+      double yFactor = MAIN_MAP_HEIGHT / yDiff;
+      if (xFactor > 25.0) {
+        xFactor = 25.0;
+      }
+      if (yFactor > 25.0) {
+        yFactor = 25.0;
+      }
+      if (xFactor < 2.5) {
+        xFactor = 2.5;
+      }
+      if (yFactor < 2.5) {
+        yFactor = 2.5;
+      }
+      System.out.println("Here tehy are");
+      System.out.println(xFactor);
+      System.out.println(yFactor);
       if (yDiff > xDiff) {
-        uiSetting.setZoomScaleValue((MAIN_MAP_HEIGHT / yDiff) / 1.6);
+        uiSetting.setZoomScaleValue(yFactor / 1.6);
       } else {
-        uiSetting.setZoomScaleValue((MAIN_MAP_WIDTH / xDiff) / 1.6);
+        uiSetting.setZoomScaleValue(xFactor / 1.6);
       }
       hVal =
           (bigX - ((bigX - smallX) / 2))
