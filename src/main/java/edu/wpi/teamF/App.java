@@ -2,8 +2,6 @@ package edu.wpi.teamF;
 
 import edu.wpi.teamF.Controllers.*;
 import java.io.IOException;
-
-import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -103,8 +101,8 @@ public class App extends Application {
   }
 
   public void reset() throws Exception {
-      pathfinderController = new PathfinderController();
-      menuBarController.logout(new ActionEvent());
+    pathfinderController = new PathfinderController();
+    menuBarController.logout(new ActionEvent());
   }
 
   @Override

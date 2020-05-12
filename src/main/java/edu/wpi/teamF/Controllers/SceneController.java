@@ -2,11 +2,8 @@ package edu.wpi.teamF.Controllers;
 
 import edu.wpi.teamF.App;
 import java.io.IOException;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -27,13 +24,17 @@ public class SceneController {
     this.primaryScene = primaryScene;
     this.primaryStage = primaryStage;
     this.menuBarController = new MenuBarController();
-    Timeline timeline = new Timeline(new KeyFrame(new Duration(15000), (evt) -> {
-      try {
-        menuBarController.logout(evt);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }));
+    Timeline timeline =
+        new Timeline(
+            new KeyFrame(
+                new Duration(15000),
+                (evt) -> {
+                  try {
+                    menuBarController.logout(evt);
+                  } catch (IOException e) {
+                    e.printStackTrace();
+                  }
+                }));
     this.timeline = timeline;
     primaryStage.addEventFilter(MouseEvent.MOUSE_MOVED, (evt) -> timeline.playFromStart());
   }

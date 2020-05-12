@@ -246,7 +246,6 @@ public class DataViewController implements Initializable {
     WritableImage image3 = sanGridPane.snapshot(new SnapshotParameters(), null);
     File file3 = new File(workingdir + "/SanitationGrid.png");
 
-
     try {
       // Writing out to temporary folder
       ImageIO.write(SwingFXUtils.fromFXImage(image, null), "png", file);

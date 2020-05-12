@@ -27,11 +27,17 @@
          <children>
             <StackPane prefHeight="150.0" prefWidth="130.0">
                <children>
-                  <Circle fill="WHITE" radius="32.0" stroke="BLACK" strokeType="INSIDE" />
+                  <Circle fill="WHITE" radius="32.0" stroke="BLACK" strokeType="INSIDE">
+                     <StackPane.margin>
+                        <Insets bottom="10.0" />
+                     </StackPane.margin></Circle>
                   <ImageView fitHeight="55.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../Images/icons8-flamingo-100.png" />
                      </image>
+                     <StackPane.margin>
+                        <Insets bottom="10.0" />
+                     </StackPane.margin>
                   </ImageView>
                </children>
             </StackPane>
@@ -47,6 +53,7 @@
                   <RowConstraints percentHeight="12.5" vgrow="ALWAYS" />
                   <RowConstraints percentHeight="12.5" vgrow="ALWAYS" />
                   <RowConstraints percentHeight="12.5" vgrow="ALWAYS" />
+                  <RowConstraints minHeight="10.0" percentHeight="12.5" prefHeight="30.0" vgrow="ALWAYS" />
                   <RowConstraints percentHeight="5.0" vgrow="ALWAYS" />
               </rowConstraints>
                <children>
@@ -90,6 +97,7 @@
                   <Line endX="89.29289245605469" startX="-100.0" stroke="WHITE" GridPane.rowIndex="4" GridPane.valignment="BOTTOM" />
                   <Line fx:id="line5" endX="89.29289245605469" startX="-100.0" stroke="WHITE" GridPane.rowIndex="5" GridPane.valignment="BOTTOM" />
                   <Line fx:id="line6" endX="89.29289245605469" startX="-100.0" stroke="WHITE" GridPane.rowIndex="6" GridPane.valignment="BOTTOM" />
+                  <Line fx:id="line7" endX="89.29289245605469" startX="-100.0" stroke="WHITE" GridPane.rowIndex="7" GridPane.valignment="BOTTOM" />
                   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                      <children>
                         <StackPane prefHeight="49.0" prefWidth="30.0">
@@ -151,7 +159,36 @@
                         </StackPane>
                      </children>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+                  <HBox prefHeight="50.0" prefWidth="0.0" GridPane.rowIndex="4">
+                     <children>
+                        <StackPane prefHeight="71.0" prefWidth="0.0">
+                           <children>
+                              <JFXButton fx:id="pathfindButton1" onAction="#pathfinder" prefHeight="97.0" prefWidth="102.0" text=" " textFill="#ffffffcc">
+                                 <font>
+                                    <Font name="STIXGeneral-Bold" size="18.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../Images/icons8-wrench-90.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                        </StackPane>
+                        <StackPane prefHeight="65.0" prefWidth="90.0">
+                           <children>
+                              <JFXButton fx:id="toolsButton1" onAction="#tools" prefHeight="179.0" prefWidth="189.0" text="Tools        " textFill="#ffffffcc">
+                                 <font>
+                                    <Font name="Dubai Light" size="16.0" />
+                                 </font>
+                              </JFXButton>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
                      <children>
                         <StackPane prefHeight="65.0" prefWidth="11.0">
                            <children>
@@ -180,7 +217,7 @@
                         </StackPane>
                      </children>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
                      <children>
                         <StackPane prefHeight="59.0" prefWidth="0.0">
                            <children>
@@ -212,7 +249,7 @@
                         </StackPane>
                      </children>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
+                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
                      <children>
                         <StackPane prefHeight="74.0" prefWidth="3.0">
                            <children>
@@ -297,6 +334,9 @@
                      </children>
                   </HBox>
                </children>
+               <GridPane.margin>
+                  <Insets top="-20.0" />
+               </GridPane.margin>
             </GridPane>
          </children>
       </GridPane>
