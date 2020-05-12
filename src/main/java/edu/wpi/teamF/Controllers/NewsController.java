@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXTextField;
 import com.kwabenaberko.newsapilib.NewsApiClient;
 import com.kwabenaberko.newsapilib.models.Article;
 import com.kwabenaberko.newsapilib.models.request.EverythingRequest;
+import com.kwabenaberko.newsapilib.models.request.TopHeadlinesRequest;
 import com.kwabenaberko.newsapilib.models.response.ArticleResponse;
 import edu.wpi.teamF.Controllers.com.twilio.phoneComms;
 import java.awt.*;
@@ -58,6 +59,8 @@ public class NewsController implements Initializable {
     backgroundImage.fitWidthProperty().bind(frame.widthProperty());
 
     newsApiClient = new NewsApiClient("89cd565661a44c85bc4f2eda6cd4c90b");
+
+    resetBtn();
   }
 
   public void reset() {
@@ -266,8 +269,38 @@ public class NewsController implements Initializable {
     articlesPane.getChildren().add(hbox);
   }
 
-  public void resetBtn(ActionEvent actionEvent) {
-    reset();
+  public void resetBtn() {
+    articlesPane.getChildren().clear();
+    searchTerm.setText("");
+    newsApiClient.getTopHeadlines(
+        new TopHeadlinesRequest.Builder().language("en").country("us").pageSize(50).build(),
+        new NewsApiClient.ArticlesResponseCallback() {
+          public ArticleResponse articles;
+
+          @Override
+          public void onSuccess(ArticleResponse response) {
+            System.out.println("Successfully got news");
+            Platform.runLater(
+                new Runnable() {
+                  @Override
+                  public void run() {
+                    setResponses(response);
+                  }
+                });
+          }
+
+          @Override
+          public void onFailure(Throwable throwable) {
+            System.out.println(throwable.getMessage());
+            Platform.runLater(
+                new Runnable() {
+                  @Override
+                  public void run() {
+                    articlesFailed();
+                  }
+                });
+          }
+        });
   }
 
   public void sendText(ActionEvent actionEvent) {
