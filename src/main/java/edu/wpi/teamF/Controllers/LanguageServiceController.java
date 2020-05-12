@@ -56,7 +56,8 @@ public class LanguageServiceController implements Initializable {
   public AnchorPane anchorPane;
   public ImageView backgroundImage;
   public JFXComboBox<String> toDelete;
-  ObservableList<UILanguageServiceRequest> langUI = FXCollections.observableArrayList();
+    public JFXButton deleteButton;
+    ObservableList<UILanguageServiceRequest> langUI = FXCollections.observableArrayList();
   public JFXComboBox<String> locationCombobox;
   public JFXComboBox<String> languageCombobox;
   public JFXComboBox<String> problemTypeCombobox;
@@ -191,10 +192,17 @@ public class LanguageServiceController implements Initializable {
     Account.Type userLevel = databaseManager.getPermissions();
     if (userLevel == Account.Type.USER) {
       checkStatusButton.setDisable(true);
+      checkStatusButton.setVisible(false);
 
       // set to user
-    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+    } else if (userLevel == Account.Type.STAFF) {
       checkStatusButton.setDisable(false);
+      checkStatusButton.setVisible(true);
+      deleteButton.setDisable(true);
+    }else if(userLevel == Account.Type.ADMIN){
+      checkStatusButton.setDisable(false);
+      checkStatusButton.setVisible(true);
+      deleteButton.setDisable(false);
     }
 
     List<Node> nodes = null;

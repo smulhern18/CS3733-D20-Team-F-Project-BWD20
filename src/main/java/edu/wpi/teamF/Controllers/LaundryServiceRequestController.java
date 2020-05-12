@@ -84,10 +84,17 @@ public class LaundryServiceRequestController implements Initializable {
     Account.Type userLevel = databaseManager.getPermissions();
     if (userLevel == Account.Type.USER) {
       checkStatButton.setDisable(true);
+      checkStatButton.setVisible(false);
 
       // set to user
-    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+    } else if (userLevel == Account.Type.STAFF) {
       checkStatButton.setDisable(false);
+      checkStatButton.setVisible(true);
+      delete.setDisable(true);
+    }else if(userLevel == Account.Type.ADMIN){
+      checkStatButton.setDisable(false);
+      checkStatusPane.setVisible(true);
+      delete.setDisable(false);
     }
 
     UISetting uiSetting = new UISetting();

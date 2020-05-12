@@ -70,8 +70,13 @@ public class MariachiRequestController implements Initializable {
     if (userLevel == Account.Type.USER) {
       checkStatusButton.setDisable(true);
 
+
       // set to user
-    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+    } else if (userLevel == Account.Type.STAFF) {
+      checkStatusButton.setDisable(false);
+      deleteButton.setDisable(true);
+    }else if (userLevel == Account.Type.ADMIN){
+      deleteButton.setDisable(false);
       checkStatusButton.setDisable(false);
     }
     // add the different choices to the choicebox
