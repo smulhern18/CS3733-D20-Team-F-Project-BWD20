@@ -92,7 +92,7 @@ public class LaundryServiceRequestController implements Initializable {
       delete.setDisable(true);
     } else if (userLevel == Account.Type.ADMIN) {
       checkStatButton.setDisable(false);
-      checkStatusPane.setVisible(true);
+      checkStatButton.setVisible(true);
       delete.setDisable(false);
     }
 
