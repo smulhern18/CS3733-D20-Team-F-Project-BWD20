@@ -64,7 +64,7 @@ public class MenuBarController implements Initializable {
   }
 
   public void admin(ActionEvent actionEvent) throws IOException {
-    sceneController.switchScene("DataMapView");
+    sceneController.switchScene("MapEditor");
   }
 
   public void help(ActionEvent actionEvent) throws IOException {

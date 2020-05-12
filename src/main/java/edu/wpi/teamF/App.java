@@ -85,7 +85,7 @@ public class App extends Application {
           return null;
         });
     sceneController = new SceneController(fxmlLoader, primaryStage, primaryScene);
-    Parent root = fxmlLoader.load(getClass().getResource("Views/MapEditor.fxml"));
+    Parent root = fxmlLoader.load(getClass().getResource("Views/MainMenu.fxml"));
     primaryScene.setRoot(root);
     primaryStage.setScene(primaryScene);
     // primaryStage.setAlwaysOnTop(true);

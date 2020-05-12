@@ -50,7 +50,7 @@ public class MapEditorController {
       EdgeLine edgeLine = edgeLineMap.get(edgeCombo.getValue());
 
       mapView.highlightUpdatedEdge(
-              edgeCombo.getValue(), selectedEdge.getNode1(), selectedEdge.getNode2());
+          edgeCombo.getValue(), selectedEdge.getNode1(), selectedEdge.getNode2());
     }
   }
 
