@@ -24,18 +24,18 @@ public class ServiceAPIController implements Initializable {
   }
 
   public void runIncidentReport() {
-    IncidentReportApplication.run(0, 0, 600, 800, null, null, null);
+    IncidentReportApplication.run(600, 150, 600, 800, null, null, null);
   }
 
   public void runAudioVisual() throws ServiceException {
-    AudioVisualRequest.run(0, 0, 600, 800, null, null, null);
+    AudioVisualRequest.run(750, 100, 600, 800, null, null, null);
   }
 
   public void runFoodRequest() throws edu.wpi.cs3733.d20.teamP.ServiceException {
-    APIController.run(0, 0, 600, 800, null, null, null);
+    APIController.run(750, 100, 600, 800, null, null, null);
   }
 
   public void runInterpreterRequest() throws IOException {
-    InterpreterRequest.run(0, 0, 600, 800, null, null, null);
+    InterpreterRequest.run(750, 100, 600, 800, null, null, null);
   }
 }

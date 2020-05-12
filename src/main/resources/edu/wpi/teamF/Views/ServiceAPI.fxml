@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -38,6 +37,8 @@
                 <RowConstraints minHeight="10.0" percentHeight="6.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" percentHeight="3.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" percentHeight="2.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="2.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="2.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <Label text="Team C" textFill="#5b5959" GridPane.columnIndex="3" GridPane.rowIndex="2">
@@ -60,22 +61,6 @@
                   <Font name="Dubai Light" size="12.0" />
                </font>
             </Label>
-            <JFXButton onAction="#runIncidentReport" text="Incident Report" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <font>
-                  <Font name="Dubai Light" size="20.0" />
-               </font></JFXButton>
-            <JFXButton onAction="#runAudioVisual" text="Audio Visual" GridPane.columnIndex="2" GridPane.rowIndex="5">
-               <font>
-                  <Font name="Dubai Light" size="20.0" />
-               </font></JFXButton>
-            <JFXButton onAction="#runFoodRequest" text="Food Request" GridPane.columnIndex="3" GridPane.rowIndex="5">
-               <font>
-                  <Font name="Dubai Light" size="20.0" />
-               </font></JFXButton>
-            <JFXButton onAction="#runInterpreterRequest" text="Request Interpreter" GridPane.columnIndex="3" GridPane.rowIndex="1">
-               <font>
-                  <Font name="Dubai Light" size="20.0" />
-               </font></JFXButton>
             <ImageView fitHeight="150.0" fitWidth="200.0" onMouseClicked="#runIncidentReport" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2">
                <image>
                   <Image url="@../../../../Images/icons8-ask-question-100.png" />
@@ -96,6 +81,26 @@
                   <Image url="@../../../../Images/icons8-hamburger-100.png" />
                </image>
             </ImageView>
+            <Label text="Incident Report" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Dubai Light" size="20.0" />
+               </font>
+            </Label>
+            <Label text="Request Interpreter" GridPane.columnIndex="3" GridPane.rowIndex="1">
+               <font>
+                  <Font name="Dubai Light" size="20.0" />
+               </font>
+            </Label>
+            <Label text="Audio Visual" GridPane.columnIndex="2" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Dubai Light" size="20.0" />
+               </font>
+            </Label>
+            <Label text="Food Request" GridPane.columnIndex="3" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Dubai Light" size="20.0" />
+               </font>
+            </Label>
             </children>
         </GridPane>
         <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
