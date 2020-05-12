@@ -313,10 +313,16 @@
                         </StackPane>
                         <StackPane prefHeight="48.0" prefWidth="58.0">
                            <children>
-                              <JFXButton fx:id="loginButton1" onAction="#login" prefHeight="49.0" prefWidth="90.0" text="Login" textFill="#ffffffcc">
+                              <JFXButton fx:id="loginButton1" minWidth="81.0" onAction="#login" prefHeight="49.0" prefWidth="100.0" text="Login      " textFill="#ffffffcc">
                                  <font>
                                     <Font name="Dubai Light" size="16.0" />
                                  </font>
+                                 <StackPane.margin>
+                                    <Insets right="2.0" />
+                                 </StackPane.margin>
+                                 <padding>
+                                    <Insets right="2.0" />
+                                 </padding>
                               </JFXButton>
                               <JFXButton fx:id="logoutbutton1" maxWidth="-Infinity" minWidth="-Infinity" onAction="#logout" prefHeight="49.0" prefWidth="80.0" text="Logout" textFill="#ffffffcc" visible="false">
                                  <font>
