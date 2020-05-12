@@ -80,6 +80,8 @@ public class TranslatorController implements Initializable {
 
     fromLanguage.getItems().addAll(langCodeMap.keySet());
     toLanguage.getItems().addAll(langCodeMap.keySet());
+    fromLanguage.setValue("English");
+    toLanguage.setValue("Spanish");
 
     resetTranslator();
     backgroundImage.setPreserveRatio(false);
@@ -173,8 +175,6 @@ public class TranslatorController implements Initializable {
   }
 
   public void resetTranslator() {
-    fromLanguage.setValue("English");
-    toLanguage.setValue("Spanish");
     textInput.setText("");
     textOutput.setText("");
     phoneNumber.setText("");

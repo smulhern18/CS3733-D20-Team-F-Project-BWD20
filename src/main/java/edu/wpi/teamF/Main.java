@@ -29,7 +29,6 @@ public class Main {
     csvm.readCSVFileAccount(Main.class.getResourceAsStream("CSVFiles/Accounts.csv"));
     dbm.manipulateAccount(
         new Admin("admin2", "admin2", "admasdin@gmail.com", "admin2", "password"));
-
     dbm.manipulateAccount(new Admin("admin", "admin", "admin@gmail.com", "admin", "password"));
     List<Account> accounts = dbm.getAllAccounts();
     if (dbm.readAccount("admin") == null) {
