@@ -20,6 +20,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import lombok.SneakyThrows;
 
 public class RoomSchedulerController implements Initializable {
@@ -34,6 +35,10 @@ public class RoomSchedulerController implements Initializable {
   public JFXButton cancelButton;
   public AnchorPane scheduleAnchorPane;
   public JFXComboBox<String> roomTypeComboBox;
+  public GridPane computerPane;
+  public GridPane onCallPane;
+  public GridPane reflectionPane;
+  public GridPane conferencePane;
 
   // private DayPage calendarView;
   private DayPage onCallCalendarView = new DayPage();
@@ -89,6 +94,15 @@ public class RoomSchedulerController implements Initializable {
               if (newValue != null && !newValue.equals(oldValue)) {
 
                 getCalendarView(newValue).toFront();
+                if ("On-Call Beds".equals(newValue)) {
+                  onCallPane.toFront();
+                } else if ("Reflection Rooms".equals(newValue)) {
+                  reflectionPane.toFront();
+                } else if ("Conference Rooms".equals(newValue)) {
+                  conferencePane.toFront();
+                } else {
+                  computerPane.toFront();
+                }
               }
             });
     roomTypeComboBox.setEditable(false);
@@ -342,7 +356,7 @@ public class RoomSchedulerController implements Initializable {
     for (int i = 0; i < onCallRooms.length; i++) {
       onCallRooms[i] = new Calendar("On-Call Bed " + (i + 1));
       calenderDeleteEventHandler(onCallRooms[i]);
-      onCallRooms[i].setStyle(Calendar.Style.STYLE6);
+      onCallRooms[i].setStyle(Calendar.Style.STYLE2);
     }
     onCallCalenderSource.getCalendars().addAll(onCallRooms);
     onCallCalendarView.getCalendarSources().clear();
@@ -375,7 +389,7 @@ public class RoomSchedulerController implements Initializable {
     for (int i = 0; i < computerRooms.length; i++) {
       computerRooms[i] = new Calendar("Computer Room " + (i + 1));
       calenderDeleteEventHandler(computerRooms[i]);
-      computerRooms[i].setStyle(Calendar.Style.STYLE5);
+      computerRooms[i].setStyle(Calendar.Style.STYLE1);
     }
     computerCalenderSource.getCalendars().addAll(computerRooms);
     computerCalendarView.getCalendarSources().clear();
