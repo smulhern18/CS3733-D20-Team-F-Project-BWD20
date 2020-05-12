@@ -19,6 +19,7 @@
 <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.LoginController">
    <children>
       <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="newsView" layoutX="737.0" layoutY="66.0" prefHeight="395.0" prefWidth="147.0" />
 
       <StackPane fx:id="stackPane" layoutX="266.0" style="-fx-background-color: #012D5A;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -145,6 +146,5 @@
             </GridPane>
          </children>
       </StackPane>
-      <AnchorPane fx:id="newsView" layoutX="737.0" layoutY="66.0" prefHeight="395.0" prefWidth="147.0" />
    </children>
 </AnchorPane>
