@@ -426,6 +426,7 @@ public class FlowerRequestInfoController implements Initializable {
     messsageInput.setText("");
     recipientInput.setText("");
     buyerNameInput.setText("");
+    phoneNumberInput.setText("");
     roomInput.setText("");
     giftWrapCheckBox.setSelected(false);
     locationComboBox.setValue(null);
