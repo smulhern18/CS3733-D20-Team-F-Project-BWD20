@@ -108,7 +108,7 @@ public class LaundryServiceRequestController implements Initializable {
     //              }
     //            });
 
-    itemsChoice.getItems().add("Bath Blankets");
+    itemsChoice.getItems().add("Blankets");
     itemsChoice.getItems().add("Bath Towels");
     itemsChoice.getItems().add("Hand Towels");
     itemsChoice.getItems().add("Wash Cloths");
@@ -129,7 +129,7 @@ public class LaundryServiceRequestController implements Initializable {
 
     quantityChoice.getItems().add("Large");
     quantityChoice.getItems().add("Medium");
-    quantityChoice.getItems().add("Low");
+    quantityChoice.getItems().add("Small");
 
     priorityChoice.getItems().add("Low");
     priorityChoice.getItems().add("Medium");
