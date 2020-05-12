@@ -7,7 +7,6 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -32,11 +31,8 @@ public class HelpController implements Initializable {
     JFXDialogLayout content1 = new JFXDialogLayout();
     content1.setHeading(new Text("How to sign up?"));
     content1.setBody(
-        new Label(
+        new Text(
             "1. Click on the 'Login' button on the main menu. \n2. Click on 'Register'. \n3. Enter your information.\n4. Click on 'Register'. New account will be created."));
-    content1.setStyle("-fx-pref-width: 400px;-fx-wrap-text: true;");
-    content1.setStyle("-fx-text-color: black;");
-
     JFXDialog dialog1 = new JFXDialog(stackPane, content1, JFXDialog.DialogTransition.CENTER);
     JFXButton button1 = new JFXButton("Close");
     button1.setOnAction(

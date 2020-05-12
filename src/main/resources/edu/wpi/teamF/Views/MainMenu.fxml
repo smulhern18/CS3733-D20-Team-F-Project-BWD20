@@ -25,6 +25,16 @@
                         <Font name="Dubai Light" size="72.0" />
                     </font>
                 </Label>
+            <Label fx:id="time" layoutX="90.0" layoutY="160.0" prefHeight="41.0" prefWidth="216.0" text="Label">
+               <font>
+                  <Font name="STIXGeneral-Bold" size="25.0" />
+               </font>
+            </Label>
+            <Label fx:id="date" layoutX="90.0" layoutY="195.0" prefHeight="41.0" prefWidth="196.0" text="Label">
+               <font>
+                  <Font name="STIXGeneral-Bold" size="25.0" />
+               </font>
+            </Label>
             </children>
         </Pane>
         <GridPane layoutX="32.0" layoutY="188.0" opacity="0.87" style="-fx-background-color: #012d5a;" AnchorPane.bottomAnchor="85.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -61,13 +71,5 @@
 
             </children>
         </GridPane>
-      <Label fx:id="time" layoutX="66.0" layoutY="103.0" prefHeight="41.0" prefWidth="216.0" text="Label">
-         <font>
-            <Font name="STIXGeneral-Bold" size="25.0" />
-         </font></Label>
-      <Label fx:id="date" layoutX="66.0" layoutY="138.0" prefHeight="41.0" prefWidth="196.0" text="Label">
-         <font>
-            <Font name="STIXGeneral-Bold" size="25.0" />
-         </font></Label>
     </children>
 </AnchorPane>
