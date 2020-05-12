@@ -14,9 +14,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="190.0" style="-fx-background-color: #012D5A;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MenuBarController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="194.0" style="-fx-background-color: #012D5A;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MenuBarController">
    <children>
-      <GridPane layoutX="-5.0" layoutY="115.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane layoutX="-5.0" layoutY="115.0" prefHeight="600.0" prefWidth="187.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" percentWidth="100.0" />
         </columnConstraints>
@@ -25,10 +25,10 @@
           <RowConstraints percentHeight="75.0" valignment="CENTER" vgrow="ALWAYS" />
         </rowConstraints>
          <children>
-            <StackPane>
+            <StackPane prefHeight="150.0" prefWidth="130.0">
                <children>
-                  <Circle fill="WHITE" radius="33.0" stroke="BLACK" strokeType="INSIDE" />
-                  <ImageView fitHeight="65.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
+                  <Circle fill="WHITE" radius="32.0" stroke="BLACK" strokeType="INSIDE" />
+                  <ImageView fitHeight="55.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../Images/icons8-flamingo-100.png" />
                      </image>
@@ -40,7 +40,7 @@
                   <ColumnConstraints halignment="LEFT" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints percentHeight="20.0" valignment="CENTER" vgrow="ALWAYS" />
+                <RowConstraints percentHeight="12.5" valignment="CENTER" vgrow="ALWAYS" />
                 <RowConstraints percentHeight="12.5" vgrow="ALWAYS" />
                 <RowConstraints percentHeight="12.5" vgrow="ALWAYS" />
                   <RowConstraints percentHeight="12.5" valignment="CENTER" vgrow="ALWAYS" />
@@ -300,10 +300,5 @@
             </GridPane>
          </children>
       </GridPane>
-      <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="-105.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../../../../Downloads/logout.png" />
-         </image>
-      </ImageView>
    </children>
 </AnchorPane>

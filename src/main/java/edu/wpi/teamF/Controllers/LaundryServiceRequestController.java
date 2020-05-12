@@ -68,6 +68,7 @@ public class LaundryServiceRequestController implements Initializable {
   public JFXButton backButton;
   public ImageView backgroundImage;
   public JFXButton checkStatButton;
+  public JFXComboBox<String> toDelete;
   SceneController sceneController = App.getSceneController();
   DatabaseManager databaseManager = DatabaseManager.getManager();
 
@@ -347,6 +348,7 @@ public class LaundryServiceRequestController implements Initializable {
     priorityChoice.setValue(null);
     itemsChoice.setValue(null);
     quantityChoice.setValue(null);
+    toDelete.getItems().add(lsRequest.getId());
   }
 
   public void cancel(ActionEvent actionEvent) {
@@ -380,12 +382,12 @@ public class LaundryServiceRequestController implements Initializable {
   }
 
   public void delete(ActionEvent actionEvent) {
-    String toDelte = deleteText.getText();
+    String toDelte = toDelete.getValue();
     databaseManager.deleteLaundryServiceRequest(toDelte);
     isrUI.removeIf(
         launduaryServiceRequest -> launduaryServiceRequest.getID().get().equals(toDelte));
-    deleteText.setText("");
     treeTableLaunduary.refresh();
+    toDelete.getItems().remove(toDelete.getValue());
   }
 
   public void request(ActionEvent actionEvent) {

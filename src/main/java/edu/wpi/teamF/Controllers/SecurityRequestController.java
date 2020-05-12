@@ -51,6 +51,7 @@ public class SecurityRequestController implements Initializable {
   public AnchorPane checkStatusPane;
   public AnchorPane anchorPane;
   public ImageView backgroundImage;
+  public JFXComboBox<String> toDelete;
 
   DatabaseManager databaseManager = DatabaseManager.getManager();
   List<SecurityRequest> securityRequestList = databaseManager.getAllSecurityRequests();
@@ -65,12 +66,16 @@ public class SecurityRequestController implements Initializable {
     backgroundImage.fitWidthProperty().bind(anchorPane.widthProperty());
     backgroundImage.fitHeightProperty().bind(anchorPane.heightProperty());
     Account.Type userLevel = databaseManager.getPermissions();
-    if (userLevel == Account.Type.USER) {
+    if (userLevel == null) {
       checkStatusButton.setDisable(true);
+      checkStatusButton.setVisible(false);
 
       // set to user
-    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+    } else if (userLevel == Account.Type.USER
+        || userLevel == Account.Type.STAFF
+        || userLevel == Account.Type.ADMIN) {
       checkStatusButton.setDisable(false);
+      checkStatusButton.setVisible(true);
     }
     // add the different choices to the choicebox
     // Replace this with long names, linked to IDs
@@ -239,6 +244,7 @@ public class SecurityRequestController implements Initializable {
     uiSecurityRequests.add(new UISecurityRequest(securityRequest));
     table.refresh();
     resetRequest();
+    toDelete.getItems().add(securityRequest.getId());
   }
 
   private void resetRequest() {
@@ -275,9 +281,11 @@ public class SecurityRequestController implements Initializable {
   }
 
   public void delete(ActionEvent actionEvent) throws Exception {
-    String toDelete = deleteText.getText();
-    databaseManager.deleteSecurityRequest(toDelete);
-    uiSecurityRequests.removeIf(securityRequest -> securityRequest.getID().get().equals(toDelete));
+    String toDel = toDelete.getValue();
+    databaseManager.deleteSecurityRequest(toDel);
+    uiSecurityRequests.removeIf(securityRequest -> securityRequest.getID().get().equals(toDel));
+    toDelete.getItems().remove(toDelete.getValue());
+    table.refresh();
   }
 
   public void checkStatus(ActionEvent actionEvent) {

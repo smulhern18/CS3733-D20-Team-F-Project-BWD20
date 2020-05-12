@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 public class App extends Application {
 
   private static SceneController sceneController;
+  public static Stage pStage;
 
   public App() throws Exception {}
 
@@ -44,6 +45,7 @@ public class App extends Application {
 
   @Override
   public void start(Stage primaryStage) throws IOException {
+    pStage = primaryStage;
 
     Scene primaryScene = new Scene(new AnchorPane());
     FXMLLoader fxmlLoader = new FXMLLoader();
@@ -91,6 +93,10 @@ public class App extends Application {
     primaryStage.setMaximized(true);
 
     //    primaryStage.setFullScreen(true);
+  }
+
+  public static Stage getPrimaryStage() {
+    return pStage;
   }
 
   @Override

@@ -55,6 +55,7 @@ public class SanitationRequestController implements Initializable {
   // public TextField descriptionTextField;
   public JFXTextArea descText;
   public ImageView backgroundImage;
+  public JFXComboBox<String> toDelete;
 
   DatabaseManager databaseManager = DatabaseManager.getManager();
   List<SanitationServiceRequest> sanitationRequestList = databaseManager.getAllSanitationRequests();
@@ -68,12 +69,16 @@ public class SanitationRequestController implements Initializable {
     backgroundImage.fitWidthProperty().bind(anchorPane.widthProperty());
     backgroundImage.fitHeightProperty().bind(anchorPane.heightProperty());
     Account.Type userLevel = databaseManager.getPermissions();
-    if (userLevel == Account.Type.USER) {
+    if (userLevel == null) {
       checkStatusButton.setDisable(true);
+      checkStatusButton.setVisible(false);
 
       // set to user
-    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+    } else if (userLevel == Account.Type.USER
+        || userLevel == Account.Type.STAFF
+        || userLevel == Account.Type.ADMIN) {
       checkStatusButton.setDisable(false);
+      checkStatusButton.setVisible(true);
     }
     // add the different choices to the choicebox
     // Replace this with long names, linked to IDs
@@ -246,6 +251,7 @@ public class SanitationRequestController implements Initializable {
     uiSanitationRequests.add(new UISanitationServiceRequest(sanitationRequest));
     table.refresh();
     resetRequest();
+    toDelete.getItems().add(sanitationRequest.getId());
   }
 
   private void resetRequest() {
@@ -301,10 +307,12 @@ public class SanitationRequestController implements Initializable {
   }
 
   public void delete(ActionEvent actionEvent) {
-    String toDelete = deleteText.getText();
-    databaseManager.deleteSanitationService(toDelete);
+    String toDel = toDelete.getValue();
+    databaseManager.deleteSanitationService(toDel);
     uiSanitationRequests.removeIf(
-        sanitationRequest -> sanitationRequest.getID().get().equals(toDelete));
+        sanitationRequest -> sanitationRequest.getID().get().equals(toDel));
+    toDelete.getItems().remove(toDelete.getValue());
+    table.refresh();
   }
 
   public void checkStatus(ActionEvent actionEvent) {
