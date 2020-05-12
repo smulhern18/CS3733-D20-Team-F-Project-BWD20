@@ -425,6 +425,7 @@ public class PathfinderController implements Initializable {
       if (direction instanceof IndexDirection) {
         JFXButton label = new JFXButton();
         label.setMinHeight(40);
+        label.setMinWidth(120);
         label.setAlignment(Pos.CENTER);
         label.setFont(new Font("Arial", 16));
         label.setBorder(
@@ -435,7 +436,6 @@ public class PathfinderController implements Initializable {
                     null,
                     new BorderWidths(1))));
         label.setText(((IndexDirection) direction).getBuildingAndFloor());
-        label.setMinWidth(110);
         int finalIii = iii;
         label.setOnAction(
             actionEvent -> {
@@ -448,6 +448,7 @@ public class PathfinderController implements Initializable {
     }
     JFXButton label = new JFXButton();
     label.setMinHeight(40);
+    label.setMinWidth(120);
     label.setAlignment(Pos.CENTER);
     label.setFont(new Font("Arial", 16));
     label.setText(endNode.getBuilding() + " " + endNode.getFloor().replace("F", ""));
@@ -458,7 +459,6 @@ public class PathfinderController implements Initializable {
                 BorderStrokeStyle.SOLID,
                 null,
                 new BorderWidths(1))));
-    label.setMinWidth(110);
     int finalIii1 = iii;
     label.setOnAction(
         actionEvent -> {
