@@ -83,18 +83,18 @@
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <ImageView fx:id="adminImage" fitHeight="137.0" fitWidth="134.0" onMouseClicked="#language" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="contactUs" fitHeight="139.0" fitWidth="138.0" onMouseClicked="#contact" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../Images/icons8-admin-settings-male-100.png" />
+                              <Image url="@../../../../Images/icons8-email-100.png" />
                            </image>
                         </ImageView>
                      </children>
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2">
                      <children>
-                        <ImageView fx:id="contactUs" fitHeight="139.0" fitWidth="138.0" onMouseClicked="#contact" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="adminImage" fitHeight="137.0" fitWidth="134.0" onMouseClicked="#language" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../../Images/icons8-email-100.png" />
+                              <Image url="@../../../../Images/icons8-admin-settings-male-100.png" />
                            </image>
                         </ImageView>
                      </children>
@@ -110,7 +110,7 @@
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <children>
-                        <Label fx:id="adminLabel" text="Admin Questions">
+                        <Label text="Contact Us">
                            <font>
                               <Font name="Dubai Light" size="24.0" />
                            </font>
@@ -119,7 +119,7 @@
                   </StackPane>
                   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <children>
-                        <Label text="Contact Us">
+                        <Label fx:id="adminLabel" text="Admin Questions">
                            <font>
                               <Font name="Dubai Light" size="24.0" />
                            </font>
