@@ -13,10 +13,10 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" prefHeight="600.0" prefWidth="1029.0" style="-fx-background-color: light blue;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.HelpController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: light blue;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.HelpController">
    <children>
       <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <ImageView fx:id="background" fitHeight="600.0" fitWidth="931.0" layoutX="24.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" style="-fx-opacity: 20%;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fx:id="background" fitHeight="600.0" fitWidth="931.0" layoutX="24.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
             <Image url="@../../../../Images/BWH%20Shapiro%202.jpg" />
          </image>
@@ -40,21 +40,21 @@
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="665.0" prefWidth="696.0" style="-fx-background-color: ../../../../Images/BWH Shapiro 2.jpg../../../../Images/BWH Shapiro 2.jpg;">
                            <children>
-                              <VBox layoutY="6.0" prefHeight="939.0" prefWidth="719.0">
+                              <VBox layoutY="6.0" prefHeight="939.0" prefWidth="1027.0">
                                  <children>
-                                    <Label prefHeight="40.0" prefWidth="699.0" text="     Here are some general questions to help you get a basic understanding" wrapText="true">
+                                    <Label prefHeight="48.0" prefWidth="917.0" text="     Here are some general questions to help you get a basic understanding">
                                        <font>
-                                          <Font size="22.0" />
+                                          <Font name="Dubai Light" size="24.0" />
                                        </font>
                                     </Label>
-                                    <Label prefHeight="40.0" prefWidth="699.0" text="     of how to use this application.   If you have any other specific questions," wrapText="true">
+                                    <Label prefHeight="40.0" prefWidth="902.0" text="     of how to use this application. If you have any other specific questions,">
                                        <font>
-                                          <Font size="22.0" />
+                                          <Font name="Dubai Light" size="24.0" />
                                        </font>
                                     </Label>
-                                    <Label prefHeight="40.0" prefWidth="699.0" text="     please ask a staff for help or contact us directly." wrapText="true">
+                                    <Label prefHeight="40.0" prefWidth="729.0" text="     please ask a staff for help or contact us directly." wrapText="true">
                                        <font>
-                                          <Font size="22.0" />
+                                          <Font name="Dubai Light" size="24.0" />
                                        </font>
                                     </Label>
                                     <VBox prefHeight="453.0" prefWidth="719.0">
@@ -64,42 +64,42 @@
                                                 <Font size="36.0" />
                                              </font>
                                           </Label>
-                                          <JFXButton fx:id="signup" onAction="#signup" text="     How to sign up?">
+                                          <JFXButton fx:id="signup" onAction="#signup" text="     How do I to sign up?">
                                              <font>
                                                 <Font name="Dubai Light" size="24.0" />
                                              </font>
                                           </JFXButton>
-                                          <JFXButton fx:id="login" onAction="#login" text="     How to login?">
+                                          <JFXButton fx:id="login" onAction="#login" text="     How do I login?">
                                              <font>
                                                 <Font name="Dubai Light" size="24.0" />
                                              </font>
                                           </JFXButton>
-                                          <JFXButton fx:id="findpath" onAction="#findpath" text="     How to find a path?">
+                                          <JFXButton fx:id="findpath" onAction="#findpath" text="     How do I find a path?">
                                              <font>
                                                 <Font name="Dubai Light" size="24.0" />
                                              </font>
                                           </JFXButton>
-                                          <JFXButton fx:id="findnear" onAction="#findnear" text="     How to find the nearest restrooms, elevators or stairs?">
+                                          <JFXButton fx:id="findnear" onAction="#findnear" text="     How do I find the nearest restrooms, elevators or stairs?">
                                              <font>
                                                 <Font name="Dubai Light" size="24.0" />
                                              </font>
                                           </JFXButton>
-                                          <JFXButton fx:id="servicerequest" onAction="#servicerequest" text="     How to request a service?">
+                                          <JFXButton fx:id="servicerequest" onAction="#servicerequest" text="     How do I request a service?">
                                              <font>
                                                 <Font name="Dubai Light" size="24.0" />
                                              </font>
                                           </JFXButton>
-                                          <JFXButton fx:id="findatt" onAction="#findatt" text="     How to find attractions or restaurants?">
+                                          <JFXButton fx:id="findatt" onAction="#findatt" text="     How do I find attractions or restaurants nearby?">
                                              <font>
                                                 <Font name="Dubai Light" size="24.0" />
                                              </font>
                                           </JFXButton>
-                                          <JFXButton fx:id="news" onAction="#news" text="     How to find news articles?">
+                                          <JFXButton fx:id="news" onAction="#news" text="     How do I find news articles?">
                                              <font>
                                                 <Font name="Dubai Light" size="24.0" />
                                              </font>
                                           </JFXButton>
-                                          <JFXButton fx:id="translate" onAction="#translate" text="     How to use a translator?">
+                                          <JFXButton fx:id="translate" onAction="#translate" text="     How do I use the translator?">
                                              <font>
                                                 <Font name="Dubai Light" size="24.0" />
                                              </font>
@@ -114,9 +114,9 @@
                   </ScrollPane>
                </children>
             </StackPane>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="8.0" prefWidth="821.0" text="General Questions" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="8.0" prefWidth="821.0" text="General Questions" textAlignment="CENTER" textFill="WHITE" translateX="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
-                  <Font size="40.0" />
+                  <Font name="Dubai Regular" size="48.0" />
                </font>
             </Label>
          </children>
