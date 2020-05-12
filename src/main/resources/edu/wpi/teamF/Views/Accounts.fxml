@@ -71,5 +71,11 @@
          <font>
             <Font size="18.0" />
          </font></JFXButton>
+      <JFXComboBox fx:id="choiceTimeOut" layoutX="1036.0" layoutY="24.0" prefWidth="150.0" style="-fx-background-color: white;" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="24.0" />
+      <JFXButton buttonType="RAISED" layoutX="894.0" layoutY="12.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#timeout" prefHeight="50.0" prefWidth="130.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Timeout:" textFill="WHITE" AnchorPane.rightAnchor="176.0" AnchorPane.topAnchor="12.0">
+         <font>
+            <Font name="Dubai Light" size="18.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

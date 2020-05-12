@@ -52,6 +52,16 @@ public class MenuBarController implements Initializable {
     sceneController.switchScene("MainMenu");
   }
 
+  public void autoLogout() {
+    try {
+      dbm.setLogin(null);
+      SceneController sceneController2 = App.getSceneController();
+      sceneController2.switchScene("MainMenu");
+    } catch (Exception e) {
+      System.out.println(e.getClass());
+    }
+  }
+
   public void login(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("Login");
   }
@@ -87,7 +97,33 @@ public class MenuBarController implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     Account.Type userLevel = dbm.getPermissions();
-    if (userLevel == null || userLevel == Account.Type.USER) {
+    if (userLevel == null) {
+      adminButton.setVisible(false);
+      settingsButton.setVisible(false);
+      settingsButton1.setVisible(false);
+      adminButton.setDisable(true);
+      adminButton1.setVisible(false);
+      adminButton1.setDisable(true);
+      line6.setVisible(false);
+      line7.setVisible(false);
+      loginButton.setVisible(true);
+      loginButton.setDisable(false);
+      loginButton.toFront();
+      loginButton1.setVisible(true);
+      loginButton1.toFront();
+      loginButton1.setDisable(false);
+      logoutbutton1.setVisible(false);
+      LogoutButton.toBack();
+      LogoutButton.setVisible(false);
+    } else if (userLevel == Account.Type.USER) {
+      loginButton.setVisible(false);
+      loginButton.setDisable(true);
+      logoutbutton1.setVisible(true);
+      logoutbutton1.setDisable(false);
+      logoutbutton1.toFront();
+      loginButton1.setDisable(true);
+      loginButton1.setVisible(false);
+      loginButton1.toBack();
       adminButton.setVisible(false);
       settingsButton.setVisible(false);
       settingsButton1.setVisible(false);
