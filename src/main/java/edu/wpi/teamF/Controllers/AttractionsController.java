@@ -450,7 +450,7 @@ public class AttractionsController implements Initializable {
     destination += results[index].formattedAddress.replace(' ', '+').replace("&", "%26");
     googleMaps = new GoogleMaps(origin, destination);
 
-    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedDriving870x720());
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedDrivingAttractions());
     driveTime.setText(googleMaps.driveTime());
     driveDistance.setText(googleMaps.driveDistance());
     transitTime.setText(googleMaps.transitTime());
@@ -523,25 +523,25 @@ public class AttractionsController implements Initializable {
   }
 
   public void modeDriving(ActionEvent actionEvent) {
-    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedDriving870x720());
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedDrivingAttractions());
     driveTime.setText(googleMaps.driveTime());
     driveDistance.setText(googleMaps.driveDistance());
   }
 
   public void modeTransit(ActionEvent actionEvent) {
-    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedTransit870x720());
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedTransitAttractions());
     transitTime.setText(googleMaps.transitTime());
     transitDistance.setText(googleMaps.transitDistance());
   }
 
   public void modeBicycling(ActionEvent actionEvent) {
-    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedBicycling870x720());
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedBicyclingAttractions());
     bikeTime.setText(googleMaps.bikeTime());
     bikeDistance.setText(googleMaps.bikeDistance());
   }
 
   public void modeWalking(ActionEvent actionEvent) {
-    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedWalking870x720());
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedWalkingAttractions());
     walkTime.setText(googleMaps.walkTime());
     walkDistance.setText(googleMaps.walkDistance());
   }

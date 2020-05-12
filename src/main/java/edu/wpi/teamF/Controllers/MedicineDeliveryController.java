@@ -81,11 +81,18 @@ public class MedicineDeliveryController implements Initializable {
     backgroundImage.fitHeightProperty().bind(anchorPane.heightProperty());
     Account.Type userLevel = databaseManager.getPermissions();
     if (userLevel == Account.Type.USER) {
-      // checkButtonButton.setDisable(true);
+      backButton.setVisible(false);
+      backButton.setDisable(true);
 
       // set to user
-    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
-      // checkButtonButton.setDisable(false);
+    } else if (userLevel == Account.Type.STAFF) {
+      backButton.setDisable(false);
+      backButton.setVisible(true);
+      delete.setDisable(true);
+    } else if (userLevel == Account.Type.ADMIN) {
+      backButton.setDisable(false);
+      backButton.setVisible(true);
+      backButton.setDisable(false);
     }
 
     UISetting uiSetting = new UISetting();

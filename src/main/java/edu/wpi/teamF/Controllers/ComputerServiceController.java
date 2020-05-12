@@ -93,9 +93,14 @@ public class ComputerServiceController implements Initializable {
       checkStatusButton.setVisible(false);
 
       // set to user
-    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+    } else if (userLevel == Account.Type.STAFF) {
       checkStatusButton.setDisable(false);
       checkStatusButton.setVisible(true);
+      delete.setDisable(true);
+    } else if (userLevel == Account.Type.ADMIN) {
+      checkStatusButton.setDisable(false);
+      checkStatusButton.setVisible(true);
+      delete.setDisable(false);
     }
     // set to staff
 

@@ -110,6 +110,7 @@ public class FlowerRequestInfoController implements Initializable {
   public GridPane servicePane;
   public AnchorPane anchorSubmit;
   public JFXComboBox<String> toDelete;
+  public JFXButton deleteButton;
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UiFlowerServiceRequest> frUI = FXCollections.observableArrayList();
@@ -124,10 +125,17 @@ public class FlowerRequestInfoController implements Initializable {
     Account.Type userLevel = databaseManager.getPermissions();
     if (userLevel == Account.Type.USER) {
       checkStatusButton.setDisable(true);
+      checkStatusButton.setVisible(false);
 
       // set to user
-    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+    } else if (userLevel == Account.Type.STAFF) {
       checkStatusButton.setDisable(false);
+      checkStatusButton.setVisible(true);
+      deleteButton.setDisable(true);
+    } else if (userLevel == Account.Type.ADMIN) {
+      checkStatusButton.setDisable(false);
+      deleteButton.setDisable(false);
+      checkStatusButton.setVisible(true);
     }
 
     UISetting uiSetting = new UISetting();
