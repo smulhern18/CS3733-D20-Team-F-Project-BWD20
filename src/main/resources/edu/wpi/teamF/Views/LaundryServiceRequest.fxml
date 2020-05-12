@@ -30,7 +30,7 @@
         <fx:include fx:id="mainMenu" source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
         <AnchorPane fx:id="checkStatusPane" layoutX="701.0" layoutY="16.0" prefHeight="880.0" prefWidth="819.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 0;" visible="false" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="701.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="100.0">
             <children>
-                <StackPane layoutX="44.0" layoutY="274.0" prefHeight="99.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                <StackPane layoutX="44.0" layoutY="274.0" prefHeight="99.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                     <children>
                   <GridPane>
                     <columnConstraints>
