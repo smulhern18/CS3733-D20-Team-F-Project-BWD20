@@ -64,6 +64,11 @@ public class DataViewController implements Initializable {
   public GridPane transGridPane;
   public GridPane sanGridPane;
 
+  // High traffic
+  public BarChart<?, ?> barCharHigh;
+  public CategoryAxis xAxisHigh;
+  public NumberAxis yAxisHigh;
+
   ServiceRequestStats serviceRequestStats = new ServiceRequestStats();
   DatabaseManager databaseManager = DatabaseManager.getManager();
   public List<MaintenanceRequest> mR = databaseManager.getAllMaintenanceRequests();
@@ -73,6 +78,7 @@ public class DataViewController implements Initializable {
   DirectoryChooser downloadDir = new DirectoryChooser();
   FileChooser pdfChooser = new FileChooser();
   DirectoryChooser backup = new DirectoryChooser();
+  public List<ReportsClass> reports = databaseManager.getAllReports();
 
   public DataViewController() throws Exception {}
 
@@ -157,8 +163,8 @@ public class DataViewController implements Initializable {
           .add(new XYChart.Data<>(data5.get(i), Integer.parseInt(data5.get(i + 1))));
     }
 
-    mostcomLocTrans.getData().add(dataSeries3);
-    transComp.getData().add(dataSeries4);
+    transComp.getData().add(dataSeries3);
+    mostcomLocTrans.getData().add(dataSeries4);
 
     ObservableList<PieChart.Data> pieChartData3 = FXCollections.observableArrayList();
     for (int i = 0; i < data4.size(); i += 2) {
@@ -194,8 +200,8 @@ public class DataViewController implements Initializable {
           .add(new XYChart.Data<>(data8.get(i), Integer.parseInt(data8.get(i + 1))));
     }
 
-    barSaniLoc.getData().add(dataSeries5);
-    barSanCom.getData().add(dataSeries6);
+    barSanCom.getData().add(dataSeries5);
+    barSaniLoc.getData().add(dataSeries6);
 
     ObservableList<PieChart.Data> pieChartData4 = FXCollections.observableArrayList();
     for (int i = 0; i < data7.size(); i += 2) {
@@ -208,6 +214,17 @@ public class DataViewController implements Initializable {
       pieChartData7.add(new PieChart.Data(data9.get(i), Integer.parseInt(data9.get(i + 1))));
     }
     pieChartCompSan.setData(pieChartData7);
+
+    List<String> dataHigh;
+    XYChart.Series dataSeriesHigh = new XYChart.Series();
+    dataHigh = serviceRequestStats.getTimesVisitedGraphs(reports);
+
+    for (int i = 0; i < dataHigh.size(); i += 2) {
+      dataSeriesHigh
+          .getData()
+          .add(new XYChart.Data<>(dataHigh.get(i), Integer.parseInt(dataHigh.get(i + 1))));
+    }
+    barCharHigh.getData().add(dataSeriesHigh);
   }
 
   public void back(ActionEvent actionEvent) throws IOException {

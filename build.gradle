@@ -102,11 +102,6 @@ javafx {
 
 }
 
-javafx {
-    version = "11.0.1"
-    modules = ['javafx.controls', 'javafx.fxml', 'javafx.swing']
-}
-
 
 test {
     useJUnitPlatform()

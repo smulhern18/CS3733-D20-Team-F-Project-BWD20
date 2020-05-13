@@ -114,7 +114,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (MaintenanceRequest m : maintenanceRequests) {
-      nodeNum.add(m.getLocation().getShortName());
+      nodeNum.add(m.getLocation().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -299,7 +299,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (TransportRequest m : transportRequests) {
-      nodeNum.add(m.getLocation().getShortName());
+      nodeNum.add(m.getLocation().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -318,7 +318,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (TransportRequest m : transportRequests) {
-      nodeNum.add(m.getDestination().getShortName());
+      nodeNum.add(m.getDestination().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -379,7 +379,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (TransportRequest m : transportRequests) {
-      nodeNum.add(m.getLocation().getShortName());
+      nodeNum.add(m.getLocation().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -399,7 +399,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (TransportRequest m : transportRequests) {
-      nodeNum.add(m.getDestination().getShortName());
+      nodeNum.add(m.getDestination().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -510,7 +510,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ServiceRequest m : computerServiceRequests) {
-      nodeNum.add(m.getLocation().getShortName());
+      nodeNum.add(m.getLocation().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -551,7 +551,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ServiceRequest m : serviceRequests) {
-      nodeNum.add(m.getLocation().getShortName());
+      nodeNum.add(m.getLocation().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -638,7 +638,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ServiceRequest m : flowerRequests) {
-      nodeNum.add(m.getLocation().getShortName());
+      nodeNum.add(m.getLocation().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -677,7 +677,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ServiceRequest m : serviceRequests) {
-      nodeNum.add(m.getLocation().getShortName());
+      nodeNum.add(m.getLocation().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -767,7 +767,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ServiceRequest m : serviceRequests) {
-      nodeNum.add(m.getLocation().getShortName());
+      nodeNum.add(m.getLocation().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -808,7 +808,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ServiceRequest m : serviceRequests) {
-      nodeNum.add(m.getLocation().getShortName());
+      nodeNum.add(m.getLocation().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -898,7 +898,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ServiceRequest m : serviceRequests) {
-      nodeNum.add(m.getLocation().getShortName());
+      nodeNum.add(m.getLocation().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -939,7 +939,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ServiceRequest m : serviceRequests) {
-      nodeNum.add(m.getLocation().getShortName());
+      nodeNum.add(m.getLocation().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -1026,7 +1026,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ServiceRequest m : serviceRequests) {
-      nodeNum.add(m.getLocation().getShortName());
+      nodeNum.add(m.getLocation().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -1065,7 +1065,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ServiceRequest m : serviceRequests) {
-      nodeNum.add(m.getLocation().getShortName());
+      nodeNum.add(m.getLocation().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -1155,7 +1155,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ServiceRequest m : serviceRequests) {
-      nodeNum.add(m.getLocation().getShortName());
+      nodeNum.add(m.getLocation().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -1196,7 +1196,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ServiceRequest m : serviceRequests) {
-      nodeNum.add(m.getLocation().getShortName());
+      nodeNum.add(m.getLocation().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -1286,7 +1286,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ServiceRequest m : serviceRequests) {
-      nodeNum.add(m.getLocation().getShortName());
+      nodeNum.add(m.getLocation().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -1327,7 +1327,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ServiceRequest m : serviceRequests) {
-      nodeNum.add(m.getLocation().getShortName());
+      nodeNum.add(m.getLocation().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -1418,7 +1418,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ServiceRequest m : serviceRequests) {
-      nodeNum.add(m.getLocation().getShortName());
+      nodeNum.add(m.getLocation().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -1457,7 +1457,7 @@ public class ServiceRequestStats {
     ArrayList<String> nodeNum = new ArrayList<String>();
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ServiceRequest m : serviceRequests) {
-      nodeNum.add(m.getLocation().getShortName());
+      nodeNum.add(m.getLocation().getLongName());
     }
     Map<String, Long> frequency =
         nodeNum.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
@@ -1523,11 +1523,11 @@ public class ServiceRequestStats {
   private ArrayList<String> getNodesVisited(List<ReportsClass> reportsClasses) {
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ReportsClass r : reportsClasses) {
-      try{
-        csvStyled.add(databaseManager.readNode(r.getNodeID()).getLongName() + "," + r.getTimesVisited());
-      } catch (Exception e){
+      try {
+        csvStyled.add(
+            databaseManager.readNode(r.getNodeID()).getLongName() + "," + r.getTimesVisited());
+      } catch (Exception e) {
       }
-
     }
     return csvStyled;
   }
@@ -1536,10 +1536,11 @@ public class ServiceRequestStats {
 
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ReportsClass r : reportsClasses) {
-      try{
-      csvStyled.add(databaseManager.readNode(r.getNodeID()).getLongName() + "," + r.getTimesSanitized());
-    } catch (Exception e){
-    }
+      try {
+        csvStyled.add(
+            databaseManager.readNode(r.getNodeID()).getLongName() + "," + r.getTimesSanitized());
+      } catch (Exception e) {
+      }
     }
     return csvStyled;
   }
@@ -1550,7 +1551,7 @@ public class ServiceRequestStats {
       try {
         csvStyled.add(databaseManager.readNode(r.getNodeID()).getLongName());
         csvStyled.add("" + r.getTimesVisited());
-      } catch (Exception e){
+      } catch (Exception e) {
 
       }
     }
@@ -1564,7 +1565,7 @@ public class ServiceRequestStats {
       try {
         csvStyled.add(databaseManager.readNode(r.getNodeID()).getLongName());
         csvStyled.add("" + r.getTimesSanitized());
-      } catch(Exception e){
+      } catch (Exception e) {
       }
     }
     return csvStyled;
