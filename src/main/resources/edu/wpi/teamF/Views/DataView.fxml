@@ -159,7 +159,7 @@
             </Tab>
             <Tab text="High Traffic Areas">
                 <content>
-                    <AnchorPane>
+                    <AnchorPane fx:id="highTrafPane">
                      <children>
                         <BarChart fx:id="barCharHigh" layoutX="42.0" layoutY="48.0" legendVisible="false" prefHeight="371.0" prefWidth="424.0" title="Areas of High Traffic" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
                           <xAxis>

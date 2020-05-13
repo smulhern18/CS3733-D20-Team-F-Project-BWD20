@@ -68,6 +68,7 @@ public class DataViewController implements Initializable {
   public BarChart<?, ?> barCharHigh;
   public CategoryAxis xAxisHigh;
   public NumberAxis yAxisHigh;
+  public AnchorPane highTrafPane;
 
   ServiceRequestStats serviceRequestStats = new ServiceRequestStats();
   DatabaseManager databaseManager = DatabaseManager.getManager();
@@ -262,6 +263,8 @@ public class DataViewController implements Initializable {
     // Sanitation Grid
     WritableImage image3 = sanGridPane.snapshot(new SnapshotParameters(), null);
     File file3 = new File(workingdir + "/SanitationGrid.png");
+    WritableImage image4 = highTrafPane.snapshot(new SnapshotParameters(), null);
+    File file4 = new File(workingdir + "/HighTraff.png");
 
     try {
       // Writing out to temporary folder
@@ -271,6 +274,7 @@ public class DataViewController implements Initializable {
       System.out.println("Snapshot saved: " + file2.getAbsolutePath());
       ImageIO.write(SwingFXUtils.fromFXImage(image3, null), "png", file3);
       System.out.println("Snapshot saved: " + file3.getAbsolutePath());
+      ImageIO.write(SwingFXUtils.fromFXImage(image4, null), "png", file4);
 
       FileOutputStream fos = new FileOutputStream(selDir.getAbsolutePath() + "/PDFREPORTSVIEW.pdf");
       PdfWriter writer = PdfWriter.getInstance(document, fos);
@@ -285,12 +289,17 @@ public class DataViewController implements Initializable {
       // image3E.setAbsolutePosition(50f, 50f);
       image3E.scaleAbsolute(650, 320);
 
+      Image image4E = Image.getInstance(file4.getAbsolutePath());
+      image4E.scaleAbsolute(550, 220);
+
       Paragraph para1 = new Paragraph("Maintenance Request");
       para1.setAlignment(Element.ALIGN_CENTER);
       Paragraph para2 = new Paragraph("Transport Request");
       para2.setAlignment(Element.ALIGN_CENTER);
       Paragraph para3 = new Paragraph("Sanitation Request");
       para3.setAlignment(Element.ALIGN_CENTER);
+      Paragraph para4 = new Paragraph("High Traffic Areas");
+      para4.setAlignment(Element.ALIGN_CENTER);
 
       writer.open();
       document.open();
@@ -314,6 +323,13 @@ public class DataViewController implements Initializable {
       document.add(Chunk.NEWLINE);
       document.add(Chunk.NEWLINE);
       document.add(image3E);
+      document.newPage();
+      document.add(para4);
+      document.add(Chunk.NEWLINE);
+      document.add(Chunk.NEWLINE);
+      document.add(Chunk.NEWLINE);
+      document.add(Chunk.NEWLINE);
+      document.add(image4E);
 
       document.close();
       writer.close();
