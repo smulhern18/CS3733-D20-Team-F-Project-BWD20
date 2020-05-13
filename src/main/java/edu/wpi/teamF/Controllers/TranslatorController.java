@@ -7,7 +7,6 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import com.twilio.twiml.voice.Say;
 import edu.wpi.teamF.Controllers.com.twilio.phoneComms;
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -80,6 +79,8 @@ public class TranslatorController implements Initializable {
 
     fromLanguage.getItems().addAll(langCodeMap.keySet());
     toLanguage.getItems().addAll(langCodeMap.keySet());
+    fromLanguage.setValue("English");
+    toLanguage.setValue("Spanish");
 
     resetTranslator();
     backgroundImage.setPreserveRatio(false);
@@ -173,8 +174,6 @@ public class TranslatorController implements Initializable {
   }
 
   public void resetTranslator() {
-    fromLanguage.setValue("English");
-    toLanguage.setValue("Spanish");
     textInput.setText("");
     textOutput.setText("");
     phoneNumber.setText("");

@@ -68,6 +68,7 @@ public class LaundryServiceRequestController implements Initializable {
   public JFXButton backButton;
   public ImageView backgroundImage;
   public JFXButton checkStatButton;
+  public JFXComboBox<String> toDelete;
   SceneController sceneController = App.getSceneController();
   DatabaseManager databaseManager = DatabaseManager.getManager();
 
@@ -82,10 +83,17 @@ public class LaundryServiceRequestController implements Initializable {
     Account.Type userLevel = databaseManager.getPermissions();
     if (userLevel == Account.Type.USER) {
       checkStatButton.setDisable(true);
+      checkStatButton.setVisible(false);
 
       // set to user
-    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+    } else if (userLevel == Account.Type.STAFF) {
       checkStatButton.setDisable(false);
+      checkStatButton.setVisible(true);
+      delete.setDisable(true);
+    } else if (userLevel == Account.Type.ADMIN) {
+      checkStatButton.setDisable(false);
+      checkStatButton.setVisible(true);
+      delete.setDisable(false);
     }
 
     UISetting uiSetting = new UISetting();
@@ -100,7 +108,7 @@ public class LaundryServiceRequestController implements Initializable {
     //              }
     //            });
 
-    itemsChoice.getItems().add("Bath Blankets");
+    itemsChoice.getItems().add("Blankets");
     itemsChoice.getItems().add("Bath Towels");
     itemsChoice.getItems().add("Hand Towels");
     itemsChoice.getItems().add("Wash Cloths");
@@ -121,7 +129,7 @@ public class LaundryServiceRequestController implements Initializable {
 
     quantityChoice.getItems().add("Large");
     quantityChoice.getItems().add("Medium");
-    quantityChoice.getItems().add("Low");
+    quantityChoice.getItems().add("Small");
 
     priorityChoice.getItems().add("Low");
     priorityChoice.getItems().add("Medium");
@@ -294,6 +302,9 @@ public class LaundryServiceRequestController implements Initializable {
     for (LaundryServiceRequest lsr : laundryServiceRequests) {
       this.isrUI.add(new UILaundryServiceRequest(lsr));
     }
+    for (UILaundryServiceRequest yuh : isrUI) {
+      toDelete.getItems().add((yuh.getID().get()));
+    }
 
     final TreeItem<UILaundryServiceRequest> root =
         new RecursiveTreeItem<UILaundryServiceRequest>(isrUI, RecursiveTreeObject::getChildren);
@@ -347,6 +358,7 @@ public class LaundryServiceRequestController implements Initializable {
     priorityChoice.setValue(null);
     itemsChoice.setValue(null);
     quantityChoice.setValue(null);
+    toDelete.getItems().add(lsRequest.getId());
   }
 
   public void cancel(ActionEvent actionEvent) {
@@ -380,12 +392,12 @@ public class LaundryServiceRequestController implements Initializable {
   }
 
   public void delete(ActionEvent actionEvent) {
-    String toDelte = deleteText.getText();
+    String toDelte = toDelete.getValue();
     databaseManager.deleteLaundryServiceRequest(toDelte);
     isrUI.removeIf(
         launduaryServiceRequest -> launduaryServiceRequest.getID().get().equals(toDelte));
-    deleteText.setText("");
     treeTableLaunduary.refresh();
+    toDelete.getItems().remove(toDelete.getValue());
   }
 
   public void request(ActionEvent actionEvent) {

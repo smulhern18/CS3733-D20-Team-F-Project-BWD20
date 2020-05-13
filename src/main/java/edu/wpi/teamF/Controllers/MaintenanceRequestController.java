@@ -69,6 +69,8 @@ public class MaintenanceRequestController implements Initializable {
   public JFXComboBox<String> assigneeChoice;
   public JFXTreeTableView<UIMaintenenceRequest> treeTableMaintenance;
   public ImageView backgroundImage;
+  public JFXComboBox<String> toDelete;
+  public JFXButton deleteButton;
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UIMaintenenceRequest> csrUI = FXCollections.observableArrayList();
@@ -94,8 +96,12 @@ public class MaintenanceRequestController implements Initializable {
       checkStatusButton.setDisable(true);
 
       // set to user
-    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+    } else if (userLevel == Account.Type.STAFF) {
       checkStatusButton.setDisable(false);
+      deleteButton.setDisable(true);
+    } else if (userLevel == Account.Type.ADMIN) {
+      checkStatusButton.setDisable(false);
+      deleteButton.setDisable(false);
     }
     // add the different choices to the choicebox
     // Replace this with long names, linked to IDs
@@ -244,6 +250,9 @@ public class MaintenanceRequestController implements Initializable {
     for (MaintenanceRequest csr : maintenanceRequests) {
       csrUI.add(new UIMaintenenceRequest(csr));
     }
+    for (UIMaintenenceRequest yuh : csrUI) {
+      toDelete.getItems().add((yuh.getID().get()));
+    }
 
     final TreeItem<UIMaintenenceRequest> root =
         new RecursiveTreeItem<UIMaintenenceRequest>(csrUI, RecursiveTreeObject::getChildren);
@@ -292,10 +301,11 @@ public class MaintenanceRequestController implements Initializable {
     locationComboBox.setValue(null);
     assigneeChoice.setValue(null);
     desText.setText("");
+    toDelete.getItems().add(csRequest.getId());
   }
 
   public void cancel(ActionEvent actionEvent) {
-    descText.setText("");
+    desText.setText("");
     locationComboBox.setValue(null);
     priorityComboBox.setValue(null);
     issueChoice.setValue(null);
@@ -326,11 +336,11 @@ public class MaintenanceRequestController implements Initializable {
   }
 
   public void delete(ActionEvent actionEvent) throws Exception {
-    String toDelte = deleteText.getText();
+    String toDelte = toDelete.getValue();
     databaseManager.deleteComputerServiceRequest(toDelte);
     csrUI.removeIf(transportRequest -> transportRequest.getID().get().equals(toDelte));
-    deleteText.setText("");
     treeTableMaintenance.refresh();
+    toDelete.getItems().remove(toDelete.getValue());
   }
 
   public void request(ActionEvent actionEvent) {

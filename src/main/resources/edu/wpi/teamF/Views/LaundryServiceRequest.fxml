@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.LaundryServiceRequestController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.LaundryServiceRequestController">
     <children>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -28,8 +28,29 @@
          </children>
       </AnchorPane>
         <fx:include fx:id="mainMenu" source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-        <AnchorPane fx:id="checkStatusPane" layoutX="190.0" layoutY="16.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 5;" visible="false" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="16.0">
+        <AnchorPane fx:id="checkStatusPane" layoutX="701.0" layoutY="16.0" prefHeight="880.0" prefWidth="819.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 0;" visible="false" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="701.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="100.0">
             <children>
+                <JFXTreeTableView fx:id="treeTableLaunduary" style="-fx-border-color: black;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="99.0" />
+                <GridPane fx:id="deletePane" layoutX="146.0" layoutY="55.0" prefHeight="44.0" prefWidth="267.0" AnchorPane.rightAnchor="10.0">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <JFXButton fx:id="delete" alignment="CENTER" onAction="#delete" style="-fx-background-color: #a40000; -fx-background-radius: 10;" text="Delete" textFill="#ffffffcc" translateY="-5.0">
+                            <GridPane.margin>
+                                <Insets right="5.0" />
+                            </GridPane.margin>
+                     <font>
+                        <Font name="Dubai Light" size="18.0" />
+                     </font>
+                        </JFXButton>
+                  <JFXComboBox fx:id="toDelete" prefHeight="42.0" prefWidth="189.0" style="-fx-background-color: white;" translateY="-5.0" GridPane.columnIndex="1" />
+                    </children>
+                </GridPane>
                 <StackPane layoutX="44.0" layoutY="274.0" prefHeight="99.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                     <children>
                   <GridPane>
@@ -43,48 +64,23 @@
                      <children>
                               <JFXButton fx:id="back" onAction="#request" style="-fx-background-color: #012D5A; -fx-background-radius: 10;" text="Back" textFill="#ffffffcc">
                                   <font>
-                                      <Font name="Dubai Light" size="18.0" />
+                                      <Font name="Dubai Light" size="24.0" />
                                   </font>
                               </JFXButton>
                         <JFXButton fx:id="update" onAction="#update" style="-fx-background-color: #012D5A; -fx-background-radius: 10;" text="Update" textFill="#ffffffcc" GridPane.columnIndex="1">
                            <font>
-                              <Font name="Dubai Light" size="18.0" />
+                              <Font name="Dubai Light" size="24.0" />
                            </font>
                         </JFXButton>
                      </children>
                   </GridPane>
                     </children>
                 </StackPane>
-                <JFXTreeTableView fx:id="treeTableLaunduary" style="-fx-border-color: black;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="99.0" />
-                <GridPane fx:id="deletePane" layoutX="217.0" layoutY="70.0" AnchorPane.rightAnchor="10.0">
-                    <columnConstraints>
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                        <ColumnConstraints hgrow="SOMETIMES" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints vgrow="SOMETIMES" />
-                    </rowConstraints>
-                    <children>
-                        <JFXTextField fx:id="deleteText" alignment="BOTTOM_LEFT" style="-fx-background-color: white; -fx-border-color: black;" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM">
-                            <GridPane.margin>
-                                <Insets />
-                            </GridPane.margin>
-                        </JFXTextField>
-                        <JFXButton fx:id="delete" alignment="CENTER" onAction="#delete" style="-fx-background-color: #a40000; -fx-background-radius: 10;" text="Delete" textFill="#ffffffcc">
-                            <GridPane.margin>
-                                <Insets right="5.0" />
-                            </GridPane.margin>
-                     <font>
-                        <Font name="Dubai Light" size="13.0" />
-                     </font>
-                        </JFXButton>
-                    </children>
-                </GridPane>
             </children>
         </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-              <GridPane fx:id="servicePane" prefHeight="476.0" prefWidth="549.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 10;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
+              <GridPane fx:id="servicePane" prefHeight="476.0" prefWidth="549.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 10;" AnchorPane.bottomAnchor="75.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="75.0">
                   <columnConstraints>
                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   </columnConstraints>
@@ -101,99 +97,185 @@
                   <children>
                       <HBox alignment="BOTTOM_CENTER" prefHeight="34.0" prefWidth="410.0" GridPane.rowIndex="1">
                           <children>
-                              <Label fx:id="locationLabel" alignment="BOTTOM_CENTER" maxWidth="120.0" minWidth="120.0" text="Location:    " textAlignment="RIGHT">
-                           <font>
-                              <Font name="Dubai Light" size="13.0" />
-                           </font></Label>
-                              <JFXComboBox fx:id="locationChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;" />
-                          </children>
-                      </HBox>
-                      <HBox alignment="BOTTOM_CENTER" GridPane.rowIndex="2">
-                          <children>
-                              <Label fx:id="itemsLabel" alignment="BOTTOM_CENTER" contentDisplay="CENTER" maxWidth="120.0" minWidth="120.0" text="Items:" textAlignment="RIGHT">
-                           <font>
-                              <Font name="Dubai Light" size="13.0" />
-                           </font>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin></Label>
-                              <JFXComboBox fx:id="itemsChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;">
-                           <HBox.margin>
-                              <Insets left="5.0" />
-                           </HBox.margin>
-                        </JFXComboBox>
-                          </children>
-                      </HBox>
-                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
-                          <children>
-                        <GridPane>
+                        <GridPane prefHeight="110.0" prefWidth="456.0">
                           <columnConstraints>
-                            <ColumnConstraints halignment="CENTER" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints halignment="CENTER" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints halignment="CENTER" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="60.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="80.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                                    <JFXButton fx:id="cancelButton" onAction="#cancel" style="-fx-background-color: #a40000; -fx-background-radius: 10;" text="Cancel" textFill="#ffffffcc" GridPane.columnIndex="2">
+                                    <Label fx:id="locationLabel" alignment="BOTTOM_RIGHT" contentDisplay="RIGHT" maxWidth="194.0" minWidth="120.0" prefHeight="44.0" prefWidth="194.0" text="Location:" textAlignment="RIGHT">
+                                 <font>
+                                    <Font name="Dubai Light" size="24.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="20.0" />
+                                 </padding>
+                              </Label>
+                                    <JFXComboBox fx:id="locationChoice" prefHeight="35.0" prefWidth="212.0" style="-fx-background-color: white; -fx-border-color: black;" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
+                          </children>
+                      </HBox>
+                      <HBox alignment="BOTTOM_CENTER" GridPane.rowIndex="2">
+                          <children>
+                        <GridPane prefHeight="110.0" prefWidth="395.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="60.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="80.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                                    <Label fx:id="itemsLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxWidth="170.0" minWidth="120.0" prefHeight="44.0" prefWidth="170.0" text="Items:" textAlignment="RIGHT">
+                                 <font>
+                                    <Font name="Dubai Light" size="24.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="20.0" />
+                                 </padding>
+                              </Label>
+                                    <JFXComboBox fx:id="itemsChoice" prefHeight="35.0" prefWidth="212.0" style="-fx-background-color: white; -fx-border-color: black;" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
+                          </children>
+                      </HBox>
+                      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="7">
+                          <children>
+                        <GridPane prefHeight="110.0" prefWidth="335.0">
+                          <columnConstraints>
+                            <ColumnConstraints halignment="CENTER" minWidth="10.0" percentWidth="45.0" prefWidth="100.0" />
+                            <ColumnConstraints halignment="CENTER" minWidth="10.0" percentWidth="45.0" prefWidth="100.0" />
+                              <ColumnConstraints halignment="CENTER" minWidth="10.0" percentWidth="45.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                                    <JFXButton fx:id="cancelButton" onAction="#cancel" prefHeight="60.0" prefWidth="103.0" style="-fx-background-color: #a40000; -fx-background-radius: 10;" text="Cancel" textFill="#ffffffcc" GridPane.columnIndex="2">
                                         <font>
-                                            <Font name="Dubai Light" size="18.0" />
+                                            <Font name="Dubai Light" size="24.0" />
                                         </font>
                                     </JFXButton>
                                     <JFXButton fx:id="submitButton" onAction="#submit" style="-fx-background-color: #012D5A; -fx-background-radius: 10;" text="Submit" textFill="#ffffffcc" GridPane.columnIndex="1">
                                         <font>
-                                            <Font name="Dubai Light" size="18.0" />
+                                            <Font name="Dubai Light" size="24.0" />
                                         </font>
                                     </JFXButton>
                                     <JFXButton fx:id="checkStatButton" onAction="#statusView" style="-fx-background-color: #012D5A; -fx-background-radius: 10;" text="Status" textFill="#ffffffcc">
                                         <font>
-                                            <Font name="Dubai Light" size="18.0" />
+                                            <Font name="Dubai Light" size="24.0" />
                                         </font>
                                     </JFXButton>
                            </children>
                         </GridPane>
                           </children>
+                     <GridPane.margin>
+                        <Insets bottom="20.0" />
+                     </GridPane.margin>
                       </HBox>
                       <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="3">
                           <children>
-                              <Label fx:id="quantityLabel" alignment="BOTTOM_CENTER" maxWidth="120.0" minWidth="120.0" text="Quantity:      " textAlignment="RIGHT">
-                           <font>
-                              <Font name="Dubai Light" size="13.0" />
-                           </font></Label>
-                              <JFXComboBox fx:id="quantityChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                        <GridPane prefHeight="110.0" prefWidth="421.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="60.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="80.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                                    <Label fx:id="quantityLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxWidth="187.0" minWidth="120.0" prefHeight="44.0" prefWidth="187.0" text="Quantity:" textAlignment="RIGHT">
+                                 <font>
+                                    <Font name="Dubai Light" size="24.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="20.0" />
+                                 </padding>
+                              </Label>
+                                    <JFXComboBox fx:id="quantityChoice" prefHeight="35.0" prefWidth="212.0" style="-fx-background-color: white; -fx-border-color: black;" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
                           </children>
                       </HBox>
                       <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
                           <children>
-                              <Label fx:id="temperatureLabel" alignment="BOTTOM_CENTER" maxWidth="120.0" minWidth="120.0" text="Temperature:             " textAlignment="RIGHT">
-                           <font>
-                              <Font name="Dubai Light" size="13.0" />
-                           </font></Label>
-                              <JFXComboBox fx:id="temperatureSChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                        <GridPane prefHeight="110.0" prefWidth="410.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="60.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="80.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                                    <Label fx:id="temperatureLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxWidth="179.0" minWidth="120.0" prefHeight="44.0" prefWidth="179.0" text="Temperature:" textAlignment="RIGHT">
+                                 <font>
+                                    <Font name="Dubai Light" size="24.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="20.0" />
+                                 </padding>
+                              </Label>
+                                    <JFXComboBox fx:id="temperatureSChoice" prefHeight="35.0" prefWidth="212.0" style="-fx-background-color: white; -fx-border-color: black;" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
                           </children>
                       </HBox>
                       <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="5">
                           <children>
-                              <Label fx:id="descLabel" alignment="BOTTOM_CENTER" maxWidth="120.0" minWidth="120.0" text="Description:          " textAlignment="RIGHT">
-                           <font>
-                              <Font name="Dubai Light" size="13.0" />
-                           </font></Label>
-                              <JFXTextField fx:id="descText" prefHeight="25.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                        <GridPane prefHeight="110.0" prefWidth="369.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="60.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="80.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                                    <Label fx:id="descLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxWidth="156.0" minWidth="120.0" prefHeight="44.0" prefWidth="156.0" text="Description:" textAlignment="RIGHT">
+                                 <font>
+                                    <Font name="Dubai Light" size="24.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="20.0" />
+                                 </padding>
+                              </Label>
+                                    <JFXTextField fx:id="descText" prefHeight="35.0" prefWidth="212.0" style="-fx-background-color: white; -fx-border-color: black;" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
                           </children>
                       </HBox>
                       <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="6">
                           <children>
-                              <Label fx:id="prioLabel" alignment="BOTTOM_CENTER" maxWidth="120.0" minWidth="120.0" text="Priority:    " textAlignment="RIGHT">
-                           <font>
-                              <Font name="Dubai Light" size="13.0" />
-                           </font></Label>
-                              <JFXComboBox fx:id="priorityChoice" prefHeight="27.0" prefWidth="182.0" style="-fx-background-color: white; -fx-border-color: black;" />
+                        <GridPane prefHeight="110.0" prefWidth="376.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="60.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="80.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                                    <Label fx:id="prioLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxWidth="164.0" minWidth="120.0" prefHeight="44.0" prefWidth="164.0" text="Priority:" textAlignment="RIGHT">
+                                 <font>
+                                    <Font name="Dubai Light" size="24.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets right="20.0" />
+                                 </padding>
+                              </Label>
+                                    <JFXComboBox fx:id="priorityChoice" prefHeight="35.0" prefWidth="212.0" style="-fx-background-color: white; -fx-border-color: black;" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
                           </children>
                       </HBox>
-                        <Label fx:id="securityRequestLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="27.0" prefWidth="334.0" text="Laundry Service Request" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                        <Label fx:id="securityRequestLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="64.0" prefWidth="387.0" text="Laundry Service Request" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                             <font>
-                                <Font name="Dubai Light" size="24.0" />
+                                <Font name="Dubai Regular" size="36.0" />
                             </font>
                         </Label>
                   </children>

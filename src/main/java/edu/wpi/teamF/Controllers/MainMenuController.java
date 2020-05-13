@@ -6,8 +6,16 @@ import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -15,6 +23,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 
 public class MainMenuController implements Initializable {
 
@@ -30,6 +39,8 @@ public class MainMenuController implements Initializable {
   public JFXButton serviceRequestButton;
   public Rectangle blueRectangle;
   public DatabaseManager dbm = DatabaseManager.getManager();
+  public Label time;
+  public Label date;
 
   SceneController sceneController = App.getSceneController();
 
@@ -69,5 +80,32 @@ public class MainMenuController implements Initializable {
     }
     background.fitWidthProperty().bind(anchorPane.widthProperty());
     background.fitHeightProperty().bind(anchorPane.heightProperty());
+    time();
+  }
+
+  // Time
+  @FXML private Label Time;
+
+  public void time() {
+    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("hh:mm a");
+    Calendar calendar = new GregorianCalendar();
+    int day = calendar.get(Calendar.DAY_OF_MONTH);
+    int month = calendar.get(Calendar.MONTH);
+    int year = calendar.get(Calendar.YEAR);
+
+    Timeline clock =
+        new Timeline(
+            new KeyFrame(
+                Duration.ZERO,
+                e -> {
+                  LocalTime currentTime = LocalTime.now();
+
+                  time.setText(dateFormat.format(currentTime));
+                  date.setText((month + 1) + "/" + day + "/" + year);
+                },
+                new javafx.animation.KeyValue[] {}),
+            new KeyFrame(Duration.seconds(1)));
+    clock.setCycleCount(Animation.INDEFINITE);
+    clock.play();
   }
 }

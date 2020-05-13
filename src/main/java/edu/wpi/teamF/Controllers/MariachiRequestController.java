@@ -52,6 +52,7 @@ public class MariachiRequestController implements Initializable {
   public AnchorPane anchorPane;
   public AnchorPane frame;
   public ImageView backgroundImage;
+  public JFXComboBox<String> toDelete;
 
   DatabaseManager databaseManager = DatabaseManager.getManager();
   List<MariachiRequest> mariachiRequestList = databaseManager.getAllMariachiServiceRequests();
@@ -69,7 +70,11 @@ public class MariachiRequestController implements Initializable {
       checkStatusButton.setDisable(true);
 
       // set to user
-    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+    } else if (userLevel == Account.Type.STAFF) {
+      checkStatusButton.setDisable(false);
+      deleteButton.setDisable(true);
+    } else if (userLevel == Account.Type.ADMIN) {
+      deleteButton.setDisable(false);
       checkStatusButton.setDisable(false);
     }
     // add the different choices to the choicebox
@@ -164,6 +169,9 @@ public class MariachiRequestController implements Initializable {
     for (MariachiRequest sr : mariachiRequestList) {
       uiMariachiRequests.add(new UIMariachiRequest(sr));
     }
+    for (UIMariachiRequest yuh : uiMariachiRequests) {
+      toDelete.getItems().add((yuh.getID().get()));
+    }
     final TreeItem<UIMariachiRequest> root =
         new RecursiveTreeItem<>(uiMariachiRequests, RecursiveTreeObject::getChildren);
 
@@ -226,6 +234,7 @@ public class MariachiRequestController implements Initializable {
     uiMariachiRequests.add(new UIMariachiRequest(mariachiRequest));
     table.refresh();
     resetRequest();
+    toDelete.getItems().add(mariachiRequest.getId());
   }
 
   private void resetRequest() {
@@ -262,9 +271,10 @@ public class MariachiRequestController implements Initializable {
   }
 
   public void delete(ActionEvent actionEvent) {
-    String toDelete = deleteText.getText();
-    databaseManager.deleteMariachiServiceRequest(toDelete);
-    uiMariachiRequests.removeIf(mariachiRequest -> mariachiRequest.getID().get().equals(toDelete));
+    String toDel = toDelete.getValue();
+    databaseManager.deleteMariachiServiceRequest(toDel);
+    uiMariachiRequests.removeIf(mariachiRequest -> mariachiRequest.getID().get().equals(toDel));
+    toDelete.getItems().remove(toDelete.getValue());
   }
 
   public void checkStatus(ActionEvent actionEvent) {

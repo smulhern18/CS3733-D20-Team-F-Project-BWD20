@@ -3,41 +3,41 @@ package edu.wpi.teamF.Controllers;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
-import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.shape.*;
 import javafx.scene.text.Text;
-import javax.swing.*;
-import javax.swing.text.*;
 
 public class HelpController implements Initializable {
 
   @FXML public AnchorPane rootPane;
   @FXML private StackPane stackPane;
+  public ImageView background;
   // @FXML
   // private JFXButton textfield;
   // @FXML
   // private JFXButton search;
 
   @Override
-  public void initialize(URL url, ResourceBundle rb) {}
+  public void initialize(URL url, ResourceBundle rb) {
+    background.setPreserveRatio(false);
+    background.fitHeightProperty().bind(rootPane.heightProperty());
+    background.fitWidthProperty().bind(rootPane.widthProperty());
+  }
 
   @FXML
-  private void loadDialogsignup(ActionEvent actionEvent) {
+  private void signup(ActionEvent actionEvent) {
     JFXDialogLayout content1 = new JFXDialogLayout();
-    content1.setHeading(new Text("How to sign up?"));
+    content1.setHeading(new Text("How do I sign up?"));
     content1.setBody(
         new Text(
-            "Click on the 'Login' button on the main menu. Then click on the 'Register'\n"
-                + " button on Login page. After entering your information correctly, click on \n"
-                + "'Register' button. The account will be created."));
+            "1. Click on the 'Login' button on the Main Menu. \n2. Click on 'Register'. \n3. Enter your information.\n4. Click on 'Register'. New account will be created."));
     JFXDialog dialog1 = new JFXDialog(stackPane, content1, JFXDialog.DialogTransition.CENTER);
     JFXButton button1 = new JFXButton("Close");
     button1.setOnAction(
@@ -52,15 +52,14 @@ public class HelpController implements Initializable {
   }
 
   @FXML
-  private void loadDialoglogin(ActionEvent actionEvent) {
+  private void login(ActionEvent actionEvent) {
     JFXDialogLayout content2 = new JFXDialogLayout();
-    content2.setHeading(new Text("How to login?"));
+    content2.setHeading(new Text("How do I login?"));
     content2.setBody(
         new Text(
-            "Click on the 'Login' button on Main Menu. You will go to the Login page.\n"
-                + "If  you have an account,  enter the Username and  Password. Then click\n"
-                + "on the 'Login' button. If you don't have an account,  then click on the 'R-\n"
-                + "egister' button to sign up."));
+            "1. Click on the 'Login' button on Main Menu.\n"
+                + "2. If you have an account, then login.\n"
+                + "3. If you don't have an account, then click on 'Register' to sign up.\n"));
     JFXDialog dialog2 = new JFXDialog(stackPane, content2, JFXDialog.DialogTransition.CENTER);
     JFXButton button2 = new JFXButton("Close");
     button2.setOnAction(
@@ -75,16 +74,18 @@ public class HelpController implements Initializable {
   }
 
   @FXML
-  private void loadDialogservicerequest(ActionEvent actionEvent) {
+  private void findpath(ActionEvent actionEvent) {
     JFXDialogLayout content3 = new JFXDialogLayout();
-    content3.setHeading(new Text("How to request a service?"));
+    content3.setHeading(new Text("How do I find a path?"));
     content3.setBody(
         new Text(
-            "Click on the 'Service Request' button on Main Menu. You will go to the Service\n"
-                + "Request page. You could request services for security and maintenance. Enter\n"
-                + "or select the information for location, description, priority, and type. Then click\n"
-                + "on'Submit Request'. If you want to cancel the request, click on 'Cancel’.  If you\n"
-                + "want to check service your request, click on 'Ongoing Service Request'."));
+            "1.\tGo to the pathfinder page.\n"
+                + "2.\tSelect or search current location from drop down menu.\n"
+                + "3.\tYou can also click current location directly from the map. \n"
+                + "4.\tSelect the destination. \n"
+                + "5.\tSelect a preference (elevators or stairs).\n"
+                + "6.\tClick 'Find Path'. \n"
+                + "7.\tClick 'Reset' to find another path.\n"));
     JFXDialog dialog3 = new JFXDialog(stackPane, content3, JFXDialog.DialogTransition.CENTER);
     JFXButton button3 = new JFXButton("Close");
     button3.setOnAction(
@@ -99,18 +100,17 @@ public class HelpController implements Initializable {
   }
 
   @FXML
-  private void loadDialogadmin(ActionEvent actionEvent) {
+  private void findnear(ActionEvent actionEvent) {
     JFXDialogLayout content5 = new JFXDialogLayout();
-    content5.setHeading(new Text("How to add/edit/delete nodes?"));
+    content5.setHeading(new Text("How do I find the nearest restrooms, elevators or stairs?"));
     content5.setBody(
         new Text(
-            "Click on the 'Admin' button on main menu.   The information about  nodes\n"
-                + "and edges are shown in the table.  If you want to view it in a map, click on\n"
-                + "'Map View'. Click again on 'Map View' brings you back to table view.  You\n"
-                + "could quick search for node or edges by typing their ID in the text field. If\n"
-                + "you want to upload nodes and edges,  click on 'Upload Nodes' or 'Upload\n"
-                + "Edges'.  If you want to download nodes or edges,  click on 'Backup'.  You\n "
-                + "could enter NodeID and click on 'Delete Node' to delete node."));
+            "1.\tGo to the pathfinder page. \n"
+                + "2.\tSelect or search current location from drop down menu.\n"
+                + "3.\tYou can also click current location directly from the map. \n"
+                + "4.\tClick on the icon for restrooms, elevators or stairs.\n"
+                + "5.\tClick 'Find Path'. \n"
+                + "6.\tClick 'Reset' to find another path.\n"));
     JFXDialog dialog5 = new JFXDialog(stackPane, content5, JFXDialog.DialogTransition.CENTER);
     JFXButton button5 = new JFXButton("Close");
     button5.setOnAction(
@@ -125,17 +125,15 @@ public class HelpController implements Initializable {
   }
 
   @FXML
-  private void loadDialogpath(ActionEvent actionEvent) {
+  private void servicerequest(ActionEvent actionEvent) {
     JFXDialogLayout content6 = new JFXDialogLayout();
-    content6.setHeading(new Text("How to find a path?"));
+    content6.setHeading(new Text("How do I request a service?"));
     content6.setBody(
         new Text(
-            "Click on the 'Pathfinder' button on Main Menu.  You will go to the Pathfinder \n"
-                + "page. You could click on nodes’ circles on the map as start points.  Then s-\n"
-                + "elect the destination. The shortest path will be shown on the map. After you\n"
-                + "select start point and want to find stairs, elevators, and bathrooms, click on\n"
-                + "'Find Stairs', 'Find Elevator' or 'Find Bathroom'.   Click on 'Reset' if you want\n"
-                + "to find another path. "));
+            "1.\tGo to Service Request page.\n"
+                + "2.\tSelect a service you need.\n"
+                + "3.\tEnter relevant information.\n"
+                + "4.\tClick 'Submit'. The request is sent.\n"));
     JFXDialog dialog6 = new JFXDialog(stackPane, content6, JFXDialog.DialogTransition.CENTER);
     JFXButton button6 = new JFXButton("Close");
     button6.setOnAction(
@@ -148,36 +146,79 @@ public class HelpController implements Initializable {
     content6.setActions(button6);
     dialog6.show();
   }
-}
-/*
+
   @FXML
-  private void highlight(java.awt.event.ActionEvent event) {
-    // highlight(textfield, search.getText());
-
+  private void findatt(ActionEvent actionEvent) {
+    JFXDialogLayout content7 = new JFXDialogLayout();
+    content7.setHeading(new Text("How do I find nearby attractions or restaurants?"));
+    content7.setBody(
+        new Text(
+            "1.\tGo to Tools page.\n"
+                + "2.\tClick on 'Find Attractions'.\n"
+                + "3.\tEnter attractions or restaurants you want to search.\n"
+                + "4.\tSelect where you are (Main Campus or Faulkner Hospital).\n"
+                + "5.\tClick 'Search'.\n"
+                + "6.\tClick on a search result.\n"
+                + "7.\tGoogle map jumps out to show you the way to get there. \n"
+                + "8.\tIf you enter your number, text directions will be sent to your mobile phone. \n"));
+    JFXDialog dialog7 = new JFXDialog(stackPane, content7, JFXDialog.DialogTransition.CENTER);
+    JFXButton button7 = new JFXButton("Close");
+    button7.setOnAction(
+        new EventHandler<ActionEvent>() {
+          @Override
+          public void handle(ActionEvent event) {
+            dialog7.close();
+          }
+        });
+    content7.setActions(button7);
+    dialog7.show();
   }
 
-  class MyHighlightPainter extends DefaultHighlighter.DefaultHighlightPainter {
-    public MyHighlightPainter(Color color) {
-      super(color);
-    }
+  @FXML
+  private void news(ActionEvent actionEvent) {
+    JFXDialogLayout content8 = new JFXDialogLayout();
+    content8.setHeading(new Text("How do I find news articles?"));
+    content8.setBody(
+        new Text(
+            "1.\tGo to Tools page.\n"
+                + "2.\tSelect news article.\n"
+                + "3.\tClick on View Articles to read.\n"
+                + "4.\tThe articles can be sent to mobile phone if you type in your phone number.\n"
+                + "5.\tNews can be searched.  \n"));
+    JFXDialog dialog8 = new JFXDialog(stackPane, content8, JFXDialog.DialogTransition.CENTER);
+    JFXButton button8 = new JFXButton("Close");
+    button8.setOnAction(
+        new EventHandler<ActionEvent>() {
+          @Override
+          public void handle(ActionEvent event) {
+            dialog8.close();
+          }
+        });
+    content8.setActions(button8);
+    dialog8.show();
+  }
 
-    Highlighter.HighlightPainter myHighlightPainter = new MyHighlightPainter(Color.PINK);
-
-    public void highlight(JTextComponent textComponent, String pattern) {
-      try {
-        Highlighter hilite = textComponent.getHighlighter();
-        Document doc = textComponent.getDocument();
-        String text = doc.getText(0, doc.getLength());
-        int pos = 0;
-
-        while ((pos = text.toUpperCase().indexOf(pattern.toUpperCase(), pos)) >= 0) {
-          hilite.addHighlight(pos, pos + pattern.length(), myHighlightPainter);
-          pos += pattern.length();
-        }
-
-      } catch (Exception e) {
-      }
-    }
+  @FXML
+  private void translate(ActionEvent actionEvent) {
+    JFXDialogLayout content9 = new JFXDialogLayout();
+    content9.setHeading(new Text("How do I use the translator?"));
+    content9.setBody(
+        new Text(
+            "1.\tGo to Tools page.\n"
+                + "2.\tSelect the languages to translate from and translate to. \n"
+                + "3.\tEnter text to translate. Click on 'Translate'.\n"
+                + "4.\tTranslated text can be sent to mobile phone via text message.\n"
+                + "5.\tTranslated text can also be called to mobile phone and be heard spoken verbally.\n"));
+    JFXDialog dialog9 = new JFXDialog(stackPane, content9, JFXDialog.DialogTransition.CENTER);
+    JFXButton button9 = new JFXButton("Close");
+    button9.setOnAction(
+        new EventHandler<ActionEvent>() {
+          @Override
+          public void handle(ActionEvent event) {
+            dialog9.close();
+          }
+        });
+    content9.setActions(button9);
+    dialog9.show();
   }
 }
- */

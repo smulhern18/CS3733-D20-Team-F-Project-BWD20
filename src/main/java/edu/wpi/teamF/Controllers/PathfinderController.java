@@ -8,12 +8,15 @@ import com.jfoenix.controls.JFXToggleButton;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.Controllers.UISettings.UISetting;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
+import edu.wpi.teamF.ModelClasses.Account.Account;
+import edu.wpi.teamF.ModelClasses.Directions.Direction;
 import edu.wpi.teamF.ModelClasses.Directions.Directions;
+import edu.wpi.teamF.ModelClasses.Directions.IndexDirection;
 import edu.wpi.teamF.ModelClasses.Node;
 import edu.wpi.teamF.ModelClasses.Path;
 import edu.wpi.teamF.ModelClasses.PathfindAlgorithm.*;
 import edu.wpi.teamF.ModelClasses.Scorer.EuclideanScorer;
-import edu.wpi.teamF.ModelClasses.ServiceRequest.ReportsClass;
+import edu.wpi.teamF.ModelClasses.ServiceRequest.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -26,19 +29,22 @@ import javafx.animation.Timeline;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.web.WebView;
 import javafx.util.Duration;
 import javax.management.InstanceNotFoundException;
 import lombok.SneakyThrows;
@@ -53,7 +59,7 @@ public class PathfinderController implements Initializable {
   public static int MAP_HEIGHT = 1485;
   public static int MAP_WIDTH = 2475;
   public static DatabaseManager databaseManager = DatabaseManager.getManager();
-  SceneController sceneController = App.getSceneController();
+  public SceneController sceneController = App.getSceneController();
   // public int currentFloor;
   public AnchorPane currentPane;
   public AnchorPane mainMapPane;
@@ -133,19 +139,48 @@ public class PathfinderController implements Initializable {
   public Label errorPaneLabel2;
   public JFXButton errorPaneButton;
 
+  // node info stuff
+  public AnchorPane nodeInfoPane;
+  public Label nodeInfoLabel1;
+  public Label nodeInfoLabel2;
+  public Label nodeInfoLabel3;
+  public JFXButton goToButton;
+  public JFXButton nodeInfoButton;
+  public JFXComboBox<String> nodeInfoTypeCombo;
+  public JFXComboBox<String> nodeInfoCombo;
+
+  public AnchorPane nodeInfoPaneUser;
+  public Label nodeInfoLabel1User;
+  public Label nodeInfoLabel2User;
+  public JFXButton nodeInfoButtonUser;
+
+  Account.Type userLevel = databaseManager.getPermissions();
+  List<SanitationServiceRequest> sanitationList = databaseManager.getAllSanitationRequests();
+  List<ComputerServiceRequest> computerList = databaseManager.getAllComputerServiceRequests();
+  List<FlowerRequest> flowerList = databaseManager.getAllFlowerRequests();
+  List<LaundryServiceRequest> laundryList = databaseManager.getAllLaunduaryRequests();
+  List<MaintenanceRequest> maintenanceList = databaseManager.getAllMaintenanceRequests();
+  List<MariachiRequest> mariachiList = databaseManager.getAllMariachiServiceRequests();
+  List<MedicineDeliveryRequest> medicineList = databaseManager.getAllMedicineDeliveryRequests();
+  List<LanguageServiceRequest> languageList = databaseManager.getAllLanguageServiceRequests();
+  List<SecurityRequest> securityList = databaseManager.getAllSecurityRequests();
+  List<TransportRequest> tranportList = databaseManager.getAllTransportRequests();
+  ObservableList<String> tempSanitationList = FXCollections.observableArrayList();
+  ObservableList<String> tempComputerList = FXCollections.observableArrayList();
+  ObservableList<String> tempFlowerList = FXCollections.observableArrayList();
+  ObservableList<String> tempLaundryList = FXCollections.observableArrayList();
+  ObservableList<String> tempMaintenanceList = FXCollections.observableArrayList();
+  ObservableList<String> tempMariachiList = FXCollections.observableArrayList();
+  ObservableList<String> tempMedicineList = FXCollections.observableArrayList();
+  ObservableList<String> tempLanguageList = FXCollections.observableArrayList();
+  ObservableList<String> tempSecurityList = FXCollections.observableArrayList();
+  ObservableList<String> tempTransportList = FXCollections.observableArrayList();
+
+  // end of path on floor button
+  public JFXButton buttonOnEnd = new JFXButton();
+
   // intermediate maps stuff
-  public ImageView faulknerTo45FrancisImage;
-  public ImageView faulknerTo75FrancisImage;
-  public ImageView faulknerToBTMImage;
-  public ImageView faulknerToShapiroImage;
-  public ImageView faulknerTo15FrancisImage;
-  public ImageView Francis45ToFaulknerImage;
-  public ImageView Francis75ToFaulknerImage;
-  public ImageView BTMToFaulknerImage;
-  public ImageView shapiroToFaulknerImage;
-  public ImageView francis15ToFaulknerImage;
-  public ScrollPane scrollPaneIntermediate;
-  public StackPane stackPaneIntermediate;
+  public WebView webview;
   public GoogleMaps googleMaps;
   public Label driveTime;
   public Label driveDistance;
@@ -166,6 +201,9 @@ public class PathfinderController implements Initializable {
   public ImageView shapiroToFaulknerQR;
   public ImageView francis15ToFaulknerQR;
 
+  public JFXToggleButton directionsToggle;
+  public Boolean fullDirections = false;
+
   public List<Node> fullNodeList;
   public int state;
   public UISetting uiSetting = new UISetting();
@@ -175,14 +213,17 @@ public class PathfinderController implements Initializable {
   Node startNode = null;
   Node endNode = null;
   public Path path;
+  public Path globalPath;
   public Directions directions;
   public int locationIndex;
+  public AnchorPane progressPane;
+  public HBox progressBox;
 
   EuclideanScorer euclideanScorer = new EuclideanScorer();
   PathfindAlgorithm pathFindAlgorithm;
   private static String newPathfind = " ";
 
-  public PathfinderController() {}
+  public PathfinderController() throws Exception {}
 
   public static void setPathFindAlgorithm(String newPathFindAlgorithm) {
     newPathfind = newPathFindAlgorithm;
@@ -279,6 +320,61 @@ public class PathfinderController implements Initializable {
       }
     }
 
+    // path end button
+    for (Node node : pathNodes) {
+      List<Node> nodesOnFloor = getNodesOnFloor(node.getFloor());
+      if ((Node.NodeType.ELEV.equals(node.getType()) || Node.NodeType.STAI.equals(node.getType()))
+          && node.getId().equals(nodesOnFloor.get(nodesOnFloor.size() - 1).getId())) {
+        JFXButton endButton = new JFXButton();
+        endButton.setId(node.getId());
+        endButton.setMinSize(6, 6);
+        endButton.setMaxSize(6, 6);
+        endButton.setPrefSize(6, 6);
+        double xPos;
+        double yPos;
+        if ("Faulkner".equals(node.getBuilding())) {
+          xPos = ((node.getXCoord() * widthRatioFaulkner) - 3);
+          yPos = ((node.getYCoord() * heightRatioFaulkner) - 3);
+        } else {
+          xPos = ((node.getXCoord() * widthRatioMain) - 3);
+          yPos = ((node.getYCoord() * heightRatioMain) - 3);
+        }
+        endButton.setLayoutX(xPos);
+        endButton.setLayoutY(yPos);
+        endButton.setStyle(
+            "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px"); // 00cc00
+        endButton.setOnMouseClicked(
+            actionEvent -> {
+              pathSwitchNext.fire();
+            });
+      } else if ((Node.NodeType.ELEV.equals(node.getType())
+              || Node.NodeType.STAI.equals(node.getType()))
+          && node.getId().equals(nodesOnFloor.get(0).getId())) {
+        JFXButton endButton = new JFXButton();
+        endButton.setId(node.getId());
+        endButton.setMinSize(6, 6);
+        endButton.setMaxSize(6, 6);
+        endButton.setPrefSize(6, 6);
+        double xPos;
+        double yPos;
+        if ("Faulkner".equals(node.getBuilding())) {
+          xPos = ((node.getXCoord() * widthRatioFaulkner) - 3);
+          yPos = ((node.getYCoord() * heightRatioFaulkner) - 3);
+        } else {
+          xPos = ((node.getXCoord() * widthRatioMain) - 3);
+          yPos = ((node.getYCoord() * heightRatioMain) - 3);
+        }
+        endButton.setLayoutX(xPos);
+        endButton.setLayoutY(yPos);
+        endButton.setStyle(
+            "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #00cc00; -fx-border-color: #000000; -fx-border-width: 1px"); // 800000
+        endButton.setOnMouseClicked(
+            actionEvent -> {
+              pathSwitchPrevious.fire();
+            });
+      }
+    }
+
     selectButtonsPane.setVisible(false);
     directionsPane.setVisible(true);
     this.directions = new Directions(fullNodeList, path, startNode, endNode);
@@ -306,7 +402,11 @@ public class PathfinderController implements Initializable {
       System.out.println("Floor: " + path.getLocationAtIndex(locationIndex).getFloor());
       System.out.println("Building: " + path.getLocationAtIndex(locationIndex).getBuilding());
 
-      directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+      if (fullDirections) {
+        directionsDisplay.setText(directions.getFullDirectionsString());
+      } else {
+        directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+      }
     } else {
       // Single floor navigation
       pathSwitchPrevious.setVisible(false);
@@ -315,8 +415,59 @@ public class PathfinderController implements Initializable {
       pathSwitchNext.setPrefHeight(0);
       btnSpacer.setPrefHeight(0);
 
+      locationIndex = 0;
       directionsDisplay.setText(directions.getFullDirectionsString());
     }
+
+    // Setting up the progress bar
+    int iii = 0;
+    for (Direction direction : directions.getDirectionList()) {
+      if (direction instanceof IndexDirection) {
+        JFXButton label = new JFXButton();
+        label.setMinHeight(40);
+        label.setMinWidth(120);
+        label.setAlignment(Pos.CENTER);
+        label.setFont(new Font("Arial", 16));
+        label.setBorder(
+            new Border(
+                new BorderStroke(
+                    Color.web("rgba(255,255,255,0.9)"),
+                    BorderStrokeStyle.SOLID,
+                    null,
+                    new BorderWidths(1))));
+        label.setText(((IndexDirection) direction).getBuildingAndFloor());
+        int finalIii = iii;
+        label.setOnAction(
+            actionEvent -> {
+              pathSwitchIndex(finalIii);
+            });
+
+        progressBox.getChildren().add(label);
+        iii++;
+      }
+    }
+    JFXButton label = new JFXButton();
+    label.setMinHeight(40);
+    label.setMinWidth(120);
+    label.setAlignment(Pos.CENTER);
+    label.setFont(new Font("Arial", 16));
+    label.setText(endNode.getBuilding() + " " + endNode.getFloor().replace("F", ""));
+    label.setBorder(
+        new Border(
+            new BorderStroke(
+                Color.web("rgba(255,255,255,0.9)"),
+                BorderStrokeStyle.SOLID,
+                null,
+                new BorderWidths(1))));
+    int finalIii1 = iii;
+    label.setOnAction(
+        actionEvent -> {
+          pathSwitchIndex(finalIii1);
+        });
+
+    progressBox.getChildren().add(label);
+    progressPane.setVisible(true);
+    setProgressColors(locationIndex);
   }
 
   public void placeButton(Node node) {
@@ -326,13 +477,21 @@ public class PathfinderController implements Initializable {
     double heightRatioMain = (double) currentPane.getPrefHeight() / MAIN_MAP_HEIGHT;
     double widthRatioMain = (double) currentPane.getPrefWidth() / MAIN_MAP_WIDTH;
 
+    boolean hasRequest = hasRequest(node);
+
     JFXButton button = new JFXButton();
     button.setId(node.getId());
     button.setMinSize(6, 6);
     button.setMaxSize(6, 6);
     button.setPrefSize(6, 6);
-    button.setStyle(
-        "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+
+    if (hasRequest && !(userLevel == null || userLevel == Account.Type.USER)) {
+      button.setStyle(
+          "-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #e8e15d; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+    } else {
+      button.setStyle(
+          "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+    }
     double xPos;
     double yPos;
     if ("Faulkner".equals(node.getBuilding())) {
@@ -345,19 +504,52 @@ public class PathfinderController implements Initializable {
     button.setLayoutX(xPos);
     button.setLayoutY(yPos);
 
+    button.setOnMouseClicked(
+        actionEvent -> {
+          if (actionEvent.getButton() == MouseButton.SECONDARY) {
+
+            if (userLevel == null || userLevel == Account.Type.USER) {
+              nodeInfoPaneUser.setVisible(true);
+            } else {
+              nodeInfoPane.setVisible(true);
+            }
+            Node whichNode = null;
+            for (Node thisNode : fullNodeList) {
+              if (thisNode.getId().equals(button.getId())) {
+                whichNode = thisNode;
+              }
+            }
+            try {
+              setNodeInfoLabels(whichNode);
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+          }
+        });
+
     button.setOnAction(
         actionEvent -> {
           if (startNode == node && state == 1) { // Click again to de-select if start has been set
             startNode = null;
-            button.setStyle(
-                "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+            if (hasRequest && !(userLevel == null || userLevel == Account.Type.USER)) {
+              button.setStyle(
+                  "-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #e8e15d; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+            } else {
+              button.setStyle(
+                  "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+            }
             state = 0;
             startCombo.setValue(null);
             startCombo.setDisable(false);
           } else if (endNode == node) { // deselect if end has been set, return to 1
             endNode = null;
-            button.setStyle(
-                "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+            if (hasRequest && !(userLevel == null || userLevel == Account.Type.USER)) {
+              button.setStyle(
+                  "-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #e8e15d; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+            } else {
+              button.setStyle(
+                  "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+            }
             state = 1;
             endCombo.setValue(null);
             pathButton.setDisable(true);
@@ -367,8 +559,13 @@ public class PathfinderController implements Initializable {
             stairsBtn.setDisable(false);
             elevBtn.setDisable(false);
             bathBtn.setDisable(false);
-            button.setStyle(
-                "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #00cc00; -fx-border-color: #000000; -fx-border-width: 1px"); // 800000
+            if (hasRequest) {
+              button.setStyle(
+                  "-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #00cc00; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+            } else {
+              button.setStyle(
+                  "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #00cc00; -fx-border-color: #000000; -fx-border-width: 1px"); // 800000
+            }
             commandText.setText("Select End Location or Building Feature");
             state = 1;
             // startCombo.setDisable(true);
@@ -376,8 +573,13 @@ public class PathfinderController implements Initializable {
             endCombo.setDisable(false);
           } else if (state == 1) { // select end if not set
             endNode = node;
-            button.setStyle(
-                "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px"); // 00cc00
+            if (hasRequest) {
+              button.setStyle(
+                  "-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+            } else {
+              button.setStyle(
+                  "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #ff0000; -fx-border-color: #000000; -fx-border-width: 1px"); // 800000
+            }
             commandText.setText("Select Find Path or Reset");
             state = 2;
             // endCombo.setDisable(true);
@@ -408,18 +610,28 @@ public class PathfinderController implements Initializable {
     if (startNode != null) {
       for (javafx.scene.Node component : currentPane.getChildren()) {
         if (component.getId().equals(startNode.getId())) {
-          component.setStyle(
-              "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; "
-                  + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
+          boolean hasRequest = hasRequest(startNode);
+          if (hasRequest && !(userLevel == null || userLevel == Account.Type.USER)) {
+            component.setStyle(
+                "-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #e8e15d; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+          } else {
+            component.setStyle(
+                "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+          }
         }
       }
     }
     if (endNode != null) {
       for (javafx.scene.Node component : currentPane.getChildren()) {
         if (component.getId().equals(endNode.getId())) {
-          component.setStyle(
-              "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; "
-                  + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
+          boolean hasRequest = hasRequest(endNode);
+          if (hasRequest && !(userLevel == null || userLevel == Account.Type.USER)) {
+            component.setStyle(
+                "-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #e8e15d; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+          } else {
+            component.setStyle(
+                "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+          }
         }
       }
     }
@@ -441,11 +653,14 @@ public class PathfinderController implements Initializable {
     externalDirections.setVisible(false);
     externalDirections.setPrefHeight(0);
     externalDirections.setPrefWidth(0);
+    userLevel = databaseManager.getPermissions();
 
     uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1, 1.33);
 
     startCombo.setValue(null);
     endCombo.setValue(null);
+
+    globalPath = null;
 
     setComboBehavior();
 
@@ -456,6 +671,9 @@ public class PathfinderController implements Initializable {
       endLabel.setVisible(false);
     }
     phoneNumber.setText("");
+
+    progressPane.setVisible(false);
+    progressBox.getChildren().clear();
   }
 
   private void resetButtonLine(String floor, String building) {
@@ -465,9 +683,23 @@ public class PathfinderController implements Initializable {
         nodesToRemove.add(node);
       } else if (node instanceof JFXButton) {
         JFXButton button = (JFXButton) node;
-        button.setStyle(
-            "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; "
-                + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
+
+        Node aNode1 = null;
+        for (Node aNode2 : fullNodeList) {
+          if (aNode2.getId().equals(node.getId())) {
+            aNode1 = aNode2;
+          }
+        }
+        if (null != aNode1) {
+          boolean hasRequest = hasRequest(aNode1);
+          if (hasRequest && !(userLevel == null || userLevel == Account.Type.USER)) {
+            button.setStyle(
+                "-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #e8e15d; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+          } else {
+            button.setStyle(
+                "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+          }
+        }
       }
     }
     getFloorPane(floor, building).getChildren().removeAll(nodesToRemove);
@@ -496,10 +728,16 @@ public class PathfinderController implements Initializable {
     scrollPaneFaulkner1.setVisible(true);
     mapPaneFaulkner1.setVisible(true);
     imageViewFaulkner1.setVisible(true);
+
     errorPane.setVisible(false);
+    nodeInfoPane.setVisible(false);
+    nodeInfoPaneUser.setVisible(false);
+    setNodeInfoComboPrompt();
+
     floorButtonsSet();
     initializehospitalComboBox();
     setToggleBehavior();
+    setDirectionsToggleBehavior();
     setErrorPaneButtonBehavior();
     externalDirections.setVisible(false);
     externalDirections.setPrefWidth(0);
@@ -512,7 +750,6 @@ public class PathfinderController implements Initializable {
     uiSetting.setAsLocationComboBox(endCombo);
 
     uiSetting.makeZoomable(scrollPaneFaulkner1, masterPaneFaulkner1, 1.33);
-    intermediateSetting.makeZoomable(scrollPaneIntermediate, stackPaneIntermediate, 1.00);
 
     for (Node node : databaseManager.getAllNodes()) {
       node.setEdges(databaseManager.getAllEdgesConnectedToNode(node.getId()));
@@ -594,8 +831,8 @@ public class PathfinderController implements Initializable {
     switchToFloor(startNode.getFloor(), startNode.getBuilding());
     startCombo.setDisable(true);
     endCombo.setDisable(true);
-    Path newPath = pathFindAlgorithm.pathfind(startNode, Node.NodeType.getEnum(type));
-    draw(newPath);
+    globalPath = pathFindAlgorithm.pathfind(startNode, Node.NodeType.getEnum(type));
+    draw(globalPath);
     commandText.setText("See Details Below or Reset for New Path");
   }
 
@@ -626,9 +863,14 @@ public class PathfinderController implements Initializable {
           if (startNode != null) {
             for (javafx.scene.Node component : currentPane.getChildren()) {
               if (component.getId().equals(startNode.getId())) {
-                component.setStyle(
-                    "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; "
-                        + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
+                boolean hasRequest = hasRequest(startNode);
+                if (hasRequest && !(userLevel == null || userLevel == Account.Type.USER)) {
+                  component.setStyle(
+                      "-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #e8e15d; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+                } else {
+                  component.setStyle(
+                      "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+                }
               }
             }
           }
@@ -659,9 +901,14 @@ public class PathfinderController implements Initializable {
           if (endNode != null) {
             for (javafx.scene.Node component : currentPane.getChildren()) {
               if (component.getId().equals(endNode.getId())) {
-                component.setStyle(
-                    "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; "
-                        + "-fx-border-color: #000000; -fx-border-width: 1px"); // 800000
+                boolean hasRequest = hasRequest(endNode);
+                if (hasRequest && !(userLevel == null || userLevel == Account.Type.USER)) {
+                  component.setStyle(
+                      "-fx-background-radius: 15px; -fx-border-radius: 15px; -fx-background-color: #e8e15d; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+                } else {
+                  component.setStyle(
+                      "-fx-background-radius: 10px; -fx-border-radius: 10px; -fx-background-color: #99d9ea; -fx-border-color: #000000; -fx-border-width: 1px"); // ff0000
+                }
               }
             }
           }
@@ -737,32 +984,32 @@ public class PathfinderController implements Initializable {
           endNode = findComboLocation(endCombo);
           System.out.println("start" + startNode);
           System.out.println("end" + endNode);
-          Path path = null;
+          globalPath = null;
+
+          try {
+            globalPath = pathFindAlgorithm.pathfind(startNode, endNode);
+          } catch (InstanceNotFoundException e) {
+            e.printStackTrace();
+          }
+
+          if (null == globalPath.getPath()) {
+            showErrorPane();
+          } else {
+            try {
+              commandText.setText("See Path Below for Directions");
+              draw(globalPath);
+              zoomToPath(globalPath.getPath().get(0).getFloor(), globalPath);
+            } catch (InstanceNotFoundException e) {
+              e.printStackTrace();
+            }
+          }
+
           switchToFloor(startNode.getFloor(), startNode.getBuilding());
           if (!"Faulkner".equals(startNode.getBuilding())) {
             labelNodeStart();
           }
           if (!"Faulkner".equals(endNode.getBuilding())) {
             labelNodeEnd();
-          }
-
-          System.out.println(liftType);
-
-          try {
-            path = pathFindAlgorithm.pathfind(startNode, endNode);
-          } catch (InstanceNotFoundException e) {
-            e.printStackTrace();
-          }
-
-          if (null == path.getPath()) {
-            showErrorPane();
-          } else {
-            try {
-              commandText.setText("See Path Below for Directions");
-              draw(path);
-            } catch (InstanceNotFoundException e) {
-              e.printStackTrace();
-            }
           }
         });
   }
@@ -825,12 +1072,25 @@ public class PathfinderController implements Initializable {
       selectFloorPane.setVisible(false);
       selectFloorPaneMain.setVisible(true);
     }
+
     currentPane = getFloorPane(floorNum, building);
     currentFloor = floorNum;
     currentBuilding = building;
+    System.out.println("Testing globalPath");
+
+    if (null != globalPath) {
+      System.out.println("globalPath not null");
+      // placeFloorEndButton(floorNum);
+      if (null != globalPath.getPath()) {
+        System.out.println("globalPath.getPath() not null");
+        zoomToPath(floorNum, globalPath);
+      }
+    }
+
     setAllInvisible();
     currentPane.setVisible(true);
     getFloorImage(floorNum, building).setVisible(true);
+
     deselectFloorButtons();
     getFloorButton(floorNum, building)
         .setStyle("-fx-background-color: #012D5A; -fx-background-radius: 10px");
@@ -838,6 +1098,7 @@ public class PathfinderController implements Initializable {
 
   public void pathSwitchPrevious(ActionEvent actionEvent) {
     locationIndex--;
+    setProgressColors(locationIndex);
     pathSwitchNext.setVisible(true);
     pathSwitchNext.setPrefHeight(50);
     btnSpacer.setPrefHeight(10);
@@ -852,7 +1113,11 @@ public class PathfinderController implements Initializable {
         path.getLocationAtIndex(locationIndex).getFloor(),
         path.getLocationAtIndex(locationIndex).getBuilding());
 
-    directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+    if (fullDirections) {
+      directionsDisplay.setText(directions.getFullDirectionsString());
+    } else {
+      directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+    }
 
     if (locationIndex == 0) {
       // If we have gotten back to the first floor, disable and hide the previous button
@@ -897,6 +1162,7 @@ public class PathfinderController implements Initializable {
 
   public void pathSwitchNext(ActionEvent actionEvent) {
     locationIndex++;
+    setProgressColors(locationIndex);
     pathSwitchPrevious.setVisible(true);
     pathSwitchPrevious.setPrefHeight(50);
     btnSpacer.setPrefHeight(10);
@@ -912,7 +1178,11 @@ public class PathfinderController implements Initializable {
           path.getLocationAtIndex(locationIndex).getFloor(),
           path.getLocationAtIndex(locationIndex).getBuilding());
     }
-    directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+    if (fullDirections) {
+      directionsDisplay.setText(directions.getFullDirectionsString());
+    } else {
+      directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+    }
 
     if (locationIndex == (path.getUniqueLocations() - 1)) {
       // If we have gotten to the final location, disable and hide the next button
@@ -953,6 +1223,100 @@ public class PathfinderController implements Initializable {
                 + path.getLocationAtIndex(locationIndex - 1).getFloor().replace("F", ""));
       }
     }
+  }
+
+  public void pathSwitchIndex(int index) {
+    locationIndex = index;
+    setProgressColors(locationIndex);
+    pathSwitchPrevious.setVisible(true);
+    pathSwitchPrevious.setPrefHeight(50);
+    pathSwitchNext.setVisible(true);
+    pathSwitchNext.setPrefHeight(50);
+    btnSpacer.setPrefHeight(10);
+    // Disable the external directions pane
+    externalDirections.setVisible(false);
+    externalDirections.setPrefHeight(0);
+    externalDirections.setPrefWidth(0);
+    System.out.println("Changed to Index: " + locationIndex);
+    System.out.println("Floor: " + path.getLocationAtIndex(locationIndex).getFloor());
+    System.out.println("Building: " + path.getLocationAtIndex(locationIndex).getBuilding());
+    if (!"OUT".equals(path.getLocationAtIndex(locationIndex).getBuilding())) {
+      switchToFloor(
+          path.getLocationAtIndex(locationIndex).getFloor(),
+          path.getLocationAtIndex(locationIndex).getBuilding());
+    }
+    if (fullDirections) {
+      directionsDisplay.setText(directions.getFullDirectionsString());
+    } else {
+      directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+    }
+
+    if (locationIndex == (path.getUniqueLocations() - 1)) {
+      // If we have gotten to the final location, disable and hide the next button
+      pathSwitchNext.setVisible(false);
+      pathSwitchNext.setPrefHeight(0);
+      btnSpacer.setPrefHeight(0);
+    } else if ("OUT".equals(path.getLocationAtIndex(locationIndex).getBuilding())) {
+      // This is the outdoor node, show the external directions
+      externalDirections.setPrefHeight(720);
+      externalDirections.setPrefWidth(1070);
+      externalDirections.setVisible(true);
+      setExternalDirections(
+          path.getLocationAtIndex(locationIndex - 1).getBuilding(),
+          path.getLocationAtIndex(locationIndex + 1).getBuilding());
+      pathSwitchNext.setText(
+          "Arrive at " + path.getLocationAtIndex(locationIndex + 1).getBuilding());
+      pathSwitchPrevious.setText(
+          "Return to " + path.getLocationAtIndex(locationIndex - 1).getBuilding());
+    } else if ("OUT".equals(path.getLocationAtIndex(locationIndex + 1).getBuilding())) {
+      // Exiting a building to go somewhere
+      pathSwitchNext.setText(
+          "Next: Go to " + path.getLocationAtIndex(locationIndex + 2).getBuilding());
+    } else {
+      pathSwitchNext.setText(
+          "Next: Go to floor "
+              + path.getLocationAtIndex(locationIndex + 1).getFloor().replace("F", ""));
+    }
+
+    if (locationIndex == 0) {
+      // If we have gotten back to the first floor, disable and hide the previous button
+      pathSwitchPrevious.setVisible(false);
+      pathSwitchPrevious.setPrefHeight(0);
+      btnSpacer.setPrefHeight(0);
+    } else if ("OUT".equals(path.getLocationAtIndex(locationIndex).getBuilding())) {
+      // This is the outdoor node, show the external directions
+      externalDirections.setPrefHeight(720);
+      externalDirections.setPrefWidth(1070);
+      externalDirections.setVisible(true);
+      setExternalDirections(
+          path.getLocationAtIndex(locationIndex - 1).getBuilding(),
+          path.getLocationAtIndex(locationIndex + 1).getBuilding());
+      pathSwitchNext.setText(
+          "Arrive at " + path.getLocationAtIndex(locationIndex + 1).getBuilding());
+      pathSwitchPrevious.setText(
+          "Return to " + path.getLocationAtIndex(locationIndex - 1).getBuilding());
+    } else if ("OUT".equals(path.getLocationAtIndex(locationIndex - 1).getBuilding())) {
+      // Exiting a building to go somewhere
+      pathSwitchPrevious.setText(
+          "Previous: Go to " + path.getLocationAtIndex(locationIndex - 2).getBuilding());
+    } else {
+      pathSwitchPrevious.setText(
+          "Previous: Go to floor "
+              + path.getLocationAtIndex(locationIndex - 1).getFloor().replace("F", ""));
+    }
+
+    // Need to update the text for previous button
+    //    if (!"OUT".equals(path.getLocationAtIndex(locationIndex).getBuilding())) {
+    //      if ("OUT".equals(path.getLocationAtIndex(locationIndex - 1).getBuilding())) {
+    //        // Previous node was the outdoor node
+    //        pathSwitchPrevious.setText(
+    //            "Previous: Go to " + path.getLocationAtIndex(locationIndex - 2).getBuilding());
+    //      } else {
+    //        pathSwitchPrevious.setText(
+    //            "Previous: Go to floor "
+    //                + path.getLocationAtIndex(locationIndex - 1).getFloor().replace("F", ""));
+    //      }
+    //    }
   }
 
   public AnchorPane getFloorPane(String floor, String building) {
@@ -1152,12 +1516,26 @@ public class PathfinderController implements Initializable {
         });
   }
 
+  private void setDirectionsToggleBehavior() {
+    directionsToggle.setDisableAnimation(true);
+    directionsToggle.setDisableVisualFocus(true);
+    directionsToggle.setOnAction(
+        actionEvent -> {
+          if (!directionsToggle.isSelected()) {
+            fullDirections = false;
+            directionsDisplay.setText(directions.getDirectionsStringForIndex(locationIndex));
+          } else {
+            fullDirections = true;
+            directionsDisplay.setText(directions.getFullDirectionsString());
+          }
+        });
+  }
+
   public void setExternalDirections(String fromBuilding, String toBuilding) {
     System.out.println(fromBuilding);
     System.out.println(toBuilding);
     if ("Faulkner".equals(fromBuilding) && "45 Francis".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      faulknerTo45FrancisImage.setVisible(true);
       faulknerTo45FrancisQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1166,7 +1544,6 @@ public class PathfinderController implements Initializable {
     } else if ("Faulkner".equals(fromBuilding)
         && ("75 Francis".equals(toBuilding) || ("Tower".equals(toBuilding)))) {
       setIntermediateMapsInvisible();
-      faulknerTo75FrancisImage.setVisible(true);
       faulknerTo75FrancisQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1174,7 +1551,6 @@ public class PathfinderController implements Initializable {
               "75+Francis+Street,+Boston,+MA");
     } else if ("Faulkner".equals(fromBuilding) && "BTM".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      faulknerToBTMImage.setVisible(true);
       faulknerToBTMQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1182,7 +1558,6 @@ public class PathfinderController implements Initializable {
               "Building+for+Transformative+Medicine+at+Brigham+and+Women's+Hospital,+Fenwood+Road,+Boston,+MA");
     } else if ("Faulkner".equals(fromBuilding) && "Shapiro".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      faulknerToShapiroImage.setVisible(true);
       faulknerToShapiroQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1191,7 +1566,6 @@ public class PathfinderController implements Initializable {
     } else if ("Faulkner".equals(fromBuilding)
         && ("15 Francis".equals(toBuilding) || ("FLEX".equals(toBuilding)))) {
       setIntermediateMapsInvisible();
-      faulknerTo15FrancisImage.setVisible(true);
       faulknerTo15FrancisQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1199,7 +1573,6 @@ public class PathfinderController implements Initializable {
               "15+Francis+Street,+Boston,+MA");
     } else if ("45 Francis".equals(fromBuilding) && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      Francis45ToFaulknerImage.setVisible(true);
       Francis45ToFaulknerQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1208,7 +1581,6 @@ public class PathfinderController implements Initializable {
     } else if (("75 Francis".equals(fromBuilding) || ("Tower".equals(fromBuilding)))
         && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      Francis75ToFaulknerImage.setVisible(true);
       Francis75ToFaulknerQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1216,7 +1588,6 @@ public class PathfinderController implements Initializable {
               "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA");
     } else if ("BTM".equals(fromBuilding) && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      BTMToFaulknerImage.setVisible(true);
       BTMToFaulknerQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1224,7 +1595,6 @@ public class PathfinderController implements Initializable {
               "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA");
     } else if ("Shapiro".equals(fromBuilding) && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      shapiroToFaulknerImage.setVisible(true);
       shapiroToFaulknerQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1233,7 +1603,6 @@ public class PathfinderController implements Initializable {
     } else if (("15 Francis".equals(fromBuilding) || ("FLEX".equals(fromBuilding)))
         && "Faulkner".equals(toBuilding)) {
       setIntermediateMapsInvisible();
-      francis15ToFaulknerImage.setVisible(true);
       francis15ToFaulknerQR.setVisible(true);
       googleMaps =
           new GoogleMaps(
@@ -1241,6 +1610,7 @@ public class PathfinderController implements Initializable {
               "Brigham+and+Women's+Faulkner+Hospital,+Centre+Street,+Boston,+MA");
     }
 
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedDriving870x720());
     driveTime.setText(googleMaps.driveTime());
     driveDistance.setText(googleMaps.driveDistance());
     transitTime.setText(googleMaps.transitTime());
@@ -1279,16 +1649,6 @@ public class PathfinderController implements Initializable {
   }
 
   public void setIntermediateMapsInvisible() {
-    faulknerTo45FrancisImage.setVisible(false);
-    faulknerTo75FrancisImage.setVisible(false);
-    faulknerToBTMImage.setVisible(false);
-    faulknerToShapiroImage.setVisible(false);
-    faulknerTo15FrancisImage.setVisible(false);
-    Francis45ToFaulknerImage.setVisible(false);
-    Francis75ToFaulknerImage.setVisible(false);
-    BTMToFaulknerImage.setVisible(false);
-    shapiroToFaulknerImage.setVisible(false);
-    francis15ToFaulknerImage.setVisible(false);
     faulknerTo45FrancisQR.setVisible(false);
     faulknerTo75FrancisQR.setVisible(false);
     faulknerToBTMQR.setVisible(false);
@@ -1303,5 +1663,612 @@ public class PathfinderController implements Initializable {
 
   public void switchAbout(ActionEvent actionEvent) throws IOException {
     sceneController.switchScene("About");
+  }
+
+  public void zoomToPath(String floorNum, Path path) {
+    System.out.println(
+        "In zoomToPath() --------------------------------------------------------------------");
+    System.out.println(floorNum);
+    double bigX = 0.0;
+    double bigY = 0.0;
+    double smallX = 5000.0;
+    double smallY = 5000.0;
+    double hVal = 0.0;
+    double vVal = 0.0;
+    List<Node> nodesOnFloor = getNodesOnFloor(floorNum);
+    for (Node node : nodesOnFloor) {
+      if (node.getXCoord() > bigX) {
+        bigX = node.getXCoord();
+      }
+      if (node.getYCoord() > bigY) {
+        bigY = node.getYCoord();
+      }
+      if (node.getXCoord() < smallX) {
+        smallX = node.getXCoord();
+      }
+      if (node.getYCoord() < smallY) {
+        smallY = node.getYCoord();
+      }
+    }
+    System.out.println(nodesOnFloor.size());
+    Node node1 = nodesOnFloor.get(0);
+    Node node2 = nodesOnFloor.get(nodesOnFloor.size() - 1);
+
+    double xDiff = bigX - smallX;
+    double yDiff = bigY - smallY;
+
+    if ("Faulkner".equals(nodesOnFloor.get(0).getBuilding())) {
+      double xFactor = FAULKNER_MAP_WIDTH / xDiff;
+      double yFactor = FAULKNER_MAP_HEIGHT / yDiff;
+      if (xFactor > 25.0) {
+        xFactor = 25.0;
+      }
+      if (yFactor > 25.0) {
+        yFactor = 25.0;
+      }
+      if (xFactor < 2.2) {
+        xFactor = 2.2;
+      }
+      if (yFactor < 2.2) {
+        yFactor = 2.2;
+      }
+      if (yDiff > xDiff) {
+        uiSetting.setZoomScaleValue(yFactor / 1.6);
+      } else {
+        uiSetting.setZoomScaleValue(xFactor / 1.6);
+      }
+      hVal =
+          (bigX - ((bigX - smallX) / 2))
+              / FAULKNER_MAP_WIDTH; // ((bigX + smallX) / 2) / FAULKNER_MAP_WIDTH;
+      vVal =
+          (bigY - ((bigY - smallY) / 2))
+              / FAULKNER_MAP_HEIGHT; // ((bigY + smallY) / 2) / FAULKNER_MAP_HEIGHT;
+      System.out.println("hVal =");
+      System.out.println(hVal);
+      if (hVal < 0.25) {
+        hVal = hVal - (0.5 * ((xDiff / FAULKNER_MAP_HEIGHT)));
+      } else if (hVal < 0.33) {
+        hVal = hVal - (0.4 * ((xDiff / FAULKNER_MAP_HEIGHT)));
+      } else if (hVal < 0.4) {
+        hVal = hVal - (0.3 * ((xDiff / FAULKNER_MAP_HEIGHT)));
+      } else if (hVal < 0.5) {
+        hVal = hVal - (0.2 * ((xDiff / FAULKNER_MAP_HEIGHT)));
+      } else if (hVal > 0.75) {
+        hVal = hVal + (0.3 * ((xDiff / FAULKNER_MAP_HEIGHT)));
+      } else if (hVal > 0.67) {
+        hVal = hVal + (0.4 * ((xDiff / FAULKNER_MAP_HEIGHT)));
+      } else if (hVal > 0.6) {
+        hVal = hVal + (0.5 * ((xDiff / FAULKNER_MAP_HEIGHT)));
+      } else if (hVal > 0.5) {
+        hVal = hVal + (0.2 * ((xDiff / FAULKNER_MAP_HEIGHT)));
+      }
+
+      System.out.println("vVal =");
+      System.out.println(vVal);
+      if (vVal < 0.25) {
+        vVal = vVal - (1.0 * ((yDiff / FAULKNER_MAP_WIDTH)));
+      } else if (vVal < 0.33) {
+        vVal = vVal - (0.8 * ((yDiff / FAULKNER_MAP_WIDTH)));
+      } else if (vVal < 0.4) {
+        vVal = vVal - (0.5 * ((yDiff / FAULKNER_MAP_WIDTH)));
+      } else if (vVal < 0.3) {
+        vVal = vVal - (0.2 * ((yDiff / FAULKNER_MAP_WIDTH)));
+      } else if (vVal > 0.75) {
+        vVal = vVal + (0.5 * ((yDiff / FAULKNER_MAP_WIDTH)));
+      } else if (vVal > 0.67) {
+        vVal = vVal + (0.4 * ((yDiff / FAULKNER_MAP_WIDTH)));
+      } else if (vVal > 0.6) {
+        vVal = vVal + (0.3 * ((yDiff / FAULKNER_MAP_WIDTH)));
+      } else if (vVal > 0.5) {
+        vVal = vVal + (0.2 * ((yDiff / FAULKNER_MAP_WIDTH)));
+      }
+
+    } else { // main campus
+      double xFactor = MAIN_MAP_WIDTH / xDiff;
+      double yFactor = MAIN_MAP_HEIGHT / yDiff;
+      if (xFactor > 25.0) {
+        xFactor = 25.0;
+      }
+      if (yFactor > 25.0) {
+        yFactor = 25.0;
+      }
+      if (xFactor < 2.2) {
+        xFactor = 2.2;
+      }
+      if (yFactor < 2.2) {
+        yFactor = 2.2;
+      }
+      System.out.println("Here tehy are");
+      System.out.println(xFactor);
+      System.out.println(yFactor);
+      if (yDiff > xDiff) {
+        uiSetting.setZoomScaleValue(yFactor / 1.6);
+      } else {
+        uiSetting.setZoomScaleValue(xFactor / 1.6);
+      }
+      hVal =
+          (bigX - ((bigX - smallX) / 2))
+              / MAIN_MAP_WIDTH; // ((bigX + smallX) / 2) / FAULKNER_MAP_WIDTH;
+      vVal =
+          (bigY - ((bigY - smallY) / 2))
+              / MAIN_MAP_HEIGHT; // ((bigY + smallY) / 2) / FAULKNER_MAP_HEIGHT;
+      System.out.println("hVal =");
+      System.out.println(hVal);
+      if (hVal < 0.25) {
+        hVal = hVal - (0.5 * ((xDiff / MAIN_MAP_HEIGHT)));
+      } else if (hVal < 0.33) {
+        hVal = hVal - (0.4 * ((xDiff / MAIN_MAP_HEIGHT)));
+      } else if (hVal < 0.4) {
+        hVal = hVal - (0.3 * ((xDiff / MAIN_MAP_HEIGHT)));
+      } else if (hVal < 0.5) {
+        hVal = hVal - (0.2 * ((xDiff / MAIN_MAP_HEIGHT)));
+      } else if (hVal > 0.75) {
+        hVal = hVal + (0.3 * ((xDiff / MAIN_MAP_HEIGHT)));
+      } else if (hVal > 0.67) {
+        hVal = hVal + (0.4 * ((xDiff / MAIN_MAP_HEIGHT)));
+      } else if (hVal > 0.6) {
+        hVal = hVal + (0.5 * ((xDiff / MAIN_MAP_HEIGHT)));
+      } else if (hVal > 0.5) {
+        hVal = hVal + (0.2 * ((xDiff / MAIN_MAP_HEIGHT)));
+      }
+
+      System.out.println("vVal =");
+      System.out.println(vVal);
+      if (vVal < 0.25) {
+        vVal = vVal - (0.7 * ((yDiff / MAIN_MAP_WIDTH)));
+      } else if (vVal < 0.33) {
+        vVal = vVal - (0.5 * ((yDiff / MAIN_MAP_WIDTH)));
+      } else if (vVal < 0.4) {
+        vVal = vVal - (0.3 * ((yDiff / MAIN_MAP_WIDTH)));
+      } else if (vVal < 0.5) {
+        vVal = vVal - (0.2 * ((yDiff / MAIN_MAP_WIDTH)));
+      } else if (vVal > 0.75) {
+        vVal = vVal + (0.5 * ((yDiff / MAIN_MAP_WIDTH)));
+      } else if (vVal > 0.67) {
+        vVal = vVal + (0.4 * ((yDiff / MAIN_MAP_WIDTH)));
+      } else if (vVal > 0.6) {
+        vVal = vVal + (0.3 * ((yDiff / MAIN_MAP_WIDTH)));
+      } else if (vVal > 0.5) {
+        vVal = vVal + (0.2 * ((yDiff / MAIN_MAP_WIDTH)));
+      }
+    }
+    uiSetting.setScrollPaneValues(hVal, vVal);
+    System.out.println(
+        "Out of zoomToPath() --------------------------------------------------------------------");
+  }
+
+  public void nodeInfoButtonBehavior() {
+    if (userLevel == null || userLevel == Account.Type.USER) {
+      nodeInfoLabel1User.setText("");
+      nodeInfoLabel2User.setText("");
+      nodeInfoPaneUser.setVisible(false);
+    } else {
+      nodeInfoLabel1.setText("");
+      nodeInfoLabel2.setText("");
+      nodeInfoPane.setVisible(false);
+    }
+  }
+
+  public void setNodeInfoLabels(Node node) throws Exception {
+    if (userLevel == null || userLevel == Account.Type.USER) {
+      nodeInfoLabel1User.setText(node.getLongName());
+      nodeInfoLabel2User.setText(node.getId());
+    } else {
+      nodeInfoLabel1.setText(node.getLongName());
+      nodeInfoLabel2.setText(node.getId());
+      setNodeInfoTypeCombo(node);
+
+      if (userLevel == null || userLevel == Account.Type.USER) {
+        nodeInfoLabel3.setVisible(true);
+        nodeInfoTypeCombo.setVisible(true); // deal with this later
+        nodeInfoCombo.setVisible(true);
+      } else {
+        nodeInfoLabel3.setVisible(true);
+        nodeInfoTypeCombo.setVisible(true);
+        nodeInfoCombo.setVisible(true);
+      }
+
+      sanitationList = databaseManager.getAllSanitationRequests();
+      computerList = databaseManager.getAllComputerServiceRequests();
+      flowerList = databaseManager.getAllFlowerRequests();
+      laundryList = databaseManager.getAllLaunduaryRequests();
+      maintenanceList = databaseManager.getAllMaintenanceRequests();
+      mariachiList = databaseManager.getAllMariachiServiceRequests();
+      medicineList = databaseManager.getAllMedicineDeliveryRequests();
+      languageList = databaseManager.getAllLanguageServiceRequests();
+      securityList = databaseManager.getAllSecurityRequests();
+      tranportList = databaseManager.getAllTransportRequests();
+
+      tempSanitationList = FXCollections.observableArrayList();
+      for (SanitationServiceRequest sanitationServiceRequest : sanitationList) {
+        if (sanitationServiceRequest.getLocation().getId().equals(node.getId())) {
+          tempSanitationList.add(
+              sanitationServiceRequest.getType() + " " + sanitationServiceRequest.getId());
+        }
+      }
+
+      tempComputerList = FXCollections.observableArrayList();
+      for (ComputerServiceRequest computerServiceRequest : computerList) {
+        if (computerServiceRequest.getLocation().getId().equals(node.getId())) {
+          tempComputerList.add(
+              computerServiceRequest.getHardwareSoftware() + " " + computerServiceRequest.getId());
+        }
+      }
+
+      tempFlowerList = FXCollections.observableArrayList();
+      for (FlowerRequest flowerRequest : flowerList) {
+        if (flowerRequest.getLocation().getId().equals(node.getId())) {
+          tempFlowerList.add(flowerRequest.getChoice() + " " + flowerRequest.getId());
+        }
+      }
+
+      tempLaundryList = FXCollections.observableArrayList();
+      for (LaundryServiceRequest laundryServiceRequest : laundryList) {
+        if (laundryServiceRequest.getLocation().getId().equals(node.getId())) {
+          tempLaundryList.add("Laundry " + laundryServiceRequest.getId());
+        }
+      }
+
+      tempMaintenanceList = FXCollections.observableArrayList();
+      for (MaintenanceRequest maintenanceRequest : maintenanceList) {
+        if (maintenanceRequest.getLocation().getId().equals(node.getId())) {
+          tempMaintenanceList.add("Maintenance " + maintenanceRequest.getId());
+        }
+      }
+
+      tempMariachiList = FXCollections.observableArrayList();
+      for (MariachiRequest mariachiRequest : mariachiList) {
+        if (mariachiRequest.getLocation().getId().equals(node.getId())) {
+          tempMariachiList.add("Mariachi " + mariachiRequest.getId());
+        }
+      }
+
+      tempMedicineList = FXCollections.observableArrayList();
+      for (MedicineDeliveryRequest medicineDeliveryRequest : medicineList) {
+        if (medicineDeliveryRequest.getLocation().getId().equals(node.getId())) {
+          tempMedicineList.add(
+              medicineDeliveryRequest.getMedicineType() + " " + medicineDeliveryRequest.getId());
+        }
+      }
+
+      tempLanguageList = FXCollections.observableArrayList();
+      for (LanguageServiceRequest languageServiceRequest : languageList) {
+        if (languageServiceRequest.getLocation().getId().equals(node.getId())) {
+          tempLanguageList.add(
+              languageServiceRequest.getProblemType() + " " + languageServiceRequest.getId());
+        }
+      }
+
+      tempSecurityList = FXCollections.observableArrayList();
+      for (SecurityRequest securityRequest : securityList) {
+        if (securityRequest.getLocation().getId().equals(node.getId())) {
+          tempSecurityList.add("Security " + securityRequest.getId());
+        }
+      }
+
+      tempTransportList = FXCollections.observableArrayList();
+      for (TransportRequest transportRequest : tranportList) {
+        if (transportRequest.getLocation().getId().equals(node.getId())) {
+          tempTransportList.add(transportRequest.getType() + " " + transportRequest.getId());
+        }
+      }
+    }
+  }
+
+  public List<Node> getNodesOnFloor(String floorNum) {
+    List<Node> returnList = new ArrayList<>();
+    for (Node node : globalPath.getPath()) {
+      if (node.getFloor().equals(floorNum)) {
+        returnList.add(node);
+      }
+    }
+    return returnList;
+  }
+
+  public void setNodeInfoTypeCombo(Node node) {
+    ObservableList<String> list = FXCollections.observableArrayList();
+    for (SanitationServiceRequest sanitationServiceRequest : sanitationList) {
+      if (node.getId().equals(sanitationServiceRequest.getLocation().getId())
+          && !list.contains("Sanitation")) {
+        list.add("Sanitation");
+      }
+    }
+
+    for (ComputerServiceRequest computerServiceRequest : computerList) {
+      if (node.getId().equals(computerServiceRequest.getLocation().getId())
+          && !list.contains("Computer")) {
+        list.add("Computer");
+      }
+    }
+
+    for (FlowerRequest flowerRequest : flowerList) {
+      if (node.getId().equals(flowerRequest.getLocation().getId()) && !list.contains("Flower")) {
+        list.add("Flower");
+      }
+    }
+
+    for (LanguageServiceRequest languageServiceRequest : languageList) {
+      if (node.getId().equals(languageServiceRequest.getLocation().getId())
+          && !list.contains("Laguage")) {
+        list.add("Language");
+      }
+    }
+
+    for (LaundryServiceRequest laundryServiceRequest : laundryList) {
+      if (node.getId().equals(laundryServiceRequest.getLocation().getId())
+          && !list.contains("Laundry")) {
+        list.add("Laundry");
+      }
+    }
+
+    for (MaintenanceRequest maintenanceRequest : maintenanceList) {
+      if (node.getId().equals(maintenanceRequest.getLocation().getId())
+          && !list.contains("Maintenance")) {
+        list.add("Maintenance");
+      }
+    }
+
+    for (MariachiRequest mariachiRequest : mariachiList) {
+      if (node.getId().equals(mariachiRequest.getLocation().getId())
+          && !list.contains("Mariachi")) {
+        list.add("Mariachi");
+      }
+    }
+
+    for (MedicineDeliveryRequest medicineDeliveryRequest : medicineList) {
+      if (node.getId().equals(medicineDeliveryRequest.getLocation().getId())
+          && !list.contains("Medicine")) {
+        list.add("Medicine");
+      }
+    }
+
+    for (SecurityRequest securityRequest : securityList) {
+      if (node.getId().equals(securityRequest.getLocation().getId())
+          && !list.contains("Security")) {
+        list.add("Security");
+      }
+    }
+
+    for (TransportRequest transportRequest : tranportList) {
+      if (node.getId().equals(transportRequest.getLocation().getId())
+          && !list.contains("Transport")) {
+        list.add("Transport");
+      }
+    }
+
+    if (list.isEmpty()) {
+      list.add("No service requests");
+      ObservableList<String> blankList = FXCollections.observableArrayList();
+      blankList.add("No service requests");
+      nodeInfoCombo.setItems(blankList);
+    }
+    nodeInfoTypeCombo.setItems(list);
+  }
+
+  public void setNodeInfoCombo() {
+    ObservableList<String> blankList = FXCollections.observableArrayList();
+    blankList.add("No service requests");
+    nodeInfoCombo.setItems(blankList);
+    switch (nodeInfoTypeCombo.getValue()) {
+      case "Sanitation":
+        if (tempSanitationList.isEmpty()) {
+          tempSanitationList.add("No service requests");
+        }
+        nodeInfoCombo.setItems(tempSanitationList);
+        break;
+      case "Computer":
+        if (tempComputerList.isEmpty()) {
+          tempComputerList.add("No service requests");
+        }
+        nodeInfoCombo.setItems(tempComputerList);
+        break;
+      case "Flower":
+        if (tempFlowerList.isEmpty()) {
+          tempFlowerList.add("No service requests");
+        }
+        nodeInfoCombo.setItems(tempFlowerList);
+        break;
+      case "Language":
+        if (tempLanguageList.isEmpty()) {
+          tempLanguageList.add("No service requests");
+        }
+        nodeInfoCombo.setItems(tempLanguageList);
+        break;
+      case "Laundry":
+        if (tempLaundryList.isEmpty()) {
+          tempLaundryList.add("No service requests");
+        }
+        nodeInfoCombo.setItems(tempLaundryList);
+        break;
+      case "Maintenance":
+        if (tempMaintenanceList.isEmpty()) {
+          tempComputerList.add("No service requests");
+        }
+        nodeInfoCombo.setItems(tempComputerList);
+        break;
+      case "Mariachi":
+        if (tempMariachiList.isEmpty()) {
+          tempMariachiList.add("No service requests");
+        }
+        nodeInfoCombo.setItems(tempMariachiList);
+        break;
+      case "Medicine":
+        if (tempMedicineList.isEmpty()) {
+          tempMedicineList.add("No service requests");
+        }
+        nodeInfoCombo.setItems(tempMedicineList);
+        break;
+      case "Security":
+        if (tempSecurityList.isEmpty()) {
+          tempSecurityList.add("No service requests");
+        }
+        nodeInfoCombo.setItems(tempSecurityList);
+        break;
+      case "Transport":
+        if (tempTransportList.isEmpty()) {
+          tempTransportList.add("No service requests");
+        }
+        nodeInfoCombo.setItems(tempTransportList);
+        break;
+      default:
+        nodeInfoCombo.setItems(blankList);
+    }
+  }
+
+  public void goToServiceRequest(ActionEvent actionEvent) throws IOException {
+    switch (nodeInfoTypeCombo.getValue()) {
+      case ("Computer"):
+        sceneController.switchScene("ComputerServiceRequest");
+        break;
+      case ("Medicine"):
+        sceneController.switchScene("MedicineDeliveryRequest");
+        break;
+      case ("Language"):
+        sceneController.switchScene("LanguageServiceController2");
+        break;
+      case ("Sanitation"):
+        sceneController.switchScene("SanitationServiceRequest");
+        break;
+      case ("Mariachi"):
+        sceneController.switchScene("MariachiRequest");
+        break;
+      case ("Security"):
+        sceneController.switchScene("SecurityRequest");
+        break;
+      case ("Laundry"):
+        sceneController.switchScene("LaundryServiceRequest");
+        break;
+      case ("Flower"):
+        sceneController.switchScene("FlowerRequestInfo");
+        break;
+      case ("Maintenance"):
+        sceneController.switchScene("MaintenenceRequest");
+        break;
+      case ("Transport"):
+        sceneController.switchScene("TransportRequest");
+        break;
+      default:
+        break;
+    }
+  }
+
+  public boolean hasRequest(Node node) {
+    boolean bool = false;
+    for (SanitationServiceRequest sanitationServiceRequest : sanitationList) {
+      if (node.getId().equals(sanitationServiceRequest.getLocation().getId())) {
+        bool = true;
+      }
+    }
+
+    for (ComputerServiceRequest computerServiceRequest : computerList) {
+      if (node.getId().equals(computerServiceRequest.getLocation().getId())) {
+        bool = true;
+      }
+    }
+
+    for (FlowerRequest flowerRequest : flowerList) {
+      if (node.getId().equals(flowerRequest.getLocation().getId())) {
+        bool = true;
+      }
+    }
+
+    for (LanguageServiceRequest languageServiceRequest : languageList) {
+      if (node.getId().equals(languageServiceRequest.getLocation().getId())) {
+        bool = true;
+      }
+    }
+
+    for (LaundryServiceRequest laundryServiceRequest : laundryList) {
+      if (node.getId().equals(laundryServiceRequest.getLocation().getId())) {
+        bool = true;
+      }
+    }
+
+    for (MaintenanceRequest maintenanceRequest : maintenanceList) {
+      if (node.getId().equals(maintenanceRequest.getLocation().getId())) {
+        bool = true;
+      }
+    }
+
+    for (MariachiRequest mariachiRequest : mariachiList) {
+      if (node.getId().equals(mariachiRequest.getLocation().getId())) {
+        bool = true;
+      }
+    }
+
+    for (MedicineDeliveryRequest medicineDeliveryRequest : medicineList) {
+      if (node.getId().equals(medicineDeliveryRequest.getLocation().getId())) {
+        bool = true;
+      }
+    }
+
+    for (SecurityRequest securityRequest : securityList) {
+      if (node.getId().equals(securityRequest.getLocation().getId())) {
+        bool = true;
+      }
+    }
+
+    for (TransportRequest transportRequest : tranportList) {
+      if (node.getId().equals(transportRequest.getLocation().getId())) {
+        bool = true;
+      }
+    }
+    return bool;
+  }
+
+  public void setNodeInfoComboPrompt() {
+    nodeInfoTypeCombo.setPromptText("Type:");
+    nodeInfoCombo.setPromptText("Request:");
+  }
+
+  public void modeDriving(ActionEvent actionEvent) {
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedDriving870x720());
+    driveTime.setText(googleMaps.driveTime());
+    driveDistance.setText(googleMaps.driveDistance());
+  }
+
+  public void modeTransit(ActionEvent actionEvent) {
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedTransit870x720());
+    transitTime.setText(googleMaps.transitTime());
+    transitDistance.setText(googleMaps.transitDistance());
+  }
+
+  public void modeBicycling(ActionEvent actionEvent) {
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedBicycling870x720());
+    bikeTime.setText(googleMaps.bikeTime());
+    bikeDistance.setText(googleMaps.bikeDistance());
+  }
+
+  public void modeWalking(ActionEvent actionEvent) {
+    webview.getEngine().loadContent(googleMaps.getDirectionsEmbedWalking870x720());
+    walkTime.setText(googleMaps.walkTime());
+    walkDistance.setText(googleMaps.walkDistance());
+  }
+
+  public void setProgressColors(int currIndex) {
+    for (int i = 0; i < progressBox.getChildren().size(); i++) {
+      if (i == currIndex) {
+        // Current = dark blue
+        JFXButton label = (JFXButton) progressBox.getChildren().get(i);
+        label.setBackground(
+            new Background(
+                new BackgroundFill(Color.web("#012D5A"), CornerRadii.EMPTY, Insets.EMPTY)));
+        label.setTextFill(Color.WHITE);
+      } else if (i < currIndex) {
+        // Previous = green
+        JFXButton label = (JFXButton) progressBox.getChildren().get(i);
+        label.setBackground(
+            new Background(
+                new BackgroundFill(Color.web("#90EE90"), CornerRadii.EMPTY, Insets.EMPTY)));
+        label.setTextFill(Color.BLACK);
+      } else {
+        // Upcoming = grey
+        JFXButton label = (JFXButton) progressBox.getChildren().get(i);
+        label.setBackground(
+            new Background(
+                new BackgroundFill(Color.web("#D3D3D3"), CornerRadii.EMPTY, Insets.EMPTY)));
+        label.setTextFill(Color.BLACK);
+      }
+    }
   }
 }

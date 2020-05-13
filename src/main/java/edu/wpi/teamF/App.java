@@ -3,6 +3,7 @@ package edu.wpi.teamF;
 import edu.wpi.teamF.Controllers.*;
 import java.io.IOException;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 public class App extends Application {
 
   private static SceneController sceneController;
+  public static Stage pStage;
 
   public App() throws Exception {}
 
@@ -37,12 +39,14 @@ public class App extends Application {
       new MaintenanceRequestController();
   private DataViewController dataViewController = new DataViewController();
   private TranslatorController translatorController = new TranslatorController();
+  private ContactUsController contactUsController = new ContactUsController();
 
   @Override
   public void init() {}
 
   @Override
   public void start(Stage primaryStage) throws IOException {
+    pStage = primaryStage;
 
     Scene primaryScene = new Scene(new AnchorPane());
     FXMLLoader fxmlLoader = new FXMLLoader();
@@ -76,18 +80,29 @@ public class App extends Application {
             return dataViewController;
           } else if (controllerClass.equals(TranslatorController.class)) {
             return translatorController;
+          } else if (controllerClass.equals(ContactUsController.class)) {
+            return contactUsController;
           }
           return null;
         });
     sceneController = new SceneController(fxmlLoader, primaryStage, primaryScene);
+    accountsController.addListener(sceneController);
     Parent root = fxmlLoader.load(getClass().getResource("Views/MainMenu.fxml"));
     primaryScene.setRoot(root);
     primaryStage.setScene(primaryScene);
     // primaryStage.setAlwaysOnTop(true);
     primaryStage.show();
     primaryStage.setMaximized(true);
-
     //    primaryStage.setFullScreen(true);
+  }
+
+  public static Stage getPrimaryStage() {
+    return pStage;
+  }
+
+  public void reset() throws Exception {
+    pathfinderController = new PathfinderController();
+    menuBarController.logout(new ActionEvent());
   }
 
   @Override

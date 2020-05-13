@@ -1,59 +1,181 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
 
-<AnchorPane prefHeight="525.0" prefWidth="584.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.ContactUsController">
     <children>
-        <GridPane layoutX="174.0" layoutY="87.0" prefHeight="419.0" prefWidth="335.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="190.0" prefHeight="220.0" prefWidth="394.0" AnchorPane.bottomAnchor="283.80000000000007" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="418.0" fitWidth="1730.0" pickOnBounds="true" AnchorPane.bottomAnchor="98.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-640.0" AnchorPane.topAnchor="0.0">
+               <image>
+                  <Image url="@../../../../Images/main_calathea-banner-min.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+        <GridPane layoutX="174.0" layoutY="87.0" prefHeight="419.0" prefWidth="335.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="600.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
-                <ColumnConstraints hgrow="SOMETIMES" percentWidth="88.0" />
+                <ColumnConstraints hgrow="SOMETIMES" percentWidth="8.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" percentWidth="50.0" />
                 <ColumnConstraints hgrow="SOMETIMES" percentWidth="2.0" />
             </columnConstraints>
             <rowConstraints>
                 <RowConstraints percentHeight="5.0" vgrow="SOMETIMES" />
-                <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
-                <RowConstraints vgrow="SOMETIMES" />
-                <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="287.0" minHeight="122.0" percentHeight="40.0" prefHeight="287.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="313.0" minHeight="148.0" percentHeight="50.0" prefHeight="148.0" vgrow="SOMETIMES" />
+                <RowConstraints percentHeight="12.0" valignment="CENTER" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="2.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <children>
-                        <Label text="Contact Us">
+                        <Label text="Contact Us" textFill="WHITE" StackPane.alignment="CENTER">
                             <font>
-                                <Font name="STIXGeneral-Regular" size="24.0" />
+                                <Font name="Dubai Bold" size="72.0" />
                             </font>
+                     <effect>
+                        <DropShadow color="#252f6fd6" height="62.51" radius="25.5675" width="41.76" />
+                     </effect>
                         </Label>
                     </children>
                 </StackPane>
-                <GridPane prefHeight="341.0" prefWidth="345.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                <GridPane prefHeight="589.0" prefWidth="1138.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" percentWidth="100.0" />
+                        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" percentWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
-                        <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
-                        <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
-                        <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
-                        <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
-                        <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="35.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints percentHeight="8.0" vgrow="SOMETIMES" />
+                        <RowConstraints percentHeight="8.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="3.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints percentHeight="8.0" vgrow="SOMETIMES" />
+                        <RowConstraints percentHeight="8.0" vgrow="SOMETIMES" />
+                        <RowConstraints percentHeight="8.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" percentHeight="17.0" prefHeight="30.0" valignment="BOTTOM" vgrow="SOMETIMES" />
                     </rowConstraints>
                     <children>
-                        <Label prefHeight="20.0" prefWidth="282.0" text="Brigham and women's hosptial" />
-                        <Label prefHeight="17.0" prefWidth="249.0" text="General Information: 617-732-5500" GridPane.rowIndex="2" />
-                        <Label prefHeight="68.0" prefWidth="352.0" text="New patients: Request an appointment at 1-800-294-9999" wrapText="true" GridPane.rowIndex="3" />
-                        <Label prefHeight="17.0" prefWidth="246.0" text="75 Francis Street, Boston MA 02115" GridPane.rowIndex="1" />
-                        <Label prefHeight="17.0" prefWidth="291.0" text="Doctors' appointment: Call 1-800-MD-to-BWH" GridPane.rowIndex="4" />
+                        <Label prefHeight="44.0" prefWidth="633.0" text="Brigham and Women's Hosptial" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Dubai Regular" size="24.0" />
+                     </font>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                     <padding>
+                        <Insets left="175.0" />
+                     </padding></Label>
+                        <Label prefHeight="32.0" prefWidth="643.0" text="General Information: 617-732-5500" GridPane.rowIndex="4">
+                     <font>
+                        <Font name="Dubai Light" size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets left="175.0" />
+                     </padding></Label>
+                        <Label prefHeight="47.0" prefWidth="686.0" text="New patients: Request an appointment at 1-800-294-9999" wrapText="true" GridPane.rowIndex="5">
+                     <font>
+                        <Font name="Dubai Light" size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets left="175.0" />
+                     </padding></Label>
+                        <Label prefHeight="44.0" prefWidth="683.0" text="75 Francis Street, Boston, MA 02115" GridPane.rowIndex="2">
+                     <font>
+                        <Font name="Dubai Regular" size="24.0" />
+                     </font>
+                     <padding>
+                        <Insets left="175.0" />
+                     </padding></Label>
+                        <Label prefHeight="32.0" prefWidth="668.0" text="Doctors' appointment: Call 1-800-MD-to-BWH" GridPane.rowIndex="6">
+                     <font>
+                        <Font name="Dubai Light" size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets left="175.0" />
+                     </padding></Label>
+                  <Label text="STAY INFORMED. CONNECT WITH US." GridPane.rowIndex="7">
+                     <font>
+                        <Font name="Dubai Bold" size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="5.0" left="175.0" top="5.0" />
+                     </padding>
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Label>
                     </children>
                 </GridPane>
+            <HBox prefHeight="129.0" prefWidth="660.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <children>
+                  <ImageView fx:id="facebook" fitHeight="52.0" fitWidth="52.0" onMouseClicked="#toFacebook" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/icons8-facebook-480.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="linked" fitHeight="40.0" fitWidth="43.0" onMouseClicked="#toLinkedIn" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/iconfinder_social_style_3_in_341103.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="instagram" fitHeight="55.0" fitWidth="42.0" onMouseClicked="#toInstagram" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/iconfinder_Instagram_1298747.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="youtube" fitHeight="42.0" fitWidth="47.0" onMouseClicked="#toYoutube" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/material+network+social+video+youtube+icon-1320184946764047044.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="twitter" fitHeight="41.0" fitWidth="43.0" onMouseClicked="#toTwitter" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/twitter.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+                  <ImageView fx:id="blog" fitHeight="54.0" fitWidth="53.0" onMouseClicked="#toBlog" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../../Images/post-outline.png" />
+                     </image>
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" />
+                     </HBox.margin>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets left="175.0" />
+               </padding>
+            </HBox>
             </children>
         </GridPane>
       <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <AnchorPane fx:id="web" layoutX="190.0" prefHeight="525.0" prefWidth="394.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+             <WebView fx:id="webView" prefHeight="525.0" prefWidth="394.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>

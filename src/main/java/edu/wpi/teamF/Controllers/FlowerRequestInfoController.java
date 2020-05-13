@@ -109,6 +109,8 @@ public class FlowerRequestInfoController implements Initializable {
   public AnchorPane chosePane;
   public GridPane servicePane;
   public AnchorPane anchorSubmit;
+  public JFXComboBox<String> toDelete;
+  public JFXButton deleteButton;
   SceneController sceneController = App.getSceneController();
 
   ObservableList<UiFlowerServiceRequest> frUI = FXCollections.observableArrayList();
@@ -123,10 +125,17 @@ public class FlowerRequestInfoController implements Initializable {
     Account.Type userLevel = databaseManager.getPermissions();
     if (userLevel == Account.Type.USER) {
       checkStatusButton.setDisable(true);
+      checkStatusButton.setVisible(false);
 
       // set to user
-    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+    } else if (userLevel == Account.Type.STAFF) {
       checkStatusButton.setDisable(false);
+      checkStatusButton.setVisible(true);
+      deleteButton.setDisable(true);
+    } else if (userLevel == Account.Type.ADMIN) {
+      checkStatusButton.setDisable(false);
+      deleteButton.setDisable(false);
+      checkStatusButton.setVisible(true);
     }
 
     UISetting uiSetting = new UISetting();
@@ -348,6 +357,9 @@ public class FlowerRequestInfoController implements Initializable {
     for (FlowerRequest fr : flowerServiceRequests) {
       frUI.add(new UiFlowerServiceRequest(fr));
     }
+    for (UiFlowerServiceRequest yuh : frUI) {
+      toDelete.getItems().add((yuh.getID().get()));
+    }
 
     final TreeItem<UiFlowerServiceRequest> root =
         new RecursiveTreeItem<UiFlowerServiceRequest>(frUI, RecursiveTreeObject::getChildren);
@@ -426,6 +438,7 @@ public class FlowerRequestInfoController implements Initializable {
     messsageInput.setText("");
     recipientInput.setText("");
     buyerNameInput.setText("");
+    phoneNumberInput.setText("");
     roomInput.setText("");
     giftWrapCheckBox.setSelected(false);
     locationComboBox.setValue(null);
@@ -433,7 +446,9 @@ public class FlowerRequestInfoController implements Initializable {
     servicePane.setVisible(false);
     checkStatusPane.setVisible(false);
     flowerPane.setVisible(true);
-    flowerRequestLabel.setVisible(false);
+    // flowerRequestLabel.setVisible(false);
+    chosePane.toFront();
+    toDelete.getItems().add(fsRequest.getId());
   }
 
   public void cancel(ActionEvent actionEvent) {
@@ -471,11 +486,11 @@ public class FlowerRequestInfoController implements Initializable {
   }
 
   public void delete(ActionEvent actionEvent) {
-    String toDelete = deleteText.getText();
-    databaseManager.deleteFlowerRequest(toDelete);
-    frUI.removeIf(flowerServiceRequest -> flowerServiceRequest.getID().get().equals(toDelete));
-    deleteText.setText("");
+    String toDel = toDelete.getValue();
+    databaseManager.deleteFlowerRequest(toDel);
+    frUI.removeIf(flowerServiceRequest -> flowerServiceRequest.getID().get().equals(toDel));
     treeTableFlower.refresh();
+    toDelete.getItems().remove(toDelete.getValue());
   }
 
   public void request(ActionEvent actionEvent) {

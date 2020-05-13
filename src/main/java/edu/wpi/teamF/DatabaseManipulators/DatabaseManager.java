@@ -976,7 +976,11 @@ public class DatabaseManager {
   }
 
   public void setLogin(String username) throws InstanceNotFoundException {
-    accountLogged = accountFactory.read(username);
+    if (username != null) {
+      accountLogged = accountFactory.read(username);
+    } else {
+      accountLogged = null;
+    }
   }
 
   public Account.Type getPermissions() {

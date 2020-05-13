@@ -2,6 +2,9 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -10,68 +13,112 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" prefHeight="526.0" prefWidth="1082.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.HelpController">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: light blue;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.HelpController">
    <children>
       <fx:include source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-      <GridPane layoutX="239.0" layoutY="36.0" prefHeight="233.0" prefWidth="270.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fx:id="background" fitHeight="600.0" fitWidth="931.0" layoutX="24.0" layoutY="58.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../../../../Images/BWH%20Shapiro%202.jpg" />
+         </image>
+      </ImageView>
+      <GridPane layoutX="239.0" layoutY="208.0" prefHeight="502.0" prefWidth="894.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" percentWidth="10.0" />
-          <ColumnConstraints hgrow="SOMETIMES" percentWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="85.0" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="5.0" />
         </columnConstraints>
         <rowConstraints>
-          <RowConstraints percentHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints percentHeight="20.0" vgrow="SOMETIMES" />
-          <RowConstraints percentHeight="40.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="5.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="25.0" vgrow="SOMETIMES" />
+          <RowConstraints percentHeight="90.0" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="10.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
+            <StackPane fx:id="stackPane" prefHeight="643.0" prefWidth="769.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <Label text="Help">
-                     <font>
-                        <Font name="Dubai Light" size="64.0" />
-                     </font>
-                  </Label>
+                  <ScrollPane prefHeight="458.0" prefWidth="934.0" style="-fx-background-color: white; -fx-border-color: white;">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="665.0" prefWidth="696.0" style="-fx-background-color: ../../../../Images/BWH Shapiro 2.jpg../../../../Images/BWH Shapiro 2.jpg;">
+                           <children>
+                              <VBox layoutY="6.0" prefHeight="939.0" prefWidth="1027.0">
+                                 <children>
+                                    <Label prefHeight="48.0" prefWidth="917.0" text="     Here are some general questions to help you get a basic understanding">
+                                       <font>
+                                          <Font name="Dubai Light" size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="40.0" prefWidth="902.0" text="     of how to use this application. If you have any other specific questions,">
+                                       <font>
+                                          <Font name="Dubai Light" size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <Label prefHeight="40.0" prefWidth="729.0" text="     please ask a staff for help or contact us directly." wrapText="true">
+                                       <font>
+                                          <Font name="Dubai Light" size="24.0" />
+                                       </font>
+                                    </Label>
+                                    <VBox prefHeight="453.0" prefWidth="719.0">
+                                       <children>
+                                          <Label text=" ">
+                                             <font>
+                                                <Font size="36.0" />
+                                             </font>
+                                          </Label>
+                                          <JFXButton fx:id="signup" onAction="#signup" text="     How do I sign up?">
+                                             <font>
+                                                <Font name="Dubai Light" size="24.0" />
+                                             </font>
+                                          </JFXButton>
+                                          <JFXButton fx:id="login" onAction="#login" text="     How do I login?">
+                                             <font>
+                                                <Font name="Dubai Light" size="24.0" />
+                                             </font>
+                                          </JFXButton>
+                                          <JFXButton fx:id="findpath" onAction="#findpath" text="     How do I find a path?">
+                                             <font>
+                                                <Font name="Dubai Light" size="24.0" />
+                                             </font>
+                                          </JFXButton>
+                                          <JFXButton fx:id="findnear" onAction="#findnear" text="     How do I find the nearest restrooms, elevators or stairs?">
+                                             <font>
+                                                <Font name="Dubai Light" size="24.0" />
+                                             </font>
+                                          </JFXButton>
+                                          <JFXButton fx:id="servicerequest" onAction="#servicerequest" text="     How do I request a service?">
+                                             <font>
+                                                <Font name="Dubai Light" size="24.0" />
+                                             </font>
+                                          </JFXButton>
+                                          <JFXButton fx:id="findatt" onAction="#findatt" text="     How do I find attractions or restaurants nearby?">
+                                             <font>
+                                                <Font name="Dubai Light" size="24.0" />
+                                             </font>
+                                          </JFXButton>
+                                          <JFXButton fx:id="news" onAction="#news" text="     How do I find news articles?">
+                                             <font>
+                                                <Font name="Dubai Light" size="24.0" />
+                                             </font>
+                                          </JFXButton>
+                                          <JFXButton fx:id="translate" onAction="#translate" text="     How do I use the translator?">
+                                             <font>
+                                                <Font name="Dubai Light" size="24.0" />
+                                             </font>
+                                          </JFXButton>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </ScrollPane>
                </children>
             </StackPane>
-            <Label fx:id="generalquestions" text="General Questions" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="8.0" prefWidth="821.0" text="Frequently Asked Questions" textAlignment="CENTER" textFill="WHITE" translateX="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
-                  <Font name="Dubai Light" size="36.0" />
+                  <Font name="Dubai Regular" size="48.0" />
                </font>
             </Label>
-            <StackPane fx:id="stackPane" prefHeight="253.0" prefWidth="426.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-               <children>
-                  <VBox prefHeight="255.0" prefWidth="574.0">
-                     <children>
-                        <JFXButton fx:id="signup" onAction="#loadDialogsignup" text="How to sign up?" textAlignment="JUSTIFY">
-                           <font>
-                              <Font name="Dubai Light" size="24.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton fx:id="login" onAction="#loadDialoglogin" text="How to login?">
-                           <font>
-                              <Font name="Dubai Light" size="24.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton fx:id="findpath" onAction="#loadDialogpath" text="How to find a path?">
-                           <font>
-                              <Font name="Dubai Light" size="24.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton fx:id="requestservice" onAction="#loadDialogservicerequest" text="How to request a service?">
-                           <font>
-                              <Font name="Dubai Light" size="24.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton fx:id="addnodes" onAction="#loadDialogadmin" text="How to add/edit/delete nodes?">
-                           <font>
-                              <Font name="Dubai Light" size="24.0" />
-                           </font>
-                        </JFXButton>
-                     </children>
-                  </VBox>
-               </children>
-            </StackPane>
          </children>
       </GridPane>
    </children>

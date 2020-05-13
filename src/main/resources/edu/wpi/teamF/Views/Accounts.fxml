@@ -31,7 +31,7 @@
             <Font name="Dubai Light" size="18.0" />
          </font></Label>
 
-      <JFXComboBox fx:id="algoChoiceBox" layoutX="893.0" layoutY="741.0" onAction="#updatePathfinderAlgorithm" prefHeight="25.0" prefWidth="131.0" AnchorPane.bottomAnchor="32.28695563563324" AnchorPane.rightAnchor="175.93912608732558" />
+      <JFXComboBox fx:id="algoChoiceBox" layoutX="893.0" layoutY="741.0" onAction="#updatePathfinderAlgorithm" prefHeight="25.0" prefWidth="131.0" style="-fx-border-color: black;" AnchorPane.bottomAnchor="32.28695563563324" AnchorPane.rightAnchor="175.93912608732558" />
       <StackPane layoutX="536.0" layoutY="124.0" prefHeight="110.0" prefWidth="203.0" AnchorPane.leftAnchor="536.0" AnchorPane.rightAnchor="460.8" AnchorPane.topAnchor="124.0">
          <children>
             <GridPane>
@@ -71,5 +71,16 @@
          <font>
             <Font size="18.0" />
          </font></JFXButton>
+      <JFXComboBox fx:id="choiceTimeOut" layoutX="1044.0" layoutY="12.0" prefWidth="150.0" style="-fx-border-color: black;" AnchorPane.leftAnchor="535.0" AnchorPane.topAnchor="40.0" />
+      <JFXButton buttonType="RAISED" layoutX="894.0" layoutY="12.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#timeout" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #012D5A; -fx-background-radius: 10px;" text="Update" textFill="WHITE" AnchorPane.leftAnchor="700.0" AnchorPane.topAnchor="30.0">
+         <font>
+            <Font name="Dubai Light" size="18.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="316.0" layoutY="45.0" text="Change Timeout (sec):" AnchorPane.leftAnchor="310.0" AnchorPane.topAnchor="32.0">
+         <font>
+            <Font name="Dubai Light" size="24.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

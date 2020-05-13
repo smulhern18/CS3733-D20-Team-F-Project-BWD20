@@ -54,6 +54,8 @@ public class LanguageServiceController implements Initializable {
   public JFXButton checkStatusButton;
   public AnchorPane anchorPane;
   public ImageView backgroundImage;
+  public JFXComboBox<String> toDelete;
+  public JFXButton deleteButton;
   ObservableList<UILanguageServiceRequest> langUI = FXCollections.observableArrayList();
   public JFXComboBox<String> locationCombobox;
   public JFXComboBox<String> languageCombobox;
@@ -101,6 +103,7 @@ public class LanguageServiceController implements Initializable {
     priorityCombobox.setValue(null);
     languageCombobox.setValue(null);
     problemTypeCombobox.setValue(null);
+    toDelete.getItems().add(langRequest.getId());
   }
 
   public void cancel(ActionEvent actionEvent) {
@@ -172,11 +175,11 @@ public class LanguageServiceController implements Initializable {
   }
 
   public void delete(ActionEvent actionEvent) throws Exception {
-    String toDelte = deleteText.getText();
+    String toDelte = toDelete.getValue();
     databaseManager.deleteLanguageServiceRequest(toDelte);
     langUI.removeIf(languageServiceRequest -> languageServiceRequest.getID().get().equals(toDelte));
-    deleteText.setText("");
     table.refresh();
+    toDelete.getItems().remove(toDelete.getValue());
   }
 
   @SneakyThrows
@@ -188,10 +191,17 @@ public class LanguageServiceController implements Initializable {
     Account.Type userLevel = databaseManager.getPermissions();
     if (userLevel == Account.Type.USER) {
       checkStatusButton.setDisable(true);
+      checkStatusButton.setVisible(false);
 
       // set to user
-    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
+    } else if (userLevel == Account.Type.STAFF) {
       checkStatusButton.setDisable(false);
+      checkStatusButton.setVisible(true);
+      deleteButton.setDisable(true);
+    } else if (userLevel == Account.Type.ADMIN) {
+      checkStatusButton.setDisable(false);
+      checkStatusButton.setVisible(true);
+      deleteButton.setDisable(false);
     }
 
     List<Node> nodes = null;
@@ -401,6 +411,9 @@ public class LanguageServiceController implements Initializable {
 
     for (LanguageServiceRequest lang : languageServiceRequests) {
       langUI.add(new UILanguageServiceRequest(lang));
+    }
+    for (UILanguageServiceRequest yuh : langUI) {
+      toDelete.getItems().add((yuh.getID().get()));
     }
 
     final TreeItem<UILanguageServiceRequest> root =

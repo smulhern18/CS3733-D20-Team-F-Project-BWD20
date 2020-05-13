@@ -4,12 +4,13 @@ import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
-import edu.wpi.teamF.DatabaseManipulators.ServiceRequestStats;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Account.Admin;
 import edu.wpi.teamF.ModelClasses.Account.Staff;
 import edu.wpi.teamF.ModelClasses.Account.User;
 import edu.wpi.teamF.ModelClasses.UIClasses.UIAccount;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -36,18 +37,26 @@ public class AccountsController implements Initializable {
   public JFXButton updateStaff;
   public JFXComboBox<String> algoChoiceBox;
   public AnchorPane rootPane;
+  public JFXComboBox<String> choiceTimeOut;
   SceneController sceneController = App.getSceneController();
   DatabaseManager databaseManager = DatabaseManager.getManager();
   ObservableList<UIAccount> uiAccount = FXCollections.observableArrayList();
-  ServiceRequestStats serviceRequestStats = new ServiceRequestStats();
   DirectoryChooser backup = new DirectoryChooser();
 
   FileChooser nodesChooser = new FileChooser();
   FileChooser edgesChooser = new FileChooser();
 
+  public int seconds;
+
+  private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
+
   @SneakyThrows
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    choiceTimeOut.getItems().add("15");
+    choiceTimeOut.getItems().add("30");
+    choiceTimeOut.getItems().add("45");
+    choiceTimeOut.getItems().add("60");
     algoChoiceBox.setItems(
         FXCollections.observableArrayList(
             "A Star", "Breadth First", "Depth First", "Dijkstra's Algorithm"));
@@ -179,6 +188,8 @@ public class AccountsController implements Initializable {
           case "USER":
             account.setType(Account.Type.USER);
             break;
+          case "JANITOR":
+            account.setType(Account.Type.JANITOR);
         }
         databaseManager.manipulateAccount(account);
       }
@@ -219,5 +230,35 @@ public class AccountsController implements Initializable {
     File file = edgesChooser.showOpenDialog(rootPane.getScene().getWindow());
 
     databaseManager.readEdges(new FileInputStream(file));
+  }
+
+  public void timeout(ActionEvent actionEvent) {
+    if (choiceTimeOut.getValue() != null) {
+      String choice = choiceTimeOut.getValue();
+      seconds = Integer.parseInt(choice);
+      int Millis = 15000;
+      switch (seconds) {
+        case 15:
+          Millis = 15000;
+          break;
+        case 30:
+          Millis = 30000;
+          break;
+        case 45:
+          Millis = 45000;
+          break;
+        case 60:
+          Millis = 60000;
+          break;
+      }
+      this.propertyChangeSupport.addPropertyChangeListener(sceneController);
+      this.propertyChangeSupport.firePropertyChange("timeout", 0, Millis);
+    } else {
+      System.out.println("Why did you press update with no value chosen...");
+    }
+  }
+
+  public void addListener(PropertyChangeListener listener) {
+    this.propertyChangeSupport.addPropertyChangeListener(listener);
   }
 }

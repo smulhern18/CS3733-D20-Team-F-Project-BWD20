@@ -24,6 +24,7 @@ public class ServiceRequestMainController implements Initializable {
   public ImageView secHEad;
   public JFXButton secText;
   public GridPane gridUser;
+  public JFXButton apiButton;
 
   // Images
   public ImageView compImage;
@@ -40,6 +41,17 @@ public class ServiceRequestMainController implements Initializable {
   public ImageView roomSchedulerImage;
   public ImageView backgroundImage;
   public AnchorPane anchorPane;
+  // Text labels
+  public Label lanLabel;
+  public Label laundryLabel;
+  public Label flowerLabel;
+  public Label medLabel;
+  public Label compLabel;
+  public Label transLabel;
+  public Label marLabel;
+  public Label maintLabel;
+  public Label appLabel;
+  public Label roomLabel;
 
   DatabaseManager dbm = DatabaseManager.getManager();
   SceneController sceneController = App.getSceneController();
@@ -88,6 +100,10 @@ public class ServiceRequestMainController implements Initializable {
     sceneController.switchScene("RoomSchedule");
   }
 
+  public void switchToAPIRequests(MouseEvent mouseEvent) throws IOException {
+    sceneController.switchScene("ServiceAPI");
+  }
+
   public void appointmentRequest(MouseEvent mouseEvent) {
     try {
       AppointmentRequest.run(500, 50, 1000, 1000, null, null, null);
@@ -111,78 +127,106 @@ public class ServiceRequestMainController implements Initializable {
     if (userLevel == null) {
       // disable everything but sanitation and security request
       compImage.setDisable(true);
-      compImage.setOpacity(.25);
+      compImage.setVisible(false);
+      compLabel.setVisible(false);
       medImage.setDisable(true);
-      medImage.setOpacity(.25);
+      medImage.setVisible(false);
+      medLabel.setVisible(false);
       lanImage.setDisable(true);
-      lanImage.setOpacity(.25);
+      lanImage.setVisible(false);
+      lanLabel.setVisible(false);
       sanImage.setDisable(false);
       secImage.setDisable(false);
       laundryImage.setDisable(true);
-      laundryImage.setOpacity(.25);
+      laundryImage.setVisible(false);
+      laundryLabel.setVisible(false);
       flowImage.setDisable(true);
-      flowImage.setOpacity(.25);
+      flowImage.setVisible(false);
+      flowerLabel.setVisible(false);
       transportImage.setDisable(true);
-      transportImage.setOpacity(.25);
+      transportImage.setVisible(false);
+      transLabel.setVisible(false);
       marImage.setDisable(true);
-      marImage.setOpacity(.25);
+      marImage.setVisible(false);
+      marLabel.setVisible(false);
       mainImage.setDisable(true);
-      mainImage.setOpacity(.25);
+      mainImage.setVisible(false);
+      maintLabel.setVisible(false);
       appointmentsImage.setDisable(true);
-      appointmentsImage.setOpacity(.25);
+      appointmentsImage.setVisible(false);
+      appLabel.setVisible(false);
       roomSchedulerImage.setDisable(true);
-      roomSchedulerImage.setOpacity(.25);
+      roomSchedulerImage.setVisible(false);
+      roomLabel.setVisible(false);
 
     } else if (userLevel == Account.Type.USER) {
       compImage.setDisable(true);
-      compImage.setOpacity(.25);
+      compImage.setVisible(false);
+      compLabel.setVisible(false);
       medImage.setDisable(true);
-      medImage.setOpacity(.25);
+      medImage.setVisible(false);
+      medLabel.setVisible(false);
       lanImage.setDisable(false);
-      lanImage.setOpacity(1);
+      lanImage.setVisible(true);
       sanImage.setDisable(false);
-      sanImage.setOpacity(1);
+      sanImage.setVisible(true);
       secImage.setDisable(false);
-      secImage.setOpacity(1);
+      secImage.setVisible(true);
       laundryImage.setDisable(true);
+      laundryImage.setVisible(false);
+      laundryLabel.setVisible(false);
       flowImage.setDisable(false);
-      flowImage.setOpacity(1);
+      flowImage.setVisible(true);
       transportImage.setDisable(true);
-      transportImage.setOpacity(.25);
+      transportImage.setVisible(false);
+      transLabel.setVisible(false);
       marImage.setDisable(false);
-      marImage.setOpacity(1);
+      marImage.setVisible(true);
       mainImage.setDisable(true);
-      mainImage.setOpacity(.25);
+      mainImage.setVisible(false);
+      maintLabel.setVisible(false);
       appointmentsImage.setDisable(true);
-      appointmentsImage.setOpacity(.25);
+      appointmentsImage.setVisible(false);
+      appLabel.setVisible(false);
       roomSchedulerImage.setDisable(true);
-      roomSchedulerImage.setOpacity(.25);
+      roomSchedulerImage.setVisible(false);
+      roomLabel.setVisible(false);
 
     } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
       compImage.setDisable(false);
-      compImage.setOpacity(1);
+      compImage.setVisible(true);
+      compLabel.setVisible(true);
       medImage.setDisable(false);
-      medImage.setOpacity(1);
+      medImage.setVisible(true);
+      medLabel.setVisible(true);
       lanImage.setDisable(false);
-      lanImage.setOpacity(1);
+      lanImage.setVisible(true);
+      lanLabel.setVisible(true);
       sanImage.setDisable(false);
-      sanImage.setOpacity(1);
+      sanImage.setVisible(true);
       secImage.setDisable(false);
-      secImage.setOpacity(1);
+      secImage.setVisible(true);
       laundryImage.setDisable(false);
-      laundryImage.setOpacity(1);
+      laundryImage.setVisible(true);
+      laundryLabel.setVisible(true);
       flowImage.setDisable(false);
-      flowImage.setOpacity(1);
+      flowImage.setVisible(true);
+      flowerLabel.setVisible(true);
       transportImage.setDisable(false);
-      transportImage.setOpacity(1);
+      transportImage.setVisible(true);
+      transLabel.setVisible(true);
       marImage.setDisable(false);
-      mainImage.setOpacity(1);
+      marImage.setVisible(true);
+      marLabel.setVisible(true);
+      mainImage.setVisible(true);
       mainImage.setDisable(false);
-      mainImage.setOpacity(1);
+      maintLabel.setVisible(true);
       appointmentsImage.setDisable(false);
-      appointmentsImage.setOpacity(1);
+      appointmentsImage.setVisible(true);
+      appLabel.setVisible(true);
       roomSchedulerImage.setDisable(false);
-      roomSchedulerImage.setOpacity(1);
+      roomSchedulerImage.setVisible(true);
+      roomLabel.setVisible(true);
     }
     // do new permissions
     // non-logged in have only access to sanitation and security requests

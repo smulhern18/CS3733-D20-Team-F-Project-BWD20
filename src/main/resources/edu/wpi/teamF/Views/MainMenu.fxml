@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="402.0" prefWidth="784.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MainMenuController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.MainMenuController">
     <children>
         <ImageView fx:id="background" fitHeight="402.0" fitWidth="784.0" pickOnBounds="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <image>
@@ -20,11 +21,27 @@
         </ImageView>
         <Pane layoutY="13.0" prefHeight="90.0" prefWidth="339.0">
             <children>
-                <Label fx:id="welcomeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="23.0" text="Welcome" textFill="WHITE">
+                <Label fx:id="welcomeLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="31.0" layoutY="23.0" prefHeight="196.0" prefWidth="430.0" text="Welcome" textFill="WHITE">
                     <font>
-                        <Font name="Dubai Light" size="60.0" />
+                        <Font name="Dubai Light" size="96.0" />
                     </font>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
                 </Label>
+            <Label fx:id="time" layoutX="90.0" layoutY="160.0" prefHeight="41.0" prefWidth="216.0" text="Label" textFill="WHITE" translateX="10.0">
+               <font>
+                  <Font name="Dubai Light" size="36.0" />
+               </font>
+            </Label>
+            <Label fx:id="date" layoutX="90.0" layoutY="195.0" prefHeight="41.0" prefWidth="196.0" text="Label" textFill="WHITE" translateX="10.0">
+               <font>
+                  <Font name="Dubai Light" size="36.0" />
+               </font>
+               <padding>
+                  <Insets top="15.0" />
+               </padding>
+            </Label>
             </children>
         </Pane>
         <GridPane layoutX="32.0" layoutY="188.0" opacity="0.87" style="-fx-background-color: #012d5a;" AnchorPane.bottomAnchor="85.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
@@ -58,6 +75,7 @@
                         <Font name="Dubai Light" size="40.0" />
                     </font>
                 </JFXButton>
+
             </children>
         </GridPane>
     </children>

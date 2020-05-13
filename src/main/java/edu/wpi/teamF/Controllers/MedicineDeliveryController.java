@@ -66,6 +66,7 @@ public class MedicineDeliveryController implements Initializable {
   public JFXButton backButton;
   public JFXButton checkButtonButton;
   public ImageView backgroundImage;
+  public JFXComboBox<String> toDelete;
   SceneController sceneController = App.getSceneController();
 
   DatabaseManager databaseManager = DatabaseManager.getManager();
@@ -80,11 +81,18 @@ public class MedicineDeliveryController implements Initializable {
     backgroundImage.fitHeightProperty().bind(anchorPane.heightProperty());
     Account.Type userLevel = databaseManager.getPermissions();
     if (userLevel == Account.Type.USER) {
-      // checkButtonButton.setDisable(true);
+      backButton.setVisible(false);
+      backButton.setDisable(true);
 
       // set to user
-    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
-      // checkButtonButton.setDisable(false);
+    } else if (userLevel == Account.Type.STAFF) {
+      backButton.setDisable(false);
+      backButton.setVisible(true);
+      delete.setDisable(true);
+    } else if (userLevel == Account.Type.ADMIN) {
+      backButton.setDisable(false);
+      backButton.setVisible(true);
+      backButton.setDisable(false);
     }
 
     UISetting uiSetting = new UISetting();
@@ -268,6 +276,9 @@ public class MedicineDeliveryController implements Initializable {
     for (MedicineDeliveryRequest mdr : medicineDeliveryRequests) {
       mdrUI.add(new UIMedicineDeliveryRequest(mdr));
     }
+    for (UIMedicineDeliveryRequest yuh : mdrUI) {
+      toDelete.getItems().add((yuh.getID().get()));
+    }
 
     final TreeItem<UIMedicineDeliveryRequest> root =
         new RecursiveTreeItem<UIMedicineDeliveryRequest>(mdrUI, RecursiveTreeObject::getChildren);
@@ -314,6 +325,7 @@ public class MedicineDeliveryController implements Initializable {
     locationComboBox.setValue(null);
     priorityChoice.setValue(null);
     instructionsText.setText("");
+    toDelete.getItems().add(mdRequest.getId());
   }
 
   public void cancel(ActionEvent actionEvent) {
@@ -346,12 +358,12 @@ public class MedicineDeliveryController implements Initializable {
   }
 
   public void delete(ActionEvent actionEvent) {
-    String toDelte = deleteText.getText();
+    String toDelte = toDelete.getValue();
     databaseManager.deleteMedicineDeliveryRequest(toDelte);
     mdrUI.removeIf(
         medicineDeliveryRequest -> medicineDeliveryRequest.getID().get().equals(toDelte));
-    deleteText.setText("");
     treeTableMedicine.refresh();
+    toDelete.getItems().remove(toDelete.getValue());
   }
 
   public void request(ActionEvent actionEvent) {
