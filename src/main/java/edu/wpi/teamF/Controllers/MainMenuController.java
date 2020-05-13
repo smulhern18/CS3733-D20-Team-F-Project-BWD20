@@ -4,12 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
 import edu.wpi.teamF.ModelClasses.Account.Account;
-import java.io.IOException;
-import java.net.URL;
-import java.time.LocalTime;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.ResourceBundle;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -23,6 +17,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+
+import java.io.IOException;
+import java.net.URL;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable {
 
@@ -85,8 +87,8 @@ public class MainMenuController implements Initializable {
   // Time
   @FXML private Label Time;
 
-  @FXML
   public void time() {
+    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("hh:mm a");
     Calendar calendar = new GregorianCalendar();
     int day = calendar.get(Calendar.DAY_OF_MONTH);
     int month = calendar.get(Calendar.MONTH);
@@ -98,14 +100,11 @@ public class MainMenuController implements Initializable {
                 Duration.ZERO,
                 e -> {
                   LocalTime currentTime = LocalTime.now();
-                  time.setText(
-                      currentTime.getHour()
-                          + ": "
-                          + currentTime.getMinute()
-                          + ": "
-                          + currentTime.getSecond());
-                  date.setText(month + "/" + day + "/" + year);
-                }),
+
+                  time.setText(dateFormat.format(currentTime));
+                  date.setText((month + 1) + "/" + day + "/" + year);
+                },
+                new javafx.animation.KeyValue[] {}),
             new KeyFrame(Duration.seconds(1)));
     clock.setCycleCount(Animation.INDEFINITE);
     clock.play();
