@@ -20,7 +20,6 @@ public class SceneController implements PropertyChangeListener {
   private Scene primaryScene;
   private Timeline timeline;
   private MenuBarController menuBarController;
-  private AccountsController accountsController;
 
   public SceneController(FXMLLoader fxmlLoader, Stage primaryStage, Scene primaryScene) {
     this.loader = fxmlLoader;
@@ -30,7 +29,7 @@ public class SceneController implements PropertyChangeListener {
     Timeline timeline =
         new Timeline(
             new KeyFrame(
-                new Duration(15000),
+                new Duration(60000),
                 (evt) -> {
                   menuBarController.autoLogout();
                 }));
@@ -48,9 +47,10 @@ public class SceneController implements PropertyChangeListener {
     this.timeline =
         new Timeline(
             new KeyFrame(
-                new Duration((double) evt.getNewValue()),
+                new Duration((Integer) evt.getNewValue()),
                 (evt2) -> {
                   menuBarController.autoLogout();
                 }));
+    primaryStage.addEventFilter(MouseEvent.MOUSE_MOVED, (evt2) -> timeline.playFromStart());
   }
 }
