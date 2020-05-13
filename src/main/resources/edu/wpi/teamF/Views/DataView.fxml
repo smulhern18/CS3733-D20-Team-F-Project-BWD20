@@ -27,17 +27,20 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <JFXButton onAction="#back" prefHeight="40.0" prefWidth="101.0" style="-fx-background-color: #A40000;" text="Back" textFill="WHITE">
+            <JFXButton onAction="#back" prefHeight="50.0" prefWidth="100.0" style="-fx-background-color: #A40000; -fx-background-radius: 10px;" text="Back" textFill="WHITE">
                <font>
-                  <Font size="17.0" />
+                  <Font name="Dubai Light" size="20.0" />
                </font>
             </JFXButton>
-            <JFXButton onAction="#exportToPDF" prefHeight="42.0" prefWidth="102.0" style="-fx-background-color: #012d5a;" text="Export To PDF" textFill="WHITE" GridPane.columnIndex="1">
+            <JFXButton onAction="#exportToPDF" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #012d5a; -fx-background-radius: 10px;" text="Export To PDF" textFill="WHITE" GridPane.columnIndex="1">
                <font>
-                  <Font size="13.0" />
+                  <Font name="Dubai Light" size="16.0" />
                </font>
             </JFXButton>
-            <JFXButton onAction="#backupServiceRequests" prefHeight="42.0" prefWidth="95.0" style="-fx-background-color: #012d5a;" text="Export to CSV" textFill="WHITE" GridPane.columnIndex="2" />
+            <JFXButton onAction="#backupServiceRequests" prefHeight="50.0" prefWidth="120.0" style="-fx-background-color: #012d5a; -fx-background-radius: 10px;" text="Export to CSV" textFill="WHITE" GridPane.columnIndex="2">
+               <font>
+                  <Font name="Dubai Light" size="16.0" />
+               </font></JFXButton>
          </children>
       </GridPane>
       <TabPane layoutX="200.0" layoutY="83.0" prefHeight="365.0" prefWidth="383.0" style="-fx-border-color: black;" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="210.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="80.0">
