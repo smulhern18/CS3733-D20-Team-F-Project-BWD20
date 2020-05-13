@@ -354,9 +354,13 @@
             </GridPane>
             <Label fx:id="timelabel" alignment="TOP_CENTER" contentDisplay="TOP" prefHeight="26.0" prefWidth="101.0" text="Label" textFill="WHITE" GridPane.rowIndex="2">
                <font>
-                  <Font size="15.0" />
-               </font></Label>
+                  <Font name="Dubai Regular" size="24.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets top="-20.0" />
+               </GridPane.margin></Label>
          </children>
       </GridPane>
+      <Line endX="190.0" endY="1200.0" startX="190.0" stroke="WHITE" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>

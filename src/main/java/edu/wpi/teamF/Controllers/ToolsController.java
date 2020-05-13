@@ -47,8 +47,7 @@ public class ToolsController implements Initializable {
       shippingImage.setDisable(true);
       shippingImage.setVisible(false);
       shippingLabel.setVisible(false);
-    } else if (userLevel == Account.Type.STAFF
-        || userLevel == Account.Type.ADMIN) {
+    } else if (userLevel == Account.Type.STAFF || userLevel == Account.Type.ADMIN) {
       // Enable shipping
       shippingImage.setDisable(false);
       shippingImage.setVisible(true);
