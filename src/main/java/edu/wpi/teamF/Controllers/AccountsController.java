@@ -233,25 +233,29 @@ public class AccountsController implements Initializable {
   }
 
   public void timeout(ActionEvent actionEvent) {
-    String choice = choiceTimeOut.getValue();
-    seconds = Integer.parseInt(choice);
-    int Millis = 15000;
-    switch (seconds) {
-      case 15:
-        Millis = 15000;
-        break;
-      case 30:
-        Millis = 30000;
-        break;
-      case 45:
-        Millis = 45000;
-        break;
-      case 60:
-        Millis = 60000;
-        break;
+    if (choiceTimeOut.getValue() != null) {
+      String choice = choiceTimeOut.getValue();
+      seconds = Integer.parseInt(choice);
+      int Millis = 15000;
+      switch (seconds) {
+        case 15:
+          Millis = 15000;
+          break;
+        case 30:
+          Millis = 30000;
+          break;
+        case 45:
+          Millis = 45000;
+          break;
+        case 60:
+          Millis = 60000;
+          break;
+      }
+      this.propertyChangeSupport.addPropertyChangeListener(sceneController);
+      this.propertyChangeSupport.firePropertyChange("timeout", 0, Millis);
+    } else {
+      System.out.println("Why did you press update with no value chosen...");
     }
-    this.propertyChangeSupport.addPropertyChangeListener(sceneController);
-    this.propertyChangeSupport.firePropertyChange("timeout", 0, Millis);
   }
 
   public void addListener(PropertyChangeListener listener) {

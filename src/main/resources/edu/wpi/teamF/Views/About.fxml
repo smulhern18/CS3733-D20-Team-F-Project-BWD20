@@ -528,11 +528,8 @@
                                                 </Label>
                                              </children>
                                           </GridPane>
-                                          <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="80.0" prefWidth="697.0" text="The Brigham &amp; Women’s Hospital maps and data used in this application are copyrighted and provided for the sole use of educational purposes" textAlignment="CENTER" translateY="50.0" wrapText="true" />
-=======
                                           <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="80.0" prefWidth="697.0" text="The Brigham &amp; Women’s Hospital maps and data used in this application are copyrighted and provided for the sole use of educational purposes" textAlignment="CENTER" wrapText="true" />
                                           <TextArea prefHeight="200.0" prefWidth="200.0" text="APIs USED:&#10;&#10;Secure Incident Reporting - Team B&#10;Interpreter Request - Team C&#10;Audio Visual  - Team M&#10;Food Request - Team P&#10;&#10;External APIs:&#10;Live Travel Times - Google Directions API&#10;Google Maps - Google Maps Embed API&#10;Attractions - Google Places API&#10;Text Messaging - Twilio API&#10;Phone Calls - Twilio API&#10;Printing Directions - JavaFX Print API&#10;Translations - Google Translate API&#10;Address Verification - Easypost API&#10;Shipping Labels - Easypost API&#10;News Feed - NewsAPI.org&#10;Room Scheduler - CalendarFX API&#10;&#10;&#10;&#10;" />
->>>>>>> Stashed changes
                                        </children>
                                     </VBox>
                                  </children>
