@@ -4,7 +4,6 @@ import com.jfoenix.controls.*;
 import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
 import edu.wpi.teamF.App;
 import edu.wpi.teamF.DatabaseManipulators.DatabaseManager;
-import edu.wpi.teamF.DatabaseManipulators.ServiceRequestStats;
 import edu.wpi.teamF.ModelClasses.Account.Account;
 import edu.wpi.teamF.ModelClasses.Account.Admin;
 import edu.wpi.teamF.ModelClasses.Account.Staff;
@@ -42,7 +41,6 @@ public class AccountsController implements Initializable {
   SceneController sceneController = App.getSceneController();
   DatabaseManager databaseManager = DatabaseManager.getManager();
   ObservableList<UIAccount> uiAccount = FXCollections.observableArrayList();
-  ServiceRequestStats serviceRequestStats = new ServiceRequestStats();
   DirectoryChooser backup = new DirectoryChooser();
 
   FileChooser nodesChooser = new FileChooser();
@@ -50,7 +48,7 @@ public class AccountsController implements Initializable {
 
   public int seconds;
 
-  private final PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
+  private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
   @SneakyThrows
   @Override
@@ -252,6 +250,7 @@ public class AccountsController implements Initializable {
         Millis = 60000;
         break;
     }
+    this.propertyChangeSupport.addPropertyChangeListener(sceneController);
     this.propertyChangeSupport.firePropertyChange("timeout", 0, Millis);
   }
 
