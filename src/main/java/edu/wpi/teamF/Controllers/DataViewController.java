@@ -218,7 +218,7 @@ public class DataViewController implements Initializable {
 
     List<String> dataHigh;
     XYChart.Series dataSeriesHigh = new XYChart.Series();
-    dataHigh = serviceRequestStats.getTimesVisitedGraphs(reports);
+    dataHigh = serviceRequestStats.top5(serviceRequestStats.getTimesVisitedGraphs(reports));
 
     for (int i = 0; i < dataHigh.size(); i += 2) {
       dataSeriesHigh
