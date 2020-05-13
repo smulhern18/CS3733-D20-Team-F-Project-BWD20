@@ -24,6 +24,7 @@ public class ServiceRequestMainController implements Initializable {
   public ImageView secHEad;
   public JFXButton secText;
   public GridPane gridUser;
+  public JFXButton apiButton;
 
   // Images
   public ImageView compImage;
@@ -97,6 +98,10 @@ public class ServiceRequestMainController implements Initializable {
 
   public void switchToRoomScheduler(MouseEvent mouseEvent) throws IOException {
     sceneController.switchScene("RoomSchedule");
+  }
+
+  public void switchToAPIRequests(MouseEvent mouseEvent) throws IOException {
+    sceneController.switchScene("ServiceAPI");
   }
 
   public void appointmentRequest(MouseEvent mouseEvent) {
