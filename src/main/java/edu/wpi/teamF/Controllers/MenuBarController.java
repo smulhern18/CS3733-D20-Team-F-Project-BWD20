@@ -7,6 +7,9 @@ import edu.wpi.teamF.ModelClasses.Account.Account;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
@@ -101,19 +104,19 @@ public class MenuBarController implements Initializable {
   // time
   @FXML
   public void time() {
+    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("hh:mm a");
+    Calendar calendar = new GregorianCalendar();
+
     Timeline clock =
         new Timeline(
             new KeyFrame(
                 Duration.ZERO,
                 e -> {
                   LocalTime currentTime = LocalTime.now();
-                  timelabel.setText(
-                      currentTime.getHour()
-                          + ": "
-                          + currentTime.getMinute()
-                          + ": "
-                          + currentTime.getSecond());
-                }),
+
+                  timelabel.setText(dateFormat.format(currentTime));
+                },
+                new javafx.animation.KeyValue[] {}),
             new KeyFrame(Duration.seconds(1)));
     clock.setCycleCount(Animation.INDEFINITE);
     clock.play();

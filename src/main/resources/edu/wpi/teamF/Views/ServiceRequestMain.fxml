@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -35,6 +36,8 @@
                 <RowConstraints percentHeight="2.0" valignment="TOP" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" percentHeight="6.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" percentHeight="3.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" percentHeight="2.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" percentHeight="2.0" prefHeight="30.0" valignment="TOP" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <ImageView fx:id="compImage" fitHeight="85.0" fitWidth="81.0" onMouseClicked="#switchToComputerService" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
@@ -185,5 +188,9 @@
                 <RowConstraints vgrow="SOMETIMES" />
             </rowConstraints>
         </GridPane>
+      <JFXButton fx:id="apiButton" onMouseClicked="#switchToAPIRequests" text="API Requests" textAlignment="CENTER" AnchorPane.bottomAnchor="120.0" AnchorPane.rightAnchor="120.0">
+         <font>
+            <Font name="Dubai Light" size="12.0" />
+         </font></JFXButton>
     </children>
 </AnchorPane>

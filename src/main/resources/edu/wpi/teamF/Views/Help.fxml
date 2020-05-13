@@ -64,7 +64,7 @@
                                                 <Font size="36.0" />
                                              </font>
                                           </Label>
-                                          <JFXButton fx:id="signup" onAction="#signup" text="     How do I to sign up?">
+                                          <JFXButton fx:id="signup" onAction="#signup" text="     How do I sign up?">
                                              <font>
                                                 <Font name="Dubai Light" size="24.0" />
                                              </font>
@@ -114,7 +114,7 @@
                   </ScrollPane>
                </children>
             </StackPane>
-            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="8.0" prefWidth="821.0" text="General Questions" textAlignment="CENTER" textFill="WHITE" translateX="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="8.0" prefWidth="821.0" text="Frequently Asked Questions" textAlignment="CENTER" textFill="WHITE" translateX="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <font>
                   <Font name="Dubai Regular" size="48.0" />
                </font>
