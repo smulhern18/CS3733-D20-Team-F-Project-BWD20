@@ -23,6 +23,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ServiceRequestStats {
+  DatabaseManager databaseManager = DatabaseManager.getManager();
   MaintenanceRequestFactory maintenanceRequestFactory = MaintenanceRequestFactory.getFactory();
   TransportRequestFactory transportRequestFactory = TransportRequestFactory.getFactory();
   ComputerServiceRequestFactory computerServiceRequestFactory =
@@ -1522,7 +1523,11 @@ public class ServiceRequestStats {
   private ArrayList<String> getNodesVisited(List<ReportsClass> reportsClasses) {
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ReportsClass r : reportsClasses) {
-      csvStyled.add(r.getNodeID() + "," + r.getTimesVisited());
+      try{
+        csvStyled.add(databaseManager.readNode(r.getNodeID()).getLongName() + "," + r.getTimesVisited());
+      } catch (Exception e){
+      }
+
     }
     return csvStyled;
   }
@@ -1531,7 +1536,10 @@ public class ServiceRequestStats {
 
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ReportsClass r : reportsClasses) {
-      csvStyled.add(r.getNodeID() + "," + r.getTimesSanitized());
+      try{
+      csvStyled.add(databaseManager.readNode(r.getNodeID()).getLongName() + "," + r.getTimesSanitized());
+    } catch (Exception e){
+    }
     }
     return csvStyled;
   }
@@ -1539,8 +1547,12 @@ public class ServiceRequestStats {
   public ArrayList<String> getTimesVisitedGraphs(List<ReportsClass> reportsClasses) {
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ReportsClass r : reportsClasses) {
-      csvStyled.add(r.getNodeID());
-      csvStyled.add("" + r.getTimesVisited());
+      try {
+        csvStyled.add(databaseManager.readNode(r.getNodeID()).getLongName());
+        csvStyled.add("" + r.getTimesVisited());
+      } catch (Exception e){
+
+      }
     }
     return csvStyled;
   }
@@ -1549,8 +1561,11 @@ public class ServiceRequestStats {
 
     ArrayList<String> csvStyled = new ArrayList<String>();
     for (ReportsClass r : reportsClasses) {
-      csvStyled.add(r.getNodeID());
-      csvStyled.add("" + r.getTimesSanitized());
+      try {
+        csvStyled.add(databaseManager.readNode(r.getNodeID()).getLongName());
+        csvStyled.add("" + r.getTimesSanitized());
+      } catch(Exception e){
+      }
     }
     return csvStyled;
   }
