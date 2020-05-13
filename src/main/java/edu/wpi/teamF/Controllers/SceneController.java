@@ -30,7 +30,7 @@ public class SceneController implements PropertyChangeListener {
     Timeline timeline =
         new Timeline(
             new KeyFrame(
-                new Duration(15000),
+                new Duration(150000),
                 (evt) -> {
                   menuBarController.autoLogout();
                 }));

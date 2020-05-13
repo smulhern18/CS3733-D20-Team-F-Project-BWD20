@@ -30,6 +30,27 @@
         <fx:include fx:id="mainMenu" source="MenuBar.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
         <AnchorPane fx:id="checkStatusPane" layoutX="701.0" layoutY="16.0" prefHeight="880.0" prefWidth="819.0" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 0;" visible="false" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="701.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="100.0">
             <children>
+                <JFXTreeTableView fx:id="treeTableLaunduary" style="-fx-border-color: black;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="99.0" />
+                <GridPane fx:id="deletePane" layoutX="146.0" layoutY="55.0" prefHeight="44.0" prefWidth="267.0" AnchorPane.rightAnchor="10.0">
+                    <columnConstraints>
+                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+                        <ColumnConstraints hgrow="SOMETIMES" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <JFXButton fx:id="delete" alignment="CENTER" onAction="#delete" style="-fx-background-color: #a40000; -fx-background-radius: 10;" text="Delete" textFill="#ffffffcc" translateY="-5.0">
+                            <GridPane.margin>
+                                <Insets right="5.0" />
+                            </GridPane.margin>
+                     <font>
+                        <Font name="Dubai Light" size="18.0" />
+                     </font>
+                        </JFXButton>
+                  <JFXComboBox fx:id="toDelete" prefHeight="42.0" prefWidth="189.0" style="-fx-background-color: white;" translateY="-5.0" GridPane.columnIndex="1" />
+                    </children>
+                </GridPane>
                 <StackPane layoutX="44.0" layoutY="274.0" prefHeight="99.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
                     <children>
                   <GridPane>
@@ -55,27 +76,6 @@
                   </GridPane>
                     </children>
                 </StackPane>
-                <JFXTreeTableView fx:id="treeTableLaunduary" style="-fx-border-color: black;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="99.0" />
-                <GridPane fx:id="deletePane" layoutX="146.0" layoutY="55.0" prefHeight="44.0" prefWidth="267.0" AnchorPane.rightAnchor="10.0">
-                    <columnConstraints>
-                        <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
-                        <ColumnConstraints hgrow="SOMETIMES" />
-                    </columnConstraints>
-                    <rowConstraints>
-                        <RowConstraints vgrow="SOMETIMES" />
-                    </rowConstraints>
-                    <children>
-                        <JFXButton fx:id="delete" alignment="CENTER" onAction="#delete" style="-fx-background-color: #a40000; -fx-background-radius: 10;" text="Delete" textFill="#ffffffcc" translateY="-5.0">
-                            <GridPane.margin>
-                                <Insets right="5.0" />
-                            </GridPane.margin>
-                     <font>
-                        <Font name="Dubai Light" size="18.0" />
-                     </font>
-                        </JFXButton>
-                  <JFXComboBox fx:id="toDelete" prefHeight="42.0" prefWidth="189.0" style="-fx-background-color: white;" translateY="-5.0" GridPane.columnIndex="1" />
-                    </children>
-                </GridPane>
             </children>
         </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
