@@ -31,14 +31,33 @@ dependencies {
             'org.slf4j:slf4j-api:1.7.30',
             'org.slf4j:slf4j-simple:1.7.30',
 
-            [group: 'edu.wpi.cs3733.c20.teamR', name: 'AppointmentRequest', version:'5.0.0']
+            'io.github.typhon0:AnimateFX:1.2.1',
 
+            'com.google.cloud:google-cloud-translate:1.94.5',
+            'com.google.cloud:google-cloud-texttospeech:1.0.2',
+            'com.google.cloud:google-cloud-speech:1.22.6',
+            'com.google.inject:guice:4.2.3',
+
+            [group: 'edu.wpi.cs3733.c20.teamR', name: 'AppointmentRequest', version:'5.0.0'],
+            [group: 'edu.wpi.cs3733.d20.teamB', name: 'IncidentReporting', version:'1.0.0'],
+
+            [group: 'edu.wpi.cs3733.d20.teamD', name: 'InternalTransportRequest', version:'1.5.6'],
+            [group: 'edu.wpi.cs3733.d20.teamE', name: 'onCallBedsAPI', version:'1.0.2'],
+            [group: 'edu.wpi.cs3733.d20.teamO', name: 'SecurityServiceRequest', version:'1.0.0'],
+            [group: 'edu.wpi.cs3733.d20.teamK', name: 'MortuWaryRequests', version:'1.0.1'],
+            [group: 'edu.wpi.cs3733.d20.teamN', name: 'sanitation', version:'1.8.4'],
+            [group: 'edu.wpi.cs3733.d20.teamA', name: 'TeamAFlowerRequest', version:'1.1.2'],
+            [group: 'edu.wpi.cs3733.d20.teamC', name: 'InterpreterRequest', version:'1.1.1'],
+            [group: 'edu.wpi.cs3733.d20.teamM', name: 'AudioVisual', version:'1.0.0'],
+            [group: 'edu.wpi.cs3733.d20.teamP', name: 'FoodRequest', version:'1.1.0'],
+            [group: 'edu.wpi.cs3733.d20.teamL', name: 'GiftDeliveryServiceRequest', version:'1.0.0'],
+            [group: 'edu.wpi.cs3733.d20.teamF', name: 'MaintenanceRequestAPI', version:'1.0.1']
     )
+
 
     implementation 'com.calendarfx:calendar:11.8.3'
     implementation ('com.calendarfx:view:11.8.3'){
         exclude group: 'org.openjfx', module: ''    }
-
 
 
     testImplementation(
@@ -48,6 +67,8 @@ dependencies {
     testRuntimeOnly(
             'org.testfx:openjfx-monocle:8u76-b04',
     )
+
+
     implementation 'org.testng:testng:6.9.6'
     implementation 'junit:junit:4.12'
     implementation 'junit:junit:4.12'
@@ -93,6 +114,9 @@ jar {
     from {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
+    exclude 'META-INF/*.RSA'
+    exclude 'META-INF/*.SF'
+    exclude 'META-INF/*.DSA'
 }
 
 run {
