@@ -256,7 +256,7 @@
         </AnchorPane>
         <AnchorPane fx:id="chosePane" prefHeight="200.0" prefWidth="443.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="191.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <GridPane fx:id="flowerPane" alignment="CENTER" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 0;" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="100.0">
+                <GridPane fx:id="flowerPane" alignment="CENTER" style="-fx-background-color: rgba(255,255,255,0.9); -fx-background-insets: 0;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="50.0">
                     <columnConstraints>
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
