@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.wpi.teamF.Controllers.AboutController">
@@ -25,9 +26,9 @@
             </ImageView>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="480.0" AnchorPane.rightAnchor="480.0" AnchorPane.topAnchor="50.0">
                <children>
-                  <ScrollPane layoutY="-5.0" prefHeight="989.0" prefWidth="769.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-5.0">
+                  <ScrollPane prefHeight="980.0" prefWidth="769.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="1800.0" prefWidth="767.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2088.0" prefWidth="767.0">
                            <children>
                               <GridPane layoutX="-4.0" layoutY="2.0" prefHeight="1000.0" prefWidth="419.0" AnchorPane.bottomAnchor="-216.0" AnchorPane.leftAnchor="-4.0" AnchorPane.rightAnchor="-3.0" AnchorPane.topAnchor="0.0">
                                 <columnConstraints>
@@ -123,7 +124,7 @@
                                                       </ImageView>
                                                    </children>
                                                 </GridPane>
-                                                <GridPane prefHeight="63.0" prefWidth="196.0">
+                                                <GridPane prefHeight="216.0" prefWidth="231.0">
                                                   <columnConstraints>
                                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                   </columnConstraints>
@@ -134,12 +135,12 @@
                                                    <children>
                                                       <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                                          <children>
-                                                            <Label alignment="CENTER" prefHeight="27.0" prefWidth="192.0" text="Kevin Boenisch" wrapText="true">
+                                                            <Label alignment="CENTER" prefHeight="27.0" prefWidth="255.0" text="Kevin Boenisch" wrapText="true">
                                                                <font>
                                                                   <Font name="Dubai Light" size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="23.0" prefWidth="192.0" text="Software Engineer" wrapText="true">
+                                                            <Label alignment="CENTER" prefHeight="25.0" prefWidth="279.0" text="Senior Software Engineer" wrapText="true">
                                                                <font>
                                                                   <Font name="Dubai Light" size="14.0" />
                                                                </font>
@@ -153,7 +154,7 @@
                                                       </ImageView>
                                                    </children>
                                                 </GridPane>
-                                                <GridPane prefHeight="317.0" prefWidth="186.0">
+                                                <GridPane prefHeight="216.0" prefWidth="252.0">
                                                   <columnConstraints>
                                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                   </columnConstraints>
@@ -169,12 +170,12 @@
                                                       </ImageView>
                                                       <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                                          <children>
-                                                            <Label alignment="CENTER" prefHeight="30.0" prefWidth="181.0" text="Theodore Campbell" wrapText="true">
+                                                            <Label alignment="CENTER" prefHeight="29.0" prefWidth="261.0" text="Theodore Campbell" wrapText="true">
                                                                <font>
                                                                   <Font name="Dubai Light" size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="27.0" prefWidth="181.0" text="Software Engineer" wrapText="true">
+                                                            <Label alignment="CENTER" prefHeight="26.0" prefWidth="275.0" text="Senior Software Engineer" wrapText="true">
                                                                <font>
                                                                   <Font name="Dubai Light" size="14.0" />
                                                                </font>
@@ -217,7 +218,7 @@
                                                       </VBox>
                                                    </children>
                                                 </GridPane>
-                                                <GridPane prefHeight="183.0" prefWidth="203.0">
+                                                <GridPane prefHeight="183.0" prefWidth="246.0">
                                                   <columnConstraints>
                                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                   </columnConstraints>
@@ -233,12 +234,12 @@
                                                       </ImageView>
                                                       <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                                          <children>
-                                                            <Label alignment="CENTER" prefHeight="21.0" prefWidth="184.0" text="Muyun He" wrapText="true">
+                                                            <Label alignment="CENTER" prefHeight="25.0" prefWidth="298.0" text="Muyun He" translateY="3.0" wrapText="true">
                                                                <font>
                                                                   <Font name="Dubai Light" size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="29.0" prefWidth="184.0" text="Product Owner" wrapText="true">
+                                                            <Label alignment="CENTER" prefHeight="25.0" prefWidth="262.0" text="Product Owner" wrapText="true">
                                                                <font>
                                                                   <Font name="Dubai Light" size="14.0" />
                                                                </font>
@@ -247,7 +248,7 @@
                                                       </VBox>
                                                    </children>
                                                 </GridPane>
-                                                <GridPane prefHeight="183.0" prefWidth="180.0">
+                                                <GridPane prefHeight="183.0" prefWidth="243.0">
                                                    <columnConstraints>
                                                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                    </columnConstraints>
@@ -263,12 +264,12 @@
                                                       </ImageView>
                                                       <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                                          <children>
-                                                            <Label alignment="CENTER" prefHeight="26.0" prefWidth="184.0" text="Tyler Jones" wrapText="true">
+                                                            <Label alignment="CENTER" prefHeight="26.0" prefWidth="257.0" text="Tyler Jones" wrapText="true">
                                                                <font>
                                                                   <Font name="Dubai Light" size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="21.0" prefWidth="184.0" text="Scrum Master" wrapText="true">
+                                                            <Label alignment="CENTER" prefHeight="25.0" prefWidth="256.0" text="Scrum Master" wrapText="true">
                                                                <font>
                                                                   <Font name="Dubai Light" size="14.0" />
                                                                </font>
@@ -302,7 +303,7 @@
                                                                   <Font name="Dubai Light" size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="34.0" prefWidth="189.0" text="Software Engineer" wrapText="true">
+                                                            <Label alignment="CENTER" prefHeight="34.0" prefWidth="189.0" text="Senior Software Engineer" wrapText="true">
                                                                <font>
                                                                   <Font name="Dubai Light" size="14.0" />
                                                                </font>
@@ -311,7 +312,7 @@
                                                       </VBox>
                                                    </children>
                                                 </GridPane>
-                                                <GridPane prefHeight="51.0" prefWidth="189.0">
+                                                <GridPane prefHeight="222.0" prefWidth="232.0">
                                                    <columnConstraints>
                                                       <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                    </columnConstraints>
@@ -327,12 +328,12 @@
                                                       </ImageView>
                                                       <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
                                                          <children>
-                                                            <Label alignment="CENTER" prefHeight="29.0" prefWidth="189.0" text="Sullivan Mulhern" wrapText="true">
+                                                            <Label alignment="CENTER" prefHeight="25.0" prefWidth="274.0" text="Sullivan Mulhern" wrapText="true">
                                                                <font>
                                                                   <Font name="Dubai Light" size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="31.0" prefWidth="189.0" text="Lead Software Engineer" wrapText="true">
+                                                            <Label alignment="CENTER" prefHeight="25.0" prefWidth="276.0" text="Lead Software Engineer" wrapText="true">
                                                                <font>
                                                                   <Font name="Dubai Light" size="14.0" />
                                                                </font>
@@ -341,28 +342,28 @@
                                                       </VBox>
                                                    </children>
                                                 </GridPane>
-                                                <GridPane prefHeight="222.0" prefWidth="202.0">
+                                                <GridPane prefHeight="222.0" prefWidth="257.0">
                                                   <columnConstraints>
                                                     <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                                   </columnConstraints>
                                                   <rowConstraints>
                                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                    <RowConstraints minHeight="10.0" percentHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                    <RowConstraints minHeight="10.0" percentHeight="35.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                   </rowConstraints>
                                                    <children>
-                                                      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                                      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" translateY="17.0">
                                                          <image>
                                                             <Image url="@../../../../Images/reilly.JPG" />
                                                          </image>
                                                       </ImageView>
-                                                      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+                                                      <VBox prefHeight="64.0" prefWidth="202.0" GridPane.rowIndex="1">
                                                          <children>
-                                                            <Label alignment="CENTER" prefHeight="27.0" prefWidth="184.0" text="Reilly Norum" wrapText="true">
+                                                            <Label alignment="CENTER" prefHeight="26.0" prefWidth="262.0" text="Reilly Norum" translateY="30.0" wrapText="true">
                                                                <font>
                                                                   <Font name="Dubai Light" size="14.0" />
                                                                </font>
                                                             </Label>
-                                                            <Label alignment="CENTER" prefHeight="25.0" prefWidth="184.0" text="Documentation Analyst" wrapText="true">
+                                                            <Label alignment="CENTER" prefHeight="20.0" prefWidth="257.0" text="Documentation Analyst" textAlignment="CENTER" translateY="30.0" wrapText="true">
                                                                <font>
                                                                   <Font name="Dubai Light" size="14.0" />
                                                                </font>
@@ -422,7 +423,111 @@
                                                 <Font name="Dubai Regular" size="18.0" />
                                              </font>
                                           </Label>
-                                          <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="80.0" prefWidth="697.0" text="The Brigham &amp; Women’s Hospital maps and data used in this application are copyrighted and provided for the sole use of educational purposes" textAlignment="CENTER" wrapText="true" />
+                                          <Line endX="571.878662109375" endY="1.7642974853515625E-5" fill="#012d5a" startX="-100.0" stroke="#012d5a" strokeWidth="3.0" translateY="25.0" />
+                                          <GridPane prefHeight="347.0" prefWidth="601.0" translateY="50.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="100.0" />
+                                              <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" prefWidth="100.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                            </rowConstraints>
+                                             <children>
+                                                <Label text="API's From Other Teams">
+                                                   <font>
+                                                      <Font name="Dubai Regular" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="External API's" GridPane.columnIndex="1">
+                                                   <font>
+                                                      <Font name="Dubai Regular" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Secure Incident Reporting - Team B" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="Dubai Light" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Interpreter Request - Team C" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="Dubai Light" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="AudioVisual - Team M" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="Dubai Light" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Food Request - Team P" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font name="Dubai Light" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Live Travel Times - Google Directions API" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="Dubai Light" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Google Maps - Google Maps Embed API" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="Dubai Light" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Attractions - Google Places API" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                                   <font>
+                                                      <Font name="Dubai Light" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Text Messaging - Twilio API" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                                   <font>
+                                                      <Font name="Dubai Light" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Phone Calls - Twilio API" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                                   <font>
+                                                      <Font name="Dubai Light" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Printing Directions - JavaFX Print API" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                                   <font>
+                                                      <Font name="Dubai Light" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Translations - Google Translate API" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                                <Label text="Address Verification - Easypost API" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                                                   <font>
+                                                      <Font name="Dubai Light" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Shipping Labels - Easypost API" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                                                   <font>
+                                                      <Font name="Dubai Light" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="News Feed - NewsAPI.org" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                                                   <font>
+                                                      <Font name="Dubai Light" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="Room Scheduler - CalendarFX API" GridPane.columnIndex="1" GridPane.rowIndex="11">
+                                                   <font>
+                                                      <Font name="Dubai Light" size="14.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </GridPane>
+                                          <Label alignment="BOTTOM_CENTER" contentDisplay="CENTER" prefHeight="80.0" prefWidth="697.0" text="The Brigham &amp; Women’s Hospital maps and data used in this application are copyrighted and provided for the sole use of educational purposes" textAlignment="CENTER" translateY="50.0" wrapText="true" />
                                        </children>
                                     </VBox>
                                  </children>
