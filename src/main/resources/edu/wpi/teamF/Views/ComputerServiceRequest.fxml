@@ -22,7 +22,7 @@
          <children>
             <ImageView fx:id="backgroundImage" fitHeight="525.0" fitWidth="600.0" pickOnBounds="true">
                <image>
-                  <Image url="@../../../../Images/BWH Shapiro 2.jpg" />
+                  <Image url="@../../../../Images/BWHShapiro2.jpg" />
                </image>
             </ImageView>
          </children>

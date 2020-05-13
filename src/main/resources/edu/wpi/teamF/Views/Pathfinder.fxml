@@ -45,31 +45,31 @@
                      <children>
                         <ImageView fx:id="imageViewFaulkner1" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true" visible="false">
                            <image>
-                              <Image url="@../Maps/Faulkner/Floor1LM.png" />
+                              <Image url="@../Maps/Faulkner/floor1LM.png" />
                            </image>
                         </ImageView>
                         <AnchorPane fx:id="mapPaneFaulkner1" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
                         <ImageView fx:id="imageViewFaulkner2" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Maps/Faulkner/Floor2LM.png" />
+                              <Image url="@../Maps/Faulkner/floor2LM.png" />
                            </image>
                         </ImageView>
                         <AnchorPane fx:id="mapPaneFaulkner2" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
                         <ImageView fx:id="imageViewFaulkner3" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Maps/Faulkner/Floor3LM.png" />
+                              <Image url="@../Maps/Faulkner/floor3LM.png" />
                            </image>
                         </ImageView>
                         <AnchorPane fx:id="mapPaneFaulkner3" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
                         <ImageView fx:id="imageViewFaulkner4" fitHeight="585.6" fitWidth="974.4" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Maps/Faulkner/Floor4LM.png" />
+                              <Image url="@../Maps/Faulkner/floor4LM.png" />
                            </image>
                         </ImageView>
                         <AnchorPane fx:id="mapPaneFaulkner4" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />
                         <ImageView fx:id="imageViewFaulkner5" fitHeight="585.0" fitWidth="974.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../Maps/Faulkner/Floor5LM.png" />
+                              <Image url="@../Maps/Faulkner/floor5LM.png" />
                            </image>
                         </ImageView>
                         <AnchorPane fx:id="mapPaneFaulkner5" minHeight="-Infinity" minWidth="-Infinity" prefHeight="585.0" prefWidth="974.0" />

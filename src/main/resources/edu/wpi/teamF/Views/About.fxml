@@ -21,7 +21,7 @@
          <children>
             <ImageView fx:id="backgroundImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <image>
-                  <Image url="@../../../../Images/BWH%20Shapiro%202.jpg" />
+                  <Image url="@../../../../Images/BWHShapiro2.jpg" />
                </image>
             </ImageView>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="300.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="50.0">
